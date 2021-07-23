@@ -5,40 +5,49 @@
 NIST publications are numbered according to an identification scheme.
 
 This gem implements a mechanism to parse and utilize NIST publication identifers
-provided in the https://github.com/usnistgov/NIST-Tech-Pubs[NIST-Tech-Pubs] repository.
+provided in the https://github.com/usnistgov/NIST-Tech-Pubs[NIST-Tech-Pubs]
+repository.
 
 == Historic identifier patterns
 
-There are at least three major "pattern series" of identifiers due to historical reasons:
+There are at least three major "pattern series" of identifiers due to historical
+reasons:
 
-* NBS publications, produced under the National Bureau of Standards (the previous name of NIST, 1901 to 1988)
-* NIST publications produced prior to the PubID scheme (1988-)
 * NIST publications produced by the PubID scheme (202X-)
+* NIST publications produced prior to the PubID scheme (1988-)
+* NBS publications, produced under the National Bureau of Standards (the
+  previous name of NIST, 1901 to 1988)
 
-This implementation attempts to support all three types of publication identifier patterns.
+This implementation attempts to support all three types of publication
+identifier patterns.
 
 == NIST PubID
 
-NIST is currently developing a unified publication identifier scheme ("PubID") for
-their technical series of publications, which allows machine-readable identifier parts.
+NIST is currently developing a unified publication identifier scheme ("PubID")
+for their technical series of publications, which allows machine-readable
+identifier parts.
 
-This scheme is described in "`Publication Identifier Syntax for NIST Technical Series Publications`"
-authored by https://www.nist.gov/people/james-foti[Jim Foti]
+This scheme is described in "`Publication Identifier Syntax for NIST Technical
+Series Publications`" authored by
+https://www.nist.gov/people/james-foti[Jim Foti]
 of the https://www.nist.gov/itl/csd[CSD, ITL], and
 https://www.nist.gov/people/kathryn-miller[Kathryn Miller] and
 https://www.nist.gov/people/kate-bucher[Kate Bucher] of the
-https://www.nist.gov/associate-director-management-resources/staff-offices/information-services-office[ISO], Management Resources.
+https://www.nist.gov/associate-director-management-resources/staff-offices/information-services-office[ISO],
+Management Resources.
 
 NOTE: This scheme is still at proposal stage.
 
-This gem implements the NIST PubID scheme and allows the conversion to and from historic patterns.
+This gem implements the NIST PubID scheme and allows the conversion to and from
+historic patterns.
 
 
 == Use cases to support
 
 PubID:
 
-. Given a PubID (full-form title, abbreviated-form title, short-form title), generate the corresponding machine-readable (MR) PubID format
+. Given a PubID (full-form title, abbreviated-form title, short-form title),
+  generate the corresponding machine-readable (MR) PubID format
 . Given a MR PubID:
 .. generate the full-form title
 .. generate the abbreviated-form title
@@ -48,9 +57,126 @@ PubID:
 Historic compatibility:
 
 . Parse a historic publication identifier into its components:
-.. output the original publication identifier (i.e. store the contents in the object)
+.. output the original publication identifier (i.e. store the contents in the
+  object)
 .. output a MR PubID
 
 . Parse a historic DOI into a PubID:
 .. output the original DOI (i.e. store the contents in the object)
 .. output a MR PubID
+
+== Publication identifier patterns
+
+=== 1 "Full-form" title
+
+Samples:
+
+* National Institute of Standards and Technology Federal Information Processing Standards Publication 199
+* National Institute of Standards and Technology Special Publication 800-27, Revision A
+* National Institute of Standards and Technology Special Publication 800-39 (Second Public Draft)
+
+(originally described in https://github.com/metanorma/metanorma-nist/issues/98)
+
+=== 2 “Abbreviated form” title
+
+This form is used in the Authority section.
+
+----
+Natl. Inst. Stand. Technol. {abbrev(series)} {docnumber} {part | abbrev(volume)}, {abbrev(revision)}
+----
+
+* `abbrev(series)` represent the abbreviation of the Series title
+* (Note: there is no `{update-date}`)
+* Abbreviate “Revision” to “Rev.” and “Volume” to “Vol.”
+
+<img width="480" alt="image" src="https://user-images.githubusercontent.com/11865/55641177-da2a6800-57ff-11e9-883e-40999631e485.png">
+
+Examples:
+
+* "Natl. Inst. Stand. Technol. Spec. Publ. 800-78-4"
+* "Natl. Inst. Stand. Technol. Spec. Publ. 800-116”
+* "Natl. Inst. Stand. Technol. Spec. Publ. 800-57 Part 1, Revision 4”
+
+(originally from https://github.com/metanorma/metanorma-nist/issues/88)
+
+=== 3 "Short form" title
+
+The “short form” is used to cite the documents within text.
+
+It is used in these situations:
+
+1. Locality references. “In Section 3.2 of SP 800-187…” (the "SP 800-187” is a link).
++
+NOTE: NIST pubs are composed of "Sections" not "Clauses"
+
+2. A generic document reference. “SP 800-53 describes…”. This form does not specify a revision or update date.
+
+3. “All parts”. “The SP 800-57 subseries describes key management…”.
+
+"NISTIR 6885 2003 Edition (February 2003)” is a poor indicator.
+
+The correct rule should be:
+
+* SP:
++
+----
+NIST {abbrev(series)} {docnumber } {edition, optional}
+----
+
+* FIPS:
++
+----
+FIPS {docnumber }
+----
++
+NOTE: `docnumber` is the full FIPS number, including revision, e.g., `140-2`.
+
+(originally from https://github.com/metanorma/metanorma-nist/issues/88)
+
+=== 4 Machine-readable form
+
+The machine-readable form is:
+
+----
+NIST.{series}.{docnumber}.{part|volume}.{revision}.{update-date}
+----
+
+Generally, this rule should be able to uniquely identify an edition of a document.
+
+Where:
+
+----
+series = SP, IR, FIPS, TN [“Technical Note”], HB [“Handbook”], CSWP [“Cybersecurity White Paper”]
+----
+
+Details:
+* Various scenarios for “part”:
+** “Part 1” use “pt1”;
+** When a letter part is indicated, “800-63A” we should keep it as part of the docnumber (i.e., don’t indicate “pt”)
+
+* Volumes: use “v1”
+
+* Revision typically: “Revision 1” use “r1”
+
+* If a superseding edition is a full revision, it will get the next Rev. #.
+* If a superseding edition is just an errata update, we can use the update date
+from the title page (“includes updates as of…”) to uniquely identify this
+edition. Preferably use `-yyyymmdd` format.
+
+Some examples:
+* `NIST.SP.800-53r4-20152201` supersedes `NIST.SP.800-53r4-20140115`
+* `NIST.SP.800-63A-20171201` supersedes `NIST.SP.800-63A`
+* `NIST.SP.800-57pt1r4` supersedes `NIST.SP.800-57pt1r3`
+* `NIST.SP.800-160v1` supersedes `NIST.SP.800-160-20180103`
+* Undated form `NIST.SP.800-53r4`
+
+(originally from https://github.com/metanorma/metanorma-nist/issues/88)
+
+
+== TODO
+
+* Move all comments from https://github.com/metanorma/metanorma-nist/issues/88
+here.
+
+* Support the https://github.com/metanorma/metanorma-nist/issues/259[Addendum]
+* Support the Supplement type
