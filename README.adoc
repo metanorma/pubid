@@ -1,0 +1,34 @@
+= NIST publication identifiers
+
+== Purpose
+
+NIST publications are numbered according to an identification scheme.
+
+This gem implements a mechanism to parse and utilize NIST publication identifers
+provided in the https://github.com/usnistgov/NIST-Tech-Pubs[NIST-Tech-Pubs] repository.
+
+== Historic identifier patterns
+
+There are at least three major "pattern series" of identifiers due to historical reasons:
+
+* NBS publications, produced under the National Bureau of Standards (the previous name of NIST, 1901 to 1988)
+* NIST publications produced prior to the PubID scheme (1988-)
+* NIST publications produced by the PubID scheme (202X-)
+
+This implementation attempts to support all three types of publication identifier patterns.
+
+== NIST PubID
+
+NIST is currently developing a unified publication identifier scheme ("PubID") for
+their technical series of publications, which allows machine-readable identifier parts.
+
+This scheme is described in "`Publication Identifier Syntax for NIST Technical Series Publications`"
+authored by https://www.nist.gov/people/james-foti[Jim Foti]
+of the https://www.nist.gov/itl/csd[CSD, ITL], and
+https://www.nist.gov/people/kathryn-miller[Kathryn Miller] and
+https://www.nist.gov/people/kate-bucher[Kate Bucher] of the
+https://www.nist.gov/associate-director-management-resources/staff-offices/information-services-office[ISO], Management Resources.
+
+NOTE: This scheme is still at proposal stage.
+
+This gem implements the NIST PubID scheme and allows the conversion to and from historic patterns.
