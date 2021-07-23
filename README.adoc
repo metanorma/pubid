@@ -32,3 +32,25 @@ https://www.nist.gov/associate-director-management-resources/staff-offices/infor
 NOTE: This scheme is still at proposal stage.
 
 This gem implements the NIST PubID scheme and allows the conversion to and from historic patterns.
+
+
+== Use cases to support
+
+PubID:
+
+. Given a PubID (full-form title, abbreviated-form title, short-form title), generate the corresponding machine-readable (MR) PubID format
+. Given a MR PubID:
+.. generate the full-form title
+.. generate the abbreviated-form title
+.. generate short-form title
+.. generate the DOI (which is just DOI ID + MR)
+
+Historic compatibility:
+
+. Parse a historic publication identifier into its components:
+.. output the original publication identifier (i.e. store the contents in the object)
+.. output a MR PubID
+
+. Parse a historic DOI into a PubID:
+.. output the original DOI (i.e. store the contents in the object)
+.. output a MR PubID
