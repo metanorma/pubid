@@ -89,13 +89,12 @@ Natl. Inst. Stand. Technol. {abbrev(series)} {docnumber} {part | abbrev(volume)}
 * (Note: there is no `{update-date}`)
 * Abbreviate “Revision” to “Rev.” and “Volume” to “Vol.”
 
-<img width="480" alt="image" src="https://user-images.githubusercontent.com/11865/55641177-da2a6800-57ff-11e9-883e-40999631e485.png">
-
 Examples:
 
 * "Natl. Inst. Stand. Technol. Spec. Publ. 800-78-4"
 * "Natl. Inst. Stand. Technol. Spec. Publ. 800-116”
 * "Natl. Inst. Stand. Technol. Spec. Publ. 800-57 Part 1, Revision 4”
+
 
 (originally from https://github.com/metanorma/metanorma-nist/issues/88)
 
@@ -117,21 +116,32 @@ NOTE: NIST pubs are composed of "Sections" not "Clauses"
 
 The correct rule should be:
 
-* SP:
-+
 ----
-NIST {abbrev(series)} {docnumber } {edition, optional}
+{abbrev(series)} {docnumber} {abbrev(volume)} {abbrev(revision)} {edition, optional}
 ----
 
-* FIPS:
-+
-----
-FIPS {docnumber }
-----
-+
-NOTE: `docnumber` is the full FIPS number, including revision, e.g., `140-2`.
+NOTE: For FIPS, `docnumber` is the full FIPS number, including revision, e.g.,
+`140-2`.
 
 (originally from https://github.com/metanorma/metanorma-nist/issues/88)
+
+Short form date:
+
+* `Month YYYY`
+
+Examples:
+
+* NIST SP 800-53r4 (20152201) supersedes NIST SP 800-53r4 (20140115)
+* NIST SP 800 63A (December 2017) supersedes NIST SP 800-63A
+* NIST SP 800 57 Part 1 Revision 4 supersedes NIST SP 800-57 Part 1 Revision 3 ("Rev." is also accepted, and converted to "Revision")
+* NIST SP 800 160 Volume 1 supersedes NIST SP 800-160 (20180103) ("Vol." is also accepted, and converted to "Volume")
+* Undated form "NIST SP 800 53r4"
+
+Strip Revision and Date from title, only if the Revision and Date are unique for
+each document number. These are identified as "Rev. ...", "Revision ...." and "
+(Month YYYY)", whichever comes first.
+
+
 
 === 4 Machine-readable form
 
@@ -173,10 +183,53 @@ Some examples:
 (originally from https://github.com/metanorma/metanorma-nist/issues/88)
 
 
+== NIST Series prefixes
+
+[source,ruby]
+----
+SERIES_ABBR = {
+  "nist-ams": "NIST AMS",
+  "building-science": "NIST Building Science Series",
+  "nist-fips": "NIST FIPS",
+  "nist-gcr": "NISTGCR",
+  "nist-hb": "NIST HB",
+  "itl-bulletin": "ITL Bulletin",
+  "jpcrd": "JPCRD",
+  "nist-jres": "NIST JRES",
+  "letter-circular": "NIST Letter Circular",
+  "nist-monograph": "NIST MN",
+  "nist-ncstar": "NIST NCSTAR",
+  "nist-nsrds": "NIST NSRDS",
+  "nistir": "NISTIR",
+  "product-standards": "NIST Product Standards",
+  "nist-sp": "NIST SP",
+  "nist-tn": "NIST TN",
+  "other": "NIST Other",
+  "csrc-white-paper": "CSRC White Paper",
+  "csrc-book": "CSRC Book",
+  "csrc-use-case": "CSRC Use Case",
+  "csrc-building-block": "CSRC Building Block",
+}.freeze
+----
+
+
+== Addendum
+
+NIST SP 800-38A has an Addendum.
+
+In NIST MR let's call this part add-X, e.g. "NIST SP 800-38A Addendum" =>
+`NIST.SP.800-38A.pt-A.add-1`
+
+. Full form title: "Addendum to National Institute of Standards and Technology {series} {docnumber} {part | volume}, {revision}"
+
+. Abbreviated form title: "Addendum to Natl. Inst. Stand. Technol. {abbrev(series)} {docnumber} {part | abbrev(volume)}, {abbrev(revision)}"
+
+. Short form title: "{abbrev(series)} {docnumber} {part | abbrev(volume)}, {abbrev(revision)} Addendum"
+
+. Machine-readable form NIST.SP.800-38A.pt-A.add-1
+
+Originally from https://github.com/metanorma/metanorma-nist/issues/259.
+
 == TODO
 
-* Move all comments from https://github.com/metanorma/metanorma-nist/issues/88
-here.
-
-* Support the https://github.com/metanorma/metanorma-nist/issues/259[Addendum]
 * Support the Supplement type
