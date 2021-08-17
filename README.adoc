@@ -86,39 +86,128 @@ Historic compatibility:
 === Series
 
 |===
-| Code | Name | Abbrev | Value
+| Publisher | Prefix | Name | Abbrev | MR (with Publisher) | Example
 
-| NIST AMS | Advanced Manufacturing Standard | Adv. Man. Ser | `nist-ams`
-| NIST BSS | Building Science Series | Bldg. Sci. Ser. | `building-science`
-| NIST FIPS | Federal Information Processing Standard | Federal Inf. Process. Stds. | `nist-fips`
-| NISTGCR | Grant/Contract Reports | N/A | `nist-gcr`
-| NIST HB | Handbook | N/A | `nist-hb`
-| ITL Bulletin | ITL Bulletin | N/A | `itl-bulletin`
-| JPCRD | Journal of Physical and Chemical Reference Data | J. Phys. & Chem. Ref. Data | `jpcrd`
-| NIST JRES | Journal of Research of NIST | J. Res. Natl. Inst. Stan. | `nist-jres`
-| NIST LC | Letter Circular | LCIRC | `letter-circular`
-| NIST MN | Monograph | Monogr. | `nist-monograph`
-| NIST NCSTAR | National Construction Safety Team Report | Natl. Constr. Tm. Act Rpt. | `nist-ncstar`
-| NIST NSRDS | National Standard Reference Data Series | Natl. Stand. Ret. Data Ser. | `nist-nsrds`
-| NISTIR | Interagency or Internal Report | N/A | `nistir`
-| NIST PS | Voluntary Product Standards | Prod. Stand. | `product-standards`
-| NIST SP | Special Publication | Spec. Publ. | `nist-sp`
-| NIST TN | Technical Note | Tech. Note. | `nist-tn`
-| NIST Other | Other | Other | `other`
-| CSRC White Paper | Cybersecurity Resource Center White Paper | CSRC White Paper | `csrc-white-paper`
-| CSRC Book | Cybersecurity Resource Center Book | CSRC Book | `csrc-book`
-| CSRC Use Case | Cybersecurity Resource Center Use Case | CSRC Use Case | `csrc-use-case`
-| CSRC Building Block | Cybersecurity Resource Center Building Block | CSRC Building Block | `csrc-building-block`
+| NIST | NIST AMS | Advanced Manufacturing Standard | Adv. Man. Ser | `NIST.AMS`
+| https://nvlpubs.nist.gov/nistpubs/ams/NIST.AMS.200-2.pdf[NIST AMS 200-2]
+
+| NIST | NIST BSS | Building Science Series | Bldg. Sci. Ser. | `NIST.BSS`
+| https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=901127[NIST BSS 181]
+
+| NBS | NBS BSS | Building Science Series | Bldg. Sci. Ser. | `NBS.BSS`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/BSS/nbsbuildingscience94.pdf[NBS BSS 94]
+
+| NIST | FIPS PUB | Federal Information Processing Standards Publication | Federal Inf. Process. Stds. | `NIST.FIPS`
+| https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.202.pdf[FIPS PUB 202]
+
+| NIST | NISTGCR | Grant/Contract Reports | N/A | `NIST.GCR`
+| https://nvlpubs.nist.gov/nistpubs/gcr/2017/NIST.GCR.17-917-45.pdf[NIST GCR 17-917-45]
+
+| NBS | NBS GCR | Grant/Contract Reports | N/A | `NBS.GCR`
+| https://www.nist.gov/system/files/documents/2017/05/09/NISTGCR_77_82.pdf[NBS GCR 77-82]
+
+| NIST | NIST HB | Handbook | Handb. | `NIST.HB`
+| https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=932523[NIST Handbook 150-872]
+
+| NBS | NBS HB | Handbook | Handb. | `NBS.HB`
+| https://www.nist.gov/system/files/documents/pml/wmd/NBS-Handbook-1371.pdf[NBS Handbook 137]
+
+| NIST | ITL Bulletin | ITL Bulletin | N/A | `NIST.ITLB`
+| https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=930751[NIST ITL Bulletin August 2020]
+
+| NIST | NIST LC | Letter Circular | N/A | `NIST.LC`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/LC/nistlettercircular1136.pdf[NIST LC 1136]
+
+| NBS | NBS LC | Letter Circular | N/A | `NBS.LC`
+| https://www.govinfo.gov/content/pkg/GOVPUB-C13-505e153915bb567dd587b7efd26b000a/pdf/GOVPUB-C13-505e153915bb567dd587b7efd26b000a.pdf[NBS LC 1128]
+
+| NIST | NIST MN | Monograph | Monogr. | `NIST.MN`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/MONO/nistmonograph175.pdf[NIST Monograph 175]
+
+| NBS | NBS MN | Monograph | Monogr. | `NBS.MN`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/MONO/nbsmonograph125supp1.pdf[NIST Monograph 125],
+https://nvlpubs.nist.gov/nistpubs/Legacy/MONO/nbsmonograph125.pdf[NIST Monograph 125, Supp. 1]
+
+| NIST | NIST NCSTAR | National Construction Safety Team Report | Natl. Constr. Tm. Act Rpt. | `NIST.NCSTAR`
+| https://www.nist.gov/publications/design-and-construction-structural-systems-federal-building-and-fire-safety[NIST NCSTAR 1-1A]
+
+| NIST | NIST NSRDS | National Standard Reference Data Series | Natl. Stand. Ret. Data Ser. | `NIST.NSRDS`
+| https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=931745[NIST NSRDS 100-2021]
+
+| NBS | NSRDS-NBS | National Standard Reference Data Series | Natl. Stand. Ret. Data Ser. | `NBS.NSRDS`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/NSRDS/nbsnsrds1.pdf[NSRDS-NBS 1]
+
+| NIST | NISTIR | Interagency or Internal Report | N/A | `NIST.IR`
+| https://nvlpubs.nist.gov/nistpubs/ir/2021/NIST.IR.8347.pdf[NISTIR 8347]
+
+| NBS | NBSIR | Interagency or Internal Report | N/A | `NBS.IR`
+| https://www.nist.gov/system/files/documents/2017/04/28/nbsir-79-1776.pdf[NBSIR 79-1776]
+
+| NIST | NIST PS | Voluntary Product Standards | Prod. Stand. | `NIST.PS`
+| https://www.nist.gov/system/files/documents/2019/12/11/PS%2020-20%20final%20WERB%20approved.pdf[NIST PS 20-20]
+
+| NBS | NBS PS | Voluntary Product Standards | Prod. Stand. | `NBS.PS`
+| http://storage.cloversites.com/resinsystemsinc/documents/1569%20PDF.pdf[NBS PS 15-69]
+
+| NIST | NIST SP | Special Publication | Spec. Publ. | `NIST.SP`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-115.pdf[NIST SP 800-115]
+
+| NBS | NBS SP | Special Publication | Spec. Publ. | `NBS.SP`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nbsspecialpublication500-137.pdf[NBS SP 500-137]
+
+| NIST | NIST TN | Technical Note | Tech. Note | `NIST.TN`
+| https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=932542[NIST Technical Note 2172]
+
+| NBS | NBS TN | Technical Note | Tech. Note | `NBS.TN`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/TN/nbstechnicalnote876.pdf[NBS TN 876]
+
+| NIST | NIST TTB | Technology Transfer Brief | N/A | `NIST.TTB`
+| https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=929334[NIST TTB 2]
+
+| NIST | NIST DCI | Data Collection Instruments | Data Collect. Instr. | `NIST.DCI`
+| https://nvlpubs.nist.gov/nistpubs/dci/NIST.DCI.002.pdf[NIST DCI 002]
+
+| NIST | NIST EAB | Economic Analysis Brief | N/A | `NIST.EAB`
+| https://nvlpubs.nist.gov/nistpubs/eab/NIST.EAB.9.pdf[NIST EAB 3]
+
+| NIST | NIST Other | Other | Other | `NIST.O`
+| https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=925900[Report to the President]
+
+| NIST | CSRC White Paper | Cybersecurity Resource Center White Paper | CSWP | `NIST.CSWP`
+| https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=932330[NIST.CSWP.04282021]
+
+| NIST | CSRC Book | Cybersecurity Resource Center Book | CSRC Book | `NIST.CSB`
+| https://csrc.nist.gov/CSRC/media/Publications/book/1974/executive-guide-to-computer-security/documents/executive-guide-to-computer-security--brochure.pdf[Executive Guide to Computer Security],
+https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=917850[Metrics to Security]
+
+| NIST | CSRC Use Case | Cybersecurity Resource Center Use Case | CSRC Use Case | `NIST.CSUC`
+| https://nccoe.nist.gov/sites/default/files/library/project-descriptions/hit-infusion-pump-project-description-final.pdf[Wireless Medical Infusion Pumps: Medical Device Security]
+
+| NIST | CSRC Building Block | Cybersecurity Resource Center Building Block | CSRC Building Block | `NIST.CSBB`
+| https://nccoe.nist.gov/sites/default/files/library/project-descriptions/dns-secure-email-project-description-final.pdf[Domain Name System-Based Security for Electronic Mail]
+
+| NIST | JPCRD | Journal of Physical and Chemical Reference Data | J. Phys. & Chem. Ref. Data | `JPCRD`
+| (excluded from PubID scheme)
+
+| NIST | JRES | Journal of Research of NIST | J. Res. Natl. Inst. Stan. | `NIST.JRES`
+| (excluded from PubID scheme)
 
 |===
 
 === Stage
 
+The stage code element only applies to non-final publications.
+
+In most series, documents are only released as final publications, and therefore
+their PubIDs will not contain a stage code.
+
+Only some series support stage codes, e.g. SP 800 and SP 1800.
+
 |===
 | Name | Value
 
 | Initial Public Draft | IPD
-| Second Public Draft (to Nth) | 2PD (... nPD)
+| Second Public Draft (to the Nth Public Draft) | 2PD (... nPD)
 | Final Public Draft | FPD
 | Work-in-Progress Draft | WD
 | Preliminary Draft | PreD
@@ -127,7 +216,7 @@ Historic compatibility:
 
 === Report number
 
-Dependent on series.
+The contents and pattern of the report number are dependent on the series.
 
 Possible values:
 
@@ -143,7 +232,7 @@ A "Part" can also be indicated by an appended alphabetic character to the end.
 === Part
 
 |===
-| Name | Abbrev | Short
+| Name | Abbrev and Short | MR
 
 | Part | Pt. | `pt`
 | Volume | Vol. | `v`
@@ -159,7 +248,7 @@ A "Part" can also be indicated by an appended alphabetic character to the end.
 === Edition
 
 |===
-| Name | Abbrev | Short
+| Name | Abbrev and Short | MR
 
 | Revision | Rev. | `r`
 | Edition | Ed. | `e`
@@ -171,15 +260,18 @@ A "Part" can also be indicated by an appended alphabetic character to the end.
 
 An ISO 639-2 code that represents a translated document from English.
 
+If a document is translated from English, suffix the document with a 3-letter
+ISO 639-2 code within parentheses.
+
 Raw values seen in legacy DOIs include:
 
 |===
-| Name | Proper value | Legacy value
+| Name | Correct value | MR | Legacy values seen in DOI
 
-| Spanish | `esp` | `es`
-| Vietnamese | `vie` | `viet`
-| Portuguese | `por` | `port`
-| Chinese | `zho` | `chi`
+| Spanish | (ESP) | `esp` | `es`
+| Vietnamese | (VIE) | `vie` | `viet`
+| Portuguese | (POR) | `por` | `port`
+| Chinese | (ZHO) | `zho` | `chi`
 
 |===
 
@@ -195,7 +287,7 @@ These documents will display the text "includes updates as of...".
 In this case the document identifier will include the element "Update".
 
 |===
-| Name | Abbrev | Short
+| Name | Abbrev and Short | MR
 
 | Update | Upd. | `u`
 
@@ -213,7 +305,7 @@ The first update is numbered 1, and so forth.
 
 ==== Update year
 
-The year of the updated, shown as a suffix to the identifier.
+The year last updated, shown as a suffix to the identifier.
 
 * "{identifier}:{update-year}"
 
@@ -224,7 +316,8 @@ The year of the updated, shown as a suffix to the identifier.
 
 Generally in this order:
 
-* `{series} {stage} {report number}{part}{edition}({translation})/{update} {update number}:{update year}`
+* No update: `{series} {stage} {report number}{part}{edition}({translation})`
+* With update: `{series} {stage} {report number}{part}{edition}({translation})/{update} {update number}:{update year}`
 
 
 === Full PubID
@@ -306,7 +399,7 @@ each document number. These are identified as "Rev. ...", "Revision ...." and "
 The machine-readable form is:
 
 ----
-NIST.{series}.{docnumber}.{part|volume}.{revision}.{update-date}
+{publisher}.{series}.{docnumber}.{part|volume}.{revision}.{update-date}
 ----
 
 Generally, this rule should be able to uniquely identify an edition of a document.
@@ -332,6 +425,7 @@ from the title page (“includes updates as of…”) to uniquely identify this
 edition. Preferably use `-yyyymmdd` format.
 
 Some examples:
+
 * `NIST.SP.800-53r4-20152201` supersedes `NIST.SP.800-53r4-20140115`
 * `NIST.SP.800-63A-20171201` supersedes `NIST.SP.800-63A`
 * `NIST.SP.800-57pt1r4` supersedes `NIST.SP.800-57pt1r3`
@@ -341,36 +435,6 @@ Some examples:
 (originally from https://github.com/metanorma/metanorma-nist/issues/88)
 
 
-== NIST Series prefixes
-
-[source,ruby]
-----
-SERIES_ABBR = {
-  "nist-ams": "NIST AMS",
-  "building-science": "NIST Building Science Series",
-  "nist-fips": "NIST FIPS",
-  "nist-gcr": "NISTGCR",
-  "nist-hb": "NIST HB",
-  "itl-bulletin": "ITL Bulletin",
-  "jpcrd": "JPCRD",
-  "nist-jres": "NIST JRES",
-  "letter-circular": "NIST Letter Circular",
-  "nist-monograph": "NIST MN",
-  "nist-ncstar": "NIST NCSTAR",
-  "nist-nsrds": "NIST NSRDS",
-  "nistir": "NISTIR",
-  "product-standards": "NIST Product Standards",
-  "nist-sp": "NIST SP",
-  "nist-tn": "NIST TN",
-  "other": "NIST Other",
-  "csrc-white-paper": "CSRC White Paper",
-  "csrc-book": "CSRC Book",
-  "csrc-use-case": "CSRC Use Case",
-  "csrc-building-block": "CSRC Building Block",
-}.freeze
-----
-
-
 == Addendum
 
 NIST SP 800-38A has an Addendum.
@@ -378,16 +442,13 @@ NIST SP 800-38A has an Addendum.
 In NIST MR let's call this part add-X, e.g. "NIST SP 800-38A Addendum" =>
 `NIST.SP.800-38A.pt-A.add-1`
 
-. Full form title: "Addendum to National Institute of Standards and Technology {series} {docnumber} {part | volume}, {edition}"
+. Full form title: "Addendum to {publisher} {series} {docnumber} {part | volume}, {edition}"
 
-. Abbreviated form title: "Addendum to Natl. Inst. Stand. Technol. {abbrev(series)} {docnumber} {part | abbrev(volume)}, {abbrev(edition)}"
+. Abbreviated form title: "Add. to {abbrev(publisher)} {abbrev(series)} {docnumber} {part | abbrev(volume)}, {abbrev(edition)}"
 
-. Short form title: "{abbrev(series)} {docnumber} {part | abbrev(volume)}, {abbrev(edition)} Addendum"
+. Short form title: "{short(series)} {docnumber} {part | abbrev(volume)}, {abbrev(edition)} Addendum"
 
 . Machine-readable form NIST.SP.800-38A.pt-A.add-1
 
 Originally from https://github.com/metanorma/metanorma-nist/issues/259.
 
-== TODO
-
-* Support the Supplement type
