@@ -65,9 +65,169 @@ Historic compatibility:
 .. output the original DOI (i.e. store the contents in the object)
 .. output a MR PubID
 
-== Publication identifier patterns
 
-=== 1 "Full-form" title
+== Elements of the PubID
+
+=== Publisher
+
+|===
+| Name | Abbrev | Value
+
+| National Institute of Standards and Technology
+| Natl. Inst. Stand. Technol.
+| NIST
+
+| National Bureau of Standards
+| Natl. Bur. Stand.
+| NBS
+
+|===
+
+=== Series
+
+|===
+| Code | Name | Abbrev | Value
+
+| NIST AMS | Advanced Manufacturing Standard | Adv. Man. Ser | `nist-ams`
+| NIST BSS | Building Science Series | Bldg. Sci. Ser. | `building-science`
+| NIST FIPS | Federal Information Processing Standard | Federal Inf. Process. Stds. | `nist-fips`
+| NISTGCR | Grant/Contract Reports | N/A | `nist-gcr`
+| NIST HB | Handbook | N/A | `nist-hb`
+| ITL Bulletin | ITL Bulletin | N/A | `itl-bulletin`
+| JPCRD | Journal of Physical and Chemical Reference Data | J. Phys. & Chem. Ref. Data | `jpcrd`
+| NIST JRES | Journal of Research of NIST | J. Res. Natl. Inst. Stan. | `nist-jres`
+| NIST LC | Letter Circular | LCIRC | `letter-circular`
+| NIST MN | Monograph | Monogr. | `nist-monograph`
+| NIST NCSTAR | National Construction Safety Team Report | Natl. Constr. Tm. Act Rpt. | `nist-ncstar`
+| NIST NSRDS | National Standard Reference Data Series | Natl. Stand. Ret. Data Ser. | `nist-nsrds`
+| NISTIR | Interagency or Internal Report | N/A | `nistir`
+| NIST PS | Voluntary Product Standards | Prod. Stand. | `product-standards`
+| NIST SP | Special Publication | Spec. Publ. | `nist-sp`
+| NIST TN | Technical Note | Tech. Note. | `nist-tn`
+| NIST Other | Other | Other | `other`
+| CSRC White Paper | Cybersecurity Resource Center White Paper | CSRC White Paper | `csrc-white-paper`
+| CSRC Book | Cybersecurity Resource Center Book | CSRC Book | `csrc-book`
+| CSRC Use Case | Cybersecurity Resource Center Use Case | CSRC Use Case | `csrc-use-case`
+| CSRC Building Block | Cybersecurity Resource Center Building Block | CSRC Building Block | `csrc-building-block`
+
+|===
+
+=== Stage
+
+|===
+| Name | Value
+
+| Initial Public Draft | IPD
+| Second Public Draft (to Nth) | 2PD (... nPD)
+| Final Public Draft | FPD
+| Work-in-Progress Draft | WD
+| Preliminary Draft | PreD
+
+|===
+
+=== Report number
+
+Dependent on series.
+
+Possible values:
+
+* {sequence number}
+* {subseries}-{sequence number}
+* {sequence number}-{volume}
+* {sequence number}-{edition}
+* {subseries}-{sequence number}-{edition}
+* etc.
+
+A "Part" can also be indicated by an appended alphabetic character to the end.
+
+=== Part
+
+|===
+| Name | Abbrev | Short
+
+| Part | Pt. | `pt`
+| Volume | Vol. | `v`
+| Section | Sec. | `sec`
+| Supplement | Suppl. | `sup`
+| Index | Index | `indx`
+| Addendum | Add. | `add` (TBD with NIST)
+| Insert | Ins. | `ins` (TBC with NIST)
+| Errata | Err. | `err` (TBC with NIST)
+
+|===
+
+=== Edition
+
+|===
+| Name | Abbrev | Short
+
+| Revision | Rev. | `r`
+| Edition | Ed. | `e`
+| Version | Ver. | `ver`
+
+|===
+
+=== Translation
+
+An ISO 639-2 code that represents a translated document from English.
+
+Raw values seen in legacy DOIs include:
+
+|===
+| Name | Proper value | Legacy value
+
+| Spanish | `esp` | `es`
+| Vietnamese | `vie` | `viet`
+| Portuguese | `por` | `port`
+| Chinese | `zho` | `chi`
+
+|===
+
+=== Update
+
+==== General
+
+When a document is updated with an errata, the original edition may be reissued
+to include the errata.
+
+These documents will display the text "includes updates as of...".
+
+In this case the document identifier will include the element "Update".
+
+|===
+| Name | Abbrev | Short
+
+| Update | Upd. | `u`
+
+|===
+
+NOTE: This is similar to the ISO/IEC "Amd." and "Cor." except that the NIST
+"Upd." is applied to the original document and (typically) does not exist
+separately.
+
+==== Update number
+
+A sequential integer numbering of the update counting from the original document.
+
+The first update is numbered 1, and so forth.
+
+==== Update year
+
+The year of the updated, shown as a suffix to the identifier.
+
+* "{identifier}:{update-year}"
+
+
+== PubID patterns
+
+=== Presentation
+
+Generally in this order:
+
+* `{series} {stage} {report number}{part}{edition}({translation})/{update} {update number}:{update year}`
+
+
+=== Full PubID
 
 Samples:
 
@@ -77,7 +237,7 @@ Samples:
 
 (originally described in https://github.com/metanorma/metanorma-nist/issues/98)
 
-=== 2 “Abbreviated form” title
+=== Abbreviated PubID
 
 This form is used in the Authority section.
 
@@ -87,7 +247,6 @@ Natl. Inst. Stand. Technol. {abbrev(series)} {docnumber} {part | abbrev(volume)}
 
 * `abbrev(series)` represent the abbreviation of the Series title
 * (Note: there is no `{update-date}`)
-* Abbreviate “Revision” to “Rev.” and “Volume” to “Vol.”
 
 Examples:
 
@@ -98,7 +257,7 @@ Examples:
 
 (originally from https://github.com/metanorma/metanorma-nist/issues/88)
 
-=== 3 "Short form" title
+=== Short PubID
 
 The “short form” is used to cite the documents within text.
 
@@ -142,8 +301,7 @@ each document number. These are identified as "Rev. ...", "Revision ...." and "
 (Month YYYY)", whichever comes first.
 
 
-
-=== 4 Machine-readable form
+=== Machine-readable PubID
 
 The machine-readable form is:
 
@@ -220,11 +378,11 @@ NIST SP 800-38A has an Addendum.
 In NIST MR let's call this part add-X, e.g. "NIST SP 800-38A Addendum" =>
 `NIST.SP.800-38A.pt-A.add-1`
 
-. Full form title: "Addendum to National Institute of Standards and Technology {series} {docnumber} {part | volume}, {revision}"
+. Full form title: "Addendum to National Institute of Standards and Technology {series} {docnumber} {part | volume}, {edition}"
 
-. Abbreviated form title: "Addendum to Natl. Inst. Stand. Technol. {abbrev(series)} {docnumber} {part | abbrev(volume)}, {abbrev(revision)}"
+. Abbreviated form title: "Addendum to Natl. Inst. Stand. Technol. {abbrev(series)} {docnumber} {part | abbrev(volume)}, {abbrev(edition)}"
 
-. Short form title: "{abbrev(series)} {docnumber} {part | abbrev(volume)}, {abbrev(revision)} Addendum"
+. Short form title: "{abbrev(series)} {docnumber} {part | abbrev(volume)}, {abbrev(edition)} Addendum"
 
 . Machine-readable form NIST.SP.800-38A.pt-A.add-1
 
