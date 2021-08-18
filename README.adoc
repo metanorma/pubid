@@ -1,4 +1,4 @@
-= NIST publication identifiers
+= NIST publication identifiers ("NIST PubID")
 
 == Purpose
 
