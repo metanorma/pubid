@@ -494,27 +494,30 @@ Some examples:
 
 == Examples of PubID
 
-3.3.1	SP 800 series
-NIST SP 800-40r3	Details
-NIST SP 800-45ver2	Details
-NIST SP 800-53r4/Upd 3:2015	Details
-NIST SP IPD 800-53r5	Details
-NIST SP 800-53Ar4/Upd 1:2014 	Details
-NIST SP 800-60v1r1	Details
-NIST SP 800-57pt1r4	Details
-NIST SP 800-73-4/Upd 1:2016	Details
-NIST SP 2PD 800-188	Details
-3.3.2	SP 1800 series
-NIST SP 2PD 1800-13B	Details
-NIST SP PreD 1800-19B	Details
-3.3.3	NIST IR series
-NIST IR 8011v3	Details
-NIST IR 8204/Upd 1:2019	Details
-NIST IR 8115(spa)	Details
-3.3.4	Other NIST Series
-NIST HB 130e2019	Details
-NIST SP 1041r1/Upd 1: 2012	Details
-NIST NCSTAR 1-1Cv1	Details
+*	SP 800 series
+** NIST SP 800-40r3
+** NIST SP 800-45ver2
+** NIST SP 800-53r4/Upd 3:2015
+** NIST SP IPD 800-53r5
+** NIST SP 800-53Ar4/Upd 1:2014
+** NIST SP 800-60v1r1
+** NIST SP 800-57pt1r4
+** NIST SP 800-73-4/Upd 1:2016
+** NIST SP 2PD 800-188
+
+* SP 1800 series
+** NIST SP 2PD 1800-13B
+** NIST SP PreD 1800-19B
+
+* NIST IR series
+** NIST IR 8011v3
+** NIST IR 8204/Upd 1:2019
+** NIST IR 8115(spa)
+
+* Other NIST Series
+** NIST HB 130e2019
+** NIST SP 1041r1/Upd 1:2012
+** NIST NCSTAR 1-1Cv1
 
 
 == Addendum
