@@ -401,27 +401,27 @@ Natl. Inst. Stand. Technol. {abbrev(series)} {docnumber} {part | abbrev(volume)}
 Examples:
 
 * "Natl. Inst. Stand. Technol. Spec. Publ. 800-78-4"
-* "Natl. Inst. Stand. Technol. Spec. Publ. 800-116”
-* "Natl. Inst. Stand. Technol. Spec. Publ. 800-57 Part 1, Revision 4”
+* "Natl. Inst. Stand. Technol. Spec. Publ. 800-116"
+* "Natl. Inst. Stand. Technol. Spec. Publ. 800-57 Part 1, Revision 4"
 
 
 (originally from https://github.com/metanorma/metanorma-nist/issues/88)
 
 === Short PubID
 
-The “short form” is used to cite the documents within text.
+The "short form" is used to cite the documents within text.
 
 It is used in these situations:
 
-1. Locality references. “In Section 3.2 of SP 800-187…” (the "SP 800-187” is a link).
+1. Locality references. "In Section 3.2 of SP 800-187…" (the "SP 800-187" is a link).
 +
 NOTE: NIST pubs are composed of "Sections" not "Clauses"
 
-2. A generic document reference. “SP 800-53 describes…”. This form does not specify a revision or update date.
+2. A generic document reference. "SP 800-53 describes…". This form does not specify a revision or update date.
 
-3. “All parts”. “The SP 800-57 subseries describes key management…”.
+3. "All parts". "The SP 800-57 subseries describes key management…".
 
-"NISTIR 6885 2003 Edition (February 2003)” is a poor indicator.
+"NISTIR 6885 2003 Edition (February 2003)" is a poor indicator.
 
 The correct rule should be:
 
@@ -464,21 +464,25 @@ Generally, this rule should be able to uniquely identify an edition of a documen
 Where:
 
 ----
-series = SP, IR, FIPS, TN [“Technical Note”], HB [“Handbook”], CSWP [“Cybersecurity White Paper”]
+series = SP, IR, FIPS, TN ["Technical Note"], HB ["Handbook"], CSWP ["Cybersecurity White Paper"]
 ----
 
-Details:
-* Various scenarios for “part”:
-** “Part 1” use “pt1”;
-** When a letter part is indicated, “800-63A” we should keep it as part of the docnumber (i.e., don’t indicate “pt”)
+Additional notes:
 
-* Volumes: use “v1”
+* Part
+** A "Part 1" document is encoded as "pt1";
+** When a letter part is indicated, e.g. "800-63A", we should keep it as part of
+  the docnumber (i.e., don't indicate "pt")
 
-* Revision typically: “Revision 1” use “r1”
+* Volumes
+** use "v1"
 
-* If a superseding edition is a full revision, it will get the next Rev. #.
-* If a superseding edition is just an errata update, we can use the update date
-from the title page (“includes updates as of…”) to uniquely identify this
+* Revision
+** typically "Revision 1" is displayed as "r1"
+
+** If a superseding edition is a full revision, it will get the next Rev. #.
+** If a superseding edition is just an errata update, we can use the update date
+from the title page ("includes updates as of ...") to uniquely identify this
 edition. Preferably use `-yyyymmdd` format.
 
 Some examples:
