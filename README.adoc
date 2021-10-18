@@ -392,7 +392,7 @@ Samples:
 This form is used in the Authority section.
 
 ----
-Natl. Inst. Stand. Technol. {abbrev(series)} {docnumber} {part | abbrev(volume)}, {abbrev(revision)}
+Natl. Inst. Stand. Technol. {abbrev(series)} {reportnumber} {part | abbrev(volume)}, {abbrev(revision)}
 ----
 
 * `abbrev(series)` represent the abbreviation of the Series title
@@ -421,15 +421,15 @@ NOTE: NIST pubs are composed of "Sections" not "Clauses"
 
 3. "All parts". "The SP 800-57 subseries describes key management…".
 
-"NISTIR 6885 2003 Edition (February 2003)" is a poor indicator.
+("NISTIR 6885 2003 Edition (February 2003)" is a poor indicator.)
 
 The correct rule should be:
 
 ----
-{abbrev(series)} {docnumber} {abbrev(volume)} {abbrev(revision)} {edition, optional}
+{abbrev(series)} {reportnumber} {abbrev(volume)} {abbrev(revision)} {edition, optional}
 ----
 
-NOTE: For FIPS, `docnumber` is the full FIPS number, including revision, e.g.,
+NOTE: For FIPS, `reportnumber` is the full FIPS number, including revision, e.g.,
 `140-2`.
 
 (originally from https://github.com/metanorma/metanorma-nist/issues/88)
@@ -453,37 +453,37 @@ each document number. These are identified as "Rev. ...", "Revision ...." and "
 
 === Machine-readable PubID
 
-The machine-readable form is:
+Machine-readable syntax:
 
 ----
-{publisher}.{series}.{docnumber}.{part|volume}.{revision}.{update-date}
+{publisher}.{series}.[{stage}.]{reportnumber}.{part}.{revision}.[{lang}.]{update-date}
+----
+
+----
+{publisher}.{series}.[{stage}.]{reportnumber}.{part}.{revision}.[{lang}.][{update}]{update-date}
 ----
 
 Generally, this rule should be able to uniquely identify an edition of a document.
 
-Where:
+* `{part}`
+** Part
+*** A "Part 1" document is encoded as "pt1";
+*** When a letter part is indicated, e.g. "800-63A", we should keep it as part of
+  the reportnumber (i.e., don't indicate "pt").
 
-----
-series = SP, IR, FIPS, TN ["Technical Note"], HB ["Handbook"], CSWP ["Cybersecurity White Paper"]
-----
+** Volumes
+*** "Volume 1" is encoded as "v1";
 
-Additional notes:
-
-* Part
-** A "Part 1" document is encoded as "pt1";
-** When a letter part is indicated, e.g. "800-63A", we should keep it as part of
-  the docnumber (i.e., don't indicate "pt")
-
-* Volumes
-** use "v1"
-
-* Revision
-** typically "Revision 1" is displayed as "r1"
+* `{revision}`
+** "Revision 1" is encoded as "r1"
 
 ** If a superseding edition is a full revision, it will get the next Rev. #.
-** If a superseding edition is just an errata update, we can use the update date
+** If a superseding edition is just an errata update, we use the update date
 from the title page ("includes updates as of ...") to uniquely identify this
-edition. Preferably use `-yyyymmdd` format.
+edition. Preferably in the `-yyyymmdd` format.
+
+* `{update}`
+** "Update 1" is encoded as "upd1"
 
 Some examples:
 
@@ -491,7 +491,8 @@ Some examples:
 * `NIST.SP.800-63A-20171201` supersedes `NIST.SP.800-63A`
 * `NIST.SP.800-57pt1r4` supersedes `NIST.SP.800-57pt1r3`
 * `NIST.SP.800-160v1` supersedes `NIST.SP.800-160-20180103`
-* Undated form `NIST.SP.800-53r4`
+* `NIST.IR.8204.upd1-2019` supersedes `NIST.IR.8204`
+* The undated form is `NIST.SP.800-53r4`
 
 (originally from https://github.com/metanorma/metanorma-nist/issues/88)
 
@@ -531,11 +532,11 @@ NIST SP 800-38A has an Addendum.
 In NIST MR let's call this part add-X, e.g. "NIST SP 800-38A Addendum" =>
 `NIST.SP.800-38A.pt-A.add-1`
 
-. Full form title: "Addendum to {publisher} {series} {docnumber} {part | volume}, {edition}"
+. Full form title: "Addendum to {publisher} {series} {reportnumber} {part | volume}, {edition}"
 
-. Abbreviated form title: "Add. to {abbrev(publisher)} {abbrev(series)} {docnumber} {part | abbrev(volume)}, {abbrev(edition)}"
+. Abbreviated form title: "Add. to {abbrev(publisher)} {abbrev(series)} {reportnumber} {part | abbrev(volume)}, {abbrev(edition)}"
 
-. Short form title: "{short(series)} {docnumber} {part | abbrev(volume)}, {abbrev(edition)} Addendum"
+. Short form title: "{short(series)} {reportnumber} {part | abbrev(volume)}, {abbrev(edition)} Addendum"
 
 . Machine-readable form NIST.SP.800-38A.pt-A.add-1
 
