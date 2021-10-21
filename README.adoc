@@ -1,0 +1,70 @@
+= IEEE publication identifiers ("IEEE PubID")
+
+== Purpose
+
+Implements a mechanism to parse and utilize IEEE publication identifers.
+
+== Historic identifier patterns
+
+There are at least two major "pattern series" of identifiers due to historical reasons: old and new.
+This implementation attempts to support both types of publication identifier patterns.
+
+== Use cases to support
+
+* parse an old format idetifier into components
+* parse a new format idetifier into components
+* generate a filename from the idetifier's components
+
+== Elements of the PubID
+
+=== Publisher
+
+|===
+| Name | Abbrev
+
+| Institute of Electrical and Electronics Engineers
+| IEEE
+
+|===
+
+=== Report number
+
+`{number}` - is a set of one or more digits and optional letters
+
+=== Part
+
+`{part}` - is a set of digits and optional letters; starts with a digit; if a letter or letters are present then they are in the end; optional
+
+=== Subpart
+
+`{subpart}` - is a set of digits and optional letters; optional, many subparts are possible
+
+=== Year
+
+`{year}` - is a set of 4 digits; optional
+
+=== Corrigendum & Amendment
+
+`{cor}` - is a corrigendum or an amendments with the pattern `Cor {cornum}-{year}` or `Amd {cornum}:{year}` where {cornum} is a set of digits; optional
+
+== PubID patterns
+
+Document with single PubID:
+
+`{publisher} {number}.{part}.{subpart}.{subpart}.{subpart}-{year}/{cor}`
+
+Samples:
+
+* IEEE 1002-1987
+* IEEE 1003.1-2001
+* IEEE 1003.1-2001/Cor 1-2002
+* IEEE 1073.3.1a-2000
+* IEEE 11073.10101-2004/Amd 1-2017
+
+Document with multiple PubIDs:
+
+`{publisher} {number}.{part}.{subpart}.{subpart}.{subpart}-{year}/{cor}, {number}.{part}.{subpart}.{subpart}.{subpart}-{year}/{cor}`
+
+Samples:
+
+* IEEE 1224, 1224.1, 1327-1994
