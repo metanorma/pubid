@@ -7,7 +7,6 @@ on:
     branches: [ master, main ]
     tags: [ v* ]
   pull_request:
-    branches: [ master, main ]
 
 jobs:
   rake:
@@ -24,10 +23,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
-
-      # https://github.com/ruby-debug/debase/issues/89#issuecomment-686827382
-      - if: matrix.os == 'macos-latest' && matrix.ruby == '2.5'
-        run: echo BUNDLE_BUILD__DEBASE="--with-cflags=\"-Wno-error=implicit-function-declaration\"" >> $GITHUB_ENV
 
       - uses: ruby/setup-ruby@v1
         with:
