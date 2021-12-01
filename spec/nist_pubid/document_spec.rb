@@ -20,23 +20,23 @@
 # NIST NCSTAR 1-1Cv1
 # NIST SP 800-38A has an Addendum
 
-RSpec.describe NistPubid do
+RSpec.describe NistPubid::Document do
   let(:short_pubid) { 'NIST SP 800-53r5' }
   let(:long_pubid) { 'National Institute of Standards and Technology Special Publication 800-53, Revision 5' }
   let(:abbrev_pubid) { 'Natl. Inst. Stand. Technol. Spec. Publ. 800-53, Revision 5' }
   let(:mr_pubid) { 'NIST.SP.800-53r5' }
 
   it 'parses NIST PubID using parameters' do
-    expect(NistPubid.new(publisher: :nist, series: 'SP', docnumber: '800-53', revision: 5).to_s(:mr))
+    expect(described_class.new(publisher: :nist, series: 'SP', docnumber: '800-53', revision: 5).to_s(:mr))
       .to eq(mr_pubid)
   end
 
   it 'parses MR NIST PubID' do
-    expect(NistPubid.parse(mr_pubid).to_s(:long)).to eq(long_pubid)
+    expect(described_class.parse(mr_pubid).to_s(:long)).to eq(long_pubid)
   end
 
   describe 'generate NIST PubID string outputs' do
-    subject { NistPubid.parse(short_pubid) }
+    subject { described_class.parse(short_pubid) }
 
     it 'converts into long Full PubID' do
       expect(subject.to_s(:long)).to eq(long_pubid)
@@ -57,11 +57,11 @@ RSpec.describe NistPubid do
 
   describe 'access to PubID object' do
     it 'returns revision' do
-      expect(NistPubid.parse(short_pubid).revision).to eq('5')
+      expect(described_class.parse(short_pubid).revision).to eq('5')
     end
 
     it 'can update revistion' do
-      pub_id = NistPubid.parse(short_pubid)
+      pub_id = described_class.parse(short_pubid)
       pub_id.revision = 6
       expect(pub_id.to_s(:mr)).to eq('NIST.SP.800-53r6')
     end
