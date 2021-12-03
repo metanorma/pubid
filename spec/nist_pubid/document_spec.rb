@@ -27,7 +27,7 @@ RSpec.describe NistPubid::Document do
   let(:mr_pubid) { 'NIST.SP.800-53r5' }
 
   it 'parses NIST PubID using parameters' do
-    expect(described_class.new(publisher: :nist, series: 'SP', docnumber: '800-53', revision: 5).to_s(:mr))
+    expect(described_class.new(publisher: 'NIST', series: 'NIST SP', docnumber: '800-53', revision: 5).to_s(:mr))
       .to eq(mr_pubid)
   end
 
@@ -38,20 +38,44 @@ RSpec.describe NistPubid::Document do
   describe 'generate NIST PubID string outputs' do
     subject { described_class.parse(short_pubid) }
 
-    it 'converts into long Full PubID' do
-      expect(subject.to_s(:long)).to eq(long_pubid)
+    shared_examples 'converts pubid to different formats' do
+      it 'converts into long Full PubID' do
+        expect(subject.to_s(:long)).to eq(long_pubid)
+      end
+
+      it 'converts into Abbreviated PubID' do
+        expect(subject.to_s(:abbrev)).to eq(abbrev_pubid)
+      end
+
+      it 'converts into Short PubID' do
+        expect(subject.to_s(:short)).to eq(short_pubid)
+      end
+
+      it 'converts into Machine-readable PubID' do
+        expect(subject.to_s(:mr)).to eq(mr_pubid)
+      end
     end
 
-    it 'converts into Abbreviated PubID' do
-      expect(subject.to_s(:abbrev)).to eq(abbrev_pubid)
+    it_behaves_like 'converts pubid to different formats'
+
+    context 'when published by NBS' do
+      let(:short_pubid) { 'NBS SP 800-53r5' }
+      let(:long_pubid) { 'National Bureau of Standards Special Publication 800-53, Revision 5' }
+      let(:abbrev_pubid) { 'Natl. Bur. Stand. Spec. Publ. 800-53, Revision 5' }
+      let(:mr_pubid) { 'NBS.SP.800-53r5' }
+
+      it_behaves_like 'converts pubid to different formats'
     end
 
-    it 'converts into Short PubID' do
-      expect(subject.to_s(:short)).to eq(short_pubid)
-    end
+    context 'when NIST NCSTAR serie' do
+      let(:short_pubid) { 'NIST NCSTAR 1-1Cv1' }
+      let(:long_pubid) do
+        'National Institute of Standards and Technology National Construction Safety Team Report 1-1C, Volume 1'
+      end
+      let(:abbrev_pubid) { 'Natl. Inst. Stand. Technol. Natl. Constr. Tm. Act Rpt. 1-1C, Volume 1' }
+      let(:mr_pubid) { 'NIST.NCSTAR.1-1Cv1' }
 
-    it 'converts into Machine-readable PubID' do
-      expect(subject.to_s(:mr)).to eq(mr_pubid)
+      it_behaves_like 'converts pubid to different formats'
     end
   end
 
