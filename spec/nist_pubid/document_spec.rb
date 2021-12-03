@@ -1,33 +1,16 @@
 # frozen_string_literal: true
 
-# PubID examples (TODO: add to tests)
-# NIST SP 800-40r3
-# NIST SP 800-45ver2
-# NIST SP 800-53r4/Upd 3:2015
-# NIST SP IPD 800-53r5
-# NIST SP 800-53Ar4/Upd 1:2014
-# NIST SP 800-60v1r1
-# NIST SP 800-57pt1r4
-# NIST SP 800-73-4/Upd 1:2016
-# NIST SP 2PD 800-188
-# NIST SP 2PD 1800-13B
-# NIST SP PreD 1800-19B
-# NIST IR 8011v3
-# NIST IR 8204/Upd 1:2019
-# NIST IR 8115(spa)
-# NIST HB 130e2019
-# NIST SP 1041r1/Upd 1:2012
-# NIST NCSTAR 1-1Cv1
-# NIST SP 800-38A has an Addendum
-
 RSpec.describe NistPubid::Document do
   let(:short_pubid) { 'NIST SP 800-53r5' }
   let(:long_pubid) { 'National Institute of Standards and Technology Special Publication 800-53, Revision 5' }
-  let(:abbrev_pubid) { 'Natl. Inst. Stand. Technol. Spec. Publ. 800-53, Revision 5' }
+  let(:abbrev_pubid) do
+    "Natl. Inst. Stand. Technol. Spec. Publ. 800-53, Rev. 5"
+  end
   let(:mr_pubid) { 'NIST.SP.800-53r5' }
 
   it 'parses NIST PubID using parameters' do
-    expect(described_class.new(publisher: 'NIST', series: 'NIST SP', docnumber: '800-53', revision: 5).to_s(:mr))
+    expect(described_class.new(publisher: "NIST", serie: "NIST SP",
+                               docnumber: "800-53", revision: 5).to_s(:mr))
       .to eq(mr_pubid)
   end
 
@@ -61,7 +44,7 @@ RSpec.describe NistPubid::Document do
     context 'when published by NBS' do
       let(:short_pubid) { 'NBS SP 800-53r5' }
       let(:long_pubid) { 'National Bureau of Standards Special Publication 800-53, Revision 5' }
-      let(:abbrev_pubid) { 'Natl. Bur. Stand. Spec. Publ. 800-53, Revision 5' }
+      let(:abbrev_pubid) { "Natl. Bur. Stand. Spec. Publ. 800-53, Rev. 5" }
       let(:mr_pubid) { 'NBS.SP.800-53r5' }
 
       it_behaves_like 'converts pubid to different formats'
@@ -72,10 +55,85 @@ RSpec.describe NistPubid::Document do
       let(:long_pubid) do
         'National Institute of Standards and Technology National Construction Safety Team Report 1-1C, Volume 1'
       end
-      let(:abbrev_pubid) { 'Natl. Inst. Stand. Technol. Natl. Constr. Tm. Act Rpt. 1-1C, Volume 1' }
+      let(:abbrev_pubid) do
+        "Natl. Inst. Stand. Technol. Natl. Constr. Tm. Act Rpt. 1-1C, Vol. 1"
+      end
       let(:mr_pubid) { 'NIST.NCSTAR.1-1Cv1' }
 
       it_behaves_like 'converts pubid to different formats'
+    end
+
+    context "when with part" do
+      let(:short_pubid) { "NIST SP 800-57pt1r4" }
+      let(:long_pubid) do
+        "National Institute of Standards and Technology Special Publication"\
+          " 800-57 Part 1, Revision 4"
+      end
+      let(:abbrev_pubid) do
+        "Natl. Inst. Stand. Technol. Spec. Publ. 800-57 Pt. 1, Rev. 4"
+      end
+      let(:mr_pubid) { "NIST.SP.800-57pt1r4" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "when with update" do
+      let(:short_pubid) { "NIST SP 800-53r4/Upd 3:2015" }
+      let(:long_pubid) do
+        "National Institute of Standards and Technology Special Publication "\
+          "800-53, Revision 4 Update 3:2015"
+      end
+      let(:abbrev_pubid) do
+        "Natl. Inst. Stand. Technol. Spec. Publ. 800-53, Rev. 4 Upd. 3:2015"
+      end
+      let(:mr_pubid) { "NIST.SP.800-53r4.u3-2015" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "when with translation" do
+      let(:short_pubid) { "NIST IR 8115(esp)" }
+      let(:long_pubid) do
+        "National Institute of Standards and Technology Interagency or"\
+          " Internal Report 8115 (ESP)"
+      end
+      let(:abbrev_pubid) do
+        "Natl. Inst. Stand. Technol. Interagency or Internal Report"\
+          " 8115 (ESP)"
+      end
+      let(:mr_pubid) { "NIST.IR.8115(esp)" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "when with addendum" do
+      let(:short_pubid) { "NIST SP 800-38A Addendum" }
+      let(:long_pubid) do
+        "Addendum to National Institute of Standards and Technology Special"\
+          " Publication 800-38A"
+      end
+      let(:abbrev_pubid) do
+        "Add. to Natl. Inst. Stand. Technol. Spec. Publ. 800-38A"
+      end
+      let(:mr_pubid) { "NIST.SP.800-38A.add-1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "when with stage" do
+      let(:short_pubid) { "NIST SP IPD 800-53r5" }
+      let(:long_pubid) do
+        "National Institute of Standards and Technology Special Publication "\
+          "Initial Public Draft 800-53, Revision 5"
+      end
+      let(:abbrev_pubid) do
+        "Natl. Inst. Stand. Technol. Spec. Publ. Initial Public Draft 800-53,"\
+          " Rev. 5"
+      end
+      let(:mr_pubid) { "NIST.SP.IPD.800-53r5" }
+
+
+      it_behaves_like "converts pubid to different formats"
     end
   end
 
@@ -84,7 +142,7 @@ RSpec.describe NistPubid::Document do
       expect(described_class.parse(short_pubid).revision).to eq('5')
     end
 
-    it 'can update revistion' do
+    it "can update revision" do
       pub_id = described_class.parse(short_pubid)
       pub_id.revision = 6
       expect(pub_id.to_s(:mr)).to eq('NIST.SP.800-53r6')
