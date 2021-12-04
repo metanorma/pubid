@@ -26,13 +26,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.required_ruby_version = Gem::Requirement.new(">= 2.5.0")
 
-  spec.add_development_dependency "pry-byebug"
   spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "rubocop", "~> 1.23.0"
-  spec.add_development_dependency "rubocop-performance", "~> 1.12.0"
-  spec.add_development_dependency "rubocop-rails", "~> 2.12.4"
-  spec.metadata = {
-    "rubygems_mfa_required" => "true",
-  }
 end
