@@ -1,3 +1,5 @@
+SERIES = YAML.load_file(File.join(File.dirname(__FILE__), "../../series.yaml"))
+
 module NistPubid
   class Serie
     attr_accessor :serie
@@ -9,18 +11,14 @@ module NistPubid
     def to_s(format)
       return @serie if format == :short || format == :mr
 
-      result = self.class.series[format.to_s][@serie]
-      return self.class.series["long"][@serie] if result.nil?
+      result = SERIES[format.to_s][@serie]
+      return SERIES["long"][@serie] if result.nil?
 
       result
     end
 
-    def self.series
-      @series ||= YAML.load_file(File.join(File.dirname(__FILE__), "../../series.yaml"))
-    end
-
     def self.series_keys
-      series["long"].keys + series["mr"].values
+      SERIES["long"].keys + SERIES["mr"].values
     end
   end
 end

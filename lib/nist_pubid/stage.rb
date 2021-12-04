@@ -1,3 +1,5 @@
+STAGES = YAML.load_file(File.join(File.dirname(__FILE__), "../../stages.yaml"))
+
 module NistPubid
   class Stage
     attr_accessor :stage
@@ -10,16 +12,11 @@ module NistPubid
       return "" if @stage.nil?
       return "#{@stage} " if %i[short mr].include?(format)
 
-      "#{self.class.stages[@stage]} "
-    end
-
-    def self.stages
-      @stages ||= YAML.load_file(File.join(File.dirname(__FILE__),
-                                           "../../stages.yaml"))
+      "#{STAGES[@stage]} "
     end
 
     def self.stages_keys
-      stages.keys
+      STAGES.keys
     end
   end
 end

@@ -1,3 +1,5 @@
+PUBLISHERS = YAML.load_file(File.join(File.dirname(__FILE__), "../../publishers.yaml"))
+
 module NistPubid
   class Publisher
     attr_accessor :publisher
@@ -9,15 +11,11 @@ module NistPubid
     def to_s(format)
       return @publisher if format == :short || format == :mr
 
-      self.class.publishers[format.to_s][@publisher]
-    end
-
-    def self.publishers
-      @publishers ||= YAML.load_file(File.join(File.dirname(__FILE__), "../../publishers.yaml"))
+      PUBLISHERS[format.to_s][@publisher]
     end
 
     def self.publishers_keys
-      publishers["long"].keys
+      PUBLISHERS["long"].keys
     end
   end
 end
