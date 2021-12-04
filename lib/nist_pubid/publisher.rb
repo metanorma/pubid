@@ -1,4 +1,5 @@
-PUBLISHERS = YAML.load_file(File.join(File.dirname(__FILE__), "../../publishers.yaml"))
+PUBLISHERS = YAML.load_file(File.join(File.dirname(__FILE__),
+                                      "../../publishers.yaml"))
 
 module NistPubid
   class Publisher
@@ -9,7 +10,7 @@ module NistPubid
     end
 
     def to_s(format)
-      return @publisher if format == :short || format == :mr
+      return @publisher if %i[short mr].include?(format)
 
       PUBLISHERS[format.to_s][@publisher]
     end

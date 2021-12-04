@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'bundler/setup'
-require 'rspec/matchers'
+require "bundler/setup"
+require "rspec/matchers"
 
-Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
+Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
 
-require 'nist_pubid'
+require "nist_pubid"

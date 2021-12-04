@@ -9,7 +9,7 @@ module NistPubid
     end
 
     def to_s(format)
-      return @serie if format == :short || format == :mr
+      return @serie if %i[short mr].include?(format)
 
       result = SERIES[format.to_s][@serie]
       return SERIES["long"][@serie] if result.nil?

@@ -1,24 +1,24 @@
 # frozen_string_literal: true
 
 REVISION_DESC = {
-  long: ', Revision ',
+  long: ", Revision ",
   abbrev: ", Rev. ",
-  short: 'r',
-  mr: 'r'
+  short: "r",
+  mr: "r",
 }.freeze
 
 VERSION_DESC = {
-  long: ', Version ',
+  long: ", Version ",
   abbrev: ", Ver. ",
-  short: 'ver',
-  mr: 'ver'
+  short: "ver",
+  mr: "ver",
 }.freeze
 
 VOLUME_DESC = {
-  long: ', Volume ',
+  long: ", Volume ",
   abbrev: ", Vol. ",
-  short: 'v',
-  mr: 'v'
+  short: "v",
+  mr: "v",
 }.freeze
 
 PART_DESC = {
@@ -57,13 +57,15 @@ module NistPubid
 
     def self.parse(code)
       matches = {
-        publisher: match(/(#{Publisher.publishers_keys.join('|')})(?=\.|\s)/, code),
-        serie: match(/(#{Serie.series_keys.join('|')})(?=\.|\s)/, code)&.gsub(/\./, ' '),
+        publisher: match(/(#{Publisher.publishers_keys.join('|')})(?=\.|\s)/,
+                         code),
+        serie: match(/(#{Serie.series_keys.join('|')})(?=\.|\s)/,
+                     code)&.gsub(/\./, " "),
         stage: match(/(#{Stage.stages_keys.join('|')})(?=\.|\s)/, code),
         code: match(/(?<=\.|\s)[0-9-]{3,}[A-Z]?/, code),
         prt1: /(?<=(\.))?pt(?(1)-)([A-Z\d]+)/.match(code)&.[](2),
         vol1: /(?<=(\.))?v(?(1)-)(\d+)/.match(code)&.[](2),
-        ver1: match(/(?<=(\.))?ver(?(1)[-\d]|[\.\d])+/, code)&.gsub(/-/, '.'),
+        ver1: match(/(?<=(\.))?ver(?(1)[-\d]|[.\d])+/, code)&.gsub(/-/, "."),
         rev1: /(?<=[^a-z])(?<=(\.))?r(?(1)-)(\d+)/.match(code)&.[](2),
         add1: match(/(?<=(\.))?add(?(1)-)\d+/, code),
         prt2: match(/(?<=\s)Part\s[A-Z\d]+/, code),
@@ -97,13 +99,13 @@ module NistPubid
                "#{render_update(format)}#{render_translation(format)}"
       result = render_addendum(result, format)
 
-      return result.gsub(' ', '.') if format == :mr
+      return result.gsub(" ", ".") if format == :mr
 
       result
     end
 
     def render_serie(format)
-      return "#{serie.to_s(format)} " if [:mr, :short].include?(format)
+      return "#{serie.to_s(format)} " if %i[mr short].include?(format)
 
       "#{publisher.to_s(format)} #{serie.to_s(format)} "
     end
