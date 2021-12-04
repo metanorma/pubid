@@ -28,10 +28,17 @@ PART_DESC = {
   mr: "pt",
 }.freeze
 
+EDITION_DESC = {
+  long: " Edition ",
+  abbrev: " Ed. ",
+  short: "e",
+  mr: "e",
+}.freeze
+
 module NistPubid
   class Document
     attr_accessor :serie, :code, :revision, :publisher, :version, :volume,
-                  :part, :addendum, :stage, :translation, :update
+                  :part, :addendum, :stage, :translation, :update, :edition
 
     def initialize(publisher:, serie:, docnumber:, stage: nil, **opts)
       @publisher = Publisher.new(publisher: publisher)
@@ -50,10 +57,13 @@ module NistPubid
         part: /(?<=(\.))?pt(?(1)-)([A-Z\d]+)/.match(code)&.[](2),
         volume: /(?<=(\.))?v(?(1)-)(\d+)/.match(code)&.[](2),
         version: match(/(?<=(\.))?ver(?(1)[-\d]|[.\d])+/, code)&.gsub(/-/, "."),
-        revision: /(?<=[^a-z])(?<=(\.))?(?:r(?(1)-)|Rev\.\s)(\d+)/.match(code)&.[](2),
+        revision: /(?<=[^a-z])(?<=(\.))?(?:r(?(1)-)|Rev\.\s)(\d+)/
+          .match(code)&.[](2),
         addendum: match(/(?<=(\.))?(add(?(1)-)\d+|Addendum)/, code),
         translation: match(/(?<=\()\w{3}(?=\))/, code),
         update: match(/(?<=Upd\s)([\d:]+)/, code),
+        edition: /(?<=[^a-z])(?<=(\.))?(?:e(?(1)-)|Ed\.\s)(\d+)/
+          .match(code)&.[](2),
       }
       new(**matches)
     end
@@ -80,7 +90,6 @@ module NistPubid
     end
 
     def render_part(format)
-      # part, volume, addendum
       # TODO: Section, Supplement, Index, Insert, Errata
       result = ""
       result += "#{VOLUME_DESC[format]}#{volume}" unless volume.nil?
@@ -89,10 +98,10 @@ module NistPubid
     end
 
     def render_edition(format)
-      # TODO: edtion
       result = ""
       result += "#{REVISION_DESC[format]}#{revision}" unless revision.nil?
       result += "#{VERSION_DESC[format]}#{version}" unless version.nil?
+      result += "#{EDITION_DESC[format]}#{edition}" unless edition.nil?
       result
     end
 

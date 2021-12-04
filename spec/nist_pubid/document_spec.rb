@@ -144,6 +144,21 @@ RSpec.describe NistPubid::Document do
 
       it_behaves_like "converts pubid to different formats"
     end
+
+    context "when with edition" do
+      let(:short_pubid) { "NIST SP IPD 800-53e5" }
+      let(:long_pubid) do
+        "National Institute of Standards and Technology Special Publication "\
+          "Initial Public Draft 800-53 Edition 5"
+      end
+      let(:abbrev_pubid) do
+        "Natl. Inst. Stand. Technol. Spec. Publ. Initial Public Draft 800-53 "\
+          "Ed. 5"
+      end
+      let(:mr_pubid) { "NIST.SP.IPD.800-53e5" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
   end
 
   describe "access to PubID object" do
