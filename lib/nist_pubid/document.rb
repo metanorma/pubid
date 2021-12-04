@@ -28,65 +28,34 @@ PART_DESC = {
   mr: "pt",
 }.freeze
 
-UPDATE_DESC = {
-  long: " Update ",
-  abbrev: " Upd. ",
-  short: "/Upd ",
-  mr: ".u",
-}.freeze
-
 module NistPubid
   class Document
     attr_accessor :serie, :code, :revision, :publisher, :version, :volume,
                   :part, :addendum, :stage, :translation, :update
 
-    def initialize(publisher:, serie:, docnumber:, revision: nil, version: nil, volume: nil, part: nil, addendum: false,
-                   stage: nil, translation: nil, update: nil)
+    def initialize(publisher:, serie:, docnumber:, stage: nil, **opts)
       @publisher = Publisher.new(publisher: publisher)
       @serie = Serie.new(serie: serie)
       @code = docnumber
-      @revision = revision
-      @version = version
-      @volume = volume
-      @part = part
-      @addendum = addendum
       @stage = Stage.new(stage: stage)
-      @translation = translation
-      @update = update
+      opts.each { |key, value| send("#{key}=", value) }
     end
 
     def self.parse(code)
       matches = {
-        publisher: match(/(#{Publisher.publishers_keys.join('|')})(?=\.|\s)/,
-                         code),
-        serie: match(/(#{Serie.series_keys.join('|')})(?=\.|\s)/,
-                     code)&.gsub(/\./, " "),
-        stage: match(/(#{Stage.stages_keys.join('|')})(?=\.|\s)/, code),
-        code: match(/(?<=\.|\s)[0-9-]{3,}[A-Z]?/, code),
-        prt1: /(?<=(\.))?pt(?(1)-)([A-Z\d]+)/.match(code)&.[](2),
-        vol1: /(?<=(\.))?v(?(1)-)(\d+)/.match(code)&.[](2),
-        ver1: match(/(?<=(\.))?ver(?(1)[-\d]|[.\d])+/, code)&.gsub(/-/, "."),
-        rev1: /(?<=[^a-z])(?<=(\.))?r(?(1)-)(\d+)/.match(code)&.[](2),
-        add1: match(/(?<=(\.))?add(?(1)-)\d+/, code),
-        prt2: match(/(?<=\s)Part\s[A-Z\d]+/, code),
-        vol2: match(/(?<=\s)Vol\.\s\d+/, code),
-        ver2: match(/(?<=\s)Ver\.\s\d+/, code),
-        rev2: match(/(?<=\s)Rev\.\s\d+/, code),
-        add2: match(/(?<=\s)Addendum/, code),
+        publisher: match(Publisher.regexp, code),
+        serie: match(Serie.regexp, code)&.gsub(/\./, " "),
+        stage: match(Stage.regexp, code),
+        docnumber: match(/(?<=\.|\s)[0-9-]{3,}[A-Z]?/, code),
+        part: /(?<=(\.))?pt(?(1)-)([A-Z\d]+)/.match(code)&.[](2),
+        volume: /(?<=(\.))?v(?(1)-)(\d+)/.match(code)&.[](2),
+        version: match(/(?<=(\.))?ver(?(1)[-\d]|[.\d])+/, code)&.gsub(/-/, "."),
+        revision: /(?<=[^a-z])(?<=(\.))?(?:r(?(1)-)|Rev\.\s)(\d+)/.match(code)&.[](2),
+        addendum: match(/(?<=(\.))?(add(?(1)-)\d+|Addendum)/, code),
         translation: match(/(?<=\()\w{3}(?=\))/, code),
         update: match(/(?<=Upd\s)([\d:]+)/, code),
       }
-      new(publisher: matches[:publisher],
-          serie: matches[:serie],
-          docnumber: matches[:code],
-          revision: matches[:rev1] || matches[:rev2],
-          version: matches[:ver1] || matches[:ver2],
-          volume: matches[:vol1] || matches[:vol2],
-          part: matches[:prt1] || matches[:prt2],
-          addendum: matches[:add1] || matches[:add2],
-          stage: matches[:stage],
-          update: matches[:update],
-          translation: matches[:translation])
+      new(**matches)
     end
 
     def self.match(regex, code)
@@ -130,11 +99,16 @@ module NistPubid
     def render_update(format)
       return "" if update.nil?
 
-      result = "#{UPDATE_DESC[format]}#{update}"
-
-      return result.gsub(":", "-") if format == :mr
-
-      result
+      case format
+      when :long
+        " Update #{update}"
+      when :abbrev
+        " Upd. #{update}"
+      when :short
+        "/Upd #{update}"
+      when :mr
+        ".u#{update.gsub(":", "-")}"
+      end
     end
 
     def render_translation(format)

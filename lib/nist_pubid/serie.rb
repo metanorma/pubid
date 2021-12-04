@@ -17,8 +17,8 @@ module NistPubid
       result
     end
 
-    def self.series_keys
-      SERIES["long"].keys + SERIES["mr"].values
+    def self.regexp
+      /(#{(SERIES["long"].keys + SERIES["mr"].values).join('|')})(?=\.|\s)/
     end
   end
 end

@@ -124,6 +124,10 @@ RSpec.describe NistPubid::Document do
       let(:mr_pubid) { "NIST.SP.800-38A.add-1" }
 
       it_behaves_like "converts pubid to different formats"
+
+      it "converts MR PubID into long Full PubID" do
+        expect(described_class.parse(mr_pubid).to_s(:long)).to eq(long_pubid)
+      end
     end
 
     context "when with stage" do

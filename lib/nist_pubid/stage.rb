@@ -15,8 +15,8 @@ module NistPubid
       "#{STAGES[@stage]} "
     end
 
-    def self.stages_keys
-      STAGES.keys
+    def self.regexp
+      /(#{STAGES.keys.join('|')})(?=\.|\s)/
     end
   end
 end

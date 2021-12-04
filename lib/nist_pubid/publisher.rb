@@ -18,5 +18,9 @@ module NistPubid
     def self.publishers_keys
       PUBLISHERS["long"].keys
     end
+
+    def self.regexp
+      /(#{PUBLISHERS["long"].keys.join('|')})(?=\.|\s)/
+    end
   end
 end
