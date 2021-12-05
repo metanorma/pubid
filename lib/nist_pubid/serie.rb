@@ -5,7 +5,7 @@ module NistPubid
     attr_accessor :serie
 
     def initialize(serie:)
-      @serie = serie
+      @serie = serie == "NISTIR" ? "NIST IR" : serie
     end
 
     def to_s(format)
@@ -18,7 +18,7 @@ module NistPubid
     end
 
     def self.regexp
-      /(#{(SERIES["long"].keys + SERIES["mr"].values).join('|')})(?=\.|\s)/
+      /(#{(SERIES["long"].keys + SERIES["mr"].values + ["NISTIR"]).join('|')})(?=\.|\s)/
     end
   end
 end

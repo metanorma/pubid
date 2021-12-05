@@ -159,6 +159,24 @@ RSpec.describe NistPubid::Document do
 
       it_behaves_like "converts pubid to different formats"
     end
+
+    context "when using old NISTIR serie code" do
+      subject { described_class.parse(original_pubid) }
+
+      let(:original_pubid) { "NISTIR 8115" }
+      let(:short_pubid) { "NIST IR 8115" }
+      let(:long_pubid) do
+        "National Institute of Standards and Technology Interagency or"\
+          " Internal Report 8115"
+      end
+      let(:abbrev_pubid) do
+        "Natl. Inst. Stand. Technol. Interagency or Internal Report"\
+          " 8115"
+      end
+      let(:mr_pubid) { "NIST.IR.8115" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
   end
 
   describe "access to PubID object" do

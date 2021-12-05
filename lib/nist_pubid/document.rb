@@ -50,7 +50,7 @@ module NistPubid
 
     def self.parse(code)
       matches = {
-        publisher: match(Publisher.regexp, code),
+        publisher: match(Publisher.regexp, code) || "NIST",
         serie: match(Serie.regexp, code)&.gsub(/\./, " "),
         stage: match(Stage.regexp, code),
         docnumber: match(/(?<=\.|\s)[0-9-]{3,}[A-Z]?/, code),
