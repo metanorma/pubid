@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ribose Inc."]
   spec.email         = ["open.source@ribose.com"]
 
-  spec.homepage      = "http://github.com/metanorma/nist-pubid"
-  spec.summary       = "Extract and convert NIST machine-readable PubID."
-  spec.description   = "Extract and convert NIST machine-readable PubID."
+  spec.homepage      = "https://github.com/metanorma/nist-pubid"
+  spec.summary       = "Library to generate, parse and manipulate NIST PubID."
+  spec.description   = "Library to generate, parse and manipulate NIST PubID."
   spec.license       = "BSD-2-Clause"
 
   # Specify which files should be added to the gem when it is released.
