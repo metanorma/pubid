@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
       f.match(%r{^(test|spec|features)/})
     end
   end
-  spec.extra_rdoc_files = %w[README.adoc CHANGELOG.adoc LICENSE.txt]
+  spec.extra_rdoc_files = %w[README.adoc LICENSE.txt]
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
