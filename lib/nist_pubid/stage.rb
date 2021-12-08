@@ -2,21 +2,36 @@ STAGES = YAML.load_file(File.join(File.dirname(__FILE__), "../../stages.yaml"))
 
 module NistPubid
   class Stage
-    attr_accessor :stage
+    attr_accessor :stage, :original_code
 
-    def initialize(stage:)
-      @stage = stage
+    def initialize(original_code)
+      self.original_code = original_code
+      @stage = self.class.regexp.match(original_code)&.[](1)
     end
 
-    def to_s(format)
-      return "" if @stage.nil?
-      return "#{@stage} " if %i[short mr].include?(format)
+    def to_s(format = :short)
+      return "" if nil?
 
-      "#{STAGES[@stage]} "
+      case format
+      when :short
+        "(#{@stage})"
+      when :mr
+        @stage
+      else
+        STAGES[@stage]
+      end
+    end
+
+    def self.parse(code)
+      new(regexp.match(code)&.to_s)
     end
 
     def self.regexp
-      /(#{STAGES.keys.join('|')})(?=\.|\s)/
+      /\((#{STAGES.keys.join('|')})\)/
+    end
+
+    def nil?
+      @stage.nil?
     end
   end
 end

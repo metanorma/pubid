@@ -131,7 +131,7 @@ RSpec.describe NistPubid::Document do
     end
 
     context "when with stage" do
-      let(:short_pubid) { "NIST SP IPD 800-53r5" }
+      let(:short_pubid) { "NIST SP(IPD) 800-53r5" }
       let(:long_pubid) do
         "National Institute of Standards and Technology Special Publication "\
           "Initial Public Draft 800-53, Revision 5"
@@ -146,7 +146,7 @@ RSpec.describe NistPubid::Document do
     end
 
     context "when with edition" do
-      let(:short_pubid) { "NIST SP IPD 800-53e5" }
+      let(:short_pubid) { "NIST SP(IPD) 800-53e5" }
       let(:long_pubid) do
         "National Institute of Standards and Technology Special Publication "\
           "Initial Public Draft 800-53 Edition 5"

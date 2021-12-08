@@ -40,11 +40,10 @@ module NistPubid
     attr_accessor :serie, :code, :revision, :publisher, :version, :volume,
                   :part, :addendum, :stage, :translation, :update, :edition
 
-    def initialize(publisher:, serie:, docnumber:, stage: nil, **opts)
+    def initialize(publisher:, serie:, docnumber:, **opts)
       @publisher = Publisher.new(publisher: publisher)
       @serie = Serie.new(serie: serie)
       @code = docnumber
-      @stage = Stage.new(stage: stage)
       opts.each { |key, value| send("#{key}=", value) }
     end
 
@@ -52,7 +51,7 @@ module NistPubid
       matches = {
         publisher: match(Publisher.regexp, code) || "NIST",
         serie: match(Serie.regexp, code)&.gsub(/\./, " "),
-        stage: match(Stage.regexp, code),
+        stage: Stage.parse(code),
         docnumber: match(/(?<=\.|\s)[0-9-]{3,}[A-Z]?/, code),
         part: /(?<=(\.))?pt(?(1)-)([A-Z\d]+)/.match(code)&.[](2),
         volume: /(?<=(\.))?v(?(1)-)(\d+)/.match(code)&.[](2),
@@ -60,11 +59,13 @@ module NistPubid
         revision: /(?<=[^a-z])(?<=(\.))?(?:r(?(1)-)|Rev\.\s)(\d+)/
           .match(code)&.[](2),
         addendum: match(/(?<=(\.))?(add(?(1)-)\d+|Addendum)/, code),
-        translation: match(/(?<=\()\w{3}(?=\))/, code),
         update: match(/(?<=Upd\s)([\d:]+)/, code),
         edition: /(?<=[^a-z])(?<=(\.))?(?:e(?(1)-)|Ed\.\s)(\d+)/
           .match(code)&.[](2),
       }
+      code = code.gsub(matches[:stage].original_code, "") unless matches[:stage].nil?
+      matches[:translation] = match(/(?<=\()\w{3}(?=\))/, code)
+
       new(**matches)
     end
 
@@ -73,9 +74,11 @@ module NistPubid
     end
 
     def to_s(format)
-      result = "#{render_serie(format)}#{stage.to_s(format)}"\
-               "#{code}#{render_part(format)}#{render_edition(format)}"\
-               "#{render_update(format)}#{render_translation(format)}"
+      result = render_serie(format)
+      result += " " unless format == :short || stage.nil?
+      result += "#{stage&.to_s(format)}"\
+                " #{code}#{render_part(format)}#{render_edition(format)}"\
+                "#{render_update(format)}#{render_translation(format)}"
       result = render_addendum(result, format)
 
       return result.gsub(" ", ".") if format == :mr
@@ -84,9 +87,9 @@ module NistPubid
     end
 
     def render_serie(format)
-      return "#{serie.to_s(format)} " if %i[mr short].include?(format)
+      return serie.to_s(format) if %i[mr short].include?(format)
 
-      "#{publisher.to_s(format)} #{serie.to_s(format)} "
+      "#{publisher.to_s(format)} #{serie.to_s(format)}"
     end
 
     def render_part(format)
