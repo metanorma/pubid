@@ -63,6 +63,11 @@ module NistPubid
         edition: /(?<=[^a-z])(?<=(\.))?(?:e(?(1)-)|Ed\.\s)(\d+)/
           .match(code)&.[](2),
       }
+      raise Errors::SerieParseError.new("failed to parse serie for #{code}") unless matches[:serie]
+      unless matches[:docnumber]
+        raise Errors::DocumentIdParseError.new("failed to parse document identifier for #{code}")
+      end
+
       code = code.gsub(matches[:stage].original_code, "") unless matches[:stage].nil?
       matches[:translation] = match(/(?<=\()\w{3}(?=\))/, code)
 

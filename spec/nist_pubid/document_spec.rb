@@ -177,6 +177,20 @@ RSpec.describe NistPubid::Document do
 
       it_behaves_like "converts pubid to different formats"
     end
+
+    context "when cannot parse serie" do
+      it "should raise error" do
+        expect { described_class.parse("NIST WRONG-SERIE 800-11") }
+          .to raise_error(NistPubid::Errors::SerieParseError)
+      end
+    end
+
+    context "when cannot parse code" do
+      it "should raise error" do
+        expect { described_class.parse("NIST SP WRONG-CODE") }
+          .to raise_error(NistPubid::Errors::DocumentIdParseError)
+      end
+    end
   end
 
   describe "access to PubID object" do
