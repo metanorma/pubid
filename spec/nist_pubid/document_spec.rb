@@ -181,14 +181,14 @@ RSpec.describe NistPubid::Document do
     context "when cannot parse serie" do
       it "should raise error" do
         expect { described_class.parse("NIST WRONG-SERIE 800-11") }
-          .to raise_error(NistPubid::Errors::SerieParseError)
+          .to raise_error(NistPubid::Errors::ParseError)
       end
     end
 
     context "when cannot parse code" do
       it "should raise error" do
         expect { described_class.parse("NIST SP WRONG-CODE") }
-          .to raise_error(NistPubid::Errors::DocumentIdParseError)
+          .to raise_error(NistPubid::Errors::ParseError)
       end
     end
   end

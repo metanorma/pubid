@@ -52,7 +52,7 @@ module NistPubid
         publisher: match(Publisher.regexp, code) || "NIST",
         serie: match(Serie.regexp, code)&.gsub(/\./, " "),
         stage: Stage.parse(code),
-        docnumber: match(/(?<=\.|\s)[0-9-]{3,}[A-Z]?/, code),
+        docnumber: match(/(?<=\.|\s)[0-9-]+[A-Z]?/, code),
         part: /(?<=(\.))?pt(?(1)-)([A-Z\d]+)/.match(code)&.[](2),
         volume: /(?<=(\.))?v(?(1)-)(\d+)/.match(code)&.[](2),
         version: match(/(?<=(\.))?ver(?(1)[-\d]|[.\d])+/, code)&.gsub(/-/, "."),
@@ -63,9 +63,14 @@ module NistPubid
         edition: /(?<=[^a-z])(?<=(\.))?(?:e(?(1)-)|Ed\.\s)(\d+)/
           .match(code)&.[](2),
       }
-      raise Errors::SerieParseError.new("failed to parse serie for #{code}") unless matches[:serie]
+      unless matches[:serie]
+        raise Errors::ParseError.new("failed to parse serie for #{code}")
+      end
+
       unless matches[:docnumber]
-        raise Errors::DocumentIdParseError.new("failed to parse document identifier for #{code}")
+        raise Errors::ParseError.new(
+          "failed to parse document identifier for #{code}",
+        )
       end
 
       code = code.gsub(matches[:stage].original_code, "") unless matches[:stage].nil?

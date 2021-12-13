@@ -1,6 +1,5 @@
 module NistPubid
   module Errors
-    class SerieParseError < StandardError; end
-    class DocumentIdParseError < StandardError; end
+    class ParseError < StandardError; end
   end
 end
