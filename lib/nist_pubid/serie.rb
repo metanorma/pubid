@@ -18,7 +18,8 @@ module NistPubid
     end
 
     def self.regexp
-      /(#{(SERIES["long"].keys + SERIES["mr"].values + ["NISTIR"])
+      /(#{(SERIES["long"].keys + SERIES["mr"].values
+            .map { |v| v.gsub(".", '\.') } + ["NISTIR"])
             .sort_by(&:length).reverse.join('|')})/
     end
   end
