@@ -47,8 +47,13 @@ module NistPubid
       opts.each { |key, value| send("#{key}=", value) }
     end
 
-    def self.parse(code)
+    def self.update_old_code(code)
       code = code.gsub("FIPS", "FIPS PUB") unless code.include?("FIPS PUB")
+      code.gsub("NBS MONO", "NBS MN").gsub("NIST MONO", "NIST MN")
+    end
+
+    def self.parse(code)
+      code = update_old_code(code)
       matches = {
         publisher: match(Publisher.regexp, code) || "NIST",
         serie: match(Serie.regexp, code),

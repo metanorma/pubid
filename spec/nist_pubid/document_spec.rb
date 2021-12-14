@@ -227,11 +227,41 @@ RSpec.describe NistPubid::Document do
       let(:original_pubid) { "NIST FIPS 140-3" }
       let(:short_pubid) { "NIST FIPS PUB 140-3" }
       let(:long_pubid) do
-        "National Institute of Standards and Technology Federal Information Processing Standards"\
-          " Publication 140-3"
+        "National Institute of Standards and Technology Federal Information"\
+          " Processing Standards Publication 140-3"
       end
       let(:abbrev_pubid) do
         "Natl. Inst. Stand. Technol. Federal Inf. Process. Stds. 140-3"
+      end
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "parse old NBS MONO series" do
+      subject { described_class.parse(original_pubid) }
+
+      let(:original_pubid) { "NBS MONO 158" }
+      let(:short_pubid) { "NBS MN 158" }
+      let(:long_pubid) do
+        "National Bureau of Standards Monograph 158"
+      end
+      let(:abbrev_pubid) do
+        "Natl. Bur. Stand. Monogr. 158"
+      end
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "parse old NIST MONO series" do
+      subject { described_class.parse(original_pubid) }
+
+      let(:original_pubid) { "NIST MONO 178" }
+      let(:short_pubid) { "NIST MN 178" }
+      let(:long_pubid) do
+        "National Institute of Standards and Technology Monograph 178"
+      end
+      let(:abbrev_pubid) do
+        "Natl. Inst. Stand. Technol. Monogr. 178"
       end
 
       it_behaves_like "converts pubid to different formats"
