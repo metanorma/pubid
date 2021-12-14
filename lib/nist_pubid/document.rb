@@ -48,6 +48,7 @@ module NistPubid
     end
 
     def self.parse(code)
+      code = code.gsub("FIPS", "FIPS PUB") unless code.include?("FIPS PUB")
       matches = {
         publisher: match(Publisher.regexp, code) || "NIST",
         serie: match(Serie.regexp, code),
@@ -66,8 +67,13 @@ module NistPubid
         raise Errors::ParseError.new("failed to parse serie for #{code}")
       end
 
-      matches[:docnumber] = /(?:#{matches[:serie]})(?:.*?)([0-9]+[0-9-]*[A-Z]?)/
-        .match(code)&.[](1)
+      unless matches[:stage].nil?
+        code = code.gsub(matches[:stage].original_code, "")
+      end
+
+      matches[:docnumber] =
+        /(?:#{matches[:serie]})(?:\s|\.)?([0-9]+[0-9-]*[A-Z]?)/.match(code)
+          &.[](1)
 
       unless matches[:docnumber]
         raise Errors::ParseError.new(
@@ -75,7 +81,6 @@ module NistPubid
         )
       end
 
-      code = code.gsub(matches[:stage].original_code, "") unless matches[:stage].nil?
       matches[:serie].gsub!(/\./, " ")
       matches[:translation] = match(/(?<=\()\w{3}(?=\))/, code)
 
@@ -100,7 +105,9 @@ module NistPubid
     end
 
     def render_serie(format)
-      return serie.to_s(format) if %i[mr short].include?(format)
+      if serie.to_s(format).include?(publisher.to_s(format))
+        return serie.to_s(format)
+      end
 
       "#{publisher.to_s(format)} #{serie.to_s(format)}"
     end
@@ -132,7 +139,7 @@ module NistPubid
       when :short
         "/Upd #{update}"
       when :mr
-        ".u#{update.gsub(":", "-")}"
+        ".u#{update.gsub(':', '-')}"
       end
     end
 

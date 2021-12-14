@@ -189,6 +189,38 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "parse old NBS FIPS series" do
+      subject { described_class.parse(original_pubid) }
+
+      let(:original_pubid) { "NBS FIPS 100" }
+      let(:short_pubid) { "NBS FIPS PUB 100" }
+      let(:long_pubid) do
+        "National Bureau of Standards Federal Information Processing Standards"\
+          " Publication 100"
+      end
+      let(:abbrev_pubid) do
+        "Natl. Bur. Stand. Federal Inf. Process. Stds. 100"
+      end
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "parse new NBS FIPS series" do
+      subject { described_class.parse(original_pubid) }
+
+      let(:original_pubid) { "NBS FIPS PUB 100" }
+      let(:short_pubid) { "NBS FIPS PUB 100" }
+      let(:long_pubid) do
+        "National Bureau of Standards Federal Information Processing Standards"\
+          " Publication 100"
+      end
+      let(:abbrev_pubid) do
+        "Natl. Bur. Stand. Federal Inf. Process. Stds. 100"
+      end
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "when cannot parse serie" do
       it "should raise error" do
         expect { described_class.parse("NIST WRONG-SERIE 800-11") }
