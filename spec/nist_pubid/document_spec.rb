@@ -9,7 +9,7 @@ RSpec.describe NistPubid::Document do
   let(:abbrev_pubid) do
     "Natl. Inst. Stand. Technol. Spec. Publ. 800-53, Rev. 5"
   end
-  let(:mr_pubid) { "NIST.SP.800-53r5" }
+  let(:mr_pubid) { short_pubid.gsub(" ", ".") }
 
   it "parses NIST PubID using parameters" do
     expect(described_class.new(publisher: "NIST", serie: "NIST SP",
@@ -50,7 +50,6 @@ RSpec.describe NistPubid::Document do
         "National Bureau of Standards Special Publication 800-53, Revision 5"
       end
       let(:abbrev_pubid) { "Natl. Bur. Stand. Spec. Publ. 800-53, Rev. 5" }
-      let(:mr_pubid) { "NBS.SP.800-53r5" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -64,7 +63,6 @@ RSpec.describe NistPubid::Document do
       let(:abbrev_pubid) do
         "Natl. Inst. Stand. Technol. Natl. Constr. Tm. Act Rpt. 1-1C, Vol. 1"
       end
-      let(:mr_pubid) { "NIST.NCSTAR.1-1Cv1" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -78,7 +76,6 @@ RSpec.describe NistPubid::Document do
       let(:abbrev_pubid) do
         "Natl. Inst. Stand. Technol. Spec. Publ. 800-57 Pt. 1, Rev. 4"
       end
-      let(:mr_pubid) { "NIST.SP.800-57pt1r4" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -107,7 +104,6 @@ RSpec.describe NistPubid::Document do
         "Natl. Inst. Stand. Technol. Interagency or Internal Report"\
           " 8115 (ESP)"
       end
-      let(:mr_pubid) { "NIST.IR.8115(esp)" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -173,7 +169,22 @@ RSpec.describe NistPubid::Document do
         "Natl. Inst. Stand. Technol. Interagency or Internal Report"\
           " 8115"
       end
-      let(:mr_pubid) { "NIST.IR.8115" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "parse NBS CRPL-F-B series" do
+      subject { described_class.parse(original_pubid) }
+
+      let(:original_pubid) { "NBS CRPL-F-B150" }
+      let(:short_pubid) { "NBS CRPL-F-B 150" }
+      let(:long_pubid) do
+        "National Bureau of Standards CRPL Solar-Geophysical"\
+          " Data 150"
+      end
+      let(:abbrev_pubid) do
+        "Natl. Bur. Stand. CRPL Solar-Geophysical Data 150"
+      end
 
       it_behaves_like "converts pubid to different formats"
     end
