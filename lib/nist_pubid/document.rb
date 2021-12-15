@@ -35,10 +35,18 @@ EDITION_DESC = {
   mr: "e",
 }.freeze
 
+SUPPLEMENT_DESC = {
+  long: " Supplement ",
+  abbrev: " Suppl. ",
+  short: "sup",
+  mr: "sup",
+}.freeze
+
 module NistPubid
   class Document
     attr_accessor :serie, :code, :revision, :publisher, :version, :volume,
-                  :part, :addendum, :stage, :translation, :update, :edition
+                  :part, :addendum, :stage, :translation, :update, :edition,
+                  :supplement
 
     def initialize(publisher:, serie:, docnumber:, **opts)
       @publisher = Publisher.new(publisher: publisher)
@@ -51,6 +59,8 @@ module NistPubid
       code = code.gsub("FIPS", "FIPS PUB") unless code.include?("FIPS PUB")
       code.gsub("NBS MONO", "NBS MN").gsub("NIST MONO", "NIST MN")
         .gsub("NIST MP", "NBS MP")
+        .gsub("NIST SP 304a-2017", "NIST SP 304A-2017")
+        .gsub("NIST SP 260-162 2006ed.", "NIST SP 260-162e2006")
     end
 
     def self.parse(code)
@@ -59,14 +69,19 @@ module NistPubid
         publisher: match(Publisher.regexp, code) || "NIST",
         serie: match(Serie.regexp, code),
         stage: Stage.parse(code),
-        part: /(?<=(\.))?pt(?(1)-)([A-Z\d]+)/.match(code)&.[](2),
-        volume: /(?<=(\.))?v(?(1)-)(\d+)/.match(code)&.[](2),
-        version: match(/(?<=(\.))?ver(?(1)[-\d]|[.\d])+/, code)&.gsub(/-/, "."),
-        revision: /(?<=[^a-z])(?<=(\.))?(?:r(?(1)-)|Rev\.\s)(\d+)/
+        part: /(?<=(\.))?(?<![a-z])+(?:pt|p)(?(1)-)([A-Z\d]+)/.match(code)
+                &.[](2),
+        volume: /(?<=(\.))?v(?(1)-)(\d+)(?!\.\d+)/.match(code)&.[](2),
+        version:
+          /(?<=\.)?(?:(?:ver)((?(1)[-\d]|[.\d])+|\d+)|(?:v)(\d+\.[.\d]+))/
+            .match(code).to_a[1..-1]&.compact&.first&.gsub(/-/, "."),
+        revision: /(?<=[^a-z])(?<=(\.))?(?:r(?(1)-)|Rev\.\s)([\da]+)/
           .match(code)&.[](2),
         addendum: match(/(?<=(\.))?(add(?(1)-)\d+|Addendum)/, code),
         update: match(/(?<=Upd\s)([\d:]+)/, code),
         edition: /(?<=[^a-z])(?<=(\.))?(?:e(?(1)-)|Ed\.\s)(\d+)/
+          .match(code)&.[](2),
+        supplement: /(?<=(\.))?(?:(?:sup|supp)(?(1)-)(\d+)|Supplement)/
           .match(code)&.[](2),
       }
       unless matches[:serie]
@@ -82,8 +97,8 @@ module NistPubid
         matches[:volume] = nil
       else
         matches[:docnumber] =
-          /(?:#{matches[:serie]})(?:\s|\.)?([0-9]+[0-9-]*[A-Z]?)/.match(code)
-            &.[](1)
+          /(?:#{matches[:serie]})(?:\s|\.)?([0-9]+[A-Z]*[0-9-]*[A-Z]*)/
+            .match(code)&.[](1)
       end
 
       unless matches[:docnumber]
@@ -124,10 +139,11 @@ module NistPubid
     end
 
     def render_part(format)
-      # TODO: Section, Supplement, Index, Insert, Errata
+      # TODO: Section, Index, Insert, Errata
       result = ""
       result += "#{VOLUME_DESC[format]}#{volume}" unless volume.nil?
       result += "#{PART_DESC[format]}#{part}" unless part.nil?
+      result += "#{SUPPLEMENT_DESC[format]}#{supplement}" unless supplement.nil?
       result
     end
 

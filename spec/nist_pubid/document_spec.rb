@@ -12,7 +12,6 @@ RSpec.describe NistPubid::Document do
       .to eq(mr_pubid)
   end
 
-
   describe "generate NIST PubID string outputs" do
     subject { described_class.parse(original_pubid) }
 
@@ -42,8 +41,8 @@ RSpec.describe NistPubid::Document do
 
     context "when NIST SP 800-53r5" do
       let(:long_pubid) do
-        "National Institute of Standards and Technology Special Publication 800-53,"\
-          " Revision 5"
+        "National Institute of Standards and Technology Special Publication"\
+          " 800-53, Revision 5"
       end
       let(:abbrev_pubid) do
         "Natl. Inst. Stand. Technol. Spec. Publ. 800-53, Rev. 5"
@@ -277,6 +276,68 @@ RSpec.describe NistPubid::Document do
     context "parse NBS CSM series" do
       let(:original_pubid) { "NBS CSM v6n1" }
       let(:short_pubid) { "NBS CSM 6-1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "parse NIST SP 1190GB-1" do
+      let(:short_pubid) { "NIST SP 1190GB-1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "parse NIST SP 304a-2017" do
+      let(:original_pubid) { "NIST SP 304a-2017" }
+      let(:short_pubid) { "NIST SP 304A-2017" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "parse NIST SP 500-202p2" do
+      let(:original_pubid) { "NIST SP 500-202p2" }
+      let(:short_pubid) { "NIST SP 500-202pt2" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "parse NIST SP 800-22r1a" do
+      let(:short_pubid) { "NIST SP 800-22r1a" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "parse NIST SP 800-60ver2v2" do
+      let(:short_pubid) { "NIST SP 800-60ver2v2" }
+      let(:short_pubid) { "NIST SP 800-60v2ver2" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 800-63v1.0.2" do
+      let(:original_pubid) { "NIST SP 800-63v1.0.2" }
+      let(:short_pubid) { "NIST SP 800-63ver1.0.2" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 305supp26" do
+      let(:original_pubid) { "NIST SP 305supp26" }
+      let(:short_pubid) { "NIST SP 305sup26" }
+      let(:long_pubid) do
+        "National Institute of Standards and Technology Special Publication "\
+          "305 Supplement 26"
+      end
+      let(:abbrev_pubid) do
+        "Natl. Inst. Stand. Technol. Spec. Publ. 305 Suppl. 26"
+      end
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 260-162 2006ed." do
+      let(:original_pubid) { "NIST SP 260-162 2006ed." }
+      let(:short_pubid) { "NIST SP 260-162e2006" }
+      let(:mr_pubid) { "NIST.SP.260-162e2006" }
 
       it_behaves_like "converts pubid to different formats"
     end
