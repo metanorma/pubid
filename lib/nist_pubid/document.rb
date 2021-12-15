@@ -50,6 +50,7 @@ module NistPubid
     def self.update_old_code(code)
       code = code.gsub("FIPS", "FIPS PUB") unless code.include?("FIPS PUB")
       code.gsub("NBS MONO", "NBS MN").gsub("NIST MONO", "NIST MN")
+        .gsub("NIST MP", "NBS MP")
     end
 
     def self.parse(code)
@@ -76,9 +77,14 @@ module NistPubid
         code = code.gsub(matches[:stage].original_code, "")
       end
 
-      matches[:docnumber] =
-        /(?:#{matches[:serie]})(?:\s|\.)?([0-9]+[0-9-]*[A-Z]?)/.match(code)
-          &.[](1)
+      if ["NBS CSM", "NBS CS"].include?(matches[:serie])
+        matches[:docnumber] = /v(\d+)n(\d+)/.match(code).to_a[1..-1]&.join("-")
+        matches[:volume] = nil
+      else
+        matches[:docnumber] =
+          /(?:#{matches[:serie]})(?:\s|\.)?([0-9]+[0-9-]*[A-Z]?)/.match(code)
+            &.[](1)
+      end
 
       unless matches[:docnumber]
         raise Errors::ParseError.new(
