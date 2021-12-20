@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe NistPubid::Document do
-  let(:short_pubid) { "NIST SP 800-53r5" }
+  let(:short_pubid) { "NIST SP 800-53-5" }
   let(:mr_pubid) { short_pubid.gsub(" ", ".") }
   let(:long_pubid) { nil }
   let(:abbrev_pubid) { nil }
@@ -51,7 +51,7 @@ RSpec.describe NistPubid::Document do
     end
 
     context "when published by NBS" do
-      let(:short_pubid) { "NBS SP 800-53r5" }
+      let(:short_pubid) { "NBS SP 800-53-5" }
       let(:long_pubid) do
         "National Bureau of Standards Special Publication 800-53, Revision 5"
       end
@@ -87,15 +87,16 @@ RSpec.describe NistPubid::Document do
     end
 
     context "when with update" do
-      let(:short_pubid) { "NIST SP 800-53r4/Upd 3:2015" }
+      let(:original_pubid) { "NIST SP 800-53r4/Upd3-2015" }
+      let(:short_pubid) { "NIST SP 800-53-4/Upd3-2015" }
       let(:long_pubid) do
         "National Institute of Standards and Technology Special Publication "\
-          "800-53, Revision 4 Update 3:2015"
+          "800-53, Revision 4 Update 3-2015"
       end
       let(:abbrev_pubid) do
-        "Natl. Inst. Stand. Technol. Spec. Publ. 800-53, Rev. 4 Upd. 3:2015"
+        "Natl. Inst. Stand. Technol. Spec. Publ. 800-53, Rev. 4 Upd. 3-2015"
       end
-      let(:mr_pubid) { "NIST.SP.800-53r4.u3-2015" }
+      let(:mr_pubid) { "NIST.SP.800-53-4.u3-2015" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -133,7 +134,7 @@ RSpec.describe NistPubid::Document do
     end
 
     context "when with stage" do
-      let(:short_pubid) { "NIST SP(IPD) 800-53r5" }
+      let(:short_pubid) { "NIST SP(IPD) 800-53-5" }
       let(:long_pubid) do
         "National Institute of Standards and Technology Special Publication "\
           "Initial Public Draft 800-53, Revision 5"
@@ -142,7 +143,7 @@ RSpec.describe NistPubid::Document do
         "Natl. Inst. Stand. Technol. Spec. Publ. Initial Public Draft 800-53,"\
           " Rev. 5"
       end
-      let(:mr_pubid) { "NIST.SP.IPD.800-53r5" }
+      let(:mr_pubid) { "NIST.SP.IPD.800-53-5" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -301,7 +302,8 @@ RSpec.describe NistPubid::Document do
     end
 
     context "parse NIST SP 800-22r1a" do
-      let(:short_pubid) { "NIST SP 800-22r1a" }
+      let(:original_pubid) { "NIST SP 800-22r1a" }
+      let(:short_pubid) { "NIST SP 800-22-1a" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -342,6 +344,50 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NIST SP 500-300-upd" do
+      let(:original_pubid) { "NIST SP 500-300-upd" }
+      let(:short_pubid) { "NIST SP 500-300/Upd1" }
+      let(:mr_pubid) { "NIST.SP.500-300.u1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 800-90b" do
+      let(:original_pubid) { "NIST SP 800-90b" }
+      let(:short_pubid) { "NIST SP 800-90B" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    # 800-85A-4 but 800-85Apt1r4
+    context "NIST SP 800-85A-4" do
+      let(:short_pubid) { "NIST SP 800-85A-4" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS RPT 9350sup" do
+      let(:original_pubid) { "NBS RPT 9350sup" }
+      let(:short_pubid) { "NBS RPT 9350sup" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS report ; 8079" do
+      it "should raise error" do
+        expect { described_class.parse("NBS report ; 8079") }
+          .to raise_error(NistPubid::Errors::ParseError)
+      end
+    end
+
+    context "NBS.RPT.8079" do
+      let(:original_pubid) { "NBS.RPT.8079" }
+      let(:short_pubid) { "NBS RPT 8079" }
+      let(:mr_pubid) { "NBS.RPT.8079" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "when cannot parse serie" do
       it "should raise error" do
         expect { described_class.parse("NIST WRONG-SERIE 800-11") }
@@ -365,7 +411,7 @@ RSpec.describe NistPubid::Document do
     it "can update revision" do
       pub_id = described_class.parse(short_pubid)
       pub_id.revision = 6
-      expect(pub_id.to_s(:mr)).to eq("NIST.SP.800-53r6")
+      expect(pub_id.to_s(:mr)).to eq("NIST.SP.800-53-6")
     end
   end
 end

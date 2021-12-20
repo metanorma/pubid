@@ -45,8 +45,8 @@ SUPPLEMENT_DESC = {
 module NistPubid
   class Document
     attr_accessor :serie, :code, :revision, :publisher, :version, :volume,
-                  :part, :addendum, :stage, :translation, :update, :edition,
-                  :supplement
+                  :part, :addendum, :stage, :translation, :update_number,
+                  :edition, :supplement, :update_year
 
     def initialize(publisher:, serie:, docnumber:, **opts)
       @publisher = Publisher.new(publisher: publisher)
@@ -75,15 +75,18 @@ module NistPubid
         version:
           /(?<=\.)?(?:(?:ver)((?(1)[-\d]|[.\d])+|\d+)|(?:v)(\d+\.[.\d]+))/
             .match(code).to_a[1..-1]&.compact&.first&.gsub(/-/, "."),
-        revision: /(?<=[^a-z])(?<=(\.))?(?:r(?(1)-)|Rev\.\s)([\da]+)/
+        revision: /\d(?:r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))([\da]+)/
           .match(code)&.[](2),
         addendum: match(/(?<=(\.))?(add(?(1)-)\d+|Addendum)/, code),
-        update: match(/(?<=Upd\s)([\d:]+)/, code),
         edition: /(?<=[^a-z])(?<=(\.))?(?:e(?(1)-)|Ed\.\s)(\d+)/
           .match(code)&.[](2),
-        supplement: /(?<=(\.))?(?:(?:sup|supp)(?(1)-)(\d+)|Supplement)/
+        supplement: /(?<=(\.))?(?:(?:supp?)(?(1)-)(\d*)|Supplement)/
           .match(code)&.[](2),
       }
+      update = code.scan(/((?<=Upd)\s?[\d:]+|-upd)-?(\d*)/).first
+
+      (matches[:update_number], matches[:update_year]) = update if update
+
       unless matches[:serie]
         raise Errors::ParseError.new("failed to parse serie for #{code}")
       end
@@ -97,8 +100,8 @@ module NistPubid
         matches[:volume] = nil
       else
         matches[:docnumber] =
-          /(?:#{matches[:serie]})(?:\s|\.)?([0-9]+[A-Z]*[0-9-]*[A-Z]*)/
-            .match(code)&.[](1)
+          /(?:#{matches[:serie]})(?:\s|\.)?([0-9]+(?:(?!supp?)[A-Za-z]+)?(?:-[0-9]+)?(?:(?:([A-Z]|(?![a-z]))+|(?!pt|r|e|p|v|supp?)[a-z]+)?))/
+            .match(code)&.[](1)&.upcase
       end
 
       unless matches[:docnumber]
@@ -149,24 +152,38 @@ module NistPubid
 
     def render_edition(format)
       result = ""
-      result += "#{REVISION_DESC[format]}#{revision}" unless revision.nil?
+      if revision
+        result += if %i[long abbrev].include?(format) ||
+            [volume, part, supplement, version, edition].any?
+                    "#{REVISION_DESC[format]}#{revision}"
+                  else
+                    "-#{revision}"
+                  end
+      end
       result += "#{VERSION_DESC[format]}#{version}" unless version.nil?
       result += "#{EDITION_DESC[format]}#{edition}" unless edition.nil?
       result
     end
 
     def render_update(format)
-      return "" if update.nil?
+      return "" if update_year.nil?
+
+      if update_number.match?(/\d+/)
+        update_text = update_number
+        update_text += "-#{update_year}" if update_year
+      else
+        update_text = "1"
+      end
 
       case format
       when :long
-        " Update #{update}"
+        " Update #{update_text}"
       when :abbrev
-        " Upd. #{update}"
+        " Upd. #{update_text}"
       when :short
-        "/Upd #{update}"
+        "/Upd#{update_text}"
       when :mr
-        ".u#{update.gsub(':', '-')}"
+        ".u#{update_text}"
       end
     end
 
