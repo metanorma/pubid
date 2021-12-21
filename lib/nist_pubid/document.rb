@@ -61,6 +61,8 @@ module NistPubid
         .gsub("NIST MP", "NBS MP")
         .gsub("NIST SP 304a-2017", "NIST SP 304A-2017")
         .gsub("NIST SP 260-162 2006ed.", "NIST SP 260-162e2006")
+        .gsub(/(?<=\d)es/, "(spa)")
+        .gsub(/(?<=\d)chi/, "(chi)")
     end
 
     def self.parse(code)
@@ -100,7 +102,7 @@ module NistPubid
         matches[:volume] = nil
       else
         matches[:docnumber] =
-          /(?:#{matches[:serie]})(?:\s|\.)?([0-9]+(?:(?!supp?)[A-Za-z]+)?(?:-[0-9]+)?(?:(?:([A-Z]|(?![a-z]))+|(?!pt|r|e|p|v|supp?)[a-z]+)?))/
+          /(?:#{matches[:serie]})(?:\s|\.)?([0-9]+(?:(?!pt|r|e|p|v|supp?)[A-Za-z]+)?(?:-[0-9]+)?(?:(?:([A-Z]|(?![a-z]))+|(?!pt|r|e|p|v|supp?)[a-z]+)?))/
             .match(code)&.[](1)&.upcase
       end
 

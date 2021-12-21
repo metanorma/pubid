@@ -388,6 +388,27 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NIST SP 1262es" do
+      let(:original_pubid) { "NIST SP 1262es" }
+      let(:short_pubid) { "NIST SP 1262(spa)" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST IR 8115chi" do
+      let(:original_pubid) { "NIST IR 8115chi" }
+      let(:short_pubid) { "NIST IR 8115(chi)" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST IR 8118r1es" do
+      let(:original_pubid) { "NIST IR 8118r1es" }
+      let(:short_pubid) { "NIST IR 8118-1(spa)" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "when cannot parse serie" do
       it "should raise error" do
         expect { described_class.parse("NIST WRONG-SERIE 800-11") }
