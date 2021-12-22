@@ -336,6 +336,13 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NIST SP 955 Suppl." do
+      let(:original_pubid) { "NIST SP 955 Suppl." }
+      let(:short_pubid) { "NIST SP 955sup" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "NIST SP 260-162 2006ed." do
       let(:original_pubid) { "NIST SP 260-162 2006ed." }
       let(:short_pubid) { "NIST SP 260-162e2006" }

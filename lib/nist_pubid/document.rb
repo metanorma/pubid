@@ -85,9 +85,13 @@ module NistPubid
         addendum: match(/(?<=(\.))?(add(?(1)-)\d+|Addendum)/, code),
         edition: /(?<=[^a-z])(?<=(\.))?(?:e(?(1)-)|Ed\.\s)(\d+)/
           .match(code)&.[](2),
-        supplement: /(?<=(\.))?(?:(?:supp?)(?(1)-)(\d*)|Supplement)/
-          .match(code)&.[](2),
       }
+      supplement = /(?<=\.)?(?:(?:supp?)(?(1)-)(\d*)|Supplement|Suppl.)/
+        .match(code)
+      unless supplement.nil?
+        matches[:supplement] = supplement[1].nil? ? "" : supplement[1]
+      end
+
       update = code.scan(/((?<=Upd)\s?[\d:]+|-upd)-?(\d*)/).first
 
       (matches[:update_number], matches[:update_year]) = update if update
