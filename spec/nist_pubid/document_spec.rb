@@ -409,6 +409,27 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "LCIRC 887" do
+      let(:original_pubid) { "LCIRC 887" }
+      let(:short_pubid) { "NBS LC 887" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "LCIRC 888r1964" do
+      let(:original_pubid) { "LCIRC 888r1964" }
+      let(:short_pubid) { "NBS LC 888-1964" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 800-38e" do
+      let(:original_pubid) { "NIST SP 800-38e" }
+      let(:short_pubid) { "NIST SP 800-38E" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "when cannot parse serie" do
       it "should raise error" do
         expect { described_class.parse("NIST WRONG-SERIE 800-11") }
