@@ -397,7 +397,7 @@ RSpec.describe NistPubid::Document do
 
     context "NIST IR 8115chi" do
       let(:original_pubid) { "NIST IR 8115chi" }
-      let(:short_pubid) { "NIST IR 8115(chi)" }
+      let(:short_pubid) { "NIST IR 8115(zho)" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -405,6 +405,20 @@ RSpec.describe NistPubid::Document do
     context "NIST IR 8118r1es" do
       let(:original_pubid) { "NIST IR 8118r1es" }
       let(:short_pubid) { "NIST IR 8118-1(spa)" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST.IR.8115viet" do
+      let(:original_pubid) { "NIST.IR.8115viet" }
+      let(:short_pubid) { "NIST IR 8115(vie)" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST.IR.8178port" do
+      let(:original_pubid) { "NIST.IR.8178port" }
+      let(:short_pubid) { "NIST IR 8178(por)" }
 
       it_behaves_like "converts pubid to different formats"
     end

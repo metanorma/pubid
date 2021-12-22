@@ -62,7 +62,9 @@ module NistPubid
         .gsub("NIST SP 304a-2017", "NIST SP 304A-2017")
         .gsub("NIST SP 260-162 2006ed.", "NIST SP 260-162e2006")
         .gsub(/(?<=\d)es/, "(spa)")
-        .gsub(/(?<=\d)chi/, "(chi)")
+        .gsub(/(?<=\d)chi/, "(zho)")
+        .gsub(/(?<=\d)viet/, "(vie)")
+        .gsub(/(?<=\d)port/, "(por)")
         .gsub(/^LCIRC/, "NBS LC")
     end
 
@@ -102,7 +104,7 @@ module NistPubid
         matches[:docnumber] = /v(\d+)n(\d+)/.match(code).to_a[1..-1]&.join("-")
         matches[:volume] = nil
       else
-        excluded_parts = "(?!pt|r|e\\d+|p|v|supp?)"
+        excluded_parts = "(?!pt|r\\d+|e\\d+|p|v|supp?)"
         matches[:docnumber] =
           /(?:#{matches[:serie]})(?:\s|\.)?([0-9]+(?:#{excluded_parts}[A-Za-z]+)?(?:-[0-9]+)?(?:(?:([A-Z]|(?![a-z]))+|#{excluded_parts}[a-z]+)?))/
             .match(code)&.[](1)&.upcase
