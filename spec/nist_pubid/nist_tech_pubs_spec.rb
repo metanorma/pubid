@@ -37,6 +37,12 @@ RSpec.describe NistPubid::NistTechPubs, vcr: true do
                { id: "NBS CIRC re3", doi: "NBS.CIRC.5e3" },
              )).to eq("NBS CIRC 5e3")
     end
+
+    it "uses doi when doi more complete then id" do
+      expect(described_class.convert(
+               { id: "NIST SP 260-162", doi: "NIST SP 260-162 2006ed." },
+             )).to eq("NIST SP 260-162e2006")
+    end
   end
 
   describe "#comply_with_pubid" do

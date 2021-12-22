@@ -17,7 +17,12 @@ module NistPubid
       end
 
       def convert(doc)
-        NistPubid::Document.parse(doc[:id]).to_s(:short)
+        id = NistPubid::Document.parse(doc[:id])
+        return id.to_s(:short) unless doc.key?(:doi)
+
+        doi = NistPubid::Document.parse(doc[:doi])
+        # return more complete pubid
+        id.weight < doi.weight ? doi.to_s(:short) : id.to_s(:short)
       rescue Errors::ParseError
         NistPubid::Document.parse(doc[:doi]).to_s(:short)
       end

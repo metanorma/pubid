@@ -77,6 +77,12 @@ module NistPubid
       opts.each { |key, value| send("#{key}=", value) }
     end
 
+    def weight
+      instance_variables.inject(0) do |sum, var|
+        sum + (instance_variable_get(var).nil? ? 0 : 1)
+      end
+    end
+
     def self.update_old_code(code)
       code = code.gsub("FIPS", "FIPS PUB") unless code.include?("FIPS PUB")
       code.gsub("NBS MONO", "NBS MN").gsub("NIST MONO", "NIST MN")

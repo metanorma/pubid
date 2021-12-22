@@ -606,4 +606,11 @@ RSpec.describe NistPubid::Document do
       expect(pub_id.to_s(:mr)).to eq("NIST.SP.800-53-6")
     end
   end
+
+  describe "returns weight of PubID object" do
+    it "should return more weight for more complete PubID" do
+      expect(described_class.parse("NIST SP 260-162").weight).to be <
+        described_class.parse("NIST SP 260-162 2006ed.").weight
+    end
+  end
 end
