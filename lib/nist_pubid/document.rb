@@ -69,6 +69,7 @@ module NistPubid
         .gsub("NIST SP 304a-2017", "NIST SP 304A-2017")
         .gsub("NIST SP 260-162 2006ed.", "NIST SP 260-162e2006")
         .gsub("NBS CIRC 154suprev", "NBS CIRC 154r1sup")
+        .gsub(/(?<=NBS MP )(\d+)\((\d+)\)/, '\1e\2')
         .gsub(/(?<=\d)es/, "(spa)")
         .gsub(/(?<=\d)chi/, "(zho)")
         .gsub(/(?<=\d)viet/, "(vie)")
@@ -129,7 +130,8 @@ module NistPubid
             /(?:#{matches[:serie].gsub(" ", "\s|\.")})(?:\s|\.)? # match serie
              ([0-9]+ # first part of report number
                (?:#{excluded_parts}[A-Za-z]+)? # with letter but without localities
-               (?:-[0-9]+)? # second part
+               (?:-m)? # for NBS CRPL 4-m-5
+               (?:-[0-9.]+)? # second part
                (?:
                  (?: # only big letter
                    ([A-Z]|(?![a-z]))+|#{excluded_parts}[a-z]+

@@ -484,6 +484,33 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NBS CRPL 4-m-5" do
+      let(:original_pubid) { "NBS CRPL 4-m-5" }
+      let(:short_pubid) { "NBS CRPL 4-M-5" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS HB 44e2-1955" do
+      let(:original_pubid) { "NBS HB 44e2-1955" }
+      let(:short_pubid) { "NBS HB 44-1955e2" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS IR 80-2073.3" do
+      let(:short_pubid) { "NBS IR 80-2073.3" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS MP 39(1)" do
+      let(:original_pubid) { "NBS MP 39(1)" }
+      let(:short_pubid) { "NBS MP 39e1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "when cannot parse serie" do
       it "should raise error" do
         expect { described_class.parse("NIST WRONG-SERIE 800-11") }
