@@ -458,8 +458,28 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NBS CIRC 25sup-1924" do
+      let(:original_pubid) { "NBS CIRC 25sup-1924" }
+      let(:short_pubid) { "NBS CIRC 25sup1924" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "NBS CIRC 101e2sup" do
       let(:short_pubid) { "NBS CIRC 101e2sup" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CIRC 154suprev" do
+      let(:original_pubid) { "NBS CIRC 154suprev" }
+      let(:short_pubid) { "NBS CIRC 154r1sup" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CIRC 488sec1" do
+      let(:short_pubid) { "NBS CIRC 488sec1" }
 
       it_behaves_like "converts pubid to different formats"
     end

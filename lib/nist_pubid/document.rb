@@ -42,11 +42,18 @@ SUPPLEMENT_DESC = {
   mr: "sup",
 }.freeze
 
+SECTION_DESC = {
+  long: " Section ",
+  abbrev: " Sec. ",
+  short: "sec",
+  mr: "sec",
+}.freeze
+
 module NistPubid
   class Document
     attr_accessor :serie, :code, :revision, :publisher, :version, :volume,
                   :part, :addendum, :stage, :translation, :update_number,
-                  :edition, :supplement, :update_year
+                  :edition, :supplement, :update_year, :section
 
     def initialize(publisher:, serie:, docnumber:, **opts)
       @publisher = Publisher.new(publisher: publisher)
@@ -61,6 +68,7 @@ module NistPubid
         .gsub("NIST MP", "NBS MP")
         .gsub("NIST SP 304a-2017", "NIST SP 304A-2017")
         .gsub("NIST SP 260-162 2006ed.", "NIST SP 260-162e2006")
+        .gsub("NBS CIRC 154suprev", "NBS CIRC 154r1sup")
         .gsub(/(?<=\d)es/, "(spa)")
         .gsub(/(?<=\d)chi/, "(zho)")
         .gsub(/(?<=\d)viet/, "(vie)")
@@ -85,8 +93,9 @@ module NistPubid
         addendum: match(/(?<=(\.))?(add(?(1)-)\d+|Addendum)/, code),
         edition: /(?<=[^a-z])(?<=(\.))?(?:e(?(1)-)|Ed\.\s)(\d+)/
           .match(code)&.[](2),
+        section: /(?<=sec)\d+/.match(code)&.to_s
       }
-      supplement = /(?<=\.)?(?:(?:supp?)(?(1)-)(\d*)|Supplement|Suppl.)/
+      supplement = /(?:(?:supp?)-?(\d*)|Supplement|Suppl.)/
         .match(code)
       unless supplement.nil?
         matches[:supplement] = supplement[1].nil? ? "" : supplement[1]
@@ -108,8 +117,8 @@ module NistPubid
         matches[:docnumber] = /v(\d+)n(\d+)/.match(code).to_a[1..-1]&.join("-")
         matches[:volume] = nil
       else
-        localities = "pt|r\\d+|e\\d+|p|v|supp?"
-        excluded_parts = "(?!#{localities})"
+        localities = "pt|r\\d+|e\\d+|p|v|sec\\d+"
+        excluded_parts = "(?!#{localities}|supp?)"
 
         # match docnumbers with localities in the first part, like NBS CIRC 11e2-1915
         matches[:docnumber] =
@@ -192,10 +201,11 @@ module NistPubid
     end
 
     def render_localities(format)
-      # TODO: Section, Index, Insert, Errata
+      # TODO: Index, Insert, Errata
 
       result = ""
       result += "#{SUPPLEMENT_DESC[format]}#{supplement}" unless supplement.nil?
+      result += "#{SECTION_DESC[format]}#{section}" unless section.nil?
 
       result
     end
