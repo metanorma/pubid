@@ -108,10 +108,27 @@ module NistPubid
         matches[:docnumber] = /v(\d+)n(\d+)/.match(code).to_a[1..-1]&.join("-")
         matches[:volume] = nil
       else
-        excluded_parts = "(?!pt|r\\d+|e\\d+|p|v|supp?)"
+        localities = "pt|r\\d+|e\\d+|p|v|supp?"
+        excluded_parts = "(?!#{localities})"
+
+        # match docnumbers with localities in the first part, like NBS CIRC 11e2-1915
         matches[:docnumber] =
-          /(?:#{matches[:serie]})(?:\s|\.)?([0-9]+(?:#{excluded_parts}[A-Za-z]+)?(?:-[0-9]+)?(?:(?:([A-Z]|(?![a-z]))+|#{excluded_parts}[a-z]+)?))/
-            .match(code)&.[](1)&.upcase
+          /(?:#{matches[:serie].gsub(" ", "\s|\.")})(?:\s|\.)?([0-9]+)(?:#{localities})(-[0-9]+)?/
+            .match(code)&.captures&.join
+        unless matches[:docnumber]
+          matches[:docnumber] =
+            /(?:#{matches[:serie].gsub(" ", "\s|\.")})(?:\s|\.)? # match serie
+             ([0-9]+ # first part of report number
+               (?:#{excluded_parts}[A-Za-z]+)? # with letter but without localities
+               (?:-[0-9]+)? # second part
+               (?:
+                 (?: # only big letter
+                   ([A-Z]|(?![a-z]))+|#{excluded_parts}[a-z]+
+                 )? # or small letter but without localities
+               )
+             )/x
+              .match(code)&.[](1)&.upcase
+        end
       end
 
       unless matches[:docnumber]
@@ -135,6 +152,7 @@ module NistPubid
       result += " " unless format == :short || stage.nil?
       result += "#{stage&.to_s(format)}"\
                 " #{code}#{render_part(format)}#{render_edition(format)}"\
+                "#{render_localities(format)}"\
                 "#{render_update(format)}#{render_translation(format)}"
       result = render_addendum(result, format)
 
@@ -152,11 +170,9 @@ module NistPubid
     end
 
     def render_part(format)
-      # TODO: Section, Index, Insert, Errata
       result = ""
       result += "#{VOLUME_DESC[format]}#{volume}" unless volume.nil?
       result += "#{PART_DESC[format]}#{part}" unless part.nil?
-      result += "#{SUPPLEMENT_DESC[format]}#{supplement}" unless supplement.nil?
       result
     end
 
@@ -172,6 +188,15 @@ module NistPubid
       end
       result += "#{VERSION_DESC[format]}#{version}" unless version.nil?
       result += "#{EDITION_DESC[format]}#{edition}" unless edition.nil?
+      result
+    end
+
+    def render_localities(format)
+      # TODO: Section, Index, Insert, Errata
+
+      result = ""
+      result += "#{SUPPLEMENT_DESC[format]}#{supplement}" unless supplement.nil?
+
       result
     end
 
