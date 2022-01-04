@@ -90,7 +90,7 @@ module NistPubid
         .gsub(/(?<=\d)chi/, "(zho)")
         .gsub(/(?<=\d)viet/, "(vie)")
         .gsub(/(?<=\d)port/, "(por)")
-        .gsub(/^LCIRC/, "NBS LC")
+        # .gsub(/^LCIRC/, "NBS LC")
     end
 
     def self.parse(code)
@@ -139,7 +139,8 @@ module NistPubid
 
       matches[:docnumber] = parse_docnumber(matches[:serie], code)
 
-      matches[:serie].gsub!(/\./, " ")
+      matches[:serie] = SERIES["mr"].invert[matches[:serie]] || matches[:serie]
+      # matches[:serie].gsub!(/\./, " ")
       matches[:translation] = match(/(?<=\()\w{3}(?=\))/, code)
 
       new(**matches)
