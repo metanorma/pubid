@@ -56,11 +56,19 @@ APPENDIX_DESC = {
   mr: "app",
 }.freeze
 
+ERRATA_DESC = {
+  long: " Errata ",
+  abbrev: " Err. ",
+  short: "-err",
+  mr: "-err",
+}.freeze
+
 module NistPubid
   class Document
     attr_accessor :serie, :code, :revision, :publisher, :version, :volume,
                   :part, :addendum, :stage, :translation, :update_number,
-                  :edition, :supplement, :update_year, :section, :appendix
+                  :edition, :supplement, :update_year, :section, :appendix,
+                  :errata
 
     def initialize(publisher:, serie:, docnumber:, **opts)
       @publisher = Publisher.new(publisher: publisher)
@@ -76,6 +84,7 @@ module NistPubid
         .gsub("NIST SP 304a-2017", "NIST SP 304A-2017")
         .gsub("NIST SP 260-162 2006ed.", "NIST SP 260-162e2006")
         .gsub("NBS CIRC 154suprev", "NBS CIRC 154r1sup")
+        .gsub("NIST SP 260-126 rev 2013", "NIST SP 260-126r2013")
         .gsub(/(?<=NBS MP )(\d+)\((\d+)\)/, '\1e\2')
         .gsub(/(?<=\d)es/, "(spa)")
         .gsub(/(?<=\d)chi/, "(zho)")
@@ -90,18 +99,19 @@ module NistPubid
         publisher: match(Publisher.regexp, code) || "NIST",
         serie: match(Serie.regexp, code),
         stage: Stage.parse(code),
-        part: /(?<=(\.))?(?<![a-z])+(?:pt|p)(?(1)-)([A-Z\d]+)/.match(code)
+        part: /(?<=(\.))?(?<![a-z])+(?:pt|Pt|p)(?(1)-)([A-Z\d]+)/.match(code)
                 &.[](2),
         version:
           /(?<=\.)?(?:(?:ver)((?(1)[-\d]|[.\d])+|\d+)|(?:v)(\d+\.[.\d]+))/
             .match(code).to_a[1..-1]&.compact&.first&.gsub(/-/, "."),
-        revision: /\d(?:r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))([\da]+)/
+        revision: /[\da](?:r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))([\da]+)/
           .match(code)&.[](2),
-        addendum: match(/(?<=(\.))?(add(?(1)-)\d+|Addendum)/, code),
+        addendum: match(/(?<=(\.))?(add(?:-\d+)?|Addendum)/, code),
         edition: /(?<=[^a-z])(?<=(\.))?(?:e(?(1)-)|Ed\.\s)(\d+)/
           .match(code)&.[](2),
         section: /(?<=sec)\d+/.match(code)&.to_s,
-        appendix: /\d+app/.match(code)&.to_s
+        appendix: /\d+app/.match(code)&.to_s,
+        errata: /-errata/.match(code)&.to_s
       }
       supplement = /(?:(?:supp?)-?(\d*)|Supplement|Suppl.)/
         .match(code)
@@ -125,6 +135,8 @@ module NistPubid
         matches[:volume] = /(?<=(\.))?v(?(1)-)(\d+)(?!\.\d+)/.match(code)&.[](2)
       end
 
+      matches[:revision] = nil if matches[:addendum]
+
       matches[:docnumber] = parse_docnumber(matches[:serie], code)
 
       matches[:serie].gsub!(/\./, " ")
@@ -134,7 +146,7 @@ module NistPubid
     end
 
     def self.parse_docnumber(serie, code)
-      localities = "pt|r\\d+|e\\d+|p|v|sec\\d+"
+      localities = "[Pp]t\\d+|r(?:\\d+|[A-Za-z]?)|e\\d+|p|v|sec\\d+"
       excluded_parts = "(?!#{localities}|supp?)"
 
       if ["NBS CSM", "NBS CS"].include?(serie)
@@ -154,7 +166,7 @@ module NistPubid
              (?:-[0-9.]+)? # second part
              (?:
                (?: # only big letter
-                 ([A-Z]|(?![a-z]))+|#{excluded_parts}[a-z]+
+                 (#{excluded_parts}[A-Z]|(?![a-z]))+|#{excluded_parts}[a-z]?|#{excluded_parts}[a-z]+
                )? # or small letter but without localities
              )
            )/x
@@ -219,12 +231,13 @@ module NistPubid
     end
 
     def render_localities(format)
-      # TODO: Index, Insert, Errata
+      # TODO: Index, Insert
 
       result = ""
       result += "#{SUPPLEMENT_DESC[format]}#{supplement}" unless supplement.nil?
       result += "#{SECTION_DESC[format]}#{section}" unless section.nil?
       result += "#{APPENDIX_DESC[format]}" unless appendix.nil?
+      result += "#{ERRATA_DESC[format]}" unless errata.nil?
 
       result
     end

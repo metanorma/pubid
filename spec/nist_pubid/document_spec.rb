@@ -116,6 +116,7 @@ RSpec.describe NistPubid::Document do
     end
 
     context "when with addendum" do
+      let(:original_pubid) { "NIST SP 800-38a-add" }
       let(:short_pubid) { "NIST SP 800-38A Addendum" }
       let(:long_pubid) do
         "Addendum to National Institute of Standards and Technology Special"\
@@ -519,6 +520,48 @@ RSpec.describe NistPubid::Document do
 
     context "NBS SP 250e1982app" do
       let(:short_pubid) { "NBS SP 250e1982app" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 260-126 rev 2013" do
+      let(:original_pubid) { "NIST SP 260-126 rev 2013" }
+      let(:short_pubid) { "NIST SP 260-126-2013" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 800-27ra" do
+      let(:original_pubid) { "NIST SP 800-27ra" }
+      let(:short_pubid) { "NIST SP 800-27-a" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 800-53ar1" do
+      let(:original_pubid) { "NIST SP 800-53ar1" }
+      let(:short_pubid) { "NIST SP 800-53A-1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 800-57Pt3r1" do
+      let(:original_pubid) { "NIST SP 800-57Pt3r1" }
+      let(:short_pubid) { "NIST SP 800-57pt3r1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 801-errata" do
+      let(:original_pubid) { "NIST SP 801-errata" }
+      let(:short_pubid) { "NIST SP 801-err" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 955 Suppl." do
+      let(:original_pubid) { "NIST SP 955 Suppl." }
+      let(:short_pubid) { "NIST SP 955sup" }
 
       it_behaves_like "converts pubid to different formats"
     end
