@@ -4,7 +4,7 @@
 
 NIST publications are numbered according to an identification scheme.
 
-This gem implements a mechanism to parse and utilize NIST publication identifers
+This gem implements a mechanism to parse and utilize NIST publication identifiers
 provided in the https://github.com/usnistgov/NIST-Tech-Pubs[NIST-Tech-Pubs]
 repository.
 
@@ -296,9 +296,10 @@ A "Part" can also be indicated by an appended alphabetic character to the end.
 | Section | Sec. | `sec`
 | Supplement | Suppl. | `sup`
 | Index | Index | `indx`
-| Addendum | Add. | `add` (TBD with NIST)
+| Addendum | Add. | `add` (TBC with NIST)
 | Insert | Ins. | `ins` (TBC with NIST)
 | Errata | Err. | `err` (TBC with NIST)
+| Appendix | App. | `app` (TBC with NIST)
 
 |===
 
