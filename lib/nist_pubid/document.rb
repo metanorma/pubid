@@ -49,11 +49,18 @@ SECTION_DESC = {
   mr: "sec",
 }.freeze
 
+APPENDIX_DESC = {
+  long: " Appendix ",
+  abbrev: " App. ",
+  short: "app",
+  mr: "app",
+}.freeze
+
 module NistPubid
   class Document
     attr_accessor :serie, :code, :revision, :publisher, :version, :volume,
                   :part, :addendum, :stage, :translation, :update_number,
-                  :edition, :supplement, :update_year, :section
+                  :edition, :supplement, :update_year, :section, :appendix
 
     def initialize(publisher:, serie:, docnumber:, **opts)
       @publisher = Publisher.new(publisher: publisher)
@@ -85,7 +92,6 @@ module NistPubid
         stage: Stage.parse(code),
         part: /(?<=(\.))?(?<![a-z])+(?:pt|p)(?(1)-)([A-Z\d]+)/.match(code)
                 &.[](2),
-        volume: /(?<=(\.))?v(?(1)-)(\d+)(?!\.\d+)/.match(code)&.[](2),
         version:
           /(?<=\.)?(?:(?:ver)((?(1)[-\d]|[.\d])+|\d+)|(?:v)(\d+\.[.\d]+))/
             .match(code).to_a[1..-1]&.compact&.first&.gsub(/-/, "."),
@@ -94,7 +100,8 @@ module NistPubid
         addendum: match(/(?<=(\.))?(add(?(1)-)\d+|Addendum)/, code),
         edition: /(?<=[^a-z])(?<=(\.))?(?:e(?(1)-)|Ed\.\s)(\d+)/
           .match(code)&.[](2),
-        section: /(?<=sec)\d+/.match(code)&.to_s
+        section: /(?<=sec)\d+/.match(code)&.to_s,
+        appendix: /\d+app/.match(code)&.to_s
       }
       supplement = /(?:(?:supp?)-?(\d*)|Supplement|Suppl.)/
         .match(code)
@@ -114,44 +121,53 @@ module NistPubid
         code = code.gsub(matches[:stage].original_code, "")
       end
 
-      if ["NBS CSM", "NBS CS"].include?(matches[:serie])
-        matches[:docnumber] = /v(\d+)n(\d+)/.match(code).to_a[1..-1]&.join("-")
-        matches[:volume] = nil
-      else
-        localities = "pt|r\\d+|e\\d+|p|v|sec\\d+"
-        excluded_parts = "(?!#{localities}|supp?)"
-
-        # match docnumbers with localities in the first part, like NBS CIRC 11e2-1915
-        matches[:docnumber] =
-          /(?:#{matches[:serie].gsub(" ", "\s|\.")})(?:\s|\.)?([0-9]+)(?:#{localities})(-[0-9]+)?/
-            .match(code)&.captures&.join
-        unless matches[:docnumber]
-          matches[:docnumber] =
-            /(?:#{matches[:serie].gsub(" ", "\s|\.")})(?:\s|\.)? # match serie
-             ([0-9]+ # first part of report number
-               (?:#{excluded_parts}[A-Za-z]+)? # with letter but without localities
-               (?:-m)? # for NBS CRPL 4-m-5
-               (?:-[0-9.]+)? # second part
-               (?:
-                 (?: # only big letter
-                   ([A-Z]|(?![a-z]))+|#{excluded_parts}[a-z]+
-                 )? # or small letter but without localities
-               )
-             )/x
-              .match(code)&.[](1)&.upcase
-        end
+      unless ["NBS CSM", "NBS CS"].include?(matches[:serie])
+        matches[:volume] = /(?<=(\.))?v(?(1)-)(\d+)(?!\.\d+)/.match(code)&.[](2)
       end
 
-      unless matches[:docnumber]
-        raise Errors::ParseError.new(
-          "failed to parse document identifier for #{code}",
-        )
-      end
+      matches[:docnumber] = parse_docnumber(matches[:serie], code)
 
       matches[:serie].gsub!(/\./, " ")
       matches[:translation] = match(/(?<=\()\w{3}(?=\))/, code)
 
       new(**matches)
+    end
+
+    def self.parse_docnumber(serie, code)
+      localities = "pt|r\\d+|e\\d+|p|v|sec\\d+"
+      excluded_parts = "(?!#{localities}|supp?)"
+
+      if ["NBS CSM", "NBS CS"].include?(serie)
+        docnumber = /v(\d+)n(\d+)/.match(code).to_a[1..-1]&.join("-")
+      else
+        # match docnumbers with localities in the first part, like NBS CIRC 11e2-1915
+        docnumber =
+          /(?:#{serie.gsub(" ", "\s|\.")})(?:\s|\.)?([0-9]+)(?:#{localities})(-[0-9]+)?/
+            .match(code)&.captures&.join
+
+        docnumber ||=
+          /(?:#{serie.gsub(" ", "\s|\.")})(?:\s|\.)? # match serie
+           ([0-9]+ # first part of report number
+             (?:#{excluded_parts}[A-Za-z]+)? # with letter but without localities
+             (?:-m)? # for NBS CRPL 4-m-5
+             (?:-[A-Z]+)? # for NIST SP 1075-NCNR, NIST SP 1113-BFRL, etc
+             (?:-[0-9.]+)? # second part
+             (?:
+               (?: # only big letter
+                 ([A-Z]|(?![a-z]))+|#{excluded_parts}[a-z]+
+               )? # or small letter but without localities
+             )
+           )/x
+            .match(code)&.[](1)&.upcase
+      end
+
+      unless docnumber
+        raise Errors::ParseError.new(
+          "failed to parse document identifier for #{code}",
+        )
+      end
+
+      docnumber
     end
 
     def self.match(regex, code)
@@ -208,6 +224,7 @@ module NistPubid
       result = ""
       result += "#{SUPPLEMENT_DESC[format]}#{supplement}" unless supplement.nil?
       result += "#{SECTION_DESC[format]}#{section}" unless section.nil?
+      result += "#{APPENDIX_DESC[format]}" unless appendix.nil?
 
       result
     end

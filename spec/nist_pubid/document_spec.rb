@@ -511,6 +511,18 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NIST SP 1075-NCNR" do
+      let(:short_pubid) { "NIST SP 1075-NCNR" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS SP 250e1982app" do
+      let(:short_pubid) { "NBS SP 250e1982app" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "when cannot parse serie" do
       it "should raise error" do
         expect { described_class.parse("NIST WRONG-SERIE 800-11") }
