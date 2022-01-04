@@ -6,9 +6,14 @@ module NistPubid
   class NistTechPubs
     URL = "https://raw.githubusercontent.com/usnistgov/NIST-Tech-Pubs/nist-pages/xml/allrecords.xml".freeze
 
+    @converted_id = @converted_doi = {}
+
     class << self
+
+      attr_accessor :documents, :converted_id, :converted_doi
+
       def fetch
-        Nokogiri::XML(URI.open(URL))
+        @documents ||= Nokogiri::XML(URI.open(URL))
           .xpath("/body/query/doi_record/report-paper/report-paper_metadata")
           .map { |doc| parse_docid doc }
       rescue StandardError => e
@@ -17,14 +22,14 @@ module NistPubid
       end
 
       def convert(doc)
-        id = NistPubid::Document.parse(doc[:id])
+        id = @converted_id[doc[:id]] ||= NistPubid::Document.parse(doc[:id])
         return id.to_s(:short) unless doc.key?(:doi)
 
-        doi = NistPubid::Document.parse(doc[:doi])
+        doi = @converted_doi[doc[:doi]] ||= NistPubid::Document.parse(doc[:doi])
         # return more complete pubid
         id.weight < doi.weight ? doi.to_s(:short) : id.to_s(:short)
       rescue Errors::ParseError
-        NistPubid::Document.parse(doc[:doi]).to_s(:short)
+        @converted_doi[doc[:doi]] ||= NistPubid::Document.parse(doc[:doi]).to_s(:short)
       end
 
       def parse_docid(doc)
