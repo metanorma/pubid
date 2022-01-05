@@ -27,7 +27,7 @@ module NistPubid
 
         doi = @converted_doi[doc[:doi]] ||= NistPubid::Document.parse(doc[:doi])
         # return more complete pubid
-        id.weight < doi.weight ? doi.to_s(:short) : id.to_s(:short)
+        id.merge(doi).to_s(:short)
       rescue Errors::ParseError
         @converted_doi[doc[:doi]] ||= NistPubid::Document.parse(doc[:doi]).to_s(:short)
       end

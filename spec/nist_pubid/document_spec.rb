@@ -613,4 +613,12 @@ RSpec.describe NistPubid::Document do
         described_class.parse("NIST SP 260-162 2006ed.").weight
     end
   end
+
+  describe "#merge" do
+    it "merges two documents" do
+      expect(described_class.parse("NIST SP 260-162r1").merge(
+        described_class.parse("NIST SP 260-162 2006ed.")
+      ).to_s(:short)).to eq("NIST SP 260-162r1e2006")
+    end
+  end
 end

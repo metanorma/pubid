@@ -77,10 +77,20 @@ module NistPubid
       opts.each { |key, value| send("#{key}=", value) }
     end
 
+    # returns weight based on amount of defined attributes
     def weight
       instance_variables.inject(0) do |sum, var|
         sum + (instance_variable_get(var).nil? ? 0 : 1)
       end
+    end
+
+    def merge(document)
+      instance_variables.each do |var|
+        val = document.instance_variable_get(var)
+        instance_variable_set(var, val) unless val.nil?
+      end
+
+      self
     end
 
     def self.update_old_code(code)
