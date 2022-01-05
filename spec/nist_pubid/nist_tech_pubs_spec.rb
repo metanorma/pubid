@@ -71,4 +71,26 @@ RSpec.describe NistPubid::NistTechPubs, vcr: true do
         .to include("NBS CIRC e2")
     end
   end
+
+  describe "#status" do
+    let(:id) { "LCIRC 897" }
+    let(:doi) { "NBS.LCIRC.897" }
+    let(:title) do
+      "Letter Circular 897: tables for transforming chromaticity coordinates"\
+        " from the I.C.I system to the R-U-C-S system"
+    end
+    let(:finalPubId) { "NBS LC 897" }
+
+    before do
+      described_class.documents = [
+        { id: id,
+          doi: doi,
+          title: title },
+      ]
+    end
+
+    subject { described_class.status }
+
+    it { is_expected.to eq([[id, doi, title, finalPubId]]) }
+  end
 end
