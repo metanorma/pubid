@@ -100,5 +100,12 @@ RSpec.describe NistPubid::NistTechPubs, vcr: true do
     subject { described_class.status }
 
     it { is_expected.to eq([[id, doi, title, finalPubId]]) }
+
+    context "when cannot parse id and doi" do
+      let(:id) { "NBS CIRC e2" }
+      let(:doi) { "NBS.CIRC.e2" }
+
+      it { is_expected.to eq([[id, doi, title, "parse error"]]) }
+    end
   end
 end

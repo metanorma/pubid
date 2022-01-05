@@ -42,7 +42,8 @@ module NistPubid
         id = doc.at("publisher_item/item_number", "publisher_item/identifier")
           .text.sub(%r{^/}, "")
         doi = doc.at("doi_data/doi").text.gsub("10.6028/", "")
-        title = "#{doc.at('titles/title').text} #{doc.at('titles/subtitle')}"
+        title = doc.at("titles/title").text
+        title += " #{doc.at('titles/subtitle').text}" if doc.at("titles/subtitle")
         case doi
         when "10.6028/NBS.CIRC.12e2revjune" then id.sub!("13e", "12e")
         when "10.6028/NBS.CIRC.36e2" then id.sub!("46e", "36e")
@@ -80,7 +81,11 @@ module NistPubid
 
       # returning current document id, doi, title and final PubID
       def status
-        fetch.map { |doc| [doc[:id], doc[:doi], doc[:title], convert(doc)] }
+        fetch.map do |doc|
+          [doc[:id], doc[:doi], doc[:title], convert(doc)]
+        rescue Errors::ParseError
+          [doc[:id], doc[:doi], doc[:title], "parse error"]
+        end
       end
     end
   end
