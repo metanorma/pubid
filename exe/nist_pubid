@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'bundler/setup'
+require 'nist_pubid'
+require 'optparse'
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: nist_pubid [ -s | PubID ]"
+  opts.on("-s", "--status", "Get a NIST Tech Pubs list with final PubID") do
+    puts "Current document ID | DOI | Title | Final PubID"
+    NistPubid::NistTechPubs.status.each do |row|
+      puts row.join(" | ")
+    end
+  end
+
+  opts.on("-h", "--help", "Prints this help") do
+    puts opts
+    exit
+  end
+
+end.parse!
+
+code = ARGV.join(" ")
+puts NistPubid::Document.parse(code).to_s(:short) unless code.empty?
