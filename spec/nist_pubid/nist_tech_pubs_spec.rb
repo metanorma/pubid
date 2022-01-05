@@ -49,6 +49,14 @@ RSpec.describe NistPubid::NistTechPubs, vcr: true do
                { id: "NIST SP 260-162r1", doi: "NIST SP 260-162 2006ed." },
              )).to eq("NIST SP 260-162r1e2006")
     end
+
+    context "when doi code is wrong" do
+      it "skips merging with doi" do
+        expect(described_class.convert(
+                 { id: "NIST TN 1648", doi: "NISTPUB.0413171251" },
+               )).to eq("NIST TN 1648")
+      end
+    end
   end
 
   describe "#comply_with_pubid" do

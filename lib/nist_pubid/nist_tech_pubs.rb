@@ -25,11 +25,17 @@ module NistPubid
         id = @converted_id[doc[:id]] ||= NistPubid::Document.parse(doc[:id])
         return id.to_s(:short) unless doc.key?(:doi)
 
-        doi = @converted_doi[doc[:doi]] ||= NistPubid::Document.parse(doc[:doi])
+        begin
+          doi = @converted_doi[doc[:doi]] ||=
+            NistPubid::Document.parse(doc[:doi])
+        rescue Errors::ParseError
+          return id.to_s(:short)
+        end
         # return more complete pubid
         id.merge(doi).to_s(:short)
       rescue Errors::ParseError
-        @converted_doi[doc[:doi]] ||= NistPubid::Document.parse(doc[:doi]).to_s(:short)
+        @converted_doi[doc[:doi]] ||= NistPubid::Document.parse(doc[:doi])
+          .to_s(:short)
       end
 
       def parse_docid(doc)
