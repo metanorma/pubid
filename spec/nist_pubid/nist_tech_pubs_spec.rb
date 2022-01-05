@@ -26,8 +26,8 @@ RSpec.describe NistPubid::NistTechPubs, vcr: true do
     end
 
     it "keeps correct NIST PubID the same" do
-      expect(described_class.convert({ id: "NIST SP 800-133r2" }))
-        .to eq("NIST SP 800-133r2")
+      expect(described_class.convert({ id: "NIST SP 800-133r2e2" }))
+        .to eq("NIST SP 800-133r2e2")
       expect(described_class.convert({ id: "NIST SP 800-160v1" }))
         .to eq("NIST SP 800-160v1")
     end
@@ -54,7 +54,7 @@ RSpec.describe NistPubid::NistTechPubs, vcr: true do
   describe "#comply_with_pubid" do
     it "returns identifier comply with NIST PubID" do
       expect(described_class.comply_with_pubid.map { |d| d[:id] })
-        .to include("NIST SP 800-133r2")
+        .to include("NIST SP 260-14")
     end
   end
 
