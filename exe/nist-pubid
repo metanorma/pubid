@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
 
-require 'rubygems'
-require 'bundler/setup'
-require_relative '../lib/nist_pubid'
-require 'optparse'
+require "rubygems"
+require "bundler/setup"
+require_relative "../lib/nist_pubid"
+require "thor"
 
-OptionParser.new do |opts|
-  opts.banner = "Usage: nist_pubid [ -s | PubID ]"
-  opts.on("-s", "--status", "Get a NIST Tech Pubs list with final PubID") do
+class NistPubidCLI < Thor
+  desc "report", "Create report for nist tech pubs database"
+  def report
     puts "Changed | New PubID | Document ID | DOI | Title + subtitle"
     NistPubid::NistTechPubs.status.each do |row|
       puts "#{row[3] == row[0] ? ' -' : '✅'} | #{row[3]} | #{row[0]} | #{row[1]}"\
@@ -15,12 +15,10 @@ OptionParser.new do |opts|
     end
   end
 
-  opts.on("-h", "--help", "Prints this help") do
-    puts opts
-    exit
+  desc "convert", "Convert old document ID to new PubID"
+  def convert(code)
+    puts NistPubid::Document.parse(code).to_s(:short) unless code.empty?
   end
+end
 
-end.parse!
-
-code = ARGV.join(" ")
-puts NistPubid::Document.parse(code).to_s(:short) unless code.empty?
+NistPubidCLI.start(ARGV)
