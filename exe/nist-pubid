@@ -4,14 +4,23 @@ require "rubygems"
 require "bundler/setup"
 require_relative "../lib/nist_pubid"
 require "thor"
+require "csv"
 
 class NistPubidCLI < Thor
   desc "report", "Create report for nist tech pubs database"
+  option :csv, type: :boolean, desc: "Export to CSV format"
   def report
-    puts "Changed | New PubID | Document ID | DOI | Title + subtitle"
-    NistPubid::NistTechPubs.status.each do |row|
-      puts "#{row[3] == row[0] ? ' -' : '✅'} | #{row[3]} | #{row[0]} | #{row[1]}"\
-           " | #{row[2]}"
+    if options[:csv]
+      NistPubid::NistTechPubs.status.each do |row|
+        puts [row[3] == row[0] ? "-" : "+",  row[3], row[0], row[1], row[2]]
+          .to_csv
+      end
+    else
+      puts "Changed | New PubID | Document ID | DOI | Title + subtitle"
+      NistPubid::NistTechPubs.status.each do |row|
+        puts "#{row[3] == row[0] ? ' -' : '✅'} | #{row[3]} | #{row[0]} |"\
+             " #{row[1]} | #{row[2]}"
+      end
     end
   end
 
