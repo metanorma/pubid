@@ -8,9 +8,10 @@ require 'optparse'
 OptionParser.new do |opts|
   opts.banner = "Usage: nist_pubid [ -s | PubID ]"
   opts.on("-s", "--status", "Get a NIST Tech Pubs list with final PubID") do
-    puts "Current document ID | DOI | Title | Final PubID"
+    puts "Changed | New PubID | Document ID | DOI | Title + subtitle"
     NistPubid::NistTechPubs.status.each do |row|
-      puts row.join(" | ")
+      puts "#{row[3] == row[0] ? ' -' : '✅'} | #{row[3]} | #{row[0]} | #{row[1]}"\
+           " | #{row[2]}"
     end
   end
 
