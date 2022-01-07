@@ -2,7 +2,7 @@
 
 require 'rubygems'
 require 'bundler/setup'
-require 'nist_pubid'
+require_relative '../lib/nist_pubid'
 require 'optparse'
 
 OptionParser.new do |opts|
