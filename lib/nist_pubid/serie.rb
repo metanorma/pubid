@@ -8,7 +8,7 @@ module NistPubid
       @serie = serie == "NISTIR" ? "NIST IR" : serie
     end
 
-    def to_s(format)
+    def to_s(format = :short)
       return @serie if %i[short mr].include?(format)
 
       result = SERIES[format.to_s][@serie]

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require "json"
 
 REVISION_DESC = {
   long: ", Revision ",
@@ -215,6 +216,23 @@ module NistPubid
       return result.gsub(" ", ".") if format == :mr
 
       result
+    end
+
+    def to_json(*args)
+      result = {
+        styles: {
+          short: to_s(:short),
+          abbrev: to_s(:abbrev),
+          long: to_s(:long),
+          mr: to_s(:mr),
+        }
+      }
+
+      instance_variables.each do |var|
+        val = instance_variable_get(var)
+        result[var.to_s.gsub('@', '')] = val unless val.nil?
+      end
+      result.to_json(*args)
     end
 
     def render_serie(format)

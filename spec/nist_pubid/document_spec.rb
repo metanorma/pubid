@@ -48,6 +48,24 @@ RSpec.describe NistPubid::Document do
         "Natl. Inst. Stand. Technol. Spec. Publ. 800-53, Rev. 5"
       end
       it_behaves_like "converts pubid to different formats"
+
+      context "when JSON output format" do
+        it "generates json output" do
+          expect(JSON.parse(subject.to_json))
+            .to eq({
+                     "styles" => {
+                       "short" => short_pubid,
+                       "abbrev" => abbrev_pubid,
+                       "long" => long_pubid,
+                       "mr" => mr_pubid,
+                     },
+                     "publisher" => "NIST",
+                     "serie" => "NIST SP",
+                     "code" => "800-53",
+                     "revision" => "5",
+                   })
+        end
+      end
     end
 
     context "when published by NBS" do

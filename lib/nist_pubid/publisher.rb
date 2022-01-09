@@ -9,7 +9,7 @@ module NistPubid
       @publisher = publisher
     end
 
-    def to_s(format)
+    def to_s(format = :short)
       return @publisher if %i[short mr].include?(format)
 
       PUBLISHERS[format.to_s][@publisher]
