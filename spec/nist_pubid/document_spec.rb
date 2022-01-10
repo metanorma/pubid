@@ -407,7 +407,7 @@ RSpec.describe NistPubid::Document do
 
     context "NIST SP 800-56ar" do
       let(:original_pubid) { "NIST SP 800-56ar" }
-      let(:short_pubid) { "NIST SP 800-56AR" }
+      let(:short_pubid) { "NIST SP 800-56Ar1" }
 
       it_behaves_like "converts pubid to different formats"
     end
