@@ -573,7 +573,7 @@ RSpec.describe NistPubid::Document do
 
     context "NIST SP 801-errata" do
       let(:original_pubid) { "NIST SP 801-errata" }
-      let(:short_pubid) { "NIST SP 801-err" }
+      let(:short_pubid) { "NIST SP 801err" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -595,6 +595,13 @@ RSpec.describe NistPubid::Document do
     context "NIST.LCIRC.1136" do
       let(:original_pubid) { "NIST.LCIRC.1136" }
       let(:short_pubid) { "NIST LC 1136" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CIRC 74errata" do
+      let(:original_pubid) { "NBS CIRC 74errata" }
+      let(:short_pubid) { "NBS CIRC 74err" }
 
       it_behaves_like "converts pubid to different formats"
     end
