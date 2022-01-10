@@ -599,6 +599,18 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NBS CIRC 54index" do
+      let(:original_pubid) { "NBS CIRC 54index" }
+      let(:short_pubid) { "NBS CIRC 54indx" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CIRC 54indx" do
+      let(:short_pubid) { "NBS CIRC 54indx" }
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "NBS CIRC 25insert" do
       let(:original_pubid) { "NBS CIRC 25insert" }
       let(:short_pubid) { "NBS CIRC 25ins"}
@@ -607,6 +619,7 @@ RSpec.describe NistPubid::Document do
 
     context "NBS CIRC 25ins" do
       let(:short_pubid) { "NBS CIRC 25ins"}
+
       it_behaves_like "converts pubid to different formats"
     end
 
