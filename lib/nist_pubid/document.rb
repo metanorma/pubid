@@ -117,12 +117,12 @@ module NistPubid
         .gsub("NBS CIRC 154suprev", "NBS CIRC 154r1sup")
         .gsub("NIST SP 260-126 rev 2013", "NIST SP 260-126r2013")
         .gsub("NIST CSWP", "NIST CSRC White Paper")
+        .gsub("NIST SP 800-56ar", "NIST SP 800-56AR")
         .gsub(/(?<=NBS MP )(\d+)\((\d+)\)/, '\1e\2')
         .gsub(/(?<=\d)es/, "(spa)")
         .gsub(/(?<=\d)chi/, "(zho)")
         .gsub(/(?<=\d)viet/, "(vie)")
         .gsub(/(?<=\d)port/, "(por)")
-        # .gsub(/^LCIRC/, "NBS LC")
     end
 
     def self.parse(code)
@@ -136,7 +136,7 @@ module NistPubid
         version:
           /(?<=\.)?(?:(?:ver)((?(1)[-\d]|[.\d])+|\d+)|(?:v)(\d+\.[.\d]+))/
             .match(code).to_a[1..-1]&.compact&.first&.gsub(/-/, "."),
-        revision: /[\da](?:r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))([\da]+)/
+        revision: /[\daA-Z](?:r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))([\da]+)/
           .match(code)&.[](2),
         addendum: match(/(?<=(\.))?(add(?:-\d+)?|Addendum)/, code),
         edition: /(?<=[^a-z])(?<=(\.))?(?:e(?(1)-)|Ed\.\s)(\d+)/
