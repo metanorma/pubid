@@ -14,7 +14,7 @@ long:
   NBS CS: Commercial Standards
   NBS CSM: Commercial Standards Monthly
   FIPS PUB: Federal Information Processing Standards Publication
-  NISTGCR: Grant/Contract Reports
+  NIST GCR: Grant/Contract Reports
   NBS GCR: Grant/Contract Reports
   NIST HB: Handbook
   NBS HB: Handbook
@@ -94,7 +94,7 @@ mr:
   NBS CS: NBS.CS
   NBS CSM: NBS.CSM
   FIPS PUB: NIST.FIPS
-  NISTGCR: NIST.GCR
+  NIST GCR: NIST.GCR
   NBS GCR: NBS.GCR
   NIST HB: NIST.HB
   NBS HB: NBS.HB
