@@ -599,10 +599,14 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
-    context "NIST CSWP 01142020" do
-      let(:original_pubid) { "NIST CSWP 01142020" }
-      let(:short_pubid) { "NIST CSRC White Paper 01142020" }
+    context "NBS CIRC 25insert" do
+      let(:original_pubid) { "NBS CIRC 25insert" }
+      let(:short_pubid) { "NBS CIRC 25ins"}
+      it_behaves_like "converts pubid to different formats"
+    end
 
+    context "NBS CIRC 25ins" do
+      let(:short_pubid) { "NBS CIRC 25ins"}
       it_behaves_like "converts pubid to different formats"
     end
 
@@ -611,6 +615,11 @@ RSpec.describe NistPubid::Document do
         expect { described_class.parse("NIST WRONG-SERIE 800-11") }
           .to raise_error(NistPubid::Errors::ParseError)
       end
+    end
+    
+    context "NIST CSWP 01142020" do
+      let(:original_pubid) { "NIST CSWP 01142020" }
+      let(:short_pubid) { "NIST CSRC White Paper 01142020" }
     end
 
     context "when cannot parse code" do
