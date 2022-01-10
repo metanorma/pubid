@@ -602,6 +602,20 @@ RSpec.describe NistPubid::Document do
     context "NBS CIRC 74errata" do
       let(:original_pubid) { "NBS CIRC 74errata" }
       let(:short_pubid) { "NBS CIRC 74err" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CIRC 54index" do
+      let(:original_pubid) { "NBS CIRC 54index" }
+      let(:short_pubid) { "NBS CIRC 54indx" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CIRC 54indx" do
+      let(:short_pubid) { "NBS CIRC 54indx" }
+
       it_behaves_like "converts pubid to different formats"
     end
 
