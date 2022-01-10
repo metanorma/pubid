@@ -7,37 +7,62 @@ require "thor"
 require "csv"
 
 class NistPubidCLI < Thor
-  desc "report", "Create report for nist tech pubs database"
+  desc "report", "Create report for NIST Tech Pubs database (fetches from GitHub)"
   option :csv, type: :boolean, desc: "Export to CSV format"
   def report
+    heading = %w(
+      ID\ changed?
+      New\ PubID
+      Document\ ID
+      DOI\ changed?
+      New\ PubID-MR
+      DOI
+      Title
+    )
     if options[:csv]
+      puts heading.to_csv
+
       NistPubid::NistTechPubs.status.each do |doc|
-        puts [doc[:finalPubId] == doc[:id] && doc[:mr] == doc[:doi] ? "-" : "+",
-              doc[:finalPubId], doc[:id], doc[:doi], doc[:mr], doc[:title]]
-          .to_csv
+        puts [
+          doc[:finalPubId] == doc[:id] ? false : true,
+          doc[:finalPubId],
+          doc[:id],
+          doc[:mr] == doc[:doi] ? false : true,
+          doc[:mr],
+          doc[:doi],
+          doc[:title]
+        ].to_csv
       end
     else
-      puts "Changed | New PubID | Document ID | DOI | New MR | Title + subtitle"
+      puts heading.join(' | ')
+
       NistPubid::NistTechPubs.status.each do |doc|
-        puts "#{doc[:finalPubId] == doc[:id] && doc[:mr] == doc[:doi] ? ' -' : '✅'}"\
-             " | #{doc[:finalPubId]} | #{doc[:id]} | #{doc[:doi]} | #{doc[:mr]} | #{doc[:title]}"
+        puts [
+          doc[:finalPubId] == doc[:id] ? ' -' : '✅',
+          doc[:finalPubId],
+          doc[:id],
+          doc[:mr] == doc[:doi] ? ' -' : '✅',
+          doc[:mr],
+          doc[:doi],
+          doc[:title]
+        ].join(' | ')
       end
     end
   end
 
-  desc "convert", "Convert old document ID to new PubID"
+  desc "convert", "Convert legacy NIST Tech Pubs ID to NIST PubID"
   option :style, aliases: "-s", type: :string,
-                 desc: "Convert to style (short|long|mr|abbrev)",
+                 desc: "Convert to PubID style (short|long|mr|abbrev)",
                  default: "short"
   option :format, aliases: "-f", type: :string,
-                  desc: "Convert to format (json, string)",
+                  desc: "Render in format (json|string)",
                   default: "string"
   def convert(code)
-    unless %w[mr long short abbrev].include?(options[:style])
-      raise "wrong conversion style"
+    unless %w[mr long short abbrev].include?(options[:style].downcase)
+      raise "Invalid PubID style"
     end
 
-    raise "wrong conversion format" unless %w[string json].include? options[:format]
+    raise "Invalid render format" unless %w[string json].include? options[:format].downcase
 
     unless code.empty?
       if options[:format] == "string"
@@ -46,6 +71,8 @@ class NistPubidCLI < Thor
         puts NistPubid::Document.parse(code).to_json
       end
     end
+  rescue NistPubid::Errors::ParseError
+    puts "[Error] This does not seem to be a valid NIST Tech Pubs legacy identifier"
   end
 end
 

@@ -118,6 +118,7 @@ module NistPubid
         .gsub("NIST SP 260-126 rev 2013", "NIST SP 260-126r2013")
         .gsub("NIST CSWP", "NIST CSRC White Paper")
         .gsub("NIST SP 800-56ar", "NIST SP 800-56Ar1")
+        .gsub("NIST.CSWP.01162020pt", "NIST.CSWP.01162020(por)")
         .gsub(/(?<=NBS MP )(\d+)\((\d+)\)/, '\1e\2')
         .gsub(/(?<=\d)es/, "(spa)")
         .gsub(/(?<=\d)chi/, "(zho)")
@@ -139,8 +140,9 @@ module NistPubid
         revision: /[\daA-Z](?:r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))([\da]+)/
           .match(code)&.[](2),
         addendum: match(/(?<=(\.))?(add(?:-\d+)?|Addendum)/, code),
-        edition: /(?<=[^a-z])(?<=(\.))?(?:e(?(1)-)|Ed\.\s)(\d+)/
-          .match(code)&.[](2),
+        edition: /(?<=[^a-z])(?<=\.)?(?:e(?(1)-)|Ed\.\s)(\d+)|
+                  NBS\sFIPS\sPUB\s[0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-([A-Za-z\d]+)
+          /x.match(code)&.captures&.join,
         section: /(?<=sec)\d+/.match(code)&.to_s,
         appendix: /\d+app/.match(code)&.to_s,
         errata: /-errata|\d+err(?:ata)?/.match(code)&.to_s,
@@ -197,7 +199,7 @@ module NistPubid
            ([0-9]+ # first part of report number
              (?:#{excluded_parts}[A-Za-z]+)? # with letter but without localities
              (?:-m)? # for NBS CRPL 4-m-5
-             (?:-[A-Z]+)? # for NIST SP 1075-NCNR, NIST SP 1113-BFRL, etc
+             (?:-[A-Za]+)? # for NIST SP 1075-NCNR, NIST SP 1113-BFRL, NIST IR 6529-a
              (?:-[0-9.]+)? # second part
              (?:
                (?: # only big letter
