@@ -256,6 +256,7 @@ RSpec.describe NistPubid::Document do
     context "parse old NIST FIPS series" do
       let(:original_pubid) { "NIST FIPS 140-3" }
       let(:short_pubid) { "NIST FIPS PUB 140-3" }
+      let(:mr) { "NIST.FIPS.140-3" }
       let(:long_pubid) do
         "National Institute of Standards and Technology Federal Information"\
           " Processing Standards Publication 140-3"
