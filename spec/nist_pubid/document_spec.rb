@@ -599,9 +599,23 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
-    context "NBS CIRC 74errata" do
+    context "NBS FIPS 1-2-1974" do
+      let(:original_pubid) { "NBS FIPS 1-2-1974" }
+      let(:short_pubid) { "NBS FIPS PUB 1-2e1974" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+      context "NBS CIRC 74errata" do
       let(:original_pubid) { "NBS CIRC 74errata" }
       let(:short_pubid) { "NBS CIRC 74err" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS FIPS 14-1971" do
+      let(:original_pubid) { "NBS FIPS 14-1971" }
+      let(:short_pubid) { "NBS FIPS PUB 14-1971" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -609,6 +623,13 @@ RSpec.describe NistPubid::Document do
     context "NBS CIRC 54index" do
       let(:original_pubid) { "NBS CIRC 54index" }
       let(:short_pubid) { "NBS CIRC 54indx" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS FIPS 14-1-Dec1980" do
+      let(:original_pubid) { "NBS FIPS 14-1-Dec1980" }
+      let(:short_pubid) { "NBS FIPS PUB 14-1eDec1980" }
 
       it_behaves_like "converts pubid to different formats"
     end
