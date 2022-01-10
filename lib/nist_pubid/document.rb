@@ -252,14 +252,8 @@ module NistPubid
 
     def render_edition(format)
       result = ""
-      if revision
-        result += if %i[long abbrev].include?(format) ||
-            [volume, part, supplement, version, edition].any?
-                    "#{REVISION_DESC[format]}#{revision}"
-                  else
-                    "-#{revision}"
-                  end
-      end
+
+      result += "#{REVISION_DESC[format]}#{revision.to_s.upcase}" if revision
       result += "#{VERSION_DESC[format]}#{version}" unless version.nil?
       result += "#{EDITION_DESC[format]}#{edition}" unless edition.nil?
       result
