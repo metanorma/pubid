@@ -598,6 +598,13 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NBS CIRC 25insert" do
+      let(:original_pubid) { "NBS CIRC 25insert" }
+      let(:short_pubid) { "NBS CIRC 25ins"}
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "when cannot parse serie" do
       it "should raise error" do
         expect { described_class.parse("NIST WRONG-SERIE 800-11") }
