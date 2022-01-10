@@ -109,6 +109,7 @@ module NistPubid
         .gsub("NIST SP 260-162 2006ed.", "NIST SP 260-162e2006")
         .gsub("NBS CIRC 154suprev", "NBS CIRC 154r1sup")
         .gsub("NIST SP 260-126 rev 2013", "NIST SP 260-126r2013")
+        .gsub("NIST CSWP", "NIST CSRC White Paper")
         .gsub(/(?<=NBS MP )(\d+)\((\d+)\)/, '\1e\2')
         .gsub(/(?<=\d)es/, "(spa)")
         .gsub(/(?<=\d)chi/, "(zho)")
@@ -260,14 +261,8 @@ module NistPubid
 
     def render_edition(format)
       result = ""
-      if revision
-        result += if %i[long abbrev].include?(format) ||
-            [volume, part, supplement, version, edition].any?
-                    "#{REVISION_DESC[format]}#{revision}"
-                  else
-                    "-#{revision}"
-                  end
-      end
+
+      result += "#{REVISION_DESC[format]}#{revision.to_s.upcase}" if revision
       result += "#{VERSION_DESC[format]}#{version}" unless version.nil?
       result += "#{EDITION_DESC[format]}#{edition}" unless edition.nil?
       result
