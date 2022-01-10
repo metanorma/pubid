@@ -7,7 +7,7 @@ require "thor"
 require "csv"
 
 class NistPubidCLI < Thor
-  desc "report", "Create report for nist tech pubs database"
+  desc "report", "Create report for NIST Tech Pubs database (fetches from GitHub)"
   option :csv, type: :boolean, desc: "Export to CSV format"
   def report
     if options[:csv]
@@ -25,16 +25,16 @@ class NistPubidCLI < Thor
     end
   end
 
-  desc "convert", "Convert old document ID to new PubID"
+  desc "convert", "Convert legacy NIST Tech Pubs ID to NIST PubID"
   option :style, aliases: "-s", type: :string,
-                 desc: "Convert to style (short|long|mr|abbrev)",
+                 desc: "Convert to PubID style (short|long|mr|abbrev)",
                  default: "short"
   option :format, aliases: "-f", type: :string,
-                  desc: "Convert to format (json, string)",
+                  desc: "Render in format (JSON, string)",
                   default: "string"
   def convert(code)
     unless %w[mr long short abbrev].include?(options[:style])
-      raise "wrong conversion style"
+      raise "Invalid PubID style"
     end
 
     raise "wrong conversion format" unless %w[string json].include? options[:format]
