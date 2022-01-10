@@ -394,6 +394,25 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NIST SP 800-56Ar2" do
+      let(:short_pubid) { "NIST SP 800-56Ar2" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 800-56Cr1" do
+      let(:short_pubid) { "NIST SP 800-56Cr1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 800-56ar" do
+      let(:original_pubid) { "NIST SP 800-56ar" }
+      let(:short_pubid) { "NIST SP 800-56Ar1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "NBS RPT 9350sup" do
       let(:original_pubid) { "NBS RPT 9350sup" }
       let(:short_pubid) { "NBS RPT 9350sup" }
