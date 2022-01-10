@@ -10,17 +10,42 @@ class NistPubidCLI < Thor
   desc "report", "Create report for NIST Tech Pubs database (fetches from GitHub)"
   option :csv, type: :boolean, desc: "Export to CSV format"
   def report
+    heading = %w(
+      ID\ changed?
+      New\ PubID
+      Document\ ID
+      DOI\ changed?
+      New\ PubID-MR
+      DOI
+      Title
+    )
     if options[:csv]
+      puts heading.to_csv
+
       NistPubid::NistTechPubs.status.each do |doc|
-        puts [doc[:finalPubId] == doc[:id] && doc[:mr] == doc[:doi] ? "-" : "+",
-              doc[:finalPubId], doc[:id], doc[:doi], doc[:mr], doc[:title]]
-          .to_csv
+        puts [
+          doc[:finalPubId] == doc[:id] ? false : true,
+          doc[:finalPubId],
+          doc[:id],
+          doc[:mr] == doc[:doi] ? false : true,
+          doc[:mr],
+          doc[:doi],
+          doc[:title]
+        ].to_csv
       end
     else
-      puts "Changed | New PubID | Document ID | DOI | New MR | Title + subtitle"
+      puts heading.join(' | ')
+
       NistPubid::NistTechPubs.status.each do |doc|
-        puts "#{doc[:finalPubId] == doc[:id] && doc[:mr] == doc[:doi] ? ' -' : '✅'}"\
-             " | #{doc[:finalPubId]} | #{doc[:id]} | #{doc[:doi]} | #{doc[:mr]} | #{doc[:title]}"
+        puts [
+          doc[:finalPubId] == doc[:id] ? ' -' : '✅',
+          doc[:finalPubId],
+          doc[:id],
+          doc[:mr] == doc[:doi] ? ' -' : '✅',
+          doc[:mr],
+          doc[:doi],
+          doc[:title]
+        ].join(' | ')
       end
     end
   end
