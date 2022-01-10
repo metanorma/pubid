@@ -199,7 +199,7 @@ module NistPubid
            ([0-9]+ # first part of report number
              (?:#{excluded_parts}[A-Za-z]+)? # with letter but without localities
              (?:-m)? # for NBS CRPL 4-m-5
-             (?:-[A-Z]+)? # for NIST SP 1075-NCNR, NIST SP 1113-BFRL, etc
+             (?:-[A-Za]+)? # for NIST SP 1075-NCNR, NIST SP 1113-BFRL, NIST IR 6529-a
              (?:-[0-9.]+)? # second part
              (?:
                (?: # only big letter

@@ -666,10 +666,19 @@ RSpec.describe NistPubid::Document do
           .to raise_error(NistPubid::Errors::ParseError)
       end
     end
-    
+
     context "NIST CSWP 01142020" do
       let(:original_pubid) { "NIST CSWP 01142020" }
       let(:short_pubid) { "NIST CSRC White Paper 01142020" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST IR 6529-a" do
+      let(:original_pubid) { "NIST IR 6529-a" }
+      let(:short_pubid) { "NIST IR 6529-A" }
+
+      it_behaves_like "converts pubid to different formats"
     end
 
     context "when cannot parse code" do
