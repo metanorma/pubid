@@ -117,6 +117,7 @@ module NistPubid
         .gsub("NBS CIRC 154suprev", "NBS CIRC 154r1sup")
         .gsub("NIST SP 260-126 rev 2013", "NIST SP 260-126r2013")
         .gsub("NIST CSWP", "NIST CSRC White Paper")
+        .gsub("NIST.CSWP.01162020pt", "NIST.CSWP.01162020(por)")
         .gsub(/(?<=NBS MP )(\d+)\((\d+)\)/, '\1e\2')
         .gsub(/(?<=\d)es/, "(spa)")
         .gsub(/(?<=\d)chi/, "(zho)")
