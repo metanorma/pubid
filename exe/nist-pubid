@@ -55,14 +55,14 @@ class NistPubidCLI < Thor
                  desc: "Convert to PubID style (short|long|mr|abbrev)",
                  default: "short"
   option :format, aliases: "-f", type: :string,
-                  desc: "Render in format (JSON, string)",
+                  desc: "Render in format (json|string)",
                   default: "string"
   def convert(code)
-    unless %w[mr long short abbrev].include?(options[:style])
+    unless %w[mr long short abbrev].include?(options[:style].downcase)
       raise "Invalid PubID style"
     end
 
-    raise "wrong conversion format" unless %w[string json].include? options[:format]
+    raise "Invalid render format" unless %w[string json].include? options[:format].downcase
 
     unless code.empty?
       if options[:format] == "string"
