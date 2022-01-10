@@ -64,12 +64,19 @@ ERRATA_DESC = {
   mr: "err",
 }.freeze
 
+INSERT_DESC = {
+  long: " Insert ",
+  abbrev: " Ins. ",
+  short: "ins",
+  mr: "ins",
+}.freeze
+
 module NistPubid
   class Document
     attr_accessor :serie, :code, :revision, :publisher, :version, :volume,
                   :part, :addendum, :stage, :translation, :update_number,
                   :edition, :supplement, :update_year, :section, :appendix,
-                  :errata
+                  :errata, :insert
 
     def initialize(publisher:, serie:, docnumber:, **opts)
       @publisher = Publisher.new(publisher: publisher)
@@ -102,6 +109,7 @@ module NistPubid
         .gsub("NIST SP 260-162 2006ed.", "NIST SP 260-162e2006")
         .gsub("NBS CIRC 154suprev", "NBS CIRC 154r1sup")
         .gsub("NIST SP 260-126 rev 2013", "NIST SP 260-126r2013")
+        .gsub("NIST CSWP", "NIST CSRC White Paper")
         .gsub(/(?<=NBS MP )(\d+)\((\d+)\)/, '\1e\2')
         .gsub(/(?<=\d)es/, "(spa)")
         .gsub(/(?<=\d)chi/, "(zho)")
@@ -128,7 +136,8 @@ module NistPubid
           .match(code)&.[](2),
         section: /(?<=sec)\d+/.match(code)&.to_s,
         appendix: /\d+app/.match(code)&.to_s,
-        errata: /-errata|\d+err(?:ata)?/.match(code)&.to_s
+        errata: /-errata|\d+err(?:ata)?/.match(code)&.to_s,
+        insert: /\d+ins(?:ert)?/.match(code)&.to_s
       }
       supplement = /(?:(?:supp?)-?(\d*)|Supplement|Suppl.)/
         .match(code)
@@ -164,7 +173,7 @@ module NistPubid
     end
 
     def self.parse_docnumber(serie, code)
-      localities = "[Pp]t\\d+|r(?:\\d+|[A-Za-z]?)|e\\d+|p|v|sec\\d+|err(?:ata)?"
+      localities = "[Pp]t\\d+|r(?:\\d+|[A-Za-z]?)|e\\d+|p|v|sec\\d+|err(?:ata)?|ins(?:ert)?"
       excluded_parts = "(?!#{localities}|supp?)"
 
       if ["NBS CSM", "NBS CS"].include?(serie)
@@ -265,8 +274,9 @@ module NistPubid
       result = ""
       result += "#{SUPPLEMENT_DESC[format]}#{supplement}" unless supplement.nil?
       result += "#{SECTION_DESC[format]}#{section}" unless section.nil?
-      result += "#{APPENDIX_DESC[format]}" unless appendix.nil?
-      result += "#{ERRATA_DESC[format]}" unless errata.nil?
+      result += APPENDIX_DESC[format] unless appendix.nil?
+      result += ERRATA_DESC[format] unless errata.nil?
+      result += INSERT_DESC[format] unless insert.nil?
 
       result
     end
