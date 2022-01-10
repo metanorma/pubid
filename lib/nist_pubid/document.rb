@@ -204,7 +204,7 @@ module NistPubid
       regex.match(code)&.to_s
     end
 
-    def to_s(format)
+    def to_s(format = :short)
       result = render_serie(format)
       result += " " unless format == :short || stage.nil?
       result += "#{stage&.to_s(format)}"\

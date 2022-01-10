@@ -23,19 +23,18 @@ module NistPubid
 
       def convert(doc)
         id = @converted_id[doc[:id]] ||= NistPubid::Document.parse(doc[:id])
-        return id.to_s(:short) unless doc.key?(:doi)
+        return id unless doc.key?(:doi)
 
         begin
           doi = @converted_doi[doc[:doi]] ||=
             NistPubid::Document.parse(doc[:doi])
         rescue Errors::ParseError
-          return id.to_s(:short)
+          return id
         end
         # return more complete pubid
-        id.merge(doi).to_s(:short)
+        id.merge(doi)
       rescue Errors::ParseError
         @converted_doi[doc[:doi]] ||= NistPubid::Document.parse(doc[:doi])
-          .to_s(:short)
       end
 
       def parse_docid(doc)
@@ -57,7 +56,7 @@ module NistPubid
 
       def comply_with_pubid
         fetch.select do |doc|
-          convert(doc) == doc[:id]
+          convert(doc).to_s == doc[:id]
         rescue Errors::ParseError
           false
         end
@@ -65,7 +64,7 @@ module NistPubid
 
       def different_with_pubid
         fetch.reject do |doc|
-          convert(doc) == doc[:id]
+          convert(doc).to_s == doc[:id]
         rescue Errors::ParseError
           true
         end
@@ -73,7 +72,7 @@ module NistPubid
 
       def parse_fail_with_pubid
         fetch.select do |doc|
-          convert(doc) && false
+          convert(doc).to_s && false
         rescue Errors::ParseError
           true
         end
@@ -82,9 +81,22 @@ module NistPubid
       # returning current document id, doi, title and final PubID
       def status
         fetch.map do |doc|
-          [doc[:id], doc[:doi], doc[:title], convert(doc)]
+          final_doc = convert(doc)
+          {
+            id: doc[:id],
+            doi: doc[:doi],
+            title: doc[:title],
+            finalPubId: final_doc.to_s,
+            mr: final_doc.to_s(:mr),
+          }
         rescue Errors::ParseError
-          [doc[:id], doc[:doi], doc[:title], "parse error"]
+          {
+            id: doc[:id],
+            doi: doc[:doi],
+            title: doc[:title],
+            finalPubId: "parse error",
+            mr: "parse_error"
+          }
         end
       end
     end

@@ -11,15 +11,16 @@ class NistPubidCLI < Thor
   option :csv, type: :boolean, desc: "Export to CSV format"
   def report
     if options[:csv]
-      NistPubid::NistTechPubs.status.each do |row|
-        puts [row[3] == row[0] ? "-" : "+",  row[3], row[0], row[1], row[2]]
+      NistPubid::NistTechPubs.status.each do |doc|
+        puts [doc[:finalPubId] == doc[:id] && doc[:mr] == doc[:doi] ? "-" : "+",
+              doc[:finalPubId], doc[:id], doc[:doi], doc[:mr], doc[:title]]
           .to_csv
       end
     else
-      puts "Changed | New PubID | Document ID | DOI | Title + subtitle"
-      NistPubid::NistTechPubs.status.each do |row|
-        puts "#{row[3] == row[0] ? ' -' : '✅'} | #{row[3]} | #{row[0]} |"\
-             " #{row[1]} | #{row[2]}"
+      puts "Changed | New PubID | Document ID | DOI | New MR | Title + subtitle"
+      NistPubid::NistTechPubs.status.each do |doc|
+        puts "#{doc[:finalPubId] == doc[:id] && doc[:mr] == doc[:doi] ? ' -' : '✅'}"\
+             " | #{doc[:finalPubId]} | #{doc[:id]} | #{doc[:doi]} | #{doc[:mr]} | #{doc[:title]}"
       end
     end
   end
