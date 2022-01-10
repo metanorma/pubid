@@ -60,8 +60,8 @@ APPENDIX_DESC = {
 ERRATA_DESC = {
   long: " Errata ",
   abbrev: " Err. ",
-  short: "-err",
-  mr: "-err",
+  short: "err",
+  mr: "err",
 }.freeze
 
 INDEX_DESC = {
@@ -143,7 +143,7 @@ module NistPubid
           .match(code)&.[](2),
         section: /(?<=sec)\d+/.match(code)&.to_s,
         appendix: /\d+app/.match(code)&.to_s,
-        errata: /-errata/.match(code)&.to_s,
+        errata: /-errata|\d+err(?:ata)?/.match(code)&.to_s,
         index: /\d+index|\d+indx/.match(code)&.to_s,
         insert: /\d+ins(?:ert)?/.match(code)&.to_s
       }
@@ -181,7 +181,7 @@ module NistPubid
     end
 
     def self.parse_docnumber(serie, code)
-      localities = "[Pp]t\\d+|r(?:\\d+|[A-Za-z]?)|e\\d+|p|v|sec\\d+|inde?x|ins(?:ert)?"
+      localities = "[Pp]t\\d+|r(?:\\d+|[A-Za-z]?)|e\\d+|p|v|sec\\d+|inde?x|err(?:ata)?|ins(?:ert)?"
       excluded_parts = "(?!#{localities}|supp?)"
 
       if ["NBS CSM", "NBS CS"].include?(serie)
