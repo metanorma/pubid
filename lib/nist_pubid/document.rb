@@ -136,7 +136,7 @@ module NistPubid
         section: /(?<=sec)\d+/.match(code)&.to_s,
         appendix: /\d+app/.match(code)&.to_s,
         errata: /-errata/.match(code)&.to_s,
-        insert: /\dinsert/.match(code)&.to_s
+        insert: /\d+ins(?:ert)?/.match(code)&.to_s
       }
       supplement = /(?:(?:supp?)-?(\d*)|Supplement|Suppl.)/
         .match(code)
@@ -172,7 +172,7 @@ module NistPubid
     end
 
     def self.parse_docnumber(serie, code)
-      localities = "[Pp]t\\d+|r(?:\\d+|[A-Za-z]?)|e\\d+|p|v|sec\\d+|insert"
+      localities = "[Pp]t\\d+|r(?:\\d+|[A-Za-z]?)|e\\d+|p|v|sec\\d+|ins(?:ert)?"
       excluded_parts = "(?!#{localities}|supp?)"
 
       if ["NBS CSM", "NBS CS"].include?(serie)
