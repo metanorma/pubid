@@ -64,12 +64,19 @@ ERRATA_DESC = {
   mr: "-err",
 }.freeze
 
+INDEX_DESC = {
+  long: " Index ",
+  abbrev: " Index. ",
+  short: "indx",
+  mr: "indx",
+}.freeze
+
 module NistPubid
   class Document
     attr_accessor :serie, :code, :revision, :publisher, :version, :volume,
                   :part, :addendum, :stage, :translation, :update_number,
                   :edition, :supplement, :update_year, :section, :appendix,
-                  :errata
+                  :errata, :index
 
     def initialize(publisher:, serie:, docnumber:, **opts)
       @publisher = Publisher.new(publisher: publisher)
@@ -128,7 +135,8 @@ module NistPubid
           .match(code)&.[](2),
         section: /(?<=sec)\d+/.match(code)&.to_s,
         appendix: /\d+app/.match(code)&.to_s,
-        errata: /-errata/.match(code)&.to_s
+        errata: /-errata/.match(code)&.to_s,
+        index: /\d+index|\d+indx/.match(code)&.to_s,
       }
       supplement = /(?:(?:supp?)-?(\d*)|Supplement|Suppl.)/
         .match(code)
@@ -164,7 +172,7 @@ module NistPubid
     end
 
     def self.parse_docnumber(serie, code)
-      localities = "[Pp]t\\d+|r(?:\\d+|[A-Za-z]?)|e\\d+|p|v|sec\\d+"
+      localities = "[Pp]t\\d+|r(?:\\d+|[A-Za-z]?)|e\\d+|p|v|sec\\d+|inde?x"
       excluded_parts = "(?!#{localities}|supp?)"
 
       if ["NBS CSM", "NBS CS"].include?(serie)
@@ -266,13 +274,12 @@ module NistPubid
     end
 
     def render_localities(format)
-      # TODO: Index, Insert
-
       result = ""
       result += "#{SUPPLEMENT_DESC[format]}#{supplement}" unless supplement.nil?
       result += "#{SECTION_DESC[format]}#{section}" unless section.nil?
       result += "#{APPENDIX_DESC[format]}" unless appendix.nil?
       result += "#{ERRATA_DESC[format]}" unless errata.nil?
+      result += INDEX_DESC[format] unless index.nil?
 
       result
     end
