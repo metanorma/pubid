@@ -46,6 +46,8 @@ class NistPubidCLI < Thor
         puts NistPubid::Document.parse(code).to_json
       end
     end
+  rescue NistPubid::Errors::ParseError
+    puts "[Error] This does not seem to be a valid NIST Tech Pubs legacy identifier"
   end
 end
 
