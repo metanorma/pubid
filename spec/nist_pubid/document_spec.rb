@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe NistPubid::Document do
-  let(:short_pubid) { "NIST SP 800-53-5" }
+  let(:short_pubid) { "NIST SP 800-53r5" }
   let(:mr_pubid) { short_pubid.gsub(" ", ".") }
   let(:long_pubid) { nil }
   let(:abbrev_pubid) { nil }
@@ -69,7 +69,7 @@ RSpec.describe NistPubid::Document do
     end
 
     context "when published by NBS" do
-      let(:short_pubid) { "NBS SP 800-53-5" }
+      let(:short_pubid) { "NBS SP 800-53r5" }
       let(:long_pubid) do
         "National Bureau of Standards Special Publication 800-53, Revision 5"
       end
@@ -106,7 +106,7 @@ RSpec.describe NistPubid::Document do
 
     context "when with update" do
       let(:original_pubid) { "NIST SP 800-53r4/Upd3-2015" }
-      let(:short_pubid) { "NIST SP 800-53-4/Upd3-2015" }
+      let(:short_pubid) { "NIST SP 800-53r4/Upd3-2015" }
       let(:long_pubid) do
         "National Institute of Standards and Technology Special Publication "\
           "800-53, Revision 4 Update 3-2015"
@@ -114,7 +114,7 @@ RSpec.describe NistPubid::Document do
       let(:abbrev_pubid) do
         "Natl. Inst. Stand. Technol. Spec. Publ. 800-53, Rev. 4 Upd. 3-2015"
       end
-      let(:mr_pubid) { "NIST.SP.800-53-4.u3-2015" }
+      let(:mr_pubid) { "NIST.SP.800-53r4.u3-2015" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -153,7 +153,7 @@ RSpec.describe NistPubid::Document do
     end
 
     context "when with stage" do
-      let(:short_pubid) { "NIST SP(IPD) 800-53-5" }
+      let(:short_pubid) { "NIST SP(IPD) 800-53r5" }
       let(:long_pubid) do
         "National Institute of Standards and Technology Special Publication "\
           "Initial Public Draft 800-53, Revision 5"
@@ -162,7 +162,7 @@ RSpec.describe NistPubid::Document do
         "Natl. Inst. Stand. Technol. Spec. Publ. Initial Public Draft 800-53,"\
           " Rev. 5"
       end
-      let(:mr_pubid) { "NIST.SP.IPD.800-53-5" }
+      let(:mr_pubid) { "NIST.SP.IPD.800-53r5" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -256,6 +256,7 @@ RSpec.describe NistPubid::Document do
     context "parse old NIST FIPS series" do
       let(:original_pubid) { "NIST FIPS 140-3" }
       let(:short_pubid) { "NIST FIPS PUB 140-3" }
+      let(:mr) { "NIST.FIPS.140-3" }
       let(:long_pubid) do
         "National Institute of Standards and Technology Federal Information"\
           " Processing Standards Publication 140-3"
@@ -322,7 +323,7 @@ RSpec.describe NistPubid::Document do
 
     context "parse NIST SP 800-22r1a" do
       let(:original_pubid) { "NIST SP 800-22r1a" }
-      let(:short_pubid) { "NIST SP 800-22-1a" }
+      let(:short_pubid) { "NIST SP 800-22r1A" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -387,7 +388,8 @@ RSpec.describe NistPubid::Document do
 
     # 800-85A-4 but 800-85Apt1r4
     context "NIST SP 800-85A-4" do
-      let(:short_pubid) { "NIST SP 800-85A-4" }
+      let(:original_pubid) { "NIST SP 800-85A-4" }
+      let(:short_pubid) { "NIST SP 800-85Ar4" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -430,7 +432,7 @@ RSpec.describe NistPubid::Document do
 
     context "NIST IR 8118r1es" do
       let(:original_pubid) { "NIST IR 8118r1es" }
-      let(:short_pubid) { "NIST IR 8118-1(spa)" }
+      let(:short_pubid) { "NIST IR 8118r1(spa)" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -458,7 +460,7 @@ RSpec.describe NistPubid::Document do
 
     context "LCIRC 888r1964" do
       let(:original_pubid) { "NBS.LCIRC.888r1964" }
-      let(:short_pubid) { "NBS LC 888-1964" }
+      let(:short_pubid) { "NBS LC 888r1964" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -544,21 +546,21 @@ RSpec.describe NistPubid::Document do
 
     context "NIST SP 260-126 rev 2013" do
       let(:original_pubid) { "NIST SP 260-126 rev 2013" }
-      let(:short_pubid) { "NIST SP 260-126-2013" }
+      let(:short_pubid) { "NIST SP 260-126r2013" }
 
       it_behaves_like "converts pubid to different formats"
     end
 
     context "NIST SP 800-27ra" do
       let(:original_pubid) { "NIST SP 800-27ra" }
-      let(:short_pubid) { "NIST SP 800-27-a" }
+      let(:short_pubid) { "NIST SP 800-27rA" }
 
       it_behaves_like "converts pubid to different formats"
     end
 
     context "NIST SP 800-53ar1" do
       let(:original_pubid) { "NIST SP 800-53ar1" }
-      let(:short_pubid) { "NIST SP 800-53A-1" }
+      let(:short_pubid) { "NIST SP 800-53Ar1" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -572,7 +574,7 @@ RSpec.describe NistPubid::Document do
 
     context "NIST SP 801-errata" do
       let(:original_pubid) { "NIST SP 801-errata" }
-      let(:short_pubid) { "NIST SP 801-err" }
+      let(:short_pubid) { "NIST SP 801err" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -600,6 +602,66 @@ RSpec.describe NistPubid::Document do
 
     context "NIST GCR 17-917-45" do
       let(:short_pubid) { "NIST GCR 17-917-45" }
+      
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS FIPS 1-2-1974" do
+      let(:original_pubid) { "NBS FIPS 1-2-1974" }
+      let(:short_pubid) { "NBS FIPS PUB 1-2e1974" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+      context "NBS CIRC 74errata" do
+      let(:original_pubid) { "NBS CIRC 74errata" }
+      let(:short_pubid) { "NBS CIRC 74err" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS FIPS 14-1971" do
+      let(:original_pubid) { "NBS FIPS 14-1971" }
+      let(:short_pubid) { "NBS FIPS PUB 14-1971" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CIRC 54index" do
+      let(:original_pubid) { "NBS CIRC 54index" }
+      let(:short_pubid) { "NBS CIRC 54indx" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS FIPS 14-1-Dec1980" do
+      let(:original_pubid) { "NBS FIPS 14-1-Dec1980" }
+      let(:short_pubid) { "NBS FIPS PUB 14-1eDec1980" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CIRC 54indx" do
+      let(:short_pubid) { "NBS CIRC 54indx" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CIRC 25insert" do
+      let(:original_pubid) { "NBS CIRC 25insert" }
+      let(:short_pubid) { "NBS CIRC 25ins"}
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CIRC 25ins" do
+      let(:short_pubid) { "NBS CIRC 25ins"}
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST.CSWP.01162020pt" do
+      let(:original_pubid) { "NIST.CSWP.01162020pt" }
+      let(:short_pubid) { "NIST CSRC White Paper 01162020(por)" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -609,6 +671,20 @@ RSpec.describe NistPubid::Document do
         expect { described_class.parse("NIST WRONG-SERIE 800-11") }
           .to raise_error(NistPubid::Errors::ParseError)
       end
+    end
+
+    context "NIST CSWP 01142020" do
+      let(:original_pubid) { "NIST CSWP 01142020" }
+      let(:short_pubid) { "NIST CSRC White Paper 01142020" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST IR 6529-a" do
+      let(:original_pubid) { "NIST IR 6529-a" }
+      let(:short_pubid) { "NIST IR 6529-A" }
+
+      it_behaves_like "converts pubid to different formats"
     end
 
     context "when cannot parse code" do
@@ -627,7 +703,7 @@ RSpec.describe NistPubid::Document do
     it "can update revision" do
       pub_id = described_class.parse(short_pubid)
       pub_id.revision = 6
-      expect(pub_id.to_s(:mr)).to eq("NIST.SP.800-53-6")
+      expect(pub_id.to_s(:mr)).to eq("NIST.SP.800-53r6")
     end
   end
 
