@@ -325,7 +325,9 @@ module NistPubid
       case format
       when :long, :abbrev
         " (#{translation.upcase})"
-      else
+      when :mr
+        ".#{translation}"
+      when :short
         "(#{translation})"
       end
     end
