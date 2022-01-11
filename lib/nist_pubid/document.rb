@@ -175,6 +175,13 @@ module NistPubid
 
       matches[:docnumber] = parse_docnumber(matches[:serie], code)
 
+      # NIST GCR documents often have a 3-part identifier -- the last part is
+      # not revision but is part of the identifier.
+      if matches[:serie] == "NIST GCR" && matches[:revision]
+        matches[:docnumber] += "-#{matches[:revision]}"
+        matches[:revision] = nil
+      end
+
       matches[:serie] = SERIES["mr"].invert[matches[:serie]] || matches[:serie]
       # matches[:serie].gsub!(/\./, " ")
       matches[:translation] = match(/(?<=\()\w{3}(?=\))/, code)
