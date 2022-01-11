@@ -332,7 +332,7 @@ module NistPubid
       when :abbrev
         "Add. to #{input}"
       when :short
-        "#{input} Addendum"
+        "#{input} Add."
       when :mr
         "#{input}.add-1"
       end

@@ -135,7 +135,7 @@ RSpec.describe NistPubid::Document do
 
     context "when with addendum" do
       let(:original_pubid) { "NIST SP 800-38a-add" }
-      let(:short_pubid) { "NIST SP 800-38A Addendum" }
+      let(:short_pubid) { "NIST SP 800-38A Add." }
       let(:long_pubid) do
         "Addendum to National Institute of Standards and Technology Special"\
           " Publication 800-38A"
