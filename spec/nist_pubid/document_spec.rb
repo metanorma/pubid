@@ -602,7 +602,7 @@ RSpec.describe NistPubid::Document do
 
     context "NIST GCR 17-917-45" do
       let(:short_pubid) { "NIST GCR 17-917-45" }
-      
+
       it_behaves_like "converts pubid to different formats"
     end
 
