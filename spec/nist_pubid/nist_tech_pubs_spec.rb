@@ -83,7 +83,7 @@ RSpec.describe NistPubid::NistTechPubs, vcr: true do
   describe "#status" do
     let(:id) { "LCIRC 897" }
     let(:doi) { "NBS.LCIRC.897" }
-    let(:mr) { "NBS.LC.897" }
+    let(:mr) { "NBS.LCIRC.897" }
     let(:title) do
       "Letter Circular 897: tables for transforming chromaticity coordinates"\
         " from the I.C.I system to the R-U-C-S system"

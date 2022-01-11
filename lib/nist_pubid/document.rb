@@ -109,7 +109,7 @@ module NistPubid
     end
 
     def self.update_old_code(code)
-      code = code.gsub("FIPS", "FIPS PUB") unless code.include?("FIPS PUB")
+      code = code.gsub("NIST FIPS", "NIST FIPS PUB") unless code.include?("NIST FIPS PUB")
       code.gsub("NBS MONO", "NBS MN").gsub("NIST MONO", "NIST MN")
         .gsub("NIST MP", "NBS MP")
         .gsub("NIST SP 304a-2017", "NIST SP 304A-2017")
@@ -141,7 +141,7 @@ module NistPubid
           .match(code)&.[](2),
         addendum: match(/(?<=(\.))?(add(?:-\d+)?|Addendum)/, code),
         edition: /(?<=[^a-z])(?<=\.)?(?:e(?(1)-)|Ed\.\s)(\d+)|
-                  NBS\sFIPS\sPUB\s[0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-([A-Za-z\d]+)
+                  NBS\sFIPS\s[0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-([A-Za-z\d]+)
           /x.match(code)&.captures&.join,
         section: /(?<=sec)\d+/.match(code)&.to_s,
         appendix: /\d+app/.match(code)&.to_s,

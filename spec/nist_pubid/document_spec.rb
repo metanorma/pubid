@@ -228,7 +228,7 @@ RSpec.describe NistPubid::Document do
 
     context "parse old NBS FIPS series" do
       let(:original_pubid) { "NBS FIPS 100" }
-      let(:short_pubid) { "NBS FIPS PUB 100" }
+      let(:short_pubid) { "NBS FIPS 100" }
       let(:long_pubid) do
         "National Bureau of Standards Federal Information Processing Standards"\
           " Publication 100"
@@ -241,8 +241,9 @@ RSpec.describe NistPubid::Document do
     end
 
     context "parse new NBS FIPS series" do
-      let(:original_pubid) { "NBS FIPS PUB 100" }
-      let(:short_pubid) { "NBS FIPS PUB 100" }
+      let(:original_pubid) { "NBS FIPS 100" }
+      let(:short_pubid) { "NBS FIPS 100" }
+      let(:mr_pubid) { "NBS.FIPS.100" }
       let(:long_pubid) do
         "National Bureau of Standards Federal Information Processing Standards"\
           " Publication 100"
@@ -257,7 +258,7 @@ RSpec.describe NistPubid::Document do
     context "parse old NIST FIPS series" do
       let(:original_pubid) { "NIST FIPS 140-3" }
       let(:short_pubid) { "NIST FIPS PUB 140-3" }
-      let(:mr) { "NIST.FIPS.140-3" }
+      let(:mr_pubid) { "NIST.FIPS.140-3" }
       let(:long_pubid) do
         "National Institute of Standards and Technology Federal Information"\
           " Processing Standards Publication 140-3"
@@ -479,6 +480,7 @@ RSpec.describe NistPubid::Document do
     context "LCIRC 887" do
       let(:original_pubid) { "NBS.LCIRC.887" }
       let(:short_pubid) { "NBS LC 887" }
+      let(:mr_pubid) { "NBS.LCIRC.887" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -486,6 +488,7 @@ RSpec.describe NistPubid::Document do
     context "LCIRC 888r1964" do
       let(:original_pubid) { "NBS.LCIRC.888r1964" }
       let(:short_pubid) { "NBS LC 888r1964" }
+      let(:mr_pubid) { "NBS.LCIRC.888r1964" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -621,6 +624,7 @@ RSpec.describe NistPubid::Document do
     context "NIST.LCIRC.1136" do
       let(:original_pubid) { "NIST.LCIRC.1136" }
       let(:short_pubid) { "NIST LC 1136" }
+      let(:mr_pubid) { "NIST.LCIRC.1136" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -633,12 +637,12 @@ RSpec.describe NistPubid::Document do
 
     context "NBS FIPS 1-2-1974" do
       let(:original_pubid) { "NBS FIPS 1-2-1974" }
-      let(:short_pubid) { "NBS FIPS PUB 1-2e1974" }
+      let(:short_pubid) { "NBS FIPS 1-2e1974" }
 
       it_behaves_like "converts pubid to different formats"
     end
 
-      context "NBS CIRC 74errata" do
+    context "NBS CIRC 74errata" do
       let(:original_pubid) { "NBS CIRC 74errata" }
       let(:short_pubid) { "NBS CIRC 74err" }
 
@@ -647,7 +651,7 @@ RSpec.describe NistPubid::Document do
 
     context "NBS FIPS 14-1971" do
       let(:original_pubid) { "NBS FIPS 14-1971" }
-      let(:short_pubid) { "NBS FIPS PUB 14-1971" }
+      let(:short_pubid) { "NBS FIPS 14-1971" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -661,7 +665,7 @@ RSpec.describe NistPubid::Document do
 
     context "NBS FIPS 14-1-Dec1980" do
       let(:original_pubid) { "NBS FIPS 14-1-Dec1980" }
-      let(:short_pubid) { "NBS FIPS PUB 14-1eDec1980" }
+      let(:short_pubid) { "NBS FIPS 14-1eDec1980" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -687,7 +691,7 @@ RSpec.describe NistPubid::Document do
     context "NIST.CSWP.01162020pt" do
       let(:original_pubid) { "NIST.CSWP.01162020pt" }
       let(:short_pubid) { "NIST CSRC White Paper 01162020(por)" }
-      let(:mr_pubid) { "NIST.CSRC.White.Paper.01162020.por" }
+      let(:mr_pubid) { "NIST.CSWP.01162020.por" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -702,6 +706,7 @@ RSpec.describe NistPubid::Document do
     context "NIST CSWP 01142020" do
       let(:original_pubid) { "NIST CSWP 01142020" }
       let(:short_pubid) { "NIST CSRC White Paper 01142020" }
+      let(:mr_pubid) { "NIST.CSWP.01142020" }
 
       it_behaves_like "converts pubid to different formats"
     end

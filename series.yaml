@@ -13,6 +13,7 @@ long:
   NBS CIS: Consumer Information Series
   NBS CS: Commercial Standards
   NBS CSM: Commercial Standards Monthly
+  NBS FIPS: Federal Information Processing Standards Publication
   FIPS PUB: Federal Information Processing Standards Publication
   NIST GCR: Grant/Contract Reports
   NBS GCR: Grant/Contract Reports
@@ -56,6 +57,7 @@ abbrev:
   NIST AMS: Adv. Man. Ser
   NIST BSS: Bldg. Sci. Ser.
   NBS BSS: Bldg. Sci. Ser.
+  NBS FIPS: Federal Inf. Process. Stds.
   FIPS PUB: Federal Inf. Process. Stds.
   NIST HB: Handb.
   NBS HB: Handb.
@@ -93,6 +95,7 @@ mr:
   NBS CIS: NBS.CIS
   NBS CS: NBS.CS
   NBS CSM: NBS.CSM
+  NBS FIPS: NBS.FIPS
   FIPS PUB: NIST.FIPS
   NIST GCR: NIST.GCR
   NBS GCR: NBS.GCR
