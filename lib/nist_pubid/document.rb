@@ -100,7 +100,7 @@ module NistPubid
     end
 
     def merge(document)
-      instance_variables.each do |var|
+      document.instance_variables.each do |var|
         val = document.instance_variable_get(var)
         instance_variable_set(var, val) unless val.nil?
       end
@@ -154,6 +154,23 @@ module NistPubid
       }
 
       matches[:serie] = Serie.parse(matches[:publisher], code)
+      edition = /(?<=[^a-z])(?<=\.)?(?:e(?(1)-)|Ed\.\s)(\d+)/x.match(code)
+      if edition
+        edition_to_remove = edition.to_s
+      else
+        edition = /NBS\sFIPS\s[0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-([A-Za-z\d]+)|
+         NBS\sFIPS\s[0-9]+[A-Za-z]*-([A-Za-z0-9]+)
+          /x.match(code)
+        edition_to_remove = "-#{edition.captures.join}" if edition
+      end
+
+      if edition
+        code.gsub!(edition_to_remove, "")
+        matches[:edition] = edition.captures.join
+      end
+
+      matches[:revision] = /(?:[\daA-Z](?:r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))|, Revision )([\da]+)/
+        .match(code)&.[](2)
 
       supplement = /(?:(?:supp?)-?(\d*)|Supplement|Suppl.)/
         .match(code)
@@ -196,7 +213,7 @@ module NistPubid
     end
 
     def self.parse_docnumber(serie, code)
-      localities = "[Pp]t\\d+|r(?:\\d+|[A-Za-z]?)|e\\d+|p|v|sec\\d+|inde?x|err(?:ata)?|ins(?:ert)?"
+      localities = "[Pp]t\\d+|r(?:\\d+|[A-Za-z]?)|e\\d+|p|v|sec\\d+|inde?x|err(?:ata)?|ins(?:ert)|app|ins?"
       excluded_parts = "(?!#{localities}|supp?)"
 
       if ["NBS CSM", "NBS CS"].include?(serie)

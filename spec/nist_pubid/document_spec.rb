@@ -594,6 +594,12 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NIST SP 800-53Ar4" do
+      let(:short_pubid) { "NIST SP 800-53Ar4" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "NIST SP 800-57Pt3r1" do
       let(:original_pubid) { "NIST SP 800-57Pt3r1" }
       let(:short_pubid) { "NIST SP 800-57pt3r1" }
@@ -652,7 +658,7 @@ RSpec.describe NistPubid::Document do
 
     context "NBS FIPS 14-1971" do
       let(:original_pubid) { "NBS FIPS 14-1971" }
-      let(:short_pubid) { "NBS FIPS 14-1971" }
+      let(:short_pubid) { "NBS FIPS 14e1971" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -750,6 +756,13 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NBS FIPS 107-Mar1985" do
+      let(:original_pubid) { "NBS FIPS 107-Mar1985" }
+      let(:short_pubid) { "NBS FIPS 107eMar1985" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "National Institute of Standards and Technology Monograph 175" do
       let(:original_pubid) { "National Institute of Standards and Technology Monograph 175" }
       let(:short_pubid) { "NIST MN 175" }
@@ -757,9 +770,23 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NBS FIPS 107-Feb1985" do
+      let(:original_pubid) { "NBS FIPS 107-Feb1985" }
+      let(:short_pubid) { "NBS FIPS 107eFeb1985" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "National Bureau of Standards Monograph 175" do
       let(:original_pubid) { "National Bureau of Standards Monograph 175" }
       let(:short_pubid) { "NBS MN 175" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS FIPS 11-1-Sep1977" do
+      let(:original_pubid) { "NBS FIPS 11-1-Sep1977" }
+      let(:short_pubid) { "NBS FIPS 11-1eSep1977" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -797,6 +824,13 @@ RSpec.describe NistPubid::Document do
         "National Bureau of Standards Federal Information Processing Standards"\
           " Publication 100"
       end
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS FIPS 11-1-Sep30" do
+      let(:original_pubid) { "NBS FIPS 11-1-Sep30" }
+      let(:short_pubid) { "NBS FIPS 11-1eSep30" }
 
       it_behaves_like "converts pubid to different formats"
     end
