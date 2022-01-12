@@ -179,10 +179,10 @@ https://nvlpubs.nist.gov/nistpubs/Legacy/MONO/nbsmonograph125.pdf[NIST Monograph
 | NBS | NSRDS-NBS | National Standard Reference Data Series | Natl. Stand. Ret. Data Ser. | `NBS.NSRDS`
 | https://nvlpubs.nist.gov/nistpubs/Legacy/NSRDS/nbsnsrds1.pdf[NSRDS-NBS 1]
 
-| NIST | NISTIR | Interagency or Internal Report | N/A | `NIST.IR`
+| NIST | NIST IR | Interagency or Internal Report | N/A | `NIST.IR`
 | https://nvlpubs.nist.gov/nistpubs/ir/2021/NIST.IR.8347.pdf[NISTIR 8347]
 
-| NBS | NBSIR | Interagency or Internal Report | N/A | `NBS.IR`
+| NBS | NBS IR | Interagency or Internal Report | N/A | `NBS.IR`
 | https://www.nist.gov/system/files/documents/2017/04/28/nbsir-79-1776.pdf[NBSIR 79-1776]
 
 | NIST | NIST OWMWP | Office of Weights and Measures White Papers | N/A | `NIST.OWMWP`
