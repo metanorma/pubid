@@ -258,14 +258,15 @@ RSpec.describe NistPubid::Document do
 
     context "parse old NIST FIPS series" do
       let(:original_pubid) { "NIST FIPS 140-3" }
-      let(:short_pubid) { "NIST FIPS PUB 140-3" }
       let(:mr_pubid) { "NIST.FIPS.140-3" }
+      let(:short_pubid) { "NIST FIPS PUB 140e3" }
+      let(:mr) { "NIST.FIPS.140-3" }
       let(:long_pubid) do
         "National Institute of Standards and Technology Federal Information"\
-          " Processing Standards Publication 140-3"
+          " Processing Standards Publication 140 Edition 3"
       end
       let(:abbrev_pubid) do
-        "Natl. Inst. Stand. Technol. Federal Inf. Process. Stds. 140-3"
+        "Natl. Inst. Stand. Technol. Federal Inf. Process. Stds. 140 Ed. 3"
       end
 
       it_behaves_like "converts pubid to different formats"
@@ -761,6 +762,12 @@ RSpec.describe NistPubid::Document do
       let(:short_pubid) { "NBS FIPS 107eMar1985" }
 
       it_behaves_like "converts pubid to different formats"
+
+      it "has edition" do
+        expect(subject.edition.to_s).to eq("Mar1985")
+        expect(subject.edition.year).to eq(1985)
+        expect(subject.edition.month).to eq(3)
+      end
     end
 
     context "National Institute of Standards and Technology Monograph 175" do
@@ -830,7 +837,8 @@ RSpec.describe NistPubid::Document do
 
     context "NBS FIPS 11-1-Sep30" do
       let(:original_pubid) { "NBS FIPS 11-1-Sep30" }
-      let(:short_pubid) { "NBS FIPS 11-1eSep30" }
+      # has doi NBS.FIPS.11-1-Sep30/1977
+      let(:short_pubid) { "NBS FIPS PUB 11-1e30Sep1977" }
 
       it_behaves_like "converts pubid to different formats"
     end

@@ -121,6 +121,8 @@ module NistPubid
         .gsub("NIST.LCIRC", "NIST.LC")
         .gsub("NBS.LCIRC", "NBS.LC")
         .gsub("NISTIR", "NIST IR")
+        .gsub("NIST.CSWP.01162020pt", "NIST.CSWP.01162020(por)")
+        .gsub("NBS FIPS PUB 11-1-Sep30", "NBS FIPS PUB 11-1-Sep30/1977")
         .gsub(/(?<=NBS MP )(\d+)\((\d+)\)/, '\1e\2')
         .gsub(/(?<=\d)es/, "(spa)")
         .gsub(/(?<=\d)chi/, "(zho)")
@@ -168,6 +170,9 @@ module NistPubid
         code.gsub!(edition_to_remove, "")
         matches[:edition] = edition.captures.join
       end
+      matches[:edition] = Edition.parse(code)
+
+      code.gsub!(matches[:edition].parsed, "") if matches[:edition]
 
       matches[:revision] = /(?:[\daA-Z](?:r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))|, Revision )([\da]+)/
         .match(code)&.[](2)
@@ -304,7 +309,7 @@ module NistPubid
 
       result += "#{REVISION_DESC[format]}#{revision.to_s.upcase}" if revision
       result += "#{VERSION_DESC[format]}#{version}" unless version.nil?
-      result += "#{EDITION_DESC[format]}#{edition}" unless edition.nil?
+      result += "#{EDITION_DESC[format]}#{edition.to_s}" unless edition.nil?
       result
     end
 
