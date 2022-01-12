@@ -154,10 +154,10 @@ Historic compatibility:
 | NIST | ITL Bulletin | ITL Bulletin | N/A | `NIST.ITLB`
 | https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=930751[NIST ITL Bulletin August 2020]
 
-| NIST | NIST LC | Letter Circular | N/A | `NIST.LCIRC`
+| NIST | NIST LC | Letter Circular | N/A | `NIST.LC`
 | https://nvlpubs.nist.gov/nistpubs/Legacy/LC/nistlettercircular1136.pdf[NIST LC 1136]
 
-| NBS | NBS LC | Letter Circular | N/A | `NBS.LCIRC`
+| NBS | NBS LC | Letter Circular | N/A | `NBS.LC`
 | https://www.govinfo.gov/content/pkg/GOVPUB-C13-505e153915bb567dd587b7efd26b000a/pdf/GOVPUB-C13-505e153915bb567dd587b7efd26b000a.pdf[NBS LC 1128]
 
 | NIST | NIST MN | Monograph | Monogr. | `NIST.MN`

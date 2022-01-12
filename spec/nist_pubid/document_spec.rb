@@ -480,7 +480,7 @@ RSpec.describe NistPubid::Document do
     context "LCIRC 887" do
       let(:original_pubid) { "NBS.LCIRC.887" }
       let(:short_pubid) { "NBS LC 887" }
-      let(:mr_pubid) { "NBS.LCIRC.887" }
+      let(:mr_pubid) { "NBS.LC.887" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -488,7 +488,7 @@ RSpec.describe NistPubid::Document do
     context "LCIRC 888r1964" do
       let(:original_pubid) { "NBS.LCIRC.888r1964" }
       let(:short_pubid) { "NBS LC 888r1964" }
-      let(:mr_pubid) { "NBS.LCIRC.888r1964" }
+      let(:mr_pubid) { "NBS.LC.888r1964" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -624,7 +624,7 @@ RSpec.describe NistPubid::Document do
     context "NIST.LCIRC.1136" do
       let(:original_pubid) { "NIST.LCIRC.1136" }
       let(:short_pubid) { "NIST LC 1136" }
-      let(:mr_pubid) { "NIST.LCIRC.1136" }
+      let(:mr_pubid) { "NIST.LC.1136" }
 
       it_behaves_like "converts pubid to different formats"
     end
