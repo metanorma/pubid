@@ -328,8 +328,9 @@ Raw values seen in legacy DOIs include:
 
 | Spanish | (ESP) | `esp` | `es`
 | Vietnamese | (VIE) | `vie` | `viet`
-| Portuguese | (POR) | `por` | `port`
+| Portuguese | (POR) | `por` | `port` `pt`
 | Chinese | (ZHO) | `zho` | `chi`
+| Indonesian | (IND) | `ind` | `id`
 
 |===
 
