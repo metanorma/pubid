@@ -86,7 +86,7 @@ module NistPubid
                   :errata, :index, :insert
 
     def initialize(publisher:, serie:, docnumber:, **opts)
-      @publisher = Publisher.new(publisher: publisher)
+      @publisher = publisher
       @serie = Serie.new(serie: serie)
       @code = docnumber
       opts.each { |key, value| send("#{key}=", value) }
@@ -120,6 +120,7 @@ module NistPubid
         .gsub("NIST SP 800-56ar", "NIST SP 800-56Ar1")
         .gsub("NIST.LCIRC", "NIST.LC")
         .gsub("NBS.LCIRC", "NBS.LC")
+        .gsub("NISTIR", "NIST IR")
         .gsub(/(?<=NBS MP )(\d+)\((\d+)\)/, '\1e\2')
         .gsub(/(?<=\d)es/, "(spa)")
         .gsub(/(?<=\d)chi/, "(zho)")
@@ -132,18 +133,17 @@ module NistPubid
     def self.parse(code)
       code = update_old_code(code)
       matches = {
-        publisher: match(Publisher.regexp, code) || "NIST",
-        serie: match(Serie.regexp, code),
+        publisher: Publisher.parse(code),
         stage: Stage.parse(code),
         part: /(?<=(\.))?(?<![a-z])+(?:pt|Pt|p)(?(1)-)([A-Z\d]+)/.match(code)
                 &.[](2),
         version:
           /(?<=\.)?(?:(?:ver)((?(1)[-\d]|[.\d])+|\d+)|(?:v)(\d+\.[.\d]+))/
             .match(code).to_a[1..-1]&.compact&.first&.gsub(/-/, "."),
-        revision: /[\daA-Z](?:r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))([\da]+)/
+        revision: /(?:[\daA-Z](?:r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))|, Revision )([\da]+)/
           .match(code)&.[](2),
         addendum: match(/(?<=(\.))?(add(?:-\d+)?|Addendum)/, code),
-        edition: /(?<=[^a-z])(?<=\.)?(?:e(?(1)-)|Ed\.\s)(\d+)|
+        edition: /(?<=[^a-z])(?<=\.)?(?:e(?(1)-)|Ed\.\s|Edition\s)(\d+)|
                   NBS\sFIPS\s[0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-([A-Za-z\d]+)
           /x.match(code)&.captures&.join,
         section: /(?<=sec)\d+/.match(code)&.to_s,
@@ -152,13 +152,16 @@ module NistPubid
         index: /\d+index|\d+indx/.match(code)&.to_s,
         insert: /\d+ins(?:ert)?/.match(code)&.to_s
       }
+
+      matches[:serie] = Serie.parse(matches[:publisher], code)
+
       supplement = /(?:(?:supp?)-?(\d*)|Supplement|Suppl.)/
         .match(code)
       unless supplement.nil?
         matches[:supplement] = supplement[1].nil? ? "" : supplement[1]
       end
 
-      update = code.scan(/((?<=Upd)\s?[\d:]+|-upd)-?(\d*)/).first
+      update = code.scan(/((?<=Upd|Update )\s?[\d:]+|-upd)-?(\d*)/).first
 
       (matches[:update_number], matches[:update_year]) = update if update
 
@@ -170,22 +173,22 @@ module NistPubid
         code = code.gsub(matches[:stage].original_code, "")
       end
 
-      unless ["NBS CSM", "NBS CS"].include?(matches[:serie])
+      unless ["NBS CSM", "NBS CS"].include?(matches[:serie].to_s)
         matches[:volume] = /(?<=(\.))?v(?(1)-)(\d+)(?!\.\d+)/.match(code)&.[](2)
       end
 
       matches[:revision] = nil if matches[:addendum]
 
-      matches[:docnumber] = parse_docnumber(matches[:serie], code)
+      matches[:docnumber] = parse_docnumber(matches[:serie].parsed, code)
 
       # NIST GCR documents often have a 3-part identifier -- the last part is
       # not revision but is part of the identifier.
-      if matches[:serie] == "NIST GCR" && matches[:revision]
+      if matches[:serie].to_s == "NIST GCR" && matches[:revision]
         matches[:docnumber] += "-#{matches[:revision]}"
         matches[:revision] = nil
       end
 
-      matches[:serie] = SERIES["mr"].invert[matches[:serie]] || matches[:serie]
+      matches[:serie] = SERIES["mr"].invert[matches[:serie].to_s] || matches[:serie].to_s
       # matches[:serie].gsub!(/\./, " ")
       matches[:translation] = match(/(?<=\()\w{3}(?=\))/, code)
 
@@ -201,11 +204,11 @@ module NistPubid
       else
         # match docnumbers with localities in the first part, like NBS CIRC 11e2-1915
         docnumber =
-          /(?:#{serie.gsub(" ", "\s|\.")})(?:\s|\.)?([0-9]+)(?:#{localities})(-[0-9]+)?/
+          /(?:#{serie.gsub(" ", "(?:\s|\.)")})(?:\s|\.)?([0-9]+)(?:#{localities})(-[0-9]+)?/
             .match(code)&.captures&.join
 
         docnumber ||=
-          /(?:#{serie.gsub(" ", "\s|\.")})(?:\s|\.)? # match serie
+          /(?:#{serie.gsub(" ", "(?:\s|\.)")})(?:\s|\.)? # match serie
            ([0-9]+ # first part of report number
              (?:#{excluded_parts}[A-Za-z]+)? # with letter but without localities
              (?:-m)? # for NBS CRPL 4-m-5
