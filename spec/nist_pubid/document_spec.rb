@@ -69,24 +69,15 @@ RSpec.describe NistPubid::Document do
       end
     end
 
-    context "when published by NBS" do
-      let(:short_pubid) { "NBS SP 800-53r5" }
-      let(:long_pubid) do
-        "National Bureau of Standards Special Publication 800-53, Revision 5"
-      end
-      let(:abbrev_pubid) { "Natl. Bur. Stand. Spec. Publ. 800-53, Rev. 5" }
-
-      it_behaves_like "converts pubid to different formats"
-    end
-
     context "when NIST NCSTAR serie" do
-      let(:short_pubid) { "NIST NCSTAR 1-1Cv1" }
+      let(:original_pubid) { "NIST NCSTAR 1-1Cv1" }
+      let(:short_pubid) { "NIST NCSTAR 1v1e1C" }
       let(:long_pubid) do
         "National Institute of Standards and Technology National Construction"\
-          " Safety Team Report 1-1C, Volume 1"
+          " Safety Team Report 1, Volume 1 Edition 1C"
       end
       let(:abbrev_pubid) do
-        "Natl. Inst. Stand. Technol. Natl. Constr. Tm. Act Rpt. 1-1C, Vol. 1"
+        "Natl. Inst. Stand. Technol. Natl. Constr. Tm. Act Rpt. 1, Vol. 1 Ed. 1C"
       end
 
       it_behaves_like "converts pubid to different formats"
@@ -258,9 +249,8 @@ RSpec.describe NistPubid::Document do
 
     context "parse old NIST FIPS series" do
       let(:original_pubid) { "NIST FIPS 140-3" }
-      let(:mr_pubid) { "NIST.FIPS.140-3" }
       let(:short_pubid) { "NIST FIPS PUB 140e3" }
-      let(:mr) { "NIST.FIPS.140-3" }
+      let(:mr_pubid) { "NIST.FIPS.140e3" }
       let(:long_pubid) do
         "National Institute of Standards and Technology Federal Information"\
           " Processing Standards Publication 140 Edition 3"
@@ -306,14 +296,15 @@ RSpec.describe NistPubid::Document do
     end
 
     context "parse NIST SP 1190GB-1" do
-      let(:short_pubid) { "NIST SP 1190GB-1" }
+      let(:original_pubid) { "NIST SP 1190GBe1" }
+      let(:short_pubid) { "NIST SP 1190GBe1" }
 
       it_behaves_like "converts pubid to different formats"
     end
 
     context "parse NIST SP 304a-2017" do
       let(:original_pubid) { "NIST SP 304a-2017" }
-      let(:short_pubid) { "NIST SP 304A-2017" }
+      let(:short_pubid) { "NIST SP 304Ae2017" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -537,7 +528,7 @@ RSpec.describe NistPubid::Document do
 
     context "NBS CRPL 4-m-5" do
       let(:original_pubid) { "NBS CRPL 4-m-5" }
-      let(:short_pubid) { "NBS CRPL 4-M-5" }
+      let(:short_pubid) { "NBS CRPL 4-Me5" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -550,7 +541,8 @@ RSpec.describe NistPubid::Document do
     end
 
     context "NBS IR 80-2073.3" do
-      let(:short_pubid) { "NBS IR 80-2073.3" }
+      let(:original_pubid) { "NBS IR 80-2073.3" }
+      let(:short_pubid) { "NBS IR 80e2073.3" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -638,7 +630,8 @@ RSpec.describe NistPubid::Document do
     end
 
     context "NIST GCR 17-917-45" do
-      let(:short_pubid) { "NIST GCR 17-917-45" }
+      let(:original_pubid) { "NIST GCR 17-917-45" }
+      let(:short_pubid) { "NIST GCR 17-917e45" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -744,8 +737,8 @@ RSpec.describe NistPubid::Document do
 
     context "NBS.IR.73-212" do
       let(:original_pubid) { "NBS.IR.73-212" }
-      let(:short_pubid) { "NBS IR 73-212" }
-      let(:mr_pubid) { "NBS.IR.73-212" }
+      let(:short_pubid) { "NBS IR 73e212" }
+      let(:mr_pubid) { "NBS.IR.73e212" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -838,7 +831,7 @@ RSpec.describe NistPubid::Document do
     context "NBS FIPS 11-1-Sep30" do
       let(:original_pubid) { "NBS FIPS 11-1-Sep30" }
       # has doi NBS.FIPS.11-1-Sep30/1977
-      let(:short_pubid) { "NBS FIPS PUB 11-1e30Sep1977" }
+      let(:short_pubid) { "NBS FIPS 11-1e30Sep1977" }
 
       it_behaves_like "converts pubid to different formats"
     end

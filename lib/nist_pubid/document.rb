@@ -122,7 +122,7 @@ module NistPubid
         .gsub("NBS.LCIRC", "NBS.LC")
         .gsub("NISTIR", "NIST IR")
         .gsub("NIST.CSWP.01162020pt", "NIST.CSWP.01162020(por)")
-        .gsub("NBS FIPS PUB 11-1-Sep30", "NBS FIPS PUB 11-1-Sep30/1977")
+        .gsub("NBS FIPS 11-1-Sep30", "NBS FIPS 11-1-Sep30/1977")
         .gsub(/(?<=NBS MP )(\d+)\((\d+)\)/, '\1e\2')
         .gsub(/(?<=\d)es/, "(spa)")
         .gsub(/(?<=\d)chi/, "(zho)")
@@ -156,20 +156,6 @@ module NistPubid
       }
 
       matches[:serie] = Serie.parse(matches[:publisher], code)
-      edition = /(?<=[^a-z])(?<=\.)?(?:e(?(1)-)|Ed\.\s)(\d+)/x.match(code)
-      if edition
-        edition_to_remove = edition.to_s
-      else
-        edition = /NBS\sFIPS\s[0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-([A-Za-z\d]+)|
-         NBS\sFIPS\s[0-9]+[A-Za-z]*-([A-Za-z0-9]+)
-          /x.match(code)
-        edition_to_remove = "-#{edition.captures.join}" if edition
-      end
-
-      if edition
-        code.gsub!(edition_to_remove, "")
-        matches[:edition] = edition.captures.join
-      end
       matches[:edition] = Edition.parse(code)
 
       code.gsub!(matches[:edition].parsed, "") if matches[:edition]
