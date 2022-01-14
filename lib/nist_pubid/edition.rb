@@ -22,22 +22,24 @@ module NistPubid
       end
     end
 
-    def self.parse(code)
+    def self.parse(code, serie = nil)
+      serie = Serie.parse(code) if serie.nil?
+
       if ["NIST HB 135-2020", "NIST.HB.135-2020"].include?(code)
         return new(sequence: "2020", parsed: "-2020")
       end
 
       # NBS HB 44e2-1955
-      code = code.gsub(/NIST[\s.]SP(?:\([A-Z]+\))?[\s.]\d+-[\dA-Z]+(?:-\d+)?/, "")
-      code = code.gsub(/(?<=NBS HB )\d+(.*)-\d+/, '\1')
-      code = code.gsub(/(?<=NBS CIRC )\d+(.*)-\d+/, '\1')
+      code = code.gsub(/(?:\([A-Z]+\))?[\s.]\d+-[\dA-Z]+(?:-\d+)?/, "") if serie.to_s == "NIST SP"
+      code = code.gsub(/\d+(.*)-\d+/, '\1') if serie.to_s == "NBS HB"
+      code = code.gsub(/\d+(.*)-\d+/, '\1') if serie.to_s == "NBS CIRC"
 
       edition = /(?<=NBS\sIR\s80)-(?<sequence>\d{4}(?:\.\d+)?)/x.match(code)
       if edition
         parsed = edition.to_s
       else
         edition = /(?<=\.)?(?<!Upd\d)(?:\d+-\d+)?
-                 (?<!add|sup)(?<prepend>e-?|Ed\.\s|-)
+                 (?<!add|sup)(?<prepend>e-?|Ed\.\s|-|Edition\s)
                  (?:(?<year>\d{4})|(?<sequence>\d+[A-Z]?)(?!-))/x.match(code)
         if edition
           parsed = edition.captures.join.to_s

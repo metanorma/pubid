@@ -28,7 +28,9 @@ module NistPubid
       end
     end
 
-    def self.parse(publisher, code)
+    def self.parse(code, publisher = nil)
+      publisher = Publisher.parse(code) if publisher.nil?
+
       serie = /#{SERIES["long"].keys.sort_by(&:length).reverse.join('|')}/.match(code)
       return new(serie: serie.to_s, parsed: serie.to_s) if serie
 

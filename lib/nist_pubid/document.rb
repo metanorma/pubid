@@ -155,8 +155,8 @@ module NistPubid
         insert: /\d+ins(?:ert)?/.match(code)&.to_s
       }
 
-      matches[:serie] = Serie.parse(matches[:publisher], code)
-      matches[:edition] = Edition.parse(code)
+      matches[:serie] = Serie.parse(code, matches[:publisher])
+      matches[:edition] = Edition.parse(code, matches[:serie])
 
       code.gsub!(matches[:edition].parsed, "") if matches[:edition]
 
