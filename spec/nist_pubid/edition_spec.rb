@@ -27,8 +27,8 @@ RSpec.describe NistPubid::Edition do
     it { expect(subject).to be_nil }
   end
 
-  context "NIST FIPS 140-3" do
-    let(:short_pubid) { "NIST FIPS 140-3" }
+  context "NIST FIPS PUB 140-3" do
+    let(:short_pubid) { "NIST FIPS PUB 140-3" }
 
     it { expect(subject.to_s).to eq("3") }
     it { expect(subject.year).to be_nil }
@@ -56,17 +56,6 @@ RSpec.describe NistPubid::Edition do
     it { expect(subject.day).to eq(30) }
     it { expect(subject.sequence).to be_nil }
     it { expect(subject.parsed).to eq("-Sep30/1977") }
-  end
-
-  context "NIST TN 1297-1993" do
-    let(:short_pubid) { "NIST TN 1297-1993" }
-
-    it { expect(subject.to_s).to eq("1993") }
-    it { expect(subject.year).to eq(1993) }
-    it { expect(subject.month).to be_nil }
-    it { expect(subject.day).to be_nil }
-    it { expect(subject.sequence).to be_nil }
-    it { expect(subject.parsed).to eq("-1993") }
   end
 
   context "NIST HB 105-1-1990" do
@@ -102,15 +91,16 @@ RSpec.describe NistPubid::Edition do
     it { expect(subject.parsed).to eq("-2018") }
   end
 
+  context "NIST IR 85-3273-10" do
+    let(:short_pubid) { "NIST IR 85-3273-10" }
+
+    it { expect(subject).to be_nil }
+  end
+
   context "NBS IR 80-2030" do
     let(:short_pubid) { "NBS IR 80-2030" }
 
-    it { expect(subject.to_s).to eq("2030") }
-    it { expect(subject.year).to be_nil }
-    it { expect(subject.month).to be_nil }
-    it { expect(subject.day).to be_nil }
-    it { expect(subject.sequence).to eq("2030") }
-    it { expect(subject.parsed).to eq("-2030") }
+    it { expect(subject).to be_nil }
   end
 
   context "NIST HB 135-2020" do
