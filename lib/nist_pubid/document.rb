@@ -145,9 +145,6 @@ module NistPubid
         revision: /(?:[\daA-Z](?:r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))|, Revision )([\da]+)/
           .match(code)&.[](2),
         addendum: match(/(?<=(\.))?(add(?:-\d+)?|Addendum)/, code),
-        edition: /(?<=[^a-z])(?<=\.)?(?:e(?(1)-)|Ed\.\s|Edition\s)(\d+)|
-                  NBS\sFIPS\s[0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-([A-Za-z\d]+)
-          /x.match(code)&.captures&.join,
         section: /(?<=sec)\d+/.match(code)&.to_s,
         appendix: /\d+app/.match(code)&.to_s,
         errata: /-errata|\d+err(?:ata)?/.match(code)&.to_s,

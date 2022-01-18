@@ -29,33 +29,24 @@ module NistPubid
         return new(sequence: "2020", parsed: "-2020")
       end
 
-      # NBS HB 44e2-1955
-      code = code.gsub(/(?:\([A-Z]+\))?[\s.]\d+-[\dA-Z]+(?:-\d+)?/, "") if serie.to_s == "NIST SP"
-      code = code.gsub(/\d+(.*)-\d+/, '\1') if serie.to_s == "NBS HB"
-      code = code.gsub(/\d+(.*)-\d+/, '\1') if serie.to_s == "NBS CIRC"
+      # remove document number from edition parsing
+      if REGEXPS["code"].key?(serie.to_s)
+        code = code.gsub(REGEXPS["code"][serie.to_s], "")
+      end
 
-      edition = /(?<=NBS\sIR\s80)-(?<sequence>\d{4}(?:\.\d+)?)/x.match(code)
-      if edition
-        parsed = edition.to_s
+      if REGEXPS["edition"].key?(serie.to_s)
+        edition = REGEXPS["edition"][serie.to_s].match(code)
+        parsed = edition&.captures&.join
       else
         edition = /(?<=\.)?(?<!Upd\d)(?:\d+-\d+)?
-                 (?<!add|sup)(?<prepend>e-?|Ed\.\s|-|Edition\s)
+                 (?<!add|sup)(?<prepend>e-?|Ed\.\s|Edition\s)
                  (?:(?<year>\d{4})|(?<sequence>\d+[A-Z]?)(?!-))/x.match(code)
         if edition
           parsed = edition.captures.join.to_s
-        else
-          edition = /NBS\sFIPS\s[0-9]+[A-Za-z]*-(?:\d+-)?(?:
-              (?<date_with_month>[A-Za-z]{3}\d{4})| # NBS FIPS 107-Mar1985
-              (?<date_with_day>[A-Za-z]{3}\d{2}\/\d{4})| # NBS FIPS PUB 11-1-Sep30\/1977
-              (?<year>\d{4})
-            )|
-            (?:NIST|NBS)\sFIPS\sPUB\s[0-9]+[A-Za-z]*-(?<sequence>\d+) # NIST FIPS 140-3
-            /x.match(code)
-          parsed = "-#{edition.captures.join}" if edition
         end
       end
 
-      return nil unless edition
+      return nil if edition.nil? || edition.captures.compact.empty?
 
       if edition.named_captures.key?("date_with_month") && edition[:date_with_month]
         date = Date.parse(edition[:date_with_month])

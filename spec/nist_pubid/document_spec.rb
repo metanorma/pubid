@@ -71,13 +71,13 @@ RSpec.describe NistPubid::Document do
 
     context "when NIST NCSTAR serie" do
       let(:original_pubid) { "NIST NCSTAR 1-1Cv1" }
-      let(:short_pubid) { "NIST NCSTAR 1v1e1C" }
+      let(:short_pubid) { "NIST NCSTAR 1-1Cv1" }
       let(:long_pubid) do
         "National Institute of Standards and Technology National Construction"\
-          " Safety Team Report 1, Volume 1 Edition 1C"
+          " Safety Team Report 1-1C, Volume 1"
       end
       let(:abbrev_pubid) do
-        "Natl. Inst. Stand. Technol. Natl. Constr. Tm. Act Rpt. 1, Vol. 1 Ed. 1C"
+        "Natl. Inst. Stand. Technol. Natl. Constr. Tm. Act Rpt. 1-1C, Vol. 1"
       end
 
       it_behaves_like "converts pubid to different formats"
@@ -304,7 +304,7 @@ RSpec.describe NistPubid::Document do
 
     context "parse NIST SP 304a-2017" do
       let(:original_pubid) { "NIST SP 304a-2017" }
-      let(:short_pubid) { "NIST SP 304Ae2017" }
+      let(:short_pubid) { "NIST SP 304A-2017" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -528,7 +528,7 @@ RSpec.describe NistPubid::Document do
 
     context "NBS CRPL 4-m-5" do
       let(:original_pubid) { "NBS CRPL 4-m-5" }
-      let(:short_pubid) { "NBS CRPL 4-Me5" }
+      let(:short_pubid) { "NBS CRPL 4-M-5" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -542,7 +542,7 @@ RSpec.describe NistPubid::Document do
 
     context "NBS IR 80-2073.3" do
       let(:original_pubid) { "NBS IR 80-2073.3" }
-      let(:short_pubid) { "NBS IR 80e2073.3" }
+      let(:short_pubid) { "NBS IR 80-2073.3" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -631,7 +631,7 @@ RSpec.describe NistPubid::Document do
 
     context "NIST GCR 17-917-45" do
       let(:original_pubid) { "NIST GCR 17-917-45" }
-      let(:short_pubid) { "NIST GCR 17-917e45" }
+      let(:short_pubid) { "NIST GCR 17-917-45" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -652,7 +652,7 @@ RSpec.describe NistPubid::Document do
 
     context "NBS FIPS 14-1971" do
       let(:original_pubid) { "NBS FIPS 14-1971" }
-      let(:short_pubid) { "NBS FIPS 14e1971" }
+      let(:short_pubid) { "NBS FIPS 14-1971" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -737,8 +737,8 @@ RSpec.describe NistPubid::Document do
 
     context "NBS.IR.73-212" do
       let(:original_pubid) { "NBS.IR.73-212" }
-      let(:short_pubid) { "NBS IR 73e212" }
-      let(:mr_pubid) { "NBS.IR.73e212" }
+      let(:short_pubid) { "NBS IR 73-212" }
+      let(:mr_pubid) { "NBS.IR.73-212" }
 
       it_behaves_like "converts pubid to different formats"
     end
