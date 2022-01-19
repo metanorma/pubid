@@ -123,6 +123,7 @@ module NistPubid
         .gsub("NISTIR", "NIST IR")
         .gsub("NIST.CSWP.01162020pt", "NIST.CSWP.01162020(por)")
         .gsub("NBS FIPS 11-1-Sep30", "NBS FIPS 11-1-Sep30/1977")
+        .gsub(/NBS[.\s]CS[.\s]e/, "NBS CS-E ")
         .gsub("NBS CRPL c4-4", "NBS CRPL 4-4")
         .gsub(/(?<=NBS MP )(\d+)\((\d+)\)/, '\1e\2')
         .gsub(/(?<=\d)es/, "(spa)")
