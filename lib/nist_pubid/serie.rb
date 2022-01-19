@@ -4,6 +4,10 @@ module NistPubid
   class Serie
     attr_accessor :serie, :parsed
 
+    EDITION_REGEXP = /(?<=\.)?(?<!Upd\d)(?:\d+-\d+)?
+                     (?<!add|sup)(?<prepend>e-?|Ed\.\s|Edition\s)
+                     (?:(?<year>\d{4})|(?<sequence>\d+[A-Z]?)(?!-))/x.freeze
+
     def initialize(serie:, parsed: nil)
       @serie = serie
       @parsed = parsed
@@ -28,20 +32,28 @@ module NistPubid
       end
     end
 
+    def self.get_class(series, parsed)
+      if SERIES_CLASSES.has_key?(series)
+        SERIES_CLASSES[series].new(serie: series, parsed: parsed)
+      else
+        new(serie: series, parsed: parsed)
+      end
+    end
+
     def self.parse(code, publisher = nil)
       publisher = Publisher.parse(code) if publisher.nil?
 
       serie = /#{SERIES["long"].keys.sort_by(&:length).reverse.join('|')}/.match(code)
-      return new(serie: serie.to_s, parsed: serie.to_s) if serie
+      return get_class(serie.to_s,serie.to_s) if serie
 
       serie = /#{filter_by_publisher(publisher, SERIES["long"]).values.join('|')}/.match(code)
-      return new(serie: filter_by_publisher(publisher, SERIES["long"]).key(serie.to_s), parsed: serie.to_s) if serie
+      return get_class(filter_by_publisher(publisher, SERIES["long"]).key(serie.to_s), serie.to_s) if serie
 
       serie = /#{filter_by_publisher(publisher, SERIES["abbrev"]).values.join('|')}/.match(code)
-      return new(serie: filter_by_publisher(publisher, SERIES["abbrev"]).key(serie.to_s), parsed: serie.to_s) if serie
+      return get_class(filter_by_publisher(publisher, SERIES["abbrev"]).key(serie.to_s), serie.to_s) if serie
 
       serie = /#{SERIES["mr"].values.join('|')}/.match(code)
-      return new(serie: SERIES["mr"].key(serie.to_s), parsed: serie.to_s) if serie
+      return get_class(SERIES["mr"].key(serie.to_s), serie.to_s) if serie
     end
 
     def self.regexp

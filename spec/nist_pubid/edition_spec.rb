@@ -21,8 +21,8 @@ RSpec.describe NistPubid::Edition do
     it { expect(subject.parsed).to eq("e5") }
   end
 
-  context "NISTIR 8115" do
-    let(:short_pubid) { "NISTIR 8115" }
+  context "NIST IR 8115" do
+    let(:short_pubid) { "NIST IR 8115" }
 
     it { expect(subject).to be_nil }
   end

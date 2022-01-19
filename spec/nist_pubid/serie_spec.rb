@@ -32,5 +32,11 @@ RSpec.describe NistPubid::Serie do
         expect(described_class.parse(short_serie, NistPubid::Publisher.new(publisher: "NBS")).to_s(:short)).to eq("NBS MN")
       end
     end
+
+    context "when NIST IR serie" do
+      it "returns NIST IR serie class" do
+        expect(described_class.parse("NIST IR 5672-2018").class).to eq(NistPubid::Series::NistIr)
+      end
+    end
   end
 end

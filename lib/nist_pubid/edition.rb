@@ -25,25 +25,15 @@ module NistPubid
     def self.parse(code, serie = nil)
       serie = Serie.parse(code) if serie.nil?
 
+      return nil if serie.nil?
+
       if ["NIST HB 135-2020", "NIST.HB.135-2020"].include?(code)
         return new(sequence: "2020", parsed: "-2020")
       end
 
-      # remove document number from edition parsing
-      if REGEXPS["code"].key?(serie.to_s)
-        code = code.gsub(REGEXPS["code"][serie.to_s], "")
-      end
-
-      if REGEXPS["edition"].key?(serie.to_s)
-        edition = REGEXPS["edition"][serie.to_s].match(code)
-        parsed = edition&.captures&.join
-      else
-        edition = /(?<=\.)?(?<!Upd\d)(?:\d+-\d+)?
-                 (?<!add|sup)(?<prepend>e-?|Ed\.\s|Edition\s)
-                 (?:(?<year>\d{4})|(?<sequence>\d+[A-Z]?)(?!-))/x.match(code)
-        if edition
-          parsed = edition.captures.join.to_s
-        end
+      edition = serie.class::EDITION_REGEXP.match(code)
+      if edition
+        parsed = edition.captures.join.to_s
       end
 
       return nil if edition.nil? || edition.captures.compact.empty?
