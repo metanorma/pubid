@@ -286,7 +286,35 @@ RSpec.describe NistPubid::Document do
 
     context "parse NIST SP 304a-2017" do
       let(:original_pubid) { "NIST SP 304a-2017" }
-      let(:short_pubid) { "NIST SP 304A-2017" }
+      let(:short_pubid) { "NIST SP 304Ae2017" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 330-2019" do
+      let(:original_pubid) { "NIST SP 330-2019" }
+      let(:short_pubid) { "NIST SP 330e2019" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 777-1990" do
+      let(:original_pubid) { "NIST SP 777-1990" }
+      let(:short_pubid) { "NIST SP 777e1990" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 782-1995-96" do
+      let(:original_pubid) { "NIST SP 782-1995-96" }
+      let(:short_pubid) { "NIST SP 782e1995" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 250-1039" do
+      let(:original_pubid) { "NIST SP 250-1039" }
+      let(:short_pubid) { "NIST SP 250-1039" }
 
       it_behaves_like "converts pubid to different formats"
     end

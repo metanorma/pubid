@@ -21,6 +21,16 @@ RSpec.describe NistPubid::Edition do
     it { expect(subject.parsed).to eq("e5") }
   end
 
+  context "parse NIST SP 304a-2017" do
+    let(:short_pubid) { "NIST SP 304a-2017" }
+
+    it { expect(subject.to_s).to eq("2017") }
+    it { expect(subject.year).to eq(2017) }
+    it { expect(subject.month).to be_nil }
+    it { expect(subject.sequence).to be_nil }
+    it { expect(subject.parsed).to eq("-2017") }
+  end
+
   context "NIST IR 8115" do
     let(:short_pubid) { "NIST IR 8115" }
 
