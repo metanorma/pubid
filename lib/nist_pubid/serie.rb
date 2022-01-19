@@ -8,6 +8,8 @@ module NistPubid
                      (?<!add|sup)(?<prepend>e-?|Ed\.\s|Edition\s)
                      (?:(?<year>\d{4})|(?<sequence>\d+[A-Z]?)(?!-))/x.freeze
 
+    DOCNUMBER_REGEXP = nil
+
     def initialize(serie:, parsed: nil)
       @serie = serie
       @parsed = parsed

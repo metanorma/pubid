@@ -22,24 +22,6 @@ RSpec.describe NistPubid::Document do
       expect(described_class.parse(mr_pubid).to_s(:short)).to eq(short_pubid)
     end
 
-    shared_examples "converts pubid to different formats" do
-      it "converts into long Full PubID" do
-        expect(subject.to_s(:long)).to eq(long_pubid) if long_pubid
-      end
-
-      it "converts into Abbreviated PubID" do
-        expect(subject.to_s(:abbrev)).to eq(abbrev_pubid) if abbrev_pubid
-      end
-
-      it "converts into Short PubID" do
-        expect(subject.to_s(:short)).to eq(short_pubid)
-      end
-
-      it "converts into Machine-readable PubID" do
-        expect(subject.to_s(:mr)).to eq(mr_pubid)
-      end
-    end
-
     context "when NIST SP 800-53r5" do
       let(:long_pubid) do
         "National Institute of Standards and Technology Special Publication"\
@@ -529,13 +511,6 @@ RSpec.describe NistPubid::Document do
     context "NBS CRPL 4-m-5" do
       let(:original_pubid) { "NBS CRPL 4-m-5" }
       let(:short_pubid) { "NBS CRPL 4-M-5" }
-
-      it_behaves_like "converts pubid to different formats"
-    end
-
-    context "NBS HB 44e2-1955" do
-      let(:original_pubid) { "NBS HB 44e2-1955" }
-      let(:short_pubid) { "NBS HB 44-1955e2" }
 
       it_behaves_like "converts pubid to different formats"
     end
