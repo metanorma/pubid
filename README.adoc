@@ -65,6 +65,116 @@ Historic compatibility:
 .. output the original DOI (i.e. store the contents in the object)
 .. output a MR PubID
 
+== CLI conversion tool
+
+We implemented an open-source conversion tool that extracts the required PubID data elements from existing NIST Tech Pubs metadata, such as the legacy identifier, DOI, edition and publication date information, to generate the new PubID.
+`nist-pubid` provides a CLI (Command-Line Interface) and a Ruby library that can be used to create and manipulate PubID objects.
+
+== Installation
+
+The only prerequisite is to have Ruby installed. Please refer to the official https://www.ruby-lang.org/en/documentation/installation/[Ruby installation guide].
+
+The nist-pubid tool can be installed as follows.
+
+[source,sh]
+----
+$ gem install nist-pubid
+----
+
+Now you should be able to use the nist-pubid command.
+
+=== Usage
+
+==== Converting a legacy identifier to NIST PubID (`nist-pubid convert`)
+
+The command nist-pubid provides a convert subcommand that converts a legacy Nist Tech Pubs identifier into the NIST PubID format.
+
+Here’s how it can be used:
+
+----
+$ nist-pubid help convert
+Usage:
+  nist-pubid convert
+
+Options:
+  -s, [--style=STYLE]    # Convert to PubID style (short|long|mr|abbrev)
+                         # Default: short
+  -f, [--format=FORMAT]  # Render in format (JSON, string)
+                         # Default: string
+
+Convert legacy NIST Tech Pubs ID to NIST PubID
+----
+
+----
+$ nist-pubid convert "NIST SP 800-53a"
+NIST SP 800-53A
+$ nist-pubid convert "NIST SP 800-57p1r3"
+NIST SP 800-57pt1r3
+----
+
+The convert command also supports DOI conversion
+----
+$ nist-pubid convert "NIST.SP.800-57p1r3"
+NIST SP 800-57pt1r3
+----
+
+In addition to outputting PubID short style, we can also output other styles and formats of the resulting PubID.
+----
+$ nist-pubid convert -s mr "NIST SP 800-53a"
+NIST.SP.800-53A
+$ nist-pubid convert -s long -f json "NIST SP 800-53a" | jq
+{
+  "styles": {
+    "short": "NIST SP 800-53A",
+    "abbrev": "Natl. Inst. Stand. Technol. Spec. Publ. 800-53A",
+    "long": "National Institute of Standards and Technology Special Publication 800-53A",
+    "mr": "NIST.SP.800-53A"
+  },
+  "publisher": "NIST",
+  "serie": "NIST SP",
+  "code": "800-53A"
+}
+----
+
+==== Generating the bulk NIST Tech Pubs migration report (`nist-pubid report`)
+
+This is the nice part — a single command that generates the full table of converted PubIDs from the NIST Tech Pubs database, comprising of 19,333 entries.
+
+The report command can be used as follows:
+
+----
+$ nist-pubid help report
+Usage:
+  nist-pubid report
+
+Options:
+  [--csv], [--no-csv]  # Export to CSV format
+
+Create report for NIST Tech Pubs database (fetches from GitHub)
+----
+
+The purpose of this command is to aid the NIST PubID team in assessing the impact and type of changes to be made in enacting this new scheme.
+
+By default, the report command generates a table to indicate which migrated identifiers have changed, focusing on changes of two styles:
+
+PubID in short style vs legacy publication ID
+PubID in machine-readable style vs legacy DOI
+As seen in the following output, a ✅ or a - will be shown in the appropriate column of change.
+
+----
+$ nist-pubid report
+ID changed? | New PubID | Document ID | DOI changed? | New PubID-MR | DOI | Title
+ - | NBS BH 1 | NBS BH 1 |  - | NBS.BH.1 | NBS.BH.1 | Recommended minimum requirements for small dwelling construction : report of Building Code Committee July 20, 1922
+ - | NBS BH 10 | NBS BH 10 |  - | NBS.BH.10 | NBS.BH.10 | A city planning primer by the advisory committee on zoning appointed by Secretary Hoover
+ ...
+✅ | NBS BH 3A | NBS BH 3a | ✅ | NBS.BH.3A | NBS.BH.3a | A zoning primer by the advisory committee on zoning appointed by Secretary Hoover (Revised)
+ - | NBS BH 4 | NBS BH 4 |  - | NBS.BH.4 | NBS.BH.4 | How to own your home : a handbook for prospective home owners
+✅ | NBS BH 5A | NBS BH 5a | ✅ | NBS.BH.5A | NBS.BH.5a | A standard state zoning enabling act under which municipalities may adopt zoning regulations by the advisory committee on zoning appointed by Secretary Hoover (revised edition 1926)
+...
+✅ | NBS RPT 2751 | NBS report ; 2751 |  - | NBS.RPT.2751 | NBS.RPT.2751 | Stochastic search for the maximum of a function
+ ...
+✅ | NBS RPT 2831 | NBS report ; 2831 |  - | NBS.RPT.2831 | NBS.RPT.2831 | Error bounds for eigenvalues of symmetric integral equations
+----
 
 == Elements of the PubID
 
