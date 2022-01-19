@@ -31,10 +31,8 @@ module NistPubid
         return new(sequence: "2020", parsed: "-2020")
       end
 
-      edition = serie.class::EDITION_REGEXP.match(code)
-      if edition
-        parsed = edition.captures.join.to_s
-      end
+      edition = serie.parse_edition(code)
+      parsed = edition&.captures&.join&.to_s
 
       return nil if edition.nil? || edition.captures.compact.empty?
 

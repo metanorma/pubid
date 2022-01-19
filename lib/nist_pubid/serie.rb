@@ -58,6 +58,14 @@ module NistPubid
       return get_class(SERIES["mr"].key(serie.to_s), serie.to_s) if serie
     end
 
+    def parse_edition(code)
+      edition = self.class::EDITION_REGEXP.match(code)
+
+      return edition if edition || self.instance_of?(NistPubid::Serie)
+
+      NistPubid::Serie::EDITION_REGEXP.match(code)
+    end
+
     def self.regexp
       /(#{(SERIES["long"].keys + SERIES["mr"].values + SERIES["long"].values
             .map { |v| v.gsub(".", '\.') } + ["NISTIR"])
