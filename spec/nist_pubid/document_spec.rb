@@ -839,6 +839,13 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NIST TN 1297-1993" do
+      let(:original_pubid) { "NIST TN 1297-1993" }
+      let(:short_pubid) { "NIST TN 1297e1993" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "when cannot parse code" do
       it "should raise error" do
         expect { described_class.parse("NIST SP WRONG-CODE") }
