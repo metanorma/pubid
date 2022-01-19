@@ -811,6 +811,14 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NBS CRPL c4-4" do
+      let(:original_pubid) { "NBS CRPL c4-4" }
+      # has doi NBS.FIPS.11-1-Sep30/1977
+      let(:short_pubid) { "NBS CRPL 4-4" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "when cannot parse code" do
       it "should raise error" do
         expect { described_class.parse("NIST SP WRONG-CODE") }
