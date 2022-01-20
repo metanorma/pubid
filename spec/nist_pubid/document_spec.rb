@@ -868,6 +868,34 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NBS CIRC e2" do
+      let(:original_pubid) { "NBS CIRC e2" }
+      let(:short_pubid) { "NBS CIRC 2e2" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CIRC sup" do
+      let(:original_pubid) { "NBS CIRC sup" }
+      let(:short_pubid) { "NBS CIRC 24e7sup" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CIRC supJun1925-Jun1926" do
+      let(:original_pubid) { "NBS CIRC supJun1925-Jun1926" }
+      let(:short_pubid) { "NBS CIRC 24e7sup2" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CIRC supJun1925-Jun1927" do
+      let(:original_pubid) { "NBS CIRC supJun1925-Jun1927" }
+      let(:short_pubid) { "NBS CIRC 24e7sup3" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "when cannot parse code" do
       it "should raise error" do
         expect { described_class.parse("NIST SP WRONG-CODE") }

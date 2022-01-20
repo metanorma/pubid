@@ -1,0 +1,28 @@
+NBS MONO: NBS MN
+NIST MONO: NIST MN
+NIST MP: NBS MP
+NIST SP 304a-2017: NIST SP 304A-2017
+NIST SP 260-162 2006ed.: NIST SP 260-162e2006
+NBS CIRC 154suprev: NBS CIRC 154r1sup
+NIST SP 260-126 rev 2013: NIST SP 260-126r2013
+NIST CSWP: NIST CSRC White Paper
+NIST SP 800-56ar: NIST SP 800-56Ar1
+NIST.LCIRC: NIST.LC
+NBS.LCIRC: NBS.LC
+NISTIR: NIST IR
+NIST.CSWP.01162020pt: NIST.CSWP.01162020(por)
+NBS FIPS 11-1-Sep30: NBS FIPS 11-1-Sep30/1977
+NBS CRPL c4-4: NBS CRPL 4-4
+NBS CIRC e2: NBS CIRC 2e2
+!ruby/regexp /^NIST FIPS(?! PUB)/: NIST FIPS PUB
+!ruby/regexp /^NBS CIRC sup$/: NBS CIRC 24e7sup
+!ruby/regexp /^NBS CIRC supJun1925-Jun1926$/: NBS CIRC 24e7sup2
+!ruby/regexp /^NBS CIRC supJun1925-Jun1927$/: NBS CIRC 24e7sup3
+!ruby/regexp /NBS[.\s]CS[.\s]e/: NBS CS-E
+!ruby/regexp /(?<=NBS MP )(\d+)\((\d+)\)/: \1e\2
+!ruby/regexp /(?<=\d)es/: (spa)
+!ruby/regexp /(?<=\d)chi/: (zho)
+!ruby/regexp /(?<=\d)viet/: (vie)
+!ruby/regexp /(?<=\d)port/: (por)
+!ruby/regexp /(?<=\d)(pt)(?!\d)/: (por)
+!ruby/regexp /(?<=\d)id/: (ind)

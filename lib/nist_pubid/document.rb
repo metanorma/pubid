@@ -1,5 +1,8 @@
 # frozen_string_literal: true
+
 require "json"
+
+UPDATE_CODES = YAML.load_file(File.join(File.dirname(__FILE__), "../../update_codes.yaml"))
 
 REVISION_DESC = {
   long: ", Revision ",
@@ -109,29 +112,10 @@ module NistPubid
     end
 
     def self.update_old_code(code)
-      code = code.gsub("NIST FIPS", "NIST FIPS PUB") unless code.include?("NIST FIPS PUB")
-      code.gsub("NBS MONO", "NBS MN").gsub("NIST MONO", "NIST MN")
-        .gsub("NIST MP", "NBS MP")
-        .gsub("NIST SP 304a-2017", "NIST SP 304A-2017")
-        .gsub("NIST SP 260-162 2006ed.", "NIST SP 260-162e2006")
-        .gsub("NBS CIRC 154suprev", "NBS CIRC 154r1sup")
-        .gsub("NIST SP 260-126 rev 2013", "NIST SP 260-126r2013")
-        .gsub("NIST CSWP", "NIST CSRC White Paper")
-        .gsub("NIST SP 800-56ar", "NIST SP 800-56Ar1")
-        .gsub("NIST.LCIRC", "NIST.LC")
-        .gsub("NBS.LCIRC", "NBS.LC")
-        .gsub("NISTIR", "NIST IR")
-        .gsub("NIST.CSWP.01162020pt", "NIST.CSWP.01162020(por)")
-        .gsub("NBS FIPS 11-1-Sep30", "NBS FIPS 11-1-Sep30/1977")
-        .gsub(/NBS[.\s]CS[.\s]e/, "NBS CS-E ")
-        .gsub("NBS CRPL c4-4", "NBS CRPL 4-4")
-        .gsub(/(?<=NBS MP )(\d+)\((\d+)\)/, '\1e\2')
-        .gsub(/(?<=\d)es/, "(spa)")
-        .gsub(/(?<=\d)chi/, "(zho)")
-        .gsub(/(?<=\d)viet/, "(vie)")
-        .gsub(/(?<=\d)port/, "(por)")
-        .gsub(/(?<=\d)(pt)(?!\d)/, "(por)")
-        .gsub(/(?<=\d)id/, "(ind)")
+      UPDATE_CODES.each do |from, to|
+        code = code.gsub(from, to)
+      end
+      code
     end
 
     def self.parse(code)

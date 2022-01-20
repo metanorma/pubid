@@ -74,9 +74,17 @@ RSpec.describe NistPubid::NistTechPubs, vcr: true do
   end
 
   describe "#parse_fail_with_pubid" do
+    before do
+      described_class.documents = [
+        { id: "NBS CIRC e",
+          doi: "NBS.CIRC.e",
+          title: "NBS CIRC e" },
+      ]
+    end
+
     it "returns identifiers fail to parse" do
       expect(described_class.parse_fail_with_pubid.map { |d| d[:id] })
-        .to include("NBS CIRC e2")
+        .to include("NBS CIRC e")
     end
   end
 
@@ -109,8 +117,8 @@ RSpec.describe NistPubid::NistTechPubs, vcr: true do
     end
 
     context "when cannot parse id and doi" do
-      let(:id) { "NBS CIRC e2" }
-      let(:doi) { "NBS.CIRC.e2" }
+      let(:id) { "NBS CIRC e" }
+      let(:doi) { "NBS.CIRC.e" }
 
       it do
         is_expected
