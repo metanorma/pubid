@@ -66,6 +66,43 @@ module NistPubid
       NistPubid::Serie::EDITION_REGEXP.match(code)
     end
 
+    def parse_docnumber(code, code_original)
+      localities = "[Pp]t\\d+|r(?:\\d+|[A-Za-z]?)|e\\d+|p|v|sec\\d+|inde?x|err(?:ata)?|ins(?:ert)|app|ins?"
+      excluded_parts = "(?!#{localities}|supp?)"
+
+      if self.class::DOCNUMBER_REGEXP
+        docnumber = self.class::DOCNUMBER_REGEXP.match(code_original)&.captures&.join
+
+        return docnumber if docnumber || self.instance_of?(NistPubid::Serie)
+      end
+
+      docnumber ||=
+        /(?:#{parsed.gsub(" ", "(?:\s|\.)")})(?:\s|\.)?([0-9]+)(?:#{localities})(-[0-9]+)?/
+          .match(code)&.captures&.join
+
+      docnumber ||=
+        /(?:#{parsed.gsub(" ", "(?:\s|\.)")})(?:\s|\.)? # match serie
+          ([0-9]+ # first part of report number
+            (?:#{excluded_parts}[A-Za-z]+)? # with letter but without localities
+            (?:-m)? # for NBS CRPL 4-m-5
+            (?:-[A-Za]+)? # for NIST SP 1075-NCNR, NIST SP 1113-BFRL, NIST IR 6529-a
+            (?:-[0-9.]+)? # second part
+            (?:
+              (?: # only big letter
+                (#{excluded_parts}[A-Z]|(?![a-z]))+|#{excluded_parts}[a-z]?|#{excluded_parts}[a-z]+
+              )? # or small letter but without localities
+            )
+          )/x.match(code)&.[](1)&.upcase
+
+      unless docnumber
+        raise Errors::ParseError.new(
+          "failed to parse document identifier for #{code}",
+        )
+      end
+
+      docnumber
+    end
+
     def self.regexp
       /(#{(SERIES["long"].keys + SERIES["mr"].values + SERIES["long"].values
             .map { |v| v.gsub(".", '\.') } + ["NISTIR"])

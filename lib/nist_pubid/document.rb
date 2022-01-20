@@ -187,7 +187,7 @@ module NistPubid
 
       matches[:revision] = nil if matches[:addendum]
 
-      matches[:docnumber] = parse_docnumber(matches[:serie], code, code_original)
+      matches[:docnumber] = matches[:serie].parse_docnumber(code, code_original)
 
       # NIST GCR documents often have a 3-part identifier -- the last part is
       # not revision but is part of the identifier.
@@ -201,47 +201,6 @@ module NistPubid
       matches[:translation] = match(/(?<=\()\w{3}(?=\))/, code)
 
       new(**matches)
-    end
-
-    def self.parse_docnumber(serie, code, code_original)
-      localities = "[Pp]t\\d+|r(?:\\d+|[A-Za-z]?)|e\\d+|p|v|sec\\d+|inde?x|err(?:ata)?|ins(?:ert)|app|ins?"
-      excluded_parts = "(?!#{localities}|supp?)"
-
-      if ["NBS CSM", "NBS CS"].include?(serie.parsed)
-        docnumber = /v(\d+)n(\d+)/.match(code).to_a[1..-1]&.join("-")
-      else
-        if serie.class::DOCNUMBER_REGEXP
-          docnumber = serie.class::DOCNUMBER_REGEXP.match(code_original)&.captures&.join
-        end
-
-        # match docnumbers with localities in the first part, like NBS CIRC 11e2-1915
-        docnumber ||=
-          /(?:#{serie.parsed.gsub(" ", "(?:\s|\.)")})(?:\s|\.)?([0-9]+)(?:#{localities})(-[0-9]+)?/
-            .match(code)&.captures&.join
-
-        docnumber ||=
-          /(?:#{serie.parsed.gsub(" ", "(?:\s|\.)")})(?:\s|\.)? # match serie
-           ([0-9]+ # first part of report number
-             (?:#{excluded_parts}[A-Za-z]+)? # with letter but without localities
-             (?:-m)? # for NBS CRPL 4-m-5
-             (?:-[A-Za]+)? # for NIST SP 1075-NCNR, NIST SP 1113-BFRL, NIST IR 6529-a
-             (?:-[0-9.]+)? # second part
-             (?:
-               (?: # only big letter
-                 (#{excluded_parts}[A-Z]|(?![a-z]))+|#{excluded_parts}[a-z]?|#{excluded_parts}[a-z]+
-               )? # or small letter but without localities
-             )
-           )/x
-            .match(code)&.[](1)&.upcase
-      end
-
-      unless docnumber
-        raise Errors::ParseError.new(
-          "failed to parse document identifier for #{code}",
-        )
-      end
-
-      docnumber
     end
 
     def self.match(regex, code)

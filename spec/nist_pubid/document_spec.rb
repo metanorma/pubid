@@ -277,6 +277,13 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NBS CSM 1" do
+      let(:original_pubid) { "NBS CSM 1" }
+      let(:short_pubid) { "NBS CSM 1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "parse NIST SP 1190GB-1" do
       let(:original_pubid) { "NIST SP 1190GBe1" }
       let(:short_pubid) { "NIST SP 1190GBe1" }

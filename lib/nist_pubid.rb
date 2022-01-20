@@ -10,6 +10,7 @@ require_relative "nist_pubid/series/fips_pub"
 require_relative "nist_pubid/series/nbs_fips"
 require_relative "nist_pubid/series/nist_tn"
 require_relative "nist_pubid/series/nist_sp"
+require_relative "nist_pubid/series/nbs_csm"
 
 SERIES_CLASSES = NistPubid::Series.constants.select do |c|
   NistPubid::Series.const_get(c).is_a?(Class)
