@@ -8,6 +8,13 @@ This gem implements a mechanism to parse and utilize NIST publication identifier
 provided in the https://github.com/usnistgov/NIST-Tech-Pubs[NIST-Tech-Pubs]
 repository.
 
+This gem is introduced in the Metanorma blog post
+https://www.metanorma.org/blog/2022-01-09-nist-pubid/["Introducing NIST PubID, and the migration of publication identifiers"] on 2022-01-09.
+
+For further details on the Metanorma work on the NIST PubID, refer to the
+https://riboseinc.github.io/report-nist-pubid/["Ribose comments to Publication Identifier Syntax for NIST Technical Series Publications"]
+document.
+
 == Historic identifier patterns
 
 There are at least three major "pattern series" of identifiers due to historical
@@ -85,12 +92,40 @@ Now you should be able to use the nist-pubid command.
 
 === Usage
 
-==== Converting a legacy identifier to NIST PubID (`nist-pubid convert`)
+=== Installation
 
-The command nist-pubid provides a convert subcommand that converts a legacy Nist Tech Pubs identifier into the NIST PubID format.
+The only prerequisite is to have Ruby installed. Please refer to the
+https://www.ruby-lang.org/en/documentation/installation/[official Ruby installation guide].
 
-Here’s how it can be used:
+The `nist-pubid` tool can be installed as follows.
 
+[source,sh]
+----
+$ gem install nist-pubid
+----
+
+Now you should be able to use the `nist-pubid` command.
+
+When called without arguments (or as `nist-pubid help`) the help screen will
+be shown.
+
+[source,sh]
+----
+$ nist-pubid
+Commands:
+  nist-pubid convert         # Convert legacy NIST Tech Pubs ID to NIST PubID
+  nist-pubid help [COMMAND]  # Describe available commands or one specific command
+  nist-pubid report          # Create report for NIST Tech Pubs database (fetches from GitHub)
+----
+
+=== Converting a legacy identifier to NIST PubID
+
+The command `nist-pubid` provides a `convert` subcommand that converts a legacy
+Nist Tech Pubs identifier into the NIST PubID format.
+
+Here's how it can be used:
+
+[source,sh]
 ----
 $ nist-pubid help convert
 Usage:
@@ -105,6 +140,7 @@ Options:
 Convert legacy NIST Tech Pubs ID to NIST PubID
 ----
 
+[source,sh]
 ----
 $ nist-pubid convert "NIST SP 800-53a"
 NIST SP 800-53A
@@ -112,13 +148,18 @@ $ nist-pubid convert "NIST SP 800-57p1r3"
 NIST SP 800-57pt1r3
 ----
 
-The convert command also supports DOI conversion
+The `convert` command also supports DOI conversion.
+
+[source,sh]
 ----
 $ nist-pubid convert "NIST.SP.800-57p1r3"
 NIST SP 800-57pt1r3
 ----
 
-In addition to outputting PubID short style, we can also output other styles and formats of the resulting PubID.
+In addition to outputting PubID short style, we can also output other styles
+and formats of the resulting PubID.
+
+[source,sh]
 ----
 $ nist-pubid convert -s mr "NIST SP 800-53a"
 NIST.SP.800-53A
@@ -136,12 +177,15 @@ $ nist-pubid convert -s long -f json "NIST SP 800-53a" | jq
 }
 ----
 
-==== Generating the bulk NIST Tech Pubs migration report (`nist-pubid report`)
+=== Generating the bulk NIST Tech Pubs migration report
 
-This is the nice part — a single command that generates the full table of converted PubIDs from the NIST Tech Pubs database, comprising of 19,333 entries.
+This is the nice part -- a single command that generates the full table of
+converted PubIDs from the NIST Tech Pubs database, comprising of 19,333
+entries.
 
-The report command can be used as follows:
+The `report` command can be used as follows:
 
+[source,sh]
 ----
 $ nist-pubid help report
 Usage:
@@ -153,14 +197,19 @@ Options:
 Create report for NIST Tech Pubs database (fetches from GitHub)
 ----
 
-The purpose of this command is to aid the NIST PubID team in assessing the impact and type of changes to be made in enacting this new scheme.
+The purpose of this command is to aid the NIST PubID team in assessing the
+impact and type of changes to be made in enacting this new scheme.
 
-By default, the report command generates a table to indicate which migrated identifiers have changed, focusing on changes of two styles:
+By default, the `report` command generates a table to indicate which migrated
+identifiers have changed, focusing on changes of two styles:
 
-PubID in short style vs legacy publication ID
-PubID in machine-readable style vs legacy DOI
-As seen in the following output, a ✅ or a - will be shown in the appropriate column of change.
+* PubID in short style vs legacy publication ID
+* PubID in machine-readable style vs legacy DOI
 
+As seen in the following output, a `✅` or a `-` will be shown in the appropriate
+column of change.
+
+[source,sh]
 ----
 $ nist-pubid report
 ID changed? | New PubID | Document ID | DOI changed? | New PubID-MR | DOI | Title
@@ -175,6 +224,47 @@ ID changed? | New PubID | Document ID | DOI changed? | New PubID-MR | DOI | Titl
  ...
 ✅ | NBS RPT 2831 | NBS report ; 2831 |  - | NBS.RPT.2831 | NBS.RPT.2831 | Error bounds for eigenvalues of symmetric integral equations
 ----
+
+
+Better yet, the `report` command supports CSV output. The "changes" fields
+will display `true` or `false` accordingly.
+
+[source,sh]
+----
+$ nist-pubid report --csv
+ID changed?,New PubID,Document ID,DOI changed?,New PubID-MR,DOI,Title
+false,NBS BH 1,NBS BH 1,false,NBS.BH.1,NBS.BH.1,"Recommended minimum requirements for small dwelling construction : report of Building Code Committee July 20, 1922"
+false,NBS BH 10,NBS BH 10,false,NBS.BH.10,NBS.BH.10,A city planning primer by the advisory committee on zoning appointed by Secretary Hoover
+false,NBS BH 11,NBS BH 11,false,NBS.BH.11,NBS.BH.11,A standard city planning enabling act by the advisory committee on city planning and zoning appointed by secretary Hoover
+...
+true,NIST SP 260-214,NIST SP 260-14,false,NIST.SP.260-214,NIST.SP.260-214,"Analysis of Seafood Reference Materials: RM 8256, RM 8257, RM 8258 and RM 8259, Wild-Caught Coho Salmon (RM 8256), Aquacultured Coho Salmon (RM 8257), Wild-Caught Shrimp (RM 8258), Aquacultured Shrimp (RM 8259)"
+false,NIST SP 260-14,NIST SP 260-14,false,NIST.SP.260-14,NIST.SP.260-14,"Analysis of Seafood Reference Materials: RM 8256, RM 8257, RM 8258 and RM 8259, Wild-Caught Coho Salmon (RM 8256), Aquacultured Coho Salmon (RM 8257), Wild-Caught Shrimp (RM 8258), Aquacultured Shrimp (RM 8259)"
+true,NIST IR 8379,NISTIR 8379,false,NIST.IR.8379,NIST.IR.8379,Summary Report for the Virtual Workshop Addressing Public Comment on NIST Cybersecurity for IoT Guidance
+----
+
+
+The best part is that this CSV will work properly with spreadsheet editors like
+Excel and Pages.
+All you need is to export the CSV values to a CSV file, and open it in your
+favorite program.
+
+[source,sh]
+----
+$ nist-pubid report --csv > myreport.csv
+----
+
+It is easy to filter these columns in Microsoft Excel with the following steps:
+
+. Open the CSV file in Excel
+. Convert the header row into a filter row:
+  first highlight the header row, then click on "Data > Filter"
+. Filter the columns accordingly
+
+.PubID conversion report, showing mapping between legacy publication identifiers and NIST PubIDs
+image::/assets/blog/2022-01-09_2.png[PubID conversion report, showing mapping between legacy publication identifiers and NIST PubIDs]
+
+Now it's easy to screen through the anomalies and surface the data issues!
+
 
 == Elements of the PubID
 
@@ -635,22 +725,3 @@ Some examples:
 ** NIST HB 130e2019
 ** NIST SP 1041r1/Upd 1:2012
 ** NIST NCSTAR 1-1Cv1
-
-
-== Addendum
-
-NIST SP 800-38A has an Addendum.
-
-In NIST MR let's call this part add-X, e.g. "NIST SP 800-38A Addendum" =>
-`NIST.SP.800-38A.pt-A.add-1`
-
-. Full form title: "Addendum to {publisher} {series} {reportnumber} {part | volume}, {edition}"
-
-. Abbreviated form title: "Add. to {abbrev(publisher)} {abbrev(series)} {reportnumber} {part | abbrev(volume)}, {abbrev(edition)}"
-
-. Short form title: "{short(series)} {reportnumber} {part | abbrev(volume)}, {abbrev(edition)} Addendum"
-
-. Machine-readable form NIST.SP.800-38A.pt-A.add-1
-
-Originally from https://github.com/metanorma/metanorma-nist/issues/259.
-
