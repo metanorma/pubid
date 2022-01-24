@@ -126,8 +126,6 @@ module NistPubid
         version:
           /(?<=\.)?(?:(?:ver)((?(1)[-\d]|[.\d])+|\d+)|(?:v)(\d+\.[.\d]+))/
             .match(code).to_a[1..-1]&.compact&.first&.gsub(/-/, "."),
-        revision: /(?:[\daA-Z](?:r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))|, Revision )([\da]+)/
-          .match(code)&.[](2),
         addendum: match(/(?<=(\.))?(add(?:-\d+)?|Addendum)/, code),
         section: /(?<=sec)\d+/.match(code)&.to_s,
         appendix: /\d+app/.match(code)&.to_s,
@@ -147,8 +145,9 @@ module NistPubid
       code_original = code
       code = code.gsub(matches[:edition].parsed, "") if matches[:edition]
 
-      matches[:revision] = /(?:[\daA-Z](?:r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))|, Revision )([\da]+)/
+      matches[:revision] = /(?:[\daA-Z](?:r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))|, Revision )([\da]+|$)/
         .match(code)&.[](2)
+      matches[:revision] = "1" if matches[:revision] && matches[:revision].empty?
 
       matches[:supplement] = matches[:serie].parse_supplement(code)
 
