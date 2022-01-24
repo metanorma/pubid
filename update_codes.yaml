@@ -14,12 +14,14 @@ NIST.CSWP.01162020pt: NIST.CSWP.01162020(por)
 NBS FIPS 11-1-Sep30: NBS FIPS 11-1-Sep30/1977
 NBS CRPL c4-4: NBS CRPL 4-4
 NBS CIRC e2: NBS CIRC 2e2
+NIST AMS 300-8r1 (February 2021 update): NIST AMS 300-8r1/Upd1-201502
+# add missing update dates
+NIST IR 8115r1-upd: NIST IR 8115r1/Upd1-202103
+NIST SP 500-300-upd: NIST SP 500-300/Upd1-202105
+NIST TN 2150-upd: NIST TN 2150/Upd1-202102
+NIST IR 8170-upd: NIST IR 8170/Upd1-202003
 !ruby/regexp /^NIST FIPS(?! PUB)/: NIST FIPS PUB
-#!ruby/regexp /^NBS CIRC sup$/: NBS CIRC 24e7sup
-#!ruby/regexp /^NBS CIRC supJun1925-Jun1926$/: NBS CIRC 24e7sup2
-#!ruby/regexp /^NBS CIRC supJun1925-Jun1927$/: NBS CIRC 24e7sup3
 !ruby/regexp /NBS[.\s]CS[.\s]e/: NBS CS-E
-#!ruby/regexp /(?<=NBS MP )(\d+)\((\d+)\)/: \1e\2
 !ruby/regexp /(?<=\d)es/: (spa)
 !ruby/regexp /(?<=\d)chi/: (zho)
 !ruby/regexp /(?<=\d)viet/: (vie)
