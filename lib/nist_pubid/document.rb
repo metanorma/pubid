@@ -155,7 +155,6 @@ module NistPubid
 
       (matches[:update_number], matches[:update_year]) = update if update
 
-
       unless matches[:stage].nil?
         code = code.gsub(matches[:stage].original_code, "")
       end
@@ -258,7 +257,7 @@ module NistPubid
 
       if update_number.match?(/\d+/)
         update_text = update_number
-        update_text += "-#{update_year}" if update_year
+        update_text += "-#{update_year}" if update_year && !update_year.empty?
       else
         update_text = "1"
       end
