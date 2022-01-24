@@ -78,7 +78,7 @@ module NistPubid
       return nil if edition.nil? || edition.captures.compact.empty?
 
       if edition.named_captures.key?("date_with_month") && edition[:date_with_month]
-        date = Date.parse(edition[:date_with_month])
+        date = Date.parse("01/" + edition[:date_with_month])
         { month: date.month, year: date.year, parsed: "-#{edition.captures.join}" }
       elsif edition.named_captures.key?("date_with_day") && edition[:date_with_day]
         date = Date.parse(edition[:date_with_day])
