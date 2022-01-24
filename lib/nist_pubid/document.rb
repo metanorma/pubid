@@ -145,7 +145,7 @@ module NistPubid
       code_original = code
       code = code.gsub(matches[:edition].parsed, "") if matches[:edition]
 
-      matches[:revision] = /(?:[\daA-Z](?:r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))|, Revision )([\da]+|$)/
+      matches[:revision] = /(?:[\daA-Z](?:rev|r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))|, Revision )([\da]+|$|\w+\d{4})/
         .match(code)&.[](2)
       matches[:revision] = "1" if matches[:revision] && matches[:revision].empty?
 
@@ -234,9 +234,9 @@ module NistPubid
     def render_edition(format)
       result = ""
 
-      result += "#{REVISION_DESC[format]}#{revision.to_s.upcase}" if revision
-      result += "#{VERSION_DESC[format]}#{version}" unless version.nil?
       result += "#{EDITION_DESC[format]}#{edition.to_s}" unless edition.nil?
+      result += "#{REVISION_DESC[format]}#{revision.to_s}" if revision
+      result += "#{VERSION_DESC[format]}#{version}" unless version.nil?
       result
     end
 
