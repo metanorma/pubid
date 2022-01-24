@@ -26,8 +26,8 @@ RSpec.describe NistPubid::NistTechPubs, vcr: true do
     end
 
     it "keeps correct NIST PubID the same" do
-      expect(described_class.convert({ id: "NIST SP 800-133r2e2" }).to_s)
-        .to eq("NIST SP 800-133r2e2")
+      expect(described_class.convert({ id: "NIST SP 800-133r2" }).to_s)
+        .to eq("NIST SP 800-133r2")
       expect(described_class.convert({ id: "NIST SP 800-160v1" }).to_s)
         .to eq("NIST SP 800-160v1")
     end
@@ -46,8 +46,8 @@ RSpec.describe NistPubid::NistTechPubs, vcr: true do
 
     it "combines data from id and doi" do
       expect(described_class.convert(
-               { id: "NIST SP 260-162r1", doi: "NIST SP 260-162 2006ed." },
-             ).to_s).to eq("NIST SP 260-162r1e2006")
+        { id: "NIST SP 260-162r1", doi: "NIST SP 260-162 2006ed." },
+      ).to_s).to eq("NIST SP 260-162e2006r1")
     end
 
     context "when doi code is wrong" do

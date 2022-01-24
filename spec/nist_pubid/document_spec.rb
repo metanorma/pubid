@@ -335,7 +335,7 @@ RSpec.describe NistPubid::Document do
 
     context "parse NIST SP 800-22r1a" do
       let(:original_pubid) { "NIST SP 800-22r1a" }
-      let(:short_pubid) { "NIST SP 800-22r1A" }
+      let(:short_pubid) { "NIST SP 800-22r1a" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -585,7 +585,7 @@ RSpec.describe NistPubid::Document do
 
     context "NIST SP 800-27ra" do
       let(:original_pubid) { "NIST SP 800-27ra" }
-      let(:short_pubid) { "NIST SP 800-27rA" }
+      let(:short_pubid) { "NIST SP 800-27ra" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -917,6 +917,20 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NBS CIRC 13e2revJune1908" do
+      let(:original_pubid) { "NBS CIRC 13e2revJune1908" }
+      let(:short_pubid) { "NBS CIRC 13e2rJune1908" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST IR 4743rJun1992" do
+      let(:original_pubid) { "NIST IR 4743rJun1992" }
+      let(:short_pubid) { "NIST IR 4743rJun1992" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "when cannot parse code" do
       it "should raise error" do
         expect { described_class.parse("NIST SP WRONG-CODE") }
@@ -948,7 +962,7 @@ RSpec.describe NistPubid::Document do
     it "merges two documents" do
       expect(described_class.parse("NIST SP 260-162r1").merge(
         described_class.parse("NIST SP 260-162 2006ed.")
-      ).to_s(:short)).to eq("NIST SP 260-162r1e2006")
+      ).to_s(:short)).to eq("NIST SP 260-162e2006r1")
     end
   end
 end
