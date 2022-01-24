@@ -135,10 +135,14 @@ module NistPubid
         appendix: /\d+app/.match(code)&.to_s,
         errata: /-errata|\d+err(?:ata)?/.match(code)&.to_s,
         index: /\d+index|\d+indx/.match(code)&.to_s,
-        insert: /\d+ins(?:ert)?/.match(code)&.to_s
+        insert: /\d+ins(?:ert)?/.match(code)&.to_s,
       }
 
       matches[:serie] = Serie.parse(code, matches[:publisher])
+      unless matches[:serie]
+        raise Errors::ParseError.new("failed to parse serie for #{code}")
+      end
+
       matches[:edition] = Edition.parse(code, matches[:serie])
 
       code_original = code
@@ -147,19 +151,12 @@ module NistPubid
       matches[:revision] = /(?:[\daA-Z](?:r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))|, Revision )([\da]+)/
         .match(code)&.[](2)
 
-      supplement = /(?:(?:supp?)-?(\d*)|Supplement|Suppl.)/
-        .match(code)
-      unless supplement.nil?
-        matches[:supplement] = supplement[1].nil? ? "" : supplement[1]
-      end
+      matches[:supplement] = matches[:serie].parse_supplement(code)
 
       update = code.scan(/((?<=Upd|Update )\s?[\d:]+|-upd)-?(\d*)/).first
 
       (matches[:update_number], matches[:update_year]) = update if update
 
-      unless matches[:serie]
-        raise Errors::ParseError.new("failed to parse serie for #{code}")
-      end
 
       unless matches[:stage].nil?
         code = code.gsub(matches[:stage].original_code, "")

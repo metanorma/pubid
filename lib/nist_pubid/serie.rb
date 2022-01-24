@@ -9,6 +9,7 @@ module NistPubid
                      (?:(?<year>\d{4})|(?<sequence>\d+[A-Z]?)(?!-))/x.freeze
 
     DOCNUMBER_REGEXP = nil
+    SUPPLEMENT_REGEXP = /(?:(?:supp?)-?(\d*)|Supplement|Suppl.)/.freeze
 
     def initialize(serie:, parsed: nil)
       @serie = serie
@@ -46,7 +47,7 @@ module NistPubid
       publisher = Publisher.parse(code) if publisher.nil?
 
       serie = /#{SERIES["long"].keys.sort_by(&:length).reverse.join('|')}/.match(code)
-      return get_class(serie.to_s,serie.to_s) if serie
+      return get_class(serie.to_s, serie.to_s) if serie
 
       serie = /#{filter_by_publisher(publisher, SERIES["long"]).values.join('|')}/.match(code)
       return get_class(filter_by_publisher(publisher, SERIES["long"]).key(serie.to_s), serie.to_s) if serie
@@ -61,9 +62,25 @@ module NistPubid
     def parse_edition(code)
       edition = self.class::EDITION_REGEXP.match(code)
 
-      return edition if edition || self.instance_of?(NistPubid::Serie)
+      if !edition && !self.instance_of?(NistPubid::Serie)
+        edition = NistPubid::Serie::EDITION_REGEXP.match(code)
+      end
 
-      NistPubid::Serie::EDITION_REGEXP.match(code)
+      parsed = edition&.captures&.join&.to_s
+
+      return nil if edition.nil? || edition.captures.compact.empty?
+
+      if edition.named_captures.key?("date_with_month") && edition[:date_with_month]
+        date = Date.parse(edition[:date_with_month])
+        { month: date.month, year: date.year, parsed: "-#{edition.captures.join}" }
+      elsif edition.named_captures.key?("date_with_day") && edition[:date_with_day]
+        date = Date.parse(edition[:date_with_day])
+        { day: date.day, month: date.month, year: date.year, parsed: "-#{edition.captures.join}" }
+      elsif edition.named_captures.key?("year") && edition[:year]
+        { year: edition[:year].to_i, parsed: parsed }
+      else
+        { sequence: edition[:sequence], parsed: parsed }
+      end
     end
 
     def parse_docnumber(code, code_original)
@@ -101,6 +118,13 @@ module NistPubid
       end
 
       docnumber
+    end
+
+    def parse_supplement(code)
+      supplement = self.class::SUPPLEMENT_REGEXP.match(code)
+      return nil unless supplement
+
+      supplement[1].nil? ? "" : supplement[1]
     end
 
     def self.regexp

@@ -32,21 +32,9 @@ module NistPubid
       end
 
       edition = serie.parse_edition(code)
-      parsed = edition&.captures&.join&.to_s
+      return new(**edition) unless edition.nil?
 
-      return nil if edition.nil? || edition.captures.compact.empty?
-
-      if edition.named_captures.key?("date_with_month") && edition[:date_with_month]
-        date = Date.parse(edition[:date_with_month])
-        new(month: date.month, year: date.year, parsed: "-#{edition.captures.join}")
-      elsif edition.named_captures.key?("date_with_day") && edition[:date_with_day]
-        date = Date.parse(edition[:date_with_day])
-        new(day: date.day, month: date.month, year: date.year, parsed: "-#{edition.captures.join}")
-      elsif edition.named_captures.key?("year") && edition[:year]
-        new(year: edition[:year].to_i, parsed: parsed)
-      else
-        new(sequence: edition[:sequence], parsed: parsed)
-      end
+      nil
     end
   end
 end
