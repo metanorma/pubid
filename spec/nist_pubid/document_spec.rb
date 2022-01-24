@@ -385,8 +385,8 @@ RSpec.describe NistPubid::Document do
 
     context "NIST SP 500-300-upd" do
       let(:original_pubid) { "NIST SP 500-300-upd" }
-      let(:short_pubid) { "NIST SP 500-300/Upd1" }
-      let(:mr_pubid) { "NIST.SP.500-300.u1" }
+      let(:short_pubid) { "NIST SP 500-300/Upd1-202105" }
+      let(:mr_pubid) { "NIST.SP.500-300.u1-202105" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -919,16 +919,32 @@ RSpec.describe NistPubid::Document do
 
     context "NIST AMS 300-8r1 (February 2021 update)" do
       let(:original_pubid) { "NIST AMS 300-8r1 (February 2021 update)" }
-      let(:short_pubid) { "NIST AMS 300-8r1/Upd2-2015" }
-      let(:mr_pubid) { "NIST.AMS.300-8r1.u2-2015" }
+      let(:short_pubid) { "NIST AMS 300-8r1/Upd1-201502" }
+      let(:mr_pubid) { "NIST.AMS.300-8r1.u1-201502" }
 
       it_behaves_like "converts pubid to different formats"
     end
 
     context "NISTIR 8115r1/upd" do
-      let(:original_pubid) { "NISTIR 8115r1/upd" }
-      let(:short_pubid) { "NIST IR 8115r1/Upd1" }
-      let(:mr_pubid) { "NIST.IR.8115r1.u1" }
+      let(:original_pubid) { "NISTIR 8115r1-upd" }
+      let(:short_pubid) { "NIST IR 8115r1/Upd1-202103" }
+      let(:mr_pubid) { "NIST.IR.8115r1.u1-202103" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NISTIR 8170-upd" do
+      let(:original_pubid) { "NISTIR 8170-upd" }
+      let(:short_pubid) { "NIST IR 8170/Upd1-202003" }
+      let(:mr_pubid) { "NIST.IR.8170.u1-202003" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST TN 2150-upd" do
+      let(:original_pubid) { "NIST TN 2150-upd" }
+      let(:short_pubid) { "NIST TN 2150/Upd1-202102" }
+      let(:mr_pubid) { "NIST.TN.2150.u1-202102" }
 
       it_behaves_like "converts pubid to different formats"
     end
