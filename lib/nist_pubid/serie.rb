@@ -47,6 +47,10 @@ module NistPubid
     def self.parse(code, publisher = nil)
       publisher = Publisher.parse(code) if publisher.nil?
 
+      ObjectSpace.each_object(NistPubid::Serie.singleton_class) do |klass|
+        return klass.parse(code) if klass.methods.include?(:match?) && klass.match?(code)
+      end
+
       serie = /#{SERIES["long"].keys.sort_by(&:length).reverse.join('|')}/.match(code)
       return get_class(serie.to_s, serie.to_s) if serie
 
@@ -58,6 +62,8 @@ module NistPubid
 
       serie = /#{SERIES["mr"].values.join('|')}/.match(code)
       return get_class(SERIES["mr"].key(serie.to_s), serie.to_s) if serie
+
+      nil
     end
 
     def parse_edition(code)

@@ -159,7 +159,7 @@ module NistPubid
         code = code.gsub(matches[:stage].original_code, "")
       end
 
-      unless ["NBS CSM", "NBS CS"].include?(matches[:serie].to_s)
+      unless ["NBS CSM", "NBS CS", "NBS RPT"].include?(matches[:serie].to_s)
         matches[:volume] = /(?<=(\.))?v(?(1)-)(\d+)(?!\.\d+)/.match(code)&.[](2)
       end
 

@@ -433,10 +433,11 @@ RSpec.describe NistPubid::Document do
     end
 
     context "NBS report ; 8079" do
-      it "should raise error" do
-        expect { described_class.parse("NBS report ; 8079") }
-          .to raise_error(NistPubid::Errors::ParseError)
-      end
+      let(:original_pubid) { "NBS report ; 8079" }
+      let(:short_pubid) { "NBS RPT 8079" }
+      let(:mr_pubid) { "NBS.RPT.8079" }
+
+      it_behaves_like "converts pubid to different formats"
     end
 
     context "NBS.RPT.8079" do
@@ -959,6 +960,27 @@ RSpec.describe NistPubid::Document do
       let(:original_pubid) { "NIST TN 2150-upd" }
       let(:short_pubid) { "NIST TN 2150/Upd1-202102" }
       let(:mr_pubid) { "NIST.TN.2150.u1-202102" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS report ; Oct-Dec1950" do
+      let(:original_pubid) { "NBS report ; Oct-Dec1950" }
+      let(:short_pubid) { "NBS RPT Oct-Dec1950" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS RPT ADHOC" do
+      let(:original_pubid) { "NBS RPT ADHOC" }
+      let(:short_pubid) { "NBS RPT ADHOC" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS report ; div9" do
+      let(:original_pubid) { "NBS report ; div9" }
+      let(:short_pubid) { "NBS RPT div9" }
 
       it_behaves_like "converts pubid to different formats"
     end
