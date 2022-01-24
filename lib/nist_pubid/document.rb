@@ -123,8 +123,6 @@ module NistPubid
       matches = {
         publisher: Publisher.parse(code),
         stage: Stage.parse(code),
-        part: /(?<=(\.))?(?<![a-z])+(?:pt|Pt|p)(?(1)-)([A-Z\d]+)/.match(code)
-                &.[](2),
         version:
           /(?<=\.)?(?:(?:ver)((?(1)[-\d]|[.\d])+|\d+)|(?:v)(\d+\.[.\d]+))/
             .match(code).to_a[1..-1]&.compact&.first&.gsub(/-/, "."),
@@ -143,6 +141,7 @@ module NistPubid
         raise Errors::ParseError.new("failed to parse serie for #{code}")
       end
 
+      matches[:part] = matches[:serie].parse_part(code)
       matches[:edition] = Edition.parse(code, matches[:serie])
 
       code_original = code

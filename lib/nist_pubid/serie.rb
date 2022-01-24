@@ -10,6 +10,7 @@ module NistPubid
 
     DOCNUMBER_REGEXP = nil
     SUPPLEMENT_REGEXP = /(?:(?:supp?)-?(\d*)|Supplement|Suppl.)/.freeze
+    PART_REGEXP = /(?<=\.)?(?<![a-z])+(?:pt|Pt|p)(?(1)-)([A-Z\d]+)/.freeze
 
     def initialize(serie:, parsed: nil)
       @serie = serie
@@ -125,6 +126,10 @@ module NistPubid
       return nil unless supplement
 
       supplement[1].nil? ? "" : supplement[1]
+    end
+
+    def parse_part(code)
+      self.class::PART_REGEXP.match(code)&.captures&.join
     end
 
     def self.regexp

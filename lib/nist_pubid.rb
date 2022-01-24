@@ -2,16 +2,10 @@
 
 require "yaml"
 require_relative "nist_pubid/serie"
-require_relative "nist_pubid/series/nist_ir"
-require_relative "nist_pubid/series/nbs_hb"
-require_relative "nist_pubid/series/nist_hb"
-require_relative "nist_pubid/series/nbs_circ"
-require_relative "nist_pubid/series/fips_pub"
-require_relative "nist_pubid/series/nbs_fips"
-require_relative "nist_pubid/series/nist_tn"
-require_relative "nist_pubid/series/nist_sp"
-require_relative "nist_pubid/series/nbs_csm"
-require_relative "nist_pubid/series/nbs_mp"
+
+Dir[File.join(__dir__, 'nist_pubid/series', '*.rb')].each do |file|
+  require file
+end
 
 SERIES_CLASSES = NistPubid::Series.constants.select do |c|
   NistPubid::Series.const_get(c).is_a?(Class)
