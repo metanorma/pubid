@@ -80,7 +80,7 @@ module NistPubid
 
       # returning current document id, doi, title and final PubID
       def status
-        fetch.map do |doc|
+        fetch.lazy.map do |doc|
           final_doc = convert(doc)
           {
             id: doc[:id],
@@ -95,7 +95,7 @@ module NistPubid
             doi: doc[:doi],
             title: doc[:title],
             finalPubId: "parse error",
-            mr: "parse_error"
+            mr: "parse_error",
           }
         end
       end

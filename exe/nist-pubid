@@ -6,9 +6,22 @@ require_relative "../lib/nist_pubid"
 require "thor"
 require "csv"
 
+def render_report_doc(doc)
+  [doc[:finalPubId] != doc[:id],
+   doc[:finalPubId],
+   doc[:id],
+   doc[:mr] != doc[:doi],
+   doc[:mr],
+   doc[:doi],
+   doc[:title]]
+end
+
 class NistPubidCLI < Thor
   desc "report", "Create report for NIST Tech Pubs database (fetches from GitHub)"
-  option :csv, type: :boolean, desc: "Export to CSV format"
+  option :csv, aliases: "-c", type: :boolean, desc: "Export to CSV format"
+  option :updated, aliases: "-u", type: :boolean,
+                   desc: "Return only updated identifiers",
+                   default: false
   def report
     heading = %w(
       ID\ changed?
@@ -19,33 +32,29 @@ class NistPubidCLI < Thor
       DOI
       Title
     )
+    STDERR.puts "Downloading NIST-Tech-Pubs XML database..."
+    NistPubid::NistTechPubs.fetch
+
     if options[:csv]
       puts heading.to_csv
 
       NistPubid::NistTechPubs.status.each do |doc|
-        puts [
-          doc[:finalPubId] == doc[:id] ? false : true,
-          doc[:finalPubId],
-          doc[:id],
-          doc[:mr] == doc[:doi] ? false : true,
-          doc[:mr],
-          doc[:doi],
-          doc[:title]
-        ].to_csv
+        puts render_report_doc(doc).to_csv
       end
     else
-      puts heading.join(' | ')
+      puts heading.join(" | ")
 
       NistPubid::NistTechPubs.status.each do |doc|
-        puts [
-          doc[:finalPubId] == doc[:id] ? ' -' : '✅',
-          doc[:finalPubId],
-          doc[:id],
-          doc[:mr] == doc[:doi] ? ' -' : '✅',
-          doc[:mr],
-          doc[:doi],
-          doc[:title]
-        ].join(' | ')
+        puts (render_report_doc(doc).map do |v|
+          case v
+          when false
+            " -"
+          when true
+            "✅"
+          else
+            v
+          end
+        end).join(" | ")
       end
     end
   end
