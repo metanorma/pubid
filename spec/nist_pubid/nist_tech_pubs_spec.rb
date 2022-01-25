@@ -109,7 +109,7 @@ RSpec.describe NistPubid::NistTechPubs, vcr: true do
     subject { described_class.status }
 
     it do
-      is_expected
+      expect(subject.to_a)
         .to eq([
                  { id: id, doi: doi, title: title, mr: mr,
                    finalPubId: finalPubId },
@@ -121,7 +121,7 @@ RSpec.describe NistPubid::NistTechPubs, vcr: true do
       let(:doi) { "NBS.CIRC.e" }
 
       it do
-        is_expected
+        expect(subject.to_a)
           .to eq([
                    { id: id, doi: doi, title: title, finalPubId: "parse error",
                      mr: "parse_error" },

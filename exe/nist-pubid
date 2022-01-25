@@ -35,16 +35,16 @@ class NistPubidCLI < Thor
     STDERR.puts "Downloading NIST-Tech-Pubs XML database..."
     NistPubid::NistTechPubs.fetch
 
-    if options[:csv]
-      puts heading.to_csv
+    puts options[:csv] && heading.to_csv || heading.join(" | ")
 
-      NistPubid::NistTechPubs.status.each do |doc|
+    documents = NistPubid::NistTechPubs.status
+
+    documents = documents.reject { |doc| doc[:finalPubId] == doc[:id] } if options[:updated]
+
+    documents.each do |doc|
+      if options[:csv]
         puts render_report_doc(doc).to_csv
-      end
-    else
-      puts heading.join(" | ")
-
-      NistPubid::NistTechPubs.status.each do |doc|
+      else
         puts (render_report_doc(doc).map do |v|
           case v
           when false
