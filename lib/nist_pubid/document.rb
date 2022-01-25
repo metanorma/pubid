@@ -123,9 +123,6 @@ module NistPubid
       matches = {
         publisher: Publisher.parse(code),
         stage: Stage.parse(code),
-        version:
-          /(?<=\.)?(?:(?:ver)((?(1)[-\d]|[.\d])+|\d+)|(?:v)(\d+\.[.\d]+))/
-            .match(code).to_a[1..-1]&.compact&.first&.gsub(/-/, "."),
         addendum: match(/(?<=(\.))?(add(?:-\d+)?|Addendum)/, code),
         section: /(?<=sec)\d+/.match(code)&.to_s,
         appendix: /\d+app/.match(code)&.to_s,
@@ -145,6 +142,23 @@ module NistPubid
       code_original = code
       code = code.gsub(matches[:edition].parsed, "") if matches[:edition]
 
+      version = /(?<=\.)?(?:(?:ver)((?(1)[-\d]|[.\d])+|\d+)|(?:v)(\d+\.[.\d]+))/
+        .match(code)
+      if version
+        code = code.gsub(version.to_s, "")
+        matches[:version] = version.to_a[1..-1]&.compact&.first&.gsub(/-/, ".")
+      end
+
+      unless matches[:stage].nil?
+        code = code.gsub(matches[:stage].original_code, "")
+      end
+
+      translation = /\((\w{3})\)/.match(code)
+      if translation
+        code = code.gsub(translation.to_s, "")
+        matches[:translation] = translation.captures.join
+      end
+
       matches[:revision] = /(?:[\daA-Z](?:rev|r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))|, Revision )([\da]+|$|\w+\d{4})/
         .match(code)&.[](2)
       matches[:revision] = "1" if matches[:revision] && matches[:revision].empty?
@@ -155,12 +169,9 @@ module NistPubid
 
       (matches[:update_number], matches[:update_year]) = update if update
 
-      unless matches[:stage].nil?
-        code = code.gsub(matches[:stage].original_code, "")
-      end
 
       unless ["NBS CSM", "NBS CS", "NBS RPT"].include?(matches[:serie].to_s)
-        matches[:volume] = /(?<=(\.))?v(?(1)-)(\d+)(?!\.\d+)/.match(code)&.[](2)
+        matches[:volume] = /(?<=(\.))?v(?(1)-)(\d+[\w-]*)(?!\.\d+)/.match(code)&.[](2)
       end
 
       matches[:revision] = nil if matches[:addendum]
@@ -176,7 +187,6 @@ module NistPubid
 
       matches[:serie] = SERIES["mr"].invert[matches[:serie].to_s] || matches[:serie].to_s
       # matches[:serie].gsub!(/\./, " ")
-      matches[:translation] = match(/(?<=\()\w{3}(?=\))/, code)
 
       new(**matches)
     end

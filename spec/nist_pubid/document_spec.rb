@@ -341,7 +341,7 @@ RSpec.describe NistPubid::Document do
     end
 
     context "parse NIST SP 800-60ver2v2" do
-      let(:short_pubid) { "NIST SP 800-60ver2v2" }
+      let(:original_pubid) { "NIST SP 800-60ver2v2" }
       let(:short_pubid) { "NIST SP 800-60v2ver2" }
 
       it_behaves_like "converts pubid to different formats"
@@ -989,6 +989,20 @@ RSpec.describe NistPubid::Document do
       let(:original_pubid) { "NIST FIPS 54-1-Jan15" }
       let(:short_pubid) { "NIST FIPS PUB 54e1" }
       let(:mr_pubid) { "NIST.FIPS.54e1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS SP 535v2a-l" do
+      let(:original_pubid) { "NBS SP 535v2a-l" }
+      let(:short_pubid) { "NBS SP 535v2a-l" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST GCR 21-917-48v3B" do
+      let(:original_pubid) { "NIST GCR 21-917-48v3B" }
+      let(:short_pubid) { "NIST GCR 21-917-48v3B" }
 
       it_behaves_like "converts pubid to different formats"
     end
