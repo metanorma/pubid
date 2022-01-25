@@ -987,8 +987,8 @@ RSpec.describe NistPubid::Document do
 
     context "NIST FIPS 54-1-Jan15" do
       let(:original_pubid) { "NIST FIPS 54-1-Jan15" }
-      let(:short_pubid) { "NIST FIPS PUB 54-1eJan2015" }
-      let(:mr_pubid) { "NIST.FIPS.54-1eJan2015" }
+      let(:short_pubid) { "NIST FIPS PUB 54e1" }
+      let(:mr_pubid) { "NIST.FIPS.54e1" }
 
       it_behaves_like "converts pubid to different formats"
     end
