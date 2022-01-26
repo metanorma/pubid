@@ -140,22 +140,22 @@ module NistPubid
       matches[:edition] = Edition.parse(code, matches[:serie])
 
       code_original = code
-      code = code.gsub(matches[:edition].parsed, "") if matches[:edition]
+      code = code.sub(matches[:edition].parsed, "") if matches[:edition]
 
       version = /(?<=\.)?(?:(?:ver)((?(1)[-\d]|[.\d])+|\d+)|(?:v)(\d+\.[.\d]+))/
         .match(code)
       if version
-        code = code.gsub(version.to_s, "")
+        code = code.sub(version.to_s, "")
         matches[:version] = version.to_a[1..-1]&.compact&.first&.gsub(/-/, ".")
       end
 
       unless matches[:stage].nil?
-        code = code.gsub(matches[:stage].original_code, "")
+        code = code.sub(matches[:stage].original_code, "")
       end
 
       translation = /\((\w{3})\)/.match(code)
       if translation
-        code = code.gsub(translation.to_s, "")
+        code = code.sub(translation.to_s, "")
         matches[:translation] = translation.captures.join
       end
 

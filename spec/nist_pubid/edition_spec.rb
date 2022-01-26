@@ -40,11 +40,7 @@ RSpec.describe NistPubid::Edition do
   context "NIST FIPS PUB 140-3" do
     let(:short_pubid) { "NIST FIPS PUB 140-3" }
 
-    it { expect(subject.to_s).to eq("3") }
-    it { expect(subject.year).to be_nil }
-    it { expect(subject.month).to be_nil }
-    it { expect(subject.sequence).to eq("3") }
-    it { expect(subject.parsed).to eq("-3") }
+    it { expect(subject).to be_nil }
   end
 
   context "NIST SP 260-162e2006" do
