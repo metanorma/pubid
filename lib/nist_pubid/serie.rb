@@ -4,6 +4,7 @@ module NistPubid
   class Serie
     attr_accessor :serie, :parsed
 
+    SERIE_REGEXP = nil
     EDITION_REGEXP = /(?<=\.)?(?<!Upd\d)(?:\d+-\d+)?
                      (?<!add|sup)(?<prepend>e-?|Ed\.\s|Edition\s)
                      (?:(?<year>\d{4})|(?<sequence>\d+[A-Z]?)(?!-))/x.freeze
@@ -47,8 +48,19 @@ module NistPubid
     def self.parse(code, publisher = nil)
       publisher = Publisher.parse(code) if publisher.nil?
 
+      # if self::SERIE_REGEXP && self::SERIE_REGEXP.match?(code)
+      #   new(serie: self.name.split("::").last.gsub!(/(.)([A-Z])/,'\1 \2').upcase,
+      #       parsed: self::SERIE_REGEXP.match(code).to_s)
+      # end
+
       ObjectSpace.each_object(NistPubid::Serie.singleton_class) do |klass|
-        return klass.parse(code) if klass.methods.include?(:match?) && klass.match?(code)
+        if klass::SERIE_REGEXP&.match?(code)
+          return klass.new(
+            serie: klass.name.split("::").last.gsub!(/(.)([A-Z])/, '\1 \2').upcase,
+            parsed: klass::SERIE_REGEXP.match(code).captures.join,
+          )
+        end
+        # return klass.parse(code) if klass.methods.include?(:match?) && klass.match?(code)
       end
 
       serie = /#{SERIES["long"].keys.sort_by(&:length).reverse.join('|')}/.match(code)
