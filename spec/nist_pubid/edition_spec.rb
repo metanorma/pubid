@@ -67,12 +67,7 @@ RSpec.describe NistPubid::Edition do
   context "NIST HB 105-1-1990" do
     let(:short_pubid) { "NIST HB 105-1-1990" }
 
-    it { expect(subject.to_s).to eq("1990") }
-    it { expect(subject.year).to eq(1990) }
-    it { expect(subject.month).to be_nil }
-    it { expect(subject.day).to be_nil }
-    it { expect(subject.sequence).to be_nil }
-    it { expect(subject.parsed).to eq("-1990") }
+    it { expect(subject).to be_nil }
   end
 
   context "NIST HB 44-1989" do

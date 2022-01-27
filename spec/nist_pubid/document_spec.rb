@@ -1000,5 +1000,37 @@ RSpec.describe NistPubid::Document do
         ).to_s(:short)).to eq("NIST FIPS PUB 100-1e1991")
       end
     end
+
+    context "NBS FIPS 11-1-Sep1977" do
+      it do
+        expect(described_class.parse("NBS FIPS 11-1-Sep1977").merge(
+          described_class.parse("NBS.FIPS.11-1-Sep1977")
+        ).to_s(:short)).to eq("NBS FIPS 11-1eSep1977")
+      end
+    end
+
+    context "NBS FIPS 16-1-1977" do
+      it do
+        expect(described_class.parse("NBS FIPS 16-1-1977").merge(
+          described_class.parse("NBS.FIPS.16-1-1977")
+        ).to_s(:short)).to eq("NBS FIPS 16-1e1977")
+      end
+    end
+
+    context "NBS FIPS 68-2-Aug1987" do
+      it do
+        expect(described_class.parse("NBS FIPS 68-2-Aug1987").merge(
+          described_class.parse("NBS.FIPS.68-2-Aug1987")
+        ).to_s(:short)).to eq("NBS FIPS 68-2eAug1987")
+      end
+    end
+
+    context "NBS FIPS 107-Mar1985" do
+      it do
+        expect(described_class.parse("NBS FIPS 107-Mar1985").merge(
+          described_class.parse("NBS.FIPS.107-Mar1985")
+        ).to_s(:short)).to eq("NBS FIPS 107eMar1985")
+      end
+    end
   end
 end
