@@ -153,7 +153,7 @@ module NistPubid
         code = code.sub(matches[:stage].original_code, "")
       end
 
-      translation = /\((\w{3})\)/.match(code)
+      translation = /\((\w{3})\)|\.(spa|zho|vie|por|ind)/.match(code)
       if translation
         code = code.sub(translation.to_s, "")
         matches[:translation] = translation.captures.join
