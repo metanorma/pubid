@@ -136,10 +136,15 @@ module NistPubid
         raise Errors::ParseError.new("failed to parse serie for #{code}")
       end
 
-      matches[:part] = matches[:serie].parse_part(code)
+      code_original = code
+
+      parsed_part, part = matches[:serie].parse_part(code)
+      if part
+        matches[:part] = part
+        code = code.sub(parsed_part, "")
+      end
       matches[:edition] = Edition.parse(code, matches[:serie])
 
-      code_original = code
       code = code.sub(matches[:edition].parsed, "") if matches[:edition]
 
       version = /(?<=\.)?(?:(?:ver)((?(1)[-\d]|[.\d])+|\d+)|(?:v)(\d+\.[.\d]+))/
@@ -163,12 +168,11 @@ module NistPubid
         .match(code)&.[](2)
       matches[:revision] = "1" if matches[:revision] && matches[:revision].empty?
 
-      matches[:supplement] = matches[:serie].parse_supplement(code)
+      matches[:supplement] = matches[:serie].parse_supplement(code_original)
 
       update = code.scan(/((?<=Upd|Update )\s?[\d:]+|-upd)-?(\d*)/).first
 
       (matches[:update_number], matches[:update_year]) = update if update
-
 
       unless ["NBS CSM", "NBS CS", "NBS RPT"].include?(matches[:serie].to_s)
         matches[:volume] = /(?<=(\.))?v(?(1)-)(\d+[\w-]*)(?!\.\d+)/.match(code)&.[](2)

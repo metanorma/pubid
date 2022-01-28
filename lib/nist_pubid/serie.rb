@@ -147,7 +147,10 @@ module NistPubid
     end
 
     def parse_part(code)
-      self.class::PART_REGEXP.match(code)&.captures&.join
+      part = self.class::PART_REGEXP.match(code)
+      return [part.to_s, part.captures.join] if part
+
+      [nil, nil]
     end
 
     def self.regexp
