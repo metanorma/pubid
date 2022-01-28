@@ -10,7 +10,7 @@ module NistPubid
                      (?:(?<year>\d{4})|(?<sequence>\d+[A-Z]?)(?!-))/x.freeze
 
     DOCNUMBER_REGEXP = nil
-    SUPPLEMENT_REGEXP = /(?:(?:supp?)-?(\d*)|Supplement|Suppl.)/.freeze
+    SUPPLEMENT_REGEXP = /(?:(?:supp?)-?(\d+|\w{3}\d{4})?|Supplement|Suppl.)/.freeze
     PART_REGEXP = /(?<=\.)?(?<![a-z])+(?:pt|Pt|p)(?(1)-)([A-Z\d]+)/.freeze
 
     def initialize(serie:, parsed: nil)
