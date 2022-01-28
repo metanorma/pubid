@@ -75,4 +75,12 @@ RSpec.describe NistPubid::Document do
 
     it_behaves_like "converts pubid to different formats"
   end
+
+  context "NBS.HB.28p11969" do
+    let(:original_pubid) { "NBS.HB.28p11969" }
+    let(:short_pubid) { "NBS HB 28pt1e1969" }
+    let(:mr_pubid) { "NBS.HB.28pt1e1969" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
 end
