@@ -60,6 +60,14 @@ RSpec.describe NistPubid::NistTechPubs, vcr: true do
   end
 
   describe "#comply_with_pubid" do
+    before do
+      described_class.documents = [
+        { id: "NIST SP 260-14",
+          doi: "NIST.SP.260-14",
+          title: "NIST SP 260-14" },
+      ]
+    end
+
     it "returns identifier comply with NIST PubID" do
       expect(described_class.comply_with_pubid.map { |d| d[:id] })
         .to include("NIST SP 260-14")
@@ -67,6 +75,14 @@ RSpec.describe NistPubid::NistTechPubs, vcr: true do
   end
 
   describe "#different_with_pubid" do
+    before do
+      described_class.documents = [
+        { id: "NISTIR 8379",
+          doi: "NIST.IR.8379",
+          title: "NISTIR 8379" },
+      ]
+    end
+
     it "returns identifiers not comply with NIST PubID" do
       expect(described_class.different_with_pubid.map { |d| d[:id] })
         .to include("NISTIR 8379")

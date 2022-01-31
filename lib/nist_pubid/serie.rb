@@ -89,17 +89,24 @@ module NistPubid
 
       return nil if edition.nil? || edition.captures.compact.empty?
 
+      result = { parsed: parsed }
+
       if edition.named_captures.key?("date_with_month") && edition[:date_with_month]
         date = Date.parse("01/" + edition[:date_with_month])
-        { month: date.month, year: date.year, parsed: parsed }
+        result[:month] = date.month
+        result[:year] = date.year
       elsif edition.named_captures.key?("date_with_day") && edition[:date_with_day]
         date = Date.parse(edition[:date_with_day])
-        { day: date.day, month: date.month, year: date.year, parsed: parsed }
+        result.merge!({ day: date.day, month: date.month, year: date.year })
       elsif edition.named_captures.key?("year") && edition[:year]
-        { year: edition[:year].to_i, parsed: parsed }
-      else
-        { sequence: edition[:sequence], parsed: parsed }
+        result[:year] = edition[:year].to_i
       end
+
+      if edition.named_captures.key?("sequence") && edition[:sequence]
+        result[:sequence] = edition[:sequence]
+      end
+
+      result
     end
 
     def parse_docnumber(code, code_original)

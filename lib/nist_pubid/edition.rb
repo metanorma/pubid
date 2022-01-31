@@ -11,15 +11,16 @@ module NistPubid
     end
 
     def to_s
+      result = (@sequence && [@sequence]) || []
       if @day
-        Date.new(@year, @month, @day).strftime("%Y%m%d")
+        result << Date.new(@year, @month, @day).strftime("%Y%m%d")
       elsif @month
-        Date.new(@year, @month).strftime("%Y%m")
+        result << Date.new(@year, @month).strftime("%Y%m")
       elsif @year
-        Date.new(@year).strftime("%Y")
-      else
-        @sequence
+        result << Date.new(@year).strftime("%Y")
       end
+
+      result.join("-")
     end
 
     def self.parse(code, serie = nil)

@@ -105,7 +105,12 @@ module NistPubid
     def merge(document)
       document.instance_variables.each do |var|
         val = document.instance_variable_get(var)
-        instance_variable_set(var, val) unless val.nil?
+        current_val = instance_variable_get(var)
+        if [:@serie, :@publisher].include?(var) ||
+            (val && current_val.nil?) ||
+            (val && current_val.to_s.length < val.to_s.length)
+          instance_variable_set(var, val)
+        end
       end
 
       self
