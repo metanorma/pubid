@@ -630,7 +630,7 @@ RSpec.describe NistPubid::Document do
 
     context "NBS FIPS 14-1-Dec1980" do
       let(:original_pubid) { "NBS FIPS 14-1-Dec1980" }
-      let(:short_pubid) { "NBS FIPS 14-1eDec1980" }
+      let(:short_pubid) { "NBS FIPS 14-1e198012" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -703,12 +703,12 @@ RSpec.describe NistPubid::Document do
 
     context "NBS FIPS 107-Mar1985" do
       let(:original_pubid) { "NBS FIPS 107-Mar1985" }
-      let(:short_pubid) { "NBS FIPS 107eMar1985" }
+      let(:short_pubid) { "NBS FIPS 107e198503" }
 
       it_behaves_like "converts pubid to different formats"
 
       it "has edition" do
-        expect(subject.edition.to_s).to eq("Mar1985")
+        expect(subject.edition.to_s).to eq("198503")
         expect(subject.edition.year).to eq(1985)
         expect(subject.edition.month).to eq(3)
       end
@@ -723,7 +723,7 @@ RSpec.describe NistPubid::Document do
 
     context "NBS FIPS 107-Feb1985" do
       let(:original_pubid) { "NBS FIPS 107-Feb1985" }
-      let(:short_pubid) { "NBS FIPS 107eFeb1985" }
+      let(:short_pubid) { "NBS FIPS 107e198502" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -737,7 +737,7 @@ RSpec.describe NistPubid::Document do
 
     context "NBS FIPS 11-1-Sep1977" do
       let(:original_pubid) { "NBS FIPS 11-1-Sep1977" }
-      let(:short_pubid) { "NBS FIPS 11-1eSep1977" }
+      let(:short_pubid) { "NBS FIPS 11-1e197709" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -782,7 +782,7 @@ RSpec.describe NistPubid::Document do
     context "NBS FIPS 11-1-Sep30" do
       let(:original_pubid) { "NBS FIPS 11-1-Sep30" }
       # has doi NBS.FIPS.11-1-Sep30/1977
-      let(:short_pubid) { "NBS FIPS 11-1e30Sep1977" }
+      let(:short_pubid) { "NBS FIPS 11-1e19770930" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -927,14 +927,14 @@ RSpec.describe NistPubid::Document do
 
     context "NBS CIRC 24supJan1924" do
       let(:original_pubid) { "NBS CIRC 24supJan1924" }
-      let(:short_pubid) { "NBS CIRC 24supJan1924" }
+      let(:short_pubid) { "NBS CIRC 24e192401sup" }
 
       it_behaves_like "converts pubid to different formats"
     end
 
     context "NBS HB 67suppFeb1965" do
       let(:original_pubid) { "NBS HB 67suppFeb1965" }
-      let(:short_pubid) { "NBS HB 67eFeb1965sup" }
+      let(:short_pubid) { "NBS HB 67e196502sup" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -1025,7 +1025,7 @@ RSpec.describe NistPubid::Document do
       it do
         expect(described_class.parse("NBS FIPS 11-1-Sep1977").merge(
           described_class.parse("NBS.FIPS.11-1-Sep1977")
-        ).to_s(:short)).to eq("NBS FIPS 11-1eSep1977")
+        ).to_s(:short)).to eq("NBS FIPS 11-1e197709")
       end
     end
 
@@ -1041,7 +1041,7 @@ RSpec.describe NistPubid::Document do
       it do
         expect(described_class.parse("NBS FIPS 68-2-Aug1987").merge(
           described_class.parse("NBS.FIPS.68-2-Aug1987")
-        ).to_s(:short)).to eq("NBS FIPS 68-2eAug1987")
+        ).to_s(:short)).to eq("NBS FIPS 68-2e198708")
       end
     end
 
@@ -1049,7 +1049,7 @@ RSpec.describe NistPubid::Document do
       it do
         expect(described_class.parse("NBS FIPS 107-Mar1985").merge(
           described_class.parse("NBS.FIPS.107-Mar1985")
-        ).to_s(:short)).to eq("NBS FIPS 107eMar1985")
+        ).to_s(:short)).to eq("NBS FIPS 107e198503")
       end
     end
   end
