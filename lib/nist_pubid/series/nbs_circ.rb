@@ -1,7 +1,7 @@
 module NistPubid
   module Series
     class NbsCirc < NistPubid::Serie
-      EDITION_REGEXP = /\d+(?<prepend>[e-])(?<sequence>\d+)/.freeze
+      EDITION_REGEXP = /\d+(?<prepend>[e-])(?<sequence>\d+)|sup(?<date_with_month>\w{3}\d{4})/.freeze
 
       def parse_edition(code)
         return { sequence: 7, parsed: "" } if /^NBS CIRC sup/.match?(code)

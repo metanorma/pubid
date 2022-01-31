@@ -12,9 +12,9 @@ module NistPubid
 
     def to_s
       if @day
-        Date.new(@year, @month, @day).strftime("%d%b%Y")
+        Date.new(@year, @month, @day).strftime("%Y%m%d")
       elsif @month
-        Date.new(@year, @month).strftime("%b%Y")
+        Date.new(@year, @month).strftime("%Y%m")
       elsif @year
         Date.new(@year).strftime("%Y")
       else

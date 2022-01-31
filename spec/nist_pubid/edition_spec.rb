@@ -5,7 +5,7 @@ RSpec.describe NistPubid::Edition do
   context "when NBS FIPS 107-Mar1985" do
     let(:short_pubid) { "NBS FIPS 107-Mar1985" }
 
-    it { expect(subject.to_s).to eq("Mar1985") }
+    it { expect(subject.to_s).to eq("198503") }
     it { expect(subject.year).to eq(1985) }
     it { expect(subject.month).to eq(3) }
     it { expect(subject.parsed).to eq("-Mar1985") }
@@ -56,7 +56,7 @@ RSpec.describe NistPubid::Edition do
   context "NBS FIPS 11-1-Sep30/1977" do
     let(:short_pubid) { "NBS FIPS 11-1-Sep30/1977" }
 
-    it { expect(subject.to_s).to eq("30Sep1977") }
+    it { expect(subject.to_s).to eq("19770930") }
     it { expect(subject.year).to eq(1977) }
     it { expect(subject.month).to eq(9) }
     it { expect(subject.day).to eq(30) }
