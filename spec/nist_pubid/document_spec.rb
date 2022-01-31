@@ -934,7 +934,7 @@ RSpec.describe NistPubid::Document do
 
     context "NBS HB 67suppFeb1965" do
       let(:original_pubid) { "NBS HB 67suppFeb1965" }
-      let(:short_pubid) { "NBS HB 67supFeb1965" }
+      let(:short_pubid) { "NBS HB 67eFeb1965sup" }
 
       it_behaves_like "converts pubid to different formats"
     end
