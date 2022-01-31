@@ -991,6 +991,14 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NIST FIPS 150-Aug1988" do
+      let(:original_pubid) { "NIST FIPS 150-Aug1988" }
+      let(:short_pubid) { "NIST FIPS PUB 150e198808" }
+      let(:mr_pubid) { "NIST.FIPS.150e198808" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "when cannot parse code" do
       it "should raise error" do
         expect { described_class.parse("NIST SP WRONG-CODE") }
@@ -1118,6 +1126,22 @@ RSpec.describe NistPubid::Document do
         expect(described_class.parse("NIST SP 260-126 rev 2013").merge(
           described_class.parse("NIST.SP.260-126rev2013")
         ).to_s(:short)).to eq("NIST SP 260-126r2013")
+      end
+    end
+
+    context "NIST FIPS 150-Aug1988" do
+      it do
+        expect(described_class.parse("NIST FIPS 150-Aug1988").merge(
+          described_class.parse("NIST.FIPS.150-Aug1988")
+        ).to_s(:short)).to eq("NIST FIPS PUB 150e198808")
+      end
+    end
+
+    context "NBS FIPS 107-Feb1985" do
+      it do
+        expect(described_class.parse("NBS FIPS 107-Feb1985").merge(
+          described_class.parse("NBS.FIPS.107-Feb1985")
+        ).to_s(:short)).to eq("NBS FIPS 107e198502")
       end
     end
   end
