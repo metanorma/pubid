@@ -169,9 +169,7 @@ module NistPubid
         matches[:translation] = translation.captures.join
       end
 
-      matches[:revision] = /(?:[\daA-Z](?:rev|r|Rev\.\s|([0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))|, Revision )([\da]+|$|\w+\d{4})/
-        .match(code)&.[](2)
-      matches[:revision] = "1" if matches[:revision] && matches[:revision].empty?
+      matches[:revision] = matches[:serie].parse_revision(code)
 
       matches[:supplement] = matches[:serie].parse_supplement(code_original)
 

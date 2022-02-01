@@ -12,6 +12,9 @@ module NistPubid
     DOCNUMBER_REGEXP = nil
     SUPPLEMENT_REGEXP = /(?:(?:supp?)-?(\d+)?|Supplement|Suppl.)/.freeze
     PART_REGEXP = /(?<=\.)?(?<![a-z])+(?:pt|Pt|p)(?(1)-)([A-Z\d]+)/.freeze
+    REVISION_REGEXP =
+      /(?:[\daA-Z](?:rev|r|Rev\.\s|(?:[0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))|, Revision )([\da]+|$|\w+\d{4})/
+        .freeze
 
     def initialize(serie:, parsed: nil)
       @serie = serie
@@ -158,6 +161,15 @@ module NistPubid
       return [part.to_s, part.captures.join] if part
 
       [nil, nil]
+    end
+
+    def parse_revision(code)
+      revision = self.class::REVISION_REGEXP.match(code)&.captures&.compact&.join("-")
+      revision ||= Serie::REVISION_REGEXP.match(code)&.captures&.join unless instance_of?(NistPubid::Serie)
+
+      revision = "1" if revision&.empty?
+
+      revision
     end
 
     def self.regexp
