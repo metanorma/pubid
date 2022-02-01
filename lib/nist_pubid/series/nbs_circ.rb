@@ -20,6 +20,8 @@ module NistPubid
 
         return "3" if /supJun1925-Jun1927$/.match?(code)
 
+        return "" if /25sup-1924$/.match?(code)
+
         super
       end
     end

@@ -473,7 +473,7 @@ RSpec.describe NistPubid::Document do
 
     context "NBS CIRC 25sup-1924" do
       let(:original_pubid) { "NBS CIRC 25sup-1924" }
-      let(:short_pubid) { "NBS CIRC 25sup1924" }
+      let(:short_pubid) { "NBS CIRC 25sup" }
 
       it_behaves_like "converts pubid to different formats"
     end
