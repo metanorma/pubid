@@ -24,6 +24,8 @@ NBS.HB.105-1r1990: NIST.HB.105-1r1990
 NBS.FIPS.100-1-1991: NIST.FIPS.100-1-1991
 NBS.HB.28p11969: NBS.HB.28-1969pt1
 NBS.LC.1088sp: NBS.LC.1088.spa
+NBS.LC.145r11/1925: NBS.LC.145/Upd1-192511
+NBS.LC.118sup12/1926: NBS.LC.118sup/Upd1-192612
 !ruby/regexp /NBS[.\s]CS[.\s]e/: NBS CS-E
 !ruby/regexp /(?<=\d)es/: (spa)
 !ruby/regexp /(?<=\d)chi/: (zho)

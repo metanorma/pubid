@@ -16,6 +16,7 @@ module NistPubid
       /(?:[\daA-Z](?:rev|r|Rev\.\s|(?:[0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))|, Revision )([\da]+|$|\w+\d{4})/
         .freeze
     VOLUME_REGEXP = /(?<=\.)?v(?(1)-)(\d+[\w-]*)(?!\.\d+)/.freeze
+    UPDATE_REGEXP = /((?<=Upd|Update )\s?[\d:]+|-upd)-?(\d*)/.freeze
 
     def initialize(serie:, parsed: nil)
       @serie = serie
@@ -178,6 +179,10 @@ module NistPubid
       return [volume.captures.join, volume.captures.last] if volume
 
       [nil, nil]
+    end
+
+    def parse_update(code)
+      code.scan(self.class::UPDATE_REGEXP).first
     end
 
     def self.regexp

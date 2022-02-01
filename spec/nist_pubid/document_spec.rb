@@ -936,6 +936,7 @@ RSpec.describe NistPubid::Document do
       let(:original_pubid) { "NBS CIRC 24supJan1924" }
       let(:short_pubid) { "NBS CIRC 24e192401sup" }
 
+
       it_behaves_like "converts pubid to different formats"
     end
 
@@ -949,6 +950,14 @@ RSpec.describe NistPubid::Document do
     context "NBS IR 74-577-1" do
       let(:original_pubid) { "NBS IR 74-577-1" }
       let(:short_pubid) { "NBS IR 74-577v1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS.LCIRC.118sup12/1926" do
+      let(:original_pubid) { "NBS.LCIRC.118sup12/1926" }
+      let(:short_pubid) { "NBS LC 118sup/Upd1-192612" }
+      let(:mr_pubid) { "NBS.LC.118sup.u1-192612" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -970,6 +979,14 @@ RSpec.describe NistPubid::Document do
     context "NBS IR 84-2857-1" do
       let(:original_pubid) { "NBS IR 84-2857-1" }
       let(:short_pubid) { "NBS IR 84-2857pt1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS.LCIRC.145r11/1925" do
+      let(:original_pubid) { "NBS.LCIRC.145r11/1925" }
+      let(:short_pubid) { "NBS LC 145/Upd1-192511" }
+      let(:mr_pubid) { "NBS.LC.145.u1-192511" }
 
       it_behaves_like "converts pubid to different formats"
     end

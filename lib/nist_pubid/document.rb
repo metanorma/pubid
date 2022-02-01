@@ -183,7 +183,7 @@ module NistPubid
 
       matches[:supplement] = matches[:serie].parse_supplement(code_original)
 
-      update = code.scan(/((?<=Upd|Update )\s?[\d:]+|-upd)-?(\d*)/).first
+      update = matches[:serie].parse_update(code)
 
       (matches[:update_number], matches[:update_year]) = update if update
 
