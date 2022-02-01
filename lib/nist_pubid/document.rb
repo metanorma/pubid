@@ -187,7 +187,6 @@ module NistPubid
 
       (matches[:update_number], matches[:update_year]) = update if update
 
-
       matches[:revision] = nil if matches[:addendum]
 
       matches[:docnumber] = matches[:serie].parse_docnumber(code, code_original)

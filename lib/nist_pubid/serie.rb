@@ -15,8 +15,8 @@ module NistPubid
     REVISION_REGEXP =
       /(?:[\daA-Z](?:rev|r|Rev\.\s|(?:[0-9]+[A-Za-z]*-[0-9]+[A-Za-z]*-))|, Revision )([\da]+|$|\w+\d{4})/
         .freeze
-    VOLUME_REGEXP = /(?<=\.)?v(?(1)-)(\d+[\w-]*)(?!\.\d+)/.freeze
     UPDATE_REGEXP = /((?<=Upd|Update )\s?[\d:]+|-upd)-?(\d*)/.freeze
+    VOLUME_REGEXP = /(?<=\.)?(?<![a-z])v(?(1)-)(\d+[\w-]*)(?!\.\d+)/.freeze
 
     def initialize(serie:, parsed: nil)
       @serie = serie

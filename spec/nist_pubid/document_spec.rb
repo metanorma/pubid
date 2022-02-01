@@ -1112,5 +1112,13 @@ RSpec.describe NistPubid::Document do
         ).to_s(:short)).to eq("NIST HB 133e4-2002")
       end
     end
+
+    context "NIST SP 260-126 rev 2013" do
+      it do
+        expect(described_class.parse("NIST SP 260-126 rev 2013").merge(
+          described_class.parse("NIST.SP.260-126rev2013")
+        ).to_s(:short)).to eq("NIST SP 260-126r2013")
+      end
+    end
   end
 end
