@@ -946,6 +946,34 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NBS IR 74-577-1" do
+      let(:original_pubid) { "NBS IR 74-577-1" }
+      let(:short_pubid) { "NBS IR 74-577v1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS IR 79-1591-1" do
+      let(:original_pubid) { "NBS IR 79-1591-1" }
+      let(:short_pubid) { "NBS IR 79-1591pt1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS IR 80-2111-1" do
+      let(:original_pubid) { "NBS IR 80-2111-1" }
+      let(:short_pubid) { "NBS IR 80-2111pt1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS IR 84-2857-1" do
+      let(:original_pubid) { "NBS IR 84-2857-1" }
+      let(:short_pubid) { "NBS IR 84-2857pt1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "when cannot parse code" do
       it "should raise error" do
         expect { described_class.parse("NIST SP WRONG-CODE") }

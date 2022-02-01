@@ -143,10 +143,20 @@ module NistPubid
 
       code_original = code
 
+      unless ["NBS CSM", "NBS CS", "NBS RPT"].include?(matches[:serie].to_s)
+        parsed_volume, volume = matches[:serie].parse_volume(code)
+        if volume
+          matches[:volume] = volume
+          # replace last occurrence
+          code = code.reverse.sub(parsed_volume.reverse, "").reverse
+        end
+      end
+
       parsed_part, part = matches[:serie].parse_part(code)
       if part
         matches[:part] = part
-        code = code.sub(parsed_part, "")
+        # replace last occurrence
+        code = code.reverse.sub(parsed_part.reverse, "").reverse
       end
       matches[:edition] = Edition.parse(code, matches[:serie])
 
@@ -177,13 +187,12 @@ module NistPubid
 
       (matches[:update_number], matches[:update_year]) = update if update
 
-      unless ["NBS CSM", "NBS CS", "NBS RPT"].include?(matches[:serie].to_s)
-        matches[:volume] = /(?<=(\.))?v(?(1)-)(\d+[\w-]*)(?!\.\d+)/.match(code)&.[](2)
-      end
 
       matches[:revision] = nil if matches[:addendum]
 
       matches[:docnumber] = matches[:serie].parse_docnumber(code, code_original)
+
+      # part, edition, supplement, revision, docnumber, volume
 
       # NIST GCR documents often have a 3-part identifier -- the last part is
       # not revision but is part of the identifier.
