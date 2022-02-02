@@ -1144,5 +1144,13 @@ RSpec.describe NistPubid::Document do
         ).to_s(:short)).to eq("NBS FIPS 107e198502")
       end
     end
+
+    context "NIST FIPS 54-1-Jan17" do
+      it do
+        expect(described_class.parse("NIST FIPS 54-1-Jan17").merge(
+          described_class.parse("NIST.FIPS.54-1-Jan17/1991")
+        ).to_s(:short)).to eq("NIST FIPS PUB 54-1e19910117")
+      end
+    end
   end
 end
