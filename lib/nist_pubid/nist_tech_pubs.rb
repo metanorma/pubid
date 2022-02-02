@@ -1,6 +1,9 @@
 require "relaton_nist/data_fetcher"
 require "nokogiri"
 require "open-uri"
+require "lightly"
+
+Lightly.life = "24h"
 
 module NistPubid
   class NistTechPubs
@@ -13,9 +16,12 @@ module NistPubid
       attr_accessor :documents, :converted_id, :converted_doi
 
       def fetch
-        @documents ||= Nokogiri::XML(URI.open(URL))
-          .xpath("/body/query/doi_record/report-paper/report-paper_metadata")
-          .map { |doc| parse_docid doc }
+        Lightly.prune
+        @documents ||= Lightly.get "documents" do
+          Nokogiri::XML(URI.open(URL))
+            .xpath("/body/query/doi_record/report-paper/report-paper_metadata")
+            .map { |doc| parse_docid doc }
+        end
       rescue StandardError => e
         warn e.message
         []

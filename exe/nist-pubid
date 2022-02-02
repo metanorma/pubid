@@ -5,6 +5,7 @@ require "bundler/setup"
 require_relative "../lib/nist_pubid"
 require "thor"
 require "csv"
+require "lightly"
 
 def render_report_doc(doc)
   [doc[:finalPubId] != doc[:id],
@@ -22,6 +23,9 @@ class NistPubidCLI < Thor
   option :updated, aliases: "-u", type: :boolean,
                    desc: "Return only updated identifiers",
                    default: false
+  option :pull, aliases: "-p", type: :boolean,
+                desc: "Update cache from NIST Tech Pubs database",
+                default: false
   def report
     heading = %w(
       ID\ changed?
@@ -32,8 +36,14 @@ class NistPubidCLI < Thor
       DOI
       Title
     )
-    STDERR.puts "Downloading NIST-Tech-Pubs XML database..."
-    NistPubid::NistTechPubs.fetch
+
+    Lightly.clear "documents" if options[:pull]
+    # NistPubid::NistTechPubs.fetch
+    if Lightly.cached? "documents"
+      warn "Using nist-tech-pubs.xml file from local cache"
+    else
+      warn "Cached nist-tech-pubs.xml not present, downloading from GitHub..."
+    end
 
     puts options[:csv] && heading.to_csv || heading.join(" | ")
 
