@@ -2,11 +2,10 @@ STAGES = YAML.load_file(File.join(File.dirname(__FILE__), "../../stages.yaml"))
 
 module NistPubid
   class Stage
-    attr_accessor :stage, :original_code
+    attr_accessor :stage
 
-    def initialize(original_code)
-      self.original_code = original_code
-      @stage = self.class.regexp.match(original_code)&.[](1)
+    def initialize(stage)
+      @stage = stage
     end
 
     def to_s(format = :short)
@@ -20,14 +19,6 @@ module NistPubid
       else
         STAGES[@stage]
       end
-    end
-
-    def self.parse(code)
-      new(regexp.match(code)&.to_s)
-    end
-
-    def self.regexp
-      /\((#{STAGES.keys.join('|')})\)/
     end
 
     def nil?

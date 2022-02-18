@@ -22,20 +22,5 @@ module NistPubid
 
       result.join("-")
     end
-
-    def self.parse(code, serie = nil)
-      serie = Serie.parse(code) if serie.nil?
-
-      return nil if serie.nil?
-
-      if ["NIST HB 135-2020", "NIST.HB.135-2020"].include?(code)
-        return new(sequence: "2020", parsed: "-2020")
-      end
-
-      edition = serie.parse_edition(code)
-      return new(**edition) unless edition.nil?
-
-      nil
-    end
   end
 end

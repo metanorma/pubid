@@ -88,11 +88,28 @@ module NistPubid
                   :edition, :supplement, :update_year, :section, :appendix,
                   :errata, :index, :insert
 
-    def initialize(publisher:, serie:, docnumber:, **opts)
+    def initialize(publisher:, serie:, docnumber:, stage: nil, supplement: nil,
+                   edition_month: nil, edition_year: nil, edition_day: nil, **opts)
       @publisher = publisher
-      @serie = Serie.new(serie: serie)
+      @serie = serie
       @code = docnumber
-      opts.each { |key, value| send("#{key}=", value) }
+      @stage = Stage.new(stage.to_s) if stage
+      @supplement = (supplement.is_a?(Array) && "") || supplement
+      @edition = parse_edition(edition_month, edition_year, edition_day) if edition_month || edition_year
+      opts.each { |key, value| send("#{key}=", value.to_s) }
+    end
+
+    def parse_edition(edition_month, edition_year, edition_day)
+      if edition_month
+        date = Date.parse("#{edition_day || '01'}/#{edition_month}/#{edition_year}")
+        if edition_day
+          Edition.new(month: date.month, year: date.year, day: date.day)
+        else
+          Edition.new(month: date.month, year: date.year)
+        end
+      else
+        Edition.new(year: edition_year.to_i)
+      end
     end
 
     # returns weight based on amount of defined attributes
@@ -100,6 +117,13 @@ module NistPubid
       instance_variables.inject(0) do |sum, var|
         sum + (instance_variable_get(var).nil? ? 0 : 1)
       end
+    end
+
+    def ==(other)
+      other.instance_variables.each do |var|
+        return false if instance_variable_get(var) != other.instance_variable_get(var)
+      end
+      true
     end
 
     def merge(document)
@@ -125,89 +149,9 @@ module NistPubid
 
     def self.parse(code)
       code = update_old_code(code)
-      matches = {
-        publisher: Publisher.parse(code),
-        stage: Stage.parse(code),
-        addendum: match(/(?<=(\.))?(add(?:-\d+)?|Addendum)/, code),
-        section: /(?<=sec)\d+/.match(code)&.to_s,
-        appendix: /\d+app/.match(code)&.to_s,
-        errata: /-errata|\d+err(?:ata)?/.match(code)&.to_s,
-        index: /\d+index|\d+indx/.match(code)&.to_s,
-        insert: /\d+ins(?:ert)?/.match(code)&.to_s,
-      }
-
-      matches[:serie] = Serie.parse(code, matches[:publisher])
-      unless matches[:serie]
-        raise Errors::ParseError.new("failed to parse serie for #{code}")
-      end
-
-      code_original = code
-
-      unless ["NBS CSM", "NBS CS", "NBS RPT"].include?(matches[:serie].to_s)
-        parsed_volume, volume = matches[:serie].parse_volume(code)
-        if volume
-          matches[:volume] = volume
-          # replace last occurrence
-          code = code.reverse.sub(parsed_volume.reverse, "").reverse
-        end
-      end
-
-      parsed_part, part = matches[:serie].parse_part(code)
-      if part
-        matches[:part] = part
-        # replace last occurrence
-        code = code.reverse.sub(parsed_part.reverse, "").reverse
-      end
-      matches[:edition] = Edition.parse(code, matches[:serie])
-
-      code = code.sub(matches[:edition].parsed, "") if matches[:edition]
-
-      version = /(?<=\.)?(?:(?:ver)((?(1)[-\d]|[.\d])+|\d+)|(?:v)(\d+\.[.\d]+))/
-        .match(code)
-      if version
-        code = code.sub(version.to_s, "")
-        matches[:version] = version.to_a[1..-1]&.compact&.first&.gsub(/-/, ".")
-      end
-
-      unless matches[:stage].nil?
-        code = code.sub(matches[:stage].original_code, "")
-      end
-
-      translation = /\((\w{3})\)|\.(spa|zho|vie|por|ind)/.match(code)
-      if translation
-        code = code.sub(translation.to_s, "")
-        matches[:translation] = translation.captures.join
-      end
-
-      matches[:revision] = matches[:serie].parse_revision(code)
-
-      matches[:supplement] = matches[:serie].parse_supplement(code_original)
-
-      update = matches[:serie].parse_update(code)
-
-      (matches[:update_number], matches[:update_year]) = update if update
-
-      matches[:revision] = nil if matches[:addendum]
-
-      matches[:docnumber] = matches[:serie].parse_docnumber(code, code_original)
-
-      # part, edition, supplement, revision, docnumber, volume
-
-      # NIST GCR documents often have a 3-part identifier -- the last part is
-      # not revision but is part of the identifier.
-      if matches[:serie].to_s == "NIST GCR" && matches[:revision]
-        matches[:docnumber] += "-#{matches[:revision]}"
-        matches[:revision] = nil
-      end
-
-      matches[:serie] = SERIES["mr"].invert[matches[:serie].to_s] || matches[:serie].to_s
-      # matches[:serie].gsub!(/\./, " ")
-
-      new(**matches)
-    end
-
-    def self.match(regex, code)
-      regex.match(code)&.to_s
+      DocumentTransform.new.apply(DocumentParser.new.parse(code))
+    rescue Parslet::ParseFailed => failure
+      raise NistPubid::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
     end
 
     def to_s(format = :short)

@@ -35,4 +35,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "nokogiri"
   spec.add_dependency "thor"
   spec.add_dependency "lightly"
+  spec.add_dependency "parslet"
 end

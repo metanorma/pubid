@@ -15,6 +15,10 @@ module NistPubid
       PUBLISHERS[format.to_s][@publisher]
     end
 
+    def ==(other)
+      other.publisher == @publisher
+    end
+
     def self.publishers_keys
       PUBLISHERS["long"].keys
     end
