@@ -12,15 +12,17 @@ module NistPubid
 
       rule(:edition) do
         (str("supp") >> str("").as(:supplement) >>
-          (match('[A-Za-z]').repeat(3, 3).as(:edition_month) >> match('\d').repeat(4,4).as(:edition_year)))
+          (letters.as(:edition_month) >> year_digits.as(:edition_year)) |
+          str("e") >> year_digits.as(:edition_year)
+        )
       end
 
       rule(:report_number) do
-        match('\d').repeat(1).as(:first_report_number) >>
-          (str("e") >> match('\d').repeat(1).as(:edition) >> (str("-") >> match('\d').repeat(1)).maybe |
-            str("-") >> match('\d').repeat(4,4).as(:edition_year) |
-            str("-") >> match('\d').repeat(1).as(:second_report_number) >> str("-") >>  match('\d').repeat(4,4).as(:edition_year) |
-            str("-") >> match('\d').repeat(1).as(:second_report_number)
+        digits.as(:first_report_number) >>
+          (str("e") >> digits.as(:edition) >> (str("-") >> digits).maybe |
+            str("-") >> year_digits.as(:edition_year) |
+            str("-") >> digits.as(:second_report_number) >> str("-") >>  year_digits.as(:edition_year) |
+            str("-") >> digits.as(:second_report_number)
           ).maybe
       end
     end

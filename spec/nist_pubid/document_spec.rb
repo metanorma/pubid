@@ -1012,6 +1012,63 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NBS BH 3a" do
+      let(:original_pubid) { "NBS BH 3a" }
+      let(:short_pubid) { "NBS BH 3A" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CIRC 15-April1909" do
+      let(:original_pubid) { "NBS CIRC 15-April1909" }
+      let(:short_pubid) { "NBS CIRC 15e190904" }
+
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CIRC 24supJuly1922" do
+      let(:original_pubid) { "NBS CIRC 24supJuly1922" }
+      let(:short_pubid) { "NBS CIRC 24e192207sup" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CIRC 539v10" do
+      let(:original_pubid) { "NBS CIRC 539v10" }
+      let(:short_pubid) { "NBS CIRC 539v10" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CRPL-F-A 135B" do
+      let(:original_pubid) { "NBS CRPL-F-A 135B" }
+      let(:short_pubid) { "NBS CRPL-F-A 135B" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CS 102E-42" do
+      let(:original_pubid) { "NBS CS 102E-42" }
+      let(:short_pubid) { "NBS CS 102E-42" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST HB 105-2e1996" do
+      let(:original_pubid) { "NIST HB 105-2e1996" }
+      let(:short_pubid) { "NIST HB 105-2e1996" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS HB 67suppJune1965" do
+      let(:original_pubid) { "NBS HB 67suppJune1965" }
+      let(:short_pubid) { "NBS HB 67e196506sup" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "NIST SP 1011-I-2.0" do
 
     end
