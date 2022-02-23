@@ -1069,6 +1069,66 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NBS IR 73-285p1" do
+      let(:original_pubid) { "NBS IR 73-285p1" }
+      let(:short_pubid) { "NBS IR 73-285pt1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS IR 80-2111-11" do
+      let(:original_pubid) { "NBS IR 80-2111-11" }
+      let(:short_pubid) { "NBS IR 80-2111pt11" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "LCIRC 118sup3/1926" do
+      let(:original_pubid) { "NBS.LCIRC.118sup3/1926" }
+      let(:short_pubid) { "NBS LC 118sup/Upd1-192603" }
+      let(:mr_pubid) { "NBS.LC.118sup.u1-192603" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "LCIRC 145r6/1925" do
+      let(:original_pubid) { "NBS.LCIRC.145r6/1925" }
+      let(:short_pubid) { "NBS LC 145/Upd1-192506" }
+      let(:mr_pubid) { "NBS.LC.145.u1-192506" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "LCIRC 378b" do
+      let(:original_pubid) { "NBS.LCIRC.378b" }
+      let(:short_pubid) { "NBS LC 378B" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS MONO 128p1" do
+      let(:original_pubid) { "NBS MONO 128p1" }
+      let(:short_pubid) { "NBS MN 128pt1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS NSRDS 61p1" do
+      let(:original_pubid) { "NBS.NSRDS.61p1" }
+      let(:short_pubid) { "NSRDS-NBS 61pt1" }
+      let(:mr_pubid) { "NBS.NSRDS.61pt1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS report ; 1946-1947" do # NBS.RPT.1946-1947
+      let(:original_pubid) { "NBS.RPT.1946-1947" }
+      let(:short_pubid) { "NBS RPT 1946-1947" }
+      let(:mr_pubid) { "NBS.RPT.1946-1947" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "NIST SP 1011-I-2.0" do
 
     end

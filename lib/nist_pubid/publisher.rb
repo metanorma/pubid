@@ -24,7 +24,7 @@ module NistPubid
     end
 
     def self.parse(code)
-      publisher = /(#{PUBLISHERS["long"].keys.join('|')})(?=\.|\s)/.match(code)
+      publisher = /(#{PUBLISHERS["long"].keys.join('|')})/.match(code)
       return new(publisher: publisher.to_s) if publisher
 
       publisher = /(#{PUBLISHERS["long"].values.join('|')})(?=\.|\s)/.match(code)

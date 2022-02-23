@@ -85,8 +85,8 @@ module NistPubid
   class Document
     attr_accessor :serie, :code, :revision, :publisher, :version, :volume,
                   :part, :addendum, :stage, :translation, :update_number,
-                  :edition, :supplement, :update_year, :section, :appendix,
-                  :errata, :index, :insert
+                  :edition, :supplement, :update_year, :update_month,
+                  :section, :appendix, :errata, :index, :insert
 
     def initialize(publisher:, serie:, docnumber:, stage: nil, supplement: nil,
                    edition_month: nil, edition_year: nil, edition_day: nil, **opts)
@@ -224,9 +224,14 @@ module NistPubid
     def render_update(format)
       return "" if update_year.nil?
 
+      if update_month && update_number.nil?
+        @update_number = "1"
+      end
+
       if update_number.match?(/\d+/)
         update_text = update_number
         update_text += "-#{update_year}" if update_year && !update_year.empty?
+        update_text += sprintf("%02d", update_month) if update_month
       else
         update_text = "1"
       end

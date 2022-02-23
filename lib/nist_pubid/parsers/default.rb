@@ -9,6 +9,7 @@ module NistPubid
       rule(:letters) { match('[A-Za-z]').repeat(1) }
       rule(:year_digits) { match('\d').repeat(4, 4) }
       rule(:month_letters) { match('[A-Za-z]').repeat(3, 3) }
+      rule(:number_suffix) { match("[aA-Z]") }
       # rule(:small)
 
       rule(:parts) do
@@ -43,12 +44,15 @@ module NistPubid
       end
 
       rule(:report_number) do
-        ((digits >> match("[aA-Z]").maybe).as(:first_report_number) >>
-          (str("-") >> (digits >> match("[aA-Z]").maybe).as(:second_report_number)).maybe)
+        ((digits >>
+          # do not match with 428P1
+          (number_suffix >> match('\d').absent?).maybe
+         ).as(:first_report_number) >>
+           (str("-") >> (digits >> number_suffix.maybe).as(:second_report_number)).maybe)
       end
 
       rule(:part) do
-        str("pt") >> digits.as(:part)
+        (str("pt") | str("p")) >> digits.as(:part)
       end
 
       rule(:revision) do
