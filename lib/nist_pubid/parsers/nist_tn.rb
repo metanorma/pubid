@@ -6,7 +6,7 @@ module NistPubid
       end
 
       rule(:edition) do
-        str("-") >> match('\d').repeat(1).as(:edition)
+        (str("-") | str("e")) >> match('\d').repeat(1).as(:edition)
       end
     end
   end

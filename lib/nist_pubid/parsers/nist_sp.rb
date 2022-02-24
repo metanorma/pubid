@@ -2,7 +2,7 @@ module NistPubid
   module Parsers
     class NistSp < Default
       rule(:version) do
-        ((str("ver") >> match('\d').repeat(1).as(:version)) |
+        ((str("ver") >> (match('\d').repeat(1) >> (str(".") >> match('\d')).maybe).as(:version)) |
           (str("v") >> (match('\d') >> str(".") >> match('\d') >> str(".") >> match('\d')).as(:version)))
       end
 
@@ -40,7 +40,8 @@ module NistPubid
       end
 
       rule(:revision) do
-        ((str("rev") | str("r") | str("-")) >> (match('\d').repeat(1) >> match("[a-z]").maybe).as(:revision)) |
+        ((str("rev") | str("r")) >> (match('\d').repeat(1) >> match("[a-z]").maybe).as(:revision)) |
+          (str("-") >> (match('\d').repeat(1)).as(:revision)) |
           (str("r") >> match("[a-z]").as(:revision))
       end
     end

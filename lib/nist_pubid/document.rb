@@ -228,10 +228,17 @@ module NistPubid
         @update_number = "1"
       end
 
+      if update_year&.length == 2
+        @update_year = "19#{update_year}"
+      end
+
       if update_number.match?(/\d+/)
         update_text = update_number
-        update_text += update_year.length > 2 ? "-#{update_year}" : "-19#{update_year}" if update_year && !update_year.empty?
-        update_text += sprintf("%02d", update_month) if update_month
+        update_text += "-#{update_year}" if update_year && !update_year.empty?
+        if update_month
+          date = Date.parse("01/#{update_month}/#{update_year}")
+          update_text += sprintf("%02d", date.month)
+        end
       else
         update_text = "1"
       end

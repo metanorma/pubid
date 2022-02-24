@@ -1215,12 +1215,76 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
-    context "NIST SP 1011-I-2.0" do
+    context "NIST IR 4335rNov1990" do
+      let(:original_pubid) { "NIST IR 4335rNov1990" }
+      let(:short_pubid) { "NIST IR 4335/Upd1-199011" }
+      let(:mr_pubid) { "NIST.IR.4335.u1-199011" }
 
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST IR 6945r" do
+      let(:original_pubid) { "NIST IR 6945r" }
+      let(:short_pubid) { "NIST IR 6945r1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST IR 7103b" do
+      let(:original_pubid) { "NIST IR 7103b" }
+      let(:short_pubid) { "NIST IR 7103B" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST NCSTAR 1-1b" do
+      let(:original_pubid) { "NIST NCSTAR 1-1b" }
+      let(:short_pubid) { "NIST NCSTAR 1-1B" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST NCSTAR 1-1cv1" do
+      let(:original_pubid) { "NIST NCSTAR 1-1cv1" }
+      let(:short_pubid) { "NIST NCSTAR 1-1Cv1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST OWMWP 06-13-2018" do
+      let(:original_pubid) { "NIST OWMWP 06-13-2018" }
+      let(:short_pubid) { "NIST OWMWP 06-13-2018" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 1011-I-2.0" do
+      let(:original_pubid) { "NIST SP 1011-I-2.0" }
+      let(:short_pubid) { "NIST SP 1011v1ver2.0" }
+
+      it_behaves_like "converts pubid to different formats"
     end
 
     context "NIST SP 1011-II-1.0" do
+      let(:original_pubid) { "NIST SP 1011-II-1.0" }
+      let(:short_pubid) { "NIST SP 1011v2ver1.0" }
 
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 800-73-3p1" do
+      let(:original_pubid) { "NIST SP 800-73-3p1" }
+      let(:short_pubid) { "NIST SP 800-73pt1r3" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NISTIR 8259Aes" do
+      let(:original_pubid) { "NISTIR 8259Aes" }
+      let(:short_pubid) { "NIST IR 8259A(spa)" }
+      let(:mr_pubid) { "NIST.IR.8259A.spa" }
+
+      it_behaves_like "converts pubid to different formats"
     end
 
     context "when cannot parse code" do
