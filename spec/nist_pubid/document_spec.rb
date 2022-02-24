@@ -1129,6 +1129,92 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NBS RPT 4817-A" do
+      let(:original_pubid) { "NBS RPT 4817-A" }
+      let(:short_pubid) { "NBS RPT 4817-A" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS RPT 7386a" do
+      let(:original_pubid) { "NBS RPT 7386a" }
+      let(:short_pubid) { "NBS RPT 7386a" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS SP 384r" do
+      let(:original_pubid) { "NBS SP 384r" }
+      let(:short_pubid) { "NBS SP 384r1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS TN 100-A" do
+      let(:original_pubid) { "NBS TN 100-A" }
+      let(:short_pubid) { "NBS TN 100-A" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS TN 467p1adde1" do
+      let(:original_pubid) { "NBS TN 467p1adde1" }
+      let(:short_pubid) { "NBS TN 467pt1 Add." }
+      let(:mr_pubid) { "NBS.TN.467pt1.add-1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST HB 146v1-1991" do
+      let(:original_pubid) { "NIST HB 146v1-1991" }
+      let(:short_pubid) { "NIST HB 146v1e1991" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST HB 150-2A" do
+      let(:original_pubid) { "NIST HB 150-2A" }
+      let(:short_pubid) { "NIST HB 150-2A" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST IR 4335r11/90" do
+      let(:original_pubid) { "NIST IR 4335r11/90" }
+      let(:short_pubid) { "NIST IR 4335/Upd1-199011" }
+      let(:mr_pubid) { "NIST.IR.4335.u1-199011" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST IR 5443-A" do
+      let(:original_pubid) { "NIST IR 5443-A" }
+      let(:short_pubid) { "NIST IR 5443-A" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST IR 7297-B" do
+      let(:original_pubid) { "NIST IR 7297-B" }
+      let(:short_pubid) { "NIST IR 7297-B" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST IR 6099a" do
+      let(:original_pubid) { "NIST IR 6099a" }
+      let(:short_pubid) { "NIST IR 6099A" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST IR 7356-CAS" do
+      let(:original_pubid) { "NIST IR 7356-CAS" }
+      let(:short_pubid) { "NIST IR 7356-CAS" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "NIST SP 1011-I-2.0" do
 
     end

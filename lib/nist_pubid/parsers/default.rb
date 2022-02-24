@@ -43,12 +43,14 @@ module NistPubid
         end).as(:stage) >> str(")"))
       end
 
-      rule(:report_number) do
-        ((digits >>
-          # do not match with 428P1
+      rule(:digits_with_suffix) do
+        digits >> # do not match with 428P1
           (number_suffix >> match('\d').absent?).maybe
-         ).as(:first_report_number) >>
-           (str("-") >> (digits >> number_suffix.maybe).as(:second_report_number)).maybe)
+      end
+
+      rule(:report_number) do
+        digits_with_suffix.as(:first_report_number) >>
+          (str("-") >> digits_with_suffix.as(:second_report_number)).maybe
       end
 
       rule(:part) do
@@ -56,7 +58,7 @@ module NistPubid
       end
 
       rule(:revision) do
-        str("r") >> (digits >> match("[a-z]").maybe).as(:revision)
+        str("r") >> ((digits >> match("[a-z]").maybe).maybe).as(:revision)
       end
 
       rule(:volume) do

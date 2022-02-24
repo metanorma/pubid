@@ -39,6 +39,7 @@ NIST SP 800-38e: NIST SP 800-38E
 NIST SP 782-1995-96: NIST SP 782-1995
 NIST FIPS 54-Jan15: NIST FIPS 54
 NBS report ;: NBS RPT
+NBS TN 467p1adde1: NBS TN 467pt1-add
 !ruby/regexp /NBS CRPL-F-B(?=\d+)/: "NBS CRPL-F-B "
 !ruby/regexp /NBS[.\s]CS[.\s]e/: "NBS CS-E "
 !ruby/regexp /(?<=\d)es/: (spa)

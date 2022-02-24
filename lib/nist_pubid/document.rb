@@ -204,7 +204,7 @@ module NistPubid
       result = ""
 
       result += "#{EDITION_DESC[format]}#{edition.to_s}" unless edition.nil?
-      result += "#{REVISION_DESC[format]}#{revision.to_s}" if revision
+      result += "#{REVISION_DESC[format]}#{revision == '' ? '1' : revision}" if revision
       result += "#{VERSION_DESC[format]}#{version}" unless version.nil?
       result
     end
@@ -230,7 +230,7 @@ module NistPubid
 
       if update_number.match?(/\d+/)
         update_text = update_number
-        update_text += "-#{update_year}" if update_year && !update_year.empty?
+        update_text += update_year.length > 2 ? "-#{update_year}" : "-19#{update_year}" if update_year && !update_year.empty?
         update_text += sprintf("%02d", update_month) if update_month
       else
         update_text = "1"
