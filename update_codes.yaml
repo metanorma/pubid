@@ -47,6 +47,7 @@ NIST IR 8259Aes: NIST IR 8259A(spa)
 NIST IR 8259Apt: NIST IR 8259A(por)
 NIST IR 8211-upd: NIST IR 8211/Upd1-2021
 NIST IR 8115r1/upd: NIST IR 8115r1/Upd1-2021
+NBS CS v: NBS CSM v
 !ruby/regexp /NBS CRPL-F-B(?=\d+)/: "NBS CRPL-F-B "
 !ruby/regexp /NBS[.\s]CS[.\s]e/: "NBS CS-E "
 !ruby/regexp /(?<=\d)es/: (spa)

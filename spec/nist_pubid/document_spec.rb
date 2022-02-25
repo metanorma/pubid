@@ -257,7 +257,7 @@ RSpec.describe NistPubid::Document do
 
     context "parse NBS CSM series" do
       let(:original_pubid) { "NBS CSM v6n1" }
-      let(:short_pubid) { "NBS CSM 6-1" }
+      let(:short_pubid) { "NBS CSM v6pt1" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -1320,6 +1320,13 @@ RSpec.describe NistPubid::Document do
       let(:original_pubid) { "NISTIR 8211-upd" }
       let(:short_pubid) { "NIST IR 8211/Upd1-2021" }
       let(:mr_pubid) { "NIST.IR.8211.u1-2021" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS CS v6n1" do
+      let(:original_pubid) { "NBS CS v6n1" }
+      let(:short_pubid) { "NBS CSM v6pt1" }
 
       it_behaves_like "converts pubid to different formats"
     end
