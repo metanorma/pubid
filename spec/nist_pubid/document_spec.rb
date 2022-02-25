@@ -1287,6 +1287,43 @@ RSpec.describe NistPubid::Document do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NIST SP 500-268v1.1" do
+      let(:original_pubid) { "NIST SP 500-268v1.1" }
+      let(:short_pubid) { "NIST SP 500-268ver1.1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 500-281-v1.0" do
+      let(:original_pubid) { "NIST SP 500-281-v1.0" }
+      let(:short_pubid) { "NIST SP 500-281ver1.0" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST SP 800-90r" do
+      let(:original_pubid) { "NIST SP 800-90r" }
+      let(:short_pubid) { "NIST SP 800-90r1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NISTIR 8115r1/upd" do
+      let(:original_pubid) { "NISTIR 8115r1/upd" }
+      let(:short_pubid) { "NIST IR 8115r1/Upd1-2021" }
+      let(:mr_pubid) { "NIST.IR.8115r1.u1-2021" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NISTIR 8211-upd" do
+      let(:original_pubid) { "NISTIR 8211-upd" }
+      let(:short_pubid) { "NIST IR 8211/Upd1-2021" }
+      let(:mr_pubid) { "NIST.IR.8211.u1-2021" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "when cannot parse code" do
       it "should raise error" do
         expect { described_class.parse("NIST SP WRONG-CODE") }

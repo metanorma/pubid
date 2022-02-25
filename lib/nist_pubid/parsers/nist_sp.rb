@@ -3,7 +3,7 @@ module NistPubid
     class NistSp < Default
       rule(:version) do
         ((str("ver") >> (match('\d').repeat(1) >> (str(".") >> match('\d')).maybe).as(:version)) |
-          (str("v") >> (match('\d') >> str(".") >> match('\d') >> str(".") >> match('\d')).as(:version)))
+          (str("v") >> (match('\d') >> str(".") >> match('\d') >> (str(".") >> match('\d')).maybe).as(:version)))
       end
 
       rule(:first_report_number) do
@@ -42,7 +42,8 @@ module NistPubid
       rule(:revision) do
         ((str("rev") | str("r")) >> (match('\d').repeat(1) >> match("[a-z]").maybe).as(:revision)) |
           (str("-") >> (match('\d').repeat(1)).as(:revision)) |
-          (str("r") >> match("[a-z]").as(:revision))
+          (str("r") >> match("[a-z]").as(:revision)) |
+          (str("r") >> str("").as(:revision))
       end
     end
   end

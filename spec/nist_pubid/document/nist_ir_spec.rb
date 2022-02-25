@@ -15,7 +15,8 @@ RSpec.describe NistPubid::Document do
 
   context "NIST IR 4743rJun1992" do
     let(:original_pubid) { "NIST IR 4743rJun1992" }
-    let(:short_pubid) { "NIST IR 4743rJun1992" }
+    let(:short_pubid) { "NIST IR 4743/Upd1-199206" }
+    let(:mr_pubid) { "NIST.IR.4743.u1-199206" }
 
     it_behaves_like "converts pubid to different formats"
   end

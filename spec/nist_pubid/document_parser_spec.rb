@@ -7,7 +7,7 @@ RSpec.describe NistPubid::DocumentParser do
     end
 
     it "returns DocumentParser for series without separate parser" do
-      expect(described_class.new.find_parser("NIST NCSTAR")).to eq(NistPubid::Parsers::Default)
+      expect(described_class.new.find_parser("NOT EXISTING SERIES")).to eq(NistPubid::Parsers::Default)
     end
   end
 end

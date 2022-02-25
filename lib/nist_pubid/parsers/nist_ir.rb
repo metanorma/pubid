@@ -23,6 +23,10 @@ module NistPubid
             digits.as(:revision) |
             str("").as(:revision))
       end
+
+      # rule(:update) do
+      #   (str("-upd") | str("/upd")) >> str("").as(:update_number)
+      # end
     end
   end
 end
