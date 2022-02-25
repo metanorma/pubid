@@ -83,4 +83,25 @@ RSpec.describe NistPubid::Document do
 
     it_behaves_like "converts pubid to different formats"
   end
+
+  context "NBS.HB.105-1r1990" do
+    let(:original_pubid) { "NBS.HB.105-1r1990" }
+    let(:short_pubid) { "NIST HB 105-1r1990" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
+
+  context "NBS HB 67suppFeb1965" do
+    let(:original_pubid) { "NBS HB 67suppFeb1965" }
+    let(:short_pubid) { "NBS HB 67e196502sup" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
+
+  context "NBS HB 67suppJune1965" do
+    let(:original_pubid) { "NBS HB 67suppJune1965" }
+    let(:short_pubid) { "NBS HB 67e196506sup" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
 end

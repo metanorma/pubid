@@ -119,4 +119,101 @@ RSpec.describe NistPubid::Document do
 
     it_behaves_like "converts pubid to different formats"
   end
+
+  context "NISTIR 8115r1/upd" do
+    let(:original_pubid) { "NISTIR 8115r1/upd" }
+    let(:short_pubid) { "NIST IR 8115r1/Upd1-2021" }
+    let(:mr_pubid) { "NIST.IR.8115r1.u1-2021" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
+
+  context "NISTIR 8211-upd" do
+    let(:original_pubid) { "NISTIR 8211-upd" }
+    let(:short_pubid) { "NIST IR 8211/Upd1-2021" }
+    let(:mr_pubid) { "NIST.IR.8211.u1-2021" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
+
+  context "NISTIR 8259Aes" do
+    let(:original_pubid) { "NISTIR 8259Aes" }
+    let(:short_pubid) { "NIST IR 8259A(spa)" }
+    let(:mr_pubid) { "NIST.IR.8259A.spa" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
+
+  context "NIST IR 4335r11/90" do
+    let(:original_pubid) { "NIST IR 4335r11/90" }
+    let(:short_pubid) { "NIST IR 4335/Upd1-199011" }
+    let(:mr_pubid) { "NIST.IR.4335.u1-199011" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
+
+  context "NIST IR 5443-A" do
+    let(:original_pubid) { "NIST IR 5443-A" }
+    let(:short_pubid) { "NIST IR 5443-A" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
+
+  context "NIST IR 7297-B" do
+    let(:original_pubid) { "NIST IR 7297-B" }
+    let(:short_pubid) { "NIST IR 7297-B" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
+
+  context "NIST IR 6099a" do
+    let(:original_pubid) { "NIST IR 6099a" }
+    let(:short_pubid) { "NIST IR 6099A" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
+
+  context "NIST IR 7356-CAS" do
+    let(:original_pubid) { "NIST IR 7356-CAS" }
+    let(:short_pubid) { "NIST IR 7356-CAS" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
+
+  context "NIST IR 4335rNov1990" do
+    let(:original_pubid) { "NIST IR 4335rNov1990" }
+    let(:short_pubid) { "NIST IR 4335/Upd1-199011" }
+    let(:mr_pubid) { "NIST.IR.4335.u1-199011" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
+
+  context "NIST IR 6945r" do
+    let(:original_pubid) { "NIST IR 6945r" }
+    let(:short_pubid) { "NIST IR 6945r1" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
+
+  context "NIST IR 7103b" do
+    let(:original_pubid) { "NIST IR 7103b" }
+    let(:short_pubid) { "NIST IR 7103B" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
+
+  context "NIST IR 8115(esp)" do
+    let(:short_pubid) { "NIST IR 8115(esp)" }
+    let(:mr_pubid) { "NIST.IR.8115.esp" }
+    let(:long_pubid) do
+      "National Institute of Standards and Technology Interagency or"\
+          " Internal Report 8115 (ESP)"
+    end
+    let(:abbrev_pubid) do
+      "Natl. Inst. Stand. Technol. Interagency or Internal Report"\
+          " 8115 (ESP)"
+    end
+
+    it_behaves_like "converts pubid to different formats"
+  end
 end
