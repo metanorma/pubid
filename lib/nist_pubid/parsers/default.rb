@@ -48,13 +48,22 @@ module NistPubid
           (number_suffix >> match('\d').absent?).maybe
       end
 
-      rule(:report_number) do
-        digits_with_suffix.as(:first_report_number) >>
-          (str("-") >> digits_with_suffix.as(:second_report_number)).maybe
+      rule(:first_report_number) do
+        digits_with_suffix.as(:first_report_number)
       end
 
+      rule(:second_report_number) do
+        digits_with_suffix.as(:second_report_number)
+      end
+
+      rule(:report_number) do
+        first_report_number >> (str("-") >> second_report_number).maybe
+      end
+
+      rule(:part_prefixes) { str("pt") | str("p") }
+
       rule(:part) do
-        (str("pt") | str("p")) >> digits.as(:part)
+        part_prefixes >> digits.as(:part)
       end
 
       rule(:revision) do
@@ -78,8 +87,10 @@ module NistPubid
           (str(".") >> match('\w').repeat(3, 3).as(:translation))
       end
 
+      rule(:edition_prefixes) { str("e") }
+
       rule(:edition) do
-        str("e") >> digits.as(:edition)
+        edition_prefixes >> digits.as(:edition)
       end
 
       rule(:addendum) do

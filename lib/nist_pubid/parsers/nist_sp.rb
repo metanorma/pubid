@@ -2,12 +2,15 @@ module NistPubid
   module Parsers
     class NistSp < Default
       rule(:version) do
-        ((str("ver") >> (match('\d').repeat(1) >> (str(".") >> match('\d')).maybe).as(:version)) |
-          (str("v") >> (match('\d') >> str(".") >> match('\d') >> (str(".") >> match('\d')).maybe).as(:version)))
+        ((str("ver") >> (digits >> (str(".") >> digits).maybe).as(:version)) |
+          (str("v") >>
+            (match('\d') >> str(".") >> match('\d') >> (str(".") >> match('\d')).maybe).as(:version)))
       end
 
+      rule(:number_suffix) { match["[A-Zabcd]"] }
+
       rule(:first_report_number) do
-        (match('\d').repeat(1) >> (str("GB") | str("a")).maybe)
+        digits >> (str("GB") | str("a")).maybe
       end
 
       rule(:report_number) do
@@ -21,11 +24,11 @@ module NistPubid
               # consume 4 numbers or any amount of numbers
               # for document ids starting from 250
               (if context.captures[:first_number] == "250"
-                 match('\d').repeat(1)
+                 digits
                else
-                 # skip edition numbers (parse only if have not 4 numbers)
-                 match('\d').repeat(4, 4).absent? >> match('\d').repeat(1)
-               end >> match["[A-Zabcd]"].maybe
+                 # do not consume edition numbers (parse only if have not 4 numbers)
+                 year_digits.absent? >> digits
+               end >> number_suffix.maybe
                 # parse last number as edition if have 4 numbers
               ) | (str("NCNR") | str("PERMIS") | str("BFRL"))
             end.as(:second_report_number)
@@ -35,13 +38,13 @@ module NistPubid
       end
 
       rule(:edition) do
-        ((str("e") >> match("\\d").repeat(4,4).as(:edition_year)) | (str("-") >> match("\\d").repeat(4,4).as(:edition_year)) |
-          (str("e") >> match("\\d").repeat(1).as(:edition)))
+        ((str("e") >> year_digits.as(:edition_year)) | (str("-") >> year_digits.as(:edition_year)) |
+          (str("e") >> digits.as(:edition)))
       end
 
       rule(:revision) do
-        ((str("rev") | str("r")) >> (match('\d').repeat(1) >> match("[a-z]").maybe).as(:revision)) |
-          (str("-") >> (match('\d').repeat(1)).as(:revision)) |
+        ((str("rev") | str("r")) >> (digits >> match("[a-z]").maybe).as(:revision)) |
+          (str("-") >> digits.as(:revision)) |
           (str("r") >> match("[a-z]").as(:revision)) |
           (str("r") >> str("").as(:revision))
       end

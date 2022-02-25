@@ -2,11 +2,11 @@ module NistPubid
   module Parsers
     class NistTn < Default
       rule(:report_number) do
-        match('\d').repeat(1).as(:first_report_number)
+        first_report_number
       end
 
-      rule(:edition) do
-        (str("-") | str("e")) >> match('\d').repeat(1).as(:edition)
+      rule(:edition_prefixes) do
+        str("-") | str("e")
       end
     end
   end

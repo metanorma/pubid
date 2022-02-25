@@ -10,7 +10,7 @@ module NistPubid
       rule(:report_number) do
         (year_digits.as(:first_report_number) >>
           str("-") >> year_digits.as(:edition_year)) |
-          digits_with_suffix.as(:first_report_number) >> (str("-") >>
+          first_report_number >> (str("-") >>
             ((digits | match("[aAB]") | str("CAS") | str("FRA")) >>
               # for extra number for NIST IR 85-3273-10
               (str("-") >> digits).maybe).as(:second_report_number)).maybe
@@ -23,10 +23,6 @@ module NistPubid
             digits.as(:revision) |
             str("").as(:revision))
       end
-
-      # rule(:update) do
-      #   (str("-upd") | str("/upd")) >> str("").as(:update_number)
-      # end
     end
   end
 end

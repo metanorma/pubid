@@ -8,8 +8,7 @@ module NistPubid
       end
 
       rule(:report_number) do
-        (digits.as(:first_report_number) >> edition.maybe >>
-          (str("-") >> (digits >> match("[aA-Z]").maybe).as(:second_report_number)).maybe)
+        first_report_number >> edition.maybe >> (str("-") >> second_report_number).maybe
       end
 
       rule(:edition) do

@@ -5,9 +5,7 @@ module NistPubid
         (str(" ") | str(".")) >> report_number.maybe >> parts.repeat.as(:parts)
       end
 
-      rule(:part) do
-        str("n") >> digits.as(:part)
-      end
+      rule(:part_prefixes) { str("n") }
     end
   end
 end
