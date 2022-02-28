@@ -4,7 +4,7 @@ require "pubid_iso/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "pubid-iso"
-  spec.version       = NistPubid::VERSION
+  spec.version       = PubidIso::VERSION
   spec.authors       = ["Ribose Inc."]
   spec.email         = ["open.source@ribose.com"]
 
@@ -35,4 +35,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor"
   spec.add_dependency "lightly"
   spec.add_dependency "parslet"
+  spec.add_dependency "algolia"
 end
