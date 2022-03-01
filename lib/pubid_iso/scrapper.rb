@@ -53,7 +53,7 @@ module PubidIso
         ]
       end
 
-      # @param doc [Nokogiri:HTML::Document]
+      # @param doc [Nokogiri:HTML::Identifier]
       # @param pubid [String]
       # @param edition [String]
       # @param langs [Array<Hash>]

@@ -1,16 +1,21 @@
 require "algolia"
 
 module PubidIso
-  class Document
-    attr_accessor :code, :url
+  class Identifier
+    attr_accessor :number, :copublisher, :stage, :part
 
-    def initialize(code)
-      @code = code
-      @url = fetch_iso.first[:path]
+    def initialize(**opts)
+      opts.each { |key, value| send("#{key}=", value.to_s) }
+      # @number = number
+      # @url = fetch_iso.first[:path]
+    end
+
+    def urn
+      URN.new(self)
     end
 
     def self.parse(code)
-      new(code: Parser.new.parse(code).to_s)
+      new(**Parser.new.parse(code))
     rescue Parslet::ParseFailed => failure
       raise PubidIso::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
     end
