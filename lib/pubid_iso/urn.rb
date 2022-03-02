@@ -28,9 +28,9 @@ module PubidIso
       #   "iso-ieee" / "iec"
 
       if identifier.copublisher
-        "iso-#{identifier.copublisher.downcase}"
+        "#{identifier.publisher.downcase}-#{identifier.copublisher.downcase.gsub('/', '-')}"
       else
-        "iso"
+        identifier.publisher.downcase
       end
     end
 

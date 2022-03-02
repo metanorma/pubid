@@ -27,4 +27,32 @@ RSpec.describe PubidIso::Identifier do
 
     it_behaves_like "converts pubid to urn"
   end
+
+  context "IWA 8:2009" do
+    let(:pubid) { "IWA 8:2009" }
+    let(:urn) { "urn:iso:std:iwa:8" }
+
+    it_behaves_like "converts pubid to urn"
+  end
+
+  context "ISO/IEC TR 24754-2:2011" do
+    let(:pubid) { "ISO/IEC TR 24754-2:2011" }
+    let(:urn) { "urn:iso:std:iso-iec:tr:24754:-2" }
+
+    it_behaves_like "converts pubid to urn"
+  end
+
+  context "FprISO 105-A03" do
+    let(:pubid) { "FprISO 105-A03" }
+    let(:urn) { "urn:iso:std:iso:105:-A03:stage-50.00" }
+
+    it_behaves_like "converts pubid to urn"
+  end
+
+  context "ISO/IEC/IEEE 26512" do
+    let(:pubid) { "ISO/IEC/IEEE 26512" }
+    let(:urn) { "urn:iso:std:iso-iec-ieee:26512" }
+
+    it_behaves_like "converts pubid to urn"
+  end
 end

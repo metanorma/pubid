@@ -26,11 +26,6 @@ module PubidIso
         str("IS")).as(:stage)
     end
 
-    rule(:copublisher) do
-      (str("IEC") | str("IEEE") | str("IEC/IEEE") | str("CIW") | str("SAE") |
-        str("CIE") | str("ASME")).as(:copublisher)
-    end
-
     # TYPES = {
     #   "TS" => "technical-specification",
     #   "TR" => "technical-report",
@@ -38,17 +33,34 @@ module PubidIso
     #   "Guide" => "guide",
     # }.freeze
     # DATA|GUIDE|ISP|IWA|PAS|R|TR|TS|TTA
+    #       # type          = "data" / "guide" / "isp" / "iwa" /
+    #       #   "pas" / "r" / "tr" / "ts" / "tta"
     rule(:type) do
-      (str("TS") | str("TR") | str("PAS") | str("Guide")).as(:type)
+      (str("DATA") | str("ISP") | str("IWA") | str("R") | str("TTA") |
+        str("TS") | str("TR") | str("PAS") | str("Guide")).as(:type)
     end
 
     rule(:year) do
       match('\d').repeat(4, 4)
     end
 
+    rule(:part) do
+      str("-") >> (match['[\dA-Z]'] | str("-")).repeat(1).as(:part)
+    end
+
+    rule(:originator) do
+      (str("ISO") | str("IWA")).as(:publisher) >> (str("/") >> copublisher).maybe
+    end
+
+    rule(:copublisher) do
+      (str("IEC/IEEE") | str("IEC") | str("IEEE") | str("CIW") | str("SAE") |
+        str("CIE") | str("ASME") | str("ASTM")).as(:copublisher)
+    end
+
     rule(:identifier) do
-      str("ISO") >> (str("/") >> copublisher).maybe >> (str("/") >> type).maybe >> str(" ") >> (stage >> str(" ")).maybe >>
-        digits.as(:number) >> (str("-") >> digits.as(:part)).maybe >> (str(":") >> year).maybe
+      str("Fpr").maybe >> originator >> ((str(" ") | str("/")) >> type).maybe >> str(" ") >> (stage >> str(" ")).maybe >>
+        digits.as(:number) >> part.maybe >> (str(":") >> year).maybe >>
+        (str(" ") >> (str("ED1") | str("Ed 1") | str("Ed") | str("Ed 2") | str("Ed.2") | str("Ed 3"))).maybe
     end
 
     rule(:root) { identifier }
