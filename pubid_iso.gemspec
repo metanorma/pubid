@@ -35,5 +35,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor"
   spec.add_dependency "lightly"
   spec.add_dependency "parslet"
-  spec.add_dependency "algolia"
 end
