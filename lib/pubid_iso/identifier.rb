@@ -8,7 +8,7 @@ module PubidIso
                PRF: 50,
                IS: 60 }.freeze
 
-    attr_accessor :number, :copublisher, :stage, :substage, :part
+    attr_accessor :number, :copublisher, :stage, :substage, :part, :type, :year
 
     def initialize(stage: nil, **opts)
       if stage

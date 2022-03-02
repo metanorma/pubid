@@ -31,9 +31,24 @@ module PubidIso
         str("CIE") | str("ASME")).as(:copublisher)
     end
 
+    # TYPES = {
+    #   "TS" => "technical-specification",
+    #   "TR" => "technical-report",
+    #   "PAS" => "publicly-available-specification",
+    #   "Guide" => "guide",
+    # }.freeze
+    # DATA|GUIDE|ISP|IWA|PAS|R|TR|TS|TTA
+    rule(:type) do
+      (str("TS") | str("TR") | str("PAS") | str("Guide")).as(:type)
+    end
+
+    rule(:year) do
+      match('\d').repeat(4, 4)
+    end
+
     rule(:identifier) do
-      str("ISO") >> (str("/") >> copublisher).maybe >> str(" ") >> (stage >> str(" ")).maybe >>
-        digits.as(:number) >> (str("-") >> digits.as(:part)).maybe
+      str("ISO") >> (str("/") >> copublisher).maybe >> (str("/") >> type).maybe >> str(" ") >> (stage >> str(" ")).maybe >>
+        digits.as(:number) >> (str("-") >> digits.as(:part)).maybe >> (str(":") >> year).maybe
     end
 
     rule(:root) { identifier }

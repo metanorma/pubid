@@ -7,7 +7,11 @@ module PubidIso
     end
 
     def to_s
-      result = "urn:iso:std:#{publisher}:#{identifier.number}"
+      # docidentifier = originator [":" type] ":" docnumber [":" partnumber]
+      # [[":" status] ":" edition]
+      # [":" docversion] [":" language]
+
+      result = "urn:iso:std:#{originator}#{type}:#{identifier.number}"
 
       if identifier.part
         result += ":-#{identifier.part}"
@@ -19,11 +23,23 @@ module PubidIso
       result
     end
 
-    def publisher
+    def originator
+      # originator    = "iso" / "iso-iec" / "iso-cie" / "iso-astm" /
+      #   "iso-ieee" / "iec"
+
       if identifier.copublisher
         "iso-#{identifier.copublisher.downcase}"
       else
         "iso"
+      end
+    end
+
+    def type
+      # type          = "data" / "guide" / "isp" / "iwa" /
+      #   "pas" / "r" / "tr" / "ts" / "tta"
+
+      if identifier.type
+        ":#{identifier.type.downcase}"
       end
     end
   end
