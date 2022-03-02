@@ -27,7 +27,8 @@ module PubidIso
     end
 
     rule(:copublisher) do
-      (str("IEC") | str("IEEE") | str("IEC/IEEE") | str("CIW") | str("SAE")).as(:copublisher)
+      (str("IEC") | str("IEEE") | str("IEC/IEEE") | str("CIW") | str("SAE") |
+        str("CIE") | str("ASME")).as(:copublisher)
     end
 
     rule(:identifier) do
