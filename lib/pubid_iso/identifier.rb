@@ -1,8 +1,20 @@
 module PubidIso
   class Identifier
-    attr_accessor :number, :copublisher, :stage, :part
+    STAGES = { NP: 10,
+               WD: 20,
+               CD: 30,
+               DIS: 40,
+               FDIS: 50,
+               PRF: 50,
+               IS: 60 }.freeze
 
-    def initialize(**opts)
+    attr_accessor :number, :copublisher, :stage, :substage, :part
+
+    def initialize(stage: nil, **opts)
+      if stage
+        @stage = STAGES[stage.to_sym]
+        @substage = 0
+      end
       opts.each { |key, value| send("#{key}=", value.to_s) }
     end
 

@@ -14,28 +14,9 @@ module PubidIso
       end
 
       if identifier.stage
-        result += ":stage-#{stage}"
+        result += ":stage-#{identifier.stage}.#{sprintf('%02d', identifier.substage)}"
       end
       result
-    end
-
-    def stage
-      # Stage 10: NP (non-public)
-      # Stage 20: WD (non-public)
-      # Stage 30: CD
-      # Stage 40: DIS
-      # Stage 50: FDIS
-      # Stage 50.60: PRF ("proof") (non-public)
-      # Stage 60: IS
-
-      case identifier.stage
-      when "NP"
-        "10.00";
-      when "WD"
-        "20.00";
-      when "FDIS"
-        "50.00";
-      end
     end
 
     def publisher
