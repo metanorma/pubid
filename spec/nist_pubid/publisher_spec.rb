@@ -1,4 +1,4 @@
-RSpec.describe NistPubid::Publisher do
+RSpec.describe Pubid::Nist::Publisher do
   let(:short_publisher) { "NIST" }
   let(:long_publisher) { "National Institute of Standards and Technology" }
 

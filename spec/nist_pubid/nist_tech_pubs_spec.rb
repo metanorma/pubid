@@ -1,4 +1,4 @@
-RSpec.describe NistPubid::NistTechPubs, vcr: true do
+RSpec.describe Pubid::Nist::NistTechPubs, vcr: true do
   describe "#fetch" do
     it "fetch doc identifiers from nist_tech_pubs" do
       expect(described_class.fetch.map { |d| d[:id] })

@@ -1,6 +1,6 @@
 require "parslet/rig/rspec"
 
-RSpec.describe NistPubid::Parsers::NbsCirc do
+RSpec.describe Pubid::Nist::Parsers::NbsCirc do
   subject { described_class.new }
 
   context "when supplement" do

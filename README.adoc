@@ -9,10 +9,10 @@ provided in the https://github.com/usnistgov/NIST-Tech-Pubs[NIST-Tech-Pubs]
 repository.
 
 This gem is introduced in the Metanorma blog post
-https://www.metanorma.org/blog/2022-01-09-nist-pubid/["Introducing NIST PubID, and the migration of publication identifiers"] on 2022-01-09.
+https://www.metanorma.org/blog/2022-01-09-pubid-nist/["Introducing NIST PubID, and the migration of publication identifiers"] on 2022-01-09.
 
 For further details on the Metanorma work on the NIST PubID, refer to the
-https://riboseinc.github.io/report-nist-pubid/["Ribose comments to Publication Identifier Syntax for NIST Technical Series Publications"]
+https://riboseinc.github.io/report-pubid-nist/["Ribose comments to Publication Identifier Syntax for NIST Technical Series Publications"]
 document.
 
 == Historic identifier patterns
@@ -75,20 +75,20 @@ Historic compatibility:
 == CLI conversion tool
 
 We implemented an open-source conversion tool that extracts the required PubID data elements from existing NIST Tech Pubs metadata, such as the legacy identifier, DOI, edition and publication date information, to generate the new PubID.
-`nist-pubid` provides a CLI (Command-Line Interface) and a Ruby library that can be used to create and manipulate PubID objects.
+`pubid-nist` provides a CLI (Command-Line Interface) and a Ruby library that can be used to create and manipulate PubID objects.
 
 == Installation
 
 The only prerequisite is to have Ruby installed. Please refer to the official https://www.ruby-lang.org/en/documentation/installation/[Ruby installation guide].
 
-The nist-pubid tool can be installed as follows.
+The pubid-nist tool can be installed as follows.
 
 [source,sh]
 ----
-$ gem install nist-pubid
+$ gem install pubid-nist
 ----
 
-Now you should be able to use the nist-pubid command.
+Now you should be able to use the pubid-nist command.
 
 === Usage
 
@@ -97,39 +97,39 @@ Now you should be able to use the nist-pubid command.
 The only prerequisite is to have Ruby installed. Please refer to the
 https://www.ruby-lang.org/en/documentation/installation/[official Ruby installation guide].
 
-The `nist-pubid` tool can be installed as follows.
+The `pubid-nist` tool can be installed as follows.
 
 [source,sh]
 ----
-$ gem install nist-pubid
+$ gem install pubid-nist
 ----
 
-Now you should be able to use the `nist-pubid` command.
+Now you should be able to use the `pubid-nist` command.
 
-When called without arguments (or as `nist-pubid help`) the help screen will
+When called without arguments (or as `pubid-nist help`) the help screen will
 be shown.
 
 [source,sh]
 ----
-$ nist-pubid
+$ pubid-nist
 Commands:
-  nist-pubid convert         # Convert legacy NIST Tech Pubs ID to NIST PubID
-  nist-pubid help [COMMAND]  # Describe available commands or one specific command
-  nist-pubid report          # Create report for NIST Tech Pubs database (fetches from GitHub)
+  pubid-nist convert         # Convert legacy NIST Tech Pubs ID to NIST PubID
+  pubid-nist help [COMMAND]  # Describe available commands or one specific command
+  pubid-nist report          # Create report for NIST Tech Pubs database (fetches from GitHub)
 ----
 
 === Converting a legacy identifier to NIST PubID
 
-The command `nist-pubid` provides a `convert` subcommand that converts a legacy
+The command `pubid-nist` provides a `convert` subcommand that converts a legacy
 Nist Tech Pubs identifier into the NIST PubID format.
 
 Here's how it can be used:
 
 [source,sh]
 ----
-$ nist-pubid help convert
+$ pubid-nist help convert
 Usage:
-  nist-pubid convert
+  pubid-nist convert
 
 Options:
   -s, [--style=STYLE]    # Convert to PubID style (short|long|mr|abbrev)
@@ -142,9 +142,9 @@ Convert legacy NIST Tech Pubs ID to NIST PubID
 
 [source,sh]
 ----
-$ nist-pubid convert "NIST SP 800-53a"
+$ pubid-nist convert "NIST SP 800-53a"
 NIST SP 800-53A
-$ nist-pubid convert "NIST SP 800-57p1r3"
+$ pubid-nist convert "NIST SP 800-57p1r3"
 NIST SP 800-57pt1r3
 ----
 
@@ -152,7 +152,7 @@ The `convert` command also supports DOI conversion.
 
 [source,sh]
 ----
-$ nist-pubid convert "NIST.SP.800-57p1r3"
+$ pubid-nist convert "NIST.SP.800-57p1r3"
 NIST SP 800-57pt1r3
 ----
 
@@ -161,9 +161,9 @@ and formats of the resulting PubID.
 
 [source,sh]
 ----
-$ nist-pubid convert -s mr "NIST SP 800-53a"
+$ pubid-nist convert -s mr "NIST SP 800-53a"
 NIST.SP.800-53A
-$ nist-pubid convert -s long -f json "NIST SP 800-53a" | jq
+$ pubid-nist convert -s long -f json "NIST SP 800-53a" | jq
 {
   "styles": {
     "short": "NIST SP 800-53A",
@@ -187,9 +187,9 @@ The `report` command can be used as follows:
 
 [source,sh]
 ----
-$ nist-pubid help report
+$ pubid-nist help report
 Usage:
-  nist-pubid report
+  pubid-nist report
 
 Options:
   [--csv], [--no-csv]  # Export to CSV format
@@ -211,7 +211,7 @@ column of change.
 
 [source,sh]
 ----
-$ nist-pubid report
+$ pubid-nist report
 ID changed? | New PubID | Document ID | DOI changed? | New PubID-MR | DOI | Title
  - | NBS BH 1 | NBS BH 1 |  - | NBS.BH.1 | NBS.BH.1 | Recommended minimum requirements for small dwelling construction : report of Building Code Committee July 20, 1922
  - | NBS BH 10 | NBS BH 10 |  - | NBS.BH.10 | NBS.BH.10 | A city planning primer by the advisory committee on zoning appointed by Secretary Hoover
@@ -231,7 +231,7 @@ will display `true` or `false` accordingly.
 
 [source,sh]
 ----
-$ nist-pubid report --csv
+$ pubid-nist report --csv
 ID changed?,New PubID,Document ID,DOI changed?,New PubID-MR,DOI,Title
 false,NBS BH 1,NBS BH 1,false,NBS.BH.1,NBS.BH.1,"Recommended minimum requirements for small dwelling construction : report of Building Code Committee July 20, 1922"
 false,NBS BH 10,NBS BH 10,false,NBS.BH.10,NBS.BH.10,A city planning primer by the advisory committee on zoning appointed by Secretary Hoover
@@ -250,7 +250,7 @@ favorite program.
 
 [source,sh]
 ----
-$ nist-pubid report --csv > myreport.csv
+$ pubid-nist report --csv > myreport.csv
 ----
 
 It is easy to filter these columns in Microsoft Excel with the following steps:

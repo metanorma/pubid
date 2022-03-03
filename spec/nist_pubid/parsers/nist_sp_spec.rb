@@ -1,6 +1,6 @@
 require "parslet/rig/rspec"
 
-RSpec.describe NistPubid::Parsers::NistSp do
+RSpec.describe Pubid::Nist::Parsers::NistSp do
   subject { described_class.new }
   it "consumes version like v1.2.3" do
     expect(subject.version).to parse("v1.2.3")

@@ -1,6 +1,6 @@
 require "parslet/rig/rspec"
 
-RSpec.describe NistPubid::Parsers::NbsFips do
+RSpec.describe Pubid::Nist::Parsers::NbsFips do
   subject { described_class.new }
 
   context "when edition" do

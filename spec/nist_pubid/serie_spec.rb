@@ -1,4 +1,4 @@
-RSpec.describe NistPubid::Serie do
+RSpec.describe Pubid::Nist::Serie do
   let(:short_serie) { "NIST SP" }
   let(:long_serie) { "Special Publication" }
 

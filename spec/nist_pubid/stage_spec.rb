@@ -1,4 +1,4 @@
-RSpec.describe NistPubid::Stage do
+RSpec.describe Pubid::Nist::Stage do
   let(:short_stage) { "NIST SP 800-18(IPD)" }
   let(:long_stage) { "Initial Public Draft" }
 

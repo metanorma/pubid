@@ -1,13 +1,13 @@
 require "parslet/rig/rspec"
 
-RSpec.describe NistPubid::DocumentParser do
+RSpec.describe Pubid::Nist::DocumentParser do
   describe "find parser for series" do
     it "returns parser for series with separate parser" do
-      expect(described_class.new.find_parser("NIST SP")).to eq(NistPubid::Parsers::NistSp)
+      expect(described_class.new.find_parser("NIST SP")).to eq(Pubid::Nist::Parsers::NistSp)
     end
 
     it "returns DocumentParser for series without separate parser" do
-      expect(described_class.new.find_parser("NOT EXISTING SERIES")).to eq(NistPubid::Parsers::Default)
+      expect(described_class.new.find_parser("NOT EXISTING SERIES")).to eq(Pubid::Nist::Parsers::Default)
     end
   end
 end

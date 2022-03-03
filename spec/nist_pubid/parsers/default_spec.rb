@@ -1,6 +1,6 @@
 require "parslet/rig/rspec"
 
-RSpec.describe NistPubid::Parsers::Default do
+RSpec.describe Pubid::Nist::Parsers::Default do
   describe "parses series" do
     it "parses revision" do
       expect(described_class.new.revision).to parse("r5")

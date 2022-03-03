@@ -5,4 +5,4 @@ require "rspec/matchers"
 
 Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
 
-require_relative "../lib/nist_pubid"
+require_relative "../lib/pubid-nist"
