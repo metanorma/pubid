@@ -45,7 +45,7 @@ module PubidIso
     end
 
     rule(:part) do
-      str("-") >> (match['[\dA-Z]'] | str("-")).repeat(1).as(:part)
+      (str("-") | str("/")) >> (match['[\dA-Z]'] | str("-")).repeat(1).as(:part)
     end
 
     rule(:originator) do
@@ -67,7 +67,10 @@ module PubidIso
     end
 
     rule(:identifier) do
-      str("Fpr").as(:stage).maybe >> originator >> ((str(" ") | str("/")) >> (type | stage)).maybe >> str(" ") >> (stage >> str(" ")).maybe >>
+      str("Fpr").as(:stage).maybe >> originator >> ((str(" ") | str("/")) >>
+        # for ISO/FDIS
+        (type | stage)).maybe >>
+        str(" ") >> (stage >> str(" ")).maybe >>
         digits.as(:number) >> iteration.maybe >> part.maybe >>
         (str(":") >> year).maybe >> edition.maybe
     end
