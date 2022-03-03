@@ -19,7 +19,7 @@ module PubidIso
     end
 
     def stage
-      ":stage-#{identifier.stage}.#{sprintf('%02d', identifier.substage)}" if identifier.stage
+      ":stage-#{identifier.stage}.#{sprintf('%02d', identifier.substage)}#{iteration}" if identifier.stage
     end
 
     def originator
@@ -35,6 +35,10 @@ module PubidIso
 
     def edition
       ":ed-#{identifier.edition}" if identifier.edition
+    end
+
+    def iteration
+      ".v#{identifier.iteration}" if identifier.iteration
     end
 
     def type

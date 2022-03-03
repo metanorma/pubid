@@ -83,4 +83,25 @@ RSpec.describe PubidIso::Identifier do
 
     it_behaves_like "converts pubid to urn"
   end
+
+  context "ISO 21143.2" do
+    let(:pubid) { "ISO 21143.2" }
+    let(:urn) { "urn:iso:std:iso:21143" }
+
+    it_behaves_like "converts pubid to urn"
+  end
+
+  context "ISO/FDIS 21420.2" do
+    let(:pubid) { "ISO/FDIS 21420.2" }
+    let(:urn) { "urn:iso:std:iso:21420:stage-50.00.v2" }
+
+    it_behaves_like "converts pubid to urn"
+  end
+
+  context "ISO/TR 30406:2017" do
+    let(:pubid) { "ISO/TR 30406:2017" }
+    let(:urn) { "urn:iso:std:iso:tr:30406" }
+
+    it_behaves_like "converts pubid to urn"
+  end
 end

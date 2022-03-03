@@ -62,10 +62,14 @@ module PubidIso
         digits.as(:edition) | str("Ed").as(:edition))
     end
 
+    rule(:iteration) do
+      str(".") >> digits.as(:iteration)
+    end
+
     rule(:identifier) do
-      str("Fpr").as(:stage).maybe >> originator >> ((str(" ") | str("/")) >> type).maybe >> str(" ") >> (stage >> str(" ")).maybe >>
-        digits.as(:number) >> part.maybe >> (str(":") >> year).maybe >>
-        edition.maybe
+      str("Fpr").as(:stage).maybe >> originator >> ((str(" ") | str("/")) >> (type | stage)).maybe >> str(" ") >> (stage >> str(" ")).maybe >>
+        digits.as(:number) >> iteration.maybe >> part.maybe >>
+        (str(":") >> year).maybe >> edition.maybe
     end
 
     rule(:root) { identifier }
