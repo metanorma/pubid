@@ -55,4 +55,32 @@ RSpec.describe PubidIso::Identifier do
 
     it_behaves_like "converts pubid to urn"
   end
+
+  context "ISO/IEC 30142 ED1" do
+    let(:pubid) { "ISO/IEC 30142 ED1" }
+    let(:urn) { "urn:iso:std:iso-iec:30142:ed-1" }
+
+    it_behaves_like "converts pubid to urn"
+  end
+
+  context "ISO 22610:2006 Ed" do
+    let(:pubid) { "ISO 22610:2006 Ed" }
+    let(:urn) { "urn:iso:std:iso:22610:ed-1" }
+
+    it_behaves_like "converts pubid to urn"
+  end
+
+  context "ISO 17121:2000 Ed 1" do
+    let(:pubid) { "ISO 17121:2000 Ed 1" }
+    let(:urn) { "urn:iso:std:iso:17121:ed-1" }
+
+    it_behaves_like "converts pubid to urn"
+  end
+
+  context "ISO 11553-1 Ed.2" do
+    let(:pubid) { "ISO 11553-1 Ed.2" }
+    let(:urn) { "urn:iso:std:iso:11553:-1:ed-2" }
+
+    it_behaves_like "converts pubid to urn"
+  end
 end

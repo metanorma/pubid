@@ -57,10 +57,15 @@ module PubidIso
         str("CIE") | str("ASME") | str("ASTM")).as(:copublisher)
     end
 
+    rule(:edition) do
+      str(" ") >> ((str("ED") | str("Ed ") | str("Ed.")) >>
+        digits.as(:edition) | str("Ed").as(:edition))
+    end
+
     rule(:identifier) do
       str("Fpr").as(:stage).maybe >> originator >> ((str(" ") | str("/")) >> type).maybe >> str(" ") >> (stage >> str(" ")).maybe >>
         digits.as(:number) >> part.maybe >> (str(":") >> year).maybe >>
-        (str(" ") >> (str("ED1") | str("Ed 1") | str("Ed") | str("Ed 2") | str("Ed.2") | str("Ed 3"))).maybe
+        edition.maybe
     end
 
     rule(:root) { identifier }

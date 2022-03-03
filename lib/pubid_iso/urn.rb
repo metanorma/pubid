@@ -11,16 +11,15 @@ module PubidIso
       # [[":" status] ":" edition]
       # [":" docversion] [":" language]
 
-      result = "urn:iso:std:#{originator}#{type}:#{identifier.number}"
+      "urn:iso:std:#{originator}#{type}:#{identifier.number}#{part}#{stage}#{edition}"
+    end
 
-      if identifier.part
-        result += ":-#{identifier.part}"
-      end
+    def part
+      ":-#{identifier.part}" if identifier.part
+    end
 
-      if identifier.stage
-        result += ":stage-#{identifier.stage}.#{sprintf('%02d', identifier.substage)}"
-      end
-      result
+    def stage
+      ":stage-#{identifier.stage}.#{sprintf('%02d', identifier.substage)}" if identifier.stage
     end
 
     def originator
@@ -32,6 +31,10 @@ module PubidIso
       else
         identifier.publisher.downcase
       end
+    end
+
+    def edition
+      ":ed-#{identifier.edition}" if identifier.edition
     end
 
     def type
