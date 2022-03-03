@@ -6,7 +6,8 @@ module PubidIso
                DIS: 40,
                FDIS: 50,
                PRF: 50,
-               IS: 60 }.freeze
+               IS: 60,
+               Fpr: 50 }.freeze
 
     attr_accessor :number, :publisher, :copublisher, :stage, :substage, :part,
                   :type, :year

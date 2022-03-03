@@ -58,7 +58,7 @@ module PubidIso
     end
 
     rule(:identifier) do
-      str("Fpr").maybe >> originator >> ((str(" ") | str("/")) >> type).maybe >> str(" ") >> (stage >> str(" ")).maybe >>
+      str("Fpr").as(:stage).maybe >> originator >> ((str(" ") | str("/")) >> type).maybe >> str(" ") >> (stage >> str(" ")).maybe >>
         digits.as(:number) >> part.maybe >> (str(":") >> year).maybe >>
         (str(" ") >> (str("ED1") | str("Ed 1") | str("Ed") | str("Ed 2") | str("Ed.2") | str("Ed 3"))).maybe
     end
