@@ -23,7 +23,7 @@ module PubidIso
 
     rule(:stage) do
       (str("NP") | str("WD") | str("CD") | str("DIS") | str("FDIS") | str("PRF") |
-        str("IS")).as(:stage)
+        str("IS") | str("AWI")).as(:stage)
     end
 
     # TYPES = {
@@ -37,7 +37,7 @@ module PubidIso
     #       #   "pas" / "r" / "tr" / "ts" / "tta"
     rule(:type) do
       (str("DATA") | str("ISP") | str("IWA") | str("R") | str("TTA") |
-        str("TS") | str("TR") | str("PAS") | str("Guide")).as(:type)
+        str("TS") | str("TR") | str("PAS") | str("Guide") | str("DTR")).as(:type)
     end
 
     rule(:year) do
@@ -69,8 +69,12 @@ module PubidIso
     end
 
     rule(:supplement) do
-      str("/") >> (str("Amd") | str("Cor")).as(:supplement) >> str(" ") >>
-        digits.as(:supplement_version) >> str(":") >> digits.as(:supplement_number)
+      (str("/") | str(" "))>> (str("Amd") | str("Cor")).as(:supplement) >> str(" ") >>
+        digits.as(:supplement_version) >> (str(":") >> digits.as(:supplement_number)).maybe
+    end
+
+    rule(:language) do
+      str("(") >> match["a-z"].repeat(1).as(:language) >> str(")")
     end
 
     rule(:identifier) do
@@ -82,10 +86,12 @@ module PubidIso
         (type | stage)).maybe >>
         # for ISO/IEC WD TS 25025
         str(" ").maybe >> ((stage | type) >> str(" ")).maybe >>
-        digits.as(:number) >> iteration.maybe >> part.maybe >>
+        digits.as(:number) >> part.maybe >> iteration.maybe >>
         (str(" ").maybe >> str(":") >> year).maybe >>
-        supplement.maybe >>
-        edition.maybe
+        (str("/") >> stage).maybe >>
+        supplement.repeat.as(:supplements) >>
+        edition.maybe >>
+        language.maybe
     end
 
     rule(:root) { identifier }

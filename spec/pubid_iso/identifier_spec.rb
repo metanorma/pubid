@@ -146,4 +146,25 @@ RSpec.describe PubidIso::Identifier do
 
     it_behaves_like "converts pubid to urn"
   end
+
+  context "ISO 13688:2013/Amd 1:2021(en)" do
+    let(:pubid) { "ISO 13688:2013/Amd 1:2021(en)" }
+    let(:urn) { "urn:iso:std:iso:13688:amd:2021:v1:en" }
+
+    it_behaves_like "converts pubid to urn"
+  end
+
+  context "ISO/IEC 10646:2020/CD Amd 1" do
+    let(:pubid) { "ISO/IEC 10646:2020/CD Amd 1" }
+    let(:urn) { "urn:iso:std:iso-iec:10646:stage-30.00:amd:v1" }
+
+    it_behaves_like "converts pubid to urn"
+  end
+
+  context "ISO/IEC 13818-1:2015/Amd 3:2016/Cor 1:2017" do
+    let(:pubid) { "ISO/IEC 13818-1:2015/Amd 3:2016/Cor 1:2017" }
+    let(:urn) { "urn:iso:std:iso-iec:13818:-1:amd:2016:v3:cor:2017:v1" }
+
+    it_behaves_like "converts pubid to urn"
+  end
 end

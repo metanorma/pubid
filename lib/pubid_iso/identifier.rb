@@ -10,15 +10,14 @@ module PubidIso
                Fpr: 50 }.freeze
 
     attr_accessor :number, :publisher, :copublisher, :stage, :substage, :part,
-                  :type, :year, :edition, :iteration, :supplement, :supplement_number,
-                  :supplement_version
+                  :type, :year, :edition, :iteration, :supplements, :language
 
     def initialize(stage: nil, **opts)
       if stage
         @stage = STAGES[stage.to_sym]
         @substage = 0
       end
-      opts.each { |key, value| send("#{key}=", value.to_s) }
+      opts.each { |key, value| send("#{key}=", value.is_a?(Array) && value || value.to_s) }
     end
 
     def urn

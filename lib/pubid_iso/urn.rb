@@ -11,7 +11,7 @@ module PubidIso
       # [[":" status] ":" edition]
       # [":" docversion] [":" language]
 
-      "urn:iso:std:#{originator}#{type}:#{identifier.number}#{part}#{stage}#{edition}#{supplement}"
+      "urn:iso:std:#{originator}#{type}:#{identifier.number}#{part}#{stage}#{edition}#{supplement}#{language}"
     end
 
     def part
@@ -51,8 +51,18 @@ module PubidIso
     end
 
     def supplement
-      if identifier.supplement
-        ":#{identifier.supplement.downcase}:#{identifier.supplement_number}:v#{identifier.supplement_version}"
+      identifier.supplements&.map do |supplement|
+        if supplement[:supplement_number]
+          ":#{supplement[:supplement].to_s.downcase}:#{supplement[:supplement_number]}:v#{supplement[:supplement_version]}"
+        else
+          ":#{supplement[:supplement].to_s.downcase}:v#{supplement[:supplement_version]}"
+        end
+      end&.join
+    end
+
+    def language
+      if identifier.language
+        ":#{identifier.language}"
       end
     end
   end
