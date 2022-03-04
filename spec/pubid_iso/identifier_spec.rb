@@ -167,4 +167,11 @@ RSpec.describe PubidIso::Identifier do
 
     it_behaves_like "converts pubid to urn"
   end
+
+  context "ISO/IEC 14496-30:2018/FDAmd 1" do
+    let(:pubid) { "ISO/IEC 14496-30:2018/FDAmd 1" }
+    let(:urn) { "urn:iso:std:iso-iec:14496:-30:stage-50.00:amd:v1" }
+
+    it_behaves_like "converts pubid to urn"
+  end
 end

@@ -19,5 +19,13 @@ RSpec.describe PubidIso::Parser do
         expect(subject).to parse(pub_id.chomp)
       end
     end
+
+    it "parses identifiers from iso-sample-identifiers-coramd.txt" do
+      f = open("spec/fixtures/iso-sample-identifiers-coramd.txt")
+      f.readlines.each do |pub_id|
+        next if pub_id.match?("^#")
+        expect(subject).to parse(pub_id.chomp)
+      end
+    end
   end
 end

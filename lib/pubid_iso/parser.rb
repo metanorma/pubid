@@ -23,7 +23,7 @@ module PubidIso
 
     rule(:stage) do
       (str("NP") | str("WD") | str("CD") | str("DIS") | str("FDIS") | str("PRF") |
-        str("IS") | str("AWI")).as(:stage)
+        str("IS") | str("AWI") | str("FD") | str("D")).as(:stage)
     end
 
     # TYPES = {
@@ -69,7 +69,7 @@ module PubidIso
     end
 
     rule(:supplement) do
-      (str("/") | str(" "))>> (str("Amd") | str("Cor")).as(:supplement) >> str(" ") >>
+      (str("/") | str(" ")).maybe >> (str("Amd") | str("Cor")).as(:supplement) >> str(" ") >>
         digits.as(:supplement_version) >> (str(":") >> digits.as(:supplement_number)).maybe
     end
 
@@ -88,8 +88,8 @@ module PubidIso
         str(" ").maybe >> ((stage | type) >> str(" ")).maybe >>
         digits.as(:number) >> part.maybe >> iteration.maybe >>
         (str(" ").maybe >> str(":") >> year).maybe >>
-        (str("/") >> stage).maybe >>
-        supplement.repeat.as(:supplements) >>
+        ((str("/") >> stage).maybe >>
+        supplement).repeat.as(:supplements) >>
         edition.maybe >>
         language.maybe
     end
