@@ -49,7 +49,8 @@ module PubidIso
     end
 
     rule(:originator) do
-      (str("ISO") | str("IWA")).as(:publisher) >> (str("/") >> copublisher).maybe
+      (str("ISO") | str("IWA") | str("IEC")).as(:publisher) >> (str(" ").maybe >>
+        str("/") >> copublisher).maybe
     end
 
     rule(:copublisher) do
@@ -70,9 +71,10 @@ module PubidIso
       str("Fpr").as(:stage).maybe >> originator >> ((str(" ") | str("/")) >>
         # for ISO/FDIS
         (type | stage)).maybe >>
-        str(" ") >> (stage >> str(" ")).maybe >>
+        # for ISO/IEC WD TS 25025
+        str(" ") >> ((stage | type) >> str(" ")).maybe >>
         digits.as(:number) >> iteration.maybe >> part.maybe >>
-        (str(":") >> year).maybe >> edition.maybe
+        (str(" ").maybe >> str(":") >> year).maybe >> edition.maybe
     end
 
     rule(:root) { identifier }

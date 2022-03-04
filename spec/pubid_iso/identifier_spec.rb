@@ -111,4 +111,18 @@ RSpec.describe PubidIso::Identifier do
 
     it_behaves_like "converts pubid to urn"
   end
+
+  context "ISO/NP 23219" do
+    let(:pubid) { "ISO/NP 23219" }
+    let(:urn) { "urn:iso:std:iso:23219:stage-10.00" }
+
+    it_behaves_like "converts pubid to urn"
+  end
+
+  context "IEC 80601-2-60" do
+    let(:pubid) { "IEC 80601-2-60" }
+    let(:urn) { "urn:iso:std:iec:80601:-2-60" }
+
+    it_behaves_like "converts pubid to urn"
+  end
 end

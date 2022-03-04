@@ -15,7 +15,6 @@ RSpec.describe PubidIso::Parser do
     it "parses identifiers from iso-sample-identifiers-v2.txt" do
       f = open("spec/fixtures/iso-sample-identifiers-v2.txt")
       f.readlines.each do |pub_id|
-        #expect()
         expect(subject).to parse(pub_id.chomp)
       end
     end
