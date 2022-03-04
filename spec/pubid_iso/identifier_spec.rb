@@ -125,4 +125,11 @@ RSpec.describe PubidIso::Identifier do
 
     it_behaves_like "converts pubid to urn"
   end
+
+  context "ISO/TR27957:2008" do
+    let(:pubid) { "ISO/TR27957:2008" }
+    let(:urn) { "urn:iso:std:iso:tr:27957" }
+
+    it_behaves_like "converts pubid to urn"
+  end
 end

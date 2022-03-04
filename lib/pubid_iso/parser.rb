@@ -45,17 +45,18 @@ module PubidIso
     end
 
     rule(:part) do
-      (str("-") | str("/")) >> (match['[\dA-Z]'] | str("-")).repeat(1).as(:part)
+      (str("-") | str("/")) >> str(" ").maybe >> (match['[\dA-Z]'] | str("-")).repeat(1).as(:part)
     end
 
     rule(:originator) do
-      (str("ISO") | str("IWA") | str("IEC")).as(:publisher) >> (str(" ").maybe >>
-        str("/") >> copublisher).maybe
+      organization.as(:publisher) >>
+        (str(" ").maybe >> str("/") >> organization.as(:copublisher)).maybe
     end
 
-    rule(:copublisher) do
-      (str("IEC/IEEE") | str("IEC") | str("IEEE") | str("CIW") | str("SAE") |
-        str("CIE") | str("ASME") | str("ASTM")).as(:copublisher)
+    rule(:organization) do
+      str("IEC/IEEE") | str("IEC") | str("IEEE") | str("CIW") | str("SAE") |
+        str("CIE") | str("ASME") | str("ASTM") | str("OECD") | str("ISO") |
+        str("IWA") | str("HL7")
     end
 
     rule(:edition) do
@@ -68,11 +69,14 @@ module PubidIso
     end
 
     rule(:identifier) do
-      str("Fpr").as(:stage).maybe >> originator >> ((str(" ") | str("/")) >>
+      str("Fpr").as(:stage).maybe >>
+        # Withdrawn e.g: WD/ISO 10360-5:2000
+        str("WD/").maybe >>
+        originator >> ((str(" ") | str("/")) >>
         # for ISO/FDIS
         (type | stage)).maybe >>
         # for ISO/IEC WD TS 25025
-        str(" ") >> ((stage | type) >> str(" ")).maybe >>
+        str(" ").maybe >> ((stage | type) >> str(" ")).maybe >>
         digits.as(:number) >> iteration.maybe >> part.maybe >>
         (str(" ").maybe >> str(":") >> year).maybe >> edition.maybe
     end
