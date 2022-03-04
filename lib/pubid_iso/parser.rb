@@ -68,6 +68,11 @@ module PubidIso
       str(".") >> digits.as(:iteration)
     end
 
+    rule(:supplement) do
+      str("/") >> (str("Amd") | str("Cor")).as(:supplement) >> str(" ") >>
+        digits.as(:supplement_version) >> str(":") >> digits.as(:supplement_number)
+    end
+
     rule(:identifier) do
       str("Fpr").as(:stage).maybe >>
         # Withdrawn e.g: WD/ISO 10360-5:2000
@@ -78,7 +83,9 @@ module PubidIso
         # for ISO/IEC WD TS 25025
         str(" ").maybe >> ((stage | type) >> str(" ")).maybe >>
         digits.as(:number) >> iteration.maybe >> part.maybe >>
-        (str(" ").maybe >> str(":") >> year).maybe >> edition.maybe
+        (str(" ").maybe >> str(":") >> year).maybe >>
+        supplement.maybe >>
+        edition.maybe
     end
 
     rule(:root) { identifier }

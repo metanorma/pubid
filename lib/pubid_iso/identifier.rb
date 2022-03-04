@@ -10,7 +10,8 @@ module PubidIso
                Fpr: 50 }.freeze
 
     attr_accessor :number, :publisher, :copublisher, :stage, :substage, :part,
-                  :type, :year, :edition, :iteration
+                  :type, :year, :edition, :iteration, :supplement, :supplement_number,
+                  :supplement_version
 
     def initialize(stage: nil, **opts)
       if stage
