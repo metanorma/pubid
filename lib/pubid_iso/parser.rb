@@ -45,7 +45,8 @@ module PubidIso
     end
 
     rule(:part) do
-      (str("-") | str("/")) >> str(" ").maybe >> (match['[\dA-Z]'] | str("-")).repeat(1).as(:part)
+      (str("-") | str("/")) >> str(" ").maybe >>
+        (match['[\dA-Z]'] | str("-")).repeat(1).as(:part)
     end
 
     rule(:originator) do
