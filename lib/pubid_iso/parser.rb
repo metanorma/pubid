@@ -1,5 +1,5 @@
 # from https://github.com/relaton/relaton-iso/issues/47#issuecomment-512251416
-# ISO {num}-{docpart}:{year} - docpart and year are optioal. docpart is [\w-]+
+# ISO {num}-{docpart}:{year} - docpart and year are optional. docpart is [\w-]+
 #   ISO/{stage} {num}-{docpart}:{year} or ISO/{subprefix} {stage} {num}:{year} - stages are WD, CD, DIS, FDIS, AWI
 # ISO/{subprefix} {stage} {num}-{docpart}:{year} - subpefixes are IEC, IEEE, IEC/IEEE, TR, R. Any other?
 # ISO {num}:{year}/{correction} {cornum}:{coryear} - corrections are Amd, DAmd, Cor. coryear is optional
