@@ -1,6 +1,6 @@
 require "parslet/rig/rspec"
 
-RSpec.describe PubidIso::Parser do
+RSpec.describe Pubid::Iso::Parser do
   subject { described_class.new }
 
   context "Identifiers list from file" do

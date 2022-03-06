@@ -1,4 +1,4 @@
-module PubidIso
+module Pubid::Iso
   class Transformer < Parslet::Transform
     rule(edition: "Ed") do
       { edition: "1" }

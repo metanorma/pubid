@@ -1,4 +1,4 @@
-module PubidIso
+module Pubid::Iso
   class Identifier
     STAGES = { NP: 10,
                WD: 20,
@@ -40,7 +40,7 @@ module PubidIso
         Transformer.new.apply(k => v).to_a.first
       end.to_h)
     rescue Parslet::ParseFailed => failure
-      raise PubidIso::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
+      raise Pubid::Iso::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
     end
   end
 end

@@ -5,7 +5,7 @@
 # ISO {num}:{year}/{correction} {cornum}:{coryear} - corrections are Amd, DAmd, Cor. coryear is optional
 # ISO {num}:{year}/{corstage} {correction} {cornum}:{coryear} - corstages are CD, NP, AWI, PRF, WD, DIS. Any others?
 
-module PubidIso
+module Pubid::Iso
   # ISO/IEC FDIS 7816-6
   # ISO/IEC/IEEE 15289:2019
   #

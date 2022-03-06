@@ -1,4 +1,4 @@
-RSpec.describe PubidIso::Identifier do
+RSpec.describe Pubid::Iso::Identifier do
   subject { described_class.parse(pubid) }
 
   shared_examples "converts pubid to urn" do

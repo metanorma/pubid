@@ -1,10 +1,10 @@
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "pubid_iso/version"
+require "pubid/iso/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "pubid-iso"
-  spec.version       = PubidIso::VERSION
+  spec.version       = Pubid::Iso::VERSION
   spec.authors       = ["Ribose Inc."]
   spec.email         = ["open.source@ribose.com"]
 

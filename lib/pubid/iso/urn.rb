@@ -1,4 +1,4 @@
-module PubidIso
+module Pubid::Iso
   class URN
     attr_accessor :identifier
 
