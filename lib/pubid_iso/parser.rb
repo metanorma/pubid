@@ -69,8 +69,11 @@ module PubidIso
     end
 
     rule(:supplement) do
-      (str("/") | str(" ")).maybe >> (str("Amd") | str("Cor")).as(:supplement) >> str(" ") >>
-        digits.as(:supplement_version) >> (str(":") >> digits.as(:supplement_number)).maybe
+      (str("/") | str(" ")).maybe >>
+        (str("Amd") | str("AMD") | str("Cor") | str("COR")).as(:supplement) >>
+        str(" ") >>
+        digits.as(:supplement_version) >>
+        (str(":") >> digits.as(:supplement_number)).maybe
     end
 
     rule(:language) do
