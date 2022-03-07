@@ -10,23 +10,15 @@ module Pubid::Iso
                Fpr: 50 }.freeze
 
     attr_accessor :number, :publisher, :copublisher, :stage, :substage, :part,
-                  :type, :year, :edition, :iteration, :supplements, :language
+                  :type, :year, :edition, :iteration, :supplements, :language,
+                  :amendment, :amendment_version, :amendment_number,
+                  :corrigendum, :corrigendum_version, :corrigendum_number
 
     def initialize(stage: nil, supplements: nil, **opts)
       if stage
         @stage = STAGES[stage.to_sym]
         @substage = 0
       end
-
-      # XXX: temporary hack for ISO/IEC 19794-7:2014/Amd 1:2015/CD Cor 1 parsing
-      supplements&.each do |supplement|
-        if supplement[:stage]
-          @stage = STAGES[Transformer.new.apply(stage: supplement[:stage].to_s)[:stage].to_sym]
-          @substage = 0
-        end
-      end
-
-      @supplements = supplements
 
       opts.each { |key, value| send("#{key}=", value.is_a?(Array) && value || value.to_s) }
     end

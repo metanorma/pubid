@@ -51,13 +51,23 @@ module Pubid::Iso
     end
 
     def supplement
-      identifier.supplements&.map do |supplement|
-        if supplement[:supplement_number]
-          ":#{supplement[:supplement].to_s.downcase}:#{supplement[:supplement_number]}:v#{supplement[:supplement_version]}"
-        else
-          ":#{supplement[:supplement].to_s.downcase}:v#{supplement[:supplement_version]}"
-        end
-      end&.join
+      result = ""
+      if identifier.amendment
+        result +=  if identifier.amendment_number
+                     ":amd:#{identifier.amendment_number}:v#{identifier.amendment_version}"
+                   else
+                     ":amd:v#{identifier.amendment_version}"
+                   end
+      end
+      if identifier.corrigendum
+        result += if identifier.corrigendum_number
+                    ":cor:#{identifier.corrigendum_number}:v#{identifier.corrigendum_version}"
+                  else
+                    ":cor:v#{identifier.corrigendum_version}"
+                  end
+      end
+
+      result
     end
 
     def language

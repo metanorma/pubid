@@ -69,12 +69,20 @@ module Pubid::Iso
       str(".") >> digits.as(:iteration)
     end
 
-    rule(:supplement) do
+    rule(:amendment) do
       (str("/") | str(" ")).maybe >>
-        (str("Amd") | str("AMD") | str("Cor") | str("COR")).as(:supplement) >>
+        (str("Amd") | str("AMD")).as(:amendment) >>
         (str(" ") | str(".")) >>
-        digits.as(:supplement_version) >>
-        (str(":") >> digits.as(:supplement_number)).maybe
+        digits.as(:amendment_version) >>
+        (str(":") >> digits.as(:amendment_number)).maybe
+    end
+
+    rule(:corrigendum) do
+      (str("/") | str(" ")).maybe >>
+        (str("Cor") | str("COR")).as(:corrigendum) >>
+        (str(" ") | str(".")) >>
+        digits.as(:corrigendum_version) >>
+        (str(":") >> digits.as(:corrigendum_number)).maybe
     end
 
     rule(:language) do
@@ -98,8 +106,10 @@ module Pubid::Iso
         str(" ").maybe >> ((stage | type) >> str(" ")).maybe >>
         digits.as(:number) >> part.maybe >> iteration.maybe >>
         (str(" ").maybe >> str(":") >> year).maybe >>
+        # stage before amendment
         ((str("/") >> stage).maybe >>
-        supplement).repeat.as(:supplements) >>
+        # stage before corrigendum
+        ((amendment >> (str("/") >> stage).maybe >> corrigendum.maybe) | corrigendum).maybe) >>
         edition.maybe >>
         language.maybe
     end
