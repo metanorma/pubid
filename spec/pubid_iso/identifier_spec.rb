@@ -174,4 +174,25 @@ RSpec.describe Pubid::Iso::Identifier do
 
     it_behaves_like "converts pubid to urn"
   end
+
+  context "ISO 11783-2:2012/Cor.1:2012(fr)" do
+    let(:pubid) { "ISO 11783-2:2012/Cor.1:2012(fr)" }
+    let(:urn) { "urn:iso:std:iso:11783:-2:cor:2012:v1:fr" }
+
+    it_behaves_like "converts pubid to urn"
+  end
+
+  context "ISO 14451-1:2013(en,fr,other)" do
+    let(:pubid) { "ISO 14451-1:2013(en,fr,other)" }
+    let(:urn) { "urn:iso:std:iso:14451:-1:en,fr,other" }
+
+    it_behaves_like "converts pubid to urn"
+  end
+
+  context "ISO 17225-1:2014(R)" do
+    let(:pubid) { "ISO 17225-1:2014(R)" }
+    let(:urn) { "urn:iso:std:iso:17225:-1:ru" }
+
+    it_behaves_like "converts pubid to urn"
+  end
 end

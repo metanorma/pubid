@@ -37,7 +37,7 @@ module Pubid::Iso
     #       #   "pas" / "r" / "tr" / "ts" / "tta"
     rule(:type) do
       (str("DATA") | str("ISP") | str("IWA") | str("R") | str("TTA") |
-        str("TS") | str("TR") | str("PAS") | str("Guide")).as(:type)
+        str("TS") | str("TR") | str("PAS") | str("Guide") | str("GUIDE")).as(:type)
     end
 
     rule(:year) do
@@ -72,13 +72,19 @@ module Pubid::Iso
     rule(:supplement) do
       (str("/") | str(" ")).maybe >>
         (str("Amd") | str("AMD") | str("Cor") | str("COR")).as(:supplement) >>
-        str(" ") >>
+        (str(" ") | str(".")) >>
         digits.as(:supplement_version) >>
         (str(":") >> digits.as(:supplement_number)).maybe
     end
 
     rule(:language) do
-      str("(") >> match["a-z"].repeat(1).as(:language) >> str(")")
+      str("(") >> (
+        ( # parse ru,en,fr
+          (match["a-z"].repeat(1) >> str(",").maybe) |
+          # parse R/E/F
+          ((str("E") | str("F") | str("A") | str("R")) >> str("/").maybe)
+        ).repeat.as(:language)
+      ) >> str(")")
     end
 
     rule(:identifier) do

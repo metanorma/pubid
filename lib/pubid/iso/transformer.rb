@@ -15,5 +15,21 @@ module Pubid::Iso
                end
       }
     end
+
+    rule(language: simple(:language)) do
+      { language: case language
+                  when "R"
+                    "ru"
+                  when "F"
+                    "fr"
+                  when "E"
+                    "en"
+                  when "A"
+                    "ar"
+                  else
+                    language
+                  end
+      }
+    end
   end
 end
