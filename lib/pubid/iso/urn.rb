@@ -1,6 +1,11 @@
 module Pubid::Iso
   class URN
-    attr_accessor :identifier
+    attr_accessor :number, :publisher, :copublisher, :stage, :substage, :part,
+                  :type, :year, :edition, :iteration, :supplements, :language,
+                  :amendment, :amendment_version, :amendment_number,
+                  :corrigendum, :corrigendum_version, :corrigendum_number,
+                  :amendment_stage, :corrigendum_stage
+
 
     STAGES = { NP: 10,
                WD: 20,
@@ -10,8 +15,8 @@ module Pubid::Iso
                PRF: 50,
                IS: 60 }.freeze
 
-    def initialize(identifier)
-      @identifier = identifier
+    def initialize(**opts)
+      opts.each { |key, value| send("#{key}=", value) }
     end
 
     def to_s
@@ -19,11 +24,11 @@ module Pubid::Iso
       # [[":" status] ":" edition]
       # [":" docversion] [":" language]
 
-      "urn:iso:std:#{originator}#{type}:#{identifier.number}#{part}#{stage}#{edition}#{supplement}#{language}"
+      "urn:iso:std:#{originator}#{type}:#{number}#{part}#{stage}#{edition}#{supplement}#{language}"
     end
 
     def part
-      ":-#{identifier.part}" if identifier.part
+      ":-#{@part}" if @part
     end
 
     def render_stage(stage)
@@ -32,55 +37,55 @@ module Pubid::Iso
     end
 
     def stage
-      return render_stage(identifier.stage) if identifier.stage
+      return render_stage(@stage) if @stage
 
-      return render_stage(identifier.amendment_stage) if identifier.amendment_stage
+      return render_stage(@amendment_stage) if @amendment_stage
 
-      render_stage(identifier.corrigendum_stage) if identifier.corrigendum_stage
+      render_stage(@corrigendum_stage) if @corrigendum_stage
     end
 
     def originator
       # originator    = "iso" / "iso-iec" / "iso-cie" / "iso-astm" /
       #   "iso-ieee" / "iec"
 
-      if identifier.copublisher
-        "#{identifier.publisher.downcase}-#{identifier.copublisher.downcase.gsub('/', '-')}"
+      if @copublisher
+        "#{@publisher.downcase}-#{@copublisher.downcase.gsub('/', '-')}"
       else
-        identifier.publisher.downcase
+        @publisher.downcase
       end
     end
 
     def edition
-      ":ed-#{identifier.edition}" if identifier.edition
+      ":ed-#{@edition}" if @edition
     end
 
     def iteration
-      ".v#{identifier.iteration}" if identifier.iteration
+      ".v#{@iteration}" if @iteration
     end
 
     def type
       # type          = "data" / "guide" / "isp" / "iwa" /
       #   "pas" / "r" / "tr" / "ts" / "tta"
 
-      if identifier.type
-        ":#{identifier.type.downcase}"
+      if @type
+        ":#{@type.downcase}"
       end
     end
 
     def supplement
       result = ""
-      if identifier.amendment
-        result +=  if identifier.amendment_number
-                     ":amd:#{identifier.amendment_number}:v#{identifier.amendment_version}"
+      if @amendment
+        result +=  if @amendment_number
+                     ":amd:#{@amendment_number}:v#{@amendment_version}"
                    else
-                     ":amd:v#{identifier.amendment_version}"
+                     ":amd:v#{@amendment_version}"
                    end
       end
-      if identifier.corrigendum
-        result += if identifier.corrigendum_number
-                    ":cor:#{identifier.corrigendum_number}:v#{identifier.corrigendum_version}"
+      if @corrigendum
+        result += if @corrigendum_number
+                    ":cor:#{@corrigendum_number}:v#{@corrigendum_version}"
                   else
-                    ":cor:v#{identifier.corrigendum_version}"
+                    ":cor:v#{@corrigendum_version}"
                   end
       end
 
@@ -88,8 +93,8 @@ module Pubid::Iso
     end
 
     def language
-      if identifier.language
-        ":#{identifier.language}"
+      if @language
+        ":#{@language}"
       end
     end
   end

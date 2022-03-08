@@ -11,7 +11,7 @@ RSpec.describe Pubid::Iso::Identifier do
 
   shared_examples "converts pubid to pubid" do
     it "converts pubid to pubid" do
-      expect(subject.pubid.to_s).to eq(pubid)
+      expect(subject.to_s).to eq(pubid)
     end
   end
 
