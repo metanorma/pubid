@@ -2,6 +2,14 @@ module Pubid::Iso
   class URN
     attr_accessor :identifier
 
+    STAGES = { NP: 10,
+               WD: 20,
+               CD: 30,
+               DIS: 40,
+               FDIS: 50,
+               PRF: 50,
+               IS: 60 }.freeze
+
     def initialize(identifier)
       @identifier = identifier
     end
@@ -18,8 +26,17 @@ module Pubid::Iso
       ":-#{identifier.part}" if identifier.part
     end
 
+    def render_stage(stage)
+      substage = 0
+      ":stage-#{STAGES[stage.to_sym]}.#{sprintf('%02d', substage)}#{iteration}"
+    end
+
     def stage
-      ":stage-#{identifier.stage}.#{sprintf('%02d', identifier.substage)}#{iteration}" if identifier.stage
+      return render_stage(identifier.stage) if identifier.stage
+
+      return render_stage(identifier.amendment_stage) if identifier.amendment_stage
+
+      render_stage(identifier.corrigendum_stage) if identifier.corrigendum_stage
     end
 
     def originator

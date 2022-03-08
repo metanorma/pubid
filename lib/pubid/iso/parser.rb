@@ -22,8 +22,8 @@ module Pubid::Iso
     end
 
     rule(:stage) do
-      (str("NP") | str("WD") | str("CD") | str("DIS") | str("FDIS") | str("PRF") |
-        str("IS") | str("AWI") | str("FD") | str("D")).as(:stage)
+      str("NP") | str("WD") | str("CD") | str("DIS") | str("FDIS") | str("PRF") |
+        str("IS") | str("AWI") | str("FD") | str("D")
     end
 
     # TYPES = {
@@ -41,7 +41,7 @@ module Pubid::Iso
     end
 
     rule(:year) do
-      match('\d').repeat(4, 4)
+      match('\d').repeat(4, 4).as(:year)
     end
 
     rule(:part) do
@@ -101,15 +101,15 @@ module Pubid::Iso
         str("WD/").maybe >>
         originator >> ((str(" ") | str("/")) >>
         # for ISO/FDIS
-        (type | stage)).maybe >>
+        (type | stage.as(:stage))).maybe >>
         # for ISO/IEC WD TS 25025
-        str(" ").maybe >> ((stage | type) >> str(" ")).maybe >>
+        str(" ").maybe >> ((stage.as(:stage) | type) >> str(" ")).maybe >>
         digits.as(:number) >> part.maybe >> iteration.maybe >>
         (str(" ").maybe >> str(":") >> year).maybe >>
         # stage before amendment
-        ((str("/") >> stage).maybe >>
+        ((str("/") >> stage.as(:amendment_stage)).maybe >>
         # stage before corrigendum
-        ((amendment >> (str("/") >> stage).maybe >> corrigendum.maybe) | corrigendum).maybe) >>
+        ((amendment >> (str("/") >> stage.as(:corrigendum_stage)).maybe >> corrigendum.maybe) | corrigendum).maybe) >>
         edition.maybe >>
         language.maybe
     end
