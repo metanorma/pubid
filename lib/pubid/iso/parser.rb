@@ -51,11 +51,11 @@ module Pubid::Iso
 
     rule(:originator) do
       organization.as(:publisher) >>
-        (str(" ").maybe >> str("/") >> organization.as(:copublisher)).maybe
+        (str(" ").maybe >> str("/") >> organization.as(:copublisher)).repeat
     end
 
     rule(:organization) do
-      str("IEC/IEEE") | str("IEC") | str("IEEE") | str("CIW") | str("SAE") |
+      str("IEC") | str("IEEE") | str("CIW") | str("SAE") |
         str("CIE") | str("ASME") | str("ASTM") | str("OECD") | str("ISO") |
         str("IWA") | str("HL7")
     end

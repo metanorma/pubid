@@ -17,9 +17,30 @@ module Pubid::Iso
     end
 
     def self.parse(code)
-      new(**Parser.new.parse(code).map do |k, v|
-        Transformer.new.apply(k => v).to_a.first
-      end.to_h)
+      params = Parser.new.parse(code)
+      # Parslet returns an array when match any copublisher
+      # otherwise it's hash
+      if params.is_a?(Array)
+        new(
+          **(
+            params.inject({}) do |r, i|
+              result = r
+              i.map {|k, v| Transformer.new.apply(k => v).to_a.first }.each do |k, v|
+                result = result.merge(k => r.key?(k) ? [v, r[k]] : v)
+              end
+              result
+            end
+          )
+        )
+      else
+        new(**params.map do |k, v|
+          Transformer.new.apply(k => v).to_a.first
+        end.to_h)
+      end
+      # merge values repeating keys into array (for copublishers)
+
+
+      # params.to_h)
     rescue Parslet::ParseFailed => failure
       raise Pubid::Iso::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
     end
@@ -30,7 +51,10 @@ module Pubid::Iso
 
     def originator
       if @copublisher
-        "#{@publisher}/#{@copublisher.gsub('-', '/')}"
+        @copublisher = [@copublisher] unless @copublisher.is_a?(Array)
+        @publisher + @copublisher.map(&:to_s).sort.map do |copublisher|
+          "/#{copublisher.gsub('-', '/')}"
+        end.join
       else
         @publisher
       end

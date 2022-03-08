@@ -49,7 +49,10 @@ module Pubid::Iso
       #   "iso-ieee" / "iec"
 
       if @copublisher
-        "#{@publisher.downcase}-#{@copublisher.downcase.gsub('/', '-')}"
+        @copublisher = [@copublisher] unless @copublisher.is_a?(Array)
+        @publisher.downcase + @copublisher.map(&:to_s).sort.map do |copublisher|
+          "-#{copublisher.downcase.gsub('/', '-')}"
+        end.join
       else
         @publisher.downcase
       end
