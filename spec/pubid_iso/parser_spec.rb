@@ -46,7 +46,7 @@ RSpec.describe Pubid::Iso::Parser do
       it_behaves_like "parse identifiers from file"
     end
 
-    xcontext "parses identifiers from iwa-pubid.txt" do
+    context "parses identifiers from iwa-pubid.txt" do
       let(:examples_file) { "iwa-pubid.txt" }
 
       it_behaves_like "parse identifiers from file"

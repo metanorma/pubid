@@ -121,6 +121,7 @@ module Pubid::Iso
         str("WD/").maybe >>
         # for French and Russian PubIDs starting with Guide type
         (guide_prefix.as(:type) >> str(" ")).maybe >>
+        (stage.as(:stage) >> str(" ")).maybe >>
         originator >> ((str(" ") | str("/")) >>
         # for ISO/FDIS
         (type | stage.as(:stage))).maybe >>

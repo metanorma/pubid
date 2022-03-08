@@ -413,4 +413,13 @@ RSpec.describe Pubid::Iso::Identifier do
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "AWI IWA 36" do
+    let(:original) { "AWI IWA 36" }
+    let(:pubid) { "IWA/WD 36" }
+    let(:urn) { "urn:iso:std:iwa:36:stage-20.00" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
 end

@@ -73,6 +73,8 @@ module Pubid::Iso
         "PRF"
       when "pD", "PD"
         "CD"
+      when "AWI"
+        "WD"
       else
         code
       end
