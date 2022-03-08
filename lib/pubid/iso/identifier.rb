@@ -13,7 +13,7 @@ module Pubid::Iso
 
     def urn
       params = instance_variables.map { |var| [var.to_s.gsub("@", "").to_sym, instance_variable_get(var)] }.to_h
-      URN.new(**params)
+      Urn.new(**params)
     end
 
     def self.parse(code)

@@ -1,5 +1,5 @@
 module Pubid::Iso
-  class URN
+  class Urn
     attr_accessor :number, :publisher, :copublisher, :stage, :substage, :part,
                   :type, :year, :edition, :iteration, :supplements, :language,
                   :amendment, :amendment_version, :amendment_number,
