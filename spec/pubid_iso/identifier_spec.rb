@@ -243,7 +243,7 @@ RSpec.describe Pubid::Iso::Identifier do
 
   context "ISO/IEC GUIDE 2:2004(E/F/R)" do
     let(:original) { "ISO/IEC GUIDE 2:2004(E/F/R)" }
-    let(:pubid) { "ISO/IEC GUIDE 2:2004(en,fr,ru)" }
+    let(:pubid) { "ISO/IEC Guide 2:2004(en,fr,ru)" }
     let(:urn) { "urn:iso:std:iso-iec:guide:2:en,fr,ru" }
 
     it_behaves_like "converts pubid to urn"

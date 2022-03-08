@@ -26,6 +26,16 @@ module Pubid::Iso
       end
     end
 
+    rule(type: simple(:type)) do
+      { type: case type
+              when "GUIDE"
+                "Guide"
+              else
+                type
+              end
+      }
+    end
+
     def self.convert_stage(code)
       case code
       when "D"
