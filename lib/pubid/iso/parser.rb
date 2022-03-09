@@ -40,8 +40,7 @@ module Pubid::Iso
     #       #   "pas" / "r" / "tr" / "ts" / "tta"
     rule(:type) do
       (str("DATA") | str("ISP") | str("IWA") | str("R") | str("TTA") |
-        str("TS") | str("TR") | str("PAS") | str("Guide") | str("GUIDE") |
-        str("PDTR") | str("PDTS")).as(:type)
+        str("TS") | str("TR") | str("PAS") | str("Guide") | str("GUIDE")).as(:type)
     end
 
     rule(:year) do

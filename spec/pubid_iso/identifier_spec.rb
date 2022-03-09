@@ -297,8 +297,17 @@ RSpec.describe Pubid::Iso::Identifier do
 
   context "ISO/IEC PDTR 20943-5" do
     let(:original) { "ISO/IEC PDTR 20943-5" }
-    let(:pubid) { "ISO/IEC TR 20943-5" }
-    let(:urn) { "urn:iso:std:iso-iec:tr:20943:-5" }
+    let(:pubid) { "ISO/IEC TR CD 20943-5" }
+    let(:urn) { "urn:iso:std:iso-iec:tr:20943:-5:stage-30.00" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO/IEC PDTS 19583-24" do
+    let(:original) { "ISO/IEC PDTS 19583-24" }
+    let(:pubid) { "ISO/IEC TS CD 19583-24" }
+    let(:urn) { "urn:iso:std:iso-iec:ts:19583:-24:stage-30.00" }
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
