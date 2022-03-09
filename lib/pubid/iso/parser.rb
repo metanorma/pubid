@@ -111,7 +111,10 @@ module Pubid::Iso
         (type | stage.as(:stage))).maybe >>
         # for ISO/IEC WD TS 25025
         str(" ").maybe >> ((stage.as(:stage) | type) >> str(" ")).maybe >>
-        digits.as(:number) >> part.maybe >> iteration.maybe >>
+        digits.as(:number) >>
+        # for identifiers like ISO 5537/IDF 26
+        (str("/IDF") >> str(" ") >> digits).maybe >>
+        part.maybe >> iteration.maybe >>
         (str(" ").maybe >> str(":") >> year).maybe >>
         # stage before amendment
         (

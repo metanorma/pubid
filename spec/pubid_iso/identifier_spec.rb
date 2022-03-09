@@ -339,4 +339,13 @@ RSpec.describe Pubid::Iso::Identifier do
     it_behaves_like "converts pubid to pubid"
     it_behaves_like "converts pubid to french pubid"
   end
+
+  context "ISO 5537/IDF 26" do
+    let(:original) { "ISO 5537/IDF 26" }
+    let(:pubid) { "ISO 5537" }
+    let(:urn) { "urn:iso:std:iso:5537" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
 end
