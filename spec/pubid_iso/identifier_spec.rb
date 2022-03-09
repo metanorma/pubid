@@ -321,7 +321,7 @@ RSpec.describe Pubid::Iso::Identifier do
   context "GUIDE ISO/CEI 71:2001(F)" do
     let(:original) { "GUIDE ISO/CEI 71:2001(F)" }
     let(:pubid) { "ISO/IEC Guide 71:2001(fr)" }
-    let(:french_pubid) { "Guide ISO/IEC 71:2001(fr)" }
+    let(:french_pubid) { "Guide ISO/CEI 71:2001(fr)" }
     let(:urn) { "urn:iso:std:iso-iec:guide:71:fr" }
 
     it_behaves_like "converts pubid to urn"
@@ -332,7 +332,7 @@ RSpec.describe Pubid::Iso::Identifier do
   context "ISO/IEC 17025:2005/Cor.1:2006(fr)" do
     let(:original) { "ISO/IEC 17025:2005/Cor.1:2006(fr)" }
     let(:pubid) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }
-    let(:french_pubid) { "ISO/IEC 17025:2005/Cor.1:2006(fr)" }
+    let(:french_pubid) { "ISO/CEI 17025:2005/Cor.1:2006(fr)" }
     let(:urn) { "urn:iso:std:iso-iec:17025:cor:2006:v1:fr" }
 
     it_behaves_like "converts pubid to urn"

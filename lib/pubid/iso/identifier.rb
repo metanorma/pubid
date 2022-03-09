@@ -59,6 +59,7 @@ module Pubid::Iso
     def originator
       if @copublisher
         @copublisher = [@copublisher] unless @copublisher.is_a?(Array)
+        @copublisher.map! { |copublisher| copublisher.sub("IEC", "CEI") } if @french
         @publisher + @copublisher.map(&:to_s).sort.map do |copublisher|
           "/#{copublisher.gsub('-', '/')}"
         end.join
