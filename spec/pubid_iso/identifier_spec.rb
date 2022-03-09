@@ -294,4 +294,13 @@ RSpec.describe Pubid::Iso::Identifier do
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "ISO/IEC PDTR 20943-5" do
+    let(:original) { "ISO/IEC PDTR 20943-5" }
+    let(:pubid) { "ISO/IEC TR 20943-5" }
+    let(:urn) { "urn:iso:std:iso-iec:tr:20943:-5" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
 end

@@ -30,6 +30,10 @@ module Pubid::Iso
       { type: case type
               when "GUIDE"
                 "Guide"
+              when "PDTR"
+                "TR"
+              when "PDTS"
+                "TS"
               else
                 type
               end
