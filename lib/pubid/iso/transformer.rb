@@ -44,6 +44,8 @@ module Pubid::Iso
         "FDIS"
       when "Fpr"
         "PRF"
+      when "pD", "PD"
+        "CD"
       else
         code
       end

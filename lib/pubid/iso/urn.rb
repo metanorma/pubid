@@ -7,7 +7,8 @@ module Pubid::Iso
                   :amendment_stage, :corrigendum_stage
 
 
-    STAGES = { NP: 10,
+    STAGES = { PWI: 0,
+               NP: 10,
                WD: 20,
                CD: 30,
                DIS: 40,
@@ -33,7 +34,7 @@ module Pubid::Iso
 
     def render_stage(stage)
       substage = 0
-      ":stage-#{STAGES[stage.to_sym]}.#{sprintf('%02d', substage)}#{iteration}"
+      ":stage-#{sprintf('%02d', STAGES[stage.to_sym])}.#{sprintf('%02d', substage)}#{iteration}"
     end
 
     def stage

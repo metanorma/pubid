@@ -249,4 +249,49 @@ RSpec.describe Pubid::Iso::Identifier do
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "ISO 10791-6:2014/PWI Amd 1" do
+    let(:original) { "ISO 10791-6:2014/PWI Amd 1" }
+    let(:pubid) { "ISO 10791-6:2014/PWI Amd 1" }
+    let(:urn) { "urn:iso:std:iso:10791:-6:stage-00.00:amd:v1" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO 11137-2:2013/FDAmd 1" do
+    let(:original) { "ISO 11137-2:2013/FDAmd 1" }
+    let(:pubid) { "ISO 11137-2:2013/FDIS Amd 1" }
+    let(:urn) { "urn:iso:std:iso:11137:-2:stage-50.00:amd:v1" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO 15002:2008/DAM 2:2020(F)" do
+    let(:original) { "ISO 15002:2008/DAM 2:2020(F)" }
+    let(:pubid) { "ISO 15002:2008/DIS Amd 2:2020(fr)" }
+    let(:urn) { "urn:iso:std:iso:15002:stage-40.00:amd:2020:v2:fr" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO/IEC 10646-1:1993/pDCOR.2" do
+    let(:original) { "ISO/IEC 10646-1:1993/pDCOR.2" }
+    let(:pubid) { "ISO/IEC 10646-1:1993/CD Cor 2" }
+    let(:urn) { "urn:iso:std:iso-iec:10646:-1:stage-30.00:cor:v2" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO/IEC 14496-12/PDAM 4" do
+    let(:original) { "ISO/IEC 14496-12/PDAM 4" }
+    let(:pubid) { "ISO/IEC 14496-12/CD Amd 4" }
+    let(:urn) { "urn:iso:std:iso-iec:14496:-12:stage-30.00:amd:v4" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
 end

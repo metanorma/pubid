@@ -22,8 +22,11 @@ module Pubid::Iso
     end
 
     rule(:stage) do
+      # other stages
       str("NP") | str("WD") | str("CD") | str("DIS") | str("FDIS") | str("PRF") |
-        str("IS") | str("AWI") | str("FD") | str("D")
+      str("IS") | str("AWI") | str("PWI") |
+      # AMD and COR stages
+      str("FPD") | str("pD") | str("PD") | str("FD") | str("D")
     end
 
     # TYPES = {
@@ -70,14 +73,16 @@ module Pubid::Iso
     end
 
     rule(:amendment) do
+      (str("/") >> stage.as(:amendment_stage)).maybe >>
       (str("/") | str(" ")).maybe >>
-        (str("Amd") | str("AMD")).as(:amendment) >>
+        (str("Amd") | str("AMD") | str("AM")).as(:amendment) >>
         (str(" ") | str(".")) >>
         digits.as(:amendment_version) >>
         (str(":") >> digits.as(:amendment_number)).maybe
     end
 
     rule(:corrigendum) do
+      (str("/") >> stage.as(:corrigendum_stage)).maybe >>
       (str("/") | str(" ")).maybe >>
         (str("Cor") | str("COR")).as(:corrigendum) >>
         (str(" ") | str(".")) >>
@@ -107,9 +112,9 @@ module Pubid::Iso
         digits.as(:number) >> part.maybe >> iteration.maybe >>
         (str(" ").maybe >> str(":") >> year).maybe >>
         # stage before amendment
-        ((str("/") >> stage.as(:amendment_stage)).maybe >>
+        (
         # stage before corrigendum
-        ((amendment >> (str("/") >> stage.as(:corrigendum_stage)).maybe >> corrigendum.maybe) | corrigendum).maybe) >>
+        ((amendment >> corrigendum.maybe) | corrigendum).maybe) >>
         edition.maybe >>
         language.maybe
     end
