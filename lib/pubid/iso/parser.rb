@@ -60,7 +60,7 @@ module Pubid::Iso
     rule(:organization) do
       str("IEC") | str("IEEE") | str("CIW") | str("SAE") |
         str("CIE") | str("ASME") | str("ASTM") | str("OECD") | str("ISO") |
-        str("IWA") | str("HL7")
+        str("IWA") | str("HL7") | str("CEI")
     end
 
     rule(:edition) do
@@ -104,6 +104,8 @@ module Pubid::Iso
       str("Fpr").as(:stage).maybe >>
         # Withdrawn e.g: WD/ISO 10360-5:2000
         str("WD/").maybe >>
+        # for french PubID starting with Guide type
+        ((str("Guide") | str("GUIDE")).as(:type) >> str(" ")).maybe >>
         originator >> ((str(" ") | str("/")) >>
         # for ISO/FDIS
         (type | stage.as(:stage))).maybe >>

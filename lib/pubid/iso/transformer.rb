@@ -36,6 +36,16 @@ module Pubid::Iso
       }
     end
 
+    rule(copublisher: simple(:copublisher)) do
+      { copublisher: case copublisher
+                     when "CEI"
+                       "IEC"
+                     else
+                       copublisher
+                     end
+      }
+    end
+
     def self.convert_stage(code)
       case code
       when "D"

@@ -312,4 +312,13 @@ RSpec.describe Pubid::Iso::Identifier do
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "GUIDE ISO/CEI 71:2001(F)" do
+    let(:original) { "GUIDE ISO/CEI 71:2001(F)" }
+    let(:pubid) { "ISO/IEC Guide 71:2001(fr)" }
+    let(:urn) { "urn:iso:std:iso-iec:guide:71:fr" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
 end
