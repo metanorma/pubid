@@ -6,12 +6,17 @@ RSpec.describe Pubid::Iso::Identifier do
     it "converts pubid to urn" do
       expect(subject.urn.to_s).to eq(urn)
     end
-
   end
 
   shared_examples "converts pubid to pubid" do
     it "converts pubid to pubid" do
       expect(subject.to_s).to eq(pubid)
+    end
+  end
+
+  shared_examples "converts pubid to french pubid" do
+    it "converts pubid to pubid" do
+      expect(subject.to_s(french: true)).to eq(french_pubid)
     end
   end
 
@@ -316,9 +321,22 @@ RSpec.describe Pubid::Iso::Identifier do
   context "GUIDE ISO/CEI 71:2001(F)" do
     let(:original) { "GUIDE ISO/CEI 71:2001(F)" }
     let(:pubid) { "ISO/IEC Guide 71:2001(fr)" }
+    let(:french_pubid) { "Guide ISO/IEC 71:2001(fr)" }
     let(:urn) { "urn:iso:std:iso-iec:guide:71:fr" }
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to french pubid"
+  end
+
+  context "ISO/IEC 17025:2005/Cor.1:2006(fr)" do
+    let(:original) { "ISO/IEC 17025:2005/Cor.1:2006(fr)" }
+    let(:pubid) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }
+    let(:french_pubid) { "ISO/IEC 17025:2005/Cor.1:2006(fr)" }
+    let(:urn) { "urn:iso:std:iso-iec:17025:cor:2006:v1:fr" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to french pubid"
   end
 end

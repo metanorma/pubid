@@ -7,6 +7,8 @@ module Pubid::Iso
                   :corrigendum, :corrigendum_version, :corrigendum_number,
                   :amendment_stage, :corrigendum_stage
 
+    attr_accessor :french
+
     def initialize(**opts)
       opts.each { |key, value| send("#{key}=", value.is_a?(Array) && value || value.to_s) }
     end
@@ -45,8 +47,13 @@ module Pubid::Iso
       raise Pubid::Iso::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
     end
 
-    def to_s
-      "#{originator}#{type}#{stage} #{number}#{part}#{iteration}#{year}#{edition}#{supplements}#{language}"
+    def to_s(french: false)
+      @french = french
+      if french && @type == "Guide"
+        "#{type}#{originator}#{stage} #{number}#{part}#{iteration}#{year}#{edition}#{supplements}#{language}"
+      else
+        "#{originator}#{type}#{stage} #{number}#{part}#{iteration}#{year}#{edition}#{supplements}#{language}"
+      end
     end
 
     def originator
@@ -73,7 +80,7 @@ module Pubid::Iso
     end
 
     def type
-      "#{(@copublisher && ' ') || '/'}#{@type}" if @type
+      "#{(@french && '') || (@copublisher && ' ') || '/'}#{@type}#{(french && ' ') || ''}" if @type
     end
 
     def edition
@@ -89,17 +96,17 @@ module Pubid::Iso
       if @amendment
         result += (@amendment_stage && "/#{@amendment_stage} ") || "/"
         result += if @amendment_number
-                    "Amd #{@amendment_version}:#{@amendment_number}"
+                    "Amd#{(@french && '.') || ' '}#{@amendment_version}:#{@amendment_number}"
                   else
-                    "Amd #{@amendment_version}"
+                    "Amd#{(@french && '.') || ' '}#{@amendment_version}"
                   end
       end
       if @corrigendum
         result += (@corrigendum_stage && "/#{@corrigendum_stage} ") || "/"
         result += if @corrigendum_number
-                    "Cor #{@corrigendum_version}:#{@corrigendum_number}"
+                    "Cor#{(@french && '.') || ' '}#{@corrigendum_version}:#{@corrigendum_number}"
                   else
-                    "Cor #{@corrigendum_version}"
+                    "Cor#{(@french && '.') || ' '}#{@corrigendum_version}"
                   end
       end
 
