@@ -5,7 +5,7 @@ module Pubid::Iso
                   :type, :year, :edition, :iteration, :supplements, :language,
                   :amendment, :amendment_version, :amendment_number,
                   :corrigendum, :corrigendum_version, :corrigendum_number,
-                  :amendment_stage, :corrigendum_stage
+                  :amendment_stage, :corrigendum_stage, :joint_document
 
     attr_accessor :french
 
@@ -53,7 +53,7 @@ module Pubid::Iso
         "#{type}#{originator}#{stage} #{number}#{part}#{iteration}#{year}#{edition}#{supplements}#{language}"
       else
         "#{originator}#{type}#{stage} #{number}#{part}#{iteration}#{year}#{edition}#{supplements}#{language}"
-      end
+      end + (@joint_document && "|#{@joint_document}").to_s
     end
 
     def originator

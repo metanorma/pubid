@@ -113,7 +113,7 @@ module Pubid::Iso
         str(" ").maybe >> ((stage.as(:stage) | type) >> str(" ")).maybe >>
         digits.as(:number) >>
         # for identifiers like ISO 5537/IDF 26
-        (str("/IDF") >> str(" ") >> digits).maybe >>
+        (str("|") >> (str("IDF") >> str(" ") >> digits).as(:joint_document)).maybe >>
         part.maybe >> iteration.maybe >>
         (str(" ").maybe >> str(":") >> year).maybe >>
         # stage before amendment

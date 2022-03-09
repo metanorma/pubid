@@ -4,7 +4,7 @@ module Pubid::Iso
                   :type, :year, :edition, :iteration, :supplements, :language,
                   :amendment, :amendment_version, :amendment_number,
                   :corrigendum, :corrigendum_version, :corrigendum_number,
-                  :amendment_stage, :corrigendum_stage
+                  :amendment_stage, :corrigendum_stage, :joint_document
 
 
     STAGES = { PWI: 0,
