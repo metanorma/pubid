@@ -6,9 +6,16 @@ module Pubid::Iso
               "NP" => "НП",
               "AWI" => "АВИ",
               "CD" => "КПК",
+              "PD" => "ПД",
+              "FPD" => "ФПД",
+
 
     }.freeze
-    TYPE = { "Guide" => "Руководство", "TS" => "ТС", "TR" => "ТО" }.freeze
+    TYPE = { "Guide" => "Руководство",
+             "TS" => "ТС",
+             "TR" => "ТО",
+             "ISP" => "ИСП",
+    }.freeze
 
     def identifier
       if @type == "Guide"
