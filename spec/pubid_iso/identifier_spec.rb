@@ -348,4 +348,58 @@ RSpec.describe Pubid::Iso::Identifier do
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "Руководство ИСО/МЭК 76" do
+    let(:original) { "Руководство ИСО/МЭК 76" }
+    let(:pubid) { "ISO/IEC Guide 76" }
+    let(:urn) { "urn:iso:std:iso-iec:guide:76" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ИСО/ОПМС 26000:2010(R)" do
+    let(:original) { "ИСО/ОПМС 26000:2010(R)" }
+    let(:pubid) { "ISO/FDIS 26000:2010(ru)" }
+    let(:urn) { "urn:iso:std:iso:26000:stage-50.00:ru" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ИСО/ПМС 1956/2" do
+    let(:original) { "ИСО/ПМС 1956/2" }
+    let(:pubid) { "ISO/DIS 1956-2" }
+    let(:urn) { "urn:iso:std:iso:1956:-2:stage-40.00" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ИСО/ТС 18625" do
+    let(:original) { "ИСО/ТС 18625" }
+    let(:pubid) { "ISO/TS 18625" }
+    let(:urn) { "urn:iso:std:iso:ts:18625" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ИСО/ТО 8517" do
+    let(:original) { "ИСО/ТО 8517" }
+    let(:pubid) { "ISO/TR 8517" }
+    let(:urn) { "urn:iso:std:iso:tr:8517" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ИСО/ТС 18625" do
+    let(:original) { "ИСО/ТС 18625" }
+    let(:pubid) { "ISO/TS 18625" }
+    let(:urn) { "urn:iso:std:iso:ts:18625" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
 end

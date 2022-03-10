@@ -26,7 +26,9 @@ module Pubid::Iso
       str("NP") | str("WD") | str("CD") | str("DIS") | str("FDIS") | str("PRF") |
       str("IS") | str("AWI") | str("PWI") |
       # AMD and COR stages
-      str("FPD") | str("pD") | str("PD") | str("FD") | str("D")
+      str("FPD") | str("pD") | str("PD") | str("FD") | str("D") |
+      # Stages in Russian
+      str("ОПМС") | str("ПМС")
     end
 
     # TYPES = {
@@ -40,7 +42,10 @@ module Pubid::Iso
     #       #   "pas" / "r" / "tr" / "ts" / "tta"
     rule(:type) do
       (str("DATA") | str("ISP") | str("IWA") | str("R") | str("TTA") |
-        str("TS") | str("TR") | str("PAS") | str("Guide") | str("GUIDE")).as(:type)
+        str("TS") | str("TR") | str("PAS") | str("Guide") | str("GUIDE") |
+        # Russian types
+        str("ТС") | str("ТО")
+      ).as(:type)
     end
 
     rule(:year) do
@@ -60,7 +65,8 @@ module Pubid::Iso
     rule(:organization) do
       str("IEC") | str("IEEE") | str("CIW") | str("SAE") |
         str("CIE") | str("ASME") | str("ASTM") | str("OECD") | str("ISO") |
-        str("IWA") | str("HL7") | str("CEI")
+        str("IWA") | str("HL7") | str("CEI") |
+        str("ИСО") | str("МЭК")
     end
 
     rule(:edition) do
@@ -100,12 +106,16 @@ module Pubid::Iso
       ) >> str(")")
     end
 
+    rule(:guide_prefix) do
+      str("Guide") | str("GUIDE") | str("Руководство") | str("Руководства")
+    end
+
     rule(:identifier) do
       str("Fpr").as(:stage).maybe >>
         # Withdrawn e.g: WD/ISO 10360-5:2000
         str("WD/").maybe >>
-        # for french PubID starting with Guide type
-        ((str("Guide") | str("GUIDE")).as(:type) >> str(" ")).maybe >>
+        # for French and Russian PubIDs starting with Guide type
+        (guide_prefix.as(:type) >> str(" ")).maybe >>
         originator >> ((str(" ") | str("/")) >>
         # for ISO/FDIS
         (type | stage.as(:stage))).maybe >>

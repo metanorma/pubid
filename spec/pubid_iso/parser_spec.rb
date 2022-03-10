@@ -17,7 +17,7 @@ RSpec.describe Pubid::Iso::Parser do
         f = open("spec/fixtures/#{examples_file}")
         f.readlines.each do |pub_id|
           next if pub_id.match?("^#")
-          expect(subject).to parse(pub_id.chomp)
+          expect(subject).to parse(pub_id.split("#").first.strip.chomp)
         end
       end
     end
@@ -66,6 +66,12 @@ RSpec.describe Pubid::Iso::Parser do
 
     context "parse identifiers from iso-pubid-french.txt" do
       let(:examples_file) { "iso-pubid-french.txt" }
+
+      it_behaves_like "parse identifiers from file"
+    end
+
+    context "parses identifiers from iso-pubid-russian.txt" do
+      let(:examples_file) { "iso-pubid-russian.txt" }
 
       it_behaves_like "parse identifiers from file"
     end

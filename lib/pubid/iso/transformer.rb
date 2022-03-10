@@ -28,8 +28,12 @@ module Pubid::Iso
 
     rule(type: simple(:type)) do
       { type: case type
-              when "GUIDE"
+              when "GUIDE", "Руководство", "Руководства"
                 "Guide"
+              when "ТС"
+                "TS"
+              when "ТО"
+                "TR"
               else
                 type
               end
@@ -38,7 +42,7 @@ module Pubid::Iso
 
     rule(copublisher: simple(:copublisher)) do
       { copublisher: case copublisher
-                     when "CEI"
+                     when "CEI", "МЭК"
                        "IEC"
                      else
                        copublisher
@@ -46,11 +50,21 @@ module Pubid::Iso
       }
     end
 
+    rule(publisher: simple(:publisher)) do
+      { publisher: case publisher
+                   when "ИСО"
+                     "ISO"
+                   else
+                     publisher
+                   end
+      }
+    end
+
     def self.convert_stage(code)
       case code
-      when "D"
+      when "D", "ПМС"
         "DIS"
-      when "FD"
+      when "FD", "ОПМС"
         "FDIS"
       when "Fpr"
         "PRF"
