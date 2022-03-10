@@ -22,13 +22,14 @@ module Pubid::Iso
     end
 
     rule(:stage) do
-      # other stages
-      str("NP") | str("WD") | str("CD") | str("DIS") | str("FDIS") | str("PRF") |
-      str("IS") | str("AWI") | str("PWI") |
-      # AMD and COR stages
-      str("FPD") | str("pD") | str("PD") | str("FD") | str("D") |
-      # Stages in Russian
-      str("ОПМС") | str("ПМС")
+      Russian::STAGE.values.reduce(
+        # other stages
+        str("NP") | str("WD") | str("CD") | str("DIS") | str("FDIS") | str("PRF") |
+        str("IS") | str("AWI") | str("PWI") |
+        # AMD and COR stages
+        str("FPD") | str("pD") | str("PD") | str("FD") | str("D")) do |acc, stage|
+        acc | str(stage)
+      end
     end
 
     # TYPES = {
@@ -41,10 +42,12 @@ module Pubid::Iso
     #       # type          = "data" / "guide" / "isp" / "iwa" /
     #       #   "pas" / "r" / "tr" / "ts" / "tta"
     rule(:type) do
-      (str("DATA") | str("ISP") | str("IWA") | str("R") | str("TTA") |
-        str("TS") | str("TR") | str("PAS") | str("Guide") | str("GUIDE") |
-        # Russian types
-        str("ТС") | str("ТО")
+      (
+        Russian::TYPE.values.reduce(
+          str("DATA") | str("ISP") | str("IWA") | str("R") | str("TTA") |
+          str("TS") | str("TR") | str("PAS") | str("Guide") | str("GUIDE")) do |acc, type|
+          acc | str(type)
+        end
       ).as(:type)
     end
 
@@ -63,10 +66,12 @@ module Pubid::Iso
     end
 
     rule(:organization) do
-      str("IEC") | str("IEEE") | str("CIW") | str("SAE") |
+      Russian::PUBLISHER.values.reduce(
+        str("IEC") | str("IEEE") | str("CIW") | str("SAE") |
         str("CIE") | str("ASME") | str("ASTM") | str("OECD") | str("ISO") |
-        str("IWA") | str("HL7") | str("CEI") |
-        str("ИСО") | str("МЭК")
+        str("IWA") | str("HL7") | str("CEI")) do |acc, publisher|
+        acc | str(publisher)
+      end
     end
 
     rule(:edition) do
