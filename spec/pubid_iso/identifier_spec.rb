@@ -1,6 +1,8 @@
 RSpec.describe Pubid::Iso::Identifier do
   subject { described_class.parse(original || pubid) }
   let(:original) { nil }
+  let(:french_pubid) { original }
+  let(:russian_pubid) { original }
 
   shared_examples "converts pubid to urn" do
     it "converts pubid to urn" do
@@ -15,8 +17,14 @@ RSpec.describe Pubid::Iso::Identifier do
   end
 
   shared_examples "converts pubid to french pubid" do
-    it "converts pubid to pubid" do
-      expect(subject.to_s(french: true)).to eq(french_pubid)
+    it "converts pubid to french pubid" do
+      expect(subject.to_s(lang: :french)).to eq(french_pubid)
+    end
+  end
+
+  shared_examples "converts pubid to russian pubid" do
+    it "converts pubid to russian pubid" do
+      expect(subject.to_s(lang: :russian)).to eq(russian_pubid)
     end
   end
 
@@ -356,15 +364,18 @@ RSpec.describe Pubid::Iso::Identifier do
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to russian pubid"
   end
 
   context "ИСО/ОПМС 26000:2010(R)" do
     let(:original) { "ИСО/ОПМС 26000:2010(R)" }
     let(:pubid) { "ISO/FDIS 26000:2010(ru)" }
+    let(:russian_pubid) { "ИСО/ОПМС 26000:2010(ru)" }
     let(:urn) { "urn:iso:std:iso:26000:stage-50.00:ru" }
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
+    it_behaves_like "converts pubid to russian pubid"
   end
 
   context "ИСО/ПМС 1956/2" do

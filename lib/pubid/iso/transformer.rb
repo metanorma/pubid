@@ -27,44 +27,47 @@ module Pubid::Iso
     end
 
     rule(type: simple(:type)) do
-      { type: case type
-              when "GUIDE", "Руководство", "Руководства"
-                "Guide"
-              when "ТС"
-                "TS"
-              when "ТО"
-                "TR"
-              else
-                type
-              end
+      russian_type = Russian::TYPE.key(type.to_s)
+      { type: russian_type&.to_s ||
+        case type
+        # XXX: can't put 2 alternative Russian translations to dictionary, temporary hack
+        when "GUIDE", "Руководства"
+          "Guide"
+        when "ТС"
+          "TS"
+        when "ТО"
+          "TR"
+        else
+          type
+        end
       }
     end
 
     rule(copublisher: simple(:copublisher)) do
-      { copublisher: case copublisher
-                     when "CEI", "МЭК"
-                       "IEC"
-                     else
-                       copublisher
-                     end
+      russian_copublisher = Russian::PUBLISHER.key(copublisher.to_s)
+      { copublisher: russian_copublisher&.to_s ||
+        case copublisher
+        when "CEI"
+          "IEC"
+        else
+          copublisher
+        end
       }
     end
 
     rule(publisher: simple(:publisher)) do
-      { publisher: case publisher
-                   when "ИСО"
-                     "ISO"
-                   else
-                     publisher
-                   end
-      }
+      russian_publisher = Russian::PUBLISHER.key(publisher.to_s)
+      { publisher: russian_publisher&.to_s || publisher }
     end
 
     def self.convert_stage(code)
+      russian_code = Russian::STAGE.key(code.to_s)
+      return russian_code.to_s if russian_code
+
       case code
-      when "D", "ПМС"
+      when "D"
         "DIS"
-      when "FD", "ОПМС"
+      when "FD"
         "FDIS"
       when "Fpr"
         "PRF"

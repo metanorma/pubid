@@ -7,15 +7,16 @@ module Pubid::Iso
                   :corrigendum, :corrigendum_version, :corrigendum_number,
                   :amendment_stage, :corrigendum_stage, :joint_document
 
-    attr_accessor :french
-
     def initialize(**opts)
       opts.each { |key, value| send("#{key}=", value.is_a?(Array) && value || value.to_s) }
     end
 
+    def get_params
+      instance_variables.map { |var| [var.to_s.gsub("@", "").to_sym, instance_variable_get(var)] }.to_h
+    end
+
     def urn
-      params = instance_variables.map { |var| [var.to_s.gsub("@", "").to_sym, instance_variable_get(var)] }.to_h
-      Urn.new(**params)
+      Urn.new(**get_params)
     end
 
     def self.parse(code)
@@ -47,24 +48,37 @@ module Pubid::Iso
       raise Pubid::Iso::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
     end
 
-    def to_s(french: false)
-      @french = french
-      if french && @type == "Guide"
-        "#{type}#{originator}#{stage} #{number}#{part}#{iteration}#{year}#{edition}#{supplements}#{language}"
+    def to_s(lang: nil)
+      # @pubid_language = lang
+      case lang
+      when :french
+        French.new(**get_params).identifier
+      when :russian
+        Russian.new(**get_params).identifier
       else
-        "#{originator}#{type}#{stage} #{number}#{part}#{iteration}#{year}#{edition}#{supplements}#{language}"
+        identifier
       end + (@joint_document && "|#{@joint_document}").to_s
     end
 
+    def identifier
+      "#{originator}#{type}#{stage} #{number}#{part}#{iteration}#{year}#{edition}#{supplements}#{language}"
+    end
+
+    def copublisher
+      return nil unless @copublisher
+
+      (!@copublisher.is_a?(Array) && [@copublisher]) || @copublisher
+    end
+
     def originator
-      if @copublisher
-        @copublisher = [@copublisher] unless @copublisher.is_a?(Array)
-        @copublisher.map! { |copublisher| copublisher.sub("IEC", "CEI") } if @french
-        @publisher + @copublisher.map(&:to_s).sort.map do |copublisher|
+      if copublisher
+        # @copublisher = [@copublisher] unless @copublisher.is_a?(Array)
+        # @copublisher.map! { |copublisher| copublisher.sub("IEC", "CEI") } if @french
+        publisher + copublisher.map(&:to_s).sort.map do |copublisher|
           "/#{copublisher.gsub('-', '/')}"
         end.join
       else
-        @publisher
+        publisher
       end
     end
 
@@ -81,7 +95,7 @@ module Pubid::Iso
     end
 
     def type
-      "#{(@french && '') || (@copublisher && ' ') || '/'}#{@type}#{(french && ' ') || ''}" if @type
+      "#{(@copublisher && ' ') || '/'}#{@type}" if @type
     end
 
     def edition
@@ -92,23 +106,32 @@ module Pubid::Iso
       ".#{@iteration}" if @iteration
     end
 
+    def amendment
+      if @amendment_number
+        "Amd #{@amendment_version}:#{@amendment_number}"
+      else
+        "Amd #{@amendment_version}"
+      end
+    end
+
+    def corrigendum
+      if @corrigendum_number
+        "Cor #{@corrigendum_version}:#{@corrigendum_number}"
+      else
+        "Cor #{@corrigendum_version}"
+      end
+    end
+
     def supplements
       result = ""
       if @amendment
         result += (@amendment_stage && "/#{@amendment_stage} ") || "/"
-        result += if @amendment_number
-                    "Amd#{(@french && '.') || ' '}#{@amendment_version}:#{@amendment_number}"
-                  else
-                    "Amd#{(@french && '.') || ' '}#{@amendment_version}"
-                  end
+        result += amendment
       end
+
       if @corrigendum
         result += (@corrigendum_stage && "/#{@corrigendum_stage} ") || "/"
-        result += if @corrigendum_number
-                    "Cor#{(@french && '.') || ' '}#{@corrigendum_version}:#{@corrigendum_number}"
-                  else
-                    "Cor#{(@french && '.') || ' '}#{@corrigendum_version}"
-                  end
+        result += corrigendum
       end
 
       result
@@ -119,5 +142,6 @@ module Pubid::Iso
         "(#{@language})"
       end
     end
+
   end
 end
