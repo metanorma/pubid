@@ -7,6 +7,7 @@ RSpec.describe Pubid::Iso::Identifier do
   shared_examples "converts pubid to urn" do
     it "converts pubid to urn" do
       expect(subject.urn.to_s).to eq(urn)
+      expect(subject.urn.to_s).to eq(urn)
     end
   end
 
@@ -416,8 +417,17 @@ RSpec.describe Pubid::Iso::Identifier do
 
   context "AWI IWA 36" do
     let(:original) { "AWI IWA 36" }
-    let(:pubid) { "IWA/WD 36" }
+    let(:pubid) { "IWA/AWI 36" }
     let(:urn) { "urn:iso:std:iwa:36:stage-20.00" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO/IEC WD TS 25025" do
+    let(:original) { "ISO/IEC WD TS 25025" }
+    let(:pubid) { "ISO/IEC TS WD 25025" }
+    let(:urn) { "urn:iso:std:iso-iec:ts:25025:stage-20.20" }
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"

@@ -9,7 +9,8 @@ module Pubid::Iso
 
     STAGES = { PWI: 0,
                NP: 10,
-               WD: 20,
+               AWI: 20,
+               WD: 20.20,
                CD: 30,
                DIS: 40,
                FDIS: 50,
@@ -33,8 +34,7 @@ module Pubid::Iso
     end
 
     def render_stage(stage)
-      substage = 0
-      ":stage-#{sprintf('%02d', STAGES[stage.to_sym])}.#{sprintf('%02d', substage)}#{iteration}"
+      ":stage-#{sprintf('%05.2f', STAGES[stage.to_sym])}#{iteration}"
     end
 
     def stage
