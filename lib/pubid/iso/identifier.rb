@@ -1,11 +1,17 @@
 module Pubid::Iso
   class Identifier
-
     attr_accessor :number, :publisher, :copublisher, :stage, :substage, :part,
                   :type, :year, :edition, :iteration, :supplements, :language,
                   :amendment, :amendment_version, :amendment_number,
                   :corrigendum, :corrigendum_version, :corrigendum_number,
                   :amendment_stage, :corrigendum_stage, :joint_document
+
+    LANGUAGES = {
+      "ru" => "R",
+      "fr" => "F",
+      "en" => "E",
+      "ar" => "A",
+    }.freeze
 
     def initialize(**opts)
       opts.each { |key, value| send("#{key}=", value.is_a?(Array) && value || value.to_s) }
@@ -48,20 +54,21 @@ module Pubid::Iso
       raise Pubid::Iso::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
     end
 
-    def to_s(lang: nil)
+    def to_s(lang: nil, with_date: true, with_language_code: :iso)
       # @pubid_language = lang
       case lang
       when :french
-        French.new(**get_params).identifier
+        French.new(**get_params)
       when :russian
-        Russian.new(**get_params).identifier
+        Russian.new(**get_params)
       else
-        identifier
-      end + (@joint_document && "|#{@joint_document}").to_s
+        self
+      end.identifier(with_date, with_language_code) + (@joint_document && "|#{@joint_document}").to_s
     end
 
-    def identifier
-      "#{originator}#{type}#{stage} #{number}#{part}#{iteration}#{year}#{edition}#{supplements}#{language}"
+    def identifier(with_date, with_language_code)
+      "#{originator}#{type}#{stage} #{number}#{part}#{iteration}"\
+        "#{with_date && year || ''}#{edition}#{supplements}#{language(with_language_code)}"
     end
 
     def copublisher
@@ -137,9 +144,13 @@ module Pubid::Iso
       result
     end
 
-    def language
+    def language(with_language_code = :iso)
       if @language
-        "(#{@language})"
+        if with_language_code == :single
+          "(#{LANGUAGES[@language]})"
+        else
+          "(#{@language})"
+        end
       end
     end
 

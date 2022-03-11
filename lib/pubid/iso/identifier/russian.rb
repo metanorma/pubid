@@ -17,9 +17,10 @@ module Pubid::Iso
              "ISP" => "ИСП",
     }.freeze
 
-    def identifier
+    def identifier(with_date, with_language_code)
       if @type == "Guide"
-        "Руководство #{originator}#{stage} #{number}#{part}#{iteration}#{year}#{edition}#{supplements}#{language}"
+        "Руководство #{originator}#{stage} #{number}#{part}#{iteration}"\
+          "#{with_date && year || ''}#{edition}#{supplements}#{language(with_language_code)}"
       else
         super
       end

@@ -341,12 +341,22 @@ RSpec.describe Pubid::Iso::Identifier do
   context "ISO/IEC 17025:2005/Cor.1:2006(fr)" do
     let(:original) { "ISO/IEC 17025:2005/Cor.1:2006(fr)" }
     let(:pubid) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }
+    let(:pubid_without_date) { "ISO/IEC 17025/Cor 1:2006(fr)" }
+    let(:pubid_single_letter_language) { "ISO/IEC 17025:2005/Cor 1:2006(F)" }
     let(:french_pubid) { "ISO/CEI 17025:2005/Cor.1:2006(fr)" }
     let(:urn) { "urn:iso:std:iso-iec:17025:cor:2006:v1:fr" }
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
     it_behaves_like "converts pubid to french pubid"
+
+    it "converts to pubid without date" do
+      expect(subject.to_s(with_date: false)).to eq(pubid_without_date)
+    end
+
+    it "converts to pubid with single letter language code" do
+      expect(subject.to_s(with_language_code: :single)).to eq(pubid_single_letter_language)
+    end
   end
 
   context "ISO 5537|IDF 26" do

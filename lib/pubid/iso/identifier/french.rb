@@ -1,8 +1,9 @@
 module Pubid::Iso
   class French < Identifier
-    def identifier
+    def identifier(with_date, with_language_code)
       if @type == "Guide"
-        "Guide #{originator}#{stage} #{number}#{part}#{iteration}#{year}#{edition}#{supplements}#{language}"
+        "Guide #{originator}#{stage} #{number}#{part}#{iteration}"\
+          "#{with_date && year || ''}#{edition}#{supplements}#{language(with_language_code)}"
       else
         super
       end
