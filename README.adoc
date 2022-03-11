@@ -2,16 +2,16 @@
 
 == Purpose
 
-This gem implements a mechanism to parse and utilize ISO publication identifiers.
+This gem implements a mechanism to parse and utilize ISO publication
+identifiers.
 
 == Use cases to support
 
-PubID:
+. generate the corresponding URN format (according to RFC 5141)
+. generate updated PubID
+. generate language specific PubID
+. generate dated vs undated PubIDs
 
-. Given a PubID:
-.. generate the corresponding URN format
-.. generate updated PubID
-.. generate language specific PubID
 
 == Elements of the PubID
 
@@ -31,9 +31,19 @@ language:: language of document
 
 ==== Publisher
 
-This is the abbreviation of the publishing organization, typically `ISO`. If the document is published under co-publishing agreements, it can contain the abbreviations of other publishing SDOs, delimited by `/` after `ISO`. An `IWA` document has publisher abbreviation of `IWA`.
+This is the abbreviation of the publishing organization, typically `ISO`.
 
-EXAMPLE: `ISO`, `ISO/IEC`, `ISO/IEC/IEEE`, `ISO/IEEE`, `ISO/SAE`, `IWA`
+If the document is published under co-publishing agreements, it can contain the
+abbreviations of other publishing SDOs, delimited by `/` after `ISO`.
+
+An International Workshop Agreement document has publisher abbreviation of
+`IWA`.
+
+[example]
+====
+`ISO`, `ISO/IEC`, `ISO/IEC/IEEE`, `ISO/IEEE`, `ISO/SAE`, `IWA`
+====
+
 
 ==== Document type and stage
 
@@ -43,8 +53,8 @@ International Standard::
 
 `00.00` to `00.99`::: "`PWI`"
 `10.00` to `10.98`::: "`NP`"
-`10.99` to `10.98`::: "`AWI`"
-`20.00` to `20.99`::: "`WD`"
+`10.99` to `20.00`::: "`AWI`"
+`20.20` to `20.99`::: "`WD`"
 `30.00` to `30.99`::: "`CD`"
 `40.00` to `40.99`::: "`DIS`"
 `50.00` to `50.99`::: "`FDIS`"
@@ -55,11 +65,13 @@ Technical Specification, Technical Report::
 
 `00.00` to `00.99`::: "`PWI {TR,TS}`"
 `10.00` to `10.98`::: "`NP {TR,TS}`"
-`10.99` to `10.98`::: "`AWI {TR,TS}`"
-`20.00` to `20.99`::: "`WD {TR,TS}`"
+`10.98` to `20.00`::: "`AWI {TR,TS}`"
+`20.20` to `20.99`::: "`WD {TR,TS}`"
 `30.00` to `30.99`::: "`CD {TR,TS}`"
-`40.00` to `40.99`::: TS/TRs do not have DIS stage because they are not international standards.
-`50.00` to `50.99`::: TS/TRs do not have FDIS stage because they are not international standards.
+`40.00` to `40.99`::: TS/TRs do not have DIS stage because they are not
+international standards.
+`50.00` to `50.99`::: TS/TRs do not have FDIS stage because they are not
+international standards.
 `60.00`::: "`PRF {TR,TS}`"
 `60.60`::: "`{TR,TS}`"
 
@@ -69,8 +81,8 @@ Amendment::
 
 `00.00` to `00.99`::: "`{base-document-id}/PWI Amd {num}`"
 `10.00` to `10.98`::: "`{base-document-id}/NP Amd {num}`"
-`10.99` to `10.98`::: "`{base-document-id}/AWI Amd {num}`"
-`20.00` to `20.99`::: "`{base-document-id}/WD Amd {num}`"
+`10.99` to `20.00`::: "`{base-document-id}/AWI Amd {num}`"
+`20.20` to `20.99`::: "`{base-document-id}/WD Amd {num}`"
 `30.00` to `30.99`::: "`{base-document-id}/CD Amd {num}`"
 `40.00` to `40.99`::: "`{base-document-id}/DAmd {num}`"
 `50.00` to `50.99`::: "`{base-document-id}/FDAmd {num}`"
@@ -81,8 +93,8 @@ Technical Corrigendum::
 
 `00.00` to `00.99`::: "`{base-document-id}/PWI Cor {num}`"
 `10.00` to `10.98`::: "`{base-document-id}/NP Cor {num}`"
-`10.99` to `10.98`::: "`{base-document-id}/AWI Cor {num}`"
-`20.00` to `20.99`::: "`{base-document-id}/WD Cor {num}`"
+`10.99` to `20.00`::: "`{base-document-id}/AWI Cor {num}`"
+`20.20` to `20.99`::: "`{base-document-id}/WD Cor {num}`"
 `30.00` to `30.99`::: "`{base-document-id}/CD Cor {num}`"
 `40.00` to `40.99`::: "`{base-document-id}/DIS Cor {num}`"
 `50.00` to `50.99`::: "`{base-document-id}/FDCor {num}`"
@@ -90,65 +102,78 @@ Technical Corrigendum::
 `60.60`::: "`{base-document-id}/Cor {num}`"
 
 
-When the Publisher element contains a "`slash`" ("`/`"), the separation in front of the document stage will be converted into an empty space.
+When the Publisher element contains a "`slash`" ("`/`"), the separation in front
+of the document stage will be converted into an empty space.
 
-EXAMPLE: `ISO/NP 33333` but `ISO/IEC NP 33333`; `ISO/NP TR 33333` but `ISO/IEC NP TR 33333`.
+[example]
+====
+`ISO/NP 33333` but `ISO/IEC NP 33333`.
+`ISO/NP TR 33333` but `ISO/IEC NP TR 33333`.
+====
+
+According to ISO Directives Part 1 (11ed), SE.2:
+
+[quote]
+____
+Working drafts (WD), committee drafts (CD), draft International Standards (DIS),
+final draft International Standards (FDIS) and International Standards`",
+"`Successive DIS on the same subject will carry the same number but will be
+distinguished by a numerical suffix (.2, .3, etc.).
+____
+
+The stage iteration number is assigned accordingly for all stages, which is
+patterned as:
+
+* `{document stage}` (no suffix if iteration is 1); or
+* `{document stage}.{iteration number}`
+  (suffix including iteration number after 1).
+
+Once the document is published (stage 60 substage 60), no status abbreviation is
+given.
 
 
-According to ISO Directives Part 1 (11ed), SE.2 "`Working drafts (WD), committee drafts (CD), draft International Standards (DIS), final draft International Standards (FDIS) and International Standards`", "`Successive DIS on the same subject will carry the same number but will be distinguished by a numerical suffix (.2, .3, etc.).`"
-
-Metanorma names the stage iteration number accordingly for all stages, which is patterned as:
-`{document stage}` (no suffix if iteration is 1), `{document stage}.{iteration number}` (suffix including iteration number after 1).
-
-Once the document is published (stage 60 substage 60), no status abbreviation is given.
-
-
-==== Full document identifier patterns
+==== Full PubID patterns
 
 The patterns are as follows:
 
 *International Standard*::
 `{publisher} (/{document type and stage})? ({document number}) (- {part number})? (: {copyright year}) ({ISO 639 language code})?` +
 +
-EXAMPLE: `ISO/IEEE/FDIS 33333-2`, `ISO/IEEE 33333-2:2030(E)`
+====
+`ISO/IEEE/FDIS 33333-2`, `ISO/IEEE 33333-2:2030(E)`
+====
 
 *Technical Report*, *Technical Specification*::
 `{publisher} (/{document type and stage}) ({document number}) (- {part number})? (: {copyright year}) ({ISO 639 language code})?` +
 +
-EXAMPLE: `ISO/IEC/FDIS TS 33333-2`, `ISO/TR 33333-2:2030(E)`, `ISO/IEC TR 33333-2:2030(E)`
+====
+`ISO/IEC/FDIS TS 33333-2`, `ISO/TR 33333-2:2030(E)`, `ISO/IEC TR 33333-2:2030(E)`
+====
 
 *Amendments*, *Technical Corrigendum*::
 `{source document ID}/{document type and stage} {update number} (: {copyright year}) ({ISO 639 language code})?` +
 +
-EXAMPLE: `ISO 33333-2:2030/DIS Cor 2:2031`, `ISO 33333-2:2030/Cor 2:2032`, `ISO/IEC 33333-2:2030/Cor 2:2032`
+====
+`ISO 33333-2:2030/DIS Cor 2:2031`, `ISO 33333-2:2030/Cor 2:2032`, `ISO/IEC 33333-2:2030/Cor 2:2032`
+====
 
 
-=== Title
+// === Title
 
-`:title-intro-{en,fr}:`:: The introductory component of the English or French title of the
-document.
+// `:title-intro-{en,fr}:`:: The introductory component of the English or French
+// title of the document.
 
-`:title-main-{en,fr}:`:: The main component of the English or French title
-of the document (mandatory).
+// `:title-main-{en,fr}:`:: The main component of the English or French title of
+// the document (mandatory).
 
-`:title-part-{en,fr}:`:: The English or French title of the document part.
+// `:title-part-{en,fr}:`:: The English or French title of the document part.
 
-`:title-amendment-{en,fr}:`:: (only when `doctype` is set to `amendment` or `technical-corrigendum`)
-The English or French title of the amendment [added in https://github.com/metanorma/isodoc/releases/tag/v1.3.25]
+// `:title-amendment-{en,fr}:`:: (only when `doctype` is set to `amendment` or `technical-corrigendum`)
+// The English or French title of the amendment [added in https://github.com/metanorma/isodoc/releases/tag/v1.3.25]
 
-`:amendment-number:`:: (only when `doctype` is set to `amendment`)
-The number of the amendment [added in https://github.com/metanorma/isodoc/releases/tag/v1.3.25]
+// `:amendment-number:`:: (only when `doctype` is set to `amendment`)
+// The number of the amendment [added in https://github.com/metanorma/isodoc/releases/tag/v1.3.25]
 
-`:corrigendum-number:`:: (only when `doctype` is set to `technical-corrigendum`)
-The number of the technical corrigendum [added in https://github.com/metanorma/isodoc/releases/tag/v1.3.25]
-
-NOTE: These `:title-*` document attributes are used instead
-of the `metanorma-standoc` `:title:` attribute and the default AsciiDoc title
-(the first line of the document header, prefixed with `=`),
-due to the complexity of ISO deliverable titles.
-
-NOTE: This document template presupposes authoring in English; a different
-template will be needed for French, including French titles of document
-components such as annexes.
-
+// `:corrigendum-number:`:: (only when `doctype` is set to `technical-corrigendum`)
+// The number of the technical corrigendum [added in https://github.com/metanorma/isodoc/releases/tag/v1.3.25]
 
