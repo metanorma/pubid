@@ -82,14 +82,14 @@ module Pubid::Iso
         result +=  if @amendment_number
                      ":amd:#{@amendment_number}:v#{@amendment_version}"
                    else
-                     ":amd:v#{@amendment_version}"
+                     ":amd:#{@amendment_version}:v1"
                    end
       end
       if @corrigendum
         result += if @corrigendum_number
                     ":cor:#{@corrigendum_number}:v#{@corrigendum_version}"
                   else
-                    ":cor:v#{@corrigendum_version}"
+                    ":cor:#{@corrigendum_version}:v1"
                   end
       end
 

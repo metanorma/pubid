@@ -206,7 +206,7 @@ RSpec.describe Pubid::Iso::Identifier do
   context "ISO/IEC 10646:2020/CD Amd 1" do
     let(:original) { "ISO/IEC 10646:2020/CD Amd 1" }
     let(:pubid) { "ISO/IEC 10646:2020/CD Amd 1" }
-    let(:urn) { "urn:iso:std:iso-iec:10646:stage-30.00:amd:v1" }
+    let(:urn) { "urn:iso:std:iso-iec:10646:stage-30.00:amd:1:v1" }
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
@@ -223,7 +223,7 @@ RSpec.describe Pubid::Iso::Identifier do
   context "ISO/IEC 14496-30:2018/FDAmd 1" do
     let(:original) { "ISO/IEC 14496-30:2018/FDAmd 1" }
     let(:pubid) { "ISO/IEC 14496-30:2018/FDIS Amd 1" }
-    let(:urn) { "urn:iso:std:iso-iec:14496:-30:stage-50.00:amd:v1" }
+    let(:urn) { "urn:iso:std:iso-iec:14496:-30:stage-50.00:amd:1:v1" }
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
@@ -267,7 +267,7 @@ RSpec.describe Pubid::Iso::Identifier do
   context "ISO 10791-6:2014/PWI Amd 1" do
     let(:original) { "ISO 10791-6:2014/PWI Amd 1" }
     let(:pubid) { "ISO 10791-6:2014/PWI Amd 1" }
-    let(:urn) { "urn:iso:std:iso:10791:-6:stage-00.00:amd:v1" }
+    let(:urn) { "urn:iso:std:iso:10791:-6:stage-00.00:amd:1:v1" }
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
@@ -276,7 +276,7 @@ RSpec.describe Pubid::Iso::Identifier do
   context "ISO 11137-2:2013/FDAmd 1" do
     let(:original) { "ISO 11137-2:2013/FDAmd 1" }
     let(:pubid) { "ISO 11137-2:2013/FDIS Amd 1" }
-    let(:urn) { "urn:iso:std:iso:11137:-2:stage-50.00:amd:v1" }
+    let(:urn) { "urn:iso:std:iso:11137:-2:stage-50.00:amd:1:v1" }
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
@@ -294,7 +294,7 @@ RSpec.describe Pubid::Iso::Identifier do
   context "ISO/IEC 10646-1:1993/pDCOR.2" do
     let(:original) { "ISO/IEC 10646-1:1993/pDCOR.2" }
     let(:pubid) { "ISO/IEC 10646-1:1993/CD Cor 2" }
-    let(:urn) { "urn:iso:std:iso-iec:10646:-1:stage-30.00:cor:v2" }
+    let(:urn) { "urn:iso:std:iso-iec:10646:-1:stage-30.00:cor:2:v1" }
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
@@ -303,7 +303,7 @@ RSpec.describe Pubid::Iso::Identifier do
   context "ISO/IEC 14496-12/PDAM 4" do
     let(:original) { "ISO/IEC 14496-12/PDAM 4" }
     let(:pubid) { "ISO/IEC 14496-12/CD Amd 4" }
-    let(:urn) { "urn:iso:std:iso-iec:14496:-12:stage-30.00:amd:v4" }
+    let(:urn) { "urn:iso:std:iso-iec:14496:-12:stage-30.00:amd:4:v1" }
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
