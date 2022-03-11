@@ -34,4 +34,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor"
   spec.add_dependency "lightly"
   spec.add_dependency "parslet"
+  spec.add_dependency "psych", "~> 3.3.2"
 end
