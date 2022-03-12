@@ -48,11 +48,11 @@ NIST IR 8259Apt: NIST IR 8259A(por)
 NIST IR 8211-upd: NIST IR 8211/Upd1-2021
 NIST IR 8115r1/upd: NIST IR 8115r1/Upd1-2021
 NBS CS v: NBS CSM v
-!ruby/regexp /NBS CRPL-F-B(?=\d+)/: "NBS CRPL-F-B "
-!ruby/regexp /NBS[.\s]CS[.\s]e/: "NBS CS-E "
-!ruby/regexp /(?<=\d)es/: (spa)
-!ruby/regexp /(?<=\d)chi/: (zho)
-!ruby/regexp /(?<=\d)viet/: (vie)
-!ruby/regexp /(?<=\d)port/: (por)
-!ruby/regexp /(?<=\d)(pt)(?!\d)/: (por)
-!ruby/regexp /(?<=\d)id/: (ind)
+/NBS CRPL-F-B(?=\d+)/: "NBS CRPL-F-B "
+/NBS[.\s]CS[.\s]e/: "NBS CS-E "
+/(?<=\d)es/: (spa)
+/(?<=\d)chi/: (zho)
+/(?<=\d)viet/: (vie)
+/(?<=\d)port/: (por)
+/(?<=\d)(pt)(?!\d)/: (por)
+/(?<=\d)id/: (ind)

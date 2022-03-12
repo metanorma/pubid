@@ -142,7 +142,7 @@ module Pubid::Nist
 
     def self.update_old_code(code)
       UPDATE_CODES.each do |from, to|
-        code = code.gsub(from, to)
+        code = code.gsub(from.match?(/^\/.*\/$/) ? Regexp.new(from[1..-2]) : from, to)
       end
       code
     end
