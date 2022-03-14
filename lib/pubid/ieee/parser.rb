@@ -8,8 +8,14 @@ module Pubid::Ieee
       match('\d').repeat(4, 4)
     end
 
+    rule(:organization) do
+      str("IEEE") | str("AIEE")
+    end
+
     rule(:identifier) do
-      str("IEEE No") >> (str(" ") | str(". ")) >> digits.as(:number) >> str("-") >> year.as(:year)
+      organization >> str(" ") >> (str("No") | str("no")) >> (str(".") | str(" ")) >>
+        str(" ").maybe >>
+        (digits | match("[A-Z]")).repeat(1).as(:number) >> str("-") >> year.as(:year)
     end
 
     rule(:root) { identifier }
