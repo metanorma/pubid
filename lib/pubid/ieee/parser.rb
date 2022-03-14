@@ -9,7 +9,7 @@ module Pubid::Ieee
     end
 
     rule(:identifier) do
-      str("IEEE No ") >> digits.as(:number) >> str("-") >> year.as(:year)
+      str("IEEE No") >> (str(" ") | str(". ")) >> digits.as(:number) >> str("-") >> year.as(:year)
     end
 
     rule(:root) { identifier }
