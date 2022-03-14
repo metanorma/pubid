@@ -13,9 +13,9 @@ module Pubid::Ieee
     end
 
     rule(:identifier) do
-      organization >> str(" ") >> (str("No") | str("no")) >> (str(".") | str(" ")) >>
+      organization >> str(" ") >> str("Std ").maybe >> ((str("No") | str("no")) >> (str(".") | str(" "))).maybe >>
         str(" ").maybe >>
-        (digits | match("[A-Z]")).repeat(1).as(:number) >> str("-") >> year.as(:year)
+        (digits | match("[A-Z]")).repeat(1).as(:number) >> (str("-") >> year.as(:year)).maybe
     end
 
     rule(:root) { identifier }

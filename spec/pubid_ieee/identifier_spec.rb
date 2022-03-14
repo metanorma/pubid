@@ -9,7 +9,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEEE No 142-1956" do
     let(:original) { "IEEE No 142-1956" }
-    let(:pubid) { "IEEE No 142-1956" }
+    let(:pubid) { "IEEE 142-1956" }
 
     it_behaves_like "converts pubid to pubid"
   end
