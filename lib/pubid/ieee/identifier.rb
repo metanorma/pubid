@@ -1,6 +1,6 @@
 module Pubid::Ieee
   class Identifier
-    attr_accessor :number, :publisher, :stage, :part, :subpart, :status, :approval,
+    attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart, :status, :approval,
                   :edition, :draft, :rev, :corr, :amd, :redline, :year, :month, :type
 
     def initialize(**opts)
@@ -15,7 +15,11 @@ module Pubid::Ieee
     end
 
     def to_s
-      "#{publisher} #{type}#{number}#{part}#{subpart}#{year}"
+      "#{publisher}#{copublisher} #{type}#{number}#{part}#{subpart}#{year}"
+    end
+
+    def copublisher
+      "/#{@copublisher}" if @copublisher
     end
 
     def part

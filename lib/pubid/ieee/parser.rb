@@ -9,7 +9,7 @@ module Pubid::Ieee
     end
 
     rule(:organization) do
-      str("IEEE") | str("AIEE") | str("ANSI")
+      str("IEEE") | str("AIEE") | str("ANSI") | str("ASA")
     end
 
     rule(:number) do
@@ -29,7 +29,8 @@ module Pubid::Ieee
     end
 
     rule(:identifier) do
-      organization.as(:publisher) >> str(" ") >> (type.as(:type) >> str(" ")).maybe >> (
+      organization.as(:publisher) >> ((str("/ ") | str("/")) >> organization.as(:copublisher)).maybe >>
+        str(" ") >> (type.as(:type) >> str(" ")).maybe >> (
         (str("No") | str("no")) >> (str(".") | str(" "))
       ).maybe >> str(" ").maybe >>
       number >>

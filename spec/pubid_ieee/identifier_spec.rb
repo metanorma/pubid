@@ -37,15 +37,26 @@ RSpec.describe Pubid::Ieee::Identifier do
   end
 
   context "ANSI C37.0781-1972" do
-    let(:original) { "ANSI C37.0781-1972" }
     let(:pubid) { "ANSI C37.0781-1972" }
 
     it_behaves_like "converts pubid to pubid"
   end
 
   context "IEEE Std 1003.0-1995" do
-    let(:original) { "IEEE Std 1003.0-1995" }
     let(:pubid) { "IEEE Std 1003.0-1995" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ASA C37.1-1950" do
+    let(:pubid) { "ASA C37.1-1950" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ANSI/ IEEE C37.23-1969" do
+    let(:original) { "ANSI/ IEEE C37.23-1969" }
+    let(:pubid) { "ANSI/IEEE C37.23-1969" }
 
     it_behaves_like "converts pubid to pubid"
   end
