@@ -12,10 +12,23 @@ module Pubid::Ieee
       str("IEEE") | str("AIEE")
     end
 
+    rule(:number) do
+      (digits | match("[A-Z]")).repeat(1).as(:number)
+    end
+
+    rule(:part) do
+      str(".") >> (digits | match("[A-Z]")).repeat(1).as(:part)
+    end
+
+    rule(:subpart) do
+      str(".") >> digits
+    end
+
     rule(:identifier) do
-      organization >> str(" ") >> str("Std ").maybe >> ((str("No") | str("no")) >> (str(".") | str(" "))).maybe >>
-        str(" ").maybe >>
-        (digits | match("[A-Z]")).repeat(1).as(:number) >> (str("-") >> year.as(:year)).maybe
+      organization >> str(" ") >> ((str("Std") | str("STD"))>> str(" ")).maybe >> (
+        (str("No") | str("no")) >> (str(".") | str(" "))
+      ).maybe >> str(" ").maybe >>
+      number >> (part >> subpart.repeat.as(:subpart)).maybe >> (str("-") >> year.as(:year)).maybe
     end
 
     rule(:root) { identifier }
