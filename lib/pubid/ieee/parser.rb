@@ -17,11 +17,11 @@ module Pubid::Ieee
     end
 
     rule(:part) do
-      str(".") >> (digits | match("[A-Z]")).repeat(1).as(:part)
+      (str(".") | str("-")) >> (digits | match("[A-Z]")).repeat(1).as(:part)
     end
 
     rule(:subpart) do
-      str(".") >> digits
+      (str(".") | str("-")) >> digits
     end
 
     rule(:type) do
