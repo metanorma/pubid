@@ -15,7 +15,7 @@ module Pubid::Ieee
     end
 
     def to_s
-      "#{publisher} #{type}#{number}#{part}#{subpart}-#{year}"
+      "#{publisher} #{type}#{number}#{part}#{subpart}#{year}"
     end
 
     def part
@@ -23,11 +23,15 @@ module Pubid::Ieee
     end
 
     def subpart
-      @subpart if @subpart
+      @subpart if @subpart && !@subpart.empty?
     end
 
     def type
       "#{@type} " if @type
+    end
+
+    def year
+      "-#{@year}" if @year
     end
   end
 end

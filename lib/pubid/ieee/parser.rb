@@ -5,7 +5,7 @@ module Pubid::Ieee
     end
 
     rule(:year) do
-      match('\d').repeat(4, 4)
+      (str(".") | str("-")) >> match('\d').repeat(4, 4).as(:year)
     end
 
     rule(:organization) do
@@ -17,11 +17,11 @@ module Pubid::Ieee
     end
 
     rule(:part) do
-      (str(".") | str("-")) >> (digits | match("[A-Z]")).repeat(1).as(:part)
+      (str(".") | str("-")) >> match('[\dA-Z]').repeat(1).as(:part)
     end
 
     rule(:subpart) do
-      (str(".") | str("-")) >> digits
+      (str(".") | str("-")) >> match('\d').repeat(1)
     end
 
     rule(:type) do
@@ -32,7 +32,26 @@ module Pubid::Ieee
       organization.as(:publisher) >> str(" ") >> (type.as(:type) >> str(" ")).maybe >> (
         (str("No") | str("no")) >> (str(".") | str(" "))
       ).maybe >> str(" ").maybe >>
-      number >> (part >> subpart.repeat.as(:subpart)).maybe >> (str("-") >> year.as(:year)).maybe
+      number >>
+        # patterns:
+        (
+          # 802.15.22.3-2020
+          # 1073.1.1.1-2004
+          (part >> subpart.repeat(2, 2).as(:subpart) >> year) |
+          # C57.12.00-1993
+          (part >> subpart.as(:subpart) >> year) |
+          # N42.44-2008
+          # 1244-5.2000
+          # 11073-40102-2020
+          # C37.0781-1972
+          (part >> year) |
+          # C57.19.101
+          part >> subpart |
+          # 581.1978
+          year |
+          # 61691-6
+          part
+        ).maybe
     end
 
     rule(:root) { identifier }
