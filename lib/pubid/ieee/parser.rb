@@ -9,7 +9,7 @@ module Pubid::Ieee
     end
 
     rule(:organization) do
-      str("IEEE") | str("AIEE")
+      str("IEEE") | str("AIEE") | str("ANSI")
     end
 
     rule(:number) do
@@ -25,7 +25,7 @@ module Pubid::Ieee
     end
 
     rule(:identifier) do
-      organization >> str(" ") >> ((str("Std") | str("STD"))>> str(" ")).maybe >> (
+      organization.as(:publisher) >> str(" ") >> ((str("Std") | str("STD"))>> str(" ")).maybe >> (
         (str("No") | str("no")) >> (str(".") | str(" "))
       ).maybe >> str(" ").maybe >>
       number >> (part >> subpart.repeat.as(:subpart)).maybe >> (str("-") >> year.as(:year)).maybe

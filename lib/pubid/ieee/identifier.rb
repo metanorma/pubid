@@ -15,7 +15,7 @@ module Pubid::Ieee
     end
 
     def to_s
-      "IEEE Std #{number}#{part}#{subpart}-#{year}"
+      "#{publisher} Std #{number}#{part}#{subpart}-#{year}"
     end
 
     def part
