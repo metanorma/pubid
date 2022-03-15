@@ -24,8 +24,12 @@ module Pubid::Ieee
       str(".") >> digits
     end
 
+    rule(:type) do
+      str("Std") | str("STD") | str("Standard") | str("Draft Std") | str("Draft")
+    end
+
     rule(:identifier) do
-      organization.as(:publisher) >> str(" ") >> ((str("Std") | str("STD"))>> str(" ")).maybe >> (
+      organization.as(:publisher) >> str(" ") >> (type.as(:type) >> str(" ")).maybe >> (
         (str("No") | str("no")) >> (str(".") | str(" "))
       ).maybe >> str(" ").maybe >>
       number >> (part >> subpart.repeat.as(:subpart)).maybe >> (str("-") >> year.as(:year)).maybe

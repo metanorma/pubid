@@ -1,7 +1,7 @@
 module Pubid::Ieee
   class Identifier
     attr_accessor :number, :publisher, :stage, :part, :subpart, :status, :approval,
-                  :edition, :draft, :rev, :corr, :amd, :redline, :year, :month
+                  :edition, :draft, :rev, :corr, :amd, :redline, :year, :month, :type
 
     def initialize(**opts)
       opts.each { |key, value| send("#{key}=", value.is_a?(Array) && value || value.to_s) }
@@ -15,7 +15,7 @@ module Pubid::Ieee
     end
 
     def to_s
-      "#{publisher} Std #{number}#{part}#{subpart}-#{year}"
+      "#{publisher} #{type}#{number}#{part}#{subpart}-#{year}"
     end
 
     def part
@@ -24,6 +24,10 @@ module Pubid::Ieee
 
     def subpart
       @subpart if @subpart
+    end
+
+    def type
+      "#{@type} " if @type
     end
   end
 end
