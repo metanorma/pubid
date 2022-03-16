@@ -60,4 +60,24 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "AIEE No 91-1962 (ASA Y32.14-1962)" do
+    let(:original) { "AIEE No 91-1962 (ASA Y32.14-1962)" }
+    let(:pubid) { "AIEE 91-1962 (ASA Y32.14-1962)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ANSI C37.61-1973 and IEEE Std 321-1973" do
+    let(:original) { "ANSI C37.61-1973 and IEEE Std 321-1973" }
+    let(:pubid) { "ANSI C37.61-1973 (IEEE Std 321-1973)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 623-1976 (ANSI Y32.21-1976, NCTA 006-0975)" do
+    let(:pubid) { "IEEE Std 623-1976 (ANSI Y32.21-1976, NCTA 006-0975)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end

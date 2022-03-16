@@ -9,7 +9,7 @@ module Pubid::Ieee
     end
 
     rule(:organization) do
-      str("IEEE") | str("AIEE") | str("ANSI") | str("ASA")
+      str("IEEE") | str("AIEE") | str("ANSI") | str("ASA") | str("NCTA")
     end
 
     rule(:number) do
@@ -47,11 +47,15 @@ module Pubid::Ieee
           # C37.0781-1972
           (part >> year) |
           # C57.19.101
-          part >> subpart |
+          (part >> subpart) |
           # 581.1978
           year |
           # 61691-6
           part
+        ).maybe >>
+        (str(" ") >>
+          ((str("(") >> (identifier.as(:alternative) >> str(", ").maybe).repeat(1) >> str(")")) |
+           (str("and ") >> identifier.as(:alternative)))
         ).maybe
     end
 
