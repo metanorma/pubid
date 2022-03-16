@@ -80,4 +80,39 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "IEC 61671-2 Edition 1.0 2016-04" do
+    let(:original) { "IEC 61671-2 Edition 1.0 2016-04" }
+    let(:pubid) { "IEC 61671.2 Edition 1.0 2016-04" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEC/IEEE 60076-16 Edition 2.0 2018-09" do
+    let(:original) { "IEC/IEEE 60076-16 Edition 2.0 2018-09" }
+    let(:pubid) { "IEC/IEEE 60076.16 Edition 2.0 2018-09" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 1003.1, 2004 Edition" do
+    let(:original) { "IEEE Std 1003.1, 2004 Edition" }
+    let(:pubid) { "IEEE Std 1003.1 Edition 2004" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEC 62525-Edition 1.0 - 2007" do
+    let(:original) { "IEC 62525-Edition 1.0 - 2007" }
+    let(:pubid) { "IEC 62525 Edition 1.0 2007" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE/ISO/IEC P90003, February 2018 (E)" do
+    let(:original) { "IEEE/ISO/IEC P90003, February 2018 (E)" }
+    let(:pubid) { "IEEE/ISO/IEC P90003 Edition 2018-02" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end

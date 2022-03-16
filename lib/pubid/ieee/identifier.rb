@@ -1,3 +1,5 @@
+require 'date'
+
 module Pubid::Ieee
   class Identifier
     attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart, :status, :approval,
@@ -31,11 +33,17 @@ module Pubid::Ieee
     end
 
     def to_s
-      "#{publisher}#{copublisher} #{type}#{number}#{part}#{subpart}#{year}#{alternative}"
+      "#{publisher}#{copublisher} #{type}#{number}#{part}#{subpart}#{year}#{edition}#{alternative}"
     end
 
     def copublisher
-      "/#{@copublisher}" if @copublisher
+      return "" unless @copublisher
+
+      if @copublisher.is_a?(Array)
+        @copublisher&.map { |c| "/#{c}" }&.join
+      else
+        "/#{@copublisher}"
+      end
     end
 
     def part
@@ -62,6 +70,20 @@ module Pubid::Ieee
           " (#{Identifier.new(**@alternative)})"
         end
       end
+    end
+
+    def edition
+      return "" unless @edition
+
+      result = " Edition "
+      result += "#{@edition[:version]} " if @edition[:version]
+      result += "#{@edition[:year]}" if @edition[:year]
+      if @edition[:month]
+        month = @edition[:month]
+        month = Date.parse(@edition[:month]).month if month.to_i.zero?
+        result += "-#{sprintf('%02d', month)}"
+      end
+      result
     end
   end
 end

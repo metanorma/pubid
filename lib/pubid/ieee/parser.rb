@@ -9,7 +9,7 @@ module Pubid::Ieee
     end
 
     rule(:organization) do
-      str("IEEE") | str("AIEE") | str("ANSI") | str("ASA") | str("NCTA")
+      str("IEEE") | str("AIEE") | str("ANSI") | str("ASA") | str("NCTA") | str("IEC") | str("ISO")
     end
 
     rule(:number) do
@@ -28,8 +28,18 @@ module Pubid::Ieee
       str("Std") | str("STD") | str("Standard") | str("Draft Std") | str("Draft")
     end
 
+    rule(:edition) do
+      (str(", ") >> match('\d').repeat(4, 4).as(:year) >> str(" Edition")) |
+        ((str(" ") | str("-")) >> str("Edition ") >> (digits >> str(".") >> digits).as(:version) >> (str(" - ") | str(" ")) >>
+        match('\d').repeat(4, 4).as(:year) >> (str("-") >>
+        match('\d').repeat(2, 2).as(:month)).maybe) |
+        #, February 2018 (E)
+        (str(", ") >> match('[a-zA-Z]').repeat(1).as(:month) >> str(" ") >> match('\d').repeat(4, 4).as(:year) >>
+          str(" (E)"))
+    end
+
     rule(:identifier) do
-      organization.as(:publisher) >> ((str("/ ") | str("/")) >> organization.as(:copublisher)).maybe >>
+      organization.as(:publisher) >> ((str("/ ") | str("/")) >> organization.as(:copublisher)).repeat >>
         str(" ") >> (type.as(:type) >> str(" ")).maybe >> (
         (str("No") | str("no")) >> (str(".") | str(" "))
       ).maybe >> str(" ").maybe >>
@@ -50,9 +60,12 @@ module Pubid::Ieee
           (part >> subpart) |
           # 581.1978
           year |
+          # IEC 62525-Edition 1.0 - 2007
+          edition.as(:edition) |
           # 61691-6
           part
         ).maybe >>
+        edition.as(:edition).maybe >>
         (str(" ") >>
           ((str("(") >> (identifier.as(:alternative) >> str(", ").maybe).repeat(1) >> str(")")) |
            (str("and ") >> identifier.as(:alternative)))
