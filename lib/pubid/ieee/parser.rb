@@ -51,7 +51,7 @@ module Pubid::Ieee
         (str("No") | str("no")) >> (str(".") | str(" "))
       ).maybe >> str(" ").maybe >>
       number >>
-        # patterns:
+        # part/subpart/year patterns:
         (
           # 802.15.22.3-2020
           # 1073.1.1.1-2004
@@ -73,9 +73,11 @@ module Pubid::Ieee
           part
         ).maybe >>
         edition.as(:edition).maybe >>
+        # dual-PubIDs
         (str(" ") >>
-          ((str("(") >> (identifier.as(:alternative) >> str(", ").maybe).repeat(1) >> str(")")) |
-           (str("and ") >> identifier.as(:alternative)))
+          ((str("(") >> (identifier.as(:alternative) >> str(", ").maybe).repeat(1) >>
+            str(")")) | (str("and ") >> identifier.as(:alternative)) |
+            identifier.as(:alternative))
         ).maybe
     end
 

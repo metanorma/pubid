@@ -129,4 +129,18 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "IEEE 1076.4 IEC 61691-5 First edition 2004-10" do
+    let(:original) { "IEEE 1076.4 IEC 61691-5 First edition 2004-10" }
+    let(:pubid) { "IEEE 1076.4 (IEC 61691.5 Edition 1.0 2004-10)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 1076.1 IEC 61691-6 Edition 1.0 2009-12" do
+    let(:original) { "IEEE Std 1076.1 IEC 61691-6 Edition 1.0 2009-12" }
+    let(:pubid) { "IEEE Std 1076.1 (IEC 61691.6 Edition 1.0 2009-12)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end
