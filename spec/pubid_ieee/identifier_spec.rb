@@ -115,4 +115,18 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "ISO/IEC 15288 First edition 2002-11-01" do
+    let(:original) { "ISO/IEC 15288 First edition 2002-11-01" }
+    let(:pubid) { "ISO/IEC 15288 Edition 1.0 2002-11-01" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEC 61523-3 First edition 2004-09" do
+    let(:original) { "IEC 61523-3 First edition 2004-09" }
+    let(:pubid) { "IEC 61523.3 Edition 1.0 2004-09" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end

@@ -35,7 +35,14 @@ module Pubid::Ieee
         match('\d').repeat(2, 2).as(:month)).maybe) |
         #, February 2018 (E)
         (str(", ") >> match('[a-zA-Z]').repeat(1).as(:month) >> str(" ") >> match('\d').repeat(4, 4).as(:year) >>
-          str(" (E)"))
+          str(" (E)")) |
+        # First edition 2002-11-01
+        str(" ") >> str("First").as(:version) >>
+        str(" edition ") >>
+          match('\d').repeat(4, 4).as(:year) >> str("-") >>
+          match('\d').repeat(2, 2).as(:month) >> (str("-") >>
+          match('\d').repeat(2, 2).as(:day)).maybe
+
     end
 
     rule(:identifier) do
