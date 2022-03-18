@@ -137,10 +137,92 @@ RSpec.describe Pubid::Ieee::Identifier do
     it_behaves_like "converts pubid to pubid"
   end
 
+  context "ANSI PC63.10/D14, April 2020" do
+    let(:pubid) { "ANSI PC63.10/D14, April 2020" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
   context "IEEE Std 1076.1 IEC 61691-6 Edition 1.0 2009-12" do
     let(:original) { "IEEE Std 1076.1 IEC 61691-6 Edition 1.0 2009-12" }
     let(:pubid) { "IEEE Std 1076.1 (IEC 61691.6 Edition 1.0 2009-12)" }
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "IEEE Std PC37.12.1/D2.0" do
+    let(:pubid) { "IEEE Std PC37.12.1/D2.0" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE 1250 /D11 May 2010" do
+    let(:original) { "IEEE 1250 /D11 May 2010" }
+    let(:pubid) { "IEEE 1250/D11, May 2010" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ANSI PC63.12/D12e, January 2015" do
+    let(:pubid) { "ANSI PC63.12/D12e, January 2015" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE P62.44/D15.3" do
+    let(:pubid) { "IEEE P62.44/D15.3" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE C57.139/D14June 2010" do
+    let(:pubid) { "IEEE C57.139/D14, June 2010" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE P11073-10101/D3r7, September 2018" do
+    let(:original) { "IEEE P11073-10101/D3.7, September 2018" }
+    let(:pubid) { "IEEE P11073.10101/D3.7, September 2018" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE P11073-10420/D4D5, March 2020" do
+    let(:original) { "IEEE P11073-10420/D4D5, March 2020" }
+    let(:pubid) { "IEEE P11073.10420/D4, March 2020" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE P1293/D29a1, August 2018" do
+    let(:pubid) { "IEEE P1293/D29a1, August 2018" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE P1609.2.1/D12D14, June 2020" do
+    let(:original) { "IEEE P1609.2.1/D12D14, June 2020" }
+    let(:pubid) { "IEEE P1609.2.1/D12, June 2020" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE P1653.5/D7d1 November, 2019" do
+    let(:original) { "IEEE P1653.5/D7d1 November, 2019" }
+    let(:pubid) { "IEEE P1653.5/D7, November 2019" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE P1017/D062012"
+  # IEEE P1653.5/D8c June, 2020
+  # IEEE P1668/D3Q, April 2013
+  # IEEE P1785.2/D1n, April 2015
+  # IEEE P3004.11/D1b, September 2017
+  # IEEE P3004.11/D1e, June 2019
+  # IEEE P3004.11/D1f, June 2019
+  # IEEE P535/DA, March 2017
+  # IEEE P535/DB, September 2017
+  # IEEE P535/DC, October 2017
 end

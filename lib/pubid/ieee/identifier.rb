@@ -1,4 +1,7 @@
 require 'date'
+require "yaml"
+
+UPDATE_CODES = YAML.load_file(File.join(File.dirname(__FILE__), "../../../update_codes.yaml"))
 
 module Pubid::Ieee
   class Identifier
@@ -7,6 +10,13 @@ module Pubid::Ieee
 
     def initialize(**opts)
       opts.each { |key, value| send("#{key}=", value.is_a?(Enumerable) && value || value.to_s) }
+    end
+
+    def self.update_old_code(code)
+      UPDATE_CODES.each do |from, to|
+        code = code.gsub(from.match?(/^\/.*\/$/) ? Regexp.new(from[1..-2]) : from, to)
+      end
+      code
     end
 
     def self.merge_parameters(params)
@@ -26,14 +36,14 @@ module Pubid::Ieee
     end
 
     def self.parse(code)
-      new(**merge_parameters(Parser.new.parse(code)).to_h)
+      new(**merge_parameters(Parser.new.parse(update_old_code(code))).to_h)
 
     rescue Parslet::ParseFailed => failure
       raise Pubid::Ieee::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
     end
 
     def to_s
-      "#{publisher}#{copublisher} #{type}#{number}#{part}#{subpart}#{year}#{edition}#{alternative}"
+      "#{publisher}#{copublisher} #{type}#{number}#{part}#{subpart}#{year}#{draft}#{edition}#{alternative}"
     end
 
     def copublisher
@@ -87,6 +97,15 @@ module Pubid::Ieee
         result += "-#{sprintf('%02d', month)}"
       end
       result += "-#{@edition[:day]}" if @edition[:day]
+      result
+    end
+
+    def draft
+      return "" unless @draft
+
+      result = "/D#{@draft[:version]}"
+      result += ".#{@draft[:revision]}" if @draft[:revision]
+      result += ", #{@draft[:month]} #{@draft[:year]}" if @draft[:month]
       result
     end
   end

@@ -45,6 +45,15 @@ module Pubid::Ieee
 
     end
 
+    rule(:draft) do
+      # /D14, April 2020
+      # /D7 November, 2019
+      str(" ").maybe >> str("/D") >> match('[\dA-Za-z]').repeat(1).as(:version) >>
+        ((str(".") | str("r")) >> digits.as(:revision)).maybe >>
+        ((str(", ") | str(" ")) >> match("[A-Za-z]").repeat(1).as(:month) >>
+          (str(" ") | str(", ")) >> match('\d').repeat(4, 4).as(:year)).maybe
+    end
+
     rule(:identifier) do
       organization.as(:publisher) >> ((str("/ ") | str("/")) >> organization.as(:copublisher)).repeat >>
         str(" ") >> (type.as(:type) >> str(" ")).maybe >> (
@@ -64,7 +73,11 @@ module Pubid::Ieee
           # C37.0781-1972
           (part >> year) |
           # C57.19.101
-          (part >> subpart) |
+          (part >> subpart.as(:subpart)) |
+          # IEEE P11073-10101
+          # IEEE P11073-10420/D4D5
+          # trick to avoid being partially parsed by year
+          (str("-") >> match('[\dA-Z]').repeat(5).as(:part)) |
           # 581.1978
           year |
           # IEC 62525-Edition 1.0 - 2007
@@ -72,6 +85,7 @@ module Pubid::Ieee
           # 61691-6
           part
         ).maybe >>
+        draft.as(:draft).maybe >>
         edition.as(:edition).maybe >>
         # dual-PubIDs
         (str(" ") >>
