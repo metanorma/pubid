@@ -190,7 +190,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEEE P11073-10420/D4D5, March 2020" do
     let(:original) { "IEEE P11073-10420/D4D5, March 2020" }
-    let(:pubid) { "IEEE P11073.10420/D4, March 2020" }
+    let(:pubid) { "IEEE P11073.10420/D4D5, March 2020" }
 
     it_behaves_like "converts pubid to pubid"
   end
@@ -203,26 +203,22 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEEE P1609.2.1/D12D14, June 2020" do
     let(:original) { "IEEE P1609.2.1/D12D14, June 2020" }
-    let(:pubid) { "IEEE P1609.2.1/D12, June 2020" }
+    let(:pubid) { "IEEE P1609.2.1/D12D14, June 2020" }
 
     it_behaves_like "converts pubid to pubid"
   end
 
   context "IEEE P1653.5/D7d1 November, 2019" do
     let(:original) { "IEEE P1653.5/D7d1 November, 2019" }
-    let(:pubid) { "IEEE P1653.5/D7, November 2019" }
+    let(:pubid) { "IEEE P1653.5/D7.1, November 2019" }
 
     it_behaves_like "converts pubid to pubid"
   end
 
-  context "IEEE P1017/D062012"
-  # IEEE P1653.5/D8c June, 2020
-  # IEEE P1668/D3Q, April 2013
-  # IEEE P1785.2/D1n, April 2015
-  # IEEE P3004.11/D1b, September 2017
-  # IEEE P3004.11/D1e, June 2019
-  # IEEE P3004.11/D1f, June 2019
-  # IEEE P535/DA, March 2017
-  # IEEE P535/DB, September 2017
-  # IEEE P535/DC, October 2017
+  context "IEEE P1017/D062012" do
+    let(:original) { "IEEE P1017/D062012" }
+    let(:pubid) { "IEEE P1017/D062012, Jun 2012" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end
