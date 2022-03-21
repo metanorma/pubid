@@ -45,17 +45,25 @@ module Pubid::Ieee
 
     end
 
+    rule(:draft_status) do
+      str(" ") >> (str("Active Unapproved") | str("Unapproved") | str("Approved")).as(:draft_status) >> str(" Draft")
+    end
+
     rule(:draft) do
       # /D14, April 2020
       # /D7 November, 2019
-      str(" ").maybe >> str("/D") >> match('[\dA-Za-z]').repeat(1).as(:version) >>
+      str(" ").maybe >> (str("/") | str("_")) >> str("D") >> match('[\dA-Za-z]').repeat(1).as(:version) >>
         ((str(".") | str("r")) >> digits.as(:revision)).maybe >>
         ((str(", ") | str(" ")) >> match("[A-Za-z]").repeat(1).as(:month) >>
-          (str(" ") | str(", ")) >> match('\d').repeat(4, 4).as(:year)).maybe
+          (((str(" ") >> digits.as(:day)).maybe >>
+          str(", ") >> match('\d').repeat(4, 4).as(:year)) |
+          ((str(" ") | str(", ")) >> match('\d').repeat(4, 4).as(:year)))
+        ).maybe
     end
 
     rule(:identifier) do
       organization.as(:publisher) >> ((str("/ ") | str("/")) >> organization.as(:copublisher)).repeat >>
+        draft_status.maybe >>
         str(" ") >> (type.as(:type) >> str(" ")).maybe >> (
         (str("No") | str("no")) >> (str(".") | str(" "))
       ).maybe >> str(" ").maybe >>

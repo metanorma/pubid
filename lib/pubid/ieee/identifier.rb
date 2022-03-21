@@ -6,7 +6,8 @@ UPDATE_CODES = YAML.load_file(File.join(File.dirname(__FILE__), "../../../update
 module Pubid::Ieee
   class Identifier
     attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart, :status, :approval,
-                  :edition, :draft, :rev, :corr, :amd, :redline, :year, :month, :type, :alternative
+                  :edition, :draft, :rev, :corr, :amd, :redline, :year, :month, :type, :alternative,
+                  :draft_status
 
     def initialize(**opts)
       opts.each { |key, value| send("#{key}=", value.is_a?(Enumerable) && value || value.to_s) }
@@ -43,7 +44,7 @@ module Pubid::Ieee
     end
 
     def to_s
-      "#{publisher}#{copublisher} #{type}#{number}#{part}#{subpart}#{year}#{draft}#{edition}#{alternative}"
+      "#{publisher}#{copublisher} #{draft_status}#{type}#{number}#{part}#{subpart}#{year}#{draft}#{edition}#{alternative}"
     end
 
     def copublisher
@@ -105,8 +106,14 @@ module Pubid::Ieee
 
       result = "/D#{@draft[:version]}"
       result += ".#{@draft[:revision]}" if @draft[:revision]
-      result += ", #{@draft[:month]} #{@draft[:year]}" if @draft[:month]
+      result += ", #{@draft[:month]}" if @draft[:month]
+      result += " #{@draft[:day]}," if @draft[:day]
+      result += " #{@draft[:year]}" if @draft[:year]
       result
+    end
+
+    def draft_status
+      "#{@draft_status} Draft " if @draft_status
     end
   end
 end
