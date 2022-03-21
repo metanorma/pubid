@@ -217,7 +217,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEEE P1017/D062012" do
     let(:original) { "IEEE P1017/D062012" }
-    let(:pubid) { "IEEE P1017/D062012, Jun 2012" }
+    let(:pubid) { "IEEE P1017/D062012, June 2012" }
 
     it_behaves_like "converts pubid to pubid"
   end
@@ -256,6 +256,20 @@ RSpec.describe Pubid::Ieee::Identifier do
   context "IEEE Unapproved Draft Std P11073-20601_D20 May 2008" do
     let(:original) { "IEEE Unapproved Draft Std P11073-20601_D20 May 2008" }
     let(:pubid) { "IEEE Unapproved Draft Std P11073.20601/D20, May 2008" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Unapproved Draft Std P1616a/D4, Jan 2010" do
+    let(:original) { "IEEE Unapproved Draft Std P1616a/D4, Jan 2010" }
+    let(:pubid) { "IEEE Unapproved Draft Std P1616a/D4, January 2010" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Unapproved Draft Std P1619/D17, Jul 07" do
+    let(:original) { "IEEE Unapproved Draft Std P1619/D17, Jul 07" }
+    let(:pubid) { "IEEE Unapproved Draft Std P1619/D17, July 2007" }
 
     it_behaves_like "converts pubid to pubid"
   end

@@ -9,8 +9,20 @@ module Pubid::Ieee
                   :edition, :draft, :rev, :corr, :amd, :redline, :year, :month, :type, :alternative,
                   :draft_status
 
-    def initialize(**opts)
-      opts.each { |key, value| send("#{key}=", value.is_a?(Enumerable) && value || value.to_s) }
+    def initialize(organizations:, type_status:, number:, parameters:)
+      @number = number
+      [organizations, type_status, parameters].each do |data|
+        case data
+        when Hash
+          set_values(data)
+        when Array
+          set_values(Identifier.merge_parameters(data))
+        end
+      end
+    end
+
+    def set_values(hash)
+      hash.each { |key, value| send("#{key}=", value.is_a?(Enumerable) && value || value.to_s) }
     end
 
     def self.update_old_code(code)
@@ -37,7 +49,7 @@ module Pubid::Ieee
     end
 
     def self.parse(code)
-      new(**merge_parameters(Parser.new.parse(update_old_code(code))).to_h)
+      new(**merge_parameters(Transformer.new.apply(Parser.new.parse(update_old_code(code)))).to_h)
 
     rescue Parslet::ParseFailed => failure
       raise Pubid::Ieee::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"

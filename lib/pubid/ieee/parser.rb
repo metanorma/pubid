@@ -13,7 +13,7 @@ module Pubid::Ieee
     end
 
     rule(:number) do
-      (digits | match("[A-Z]")).repeat(1).as(:number)
+      ((digits | match("[A-Z]")).repeat(1) >> match("[a-z]").maybe).as(:number)
     end
 
     rule(:part) do
@@ -57,50 +57,55 @@ module Pubid::Ieee
         ((str(", ") | str(" ")) >> match("[A-Za-z]").repeat(1).as(:month) >>
           (((str(" ") >> digits.as(:day)).maybe >>
           str(", ") >> match('\d').repeat(4, 4).as(:year)) |
-          ((str(" ") | str(", ")) >> match('\d').repeat(4, 4).as(:year)))
+          ((str(" ") | str(", ")) >> match('\d').repeat(2, 4).as(:year)))
         ).maybe
     end
 
+    rule(:part_subpart_year) do
+      # 802.15.22.3-2020
+      # 1073.1.1.1-2004
+      (part >> subpart.repeat(2, 2).as(:subpart) >> year) |
+        # C57.12.00-1993
+        (part >> subpart.as(:subpart) >> year) |
+        # N42.44-2008
+        # 1244-5.2000
+        # 11073-40102-2020
+        # C37.0781-1972
+        (part >> year) |
+        # C57.19.101
+        (part >> subpart.as(:subpart)) |
+        # IEEE P11073-10101
+        # IEEE P11073-10420/D4D5
+        # trick to avoid being partially parsed by year
+        (str("-") >> match('[\dA-Z]').repeat(5).as(:part)) |
+        # 581.1978
+        year |
+        # IEC 62525-Edition 1.0 - 2007
+        edition.as(:edition) |
+        # 61691-6
+        part
+
+    end
+
+    rule(:dual_pubids) do
+      str(" ") >>
+        ((str("(") >> (identifier.as(:alternative) >> str(", ").maybe).repeat(1) >>
+          str(")")) | (str("and ") >> identifier.as(:alternative)) |
+          identifier.as(:alternative))
+    end
+
+    rule(:number_prefix) do
+      ((str("No") | str("no")) >> (str(".") | str(" "))).maybe >> str(" ").maybe
+    end
+
     rule(:identifier) do
-      organization.as(:publisher) >> ((str("/ ") | str("/")) >> organization.as(:copublisher)).repeat >>
-        draft_status.maybe >>
-        str(" ") >> (type.as(:type) >> str(" ")).maybe >> (
-        (str("No") | str("no")) >> (str(".") | str(" "))
-      ).maybe >> str(" ").maybe >>
-      number >>
-        # part/subpart/year patterns:
-        (
-          # 802.15.22.3-2020
-          # 1073.1.1.1-2004
-          (part >> subpart.repeat(2, 2).as(:subpart) >> year) |
-          # C57.12.00-1993
-          (part >> subpart.as(:subpart) >> year) |
-          # N42.44-2008
-          # 1244-5.2000
-          # 11073-40102-2020
-          # C37.0781-1972
-          (part >> year) |
-          # C57.19.101
-          (part >> subpart.as(:subpart)) |
-          # IEEE P11073-10101
-          # IEEE P11073-10420/D4D5
-          # trick to avoid being partially parsed by year
-          (str("-") >> match('[\dA-Z]').repeat(5).as(:part)) |
-          # 581.1978
-          year |
-          # IEC 62525-Edition 1.0 - 2007
-          edition.as(:edition) |
-          # 61691-6
-          part
-        ).maybe >>
-        draft.as(:draft).maybe >>
+      (organization.as(:publisher) >> ((str("/ ") | str("/")) >> organization.as(:copublisher)).repeat)
+        .as(:organizations) >>
+        (draft_status.maybe >> (str(" ") >> type.as(:type) >> str(" ")).maybe).as(:type_status) >>
+        str(" ").maybe >> number_prefix >> number >> (part_subpart_year.maybe >> draft.as(:draft).maybe >>
         edition.as(:edition).maybe >>
         # dual-PubIDs
-        (str(" ") >>
-          ((str("(") >> (identifier.as(:alternative) >> str(", ").maybe).repeat(1) >>
-            str(")")) | (str("and ") >> identifier.as(:alternative)) |
-            identifier.as(:alternative))
-        ).maybe
+        dual_pubids.maybe).as(:parameters)
     end
 
     rule(:root) { identifier }

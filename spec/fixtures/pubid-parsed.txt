@@ -5570,3 +5570,101 @@ IEEE Unapproved Draft Std PC57.12.90_D8, Sep 2008
 IEEE/IEC P62582-3_D1, April 2011
 IEEE/IEC P62659_D2
 IEEE/IEC P82079_D2, March 2017
+IEEE Approved Draft Std P1115a/D4, Feb 2007
+IEEE Approved Draft Std P1484.20.1/D7, May 07
+IEEE Approved Draft Std P1516.4/Dx.1, Jun 07
+IEEE Approved Draft Std P1542/D8, Aug 07
+IEEE Approved Draft Std P1613a/D3.2 Nov 2007
+IEEE Approved Draft Std P1617/D7.0, Jun 07
+IEEE Approved Draft Std P1636.1/D3, May 07
+IEEE Approved Draft Std P1661/D11, Jul 07
+IEEE Approved Draft Std P495/D13, Aug 07
+IEEE Approved Draft Std P532/D9.6, Apr 07
+IEEE Approved Draft Std P741/D2, Apr 07
+IEEE Approved Draft Std P99/D2.0, May 07
+IEEE Approved Draft Std PC37.20.7/D14, Dec 06
+IEEE Approved Draft Std PC37.230/D6.1, Jul 07
+IEEE Approved Draft Std PC37.235/D4, Mar 07
+IEEE Approved Draft Std PC57.12.36/D11, May 07
+IEEE Approved Draft Std PC57.129/D10, Jul 07
+IEEE P1048a/D002, February 2020
+IEEE P1048a/D003, December 2020
+IEEE P1538a/D3, February 2015
+IEEE P1538a/D4, February 2015
+IEEE P1538a/D5, July 2015
+IEEE P1547a.1/D4, August 2014
+IEEE P1547a/D1.3, December 2019
+IEEE P1547a/D1.4, January 2020
+IEEE P1547a/D2, June 2013
+IEEE P1547a/D3, December 2013
+IEEE P1588b/D1.0, August 2021
+IEEE P1588b/D1.1, December 2021
+IEEE P1657a/D4, January 2015
+IEEE P1657a/D5, January 2015
+IEEE P1708a/D2, February 2019
+IEEE P1708a/D3, April 2019
+IEEE P1801a/D01, May 2014
+IEEE P1801a/D03, May 2014
+IEEE P1857a/D1, December 2013
+IEEE P1857a/D2, January 2014
+IEEE P1901a/D3, December 2018
+IEEE P1901b/D1.1, August 2021
+IEEE P269a/D5.0, November 2011
+IEEE P269a/D5.2, January 2012
+IEEE P802.15.4q/D5.0, May, 20
+IEEE P802c/D2.2, April 2017
+IEEE P802d/D1.0 August, 2016
+IEEE P802d/D1.1 September 17, 2016
+IEEE P802d/D1.2, November 2016
+IEEE P835a/D2, October 2012
+IEEE Std 1012a-1998
+IEEE Std 1394a-2000
+IEEE Std 1613a-2008
+IEEE Std 1616a
+IEEE Std 1666 IEC61691-7 Edition 1.0 2009-12
+IEEE Std 4a-2001
+IEEE Std 524a-1993
+IEEE Std 802a-2003
+IEEE Std P1076c/D3.1
+IEEE Std P1115a/D3
+IEEE Std P1394c/D1.1
+IEEE Std P1394c/D1.2
+IEEE Std P1500/D11, Jan 06
+IEEE Std P1528a/D2.0
+IEEE Std P1528a/D2.1
+IEEE Std P269a_D5
+IEEE Std P269a_D8
+IEEE Std P802a/D4
+IEEE Std P802b/D3
+IEEE Unapproved Draft Std P1003.1_D3, Jun 07
+IEEE Unapproved Draft Std P1028/D5.1, Sep, 07
+IEEE Unapproved Draft Std P1189/D15, Jun 07
+IEEE Unapproved Draft Std P1407_D7, Mar 07
+IEEE Unapproved Draft Std P1561/D16, Jul 07
+IEEE Unapproved Draft Std P1610_D13, Aug 07
+IEEE Unapproved Draft Std P1613a/D3.2, Nov 2007
+IEEE Unapproved Draft Std P1616a/D3, Oct 2009
+IEEE Unapproved Draft Std P1616a/D4, Jan 2010
+IEEE Unapproved Draft Std P1619/D17, Jul 07
+IEEE Unapproved Draft Std P1631/D2, Sep 07
+IEEE Unapproved Draft Std P1636.1/D3, Jan 09
+IEEE Unapproved Draft Std P1686_D4, Jun 07
+IEEE Unapproved Draft Std P1900.2/D2.22, Jun 07
+IEEE Unapproved Draft Std P1900_D01, Jun 07
+IEEE Unapproved Draft Std P2600.1/D41b, Jan 09
+IEEE Unapproved Draft Std P2600.3/D41b, Jan 09
+IEEE Unapproved Draft Std P2600.4/D41b, Jan 09
+IEEE Unapproved Draft Std P532/D9.6, May 07
+IEEE Unapproved Draft Std P605a/D2, Sept 2009
+IEEE Unapproved Draft Std P605a/D3, Nov 2009
+IEEE Unapproved Draft Std P841/D5, Jan 09
+IEEE Unapproved Draft Std P841_D3, Jul 07
+IEEE Unapproved Draft Std PC37.1/D3, Jun 07
+IEEE Unapproved Draft Std PC37.1/D5, Sep 07
+IEEE Unapproved Draft Std PC37.12.1_D4.0, Sep 07
+IEEE Unapproved Draft Std PC37.16/D13, Apr 08
+IEEE Unapproved Draft Std PC37.43/D9, Oct 06
+IEEE Unapproved Draft Std PC57.12.38/D6.3, Aug 08
+IEEE Unapproved Draft Std PC57.13/D09, Aug 07
+IEEEPC37.74/D12, May 2014
+ISO/IEC/IEEE P42010_D8, June 2010
