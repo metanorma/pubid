@@ -21,7 +21,7 @@ module Pubid::Ieee
     end
 
     rule(:subpart) do
-      (str(".") | str("-")) >> match('\d').repeat(1)
+      (str(".") | str("-")) >> match('[\da-z]').repeat(1)
     end
 
     rule(:type) do

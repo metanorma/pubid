@@ -221,4 +221,16 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "IEEE Std PC37.20.1a/D11" do
+    let(:pubid) { "IEEE Std PC37.20.1a/D11" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std PC37.66/D12, Apr 2005" do
+    let(:pubid) { "IEEE Std PC37.66/D12, Apr 2005" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end
