@@ -5668,3 +5668,604 @@ IEEE Unapproved Draft Std PC57.12.38/D6.3, Aug 08
 IEEE Unapproved Draft Std PC57.13/D09, Aug 07
 IEEEPC37.74/D12, May 2014
 ISO/IEC/IEEE P42010_D8, June 2010
+IEEE Approved Std P1013/D10, Oct 2006
+IEEE Approved Std P1451.0/D8.00, Jan 2007
+IEEE Approved Std P1451.5/D10.8, Dec 2006
+IEEE Approved Std P1484.4/D11, Dec 2006
+IEEE Approved Std P287/D5, Feb 2007
+IEEE Approved Std P400.1/D8A Dec 2006
+IEEE Approved Std P421.1/D7, Nov 2006
+IEEE Approved Std P525/D16, Oct 2006
+IEEE Approved Std P802.15.4a/D7, Jan 2007
+IEEE Approved Std P937/D7, Jan 2007
+IEEE Approved Std PC37.232/D8, Jan 2007
+IEEE Approved Std PC37.45/D8, Oct 2006
+IEEE Approved Std PC57.127/D10.0, Jan 2007
+IEEE Unapproved Std P1003.1/D2 Oct 2006
+IEEE Unapproved Std P11073-00101/D02J, Feb 2007
+IEEE Unapproved Std P1115a/D4, Feb 2007
+IEEE Unapproved Std P1234/D12, Feb 2007
+IEEE Unapproved Std P1363.2 /D27, Feb 2007
+IEEE Unapproved Std P1561/D15, Dec 2006
+IEEE Unapproved Std P1578/D17, Mar 2007
+IEEE Unapproved Std P1594/D1, Nov 2006
+IEEE Unapproved Std P1633/D6 Mar 2007
+IEEE Unapproved Std P1661/D10, Dec 2006
+IEEE Unapproved Std P487/D7 Feb 2007
+IEEE Unapproved Std P495/D12 Mar 2007
+IEEE Unapproved Std P99/D1.3, Feb 2007
+IEEE Unapproved Std PC37.101/D13, Jun 2006
+IEEE Unapproved Std PC37.59/D9, Mar 2007
+ANSI PC63.4a/D1.04, March 2017
+ANSI/IEEE C37.04g-1986
+ANSI/IEEE Std 802.1b-1995
+ANSI/IEEE Std 802.3j-1993
+ANSI/IEEE Std C37.34a-1978
+IEEE 802.21a/D05, October 2011
+IEEE 802.5v-2001
+IEEE Active Unapproved Draft Std P802.11k_D8.0, May 2007
+IEEE Approved Draft Std P802.11y/D11.0, June 2008
+IEEE Approved Draft Std P802.16g/D9, Apr 07
+IEEE Approved Draft Std P802.1ag/D8.1, Jun 07
+IEEE Approved Draft Std P802.1ah/D4.2, Mar 2008
+IEEE Approved Draft Std PC95.1a/D1.5, Sep 2009
+IEEE Approved Std P802.16k/D2a, Aug 2006
+IEEE Approved Std P802.1ak/D8.0, Nov 2006
+IEEE Approved Std P802.3ap/D3.3, Jul 2005
+IEEE Draft Std P802.11n/D2.00, February 2007
+IEEE P1609.2a/D5, May 2017
+IEEE P1609.2a/D7, June 2017
+IEEE P1609.2a/D8, July 2017
+IEEE P1609.2b/D2, September 2018
+IEEE P1609.2b/D3, September 2019
+IEEE P1609.3v3/D3, July 2015
+IEEE P1609.3v3/D5, October 2015
+IEEE P1609.3v3/D6, November 2015
+IEEE P1609.3v4/D11, June 2020
+IEEE P1609.3v4/D12, August 2020
+IEEE P1609.3v4/D13, September 2020
+IEEE P1641.1a/D6, December 2017
+IEEE P1641.1a/D9, January 2018
+IEEE P1680.1a/D1, April 2019
+IEEE P1680.1a/D2, November 2019
+IEEE P1680.2a/D1, June 2017
+IEEE P1680.2a/D2, August 2017
+IEEE P1680.3a/D1, June 2017
+IEEE P1680.3a/D2, August 2017
+IEEE P1900.1a/D1.0, May 2012
+IEEE P1900.1a/D2.0, August 2012
+IEEE P1900.6a/D0.5, April 2013
+IEEE P1900.6a/D0.6, September 2013
+IEEE P1900.6b/D4.0, January 2020
+IEEE P1901.2a/D0.3, July 2015
+IEEE P1901.2a/D0.3, March 2015
+IEEE P1905.1a/D1, July 2014
+IEEE P1905.1a/D2, September 2014
+IEEE P487.3a/D3, April 2021
+IEEE P802.11aa/D6.0, July 2011
+IEEE P802.11aa/D7.0, November 2011
+IEEE P802.11aa/D8.0, December 2011
+IEEE P802.11aa/D9.0, January 2012
+IEEE P802.11ac/D2.0, January 2012
+IEEE P802.11ac/D3.0, June 2012
+IEEE P802.11ac/D4.0, October 2012
+IEEE P802.11ac/D5.0, January 2013
+IEEE P802.11ac/D6.0, July 2013
+IEEE P802.11ac/D7.0, September 2013
+IEEE P802.11ae/D5.00, July 2011
+IEEE P802.11ae/D6.00, October 2011
+IEEE P802.11ae/D8.00, December 2011
+IEEE P802.11af/D3.0, January 2013
+IEEE P802.11af/D4.0, April 2013
+IEEE P802.11ah/D10.0, September 2016
+IEEE P802.11ah/D2.0, June 2014
+IEEE P802.11ah/D8.0, April 2016
+IEEE P802.11ah/D9.0, August 2016
+IEEE P802.11ai/D10.0 August 2016
+IEEE P802.11ai/D11.0 September 2016
+IEEE P802.11ai/D2.0, April 2014
+IEEE P802.11ai/D3.0, September 2014
+IEEE P802.11ai/D4.0, February 2015
+IEEE P802.11ai/D5.0 June 2015
+IEEE P802.11ai/D6.0 July 2015
+IEEE P802.11ai/D7.0, March 2016
+IEEE P802.11ai/D8.0, June 2016
+IEEE P802.11ai/D9.0 July 2016
+IEEE P802.11aj/D6.0, June 2017
+IEEE P802.11ak/D4.0, March 2017
+IEEE P802.11ak/D6.0, December 2017
+IEEE P802.11aq/D10.0, July 2017
+IEEE P802.11aq/D11.0 August 2017
+IEEE P802.11aq/D12.0, September 2017
+IEEE P802.11aq/D14.0, December 2017
+IEEE P802.11aq/D8.0, March 2017
+IEEE P802.11aq/D9.0, June 2017
+IEEE P802.11ax/D3.0, June 2018
+IEEE P802.11ax/D4.0, February 2019
+IEEE P802.11ax/D6.0, November 2019
+IEEE P802.11ax/D7.0, September 2020
+IEEE P802.11ax/D8.0, October 2020
+IEEE P802.11ay/D2.0, July 2018
+IEEE P802.11ay/D3.0, February 2019
+IEEE P802.11ay/D4.0, June 2019
+IEEE P802.11ay/D5.0, October 2019
+IEEE P802.11ay/D7.0, December 2020
+IEEE P802.11az/D1.0, February 2019
+IEEE P802.11az/D2.0, December 2019
+IEEE P802.11az/D3.0, January 2021
+IEEE P802.11az/D4.0, August 2021
+IEEE P802.11ba/D3.0, May 2019
+IEEE P802.11ba/D6.0, January 2020
+IEEE P802.11ba/D7.0, September 2020
+IEEE P802.11ba/D8.0, December 2020
+IEEE P802.11bc /D2.0, October 2021
+IEEE P802.11s/D10.0, March 2011
+IEEE P802.11s/D11.0, April 2011
+IEEE P802.11s/D12.0, May 2011
+IEEE P802.11s/D7.0, July 2010
+IEEE P802.11s/D8.0, December 2010
+IEEE P802.11s/D9.0, February 2011
+IEEE P802.11u/D10.0, June 2010
+IEEE P802.11u/D11.0, June 2010
+IEEE P802.11u/D13.0, November 2010
+IEEE P802.11v/D13.0, July 2010
+IEEE P802.11v/D14.0, August 2010
+IEEE P802.11v/D15.0, September 2010
+IEEE P802.11v/D16.0, November 2010
+IEEE P802.11z/D11.0, July 2010
+IEEE P802.11z/D12.0, July 2010
+IEEE P802.16Rev3/D3, November 2011
+IEEE P802.16Rev3/D4, February 2012
+IEEE P802.16Rev3/D5, March 2012
+IEEE P802.16m/D10, November 2010
+IEEE P802.16m/D11, January 2011
+IEEE P802.16m/D12, February 2011
+IEEE P802.16m/D6 May 2010
+IEEE P802.16m/D7 July 2010
+IEEE P802.16m/D8, August 2010
+IEEE P802.16m/D9, October 2010
+IEEE P802.16n/D5, August 2012
+IEEE P802.16n/D6, October 2012
+IEEE P802.16n/D8, Jan 2013
+IEEE P802.16p/D4 April 2012
+IEEE P802.16p/D5 May 2012
+IEEE P802.16p/D6 July 2012
+IEEE P802.16q/D3 September 2014
+IEEE P802.16q/D4 November 2014
+IEEE P802.16s/D2, March 2017
+IEEE P802.16s/D3, June 2017
+IEEE P802.1ABcu/D2.1, July 2021
+IEEE P802.1ABcu/D2.1, June 2021
+IEEE P802.1ABcu/D2.2 August 2021
+IEEE P802.1ABcu/D2.3 September 2021
+IEEE P802.1ABdh/D2.0, July 2021
+IEEE P802.1ABdh/D2.1, September 2021
+IEEE P802.1AEcg/D1.4, June 2016
+IEEE P802.1AXbk/D2.0, November 2011
+IEEE P802.1AXbk/D2.1, January 2012
+IEEE P802.1CBcv/D2.1, September 2021
+IEEE P802.1CBdb/D2.0, July 2021
+IEEE P802.1CBdb/D2.1, September 2021
+IEEE P802.1CMde/D2.0, November 2019
+IEEE P802.1CMde/D2.1, February 2020
+IEEE P802.1Qaz/D2.0 September, 2010
+IEEE P802.1Qaz/D2.1 November 2010
+IEEE P802.1Qaz/D2.3, December 2010
+IEEE P802.1Qaz/D2.5, March 2010
+IEEE P802.1Qbc/D1.5, April 2011
+IEEE P802.1Qbf/D1.3, February 2011
+IEEE P802.1Qbg/D1.6, June 2011
+IEEE P802.1Qbg/D2.0, December 2011
+IEEE P802.1Qbg/D2.1, January 2012
+IEEE P802.1Qbg/D2.2, February 2012
+IEEE P802.1Qbp/D1.7, September 2013
+IEEE P802.1Qbv/D3.0, August 2015
+IEEE P802.1Qbv/D3.1, September 2015
+IEEE P802.1Qbz/D2.3, October 2015
+IEEE P802.1Qbz/D2.4, October 2015
+IEEE P802.1Qca/D2.0 April 2015
+IEEE P802.1Qca/D2.1, June 2015
+IEEE P802.1Qcc/D2.0, October 2017
+IEEE P802.1Qcc/D2.1, February 2018
+IEEE P802.1Qcc/D2.2, March 2018
+IEEE P802.1Qcc/D2.3, May 2018
+IEEE P802.1Qcd/D2.1, September 2014
+IEEE P802.1Qch/D2.0, November 2016
+IEEE P802.1Qch/D2.1, January 2017
+IEEE P802.1Qch/D2.2, February 2017
+IEEE P802.1Qci/D1.4, October 2016
+IEEE P802.1Qci/D2.1, November 2016
+IEEE P802.1Qcp/D2.0 November 2017
+IEEE P802.1Qcr/D0.5, June 2018
+IEEE P802.1Qcr/D2.0, December 2019
+IEEE P802.1Qcr/D2.1, February 2020
+IEEE P802.1Qcr/D2.2, March 2020
+IEEE P802.1Qcx/D2.0, December 2019
+IEEE P802.1Qcx/D2.1, February 2020
+IEEE P802.1Qcz/D2.0, January 2021
+IEEE P802.1Qcz/D2.1, March 2021
+IEEE P802.1Xck/D2.0, January 2018
+IEEE P802.1Xck/D2.1, June 2018
+IEEE P802.20a/D2.0
+IEEE P802.20b/D2.0, July 2010
+IEEE P802.21a/D04, June 2011
+IEEE P802.21a/D06, November 2011
+IEEE P802.21b/D04, June 2011
+IEEE P802.21b/D05, October 2011
+IEEE P802.21b/D06, November 2011
+IEEE P802.21c/D6, August 2013
+IEEE P802.21c/D7, December 2013
+IEEE P802.21d/D7, December 2014
+IEEE P802.21d/D8, February 2015
+IEEE P802.22a/D1, September, 2013
+IEEE P802.22a/D2, October 2013
+IEEE P802.22b/D4, February 2015
+IEEE P802.22b/D5, April 2015
+IEEE P802.22b/D6, May 2015
+IEEE P802.3bj/D3.2, April 2014
+IEEE P802.3bn/D3.1, April 2016
+IEEE P802.3bn/D3.2, May 2016
+IEEE P802.3bs/D3.0, January 2017
+IEEE P802.3bs/D3.1, April 2017
+IEEE P802.3bs/D3.2, June 2017
+IEEE P802.3bs/D3.3, July 2017
+IEEE P802.3bs/D3.5, October 2017
+IEEE P802.3bt/D3.0, July 2017
+IEEE P802.3bt/D3.1 October 2017
+IEEE P802.3bt/D3.2, December 2017
+IEEE P802.3bt/D3.3, February 2018
+IEEE P802.3bt/D3.4, March 2018
+IEEE P802.3bt/D3.5, June 2018
+IEEE P802.3bt/D3.6, June 2018
+IEEE P802.3bt/D3.7, July 2018
+IEEE P802.3bu/D3.2, September 2016
+IEEE P802.3bv/D3.0, July 2016
+IEEE P802.3bv/D3.1, September 2016
+IEEE P802.3bv/D3.2, November 2016
+IEEE P802.3bv/D3.3, December 2016
+IEEE P802.3by/D3.1, February 2016
+IEEE P802.3bz/D3.1, June 2016
+IEEE P802.3bz/D3.2, June 2016
+IEEE P802.3bz/D3.3, July 2016
+IEEE P802.3ca/D3.0, November 2019
+IEEE P802.3ca/D3.1, January 2020
+IEEE P802.3cb/D3.5, June 2018
+IEEE P802.3cc/D3.0, April 2017
+IEEE P802.3cc/D3.1, June 2017
+IEEE P802.3cc/D3.2, July 2017
+IEEE P802.3cc/D3.3, September 2017
+IEEE P802.3cd/D3.0, November 2017
+IEEE P802.3cd/D3.1, February 2018
+IEEE P802.3cd/D3.2, March 2018
+IEEE P802.3cg/D3.0, March 2019
+IEEE P802.3cg/D3.1, June 2019
+IEEE P802.3cg/D3.2, July 2019
+IEEE P802.3cg/D3.3, August 2019
+IEEE P802.3cg/D3.4, September 2019
+IEEE P802.3ch/D3.0, November 2019
+IEEE P802.3ch/D3.2, February 2020
+IEEE P802.3ck/D3.0, December 2021
+IEEE P802.3cm/D3.0, July 2019
+IEEE P802.3cm/D3.1, September 2019
+IEEE P802.3cn/D3.0, July 2019
+IEEE P802.3cn/D3.1, August 2019
+IEEE P802.3cp/D3.0, January 2021
+IEEE P802.3cp/D3.1, April 2021
+IEEE P802.3cp/D3.2, May 2021
+IEEE P802.3cq/D3.0, July 2019
+IEEE P802.3cq/D3.1, September 2019
+IEEE P802.3cq/D3.2, November 2019
+IEEE P802.3cr/D3.0, June 2020
+IEEE P802.3cr/D3.1, September 2020
+IEEE P802.3cr/D3.2, October 2020
+IEEE P802.3cr/D3.3, October 2020
+IEEE P802.3cs/D3.0, November 2021
+IEEE P802.3cs/D3.1, January 2022
+IEEE P802.3ct/D3.0, October 2020
+IEEE P802.3ct/D3.1, January 2021
+IEEE P802.3ct/D3.2, March 2021
+IEEE P802.3ct/D3.3, April 2021
+IEEE P802.3ct/D3.4, April 2021
+IEEE P802.3cu/D3.0, July 2020
+IEEE P802.3cu/D3.1, October 2020
+IEEE P802.3cu/D3.2, November 2020
+IEEE P802.3cv/D3.0, October 2020
+IEEE P802.3db/D3.0, March 2022
+IEEE P802.3dd/D3.0, January 2022
+IEEE PC37.012a/D1.7, January 2020
+IEEE PC37.012a/D1.8, April 2020
+IEEE PC37.09b/D5, August 2010
+IEEE PC37.09b/D6, September 2010
+IEEE PC37.21a/D3, June 2019
+IEEE PC37.21a/D4, August 2019
+IEEE PC37.21a/D7, October 2019
+IEEE PC37.238a/D2, May 2020
+IEEE PC57.32a/D11.1, October 2019
+IEEE PC57.32a/D11.2, January 2020
+IEEE PC57.32a/D8.1, June 2018
+IEEE PC62.22a/D6, February 2013
+IEEE PC62.55a-2017
+IEEE PC62.55c/D2, April 2018
+IEEE PC62.69a/D2, December 2016
+IEEE PC62.69a/D3, January 2017
+IEEE PC62.72a/D1, February 2018
+IEEE PC62.72a/D2, March 2020
+IEEE PC63.4rev/D5.03, December 2013
+IEEE STD 802-11y-2008
+IEEE STD C62.11a-2008
+IEEE Std 1003.1b-1993
+IEEE Std 1003.1d-1999
+IEEE Std 1003.1j-2000
+IEEE Std 1003.1q-2000
+IEEE Std 1003.2d-1994
+IEEE Std 1149.1b-1994
+IEEE Std 1278.1a-1998
+IEEE Std 1420.1a-1996
+IEEE Std 1420.1b-1999
+IEEE Std 1802.3d-1993
+IEEE Std 2003.1b-2000
+IEEE Std 538-1976 (ANSI C37.13a-1975)
+IEEE Std 802.10a-1999
+IEEE Std 802.10c-1998
+IEEE Std 802.10g-1995
+IEEE Std 802.11a-1999
+IEEE Std 802.11b-1999
+IEEE Std 802.11d-2001
+IEEE Std 802.11i-2004
+IEEE Std 802.11j-2004
+IEEE Std 802.12c-1998
+IEEE Std 802.1k-1993
+IEEE Std 802.1t-2001
+IEEE Std 802.1u-2001
+IEEE Std 802.1v-2001
+IEEE Std 802.1w-2001
+IEEE Std 802.3ab-1999
+IEEE Std 802.3ac-1998
+IEEE Std 802.3ad-2000
+IEEE Std 802.3ah-2004
+IEEE Std 802.3k-1992
+IEEE Std 802.3r-1996
+IEEE Std 802.4b-1992
+IEEE Std 802.4h-1997
+IEEE Std 802.5c-1991
+IEEE Std 802.5t-2000
+IEEE Std 802.5w-2000
+IEEE Std 802.6j-1995
+IEEE Std 802.6k-1992
+IEEE Std 802.9a-1995
+IEEE Std 802.9c-1995
+IEEE Std 802.9d-1995
+IEEE Std 896.2a-1994
+IEEE Std 896.4a-1995
+IEEE Std 896.5a-1994
+IEEE Std C37.081a-1997
+IEEE Std C37.30h-1978
+IEEE Std C37.34e-1979
+IEEE Std C37.36b-1990
+IEEE Std C37.40b-1996
+IEEE Std C37.41c-1991
+IEEE Std C37.41e-1996
+IEEE Std C37.48c-1991
+IEEE Std P802.11a/D7
+IEEE Std P802.11d/D2
+IEEE Std P802.11d/D3
+IEEE Std P802.11e/D13.0
+IEEE Std P802.11g/D8.2
+IEEE Std P802.11h/D3.11
+IEEE Std P802.11i/D10.0
+IEEE Std P802.11i/D3
+IEEE Std P802.11j/D1.6
+IEEE Std P802.11ma/D3.0
+IEEE Std P802.11p/D11.0 April 2010
+IEEE Std P802.11s/D5.0 April 2010
+IEEE Std P802.11u/D9.0
+IEEE Std P802.16a/D7.0
+IEEE Std P802.16c/D4
+IEEE Std P802.16e/D11
+IEEE Std P802.16e/D12
+IEEE Std P802.16e/D7
+IEEE Std P802.16e/D8
+IEEE Std P802.16e/D9
+IEEE Std P802.16f/D3
+IEEE Std P802.16f/D4
+IEEE Std P802.16f/D5
+IEEE Std P802.16f/D6
+IEEE Std P802.16g/D4
+IEEE Std P802.16g/D5
+IEEE Std P802.16g/D6, Nov 06
+IEEE Std P802.16g/D6, Nov 2006
+IEEE Std P802.16g/D7, Nov 06
+IEEE Std P802.16k/D2a
+IEEE Std P802.16k/D3
+IEEE Std P802.17a/D2.1
+IEEE Std P802.17b/D2.0
+IEEE Std P802.17b/D2.1
+IEEE Std P802.17b/D2.2
+IEEE Std P802.17b/D2.3
+IEEE Std P802.1ad/D5.1
+IEEE Std P802.1ad/D6.0
+IEEE Std P802.1ae/D4.0
+IEEE Std P802.1ak/D6.0
+IEEE Std P802.1ak/D8.0, Sep 2006
+IEEE Std P802.1s/D14.1
+IEEE Std P802.1t/D10
+IEEE Std P802.1u/D9
+IEEE Std P802.1v/D6
+IEEE Std P802.1w/D9
+IEEE Std P802.3ab/D6.0
+IEEE Std P802.3ad/D3.1
+IEEE Std P802.3ae/D5.0
+IEEE Std P802.3af/D4.3
+IEEE Std P802.3ah/D3.3
+IEEE Std P802.3aj/D3.1
+IEEE Std P802.3ak/D5.3
+IEEE Std P802.3an/D3.0
+IEEE Std P802.3an/D3.1
+IEEE Std P802.3an/D3.2
+IEEE Std P802.3an/D4.0
+IEEE Std P802.3ap/D2
+IEEE Std P802.3ap/D3.2, Dec 2006
+IEEE Std P802.3aq/D3.0
+IEEE Std P802.3aq/D3.1
+IEEE Std P802.3aq/D3.2
+IEEE Std P802.3aq/D4.0
+IEEE Std P802.3as/D3.0
+IEEE Std P802.3as/D3.1
+IEEE Std P802.3as/D3.3
+IEEE Std P802.5t/D2.5
+IEEE Std PC37.013a/D3
+IEEE Std PC37.013a/D5
+IEEE Std PC37.013a/D6
+IEEE Std PC37.04b/D12
+IEEE Std PC37.09a/D13
+IEEE Std PC95.1b/D1.2
+IEEE Unapproved Draft Std P802.11k/D8.0, May 2007
+IEEE Unapproved Draft Std P802.11k/D9.0, Sep 07
+IEEE Unapproved Draft Std P802.11k_D11.0, Jan 2008
+IEEE Unapproved Draft Std P802.11k_D12.0, Jan 2008
+IEEE Unapproved Draft Std P802.11n/D11.0, Jun 2009
+IEEE Unapproved Draft Std P802.11n/D4.00, Mar 2008
+IEEE Unapproved Draft Std P802.11n/D5.0, May 2008
+IEEE Unapproved Draft Std P802.11n/D7.0, Sep 2008
+IEEE Unapproved Draft Std P802.11n/D8.0, Feb 2009
+IEEE Unapproved Draft Std P802.11n/D9.0, Mar 2009
+IEEE Unapproved Draft Std P802.11n_D3.00, Sep 2007
+IEEE Unapproved Draft Std P802.11p /D10.0, Jan 2010
+IEEE Unapproved Draft Std P802.11p /D11.0, Mar 2010
+IEEE Unapproved Draft Std P802.11p /D7.0, May 2009
+IEEE Unapproved Draft Std P802.11p/D5.0, Nov 2008
+IEEE Unapproved Draft Std P802.11p/D9.0, July 2009
+IEEE Unapproved Draft Std P802.11r/D7.0, July 2007
+IEEE Unapproved Draft Std P802.11r/D78.0, Sep 07
+IEEE Unapproved Draft Std P802.11r_D9.0, Jan 2008
+IEEE Unapproved Draft Std P802.11s/D3.0, Mar 2009
+IEEE Unapproved Draft Std P802.11s/D4.0, Dec 2009
+IEEE Unapproved Draft Std P802.11u/D3.0, May 2008
+IEEE Unapproved Draft Std P802.11u/D5.0, Feb 2009
+IEEE Unapproved Draft Std P802.11u/D7.0, Jun 2009
+IEEE Unapproved Draft Std P802.11u/D8.0, Jul, 2009
+IEEE Unapproved Draft Std P802.11v/D10.0, Mar 2010
+IEEE Unapproved Draft Std P802.11v/D4.0, Nov 2008
+IEEE Unapproved Draft Std P802.11v/D5.0, Mar 2009
+IEEE Unapproved Draft Std P802.11v/D6.0, May 2009
+IEEE Unapproved Draft Std P802.11v/D7.0, Jul 2009
+IEEE Unapproved Draft Std P802.11v/D9.0, Feb 2010
+IEEE Unapproved Draft Std P802.11w/D10.0, May 2009
+IEEE Unapproved Draft Std P802.11w/D11.0, Jun 2009
+IEEE Unapproved Draft Std P802.11w/D6.0, Mar 2008
+IEEE Unapproved Draft Std P802.11w/D7.0, Dec 2008
+IEEE Unapproved Draft Std P802.11w/D9.0, May 2009
+IEEE Unapproved Draft Std P802.11y/D10.0, Apr 2008
+IEEE Unapproved Draft Std P802.11y/D8.0, Feb 2008
+IEEE Unapproved Draft Std P802.11y/D9.0, Mar 2008
+IEEE Unapproved Draft Std P802.11y_D5.0, Sep 2007
+IEEE Unapproved Draft Std P802.11y_D7.0, Dec 2007
+IEEE Unapproved Draft Std P802.11z/D4.0, Feb 2009
+IEEE Unapproved Draft Std P802.11z/D5.0, Jun 2009
+IEEE Unapproved Draft Std P802.11z/D6.0, Aug 2009
+IEEE Unapproved Draft Std P802.11z/D7.0, Feb 2010
+IEEE Unapproved Draft Std P802.16Rev2/D3 Feb 2008
+IEEE Unapproved Draft Std P802.16Rev2/D6 Jul 2008
+IEEE Unapproved Draft Std P802.16Rev2/D7 Oct 2008
+IEEE Unapproved Draft Std P802.16Rev2/D8 Dec 2008
+IEEE Unapproved Draft Std P802.16Rev2/D9 Jan 09
+IEEE Unapproved Draft Std P802.16Rev2/D9a March 2009
+IEEE Unapproved Draft Std P802.16Rev2_D4 Apr 2008
+IEEE Unapproved Draft Std P802.16g/D9, Apr 2007
+IEEE Unapproved Draft Std P802.16h/D10, Jul 2009
+IEEE Unapproved Draft Std P802.16h/D11, Sept 2009
+IEEE Unapproved Draft Std P802.16h/D12, Sept 2009
+IEEE Unapproved Draft Std P802.16h/D13, Dec 2009
+IEEE Unapproved Draft Std P802.16h/D14, Jan 2010
+IEEE Unapproved Draft Std P802.16h/D15, Mar 2010
+IEEE Unapproved Draft Std P802.16h/D4, Feb 2008
+IEEE Unapproved Draft Std P802.16h/D5, Mar 2008
+IEEE Unapproved Draft Std P802.16h/D6, May 2008
+IEEE Unapproved Draft Std P802.16h/D7a, Jun 2008
+IEEE Unapproved Draft Std P802.16h/D8, Nov 2008
+IEEE Unapproved Draft Std P802.16h/D9, Mar 2009
+IEEE Unapproved Draft Std P802.16i/D1, Feb 2007
+IEEE Unapproved Draft Std P802.16i/D5, Oct 2007
+IEEE Unapproved Draft Std P802.16j/D1, Aug 2007
+IEEE Unapproved Draft Std P802.16j/D3, Feb 2008
+IEEE Unapproved Draft Std P802.16j/D5, Jun 2008
+IEEE Unapproved Draft Std P802.16j/D6a, Jul 2008
+IEEE Unapproved Draft Std P802.16j/D7, Oct 2008
+IEEE Unapproved Draft Std P802.16j/D8, Dec 2008
+IEEE Unapproved Draft Std P802.16j/D9, Feb 2009
+IEEE Unapproved Draft Std P802.17c/D2.0, Oct 2009
+IEEE Unapproved Draft Std P802.17c/D2.1, Nov 2009
+IEEE Unapproved Draft Std P802.1Qat/D5.0, Jan 2010
+IEEE Unapproved Draft Std P802.1Qau/D2.4, Oct 2005
+IEEE Unapproved Draft Std P802.1Qau/D2.5, Dec 2009
+IEEE Unapproved Draft Std P802.1Qav/D6.0, Jun 2009
+IEEE Unapproved Draft Std P802.1Qav/D7.0, Oct 2009
+IEEE Unapproved Draft Std P802.1Qaw/D1.1, Oct 2007
+IEEE Unapproved Draft Std P802.1Qaw_D4.0, Dec 2008
+IEEE Unapproved Draft Std P802.1Qay/D5.1, Mar 2009
+IEEE Unapproved Draft Std P802.1af/D1.7, Nov 2007
+IEEE Unapproved Draft Std P802.1ag/D8.1, Jun 07
+IEEE Unapproved Draft Std P802.1ah/D4.0, Nov 2007
+IEEE Unapproved Draft Std P802.1aj/D2.2, Oct 2007
+IEEE Unapproved Draft Std P802.1aj/D4.0, Jul 2009
+IEEE Unapproved Draft Std P802.1aj/D4.2, Sept 24, 2009
+IEEE Unapproved Draft Std P802.1ap/D3.0, Oct 2007
+IEEE Unapproved Draft Std P802.1ap/D4.0 Aug, 2008
+IEEE Unapproved Draft Std P802.1ap/D4.2, Oct 2008
+IEEE Unapproved Draft Std P802.1ap/D4.3, Oct 2008
+IEEE Unapproved Draft Std P802.1ax/D2.1, Feb 2008
+IEEE Unapproved Draft Std P802.20a_D2.0, Feb 2010
+IEEE Unapproved Draft Std P802.3at/D3.0, Mar 2008
+IEEE Unapproved Draft Std P802.3at/D4.0, Jan 2009
+IEEE Unapproved Draft Std P802.3at/D4.1, Apr 2009
+IEEE Unapproved Draft Std P802.3at/D4.2, Jun 2009
+IEEE Unapproved Draft Std P802.3av/D3.0, Jan 2009
+IEEE Unapproved Draft Std P802.3av/D3.2, Apr 2009
+IEEE Unapproved Draft Std P802.3av/D3.3, May 2009
+IEEE Unapproved Draft Std P802.3av/D3.4, Jun 2009
+IEEE Unapproved Draft Std P802.3az/D2.0, Jul 2009
+IEEE Unapproved Draft Std P802.3az/D2.3, Mar 2010
+IEEE Unapproved Draft Std P802.3az_D2.1, Nov 2009
+IEEE Unapproved Draft Std P802.3ba/D2.0, Mar 2009
+IEEE Unapproved Draft Std P802.3ba/D2.1, May 2009
+IEEE Unapproved Draft Std P802.3ba/D2.3, Oct 2009
+IEEE Unapproved Draft Std P802.3ba/D3.0, Nov 2009
+IEEE Unapproved Draft Std P802.3ba/D3.1, Feb 2010
+IEEE Unapproved Draft Std P802.3ba/D3.2, Mar 2010
+IEEE Unapproved Draft Std P802.3bc/D2.2, May 2009
+IEEE Unapproved Draft Std P802.3bc/D3.0, Jun 2009
+IEEE Unapproved Draft Std P802.3bc/D3.1, Jul 2009
+IEEE Unapproved Draft Std PC37.04b/D14, Apr 2008
+IEEE Unapproved Draft Std PC37.04b/D15, Sept 2008
+IEEE Unapproved Draft Std PC37.09b/D4, Sept 2009
+IEEE Unapproved Draft Std PC62.11a/D9E, Sept 2007
+IEEE Unapproved Draft Std PC62.11a_D9F, Jan 2008
+IEEE Unapproved Draft Std PC95.1a/D1.4, Jun 2009
+IEEE Unapproved Std P802.1ag/D8, Feb 2007
+IEEE Unapproved Std P802.1ah/D3.4, Mar 2007
+IEEE Unapproved Std PC62.11a/D9D, Mar 2007
+IEEE P11073-10101a/D1, April 2015
+IEEE P11073-10101a/D2, July 2015
+IEEE P11073-10101a/D3, August 2015
+IEEE P11073-10101a/D4, August 2015
+IEEE P11073-10101a/D5, September 2015
+IEEE P11073-30200a/D02, March 2010
+IEEE P11073-30200a/D03, October 2010
+IEEE P3004.7/D4.2c, February 2020
+IEEE PC37.122.2/D6 , November 2021
+IEEE PC37.20.9/D7.3A, January 2019
+IEEE PC37.245/D7.3f, February 2018
+IEEE PC37.245/D8.2c, July 2018
+IEEE PC37.59/D14 , April 2018
+IEEE PC37.98/D5.1D July 2013
+IEEE PC37.98/D5.1E August 2013
+IEEE Unapproved Draft Std 802.20/D3.1m, Dec 2007
+IEEE Unapproved Draft Std 802.20/D4.1m, April 2008
+IEEE Unapproved Draft Std P1003.1_D4 , Jan 2008
+IEEE Unapproved Draft Std P1076/D4.3a, Jul 2008
+IEEE Unapproved Draft Std P11073-20601a/D13, Jan 2010
+IEEE Unapproved Draft Std P802.20/D4.0m, Feb 2008
+IEEE Unapproved Draft Std P802.3/D2.3CMP, Jun 2008
+IEEE Unapproved Draft Std PC63.10/D8.6F, Apr 2009
+ISO/IEEE P11073-20601a/D29, July 2010
+ISO/IEEE P11073-20601a/D31, August 2010

@@ -275,4 +275,38 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "IEEE Unapproved Std PC37.101/D13, Jun 2006" do
+    let(:original) { "IEEE Unapproved Std PC37.101/D13, Jun 2006" }
+    let(:pubid) { "IEEE Unapproved Draft Std PC37.101/D13, June 2006" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Unapproved Draft Std PC62.11a/D9E, Sept 2007" do
+    let(:original) { "IEEE Unapproved Draft Std PC62.11a/D9E, Sept 2007" }
+    let(:pubid) { "IEEE Unapproved Draft Std PC62.11a/D9E, September 2007" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Unapproved Draft Std 802.20/D4.1m, April 2008" do
+    let(:pubid) { "IEEE Unapproved Draft Std 802.20/D4.1m, April 2008" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Unapproved Draft Std P1003.1_D4 , Jan 2008" do
+    let(:original) { "IEEE Unapproved Draft Std P1003.1_D4 , Jan 2008" }
+    let(:pubid) { "IEEE Unapproved Draft Std P1003.1/D4, January 2008" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Unapproved Draft Std P11073-20601a/D13, Jan 2010" do
+    let(:original) { "IEEE Unapproved Draft Std P11073-20601a/D13, Jan 2010" }
+    let(:pubid) { "IEEE Unapproved Draft Std P11073.20601a/D13, January 2010" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end

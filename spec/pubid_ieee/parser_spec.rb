@@ -7,6 +7,10 @@ RSpec.describe Pubid::Ieee::Parser do
     expect(subject.draft_date).to parse(", Feb 6, 2007")
   end
 
+  it "parses part" do
+    expect(subject.part_subpart_year).to parse("-20601a", trace: true)
+  end
+
   describe "parse identifiers from examples files" do
     shared_examples "parse identifiers from file" do
       it "parse identifiers from file" do

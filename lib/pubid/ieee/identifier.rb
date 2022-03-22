@@ -56,7 +56,8 @@ module Pubid::Ieee
     end
 
     def to_s
-      "#{publisher}#{copublisher} #{draft_status}#{type}#{number}#{part}#{subpart}#{year}#{draft}#{edition}#{alternative}"
+      "#{publisher}#{copublisher} #{draft_status}#{type}#{number}#{part}"\
+        "#{subpart}#{year}#{draft}#{edition}#{alternative}"
     end
 
     def copublisher
@@ -125,7 +126,7 @@ module Pubid::Ieee
     end
 
     def draft_status
-      "#{@draft_status} Draft " if @draft_status
+      "#{@draft_status} #{@type&.include?('Draft') ? '' : 'Draft '}" if @draft_status
     end
   end
 end

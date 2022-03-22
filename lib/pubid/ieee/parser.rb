@@ -11,6 +11,7 @@ module Pubid::Ieee
     rule(:comma_space) { comma | space }
     rule(:words_digits) { match('[\dA-Za-z]').repeat(1) }
     rule(:words) { match("[A-Za-z]").repeat(1) }
+    rule(:words?) { words.maybe }
     rule(:year_digits) { match('\d').repeat(4, 4) }
 
     rule(:year) do
@@ -26,7 +27,7 @@ module Pubid::Ieee
     end
 
     rule(:part) do
-      (str(".") | str("-")) >> match('[\dA-Z]').repeat(1).as(:part)
+      (str(".") | str("-")) >> match('[\dA-Za-z]').repeat(1).as(:part)
     end
 
     rule(:subpart) do
@@ -55,7 +56,7 @@ module Pubid::Ieee
     end
 
     rule(:draft_status) do
-      space >> (str("Active Unapproved") | str("Unapproved") | str("Approved")).as(:draft_status) >> str(" Draft")
+      space >> (str("Active Unapproved") | str("Unapproved") | str("Approved")).as(:draft_status)
     end
 
     rule(:draft_prefix) do
@@ -63,7 +64,7 @@ module Pubid::Ieee
     end
 
     rule(:draft_date) do
-      comma_space >> words.as(:month) >>
+      (space? >> comma | space) >> words.as(:month) >>
         (
           ((space >> digits.as(:day)).maybe >> comma >> year_digits.as(:year)) |
             (comma_space >> match('\d').repeat(2, 4).as(:year))
@@ -81,7 +82,7 @@ module Pubid::Ieee
       # /D14, April 2020
       # /D7 November, 2019
       space? >> draft_prefix >> draft_version >>
-        ((str(".") | str("r")) >> digits.as(:revision)).maybe >>
+        ((str(".") | str("r")) >> (digits >> words?).as(:revision)).maybe >>
         draft_date.maybe
     end
 
@@ -98,14 +99,15 @@ module Pubid::Ieee
         (part >> year) |
         # C57.19.101
         (part >> subpart.as(:subpart)) |
-        # IEEE P11073-10101
-        # IEEE P11073-10420/D4D5
-        # trick to avoid being partially parsed by year
-        (str("-") >> match('[\dA-Z]').repeat(5).as(:part)) |
-        # 581.1978
-        year |
         # IEC 62525-Edition 1.0 - 2007
         edition.as(:edition) |
+        # IEEE P11073-10101
+        # IEEE P11073-10420/D4D5
+        # IEEE Unapproved Draft Std P11073-20601a/D13, Jan 2010
+        # XXX: hack to avoid being partially parsed by year
+        (str("-") >> match('[\dA-Za-z]').repeat(5, 6).as(:part)) |
+        # 581.1978
+        year |
         # 61691-6
         part
 
