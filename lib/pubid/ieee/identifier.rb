@@ -14,9 +14,9 @@ module Pubid::Ieee
       [organizations, type_status, parameters].each do |data|
         case data
         when Hash
-          set_values(data)
+          set_values(data.transform_values { |v| (v.is_a?(Array) && merge_parameters(v)) || v })
         when Array
-          set_values(Identifier.merge_parameters(data))
+          set_values(merge_parameters(data))
         end
       end
     end
@@ -32,7 +32,7 @@ module Pubid::Ieee
       code
     end
 
-    def self.merge_parameters(params)
+    def merge_parameters(params)
       return params unless params.is_a?(Array)
 
       result = {}
@@ -49,7 +49,7 @@ module Pubid::Ieee
     end
 
     def self.parse(code)
-      new(**merge_parameters(Transformer.new.apply(Parser.new.parse(update_old_code(code)))).to_h)
+      new(**Transformer.new.apply(Parser.new.parse(update_old_code(code))).to_h)
 
     rescue Parslet::ParseFailed => failure
       raise Pubid::Ieee::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
@@ -116,7 +116,7 @@ module Pubid::Ieee
     def draft
       return "" unless @draft
 
-      result = "/D#{@draft[:version]}"
+      result = "/D#{@draft[:version].is_a?(Array) ? @draft[:version].join('D') : @draft[:version]}"
       result += ".#{@draft[:revision]}" if @draft[:revision]
       result += ", #{@draft[:month]}" if @draft[:month]
       result += " #{@draft[:day]}," if @draft[:day]

@@ -4,8 +4,17 @@ module Pubid::Ieee
       match('\d').repeat(1)
     end
 
+    rule(:space) { str(" ") }
+    rule(:space?) { space.maybe }
+    rule(:comma) { str(", ") }
+    rule(:comma?) { comma.maybe }
+    rule(:comma_space) { comma | space }
+    rule(:words_digits) { match('[\dA-Za-z]').repeat(1) }
+    rule(:words) { match("[A-Za-z]").repeat(1) }
+    rule(:year_digits) { match('\d').repeat(4, 4) }
+
     rule(:year) do
-      (str(".") | str("-")) >> match('\d').repeat(4, 4).as(:year)
+      (str(".") | str("-")) >> year_digits.as(:year)
     end
 
     rule(:organization) do
@@ -29,15 +38,15 @@ module Pubid::Ieee
     end
 
     rule(:edition) do
-      (str(", ") >> match('\d').repeat(4, 4).as(:year) >> str(" Edition")) |
-        ((str(" ") | str("-")) >> str("Edition ") >> (digits >> str(".") >> digits).as(:version) >> (str(" - ") | str(" ")) >>
+      (comma >> match('\d').repeat(4, 4).as(:year) >> str(" Edition")) |
+        ((space | str("-")) >> str("Edition ") >> (digits >> str(".") >> digits).as(:version) >> (str(" - ") | str(" ")) >>
         match('\d').repeat(4, 4).as(:year) >> (str("-") >>
         match('\d').repeat(2, 2).as(:month)).maybe) |
         #, February 2018 (E)
-        (str(", ") >> match('[a-zA-Z]').repeat(1).as(:month) >> str(" ") >> match('\d').repeat(4, 4).as(:year) >>
+        (comma >> match('[a-zA-Z]').repeat(1).as(:month) >> str(" ") >> match('\d').repeat(4, 4).as(:year) >>
           str(" (E)")) |
         # First edition 2002-11-01
-        str(" ") >> str("First").as(:version) >>
+        space >> str("First").as(:version) >>
         str(" edition ") >>
           match('\d').repeat(4, 4).as(:year) >> str("-") >>
           match('\d').repeat(2, 2).as(:month) >> (str("-") >>
@@ -46,19 +55,34 @@ module Pubid::Ieee
     end
 
     rule(:draft_status) do
-      str(" ") >> (str("Active Unapproved") | str("Unapproved") | str("Approved")).as(:draft_status) >> str(" Draft")
+      space >> (str("Active Unapproved") | str("Unapproved") | str("Approved")).as(:draft_status) >> str(" Draft")
+    end
+
+    rule(:draft_prefix) do
+      str("/") | str("_")
+    end
+
+    rule(:draft_date) do
+      comma_space >> words.as(:month) >>
+        (
+          ((space >> digits.as(:day)).maybe >> comma >> year_digits.as(:year)) |
+            (comma_space >> match('\d').repeat(2, 4).as(:year))
+        )
+    end
+
+    rule(:draft_version) do
+      # for D1D2
+      (str("D") >> digits.as(:version)).repeat(2) |
+      # for DD3, D3Q
+      (str("D") >> words_digits.as(:version)).repeat(1, 1)
     end
 
     rule(:draft) do
       # /D14, April 2020
       # /D7 November, 2019
-      str(" ").maybe >> (str("/") | str("_")) >> str("D") >> match('[\dA-Za-z]').repeat(1).as(:version) >>
+      space? >> draft_prefix >> draft_version >>
         ((str(".") | str("r")) >> digits.as(:revision)).maybe >>
-        ((str(", ") | str(" ")) >> match("[A-Za-z]").repeat(1).as(:month) >>
-          (((str(" ") >> digits.as(:day)).maybe >>
-          str(", ") >> match('\d').repeat(4, 4).as(:year)) |
-          ((str(" ") | str(", ")) >> match('\d').repeat(2, 4).as(:year)))
-        ).maybe
+        draft_date.maybe
     end
 
     rule(:part_subpart_year) do

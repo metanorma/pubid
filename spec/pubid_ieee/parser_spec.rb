@@ -3,6 +3,10 @@ require "parslet/rig/rspec"
 RSpec.describe Pubid::Ieee::Parser do
   subject { described_class.new }
 
+  it "parses draft date" do
+    expect(subject.draft_date).to parse(", Feb 6, 2007")
+  end
+
   describe "parse identifiers from examples files" do
     shared_examples "parse identifiers from file" do
       it "parse identifiers from file" do

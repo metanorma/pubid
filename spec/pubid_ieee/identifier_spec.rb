@@ -229,26 +229,28 @@ RSpec.describe Pubid::Ieee::Identifier do
   end
 
   context "IEEE Std PC37.66/D12, Apr 2005" do
-    let(:pubid) { "IEEE Std PC37.66/D12, Apr 2005" }
+    let(:pubid) { "IEEE Std PC37.66/D12, April 2005" }
 
     it_behaves_like "converts pubid to pubid"
   end
 
   context "IEEE Unapproved Draft Std 11073-10471/D02, Feb 2008" do
     let(:original) { "IEEE Unapproved Draft Std 11073-10471/D02, Feb 2008" }
-    let(:pubid) { "IEEE Unapproved Draft Std 11073.10471/D02, Feb 2008" }
+    let(:pubid) { "IEEE Unapproved Draft Std 11073.10471/D02, February 2008" }
 
     it_behaves_like "converts pubid to pubid"
   end
 
   context "IEEE Active Unapproved Draft Std PC37.59/D11, Jul 2007" do
-    let(:pubid) { "IEEE Active Unapproved Draft Std PC37.59/D11, Jul 2007" }
+    let(:original) { "IEEE Active Unapproved Draft Std PC37.59/D11, Jul 2007" }
+    let(:pubid) { "IEEE Active Unapproved Draft Std PC37.59/D11, July 2007" }
 
     it_behaves_like "converts pubid to pubid"
   end
 
   context "IEEE Approved Draft Std P1076.1/D3.3, Feb 6, 2007" do
-    let(:pubid) { "IEEE Approved Draft Std P1076.1/D3.3, Feb 6, 2007" }
+    let(:original) { "IEEE Approved Draft Std P1076.1/D3.3, Feb 6, 2007" }
+    let(:pubid) { "IEEE Approved Draft Std P1076.1/D3.3, February 6, 2007" }
 
     it_behaves_like "converts pubid to pubid"
   end

@@ -1,19 +1,23 @@
 module Pubid::Ieee
   class Transformer < Parslet::Transform
-    rule(draft: subtree(:draft)) do
-      result = draft
-      if draft[:month]
+    rule(month: simple(:month), year: simple(:year)) do |date|
+      update_month_year(date[:month], date[:year])
+    end
 
-        if draft[:year].length == 2
-          result[:year] = case draft[:year].to_i
-            when 0..25 then "20#{draft[:year]}"
-            when 26..99 then "19#{draft[:year]}"
-          end
-        end
+    rule(month: simple(:month), year: simple(:year), day: simple(:day)) do |date|
+      update_month_year(date[:month], date[:year]).merge({ day: date[:day] })
+    end
 
-        result[:month] = Date.parse(draft[:month]).strftime("%B")
-      end
-      { draft: result }
+    def self.update_month_year(month, year)
+      { year: if year.length == 2
+                case year.to_i
+                when 0..25 then "20#{year}"
+                when 26..99 then "19#{year}"
+                end
+              else
+                year
+              end,
+        month: Date.parse(month).strftime("%B") }
     end
   end
 end
