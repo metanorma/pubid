@@ -35,7 +35,7 @@ module Pubid::Ieee
     end
 
     rule(:type) do
-      str("Std") | str("STD") | str("Standard") | str("Draft Std") | str("Draft")
+      str("Std") | str("STD") | str("Standard")# | str("Draft Std") | str("Draft")
     end
 
     rule(:edition) do
@@ -127,7 +127,8 @@ module Pubid::Ieee
     rule(:identifier) do
       (organization.as(:publisher) >> ((str("/ ") | str("/")) >> organization.as(:copublisher)).repeat)
         .as(:organizations) >>
-        (draft_status.maybe >> (str(" ") >> type.as(:type) >> str(" ")).maybe).as(:type_status) >>
+        (draft_status.maybe >> (str(" ") >> str("Draft ").maybe >>
+          type.as(:type) >> str(" ")).maybe).as(:type_status) >>
         str(" ").maybe >> number_prefix >> number >> (part_subpart_year.maybe >> draft.as(:draft).maybe >>
         edition.as(:edition).maybe >>
         # dual-PubIDs

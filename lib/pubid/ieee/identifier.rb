@@ -55,8 +55,8 @@ module Pubid::Ieee
       raise Pubid::Ieee::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
     end
 
-    def to_s
-      "#{publisher}#{copublisher} #{draft_status}#{type}#{number}#{part}"\
+    def to_s(format = :short)
+      "#{publisher}#{copublisher} #{draft_status(format)}#{type(format)}#{number}#{part}"\
         "#{subpart}#{year}#{draft}#{edition}#{alternative}"
     end
 
@@ -78,8 +78,10 @@ module Pubid::Ieee
       @subpart if @subpart && !@subpart.empty?
     end
 
-    def type
-      "#{@type} " if @type
+    def type(format)
+      result = @draft && format == :full ? "Draft " : ""
+      result += "#{@type} " if @type
+      result
     end
 
     def year
@@ -125,8 +127,8 @@ module Pubid::Ieee
       result
     end
 
-    def draft_status
-      "#{@draft_status} #{@type&.include?('Draft') ? '' : 'Draft '}" if @draft_status
+    def draft_status(format)
+      "#{@draft_status} " if @draft_status && format == :full
     end
   end
 end
