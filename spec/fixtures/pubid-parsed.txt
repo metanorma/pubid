@@ -7106,3 +7106,421 @@ IEEE Std C95.3-2021 (Revision of IEEE Std C95.3-2002 and IEEE Std C95.3.1-2010)
 IEEE Std C95.7-2014 (Revision of IEEE Std C95.7-2005)
 IEEE Std N42.43-2021 (Revision of ANSI N42.43-2016)
 IEEE Std No 64-1969 (Revision of AIEE No. 64-1962)
+ANSI C63.10-2013 - Redline
+ANSI C63.10-2020 - Redline
+ANSI C63.12-2015 (Revision of ANSI C63.12-1999) - Redline
+ANSI C63.14-2014 (Revision of ANSI C63.14-2009) - Redline
+ANSI C63.17-2013 - Redline
+ANSI C63.18-2014 (Revision of ANSI C63.18-1997) - Redline
+ANSI C63.19-2019 (Revision of ANSI C63.19-2011) - Redline
+ANSI C63.2-2016 (Revision of ANSI C63.2-2009) - Redline
+ANSI C63.4-2014 (Revision of ANSI C63.4-2009) - Redline
+ANSI C63.5-2017 (Revision of ANSI C63.5-2005) - Redline
+ANSI C63.7-2015 (Revision of ANSI C63.7-2005) - Redline
+ANSI N42.32-2016 (Revision of ANSI N42.32-2006) - Redline
+ANSI N42.35-2016 (Revision of ANSI N42.35-2006) - Redline
+ANSI N42.37-2016 (Revision of ANSI N42.37-2006) - Redline
+ANSI N42.42-2012 (Revision of ANSI N42.42-2006) - Redline
+ANSI N42.42-2020 (Revision of ANSI N42.42-2012) - Redline
+IEC/IEEE 60780-323 Edition 1.0 2016-02 - Redline
+IEEE 1023-2020 (Revision of IEEE Std 1023-2004) - Redline
+IEEE STD 12207-2008 - Redline
+IEEE Std 1003.1-2017 (Revision of IEEE Std 1003.1-2008) - Redline
+IEEE Std 1012-1998 - Redline
+IEEE Std 1012-2012 (Revision of IEEE Std 1012-2004) - Redline
+IEEE Std 1013-2007 (Revision of IEEE Std 1013-2000) - Redline
+IEEE Std 1013-2019 (Revision of IEEE Std 1013-2007) - Redline
+IEEE Std 1016-2009 (Revision of IEEE Std 1016-1998) - Redline
+IEEE Std 1017-2013 (Revision of IEEE Std 1017-2004) - Redline
+IEEE Std 1019-2013 (Revision of IEEE Std 1019-2004) - Redline
+IEEE Std 1020-2011 (Revision of IEEE Std 1020-1988) - Redline
+IEEE Std 1023-2004 (Revision of IEEE Std 1023-1988) - Redline
+IEEE Std 1031-2011 (Revision of IEEE Std 1031-2000) - Redline
+IEEE Std 1036-2020 (Revision of IEEE Std 1036-2010) - Redline
+IEEE Std 1044-2009 (Revision of IEEE Std 1044-1993) - Redline
+IEEE Std 1057-2017 (Revision of IEEE Std 1057-2007) - Redline
+IEEE Std 1062-2015 (Revision of IEEE Std 1062-1993) - Redline
+IEEE Std 1067-2012 (Revision of IEEE Std 1067-2005) - Redline
+IEEE Std 1068-2009 (Revision of IEEE Std 1068-1996) - Redline
+IEEE Std 1068-2015 (Revision of IEEE Std 1068-2009) - Redline
+IEEE Std 1076-2008 (Revision of IEEE Std 1076-2002) - Redline
+IEEE Std 1076-2019 - Redline
+IEEE Std 1076.1.1-2011 (Revision of IEEE Std 1076.1.1-2004) - Redline
+IEEE Std 1095-2012 (Revision of IEEE Std 1095-1989) - Redline
+IEEE Std 1100-2005 (Revision of IEEE Std 1100-1999) - Redline
+IEEE Std 1106-2005 (Revision of IEEE Std 1106-1995) - Redline
+IEEE Std 1106-2015 (Revision of IEEE Std 1106-2005) - Redline
+IEEE Std 11073-10201-2018 (Revision of IEEE Std 11073-10201-2004) - Redline
+IEEE Std 11073-10404-2020 (Revision of IEEE Std 11073-10404-2008) - Redline
+IEEE Std 11073-10407-2020 (Revision of IEEE Std 11073-10407-2008) - Redline
+IEEE Std 11073-10408-2019 (Revision of IEEE Std 11073-10408-2008) - Redline
+IEEE Std 11073-10415-2019 (Revision of IEEE Std 11073-10415-2008) - Redline
+IEEE Std 11073-10417-2011 (Revision of IEEE Std 11073-10417-2009) - Redline
+IEEE Std 11073-10417-2015 (Revision of IEEE Std 11073-10417-2011) - Redline
+IEEE Std 11073-10419-2017 (Revision of IEEE Std 11073-10419-2015) - Redline
+IEEE Std 11073-10420-2020 (Revision of IEEE Std 11073-10420-2010) - Redline
+IEEE Std 11073-10425-2017 (Revision of IEEE Std 11073-10425-2014) - Redline
+IEEE Std 11073-20601-2019 (Revision of IEEE Std 11073-20601-2014) - Redline
+IEEE Std 1110-2019 (Revision of IEEE Std 1110-2002) - Redline
+IEEE Std 1115-2014 (Revision of IEEE Std 1115-2000) - Redline
+IEEE Std 1127-2013 (Revision of IEEE Std 1127-1998) - Redline
+IEEE Std 1138-2009 (Revision of IEEE Std 1138-1994) - Redline
+IEEE Std 1138-2021 (Revision of IEEE Std 1138-2009) - Redline
+IEEE Std 1139-2008 (Revision of IEEE Std 1139-1999) - Redline
+IEEE Std 1142-2009 (Revision of IEEE Std 1142-1995) - Redline
+IEEE Std 1143-2012 (Revision of IEEE Std 1143-1994) - Redline
+IEEE Std 1147-2021 (Revision of IEEE Std 1147-2005) - Redline
+IEEE Std 1149.1-2013 (Revision of IEEE Std 1149.1-2001) - Redline
+IEEE Std 1149.6-2015 (Revision of IEEE Std 1149.6-2003) - Redline
+IEEE Std 115-2009 (Revision of IEEE Std 115-1995) - Redline
+IEEE Std 115-2019 (Revision of IEEE Std 115-2009) - Redline
+IEEE Std 1159-2019 (Revision of IEEE Std 1159-2009) - Redline
+IEEE Std 1159.3-2019 (Revision of IEEE Std 1159.3-2003) - Redline
+IEEE Std 117-2015 (Revision of IEEE Std 117-1974) - Redline
+IEEE Std 1185-2019 (Revision of IEEE Std 1185-2010) - Redline
+IEEE Std 1187-2013 (Revision of IEEE Std 1187-2002) - Redline
+IEEE Std 1188-2005 (Revision of IEEE Std 1188-1996) - Redline
+IEEE Std 1189-2007 (Revision of IEEE Std 1189-1996) - Redline
+IEEE Std 1215-2013 (Revision of IEEE Std 1215-2001) - Redline
+IEEE Std 1222-2011 (Revision of IEEE Std 1222-2004) - Redline
+IEEE Std 1222-2019 (Revision of IEEE Std 1222-2011) - Redline
+IEEE Std 1234-2019 (Revision of IEEE Std 1234-2007) - Redline
+IEEE Std 1242-2016 - Redline
+IEEE Std 1246-2011 (Revision of IEEE Std 1246-2002) - Redline
+IEEE Std 1246-2020 (Revision of IEEE Std 1246-2011) - Redline
+IEEE Std 1248-2020 (Revision of IEEE Std 1248-1998) - Redline
+IEEE Std 1250-2011 (Revision of IEEE Std 1250-1995) - Redline
+IEEE Std 1264-2015 (Revision of IEEE Std 1264-1993) - Redline
+IEEE Std 1268-2016 (Revision of IEEE Std 1268-2005) - Redline
+IEEE Std 1276-2020 (Revision of IEEE Std 1276-1997) - Redline
+IEEE Std 1278.1-2012 (Revision of IEEE Std 1278.1-1995) - Redline
+IEEE Std 1278.2-2015 (Revision of IEEE Std 1278.2-1995) - Redline
+IEEE Std 1283-2013 (Revision of IEEE Std 1283-2004) - Redline
+IEEE Std 1290-2015 (Revision of IEEE Std 1290-1996) - Redline
+IEEE Std 1300-2011 (Revision of IEEE Std 1300-1996) - Redline
+IEEE Std 1302-2019 (Revision of IEEE Std 1302-2008) - Redline
+IEEE Std 1303-2011 (Revision of IEEE Std 1303-1994) - Redline
+IEEE Std 1309-2013 (Revision of IEEE Std 1309-2005) - Redline
+IEEE Std 1310-2012 (Revision of IEEE Std 1310-1996) - Redline
+IEEE Std 1349-2011 (Revision of IEEE Std 1349-2001) - Redline
+IEEE Std 1349-2021 (Revision of IEEE Std 1349-2011) - Redline
+IEEE Std 1366-2012 (Revision of IEEE Std 1366-2003) - Redline
+IEEE Std 1394-2008 (Revision of IEEE Std 1394-1995) - Redline
+IEEE Std 1406-2020 (Revision of IEEE Std 1406-1998) - Redline
+IEEE Std 1413-2010 (Revision of IEEE Std 1413-1998) - Redline
+IEEE Std 142-2007 (Revision of IEEE Std 142-1991) - Redline
+IEEE Std 1427-2020 (Revision of IEEE Std 1427-2006) - Redline
+IEEE Std 145-2013 (Revision of IEEE Std 145-1993) - Redline
+IEEE Std 1453-2011 - Redline
+IEEE Std 1453-2015 (Revision of IEEE Std 1453-2011) - Redline
+IEEE Std 1458-2017 (Revision of IEEE Std 1458-2005) - Redline
+IEEE Std 1459-2010 (Revision of IEEE Std 1459-2000) - Redline
+IEEE Std 1475-2012 (Revision of IEEE Std 1475-1999) - Redline
+IEEE Std 1478-2013 (Revision of IEEE Std 1478-2001) - Redline
+IEEE Std 1481-2019 (Revision of IEEE Std 1481-2009) - Redline
+IEEE Std 1482.1-2013 (Revision of IEEE Std 1482.1-1999) - Redline
+IEEE Std 1484.11.2-2020 (Revision of IEEE Std 1148.11.2-2003) - Redline
+IEEE Std 1484.12.1-2020 - Redline
+IEEE Std 1484.12.3-2020 (Revision of IEEE Std 1484.12.3-2005) - Redline
+IEEE Std 1491-2012 (Revision of IEEE Std 1491-2005) - Redline
+IEEE Std 1505-2010 (Revision of IEEE Std 1505-2006) - Redline
+IEEE Std 1505.1-2019 (Revision of IEEE Std 1505.1-2008) - Redline
+IEEE Std 1516-2010 (Revision of IEEE Std 1516-2000) - Redline
+IEEE Std 1516.1-2010 (Revision of IEEE Std 1516.1-2000) - Redline
+IEEE Std 1516.2-2010 (Revision of IEEE Std 1516.2-2000) - Redline
+IEEE Std 1527-2018 (Revision of IEEE Std 1527-2006) - Redline
+IEEE Std 1528-2013 (Revision of IEEE Std 1528-2003) - Redline
+IEEE Std 1531-2020 (Revision of IEEE Std 1531-2003) - Redline
+IEEE Std 1534-2009 (Revision of IEEE Std 1534-2002) - Redline
+IEEE Std 1547-2018 (Revision of IEEE Std 1547-2003) - Redline
+IEEE Std 1547.1-2020 - Redline
+IEEE Std 1561-2019 (Revision of IEEE Std 1561-2007) - Redline
+IEEE Std 1562-2021 (Revision of IEEE Std 1562-2007) - Redline
+IEEE Std 1566-2015 (Revision of IEEE Std 1566-2005) - Redline
+IEEE Std 1578-2018 (Revision of IEEE Std 1578-2007) - Redline
+IEEE Std 1584-2018 (Revision of IEEE Std 1584-2002) - Redline
+IEEE Std 1588-2008 (Revision of IEEE Std 1588-2002) - Redline
+IEEE Std 1590-2009 (Revision of IEEE Std 1590-2003) - Redline
+IEEE Std 1594-2020 (Revision of IEEE Std 1594-2008) - Redline
+IEEE Std 16-2020 (Revision of IEEE Std 16-2004) - Redline
+IEEE Std 1609.0-2019 (Revision of IEEE Std 1609.0-2013) - Redline
+IEEE Std 1609.12-2016 (Revision of IEEE Std 1609.12-2012) - Redline
+IEEE Std 1609.12-2019 (Revision of IEEE Std 1609.12-2016) - Redline
+IEEE Std 1609.2-2016 (Revision of IEEE Std 1609.2-2013) - Redline
+IEEE Std 1609.3-2010 (Revision of IEEE Std 1609.3-2007) - Redline
+IEEE Std 1609.3-2016 (Revision of IEEE Std 1609.3-2010) - Redline
+IEEE Std 1609.3-2020 (Revision of IEEE Std 1609.3-2016) - Redline
+IEEE Std 1609.4-2016 (Revision of IEEE Std 1609.4-2010) - Redline
+IEEE Std 1610-2016 (Revision of IEEE Std 1610-2007) - Redline
+IEEE Std 1613-2009 (Revision of IEEE Std 1613-2003) - Redline
+IEEE Std 1615-2019 (Revision of IEEE Std 1615-2007) - Redline
+IEEE Std 1619.2-2021 (Revision of IEEE Std 1619.2-2010) - Redline
+IEEE Std 1620-2008 (Revision of IEEE Std 1620-2004) - Redline
+IEEE Std 1625-2008 (Revision of IEEE Std 1625-2004) - Redline
+IEEE Std 1633-2016 (Revision of IEEE Std 1633-2008) - Redline
+IEEE Std 1636.1-2013 (Revision of IEEE Std 1636.1-2007) - Redline
+IEEE Std 1637-2020 (Revision of IEEE Std 1637-2010) - Redline
+IEEE Std 1641-2010 (Revision of IEEE Std 1641-2004) - Redline
+IEEE Std 1647-2008 (Revision of IEEE Std 1647-2006) - Redline
+IEEE Std 1647-2011 (Revision of IEEE Std 1647-2008) - Redline
+IEEE Std 1647-2016 (Revision of IEEE Std 1647-2011) - Redline
+IEEE Std 1647-2019 (Revision of IEEE Std 1647-2016) - Redline
+IEEE Std 1652-2016 (Revision of IEEE Std 1652-2008) - Redline
+IEEE Std 1653.2-2020 (Revision of IEEE Std 1653.2-2009) - Redline
+IEEE Std 1653.3-2021 (Revision of IEEE Std 1653.3-2012) - Redline
+IEEE Std 1657-2018 (Revision of IEEE Std 1657-2009) - Redline
+IEEE Std 1661-2019 (Revision of IEEE Std 1661-2007) - Redline
+IEEE Std 1662-2016 (Revision of IEEE Std 1662-2008) - Redline
+IEEE Std 1666-2011 (Revision of IEEE Std 1666-2005) - Redline
+IEEE Std 1667-2009 (Revision of IEEE Std 1667-2006) - Redline
+IEEE Std 1667-2015 (Revision of IEEE Std 1667-2009) - Redline
+IEEE Std 1667-2018 (Revision of IEEE Std 1667-2015) - Redline
+IEEE Std 1668-2017 (Revision of IEEE Std 1668-2014) - Redline
+IEEE Std 1671.2-2012 (Revision of IEEE Std 1671.2-2008) - Redline
+IEEE Std 1671.5-2015 (Revision of IEEE Std 1671.5-2008) - Redline
+IEEE Std 1671.6-2015 (Revision of IEEE Std 1671.6-2008) - Redline
+IEEE Std 1679-2020 (Revision of IEEE Std 1679-2010) - Redline
+IEEE Std 1680-2009 (Revision of IEEE Std 1680-2006) - Redline
+IEEE Std 1680.1-2018 (Revision of IEEE Std 1680.1-2009) - Redline
+IEEE Std 1686-2013 (Revision of IEEE Std 1686-2007) - Redline
+IEEE Std 1725-2021 - Redline
+IEEE Std 1792-2017 (Revision of IEEE Std 1792-2011) - Redline
+IEEE Std 18-2012 (Revision of IEEE Std 18-2002) - Redline
+IEEE Std 1801-2013 (Revision of IEEE Std 1801-2009) - Redline
+IEEE Std 1801-2015 (Revision of IEEE Std 1801-2013) - Redline
+IEEE Std 181-2011 (Revision of IEEE Std 181-2003) - Redline
+IEEE Std 1815-2012 (Revision of IEEE Std 1815-2010) - Redline
+IEEE Std 1826-2020 (Revision of IEEE Std 1826-2012) - Redline
+IEEE Std 1850-2010 (Revision of IEEE Std 1850-2005) - Redline
+IEEE Std 187-2018 (Revision of IEEE Std 187-2003) - Redline
+IEEE Std 1900.1-2019 (Revision of IEEE Std 1900.1-2008) - Redline
+IEEE Std 1901-2020 (Revision of IEEE Std 1901-2010) - Redline
+IEEE Std 1904.1-2017 (Revision of IEEE Std 1904.1-2013) - Redline
+IEEE Std 2401-2019 (Revision of IEEE Std 2401-2015) - Redline
+IEEE Std 2410-2017 (Revision of IEEE 2410-2015) - Redline
+IEEE Std 2410-2019 (Revision of IEEE Std 2410-2017) - Redline
+IEEE Std 269-2010 (Revision of IEEE Std 269-2002) - Redline
+IEEE Std 280-2021 (Revision of IEEE Std 280-1982) - Redline
+IEEE Std 308-2012 (Revision of IEEE Std 308-2001) - Redline
+IEEE Std 308-2020 (Revision of IEEE Std 308-2012) - Redline
+IEEE Std 317-2013 (Revision of IEEE Std 317-1983) - Redline
+IEEE Std 336-2020 (Revision of IEEE Std 336-2010) - Redline
+IEEE Std 338-2012 (Revision of IEEE Std 338-2006) - Redline
+IEEE Std 352-2016 (Revision of IEEE Std 352-1987) - Redline
+IEEE Std 367-2012 (Revision of IEEE Std 367-1996) - Redline
+IEEE Std 382-2019 (Revision of IEEE Std 382-2006) - Redline
+IEEE Std 383-2015 (Revision of IEEE Std 383-2003) - Redline
+IEEE Std 384-2008 (Revision of IEEE Std 384-1992) - Redline
+IEEE Std 386-2016 (Revision of IEEE Std 386-2006) - Redline
+IEEE Std 389-2020 (Revision of IEEE Std 389-1996) - Redline
+IEEE Std 4-2013 (Revision of IEEE Std 4-1995) - Redline
+IEEE Std 400-2012 (Revision of IEEE Std 400-2001) - Redline
+IEEE Std 400.2-2013 - Redline
+IEEE Std 404-2012 (Revision of IEEE Std 404-2006) - Redline
+IEEE Std 420-2001 (Revision of ANSI/IEEE Std 420-1982) - Redline
+IEEE Std 420-2013 (Revision of IEEE Std 420-2001) - Redline
+IEEE Std 421.1-2007 (Revision of IEEE Std 421.1-1986) - Redline
+IEEE Std 421.2-2014 (Revision of IEEE Std 421.2-1990) - Redline
+IEEE Std 421.3-2016 (Revision of IEEE Std 421.3-1997) - Redline
+IEEE Std 421.5-2016 (Revision of IEEE Std 421.5-2005) - Redline
+IEEE Std 43-2013 (Revision of IEEE Std 43-2000) - Redline
+IEEE Std 433-2009 (Revision of IEEE Std 433-1974) - Redline
+IEEE Std 450-2010 (Revision of IEEE Std 450-2002) - Redline
+IEEE Std 450-2020 (Revision of IEEE Std 450-2010) - Redline
+IEEE Std 463-2013 (Revision of IEEE Std 463-2006) - Redline
+IEEE Std 463-2019 (Revision of IEEE Std 463-2013) - Redline
+IEEE Std 48-2009 (Revision of IEEE Std 48-1996) - Redline
+IEEE Std 484-2019 (Revision of IEEE Std 484-2002) - Redline
+IEEE Std 485-2020 (Revision of IEEE Std 485-2010) - Redline
+IEEE Std 487-2015 (Revision of IEEE Std 487-2007) - Redline
+IEEE Std 493-2007 (Revision of IEEE Std 493-1997) - Redline
+IEEE Std 495-2007 (Revision of IEEE Std 495-1986) - Redline
+IEEE Std 497-2016 (Revision of IEEE Std 497-2010) - Redline
+IEEE Std 515-2011 (Revision of IEEE Std 515-2004) - Redline
+IEEE Std 515.1-2012 (Revision of IEEE Std 515.1-2005) - Redline
+IEEE Std 516-2009 (Revision of IEEE Std 516-2003) - Redline
+IEEE Std 519-2014 (Revision of IEEE Std 519-1992) - Redline
+IEEE Std 521-2019 (Revision of IEEE Std 521-2002) - Redline
+IEEE Std 524-2016 (Revision of IEEE Std 524-2003) - Redline
+IEEE Std 525-2016 (Revision of IEEE Std 525-2007) - Redline
+IEEE Std 528-2019 - Redline
+IEEE Std 532-2007 (Revision of IEEE Std 532-1993) - Redline
+IEEE Std 532-2021 - Redline
+IEEE Std 535-2013 (Revision of IEEE Std 535-2006) - Redline
+IEEE Std 56-2016 - Redline
+IEEE Std 572-2019 (Revision of IEEE Std 572-2006) - Redline
+IEEE Std 577-2012 (Revision of IEEE Std 577-2004) - Redline
+IEEE Std 592-2007 (Revision of IEEE Std 592-1990) - Redline
+IEEE Std 592-2018 (Revision of IEEE Std 592-2007) - Redline
+IEEE Std 603-2009 (Revision of IEEE Std 603-1998) - Redline
+IEEE Std 627-2019 (Revision of IEEE Std 627-2010) - Redline
+IEEE Std 628-2011 (Revision of IEEE Std 628-2001) - Redline
+IEEE Std 638-2013 (Revision of IEEE Std 638-1992) - Redline
+IEEE Std 644-2019 (Revision of IEEE Std 644-2008) - Redline
+IEEE Std 656-2018 (Revision of IEEE Std 656-1992) - Redline
+IEEE Std 666-2007 (Revision of IEEE Std 666-1991) - Redline
+IEEE Std 690-2018 (Revision of IEEE Std 690-2004) - Redline
+IEEE Std 692-2010 (Revision of IEEE Std 692-1997) - Redline
+IEEE Std 692-2013 (Revision of IEEE Std 692-2010) - Redline
+IEEE Std 693-2005 (Revision of IEEE Std 693-1997) - Redline
+IEEE Std 693-2018 (Revision of IEEE Std 693-2005) - Redline
+IEEE Std 730-2014 (Revision of IEEE Std 730-2002) - Redline
+IEEE Std 741-2007 (Revision of IEEE Std 741-1997) - Redline
+IEEE Std 754-2008 (Revision of IEEE Std 754-1985) - Redline
+IEEE Std 754-2019 (Revision of IEEE 754-2008) - Redline
+IEEE Std 765-2012 (Revision of IEEE Std 765-2006) - Redline
+IEEE Std 802.11-2007 (Revision of IEEE Std 802.11-1999) - Redline
+IEEE Std 802.11-2012 (Revision of IEEE Std 802.11-2007) - Redline
+IEEE Std 802.11-2020 (Revision of IEEE Std 802.11-2016) - Redline
+IEEE Std 802.15.4-2020 (Revision of IEEE Std 802.15.4-2015) - Redline
+IEEE Std 802.15.7-2018 (Revision of IEEE Std 802.15.7-2011) - Redline
+IEEE Std 802.16-2012 (Revision of IEEE Std 802.16-2009) - Redline
+IEEE Std 802.19.1-2018 - Redline
+IEEE Std 802.1AC-2016 (Revision of IEEE Std 802.1AC-2012) - Redline
+IEEE Std 802.1AR-2018 (Revision of IEEE Std 802.1AR-2009) - Redline
+IEEE Std 802.1Q-2018 (Revision of IEEE Std 802.1Q-2014) - Redline
+IEEE Std 802.3-2018 (Revision of IEEE Std 802.3-2015) - Redline
+IEEE Std 81-2012 (Revision of IEEE Std 81-1983) - Redline
+IEEE Std 828-2005 (Revision of IEEE Std 828-1998) - Redline
+IEEE Std 828-2012 (Revision of IEEE Std 828-2005) - Redline
+IEEE Std 829-2008 (Revision of IEEE Std 829-1998) - Redline
+IEEE Std 836-2009 (Revision of IEEE Std 836-2001) - Redline
+IEEE Std 837-2014 (Revision of IEEE Std 837-2002) - Redline
+IEEE Std 841-2009 (Revision of IEEE Std 841-2001) - Redline
+IEEE Std 848-2015 (Revision of IEEE Std 848-1996) - Redline
+IEEE Std 859-2018 (Revision of IEEE Std 859-1987) - Redline
+IEEE Std 933-2013 (Revision of IEEE Std 933-1999) - Redline
+IEEE Std 937-2007 (Revision of IEEE Std 937-2000) - Redline
+IEEE Std 937-2019 (Revision of IEEE Std 937-2007) - Redline
+IEEE Std 945-2019 (Revision of IEEE Std 945-1984) - Redline
+IEEE Std 946-2020 (Revision of IEEE Std 946-2004) - Redline
+IEEE Std 952-2020 (Revision of IEEE Std 952-1997) - Redline
+IEEE Std 979-2012 - Redline
+IEEE Std 980-2013 (Revision of IEEE Std 980-1994) - Redline
+IEEE Std 99-2007 (Revision of IEEE Std 99-1980) - Redline
+IEEE Std 99-2019 (Revision of IEEE Std 99-2007) - Redline
+IEEE Std 998-2012 (Revision of IEEE Std 998-1996) - Redline
+IEEE Std C37.011-2011 (Revision of IEEE Std C37.011-2005) - Redline
+IEEE Std C37.011-2019 (Revision of IEEE Std C37.011-2011) - Redline
+IEEE Std C37.015-2009 (Revision of IEEE Std C37.015-1993) - Redline
+IEEE Std C37.04-2018 (Revision of IEEE Std C37.04-1999) - Redline
+IEEE Std C37.09-2018 (Revision of IEEE Std C37.09-1999) - Redline
+IEEE Std C37.1-2007 (Revision of IEEE Std C37.1-1994) - Redline
+IEEE Std C37.10-2011 (Revision of IEEE Std C37.10-1995) - Redline
+IEEE Std C37.10.1-2018 (Revision of IEEE Std C37.10.1-2000) - Redline
+IEEE Std C37.103-2015 (Revision of IEEE Std C37.103-2004) - Redline
+IEEE Std C37.104-2012 (Revision of IEEE Std C37.104-2002) - Redline
+IEEE Std C37.108-2021 (Revision of IEEE Std C37.108-2002) - Redline
+IEEE Std C37.109-2006 (Revision of IEEE Std C37.109-1988) - Redline
+IEEE Std C37.11-2014 (Revision of IEEE Std C37.11-1997) - Redline
+IEEE Std C37.110-2007 (Revision of IEEE Std C37.110-1996) - Redline
+IEEE Std C37.114-2014 (Revision of IEEE Std C37.114-2004) - Redline
+IEEE Std C37.116-2018 (Revision of IEEE Std C37.116-2007) - Redline
+IEEE Std C37.12-2008 - Redline
+IEEE Std C37.12-2018 (Revision of IEEE Std C37.12-2008) - Redline
+IEEE Std C37.12.1-2018 - Redline
+IEEE Std C37.121-2012 (Revision of IEEE Std C37.121-1989) - Redline
+IEEE Std C37.121-2020 (Revision of IEEE Std C37.121-2012) - Redline
+IEEE Std C37.122-2021 (Revision of IEEE Std C37.122-2010) - Redline
+IEEE Std C37.122.1-2014 (Revision of IEEE Std C37.122.1-1993) - Redline
+IEEE Std C37.122.5-2013 (Revision of IEEE Std 1125-1993) - Redline
+IEEE Std C37.122.6-2013 (Revision of IEEE Std 1416-1998) - Redline
+IEEE Std C37.13-2008 (Revision of IEEE Std C37.13-1990) - Redline
+IEEE Std C37.13-2015 (Revision of IEEE Std C37.13-2008) - Redline
+IEEE Std C37.14-2015 (Revision of IEEE Std C37.14-2002) - Redline
+IEEE Std C37.2-2008 (Revision of IEEE Std C37.2-1996) - Redline
+IEEE Std C37.20.1-2015 (Revision of IEEE Std C37.20.1-2002) - Redline
+IEEE Std C37.20.2-2015 (Revision of IEEE Std C37.20.2-1999) - Redline
+IEEE Std C37.20.3-2013 (Revision of IEEE Std C37.20.3-2001) - Redline
+IEEE Std C37.20.4-2013 (Revision of IEEE Std C37.20.4-2001) - Redline
+IEEE Std C37.20.6-2015 (Revision of IEEE Std C37.20.6-2007) - Redline
+IEEE Std C37.20.7-2007 (Revision of IEEE Std C37.20.7-2001) - Redline
+IEEE Std C37.21-2017 (Revision of IEEE Std C37.21-2005) - Redline
+IEEE Std C37.242-2021 (Revision of IEEE Std C37.242-2013) - Redline
+IEEE Std C37.26-2014 (Revision of IEEE Std C37.26-2003) - Redline
+IEEE Std C37.27-2008 (Revision of IEEE Std C37.27-1987) - Redline
+IEEE Std C37.27-2015 (Revision of IEEE Std C37.27-2008) - Redline
+IEEE Std C37.41-2008 (Revision of IEEE Std C37.41-2000) - Redline
+IEEE Std C37.42-2016 - Redline
+IEEE Std C37.47-2011 - Redline
+IEEE Std C37.48.1-2011 (Revision of IEEE Std C37.48.1-2011) - Redline
+IEEE Std C37.59-2007 (Revision of IEEE Std C37.59-2002) - Redline
+IEEE Std C37.59-2018 (Revision of IEEE Std C37.59-2007) - Redline
+IEEE Std C37.60-2012 - Redline
+IEEE Std C37.63-2013 (Revision of IEEE Std C37.63-2005) - Redline
+IEEE Std C37.74-2014 (Revision of IEEE Std C37.74-2003) - Redline
+IEEE Std C37.90.1-2012 (Revision of IEEE Std C37.90.1-2002) - Redline
+IEEE Std C37.91-2008 (Revision of IEEE Std C37.91-2000) - Redline
+IEEE Std C37.91-2021 (Revision of IEEE Std C37.91-2008) - Redline
+IEEE Std C37.96-2012 (Revision of IEEE Std C37.96-2000) - Redline
+IEEE Std C37.99-2012 (Revision of IEEE Std C37.99-2000) - Redline
+IEEE Std C50.13-2014 (Revision of IEEE Std C50.13-2005) - Redline
+IEEE Std C57.100-2011 (Revision of IEEE Std C57.100-1999) - Redline
+IEEE Std C57.104-2008 (Revision of IEEE Std C57.104-1991) - Redline
+IEEE Std C57.104-2019 (Revision of IEEE Std C57.104-2008) - Redline
+IEEE Std C57.105-2019 (Revision of IEEE Std C57.105-1978) - Redline
+IEEE Std C57.106-2015 (Revision of IEEE Std C57.106-2006) - Redline
+IEEE Std C57.109-2018 (Revision of IEEE Std C57.109-1993) - Redline
+IEEE Std C57.110-2008 (Revision of IEEE Std C57.110-1998) - Redline
+IEEE Std C57.113-2010 (Revision of IEEE Std C57.113-1991) - Redline
+IEEE Std C57.119-2018 (Revision of IEEE Std C57.119-2001) - Redline
+IEEE Std C57.12.00-2010 (Revision of IEEE Std C57.12.00-2006) - Redline
+IEEE Std C57.12.01-2015 (Revision of IEEE Std C57.12.01-2005) - Redline
+IEEE Std C57.12.01-2020 (Revision of IEEE Std C57.12.01-2015) - Redline
+IEEE Std C57.12.10-2010 (Revision of ANSI C57.12.10-1997) - Redline
+IEEE Std C57.12.20-2011 (Revision of IEEE Std C57.12.20-2005) - Redline
+IEEE Std C57.12.23-2009 (Revision of IEEE Std C57.12.23-2002) - Redline
+IEEE Std C57.12.23-2018 (Revision of IEEE Std C57.12.23-2009) - Redline
+IEEE Std C57.12.30-2020 (Revision of IEEE Std C57.12.30-2010) - Redline
+IEEE Std C57.12.31-2020 (Revision of IEEE Std C57.12.31-2010) - Redline
+IEEE Std C57.12.32-2019 (Revision of IEEE Std C57.12.32-2002) - Redline
+IEEE Std C57.12.34-2015 (Revision of IEEE Std C57.12.34-2009) - Redline
+IEEE Std C57.12.35-2007 (Revision of IEEE Std C57.12.35-1996) - Redline
+IEEE Std C57.12.35-2013 (Revision of IEEE Std C57.12.35-2007) - Redline
+IEEE Std C57.12.37-2015 (Revision of IEEE Std C57.12.37-2006) - Redline
+IEEE Std C57.12.40-2011 (Revision of IEEE Std C57.12.40-2006) - Redline
+IEEE Std C57.12.51-2019 (Revision of IEEE Std C57.12.51-2008) - Redline
+IEEE Std C57.12.59-2015 (Revision of IEEE Std C57.12.59-2001) - Redline
+IEEE Std C57.12.60-2009 (Revision of IEEE Std C57.12.60-1998) - Redline
+IEEE Std C57.12.60-2020 (Revision of IEEE Std C57.12.60-2009) - Redline
+IEEE Std C57.12.70-2011 (Revision of IEEE Std C57.12.70-2000) - Redline
+IEEE Std C57.12.90-2015 (Revision of IEEE Std C57.12.90-2010) - Redline
+IEEE Std C57.12.91-2011 (Revision of IEEE Std C57.12.91-2001) - Redline
+IEEE Std C57.123-2010 (Revision of IEEE Std C57.123-2002) - Redline
+IEEE Std C57.123-2019 (Revision of IEEE Std C57.123-2010) - Redline
+IEEE Std C57.129-2007 (Revision of IEEE Std C57.129-1999) - Redline
+IEEE Std C57.13-2008 (Revision of IEEE Std C57.13-1993) - Redline
+IEEE Std C57.13.1-2006 - Redline
+IEEE Std C57.13.3-2014 (Revision of IEEE Std C57.13.3-2005) - Redline
+IEEE Std C57.13.5-2009 (Revision of IEEE Std C57.13.5-2003) - Redline
+IEEE Std C57.13.5-2019 (Revision of IEEE Std C57.13.5-2009) - Redline
+IEEE Std C57.131-2012 (Revision of IEEE Std C57.131-1995) - Redline
+IEEE Std C57.135-2011 (Revision of IEEE Std C57.135-2001) - Redline
+IEEE Std C57.147-2018 (Revision of IEEE Std C57.147-2008) - Redline
+IEEE Std C57.148-2020 (Revision of IEEE Std C57.148-2011) - Redline
+IEEE Std C57.15-2009 (Revision of IEEE Std C57.15-1999) - Redline
+IEEE Std C57.16-2011 (Revision of IEEE Std C57.16-1996) - Redline
+IEEE Std C57.19.100-2012 (Revision of IEEE Std C57.19.100-1995) - Redline
+IEEE Std C57.21-2008 (Revision of IEEE Std C57.21-1990) - Redline
+IEEE Std C57.21-2021 (Revision of IEEE Std C57.21-2008) - Redline
+IEEE Std C57.637-2015 (Revision of IEEE Std 637-1985) - Redline
+IEEE Std C57.91-2011 (Revision of IEEE Std C57.91-1995) - Redline
+IEEE Std C57.93-2007 (Revision of IEEE Std C57.93-1995) - Redline
+IEEE Std C57.96-2013 (Revision of IEEE Std C57.96-1999) - Redline
+IEEE Std C57.98-2011 (Revision of IEEE Std C57.98-1993) - Redline
+IEEE Std C62.11-2012 (Revision of IEEE Std C62.11-2005) - Redline
+IEEE Std C62.11-2020 (Revision of IEEE Std C62.11-2012) - Redline
+IEEE Std C62.22-2009 (Revision of IEEE Std C62.22-1997) - Redline
+IEEE Std C62.31-2020 (Revision of IEEE Std C62.31-2006) - Redline
+IEEE Std C62.36-2014 (Revision of IEEE Std C62.36-2000) - Redline
+IEEE Std C62.37.1-2012 (Revision of IEEE Std C62.37.1-2000) - Redline
+IEEE Std C62.41.3-2020 (Revision of IEEE Std C62.48-2005) - Redline
+IEEE Std C62.62-2018 (Revision of IEEE Std C62.62-2010) - Redline
+IEEE Std C62.64-2009 (Revision of IEEE Std C62.64-1997) - Redline
+IEEE Std C62.92.1-2016 (Revision of IEEE Std C62.92.1-2000) - Redline
+IEEE Std C62.92.2-2017 (Revision of IEEE Std C62.92.2-1989) - Redline
+IEEE Std C62.92.3-2012 (Revision of IEEE Std C62.92.3-1993) - Redline
+IEEE Std C62.92.4-2014 (Revision of IEEE Std C62.92.4-1991) - Redline
+IEEE Std C62.92.5-2009 (Revision of IEEE Std C62.92.5-1992) - Redline
+IEEE Std C62.92.5-2020 (Revision of IEEE Std C62.92.5-2009) - Redline
+IEEE Std C95.2-2018 (Revision of IEEE Std C95.2-1999) - Redline

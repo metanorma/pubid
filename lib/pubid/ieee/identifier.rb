@@ -7,7 +7,7 @@ module Pubid::Ieee
   class Identifier
     attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart, :status, :approval,
                   :edition, :draft, :rev, :corr, :amd, :redline, :year, :month, :type, :alternative,
-                  :draft_status, :revision
+                  :draft_status, :revision, :redline
 
     def initialize(organizations:, type_status:, number:, parameters:, revision: nil)
       @number = number
@@ -57,7 +57,7 @@ module Pubid::Ieee
     end
 
     def to_s(format = :short)
-      "#{identifier(format)}#{revision}"
+      "#{identifier(format)}#{revision}#{redline}"
     end
 
     def identifier(format)
@@ -138,6 +138,10 @@ module Pubid::Ieee
 
     def revision
       " (Revision of #{@revision})" if @revision
+    end
+
+    def redline
+      " - Redline" if @redline
     end
   end
 end

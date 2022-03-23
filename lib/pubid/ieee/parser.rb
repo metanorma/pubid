@@ -130,18 +130,25 @@ module Pubid::Ieee
       ((str("No") | str("no")) >> (str(".") | str(" "))).maybe >> str(" ").maybe
     end
 
+    rule(:redline) do
+      str(" - ") >> str("Redline").as(:redline)
+    end
+
     rule(:identifier) do
       (organization.as(:publisher) >> ((str("/ ") | str("/")) >> organization.as(:copublisher)).repeat)
         .as(:organizations) >>
         (draft_status.maybe >> (str(" ") >> str("Draft ").maybe >>
           type.as(:type) >> str(" ")).maybe).as(:type_status) >>
-        str(" ").maybe >> number_prefix >> number >> (part_subpart_year.maybe >> draft.as(:draft).maybe >>
-        edition.as(:edition).maybe >>
-        # dual-PubIDs
-        dual_pubids.maybe).as(:parameters) >>
-        # Hack: putting revision_identifier inside revision ({revision: {revision_identifier: ...}})
-        # to apply transform without including all parameters
-        revision.as(:revision).maybe
+        str(" ").maybe >> number_prefix >> number >>
+        (part_subpart_year.maybe >> draft.as(:draft).maybe >>
+          edition.as(:edition).maybe >>
+          # dual-PubIDs
+          dual_pubids.maybe >>
+          # Hack: putting revision_identifier inside revision ({revision: {revision_identifier: ...}})
+          # to apply transform without including all parameters
+          revision.as(:revision).maybe >>
+          redline.maybe
+        ).as(:parameters)
     end
 
     rule(:root) { identifier }

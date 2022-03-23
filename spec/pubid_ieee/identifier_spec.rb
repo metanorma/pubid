@@ -334,4 +334,10 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "ANSI C63.10-2013 - Redline" do
+    let(:pubid) { "ANSI C63.10-2013 - Redline" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end
