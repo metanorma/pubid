@@ -120,6 +120,12 @@ module Pubid::Ieee
           identifier.as(:alternative))
     end
 
+    rule(:revision) do
+      str(" ") >>
+        str("(Revision of ") >> identifier.as(:revision_identifier) >>
+        str(")")
+    end
+
     rule(:number_prefix) do
       ((str("No") | str("no")) >> (str(".") | str(" "))).maybe >> str(" ").maybe
     end
@@ -132,7 +138,10 @@ module Pubid::Ieee
         str(" ").maybe >> number_prefix >> number >> (part_subpart_year.maybe >> draft.as(:draft).maybe >>
         edition.as(:edition).maybe >>
         # dual-PubIDs
-        dual_pubids.maybe).as(:parameters)
+        dual_pubids.maybe).as(:parameters) >>
+        # Hack: putting revision_identifier inside revision ({revision: {revision_identifier: ...}})
+        # to apply transform without including all parameters
+        revision.as(:revision).maybe
     end
 
     rule(:root) { identifier }

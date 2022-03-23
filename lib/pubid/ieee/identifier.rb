@@ -7,10 +7,11 @@ module Pubid::Ieee
   class Identifier
     attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart, :status, :approval,
                   :edition, :draft, :rev, :corr, :amd, :redline, :year, :month, :type, :alternative,
-                  :draft_status
+                  :draft_status, :revision
 
-    def initialize(organizations:, type_status:, number:, parameters:)
+    def initialize(organizations:, type_status:, number:, parameters:, revision: nil)
       @number = number
+      @revision = revision
       [organizations, type_status, parameters].each do |data|
         case data
         when Hash
@@ -56,6 +57,10 @@ module Pubid::Ieee
     end
 
     def to_s(format = :short)
+      "#{identifier(format)}#{revision}"
+    end
+
+    def identifier(format)
       "#{publisher}#{copublisher} #{draft_status(format)}#{type(format)}#{number}#{part}"\
         "#{subpart}#{year}#{draft}#{edition}#{alternative}"
     end
@@ -129,6 +134,10 @@ module Pubid::Ieee
 
     def draft_status(format)
       "#{@draft_status} " if @draft_status && format == :full
+    end
+
+    def revision
+      " (Revision of #{@revision})" if @revision
     end
   end
 end

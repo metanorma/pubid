@@ -8,6 +8,10 @@ module Pubid::Ieee
       update_month_year(date[:month], date[:year]).merge({ day: date[:day] })
     end
 
+    rule(revision_identifier: subtree(:revision)) do |data|
+      Identifier.new(**data[:revision])
+    end
+
     def self.update_month_year(month, year)
       { year: if year.length == 2
                 case year.to_i
