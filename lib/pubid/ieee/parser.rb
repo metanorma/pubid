@@ -40,11 +40,11 @@ module Pubid::Ieee
 
     rule(:edition) do
       (comma >> match('\d').repeat(4, 4).as(:year) >> str(" Edition")) |
-        ((space | str("-")) >> str("Edition ") >> (digits >> str(".") >> digits).as(:version) >> (str(" - ") | str(" ")) >>
+        ((space | str("-")) >> str("Edition ") >> (digits >> str(".") >> digits).as(:version) >> (str(" - ") | space) >>
         match('\d').repeat(4, 4).as(:year) >> (str("-") >>
         match('\d').repeat(2, 2).as(:month)).maybe) |
         #, February 2018 (E)
-        (comma >> match('[a-zA-Z]').repeat(1).as(:month) >> str(" ") >> match('\d').repeat(4, 4).as(:year) >>
+        (comma >> match('[a-zA-Z]').repeat(1).as(:month) >> space >> match('\d').repeat(4, 4).as(:year) >>
           str(" (E)")) |
         # First edition 2002-11-01
         space >> str("First").as(:version) >>
@@ -56,7 +56,7 @@ module Pubid::Ieee
     end
 
     rule(:draft_status) do
-      space >> (str("Active Unapproved") | str("Unapproved") | str("Approved")).as(:draft_status)
+      (str("Active Unapproved") | str("Unapproved") | str("Approved")).as(:draft_status)
     end
 
     rule(:draft_prefix) do
@@ -114,32 +114,34 @@ module Pubid::Ieee
     end
 
     rule(:dual_pubids) do
-      str(" ") >>
-        ((str("(") >> (identifier.as(:alternative) >> str(", ").maybe).repeat(1) >>
-          str(")")) | (str("and ") >> identifier.as(:alternative)) |
-          identifier.as(:alternative))
+      space >>
+        (
+          (str("(") >> (identifier_with_organization.as(:alternative) >> str(", ").maybe).repeat(1) >> str(")")) |
+          (str("and ") >> identifier.as(:alternative)) |
+          # should have an organization when no brackets
+          identifier_with_organization.as(:alternative)
+        )
     end
 
     rule(:revision) do
-      str(" ") >>
+      space >>
         str("(Revision of ") >> identifier.as(:revision_identifier) >>
         str(")")
     end
 
     rule(:number_prefix) do
-      ((str("No") | str("no")) >> (str(".") | str(" "))).maybe >> str(" ").maybe
+      ((str("No") | str("no")) >> (str(". ") | str(".") | space)).maybe
     end
 
     rule(:redline) do
       str(" - ") >> str("Redline").as(:redline)
     end
 
-    rule(:identifier) do
-      (organization.as(:publisher) >> ((str("/ ") | str("/")) >> organization.as(:copublisher)).repeat)
-        .as(:organizations) >>
-        (draft_status.maybe >> (str(" ") >> str("Draft ").maybe >>
-          type.as(:type) >> str(" ")).maybe).as(:type_status) >>
-        str(" ").maybe >> number_prefix >> number >>
+    rule(:parameters) do
+      ((draft_status >> space).maybe >> (str("Draft ").maybe >>
+        type.as(:type) >> space).maybe).as(:type_status) >>
+         number_prefix >> number >>
+
         (part_subpart_year.maybe >> draft.as(:draft).maybe >>
           edition.as(:edition).maybe >>
           # dual-PubIDs
@@ -147,8 +149,20 @@ module Pubid::Ieee
           # Hack: putting revision_identifier inside revision ({revision: {revision_identifier: ...}})
           # to apply transform without including all parameters
           revision.as(:revision).maybe >>
-          redline.maybe
-        ).as(:parameters)
+          redline.maybe).as(:parameters)
+    end
+
+    rule(:organizations) do
+      (organization.as(:publisher) >> ((str("/ ") | str("/")) >> organization.as(:copublisher)).repeat)
+        .as(:organizations)
+    end
+
+    rule(:identifier_with_organization) do
+      organizations >> space? >> parameters
+    end
+
+    rule(:identifier) do
+      (organizations >> space).maybe >> parameters
     end
 
     rule(:root) { identifier }

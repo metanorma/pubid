@@ -11,6 +11,10 @@ RSpec.describe Pubid::Ieee::Parser do
     expect(subject.part_subpart_year).to parse("-20601a", trace: true)
   end
 
+  it "don't parse identifier with extra space" do
+    expect(subject.parameters).not_to parse(" C22-1925", trace: true)
+  end
+
   describe "parse identifiers from examples files" do
     shared_examples "parse identifiers from file" do
       it "parse identifiers from file" do

@@ -340,4 +340,32 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "PC57.158/D6A, August 2016" do
+    let(:original) { "PC57.158/D6A, August 2016" }
+    let(:pubid) { "IEEE PC57.158/D6A, August 2016" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEP62.42.1/D3, October 2014" do
+    let(:original) { "IEEP62.42.1/D3, October 2014" }
+    let(:pubid) { "IEEE P62.42.1/D3, October 2014" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE No. 264-1968" do
+    let(:original) { "IEEE No. 264-1968" }
+    let(:pubid) { "IEEE 264-1968" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 1666 IEC61691-7 Edition 1.0 2009-12" do
+    let(:original) { "IEEE Std 1666 IEC61691-7 Edition 1.0 2009-12" }
+    let(:pubid) { "IEEE Std 1666 (IEC 61691.7 Edition 1.0 2009-12)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end

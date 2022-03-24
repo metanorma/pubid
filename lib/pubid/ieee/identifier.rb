@@ -9,7 +9,8 @@ module Pubid::Ieee
                   :edition, :draft, :rev, :corr, :amd, :redline, :year, :month, :type, :alternative,
                   :draft_status, :revision, :redline
 
-    def initialize(organizations:, type_status:, number:, parameters:, revision: nil)
+    def initialize(type_status:, number:, parameters:,
+                   organizations: { publisher: "IEEE" }, revision: nil)
       @number = number
       @revision = revision
       [organizations, type_status, parameters].each do |data|

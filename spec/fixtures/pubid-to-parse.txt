@@ -1,8 +1,6 @@
 IEEE 1076-CONC-I99O
 AIEE No 1E -1957
-1703/D9, February 2012
 1873-2015 IEEE Standard for Robot Map Data Representation for Navigation
-1900.5.1-2020
 2012 NESC Handbook, Seventh Edition
 2017 NESC(R) Handbook, Premier Edition
 2017 National Electrical Safety Code(R) (NESC(R))
@@ -17,10 +15,7 @@ AIEE No 1E -1957
 62 IRE 7.S2 (IEEE 161)
 62704-4/D4, 2020
 802.11ba Battery Life Improvement: IEEE Technology Report on Wake-Up Radio
-802.15.4g/D7, November 2011
 802.16k-2007 (Amendment to IEEE Std 802.1D-2004)
-802.21a/D06, November 2011
-802.21b/D06, November 2011
 802.3-2005/Cor 2-2007 (Corrigendum to IEEE Std 802.3-2005)
 A.I.E.E. No. 15 May-1928
 AIEE No 14-1925 (AESC C22-1925)
@@ -43,7 +38,6 @@ AIEE Nos 72 and 73 - 1932
 ANSI C37.45-1981(R1992) (Revision of ANSI C37.45-1969)
 ANSI C37.47-1981 (R1992) (Revision of ANSI C37.47-19969)
 ANSI C37.53.1-1989 (R1996) (Revision of ANSI C37.53.1-1982)
-ANSI C50.13-1977 (Revision of C50.13-1965)
 ANSI C50.14-1977 (Reaffirmed 1989)
 ANSI C50.32-1976 and IEEE Std 117-1974 (Reaffirmed 1984) (Revision of IEEE Std 117-1956)
 ANSI C57.1 2.25-1990
@@ -90,7 +84,6 @@ ANSI/IEEE Std 620-1981 (Issued April 1981 for trail use)
 ANSI/IEEE Std 802.11, 1999 Edition (R2003)
 ANSI/IEEE Std 802.12, 1998 Edition (Incorporating ANSI/IEEE Stds 802.122-1995 and ANSI/IEEE Std 802.12d-1997)
 ANSI/IEEE Std 802.3a,b,c, and e-1988
-ANSI/IEEE Std 802.3p and Std 802.3q
 ANSI/IEEE Std 802.4-1990 (Revision of ANSI/IEEE 802.4-1985) (Adopted by ISO/IEC and redesignated as ISO/IEC 8802-4: 1990)
 ANSI/IEEE Std 896.1-1994,
 ANSI/IEEE Std: 8-Bit Backplane Interface - STEbus,
@@ -99,16 +92,12 @@ ANSI/IEEE Std: Transformers and Shunt Reactors
 ANSI/IEEE-ANS-7-4.3.2-1982
 ASA C37.1-1937 (Reaffirmed 1945)
 ASA C37.4-1945 Through C37.9-1945
-ASA C39.1-1955 (Revision of C39.1-1951)
-ASA C39.1-1959 (Revision of C39.1-1955)
 Amendment to IEEE Std 802.11-2007 as amended by IEEE Std 802.11k-2008, IEEE Std 802.11r-2008, IEEE Std 802.11y-2008, IEEE Std 802.11w-2009, IEEE Std 802.11n-2009, IEEE Std 802.11p-2010, IEEE Std 802.11z-2010, and IEEE Std 802.11v-2011
 American National Standard for Methods of Measurement of Radio- Noise Emissions from Low-Voltage Electrical and Electronic Equipment in the Range of 9 kHz to 40 GHz--Amendment 1: Test Site Validation
 C2-1997 National Electric Safety Code (NESC)
 C2-2012-Preprint
-C62.72-2007
 C63.19-2011(Revision of ANSI C63.19-2007)
 C63.19-2011(Revision of ANSI C63.19-2007) - Redline
-C63.4-2000 (Revision of ANSI C63.4-1992)
 Corrigendum to IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015, IEEE Std 802.3by-2016, IEEE Std 802.3bq-2016, IEEE Std 802.3bp-2016, IEEE Std 802.3br-2016, IEEE Std 802.3bn-2016, IEEE Std 802.3bz-2016, IEEE Std 802.3bu-2016, IEEE Std 802.3bv-2017
 Draft IEEE P802.15.4REVi/D09, April 2011 (Revision of IEEE Std 802.15.4-2006)
 Draft National Electrical Safety Code, January 2016
@@ -1085,7 +1074,6 @@ IEEE Std 802.3u-1995 (Supplement to ISO/IEC 8802-3: 1993; ANSI/IEEE Std 802.3, 1
 IEEE Std 802.5, 1998 Edition (ISO/IEC 8802-5:1998)
 IEEE Std 802.5j-1993,
 IEEE Std 802.5r and IEEE 802.5j, 1998 Edition (ISO/IEC 8802-5:1998/Amd.1)
-IEEE Std 802.6c-1993 and Std 802.6h-1993
 IEEE Std 802b-2004 (Amendment to IEEE Std 802-2001, as amended by IEEE Std 802a-2003)
 IEEE Std 802c-2017 (Amendment to IEEE Std 802-2014 as amended by IEEE Std 802d-2017)
 IEEE Std 802d-2017 (Amendment to IEEE Std 802-2014)
@@ -1123,10 +1111,7 @@ IEEE Std C37.101 -2006 (Revision of IEEE Std C37.101-1993/Incorporates IEEE Std 
 IEEE Std C37.101-2006 (Revision of IEEE Std C37.101-1993/Incorporates IEEE Std C37.101-2006/Cor1:2007)
 IEEE Std C37.102 -2006 (Revision of IEEE Std C37.102-1995) - Redline
 IEEE Std C37.102-2006 (Revison of IEEE Std C37.102-1995)
-IEEE Std C37.108-2002 (Revision of C37.108-1989)
-IEEE Std C37.110-2007 (Revision of Std C37.110-1996)
 IEEE Std C37.110-2007/Cor 1-2010 (Corrigendum to IEEE Std C37.110-2007)
-IEEE Std C37.111-2013 (IEC 60255-24 Edition 2.0 2013-04) - Redline
 IEEE Std C37.118.1a-2014 (Amendment to IEEE Std C37.118.1-2011)
 IEEE Std C37.13.1-2016 (Revision of IEEE Std C37.13.1-2006
 IEEE Std C37.13.1-2016 (Revision of IEEE Std C37.13.1-2006 - Redline
@@ -1350,7 +1335,6 @@ IEEE Unapproved Std P90003/D1, Feb 2007.pdf
 IEEE Unapproved Std PC57.129_D9, Mar07.pdf
 IEEE-P15026-3-DIS-January 2015
 IEEE/ ASTM SI 10-2010 (Revision of IEEE/ASTM SI 10-2002)
-IEEE/ANSI Std 24-1984 (Revision of 24-1977)
 IEEE/ASTM PSI 10/D2, October 2015
 IEEE/ASTM PSI 10/D3, October 2010
 IEEE/ASTM PSI 10/D3, October 2015
@@ -1392,7 +1376,6 @@ IEEE/NACE P2445/D2, May 2018
 IEEE/NACE P2638/D2.4, January 2020
 IEEE/NACE P2655/D2, May 2018
 IEEE/NEMI PR 1533-1998
-IEEP62.42.1/D3, October 2014
 IS0/IEC/IEEE 8802-11:2012/Amd.5:2015(E) (Adoption of IEEE Std 802.11af-2014)
 ISO /IEC/IEEE P24774/DIS, July 2020
 ISO /IEC/IEEE P24774_D1, February 2020
@@ -1723,7 +1706,6 @@ ISO/IEEE DIS P11073-10418 D13, January 2011
 ISO/IEEE DIS P11073-10418/D15, June 2011
 ISO/IEEE DIS P11073-10418_D8, July 2010
 International Standard ISO/IEC 8802-9: 1996(E) ANSI/IEEE Std 802.9, 1996 Edition
-J-STD-016-1995
 NACE SP0215-2015/IEEE Std 1839-2014
 NACE SP0315-2015/IEEE Std 1835-2014
 NACE SP0415-2015/IEEE Std 1895-2014
@@ -1739,178 +1721,34 @@ National Electrical Safety Code, C2-2012
 National Electrical Safety Code, C2-2012 - Redline
 Nuclear EQ Sourcebook and Supplement
 P1073.1.3.4/D3.0
-P1082/D8, May 2016
-P1115/D4, July 2013
-P115/D5, September 2019
-P1222/D5 January, 2011
-P1232.3/D3, May 2014
-P1268/D12, August 2015
-P1268/D13, October 2015
-P1278.2/D9, July 2015
-P145/DD2, March 2013
-P1450.4/D05, September 2017
-P1484.11.1/D1, September 2021
 P1484.12.3/D1, September2019
-P1484.20.2/D2, December 2021
-P149/D10 February 2021
-P1505.3/D11, May 2015
-P1526/D2, April 2020
-P1559/D10, February 2022
-P1561/D3.0, November 2018
-P1580/D4, August 2010
-P1584.1/D7, January 2022
-P1584/D4, April 2018
-P1609.12/D6, December 2018
-P1609.12/D6, May 2019
-P1627/D1, June 2017
 P1635/D10/ASHARE 21/D10, December 2016
-P1652/D10.3, January, 2016
-P1653.1/D10, October 2015
-P1662/D8.2 March 2016
-P1662/D8.3, June 2016
-P1667/D14, April 2015
-P1671.2/D15, September 2012
-P1671.3/D4, September 2017
-P1704/D26, September 2020
-P1704/D27, July 2021
 P1735_Cor1/D2, April 2015
-P1780/D29, October 2020
-P1791/D10.1, July 2019
 P1815.1-2015/Cor1/D3.0, July 2016
-P1827/D17.4, August 2016
-P1829/D2, October 2016
-P1834/D3.4, August 2019
-P1848/D6, February 2020
-P1857.6/D3, April 2018
 P1857/D1+1, July 2012
-P1857/D2, November 2012
 P1858-2016_Cor1_D2, December 2016
-P1872/D3, August 2014
-P1876/D1, January 2019
-P1882/D02, July 2016
-P1885/D004, December 2021
-P1900.1/D1, September 2018
 P1900.6-2011/Cor1/D3, August 2015
-P1900.6a/D0.7, November 2013
-P1901.1.1/D0.7, September 2019
 P1901.2/D0.11.00, August, 2013
-P1911.1/D1, October 2015
 P1936.1, 2020
 P20000-2, D1 December 2012
-P2030.102.1/D1.11, February 2020
-P2030.3/D4, December 2015
-P2030.6/D03, Mar 2016
-P2089/D3, July 2021
-P2140.5/D8, March 2020
-P2144.1/D2, July 2020
-P21451-001/D2.0, September 2016
-P21451-001/D3.0 November 2016
-P2404/D3.0, December 2015
-P2410/D11, Feburary 2015
-P260.4/D1.0, April 2018
-P2621.2/D1.0, March 2021
-P2621.3/D2.0, November 2021
-P2740/D5.2, June 2019
 P2745.1/D4+1, April 2019
-P2746/D6, January 2020
-P2778/D3, September 2019
-P2800/D6.3, December 2021
-P2847/D2, May 2021
-P29148/D1, March 2017
-P2977/D1, April 2021
-P3001.2/D5, August 2017
-P3002.2/D6, October 2015
-P3002.3/D6, November 2015
-P3003.1/D16.2, January 2019
-P3004.11/D1c, September 2018
-P3004.7/D4.1, June 2019
-P3333.1.3/D3, November 2021
-P356/D4.0, May 2020
-P360/D8, December 2021
-P37.68/D3.1, February 2022
-P370/D8, July 2020
-P3801/D2.0, May 2021
-P421.3/D021, February 2015
-P421.3/D03, February 2015
-P43/D17, January 2013
-P430/D7, July 2016
-P521/D2, March 2019
-P525/D6 May 2016
-P532/D2, April 2020
-P56/D31, June 2016
-P572/D4, November 2018
-P577/D5, March 2021
-P60076-16_D3, February 2017
-P62.44/D15.4, August 2016
-P62704-1_D3, August 2016
-P693/D15, March 2016
 P7-4.3.2/D4 February 2010
 P802-REV/D1.6 (Revision of IEEE Std 802-2001, incorporating IEEE Std 802a-2003, and IEEE Std 802b-2004)
 P802-REV/D2.0 (Revision of IEEE Std 802-2001, incorporating IEEE Std 802a-2003, and IEEE Std 802b-2004)
 P802.11-REVmd/D2.0, December 2018
-P802.11v/D12.0, June 2010
-P802.15.4g/D7, November 2011
-P802.15.4m/D3, May 2013
-P802.15.4m/D5, December 2013
-P802.15.9/D05, November 2015
-P802.1ACct/D2.0, September 2021
 P802.1AX-2014_Cor1/D0.5 April 27, 2016
-P802.1Qat/D6.1, June 2010
-P802.1Qaz/D2.0 September, 2010
-P802.1Qbc/D1.3, June 2010
-P802.1Qbc/D1.4, October 2010
-P802.1Qbf/D1.4, August 2011
-P802.1Qbu/D3.1, September 2015
 P802.1Xck/D2.2, July 2018 (DRAFT Amendment to IEEE Std 802.1X&#x2013;2010 as amended by IEEE Std 802.1Xbx&#x2013;2014)
 P802.3-2015_Cor1/D2.0, December 2016
 P802.3bd/D2.2 August 2010. (Draft Amendment to IEEE Std 802.3-2008)
 P802.3bq/D3.3, April 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015 and IEEE Std 802.3by-201X)
-P802.3bz/D3.0, April 2016
 P82079-1_D4_FDIS
-P837/D17, December 2013
-P95.1-2345/D6.7, June 2013
 PC37.012-2014_Cor1/D1, June 2015
-PC37.04/D3.1, November 2017
-PC37.100.5/D3 February 2016
-PC37.104/D1.9, November 2021
-PC37.116/D1.12, February 2018
-PC37.119/D2, July 2015
-PC37.13/D10, December 2014
-PC37.13/D12.2, October 2015
-PC37.20.1/D5.0, December 2014
-PC37.235/D08, May 2019
-PC37.238/D5.5, October 2010
-PC37.246/D11.0, June 2017
 PC37.30.2/D043 Rev 18, May 2015
-PC37.30.3/D2.13, March 2018
-PC37.302/D4, August 2015
-PC37.42/D11, January 2016
 PC57-15 D2.0, September 2016
-PC57.106/D10, September 2015
-PC57.106/D4.7, August 2015
-PC57.12.10/D2.2, February 2017
-PC57.12.24/D6, March 2016
 PC57.12.60-2009/Cor 1/D1, December 2012
-PC57.12.91/D5, April 2020
-PC57.120/D015, March 2016
-PC57.13.7/D7, October 2016
-PC57.139/D6, September 2015
-PC57.140/D7, December 2016
-PC57.158/D6A, August 2016
-PC57.163/D2.4, June 2015
-PC57.18.10/D11, July 2021
-PC57.19.04/D6, July 2017
-PC57.93/D1.7, February 2018
-PC62.42.6/D3, April 2018
-PC62.43.1/D29, May 2019
-PC62.92.2/D4, May 2016
-PC93.3/D17.1, June 2016
-PC93.3/D17.3, July 2016
-PN42.54/D4, August 2016
 Preprint Proposal for the 2017 Edition of the National Electrical Safety Code
 Preprint Proposals for the 2022 Edition of the National Electrical Safety Code (NESC(R))
 Preview: IEEE Technology Report on Wake-Up Radio
-Std 11073-10417-2009
 Std 802.1ak-2007 (Amendment to IEEE Std 802.1QTM-2005)
 Std ISO IEC 16085 - 2006
 USAS C57.12.00-1968 (Revision of C57.12.00-1965 &amp; C57.12.00a-1966)
