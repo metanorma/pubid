@@ -9,13 +9,16 @@ module Pubid::Ieee
     rule(:comma) { str(", ") }
     rule(:comma?) { comma.maybe }
     rule(:comma_space) { comma | space }
+    rule(:dash) { str("-") }
     rule(:words_digits) { match('[\dA-Za-z]').repeat(1) }
     rule(:words) { match("[A-Za-z]").repeat(1) }
     rule(:words?) { words.maybe }
-    rule(:year_digits) { match('\d').repeat(4, 4) }
+    rule(:year_digits) { (str("19") | str("20")) >> match('\d').repeat(2, 2) }
 
     rule(:year) do
-      (str(".") | str("-")) >> year_digits.as(:year)
+      # -2014, April 2015
+      dash >> year_digits.as(:adoption_year) >> publication_date |
+        (str(".") | dash) >> year_digits.as(:year)
     end
 
     rule(:organization) do
@@ -27,30 +30,33 @@ module Pubid::Ieee
     end
 
     rule(:part) do
-      (str(".") | str("-")) >> match('[\dA-Za-z]').repeat(1).as(:part)
+      (str(".") | dash) >> words_digits.as(:part)
     end
 
     rule(:subpart) do
-      (str(".") | str("-")) >> match('[\da-z]').repeat(1)
+      (str(".") | dash) >> match('[\da-z]').repeat(1)
     end
 
     rule(:type) do
       str("Std") | str("STD") | str("Standard")# | str("Draft Std") | str("Draft")
     end
 
+    rule(:comma_month_year) do
+      comma >> words.as(:month) >> space >> year_digits.as(:year)
+    end
+
     rule(:edition) do
-      (comma >> match('\d').repeat(4, 4).as(:year) >> str(" Edition")) |
-        ((space | str("-")) >> str("Edition ") >> (digits >> str(".") >> digits).as(:version) >> (str(" - ") | space) >>
-        match('\d').repeat(4, 4).as(:year) >> (str("-") >>
+      (comma >> year_digits.as(:year) >> str(" Edition")) |
+        ((space | dash) >> str("Edition ") >> (digits >> str(".") >> digits).as(:version) >> (str(" - ") | space) >>
+        year_digits.as(:year) >> (dash >>
         match('\d').repeat(2, 2).as(:month)).maybe) |
         #, February 2018 (E)
-        (comma >> match('[a-zA-Z]').repeat(1).as(:month) >> space >> match('\d').repeat(4, 4).as(:year) >>
-          str(" (E)")) |
+        (comma_month_year >> str(" (E)")) |
         # First edition 2002-11-01
         space >> str("First").as(:version) >>
         str(" edition ") >>
-          match('\d').repeat(4, 4).as(:year) >> str("-") >>
-          match('\d').repeat(2, 2).as(:month) >> (str("-") >>
+          year_digits.as(:year) >> dash >>
+          match('\d').repeat(2, 2).as(:month) >> (dash >>
           match('\d').repeat(2, 2).as(:day)).maybe
 
     end
@@ -60,7 +66,7 @@ module Pubid::Ieee
     end
 
     rule(:draft_prefix) do
-      str("/") | str("_")
+      str("/") | str("_") | str("-")
     end
 
     rule(:draft_date) do
@@ -105,7 +111,7 @@ module Pubid::Ieee
         # IEEE P11073-10420/D4D5
         # IEEE Unapproved Draft Std P11073-20601a/D13, Jan 2010
         # XXX: hack to avoid being partially parsed by year
-        (str("-") >> match('[\dA-Za-z]').repeat(5, 6).as(:part)) |
+        (dash >> match('[\dA-Za-z]').repeat(5, 6).as(:part)) |
         # 581.1978
         year |
         # 61691-6
@@ -137,19 +143,26 @@ module Pubid::Ieee
       str(" - ") >> str("Redline").as(:redline)
     end
 
+    rule(:publication_date) do
+      comma_month_year
+    end
+
     rule(:parameters) do
       ((draft_status >> space).maybe >> (str("Draft ").maybe >>
-        type.as(:type) >> space).maybe).as(:type_status) >>
+         type.as(:type) >> space).maybe).as(:type_status) >>
          number_prefix >> number >>
-
-        (part_subpart_year.maybe >> draft.as(:draft).maybe >>
+        (
+          # IEEE P2410-D4, July 2019
+          (draft.as(:draft) | part_subpart_year.maybe >> draft.as(:draft).maybe) >>
+          publication_date.maybe >>
           edition.as(:edition).maybe >>
           # dual-PubIDs
           dual_pubids.maybe >>
           # Hack: putting revision_identifier inside revision ({revision: {revision_identifier: ...}})
           # to apply transform without including all parameters
           revision.as(:revision).maybe >>
-          redline.maybe).as(:parameters)
+          redline.maybe
+        ).as(:parameters)
     end
 
     rule(:organizations) do

@@ -4,8 +4,15 @@ RSpec.describe Pubid::Ieee::Identifier do
   let(:original) { pubid }
   let(:full_pubid) { nil }
 
+  def context_description(ex)
+    ex.example_group.metadata[:parent_example_group][:description_args].first
+  end
+
   shared_examples "converts pubid to pubid" do
-    it "converts pubid to pubid" do
+    it "converts pubid to pubid" do |ex|
+      # identifier = described_class.parse(
+      #   context_description(ex)
+      # )
       expect(subject.to_s).to eq(pubid)
     end
 
@@ -81,7 +88,7 @@ RSpec.describe Pubid::Ieee::Identifier do
   end
 
   context "IEEE Std 623-1976 (ANSI Y32.21-1976, NCTA 006-0975)" do
-    let(:pubid) { "IEEE Std 623-1976 (ANSI Y32.21-1976, NCTA 006-0975)" }
+    let(:pubid) { "IEEE Std 623-1976 (ANSI Y32.21-1976, NCTA 006.0975)" }
 
     it_behaves_like "converts pubid to pubid"
   end
@@ -365,6 +372,55 @@ RSpec.describe Pubid::Ieee::Identifier do
   context "IEEE Std 1666 IEC61691-7 Edition 1.0 2009-12" do
     let(:original) { "IEEE Std 1666 IEC61691-7 Edition 1.0 2009-12" }
     let(:pubid) { "IEEE Std 1666 (IEC 61691.7 Edition 1.0 2009-12)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE No 323, April 1971" do
+    let(:original) { "IEEE No 323, April 1971" }
+    let(:pubid) { "IEEE 323-1971" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE P15026-2, April 2011" do
+    let(:original) { "IEEE P15026-2, April 2011" }
+    let(:pubid) { "IEEE P15026.2-2011" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE P90003-2014, April 2015" do
+    let(:original) { "IEEE P90003-2014, April 2015" }
+    let(:pubid) { "IEEE P90003-2015 (Adoption of IEEE P90003-2014)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE/IEC P60076-57-1202, July 2014" do
+    let(:original) { "IEEE/IEC P60076-57-1202, July 2014" }
+    let(:pubid) { "IEEE/IEC P60076.57-1202-2014" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE P802.11ajD8.0, August 2017" do
+    let(:original) { "IEEE P802.11ajD8.0, August 2017" }
+    let(:pubid) { "IEEE P802.11aj/D8.0, August 2017" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO/IEC/IEEE P26513_D2, January 2017" do
+    let(:original) { "ISO/IEC/IEEE P26513_D2, January 2017" }
+    let(:pubid) { "ISO/IEC/IEEE P26513/D2, January 2017" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE P2410-D4, July 2019" do
+    let(:original) { "IEEE P2410-D4, July 2019" }
+    let(:pubid) { "IEEE P2410/D4, July 2019" }
 
     it_behaves_like "converts pubid to pubid"
   end

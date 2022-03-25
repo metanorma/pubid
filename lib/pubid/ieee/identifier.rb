@@ -7,7 +7,7 @@ module Pubid::Ieee
   class Identifier
     attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart, :status, :approval,
                   :edition, :draft, :rev, :corr, :amd, :redline, :year, :month, :type, :alternative,
-                  :draft_status, :revision, :redline
+                  :draft_status, :revision, :adoption_year
 
     def initialize(type_status:, number:, parameters:,
                    organizations: { publisher: "IEEE" }, revision: nil)
@@ -58,10 +58,10 @@ module Pubid::Ieee
     end
 
     def to_s(format = :short)
-      "#{identifier(format)}#{revision}#{redline}"
+      "#{identifier(format)}#{revision}#{redline}#{adoption}"
     end
 
-    def identifier(format)
+    def identifier(format = :short)
       "#{publisher}#{copublisher} #{draft_status(format)}#{type(format)}#{number}#{part}"\
         "#{subpart}#{year}#{draft}#{edition}#{alternative}"
     end
@@ -143,6 +143,14 @@ module Pubid::Ieee
 
     def redline
       " - Redline" if @redline
+    end
+
+    def adoption
+      if @adoption_year
+        adoption_id = dup
+        adoption_id.year = @adoption_year
+        " (Adoption of #{adoption_id.identifier})"
+      end
     end
   end
 end
