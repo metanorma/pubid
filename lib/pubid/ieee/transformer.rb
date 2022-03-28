@@ -12,6 +12,14 @@ module Pubid::Ieee
       Identifier.new(**data[:revision])
     end
 
+    rule(amendment_identifier: subtree(:amendment)) do |data|
+      Identifier.new(**data[:amendment])
+    end
+
+    rule(previous_amendments: subtree(:amendment)) do |data|
+      Identifier.new(**data[:amendment])
+    end
+
     def self.update_month_year(month, year)
       { year: if year.length == 2
                 case year.to_i

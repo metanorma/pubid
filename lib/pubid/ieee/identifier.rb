@@ -7,7 +7,7 @@ module Pubid::Ieee
   class Identifier
     attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart, :status, :approval,
                   :edition, :draft, :rev, :corr, :amd, :redline, :year, :month, :type, :alternative,
-                  :draft_status, :revision, :adoption_year
+                  :draft_status, :revision, :adoption_year, :amendment
 
     def initialize(type_status:, number:, parameters:,
                    organizations: { publisher: "IEEE" }, revision: nil)
@@ -16,7 +16,9 @@ module Pubid::Ieee
       [organizations, type_status, parameters].each do |data|
         case data
         when Hash
-          set_values(data.transform_values { |v| (v.is_a?(Array) && merge_parameters(v)) || v })
+          set_values(data.transform_values do |v|
+            (v.is_a?(Array) && v.first.is_a?(Hash) && merge_parameters(v)) || v
+          end)
         when Array
           set_values(merge_parameters(data))
         end
@@ -58,7 +60,7 @@ module Pubid::Ieee
     end
 
     def to_s(format = :short)
-      "#{identifier(format)}#{revision}#{redline}#{adoption}"
+      "#{identifier(format)}#{revision}#{amendment}#{redline}#{adoption}"
     end
 
     def identifier(format = :short)
@@ -139,6 +141,21 @@ module Pubid::Ieee
 
     def revision
       " (Revision of #{@revision})" if @revision
+    end
+
+    def amendment
+      return unless @amendment
+
+      return " (Amendment to #{@amendment})" unless @amendment.is_a?(Array)
+
+      result = " (Amendment to #{@amendment.first} as amended by "
+      result += if @amendment.length > 2
+                  "#{@amendment[1..-2].map(&:to_s).join(', ')}, and #{@amendment[-1]}"
+                else
+                  @amendment.last.to_s
+                end
+
+      "#{result})"
     end
 
     def redline

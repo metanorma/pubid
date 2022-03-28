@@ -424,4 +424,44 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "ANSI C63.4a-2017 (Amendment to ANSI C63.4-2014)" do
+    let(:original) { "ANSI C63.4a-2017 (Amendment to ANSI C63.4-2014)" }
+    let(:pubid) { "ANSI C63.4a-2017 (Amendment to ANSI C63.4-2014)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE P802.3bg/D2.1, September 2010 (Amendment of IEEE Std 802.3-2008)" do
+    let(:original) { "IEEE P802.3bg/D2.1, September 2010 (Amendment of IEEE Std 802.3-2008)" }
+    let(:pubid) { "IEEE P802.3bg/D2.1, September 2010 (Amendment to IEEE Std 802.3-2008)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 802.15.3f-2017 (Amendment to IEEE Std 802.15.3-2016 as "\
+          "amended by IEEE Std 802.15.3d-2017, and IEEE Std 802.15.3e-2017)" do
+    let(:pubid) do
+      "IEEE Std 802.15.3f-2017 (Amendment to IEEE Std 802.15.3-2016 as amended by IEEE Std 802.15.3d-2017, and IEEE Std 802.15.3e-2017)"
+    end
+
+    it_behaves_like "converts pubid to pubid"
+
+  end
+
+  context "IEEE Std 802.15.3d-2017 (Amendment to IEEE Std 802.15.3-2016 as amended by IEEE Std 802.15.3e-2017)" do
+    let(:pubid) do
+      "IEEE Std 802.15.3d-2017 (Amendment to IEEE Std 802.15.3-2016 as amended by IEEE Std 802.15.3e-2017)"
+    end
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 802.15.3f-2017 (Amendment to IEEE Std 802.15.3-2016 as amended by IEEE Std 802.15.3d-2017, and IEEE Std 802.15.3e-2017)" do
+    let(:pubid) do
+      "IEEE Std 802.15.3f-2017 (Amendment to IEEE Std 802.15.3-2016 as amended by IEEE Std 802.15.3d-2017, and IEEE Std 802.15.3e-2017)"
+    end
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end

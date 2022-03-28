@@ -10,15 +10,24 @@ module Pubid::Ieee
     rule(:comma?) { comma.maybe }
     rule(:comma_space) { comma | space }
     rule(:dash) { str("-") }
+    rule(:dot) { str(".") }
     rule(:words_digits) { match('[\dA-Za-z]').repeat(1) }
     rule(:words) { match("[A-Za-z]").repeat(1) }
     rule(:words?) { words.maybe }
     rule(:year_digits) { (str("19") | str("20")) >> match('\d').repeat(2, 2) }
 
+    rule(:month_digits) do
+      match('\d').repeat(2, 2)
+    end
+
+    rule(:day_digits) do
+      match('\d').repeat(2, 2)
+    end
+
     rule(:year) do
       # -2014, April 2015
       dash >> year_digits.as(:adoption_year) >> publication_date |
-        (str(".") | dash) >> year_digits.as(:year)
+        (dot | dash) >> year_digits.as(:year)
     end
 
     rule(:organization) do
@@ -37,19 +46,20 @@ module Pubid::Ieee
       comma >> words.as(:month) >> space >> year_digits.as(:year)
     end
 
+
     rule(:edition) do
       (comma >> year_digits.as(:year) >> str(" Edition")) |
-        ((space | dash) >> str("Edition ") >> (digits >> str(".") >> digits).as(:version) >> (str(" - ") | space) >>
+        ((space | dash) >> str("Edition ") >> (digits >> dot >> digits).as(:version) >> (str(" - ") | space) >>
         year_digits.as(:year) >> (dash >>
-        match('\d').repeat(2, 2).as(:month)).maybe) |
+          month_digits.as(:month)).maybe) |
         #, February 2018 (E)
         (comma_month_year >> str(" (E)")) |
         # First edition 2002-11-01
         space >> str("First").as(:version) >>
         str(" edition ") >>
           year_digits.as(:year) >> dash >>
-          match('\d').repeat(2, 2).as(:month) >> (dash >>
-          match('\d').repeat(2, 2).as(:day)).maybe
+          month_digits.as(:month) >> (dash >>
+          day_digits.as(:day)).maybe
 
     end
 
@@ -58,7 +68,7 @@ module Pubid::Ieee
     end
 
     rule(:draft_prefix) do
-      str("/") | str("_") | str("-")
+      str("/") | str("_") | dash
     end
 
     rule(:draft_date) do
@@ -80,16 +90,16 @@ module Pubid::Ieee
       # /D14, April 2020
       # /D7 November, 2019
       space? >> draft_prefix >> draft_version >>
-        ((str(".") | str("r")) >> (digits >> words?).as(:revision)).maybe >>
+        ((dot | str("r")) >> (digits >> words?).as(:revision)).maybe >>
         draft_date.maybe
     end
 
     rule(:part) do
-      ((str(".") | dash) >> words_digits).as(:part)
+      ((dot | dash) >> words_digits).as(:part)
     end
 
     rule(:subpart) do
-      (str(".") | dash) >> match('[\da-z]').repeat(1)
+      (dot | dash) >> match('[\da-z]').repeat(1)
     end
 
     rule(:part_subpart_year) do
@@ -116,7 +126,6 @@ module Pubid::Ieee
         year |
         # 61691-6
         part
-
     end
 
     rule(:dual_pubids) do
@@ -135,8 +144,22 @@ module Pubid::Ieee
         str(")")
     end
 
+    rule(:previous_amendments) do
+      # IEEE P802.3bp/D3.4, April 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015,
+      # IEEE Std 802.3by-201X, and IEEE Std 802.3bq-201X)
+      str(" as amended by ") >>
+        (identifier.as(:previous_amendments) >> (str(", ") >> str("and ").maybe).maybe).repeat(1)
+    end
+
+    rule(:amendment) do
+      space >>
+        str("(Amendment ") >> (str("of") | str("to")) >> space >>
+        identifier.as(:amendment_identifier) >> previous_amendments.maybe >>
+        str(")")
+    end
+
     rule(:number_prefix) do
-      ((str("No") | str("no")) >> (str(". ") | str(".") | space)).maybe
+      ((str("No") | str("no")) >> (str(". ") | dot | space)).maybe
     end
 
     rule(:redline) do
@@ -161,12 +184,13 @@ module Pubid::Ieee
           # Hack: putting revision_identifier inside revision ({revision: {revision_identifier: ...}})
           # to apply transform without including all parameters
           revision.as(:revision).maybe >>
+          amendment.as(:amendment).maybe >>
           redline.maybe
         ).as(:parameters)
     end
 
     rule(:organizations) do
-      (organization.as(:publisher) >> ((str("/ ") | str("/")) >> organization.as(:copublisher)).repeat)
+      (organization.as(:publisher) >> (str("/") >> space? >> organization.as(:copublisher)).repeat)
         .as(:organizations)
     end
 

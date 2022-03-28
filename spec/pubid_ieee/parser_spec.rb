@@ -15,6 +15,11 @@ RSpec.describe Pubid::Ieee::Parser do
     expect(subject.parameters).not_to parse(" C22-1925", trace: true)
   end
 
+  it "parses previous amendments" do
+    expect(subject.previous_amendments).to parse(" as"\
+      " amended by IEEE Std 802.15.3d-2017, and IEEE Std 802.15.3e-2017", trace: true)
+  end
+
   describe "parse identifiers from examples files" do
     shared_examples "parse identifiers from file" do
       it "parse identifiers from file" do
