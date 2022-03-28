@@ -464,4 +464,25 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "IEEE Std 802.11af-2013 (Amendment to IEEE Std 802.11-2012, as amended by IEEE Std 802.11ae-2012,"\
+          " IEEE Std 802.11aa-2012, IEEE Std 802.11ad-2012, and IEEE Std 802.11ac-2013)" do
+    let(:original) do
+      "IEEE Std 802.11af-2013 (Amendment to IEEE Std 802.11-2012, as amended by IEEE Std 802.11ae-2012,"\
+        " IEEE Std 802.11aa-2012, IEEE Std 802.11ad-2012, and IEEE Std 802.11ac-2013)"
+    end
+
+    let(:pubid) do
+      "IEEE Std 802.11af-2013 (Amendment to IEEE Std 802.11-2012 as amended by IEEE Std 802.11ae-2012,"\
+        " IEEE Std 802.11aa-2012, IEEE Std 802.11ad-2012, and IEEE Std 802.11ac-2013)"
+    end
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 802.11ae-2012" do
+    let(:pubid) { "IEEE Std 802.11ae-2012" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end

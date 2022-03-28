@@ -15,6 +15,11 @@ RSpec.describe Pubid::Ieee::Parser do
     expect(subject.parameters).not_to parse(" C22-1925", trace: true)
   end
 
+  it "parses amendments" do
+    expect(subject.amendment).to parse(" (Amendment to IEEE Std 802.11-2012, as amended by IEEE Std 802.11ae-2012,"\
+      " IEEE Std 802.11aa-2012, IEEE Std 802.11ad-2012, and IEEE Std 802.11ac-2013)", trace: true)
+  end
+
   it "parses previous amendments" do
     expect(subject.previous_amendments).to parse(" as"\
       " amended by IEEE Std 802.15.3d-2017, and IEEE Std 802.15.3e-2017", trace: true)

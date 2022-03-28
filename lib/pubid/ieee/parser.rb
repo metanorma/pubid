@@ -147,7 +147,7 @@ module Pubid::Ieee
     rule(:previous_amendments) do
       # IEEE P802.3bp/D3.4, April 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015,
       # IEEE Std 802.3by-201X, and IEEE Std 802.3bq-201X)
-      str(" as amended by ") >>
+      str(",").maybe >> str(" as amended by ") >>
         (identifier.as(:previous_amendments) >> (str(", ") >> str("and ").maybe).maybe).repeat(1)
     end
 

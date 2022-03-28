@@ -419,12 +419,8 @@ IEEE P802.11ad/D6.0, March 2012 (Draft Amendment based on IEEE P802.11REVmb D12.
 IEEE P802.11ad/D7.0, April 2012 (Draft Amendment based on IEEE 802.11-2012)
 IEEE P802.11ad/D8.0, May 2012 (Draft Amendment based on IEEE 802.11-2012)
 IEEE P802.11ad/D9.0, July 2012 (Draft Amendment based on IEEE 802.11-2012)
-IEEE P802.11af/D5.0 (Amendment to IEEE Std 802.11-2012, as amended by IEEE Std 802.11ae-2012, IEEE Std 802.11aa-2012, IEEE Std 802.11ad-2012, and IEEE Std 802.11ac_D5.0)
-IEEE P802.11af/D6.0, October 2013 (Amendment to IEEE Std 802.11-2012, as amended by IEEE Std 802.11ae-2012, IEEE Std 802.11aa-2012, IEEE Std 802.11ad-2012, and IEEE Std 802.11ac_D7.0)
 IEEE P802.11ah/D7.0, March2016 (Amendment to IEEE Std 802.11REVmc/D5.0)
 IEEE P802.11aj/D5.0, February 2017 (Amendment to IEEE Std 802.11REVmc 8.0, as amended by IEEE Std 802.11ah 10.0, IEEE Std 802.11ai 11.0 and IEEE Std 802.11ak 3.0 and IEEE Std 802.11aq 7.2)
-IEEE P802.11aq/D3.0 October 2015 (Amendment to IEEE Std 802.11REVmc, as amended by IEEE Std 802.11ah-2016 and IEEE Std 802.11ai-2016)
-IEEE P802.11aq/D7.0 October 2016 (Amendment to IEEE Std 802.11REVmc, as amended by IEEE Std 802.11ah-2016 and IEEE Std 802.11ai-2016)
 IEEE P802.11aqTM/013.0 October 2017
 IEEE P802.11ba/D2.0, January 2019 (amendment to IEEE P802.11REVmd/D2.0, as amended by IEEE P802.11ax/D3.3, IEEE P802.11ay/D2.2, and IEEE P802.11az/D0.6)
 IEEE P802.11e/D6.0, November 2003 (Draft Amendment to IEEE Std 802.11, 1999 Edition (Reaff 2003))
@@ -774,10 +770,6 @@ IEEE Std 802-2014 (Revision to IEEE Std 802-2001) - Redline
 IEEE Std 802.10e-1993 and IEEE std 802.10f-1993
 IEEE Std 802.10h-1997 (Supplement to IEEE Std 802.10-1 992)
 IEEE Std 802.11ac&#x2122;-2013 (Amendment to IEEE Std 802.11-2012, as amended by IEEE Std 802.11ae-2012, IEEE Std 802.11aa-2012, and IEEE Std 802.11ad-2012)
-IEEE Std 802.11ac-2013 (Amendment to IEEE Std 802.11-2012, as amended by IEEE Std 802.11ae-2012, IEEE Std 802.11aa-2012, and IEEE Std 802.11ad-2012)
-IEEE Std 802.11ad-2012 (Amendment to IEEE Std 802.11-2012, as amended by IEEE Std 802.11ae-2012 and IEEE Std 802.11aa-2012)
-IEEE Std 802.11af-2013 (Amendment to IEEE Std 802.11-2012, as amended by IEEE Std 802.11ae-2012, IEEE Std 802.11aa-2012, IEEE Std 802.11ad-2012, and IEEE Std 802.11ac-2013)
-IEEE Std 802.11ah-2016 (Amendment to IEEE Std 802.11-2016, as amended by IEEE Std 802.11ai-2016)
 IEEE Std 802.11ay-2021 (Amendment to IEEE Std 802.11-2020 as amendment by IEEE Std 802.11ax-2021)
 IEEE Std 802.11b-1999/Cor 1-2001
 IEEE Std 802.11ba-2021 (Amendment to IEEE Std 802.11-2020 as amendment by IEEE Std 802.11ax-2021, and IEEE Std 802.11ay-2021)
@@ -790,7 +782,6 @@ IEEE Std 802.15.3-2016 (Revision of IEEE Std 802.15.3-2003
 IEEE Std 802.15.4-2015/Cor 1-2018 (Amendment to IEEE Std 802.15.4-2015 as amended by IEEE Std 802.15.4n-2016, IEEE Std 802.15.4q-2016, IEEE Std 802.15.4u-2016, IEEE Std 802.15.4t-2017 and IEEE Std 802.15.4v-2017)
 IEEE Std 802.15.4s-2018 (Amendment to IEEE Std 802.15.4-2015 as amended by IEEE Std 802.15.4n-2016, IEEE Std 802.15.4q-2016, IEEE Std 802.15.4u-2016, IEEE Std 802.15.4t-2017, IEEE Std 802.15.4v-2017, and IEEE Std 802.15.4-2015/Cor 1-2018)
 IEEE Std 802.15.4t-2017 (Amendment to IEEE Std 802.15.4-2015 as amended by IEEE Std 802.15.4n-2016, IEEE Std 802.15.4q-2016, and IEEE Std 802.15.4u-2016
-IEEE Std 802.15.4v-2017 (Amendment to IEEE Std 802.15.4-2015, as amended by IEEE Std 802.15.4n-2016, IEEE Std 802.15.4q-2016, IEEE Std 802.15.4u-2016, and IEEE Std 802.15.4t-2017)
 IEEE Std 802.15.4x-2019 (Amendment to IEEE 802.15.4-2015 as amended by IEEE 802.15.4n-2016, IEEE 802.15.4q-2016, IEEE 802.15.4u-2016, IEEE 802.15.4t-2017, IEEE 802.15.4v-2017, IEEE 802.15.4s-2018, and IEEE 802.15.4-2015/Cor. 1-2018)
 IEEE Std 802.16 / Conformance02-2003 (Conformance to IEEE Std 802.16-2001 as ammended by IEEE Std 802.16a-2003 and IEEE Std 802.16c-2002)
 IEEE Std 802.16/Conformance01-2003
@@ -819,7 +810,6 @@ IEEE Std 802.1Q-2005 (Incorporates IEEE Std 802.1Q1998, IEEE Std 802.1u-2001, IE
 IEEE Std 802.1Q-2005/Cor1-2008 (Corrigendum to IEEE Std 802.1Q-2005)
 IEEE Std 802.1Q-2011/Cor 2-2012 (Corrigendum to IEEE Std 802.1Q-2011)
 IEEE Std 802.1Q-2014/Cor 1-2015 (Corrigendum to IEEE Std 802.1Q-2014)
-IEEE Std 802.1Qbc-2011 (Amendment to IEEE Std 802.1Q-2011, as amended by IEEE Std 802.1Qbe-2011)
 IEEE Std 802.1Qbv-2015 (Amendment to IEEE Std 802.1Q-2014 as amended by IEEE Std 802.1Qca-2015, IEEE Std 802.1Qcd-2015, and IEEE Std 802.1Q-2014/Cor 1-2015)
 IEEE Std 802.1Qca-2015 (Amendment to IEEE Std 802.1Q-2014 as amended by IEEE Std 802.1Qcd-2015 and IEEE Std 802.1Q-2014/Cor 1-2015)
 IEEE Std 802.1Qci-2017 (Amendment to IEEE Std 802.1Q-2014 as amended by IEEE Std 802.1Qca-2015, IEEE Std 802.1Qcd-2015, IEEE Std 802.1Q-2014/Cor 1-2015, IEEE Std 802.1Qbv-2015, IEEE Std 802.1Qbu-2016, and IEEE Std 802.1Qbz-2016)
@@ -851,7 +841,6 @@ IEEE Std 802.3u-1995 (Supplement to ISO/IEC 8802-3: 1993; ANSI/IEEE Std 802.3, 1
 IEEE Std 802.5, 1998 Edition (ISO/IEC 8802-5:1998)
 IEEE Std 802.5j-1993,
 IEEE Std 802.5r and IEEE 802.5j, 1998 Edition (ISO/IEC 8802-5:1998/Amd.1)
-IEEE Std 802b-2004 (Amendment to IEEE Std 802-2001, as amended by IEEE Std 802a-2003)
 IEEE Std 844.1-2017/CSA C22.2 No. 293.1-17
 IEEE Std 844.2-2017/CSA C293.2-17
 IEEE Std 844.3-2019/CSA C22.2 No. 293.3:19
