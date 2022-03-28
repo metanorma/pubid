@@ -29,14 +29,6 @@ module Pubid::Ieee
       ((digits | match("[A-Z]")).repeat(1) >> match("[a-z]").maybe).as(:number)
     end
 
-    rule(:part) do
-      (str(".") | dash) >> words_digits.as(:part)
-    end
-
-    rule(:subpart) do
-      (str(".") | dash) >> match('[\da-z]').repeat(1)
-    end
-
     rule(:type) do
       str("Std") | str("STD") | str("Standard")# | str("Draft Std") | str("Draft")
     end
@@ -92,6 +84,14 @@ module Pubid::Ieee
         draft_date.maybe
     end
 
+    rule(:part) do
+      ((str(".") | dash) >> words_digits).as(:part)
+    end
+
+    rule(:subpart) do
+      (str(".") | dash) >> match('[\da-z]').repeat(1)
+    end
+
     rule(:part_subpart_year) do
       # 802.15.22.3-2020
       # 1073.1.1.1-2004
@@ -111,7 +111,7 @@ module Pubid::Ieee
         # IEEE P11073-10420/D4D5
         # IEEE Unapproved Draft Std P11073-20601a/D13, Jan 2010
         # XXX: hack to avoid being partially parsed by year
-        (dash >> match('[\dA-Za-z]').repeat(5, 6).as(:part)) |
+        (dash >> match('[\dA-Za-z]').repeat(5, 6)).as(:part) |
         # 581.1978
         year |
         # 61691-6

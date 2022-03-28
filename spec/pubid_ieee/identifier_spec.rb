@@ -36,7 +36,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEEE Std 1244-5.2000" do
     let(:original) { "IEEE Std 1244-5.2000" }
-    let(:pubid) { "IEEE Std 1244.5-2000" }
+    let(:pubid) { "IEEE Std 1244-5-2000" }
 
     it_behaves_like "converts pubid to pubid"
   end
@@ -95,14 +95,14 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEC 61671-2 Edition 1.0 2016-04" do
     let(:original) { "IEC 61671-2 Edition 1.0 2016-04" }
-    let(:pubid) { "IEC 61671.2 Edition 1.0 2016-04" }
+    let(:pubid) { "IEC 61671-2 Edition 1.0 2016-04" }
 
     it_behaves_like "converts pubid to pubid"
   end
 
   context "IEC/IEEE 60076-16 Edition 2.0 2018-09" do
     let(:original) { "IEC/IEEE 60076-16 Edition 2.0 2018-09" }
-    let(:pubid) { "IEC/IEEE 60076.16 Edition 2.0 2018-09" }
+    let(:pubid) { "IEC/IEEE 60076-16 Edition 2.0 2018-09" }
 
     it_behaves_like "converts pubid to pubid"
   end
@@ -137,14 +137,14 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEC 61523-3 First edition 2004-09" do
     let(:original) { "IEC 61523-3 First edition 2004-09" }
-    let(:pubid) { "IEC 61523.3 Edition 1.0 2004-09" }
+    let(:pubid) { "IEC 61523-3 Edition 1.0 2004-09" }
 
     it_behaves_like "converts pubid to pubid"
   end
 
   context "IEEE 1076.4 IEC 61691-5 First edition 2004-10" do
     let(:original) { "IEEE 1076.4 IEC 61691-5 First edition 2004-10" }
-    let(:pubid) { "IEEE 1076.4 (IEC 61691.5 Edition 1.0 2004-10)" }
+    let(:pubid) { "IEEE 1076.4 (IEC 61691-5 Edition 1.0 2004-10)" }
 
     it_behaves_like "converts pubid to pubid"
   end
@@ -158,7 +158,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEEE Std 1076.1 IEC 61691-6 Edition 1.0 2009-12" do
     let(:original) { "IEEE Std 1076.1 IEC 61691-6 Edition 1.0 2009-12" }
-    let(:pubid) { "IEEE Std 1076.1 (IEC 61691.6 Edition 1.0 2009-12)" }
+    let(:pubid) { "IEEE Std 1076.1 (IEC 61691-6 Edition 1.0 2009-12)" }
 
     it_behaves_like "converts pubid to pubid"
   end
@@ -197,14 +197,14 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEEE P11073-10101/D3r7, September 2018" do
     let(:original) { "IEEE P11073-10101/D3.7, September 2018" }
-    let(:pubid) { "IEEE P11073.10101/D3.7, September 2018" }
+    let(:pubid) { "IEEE P11073-10101/D3.7, September 2018" }
 
     it_behaves_like "converts pubid to pubid"
   end
 
   context "IEEE P11073-10420/D4D5, March 2020" do
     let(:original) { "IEEE P11073-10420/D4D5, March 2020" }
-    let(:pubid) { "IEEE P11073.10420/D4D5, March 2020" }
+    let(:pubid) { "IEEE P11073-10420/D4D5, March 2020" }
 
     it_behaves_like "converts pubid to pubid"
   end
@@ -250,8 +250,8 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEEE Unapproved Draft Std 11073-10471/D02, Feb 2008" do
     let(:original) { "IEEE Unapproved Draft Std 11073-10471/D02, Feb 2008" }
-    let(:pubid) { "IEEE Std 11073.10471/D02, February 2008" }
-    let(:full_pubid) { "IEEE Unapproved Draft Std 11073.10471/D02, February 2008" }
+    let(:pubid) { "IEEE Std 11073-10471/D02, February 2008" }
+    let(:full_pubid) { "IEEE Unapproved Draft Std 11073-10471/D02, February 2008" }
 
     it_behaves_like "converts pubid to pubid"
   end
@@ -274,8 +274,8 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEEE Unapproved Draft Std P11073-20601_D20 May 2008" do
     let(:original) { "IEEE Unapproved Draft Std P11073-20601_D20 May 2008" }
-    let(:pubid) { "IEEE Std P11073.20601/D20, May 2008" }
-    let(:full_pubid) { "IEEE Unapproved Draft Std P11073.20601/D20, May 2008" }
+    let(:pubid) { "IEEE Std P11073-20601/D20, May 2008" }
+    let(:full_pubid) { "IEEE Unapproved Draft Std P11073-20601/D20, May 2008" }
 
     it_behaves_like "converts pubid to pubid"
   end
@@ -330,8 +330,8 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEEE Unapproved Draft Std P11073-20601a/D13, Jan 2010" do
     let(:original) { "IEEE Unapproved Draft Std P11073-20601a/D13, Jan 2010" }
-    let(:full_pubid) { "IEEE Unapproved Draft Std P11073.20601a/D13, January 2010" }
-    let(:pubid) { "IEEE Std P11073.20601a/D13, January 2010" }
+    let(:full_pubid) { "IEEE Unapproved Draft Std P11073-20601a/D13, January 2010" }
+    let(:pubid) { "IEEE Std P11073-20601a/D13, January 2010" }
 
     it_behaves_like "converts pubid to pubid"
   end
@@ -371,7 +371,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEEE Std 1666 IEC61691-7 Edition 1.0 2009-12" do
     let(:original) { "IEEE Std 1666 IEC61691-7 Edition 1.0 2009-12" }
-    let(:pubid) { "IEEE Std 1666 (IEC 61691.7 Edition 1.0 2009-12)" }
+    let(:pubid) { "IEEE Std 1666 (IEC 61691-7 Edition 1.0 2009-12)" }
 
     it_behaves_like "converts pubid to pubid"
   end
@@ -385,7 +385,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEEE P15026-2, April 2011" do
     let(:original) { "IEEE P15026-2, April 2011" }
-    let(:pubid) { "IEEE P15026.2-2011" }
+    let(:pubid) { "IEEE P15026-2-2011" }
 
     it_behaves_like "converts pubid to pubid"
   end
@@ -399,7 +399,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEEE/IEC P60076-57-1202, July 2014" do
     let(:original) { "IEEE/IEC P60076-57-1202, July 2014" }
-    let(:pubid) { "IEEE/IEC P60076.57-1202-2014" }
+    let(:pubid) { "IEEE/IEC P60076-57-1202-2014" }
 
     it_behaves_like "converts pubid to pubid"
   end

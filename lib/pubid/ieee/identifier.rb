@@ -77,7 +77,7 @@ module Pubid::Ieee
     end
 
     def part
-      ".#{@part}" if @part
+      "#{@part}" if @part
     end
 
     def subpart
