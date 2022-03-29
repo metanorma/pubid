@@ -480,8 +480,22 @@ RSpec.describe Pubid::Ieee::Identifier do
     it_behaves_like "converts pubid to pubid"
   end
 
-  context "IEEE Std 802.11ae-2012" do
-    let(:pubid) { "IEEE Std 802.11ae-2012" }
+  context "IEEE Std 1003.1-2001/Cor 2-2004" do
+    let(:pubid) { "IEEE Std 1003.1-2001/Cor 2-2004" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "P1900.6-2011/Cor1/D3, August 2015" do
+    let(:original) { "P1900.6-2011/Cor1/D3, August 2015" }
+    let(:pubid) { "IEEE P1900.6-2011/Cor1/D3, August 2015" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE P1722-2016-Cor1/D0, June 2016" do
+    let(:original) { "IEEE P1722-2016-Cor1/D0, June 2016" }
+    let(:pubid) { "IEEE P1722-2016/Cor1/D0, June 2016" }
 
     it_behaves_like "converts pubid to pubid"
   end

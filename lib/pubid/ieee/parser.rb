@@ -199,7 +199,19 @@ module Pubid::Ieee
             supersedes.maybe >>
             redline.maybe
         ).as(:parameters)
+    end
 
+    rule(:corrigendum_prefix) do
+      (str("_") | str("/") | str("-")) >> str("Cor") >> (str("-") | dot.maybe >> space?)
+    end
+
+    rule(:corrigendum) do
+      # IEEE 1672-2006/Cor 1-2008
+      (corrigendum_prefix >> digits.as(:version) >> (dash >> year_digits.as(:year)).maybe).as(:corrigendum)
+    end
+
+    rule(:corrigendum_comment) do
+      (space? >> str("(") >> (str("Corrigendum to ") | str("Corrigenda ") >> (str("to ") | str("of "))) >> identifier >> str(")")).maybe
     end
 
     rule(:organizations) do

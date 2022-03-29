@@ -7,7 +7,8 @@ module Pubid::Ieee
   class Identifier
     attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart,
                   :edition, :draft, :redline, :year, :month, :type, :alternative,
-                  :draft_status, :revision, :adoption_year, :amendment, :supersedes
+                  :draft_status, :revision, :adoption_year, :amendment, :supersedes,
+                  :corrigendum
 
     def initialize(type_status:, number:, parameters:,
                    organizations: { publisher: "IEEE" }, revision: nil)
@@ -65,7 +66,7 @@ module Pubid::Ieee
 
     def identifier(format = :short)
       "#{publisher}#{copublisher} #{draft_status(format)}#{type(format)}#{number}#{part}"\
-        "#{subpart}#{year}#{draft}#{edition}#{alternative}#{supersedes}"
+        "#{subpart}#{year}#{corrigendum}#{draft}#{edition}#{alternative}#{supersedes}"
     end
 
     def copublisher
@@ -177,6 +178,16 @@ module Pubid::Ieee
         " (Supersedes #{@supersedes.join(', ')})"
       else
         " (Supersedes #{@supersedes.join(' and ')})"
+      end
+    end
+
+    def corrigendum
+      return unless @corrigendum
+
+      if @corrigendum[:year]
+        "/Cor #{@corrigendum[:version]}-#{@corrigendum[:year]}"
+      else
+        "/Cor#{@corrigendum[:version]}"
       end
     end
   end
