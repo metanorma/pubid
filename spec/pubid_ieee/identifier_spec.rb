@@ -488,14 +488,14 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "P1900.6-2011/Cor1/D3, August 2015" do
     let(:original) { "P1900.6-2011/Cor1/D3, August 2015" }
-    let(:pubid) { "IEEE P1900.6-2011/Cor1/D3, August 2015" }
+    let(:pubid) { "IEEE P1900.6-2011/Cor 1/D3, August 2015" }
 
     it_behaves_like "converts pubid to pubid"
   end
 
   context "IEEE P1722-2016-Cor1/D0, June 2016" do
     let(:original) { "IEEE P1722-2016-Cor1/D0, June 2016" }
-    let(:pubid) { "IEEE P1722-2016/Cor1/D0, June 2016" }
+    let(:pubid) { "IEEE P1722-2016/Cor 1/D0, June 2016" }
 
     it_behaves_like "converts pubid to pubid"
   end

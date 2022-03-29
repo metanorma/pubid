@@ -187,7 +187,7 @@ module Pubid::Ieee
       if @corrigendum[:year]
         "/Cor #{@corrigendum[:version]}-#{@corrigendum[:year]}"
       else
-        "/Cor#{@corrigendum[:version]}"
+        "/Cor #{@corrigendum[:version]}"
       end
     end
   end
