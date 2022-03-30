@@ -31,7 +31,8 @@ module Pubid::Ieee
     end
 
     rule(:organization) do
-      str("IEEE") | str("AIEE") | str("ANSI") | str("ASA") | str("NCTA") | str("IEC") | str("ISO")
+      str("IEEE") | str("AIEE") | str("ANSI") | str("ASA") | str("NCTA") |
+        str("IEC") | str("ISO") | str("ASTM")
     end
 
     rule(:number) do
@@ -140,7 +141,7 @@ module Pubid::Ieee
 
     rule(:revision) do
       space >>
-        str("(Revision of ") >> identifier.as(:revision_identifier) >>
+        str("(Revision of ") >> (identifier_without_dual_pubids.as(:revision_identifier) >> str(" and ").maybe).repeat(1) >>
         str(")")
     end
 
@@ -170,23 +171,35 @@ module Pubid::Ieee
       comma_month_year
     end
 
-    rule(:parameters) do
-      ((draft_status >> space).maybe >> (str("Draft ").maybe >>
-         type.as(:type) >> space).maybe).as(:type_status) >>
-         number_prefix >> number >>
+    rule(:supersedes) do
+      (str(" (") >> str("Supersedes ") >> (identifier_without_dual_pubids.as(:supersedes_identifier) >>
+        (str(" and ") | str(" ")).maybe).repeat(1) >> str(")")).as(:supersedes)
+    end
+
+    # Hack to exclude dual_pubids parsing for revisions and supersedes
+    # otherwise extra identifiers parsed as dual PubIDs to the main identifier
+    def parameters(atom, without_dual_pubids: false)
+      atom >>
+        ((draft_status >> space).maybe >> (str("Draft ").maybe >>
+          type.as(:type) >> space).maybe).as(:type_status) >>
+        number_prefix >> number >>
         (
           # IEEE P2410-D4, July 2019
-          (draft.as(:draft) | part_subpart_year.maybe >> draft.as(:draft).maybe) >>
-          publication_date.maybe >>
-          edition.as(:edition).maybe >>
-          # dual-PubIDs
-          dual_pubids.maybe >>
-          # Hack: putting revision_identifier inside revision ({revision: {revision_identifier: ...}})
-          # to apply transform without including all parameters
-          revision.as(:revision).maybe >>
-          amendment.as(:amendment).maybe >>
-          redline.maybe
+          (draft.as(:draft) |
+            part_subpart_year.maybe >> draft.as(:draft).maybe
+          ) >>
+            publication_date.maybe >>
+            edition.as(:edition).maybe >>
+            # dual-PubIDs
+            ((without_dual_pubids && str("")) || dual_pubids.maybe) >>
+            # Hack: putting revision_identifier inside revision ({revision: {revision_identifier: ...}})
+            # to apply transform without including all parameters
+            revision.as(:revision).maybe >>
+            amendment.as(:amendment).maybe >>
+            supersedes.maybe >>
+            redline.maybe
         ).as(:parameters)
+
     end
 
     rule(:organizations) do
@@ -195,11 +208,15 @@ module Pubid::Ieee
     end
 
     rule(:identifier_with_organization) do
-      organizations >> space? >> parameters
+      parameters(organizations >> space?)
     end
 
     rule(:identifier) do
-      (organizations >> space).maybe >> parameters
+      parameters((organizations >> space).maybe)
+    end
+
+    rule(:identifier_without_dual_pubids) do
+      parameters((organizations >> space).maybe, without_dual_pubids: true)
     end
 
     rule(:root) { identifier }

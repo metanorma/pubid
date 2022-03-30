@@ -5,9 +5,9 @@ UPDATE_CODES = YAML.load_file(File.join(File.dirname(__FILE__), "../../../update
 
 module Pubid::Ieee
   class Identifier
-    attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart, :status, :approval,
-                  :edition, :draft, :rev, :corr, :amd, :redline, :year, :month, :type, :alternative,
-                  :draft_status, :revision, :adoption_year, :amendment
+    attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart,
+                  :edition, :draft, :redline, :year, :month, :type, :alternative,
+                  :draft_status, :revision, :adoption_year, :amendment, :supersedes
 
     def initialize(type_status:, number:, parameters:,
                    organizations: { publisher: "IEEE" }, revision: nil)
@@ -65,7 +65,7 @@ module Pubid::Ieee
 
     def identifier(format = :short)
       "#{publisher}#{copublisher} #{draft_status(format)}#{type(format)}#{number}#{part}"\
-        "#{subpart}#{year}#{draft}#{edition}#{alternative}"
+        "#{subpart}#{year}#{draft}#{edition}#{alternative}#{supersedes}"
     end
 
     def copublisher
@@ -140,7 +140,7 @@ module Pubid::Ieee
     end
 
     def revision
-      " (Revision of #{@revision})" if @revision
+      " (Revision of #{@revision.join(' and ')})" if @revision
     end
 
     def amendment
@@ -167,6 +167,16 @@ module Pubid::Ieee
         adoption_id = dup
         adoption_id.year = @adoption_year
         " (Adoption of #{adoption_id.identifier})"
+      end
+    end
+
+    def supersedes
+      return unless @supersedes
+
+      if @supersedes.length > 2
+        " (Supersedes #{@supersedes.join(', ')})"
+      else
+        " (Supersedes #{@supersedes.join(' and ')})"
       end
     end
   end

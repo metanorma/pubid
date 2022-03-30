@@ -485,4 +485,30 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "IEEE Std 268-1979 (Supersedes IEEE Std 268-1976)" do
+    let(:pubid) { "IEEE Std 268-1979 (Supersedes IEEE Std 268-1976)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 16-1955 (Supersedes C48-1931 and AIEE 16A 1951)" do
+    let(:original) { "IEEE Std 16-1955 (Supersedes C48-1931 and AIEE 16A-1951)" }
+    let(:pubid) { "IEEE Std 16-1955 (Supersedes IEEE C48-1931 and AIEE 16A-1951)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 588-1976 (ANSI C37.86-1975) (Revision of IEEE Std 288-1969 and IEEE Std 328-1971)" do
+    let(:pubid) { "IEEE Std 588-1976 (ANSI C37.86-1975) (Revision of IEEE Std 288-1969 and IEEE Std 328-1971)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 268-1976 (Supersedes ASTM E380-1974 IEEE Std 268-1973 IEEE Std 322-1971)" do
+    let(:original) { "IEEE Std 268-1976 (Supersedes ASTM E380-1974 IEEE Std 268-1973 IEEE Std 322-1971)" }
+    let(:pubid) { "IEEE Std 268-1976 (Supersedes ASTM E380-1974, IEEE Std 268-1973, IEEE Std 322-1971)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end

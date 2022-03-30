@@ -20,6 +20,10 @@ module Pubid::Ieee
       Identifier.new(**data[:amendment])
     end
 
+    rule(supersedes_identifier: subtree(:supersedes)) do |data|
+      Identifier.new(**data[:supersedes])
+    end
+
     def self.update_month_year(month, year)
       { year: if year.length == 2
                 case year.to_i

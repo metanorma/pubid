@@ -31,7 +31,6 @@ AIEE No 600-1944 (Published for Trial Use)
 AIEE No 600-1949 (Published for Trial Use)
 AIEE No. 2-June 1929
 AIEE No. 25-1952 (Supercedes AIEE No. 25-1945)
-AIEE No. 25-1958 (Supersedes AIEE No 25-1952)
 AIEE No.1-1962 (Supersedes June 1957 issue)
 AIEE Nos 72 and 73 - 1932
 ANSI C37.45-1981(R1992) (Revision of ANSI C37.45-1969)
@@ -68,7 +67,6 @@ ANSI/IEEE C37.34b-1985 (Supplement to ANSIIEEE C37.341971)
 ANSI/IEEE C37.34d-1984 (Supplement to ANSI/IEEE C37.34-1971)
 ANSI/IEEE PC63.7/D rev17, December 2014
 ANSI/IEEE Std 101-1987(R2010) (Revision of IEEE Std 101-1972)
-ANSI/IEEE Std 193-1971 (Supersedes IEEE Std 193-1953)
 ANSI/IEEE Std 286-1975 (Reaffirmed 1981) (Revision of IEEE Std 286-1968)
 ANSI/IEEE Std 336-1980 (revision of ANSI/IEEE Std 336-1977)
 ANSI/IEEE Std 384-1981 (Revision of ANSI/IEEE Std 384-1977
@@ -688,7 +686,6 @@ IEEE Std 1549-2011/Cor 1-2017 (Corrigendum to IEEE Std 1549-2011)
 IEEE Std 1588-2019 (Revision ofIEEE Std 1588-2008)
 IEEE Std 159-1972 (52 IRE 7 S2)
 IEEE Std 1596-1992 (Adopted by ISO/IEC and redesignated as ISO/IEC 13961:2000)
-IEEE Std 16-1955 (Supersedes C48-1931 and AIEE 16A 1951)
 IEEE Std 1609.3-2010/Cor 1-2012 (Corrigendum to IEEE Std 1609.3-2010)
 IEEE Std 1609.3-2010/Cor 2-2014 (Corrigendum to IEEE Std 1609.3-2010)
 IEEE Std 1609.4-2010/Cor 1-2014 (Corrigendum to IEEE Std 1609.4-2010)
@@ -704,7 +701,6 @@ IEEE Std 1671.1-2009 (Full_Use)
 IEEE Std 1671.5-2008 (Full_Use)
 IEEE Std 1671.6-2008 (Full-Use)
 IEEE Std 1673-2015 (2nd Printing)
-IEEE Std 167A-1980 (Supersedes IEEE 167A-1975)
 IEEE Std 1722.1-2013/Cor 1-2018 (Corrigendum to IEEE Std 1722.1-2013)
 IEEE Std 1725-2011(Revision to IEEE Std 1725-2006)
 IEEE Std 1725-2011(Revision to IEEE Std 1725-2006) - Redline
@@ -725,11 +721,6 @@ IEEE Std 22A-1962 (Reaffirmed 1977)
 IEEE Std 242-2001 (Revision of IEEE Std 242-1986) [IEEE Buff Book]
 IEEE Std 24748-3:2012
 IEEE Std 262-1973 /ANSI C57.12.90-1973 (Supersedes ANSI C57.12.90-1968)
-IEEE Std 268-1976 (Supersedes ASTM E380-1974 IEEE Std 268-1973 IEEE Std 322-1971)
-IEEE Std 268-1979 (Supersedes IEEE Std 268-1976)
-IEEE Std 268-1982 (Supersedes IEEE Std 268-1979)
-IEEE Std 269-1971 (Supersedes IEEE Std 269-1966)
-IEEE Std 28-1972 (Supersedes IEEE Std 28-1967)
 IEEE Std 293-1969/Cor 1-2014 (Corrigendum to IEEE Std 293-1969)
 IEEE Std 309-1999: ANSI N42.3-1999
 IEEE Std 315-1975 (Reaffirmed 1993)

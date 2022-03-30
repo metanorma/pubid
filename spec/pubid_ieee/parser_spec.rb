@@ -12,7 +12,7 @@ RSpec.describe Pubid::Ieee::Parser do
   end
 
   it "don't parse identifier with extra space" do
-    expect(subject.parameters).not_to parse(" C22-1925", trace: true)
+    expect(subject.parameters(Parslet::str(""))).not_to parse(" C22-1925", trace: true)
   end
 
   it "parses amendments" do
