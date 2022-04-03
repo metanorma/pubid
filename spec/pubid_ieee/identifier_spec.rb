@@ -525,4 +525,11 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "IEEE Std C57.12.10-2013 (Corrigendum to IEEE Std C57.12.10-2010)" do
+    let(:original) { "IEEE Std C57.12.10-2013 (Corrigendum to IEEE Std C57.12.10-2010)" }
+    let(:pubid) { "IEEE Std C57.12.10-2010/Cor 1-2013" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end

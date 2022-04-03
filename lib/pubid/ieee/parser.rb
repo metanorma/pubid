@@ -186,7 +186,7 @@ module Pubid::Ieee
         (
           # IEEE P2410-D4, July 2019
           (draft.as(:draft) |
-            part_subpart_year.maybe >> draft.as(:draft).maybe
+            part_subpart_year.maybe >> corrigendum.maybe >> draft.as(:draft).maybe
           ) >>
             publication_date.maybe >>
             edition.as(:edition).maybe >>
@@ -197,6 +197,7 @@ module Pubid::Ieee
             revision.as(:revision).maybe >>
             amendment.as(:amendment).maybe >>
             supersedes.maybe >>
+            corrigendum_comment.maybe >>
             redline.maybe
         ).as(:parameters)
     end
@@ -211,7 +212,8 @@ module Pubid::Ieee
     end
 
     rule(:corrigendum_comment) do
-      (space? >> str("(") >> (str("Corrigendum to ") | str("Corrigenda ") >> (str("to ") | str("of "))) >> identifier >> str(")")).maybe
+      ((space? >> str("(") >> (str("Corrigendum to ") | str("Corrigenda ") >> (str("to ") | str("of "))) >>
+        identifier.as(:corrigendum_identifier) >> str(")")).maybe).as(:corrigendum_comment)
     end
 
     rule(:organizations) do

@@ -16,6 +16,10 @@ module Pubid::Ieee
       Identifier.new(**data[:amendment])
     end
 
+    rule(corrigendum_identifier: subtree(:corrigendum)) do |data|
+      Identifier.new(**data[:corrigendum])
+    end
+
     rule(previous_amendments: subtree(:amendment)) do |data|
       Identifier.new(**data[:amendment])
     end

@@ -8,7 +8,7 @@ module Pubid::Ieee
     attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart,
                   :edition, :draft, :redline, :year, :month, :type, :alternative,
                   :draft_status, :revision, :adoption_year, :amendment, :supersedes,
-                  :corrigendum
+                  :corrigendum, :corrigendum_comment
 
     def initialize(type_status:, number:, parameters:,
                    organizations: { publisher: "IEEE" }, revision: nil)
@@ -27,7 +27,7 @@ module Pubid::Ieee
     end
 
     def set_values(hash)
-      hash.each { |key, value| send("#{key}=", value.is_a?(Enumerable) && value || value.to_s) }
+      hash.each { |key, value| send("#{key}=", value.is_a?(Parslet::Slice) && value.to_s || value) }
     end
 
     def self.update_old_code(code)
@@ -94,7 +94,13 @@ module Pubid::Ieee
     end
 
     def year
-      "-#{@year}" if @year
+      return "" unless @year
+
+      if @corrigendum_comment
+        @corrigendum_comment.year
+      else
+        "-#{@year}"
+      end
     end
 
     def alternative
@@ -182,12 +188,14 @@ module Pubid::Ieee
     end
 
     def corrigendum
-      return unless @corrigendum
-
-      if @corrigendum[:year]
-        "/Cor #{@corrigendum[:version]}-#{@corrigendum[:year]}"
+      if @corrigendum.nil?
+        (@year && @corrigendum_comment && "/Cor 1-#{@year}") || ""
       else
-        "/Cor #{@corrigendum[:version]}"
+        if @corrigendum[:year]
+          "/Cor #{@corrigendum[:version]}-#{@corrigendum[:year]}"
+        else
+          "/Cor #{@corrigendum[:version]}"
+        end
       end
     end
   end
