@@ -8,7 +8,7 @@ module Pubid::Ieee
     attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart,
                   :edition, :draft, :redline, :year, :month, :type, :alternative,
                   :draft_status, :revision, :adoption_year, :amendment, :supersedes,
-                  :corrigendum, :corrigendum_comment
+                  :corrigendum, :corrigendum_comment, :reaffirmed
 
     def initialize(type_status:, number:, parameters:,
                    organizations: { publisher: "IEEE" }, revision: nil)
@@ -66,7 +66,7 @@ module Pubid::Ieee
 
     def identifier(format = :short)
       "#{publisher}#{copublisher} #{draft_status(format)}#{type(format)}#{number}#{part}"\
-        "#{subpart}#{year}#{corrigendum}#{draft}#{edition}#{alternative}#{supersedes}"
+        "#{subpart}#{year}#{corrigendum}#{draft}#{edition}#{alternative}#{supersedes}#{reaffirmed}"
     end
 
     def copublisher
@@ -98,6 +98,8 @@ module Pubid::Ieee
 
       if @corrigendum_comment
         @corrigendum_comment.year
+      elsif @reaffirmed && @reaffirmed.key?(:reaffirmation_of)
+        @reaffirmed[:reaffirmation_of].year
       else
         "-#{@year}"
       end
@@ -197,6 +199,14 @@ module Pubid::Ieee
           "/Cor #{@corrigendum[:version]}"
         end
       end
+    end
+
+    def reaffirmed
+      return unless @reaffirmed
+
+      return " (Reaffirmed #{@year})" if @reaffirmed.key?(:reaffirmation_of)
+
+      " (Reaffirmed #{@reaffirmed[:year]})" if @reaffirmed[:year]
     end
   end
 end

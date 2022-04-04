@@ -132,8 +132,9 @@ module Pubid::Ieee
     rule(:dual_pubids) do
       space >>
         (
-          (str("(") >> (identifier_with_organization.as(:alternative) >> str(", ").maybe).repeat(1) >> str(")")) |
-          (str("and ") >> identifier.as(:alternative)) |
+          # identifier without parameters (like reaffirmed, amendmend etc)
+          (str("(") >> (identifier_with_org_no_params.as(:alternative) >> str(", ").maybe).repeat(1) >> str(")")) |
+          ((str("and ") | str("/ ")) >> identifier_no_params.as(:alternative)) |
           # should have an organization when no brackets
           identifier_with_organization.as(:alternative)
         )
@@ -178,7 +179,7 @@ module Pubid::Ieee
 
     # Hack to exclude dual_pubids parsing for revisions and supersedes
     # otherwise extra identifiers parsed as dual PubIDs to the main identifier
-    def parameters(atom, without_dual_pubids: false)
+    def parameters(atom, without_dual_pubids: false, skip_parameters: false)
       atom >>
         ((draft_status >> space).maybe >> (str("Draft ").maybe >>
           type.as(:type) >> space).maybe).as(:type_status) >>
@@ -192,14 +193,24 @@ module Pubid::Ieee
             edition.as(:edition).maybe >>
             # dual-PubIDs
             ((without_dual_pubids && str("")) || dual_pubids.maybe) >>
-            # Hack: putting revision_identifier inside revision ({revision: {revision_identifier: ...}})
-            # to apply transform without including all parameters
-            revision.as(:revision).maybe >>
-            amendment.as(:amendment).maybe >>
-            supersedes.maybe >>
-            corrigendum_comment.maybe >>
-            redline.maybe
+            if skip_parameters
+              str("")
+            else
+              reaffirmed.maybe >>
+              revision.as(:revision).maybe >>
+              amendment.as(:amendment).maybe >>
+              supersedes.maybe >>
+              corrigendum_comment.maybe >>
+              redline.maybe
+            end
         ).as(:parameters)
+    end
+
+    rule(:reaffirmed) do
+      (space >> str("(") >>
+        (str("Reaffirmed ") >> year_digits.as(:year) |
+          str("Reaffirmation of ") >> identifier.as(:reaffirmation_identifier)) >>
+        str(")")).as(:reaffirmed)
     end
 
     rule(:corrigendum_prefix) do
@@ -225,12 +236,24 @@ module Pubid::Ieee
       parameters(organizations >> space?)
     end
 
+    rule(:identifier_with_org_no_params) do
+      parameters(organizations >> space?, skip_parameters: true)
+    end
+
+    rule(:identifier_no_params) do
+      parameters((organizations >> space).maybe, skip_parameters: true)
+    end
+
     rule(:identifier) do
       parameters((organizations >> space).maybe)
     end
 
     rule(:identifier_without_dual_pubids) do
       parameters((organizations >> space).maybe, without_dual_pubids: true)
+    end
+
+    rule(:identifier_without_parameters) do
+      parameters((organizations >> space).maybe, skip_parameters: true)
     end
 
     rule(:root) { identifier }

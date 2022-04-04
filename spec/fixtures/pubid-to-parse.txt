@@ -35,8 +35,6 @@ AIEE Nos 72 and 73 - 1932
 ANSI C37.45-1981(R1992) (Revision of ANSI C37.45-1969)
 ANSI C37.47-1981 (R1992) (Revision of ANSI C37.47-19969)
 ANSI C37.53.1-1989 (R1996) (Revision of ANSI C37.53.1-1982)
-ANSI C50.14-1977 (Reaffirmed 1989)
-ANSI C50.32-1976 and IEEE Std 117-1974 (Reaffirmed 1984) (Revision of IEEE Std 117-1956)
 ANSI C57.1 2.25-1990
 ANSI C57.12.22-1993 (R1998)
 ANSI C57.12.24-1994 (Revision of ANSI C57.12.24-188)
@@ -44,7 +42,6 @@ ANSI C57.12.50-1981 (R1998)
 ANSI C57.12.55-1987 (R1998)
 ANSI C63.022-1 996
 ANSI N323AB-2013 (Revision and Redesignation of ANSI N323A-1997 and ANSI N323B-2002)
-ANSI N42.13-2004 (Reaffirmation of ANSI N42.13-1986)
 ANSI N42.18-2004 (Reaffirmation of ANSI N42.18-1980; Redesignation of ANSI N13.10-1974)
 ANSI N42.33-2019 (Revison of ANSI N42.33-2006)
 ANSI N42.33-2019 (Revison of ANSI N42.33-2006) - Redline
@@ -65,7 +62,6 @@ ANSI/IEEE C37.34b-1985 (Supplement to ANSIIEEE C37.341971)
 ANSI/IEEE C37.34d-1984 (Supplement to ANSI/IEEE C37.34-1971)
 ANSI/IEEE PC63.7/D rev17, December 2014
 ANSI/IEEE Std 101-1987(R2010) (Revision of IEEE Std 101-1972)
-ANSI/IEEE Std 286-1975 (Reaffirmed 1981) (Revision of IEEE Std 286-1968)
 ANSI/IEEE Std 336-1980 (revision of ANSI/IEEE Std 336-1977)
 ANSI/IEEE Std 384-1981 (Revision of ANSI/IEEE Std 384-1977
 ANSI/IEEE Std 488-1978 (Revision of ANSI/IEEE 488-1975. Includes supplement IEEE Std 488A-19801)
@@ -81,7 +77,6 @@ ANSI/IEEE Std: 8-Bit Backplane Interface - STEbus,
 ANSI/IEEE Std: Outdoor Apparatus Bushings
 ANSI/IEEE Std: Transformers and Shunt Reactors
 ANSI/IEEE-ANS-7-4.3.2-1982
-ASA C37.1-1937 (Reaffirmed 1945)
 ASA C37.4-1945 Through C37.9-1945
 Amendment to IEEE Std 802.11-2007 as amended by IEEE Std 802.11k-2008, IEEE Std 802.11r-2008, IEEE Std 802.11y-2008, IEEE Std 802.11w-2009, IEEE Std 802.11n-2009, IEEE Std 802.11p-2010, IEEE Std 802.11z-2010, and IEEE Std 802.11v-2011
 American National Standard for Methods of Measurement of Radio- Noise Emissions from Low-Voltage Electrical and Electronic Equipment in the Range of 9 kHz to 40 GHz--Amendment 1: Test Site Validation
@@ -237,7 +232,6 @@ IEEE Draft P802.3bf/D3.1, January 2011 (Draft Amendment to IEEE Std 802.3-2008)
 IEEE Draft P802.3bf/D3.2, March 2011 (Draft Amendment to IEEE Std 802.3-2008)
 IEEE IEEE P1453/D3, June 2011
 IEEE No 107-1964 (Revision of AIEE No. 433, 1959)
-IEEE No 29-1941 / ASA C77.1-1943 (Reaffirmed 1971)
 IEEE No 300-1969 (USAS N42.1-1969)
 IEEE No. 282-1968 (Issued for Trial-Use)
 IEEE No. 317 April 1971
@@ -612,19 +606,15 @@ IEEE Std 1858-2016 (Incorporating IEEE Std 1858-2016/Cor 1-2017)
 IEEE Std 1904.1(TM)/Conformance02-2014 (Conformance to IEEE Std 1904.1-2013)
 IEEE Std 1904.1(TM)/Conformance03-2014 (Conformance to IEEE Std 1904.1-2013)
 IEEE Std 1904.1/Conformance01-2014 (Conformance to IEEE Std 1904.1-2013)
-IEEE Std 202-1954 (Reaffirmed 1972)
 IEEE Std 218-1956 (Reaffirmed 1980, 56 IRE 28.S2)
-IEEE Std 22A-1962 (Reaffirmed 1977)
 IEEE Std 242-2001 (Revision of IEEE Std 242-1986) [IEEE Buff Book]
 IEEE Std 24748-3:2012
 IEEE Std 262-1973 /ANSI C57.12.90-1973 (Supersedes ANSI C57.12.90-1968)
 IEEE Std 309-1999: ANSI N42.3-1999
-IEEE Std 315-1975 (Reaffirmed 1993)
 IEEE Std 336-2010 (Revision of EEE Std 336-2005)
 IEEE Std 338-1971/ANSI N41.3
 IEEE Std 356-2020 (Revision of IEEE Std 356?2010)
 IEEE Std 356-2020 (Revision of IEEE Std 356?2010) - Redline
-IEEE Std 402-1974 (Reaffirmed 1982)
 IEEE Std 404-2000 (Revision of IEEE Std 404 1993)
 IEEE Std 446-1995 [The Orange Book]
 IEEE Std 45-1983 (revision of ANSI/IEEE Std 45-1977)
@@ -645,7 +635,6 @@ IEEE Std 738-2012 (Revision of IEEE Std 738-2006 - Incorporates IEEE Std 738-201
 IEEE Std 738-2012 Draft 10 (Revision of IEEE Std 738-2006)
 IEEE Std 739-1995 [The Bronze Book]
 IEEE Std 771-1998 (R2009)
-IEEE Std 792-1995 (Reaffirmation of IEEE Std 792-1988)
 IEEE Std 80-2013 (Revision of IEEE Std 80-2000/ Incorporates IEEE Std 80-2013/Cor 1-2015)
 IEEE Std 80-2013 (Revision of IEEE Std 80-2000/ Incorporates IEEE Std 80-2013/Cor 1-2015) - Redline
 IEEE Std 802-2014 (Revision to IEEE Std 802-2001)

@@ -532,4 +532,38 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "ASA C37.1-1937 (Reaffirmed 1945)" do
+    let(:pubid) { "ASA C37.1-1937 (Reaffirmed 1945)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 792-1995 (Reaffirmation of IEEE Std 792-1988)" do
+    let(:original) { "IEEE Std 792-1995 (Reaffirmation of IEEE Std 792-1988)" }
+    let(:pubid) { "IEEE Std 792-1988 (Reaffirmed 1995)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ANSI C50.32-1976 and IEEE Std 117-1974 (Reaffirmed 1984) (Revision of IEEE Std 117-1956)" do
+    let(:original) { "ANSI C50.32-1976 and IEEE Std 117-1974 (Reaffirmed 1984) (Revision of IEEE Std 117-1956)" }
+    let(:pubid) { "ANSI C50.32-1976 (IEEE Std 117-1974) (Reaffirmed 1984) (Revision of IEEE Std 117-1956)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE No 29-1941 / ASA C77.1-1943 (Reaffirmed 1971)" do
+    let(:original) { "IEEE No 29-1941 / ASA C77.1-1943 (Reaffirmed 1971)" }
+    let(:pubid) { "IEEE 29-1941 (ASA C77.1-1943) (Reaffirmed 1971)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ANSI/IEEE Std 802.3p and Std 802.3q" do
+    let(:original) { "ANSI/IEEE Std 802.3p and Std 802.3q" }
+    let(:pubid) { "ANSI/IEEE Std 802.3p (IEEE Std 802.3q)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end
