@@ -8,7 +8,8 @@ module Pubid::Ieee
     attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart,
                   :edition, :draft, :redline, :year, :month, :type, :alternative,
                   :draft_status, :revision, :adoption_year, :amendment, :supersedes,
-                  :corrigendum, :corrigendum_comment, :reaffirmed, :incorporates
+                  :corrigendum, :corrigendum_comment, :reaffirmed, :incorporates,
+                  :supplement
 
     def initialize(type_status:, number:, parameters:,
                    organizations: { publisher: "IEEE" }, revision: nil)
@@ -67,7 +68,7 @@ module Pubid::Ieee
     def identifier(format = :short)
       "#{publisher}#{copublisher} #{draft_status(format)}#{type(format)}#{number}#{part}"\
         "#{subpart}#{year}#{corrigendum}#{draft}#{edition}#{alternative}#{supersedes}"\
-        "#{reaffirmed}#{incorporates}"
+        "#{reaffirmed}#{incorporates}#{supplement}"
     end
 
     def copublisher
@@ -216,6 +217,10 @@ module Pubid::Ieee
       # " (Supersedes #{@supersedes.join(', ')})"
 
       " (Incorporates #{@incorporates.join(', and ')})" if @incorporates
+    end
+
+    def supplement
+      " (Supplement to #{@supplement})" if @supplement
     end
   end
 end

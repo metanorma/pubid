@@ -142,7 +142,7 @@ module Pubid::Ieee
 
     rule(:revision) do
       (str("Revision of ") >>
-        (identifier_without_dual_pubids.as(:revision_identifier) >> str(" and ").maybe).repeat(1)
+        (identifier_without_dual_pubids.as(:identifier) >> str(" and ").maybe).repeat(1)
       ).as(:revision)
     end
 
@@ -150,12 +150,12 @@ module Pubid::Ieee
       # IEEE P802.3bp/D3.4, April 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015,
       # IEEE Std 802.3by-201X, and IEEE Std 802.3bq-201X)
       str(",").maybe >> str(" as amended by ") >>
-        (identifier.as(:previous_amendments) >> (str(", ") >> str("and ").maybe).maybe).repeat(1)
+        (identifier.as(:identifier) >> (str(", ") >> str("and ").maybe).maybe).repeat(1)
     end
 
     rule(:amendment) do
       (str("Amendment ") >> (str("of") | str("to")) >> space >>
-        identifier.as(:amendment_identifier) >> previous_amendments.maybe).as(:amendment)
+        identifier.as(:identifier) >> previous_amendments.maybe).as(:amendment)
     end
 
     rule(:number_prefix) do
@@ -171,21 +171,25 @@ module Pubid::Ieee
     end
 
     rule(:supersedes) do
-      (str("Supersedes ") >> (identifier_without_dual_pubids.as(:supersedes_identifier) >>
+      (str("Supersedes ") >> (identifier_without_dual_pubids.as(:identifier) >>
         (str(" and ") | str(" ")).maybe).repeat(1)).as(:supersedes)
     end
 
     rule(:incorporates) do
       (
         match("[Ii]") >> (str("ncorporates ") | str("ncorporating ")) >>
-          (identifier_without_dual_pubids.as(:incorporates_identifier) >> str(", and ").maybe).repeat(1)
+          (identifier_without_dual_pubids.as(:identifier) >> str(", and ").maybe).repeat(1)
       ).as(:incorporates)
+    end
+
+    rule(:supplement) do
+      (str("Supplement") >> str("s").maybe >> str(" to ") >> identifier_without_dual_pubids.as(:identifier)).as(:supplement)
     end
 
     rule(:additional_parameters) do
       (space? >> str("(") >> (
-        (reaffirmed | revision | amendment | supersedes | corrigendum_comment| incorporates) >>
-          ((str("/") | str(",")) >> space?).maybe).repeat >> str(")")
+        (reaffirmed | revision | amendment | supersedes | corrigendum_comment| incorporates | supplement) >>
+          ((str("/") | str(",")) >> space?).maybe).repeat >> str(")").maybe
       ).repeat >> redline.maybe
     end
 
@@ -216,7 +220,7 @@ module Pubid::Ieee
     rule(:reaffirmed) do
       (
         (str("Reaffirmed ") >> year_digits.as(:year) |
-          str("Reaffirmation of ") >> identifier.as(:reaffirmation_identifier))
+          str("Reaffirmation of ") >> identifier.as(:identifier).as(:reaffirmation_of))
       ).as(:reaffirmed)
     end
 
@@ -231,7 +235,7 @@ module Pubid::Ieee
 
     rule(:corrigendum_comment) do
       ((str("Corrigendum to ") | str("Corrigenda ") >> (str("to ") | str("of "))) >>
-        identifier.as(:corrigendum_identifier)).as(:corrigendum_comment)
+        identifier.as(:identifier)).as(:corrigendum_comment)
     end
 
     rule(:organizations) do

@@ -600,4 +600,10 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "ANSI/IEEE C37.010b-1985 (Supplement to ANSI/IEEE C37.010-1979)" do
+    let(:pubid) { "ANSI/IEEE C37.010b-1985 (Supplement to ANSI/IEEE C37.010-1979)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end

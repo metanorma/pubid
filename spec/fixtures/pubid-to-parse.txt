@@ -51,19 +51,10 @@ ANSI PN42.38_D12, 2015
 ANSI PN42.38a/D1_May 2018 (Amendment to ANSI N42.38-2015)
 ANSI PN42.54/D7, Jan2018
 ANSI/IEEE C37.010-1979 (Includes Supplement ANSI/IEEE C37.0I0d-1984)
-ANSI/IEEE C37.010b-1985 (Supplement to ANSI/IEEE C37.010-1979)
-ANSI/IEEE C37.010e-1985 (Supplement to ANSI/IEEE C37.010-1979)
-ANSI/IEEE C37.09C-1984 (Supplement to ANSI/IEEE C37.09-1979
-ANSI/IEEE C37.09e-1985 (Supplement to ANSI/IEEE C37.09-1979)
-ANSI/IEEE C37.100b-1986 (Supplement to ANSI/IEEE C37.100-1981)
-ANSI/IEEE C37.30C-1984 ANSI/IEEE C37.30e-1984 (Supplements to ANSI/IEEE C37.30.1971)
-ANSI/IEEE C37.30g-1985 (Supplement to ANSI/IEEE C37.30-1971)
 ANSI/IEEE C37.34b-1985 (Supplement to ANSIIEEE C37.341971)
-ANSI/IEEE C37.34d-1984 (Supplement to ANSI/IEEE C37.34-1971)
 ANSI/IEEE PC63.7/D rev17, December 2014
 ANSI/IEEE Std 101-1987(R2010) (Revision of IEEE Std 101-1972)
 ANSI/IEEE Std 336-1980 (revision of ANSI/IEEE Std 336-1977)
-ANSI/IEEE Std 384-1981 (Revision of ANSI/IEEE Std 384-1977
 ANSI/IEEE Std 488-1978 (Revision of ANSI/IEEE 488-1975. Includes supplement IEEE Std 488A-19801)
 ANSI/IEEE Std 500-1984 P&amp;V
 ANSI/IEEE Std 500-1984 P&amp;amp;V
@@ -82,8 +73,6 @@ Amendment to IEEE Std 802.11-2007 as amended by IEEE Std 802.11k-2008, IEEE Std 
 American National Standard for Methods of Measurement of Radio- Noise Emissions from Low-Voltage Electrical and Electronic Equipment in the Range of 9 kHz to 40 GHz--Amendment 1: Test Site Validation
 C2-1997 National Electric Safety Code (NESC)
 C2-2012-Preprint
-C63.19-2011(Revision of ANSI C63.19-2007)
-C63.19-2011(Revision of ANSI C63.19-2007) - Redline
 Corrigendum to IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015, IEEE Std 802.3by-2016, IEEE Std 802.3bq-2016, IEEE Std 802.3bp-2016, IEEE Std 802.3br-2016, IEEE Std 802.3bn-2016, IEEE Std 802.3bz-2016, IEEE Std 802.3bu-2016, IEEE Std 802.3bv-2017
 Draft IEEE P802.15.4REVi/D09, April 2011 (Revision of IEEE Std 802.15.4-2006)
 Draft National Electrical Safety Code, January 2016
@@ -215,11 +204,7 @@ IEEE Approved Draft Std PC37.101-2006/Cor 1/D2, 07
 IEEE Approved Std P1512.4/rev44, Sep 2006
 IEEE Approved Std P1609.3/D23.pdf, Feb 2007
 IEEE Approved Std P277D1/Jan 2007
-IEEE C37.04f-1990 (Supplement to IEEE C37.04-1979)
 IEEE C37.04h-1990 (Supplement to lEEE C37.04-1979)
-IEEE C37.04i-1991 (Supplement to IEEE C37.04-1979)
-IEEE C37.09a-1991 (Supplement to IEEE C37.09-1979)
-IEEE C37.09g-1991 (Supplement to IEEE C37.09-1979)
 IEEE C57.139/D14June 2010
 IEEE Draft P802.11-REVmb/D3.0, March 2010 (Revision of IEEE Std 802.11-2007, as amended by IEEE Std 802.11k-2008, IEEE Std 802.11r-2008, IEEE Std 802.11y-2008, IEEE Std 802.11w-2009 and IEEE Std 802.11n-2009)
 IEEE Draft P802.11-REVmb/D6.0, September 2010 (Revision of IEEE Std 802.11-2007, as amended by IEEE Std 802.11k-2008, IEEE Std 802.11r-2008, IEEE Std 802.11y-2008, IEEE Std 802.11w-2009 and IEEE Std 802.11n-2009)
@@ -465,7 +450,6 @@ IEEE P802.22.2/D3.0, May 2012 (Approved Draft)
 IEEE P802.22/D6.0.0, May 2019
 IEEE P802.22/D7.0.0, June 2019
 IEEE P802.22/D8.0.0, July 2019
-IEEE P802.3_D3.0, December 2011(Revision of IEEE Std 802.3-2008)
 IEEE P802.3az/D3.1, June 2010 (Draft Amendment of IEEE Std 802.3-2008)
 IEEE P802.3az/D3.2, July 2010 (Draft Amendment of IEEE Std 802.3-2008)
 IEEE P802.3bm/D3.23.3, November 2014 (Amendment of IEEE Std 802.3-2012)
@@ -509,7 +493,6 @@ IEEE PC37.60/IEC 62271-111_D10, February 2012
 IEEE PC37.60/IEC 62271-111_D6, June 2009
 IEEE PC37.90.1/D6.1, June 2012 (Approved Draft)
 IEEE PC57.12.00 August 2015 / D2.2 (Revision of IEEE Std C57.12.00-2010)
-IEEE PC57.12.00/D1.2, August 2015(Revision of IEEE Std C57.12.00-2010)
 IEEE PC57.12.01/D8, 2014
 IEEE PC57.12.28 D10, November 2013
 IEEE PC57.130/D 4, March 2014
@@ -543,9 +526,7 @@ IEEE Std 1003.5-1992/INT Mar 1994
 IEEE Std 1003.5b-1996 (Includes IEEE Std 1003.5-1992)
 IEEE Std 1018-2013 (Revison of IEEE Std 1018-2004)
 IEEE Std 1018-2013 (Revison of IEEE Std 1018-2004) - Redline
-IEEE Std 1031-2011(Revision of IEEE Std 1031-2000)
 IEEE Std 1057-2007 (Revision of IEEE 1057-1994) (Full-Use)
-IEEE Std 1057-2007(Revision of IEEE Std 1057-1994) - Redline
 IEEE Std 1076-2002 (Revision of IEEE Std 1076, 2002 Edn)
 IEEE Std 1076/INT-1991
 IEEE Std 108-1955; AIEE No.450-April 1955
@@ -556,7 +537,6 @@ IEEE Std 11073-10101a-2015 (Amendment to ISO/IEEE 11073-10101:2004)
 IEEE Std 11073-20601-2014 (Revision of ISO/IEEE 11073-20601:2010)
 IEEE Std 11073-20601-2014 (Revision of ISO/IEEE 11073-20601:2010) - Redline
 IEEE Std 11073-30200a-2011 (Amendment to ISO/IEEE Std 11073-30200:2004)
-IEEE Std 1142-2009(Revision of IEEE Std 1142-1995)
 IEEE Std 1184-2006(R2011) (Revision of IEEE 1184-1994)
 IEEE Std 120-1955; ASME PTC 19.6-1955
 IEEE Std 1207-2011 (Revision to IEEE Std 1207-2004)
@@ -639,20 +619,15 @@ IEEE Std 802.11ba-2021 (Amendment to IEEE Std 802.11-2020 as amendment by IEEE S
 IEEE Std 802.11e-2005 (Amendment to IEEE Std 802.11, 1999 Edition (Reaff 2003)
 IEEE Std 802.11g-2003 (Amendment to IEEE Std 802.11, 1999 Edn. (Reaff 2003) as amended by IEEE Stds 802.11a-1999, 802.11b-1999, 802.11b-1999/Cor 1-2001, and 802.11d-2001)
 IEEE Std 802.11h-2003 (Amendment to IEEE Std 802.11, 1999 Edn. (Reaff 2003))
-IEEE Std 802.12d-1997 (Supplement to IEEE Std 802.12-1995)
 IEEE Std 802.15.10a-2019 (Amendment to IEEE Std 802.15.10&#x2122;-2017)
-IEEE Std 802.15.3-2016 (Revision of IEEE Std 802.15.3-2003
-IEEE Std 802.15.4t-2017 (Amendment to IEEE Std 802.15.4-2015 as amended by IEEE Std 802.15.4n-2016, IEEE Std 802.15.4q-2016, and IEEE Std 802.15.4u-2016
 IEEE Std 802.16 / Conformance02-2003 (Conformance to IEEE Std 802.16-2001 as ammended by IEEE Std 802.16a-2003 and IEEE Std 802.16c-2002)
 IEEE Std 802.16/Conformance01-2003
 IEEE Std 802.16/Conformance03-2004 (Conformance to IEEE Std 802.16-2001 as amended by IEEE Std 802.16a -2003 and IEEE Std 802.16c-2002)
 IEEE Std 802.16/Conformance04-2006 (Conformance to IEEE Std 802.16-2004)
 IEEE Std 802.16e-2005 and IEEE Std 802.16-2004/Cor 1-2005 (Amendment and Corrigendum to IEEE Std 802.16-2004)
 IEEE Std 802.16g 2007 (Amendment to IEEE Std 802.16-2004)
-IEEE Std 802.16m-2011(Amendment to IEEE Std 802.16-2009)
 IEEE Std 802.17-2011 (Revision of IEEE Std 802.17-2004, as amended by IEEE Std 802.17b-2007 and IEEE Std 802.17c-2010)
 IEEE Std 802.1ACct-2021 (Amendment to EEE Std 802.1AC-2016 as amended by IEEE Std 802.1AC-2016/Cor 1-2018)
-IEEE Std 802.1CMde-2020 (Amendment to IEEE Std 802.1CM-2018
 IEEE Std 802.1CS&#x2013;2020
 IEEE Std 802.1G, 1998 Edition (ISO/IEC15802-5:1998)
 IEEE Std 802.1H, 1997 Edition (ISO/IEC TR11802-5:1997)
@@ -673,7 +648,6 @@ IEEE Std 802.3af-2003 (Amendment to IEEE Std 802.3-2002, including IEEE Std 802.
 IEEE Std 802.3ak-2004 (Amendment to IEEE Std 802.3-2002 as amended by IEEE Stds 802.3ae-2002, 802.3af-2003 and 802.3aj-2003)
 IEEE Std 802.3bm-2015 (Amendment to IEEE Std 802.3-2012 as amended by IEEE Std 802.3bk-2013 and IEEE Std 802.3bj-2014 )
 IEEE Std 802.3bs-2017 (Amendment to IEEE 802.3-2015 as amended by IEEE's 802.3bw-2015, 802.3by-2016, 802.3bq-2016, 802.3bp-2016, 802.3br-2016, 802.3bn-2016, 802.3bz-2016, 802.3bu-2016, 802.3bv-2017, and IEEE 802.3-2015/Cor1-2017)
-IEEE Std 802.3bw-2015 (Amendment to IEEE Std 802.3-2015
 IEEE Std 802.3bz-2016 (Amendment to IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015, IEEE Std 802.3by(TM)-2016, IEEE Std 802.3bq-2016, IEEE Std 802.3bp-2016, IEEE Std 802.3br-2016, and IEEE Std 802.3bn-2016)
 IEEE Std 802.3cc-2017 (Amendment to IEEE Std 802.3-2015 as amended by IEEE&#x2019;s 802.3bw-2015, 802.3by-2016, 802.3bq-2016, 802.3bp-2016, 802.3br-2016, 802.3bn-2016, 802.3bz-2016, 802.3bu-2016, 802.3bv-2017, 802.3-2015/Cor 1-2017, and 802.3bs-2017)
 IEEE Std 802.3ct-2021 (Amendment to IEEE Std 802.3-2018 as amended by IEEE's 802.3cb-2018, 802.3bt-2018, 802.3cd-2018, 802.3cn-2019, 802.3cg-2019, 802.3cq-2020, 802.3cm-2020, 802.3ch-2020,802.3ca-2020, 802.3cr-2021, 802.3cu-2021, and 802.3cv-2021)
@@ -697,21 +671,15 @@ IEEE Std C135.61-1997(R2006)
 IEEE Std C135.63-1998(R2006)
 IEEE Std C2-2002/Preprint
 IEEE Std C2-2007/Preprint
-IEEE Std C37.015-2017 (Revision of IEEE Std C37.015-2009
 IEEE Std C37.09-2018 Cor1-2021
-IEEE Std C37.100d-1991 (Supplement to C37.100-1981)
 IEEE Std C37.101 -2006 (Revision of IEEE Std C37.101-1993/Incorporates IEEE Std C37.101-2006/Cor1:2007) - Redline
 IEEE Std C37.101-2006 (Revision of IEEE Std C37.101-1993/Incorporates IEEE Std C37.101-2006/Cor1:2007)
 IEEE Std C37.102 -2006 (Revision of IEEE Std C37.102-1995) - Redline
 IEEE Std C37.102-2006 (Revison of IEEE Std C37.102-1995)
-IEEE Std C37.13.1-2016 (Revision of IEEE Std C37.13.1-2006
-IEEE Std C37.13.1-2016 (Revision of IEEE Std C37.13.1-2006 - Redline
 IEEE Std C37.17-2012 (Revision of ANSI C37.17-1997 )
-IEEE Std C37.20.2b-1994 (Supplement to IEEE Std C37.20.2-1993)
 IEEE Std C37.20.3-2001 - IEEE Standard for metal-enclosed interrupter switchgear
 IEEE Std C37.230-2020 (Revision ofIEEE Std C37.230-2007)
 IEEE Std C37.230-2020 (Revision ofIEEE Std C37.230-2007) - Redline
-IEEE Std C37.37a-1992 (Supplement to ANSI/IEEE C37.37-1979)
 IEEE Std C37.63-1 997
 IEEE Std C50.12-2005 (Previously designated as ANSI C50.12-1982)
 IEEE Std C57.110&#x2122;-2018 (Revision of IEEE Std C57.110-2008)

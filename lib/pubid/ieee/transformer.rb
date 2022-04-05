@@ -8,32 +8,8 @@ module Pubid::Ieee
       update_month_year(date[:month], date[:year]).merge({ day: date[:day] })
     end
 
-    rule(revision_identifier: subtree(:revision)) do |data|
-      Identifier.new(**data[:revision])
-    end
-
-    rule(amendment_identifier: subtree(:amendment)) do |data|
-      Identifier.new(**data[:amendment])
-    end
-
-    rule(corrigendum_identifier: subtree(:corrigendum)) do |data|
-      Identifier.new(**data[:corrigendum])
-    end
-
-    rule(previous_amendments: subtree(:amendment)) do |data|
-      Identifier.new(**data[:amendment])
-    end
-
-    rule(supersedes_identifier: subtree(:supersedes)) do |data|
-      Identifier.new(**data[:supersedes])
-    end
-
-    rule(reaffirmation_identifier: subtree(:reaffirmation)) do |data|
-      { reaffirmation_of: Identifier.new(**data[:reaffirmation]) }
-    end
-
-    rule(incorporates_identifier: subtree(:incorporates)) do |data|
-      Identifier.new(**data[:incorporates])
+    rule(identifier: subtree(:identifier)) do |data|
+      Identifier.new(**data[:identifier])
     end
 
     def self.update_month_year(month, year)
