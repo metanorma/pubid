@@ -8166,3 +8166,15 @@ IEEE Std 315-1975 (Reaffirmed 1993)
 IEEE Std 402-1974 (Reaffirmed 1982)
 IEEE Std 792-1995 (Reaffirmation of IEEE Std 792-1988)
 IEEE No 29-1941 / ASA C77.1-1943 (Reaffirmed 1971)
+IEEE Std 1003.1, 2013 Edition (incorporates IEEE Std 1003.1-2008, and IEEE Std 1003.1-2008/Cor 1-2013)
+IEEE Std 1012-2016 (Revision of IEEE Std 1012-2012/ Incorporates IEEE Std 1012-2016/Cor1-2017)
+IEEE Std 1012-2016 (Revision of IEEE Std 1012-2012/ Incorporates IEEE Std 1012-2016/Cor1-2017) - Redline
+IEEE Std 1735-2014 (Incorporates IEEE Std 1735-2014/Cor 1-2015)
+IEEE Std 1815.1-2015 (Incorporates IEEE Std 1815.1-2015/Cor 1-2016)
+IEEE Std 80-2013 (Revision of IEEE Std 80-2000/ Incorporates IEEE Std 80-2013/Cor 1-2015)
+IEEE Std 80-2013 (Revision of IEEE Std 80-2000/ Incorporates IEEE Std 80-2013/Cor 1-2015) - Redline
+IEEE Std C95.1-2019 (Revision of IEEE Std C95.1-2005/ Incorporates IEEE Std C95.1-2019/Cor 1-2019)
+IEEE Std C95.1-2019 (Revision of IEEE Std C95.1-2005/ Incorporates IEEE Std C95.1-2019/Cor 1-2019) - Redline
+IEEE Std 1858-2016 (Incorporating IEEE Std 1858-2016/Cor 1-2017)
+P802-REV/D1.6 (Revision of IEEE Std 802-2001, incorporating IEEE Std 802a-2003, and IEEE Std 802b-2004)
+P802-REV/D2.0 (Revision of IEEE Std 802-2001, incorporating IEEE Std 802a-2003, and IEEE Std 802b-2004)

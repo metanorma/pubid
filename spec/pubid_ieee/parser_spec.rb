@@ -16,8 +16,8 @@ RSpec.describe Pubid::Ieee::Parser do
   end
 
   it "parses amendments" do
-    expect(subject.amendment).to parse(" (Amendment to IEEE Std 802.11-2012, as amended by IEEE Std 802.11ae-2012,"\
-      " IEEE Std 802.11aa-2012, IEEE Std 802.11ad-2012, and IEEE Std 802.11ac-2013)", trace: true)
+    expect(subject.amendment).to parse("Amendment to IEEE Std 802.11-2012, as amended by IEEE Std 802.11ae-2012,"\
+      " IEEE Std 802.11aa-2012, IEEE Std 802.11ad-2012, and IEEE Std 802.11ac-2013", trace: true)
   end
 
   it "parses previous amendments" do

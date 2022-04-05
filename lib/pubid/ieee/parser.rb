@@ -141,9 +141,9 @@ module Pubid::Ieee
     end
 
     rule(:revision) do
-      space >>
-        str("(Revision of ") >> (identifier_without_dual_pubids.as(:revision_identifier) >> str(" and ").maybe).repeat(1) >>
-        str(")")
+      (str("Revision of ") >>
+        (identifier_without_dual_pubids.as(:revision_identifier) >> str(" and ").maybe).repeat(1)
+      ).as(:revision)
     end
 
     rule(:previous_amendments) do
@@ -154,10 +154,8 @@ module Pubid::Ieee
     end
 
     rule(:amendment) do
-      space >>
-        str("(Amendment ") >> (str("of") | str("to")) >> space >>
-        identifier.as(:amendment_identifier) >> previous_amendments.maybe >>
-        str(")")
+      (str("Amendment ") >> (str("of") | str("to")) >> space >>
+        identifier.as(:amendment_identifier) >> previous_amendments.maybe).as(:amendment)
     end
 
     rule(:number_prefix) do
@@ -173,8 +171,22 @@ module Pubid::Ieee
     end
 
     rule(:supersedes) do
-      (str(" (") >> str("Supersedes ") >> (identifier_without_dual_pubids.as(:supersedes_identifier) >>
-        (str(" and ") | str(" ")).maybe).repeat(1) >> str(")")).as(:supersedes)
+      (str("Supersedes ") >> (identifier_without_dual_pubids.as(:supersedes_identifier) >>
+        (str(" and ") | str(" ")).maybe).repeat(1)).as(:supersedes)
+    end
+
+    rule(:incorporates) do
+      (
+        match("[Ii]") >> (str("ncorporates ") | str("ncorporating ")) >>
+          (identifier_without_dual_pubids.as(:incorporates_identifier) >> str(", and ").maybe).repeat(1)
+      ).as(:incorporates)
+    end
+
+    rule(:additional_parameters) do
+      (space? >> str("(") >> (
+        (reaffirmed | revision | amendment | supersedes | corrigendum_comment| incorporates) >>
+          ((str("/") | str(",")) >> space?).maybe).repeat >> str(")")
+      ).repeat >> redline.maybe
     end
 
     # Hack to exclude dual_pubids parsing for revisions and supersedes
@@ -196,21 +208,16 @@ module Pubid::Ieee
             if skip_parameters
               str("")
             else
-              reaffirmed.maybe >>
-              revision.as(:revision).maybe >>
-              amendment.as(:amendment).maybe >>
-              supersedes.maybe >>
-              corrigendum_comment.maybe >>
-              redline.maybe
+              additional_parameters.maybe
             end
         ).as(:parameters)
     end
 
     rule(:reaffirmed) do
-      (space >> str("(") >>
+      (
         (str("Reaffirmed ") >> year_digits.as(:year) |
-          str("Reaffirmation of ") >> identifier.as(:reaffirmation_identifier)) >>
-        str(")")).as(:reaffirmed)
+          str("Reaffirmation of ") >> identifier.as(:reaffirmation_identifier))
+      ).as(:reaffirmed)
     end
 
     rule(:corrigendum_prefix) do
@@ -223,8 +230,8 @@ module Pubid::Ieee
     end
 
     rule(:corrigendum_comment) do
-      ((space? >> str("(") >> (str("Corrigendum to ") | str("Corrigenda ") >> (str("to ") | str("of "))) >>
-        identifier.as(:corrigendum_identifier) >> str(")")).maybe).as(:corrigendum_comment)
+      ((str("Corrigendum to ") | str("Corrigenda ") >> (str("to ") | str("of "))) >>
+        identifier.as(:corrigendum_identifier)).as(:corrigendum_comment)
     end
 
     rule(:organizations) do

@@ -32,6 +32,10 @@ module Pubid::Ieee
       { reaffirmation_of: Identifier.new(**data[:reaffirmation]) }
     end
 
+    rule(incorporates_identifier: subtree(:incorporates)) do |data|
+      Identifier.new(**data[:incorporates])
+    end
+
     def self.update_month_year(month, year)
       { year: if year.length == 2
                 case year.to_i

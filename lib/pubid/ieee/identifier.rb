@@ -8,7 +8,7 @@ module Pubid::Ieee
     attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart,
                   :edition, :draft, :redline, :year, :month, :type, :alternative,
                   :draft_status, :revision, :adoption_year, :amendment, :supersedes,
-                  :corrigendum, :corrigendum_comment, :reaffirmed
+                  :corrigendum, :corrigendum_comment, :reaffirmed, :incorporates
 
     def initialize(type_status:, number:, parameters:,
                    organizations: { publisher: "IEEE" }, revision: nil)
@@ -66,7 +66,8 @@ module Pubid::Ieee
 
     def identifier(format = :short)
       "#{publisher}#{copublisher} #{draft_status(format)}#{type(format)}#{number}#{part}"\
-        "#{subpart}#{year}#{corrigendum}#{draft}#{edition}#{alternative}#{supersedes}#{reaffirmed}"
+        "#{subpart}#{year}#{corrigendum}#{draft}#{edition}#{alternative}#{supersedes}"\
+        "#{reaffirmed}#{incorporates}"
     end
 
     def copublisher
@@ -135,6 +136,8 @@ module Pubid::Ieee
 
     def draft
       return "" unless @draft
+
+      @draft = merge_parameters(@draft) if @draft.is_a?(Array)
 
       result = "/D#{@draft[:version].is_a?(Array) ? @draft[:version].join('D') : @draft[:version]}"
       result += ".#{@draft[:revision]}" if @draft[:revision]
@@ -207,6 +210,12 @@ module Pubid::Ieee
       return " (Reaffirmed #{@year})" if @reaffirmed.key?(:reaffirmation_of)
 
       " (Reaffirmed #{@reaffirmed[:year]})" if @reaffirmed[:year]
+    end
+
+    def incorporates
+      # " (Supersedes #{@supersedes.join(', ')})"
+
+      " (Incorporates #{@incorporates.join(', and ')})" if @incorporates
     end
   end
 end

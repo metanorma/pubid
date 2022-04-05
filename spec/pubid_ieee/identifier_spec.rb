@@ -566,4 +566,38 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "IEEE Std 1735-2014 (Incorporates IEEE Std 1735-2014/Cor 1-2015)" do
+    let(:pubid) { "IEEE Std 1735-2014 (Incorporates IEEE Std 1735-2014/Cor 1-2015)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 525-2007 (Revision of IEEE Std 525-1992/Incorporates IEEE Std 525-2007/Cor1:2008) - Redline" do
+    let(:original) { "IEEE Std 525-2007 (Revision of IEEE Std 525-1992/Incorporates IEEE Std 525-2007/Cor1-2008) - Redline" }
+    let(:pubid) { "IEEE Std 525-2007 (Incorporates IEEE Std 525-2007/Cor 1-2008) (Revision of IEEE Std 525-1992) - Redline" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 1003.1, 2013 Edition (incorporates IEEE Std 1003.1-2008, and IEEE Std 1003.1-2008/Cor 1-2013)" do
+    let(:original) { "IEEE Std 1003.1, 2013 Edition (incorporates IEEE Std 1003.1-2008, and IEEE Std 1003.1-2008/Cor 1-2013)" }
+    let(:pubid) { "IEEE Std 1003.1 Edition 2013 (Incorporates IEEE Std 1003.1-2008, and IEEE Std 1003.1-2008/Cor 1-2013)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 1012-2016 (Revision of IEEE Std 1012-2012/ Incorporates IEEE Std 1012-2016/Cor1-2017)" do
+    let(:original) { "IEEE Std 1012-2016 (Revision of IEEE Std 1012-2012/ Incorporates IEEE Std 1012-2016/Cor1-2017)" }
+    let(:pubid) { "IEEE Std 1012-2016 (Incorporates IEEE Std 1012-2016/Cor 1-2017) (Revision of IEEE Std 1012-2012)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "P802-REV/D2.0 (Revision of IEEE Std 802-2001, incorporating IEEE Std 802a-2003, and IEEE Std 802b-2004)" do
+    let(:original) { "P802-REV/D2.0 (Revision of IEEE Std 802-2001, incorporating IEEE Std 802a-2003, and IEEE Std 802b-2004)" }
+    let(:pubid) { "IEEE P802-REV/D2.0 (Incorporates IEEE Std 802a-2003, and IEEE Std 802b-2004) (Revision of IEEE Std 802-2001)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end

@@ -531,7 +531,6 @@ IEEE STD N323C-2009 (New Standard)
 IEEE Stad 204-1961
 IEEE Standard for Ethernet Amendment 3: Physical Layer Specifications and Management Parameters for 40 Gb/s and 100 Gb/s Operation over Fiber Optic Cables
 IEEE Std 1-1969 (Revision of AIEE No 1 -1962)
-IEEE Std 1003.1, 2013 Edition (incorporates IEEE Std 1003.1-2008, and IEEE Std 1003.1-2008/Cor 1-2013)
 IEEE Std 1003.1, 2016 Edition (incorporates IEEE Std 1003.1-2008, IEEE Std 1003.1-2008/Cor 1-2013, and IEEE Std 1003.1-2008/Cor 2-2016)
 IEEE Std 1003.1-1988/INT, 1992 Edition
 IEEE Std 1003.1-2001/Cor 1-2002. The Open Group Technical Standard Base Specifications, Issue 6
@@ -542,8 +541,6 @@ IEEE Std 1003.2-1992/INT, Dec. 1994 Ed.
 IEEE Std 1003.2-1992/INT, March 1994 Edition
 IEEE Std 1003.5-1992/INT Mar 1994
 IEEE Std 1003.5b-1996 (Includes IEEE Std 1003.5-1992)
-IEEE Std 1012-2016 (Revision of IEEE Std 1012-2012/ Incorporates IEEE Std 1012-2016/Cor1-2017)
-IEEE Std 1012-2016 (Revision of IEEE Std 1012-2012/ Incorporates IEEE Std 1012-2016/Cor1-2017) - Redline
 IEEE Std 1018-2013 (Revison of IEEE Std 1018-2004)
 IEEE Std 1018-2013 (Revison of IEEE Std 1018-2004) - Redline
 IEEE Std 1031-2011(Revision of IEEE Std 1031-2000)
@@ -597,12 +594,9 @@ IEEE Std 1671.6-2008 (Full-Use)
 IEEE Std 1673-2015 (2nd Printing)
 IEEE Std 1725-2011(Revision to IEEE Std 1725-2006)
 IEEE Std 1725-2011(Revision to IEEE Std 1725-2006) - Redline
-IEEE Std 1735-2014 (Incorporates IEEE Std 1735-2014/Cor 1-2015)
 IEEE Std 175-1960 (60 IRE 13 S1)
 IEEE Std 1800-2009 (Revision of IEEE Std1800-2005) - Redline
-IEEE Std 1815.1-2015 (Incorporates IEEE Std 1815.1-2015/Cor 1-2016)
 IEEE Std 1850-2010 (Revision of IEEE Std1850-2005) - Redline
-IEEE Std 1858-2016 (Incorporating IEEE Std 1858-2016/Cor 1-2017)
 IEEE Std 1904.1(TM)/Conformance02-2014 (Conformance to IEEE Std 1904.1-2013)
 IEEE Std 1904.1(TM)/Conformance03-2014 (Conformance to IEEE Std 1904.1-2013)
 IEEE Std 1904.1/Conformance01-2014 (Conformance to IEEE Std 1904.1-2013)
@@ -635,8 +629,6 @@ IEEE Std 738-2012 (Revision of IEEE Std 738-2006 - Incorporates IEEE Std 738-201
 IEEE Std 738-2012 Draft 10 (Revision of IEEE Std 738-2006)
 IEEE Std 739-1995 [The Bronze Book]
 IEEE Std 771-1998 (R2009)
-IEEE Std 80-2013 (Revision of IEEE Std 80-2000/ Incorporates IEEE Std 80-2013/Cor 1-2015)
-IEEE Std 80-2013 (Revision of IEEE Std 80-2000/ Incorporates IEEE Std 80-2013/Cor 1-2015) - Redline
 IEEE Std 802-2014 (Revision to IEEE Std 802-2001)
 IEEE Std 802-2014 (Revision to IEEE Std 802-2001) - Redline
 IEEE Std 802.10e-1993 and IEEE std 802.10f-1993
@@ -731,8 +723,6 @@ IEEE Std C57.94-2015 (Revison of IEEE Std C57.94-1982)
 IEEE Std C57.94-2015 (Revison of IEEE Std C57.94-1982) - Redline
 IEEE Std C62.35- 2010 (Revision of IEEE Std C62.35-1987)
 IEEE Std C62.43-2005 (R2010) (Revision of IEEE Std C62.43-1999)
-IEEE Std C95.1-2019 (Revision of IEEE Std C95.1-2005/ Incorporates IEEE Std C95.1-2019/Cor 1-2019)
-IEEE Std C95.1-2019 (Revision of IEEE Std C95.1-2005/ Incorporates IEEE Std C95.1-2019/Cor 1-2019) - Redline
 IEEE Std IEEE Std 1205&#x2122;-2014 (Revision of IEEE Std 1205-2000) (Revision of IEEE Std 1205-2000)
 IEEE Std IEEE Std 1205-2014 (Revision of IEEE Std 1205-2000) (Revision of IEEE Std 1205-2000)
 IEEE Std No 262 (USAS C57.12.90-1968)
@@ -1260,8 +1250,6 @@ P1936.1, 2020
 P20000-2, D1 December 2012
 P2745.1/D4+1, April 2019
 P7-4.3.2/D4 February 2010
-P802-REV/D1.6 (Revision of IEEE Std 802-2001, incorporating IEEE Std 802a-2003, and IEEE Std 802b-2004)
-P802-REV/D2.0 (Revision of IEEE Std 802-2001, incorporating IEEE Std 802a-2003, and IEEE Std 802b-2004)
 P802.11-REVmd/D2.0, December 2018
 P802.1Xck/D2.2, July 2018 (DRAFT Amendment to IEEE Std 802.1X&#x2013;2010 as amended by IEEE Std 802.1Xbx&#x2013;2014)
 P802.3bd/D2.2 August 2010. (Draft Amendment to IEEE Std 802.3-2008)
