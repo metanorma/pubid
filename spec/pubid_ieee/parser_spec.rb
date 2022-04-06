@@ -25,6 +25,10 @@ RSpec.describe Pubid::Ieee::Parser do
       " amended by IEEE Std 802.15.3d-2017, and IEEE Std 802.15.3e-2017", trace: true)
   end
 
+  it "parses draft date" do
+    expect(subject.draft_date).to parse(", 2011", trace: true)
+  end
+
   describe "parse identifiers from examples files" do
     shared_examples "parse identifiers from file" do
       it "parse identifiers from file" do

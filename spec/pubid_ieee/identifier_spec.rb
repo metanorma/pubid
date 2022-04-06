@@ -606,4 +606,25 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "NACE/IEEE P1835_D2, July 2014" do
+    let(:original) { "NACE/IEEE P1835_D2, July 2014" }
+    let(:pubid) { "NACE/IEEE P1835/D2, July 2014" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "NACE SP0XXX-2011/IEEE P1835_D1a, 2011" do
+    let(:original) { "NACE SP0XXX-2011/IEEE P1835_D1a, 2011" }
+    let(:pubid) { "NACE SP0XXX-2011 (IEEE P1835/D1a 2011)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "NACE SP0215-2015/IEEE Std 1839-2014" do
+    let(:original) { "NACE SP0215-2015/IEEE Std 1839-2014" }
+    let(:pubid) { "NACE SP0215-2015 (IEEE Std 1839-2014)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end

@@ -32,7 +32,7 @@ module Pubid::Ieee
 
     rule(:organization) do
       str("IEEE") | str("AIEE") | str("ANSI") | str("ASA") | str("NCTA") |
-        str("IEC") | str("ISO") | str("ASTM")
+        str("IEC") | str("ISO") | str("ASTM") | str("NACE") | str("NSF")
     end
 
     rule(:number) do
@@ -46,7 +46,6 @@ module Pubid::Ieee
     rule(:comma_month_year) do
       comma >> words.as(:month) >> space >> year_digits.as(:year)
     end
-
 
     rule(:edition) do
       (comma >> year_digits.as(:year) >> str(" Edition")) |
@@ -73,7 +72,7 @@ module Pubid::Ieee
     end
 
     rule(:draft_date) do
-      (space? >> comma | space) >> words.as(:month) >>
+      ((space? >> comma | space) >> words.as(:month)).maybe >>
         (
           ((space >> digits.as(:day)).maybe >> comma >> year_digits.as(:year)) |
             (comma_space >> match('\d').repeat(2, 4).as(:year))
@@ -90,9 +89,9 @@ module Pubid::Ieee
     rule(:draft) do
       # /D14, April 2020
       # /D7 November, 2019
-      space? >> draft_prefix >> draft_version >>
+      (space? >> draft_prefix >> draft_version >>
         ((dot | str("r")) >> (digits >> words?).as(:revision)).maybe >>
-        draft_date.maybe
+        draft_date.maybe).as(:draft)
     end
 
     rule(:part) do
@@ -130,11 +129,12 @@ module Pubid::Ieee
     end
 
     rule(:dual_pubids) do
-      space >>
+      space? >>
         (
           # identifier without parameters (like reaffirmed, amendmend etc)
           (str("(") >> (identifier_with_org_no_params.as(:alternative) >> str(", ").maybe).repeat(1) >> str(")")) |
           ((str("and ") | str("/ ")) >> identifier_no_params.as(:alternative)) |
+          (str("/") >> identifier_with_organization.as(:alternative)) |
           # should have an organization when no brackets
           identifier_with_organization.as(:alternative)
         )
@@ -202,10 +202,14 @@ module Pubid::Ieee
         number_prefix >> number >>
         (
           # IEEE P2410-D4, July 2019
-          (draft.as(:draft) |
-            part_subpart_year.maybe >> corrigendum.maybe >> draft.as(:draft).maybe
+          (draft |
+            part_subpart_year.maybe >> corrigendum.maybe >> draft.maybe
           ) >>
-            publication_date.maybe >>
+            if skip_parameters
+              str("")
+            else
+              publication_date.maybe
+            end >>
             edition.as(:edition).maybe >>
             # dual-PubIDs
             ((without_dual_pubids && str("")) || dual_pubids.maybe) >>
