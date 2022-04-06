@@ -222,5 +222,9 @@ module Pubid::Ieee
     def supplement
       " (Supplement to #{@supplement})" if @supplement
     end
+
+    def proposal
+      @number.to_s[0] == "P"
+    end
   end
 end
