@@ -25,8 +25,8 @@ module Pubid::Iso
       Urn.new(**get_params)
     end
 
-    def self.parse(code)
-      params = Parser.new.parse(code)
+    def self.parse(code_or_params)
+      params = code_or_params.is_a?(String) ? Parser.new.parse(code_or_params) : code_or_params
       # Parslet returns an array when match any copublisher
       # otherwise it's hash
       if params.is_a?(Array)
