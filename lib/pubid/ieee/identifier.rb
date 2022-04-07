@@ -9,21 +9,22 @@ module Pubid::Ieee
                   :edition, :draft, :redline, :year, :month, :type, :alternative,
                   :draft_status, :revision, :adoption_year, :amendment, :supersedes,
                   :corrigendum, :corrigendum_comment, :reaffirmed, :incorporates,
-                  :supplement, :proposal
+                  :supplement, :proposal, :iso_identifier
 
-    def initialize(type_status:, number:, parameters:,
-                   organizations: { publisher: "IEEE" }, revision: nil)
+    def initialize(type_status: nil, number: nil, parameters: nil,
+                   organizations: { publisher: "IEEE" }, revision: nil, iso_identifier: nil)
       @number = number
       @proposal = @number.to_s[0] == "P"
       @revision = revision
+      @iso_identifier = Pubid::Iso::Identifier.parse(iso_identifier) if iso_identifier
       [organizations, type_status, parameters].each do |data|
         case data
         when Hash
           set_values(data.transform_values do |v|
-            (v.is_a?(Array) && v.first.is_a?(Hash) && merge_parameters(v)) || v
+            (v.is_a?(Array) && v.first.is_a?(Hash) && Identifier.merge_parameters(v)) || v
           end)
         when Array
-          set_values(merge_parameters(data))
+          set_values(Identifier.merge_parameters(data))
         end
       end
     end
@@ -39,7 +40,7 @@ module Pubid::Ieee
       code
     end
 
-    def merge_parameters(params)
+    def self.merge_parameters(params)
       return params unless params.is_a?(Array)
 
       result = {}
@@ -56,14 +57,19 @@ module Pubid::Ieee
     end
 
     def self.parse(code)
-      new(**Transformer.new.apply(Parser.new.parse(update_old_code(code))).to_h)
+      parsed = Parser.new.parse(update_old_code(code))
+      new(**merge_parameters(Transformer.new.apply(parsed)))
 
     rescue Parslet::ParseFailed => failure
       raise Pubid::Ieee::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
     end
 
     def to_s(format = :short)
-      "#{identifier(format)}#{revision}#{amendment}#{redline}#{adoption}"
+      if @iso_identifier
+        "#{@iso_identifier.to_s(with_language_code: :single)}#{revision}#{redline}"
+      else
+        "#{identifier(format)}#{revision}#{amendment}#{redline}#{adoption}"
+      end
     end
 
     def identifier(format = :short)
@@ -139,7 +145,7 @@ module Pubid::Ieee
     def draft
       return "" unless @draft
 
-      @draft = merge_parameters(@draft) if @draft.is_a?(Array)
+      @draft = Identifier.merge_parameters(@draft) if @draft.is_a?(Array)
 
       result = "/D#{@draft[:version].is_a?(Array) ? @draft[:version].join('D') : @draft[:version]}"
       result += ".#{@draft[:revision]}" if @draft[:revision]

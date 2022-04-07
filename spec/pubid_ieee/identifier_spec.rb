@@ -631,4 +631,29 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "IEEE/ISO/IEC 8802-3:2021/Amd8-2021" do
+    let(:pubid) { "IEEE/ISO/IEC 8802-3:2021/Amd8-2021" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEC/IEEE 60214-2:2019" do
+    let(:pubid) { "IEC/IEEE 60214-2:2019" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEC/IEEE 62271-37-082:2012(E) (Revision of IEEE Std C37.082-1982) - Redline" do
+    let(:pubid) { "IEC/IEEE 62271-37-082:2012(E) (Revision of IEEE Std C37.082-1982) - Redline" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 802.5r and IEEE 802.5j, 1998 Edition (ISO/IEC 8802-5:1998/Amd.1)" do
+    let(:original) { "IEEE Std 802.5r and IEEE 802.5j, 1998 Edition (ISO/IEC 8802-5:1998/Amd.1)" }
+    let(:pubid) { "IEEE Std 802.5r Edition 1998 (IEEE 802.5j, ISO/IEC 8802-5:1998/Amd 1)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end

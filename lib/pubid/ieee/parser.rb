@@ -1,3 +1,5 @@
+require "pubid-iso"
+
 module Pubid::Ieee
   class Parser < Parslet::Parser
     rule(:digits) do
@@ -252,15 +254,19 @@ module Pubid::Ieee
     end
 
     rule(:identifier_with_org_no_params) do
-      parameters(organizations >> space?, skip_parameters: true)
+      iso_identifier | parameters(organizations >> space?, skip_parameters: true)
     end
 
     rule(:identifier_no_params) do
-      parameters((organizations >> space).maybe, skip_parameters: true)
+      parameters((organizations >> space).maybe, skip_parameters: true, without_dual_pubids: true)
+    end
+
+    rule(:iso_identifier) do
+      Pubid::Iso::Parser.new.identifier.as(:iso_identifier) >> additional_parameters.as(:parameters).maybe
     end
 
     rule(:identifier) do
-      parameters((organizations >> space).maybe)
+      iso_identifier | parameters((organizations >> space).maybe)
     end
 
     rule(:identifier_without_dual_pubids) do
