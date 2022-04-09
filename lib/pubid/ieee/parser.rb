@@ -135,7 +135,7 @@ module Pubid::Ieee
         (
           # identifier without parameters (like reaffirmed, amendmend etc)
           (str("(") >> (identifier_with_org_no_params.as(:alternative) >> str(", ").maybe).repeat(1) >> str(")")) |
-          ((str("and ") | str("/ ")) >> identifier_no_params.as(:alternative)) |
+          ((str("and ") | str("/ ") | space) >> identifier_no_params.as(:alternative)) |
           (str("/") >> identifier_with_organization.as(:alternative)) |
           # should have an organization when no brackets
           identifier_with_organization.as(:alternative)
@@ -262,11 +262,13 @@ module Pubid::Ieee
     end
 
     rule(:iso_identifier) do
-      Pubid::Iso::Parser.new.identifier.as(:iso_identifier) >> additional_parameters.as(:parameters).maybe
+      Pubid::Iso::Parser.new.identifier.as(:iso_identifier)# >> additional_parameters.as(:parameters).maybe
     end
 
     rule(:identifier) do
-      iso_identifier | parameters((organizations >> space).maybe)
+      iso_identifier >> additional_parameters.as(:parameters) |
+      iso_identifier >> str(" ") >> parameters((organizations >> space).maybe) | iso_identifier |
+         parameters((organizations >> space).maybe)
     end
 
     rule(:identifier_without_dual_pubids) do

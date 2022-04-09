@@ -66,16 +66,28 @@ module Pubid::Ieee
 
     def to_s(format = :short)
       if @iso_identifier
-        "#{@iso_identifier.to_s(with_language_code: :single)}#{revision}#{redline}"
+        "#{@iso_identifier.to_s(with_language_code: :single)}#{dual_identifier}"
       else
-        "#{identifier(format)}#{revision}#{amendment}#{redline}#{adoption}"
+        "#{identifier(format)}#{parameters}#{adoption}"
       end
     end
 
+    def dual_identifier
+      @number ? " (#{identifier})#{parameters}" : "#{identifier}#{parameters}"
+    end
+
+    def publisher
+      "#{@publisher}#{copublisher} " if @publisher && @number
+    end
+
     def identifier(format = :short)
-      "#{publisher}#{copublisher} #{draft_status(format)}#{type(format)}#{number}#{part}"\
-        "#{subpart}#{year}#{corrigendum}#{draft}#{edition}#{alternative}#{supersedes}"\
-        "#{reaffirmed}#{incorporates}#{supplement}"
+      "#{publisher}#{draft_status(format)}#{type(format)}#{number}#{part}"\
+        "#{subpart}#{year}"
+    end
+
+    def parameters
+      "#{corrigendum}#{draft}#{edition}#{alternative}#{supersedes}"\
+      "#{reaffirmed}#{incorporates}#{supplement}#{revision}#{amendment}#{redline}"
     end
 
     def copublisher

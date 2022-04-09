@@ -144,7 +144,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEEE 1076.4 IEC 61691-5 First edition 2004-10" do
     let(:original) { "IEEE 1076.4 IEC 61691-5 First edition 2004-10" }
-    let(:pubid) { "IEEE 1076.4 (IEC 61691-5 Edition 1.0 2004-10)" }
+    let(:pubid) { "IEEE 1076.4 (IEC 61691-5) Edition 1.0 2004-10" }
 
     it_behaves_like "converts pubid to pubid"
   end
@@ -653,6 +653,13 @@ RSpec.describe Pubid::Ieee::Identifier do
   context "IEEE Std 802.5r and IEEE 802.5j, 1998 Edition (ISO/IEC 8802-5:1998/Amd.1)" do
     let(:original) { "IEEE Std 802.5r and IEEE 802.5j, 1998 Edition (ISO/IEC 8802-5:1998/Amd.1)" }
     let(:pubid) { "IEEE Std 802.5r Edition 1998 (IEEE 802.5j, ISO/IEC 8802-5:1998/Amd 1)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO/IEC 15288:2008(E) IEEE Std 15288-2008 (Revision of IEEE Std 15288-2004)" do
+    let(:original) { "ISO/IEC 15288:2008(E) IEEE Std 15288-2008 (Revision of IEEE Std 15288-2004)" }
+    let(:pubid) { "ISO/IEC 15288:2008(E) (IEEE Std 15288-2008) (Revision of IEEE Std 15288-2004)" }
 
     it_behaves_like "converts pubid to pubid"
   end
