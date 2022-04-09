@@ -442,4 +442,26 @@ RSpec.describe Pubid::Iso::Identifier do
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "when assigns amendment" do
+    let(:original) { "ISO/IEC 17025:2005" }
+    let(:pubid) { "ISO/IEC 17025:2005/Amd 1:2010" }
+
+    it "generates correct PubID with amendment" do
+      subject.amendment_version = 1
+      subject.amendment_number = 2010
+      expect(subject.to_s).to eq(pubid)
+    end
+  end
+
+  context "when assigns corrigendum" do
+    let(:original) { "ISO/IEC 17025:2005" }
+    let(:pubid) { "ISO/IEC 17025:2005/Cor 1:2010" }
+
+    it "generates correct PubID with corrigendum" do
+      subject.corrigendum_version = 1
+      subject.corrigendum_number = 2010
+      expect(subject.to_s).to eq(pubid)
+    end
+  end
 end

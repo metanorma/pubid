@@ -131,12 +131,12 @@ module Pubid::Iso
 
     def supplements
       result = ""
-      if @amendment
+      if @amendment_version
         result += (@amendment_stage && "/#{@amendment_stage} ") || "/"
         result += amendment
       end
 
-      if @corrigendum
+      if @corrigendum_version
         result += (@corrigendum_stage && "/#{@corrigendum_stage} ") || "/"
         result += corrigendum
       end
