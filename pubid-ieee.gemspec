@@ -31,5 +31,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor"
   spec.add_dependency "lightly"
   spec.add_dependency "parslet"
-  spec.add_dependency "pubid-iso", "~> 0.1.2"
+  spec.add_dependency "pubid-iso", "~> 0.1.3"
 end

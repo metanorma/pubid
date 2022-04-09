@@ -9,14 +9,21 @@ module Pubid::Ieee
                   :edition, :draft, :redline, :year, :month, :type, :alternative,
                   :draft_status, :revision, :adoption_year, :amendment, :supersedes,
                   :corrigendum, :corrigendum_comment, :reaffirmed, :incorporates,
-                  :supplement, :proposal, :iso_identifier
+                  :supplement, :proposal, :iso_identifier, :iso_amendment
 
     def initialize(type_status: nil, number: nil, parameters: nil,
-                   organizations: { publisher: "IEEE" }, revision: nil, iso_identifier: nil)
+                   organizations: { publisher: "IEEE" }, revision: nil, iso_identifier: nil,
+                   iso_amendment: nil)
       @number = number
       @proposal = @number.to_s[0] == "P"
       @revision = revision
-      @iso_identifier = Pubid::Iso::Identifier.parse(iso_identifier) if iso_identifier
+      if iso_identifier
+        @iso_identifier = Pubid::Iso::Identifier.parse(iso_identifier)
+        if iso_amendment
+          @iso_identifier.amendment_version = iso_amendment[:version]
+          @iso_identifier.amendment_number = iso_amendment[:year]
+        end
+      end
       [organizations, type_status, parameters].each do |data|
         case data
         when Hash
@@ -66,10 +73,14 @@ module Pubid::Ieee
 
     def to_s(format = :short)
       if @iso_identifier
-        "#{@iso_identifier.to_s(with_language_code: :single)}#{dual_identifier}"
+        "#{@iso_identifier.to_s(with_language_code: :single)}#{iso_amendment}#{dual_identifier}"
       else
         "#{identifier(format)}#{parameters}#{adoption}"
       end
+    end
+
+    def iso_amendment
+
     end
 
     def dual_identifier

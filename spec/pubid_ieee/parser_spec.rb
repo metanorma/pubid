@@ -33,6 +33,10 @@ RSpec.describe Pubid::Ieee::Parser do
     expect(subject.dual_pubids).to parse(" (ISO/IEC 8802-5:1998/Amd.1)", trace: true)
   end
 
+  it "parses iso amendment" do
+    expect(subject.iso_amendment).to parse("/Amd8-2021", trace: true)
+  end
+
   describe "parse identifiers from examples files" do
     shared_examples "parse identifiers from file" do
       it "parse identifiers from file" do

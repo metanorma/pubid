@@ -205,7 +205,7 @@ module Pubid::Ieee
         (
           # IEEE P2410-D4, July 2019
           (draft |
-            part_subpart_year.maybe >> corrigendum.maybe >> draft.maybe
+            part_subpart_year.maybe >> corrigendum.maybe >> draft.maybe >> iso_amendment.maybe
           ) >>
             if skip_parameters
               str("")
@@ -244,6 +244,15 @@ module Pubid::Ieee
         identifier.as(:identifier)).as(:corrigendum_comment)
     end
 
+    rule(:iso_amendment_prefix) do
+      str("/") >> str("Amd")
+    end
+
+    rule(:iso_amendment) do
+      # IEEE 1672-2006/Cor 1-2008
+      (iso_amendment_prefix >> digits.as(:version) >> (dash >> year_digits.as(:year)).maybe).as(:iso_amendment)
+    end
+
     rule(:organizations) do
       (organization.as(:publisher) >> (str("/") >> space? >> organization.as(:copublisher)).repeat)
         .as(:organizations)
@@ -265,8 +274,12 @@ module Pubid::Ieee
       Pubid::Iso::Parser.new.identifier.as(:iso_identifier)# >> additional_parameters.as(:parameters).maybe
     end
 
+    rule(:iso_parameters) do
+      iso_amendment.maybe >> additional_parameters.as(:parameters)
+    end
+
     rule(:identifier) do
-      iso_identifier >> additional_parameters.as(:parameters) |
+      iso_identifier >> iso_parameters |
       iso_identifier >> str(" ") >> parameters((organizations >> space).maybe) | iso_identifier |
          parameters((organizations >> space).maybe)
     end

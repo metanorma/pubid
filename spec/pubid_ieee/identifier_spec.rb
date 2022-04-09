@@ -632,12 +632,6 @@ RSpec.describe Pubid::Ieee::Identifier do
     it_behaves_like "converts pubid to pubid"
   end
 
-  context "IEEE/ISO/IEC 8802-3:2021/Amd8-2021" do
-    let(:pubid) { "IEEE/ISO/IEC 8802-3:2021/Amd8-2021" }
-
-    it_behaves_like "converts pubid to pubid"
-  end
-
   context "IEC/IEEE 60214-2:2019" do
     let(:pubid) { "IEC/IEEE 60214-2:2019" }
 
@@ -650,16 +644,16 @@ RSpec.describe Pubid::Ieee::Identifier do
     it_behaves_like "converts pubid to pubid"
   end
 
-  context "IEEE Std 802.5r and IEEE 802.5j, 1998 Edition (ISO/IEC 8802-5:1998/Amd.1)" do
-    let(:original) { "IEEE Std 802.5r and IEEE 802.5j, 1998 Edition (ISO/IEC 8802-5:1998/Amd.1)" }
-    let(:pubid) { "IEEE Std 802.5r Edition 1998 (IEEE 802.5j, ISO/IEC 8802-5:1998/Amd 1)" }
+  context "ISO/IEC 15288:2008(E) IEEE Std 15288-2008 (Revision of IEEE Std 15288-2004)" do
+    let(:original) { "ISO/IEC 15288:2008(E) IEEE Std 15288-2008 (Revision of IEEE Std 15288-2004)" }
+    let(:pubid) { "ISO/IEC 15288:2008(E) (IEEE Std 15288-2008) (Revision of IEEE Std 15288-2004)" }
 
     it_behaves_like "converts pubid to pubid"
   end
 
-  context "ISO/IEC 15288:2008(E) IEEE Std 15288-2008 (Revision of IEEE Std 15288-2004)" do
-    let(:original) { "ISO/IEC 15288:2008(E) IEEE Std 15288-2008 (Revision of IEEE Std 15288-2004)" }
-    let(:pubid) { "ISO/IEC 15288:2008(E) (IEEE Std 15288-2008) (Revision of IEEE Std 15288-2004)" }
+  context "IEEE/ISO/IEC 8802-3:2021/Amd8-2021" do
+    let(:original) { "IEEE/ISO/IEC 8802-3:2021/Amd8-2021" }
+    let(:pubid) { "IEEE/IEC/ISO 8802-3:2021/Amd 8:2021" }
 
     it_behaves_like "converts pubid to pubid"
   end
