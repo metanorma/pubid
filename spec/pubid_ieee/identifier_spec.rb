@@ -657,4 +657,29 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "IEEE Std C37.111-2013 (IEC 60255-24 Edition 2.0 2013-04)" do
+    let(:pubid) { "IEEE Std C37.111-2013 (IEC 60255-24 Edition 2.0 2013-04)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEC 61691-6 Edition 1.0 2009-12" do
+    let(:pubid) { "IEC 61691-6 Edition 1.0 2009-12" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 802.3cp-2021 (Amendment to IEEE 802.3-2018)" do
+    let(:pubid) { "IEEE Std 802.3cp-2021 (Amendment to IEEE 802.3-2018)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 802.1s-2002 (Amendment to IEEE Std 802.1Q, 1998 Edition)" do
+    let(:original) { "IEEE Std 802.1s-2002 (Amendment to IEEE Std 802.1Q, 1998 Edition)" }
+    let(:pubid) { "IEEE Std 802.1s-2002 (Amendment to IEEE Std 802.1Q Edition 1998)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end

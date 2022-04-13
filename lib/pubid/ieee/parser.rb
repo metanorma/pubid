@@ -42,7 +42,7 @@ module Pubid::Ieee
     end
 
     rule(:type) do
-      str("Std") | str("STD") | str("Standard")# | str("Draft Std") | str("Draft")
+      str("Std") | str("STD") | str("Standard")
     end
 
     rule(:comma_month_year) do
@@ -133,8 +133,8 @@ module Pubid::Ieee
     rule(:dual_pubids) do
       space? >>
         (
-          # identifier without parameters (like reaffirmed, amendmend etc)
-          (str("(") >> (identifier_with_org_no_params.as(:alternative) >> str(", ").maybe).repeat(1) >> str(")")) |
+          (str("(") >> (iso_identifier >> iso_parameters).as(:alternative) >> str(")") |
+            str("(") >> (parameters(organizations >> space?).as(:alternative) >> str(", ").maybe).repeat(1) >> str(")")) |
           ((str("and ") | str("/ ") | space) >> identifier_no_params.as(:alternative)) |
           (str("/") >> identifier_with_organization.as(:alternative)) |
           # should have an organization when no brackets
@@ -152,12 +152,18 @@ module Pubid::Ieee
       # IEEE P802.3bp/D3.4, April 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015,
       # IEEE Std 802.3by-201X, and IEEE Std 802.3bq-201X)
       str(",").maybe >> str(" as amended by ") >>
-        (identifier.as(:identifier) >> (str(", ") >> str("and ").maybe).maybe).repeat(1)
+        (identifier_inside_brackets.as(:identifier) >> (str(", ") >> str("and ").maybe).maybe).repeat(1)
+    end
+
+    # match everything before "," or ")" or " as"
+    rule(:identifier_inside_brackets) do
+      ((str(" as") | str(")") | str(",")).absent? >> any).repeat(1) >>
+        (str(", ") >> year_digits >> str(" Edition")).maybe
     end
 
     rule(:amendment) do
       (str("Amendment ") >> (str("of") | str("to")) >> space >>
-        identifier.as(:identifier) >> previous_amendments.maybe).as(:amendment)
+        identifier_inside_brackets.as(:identifier) >> previous_amendments.maybe).as(:amendment)
     end
 
     rule(:number_prefix) do
@@ -271,7 +277,7 @@ module Pubid::Ieee
     end
 
     rule(:iso_identifier) do
-      Pubid::Iso::Parser.new.identifier.as(:iso_identifier)# >> additional_parameters.as(:parameters).maybe
+      Pubid::Iso::Parser.new.identifier.as(:iso_identifier)
     end
 
     rule(:iso_parameters) do

@@ -9,7 +9,11 @@ module Pubid::Ieee
     end
 
     rule(identifier: subtree(:identifier)) do |data|
-      Identifier.new(**data[:identifier])
+      if data[:identifier].is_a?(Parslet::Slice)
+        Identifier.new(**Parser.new.identifier.parse(data[:identifier].to_s))
+      else
+        Identifier.new(**data[:identifier])
+      end
     end
 
     def self.update_month_year(month, year)
