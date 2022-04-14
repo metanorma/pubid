@@ -7878,15 +7878,7 @@ IEEE P802.3bw/D3.1, June 2015 (Amendment of IEEE Std 802.3-201x)
 IEEE P802.3bw/D3.3, August 2015 (Amendment of IEEE Std 802.3-201x)
 IEEE P802.3by/D3.0, November 2015 (Amendment of IEEE Std 802.3-2015)
 IEEE P802.11ay/D6.0, September 2020 (Amendment to IEEE P802.11REVmd/D4.0 as amended by IEEE P802.11ax/D7.0)
-IEEE P802.3bp/D3.1, January 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015, IEEE Std 802.3by-201X, and IEEE Std 802.3bq-201X)
-IEEE P802.3bp/D3.2CMP, February 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015, IEEE Std 802.3by-201X, and IEEE Std 802.3bq-201X)
-IEEE P802.3bp/D3.3, March 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015, IEEE Std 802.3by-201X, and IEEE Std 802.3bq-201X)
-IEEE P802.3bp/D3.4, April 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015, IEEE Std 802.3by-201X, and IEEE Std 802.3bq-201X)
-IEEE P802.3bq/D3.1, February 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015 and IEEE Std 802.3by-201X)
 IEEE P802.3by/D3.2, March 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015)
-IEEE P802.3cd/D3.3, June 2018 (Amendment of IEEE Std 802.3-201x as amended by IEEE Std 802.3cb-201x and IEEE Std 802.3bt-201x)
-IEEE P802.3cd/D3.4, July 2018 (Amendment of IEEE Std 802.3-201x as amended by IEEE Std 802.3cb-201x and IEEE Std 802.3bt-201x)
-IEEE P802.3cd/D3.5, September 2018 (Amendment of IEEE Std 802.3-2018 as amended by IEEE Std 802.3cb-201x and IEEE Std 802.3bt-201x)
 IEEE Std 802.11aa-2012 (Amendment to IEEE Std 802.11-2012 as amended by IEEE Std 802.11ae-2012)
 IEEE Std 802.11aj-2018 (Amendment to IEEE Std 802.11-2016 as amended by IEEE Std 802.11ai-2016 and IEEE Std 802.11ah-2016)
 IEEE Std 802.11ak-2018 (Amendment to IEEE Std 802.11-2016 as amended by IEEE Std 802.11ai-2016, IEEE Std 802.11ah-2016, and IEEE Std 802.11aj-2018)
@@ -7928,7 +7920,6 @@ IEEE Std 802.3bj-2014 (Amendment to IEEE Std 802.3-2012 as amended by IEEE Std 8
 IEEE Std 802.3bn-2016 (Amendment to IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015, IEEE Std 802.3by-2016, IEEE Std 802.3bq-2016, IEEE Std 802.3bp-2016, and IEEE Std 802.3br-2016)
 IEEE Std 802.3bp-2016 (Amendment to IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015, IEEE Std 802.3by-2016, and IEEE Std 802.3bq-2016)
 IEEE Std 802.3bq-2016 (Amendment to IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015, and IEEE Std 802.3by-2016)
-IEEE Std 802.3br-2016 (Amendment to IEEE Std 802.3-2015 as amended by IEEE St802.3bw-2015, IEEE Std 802.3by-2016, IEEE Std 802.3bq-2016, and IEEE Std 802.3bp-2016)
 IEEE Std 802.3br-2016 (Amendment to IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015, IEEE Std 802.3by-2016, IEEE Std 802.3bq-2016, and IEEE Std 802.3bp-2016)
 IEEE Std 802.3bt-2018 (Amendment to IEEE Std 802.3-2018 as amended by IEEE Std 802.3cb-2018)
 IEEE Std 802.3bu-2016 (Amendment to IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015, IEEE Std 802.3by-2016, IEEE Std 802.3bq-2016, IEEE Std 802.3bp-2016, IEEE Std 802.3br-2016, IEEE Std 802.3bn-2016, and IEEE Std 802.3bz-2016)
@@ -7945,7 +7936,6 @@ IEEE Std 802.3cq-2020 (Amendment to IEEE Std 802.3-2018 as amended by IEEE Std 8
 IEEE Std 802.3cr-2021 (Amendment to IEEE Std 802.3-2018 as amended by IEEE 802.3cb-2018, IEEE 802.3bt-2018, IEEE 802.3cd-2018, IEEE 802.3cn-2019, IEEE 802.3cg-2019, IEEE 802.3cq-2020, IEEE 802.3cm-2020, IEEE 802.3ch-2020, and IEEE 802.3ca-2020)
 IEEE Std 802c-2017 (Amendment to IEEE Std 802-2014 as amended by IEEE Std 802d-2017)
 IEEE Std C95.1b-2004 (Amendment to IEEE Std C95.1-1991 as amended by IEEE Std C95.1a-1998)
-P802.3bq/D3.3, April 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015 and IEEE Std 802.3by-201X)
 IEEE P802.11af/D5.0 (Amendment to IEEE Std 802.11-2012, as amended by IEEE Std 802.11ae-2012, IEEE Std 802.11aa-2012, IEEE Std 802.11ad-2012, and IEEE Std 802.11ac_D5.0)
 IEEE P802.11af/D6.0, October 2013 (Amendment to IEEE Std 802.11-2012, as amended by IEEE Std 802.11ae-2012, IEEE Std 802.11aa-2012, IEEE Std 802.11ad-2012, and IEEE Std 802.11ac_D7.0)
 IEEE P802.11aq/D3.0 October 2015 (Amendment to IEEE Std 802.11REVmc, as amended by IEEE Std 802.11ah-2016 and IEEE Std 802.11ai-2016)
@@ -8130,7 +8120,6 @@ P1900.6-2011/Cor1/D3, August 2015
 P802.1AX-2014_Cor1/D0.5 April 27, 2016
 P802.3-2015_Cor1/D2.0, December 2016
 PC37.012-2014_Cor1/D1, June 2015
-PC37.30.2/D043 Rev 18, May 2015
 PC57.12.60-2009/Cor 1/D1, December 2012
 IEEE Approved Std P1015_Cor 1/D1, Jan 2007
 IEEE Approved Std PC37.09-1999/Cor1/D7.2, Nov 2006
@@ -8439,3 +8428,6 @@ IEEE Std 8802-2-1994/Amd3
 IEEE/ISO/IEC 8802-1Q-2020/Amd31-2021
 IEEE/ISO/IEC 8802-3:2021/Amd7-2021
 IEEE/ISO/IEC 8802-3:2021/Amd8-2021
+IEEE P802.3cd/D3.3, June 2018 (Amendment of IEEE Std 802.3-201x as amended by IEEE Std 802.3cb-201x and IEEE Std 802.3bt-201x)
+IEEE P802.3cd/D3.4, July 2018 (Amendment of IEEE Std 802.3-201x as amended by IEEE Std 802.3cb-201x and IEEE Std 802.3bt-201x)
+IEEE P802.3cd/D3.5, September 2018 (Amendment of IEEE Std 802.3-2018 as amended by IEEE Std 802.3cb-201x and IEEE Std 802.3bt-201x)

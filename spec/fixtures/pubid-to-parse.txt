@@ -1000,3 +1000,11 @@ Preview: IEEE Technology Report on Wake-Up Radio
 Std ISO IEC 16085 - 2006
 USAS C57.12.00-1968 (Revision of C57.12.00-1965 &amp; C57.12.00a-1966)
 Unapproved Draft Std ISO/IEC FDIS 15288:2007(E) IEEE P15288/D3,
+IEEE P802.3bp/D3.1, January 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015, IEEE Std 802.3by-201X, and IEEE Std 802.3bq-201X)
+IEEE P802.3bp/D3.2CMP, February 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015, IEEE Std 802.3by-201X, and IEEE Std 802.3bq-201X)
+IEEE P802.3bp/D3.3, March 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015, IEEE Std 802.3by-201X, and IEEE Std 802.3bq-201X)
+IEEE P802.3bp/D3.4, April 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015, IEEE Std 802.3by-201X, and IEEE Std 802.3bq-201X)
+IEEE P802.3bq/D3.1, February 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015 and IEEE Std 802.3by-201X)
+EEE Std 802.3br-2016 (Amendment to IEEE Std 802.3-2015 as amended by IEEE St802.3bw-2015, IEEE Std 802.3by-2016, IEEE Std 802.3bq-2016, and IEEE Std 802.3bp-2016)
+P802.3bq/D3.3, April 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015 and IEEE Std 802.3by-201X)
+PC37.30.2/D043 Rev 18, May 2015

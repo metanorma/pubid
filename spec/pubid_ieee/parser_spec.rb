@@ -89,7 +89,13 @@ RSpec.describe Pubid::Ieee::Parser do
         f = open("spec/fixtures/#{examples_file}")
         f.readlines.each do |pub_id|
           next if pub_id.match?("^#")
-          expect(subject).to parse(pub_id.split("#").first.strip.chomp)
+
+          pub_id = pub_id.split("#").first.strip.chomp
+          expect do
+            Pubid::Ieee::Transformer.new.apply(subject.parse(pub_id))
+          rescue Exception => failure
+            raise Pubid::Ieee::Errors::ParseError, "couldn't parse #{pub_id}"
+          end.not_to raise_error
         end
       end
     end
