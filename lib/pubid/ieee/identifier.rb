@@ -9,11 +9,12 @@ module Pubid::Ieee
                   :edition, :draft, :redline, :year, :month, :type, :alternative,
                   :draft_status, :revision, :adoption_year, :amendment, :supersedes,
                   :corrigendum, :corrigendum_comment, :reaffirmed, :incorporates,
-                  :supplement
+                  :supplement, :proposal
 
     def initialize(type_status:, number:, parameters:,
                    organizations: { publisher: "IEEE" }, revision: nil)
       @number = number
+      @proposal = @number.to_s[0] == "P"
       @revision = revision
       [organizations, type_status, parameters].each do |data|
         case data
@@ -221,10 +222,6 @@ module Pubid::Ieee
 
     def supplement
       " (Supplement to #{@supplement})" if @supplement
-    end
-
-    def proposal
-      @number.to_s[0] == "P"
     end
   end
 end
