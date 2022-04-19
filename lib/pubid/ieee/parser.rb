@@ -142,6 +142,15 @@ module Pubid::Ieee
         )
     end
 
+    rule(:dual_pubid_without_parameters) do
+      space? >>
+        (
+          (str("(") >> (iso_identifier >> iso_parameters).as(:alternative) >> str(")") |
+            str("(") >> (identifier_no_params.as(:alternative) >> str(", ").maybe).repeat(1) >> str(")")) |
+            identifier_no_params.as(:alternative)
+        )
+    end
+
     rule(:revision) do
       (str("Revision of ") >>
         (identifier_without_dual_pubids.as(:identifier) >> str(" and ").maybe).repeat(1)
@@ -218,7 +227,11 @@ module Pubid::Ieee
             else
               publication_date.maybe
             end >>
-            edition.as(:edition).maybe >>
+            if skip_parameters
+              str("")
+            else
+              edition.as(:edition).maybe
+            end >>
             # dual-PubIDs
             ((without_dual_pubids && str("")) || dual_pubids.maybe) >>
             if skip_parameters
@@ -281,7 +294,7 @@ module Pubid::Ieee
     end
 
     rule(:iso_parameters) do
-      iso_amendment.maybe >> additional_parameters.as(:parameters)
+      iso_amendment.maybe >> (dual_pubid_without_parameters.maybe >> edition.as(:edition).maybe >> additional_parameters).as(:parameters)
     end
 
     rule(:identifier) do
