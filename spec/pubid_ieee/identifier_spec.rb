@@ -721,4 +721,28 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  describe "parse identifiers from examples files" do
+    shared_examples "parse identifiers from file" do
+      it "parse identifiers from file" do
+        f = open("spec/fixtures/#{examples_file}")
+        f.readlines.each do |pub_id|
+          next if pub_id.match?("^#")
+
+          pub_id = pub_id.split("#").first.strip.chomp
+          expect do
+            described_class.parse(pub_id)
+          rescue Exception => failure
+            raise Pubid::Ieee::Errors::ParseError, "couldn't parse #{pub_id}"
+          end.not_to raise_error
+        end
+      end
+    end
+
+    context "parses identifiers from pubid-parsed.txt" do
+      let(:examples_file) { "pubid-parsed.txt" }
+
+      it_behaves_like "parse identifiers from file"
+    end
+  end
 end
