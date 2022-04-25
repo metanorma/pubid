@@ -144,7 +144,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEEE 1076.4 IEC 61691-5 First edition 2004-10" do
     let(:original) { "IEEE 1076.4 IEC 61691-5 First edition 2004-10" }
-    let(:pubid) { "IEEE 1076.4 Edition 1.0 2004-10 (IEC 61691-5)" }
+    let(:pubid) { "IEEE 1076.4 (IEC 61691-5) Edition 1.0 2004-10" }
 
     it_behaves_like "converts pubid to pubid"
   end
@@ -685,6 +685,12 @@ RSpec.describe Pubid::Ieee::Identifier do
 
   context "IEC 61671:2012(E) (IEEE Std 1671-2010)" do
     let(:pubid) { "IEC 61671:2012(E) (IEEE Std 1671-2010)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEC/IEEE 62582-1:2011 Edition 1.0 2011-08" do
+    let(:pubid) { "IEC/IEEE 62582-1:2011 Edition 1.0 2011-08" }
 
     it_behaves_like "converts pubid to pubid"
   end

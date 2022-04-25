@@ -57,8 +57,29 @@ RSpec.describe Pubid::Ieee::Parser do
     expect(subject.iso_amendment).to parse("/Amd8-2021", trace: true)
   end
 
-  it "parses identifier with edition" do
-    expect(subject.identifier_no_params).to parse("IEC 61691-6 Edition 1.0 2009-12", trace: true)
+  describe "#identifier" do
+    let(:identifier) { "IEEE 802.3-2018" }
+    let(:iso_identifier) { "IEC/IEEE 62582-1:2011"}
+
+    it "parses iso identifier" do
+      expect(subject.identifier).to parse("#{iso_identifier} Edition 1.0 2011-08", trace: true)
+      # expect(subject.identifier.parse("#{iso_identifier} Edition 1.0 2011-08", trace: true))
+      #   .to eq([{ iso_identifier: { identifier: iso_identifier } }])
+    end
+
+    it "parses identifier with edition" do
+      expect(subject.identifier).to parse("IEC 61691-6 Edition 1.0 2009-12", trace: true)
+    end
+  end
+
+  describe "#iso_identifier" do
+    let(:iso_identifier) { "IEC/IEEE 62582-1:2011"}
+
+    it "parses iso identifier" do
+      expect(subject.iso_identifier).to parse(iso_identifier, trace: true)
+      # expect(subject.identifier.parse("#{iso_identifier} Edition 1.0 2011-08", trace: true))
+      #   .to eq([{ iso_identifier: { identifier: iso_identifier } }])
+    end
   end
 
   describe "#dual_pubids" do
@@ -80,6 +101,13 @@ RSpec.describe Pubid::Ieee::Parser do
   describe "#edition" do
     it "parses edition" do
       expect(subject.edition).to parse(" Edition 2.0 2013-04", trace: true)
+    end
+  end
+
+  describe "#iso_parameters" do
+    it "parses just edition" do
+      expect(subject.iso_parameters)
+        .to parse(" Edition 2.0 2013-04", trace: true)
     end
   end
 

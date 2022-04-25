@@ -146,8 +146,8 @@ module Pubid::Ieee
       space? >>
         (
           (str("(") >> (iso_identifier >> iso_parameters).as(:alternative) >> str(")") |
-            str("(") >> (identifier_no_params.as(:alternative) >> str(", ").maybe).repeat(1) >> str(")")) |
-            identifier_no_params.as(:alternative)
+            str("(") >> (identifier_no_params.as(:alternative) >> str(", ").maybe).repeat(1) >> str(")"))# |
+          #identifier_no_params.as(:alternative)
         )
     end
 
@@ -290,17 +290,50 @@ module Pubid::Ieee
     end
 
     rule(:iso_identifier) do
-      Pubid::Iso::Parser.new.identifier.as(:iso_identifier)
+      iso_parser = Pubid::Iso::Parser.new
+      # Pubid::Iso::Parser.new.identifier.as(:iso_identifier)
+        # Withdrawn e.g: WD/ISO 10360-5:2000
+        # for French and Russian PubIDs starting with Guide type
+      ((iso_parser.guide_prefix.as(:type) >> str(" ")).maybe >>
+      (iso_parser.stage.as(:stage) >> str(" ")).maybe >>
+        iso_parser.originator >> ((str(" ") | str("/")) >>
+      # for ISO/FDIS
+      (iso_parser.type | iso_parser.stage.as(:stage))).maybe >>
+      # for ISO/IEC WD TS 25025
+      str(" ").maybe >> ((iso_parser.stage.as(:stage) | iso_parser.type) >> str(" ")).maybe >>
+      iso_parser.digits.as(:number) >>
+      # for identifiers like ISO 5537/IDF 26
+      (str("|") >> (str("IDF") >> str(" ") >> digits).as(:joint_document)).maybe >>
+        iso_parser.part.maybe >> iso_parser.iteration.maybe >>
+      (str(" ").maybe >> str(":") >> iso_parser.year).maybe >>
+      # stage before amendment
+      (
+      # stage before corrigendum
+      ((iso_parser.amendment >> iso_parser.corrigendum.maybe) | iso_parser.corrigendum).maybe) >>
+        iso_parser.language.maybe).as(:iso_identifier)
     end
 
     rule(:iso_parameters) do
       iso_amendment.maybe >> (dual_pubid_without_parameters.maybe >> edition.as(:edition).maybe >> additional_parameters).as(:parameters)
     end
 
+    rule(:identifier_before_edition) do
+      ((str(" Edition")).absent? >> any).repeat(1)
+    end
+
     rule(:identifier) do
+      iso_or_ieee_identifier
+      # (identifier_before_edition.as(:iso_identifier).as(:iso_identifier) >> iso_parameters) |
+    end
+
+    rule(:iso_or_ieee_identifier) do
       iso_identifier >> iso_parameters |
-      iso_identifier >> str(" ") >> parameters((organizations >> space).maybe) | iso_identifier |
-         parameters((organizations >> space).maybe)
+        iso_identifier >> str(" ") >> parameters((organizations >> space).maybe) | iso_identifier |
+        parameters((organizations >> space).maybe)
+    end
+
+    rule(:parameters_with_optional_organizations) do
+      parameters((organizations >> space).maybe)
     end
 
     rule(:identifier_without_dual_pubids) do
