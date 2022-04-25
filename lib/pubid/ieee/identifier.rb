@@ -40,6 +40,10 @@ module Pubid::Ieee
       hash.each { |key, value| send("#{key}=", value.is_a?(Parslet::Slice) && value.to_s || value) }
     end
 
+    def self.add_missing_bracket(code)
+      code.count("(") > code.count(")") ? "#{code})" : code
+    end
+
     def self.update_old_code(code)
       UPDATE_CODES.each do |from, to|
         code = code.gsub(from.match?(/^\/.*\/$/) ? Regexp.new(from[1..-2]) : from, to)
@@ -121,7 +125,7 @@ module Pubid::Ieee
 
     def type(format)
       result = @draft && format == :full ? "Draft " : ""
-      result += "#{@type} " if @type
+      result += "#{@type.capitalize} " if @type
       result
     end
 

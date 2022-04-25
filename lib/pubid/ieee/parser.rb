@@ -29,7 +29,7 @@ module Pubid::Ieee
     rule(:year) do
       # -2014, April 2015
       dash >> year_digits.as(:adoption_year) >> publication_date |
-        (dot | dash) >> year_digits.as(:year)
+        (dot | dash) >> year_digits.as(:year) >> str("(E)").maybe
     end
 
     rule(:organization) do
@@ -255,7 +255,9 @@ module Pubid::Ieee
 
     rule(:corrigendum) do
       # IEEE 1672-2006/Cor 1-2008
-      (corrigendum_prefix >> digits.as(:version) >> (dash >> year_digits.as(:year)).maybe).as(:corrigendum)
+      (
+        corrigendum_prefix >> digits.as(:version) >> ((dash | str(":")) >> year_digits.as(:year)).maybe
+      ).as(:corrigendum)
     end
 
     rule(:corrigendum_comment) do
@@ -337,6 +339,7 @@ module Pubid::Ieee
     end
 
     rule(:identifier_without_dual_pubids) do
+      iso_identifier >> iso_parameters |
       parameters((organizations >> space).maybe, without_dual_pubids: true)
     end
 

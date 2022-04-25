@@ -694,4 +694,31 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     it_behaves_like "converts pubid to pubid"
   end
+
+  context "IEC 62529:2012(E) (IEEE Std 1641-2010" do
+    let(:original) { "IEC 62529:2012(E) (IEEE Std 1641-2010" }
+    let(:pubid) { "IEC 62529:2012(E) (IEEE Std 1641-2010)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEC 62526:2007(E) IEEE 1450.1-2005(E)" do
+    let(:original) { "IEC 62526:2007(E) IEEE 1450.1-2005(E)" }
+    let(:pubid) { "IEC 62526:2007(E) (IEEE 1450.1-2005)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE Std 11073-10101-2019 (Revision of ISO/IEEE 11073-10101:2004)" do
+    let(:pubid) { "IEEE Std 11073-10101-2019 (Revision of ISO/IEEE 11073-10101:2004)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "IEEE STD 525-2007 (Revision of IEEE Std 525-1992/Incorporates IEEE Std 525-2007/Cor1:2008)" do
+    let(:original) { "IEEE STD 525-2007 (Revision of IEEE Std 525-1992/Incorporates IEEE Std 525-2007/Cor1:2008)" }
+    let(:pubid) { "IEEE Std 525-2007 (Incorporates IEEE Std 525-2007/Cor 1-2008) (Revision of IEEE Std 525-1992)" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
 end

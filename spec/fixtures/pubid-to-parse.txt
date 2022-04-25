@@ -84,9 +84,6 @@ IEC 61523-3 First edition 2004-09; IEEE 1497
 IEC 62050 Ed. 1 (IEEE Std 1076.6-2004)
 IEC 62243 Second edition 2012-06 IEEE Std 1232
 IEC 62271-111 First edition 2005-11; IEEE C37.60
-IEC 62526:2007(E) IEEE 1450.1-2005(E)
-IEC 62529:2012(E) (IEEE Std 1641-2010
-IEC 62529:2012(E) (IEEE Std 1641-2010 - Redline
 IEC 62539 First Edition 2007-07 IEEE 930
 IEC 62860-1:2013(E) IEEE Std. 1620.1-2006
 IEC FDIS 62271-111/IEEE Std C37.60/D7, August 2017
@@ -442,7 +439,6 @@ IEEE S-135 (IPCEA P46-426)
 IEEE SA Industry Connections--IEEE 802 Nendica Report: Intelligent Lossless Data Center Networks
 IEEE SId 342-1973 (ANSI C37.0731-1973)
 IEEE STD 1636-2009 (New Trial-Use Standard)
-IEEE STD 525-2007 (Revision of IEEE Std 525-1992/Incorporates IEEE Std 525-2007/Cor1:2008)
 IEEE STD N323C-2009 (New Standard)
 IEEE Stad 204-1961
 IEEE Standard for Ethernet Amendment 3: Physical Layer Specifications and Management Parameters for 40 Gb/s and 100 Gb/s Operation over Fiber Optic Cables
@@ -464,10 +460,6 @@ IEEE Std 1076-2002 (Revision of IEEE Std 1076, 2002 Edn)
 IEEE Std 1076/INT-1991
 IEEE Std 108-1955; AIEE No.450-April 1955
 IEEE Std 1106-2005(R2011) (Revision of IEEE Std 1106-1995)
-IEEE Std 11073-10101-2019 (Revision of ISO/IEEE 11073-10101:2004)
-IEEE Std 11073-10101-2019 (Revision of ISO/IEEE 11073-10101:2004) - Redline
-IEEE Std 11073-20601-2014 (Revision of ISO/IEEE 11073-20601:2010)
-IEEE Std 11073-20601-2014 (Revision of ISO/IEEE 11073-20601:2010) - Redline
 IEEE Std 11073-30200a-2011 (Amendment to ISO/IEEE Std 11073-30200:2004)
 IEEE Std 1184-2006(R2011) (Revision of IEEE 1184-1994)
 IEEE Std 120-1955; ASME PTC 19.6-1955
@@ -523,7 +515,6 @@ IEEE Std 404-2000 (Revision of IEEE Std 404 1993)
 IEEE Std 446-1995 [The Orange Book]
 IEEE Std 45-1983 (revision of ANSI/IEEE Std 45-1977)
 IEEE Std 493-1997 [IEEE Gold Book]
-IEEE Std 525-2007 (Revision of IEEE Std 525-1992/Incorporates IEEE Std 525-2007/Cor1:2008) - Redline
 IEEE Std 551-2006 [The Violet Book]
 IEEE Std 59 IRE 12, S1
 IEEE Std 600 (Issued October 1983 for trial use.)
@@ -598,7 +589,6 @@ IEEE Std C2-2002/Preprint
 IEEE Std C2-2007/Preprint
 IEEE Std C37.09-2018 Cor1-2021
 IEEE Std C37.101 -2006 (Revision of IEEE Std C37.101-1993/Incorporates IEEE Std C37.101-2006/Cor1:2007) - Redline
-IEEE Std C37.101-2006 (Revision of IEEE Std C37.101-1993/Incorporates IEEE Std C37.101-2006/Cor1:2007)
 IEEE Std C37.102 -2006 (Revision of IEEE Std C37.102-1995) - Redline
 IEEE Std C37.102-2006 (Revison of IEEE Std C37.102-1995)
 IEEE Std C37.17-2012 (Revision of ANSI C37.17-1997 )
@@ -824,7 +814,6 @@ ISO/IEC/IEEE 26511 First edition 2011-12-01; Corrected version 2012-03-15
 ISO/IEC/IEEE 26512 First Edition, 2011-06-01
 ISO/IEC/IEEE 26515 First edition 2011-12-01; Corrected version 2012-03-15
 ISO/IEC/IEEE 31320-1:2012 (Adoption of IEEE Std 1320.1-1998 )
-ISO/IEC/IEEE 42010:2011(E) (Revision of ISO/IEC 42010:2007 and IEEE Std 1471-2000)
 ISO/IEC/IEEE 8802-11:2012(E) (Revison of ISO/IEC/IEEE 8802-11-2005 and Amendments)
 ISO/IEC/IEEE 8802-11:2012(E) (Revison of ISO/IEC/IEEE 8802-11-2005 and Amendments) - Redline
 ISO/IEC/IEEE 8802-11:2012/Amd.4:2015(E) (Adoption of IEEE Std 802.11ac-2013)

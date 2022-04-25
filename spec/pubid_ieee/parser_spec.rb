@@ -42,6 +42,21 @@ RSpec.describe Pubid::Ieee::Parser do
       expect(subject.additional_parameters.parse(" (Amendment to #{amendment_identifier})", trace: true))
         .to eq([{ amendment: { identifier: amendment_identifier } }])
     end
+
+    it "parses iso revision" do
+      expect(subject.additional_parameters).to parse(" (Revision of ISO/IEEE 11073-10101:2004)", trace: true)
+    end
+
+    it "parses incorporates with revision" do
+      expect(subject.additional_parameters)
+        .to parse(" (Revision of IEEE Std 525-1992/Incorporates IEEE Std 525-2007/Cor 1:2008)", trace: true)
+    end
+  end
+
+  describe "#incorporates" do
+    it do
+      expect(subject.incorporates).to parse("Incorporates IEEE Std 525-2007/Cor 1:2008", trace: true)
+    end
   end
 
   it "parses previous amendments" do
