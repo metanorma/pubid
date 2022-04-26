@@ -303,7 +303,7 @@ module Pubid::Ieee
       (iso_parser.type | iso_parser.stage.as(:stage))).maybe >>
       # for ISO/IEC WD TS 25025
       str(" ").maybe >> ((iso_parser.stage.as(:stage) | iso_parser.type) >> str(" ")).maybe >>
-      iso_parser.digits.as(:number) >>
+        (str("P").maybe >> iso_parser.digits).as(:number) >>
       # for identifiers like ISO 5537/IDF 26
       (str("|") >> (str("IDF") >> str(" ") >> digits).as(:joint_document)).maybe >>
         iso_parser.part.maybe >> iso_parser.iteration.maybe >>
