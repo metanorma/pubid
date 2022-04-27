@@ -735,6 +735,27 @@ RSpec.describe Pubid::Ieee::Identifier do
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "IEEE Std 24748-3:2012" do
+      let(:original) { "IEEE Std 24748-3:2012" }
+      let(:pubid) { "IEEE 24748-3:2012" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "IEC/IEEE P62271-37-013:2015 D13.4" do
+      let(:original) { "IEC/IEEE P62271-37-013:2015 D13.4" }
+      let(:pubid) { "IEC/IEEE P62271-37-013:2015/D13.4" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/IEC/IEEE P24765/D3:2017" do
+      let(:original) { "ISO/IEC/IEEE P24765/D3:2017" }
+      let(:pubid) { "ISO/IEC/IEEE P24765:2017/D3" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 
   describe "parse identifiers from examples files" do
@@ -748,7 +769,8 @@ RSpec.describe Pubid::Ieee::Identifier do
           expect do
             described_class.parse(pub_id)
           rescue Exception => failure
-            raise Pubid::Ieee::Errors::ParseError, "couldn't parse #{pub_id}"
+            raise Pubid::Ieee::Errors::ParseError,
+                  "couldn't parse #{pub_id}\n#{failure.message}"
           end.not_to raise_error
         end
       end

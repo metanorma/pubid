@@ -316,7 +316,7 @@ module Pubid::Ieee
     end
 
     rule(:iso_parameters) do
-      iso_amendment.maybe >> (dual_pubid_without_parameters.maybe >> edition.as(:edition).maybe >> additional_parameters).as(:parameters)
+      iso_amendment.maybe >> (dual_pubid_without_parameters.maybe >> edition.as(:edition).maybe >> draft.maybe >> additional_parameters).as(:parameters)
     end
 
     rule(:identifier_before_edition) do
