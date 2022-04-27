@@ -46,7 +46,7 @@ module Pubid::Ieee
 
     def self.update_old_code(code)
       UPDATE_CODES.each do |from, to|
-        code = code.gsub(from.match?(/^\/.*\/$/) ? Regexp.new(from[1..-2]) : from, to)
+        code = code.gsub(from.match?(/^\/.*\/$/) ? Regexp.new(from[1..-2]) : /^#{Regexp.escape(from)}$/, to)
       end
       code
     end
