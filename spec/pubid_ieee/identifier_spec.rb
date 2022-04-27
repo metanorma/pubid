@@ -728,6 +728,13 @@ RSpec.describe Pubid::Ieee::Identifier do
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "IEEE P1642 D8, November 2011" do
+      let(:original) { "IEEE P1642 D8, November 2011" }
+      let(:pubid) { "IEEE P1642/D8, November 2011" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 
   describe "parse identifiers from examples files" do

@@ -38,7 +38,7 @@ module Pubid::Ieee
     end
 
     rule(:number) do
-      ((digits | match("[A-Z]")).repeat(1) >> match("[a-z]").maybe).as(:number)
+      str("D").absent? >> ((digits | match("[A-Z]")).repeat(1) >> match("[a-z]").maybe).as(:number)
     end
 
     rule(:type) do
@@ -70,7 +70,7 @@ module Pubid::Ieee
     end
 
     rule(:draft_prefix) do
-      str("/") | str("_") | dash
+      space? >> str("/") | str("_") | dash | space
     end
 
     rule(:draft_date) do
@@ -91,7 +91,7 @@ module Pubid::Ieee
     rule(:draft) do
       # /D14, April 2020
       # /D7 November, 2019
-      (space? >> draft_prefix >> draft_version >>
+      (draft_prefix >> draft_version >>
         ((dot | str("r")) >> (digits >> words?).as(:revision)).maybe >>
         draft_date.maybe).as(:draft)
     end
