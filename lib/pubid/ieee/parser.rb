@@ -55,7 +55,9 @@ module Pubid::Ieee
         year_digits.as(:year) >> (dash >>
           month_digits.as(:month)).maybe) |
         #, February 2018 (E)
-        (comma_month_year >> str(" (E)")) |
+        (comma_month_year >> str("(E)")) |
+        # (comma_month_year >> space? >> str("(E)")) |
+        # comma_month_year |
         # First edition 2002-11-01
         space >> str("First").as(:version) >>
         str(" edition ") >>
@@ -63,6 +65,11 @@ module Pubid::Ieee
           month_digits.as(:month) >> (dash >>
           day_digits.as(:day)).maybe
 
+    end
+
+    rule(:revision) do
+      (comma_month_year >> space? >> str("(E)")) |
+      comma_month_year
     end
 
     rule(:draft_status) do
@@ -291,8 +298,39 @@ module Pubid::Ieee
       parameters((organizations >> space).maybe, skip_parameters: true, without_dual_pubids: true)
     end
 
+    rule(:iso_part) do
+      (str("-") | str("/")) >> str(" ").maybe >>
+        # (str("-") >> iso_parser.stage).absent? >>
+        (match('\d') >>
+          ((str("-") >> iso_parser.stage).absent? >>
+          (match['\d[A-Z]'] | str("-"))).repeat).as(:part)
+    end
+
+    rule(:iso_part_stage_iteration) do
+      iso_part >>
+      (str("-") >> iso_parser.stage.as(:stage)) >> iso_parser.iteration.maybe
+    end
+
+    rule(:iso_stage_part_iteration) do
+      ((str("-") | str("/")) >> iso_parser.stage.as(:stage)) >>
+        iso_part.maybe >> iso_parser.iteration.maybe
+    end
+
+    # add rule when don't have stage
+    #
+    rule(:iso_part_iteration) do
+      iso_part >> iso_parser.iteration.maybe
+    end
+
+    rule(:iso_part_stage_iteration_matcher) do
+      # consumes "/"
+      iso_stage_part_iteration |
+      iso_part_stage_iteration |
+      iso_part_iteration
+
+    end
+
     rule(:iso_identifier) do
-      iso_parser = Pubid::Iso::Parser.new
       # Pubid::Iso::Parser.new.identifier.as(:iso_identifier)
         # Withdrawn e.g: WD/ISO 10360-5:2000
         # for French and Russian PubIDs starting with Guide type
@@ -306,7 +344,7 @@ module Pubid::Ieee
         (str("P").maybe >> iso_parser.digits).as(:number) >>
       # for identifiers like ISO 5537/IDF 26
       (str("|") >> (str("IDF") >> str(" ") >> digits).as(:joint_document)).maybe >>
-        iso_parser.part.maybe >> iso_parser.iteration.maybe >>
+        iso_part_stage_iteration_matcher.maybe >>
       (str(" ").maybe >> str(":") >> iso_parser.year).maybe >>
       # stage before amendment
       (
@@ -316,7 +354,9 @@ module Pubid::Ieee
     end
 
     rule(:iso_parameters) do
-      iso_amendment.maybe >> (dual_pubid_without_parameters.maybe >> edition.as(:edition).maybe >> draft.maybe >> additional_parameters).as(:parameters)
+      iso_amendment.maybe >> (dual_pubid_without_parameters.maybe >>
+        (publication_date >> space? >> str("(E)").maybe).maybe >>
+        edition.as(:edition).maybe >> draft.maybe >> additional_parameters).as(:parameters)
     end
 
     rule(:identifier_before_edition) do
@@ -329,8 +369,9 @@ module Pubid::Ieee
     end
 
     rule(:iso_or_ieee_identifier) do
-      iso_identifier >> iso_parameters |
-        iso_identifier >> str(" ") >> parameters((organizations >> space).maybe) | iso_identifier |
+      (iso_identifier >> iso_parameters) |
+        # (iso identifier) >> space >> (ieee identifier) ?
+        iso_identifier >> space >> parameters((organizations >> space).maybe) | iso_identifier |
         parameters((organizations >> space).maybe)
     end
 
@@ -348,5 +389,9 @@ module Pubid::Ieee
     end
 
     rule(:root) { identifier }
+
+    def iso_parser
+      Pubid::Iso::Parser.new
+    end
   end
 end

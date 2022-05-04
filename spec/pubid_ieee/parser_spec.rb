@@ -15,6 +15,12 @@ RSpec.describe Pubid::Ieee::Parser do
     expect(subject.parameters(Parslet::str(""))).not_to parse(" C22-1925", trace: true)
   end
 
+  describe "#parameters" do
+    it "parses iso stage and revision date" do
+      expect(subject.parameters(Parslet::str(""))).to parse("P26514/FDIS, August 2021", trace: true)
+    end
+  end
+
   describe "#amendment" do
     it "parses amendments" do
       expect(subject.amendment).to parse("Amendment to IEEE Std 802.11-2012, as amended by IEEE Std 802.11ae-2012,"\
@@ -88,12 +94,48 @@ RSpec.describe Pubid::Ieee::Parser do
   end
 
   describe "#iso_identifier" do
-    let(:iso_identifier) { "IEC/IEEE 62582-1:2011"}
+    let(:iso_identifier) { "IEC/IEEE 62582-1:2011" }
 
     it "parses iso identifier" do
       expect(subject.iso_identifier).to parse(iso_identifier, trace: true)
       # expect(subject.identifier.parse("#{iso_identifier} Edition 1.0 2011-08", trace: true))
       #   .to eq([{ iso_identifier: { identifier: iso_identifier } }])
+    end
+
+    it "parses iso identifier with stage after document number" do
+      expect(subject.iso_identifier.parse("ISO/IEC/IEEE P26514/FDIS")[:iso_identifier]).to include(stage: "FDIS")
+    end
+
+    it "parses stage as part of document number" do
+      # expect(subject.iso_identifier.parse("ISO/IEC/IEEE P15288-DIS-1403")[:iso_identifier])
+      #   .to include({part: "1403", stage: "DIS"})
+      expect(subject.iso_identifier).to parse("IEEE/ISO/IEC P29119-2-DIS", trace: true)
+      expect(subject.iso_identifier.parse("IEEE/ISO/IEC P29119-2-DIS")[:iso_identifier])
+        .to include(part: "2", stage: "DIS")
+    end
+  end
+
+  describe "#iso_part_stage_iteration" do
+    it { expect(subject.iso_part_stage_iteration).to parse("-2-DIS", trace: true) }
+  end
+
+  describe "#iso_stage_part_iteration" do
+    it { expect(subject.iso_stage_part_iteration).to parse("-DIS-1403") }
+  end
+
+  describe "#iso_part_stage_iteration_matcher" do
+    it { expect(subject.iso_part_stage_iteration_matcher).to parse("-2-DIS", trace: true) }
+    it { expect(subject.iso_part_stage_iteration_matcher).to parse("-DIS-1403") }
+    it { expect(subject.iso_part_stage_iteration_matcher).to parse("/FDIS") }
+  end
+
+  describe "#iso_part" do
+    it "don't match stage as last part" do
+      expect(subject.iso_part).not_to parse("-2-DIS", trace: true)
+    end
+
+    it "match number without stage" do
+      expect(subject.iso_part).to parse("-2", trace: true)
     end
   end
 
@@ -116,6 +158,10 @@ RSpec.describe Pubid::Ieee::Parser do
   describe "#edition" do
     it "parses edition" do
       expect(subject.edition).to parse(" Edition 2.0 2013-04", trace: true)
+    end
+
+    it "parses edition with (E)" do
+      expect(subject.edition).to parse(", April 2014(E)", trace: true)
     end
   end
 

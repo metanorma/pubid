@@ -124,7 +124,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE/ISO/IEC P90003, February 2018 (E)" do
       let(:original) { "IEEE/ISO/IEC P90003, February 2018 (E)" }
-      let(:pubid) { "IEEE/IEC/ISO P90003 Edition 2018-02" }
+      let(:pubid) { "IEEE/IEC/ISO P90003, February 2018" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -383,14 +383,14 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE No 323, April 1971" do
       let(:original) { "IEEE No 323, April 1971" }
-      let(:pubid) { "IEEE 323-1971" }
+      let(:pubid) { "IEEE 323, April 1971" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE P15026-2, April 2011" do
       let(:original) { "IEEE P15026-2, April 2011" }
-      let(:pubid) { "IEEE P15026-2-2011" }
+      let(:pubid) { "IEEE P15026-2, April 2011" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -404,7 +404,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE/IEC P60076-57-1202, July 2014" do
       let(:original) { "IEEE/IEC P60076-57-1202, July 2014" }
-      let(:pubid) { "IEEE/IEC P60076-57-1202-2014" }
+      let(:pubid) { "IEEE/IEC P60076-57-1202, July 2014" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -753,6 +753,34 @@ RSpec.describe Pubid::Ieee::Identifier do
     context "ISO/IEC/IEEE P24765/D3:2017" do
       let(:original) { "ISO/IEC/IEEE P24765/D3:2017" }
       let(:pubid) { "ISO/IEC/IEEE P24765:2017/D3" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/IEC FDIS P15289, April 2014" do
+      let(:original) { "ISO/IEC FDIS P15289, April 2014(E)" }
+      let(:pubid) { "ISO/IEC FDIS P15289, April 2014" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/IEC/IEEE P26514/FDIS, August 2021" do
+      let(:original) { "ISO/IEC/IEEE P26514/FDIS, August 2021" }
+      let(:pubid) { "ISO/IEC/IEEE FDIS P26514, August 2021" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/IEC/IEEE P15288-DIS-1403" do
+      let(:original) { "ISO/IEC/IEEE P15288-DIS-1403" }
+      let(:pubid) { "ISO/IEC/IEEE DIS P15288-1403" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "IEEE/ISO/IEC P29119-2-DIS, December 2011" do
+      let(:original) { "IEEE/ISO/IEC P29119-2-DIS, December 2011" }
+      let(:pubid) { "IEEE/IEC/ISO DIS P29119-2, December 2011" }
 
       it_behaves_like "converts pubid to pubid"
     end

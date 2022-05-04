@@ -97,7 +97,7 @@ module Pubid::Ieee
 
     def identifier(format = :short)
       "#{publisher}#{draft_status(format)}#{type(format)}#{number}#{part}"\
-        "#{subpart}#{year}"
+        "#{subpart}#{year}#{revision_date}"
     end
 
     def parameters
@@ -130,6 +130,7 @@ module Pubid::Ieee
     end
 
     def year
+      return "" if @month
       return "" unless @year
 
       if @corrigendum_comment
@@ -188,6 +189,11 @@ module Pubid::Ieee
 
     def revision
       " (Revision of #{@revision.join(' and ')})" if @revision
+    end
+
+    def revision_date
+      return nil unless @month
+      ", #{@month} #{@year}"
     end
 
     def amendment
