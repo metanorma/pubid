@@ -15,12 +15,6 @@ RSpec.describe Pubid::Ieee::Parser do
     expect(subject.parameters(Parslet::str(""))).not_to parse(" C22-1925", trace: true)
   end
 
-  describe "#parameters" do
-    it "parses iso stage and revision date" do
-      expect(subject.parameters(Parslet::str(""))).to parse("P26514/FDIS, August 2021", trace: true)
-    end
-  end
-
   describe "#amendment" do
     it "parses amendments" do
       expect(subject.amendment).to parse("Amendment to IEEE Std 802.11-2012, as amended by IEEE Std 802.11ae-2012,"\
