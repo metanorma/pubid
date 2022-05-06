@@ -301,7 +301,7 @@ module Pubid::Ieee
     rule(:iso_part) do
       (str("-") | str("/")) >> str(" ").maybe >>
         # (str("-") >> iso_parser.stage).absent? >>
-        (match('\d') >>
+        ((match('\d') | str("A")) >>
           ((str("-") >> iso_parser.stage).absent? >>
           (match['\d[A-Z]'] | str("-"))).repeat).as(:part)
     end
@@ -312,7 +312,8 @@ module Pubid::Ieee
     end
 
     rule(:iso_stage_part_iteration) do
-      ((str("-") | str("/")) >> iso_parser.stage.as(:stage)) >>
+      # don't consume draft from IEEE format
+      ((str("-") | str("/")) >> (str("D") >> digits).absent? >> iso_parser.stage.as(:stage)) >>
         iso_part.maybe >> iso_parser.iteration.maybe
     end
 

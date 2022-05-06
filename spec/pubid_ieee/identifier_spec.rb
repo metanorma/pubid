@@ -784,6 +784,32 @@ RSpec.describe Pubid::Ieee::Identifier do
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "IEC/IEEE P60214-2, FDIS 2018" do
+      let(:original) { "IEC/IEEE P60214-2, FDIS 2018" }
+      let(:pubid) { "IEC/IEEE FDIS P60214-2-2018(E)" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/IEC/IEEE 8802-A:2015(E)" do
+      let(:pubid) { "ISO/IEC/IEEE 8802-A:2015(E)" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/IEC DIS P26511.2, May 2017" do
+      let(:original) { "ISO/IEC DIS P26511.2, May 2017" }
+      let(:pubid) { "ISO/IEC DIS P26511-2, May 2017" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/IEC/IEEE CD P26513/D1, August 2015" do
+      let(:pubid) { "ISO/IEC/IEEE CD P26513/D1, August 2015" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 
   describe "parse identifiers from examples files" do
