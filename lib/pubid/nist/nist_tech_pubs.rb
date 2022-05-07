@@ -44,7 +44,7 @@ module Pubid::Nist
 
       def parse_docid(doc)
         id = doc.at("publisher_item/item_number", "publisher_item/identifier")
-          .text.sub(%r{^/}, "")
+               &.text&.sub(%r{^/}, "")
         doi = doc.at("doi_data/doi").text.gsub("10.6028/", "")
         title = doc.at("titles/title").text
         title += " #{doc.at('titles/subtitle').text}" if doc.at("titles/subtitle")
@@ -56,7 +56,7 @@ module Pubid::Nist
         when "10.6028/NIST.HB.150-10-1995" then id.sub!(/150-10$/, "150-10-1995")
         end
 
-        { id: id, doi: doi, title: title }
+        { id: id || doi, doi: doi, title: title }
       end
 
       def comply_with_pubid
