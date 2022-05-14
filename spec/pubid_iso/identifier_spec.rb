@@ -443,6 +443,15 @@ RSpec.describe Pubid::Iso::Identifier do
     it_behaves_like "converts pubid to pubid"
   end
 
+  context "ISO 19110/Amd 1:2011" do
+    let(:original) { "ISO 19110/Amd 1:2011" }
+    let(:pubid) { "ISO 19110/Amd 1:2011" }
+    let(:urn) { "urn:iso:std:iso:19110:amd:2011:v1" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
   context "when assigns amendment" do
     let(:original) { "ISO/IEC 17025:2005" }
     let(:pubid) { "ISO/IEC 17025:2005/Amd 1:2010" }
