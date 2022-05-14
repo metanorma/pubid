@@ -68,7 +68,7 @@ module Pubid::Iso
 
     def identifier(with_date, with_language_code)
       "#{originator}#{type}#{stage} #{number}#{part}#{iteration}"\
-        "#{with_date && year || ''}#{edition}#{supplements}#{language(with_language_code)}"
+        "#{with_date && rendered_year || ''}#{edition}#{supplements}#{language(with_language_code)}"
     end
 
     def copublisher
@@ -97,8 +97,8 @@ module Pubid::Iso
       "-#{@part}" if @part
     end
 
-    def year
-      ":#{@year}" if @year
+    def rendered_year
+      @year && ":#{@year}"
     end
 
     def type

@@ -20,7 +20,7 @@ module Pubid::Iso
     def identifier(with_date, with_language_code)
       if @type == "Guide"
         "Руководство #{originator}#{stage} #{number}#{part}#{iteration}"\
-          "#{with_date && year || ''}#{edition}#{supplements}#{language(with_language_code)}"
+          "#{with_date && rendered_year || ''}#{edition}#{supplements}#{language(with_language_code)}"
       else
         super
       end
