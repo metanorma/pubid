@@ -51,6 +51,19 @@ module Pubid::Iso
       ).as(:type)
     end
 
+    rule(:tctype) do
+      # tc-types
+      str("TC") | str("JTC") | str("PC") | str("IT")
+    end
+
+    rule(:sctype) do
+      str("SC")
+    end
+
+    rule(:wgtype) do
+      str("AG") | str("AHG") | str("AhG") | str("WG") | str("JWG") | str("QC")
+    end
+
     rule(:year) do
       match('\d').repeat(4, 4).as(:year)
     end
@@ -122,9 +135,14 @@ module Pubid::Iso
         # for French and Russian PubIDs starting with Guide type
         (guide_prefix.as(:type) >> str(" ")).maybe >>
         (stage.as(:stage) >> str(" ")).maybe >>
-        originator >> ((str(" ") | str("/")) >>
+
+        originator >> (str(" ") | str("/")) >>
+        (tctype.as(:tctype) >> str(" ") >> digits.as(:tcnumber) >> str("/") >>
+          (sctype.as(:sctype) >> (str(" ") | str("/") >> wgtype.as(:wgtype) >> str(" ")) >> digits.as(:scnumber)) >> str(" N") >>
+          digits.as(:number)) |
+
         # for ISO/FDIS
-        (type | stage.as(:stage))).maybe >>
+        ((type | stage.as(:stage)).maybe >>
         # for ISO/IEC WD TS 25025
         str(" ").maybe >> ((stage.as(:stage) | type) >> str(" ")).maybe >>
         digits.as(:number) >>
@@ -137,7 +155,7 @@ module Pubid::Iso
         # stage before corrigendum
         ((amendment >> corrigendum.maybe) | corrigendum).maybe) >>
         edition.maybe >>
-        language.maybe
+        language.maybe)
     end
 
     rule(:root) { identifier }

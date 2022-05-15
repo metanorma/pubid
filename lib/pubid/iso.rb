@@ -11,7 +11,7 @@ end
 require_relative "iso/errors"
 require_relative "iso/parser"
 require_relative "iso/transformer"
-require_relative "iso/urn"
 require_relative "iso/identifier"
 require_relative "iso/identifier/french"
 require_relative "iso/identifier/russian"
+require_relative "iso/urn"

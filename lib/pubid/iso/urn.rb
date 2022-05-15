@@ -1,11 +1,5 @@
 module Pubid::Iso
-  class Urn
-    attr_accessor :number, :publisher, :copublisher, :stage, :substage, :part,
-                  :type, :year, :edition, :iteration, :supplements, :language,
-                  :amendment, :amendment_version, :amendment_number,
-                  :corrigendum, :corrigendum_version, :corrigendum_number,
-                  :amendment_stage, :corrigendum_stage, :joint_document
-
+  class Urn < Identifier
 
     STAGES = { PWI: 0,
                NP: 10,
@@ -26,7 +20,15 @@ module Pubid::Iso
       # [[":" status] ":" edition]
       # [":" docversion] [":" language]
 
-      "urn:iso:std:#{originator}#{type}:#{number}#{part}#{stage}#{edition}#{supplement}#{language}"
+      if tctype
+        "urn:iso:doc:#{originator}:#{tctype.downcase}:#{tcnumber}:#{sctype.downcase}#{wgtype}:#{scnumber}:#{number}"
+      else
+        "urn:iso:std:#{originator}#{type}:#{number}#{part}#{stage}#{edition}#{supplement}#{language}"
+      end
+    end
+
+    def wgtype
+      ":#{@wgtype.downcase}" if @wgtype
     end
 
     def part
@@ -70,7 +72,6 @@ module Pubid::Iso
     def type
       # type          = "data" / "guide" / "isp" / "iwa" /
       #   "pas" / "r" / "tr" / "ts" / "tta"
-
       if @type
         ":#{@type.downcase}"
       end

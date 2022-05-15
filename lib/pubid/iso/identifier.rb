@@ -4,7 +4,8 @@ module Pubid::Iso
                   :type, :year, :edition, :iteration, :supplements, :language,
                   :amendment, :amendment_version, :amendment_number,
                   :corrigendum, :corrigendum_version, :corrigendum_number,
-                  :amendment_stage, :corrigendum_stage, :joint_document
+                  :amendment_stage, :corrigendum_stage, :joint_document,
+                  :tctype, :sctype, :wgtype, :tcnumber, :scnumber, :wgnumber
 
     LANGUAGES = {
       "ru" => "R",
@@ -67,8 +68,16 @@ module Pubid::Iso
     end
 
     def identifier(with_date, with_language_code)
-      "#{originator}#{type}#{stage} #{number}#{part}#{iteration}"\
+      if tctype
+        "#{originator} #{tctype} #{tcnumber}/#{sctype}#{wgtype} #{scnumber} N#{number}"
+      else
+        "#{originator}#{type}#{stage} #{number}#{part}#{iteration}"\
         "#{with_date && rendered_year || ''}#{edition}#{supplements}#{language(with_language_code)}"
+      end
+    end
+
+    def wgtype
+      "/#{@wgtype}" if @wgtype
     end
 
     def copublisher

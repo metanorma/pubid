@@ -452,6 +452,30 @@ RSpec.describe Pubid::Iso::Identifier do
     it_behaves_like "converts pubid to pubid"
   end
 
+  context "ISO TC 184/SC 4 N1110" do
+    let(:pubid) { "ISO TC 184/SC 4 N1110" }
+    let(:urn) { "urn:iso:doc:iso:tc:184:sc:4:1110" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO/IEC JTC 1/SC 32 N1001" do
+    let(:pubid) { "ISO/IEC JTC 1/SC 32 N1001" }
+    let(:urn) { "urn:iso:doc:iso-iec:jtc:1:sc:32:1001" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO/TC 184/SC/QC 4 N265" do
+    let(:pubid) { "ISO TC 184/SC/QC 4 N265" }
+    let(:urn) { "urn:iso:doc:iso:tc:184:sc:qc:4:265" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
   context "when assigns amendment" do
     let(:original) { "ISO/IEC 17025:2005" }
     let(:pubid) { "ISO/IEC 17025:2005/Amd 1:2010" }
