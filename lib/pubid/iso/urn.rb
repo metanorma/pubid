@@ -21,14 +21,26 @@ module Pubid::Iso
       # [":" docversion] [":" language]
 
       if tctype
-        "urn:iso:doc:#{originator}:#{tctype.downcase}:#{tcnumber}:#{sctype.downcase}#{wgtype}:#{scnumber}:#{number}"
+        "urn:iso:doc:#{originator}:#{tctype.downcase}:#{tcnumber}#{sctype}#{wgtype}:#{number}"
       else
         "urn:iso:std:#{originator}#{type}:#{number}#{part}#{stage}#{edition}#{supplement}#{language}"
       end
     end
 
+    def sctype
+      return unless @sctype
+
+      ":#{@sctype.downcase}:#{@scnumber}"
+    end
+
     def wgtype
-      ":#{@wgtype.downcase}" if @wgtype
+      return unless @wgtype
+
+      if @wgnumber
+        ":#{@wgtype.downcase}:#{@wgnumber}"
+      else
+        ":#{@wgtype.downcase}"
+      end
     end
 
     def part

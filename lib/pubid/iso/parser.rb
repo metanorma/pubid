@@ -17,6 +17,9 @@ module Pubid::Iso
   # Stage 50.60: PRF ("proof") (non-public)
   # Stage 60: IS
   class Parser < Parslet::Parser
+    rule(:space) { str(" ") }
+    rule(:space?) { space.maybe }
+
     rule(:digits) do
       match('\d').repeat(1)
     end
@@ -69,13 +72,13 @@ module Pubid::Iso
     end
 
     rule(:part) do
-      (str("-") | str("/")) >> str(" ").maybe >>
+      (str("-") | str("/")) >> space? >>
         (str("Amd") | str("Cor")).absent? >> (match['[\dA-Z]'] | str("-")).repeat(1).as(:part)
     end
 
     rule(:originator) do
       organization.as(:publisher) >>
-        (str(" ").maybe >> str("/") >> organization.as(:copublisher)).repeat
+        (space? >> str("/") >> organization.as(:copublisher)).repeat
     end
 
     rule(:organization) do
@@ -88,7 +91,7 @@ module Pubid::Iso
     end
 
     rule(:edition) do
-      str(" ") >> ((str("ED") | str("Ed ") | str("Ed.")) >>
+      space >> ((str("ED") | str("Ed ") | str("Ed.")) >>
         digits.as(:edition) | str("Ed").as(:edition))
     end
 
@@ -98,18 +101,18 @@ module Pubid::Iso
 
     rule(:amendment) do
       (str("/") >> stage.as(:amendment_stage)).maybe >>
-      (str("/") | str(" ")).maybe >>
+      (str("/") | space).maybe >>
         (str("Amd") | str("AMD") | str("AM")).as(:amendment) >>
-        (str(" ") | str(".")) >>
+        (space | str(".")) >>
         digits.as(:amendment_version) >>
         (str(":") >> digits.as(:amendment_number)).maybe
     end
 
     rule(:corrigendum) do
       (str("/") >> stage.as(:corrigendum_stage)).maybe >>
-      (str("/") | str(" ")).maybe >>
+      (str("/") | space).maybe >>
         (str("Cor") | str("COR")).as(:corrigendum) >>
-        (str(" ") | str(".")) >>
+        (space | str(".")) >>
         digits.as(:corrigendum_version) >>
         (str(":") >> digits.as(:corrigendum_number)).maybe
     end
@@ -133,29 +136,37 @@ module Pubid::Iso
         # Withdrawn e.g: WD/ISO 10360-5:2000
         str("WD/").maybe >>
         # for French and Russian PubIDs starting with Guide type
-        (guide_prefix.as(:type) >> str(" ")).maybe >>
-        (stage.as(:stage) >> str(" ")).maybe >>
+        (guide_prefix.as(:type) >> space).maybe >>
+        (stage.as(:stage) >> space).maybe >>
 
-        originator >> (str(" ") | str("/")) >>
-        (tctype.as(:tctype) >> str(" ") >> digits.as(:tcnumber) >> str("/") >>
-          (sctype.as(:sctype) >> (str(" ") | str("/") >> wgtype.as(:wgtype) >> str(" ")) >> digits.as(:scnumber)) >> str(" N") >>
-          digits.as(:number)) |
+        originator >> (space | str("/")) >>
+        # Parse technical committee documents
+        (
+          (
+            tctype.as(:tctype) >> space >> digits.as(:tcnumber) >>
+            (str("/") >> (
+              ((sctype.as(:sctype) >> space >> digits.as(:scnumber) >> str("/")).maybe >>
+                wgtype.as(:wgtype) >> space >> digits.as(:wgnumber)) |
+              (sctype.as(:sctype) >> (space | str("/") >> wgtype.as(:wgtype) >> space) >> digits.as(:scnumber))
+            )).maybe >>
+            str(" N") >> space? >> digits.as(:number)
+          ) |
 
         # for ISO/FDIS
         ((type | stage.as(:stage)).maybe >>
         # for ISO/IEC WD TS 25025
-        str(" ").maybe >> ((stage.as(:stage) | type) >> str(" ")).maybe >>
+        space? >> ((stage.as(:stage) | type) >> space).maybe >>
         digits.as(:number) >>
         # for identifiers like ISO 5537/IDF 26
-        (str("|") >> (str("IDF") >> str(" ") >> digits).as(:joint_document)).maybe >>
+        (str("|") >> (str("IDF") >> space >> digits).as(:joint_document)).maybe >>
         part.maybe >> iteration.maybe >>
-        (str(" ").maybe >> str(":") >> year).maybe >>
+        (space? >> str(":") >> year).maybe >>
         # stage before amendment
         (
         # stage before corrigendum
         ((amendment >> corrigendum.maybe) | corrigendum).maybe) >>
         edition.maybe >>
-        language.maybe)
+        language.maybe))
     end
 
     rule(:root) { identifier }

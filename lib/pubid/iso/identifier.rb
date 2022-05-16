@@ -69,15 +69,33 @@ module Pubid::Iso
 
     def identifier(with_date, with_language_code)
       if tctype
-        "#{originator} #{tctype} #{tcnumber}/#{sctype}#{wgtype} #{scnumber} N#{number}"
+        "#{originator} #{tctype} #{tcnumber}#{sctype}#{wgtype} N#{number}"
       else
         "#{originator}#{type}#{stage} #{number}#{part}#{iteration}"\
         "#{with_date && rendered_year || ''}#{edition}#{supplements}#{language(with_language_code)}"
       end
     end
 
+    # TC 184/SC/WG 4 - no wg number
+    # TC 184/SC 4/WG 12 - separate sc and wg number
+    def sctype
+      return unless @sctype
+
+      if @wgnumber || !@wgtype
+        "/#{@sctype} #{@scnumber}"
+      else
+        "/#{@sctype}"
+      end
+    end
+
     def wgtype
-      "/#{@wgtype}" if @wgtype
+      return unless @wgtype
+
+      if @wgnumber
+        "/#{@wgtype} #{@wgnumber}"
+        else
+        "/#{@wgtype} #{@scnumber}"
+      end
     end
 
     def copublisher

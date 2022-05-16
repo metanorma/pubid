@@ -470,7 +470,34 @@ RSpec.describe Pubid::Iso::Identifier do
 
   context "ISO/TC 184/SC/QC 4 N265" do
     let(:pubid) { "ISO TC 184/SC/QC 4 N265" }
-    let(:urn) { "urn:iso:doc:iso:tc:184:sc:qc:4:265" }
+    let(:urn) { "urn:iso:doc:iso:tc:184:sc:4:qc:265" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO/TC 46 N 3064" do
+    let(:original) { "ISO/TC 46 N 3064" }
+    let(:pubid) { "ISO TC 46 N3064" }
+    let(:urn) { "urn:iso:doc:iso:tc:46:3064" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO/TC 184/SC 4/WG 12 N10897" do
+    let(:original) { "ISO/TC 184/SC 4/WG 12 N10897" }
+    let(:pubid) { "ISO TC 184/SC 4/WG 12 N10897" }
+    let(:urn) { "urn:iso:doc:iso:tc:184:sc:4:wg:12:10897" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO/TC 154/WG 5 N152" do
+    let(:original) { "ISO/TC 154/WG 5 N152" }
+    let(:pubid) { "ISO TC 154/WG 5 N152" }
+    let(:urn) { "urn:iso:doc:iso:tc:154:wg:5:152" }
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
