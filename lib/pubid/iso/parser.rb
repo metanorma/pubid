@@ -56,7 +56,13 @@ module Pubid::Iso
 
     rule(:tctype) do
       # tc-types
-      str("TC") | str("JTC") | str("PC") | str("IT")
+      str("TC") | str("JTC") | str("PC") | str("IT") | str("CAB") | str("CASCO") | str("COPOLCO") |
+        str("COUNCIL") | str("CPSG") | str("CS") | str("DEVCO") | str("GA") | str("GAAB") | str("INFCO") |
+        str("ISOlutions") | str("ITN") | str("REMCO") | str("TMB") | str("TMBG") | str("WMO") |
+        str("DMT") | str("JCG") | str("SGPM") | str("ATMG") | str("CCCC") | str("CCCC-TG") | str("JDMT") |
+        str("JSAG") | str("JSCTF-TF") | str("JTCG") | str("JTCG-TF") | str("SAG_Acc") | str("SAG_CRMI") |
+        str("SAG_CRMI_CG") | str("SAG_ESG") | str("SAG_ESG_CG") | str("SAG_MRS") | str("SAG SF") | str("SAG SF_CG") |
+        str("SMCC") | str("STMG") | str("MENA STAR")
     end
 
     rule(:sctype) do
@@ -65,7 +71,9 @@ module Pubid::Iso
 
     rule(:wgtype) do
       str("AG") | str("AHG") | str("AhG") | str("WG") | str("JWG") | str("QC") | str("TF") |
-        str("PPC") | str("CAG")
+        str("PPC") | str("CAG") | str("WG SGDG") | str("WG SR") | str("STAR") | str("STTF") | str("TIG") |
+        str("CPAG") | str("CSC") | str("ITSAG") | str("CSC/FIN") | str("CSC/NOM") | str("CSC/OVE") |
+        str("CSC/SP") | str("CSC/FIN") | str("JAG")
     end
 
     rule(:year) do
@@ -132,29 +140,19 @@ module Pubid::Iso
       str("Guide") | str("GUIDE") | str("Руководство") | str("Руководства")
     end
 
-    rule(:identifier) do
-      str("Fpr").as(:stage).maybe >>
-        # Withdrawn e.g: WD/ISO 10360-5:2000
-        str("WD/").maybe >>
-        # for French and Russian PubIDs starting with Guide type
-        (guide_prefix.as(:type) >> space).maybe >>
-        (stage.as(:stage) >> space).maybe >>
+    # Parse technical committee documents
+    rule(:tc_document_body) do
+      (tctype.as(:tctype) >> str("/").maybe).repeat >> space >> digits.as(:tcnumber) >>
+        (str("/") >> (
+          ((sctype.as(:sctype) >> space >> digits.as(:scnumber) >> str("/")).maybe >>
+            wgtype.as(:wgtype) >> space >> digits.as(:wgnumber)) |
+            (sctype.as(:sctype) >> (space | str("/") >> wgtype.as(:wgtype) >> space) >> digits.as(:scnumber))
+        )).maybe >>
+        str(" N") >> space? >> digits.as(:number)
+    end
 
-        originator >> (space | str("/")) >>
-        # Parse technical committee documents
-        (
-          (
-            tctype.as(:tctype) >> space >> digits.as(:tcnumber) >>
-            (str("/") >> (
-              ((sctype.as(:sctype) >> space >> digits.as(:scnumber) >> str("/")).maybe >>
-                wgtype.as(:wgtype) >> space >> digits.as(:wgnumber)) |
-              (sctype.as(:sctype) >> (space | str("/") >> wgtype.as(:wgtype) >> space) >> digits.as(:scnumber))
-            )).maybe >>
-            str(" N") >> space? >> digits.as(:number)
-          ) |
-
-        # for ISO/FDIS
-        ((type | stage.as(:stage)).maybe >>
+    rule(:std_document_body) do
+      (type | stage.as(:stage)).maybe >>
         # for ISO/IEC WD TS 25025
         space? >> ((stage.as(:stage) | type) >> space).maybe >>
         digits.as(:number) >>
@@ -164,10 +162,21 @@ module Pubid::Iso
         (space? >> str(":") >> year).maybe >>
         # stage before amendment
         (
-        # stage before corrigendum
-        ((amendment >> corrigendum.maybe) | corrigendum).maybe) >>
+          # stage before corrigendum
+          ((amendment >> corrigendum.maybe) | corrigendum).maybe) >>
         edition.maybe >>
-        language.maybe))
+        language.maybe
+    end
+
+    rule(:identifier) do
+      str("Fpr").as(:stage).maybe >>
+        # Withdrawn e.g: WD/ISO 10360-5:2000
+        str("WD/").maybe >>
+        # for French and Russian PubIDs starting with Guide type
+        (guide_prefix.as(:type) >> space).maybe >>
+        (stage.as(:stage) >> space).maybe >>
+        originator >> (space | str("/")) >>
+        (tc_document_body | std_document_body)
     end
 
     rule(:root) { identifier }

@@ -503,6 +503,15 @@ RSpec.describe Pubid::Iso::Identifier do
     it_behaves_like "converts pubid to pubid"
   end
 
+  context "ISO/TMB/DMT 154/WG 5 N152" do
+    let(:original) { "ISO/TMB/DMT 154/WG 5 N152" }
+    let(:pubid) { "ISO DMT/TMB 154/WG 5 N152" }
+    let(:urn) { "urn:iso:doc:iso:dmt:tmb:154:wg:5:152" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
   context "when assigns amendment" do
     let(:original) { "ISO/IEC 17025:2005" }
     let(:pubid) { "ISO/IEC 17025:2005/Amd 1:2010" }

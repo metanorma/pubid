@@ -68,12 +68,18 @@ module Pubid::Iso
     end
 
     def identifier(with_date, with_language_code)
-      if tctype
+      if @tctype
         "#{originator} #{tctype} #{tcnumber}#{sctype}#{wgtype} N#{number}"
       else
         "#{originator}#{type}#{stage} #{number}#{part}#{iteration}"\
         "#{with_date && rendered_year || ''}#{edition}#{supplements}#{language(with_language_code)}"
       end
+    end
+
+    def tctype
+      return @tctype.join("/") if @tctype.is_a?(Array)
+
+      @tctype
     end
 
     # TC 184/SC/WG 4 - no wg number

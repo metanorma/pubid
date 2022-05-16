@@ -27,6 +27,12 @@ module Pubid::Iso
       end
     end
 
+    def tctype
+      return @tctype.join(":") if @tctype.is_a?(Array)
+
+      @tctype
+    end
+
     def sctype
       return unless @sctype
 
