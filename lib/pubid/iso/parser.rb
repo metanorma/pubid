@@ -64,7 +64,8 @@ module Pubid::Iso
     end
 
     rule(:wgtype) do
-      str("AG") | str("AHG") | str("AhG") | str("WG") | str("JWG") | str("QC")
+      str("AG") | str("AHG") | str("AhG") | str("WG") | str("JWG") | str("QC") | str("TF") |
+        str("PPC") | str("CAG")
     end
 
     rule(:year) do
