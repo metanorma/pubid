@@ -5,7 +5,8 @@ module Pubid::Iso
                   :amendment, :amendment_version, :amendment_number,
                   :corrigendum, :corrigendum_version, :corrigendum_number,
                   :amendment_stage, :corrigendum_stage, :joint_document,
-                  :tctype, :sctype, :wgtype, :tcnumber, :scnumber, :wgnumber
+                  :tctype, :sctype, :wgtype, :tcnumber, :scnumber, :wgnumber,
+                  :urn_stage
 
     LANGUAGES = {
       "ru" => "R",

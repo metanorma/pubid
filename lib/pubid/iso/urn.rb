@@ -54,10 +54,14 @@ module Pubid::Iso
     end
 
     def render_stage(stage)
+      return ":stage-#{sprintf('%05.2f', stage)}#{iteration}" if stage.is_a?(Float)
+
       ":stage-#{sprintf('%05.2f', STAGES[stage.to_sym])}#{iteration}"
     end
 
     def stage
+      return render_stage(@urn_stage) if @urn_stage
+
       return render_stage(@stage) if @stage
 
       return render_stage(@amendment_stage) if @amendment_stage
