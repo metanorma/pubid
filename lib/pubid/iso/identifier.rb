@@ -27,6 +27,15 @@ module Pubid::Iso
       Urn.new(**get_params)
     end
 
+    def self.parse_from_title(title)
+      title.split.reverse.inject(title) do |acc, part|
+        return parse(acc)
+      rescue Pubid::Iso::Errors::ParseError
+        # delete parts from the title until it's parseable
+        acc.reverse.sub(part.reverse, "").reverse.strip
+      end
+    end
+
     def self.parse(code_or_params)
       params = code_or_params.is_a?(String) ? Parser.new.parse(code_or_params) : code_or_params
       # Parslet returns an array when match any copublisher

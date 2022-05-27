@@ -533,4 +533,14 @@ RSpec.describe Pubid::Iso::Identifier do
       expect(subject.to_s).to eq(pubid)
     end
   end
+
+  describe "#parse_from_title" do
+    subject { described_class.parse_from_title(title) }
+    let(:title) { "#{pubid} Geographic information — Metadata — Part 1: Fundamentals" }
+    let(:pubid) { "ISO 19115-1:2014" }
+
+    it "extracts pubid from title" do
+      expect(subject.to_s).to eq(pubid)
+    end
+  end
 end
