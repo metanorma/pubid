@@ -64,8 +64,6 @@ module Pubid::Iso
 
       return render_stage(@stage) if @stage
 
-      return render_stage(@amendment_stage) if @amendment_stage
-
       render_stage(@corrigendum_stage) if @corrigendum_stage
     end
 
@@ -100,21 +98,9 @@ module Pubid::Iso
     end
 
     def supplement
-      result = ""
-      if @amendment
-        result +=  if @amendment_number
-                     ":amd:#{@amendment_number}:v#{@amendment_version}"
-                   else
-                     ":amd:#{@amendment_version}:v1"
-                   end
-      end
-      if @corrigendum
-        result += if @corrigendum_number
-                    ":cor:#{@corrigendum_number}:v#{@corrigendum_version}"
-                  else
-                    ":cor:#{@corrigendum_version}:v1"
-                  end
-      end
+      result = @amendment&.render_urn || ""
+
+      result += @corrigendum&.render_urn || ""
 
       result
     end

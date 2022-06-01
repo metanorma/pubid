@@ -1,5 +1,9 @@
 module Pubid::Iso
   class French < Identifier
+    def initialize(**opts)
+      opts.each { |key, value| send("#{key}=", value) }
+    end
+
     def identifier(with_date, with_language_code)
       if @type == "Guide"
         "Guide #{originator}#{stage} #{number}#{part}#{iteration}"\
@@ -13,20 +17,8 @@ module Pubid::Iso
       super.map { |copublisher| copublisher.sub("IEC", "CEI") }
     end
 
-    def amendment
-      if @amendment_number
-        "Amd.#{@amendment_version}:#{@amendment_number}"
-      else
-        "Amd.#{@amendment_version}"
-      end
-    end
-
-    def corrigendum
-      if @corrigendum_number
-        "Cor.#{@corrigendum_version}:#{@corrigendum_number}"
-      else
-        "Cor.#{@corrigendum_version}"
-      end
+    def supplements
+      super.gsub(" ", ".")
     end
   end
 end

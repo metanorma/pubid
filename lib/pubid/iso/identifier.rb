@@ -15,7 +15,21 @@ module Pubid::Iso
       "ar" => "A",
     }.freeze
 
-    def initialize(**opts)
+    def initialize(amendment: nil, amendment_number: nil, amendment_version: nil,
+                   amendment_stage: nil,
+                   corrigendum: nil, corrigendum_number: nil, corrigendum_version: nil,
+                   corrigendum_stage: nil, **opts)
+      if amendment_version
+        @amendment = Amendment.new(number: amendment_number,
+                                   version: amendment_version,
+                                   stage: amendment_stage)
+      end
+      if corrigendum_version
+        @corrigendum = Corrigendum.new(number: corrigendum_number,
+                                   version: corrigendum_version,
+                                   stage: corrigendum_stage)
+      end
+
       opts.each { |key, value| send("#{key}=", value.is_a?(Array) && value || value.to_s) }
     end
 
@@ -156,35 +170,10 @@ module Pubid::Iso
       ".#{@iteration}" if @iteration
     end
 
-    def amendment
-      if @amendment_number
-        "Amd #{@amendment_version}:#{@amendment_number}"
-      else
-        "Amd #{@amendment_version}"
-      end
-    end
-
-    def corrigendum
-      if @corrigendum_number
-        "Cor #{@corrigendum_version}:#{@corrigendum_number}"
-      else
-        "Cor #{@corrigendum_version}"
-      end
-    end
-
     def supplements
-      result = ""
-      if @amendment_version
-        result += (@amendment_stage && "/#{@amendment_stage} ") || "/"
-        result += amendment
-      end
+      result = @amendment&.version && @amendment.render_pubid || ""
 
-      if @corrigendum_version
-        result += (@corrigendum_stage && "/#{@corrigendum_stage} ") || "/"
-        result += corrigendum
-      end
-
-      result
+      result + (@corrigendum&.version && @corrigendum.render_pubid || "")
     end
 
     def language(with_language_code = :iso)

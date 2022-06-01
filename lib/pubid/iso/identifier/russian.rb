@@ -17,6 +17,10 @@ module Pubid::Iso
              "ISP" => "ИСП",
     }.freeze
 
+    def initialize(**opts)
+      opts.each { |key, value| send("#{key}=", value) }
+    end
+
     def identifier(with_date, with_language_code)
       if @type == "Guide"
         "Руководство #{originator}#{stage} #{number}#{part}#{iteration}"\
@@ -36,6 +40,10 @@ module Pubid::Iso
 
     def stage
       "#{(@copublisher && ' ') || '/'}#{STAGE[@stage]}" if @stage
+    end
+
+    def supplements
+      super.gsub(" ", ".")
     end
   end
 end
