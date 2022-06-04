@@ -37,5 +37,9 @@ module Pubid::Core
     rule(:comma_month_year) do
       comma >> words.as(:month) >> space >> year_digits.as(:year)
     end
+
+    rule(:year_month) do
+      year_digits >> dash >> month_digits
+    end
   end
 end
