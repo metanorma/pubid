@@ -10,20 +10,12 @@ module Pubid::Core
       other.version == version && (number.nil? || other.number == number) && (stage.nil? || other.stage == stage)
     end
 
-    def render_pubid_stage
-      ((@stage && @stage) || "")
-    end
-
     def render_pubid_number
         if @number
           "#{@version}:#{@number}"
         else
           "#{@version}"
         end
-    end
-
-    def render_urn_stage
-      ((@stage && ":stage-#{sprintf('%05.2f', Urn::STAGES[@stage.to_sym])}") || "")
     end
 
     def render_urn_number
