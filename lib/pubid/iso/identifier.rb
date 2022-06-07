@@ -1,9 +1,7 @@
 module Pubid::Iso
-  class Identifier
-    attr_accessor :number, :publisher, :copublisher, :stage, :substage, :part,
-                  :type, :year, :edition, :iteration, :supplements, :language,
-                  :amendment, :amendment_version, :amendment_number,
-                  :corrigendum, :corrigendum_version, :corrigendum_number,
+  class Identifier < Pubid::Core::Identifier
+    attr_accessor :stage, :substage,
+                  :iteration, :supplements,
                   :amendment_stage, :corrigendum_stage, :joint_document,
                   :tctype, :sctype, :wgtype, :tcnumber, :scnumber, :wgnumber,
                   :urn_stage
@@ -14,28 +12,6 @@ module Pubid::Iso
       "en" => "E",
       "ar" => "A",
     }.freeze
-
-    def initialize(amendment: nil, amendment_number: nil, amendment_version: nil,
-                   amendment_stage: nil,
-                   corrigendum: nil, corrigendum_number: nil, corrigendum_version: nil,
-                   corrigendum_stage: nil, **opts)
-      if amendment_version
-        @amendment = Amendment.new(number: amendment_number,
-                                   version: amendment_version,
-                                   stage: amendment_stage)
-      end
-      if corrigendum_version
-        @corrigendum = Corrigendum.new(number: corrigendum_number,
-                                   version: corrigendum_version,
-                                   stage: corrigendum_stage)
-      end
-
-      opts.each { |key, value| send("#{key}=", value.is_a?(Array) && value || value.to_s) }
-    end
-
-    def get_params
-      instance_variables.map { |var| [var.to_s.gsub("@", "").to_sym, instance_variable_get(var)] }.to_h
-    end
 
     def urn
       Urn.new(**get_params)
@@ -77,6 +53,16 @@ module Pubid::Iso
       # params.to_h)
     rescue Parslet::ParseFailed => failure
       raise Pubid::Iso::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
+    end
+
+    class << self
+      def get_amendment_class
+        Pubid::Iso::Amendment
+      end
+
+      def get_corrigendum_class
+        Pubid::Iso::Corrigendum
+      end
     end
 
     def to_s(lang: nil, with_date: true, with_language_code: :iso)
@@ -171,9 +157,9 @@ module Pubid::Iso
     end
 
     def supplements
-      result = @amendment&.version && @amendment.render_pubid || ""
+      result = @amendments && @amendments.map(&:render_pubid).join("+") || ""
 
-      result + (@corrigendum&.version && @corrigendum.render_pubid || "")
+      result + (@corrigendums && @corrigendums.map(&:render_pubid).join("+") || "")
     end
 
     def language(with_language_code = :iso)

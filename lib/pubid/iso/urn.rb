@@ -98,9 +98,9 @@ module Pubid::Iso
     end
 
     def supplement
-      result = @amendment&.render_urn || ""
+      result = @amendments&.map(&:render_urn)&.join || ""
 
-      result += @corrigendum&.render_urn || ""
+      result += @corrigendums&.map(&:render_urn)&.join || ""
 
       result
     end

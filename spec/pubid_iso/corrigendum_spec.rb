@@ -3,7 +3,7 @@ RSpec.describe Pubid::Iso::Corrigendum do
   let(:pubid_corrigendum) { "/Cor 1:2009" }
 
   describe "#render" do
-    subject { Pubid::Iso::Identifier.parse(pubid).corrigendum }
+    subject { Pubid::Iso::Identifier.parse(pubid).corrigendums.first }
 
     it { expect(subject.render_pubid).to eq(pubid_corrigendum) }
 

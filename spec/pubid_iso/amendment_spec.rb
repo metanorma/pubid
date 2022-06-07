@@ -3,7 +3,7 @@ RSpec.describe Pubid::Iso::Amendment do
   let(:pubid_amendment) { "/Amd 1:2009" }
 
   describe "#render" do
-    subject { Pubid::Iso::Identifier.parse(pubid).amendment }
+    subject { Pubid::Iso::Identifier.parse(pubid).amendments.first }
 
     it { expect(subject.render_pubid).to eq(pubid_amendment) }
 

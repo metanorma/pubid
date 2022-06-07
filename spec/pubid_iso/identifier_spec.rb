@@ -517,7 +517,7 @@ RSpec.describe Pubid::Iso::Identifier do
     let(:pubid) { "ISO/IEC 17025:2005/Amd 1:2010" }
 
     it "generates correct PubID with amendment" do
-      subject.amendment = Pubid::Iso::Amendment.new(version: 1, number: 2010)
+      subject.amendments = [Pubid::Iso::Amendment.new(version: 1, number: 2010)]
       expect(subject.to_s).to eq(pubid)
     end
   end
@@ -527,7 +527,7 @@ RSpec.describe Pubid::Iso::Identifier do
     let(:pubid) { "ISO/IEC 17025:2005/Cor 1:2010" }
 
     it "generates correct PubID with corrigendum" do
-      subject.corrigendum = Pubid::Iso::Corrigendum.new(version: 1, number: 2010)
+      subject.corrigendums = [Pubid::Iso::Corrigendum.new(version: 1, number: 2010)]
       expect(subject.to_s).to eq(pubid)
     end
   end

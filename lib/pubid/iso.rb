@@ -8,6 +8,7 @@ module Pubid
   end
 end
 
+require "pubid-core"
 require_relative "iso/errors"
 require_relative "iso/parser"
 require_relative "iso/transformer"

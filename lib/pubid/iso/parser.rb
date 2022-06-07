@@ -109,21 +109,21 @@ module Pubid::Iso
     end
 
     rule(:amendment) do
-      (str("/") >> stage.as(:amendment_stage)).maybe >>
+      ((str("/") >> stage.as(:stage)).maybe >>
       (str("/") | space).maybe >>
-        (str("Amd") | str("AMD") | str("AM")).as(:amendment) >>
+        (str("Amd") | str("AMD") | str("AM")) >>
         (space | str(".")) >>
-        digits.as(:amendment_version) >>
-        (str(":") >> digits.as(:amendment_number)).maybe
+        digits.as(:version) >>
+        (str(":") >> digits.as(:number)).maybe).as(:amendments)
     end
 
     rule(:corrigendum) do
-      (str("/") >> stage.as(:corrigendum_stage)).maybe >>
+      ((str("/") >> stage.as(:stage)).maybe >>
       (str("/") | space).maybe >>
-        (str("Cor") | str("COR")).as(:corrigendum) >>
+        (str("Cor") | str("COR")) >>
         (space | str(".")) >>
-        digits.as(:corrigendum_version) >>
-        (str(":") >> digits.as(:corrigendum_number)).maybe
+        digits.as(:version) >>
+        (str(":") >> digits.as(:number)).maybe).as(:corrigendums)
     end
 
     rule(:language) do

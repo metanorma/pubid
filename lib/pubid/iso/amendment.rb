@@ -1,6 +1,5 @@
 module Pubid::Iso
   class Amendment < Supplement
-
     def render_pubid
       stage = render_pubid_stage
       stage += " " unless stage.size == 0

@@ -8,12 +8,18 @@ module Pubid::Iso
       { stage: convert_stage(context[:stage]) }
     end
 
-    rule(amendment_stage: simple(:amendment_stage)) do |context|
-      { amendment_stage: convert_stage(context[:amendment_stage]) }
+    rule(amendments: subtree(:amendments)) do |context|
+      if context[:amendments].key?(:stage)
+        context[:amendments][:stage] = convert_stage(context[:amendments][:stage])
+      end
+      context
     end
 
-    rule(corrigendum_stage: simple(:corrigendum_stage)) do |context|
-      { corrigendum_stage: convert_stage(context[:corrigendum_stage]) }
+    rule(corrigendums: subtree(:corrigendums)) do |context|
+      if context[:corrigendums].key?(:stage)
+        context[:corrigendums][:stage] = convert_stage(context[:corrigendums][:stage])
+      end
+      context
     end
 
     rule(language: simple(:language)) do |context|
