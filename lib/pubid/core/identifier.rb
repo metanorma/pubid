@@ -32,7 +32,7 @@ module Pubid::Core
     end
 
     def to_s
-      self.class.get_renderer.new(get_params).render
+      self.class.get_renderer_class.new(get_params).render
     end
 
     class << self
@@ -44,8 +44,12 @@ module Pubid::Core
         Corrigendum
       end
 
-      def get_renderer
+      def get_renderer_class
         Renderer
+      end
+
+      def get_transformer_class
+        Transformer
       end
 
       def parse(code_or_params)
@@ -57,7 +61,7 @@ module Pubid::Core
             **(
               params.inject({}) do |r, i|
                 result = r
-                i.map {|k, v| Transformer.new.apply(k => v).to_a.first }.each do |k, v|
+                i.map {|k, v| get_transformer_class.new.apply(k => v).to_a.first }.each do |k, v|
                   result = result.merge(k => r.key?(k) ? [v, r[k]] : v)
                 end
                 result
@@ -66,7 +70,7 @@ module Pubid::Core
           )
         else
           new(**params.map do |k, v|
-            Transformer.new.apply(k => v).to_a.first
+            get_transformer_class.new.apply(k => v).to_a.first
           end.to_h)
         end
         # merge values repeating keys into array (for copublishers)
