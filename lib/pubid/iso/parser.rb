@@ -25,7 +25,7 @@ module Pubid::Iso
     end
 
     rule(:stage) do
-      Russian::STAGE.values.reduce(
+      Renderer::Russian::STAGE.values.reduce(
         # other stages
         str("NP") | str("WD") | str("CD") | str("DIS") | str("FDIS") | str("PRF") |
         str("IS") | str("AWI") | str("PWI") |
@@ -46,7 +46,7 @@ module Pubid::Iso
     #       #   "pas" / "r" / "tr" / "ts" / "tta"
     rule(:type) do
       (
-        Russian::TYPE.values.reduce(
+        Renderer::Russian::TYPE.values.reduce(
           str("DATA") | str("ISP") | str("IWA") | str("R") | str("TTA") |
           str("TS") | str("TR") | str("PAS") | str("Guide") | str("GUIDE")) do |acc, type|
           acc | str(type)
@@ -91,7 +91,7 @@ module Pubid::Iso
     end
 
     rule(:organization) do
-      Russian::PUBLISHER.values.reduce(
+      Renderer::Russian::PUBLISHER.values.reduce(
         str("IEC") | str("IEEE") | str("CIW") | str("SAE") |
         str("CIE") | str("ASME") | str("ASTM") | str("OECD") | str("ISO") |
         str("IWA") | str("HL7") | str("CEI")) do |acc, publisher|
