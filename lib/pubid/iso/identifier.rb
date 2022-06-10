@@ -6,9 +6,6 @@ module Pubid::Iso
                   :tctype, :sctype, :wgtype, :tcnumber, :scnumber, :wgnumber,
                   :urn_stage
 
-    def urn
-      Urn.new(**get_params)
-    end
 
     def self.parse_from_title(title)
       title.split.reverse.inject(title) do |acc, part|
@@ -37,6 +34,10 @@ module Pubid::Iso
       end
     end
 
+    def urn
+      (@tctype && Renderer::UrnTc || Pubid::Core::Renderer::Urn).new(get_params).render
+    end
+
     def to_s(lang: nil, with_date: true, with_language_code: :iso)
       # @pubid_language = lang
       case lang
@@ -48,7 +49,7 @@ module Pubid::Iso
         if @tctype
           Renderer::Tc.new(get_params)
         else
-          Pubid::Core::Renderer.new(get_params)
+          self.class.get_renderer_class.new(get_params)
         end
       end.render(with_date: with_date, with_language_code: with_language_code) +
         (@joint_document && "|#{@joint_document}").to_s

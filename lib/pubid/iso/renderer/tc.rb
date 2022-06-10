@@ -1,5 +1,5 @@
 module Pubid::Iso::Renderer
-  class Tc < Pubid::Core::Renderer
+  class Tc < Pubid::Core::Renderer::Base
 
     def render_identifier(params)
       "%{publisher}%{copublisher} %{tctype} %{tcnumber}%{sctype}%{wgtype} N%{number}" % params

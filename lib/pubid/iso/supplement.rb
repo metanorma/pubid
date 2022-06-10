@@ -5,7 +5,7 @@ module Pubid::Iso
     end
 
     def render_urn_stage
-      ((@stage && ":stage-#{sprintf('%05.2f', Urn::STAGES[@stage.to_sym])}") || "")
+      ((@stage && ":stage-#{sprintf('%05.2f', Pubid::Core::Renderer::Urn::STAGES[@stage.to_sym])}") || "")
     end
   end
 end

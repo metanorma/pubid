@@ -1,5 +1,5 @@
 module Pubid::Iso::Renderer
-  class Russian < Pubid::Core::Renderer
+  class Russian < Pubid::Core::Renderer::Base
     PUBLISHER = { "ISO" => "ИСО", "IEC" => "МЭК" }.freeze
     STAGE = { "FDIS" => "ОПМС",
               "DIS" => "ПМС",
