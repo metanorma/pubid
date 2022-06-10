@@ -1,5 +1,5 @@
-module Pubid::Core
-  class Renderer
+module Pubid::Core::Renderer
+  class Base
     attr_accessor :params
 
     LANGUAGES = {

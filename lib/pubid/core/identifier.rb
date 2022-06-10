@@ -27,6 +27,10 @@ module Pubid::Core
       opts.each { |key, value| send("#{key}=", value.is_a?(Array) && value || value.to_s) }
     end
 
+    def urn
+      Renderer::Urn.new(get_params).render
+    end
+
     def get_params
       instance_variables.map { |var| [var.to_s.gsub("@", "").to_sym, instance_variable_get(var)] }.to_h
     end
@@ -45,7 +49,7 @@ module Pubid::Core
       end
 
       def get_renderer_class
-        Renderer
+        Renderer::Base
       end
 
       def get_transformer_class
