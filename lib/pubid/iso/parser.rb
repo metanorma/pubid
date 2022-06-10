@@ -1,29 +1,5 @@
-# from https://github.com/relaton/relaton-iso/issues/47#issuecomment-512251416
-# ISO {num}-{docpart}:{year} - docpart and year are optional. docpart is [\w-]+
-#   ISO/{stage} {num}-{docpart}:{year} or ISO/{subprefix} {stage} {num}:{year} - stages are WD, CD, DIS, FDIS, AWI
-# ISO/{subprefix} {stage} {num}-{docpart}:{year} - subpefixes are IEC, IEEE, IEC/IEEE, TR, R. Any other?
-# ISO {num}:{year}/{correction} {cornum}:{coryear} - corrections are Amd, DAmd, Cor. coryear is optional
-# ISO {num}:{year}/{corstage} {correction} {cornum}:{coryear} - corstages are CD, NP, AWI, PRF, WD, DIS. Any others?
-
 module Pubid::Iso
-  # ISO/IEC FDIS 7816-6
-  # ISO/IEC/IEEE 15289:2019
-  #
-  # Stage 10: NP (non-public)
-  # Stage 20: WD (non-public)
-  # Stage 30: CD
-  # Stage 40: DIS
-  # Stage 50: FDIS
-  # Stage 50.60: PRF ("proof") (non-public)
-  # Stage 60: IS
-  class Parser < Parslet::Parser
-    rule(:space) { str(" ") }
-    rule(:space?) { space.maybe }
-
-    rule(:digits) do
-      match('\d').repeat(1)
-    end
-
+  class Parser < Pubid::Core::Parser
     rule(:stage) do
       Renderer::Russian::STAGE.values.reduce(
         # other stages
@@ -35,15 +11,6 @@ module Pubid::Iso
       end
     end
 
-    # TYPES = {
-    #   "TS" => "technical-specification",
-    #   "TR" => "technical-report",
-    #   "PAS" => "publicly-available-specification",
-    #   "Guide" => "guide",
-    # }.freeze
-    # DATA|GUIDE|ISP|IWA|PAS|R|TR|TS|TTA
-    #       # type          = "data" / "guide" / "isp" / "iwa" /
-    #       #   "pas" / "r" / "tr" / "ts" / "tta"
     rule(:type) do
       (
         Renderer::Russian::TYPE.values.reduce(
@@ -76,18 +43,9 @@ module Pubid::Iso
         str("CSC/SP") | str("CSC/FIN") | str("JAG")
     end
 
-    rule(:year) do
-      match('\d').repeat(4, 4).as(:year)
-    end
-
     rule(:part) do
       (str("-") | str("/")) >> space? >>
         (str("Amd") | str("Cor")).absent? >> (match['[\dA-Z]'] | str("-")).repeat(1).as(:part)
-    end
-
-    rule(:originator) do
-      organization.as(:publisher) >>
-        (space? >> str("/") >> organization.as(:copublisher)).repeat
     end
 
     rule(:organization) do
