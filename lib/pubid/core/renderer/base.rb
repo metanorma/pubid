@@ -50,11 +50,11 @@ module Pubid::Core::Renderer
     end
 
     def render_amendments(amendments, _opts, _params)
-      amendments.map(&:render_pubid).join("+")
+      amendments.sort.map(&:render_pubid).join("+")
     end
 
     def render_corrigendums(corrigendums, _opts, _params)
-      corrigendums.map(&:render_pubid).join("+")
+      corrigendums.sort.map(&:render_pubid).join("+")
     end
 
     def render_type(type, opts, params)

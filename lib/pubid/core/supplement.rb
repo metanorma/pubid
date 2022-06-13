@@ -1,13 +1,18 @@
 module Pubid::Core
   class Supplement
-    attr_accessor :version, :number, :stage
+    include Comparable
+    attr_accessor :version, :number
 
-    def initialize(version:, number: nil, stage: nil)
-      @version, @number, @stage = version, number, stage
+    def initialize(version:, number: nil)
+      @version, @number = version&.to_i, number&.to_i
     end
 
-    def ==(other)
-      other.version == version && (number.nil? || other.number == number) && (stage.nil? || other.stage == stage)
+    def <=>(other)
+      return 0 if number.nil? && other.number
+
+      return number <=> other.number if version == other.version
+
+      (version <=> other.version) || number <=> other.number
     end
 
     def render_pubid_number
