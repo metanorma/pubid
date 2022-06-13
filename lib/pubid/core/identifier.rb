@@ -24,7 +24,7 @@ module Pubid::Core
                         end
       end
 
-      opts.each { |key, value| send("#{key}=", value.is_a?(Array) && value || value.to_s) }
+      opts.each { |key, value| send("#{key}=", value.is_a?(Parslet::Slice) && value.to_s || value) }
     end
 
     def urn
