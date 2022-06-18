@@ -15,12 +15,13 @@ module Pubid::Core::Renderer
 
     def prerender_params(params, opts)
       params.map do |key, value|
+        next unless value
         if respond_to?("render_#{key}")
           [key, send("render_#{key}", value, opts, params)]
         else
           [key, value]
         end
-      end.to_h
+      end.compact.to_h
     end
 
     # render from hash keys
