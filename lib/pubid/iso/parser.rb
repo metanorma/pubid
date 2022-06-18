@@ -106,7 +106,12 @@ module Pubid::Iso
             wgtype.as(:wgtype) >> space >> digits.as(:wgnumber)) |
             (sctype.as(:sctype) >> (space | str("/") >> wgtype.as(:wgtype) >> space) >> digits.as(:scnumber))
         )).maybe >>
-        str(" N") >> space? >> digits.as(:number)
+        space >> str("N") >> space? >> digits.as(:number)
+    end
+
+    rule(:dir_document_body) do
+      str("DIR").as(:dir) >> space >> (str("JTC").as(:dirtype) >> space).maybe >> digits.as(:number) >>
+        (space >> str("SUP:") >> year.as(:supplement)).maybe
     end
 
     rule(:std_document_body) do
@@ -134,7 +139,7 @@ module Pubid::Iso
         (guide_prefix.as(:type) >> space).maybe >>
         (stage.as(:stage) >> space).maybe >>
         originator >> (space | str("/")) >>
-        (tc_document_body | std_document_body)
+        (tc_document_body | std_document_body | dir_document_body)
     end
 
     rule(:root) { identifier }

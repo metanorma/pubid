@@ -2,8 +2,8 @@ module Pubid::Iso
   class Supplement < Pubid::Core::Supplement
     attr_accessor :stage
 
-    def initialize(stage: nil, **args)
-      super(**args)
+    def initialize(stage: nil, version: nil, **args)
+      super(version: version, **args)
       @stage = stage
     end
 

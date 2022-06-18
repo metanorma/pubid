@@ -4,8 +4,12 @@ module Pubid::Iso
                   :iteration, :supplements,
                   :amendment_stage, :corrigendum_stage, :joint_document,
                   :tctype, :sctype, :wgtype, :tcnumber, :scnumber, :wgnumber,
-                  :urn_stage
+                  :urn_stage, :dir, :dirtype, :supplement
 
+    def initialize(amendments: nil, corrigendums: nil, supplement: nil, **opts)
+      super
+      @supplement = Supplement.new(number: supplement[:year]) if supplement
+    end
 
     def self.parse_from_title(title)
       title.split.reverse.inject(title) do |acc, part|
@@ -35,7 +39,7 @@ module Pubid::Iso
     end
 
     def urn
-      (@tctype && Renderer::UrnTc || Pubid::Core::Renderer::Urn).new(get_params).render
+      (@tctype && Renderer::UrnTc || @dir && Renderer::UrnDir || Pubid::Core::Renderer::Urn).new(get_params).render
     end
 
     def to_s(lang: nil, with_date: true, with_language_code: :iso)
@@ -48,6 +52,8 @@ module Pubid::Iso
       else
         if @tctype
           Renderer::Tc.new(get_params)
+        elsif @dir
+          Renderer::Dir.new(get_params)
         else
           self.class.get_renderer_class.new(get_params)
         end

@@ -512,6 +512,24 @@ RSpec.describe Pubid::Iso::Identifier do
     it_behaves_like "converts pubid to pubid"
   end
 
+  context "ISO DIR 1" do
+    let(:original) { "ISO DIR 1" }
+    let(:pubid) { "ISO DIR 1" }
+    let(:urn) { "urn:iso:doc:iso:dir:1" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO/IEC DIR JTC 1 SUP:2021" do
+    let(:original) { "ISO/IEC DIR JTC 1 SUP:2021" }
+    let(:pubid) { "ISO/IEC DIR JTC 1 SUP:2021" }
+    let(:urn) { "urn:iso:doc:iso-iec:dir:jtc:1:sup:2021" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
   context "when assigns amendment" do
     let(:original) { "ISO/IEC 17025:2005" }
     let(:pubid) { "ISO/IEC 17025:2005/Amd 1:2010" }
