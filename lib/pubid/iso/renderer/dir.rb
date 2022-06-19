@@ -2,7 +2,7 @@ module Pubid::Iso::Renderer
   class Dir < Pubid::Core::Renderer::Base
 
     def render_identifier(params)
-      "%{publisher}%{copublisher} DIR%{dirtype} %{number}%{supplement}" % params
+      "%{publisher}%{copublisher} DIR%{dirtype} %{number}%{year}%{supplement}" % params
     end
 
     def render_dirtype(dirtype, _opts, _params)

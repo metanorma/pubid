@@ -513,8 +513,8 @@ RSpec.describe Pubid::Iso::Identifier do
   end
 
   context "ISO DIR 1" do
-    let(:original) { "ISO DIR 1" }
-    let(:pubid) { "ISO DIR 1" }
+    let(:original) { "ISO DIR 1:2022" }
+    let(:pubid) { "ISO DIR 1:2022" }
     let(:urn) { "urn:iso:doc:iso:dir:1" }
 
     it_behaves_like "converts pubid to urn"
