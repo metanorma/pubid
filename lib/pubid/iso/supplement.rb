@@ -5,7 +5,7 @@ module Pubid::Iso
     def initialize(stage: nil, version: nil, publisher: nil, **args)
       super(version: version, **args)
       @stage = stage
-      @publisher = publisher
+      @publisher = publisher.to_s
     end
 
     def render_pubid_stage

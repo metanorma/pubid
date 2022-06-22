@@ -532,9 +532,9 @@ RSpec.describe Pubid::Iso::Identifier do
 
   context "ISO/IEC DIR IEC SUP" do
     let(:pubid) { "ISO/IEC DIR IEC SUP" }
-    # let(:urn) { "urn:iso:doc:iso-iec:dir:jtc:1:sup:2021" }
+    let(:urn) { "urn:iso:doc:iso-iec:dir:sup:iec" }
 
-    # it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
   end
 
