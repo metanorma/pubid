@@ -8,13 +8,13 @@ module Pubid::Iso
 
     def initialize(amendments: nil, corrigendums: nil, supplement: nil, **opts)
       super
-      @supplement = Supplement.new(number: supplement[:year]) if supplement
+      @supplement = Supplement.new(number: supplement[:year], publisher: supplement[:publisher]) if supplement
     end
 
     def self.parse_from_title(title)
       title.split.reverse.inject(title) do |acc, part|
         return parse(acc)
-      rescue Pubid::Iso::Errors::ParseError
+      rescue Pubid::Core::Errors::ParseError
         # delete parts from the title until it's parseable
         acc.reverse.sub(part.reverse, "").reverse.strip
       end

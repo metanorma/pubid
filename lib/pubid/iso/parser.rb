@@ -110,8 +110,10 @@ module Pubid::Iso
     end
 
     rule(:dir_document_body) do
-      str("DIR").as(:dir) >> space >> (str("JTC").as(:dirtype) >> space).maybe >> digits.as(:number) >>
-        (space >> str("SUP:") >> year.as(:supplement)).maybe
+      str("DIR").as(:dir) >> space >> (str("JTC").as(:dirtype) >> space).maybe >>
+        (digits.as(:number) >> (str(":") >> year).maybe).maybe >>
+        (space? >> str("SUP:") >> year.as(:supplement) |
+          (organization.as(:publisher) >> space >> str("SUP")).as(:supplement)).maybe
     end
 
     rule(:std_document_body) do
