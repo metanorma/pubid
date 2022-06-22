@@ -80,7 +80,7 @@ module Pubid::Core
         # merge values repeating keys into array (for copublishers)
 
       rescue Parslet::ParseFailed => failure
-        raise Pubid::Iso::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
+        raise Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
       end
     end
   end
