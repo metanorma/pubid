@@ -14,7 +14,7 @@ module Pubid::Iso
       end
       context
     end
-
+    #
     rule(corrigendums: subtree(:corrigendums)) do |context|
       if context[:corrigendums].key?(:stage)
         context[:corrigendums][:stage] = convert_stage(context[:corrigendums][:stage])
@@ -65,6 +65,27 @@ module Pubid::Iso
       russian_publisher = Renderer::Russian::PUBLISHER.key(publisher.to_s)
       { publisher: russian_publisher&.to_s || publisher }
     end
+
+    # rule(year: simple(:year)) do
+    #   { year: year.to_i }
+    # end
+    #
+    rule(publisher: simple(:publisher), supplement: subtree(:supplement)) do |context|
+      context[:supplement] =
+        Supplement.new(number: context[:supplement][:year],
+                       publisher: context[:supplement][:publisher],
+                       edition: context[:supplement][:edition])
+      context
+    end
+
+    rule(supplement: subtree(:supplement)) do |context|
+      context[:supplement] =
+        Supplement.new(number: context[:supplement][:year],
+                       publisher: context[:supplement][:publisher],
+                       edition: context[:supplement][:edition])
+      context
+    end
+
 
     def self.convert_stage(code)
       russian_code = Renderer::Russian::STAGE.key(code.to_s)

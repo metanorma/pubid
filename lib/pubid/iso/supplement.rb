@@ -1,11 +1,12 @@
 module Pubid::Iso
   class Supplement < Pubid::Core::Supplement
-    attr_accessor :stage, :publisher
+    attr_accessor :stage, :publisher, :edition
 
-    def initialize(stage: nil, version: nil, publisher: nil, **args)
+    def initialize(stage: nil, version: nil, publisher: nil, edition: nil, **args)
       super(version: version, **args)
       @stage = stage
       @publisher = publisher.to_s
+      @edition = edition
     end
 
     def render_pubid_stage

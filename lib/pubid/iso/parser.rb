@@ -109,11 +109,16 @@ module Pubid::Iso
         space >> str("N") >> space? >> digits.as(:number)
     end
 
+    rule(:dir_supplement_edition) do
+      space >> (str("Edition") | str("Ed")) >> space >> digits.as(:edition)
+    end
+
     rule(:dir_document_body) do
-      str("DIR").as(:dir) >> space >> (str("JTC").as(:dirtype) >> space).maybe >>
+      (str("DIR").as(:dir) >> space).maybe >> (str("JTC").as(:dirtype) >> space).maybe >>
         (digits.as(:number) >> (str(":") >> year).maybe).maybe >>
-        (space? >> str("SUP:") >> year.as(:supplement) |
-          (space? >> organization.as(:publisher) >> space >> str("SUP")).as(:supplement)).maybe
+        ((space? >> (organization.as(:publisher) >> space).maybe >>
+            str("SUP") >> (str(":") >> year).maybe >>
+          dir_supplement_edition.maybe).as(:supplement)).maybe
     end
 
     rule(:std_document_body) do
@@ -141,7 +146,8 @@ module Pubid::Iso
         (guide_prefix.as(:type) >> space).maybe >>
         (stage.as(:stage) >> space).maybe >>
         originator >> (space | str("/")) >>
-        (tc_document_body | std_document_body | dir_document_body)
+        (tc_document_body | std_document_body | (dir_document_body >>
+          (str(" + ") >> (originator >> space >> dir_document_body).as(:joint_document)).maybe))
     end
 
     rule(:root) { identifier }

@@ -6,9 +6,13 @@ module Pubid::Iso
                   :tctype, :sctype, :wgtype, :tcnumber, :scnumber, :wgnumber,
                   :urn_stage, :dir, :dirtype, :supplement
 
-    def initialize(amendments: nil, corrigendums: nil, supplement: nil, **opts)
+    def initialize(**opts)
       super
-      @supplement = Supplement.new(number: supplement[:year], publisher: supplement[:publisher]) if supplement
+      # if supplement
+      #   @supplement = Supplement.new(number: supplement[:year],
+      #                                publisher: supplement[:publisher],
+      #                                edition: supplement[:edition])
+      # end
     end
 
     def self.parse_from_title(title)
@@ -58,7 +62,9 @@ module Pubid::Iso
           self.class.get_renderer_class.new(get_params)
         end
       end.render(with_date: with_date, with_language_code: with_language_code) +
-        (@joint_document && "|#{@joint_document}").to_s
+        if @joint_document && !@dir
+          "|#{@joint_document}"
+        end.to_s
     end
   end
 end
