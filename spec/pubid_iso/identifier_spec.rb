@@ -570,6 +570,42 @@ RSpec.describe Pubid::Iso::Identifier do
     it_behaves_like "converts pubid to pubid"
   end
 
+  context "ISO/IEC Directives Part 1" do
+    let(:original) { "ISO/IEC Directives Part 1" }
+    let(:pubid) { "ISO/IEC DIR 1" }
+    let(:urn) { "urn:iso:doc:iso-iec:dir:1" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO/IEC Directives, Part 1:2022" do
+    let(:original) { "ISO/IEC Directives, Part 1:2022" }
+    let(:pubid) { "ISO/IEC DIR 1:2022" }
+    let(:urn) { "urn:iso:doc:iso-iec:dir:1:2022" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO/IEC Directives, IEC Supplement:2022" do
+    let(:original) { "ISO/IEC Directives, IEC Supplement:2022" }
+    let(:pubid) { "ISO/IEC DIR IEC SUP:2022" }
+    let(:urn) { "urn:iso:doc:iso-iec:dir:sup:iec:2022" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO/IEC Directives, Part 1 -- Consolidated ISO Supplement" do
+    let(:original) { "ISO/IEC Directives, Part 1 -- Consolidated ISO Supplement" }
+    let(:pubid) { "ISO/IEC DIR 1 ISO SUP" }
+    let(:urn) { "urn:iso:doc:iso-iec:dir:1:sup:iso" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
   context "when assigns amendment" do
     let(:original) { "ISO/IEC 17025:2005" }
     let(:pubid) { "ISO/IEC 17025:2005/Amd 1:2010" }

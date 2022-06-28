@@ -11,3 +11,13 @@ ISO/IEC DIR 1 ISO SUP Ed 13
 ISO/IEC DIR JTC 1 SUP:2021
 ISO/IEC DIR JTC 1 SUP
 ISO/IEC DIR 1:2022 + IEC SUP:2022
+ISO/IEC Directives Part 1
+ISO/IEC Directives, Part 1
+ISO/IEC Directives, Part 1:2022
+ISO/IEC Directives Part 2
+ISO/IEC Directives, Part 2
+ISO/IEC Directives, Part 2:2021
+ISO/IEC Directives, IEC Supplement:2022
+ISO/IEC Directives, Part 1 -- Consolidated ISO Supplement
+ISO/IEC Directives, JTC 1 Supplement:2021
+ISO/IEC Directives, Part 1:2022 + IEC Supplement:2022
