@@ -56,8 +56,18 @@ module Pubid::Core
         Transformer
       end
 
+      def update_old_code(code)
+        return code unless defined?(UPDATE_CODES)
+
+        UPDATE_CODES.each do |from, to|
+          code = code.gsub(from.match?(/^\/.*\/$/) ? Regexp.new(from[1..-2]) : /^#{Regexp.escape(from)}$/, to)
+        end
+        code
+      end
+
       def parse(code_or_params)
-        params = code_or_params.is_a?(String) ? get_parser_class.new.parse(code_or_params) : code_or_params
+        params = code_or_params.is_a?(String) ?
+                   get_parser_class.new.parse(update_old_code(code_or_params)) : code_or_params
         # Parslet returns an array when match any copublisher
         # otherwise it's hash
         if params.is_a?(Array)
