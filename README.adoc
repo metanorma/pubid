@@ -12,6 +12,25 @@ identifiers.
 . generate language specific PubID
 . generate dated vs undated PubIDs
 
+=== Usage
+
+
+[source,ruby]
+----
+require "pubid-iso"
+
+pubid = Pubid::Iso::Identifier.new(publisher: "ISO", number: 123)
+pubid.to_s
+
+=> "ISO 1234"
+----
+
+Available attributes:
+
+`number`, `publisher`, `copublisher`, `part`, `type`, `year`, `edition`, `language`, `amendments`,
+`corrigendums`, `stage`, `substage`, `iteration`, `supplements`, `amendment_stage`, `corrigendum_stage`,
+`joint_document`, `tctype`, `sctype`, `wgtype`, `tcnumber`, `scnumber`, `wgnumber`, `urn_stage`,
+`dir`, `dirtype`, `supplement`
 
 == Elements of the PubID
 
