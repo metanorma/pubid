@@ -338,6 +338,24 @@ RSpec.describe Pubid::Iso::Identifier do
     it_behaves_like "converts pubid to french pubid"
   end
 
+  context "ISO 6709:2008/Cor. 1:2009" do
+    let(:original) { "ISO 6709:2008/Cor. 1:2009" }
+    let(:pubid) { "ISO 6709:2008/Cor 1:2009" }
+    let(:urn) { "urn:iso:std:iso:6709:cor:2009:v1" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO 10993-4:2002/Amd. 1:2006(E)" do
+    let(:original) { "ISO 10993-4:2002/Amd.1:2006(E)" }
+    let(:pubid) { "ISO 10993-4:2002/Amd 1:2006(en)" }
+    let(:urn) { "urn:iso:std:iso:10993:-4:amd:2006:v1:en" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
   context "ISO/IEC 17025:2005/Cor.1:2006(fr)" do
     let(:original) { "ISO/IEC 17025:2005/Cor.1:2006(fr)" }
     let(:pubid) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }

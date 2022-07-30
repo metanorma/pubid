@@ -70,7 +70,8 @@ module Pubid::Iso
       ((str("/") >> stage.as(:stage)).maybe >>
       (str("/") | space).maybe >>
         (str("Amd") | str("AMD") | str("AM")) >>
-        (space | str(".")) >>
+        str(".").maybe >>
+        space.maybe >>
         digits.as(:version) >>
         (str(":") >> digits.as(:number)).maybe).as(:amendments)
     end
@@ -79,7 +80,8 @@ module Pubid::Iso
       ((str("/") >> stage.as(:stage)).maybe >>
       (str("/") | space).maybe >>
         (str("Cor") | str("COR")) >>
-        (space | str(".")) >>
+        str(".").maybe >>
+        space.maybe >>
         digits.as(:version) >>
         (str(":") >> digits.as(:number)).maybe).as(:corrigendums)
     end
