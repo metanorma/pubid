@@ -4,7 +4,22 @@ module Pubid::Core
                   :type, :year, :edition, :language, :amendments,
                   :corrigendums
 
-    def initialize(amendments: nil, corrigendums: nil, **opts)
+    # Creates new identifier from options provided:
+    # @param publisher [String] document's publisher, eg. "ISO"
+    # @param copublisher [String] document's copublisher, eg. "IEC"
+    # @param number [Integer] document's number, eg. "1234"
+    # @param part [String] document's part and subparts, eg. "1", "1-1A", "2-3D"
+    # @param type [String] document's type, eg. "TR", "TS"
+    # @param year [Integer] document's year, eg. "2020"
+    # @param edition [Integer] document's edition, eg. "1"
+    # @param language [String] document's translation language
+    #   (available languages: "ru", "fr", "en", "ar")
+    # @param amendments [Array<Amendment>] document's amendments
+    # @param corrigendums [Array<Corrigendum>] document's corrigendums
+    #
+    def initialize(publisher:, number:, copublisher: nil, part: nil, type: nil,
+                   year: nil, edition: nil, language: nil, amendments: nil,
+                   corrigendums: nil)
       if amendments
         @amendments = if amendments.is_a?(Array)
                         amendments.map do |amendment|
@@ -24,7 +39,14 @@ module Pubid::Core
                         end
       end
 
-      opts.each { |key, value| send("#{key}=", value.is_a?(Parslet::Slice) && value.to_s || value) }
+      @publisher = publisher.to_s
+      @number = number.to_i
+      @copublisher = copublisher.to_s if copublisher
+      @part = part.to_s if part
+      @type = type.to_s if type
+      @year = year.to_i if year
+      @edition = edition.to_i if edition
+      @language = language.to_s if language
     end
 
     def urn
