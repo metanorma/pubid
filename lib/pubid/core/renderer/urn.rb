@@ -20,7 +20,7 @@ module Pubid::Core::Renderer
     end
 
     def render_copublisher(copublisher, _opts, _params)
-      return "-#{copublisher.downcase}" unless copublisher.is_a?(Array)
+      return "-#{copublisher.to_s.downcase}" unless copublisher.is_a?(Array)
 
       copublisher.map(&:to_s).sort.map do |copublisher|
         "-#{copublisher.downcase}"

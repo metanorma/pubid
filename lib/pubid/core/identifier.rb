@@ -6,7 +6,7 @@ module Pubid::Core
 
     # Creates new identifier from options provided:
     # @param publisher [String] document's publisher, eg. "ISO"
-    # @param copublisher [String] document's copublisher, eg. "IEC"
+    # @param copublisher [String,Array<String>] document's copublisher, eg. "IEC"
     # @param number [Integer] document's number, eg. "1234"
     # @param part [String] document's part and subparts, eg. "1", "1-1A", "2-3D"
     # @param type [String] document's type, eg. "TR", "TS"
@@ -41,8 +41,8 @@ module Pubid::Core
       end
 
       @publisher = publisher.to_s
-      @number = number.to_i
-      @copublisher = copublisher.to_s if copublisher
+      @number = number
+      @copublisher = copublisher if copublisher
       @part = part.to_s if part
       @type = type.to_s if type
       @year = year.to_i if year
