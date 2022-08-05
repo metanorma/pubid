@@ -1,5 +1,5 @@
 module Pubid::Iso::Renderer
-  class French < Pubid::Core::Renderer::Base
+  class French < Base
     def render_identifier(params)
       if params[:type] == " Guide"
         params[:type] = ""
@@ -10,7 +10,7 @@ module Pubid::Iso::Renderer
     end
 
     def render_copublisher(copublisher, opts, params)
-      "/#{copublisher.sub("IEC", "CEI")}"
+      "/#{copublisher.to_s.sub("IEC", "CEI")}"
     end
 
     def render_corrigendums(corrigendums, _opts, _params)

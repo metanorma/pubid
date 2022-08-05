@@ -1,12 +1,12 @@
 module Pubid::Iso::Renderer
-  class UrnTc < Pubid::Core::Renderer::Urn
+  class UrnTc < Urn
 
     def render_identifier(params)
       "urn:iso:doc:%{publisher}%{copublisher}:%{tctype}:%{tcnumber}%{sctype}%{wgtype}:%{number}" % params
     end
 
     def render_tctype(tctype, _opts, _params)
-      (tctype.is_a?(Array) && tctype.join(":") || tctype).downcase
+      (tctype.is_a?(Array) && tctype.join(":") || tctype.to_s).downcase
     end
 
     def render_sctype(sctype, _opts, params)

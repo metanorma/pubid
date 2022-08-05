@@ -1,12 +1,12 @@
 module Pubid::Iso::Renderer
-  class Tc < Pubid::Core::Renderer::Base
+  class Tc < Base
 
     def render_identifier(params)
       "%{publisher}%{copublisher} %{tctype} %{tcnumber}%{sctype}%{wgtype} N%{number}" % params
     end
 
     def render_tctype(tctype, _opts, _params)
-      tctype.is_a?(Array) && tctype.join("/") || tctype
+      tctype.is_a?(Array) && tctype.join("/") || tctype.to_s
     end
 
     # TC 184/SC/WG 4 - no wg number

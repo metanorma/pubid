@@ -1,13 +1,11 @@
 module Pubid::Iso::Renderer
-  class UrnDir < Pubid::Core::Renderer::Urn
+  class UrnDir < Urn
 
     def render_identifier(params)
       res = ("urn:iso:doc:%{publisher}%{copublisher}:dir%{dirtype}%{number}%{year}%{supplement}" % params)
 
       if params.key?(:joint_document)
-        joint_params = prerender_params(
-          params[:joint_document].transform_values { |value| value.is_a?(Parslet::Slice) && value.to_s || value }, {}
-        )
+        joint_params = prerender_params(params[:joint_document].get_params, {})
         joint_params.default = ""
         res += (":%{publisher}%{copublisher}%{dirtype}%{number}%{supplement}" % joint_params)
       end

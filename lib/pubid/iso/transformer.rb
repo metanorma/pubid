@@ -86,6 +86,11 @@ module Pubid::Iso
       context
     end
 
+    rule(joint_document: subtree(:joint_document)) do |context|
+      context[:joint_document] =
+        Identifier.new(**context[:joint_document])
+      context
+    end
 
     def self.convert_stage(code)
       russian_code = Renderer::Russian::STAGE.key(code.to_s)

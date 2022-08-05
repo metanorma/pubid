@@ -1,18 +1,52 @@
 module Pubid::Iso
   class Identifier < Pubid::Core::Identifier
-    attr_accessor :stage, :substage,
-                  :iteration, :supplements,
-                  :amendment_stage, :corrigendum_stage, :joint_document,
+    attr_accessor :stage,
+                  :iteration, :joint_document,
                   :tctype, :sctype, :wgtype, :tcnumber, :scnumber, :wgnumber,
-                  :urn_stage, :dir, :dirtype, :supplement
+                  :urn_stage, :dir, :dirtype,
+                  # supplement for DIR type identifiers
+                  :supplement
 
-    def initialize(**opts)
-      super
-      # if supplement
-      #   @supplement = Supplement.new(number: supplement[:year],
-      #                                publisher: supplement[:publisher],
-      #                                edition: supplement[:edition])
-      # end
+    # Creates new identifier from options provided, includes options from
+    # Pubid::Core::Identifier#initialize
+    #
+    # @param stage [String] stage, eg. "WD", "CD", "DIS"
+    # @param urn_stage [Float] numeric stage for URN rendering
+    # @param iteration [Integer] document iteration, eg. "1", "2", "3"
+    # @param joint_document [Identifier] joint document
+    # @param supplement [Supplement] supplement
+    # @param tctype [String] Technical Committee type, eg. "TC", "JTC"
+    # @param sctype [String] TC subsommittee, eg. "SC"
+    # @param wgtype [String] TC working group type, eg. "AG", "AHG"
+    # @param tcnumber [Integer] Technical Committee number, eg. "1", "2"
+    # @param scnumber [Integer] Subsommittee number, eg. "1", "2"
+    # @param wgnumber [Integer] Working group number, eg. "1", "2"
+    # @param dir [Boolean] Directives document
+    # @param dirtype [String] Directives document type, eg. "JTC"
+    # @see Supplement
+    # @see Identifier
+    # @see Pubid::Core::Identifier
+    # @see Parser
+    #
+    def initialize(number: nil, stage: nil, iteration: nil, supplement: nil,
+                   joint_document: nil, urn_stage: nil,
+                   tctype: nil, sctype: nil, wgtype: nil, tcnumber: nil,
+                   scnumber: nil, wgnumber:nil,
+                   dir: nil, dirtype: nil, **opts)
+      super(**opts.merge(number: number))
+      @stage = stage.to_s if stage
+      @iteration = iteration.to_i if iteration
+      @supplement = supplement if supplement
+      @joint_document = joint_document if joint_document
+      @urn_stage = urn_stage if urn_stage
+      @tctype = tctype if tctype
+      @sctype = sctype.to_s if sctype
+      @wgtype = wgtype.to_s if wgtype
+      @tcnumber = tcnumber.to_s if tcnumber
+      @scnumber = scnumber.to_s if scnumber
+      @wgnumber = wgnumber.to_s if wgnumber
+      @dir = dir.to_s if dir
+      @dirtype = dirtype.to_s if dirtype
     end
 
     def self.parse_from_title(title)
@@ -40,10 +74,14 @@ module Pubid::Iso
       def get_transformer_class
         Transformer
       end
+
+      def get_renderer_class
+        Renderer::Base
+      end
     end
 
     def urn
-      (@tctype && Renderer::UrnTc || @dir && Renderer::UrnDir || Pubid::Core::Renderer::Urn).new(get_params).render
+      (@tctype && Renderer::UrnTc || @dir && Renderer::UrnDir || Pubid::Iso::Renderer::Urn).new(get_params).render
     end
 
     def to_s(lang: nil, with_date: true, with_language_code: :iso)

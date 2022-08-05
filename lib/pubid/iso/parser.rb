@@ -1,36 +1,33 @@
 module Pubid::Iso
   class Parser < Pubid::Core::Parser
+    STAGES = %w[NP NWIP WD CD DIS FDIS PRF IS AWI PWI FPD pD PD FD D].freeze
+    TYPES = %w[DATA ISP IWA R TTA TS TR PAS Guide GUIDE].freeze
+
+    TCTYPES = ["TC", "JTC", "PC", "IT", "CAB", "CASCO", "COPOLCO",
+      "COUNCIL", "CPSG", "CS", "DEVCO", "GA", "GAAB", "INFCO",
+      "ISOlutions", "ITN", "REMCO", "TMB", "TMBG", "WMO",
+      "DMT", "JCG", "SGPM", "ATMG", "CCCC", "CCCC-TG", "JDMT",
+      "JSAG", "JSCTF-TF", "JTCG", "JTCG-TF", "SAG_Acc", "SAG_CRMI",
+      "SAG_CRMI_CG", "SAG_ESG", "SAG_ESG_CG", "SAG_MRS", "SAG SF", "SAG SF_CG",
+      "SMCC", "STMG", "MENA STAR"].freeze
+    
+    WGTYPES = ["AG", "AHG", "AhG", "WG", "JWG", "QC", "TF",
+      "PPC", "CAG", "WG SGDG", "WG SR", "STAR", "STTF", "TIG",
+      "CPAG", "CSC", "ITSAG", "CSC/FIN", "CSC/NOM", "CSC/OVE",
+      "CSC/SP", "CSC/FIN", "JAG"].freeze
+
+    ORGANIZATIONS = %w[IEC IEEE CIW SAE CIE ASME ASTM OECD ISO IWA HL7 CEI].freeze
     rule(:stage) do
-      Renderer::Russian::STAGE.values.reduce(
-        # other stages
-        str("NP") | str("NWIP") |
-        str("WD") | str("CD") | str("DIS") | str("FDIS") | str("PRF") |
-        str("IS") | str("AWI") | str("PWI") |
-        # AMD and COR stages
-        str("FPD") | str("pD") | str("PD") | str("FD") | str("D")) do |acc, stage|
-        acc | str(stage)
-      end
+      array_to_str(Renderer::Russian::STAGE.values) | array_to_str(STAGES)
     end
 
     rule(:type) do
-      (
-        Renderer::Russian::TYPE.values.reduce(
-          str("DATA") | str("ISP") | str("IWA") | str("R") | str("TTA") |
-          str("TS") | str("TR") | str("PAS") | str("Guide") | str("GUIDE")) do |acc, type|
-          acc | str(type)
-        end
-      ).as(:type)
+      (array_to_str(Renderer::Russian::TYPE.values) | array_to_str(TYPES)).as(:type)
     end
 
     rule(:tctype) do
       # tc-types
-      str("TC") | str("JTC") | str("PC") | str("IT") | str("CAB") | str("CASCO") | str("COPOLCO") |
-        str("COUNCIL") | str("CPSG") | str("CS") | str("DEVCO") | str("GA") | str("GAAB") | str("INFCO") |
-        str("ISOlutions") | str("ITN") | str("REMCO") | str("TMB") | str("TMBG") | str("WMO") |
-        str("DMT") | str("JCG") | str("SGPM") | str("ATMG") | str("CCCC") | str("CCCC-TG") | str("JDMT") |
-        str("JSAG") | str("JSCTF-TF") | str("JTCG") | str("JTCG-TF") | str("SAG_Acc") | str("SAG_CRMI") |
-        str("SAG_CRMI_CG") | str("SAG_ESG") | str("SAG_ESG_CG") | str("SAG_MRS") | str("SAG SF") | str("SAG SF_CG") |
-        str("SMCC") | str("STMG") | str("MENA STAR")
+      array_to_str(TCTYPES)
     end
 
     rule(:sctype) do
@@ -38,10 +35,7 @@ module Pubid::Iso
     end
 
     rule(:wgtype) do
-      str("AG") | str("AHG") | str("AhG") | str("WG") | str("JWG") | str("QC") | str("TF") |
-        str("PPC") | str("CAG") | str("WG SGDG") | str("WG SR") | str("STAR") | str("STTF") | str("TIG") |
-        str("CPAG") | str("CSC") | str("ITSAG") | str("CSC/FIN") | str("CSC/NOM") | str("CSC/OVE") |
-        str("CSC/SP") | str("CSC/FIN") | str("JAG")
+      array_to_str(WGTYPES)
     end
 
     rule(:part) do
@@ -50,12 +44,7 @@ module Pubid::Iso
     end
 
     rule(:organization) do
-      Renderer::Russian::PUBLISHER.values.reduce(
-        str("IEC") | str("IEEE") | str("CIW") | str("SAE") |
-        str("CIE") | str("ASME") | str("ASTM") | str("OECD") | str("ISO") |
-        str("IWA") | str("HL7") | str("CEI")) do |acc, publisher|
-        acc | str(publisher)
-      end
+      array_to_str(Renderer::Russian::PUBLISHER.values) | array_to_str(ORGANIZATIONS)
     end
 
     rule(:edition) do
@@ -129,7 +118,7 @@ module Pubid::Iso
         space? >> ((stage.as(:stage) | type) >> space).maybe >>
         digits.as(:number) >>
         # for identifiers like ISO 5537/IDF 26
-        (str("|") >> (str("IDF") >> space >> digits).as(:joint_document)).maybe >>
+        (str("|") >> (str("IDF").as(:publisher) >> space >> digits.as(:number)).as(:joint_document)).maybe >>
         part.maybe >> iteration.maybe >>
         (space? >> (str(":") | str("-")) >> year).maybe >>
         # stage before amendment

@@ -534,6 +534,13 @@ RSpec.describe Pubid::Iso::Identifier do
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
+
+    it do
+      expect(subject.scnumber).to eq("4")
+      expect(subject.wgnumber).to eq("12")
+      expect(subject.tcnumber).to eq("184")
+      expect(subject.number).to eq("10897")
+    end
   end
 
   context "ISO/TC 154/WG 5 N152" do
@@ -675,6 +682,49 @@ RSpec.describe Pubid::Iso::Identifier do
 
     it "extracts pubid from title" do
       expect(subject.to_s).to eq(pubid)
+    end
+  end
+
+  describe "creating new identifier" do
+    subject { described_class.new(**{ publisher: "ISO", number: number }.merge(params)) }
+    let(:number) { 123 }
+
+    context "when have joint document" do
+      let(:params) { { joint_document: "IDF #{number}" } }
+
+      it "renders correct identifier" do
+        expect(subject.to_s).to eq("ISO #{number}|IDF #{number}")
+      end
+    end
+
+    context "when have urn_stage" do
+      let(:params) { { urn_stage: 20.20, stage: "WD" } }
+
+      it "renders separate stage for PubID" do
+        expect(subject.to_s).to eq("ISO/WD #{number}")
+      end
+
+      it "renders separate numeric stage for URN" do
+        expect(subject.urn).to eq("urn:iso:std:iso:#{number}:stage-20.20")
+      end
+    end
+
+    context "when have DIR parameter" do
+      context "when DIR true" do
+        let(:params) { { dir: true } }
+
+        it "render DIR document" do
+          expect(subject.to_s).to eq("ISO DIR #{number}")
+        end
+      end
+
+      context "when DIR false" do
+        let(:params) { { dir: false } }
+
+        it "render normal document" do
+          expect(subject.to_s).to eq("ISO #{number}")
+        end
+      end
     end
   end
 end
