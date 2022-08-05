@@ -465,8 +465,6 @@ IEEE Std 1671.5-2008 (Full_Use)
 IEEE Std 1671.6-2008 (Full-Use)
 IEEE Std 1673-2015 (2nd Printing)
 IEEE Std 175-1960 (60 IRE 13 S1)
-IEEE Std 1800-2009 (Revision of IEEE Std1800-2005) - Redline
-IEEE Std 1850-2010 (Revision of IEEE Std1850-2005) - Redline
 IEEE Std 1904.1(TM)/Conformance02-2014 (Conformance to IEEE Std 1904.1-2013)
 IEEE Std 1904.1(TM)/Conformance03-2014 (Conformance to IEEE Std 1904.1-2013)
 IEEE Std 1904.1/Conformance01-2014 (Conformance to IEEE Std 1904.1-2013)

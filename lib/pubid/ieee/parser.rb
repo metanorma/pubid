@@ -222,7 +222,7 @@ module Pubid::Ieee
     def parameters(atom, without_dual_pubids: false, skip_parameters: false)
       atom >>
         ((draft_status >> space).maybe >> (str("Draft ").maybe >>
-          type.as(:type) >> space).maybe).as(:type_status) >>
+          type.as(:type) >> space.maybe).maybe).as(:type_status) >>
         number_prefix >> number >>
         (
           # IEEE P2410-D4, July 2019

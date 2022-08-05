@@ -729,6 +729,14 @@ RSpec.describe Pubid::Ieee::Identifier do
       it_behaves_like "converts pubid to pubid"
     end
 
+    # parses lack of space between "Std" and standard number
+    context "IEEE Std 1800-2009 (Revision of IEEE Std1800-2005) - Redline" do
+      let(:pubid) { "IEEE Std 1800-2009 (Revision of IEEE Std 1800-2005) - Redline" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+
     context "ISO/IEC/IEEE CD P23026:2013" do
       let(:pubid) { "ISO/IEC/IEEE CD P23026:2013" }
 
