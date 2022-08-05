@@ -34,9 +34,12 @@ module Pubid::Core::Renderer
       render_identifier(params)
     end
 
+    def render_base(params, prefix = "")
+      "%{publisher}%{copublisher}#{prefix} %{number}" % params
+    end
+
     def render_identifier(params)
-      "%{publisher}%{copublisher}%{type}%{stage} %{number}%{part}%{iteration}"\
-        "%{year}%{edition}%{amendments}%{corrigendums}%{language}" % params
+      render_base(params)
     end
 
     def render_copublisher(copublisher, _opts, _params)
@@ -58,21 +61,6 @@ module Pubid::Core::Renderer
       corrigendums.sort.map(&:render_pubid).join("+")
     end
 
-    def render_type(type, opts, params)
-      if params[:copublisher]
-        " #{type}"
-      else
-        "/#{type}"
-      end
-    end
-
-    def render_stage(stage, opts, params)
-      if params[:copublisher]
-        " #{stage}"
-      else
-        "/#{stage}"
-      end
-    end
 
     def render_part(part, opts, _params)
       "-#{part}"
@@ -88,14 +76,6 @@ module Pubid::Core::Renderer
       else
         "(#{language})"
       end
-    end
-    
-    def render_edition(edition, _opts, _params)
-      " ED#{edition}"
-    end
-
-    def render_iteration(iteration, _opts, _params)
-      ".#{iteration}"
     end
   end
 end

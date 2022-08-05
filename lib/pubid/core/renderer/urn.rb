@@ -1,18 +1,12 @@
 module Pubid::Core::Renderer
   class Urn < Base
-    STAGES = { PWI: 0,
-               NP: 10,
-               AWI: 20,
-               WD: 20.20,
-               CD: 30,
-               DIS: 40,
-               FDIS: 50,
-               PRF: 50,
-               IS: 60 }.freeze
+
+    def render_base(params)
+      "urn:iso:std:%{publisher}%{copublisher}%{type}:%{number}%{part}" % params
+    end
 
     def render_identifier(params)
-      "urn:iso:std:%{publisher}%{copublisher}%{type}:%{number}%{part}%{stage}"\
-      "%{urn_stage}%{corrigendum_stage}%{iteration}%{edition}%{amendments}%{corrigendums}%{language}" % params
+      render_base(params)
     end
 
     def render_publisher(publisher, _opts, _params)
@@ -20,7 +14,7 @@ module Pubid::Core::Renderer
     end
 
     def render_copublisher(copublisher, _opts, _params)
-      return "-#{copublisher.downcase}" unless copublisher.is_a?(Array)
+      return "-#{copublisher.to_s.downcase}" unless copublisher.is_a?(Array)
 
       copublisher.map(&:to_s).sort.map do |copublisher|
         "-#{copublisher.downcase}"
@@ -47,15 +41,6 @@ module Pubid::Core::Renderer
       ":#{language}"
     end
 
-    def render_stage(stage, _opts, _params)
-      return ":stage-#{sprintf('%05.2f', stage)}" if stage.is_a?(Float)
-
-      ":stage-#{sprintf('%05.2f', STAGES[stage.to_sym])}"
-    end
-
-    def render_urn_stage(stage, opts, params)
-      render_stage(stage, opts, params)
-    end
 
     def render_corrigendum_stage(stage, opts, params)
       render_stage(stage, opts, params)
