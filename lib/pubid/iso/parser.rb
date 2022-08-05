@@ -71,20 +71,18 @@ module Pubid::Iso
       ((str("/") >> stage.as(:stage)).maybe >>
       (str("/") | space).maybe >>
         (str("Amd") | str("AMD") | str("AM")) >>
-        str(".").maybe >>
-        space.maybe >>
+        (space | str(".")).repeat(1).maybe >>
         digits.as(:version) >>
-        (str(":") >> digits.as(:number)).maybe).as(:amendments)
+        ((str(":") | str("-")) >> digits.as(:number)).maybe).as(:amendments)
     end
 
     rule(:corrigendum) do
       ((str("/") >> stage.as(:stage)).maybe >>
       (str("/") | space).maybe >>
         (str("Cor") | str("COR")) >>
-        str(".").maybe >>
-        space.maybe >>
+        (space | str(".")).repeat(1).maybe >>
         digits.as(:version) >>
-        (str(":") >> digits.as(:number)).maybe).as(:corrigendums)
+        ((str(":") | str("-")) >> digits.as(:number)).maybe).as(:corrigendums)
     end
 
     rule(:language) do
@@ -133,7 +131,7 @@ module Pubid::Iso
         # for identifiers like ISO 5537/IDF 26
         (str("|") >> (str("IDF") >> space >> digits).as(:joint_document)).maybe >>
         part.maybe >> iteration.maybe >>
-        (space? >> str(":") >> year).maybe >>
+        (space? >> (str(":") | str("-")) >> year).maybe >>
         # stage before amendment
         (
           # stage before corrigendum

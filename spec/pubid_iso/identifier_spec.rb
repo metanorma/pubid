@@ -145,6 +145,14 @@ RSpec.describe Pubid::Iso::Identifier do
     it_behaves_like "converts pubid to pubid"
   end
 
+  context "ISO/TR 30406-2017" do
+    let(:pubid) { "ISO/TR 30406:2017" }
+    let(:urn) { "urn:iso:std:iso:tr:30406" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
   context "ISO 5843/6" do
     let(:original) { "ISO 5843/6" }
     let(:pubid) { "ISO 5843-6" }
@@ -241,6 +249,14 @@ RSpec.describe Pubid::Iso::Identifier do
     let(:original) { "ISO 11783-2:2012/Cor.1:2012(fr)" }
     let(:pubid) { "ISO 11783-2:2012/Cor 1:2012(fr)" }
     let(:urn) { "urn:iso:std:iso:11783:-2:cor:2012:v1:fr" }
+
+    it_behaves_like "converts pubid to urn"
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO/IEC 8802-3:2021/Amd7-2021" do
+    let(:pubid) { "ISO/IEC 8802-3:2021/Amd 7:2021" }
+    let(:urn) { "urn:iso:std:iso-iec:8802:-3:amd:2021:v7" }
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
