@@ -20,8 +20,12 @@ module Pubid::Ieee
       if iso_identifier
         @iso_identifier = Pubid::Iso::Identifier.parse(iso_identifier)
         if iso_amendment
-          @iso_identifier.amendment_version = iso_amendment[:version]
-          @iso_identifier.amendment_number = iso_amendment[:year]
+          @iso_identifier.amendments = [
+            Pubid::Iso::Amendment.new(
+              version: iso_amendment[:version],
+              number: iso_amendment[:year]
+            )
+          ]
         end
       end
       [organizations, type_status, parameters].each do |data|
