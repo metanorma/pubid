@@ -716,6 +716,12 @@ RSpec.describe Pubid::Ieee::Identifier do
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "IEEE Std 802.3-2012 (Revision to IEEE Std 802.3-2008)" do
+      let(:pubid) { "IEEE Std 802.3-2012 (Revision of IEEE Std 802.3-2008)" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "IEEE STD 525-2007 (Revision of IEEE Std 525-1992/Incorporates IEEE Std 525-2007/Cor1:2008)" do
       let(:original) { "IEEE STD 525-2007 (Revision of IEEE Std 525-1992/Incorporates IEEE Std 525-2007/Cor1:2008)" }
       let(:pubid) { "IEEE Std 525-2007 (Incorporates IEEE Std 525-2007/Cor 1-2008) (Revision of IEEE Std 525-1992)" }

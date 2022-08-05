@@ -436,8 +436,6 @@ IEEE Std 1106-2005(R2011) (Revision of IEEE Std 1106-1995)
 IEEE Std 11073-30200a-2011 (Amendment to ISO/IEEE Std 11073-30200:2004)
 IEEE Std 1184-2006(R2011) (Revision of IEEE 1184-1994)
 IEEE Std 120-1955; ASME PTC 19.6-1955
-IEEE Std 1207-2011 (Revision to IEEE Std 1207-2004)
-IEEE Std 1207-2011 (Revision to IEEE Std 1207-2004) - Redline
 IEEE Std 1215 - IEEE Guide for the Application of Separable Insulated Connectors
 IEEE Std 1224/1327/1224.1/lNT, March 1994 Edition
 IEEE Std 1232-2002 (Revision of IEEE Std 1232-1995, IEEE Std 1232.1-1997 and IEEE Std 1232.2-1998)
@@ -469,8 +467,6 @@ IEEE Std 1671.1-2009 (Full_Use)
 IEEE Std 1671.5-2008 (Full_Use)
 IEEE Std 1671.6-2008 (Full-Use)
 IEEE Std 1673-2015 (2nd Printing)
-IEEE Std 1725-2011(Revision to IEEE Std 1725-2006)
-IEEE Std 1725-2011(Revision to IEEE Std 1725-2006) - Redline
 IEEE Std 175-1960 (60 IRE 13 S1)
 IEEE Std 1800-2009 (Revision of IEEE Std1800-2005) - Redline
 IEEE Std 1850-2010 (Revision of IEEE Std1850-2005) - Redline
@@ -499,8 +495,6 @@ IEEE Std 738-2012 (Revision of IEEE Std 738-2006 - Incorporates IEEE Std 738-201
 IEEE Std 738-2012 Draft 10 (Revision of IEEE Std 738-2006)
 IEEE Std 739-1995 [The Bronze Book]
 IEEE Std 771-1998 (R2009)
-IEEE Std 802-2014 (Revision to IEEE Std 802-2001)
-IEEE Std 802-2014 (Revision to IEEE Std 802-2001) - Redline
 IEEE Std 802.10e-1993 and IEEE std 802.10f-1993
 IEEE Std 802.10h-1997 (Supplement to IEEE Std 802.10-1 992)
 IEEE Std 802.11ac&#x2122;-2013 (Amendment to IEEE Std 802.11-2012, as amended by IEEE Std 802.11ae-2012, IEEE Std 802.11aa-2012, and IEEE Std 802.11ad-2012)
@@ -531,7 +525,6 @@ IEEE Std 802.21-2017 (Revision of IEEE Std 802.21-2008 as amended by IEEE Std 80
 IEEE Std 802.21c-2014 (Amendment to IEEE Std IEEE Std 802.21-2008 as amended by IEEE Std 802.21a-2012 and IEEE Std 802.21b-2012)
 IEEE Std 802.3-2002 (Revision of IEEE Std 802.3, 2000 edn)
 IEEE Std 802.3-2005 (Revision of IEEE Std 802.3-2002 including all approved amendments)
-IEEE Std 802.3-2012 (Revision to IEEE Std 802.3-2008)
 IEEE Std 802.3af-2003 (Amendment to IEEE Std 802.3-2002, including IEEE Std 802.3ae-2002)
 IEEE Std 802.3ak-2004 (Amendment to IEEE Std 802.3-2002 as amended by IEEE Stds 802.3ae-2002, 802.3af-2003 and 802.3aj-2003)
 IEEE Std 802.3bm-2015 (Amendment to IEEE Std 802.3-2012 as amended by IEEE Std 802.3bk-2013 and IEEE Std 802.3bj-2014 )

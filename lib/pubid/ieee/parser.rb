@@ -159,7 +159,7 @@ module Pubid::Ieee
     end
 
     rule(:revision) do
-      (str("Revision of ") >>
+      (str("Revision ") >> (str("of") | str("to")) >> space >>
         (identifier_without_dual_pubids.as(:identifier) >> str(" and ").maybe).repeat(1)
       ).as(:revision)
     end
