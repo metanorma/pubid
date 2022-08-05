@@ -92,6 +92,8 @@ module Pubid::Iso
       return russian_code.to_s if russian_code
 
       case code
+      when "NWIP"
+        "NP"
       when "D"
         "DIS"
       when "FD"

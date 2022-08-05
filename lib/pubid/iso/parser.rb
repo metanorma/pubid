@@ -3,7 +3,8 @@ module Pubid::Iso
     rule(:stage) do
       Renderer::Russian::STAGE.values.reduce(
         # other stages
-        str("NP") | str("WD") | str("CD") | str("DIS") | str("FDIS") | str("PRF") |
+        str("NP") | str("NWIP") |
+        str("WD") | str("CD") | str("DIS") | str("FDIS") | str("PRF") |
         str("IS") | str("AWI") | str("PWI") |
         # AMD and COR stages
         str("FPD") | str("pD") | str("PD") | str("FD") | str("D")) do |acc, stage|
