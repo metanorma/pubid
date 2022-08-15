@@ -1,4 +1,3 @@
-require "relaton_nist/data_fetcher"
 require "nokogiri"
 require "open-uri"
 require "lightly"

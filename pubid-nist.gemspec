@@ -29,7 +29,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "vcr"
   spec.add_development_dependency "webmock"
 
-  spec.add_dependency "relaton-nist"
   spec.add_dependency "nokogiri"
   spec.add_dependency "thor"
   spec.add_dependency "lightly"
