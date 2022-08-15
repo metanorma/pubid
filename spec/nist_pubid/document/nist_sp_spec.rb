@@ -334,4 +334,11 @@ RSpec.describe Pubid::Nist::Document do
 
     it_behaves_like "converts pubid to different formats"
   end
+
+  context "NIST.SP.800-63ver1.0.2" do
+    let(:original_pubid) { "NIST.SP.800-63ver1.0.2" }
+    let(:short_pubid) { "NIST SP 800-63ver1.0.2" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
 end

@@ -2,7 +2,7 @@ module Pubid::Nist
   module Parsers
     class NistSp < Default
       rule(:version) do
-        ((str("ver") >> (digits >> (str(".") >> digits).maybe).as(:version)) |
+        ((str("ver") >> (digits >> (str(".") >> digits).repeat).as(:version)) |
           (str("v") >>
             (match('\d') >> str(".") >> match('\d') >> (str(".") >> match('\d')).maybe).as(:version)))
       end
