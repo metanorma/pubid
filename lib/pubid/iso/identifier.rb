@@ -84,8 +84,14 @@ module Pubid::Iso
       (@tctype && Renderer::UrnTc || @dir && Renderer::UrnDir || Pubid::Iso::Renderer::Urn).new(get_params).render
     end
 
-    def to_s(lang: nil, with_date: true, with_language_code: :iso)
-      # @pubid_language = lang
+    # Renders pubid identifier
+    #
+    # @param lang [:french,:russian] use language specific renderer
+    # @param with_date [Boolean] render identifier with date
+    # @param with_language_code [:iso,:single] use iso format or single language code for rendering
+    # @param with_edition [Boolean] render identifier with edition
+    # @return [String] pubid identifier
+    def to_s(lang: nil, with_date: true, with_language_code: :iso, with_edition: true)
       case lang
       when :french
         Renderer::French.new(get_params)
@@ -99,7 +105,7 @@ module Pubid::Iso
         else
           self.class.get_renderer_class.new(get_params)
         end
-      end.render(with_date: with_date, with_language_code: with_language_code) +
+      end.render(with_date: with_date, with_language_code: with_language_code, with_edition: with_edition) +
         if @joint_document && !@dir
           "|#{@joint_document}"
         end.to_s

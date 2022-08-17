@@ -381,12 +381,13 @@ RSpec.describe Pubid::Iso::Identifier do
   end
 
   context "ISO/IEC 17025:2005/Cor.1:2006(fr)" do
-    let(:original) { "ISO/IEC 17025:2005/Cor.1:2006(fr)" }
-    let(:pubid) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }
-    let(:pubid_without_date) { "ISO/IEC 17025/Cor 1:2006(fr)" }
-    let(:pubid_single_letter_language) { "ISO/IEC 17025:2005/Cor 1:2006(F)" }
-    let(:french_pubid) { "ISO/CEI 17025:2005/Cor.1:2006(fr)" }
-    let(:urn) { "urn:iso:std:iso-iec:17025:cor:2006:v1:fr" }
+    let(:original) { "ISO/IEC 17025:2005/Cor.1:2006 ED1(fr)" }
+    let(:pubid) { "ISO/IEC 17025:2005 ED1/Cor 1:2006(fr)" }
+    let(:pubid_without_date) { "ISO/IEC 17025 ED1/Cor 1:2006(fr)" }
+    let(:pubid_single_letter_language) { "ISO/IEC 17025:2005 ED1/Cor 1:2006(F)" }
+    let(:pubid_without_edition) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }
+    let(:french_pubid) { "ISO/CEI 17025:2005 ED1/Cor.1:2006(fr)" }
+    let(:urn) { "urn:iso:std:iso-iec:17025:ed-1:cor:2006:v1:fr" }
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
@@ -398,6 +399,10 @@ RSpec.describe Pubid::Iso::Identifier do
 
     it "converts to pubid with single letter language code" do
       expect(subject.to_s(with_language_code: :single)).to eq(pubid_single_letter_language)
+    end
+
+    it "converts to pubid without edition" do
+      expect(subject.to_s(with_edition: false)).to eq(pubid_without_edition)
     end
   end
 
