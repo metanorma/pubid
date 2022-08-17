@@ -378,6 +378,10 @@ RSpec.describe Pubid::Iso::Identifier do
 
     it_behaves_like "converts pubid to urn"
     it_behaves_like "converts pubid to pubid"
+
+    it "returns part without dash" do
+      expect(subject.part).to eq("4")
+    end
   end
 
   context "ISO/IEC 17025:2005/Cor.1:2006(fr)" do
