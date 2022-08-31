@@ -165,4 +165,10 @@ RSpec.describe Pubid::Ieee::Parser do
         .to parse(" Edition 2.0 2013-04", trace: true)
     end
   end
+
+  describe "#ieee_without_prefix" do
+    it "parses IEEE 1234-1987" do
+      expect(subject.ieee_without_prefix).to parse("IEEE 1234-1987", trace: true)
+    end
+  end
 end

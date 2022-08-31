@@ -865,6 +865,14 @@ RSpec.describe Pubid::Ieee::Identifier do
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "IEEE 278-1967" do
+      let(:pubid) { "IEEE 278-1967" }
+
+      it "parses last part as a year" do
+        expect(subject.year).to eq("-1967")
+      end
+    end
   end
 
   describe "parse identifiers from examples files" do

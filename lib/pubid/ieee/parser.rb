@@ -364,8 +364,14 @@ module Pubid::Ieee
       # (identifier_before_edition.as(:iso_identifier).as(:iso_identifier) >> iso_parameters) |
     end
 
+    rule(:ieee_without_prefix) do
+      (str("IEEE").as(:publisher).as(:organizations) >> space) >>
+        digits.as(:number) >> str(".").absent? >> year.as(:parameters)
+    end
+
     rule(:iso_or_ieee_identifier) do
-      (iso_identifier >> iso_parameters) |
+      ieee_without_prefix |
+        (iso_identifier >> iso_parameters) |
         # (iso identifier) >> space >> (ieee identifier) ?
         iso_identifier >> space >> parameters((organizations >> space).maybe) | iso_identifier |
         parameters((organizations >> space).maybe)
