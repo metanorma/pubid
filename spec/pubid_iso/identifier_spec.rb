@@ -695,7 +695,7 @@ RSpec.describe Pubid::Iso::Identifier do
   end
 
   describe "creating new identifier" do
-    subject { described_class.new(**{ publisher: "ISO", number: number }.merge(params)) }
+    subject { described_class.new(**{ number: number }.merge(params)) }
     let(:number) { 123 }
 
     context "when have joint document" do
@@ -733,6 +733,14 @@ RSpec.describe Pubid::Iso::Identifier do
         it "render normal document" do
           expect(subject.to_s).to eq("ISO #{number}")
         end
+      end
+    end
+
+    context "when another publisher" do
+      let(:params) { { publisher: "IEC" } }
+
+      it "render with another publisher" do
+        expect(subject.to_s).to eq("IEC #{number}")
       end
     end
   end

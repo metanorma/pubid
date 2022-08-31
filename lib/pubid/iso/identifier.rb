@@ -28,12 +28,12 @@ module Pubid::Iso
     # @see Pubid::Core::Identifier
     # @see Parser
     #
-    def initialize(number: nil, stage: nil, iteration: nil, supplement: nil,
+    def initialize(publisher: "ISO", number: nil, stage: nil, iteration: nil, supplement: nil,
                    joint_document: nil, urn_stage: nil,
                    tctype: nil, sctype: nil, wgtype: nil, tcnumber: nil,
                    scnumber: nil, wgnumber:nil,
                    dir: nil, dirtype: nil, **opts)
-      super(**opts.merge(number: number))
+      super(**opts.merge(number: number, publisher: publisher))
       @stage = stage.to_s if stage
       @iteration = iteration.to_i if iteration
       @supplement = supplement if supplement
