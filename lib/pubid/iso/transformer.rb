@@ -9,16 +9,22 @@ module Pubid::Iso
     end
 
     rule(amendments: subtree(:amendments)) do |context|
-      if context[:amendments].key?(:stage)
-        context[:amendments][:stage] = convert_stage(context[:amendments][:stage])
-      end
+      context[:amendments] =
+        [Amendment.new(
+          version: context[:amendments][:version],
+          year: context[:amendments][:number],
+          stage: context[:amendments][:stage] && convert_stage(context[:amendments][:stage]))]
+
       context
     end
-    #
+
     rule(corrigendums: subtree(:corrigendums)) do |context|
-      if context[:corrigendums].key?(:stage)
-        context[:corrigendums][:stage] = convert_stage(context[:corrigendums][:stage])
-      end
+      context[:corrigendums] =
+        [Corrigendum.new(
+          version: context[:corrigendums][:version],
+          year: context[:corrigendums][:number],
+          stage: context[:corrigendums][:stage] && convert_stage(context[:corrigendums][:stage]))]
+
       context
     end
 
@@ -72,7 +78,7 @@ module Pubid::Iso
     #
     rule(publisher: simple(:publisher), supplement: subtree(:supplement)) do |context|
       context[:supplement] =
-        Supplement.new(number: context[:supplement][:year],
+        Supplement.new(year: context[:supplement][:year],
                        publisher: context[:supplement][:publisher],
                        edition: context[:supplement][:edition])
       context
@@ -80,7 +86,7 @@ module Pubid::Iso
 
     rule(supplement: subtree(:supplement)) do |context|
       context[:supplement] =
-        Supplement.new(number: context[:supplement][:year],
+        Supplement.new(year: context[:supplement][:year],
                        publisher: context[:supplement][:publisher],
                        edition: context[:supplement][:edition])
       context
