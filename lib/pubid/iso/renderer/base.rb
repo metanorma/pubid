@@ -1,11 +1,11 @@
 module Pubid::Iso::Renderer
   class Base < Pubid::Core::Renderer::Base
-    # render from hash keys
-    def render(with_date: true, with_language_code: :iso, with_edition: true)
+    # Render identifier
+    # @param with_edition [Boolean] include edition in output
+    # @see Pubid::Core::Renderer::Base for another options
+    def render(with_edition: true, **args)
       params = prerender_params(@params,
-                                { with_date: with_date,
-                                  with_language_code: with_language_code,
-                                  with_edition: with_edition })
+                                { with_edition: with_edition }.merge(args))
       # render empty string when the key is not exist
       params.default = ""
 

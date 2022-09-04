@@ -26,7 +26,7 @@ module Pubid::Iso::Renderer
         " #{supplement.publisher} SUP"
       else
         " SUP"
-      end + (supplement.number && ":#{supplement.number}" || "") +
+      end + (supplement.year && ":#{supplement.year}" || "") +
         (supplement.edition && " Edition #{supplement.edition}" || "")
     end
   end

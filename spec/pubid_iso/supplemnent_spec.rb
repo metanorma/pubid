@@ -1,7 +1,7 @@
 RSpec.describe Pubid::Iso::Supplement do
   describe "rendering" do
     subject do
-      Pubid::Iso::Supplement.new(version: 1, number: supplement_year, stage: supplement_stage)
+      Pubid::Iso::Supplement.new(number: 1, year: supplement_year, stage: supplement_stage)
     end
 
     context "when supplement has stage" do
@@ -24,10 +24,10 @@ RSpec.describe Pubid::Iso::Supplement do
     end
 
     let(:first_supplement) do
-      described_class.new(version: 1, number: first_supplement_year, stage: first_supplement_stage)
+      described_class.new(number: 1, year: first_supplement_year, stage: first_supplement_stage)
     end
     let(:second_supplement) do
-      described_class.new(version: 1, number: second_supplement_year, stage: second_supplement_stage)
+      described_class.new(number: 1, year: second_supplement_year, stage: second_supplement_stage)
     end
     let(:first_supplement_year) { nil }
     let(:second_supplement_year) { nil }

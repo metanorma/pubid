@@ -61,8 +61,8 @@ module Pubid::Iso
       (str("/") | space).maybe >>
         (str("Amd") | str("AMD") | str("AM")) >>
         (space | str(".")).repeat(1).maybe >>
-        digits.as(:version) >>
-        ((str(":") | str("-")) >> digits.as(:number)).maybe).as(:amendments)
+        digits.as(:number) >>
+        ((str(":") | str("-")) >> digits.as(:year)).maybe).as(:amendments)
     end
 
     rule(:corrigendum) do
@@ -70,8 +70,8 @@ module Pubid::Iso
       (str("/") | space).maybe >>
         (str("Cor") | str("COR")) >>
         (space | str(".")).repeat(1).maybe >>
-        digits.as(:version) >>
-        ((str(":") | str("-")) >> digits.as(:number)).maybe).as(:corrigendums)
+        digits.as(:number) >>
+        ((str(":") | str("-")) >> digits.as(:year)).maybe).as(:corrigendums)
     end
 
     rule(:language) do

@@ -26,7 +26,7 @@ module Pubid::Iso::Renderer
         ":sup:#{supplement.publisher.downcase}"
       else
         ":sup"
-      end + (supplement.number && ":#{supplement.number}" || "") +
+      end + (supplement.year && ":#{supplement.year}" || "") +
         (supplement.edition && ":ed-#{supplement.edition}" || "")
     end
   end
