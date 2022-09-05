@@ -2,12 +2,17 @@ module Pubid::Iso
   class Supplement < Pubid::Core::Supplement
     attr_accessor :stage, :publisher, :edition, :iteration
 
+    # @param stage [String] stage, e.g. "PWI", "NP"
+    # @param publisher [String] publisher, e.g. "ISO", "IEC"
+    # @param edition [Integer] edition, e.g. 1, 2, 3
+    # @param iteration [Integer] iteration, e.g. 1, 2, 3
+    # @see Pubid::Core::Supplement for other options
     def initialize(stage: nil, publisher: nil, edition: nil, iteration: nil, **args)
       super(**args)
       @stage = stage
       @publisher = publisher.to_s
-      @edition = edition
-      @iteration = iteration
+      @edition = edition&.to_i
+      @iteration = iteration&.to_i
     end
 
     def render_pubid_stage
