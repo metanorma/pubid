@@ -1,6 +1,6 @@
 module Pubid::Iso
   class Parser < Pubid::Core::Parser
-    STAGES = %w[NP NWIP WD CD DIS FDIS PRF IS AWI PWI FPD pD PD FD D].freeze
+    STAGES = %w[NP NWIP WD CD DIS FDIS PRF IS AWI PWI FPD pD PD FD D F].freeze
     TYPES = %w[DATA ISP IWA R TTA TS TR PAS Guide GUIDE].freeze
 
     TCTYPES = ["TC", "JTC", "PC", "IT", "CAB", "CASCO", "COPOLCO",
@@ -62,6 +62,7 @@ module Pubid::Iso
         (str("Amd") | str("AMD") | str("AM")) >>
         (space | str(".")).repeat(1).maybe >>
         digits.as(:number) >>
+        (str(".") >> digits.as(:iteration)).maybe >>
         ((str(":") | str("-")) >> digits.as(:year)).maybe).as(:amendments)
     end
 
@@ -71,6 +72,7 @@ module Pubid::Iso
         (str("Cor") | str("COR")) >>
         (space | str(".")).repeat(1).maybe >>
         digits.as(:number) >>
+        (str(".") >> digits.as(:iteration)).maybe >>
         ((str(":") | str("-")) >> digits.as(:year)).maybe).as(:corrigendums)
     end
 

@@ -503,6 +503,19 @@ RSpec.describe Pubid::Iso::Identifier do
     it_behaves_like "converts pubid to pubid"
   end
 
+  context "ISO 17301-1:2016/NP Amd 1.2" do
+    let(:pubid) { "ISO 17301-1:2016/NP Amd 1.2" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
+  context "ISO 17301-1:2016/FCOR 2.3" do
+    let(:original) { "ISO 17301-1:2016/FCOR 2.3" }
+    let(:pubid) { "ISO 17301-1:2016/FDIS Cor 2.3" }
+
+    it_behaves_like "converts pubid to pubid"
+  end
+
   context "ISO TC 184/SC 4 N1110" do
     let(:pubid) { "ISO TC 184/SC 4 N1110" }
     let(:urn) { "urn:iso:doc:iso:tc:184:sc:4:1110" }

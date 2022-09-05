@@ -1,10 +1,10 @@
 RSpec.describe Pubid::Iso::Supplement do
   describe "rendering" do
-    subject do
-      Pubid::Iso::Supplement.new(number: 1, year: supplement_year, stage: supplement_stage)
-    end
-
     context "when supplement has stage" do
+      subject do
+        Pubid::Iso::Supplement.new(number: 1, year: supplement_year, stage: supplement_stage)
+      end
+
       let(:supplement_year) { 2000 }
       let(:supplement_stage) { "CD" }
 
@@ -15,6 +15,14 @@ RSpec.describe Pubid::Iso::Supplement do
       it { expect(subject.render_pubid_stage).to eq(supplement_stage) }
 
       it { expect(subject.render_urn_stage).to eq(urn_stage) }
+    end
+
+    context "when supplement has iteration" do
+      subject do
+        Pubid::Iso::Supplement.new(number: 1, iteration: 1)
+      end
+
+      it { expect(subject.render_pubid_number).to eq("1.1") }
     end
   end
 

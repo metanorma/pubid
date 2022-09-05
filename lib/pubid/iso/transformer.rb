@@ -13,7 +13,8 @@ module Pubid::Iso
         [Amendment.new(
           number: context[:amendments][:number],
           year: context[:amendments][:year],
-          stage: context[:amendments][:stage] && convert_stage(context[:amendments][:stage]))]
+          stage: context[:amendments][:stage] && convert_stage(context[:amendments][:stage]),
+          iteration: context[:amendments][:iteration])]
 
       context
     end
@@ -23,7 +24,8 @@ module Pubid::Iso
         [Corrigendum.new(
           number: context[:corrigendums][:number],
           year: context[:corrigendums][:year],
-          stage: context[:corrigendums][:stage] && convert_stage(context[:corrigendums][:stage]))]
+          stage: context[:corrigendums][:stage] && convert_stage(context[:corrigendums][:stage]),
+          iteration: context[:corrigendums][:iteration])]
 
       context
     end
@@ -109,7 +111,7 @@ module Pubid::Iso
         "NP"
       when "D"
         "DIS"
-      when "FD"
+      when "FD", "F"
         "FDIS"
       when "Fpr"
         "PRF"

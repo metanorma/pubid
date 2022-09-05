@@ -81,5 +81,11 @@ RSpec.describe Pubid::Iso::Parser do
 
       it_behaves_like "parse identifiers from file"
     end
+
+    context "parses identifiers from iso-pubid-supplement-iteration.txt" do
+      let(:examples_file) { "iso-pubid-supplement-iteration.txt" }
+
+      it_behaves_like "parse identifiers from file"
+    end
   end
 end
