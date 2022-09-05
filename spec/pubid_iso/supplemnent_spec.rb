@@ -19,10 +19,18 @@ RSpec.describe Pubid::Iso::Supplement do
 
     context "when supplement has iteration" do
       subject do
-        Pubid::Iso::Supplement.new(number: 1, iteration: 1)
+        Pubid::Iso::Supplement.new(number: 1, stage: "CD", iteration: 1)
       end
 
       it { expect(subject.render_pubid_number).to eq("1.1") }
+
+      context "when published document has iteration" do
+        subject do
+          Pubid::Iso::Supplement.new(number: 1, iteration: 1)
+        end
+
+        it { expect { subject }.to raise_error(an_instance_of(Pubid::Iso::Errors::PublishedIterationError)) }
+      end
     end
   end
 

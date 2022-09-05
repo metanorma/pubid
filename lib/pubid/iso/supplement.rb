@@ -13,6 +13,10 @@ module Pubid::Iso
       @publisher = publisher.to_s
       @edition = edition&.to_i
       @iteration = iteration&.to_i
+
+      if @iteration && @stage.nil?
+        raise Errors::PublishedIterationError.new("cannot assign iteration to published supplement")
+      end
     end
 
     def render_pubid_stage
