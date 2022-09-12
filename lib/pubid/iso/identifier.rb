@@ -10,7 +10,7 @@ module Pubid::Iso
     # Creates new identifier from options provided, includes options from
     # Pubid::Core::Identifier#initialize
     #
-    # @param stage [String] stage, eg. "WD", "CD", "DIS"
+    # @param stage [Stage] stage
     # @param urn_stage [Float] numeric stage for URN rendering
     # @param iteration [Integer] document iteration, eg. "1", "2", "3"
     # @param joint_document [Identifier] joint document

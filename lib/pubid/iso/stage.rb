@@ -12,7 +12,7 @@ module Pubid::Iso
                PRF: "50.00",
                IS: "60.00" }.freeze
 
-    # @param abbr [String, Symbol] abbreviation
+    # @param abbr [String, Symbol] abbreviation eg. :PWI, :WD
     # @param harmonized_code [HarmonizedStageCode]
     def initialize(abbr: nil, harmonized_code: nil)
       @abbr = abbr
