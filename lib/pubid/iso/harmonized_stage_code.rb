@@ -1,16 +1,7 @@
 module Pubid::Iso
   class HarmonizedStageCode
+    include Comparable
     attr_accessor :stage, :substage
-
-    STAGES = { PWI: "00.00",
-               NP: "10.00",
-               AWI: "20.00",
-               WD: "20.20",
-               CD: "30.00",
-               DIS: "40.00",
-               FDIS: "50.00",
-               PRF: "50.00",
-               IS: "60.00" }.freeze
 
     DESCRIPTIONS = {
       "50.00" => "Final text received or FDIS registered for formal approval"
@@ -24,23 +15,33 @@ module Pubid::Iso
       registration: "00"
     }
 
-    def initialize(stage_or_abbrev, substage)
-      if STAGES.key?(stage_or_abbrev.to_sym)
-        @stage, @substage = STAGES[stage_or_abbrev.to_sym].split(".")
-      elsif STAGES_NAMES.key?(stage_or_abbrev)
-        @stage = STAGES_NAMES[stage_or_abbrev]
+    def initialize(stage, substage = nil)
+      # when stage is stage name
+      if STAGES_NAMES.key?(stage)
+        @stage = STAGES_NAMES[stage]
         @substage = SUBSTAGES_NAMES[substage]
       else
-        @stage, @substage = stage_or_abbrev, substage
+        # stage is number
+        validate_stage(stage, substage)
+        @stage, @substage = stage, substage
       end
+    end
+
+    def validate_stage(stage, substage)
+      # raise an error if stage is not number
+      raise Errors::HarmonizedStageCodeNotValidError if Integer(stage, exception: false).nil?
+
+      # raise an error when substage wrong
+      raise Errors::HarmonizedStageCodeNotValidError if stage == "90" && substage == "00"
+      # raise Errors::HarmonizedStageCodeNotValidError if stage.to_i
     end
 
     def to_s
       "#{stage}.#{substage}"
     end
 
-    def abbrev
-      STAGES.select { |k,v| v == to_s }.first&.first
+    def ==(other)
+      stage == other.stage && substage == other.substage
     end
 
     def description

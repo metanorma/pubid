@@ -6,20 +6,20 @@ RSpec.describe Pubid::Iso::Supplement do
       end
 
       let(:supplement_year) { 2000 }
-      let(:supplement_stage) { "CD" }
+      let(:supplement_stage) { Pubid::Iso::Stage.new(abbr: :CD) }
 
       let(:pubid_number) { "1:2000" }
       let(:urn_stage) { ":stage-30.00" }
       let(:urn_number) { ":2000:v1" }
 
-      it { expect(subject.render_pubid_stage).to eq(supplement_stage) }
+      it { expect(subject.render_pubid_stage).to eq(:CD) }
 
       it { expect(subject.render_urn_stage).to eq(urn_stage) }
     end
 
     context "when supplement has iteration" do
       subject do
-        Pubid::Iso::Supplement.new(number: 1, stage: "CD", iteration: 1)
+        Pubid::Iso::Supplement.new(number: 1, stage: Pubid::Iso::Stage.new(abbr: :CD), iteration: 1)
       end
 
       it { expect(subject.render_pubid_number).to eq("1.1") }
@@ -51,16 +51,16 @@ RSpec.describe Pubid::Iso::Supplement do
     let(:second_supplement_stage) { nil }
 
     context "when query without stage but stage in results" do
-      let(:second_supplement_stage) { "CD" }
+      let(:second_supplement_stage) { Pubid::Iso::Stage.new(abbr: :CD) }
 
       it { is_expected.to be_truthy }
     end
 
     context "when query with stage" do
-      let(:first_supplement_stage) { "CD" }
+      let(:first_supplement_stage) { Pubid::Iso::Stage.new(abbr: :CD) }
 
       context "different stage in results" do
-        let(:second_supplement_stage) { "PWI" }
+        let(:second_supplement_stage) { Pubid::Iso::Stage.new(abbr: :PWI) }
 
         it { is_expected.to be_falsey }
       end

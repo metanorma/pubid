@@ -104,22 +104,23 @@ module Pubid::Iso
 
     def self.convert_stage(code)
       russian_code = Renderer::Russian::STAGE.key(code.to_s)
-      return russian_code.to_s if russian_code
+      # return russian_code.to_s if russian_code
 
-      case code
-      when "NWIP"
-        "NP"
-      when "D"
-        "DIS"
-      when "FD", "F"
-        "FDIS"
-      when "Fpr"
-        "PRF"
-      when "pD", "PD"
-        "CD"
-      else
-        code
-      end
+      code = case code
+             when "NWIP"
+               "NP"
+             when "D"
+               "DIS"
+             when "FD", "F"
+               "FDIS"
+             when "Fpr"
+               "PRF"
+             when "pD", "PD"
+               "CD"
+             else
+               code
+             end
+      Stage.new(abbr: (russian_code || code))
     end
 
     def self.convert_language(code)

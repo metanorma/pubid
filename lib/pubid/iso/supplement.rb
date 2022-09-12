@@ -2,7 +2,7 @@ module Pubid::Iso
   class Supplement < Pubid::Core::Supplement
     attr_accessor :stage, :publisher, :edition, :iteration
 
-    # @param stage [String] stage, e.g. "PWI", "NP"
+    # @param stage [Stage] stage, e.g. "PWI", "NP"
     # @param publisher [String] publisher, e.g. "ISO", "IEC"
     # @param edition [Integer] edition, e.g. 1, 2, 3
     # @param iteration [Integer] iteration, e.g. 1, 2, 3
@@ -20,11 +20,11 @@ module Pubid::Iso
     end
 
     def render_pubid_stage
-      ((@stage && @stage) || "")
+      ((@stage && @stage.abbr) || "")
     end
 
     def render_urn_stage
-      ((@stage && ":stage-#{sprintf('%05.2f', Pubid::Iso::Renderer::Urn::STAGES[@stage.to_sym])}") || "")
+      ((@stage && ":stage-#{@stage.harmonized_code}") || "")
     end
 
     def <=>(other)

@@ -12,19 +12,11 @@ module Pubid::Iso::Renderer
 
     def render_identifier(params)
       render_base(params) + "%{stage}"\
-      "%{urn_stage}%{corrigendum_stage}%{iteration}%{edition}%{amendments}%{corrigendums}%{language}" % params
+      "%{corrigendum_stage}%{iteration}%{edition}%{amendments}%{corrigendums}%{language}" % params
     end
 
     def render_stage(stage, _opts, params)
-      return if params[:urn_stage]
-
-      return ":stage-#{sprintf('%05.2f', stage)}" if stage.is_a?(Float)
-
-      ":stage-#{sprintf('%05.2f', STAGES[stage.to_sym])}"
-    end
-
-    def render_urn_stage(stage, opts, params)
-      ":stage-#{sprintf('%05.2f', stage)}"
+      ":stage-#{stage.harmonized_code}"
     end
   end
 end

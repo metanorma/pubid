@@ -28,9 +28,9 @@ module Pubid::Iso::Renderer
 
     def render_stage(stage, opts, params)
       if params[:copublisher]
-        " #{stage}"
+        " #{stage.abbr}"
       else
-        "/#{stage}"
+        "/#{stage.abbr}"
       end
     end
 

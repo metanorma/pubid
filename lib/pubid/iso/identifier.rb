@@ -34,7 +34,7 @@ module Pubid::Iso
                    scnumber: nil, wgnumber:nil,
                    dir: nil, dirtype: nil, **opts)
       super(**opts.merge(number: number, publisher: publisher))
-      @stage = stage.to_s if stage
+      @stage = stage if stage
       @iteration = iteration.to_i if iteration
       @supplement = supplement if supplement
       @joint_document = joint_document if joint_document
