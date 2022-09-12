@@ -21,7 +21,7 @@ RSpec.describe Pubid::Iso::HarmonizedStageCode do
       let(:substage) { "00" }
 
       it "raise an error" do
-        expect { subject }.to raise_exception(Pubid::Iso::Errors::HarmonizedStageCodeNotValidError)
+        expect { subject }.to raise_exception(Pubid::Iso::Errors::HarmonizedStageCodeInvalidError)
       end
     end
   end
