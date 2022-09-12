@@ -29,7 +29,7 @@ module Pubid::Iso
 
     def validate_stage(stage, substage)
       # raise an error if stage is not number
-      raise Errors::HarmonizedStageCodeNotValidError if Integer(stage, exception: false).nil?
+      raise Errors::HarmonizedStageCodeNotValidError if Integer(stage).nil?
 
       # raise an error when substage wrong
       raise Errors::HarmonizedStageCodeNotValidError if stage == "90" && substage == "00"
