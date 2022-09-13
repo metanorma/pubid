@@ -91,7 +91,7 @@ module Pubid::Iso
     # @param with_language_code [:iso,:single] use iso format or single language code for rendering
     # @param with_edition [Boolean] render identifier with edition
     # @return [String] pubid identifier
-    def to_s(lang: nil, with_date: true, with_language_code: :iso, with_edition: true)
+    def to_s(lang: nil, with_date: true, with_language_code: :iso, with_edition: true, stage_format: :long)
       case lang
       when :french
         Renderer::French.new(get_params)
@@ -105,7 +105,8 @@ module Pubid::Iso
         else
           self.class.get_renderer_class.new(get_params)
         end
-      end.render(with_date: with_date, with_language_code: with_language_code, with_edition: with_edition) +
+      end.render(with_date: with_date, with_language_code: with_language_code, with_edition: with_edition,
+                 stage_format: stage_format) +
         if @joint_document && !@dir
           "|#{@joint_document}"
         end.to_s

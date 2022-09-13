@@ -239,7 +239,7 @@ module Pubid::Iso
 
     context "ISO/IEC 14496-30:2018/FDAmd 1" do
       let(:original) { "ISO/IEC 14496-30:2018/FDAmd 1" }
-      let(:pubid) { "ISO/IEC 14496-30:2018/FDIS Amd 1" }
+      let(:pubid) { "ISO/IEC 14496-30:2018/FDAmd 1" }
       let(:urn) { "urn:iso:std:iso-iec:14496:-30:stage-50.00:amd:1:v1" }
 
       it_behaves_like "converts pubid to urn"
@@ -300,7 +300,7 @@ module Pubid::Iso
 
     context "ISO 11137-2:2013/FDAmd 1" do
       let(:original) { "ISO 11137-2:2013/FDAmd 1" }
-      let(:pubid) { "ISO 11137-2:2013/FDIS Amd 1" }
+      let(:pubid) { "ISO 11137-2:2013/FDAmd 1" }
       let(:urn) { "urn:iso:std:iso:11137:-2:stage-50.00:amd:1:v1" }
 
       it_behaves_like "converts pubid to urn"
@@ -309,7 +309,7 @@ module Pubid::Iso
 
     context "ISO 15002:2008/DAM 2:2020(F)" do
       let(:original) { "ISO 15002:2008/DAM 2:2020(F)" }
-      let(:pubid) { "ISO 15002:2008/DIS Amd 2:2020(fr)" }
+      let(:pubid) { "ISO 15002:2008/DAmd 2:2020(fr)" }
       let(:urn) { "urn:iso:std:iso:15002:stage-40.00:amd:2020:v2:fr" }
 
       it_behaves_like "converts pubid to urn"
@@ -512,7 +512,7 @@ module Pubid::Iso
 
     context "ISO 17301-1:2016/FCOR 2.3" do
       let(:original) { "ISO 17301-1:2016/FCOR 2.3" }
-      let(:pubid) { "ISO 17301-1:2016/FDIS Cor 2.3" }
+      let(:pubid) { "ISO 17301-1:2016/FDCor 2.3" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -822,6 +822,40 @@ module Pubid::Iso
 
         it "render with another publisher" do
           expect(subject.to_s).to eq("IEC #{number}")
+        end
+      end
+
+      context "when amendment with stage" do
+        let(:params) do
+          { amendments: [Pubid::Iso::Amendment.new(number: 1, year: "2021",
+                                                   stage: Stage.new(abbr: :DIS))] }
+        end
+
+        it "renders stage and amendment" do
+          expect(subject.to_s).to eq("ISO #{number}/DAmd 1:2021")
+        end
+
+        context "when requesting short identifier version" do
+          it "renders short stage and amendment" do
+            expect(subject.to_s(stage_format: :short)).to eq("ISO #{number}/DAM 1:2021")
+          end
+        end
+      end
+
+      context "when corrigendum with stage" do
+        let(:params) do
+          { corrigendums: [Pubid::Iso::Corrigendum.new(number: 1, year: "2021",
+                                                       stage: Stage.new(abbr: :DIS))] }
+        end
+
+        it "renders stage and corrigendum" do
+          expect(subject.to_s).to eq("ISO #{number}/DCor 1:2021")
+        end
+
+        context "when requesting short identifier version" do
+          it "renders short stage and amendment" do
+            expect(subject.to_s(stage_format: :short)).to eq("ISO #{number}/DCOR 1:2021")
+          end
         end
       end
     end

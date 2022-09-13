@@ -54,5 +54,12 @@ module Pubid::Iso::Renderer
       ".#{iteration}"
     end
 
+    def render_amendments(amendments, opts, _params)
+      amendments.sort.map { |amendment| amendment.render_pubid(opts[:stage_format]) }.join("+")
+    end
+
+    def render_corrigendums(corrigendums, opts, _params)
+      corrigendums.sort.map { |corrigendum| corrigendum.render_pubid(opts[:stage_format]) }.join("+")
+    end
   end
 end
