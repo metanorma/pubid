@@ -19,14 +19,26 @@ module Pubid::Iso::Renderer
     end
 
     def render_type(type, opts, params)
+      prefix = ""
+      if params[:stage]
+        prefix = case params[:stage].abbr
+                 when "DIS"
+                   "D"
+                 when "FDIS"
+                   "FD"
+                 end
+      end
+
       if params[:copublisher]
-        " #{type}"
+        " #{prefix}#{type}"
       else
-        "/#{type}"
+        "/#{prefix}#{type}"
       end
     end
 
     def render_stage(stage, opts, params)
+      return if params[:type] && %w(DIS FDIS).include?(stage.abbr)
+
       if params[:copublisher]
         " #{stage.abbr}"
       else

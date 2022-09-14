@@ -517,6 +517,18 @@ module Pubid::Iso
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "ISO/IEC/IEEE DTS 17301-1-1:2016(en)" do
+      let(:pubid) { "ISO/IEC/IEEE DTS 17301-1-1:2016(en)" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/IEC/IEEE FDPAS 17301-1-1:2016(en)" do
+      let(:pubid) { "ISO/IEC/IEEE FDPAS 17301-1-1:2016(en)" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "ISO TC 184/SC 4 N1110" do
       let(:pubid) { "ISO TC 184/SC 4 N1110" }
       let(:urn) { "urn:iso:doc:iso:tc:184:sc:4:1110" }
