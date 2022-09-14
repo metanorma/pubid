@@ -388,7 +388,7 @@ module Pubid::Iso
     context "ISO/IEC 17025:2005/Cor.1:2006(fr)" do
       let(:original) { "ISO/IEC 17025:2005/Cor.1:2006 ED1(fr)" }
       let(:pubid) { "ISO/IEC 17025:2005 ED1/Cor 1:2006(fr)" }
-      let(:pubid_without_date) { "ISO/IEC 17025 ED1/Cor 1:2006(fr)" }
+      let(:pubid_without_date) { "ISO/IEC 17025:2005 ED1/Cor 1(fr)" }
       let(:pubid_single_letter_language) { "ISO/IEC 17025:2005 ED1/Cor 1:2006(F)" }
       let(:pubid_without_edition) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }
       let(:french_pubid) { "ISO/CEI 17025:2005 ED1/Cor.1:2006(fr)" }
@@ -856,6 +856,51 @@ module Pubid::Iso
           it "renders short stage and amendment" do
             expect(subject.to_s(stage_format: :short)).to eq("ISO #{number}/DCOR 1:2021")
           end
+        end
+      end
+
+      describe "predefined formats" do
+        subject do
+          described_class.new(number: number, year: 2019, language: "en",
+                              amendments: [Pubid::Iso::Amendment.new(number: 1, year: "2021",
+                                                                     stage: Stage.new(abbr: :DIS))]).formatted(format)
+        end
+        let(:number) { 123 }
+
+        context "when ref_num_short format" do
+          let(:format) { :ref_num_short }
+
+          it { expect(subject).to eq("ISO #{number}:2019/DAM 1:2021(E)") }
+        end
+
+        context "when ref_num_long format" do
+          let(:format) { :ref_num_long }
+
+          it { expect(subject.to_s).to eq("ISO #{number}:2019/DAmd 1:2021(en)") }
+        end
+
+        context "when ref_dated format" do
+          let(:format) { :ref_dated }
+
+          it { expect(subject.to_s).to eq("ISO #{number}:2019/DAM 1:2021") }
+        end
+
+        context "when ref_dated_long format" do
+          let(:format) { :ref_dated_long }
+
+          it { expect(subject.to_s).to eq("ISO #{number}:2019/DAmd 1:2021") }
+        end
+
+        context "when ref_undated format" do
+          let(:format) { :ref_undated }
+
+          it { expect(subject.to_s).to eq("ISO #{number}:2019/DAM 1") }
+        end
+
+        context "when ref_undated_long" do
+          let(:format) { :ref_undated_long }
+
+          it { expect(subject.to_s).to eq("ISO #{number}:2019/DAmd 1") }
         end
       end
     end

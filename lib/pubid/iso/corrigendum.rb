@@ -1,24 +1,25 @@
 module Pubid::Iso
   class Corrigendum < Supplement
-    def render_pubid(stage_format = :long)
+    def render_pubid(stage_format = :long, with_date = true)
       stage = render_pubid_stage
+      pubid_number = render_pubid_number(with_date: with_date)
       case stage.to_s
       when "DIS"
         if stage_format == :long
-          "/DCor #{render_pubid_number}"
+          "/DCor #{pubid_number}"
         else
-          "/DCOR #{render_pubid_number}"
+          "/DCOR #{pubid_number}"
         end
       when "FDIS"
         if stage_format == :long
-          "/FDCor #{render_pubid_number}"
+          "/FDCor #{pubid_number}"
         else
-          "/FDCOR #{render_pubid_number}"
+          "/FDCOR #{pubid_number}"
         end
       when ""
-        "/Cor #{render_pubid_number}"
+        "/Cor #{pubid_number}"
       else
-        "/#{stage} Cor #{render_pubid_number}"
+        "/#{stage} Cor #{pubid_number}"
       end
     end
 

@@ -84,6 +84,25 @@ module Pubid::Iso
       (@tctype && Renderer::UrnTc || @dir && Renderer::UrnDir || Pubid::Iso::Renderer::Urn).new(get_params).render
     end
 
+    def formatted(format)
+      case format
+      when :ref_num_short
+        to_s(with_language_code: :single, stage_format: :short)
+      when :ref_num_long
+        to_s(with_language_code: :iso, stage_format: :long)
+      when :ref_dated
+        to_s(with_language_code: :none, stage_format: :short)
+      when :ref_dated_long
+        to_s(with_language_code: :none, stage_format: :long)
+      when :ref_undated
+        to_s(with_language_code: :none, stage_format: :short, with_date: false)
+      when :ref_undated_long
+        to_s(with_language_code: :none, stage_format: :long, with_date: false)
+      else
+        raise Errors::WrongFormat, "#{format} is not available"
+      end
+    end
+
     # Renders pubid identifier
     #
     # @param lang [:french,:russian] use language specific renderer
@@ -91,7 +110,8 @@ module Pubid::Iso
     # @param with_language_code [:iso,:single] use iso format or single language code for rendering
     # @param with_edition [Boolean] render identifier with edition
     # @return [String] pubid identifier
-    def to_s(lang: nil, with_date: true, with_language_code: :iso, with_edition: true, stage_format: :long)
+    def to_s(lang: nil, with_date: true, with_language_code: :iso,
+             with_edition: true, stage_format: :long)
       case lang
       when :french
         Renderer::French.new(get_params)

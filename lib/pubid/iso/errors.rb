@@ -4,5 +4,6 @@ module Pubid::Iso
     class PublishedIterationError < StandardError; end
     class HarmonizedStageCodeInvalidError < StandardError; end
     class CodeInvalidError < StandardError; end
+    class WrongFormat < StandardError; end
   end
 end
