@@ -529,6 +529,20 @@ module Pubid::Iso
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "ISO/IEC 14496-10:2014/FPDAM 1(en)" do
+      let(:original) { "ISO/IEC 14496-10:2014/FPDAM 1(en)" }
+      let(:pubid) { "ISO/IEC 14496-10:2014/DAmd 1(en)" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/IEC 27006:2015/PDAM 1" do
+      let(:original) { "ISO/IEC 27006:2015/PDAM 1" }
+      let(:pubid) { "ISO/IEC 27006:2015/CD Amd 1" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "ISO TC 184/SC 4 N1110" do
       let(:pubid) { "ISO TC 184/SC 4 N1110" }
       let(:urn) { "urn:iso:doc:iso:tc:184:sc:4:1110" }

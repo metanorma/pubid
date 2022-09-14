@@ -109,7 +109,7 @@ module Pubid::Iso
       code = case code
              when "NWIP"
                "NP"
-             when "D"
+             when "D", "FPD"
                "DIS"
              when "FD", "F"
                "FDIS"
