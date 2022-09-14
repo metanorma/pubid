@@ -24,7 +24,7 @@ module Pubid::Iso
       end
 
       if abbr
-        raise Errors::CodeInvalidError unless STAGES.key?(abbr.to_sym)
+        raise Errors::CodeInvalidError, "#{abbr} is not valid stage" unless STAGES.key?(abbr.to_sym)
 
         @harmonized_code ||= HarmonizedStageCode.new(*STAGES[abbr.to_sym].split("."))
       end
