@@ -18,6 +18,12 @@ module Pubid::Iso
         else
           "/FDAM #{pubid_number}"
         end
+      when "CD"
+        if stage_format == :long
+          "/CD Amd #{pubid_number}"
+        else
+          "/CDAM #{pubid_number}"
+        end
       when ""
         "/Amd #{pubid_number}"
       else

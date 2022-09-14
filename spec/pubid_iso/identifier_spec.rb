@@ -842,8 +842,10 @@ module Pubid::Iso
       context "when amendment with stage" do
         let(:params) do
           { amendments: [Pubid::Iso::Amendment.new(number: 1, year: "2021",
-                                                   stage: Stage.new(abbr: :DIS))] }
+                                                   stage: stage)] }
         end
+
+        let(:stage) { Stage.new(abbr: :DIS) }
 
         it "renders stage and amendment" do
           expect(subject.to_s).to eq("ISO #{number}/DAmd 1:2021")
@@ -852,6 +854,18 @@ module Pubid::Iso
         context "when requesting short identifier version" do
           it "renders short stage and amendment" do
             expect(subject.to_s(stage_format: :short)).to eq("ISO #{number}/DAM 1:2021")
+          end
+        end
+
+        context "when CD stage" do
+          let(:stage) { Stage.new(abbr: :CD) }
+
+          it "renders long stage and amendment" do
+            expect(subject.to_s(stage_format: :long)).to eq("ISO #{number}/CD Amd 1:2021")
+          end
+
+          it "renders short stage and amendment" do
+            expect(subject.to_s(stage_format: :short)).to eq("ISO #{number}/CDAM 1:2021")
           end
         end
       end
