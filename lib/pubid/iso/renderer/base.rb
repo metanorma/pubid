@@ -55,11 +55,11 @@ module Pubid::Iso::Renderer
     end
 
     def render_amendments(amendments, opts, _params)
-      amendments.sort.map { |amendment| amendment.render_pubid(opts[:stage_format], opts[:with_date]) }.join("+")
+      amendments.sort.map { |amendment| amendment.render_pubid(opts[:stage_format_long], opts[:with_date]) }.join("+")
     end
 
     def render_corrigendums(corrigendums, opts, _params)
-      corrigendums.sort.map { |corrigendum| corrigendum.render_pubid(opts[:stage_format], opts[:with_date]) }.join("+")
+      corrigendums.sort.map { |corrigendum| corrigendum.render_pubid(opts[:stage_format_long], opts[:with_date]) }.join("+")
     end
 
     def render_language(language, opts, _params)
