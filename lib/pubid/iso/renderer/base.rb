@@ -12,33 +12,33 @@ module Pubid::Iso::Renderer
       render_identifier(params)
     end
 
-
     def render_identifier(params)
-      render_base(params, "%{type}%{stage}" % params) +
+      if @params[:type] && @params[:stage] && %w(DIS FDIS).include?(@params[:stage].abbr)
+        render_base(params, " #{render_short_stage(@params[:stage].abbr)}#{@params[:type]}")
+      else
+        render_base(params, "%{type}%{stage}" % params)
+      end +
         "%{part}%{iteration}%{year}%{edition}%{amendments}%{corrigendums}%{language}" % params
     end
 
-    def render_type(type, opts, params)
-      prefix = ""
-      if params[:stage]
-        prefix = case params[:stage].abbr
-                 when "DIS"
-                   "D"
-                 when "FDIS"
-                   "FD"
-                 end
+    def render_short_stage(stage)
+      case stage
+      when "DIS"
+        "D"
+      when "FDIS"
+        "FD"
       end
+    end
 
+    def render_type(type, opts, params)
       if params[:copublisher]
-        " #{prefix}#{type}"
+        " #{type}"
       else
-        "/#{prefix}#{type}"
+        "/#{type}"
       end
     end
 
     def render_stage(stage, opts, params)
-      return if params[:type] && %w(DIS FDIS).include?(stage.abbr)
-
       if params[:copublisher]
         " #{stage.abbr}"
       else
