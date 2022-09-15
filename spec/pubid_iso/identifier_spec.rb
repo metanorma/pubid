@@ -813,6 +813,14 @@ module Pubid::Iso
       end
 
 
+      context "when create document with amendment without year" do
+        let(:params) { { amendments: [Pubid::Iso::Amendment.new(number: 1)] } }
+
+        it "renders document with amendment year" do
+          expect(subject.to_s).to eq("ISO 123/Amd 1")
+        end
+      end
+
       context "when have DIR parameter" do
         context "when DIR true" do
           let(:params) { { dir: true } }
