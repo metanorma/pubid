@@ -32,8 +32,14 @@ module Pubid::Iso
                    joint_document: nil, urn_stage: nil,
                    tctype: nil, sctype: nil, wgtype: nil, tcnumber: nil,
                    scnumber: nil, wgnumber:nil,
-                   dir: nil, dirtype: nil, **opts)
-      super(**opts.merge(number: number, publisher: publisher))
+                   dir: nil, dirtype: nil, year: nil, amendments: nil,
+                   corrigendums: nil, **opts)
+      super(**opts.merge(number: number, publisher: publisher, year: year,
+                         amendments: amendments, corrigendums: corrigendums))
+
+      if (amendments || corrigendums) && year.nil?
+        raise Errors::SupplementWithoutYearError, "Cannot apply supplement to document without edition year"
+      end
       @stage = stage if stage
       @iteration = iteration.to_i if iteration
       @supplement = supplement if supplement

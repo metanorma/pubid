@@ -325,9 +325,9 @@ module Pubid::Iso
       it_behaves_like "converts pubid to pubid"
     end
 
-    context "ISO/IEC 14496-12/PDAM 4" do
-      let(:original) { "ISO/IEC 14496-12/PDAM 4" }
-      let(:pubid) { "ISO/IEC 14496-12/CD Amd 4" }
+    context "ISO/IEC 14496-12:2012/PDAM 4" do
+      let(:original) { "ISO/IEC 14496-12:2012/PDAM 4" }
+      let(:pubid) { "ISO/IEC 14496-12:2012/CD Amd 4" }
       let(:urn) { "urn:iso:std:iso-iec:14496:-12:stage-30.00:amd:4:v1" }
 
       it_behaves_like "converts pubid to urn"
@@ -495,9 +495,9 @@ module Pubid::Iso
       it_behaves_like "converts pubid to pubid"
     end
 
-    context "ISO 19110/Amd 1:2011" do
-      let(:original) { "ISO 19110/Amd 1:2011" }
-      let(:pubid) { "ISO 19110/Amd 1:2011" }
+    context "ISO 19110:2005/Amd 1:2011" do
+      let(:original) { "ISO 19110:2005/Amd 1:2011" }
+      let(:pubid) { "ISO 19110:2005/Amd 1:2011" }
       let(:urn) { "urn:iso:std:iso:19110:amd:2011:v1" }
 
       it_behaves_like "converts pubid to urn"
@@ -781,7 +781,17 @@ module Pubid::Iso
       end
 
       context "when create document with amendment" do
-        let(:params) { { year: 1999, amendments: [Pubid::Iso::Amendment.new(number: 1, **amendment_params)] } }
+        let(:params) { { year: year, amendments: [Pubid::Iso::Amendment.new(number: 1, **amendment_params)] } }
+        let(:amendment_params) { { } }
+        let(:year) { 1999 }
+
+        context "when document don't have year" do
+          let(:year) { nil }
+
+          it "raises an error" do
+            expect { subject }.to raise_exception(Errors::SupplementWithoutYearError)
+          end
+        end
 
         context "when amendment has a year" do
           let(:amendment_params) { { year: 2017 } }
