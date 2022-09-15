@@ -780,44 +780,87 @@ module Pubid::Iso
         end
       end
 
-      context "when create document with amendment has a year" do
-        let(:params) { { year: 1999, amendments: [Pubid::Iso::Amendment.new(number: 1, year: 2017)] } }
+      context "when create document with amendment" do
+        let(:params) { { year: 1999, amendments: [Pubid::Iso::Amendment.new(number: 1, **amendment_params)] } }
 
-        it "renders document with amendment year" do
-          expect(subject.to_s).to eq("ISO 123:1999/Amd 1:2017")
+        context "when amendment has a year" do
+          let(:amendment_params) { { year: 2017 } }
+
+          it "renders document with amendment year" do
+            expect(subject.to_s).to eq("ISO 123:1999/Amd 1:2017")
+          end
+        end
+
+        context "when amendment without year" do
+          let(:amendment_params) { {} }
+
+          it "renders document with amendment year" do
+            expect(subject.to_s).to eq("ISO 123:1999/Amd 1")
+          end
+        end
+
+        context "when amendment with stage" do
+          let(:amendment_params) { { stage: stage } }
+          let(:stage) { Stage.new(abbr: :DIS) }
+
+          context "when IS stage" do
+            let(:stage) { Stage.new(abbr: "IS") }
+
+            it "should not render IS stage" do
+              expect(subject.to_s).to eq("ISO 123:1999/Amd 1")
+            end
+          end
+
+          context "when DIS stage" do
+            let(:stage) { Stage.new(abbr: :DIS) }
+
+            it "renders long stage and amendment" do
+              expect(subject.to_s).to eq("ISO #{number}:1999/DAmd 1")
+            end
+
+            it "renders short stage and amendment" do
+              expect(subject.to_s(stage_format_long: false)).to eq("ISO #{number}:1999/DAM 1")
+            end
+          end
+
+          context "when CD stage" do
+            let(:stage) { Stage.new(abbr: :CD) }
+
+            it "renders long stage and amendment" do
+              expect(subject.to_s(stage_format_long: true)).to eq("ISO #{number}:1999/CD Amd 1")
+            end
+
+            it "renders short stage and amendment" do
+              expect(subject.to_s(stage_format_long: false)).to eq("ISO #{number}:1999/CDAM 1")
+            end
+          end
         end
       end
 
-      context "when create document with amendment and stage IS" do
-        let(:params) do
-          { year: 1999,
-            amendments: [Pubid::Iso::Amendment.new(number: 1, year: 2017,
-                                                   stage: Stage.new(abbr: "IS"))] }
-        end
+      context "when create document with corrigendum" do
+        let(:params) { { year: 1999, amendments: [Corrigendum.new(number: 1, **corrigendum_params)] } }
 
-        it "should not render IS stage" do
-          expect(subject.to_s).to eq("ISO 123:1999/Amd 1:2017")
-        end
-      end
+        context "when corrigendum with stage" do
+          let(:corrigendum_params) { { stage: stage } }
 
-      context "when create document with corrigendum and stage IS" do
-        let(:params) do
-          { year: 1999,
-            corrigendums: [Pubid::Iso::Corrigendum.new(number: 1, year: 2017,
-                                                     stage: Stage.new(abbr: "IS"))] }
-        end
+          context "with IS stage" do
+            let(:stage) { Stage.new(abbr: "IS") }
 
-        it "should not render IS stage" do
-          expect(subject.to_s).to eq("ISO 123:1999/Cor 1:2017")
-        end
-      end
+            it "should not render IS stage" do
+              expect(subject.to_s).to eq("ISO 123:1999/Cor 1")
+            end
+          end
 
+          context "with DIS stage" do
+            let(:stage) { Stage.new(abbr: :DIS) }
+            it "renders long stage and corrigendum" do
+              expect(subject.to_s).to eq("ISO #{number}:1999/DCor 1")
+            end
 
-      context "when create document with amendment without year" do
-        let(:params) { { year: 1999, amendments: [Pubid::Iso::Amendment.new(number: 1)] } }
-
-        it "renders document with amendment year" do
-          expect(subject.to_s).to eq("ISO 123:1999/Amd 1")
+            it "renders short stage and corrigendum" do
+              expect(subject.to_s(stage_format_long: false)).to eq("ISO #{number}:1999/DCOR 1")
+            end
+          end
         end
       end
 
@@ -844,54 +887,6 @@ module Pubid::Iso
 
         it "render with another publisher" do
           expect(subject.to_s).to eq("IEC #{number}")
-        end
-      end
-
-      context "when amendment with stage" do
-        let(:params) do
-          { amendments: [Pubid::Iso::Amendment.new(number: 1, year: "2021",
-                                                   stage: stage)] }
-        end
-
-        let(:stage) { Stage.new(abbr: :DIS) }
-
-        it "renders stage and amendment" do
-          expect(subject.to_s).to eq("ISO #{number}/DAmd 1:2021")
-        end
-
-        context "when requesting short identifier version" do
-          it "renders short stage and amendment" do
-            expect(subject.to_s(stage_format_long: false)).to eq("ISO #{number}/DAM 1:2021")
-          end
-        end
-
-        context "when CD stage" do
-          let(:stage) { Stage.new(abbr: :CD) }
-
-          it "renders long stage and amendment" do
-            expect(subject.to_s(stage_format_long: true)).to eq("ISO #{number}/CD Amd 1:2021")
-          end
-
-          it "renders short stage and amendment" do
-            expect(subject.to_s(stage_format_long: false)).to eq("ISO #{number}/CDAM 1:2021")
-          end
-        end
-      end
-
-      context "when corrigendum with stage" do
-        let(:params) do
-          { corrigendums: [Pubid::Iso::Corrigendum.new(number: 1, year: "2021",
-                                                       stage: Stage.new(abbr: :DIS))] }
-        end
-
-        it "renders stage and corrigendum" do
-          expect(subject.to_s).to eq("ISO #{number}/DCor 1:2021")
-        end
-
-        context "when requesting short identifier version" do
-          it "renders short stage and amendment" do
-            expect(subject.to_s(stage_format_long: false)).to eq("ISO #{number}/DCOR 1:2021")
-          end
         end
       end
 
