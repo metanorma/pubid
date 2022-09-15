@@ -781,10 +781,10 @@ module Pubid::Iso
       end
 
       context "when create document with amendment has a year" do
-        let(:params) { { amendments: [Pubid::Iso::Amendment.new(number: 1, year: 2017)] } }
+        let(:params) { { year: 1999, amendments: [Pubid::Iso::Amendment.new(number: 1, year: 2017)] } }
 
         it "renders document with amendment year" do
-          expect(subject.to_s).to eq("ISO 123/Amd 1:2017")
+          expect(subject.to_s).to eq("ISO 123:1999/Amd 1:2017")
         end
       end
 
@@ -814,10 +814,10 @@ module Pubid::Iso
 
 
       context "when create document with amendment without year" do
-        let(:params) { { amendments: [Pubid::Iso::Amendment.new(number: 1)] } }
+        let(:params) { { year: 1999, amendments: [Pubid::Iso::Amendment.new(number: 1)] } }
 
         it "renders document with amendment year" do
-          expect(subject.to_s).to eq("ISO 123/Amd 1")
+          expect(subject.to_s).to eq("ISO 123:1999/Amd 1")
         end
       end
 
