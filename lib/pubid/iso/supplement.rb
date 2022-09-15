@@ -20,7 +20,7 @@ module Pubid::Iso
     end
 
     def render_pubid_stage
-      ((@stage && @stage.abbr) || "")
+      ((@stage && @stage.abbr != "IS" && @stage.abbr) || "")
     end
 
     def render_urn_stage

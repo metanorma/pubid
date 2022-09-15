@@ -774,6 +774,31 @@ module Pubid::Iso
         end
       end
 
+      context "when create document with amendment and stage IS" do
+        let(:params) do
+          { year: 1999,
+            amendments: [Pubid::Iso::Amendment.new(number: 1, year: 2017,
+                                                   stage: Stage.new(abbr: "IS"))] }
+        end
+
+        it "should not render IS stage" do
+          expect(subject.to_s).to eq("ISO 123:1999/Amd 1:2017")
+        end
+      end
+
+      context "when create document with corrigendum and stage IS" do
+        let(:params) do
+          { year: 1999,
+            corrigendums: [Pubid::Iso::Corrigendum.new(number: 1, year: 2017,
+                                                     stage: Stage.new(abbr: "IS"))] }
+        end
+
+        it "should not render IS stage" do
+          expect(subject.to_s).to eq("ISO 123:1999/Cor 1:2017")
+        end
+      end
+
+
       context "when have DIR parameter" do
         context "when DIR true" do
           let(:params) { { dir: true } }
