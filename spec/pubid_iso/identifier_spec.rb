@@ -523,8 +523,8 @@ module Pubid::Iso
       it_behaves_like "converts pubid to pubid"
     end
 
-    context "ISO/IEC/IEEE FDPAS 17301-1-1:2016(en)" do
-      let(:pubid) { "ISO/IEC/IEEE FDPAS 17301-1-1:2016(en)" }
+    context "ISO/IEC/IEEE FDTR 17301-1-1:2016(en)" do
+      let(:pubid) { "ISO/IEC/IEEE FDTR 17301-1-1:2016(en)" }
 
       it_behaves_like "converts pubid to pubid"
     end
