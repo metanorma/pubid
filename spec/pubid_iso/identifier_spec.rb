@@ -874,6 +874,14 @@ module Pubid::Iso
         end
       end
 
+      context "when create IS stage identifier with iteration" do
+        let(:params) { { iteration: 1, stage: Stage.new(abbr: "IS") } }
+
+        it "raises the error" do
+          expect { subject }.to raise_exception(Errors::IsStageIterationError)
+        end
+      end
+
       context "when have DIR parameter" do
         context "when DIR true" do
           let(:params) { { dir: true } }

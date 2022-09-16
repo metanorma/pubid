@@ -41,6 +41,9 @@ module Pubid::Iso
         raise Errors::SupplementWithoutYearError, "Cannot apply supplement to document without edition year"
       end
       @stage = stage if stage
+      if stage.abbr == "IS" && iteration
+        raise Errors::IsStageIterationError, "IS stage document cannot have iteration"
+      end
       @iteration = iteration.to_i if iteration
       @supplement = supplement if supplement
       @joint_document = joint_document if joint_document
