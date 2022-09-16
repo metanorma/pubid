@@ -40,9 +40,11 @@ module Pubid::Iso
       if (amendments || corrigendums) && year.nil?
         raise Errors::SupplementWithoutYearError, "Cannot apply supplement to document without edition year"
       end
-      @stage = stage if stage
-      if stage.abbr == "IS" && iteration
-        raise Errors::IsStageIterationError, "IS stage document cannot have iteration"
+      if stage
+        if stage.abbr == "IS" && iteration
+          raise Errors::IsStageIterationError, "IS stage document cannot have iteration"
+        end
+        @stage = stage
       end
       @iteration = iteration.to_i if iteration
       @supplement = supplement if supplement
