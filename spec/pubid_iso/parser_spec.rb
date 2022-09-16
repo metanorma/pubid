@@ -11,6 +11,8 @@ RSpec.describe Pubid::Iso::Parser do
     expect(subject.language).to parse("(R/E)")
   end
 
+  it "parses "
+
   describe "parse identifiers from examples files" do
     shared_examples "parse identifiers from file" do
       it "parse identifiers from file" do

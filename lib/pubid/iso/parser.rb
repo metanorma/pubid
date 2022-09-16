@@ -1,7 +1,7 @@
 module Pubid::Iso
   class Parser < Pubid::Core::Parser
     STAGES = %w[NP NWIP WD CD DIS FDIS PRF IS AWI PWI FPD pD PD FD D F].freeze
-    TYPES = %w[DATA ISP IWA R TTA TS TR PAS Guide GUIDE].freeze
+    TYPES = %w[DATA ISP IWA R TTA TS TR PAS Guide GUIDE DIR].freeze
 
     TCTYPES = ["TC", "JTC", "PC", "IT", "CAB", "CASCO", "COPOLCO",
       "COUNCIL", "CPSG", "CS", "DEVCO", "GA", "GAAB", "INFCO",
@@ -106,7 +106,7 @@ module Pubid::Iso
     end
 
     rule(:dir_document_body) do
-      ((str("DIR") | str("Directives Part") | str("Directives, Part") | str("Directives,")).as(:dir) >> space).maybe >>
+      ((str("DIR") | str("Directives Part") | str("Directives, Part") | str("Directives,")).as(:type) >> space).maybe >>
         (str("JTC").as(:dirtype) >> space).maybe >>
         (digits.as(:number) >> (str(":") >> year).maybe).maybe >>
         (str(" -- Consolidated").maybe >> (space? >> (organization.as(:publisher) >> space).maybe >>

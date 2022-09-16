@@ -3,7 +3,7 @@ module Pubid::Iso
     attr_accessor :stage,
                   :iteration, :joint_document,
                   :tctype, :sctype, :wgtype, :tcnumber, :scnumber, :wgnumber,
-                  :urn_stage, :dir, :dirtype,
+                  :urn_stage, :dirtype,
                   # supplement for DIR type identifiers
                   :supplement
 
@@ -21,7 +21,6 @@ module Pubid::Iso
     # @param tcnumber [Integer] Technical Committee number, eg. "1", "2"
     # @param scnumber [Integer] Subsommittee number, eg. "1", "2"
     # @param wgnumber [Integer] Working group number, eg. "1", "2"
-    # @param dir [Boolean] Directives document
     # @param dirtype [String] Directives document type, eg. "JTC"
     # @see Supplement
     # @see Identifier
@@ -92,7 +91,7 @@ module Pubid::Iso
     end
 
     def urn
-      (@tctype && Renderer::UrnTc || @dir && Renderer::UrnDir || Pubid::Iso::Renderer::Urn).new(get_params).render
+      (@tctype && Renderer::UrnTc || @type == "DIR" && Renderer::UrnDir || Pubid::Iso::Renderer::Urn).new(get_params).render
     end
 
     def formatted(format)
@@ -132,14 +131,14 @@ module Pubid::Iso
       else
         if @tctype
           Renderer::Tc.new(get_params)
-        elsif @dir
+        elsif @type == "DIR"
           Renderer::Dir.new(get_params)
         else
           self.class.get_renderer_class.new(get_params)
         end
       end.render(with_date: with_date, with_language_code: with_language_code, with_edition: with_edition,
                  stage_format_long: stage_format_long) +
-        if @joint_document && !@dir
+        if @joint_document && @type != "DIR"
           "|#{@joint_document}"
         end.to_s
     end

@@ -51,6 +51,8 @@ module Pubid::Iso
           "TS"
         when "ТО"
           "TR"
+        when "Directives Part", "Directives, Part", "Directives,"
+          "DIR"
         else
           type
         end

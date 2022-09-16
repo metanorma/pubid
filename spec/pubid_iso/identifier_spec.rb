@@ -615,6 +615,10 @@ module Pubid::Iso
       let(:pubid) { "ISO DIR 1:2022" }
       let(:urn) { "urn:iso:doc:iso:dir:1:2022" }
 
+      it "has DIR type" do
+        expect(subject.type).to eq("DIR")
+      end
+
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
     end
@@ -884,7 +888,7 @@ module Pubid::Iso
 
       context "when have DIR parameter" do
         context "when DIR true" do
-          let(:params) { { dir: true } }
+          let(:params) { { type: "DIR" } }
 
           it "render DIR document" do
             expect(subject.to_s).to eq("ISO DIR #{number}")
