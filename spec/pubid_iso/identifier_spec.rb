@@ -789,6 +789,16 @@ module Pubid::Iso
         let(:amendment_params) { { } }
         let(:year) { 1999 }
 
+        context "when provide an array of hashes for amendments parameter instead of Pubid::Iso::Amendment" do
+          subject { described_class.parse(**{ number: number }.merge(params)) }
+
+          let(:params) { { year: year, amendments: [{ number: 1 }] } }
+
+          it "renders document with amendment year" do
+            expect(subject.to_s).to eq("ISO 123:1999/Amd 1")
+          end
+        end
+
         context "when document don't have year" do
           let(:year) { nil }
 

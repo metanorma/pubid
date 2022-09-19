@@ -63,7 +63,7 @@ module Pubid::Iso
         (space | str(".")).repeat(1).maybe >>
         digits.as(:number) >>
         (str(".") >> digits.as(:iteration)).maybe >>
-        ((str(":") | str("-")) >> digits.as(:year)).maybe).as(:amendments)
+        ((str(":") | str("-")) >> digits.as(:year)).maybe).repeat(1).as(:amendments)
     end
 
     rule(:corrigendum) do
@@ -73,7 +73,7 @@ module Pubid::Iso
         (space | str(".")).repeat(1).maybe >>
         digits.as(:number) >>
         (str(".") >> digits.as(:iteration)).maybe >>
-        ((str(":") | str("-")) >> digits.as(:year)).maybe).as(:corrigendums)
+        ((str(":") | str("-")) >> digits.as(:year)).maybe).repeat(1).as(:corrigendums)
     end
 
     rule(:language) do

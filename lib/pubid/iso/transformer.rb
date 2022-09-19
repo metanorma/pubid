@@ -10,23 +10,25 @@ module Pubid::Iso
 
     rule(amendments: subtree(:amendments)) do |context|
       context[:amendments] =
-        [Amendment.new(
-          number: context[:amendments][:number],
-          year: context[:amendments][:year],
-          stage: context[:amendments][:stage] && convert_stage(context[:amendments][:stage]),
-          iteration: context[:amendments][:iteration])]
-
+        context[:amendments].map do |amendment|
+          Amendment.new(
+            number: amendment[:number],
+            year: amendment[:year],
+            stage: amendment[:stage] && convert_stage(amendment[:stage]),
+            iteration: amendment[:iteration])
+        end
       context
     end
 
     rule(corrigendums: subtree(:corrigendums)) do |context|
       context[:corrigendums] =
-        [Corrigendum.new(
-          number: context[:corrigendums][:number],
-          year: context[:corrigendums][:year],
-          stage: context[:corrigendums][:stage] && convert_stage(context[:corrigendums][:stage]),
-          iteration: context[:corrigendums][:iteration])]
-
+        context[:corrigendums].map do |corrigendum|
+          Corrigendum.new(
+            number: corrigendum[:number],
+            year: corrigendum[:year],
+            stage: corrigendum[:stage] && convert_stage(corrigendum[:stage]),
+            iteration: corrigendum[:iteration])
+        end
       context
     end
 
