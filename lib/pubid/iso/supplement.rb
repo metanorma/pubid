@@ -9,7 +9,7 @@ module Pubid::Iso
     # @see Pubid::Core::Supplement for other options
     def initialize(stage: nil, publisher: nil, edition: nil, iteration: nil, **args)
       super(**args)
-      @stage = stage
+      @stage = (stage.is_a?(Symbol) || stage.is_a?(String)) ? Stage.new(abbr: stage) : stage
       @publisher = publisher.to_s
       @edition = edition&.to_i
       @iteration = iteration&.to_i

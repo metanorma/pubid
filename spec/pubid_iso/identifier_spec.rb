@@ -770,6 +770,24 @@ module Pubid::Iso
         it "renders stage for URN" do
           expect(subject.urn).to eq("urn:iso:std:iso:#{number}:stage-20.20")
         end
+
+        context "when stage is a symbol" do
+          let(:params) { { stage: :WD } }
+
+          it "has harmonized stage assigned" do
+            expect(subject.stage.harmonized_code)
+              .to eq(Pubid::Iso::HarmonizedStageCode.new("20", "20"))
+          end
+        end
+
+        context "when stage is a string" do
+          let(:params) { { stage: "WD" } }
+
+          it "has harmonized stage assigned" do
+            expect(subject.stage.harmonized_code)
+              .to eq(Pubid::Iso::HarmonizedStageCode.new("20", "20"))
+          end
+        end
       end
 
       context "when have urn_stage" do
@@ -837,6 +855,14 @@ module Pubid::Iso
 
           context "when DIS stage" do
             let(:stage) { Stage.new(abbr: :DIS) }
+
+            context "when stage is a symbol" do
+              let(:stage) { :DIS }
+
+              it "renders long stage and amendment" do
+                expect(subject.to_s).to eq("ISO #{number}:1999/DAmd 1")
+              end
+            end
 
             it "renders long stage and amendment" do
               expect(subject.to_s).to eq("ISO #{number}:1999/DAmd 1")
