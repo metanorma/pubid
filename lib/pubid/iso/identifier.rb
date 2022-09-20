@@ -97,25 +97,6 @@ module Pubid::Iso
       (@tctype && Renderer::UrnTc || @type == "DIR" && Renderer::UrnDir || Pubid::Iso::Renderer::Urn).new(get_params).render
     end
 
-    def formatted(format)
-      case format
-      when :ref_num_short
-        to_s(with_language_code: :single, stage_format_long: false, with_prf: true)
-      when :ref_num_long
-        to_s(with_language_code: :iso, stage_format_long: true, with_prf: true)
-      when :ref_dated
-        to_s(with_language_code: :none, stage_format_long: false, with_prf: true)
-      when :ref_dated_long
-        to_s(with_language_code: :none, stage_format_long: true, with_prf: true)
-      when :ref_undated
-        to_s(with_language_code: :none, stage_format_long: false, with_date: false, with_prf: true)
-      when :ref_undated_long
-        to_s(with_language_code: :none, stage_format_long: true, with_date: false, with_prf: true)
-      else
-        raise Errors::WrongFormat, "#{format} is not available"
-      end
-    end
-
     # Renders pubid identifier
     #
     # @param lang [:french,:russian] use language specific renderer
@@ -123,9 +104,36 @@ module Pubid::Iso
     # @param with_language_code [:iso,:single] use iso format or single language code for rendering
     # @param with_edition [Boolean] render identifier with edition
     # @param stage_format_long [Boolean] render with long or short stage format
+    # @param format [:ref_num_short,:ref_num_long,:ref_dated,:ref_dated_long,:ref_undated,:ref_undated_long] create reference with specified format
     # @return [String] pubid identifier
     def to_s(lang: nil, with_date: true, with_language_code: :iso,
-             with_edition: false, stage_format_long: true, with_prf: false)
+             with_edition: false, stage_format_long: true, with_prf: false, format: nil)
+      if format
+        case format
+        when :ref_num_short
+          with_language_code = :single
+          stage_format_long = false
+        when :ref_num_long
+          with_language_code = :iso
+          stage_format_long = true
+        when :ref_dated
+          with_language_code = :none
+          stage_format_long = false
+        when :ref_dated_long
+          with_language_code = :none
+          stage_format_long = true
+        when :ref_undated
+          with_language_code = :none
+          stage_format_long = false
+          with_date = false
+        when :ref_undated_long
+          with_language_code = :none
+          stage_format_long = true
+          with_date = false
+        else
+          raise Errors::WrongFormat, "#{format} is not available"
+        end
+      end
       case lang
       when :french
         Renderer::French.new(get_params)

@@ -582,12 +582,6 @@ module Pubid::Iso
 
         it { is_expected.to eq(pubid_with_prf) }
       end
-
-      context "when requested reference" do
-        subject { described_class.parse(original).formatted(:ref_dated) }
-
-        it { is_expected.to eq(pubid_with_prf) }
-      end
     end
 
     context "ISO TC 184/SC 4 N1110" do
@@ -999,7 +993,7 @@ module Pubid::Iso
         subject do
           described_class.new(number: number, year: 2019, language: "en",
                               amendments: [Pubid::Iso::Amendment.new(number: 1, year: "2021",
-                                                                     stage: Stage.new(abbr: :DIS))]).formatted(format)
+                                                                     stage: Stage.new(abbr: :DIS))]).to_s(format: format)
         end
         let(:number) { 123 }
 
