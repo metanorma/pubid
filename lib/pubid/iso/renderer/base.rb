@@ -18,7 +18,7 @@ module Pubid::Iso::Renderer
       else
         render_base(params, "%{type}%{stage}" % params)
       end +
-        "%{part}%{iteration}%{year}%{edition}%{amendments}%{corrigendums}%{language}" % params
+        "%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}%{language}" % params
     end
 
     def render_short_stage(stage)

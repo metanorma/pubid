@@ -91,6 +91,9 @@ module Pubid::Iso
     end
 
     def urn
+      if (@amendments || @corrigendums) && !@edition
+        raise Errors::NoEditionError, "Base document must have edition"
+      end
       (@tctype && Renderer::UrnTc || @type == "DIR" && Renderer::UrnDir || Pubid::Iso::Renderer::Urn).new(get_params).render
     end
 

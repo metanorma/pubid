@@ -7,5 +7,6 @@ module Pubid::Iso
     class IsStageIterationError < StandardError; end
     class WrongFormat < StandardError; end
     class SupplementWithoutYearError < StandardError; end
+    class NoEditionError < StandardError; end
   end
 end

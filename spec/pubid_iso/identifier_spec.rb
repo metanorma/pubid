@@ -215,64 +215,71 @@ module Pubid::Iso
       let(:pubid) { "ISO 10231:2003/Amd 1:2015" }
       let(:urn) { "urn:iso:std:iso:10231:amd:2015:v1" }
 
-      it_behaves_like "converts pubid to urn"
+      it "should raise an error when converting to URN" do
+        expect { subject.urn }.to raise_exception(Errors::NoEditionError)
+      end
+
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ISO 10360-1:2000/Cor 1:2002" do
+      let(:original) { "ISO 10360-1:2000/Cor 1:2002 ED1" }
       let(:pubid) { "ISO 10360-1:2000/Cor 1:2002" }
-      let(:urn) { "urn:iso:std:iso:10360:-1:cor:2002:v1" }
+      let(:urn) { "urn:iso:std:iso:10360:-1:ed-1:cor:2002:v1" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ISO 13688:2013/Amd 1:2021(en)" do
+      let(:original) { "ISO 13688:2013/Amd 1:2021 ED1(en)" }
       let(:pubid) { "ISO 13688:2013/Amd 1:2021(en)" }
-      let(:urn) { "urn:iso:std:iso:13688:amd:2021:v1:en" }
+      let(:urn) { "urn:iso:std:iso:13688:ed-1:amd:2021:v1:en" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ISO/IEC 10646:2020/CD Amd 1" do
-      let(:original) { "ISO/IEC 10646:2020/CD Amd 1" }
+      let(:original) { "ISO/IEC 10646:2020/CD Amd 1 ED6" }
       let(:pubid) { "ISO/IEC 10646:2020/CD Amd 1" }
-      let(:urn) { "urn:iso:std:iso-iec:10646:stage-30.00:amd:1:v1" }
+      let(:urn) { "urn:iso:std:iso-iec:10646:ed-6:stage-30.00:amd:1:v1" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ISO/IEC 13818-1:2015/Amd 3:2016/Cor 1:2017" do
+      let(:original) { "ISO/IEC 13818-1:2015/Amd 3:2016/Cor 1:2017 ED5" }
       let(:pubid) { "ISO/IEC 13818-1:2015/Amd 3:2016/Cor 1:2017" }
-      let(:urn) { "urn:iso:std:iso-iec:13818:-1:amd:2016:v3:cor:2017:v1" }
+      let(:urn) { "urn:iso:std:iso-iec:13818:-1:ed-5:amd:2016:v3:cor:2017:v1" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ISO/IEC 14496-30:2018/FDAmd 1" do
-      let(:original) { "ISO/IEC 14496-30:2018/FDAmd 1" }
+      let(:original) { "ISO/IEC 14496-30:2018/FDAmd 1 ED2" }
       let(:pubid) { "ISO/IEC 14496-30:2018/FDAmd 1" }
-      let(:urn) { "urn:iso:std:iso-iec:14496:-30:stage-50.00:amd:1:v1" }
+      let(:urn) { "urn:iso:std:iso-iec:14496:-30:ed-2:stage-50.00:amd:1:v1" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ISO 11783-2:2012/Cor.1:2012(fr)" do
-      let(:original) { "ISO 11783-2:2012/Cor.1:2012(fr)" }
+      let(:original) { "ISO 11783-2:2012/Cor.1:2012 ED2(fr)" }
       let(:pubid) { "ISO 11783-2:2012/Cor 1:2012(fr)" }
-      let(:urn) { "urn:iso:std:iso:11783:-2:cor:2012:v1:fr" }
+      let(:urn) { "urn:iso:std:iso:11783:-2:ed-2:cor:2012:v1:fr" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ISO/IEC 8802-3:2021/Amd7-2021" do
+      let(:original) { "ISO/IEC 8802-3:2021/Amd 7:2021 ED3" }
       let(:pubid) { "ISO/IEC 8802-3:2021/Amd 7:2021" }
-      let(:urn) { "urn:iso:std:iso-iec:8802:-3:amd:2021:v7" }
+      let(:urn) { "urn:iso:std:iso-iec:8802:-3:ed-3:amd:2021:v7" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
@@ -305,45 +312,45 @@ module Pubid::Iso
     end
 
     context "ISO 10791-6:2014/PWI Amd 1" do
-      let(:original) { "ISO 10791-6:2014/PWI Amd 1" }
+      let(:original) { "ISO 10791-6:2014/PWI Amd 1 ED1" }
       let(:pubid) { "ISO 10791-6:2014/PWI Amd 1" }
-      let(:urn) { "urn:iso:std:iso:10791:-6:stage-00.00:amd:1:v1" }
+      let(:urn) { "urn:iso:std:iso:10791:-6:ed-1:stage-00.00:amd:1:v1" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ISO 11137-2:2013/FDAmd 1" do
-      let(:original) { "ISO 11137-2:2013/FDAmd 1" }
+      let(:original) { "ISO 11137-2:2013/FDAmd 1 ED3" }
       let(:pubid) { "ISO 11137-2:2013/FDAmd 1" }
-      let(:urn) { "urn:iso:std:iso:11137:-2:stage-50.00:amd:1:v1" }
+      let(:urn) { "urn:iso:std:iso:11137:-2:ed-3:stage-50.00:amd:1:v1" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ISO 15002:2008/DAM 2:2020(F)" do
-      let(:original) { "ISO 15002:2008/DAM 2:2020(F)" }
+      let(:original) { "ISO 15002:2008/DAM 2:2020 ED2(F)" }
       let(:pubid) { "ISO 15002:2008/DAmd 2:2020(fr)" }
-      let(:urn) { "urn:iso:std:iso:15002:stage-40.00:amd:2020:v2:fr" }
+      let(:urn) { "urn:iso:std:iso:15002:ed-2:stage-40.00:amd:2020:v2:fr" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ISO/IEC 10646-1:1993/pDCOR.2" do
-      let(:original) { "ISO/IEC 10646-1:1993/pDCOR.2" }
+      let(:original) { "ISO/IEC 10646-1:1993/pDCOR.2 ED1" }
       let(:pubid) { "ISO/IEC 10646-1:1993/CD Cor 2" }
-      let(:urn) { "urn:iso:std:iso-iec:10646:-1:stage-30.00:cor:2:v1" }
+      let(:urn) { "urn:iso:std:iso-iec:10646:-1:ed-1:stage-30.00:cor:2:v1" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ISO/IEC 14496-12:2012/PDAM 4" do
-      let(:original) { "ISO/IEC 14496-12:2012/PDAM 4" }
+      let(:original) { "ISO/IEC 14496-12:2012/PDAM 4 ED4" }
       let(:pubid) { "ISO/IEC 14496-12:2012/CD Amd 4" }
-      let(:urn) { "urn:iso:std:iso-iec:14496:-12:stage-30.00:amd:4:v1" }
+      let(:urn) { "urn:iso:std:iso-iec:14496:-12:ed-4:stage-30.00:amd:4:v1" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
@@ -379,18 +386,18 @@ module Pubid::Iso
     end
 
     context "ISO 6709:2008/Cor. 1:2009" do
-      let(:original) { "ISO 6709:2008/Cor. 1:2009" }
+      let(:original) { "ISO 6709:2008/Cor. 1:2009 ED2" }
       let(:pubid) { "ISO 6709:2008/Cor 1:2009" }
-      let(:urn) { "urn:iso:std:iso:6709:cor:2009:v1" }
+      let(:urn) { "urn:iso:std:iso:6709:ed-2:cor:2009:v1" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ISO 10993-4:2002/Amd. 1:2006(E)" do
-      let(:original) { "ISO 10993-4:2002/Amd.1:2006(E)" }
+      let(:original) { "ISO 10993-4:2002/Amd.1:2006 ED2(E)" }
       let(:pubid) { "ISO 10993-4:2002/Amd 1:2006(en)" }
-      let(:urn) { "urn:iso:std:iso:10993:-4:amd:2006:v1:en" }
+      let(:urn) { "urn:iso:std:iso:10993:-4:ed-2:amd:2006:v1:en" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
@@ -405,7 +412,7 @@ module Pubid::Iso
       let(:pubid) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }
       let(:pubid_without_date) { "ISO/IEC 17025:2005/Cor 1(fr)" }
       let(:pubid_single_letter_language) { "ISO/IEC 17025:2005/Cor 1:2006(F)" }
-      let(:pubid_with_edition) { "ISO/IEC 17025:2005 ED1/Cor 1:2006(fr)" }
+      let(:pubid_with_edition) { "ISO/IEC 17025:2005/Cor 1:2006 ED1(fr)" }
       let(:french_pubid) { "ISO/CEI 17025:2005/Cor.1:2006(fr)" }
       let(:urn) { "urn:iso:std:iso-iec:17025:ed-1:cor:2006:v1:fr" }
 
@@ -509,9 +516,9 @@ module Pubid::Iso
     end
 
     context "ISO 19110:2005/Amd 1:2011" do
-      let(:original) { "ISO 19110:2005/Amd 1:2011" }
+      let(:original) { "ISO 19110:2005/Amd 1:2011 ED1" }
       let(:pubid) { "ISO 19110:2005/Amd 1:2011" }
-      let(:urn) { "urn:iso:std:iso:19110:amd:2011:v1" }
+      let(:urn) { "urn:iso:std:iso:19110:ed-1:amd:2011:v1" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
