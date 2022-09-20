@@ -4,6 +4,7 @@ module Pubid::Iso
     let(:original) { nil }
     let(:french_pubid) { original }
     let(:russian_pubid) { original }
+    let(:pubid_with_edition) { original }
 
     shared_examples "converts pubid to urn" do
       it "converts pubid to urn" do
@@ -15,6 +16,12 @@ module Pubid::Iso
     shared_examples "converts pubid to pubid" do
       it "converts pubid to pubid" do
         expect(subject.to_s).to eq(pubid)
+      end
+    end
+
+    shared_examples "converts to pubid with edition" do
+      it "converts to pubid with edition" do
+        expect(subject.to_s(with_edition: true)).to eq(pubid_with_edition)
       end
     end
 
@@ -88,38 +95,46 @@ module Pubid::Iso
     end
 
     context "ISO/IEC 30142 ED1" do
-      let(:pubid) { "ISO/IEC 30142 ED1" }
+      let(:original) { "ISO/IEC 30142 ED1" }
+      let(:pubid) { "ISO/IEC 30142" }
       let(:urn) { "urn:iso:std:iso-iec:30142:ed-1" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
+      it_behaves_like "converts to pubid with edition"
     end
 
     context "ISO 22610:2006 Ed" do
       let(:original) { "ISO 22610:2006 Ed" }
-      let(:pubid) { "ISO 22610:2006 ED1" }
+      let(:pubid) { "ISO 22610:2006" }
+      let(:pubid_with_edition) { "ISO 22610:2006 ED1" }
       let(:urn) { "urn:iso:std:iso:22610:ed-1" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
+      it_behaves_like "converts to pubid with edition"
     end
 
     context "ISO 17121:2000 Ed 1" do
       let(:original) { "ISO 17121:2000 Ed 1" }
-      let(:pubid) { "ISO 17121:2000 ED1" }
+      let(:pubid) { "ISO 17121:2000" }
+      let(:pubid_with_edition) { "ISO 17121:2000 ED1" }
       let(:urn) { "urn:iso:std:iso:17121:ed-1" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
+      it_behaves_like "converts to pubid with edition"
     end
 
     context "ISO 11553-1 Ed.2" do
       let(:original) { "ISO 11553-1 Ed.2" }
-      let(:pubid) { "ISO 11553-1 ED2" }
+      let(:pubid) { "ISO 11553-1" }
+      let(:pubid_with_edition) { "ISO 11553-1 ED2" }
       let(:urn) { "urn:iso:std:iso:11553:-1:ed-2" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
+      it_behaves_like "converts to pubid with edition"
     end
 
     context "ISO 21143.2" do
@@ -387,11 +402,11 @@ module Pubid::Iso
 
     context "ISO/IEC 17025:2005/Cor.1:2006(fr)" do
       let(:original) { "ISO/IEC 17025:2005/Cor.1:2006 ED1(fr)" }
-      let(:pubid) { "ISO/IEC 17025:2005 ED1/Cor 1:2006(fr)" }
-      let(:pubid_without_date) { "ISO/IEC 17025:2005 ED1/Cor 1(fr)" }
-      let(:pubid_single_letter_language) { "ISO/IEC 17025:2005 ED1/Cor 1:2006(F)" }
-      let(:pubid_without_edition) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }
-      let(:french_pubid) { "ISO/CEI 17025:2005 ED1/Cor.1:2006(fr)" }
+      let(:pubid) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }
+      let(:pubid_without_date) { "ISO/IEC 17025:2005/Cor 1(fr)" }
+      let(:pubid_single_letter_language) { "ISO/IEC 17025:2005/Cor 1:2006(F)" }
+      let(:pubid_with_edition) { "ISO/IEC 17025:2005 ED1/Cor 1:2006(fr)" }
+      let(:french_pubid) { "ISO/CEI 17025:2005/Cor.1:2006(fr)" }
       let(:urn) { "urn:iso:std:iso-iec:17025:ed-1:cor:2006:v1:fr" }
 
       it_behaves_like "converts pubid to urn"
@@ -406,9 +421,7 @@ module Pubid::Iso
         expect(subject.to_s(with_language_code: :single)).to eq(pubid_single_letter_language)
       end
 
-      it "converts to pubid without edition" do
-        expect(subject.to_s(with_edition: false)).to eq(pubid_without_edition)
-      end
+      it_behaves_like "converts to pubid with edition"
     end
 
     context "ISO 5537|IDF 26" do

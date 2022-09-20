@@ -122,7 +122,7 @@ module Pubid::Iso
     # @param stage_format_long [Boolean] render with long or short stage format
     # @return [String] pubid identifier
     def to_s(lang: nil, with_date: true, with_language_code: :iso,
-             with_edition: true, stage_format_long: true)
+             with_edition: false, stage_format_long: true)
       case lang
       when :french
         Renderer::French.new(get_params)
