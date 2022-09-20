@@ -79,11 +79,18 @@ module Pubid::Iso
 
     context "FprISO 105-A03" do
       let(:original) { "FprISO 105-A03" }
-      let(:pubid) { "ISO/PRF 105-A03" }
+      let(:pubid) { "ISO 105-A03" }
+      let(:pubid_with_prf) { "ISO/PRF 105-A03" }
       let(:urn) { "urn:iso:std:iso:105:-A03:stage-50.00" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
+
+      context "when requested with_prf" do
+        subject { described_class.parse(original).to_s(with_prf: true) }
+
+        it { is_expected.to eq(pubid_with_prf) }
+      end
     end
 
     context "ISO/IEC/IEEE 26512" do
@@ -561,6 +568,26 @@ module Pubid::Iso
       let(:pubid) { "ISO/IEC 27006:2015/CD Amd 1" }
 
       it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/PRF 6709:2022" do
+      let(:original) { "ISO/PRF 6709:2022" }
+      let(:pubid) { "ISO 6709:2022" }
+      let(:pubid_with_prf) { original }
+
+      it_behaves_like "converts pubid to pubid"
+
+      context "when requested with_prf" do
+        subject { described_class.parse(original).to_s(with_prf: true) }
+
+        it { is_expected.to eq(pubid_with_prf) }
+      end
+
+      context "when requested reference" do
+        subject { described_class.parse(original).formatted(:ref_dated) }
+
+        it { is_expected.to eq(pubid_with_prf) }
+      end
     end
 
     context "ISO TC 184/SC 4 N1110" do

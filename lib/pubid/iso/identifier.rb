@@ -100,17 +100,17 @@ module Pubid::Iso
     def formatted(format)
       case format
       when :ref_num_short
-        to_s(with_language_code: :single, stage_format_long: false)
+        to_s(with_language_code: :single, stage_format_long: false, with_prf: true)
       when :ref_num_long
-        to_s(with_language_code: :iso, stage_format_long: true)
+        to_s(with_language_code: :iso, stage_format_long: true, with_prf: true)
       when :ref_dated
-        to_s(with_language_code: :none, stage_format_long: false)
+        to_s(with_language_code: :none, stage_format_long: false, with_prf: true)
       when :ref_dated_long
-        to_s(with_language_code: :none, stage_format_long: true)
+        to_s(with_language_code: :none, stage_format_long: true, with_prf: true)
       when :ref_undated
-        to_s(with_language_code: :none, stage_format_long: false, with_date: false)
+        to_s(with_language_code: :none, stage_format_long: false, with_date: false, with_prf: true)
       when :ref_undated_long
-        to_s(with_language_code: :none, stage_format_long: true, with_date: false)
+        to_s(with_language_code: :none, stage_format_long: true, with_date: false, with_prf: true)
       else
         raise Errors::WrongFormat, "#{format} is not available"
       end
@@ -125,7 +125,7 @@ module Pubid::Iso
     # @param stage_format_long [Boolean] render with long or short stage format
     # @return [String] pubid identifier
     def to_s(lang: nil, with_date: true, with_language_code: :iso,
-             with_edition: false, stage_format_long: true)
+             with_edition: false, stage_format_long: true, with_prf: false)
       case lang
       when :french
         Renderer::French.new(get_params)
@@ -140,7 +140,7 @@ module Pubid::Iso
           self.class.get_renderer_class.new(get_params)
         end
       end.render(with_date: with_date, with_language_code: with_language_code, with_edition: with_edition,
-                 stage_format_long: stage_format_long) +
+                 stage_format_long: stage_format_long, with_prf: with_prf) +
         if @joint_document && @type != "DIR"
           "|#{@joint_document}"
         end.to_s

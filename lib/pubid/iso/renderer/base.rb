@@ -39,6 +39,8 @@ module Pubid::Iso::Renderer
     end
 
     def render_stage(stage, opts, params)
+      return if stage.abbr == "PRF" and !opts[:with_prf]
+
       if params[:copublisher]
         " #{stage.abbr}"
       else
