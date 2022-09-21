@@ -53,12 +53,26 @@ module Pubid::Iso
     }
 
     STAGES_NAMES = {
-      approval: "50"
-    }
+      preliminary: "00",
+      proposal: "10",
+      preparatory: "20",
+      committee: "30",
+      enquiry: "40",
+      approval: "50",
+      publication: "60",
+      review: "90",
+      withdrawal: "95",
+    }.freeze
 
     SUBSTAGES_NAMES = {
-      registration: "00"
-    }
+      registration: "00",
+      start_of_main_action: "20",
+      completion_of_main_action: "60",
+      repeat_an_earlier_phase: "92",
+      repeat_current_phase: "93",
+      abandon: "98",
+      proceed: "99",
+    }.freeze
 
     def initialize(stage, substage = "00")
       # when stage is stage name
