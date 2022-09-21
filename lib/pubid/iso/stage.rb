@@ -13,20 +13,33 @@ module Pubid::Iso
                IS: "60.00" }.freeze
 
     # @param abbr [String, Symbol] abbreviation eg. :PWI, :WD
-    # @param harmonized_code [HarmonizedStageCode]
+    # @param harmonized_code [String, Float, HarmonizedStageCode]
     def initialize(abbr: nil, harmonized_code: nil)
       @abbr = abbr
-      @harmonized_code = harmonized_code
 
       if harmonized_code
-        # @abbr = STAGES.select { |k,v| v == @harmonized_code.to_s }.first&.first
-        @abbr ||= STAGES.key(@harmonized_code.to_s)
+        @harmonized_code = if harmonized_code.is_a?(HarmonizedStageCode)
+                             harmonized_code
+                           else
+                             HarmonizedStageCode.new(*harmonized_code.to_s.split("."))
+                           end
+        @abbr ||= STAGES.key(@harmonized_code.to_s) || STAGES.key("#{@harmonized_code.stage}.00")
       end
 
       if abbr
         raise Errors::CodeInvalidError, "#{abbr} is not valid stage" unless STAGES.key?(abbr.to_sym)
 
         @harmonized_code ||= HarmonizedStageCode.new(*STAGES[abbr.to_sym].split("."))
+      end
+    end
+
+    def self.parse(stage)
+      if /\A[\d.]+\z/.match?(stage)
+        Stage.new(harmonized_code: stage)
+      else
+        raise Errors::CodeInvalidError unless stage.is_a?(Symbol) || stage.is_a?(String)
+
+        Stage.new(abbr: stage)
       end
     end
   end

@@ -60,7 +60,7 @@ module Pubid::Iso
       registration: "00"
     }
 
-    def initialize(stage, substage = nil)
+    def initialize(stage, substage = "00")
       # when stage is stage name
       if STAGES_NAMES.key?(stage)
         @stage = STAGES_NAMES[stage]

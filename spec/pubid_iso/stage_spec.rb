@@ -18,11 +18,45 @@ RSpec.describe Pubid::Iso::Stage do
 
   context "when harmonized stage code" do
     subject { described_class.new(harmonized_code: harmonized_code) }
-    let(:harmonized_code) { Pubid::Iso::HarmonizedStageCode.new("50", "00") }
+    let(:harmonized_code) { harmonized_code_object }
+    let(:harmonized_code_object) { Pubid::Iso::HarmonizedStageCode.new("50", "00") }
 
     it "returns abbreviated code" do
       expect(subject.abbr).to eq(:FDIS)
     end
+
+    context "when harmonized_code is a string" do
+      let(:harmonized_code) { "50.00" }
+
+      it "assigns correct harmonized stage code" do
+        expect(subject.harmonized_code).to eq(harmonized_code_object)
+      end
+
+      context "when harmonized_code has only stage" do
+        let(:harmonized_code) { "50" }
+
+        it "assigns correct harmonized stage code" do
+          expect(subject.harmonized_code).to eq(harmonized_code_object)
+        end
+      end
+
+      context "when harmonized_code 50.20" do
+        let(:harmonized_code) { "50.20" }
+
+        it "returns abbreviated code" do
+          expect(subject.abbr).to eq(:FDIS)
+        end
+      end
+    end
+
+    context "when harmonized_code is an integer" do
+      let(:harmonized_code) { 50 }
+
+      it "assigns correct harmonized stage code" do
+        expect(subject.harmonized_code).to eq(harmonized_code_object)
+      end
+    end
+
   end
 
   context "when harmonized code and abbreviation" do

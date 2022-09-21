@@ -829,6 +829,15 @@ module Pubid::Iso
               .to eq(Pubid::Iso::HarmonizedStageCode.new("20", "20"))
           end
         end
+
+        context "when stage is a code" do
+          let(:params) { { stage: "40.40" } }
+
+          it "has harmonized stage assigned" do
+            expect(subject.stage.harmonized_code)
+              .to eq(Pubid::Iso::HarmonizedStageCode.new("40", "40"))
+          end
+        end
       end
 
       context "when have urn_stage" do
@@ -923,6 +932,14 @@ module Pubid::Iso
 
             it "renders short stage and amendment" do
               expect(subject.to_s(stage_format_long: false)).to eq("ISO #{number}:1999/CDAM 1")
+            end
+          end
+
+          context "when stage is a code" do
+            let(:stage) { "40.40" }
+
+            it "renders long stage and amendment" do
+              expect(subject.to_s).to eq("ISO #{number}:1999/DAmd 1")
             end
           end
         end

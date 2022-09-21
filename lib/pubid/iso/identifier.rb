@@ -10,7 +10,7 @@ module Pubid::Iso
     # Creates new identifier from options provided, includes options from
     # Pubid::Core::Identifier#initialize
     #
-    # @param stage [Stage] stage
+    # @param stage [Stage, Symbol, String] stage, e.g. "PWI", "NP", "50.00", Stage.new(abbr: :WD)
     # @param urn_stage [Float] numeric stage for URN rendering
     # @param iteration [Integer] document iteration, eg. "1", "2", "3"
     # @param joint_document [Identifier] joint document
@@ -40,7 +40,8 @@ module Pubid::Iso
         raise Errors::SupplementWithoutYearError, "Cannot apply supplement to document without edition year"
       end
       if stage
-        @stage = (stage.is_a?(Symbol) || stage.is_a?(String)) ? Stage.new(abbr: stage) : stage
+        @stage = stage.is_a?(Stage) ? stage : Stage.parse(stage)
+
         if @stage.abbr == "IS" && iteration
           raise Errors::IsStageIterationError, "IS stage document cannot have iteration"
         end
