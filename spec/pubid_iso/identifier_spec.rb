@@ -963,20 +963,18 @@ module Pubid::Iso
         end
       end
 
-      context "when have DIR parameter" do
-        context "when DIR true" do
-          let(:params) { { type: "DIR" } }
+      context "when document have DIR type" do
+        let(:params) { { type: "DIR" } }
 
-          it "render DIR document" do
-            expect(subject.to_s).to eq("ISO DIR #{number}")
-          end
+        it "render DIR document" do
+          expect(subject.to_s).to eq("ISO DIR #{number}")
         end
 
-        context "when DIR false" do
-          let(:params) { { dir: false } }
+        context "when have language parameter" do
+          let(:params) { { type: "DIR", language: "en" } }
 
-          it "render normal document" do
-            expect(subject.to_s).to eq("ISO #{number}")
+          it "render DIR document with language" do
+            expect(subject.to_s).to eq("ISO DIR #{number}(en)")
           end
         end
       end
