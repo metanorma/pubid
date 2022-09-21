@@ -77,8 +77,7 @@ module Pubid::Iso
       raise Errors::HarmonizedStageCodeInvalidError if Integer(stage).nil?
 
       # raise an error when substage wrong
-      raise Errors::HarmonizedStageCodeInvalidError if stage == "90" && substage == "00"
-      # raise Errors::HarmonizedStageCodeNotValidError if stage.to_i
+      raise Errors::HarmonizedStageCodeInvalidError unless DESCRIPTIONS.key?(to_s)
     end
 
     def to_s

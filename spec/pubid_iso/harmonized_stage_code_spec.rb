@@ -17,11 +17,16 @@ RSpec.describe Pubid::Iso::HarmonizedStageCode do
     let(:substage) { "00" }
 
     context "wrong code" do
-      let(:stage) { "90" }
-      let(:substage) { "00" }
+      let(:wrong_codes) do
+        %w[00.92 00.93 10.93 20.92 20.93 30.93 50.93 60.20 60.92 60.93 60.98
+           60.99 90.00 90.98 95.00 95.93 95.98]
+      end
 
       it "raise an error" do
-        expect { subject }.to raise_exception(Pubid::Iso::Errors::HarmonizedStageCodeInvalidError)
+        wrong_codes.each do |code|
+          expect { described_class.new(*code.split(".")) }.to raise_exception(
+            Pubid::Iso::Errors::HarmonizedStageCodeInvalidError)
+        end
       end
     end
   end
