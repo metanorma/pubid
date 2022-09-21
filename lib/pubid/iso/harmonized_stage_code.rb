@@ -81,8 +81,8 @@ module Pubid::Iso
         @substage = SUBSTAGES_NAMES[substage]
       else
         # stage is number
-        validate_stage(stage, substage)
         @stage, @substage = stage, substage
+        validate_stage(stage, substage)
       end
     end
 
