@@ -27,7 +27,7 @@ module Pubid::Iso
       end
 
       if abbr
-        raise Errors::CodeInvalidError, "#{abbr} is not valid stage" unless STAGES.key?(abbr.to_sym)
+        raise Errors::StageInvalidError, "#{abbr} is not valid stage" unless STAGES.key?(abbr.to_sym)
 
         @harmonized_code ||= HarmonizedStageCode.new(*STAGES[abbr.to_sym].split("."))
       end
@@ -37,7 +37,7 @@ module Pubid::Iso
       if /\A[\d.]+\z/.match?(stage)
         Stage.new(harmonized_code: stage)
       else
-        raise Errors::CodeInvalidError unless stage.is_a?(Symbol) || stage.is_a?(String)
+        raise Errors::StageInvalidError unless stage.is_a?(Symbol) || stage.is_a?(String)
 
         Stage.new(abbr: stage)
       end

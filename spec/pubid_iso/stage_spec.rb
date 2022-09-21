@@ -11,7 +11,7 @@ RSpec.describe Pubid::Iso::Stage do
       let(:abbrev) { :ABC }
 
       it "raise an error" do
-        expect { subject }.to raise_exception(Pubid::Iso::Errors::CodeInvalidError)
+        expect { subject }.to raise_exception(Pubid::Iso::Errors::StageInvalidError)
       end
     end
   end
