@@ -47,6 +47,46 @@ RSpec.describe Pubid::Iso::Stage do
           expect(subject.abbr).to eq(:FDIS)
         end
       end
+
+      context "when harmonized_code 20.60" do
+        let(:harmonized_code) { "20.60" }
+
+        it "returns abbreviated code" do
+          expect(subject.abbr).to eq(:WD)
+        end
+      end
+
+      context "when harmonized_code 10.99" do
+        let(:harmonized_code) { "10.99" }
+
+        it "returns abbreviated code" do
+          expect(subject.abbr).to eq(:AWI)
+        end
+      end
+
+      context "when harmonized_code 20.00" do
+        let(:harmonized_code) { "20.00" }
+
+        it "returns abbreviated code" do
+          expect(subject.abbr).to eq(:AWI)
+        end
+      end
+
+      context "when harmonized_code 60.00" do
+        let(:harmonized_code) { "60.00" }
+
+        it "returns abbreviated code" do
+          expect(subject.abbr).to eq(:PRF)
+        end
+      end
+
+      context "when harmonized_code 60.60" do
+        let(:harmonized_code) { "60.60" }
+
+        it "returns abbreviated code" do
+          expect(subject.abbr).to eq(:IS)
+        end
+      end
     end
 
     context "when harmonized_code is an integer" do
