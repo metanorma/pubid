@@ -847,7 +847,7 @@ module Pubid::Iso
           let(:stage) { :DIS }
 
           it "renders correct identifier" do
-            expect(subject.to_s).to eq("ISO DTS #{number}")
+            expect(subject.to_s).to eq("ISO/DTS #{number}")
           end
         end
 
@@ -855,7 +855,7 @@ module Pubid::Iso
           let(:stage) { :FDIS }
 
           it "renders correct identifier" do
-            expect(subject.to_s).to eq("ISO FDTS #{number}")
+            expect(subject.to_s).to eq("ISO/FDTS #{number}")
           end
         end
       end
