@@ -12,7 +12,7 @@ RSpec.describe Pubid::Iso::Supplement do
       let(:urn_stage) { ":stage-30.00" }
       let(:urn_number) { ":2000:v1" }
 
-      it { expect(subject.render_pubid_stage).to eq(:CD) }
+      it { expect(subject.render_pubid_stage).to eq("CD") }
 
       it { expect(subject.render_urn_stage).to eq(urn_stage) }
     end

@@ -105,7 +105,7 @@ RSpec.describe Pubid::Iso::Stage do
     let(:abbrev) { :FDIS }
 
     it "returns abbreviated code" do
-      expect(subject.abbr).to eq(abbrev)
+      expect(subject.abbr).to eq(abbrev.to_s)
     end
 
     it "returns harmonized code" do

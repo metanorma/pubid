@@ -840,11 +840,31 @@ module Pubid::Iso
         end
       end
 
+      context "when TS type" do
+        let(:params) { { type: "TS", stage: stage } }
+
+        context "when DIS stage" do
+          let(:stage) { :DIS }
+
+          it "renders correct identifier" do
+            expect(subject.to_s).to eq("ISO DTS #{number}")
+          end
+        end
+
+        context "when FDIS stage" do
+          let(:stage) { :FDIS }
+
+          it "renders correct identifier" do
+            expect(subject.to_s).to eq("ISO FDTS #{number}")
+          end
+        end
+      end
+
       context "when have urn_stage" do
         let(:params) { { stage: Stage.new(harmonized_code: HarmonizedStageCode.new("50", "00"), abbr: :PRF) } }
 
         it "renders separate stage for PubID" do
-          expect(subject.to_s).to eq("ISO/PRF #{number}")
+          expect(subject.to_s(with_prf: true)).to eq("ISO/PRF #{number}")
         end
 
         it "renders separate numeric stage for URN" do

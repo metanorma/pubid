@@ -16,7 +16,7 @@ module Pubid::Iso
     # @param abbr [String, Symbol] abbreviation eg. :PWI, :WD
     # @param harmonized_code [String, Float, HarmonizedStageCode]
     def initialize(abbr: nil, harmonized_code: nil)
-      @abbr = abbr
+      @abbr = abbr&.to_s
 
       if harmonized_code
         @harmonized_code = if harmonized_code.is_a?(HarmonizedStageCode)
