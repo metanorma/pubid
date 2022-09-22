@@ -107,8 +107,11 @@ module Pubid::Iso
     # @param stage_format_long [Boolean] render with long or short stage format
     # @param format [:ref_num_short,:ref_num_long,:ref_dated,:ref_dated_long,:ref_undated,:ref_undated_long] create reference with specified format
     # @return [String] pubid identifier
-    def to_s(lang: nil, with_date: true, with_language_code: :iso,
-             with_edition: false, stage_format_long: true, with_prf: false, format: nil)
+    def to_s(lang: nil, with_date: true,
+             with_edition: false, with_prf: false,
+             format: :ref_dated_long)
+      with_language_code = nil
+      stage_format_long = nil
       if format
         case format
         when :ref_num_short

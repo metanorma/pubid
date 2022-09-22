@@ -15,25 +15,25 @@ module Pubid::Iso
 
     shared_examples "converts pubid to pubid" do
       it "converts pubid to pubid" do
-        expect(subject.to_s).to eq(pubid)
+        expect(subject.to_s(format: :ref_num_long)).to eq(pubid)
       end
     end
 
     shared_examples "converts to pubid with edition" do
       it "converts to pubid with edition" do
-        expect(subject.to_s(with_edition: true)).to eq(pubid_with_edition)
+        expect(subject.to_s(format: :ref_num_long, with_edition: true)).to eq(pubid_with_edition)
       end
     end
 
     shared_examples "converts pubid to french pubid" do
       it "converts pubid to french pubid" do
-        expect(subject.to_s(lang: :french)).to eq(french_pubid)
+        expect(subject.to_s(format: :ref_num_long, lang: :french)).to eq(french_pubid)
       end
     end
 
     shared_examples "converts pubid to russian pubid" do
       it "converts pubid to russian pubid" do
-        expect(subject.to_s(lang: :russian)).to eq(russian_pubid)
+        expect(subject.to_s(format: :ref_num_long, lang: :russian)).to eq(russian_pubid)
       end
     end
 
@@ -428,11 +428,11 @@ module Pubid::Iso
       it_behaves_like "converts pubid to french pubid"
 
       it "converts to pubid without date" do
-        expect(subject.to_s(with_date: false)).to eq(pubid_without_date)
+        expect(subject.to_s(format: :ref_num_long, with_date: false)).to eq(pubid_without_date)
       end
 
       it "converts to pubid with single letter language code" do
-        expect(subject.to_s(with_language_code: :single)).to eq(pubid_single_letter_language)
+        expect(subject.to_s(format: :ref_num_short)).to eq(pubid_single_letter_language)
       end
 
       it_behaves_like "converts to pubid with edition"
@@ -939,7 +939,7 @@ module Pubid::Iso
             end
 
             it "renders short stage and amendment" do
-              expect(subject.to_s(stage_format_long: false)).to eq("ISO #{number}:1999/DAM 1")
+              expect(subject.to_s(format: :ref_num_short)).to eq("ISO #{number}:1999/DAM 1")
             end
           end
 
@@ -947,11 +947,11 @@ module Pubid::Iso
             let(:stage) { Stage.new(abbr: :CD) }
 
             it "renders long stage and amendment" do
-              expect(subject.to_s(stage_format_long: true)).to eq("ISO #{number}:1999/CD Amd 1")
+              expect(subject.to_s(format: :ref_num_long)).to eq("ISO #{number}:1999/CD Amd 1")
             end
 
             it "renders short stage and amendment" do
-              expect(subject.to_s(stage_format_long: false)).to eq("ISO #{number}:1999/CDAM 1")
+              expect(subject.to_s(format: :ref_num_short)).to eq("ISO #{number}:1999/CDAM 1")
             end
           end
 
@@ -986,7 +986,7 @@ module Pubid::Iso
             end
 
             it "renders short stage and corrigendum" do
-              expect(subject.to_s(stage_format_long: false)).to eq("ISO #{number}:1999/DCOR 1")
+              expect(subject.to_s(format: :ref_num_short)).to eq("ISO #{number}:1999/DCOR 1")
             end
           end
         end
@@ -1011,7 +1011,7 @@ module Pubid::Iso
           let(:params) { { type: "DIR", language: "en" } }
 
           it "render DIR document with language" do
-            expect(subject.to_s).to eq("ISO DIR #{number}(en)")
+            expect(subject.to_s(format: :ref_num_long)).to eq("ISO DIR #{number}(en)")
           end
         end
       end
