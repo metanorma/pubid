@@ -64,11 +64,31 @@ module Pubid::Iso
         end
       end
 
+      context "when TS type" do
+        let(:params) { { type: "TS", stage: stage } }
+
+        context "when DIS stage" do
+          let(:stage) { :DIS }
+
+          it "renders correct identifier" do
+            expect(subject.to_s).to eq("ISO/DTS #{number}")
+          end
+        end
+
+        context "when FDIS stage" do
+          let(:stage) { :FDIS }
+
+          it "renders correct identifier" do
+            expect(subject.to_s).to eq("ISO/FDTS #{number}")
+          end
+        end
+      end
+
       context "when have urn_stage" do
         let(:params) { { stage: Stage.new(harmonized_code: HarmonizedStageCode.new("50", "00"), abbr: :PRF) } }
 
         it "renders separate stage for PubID" do
-          expect(subject.to_s).to eq("ISO/PRF #{number}")
+          expect(subject.to_s(with_prf: true)).to eq("ISO/PRF #{number}")
         end
 
         it "renders separate numeric stage for URN" do
@@ -143,7 +163,7 @@ module Pubid::Iso
             end
 
             it "renders short stage and amendment" do
-              expect(subject.to_s(stage_format_long: false)).to eq("ISO #{number}:1999/DAM 1")
+              expect(subject.to_s(format: :ref_num_short)).to eq("ISO #{number}:1999/DAM 1")
             end
           end
 
@@ -151,11 +171,11 @@ module Pubid::Iso
             let(:stage) { Stage.new(abbr: :CD) }
 
             it "renders long stage and amendment" do
-              expect(subject.to_s(stage_format_long: true)).to eq("ISO #{number}:1999/CD Amd 1")
+              expect(subject.to_s(format: :ref_num_long)).to eq("ISO #{number}:1999/CD Amd 1")
             end
 
             it "renders short stage and amendment" do
-              expect(subject.to_s(stage_format_long: false)).to eq("ISO #{number}:1999/CDAM 1")
+              expect(subject.to_s(format: :ref_num_short)).to eq("ISO #{number}:1999/CDAM 1")
             end
           end
 
@@ -190,7 +210,7 @@ module Pubid::Iso
             end
 
             it "renders short stage and corrigendum" do
-              expect(subject.to_s(stage_format_long: false)).to eq("ISO #{number}:1999/DCOR 1")
+              expect(subject.to_s(format: :ref_num_short)).to eq("ISO #{number}:1999/DCOR 1")
             end
           end
         end
@@ -215,7 +235,7 @@ module Pubid::Iso
           let(:params) { { type: "DIR", language: "en" } }
 
           it "render DIR document with language" do
-            expect(subject.to_s).to eq("ISO DIR #{number}(en)")
+            expect(subject.to_s(format: :ref_num_long)).to eq("ISO DIR #{number}(en)")
           end
         end
       end
