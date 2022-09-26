@@ -127,6 +127,14 @@ module Pubid::Iso
             expect(subject.to_s).to eq("ISO/PAS #{number}")
           end
         end
+
+        context "with FDIS stage" do
+          let(:stage) { :FDIS }
+
+          it "raises an error" do
+            expect { subject }.to raise_exception(Errors::StageInvalidError)
+          end
+        end
       end
 
       context "when have urn_stage" do

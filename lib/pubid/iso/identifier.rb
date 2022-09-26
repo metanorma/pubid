@@ -32,9 +32,9 @@ module Pubid::Iso
                    tctype: nil, sctype: nil, wgtype: nil, tcnumber: nil,
                    scnumber: nil, wgnumber:nil,
                    dir: nil, dirtype: nil, year: nil, amendments: nil,
-                   corrigendums: nil, **opts)
+                   corrigendums: nil, type: nil, **opts)
       super(**opts.merge(number: number, publisher: publisher, year: year,
-                         amendments: amendments, corrigendums: corrigendums))
+                         amendments: amendments, corrigendums: corrigendums, type: type))
 
       if (amendments || corrigendums) && year.nil?
         raise Errors::SupplementWithoutYearError, "Cannot apply supplement to document without edition year"
@@ -44,6 +44,10 @@ module Pubid::Iso
 
         if @stage.abbr == "IS" && iteration
           raise Errors::IsStageIterationError, "IS stage document cannot have iteration"
+        end
+
+        if @stage.abbr == "FDIS" && type == "PAS"
+          raise Errors::StageInvalidError, "PAS type cannot have FDIS stage"
         end
       end
       @iteration = iteration.to_i if iteration
