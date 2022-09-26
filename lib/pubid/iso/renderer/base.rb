@@ -13,8 +13,16 @@ module Pubid::Iso::Renderer
     end
 
     def render_identifier(params)
-      if @params[:type] && @params[:stage] && %w(DIS FDIS).include?(@params[:stage].abbr)
-        render_base(params, "#{render_short_stage(@params[:stage].abbr)}#{@params[:type]}")
+      if @params[:type] && @params[:stage]
+        if %w(DIS FDIS).include?(@params[:stage].abbr)
+          render_base(params, "#{render_short_stage(@params[:stage].abbr)}#{@params[:type]}")
+        else
+          if params[:copublisher] && !params[:copublisher].empty?
+            render_base(params, "%{type}%{stage}" % params)
+          else
+            render_base(params, "%{stage}%{type}" % params)
+          end
+        end
       else
         render_base(params, "%{type}%{stage}" % params)
       end +

@@ -21,7 +21,8 @@ module Pubid::Iso
       end
 
       context "when have stage" do
-        let(:params) { { stage: Pubid::Iso::Stage.new(abbr: :WD) } }
+        let(:params) { { stage: stage } }
+        let(:stage) { Pubid::Iso::Stage.new(abbr: :WD) }
 
         it "has harmonized stage assigned" do
           expect(subject.stage.harmonized_code)
@@ -34,6 +35,14 @@ module Pubid::Iso
 
         it "renders stage for URN" do
           expect(subject.urn).to eq("urn:iso:std:iso:#{number}:stage-20.20")
+        end
+
+        context "when have document type" do
+          let(:params) { { stage: stage, type: "TR" } }
+
+          it "renders stage first" do
+            expect(subject.to_s).to eq("ISO/WD TR #{number}")
+          end
         end
 
         context "when stage is a symbol" do
