@@ -93,6 +93,42 @@ module Pubid::Iso
         end
       end
 
+      context "when PAS type" do
+        let(:params) { { type: "PAS", stage: stage } }
+
+        context "with WD stage" do
+          let(:stage) { :WD }
+
+          it "renders correct identifier" do
+            expect(subject.to_s).to eq("ISO/WD PAS #{number}")
+          end
+        end
+
+        context "with CD stage" do
+          let(:stage) { :CD }
+
+          it "renders correct identifier" do
+            expect(subject.to_s).to eq("ISO/CD PAS #{number}")
+          end
+        end
+
+        context "with DIS stage" do
+          let(:stage) { :DIS }
+
+          it "renders correct identifier" do
+            expect(subject.to_s).to eq("ISO/DPAS #{number}")
+          end
+        end
+
+        context "with IS stage" do
+          let(:stage) { :IS }
+
+          it "renders correct identifier" do
+            expect(subject.to_s).to eq("ISO/PAS #{number}")
+          end
+        end
+      end
+
       context "when have urn_stage" do
         let(:params) { { stage: Stage.new(harmonized_code: HarmonizedStageCode.new("50", "00"), abbr: :PRF) } }
 

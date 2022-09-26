@@ -40,7 +40,7 @@ module Pubid::Iso::Renderer
     end
 
     def render_type(type, opts, params)
-      if params[:copublisher]
+      if params[:copublisher] || (params[:stage] && params[:stage].abbr != "IS")
         " #{type}"
       else
         "/#{type}"
@@ -48,7 +48,7 @@ module Pubid::Iso::Renderer
     end
 
     def render_stage(stage, opts, params)
-      return if stage.abbr == "PRF" and !opts[:with_prf]
+      return if (stage.abbr == "PRF" and !opts[:with_prf]) || stage.abbr == "IS"
 
       if params[:copublisher]
         " #{stage.abbr}"

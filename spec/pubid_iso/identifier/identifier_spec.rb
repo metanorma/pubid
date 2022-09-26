@@ -48,18 +48,11 @@ module Pubid::Iso
 
     context "FprISO 105-A03" do
       let(:original) { "FprISO 105-A03" }
-      let(:pubid) { "ISO 105-A03" }
-      let(:pubid_with_prf) { "ISO/PRF 105-A03" }
+      let(:pubid) { "ISO/PRF 105-A03" }
       let(:urn) { "urn:iso:std:iso:105:-A03:stage-60.00" }
 
       it_behaves_like "converts pubid to urn"
-      it_behaves_like "converts pubid to pubid"
-
-      context "when requested with_prf" do
-        subject { described_class.parse(original).to_s(with_prf: true) }
-
-        it { is_expected.to eq(pubid_with_prf) }
-      end
+      it_behaves_like "converts pubid to pubid with prf"
     end
 
     context "ISO/IEC/IEEE 26512" do
@@ -541,16 +534,36 @@ module Pubid::Iso
 
     context "ISO/PRF 6709:2022" do
       let(:original) { "ISO/PRF 6709:2022" }
-      let(:pubid) { "ISO 6709:2022" }
+      let(:pubid) { "ISO/PRF 6709:2022" }
       let(:pubid_with_prf) { original }
 
+      it_behaves_like "converts pubid to pubid with prf"
+    end
+
+    context "ISO/CD PAS 22399" do
+      let(:original) { "ISO/CD PAS 22399" }
+      let(:pubid) { "ISO/CD PAS 22399" }
+
       it_behaves_like "converts pubid to pubid"
+    end
 
-      context "when requested with_prf" do
-        subject { described_class.parse(original).to_s(with_prf: true) }
+    context "ISO/DPAS 5643:2021(E)" do
+      let(:original) { "ISO/DPAS 5643:2021(E)" }
+      let(:pubid) { "ISO/DPAS 5643:2021(en)" }
 
-        it { is_expected.to eq(pubid_with_prf) }
-      end
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/PRF PAS 5643" do
+      let(:pubid) { "ISO/PRF PAS 5643" }
+
+      it_behaves_like "converts pubid to pubid with prf"
+    end
+
+    context "ISO/SAE DPAS 22736:2021" do
+      let(:pubid) { "ISO/SAE DPAS 22736:2021" }
+
+      it_behaves_like "converts pubid to pubid"
     end
 
     context "when assigns amendment" do

@@ -28,3 +28,10 @@ shared_examples "converts pubid to russian pubid" do
     expect(subject.to_s(format: :ref_num_long, lang: :russian)).to eq(russian_pubid)
   end
 end
+
+shared_examples "converts pubid to pubid with prf" do
+  it "converts pubid to pubid with prf" do
+    expect(subject.to_s(format: :ref_num_long, with_prf: true)).to eq(pubid)
+  end
+end
+
