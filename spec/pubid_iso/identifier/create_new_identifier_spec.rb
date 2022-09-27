@@ -93,6 +93,26 @@ module Pubid::Iso
         end
       end
 
+      context "when TR type" do
+        let(:params) { { type: "TR", stage: stage } }
+
+        context "when DIS stage" do
+          let(:stage) { :DIS }
+
+          it "renders correct identifier" do
+            expect(subject.to_s).to eq("ISO/DTR #{number}")
+          end
+        end
+
+        context "when FDIS stage" do
+          let(:stage) { :FDIS }
+
+          it "renders correct identifier" do
+            expect(subject.to_s).to eq("ISO/FDTR #{number}")
+          end
+        end
+      end
+
       context "when PAS type" do
         let(:params) { { type: "PAS", stage: stage } }
 
