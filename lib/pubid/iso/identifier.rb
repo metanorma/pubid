@@ -22,6 +22,10 @@ module Pubid::Iso
     # @param scnumber [Integer] Subsommittee number, eg. "1", "2"
     # @param wgnumber [Integer] Working group number, eg. "1", "2"
     # @param dirtype [String] Directives document type, eg. "JTC"
+    # @raise [Errors::SupplementWithoutYearError] when trying to apply
+    #   supplement to the document without edition year
+    # @raise [Errors::IsStageIterationError] when trying to apply iteration
+    #   to document with IS stage
     # @see Supplement
     # @see Identifier
     # @see Pubid::Core::Identifier
@@ -95,6 +99,8 @@ module Pubid::Iso
       end
     end
 
+    # Render URN identifier
+    # @return [String] URN identifier
     def urn
       if (@amendments || @corrigendums) && !@edition
         raise Errors::NoEditionError, "Base document must have edition"
@@ -106,10 +112,16 @@ module Pubid::Iso
     #
     # @param lang [:french,:russian] use language specific renderer
     # @param with_date [Boolean] render identifier with date
-    # @param with_language_code [:iso,:single] use iso format or single language code for rendering
     # @param with_edition [Boolean] render identifier with edition
     # @param stage_format_long [Boolean] render with long or short stage format
     # @param format [:ref_num_short,:ref_num_long,:ref_dated,:ref_dated_long,:ref_undated,:ref_undated_long] create reference with specified format
+    # Format options are:
+    #   :ref_num_short -- instance reference number: 1 letter language code + short form (DAM) + dated
+    #   :ref_num_long -- instance reference number long: 2 letter language code + long form (DAmd) + dated
+    #   :ref_dated -- reference dated: no language code + short form (DAM) + dated
+    #   :ref_dated_long -- reference dated long: no language code + short form (DAM) + dated
+    #   :ref_undated -- reference undated: no language code + short form (DAM) + undated
+    #   :ref_undated_long -- reference undated long: 1 letter language code + long form (DAmd) + undated
     # @return [String] pubid identifier
     def to_s(lang: nil, with_date: true,
              with_edition: false, with_prf: false,
