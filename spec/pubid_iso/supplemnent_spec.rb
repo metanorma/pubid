@@ -65,7 +65,7 @@ RSpec.describe Pubid::Iso::Supplement do
         it { is_expected.to be_falsey }
       end
 
-      context "no stage in results" do
+      context "when the second stage is nil" do
         it { is_expected.to be_falsey }
       end
 

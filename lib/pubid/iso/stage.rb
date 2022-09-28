@@ -68,7 +68,7 @@ module Pubid::Iso
 
     # Compares one stage with another
     def ==(other)
-      other.harmonized_code == harmonized_code
+      other&.harmonized_code == harmonized_code
     end
   end
 end
