@@ -112,4 +112,34 @@ RSpec.describe Pubid::Iso::Stage do
       expect(subject.harmonized_code).to eq(harmonized_code)
     end
   end
+
+  describe "#==" do
+    subject do
+      first_stage == second_stage
+    end
+
+    context "when have the same harmonized_code" do
+      let(:first_stage) do
+        described_class.new(harmonized_code: "50.00")
+      end
+      let(:second_stage) do
+        described_class.new(harmonized_code: "50.00")
+      end
+
+      it { is_expected.to be_truthy }
+    end
+
+    context "when have the different harmonized_code" do
+      let(:first_stage) do
+        described_class.new(harmonized_code: "50.00")
+      end
+      let(:second_stage) do
+        described_class.new(harmonized_code: "20.00")
+      end
+
+      it { is_expected.to be_falsey }
+    end
+
+
+  end
 end

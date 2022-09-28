@@ -65,5 +65,10 @@ module Pubid::Iso
         Stage.new(abbr: stage)
       end
     end
+
+    # Compares one stage with another
+    def ==(other)
+      other.harmonized_code == harmonized_code
+    end
   end
 end

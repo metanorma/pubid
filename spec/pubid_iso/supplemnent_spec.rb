@@ -59,7 +59,7 @@ RSpec.describe Pubid::Iso::Supplement do
     context "when query with stage" do
       let(:first_supplement_stage) { Pubid::Iso::Stage.new(abbr: :CD) }
 
-      context "different stage in results" do
+      context "different stage" do
         let(:second_supplement_stage) { Pubid::Iso::Stage.new(abbr: :PWI) }
 
         it { is_expected.to be_falsey }
@@ -67,6 +67,12 @@ RSpec.describe Pubid::Iso::Supplement do
 
       context "no stage in results" do
         it { is_expected.to be_falsey }
+      end
+
+      context "the same stage" do
+        let(:second_supplement_stage) { Pubid::Iso::Stage.new(abbr: :CD) }
+
+        it { is_expected.to be_truthy }
       end
     end
 
