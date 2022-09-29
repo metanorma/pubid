@@ -298,11 +298,23 @@ module Pubid::Iso
         end
       end
 
-      context "when create IS stage identifier with iteration" do
-        let(:params) { { iteration: 1, stage: Stage.new(abbr: "IS") } }
+      context "when create identifier with iteration" do
+        let(:params) { { iteration: 1, stage: stage } }
 
-        it "raises the error" do
-          expect { subject }.to raise_exception(Errors::IsStageIterationError)
+        context "and IS stage" do
+          let(:stage) { Stage.new(abbr: "IS") }
+
+          it "raises the error" do
+            expect { subject }.to raise_exception(Errors::IsStageIterationError)
+          end
+        end
+
+        context "without stage" do
+          let(:stage) { nil }
+
+          it "raises the error" do
+            expect { subject }.to raise_exception(Errors::IterationWithoutStageError)
+          end
         end
       end
 

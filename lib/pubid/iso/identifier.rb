@@ -26,6 +26,8 @@ module Pubid::Iso
     #   supplement to the document without edition year or stage
     # @raise [Errors::IsStageIterationError] when trying to apply iteration
     #   to document with IS stage
+    # @raise [Errors::IterationWithoutStageError] when trying to applu iteration
+    #   to document without stage
     # @see Supplement
     # @see Identifier
     # @see Pubid::Core::Identifier
@@ -53,7 +55,10 @@ module Pubid::Iso
         if @stage.abbr == "FDIS" && type == "PAS"
           raise Errors::StageInvalidError, "PAS type cannot have FDIS stage"
         end
+      elsif iteration
+        raise Errors::IterationWithoutStageError, "Document without stage cannot have iteration"
       end
+
       @iteration = iteration.to_i if iteration
       @supplement = supplement if supplement
       @joint_document = joint_document if joint_document
@@ -115,6 +120,7 @@ module Pubid::Iso
     # @param with_edition [Boolean] render identifier with edition
     # @param stage_format_long [Boolean] render with long or short stage format
     # @param format [:ref_num_short,:ref_num_long,:ref_dated,:ref_dated_long,:ref_undated,:ref_undated_long] create reference with specified format
+    # @param with_prf [Boolean] include PRF stage in output
     # Format options are:
     #   :ref_num_short -- instance reference number: 1 letter language code + short form (DAM) + dated
     #   :ref_num_long -- instance reference number long: 2 letter language code + long form (DAmd) + dated

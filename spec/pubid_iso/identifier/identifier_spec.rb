@@ -106,9 +106,9 @@ module Pubid::Iso
       it_behaves_like "converts to pubid with edition"
     end
 
-    context "ISO 21143.2" do
-      let(:pubid) { "ISO 21143.2" }
-      let(:urn) { "urn:iso:std:iso:21143" }
+    context "ISO/DIS 21143.2" do
+      let(:pubid) { "ISO/DIS 21143.2" }
+      let(:urn) { "urn:iso:std:iso:21143:stage-40.00.v2" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"

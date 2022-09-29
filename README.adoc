@@ -64,6 +64,20 @@ pubid.to_s
 => "ISO 1234-1"
 ----
 
+==== Iteration
+
+[source,ruby]
+----
+pubid = Pubid::Iso::Identifier.new(publisher: "ISO", number: 123, part: 1, stage: :DIS, iteration: 1)
+pubid.to_s
+
+=> "ISO/DIS 1234-1.1"
+----
+To apply iteration to document stage should be provided as well.
+Without stage error will be raised.
+
+
+
 ==== Using format options
 [source,ruby]
 ----
