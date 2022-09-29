@@ -6,7 +6,8 @@ module Pubid::Iso
     class StageInvalidError < StandardError; end
     class IsStageIterationError < StandardError; end
     class WrongFormat < StandardError; end
-    class SupplementWithoutYearError < StandardError; end
+    # Error raised when supplement applied to base document without publication year or stage
+    class SupplementWithoutYearOrStageError < StandardError; end
     class NoEditionError < StandardError; end
   end
 end

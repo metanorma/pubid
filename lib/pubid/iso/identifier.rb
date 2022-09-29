@@ -22,8 +22,8 @@ module Pubid::Iso
     # @param scnumber [Integer] Subsommittee number, eg. "1", "2"
     # @param wgnumber [Integer] Working group number, eg. "1", "2"
     # @param dirtype [String] Directives document type, eg. "JTC"
-    # @raise [Errors::SupplementWithoutYearError] when trying to apply
-    #   supplement to the document without edition year
+    # @raise [Errors::SupplementWithoutYearOrStageError] when trying to apply
+    #   supplement to the document without edition year or stage
     # @raise [Errors::IsStageIterationError] when trying to apply iteration
     #   to document with IS stage
     # @see Supplement
@@ -40,8 +40,8 @@ module Pubid::Iso
       super(**opts.merge(number: number, publisher: publisher, year: year,
                          amendments: amendments, corrigendums: corrigendums, type: type))
 
-      if (amendments || corrigendums) && year.nil?
-        raise Errors::SupplementWithoutYearError, "Cannot apply supplement to document without edition year"
+      if (amendments || corrigendums) && (year.nil? && stage.nil?)
+        raise Errors::SupplementWithoutYearOrStageError, "Cannot apply supplement to document without edition year or stage"
       end
       if stage
         @stage = stage.is_a?(Stage) ? stage : Stage.parse(stage)

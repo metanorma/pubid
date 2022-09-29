@@ -173,6 +173,7 @@ module Pubid::Iso
         let(:params) { { year: year, amendments: [Pubid::Iso::Amendment.new(number: 1, **amendment_params)] } }
         let(:amendment_params) { { } }
         let(:year) { 1999 }
+        let(:stage) { nil }
 
         context "when provide an array of hashes for amendments parameter instead of Pubid::Iso::Amendment" do
           subject { described_class.parse(**{ number: number }.merge(params)) }
@@ -188,7 +189,15 @@ module Pubid::Iso
           let(:year) { nil }
 
           it "raises an error" do
-            expect { subject }.to raise_exception(Errors::SupplementWithoutYearError)
+            expect { subject }.to raise_exception(Errors::SupplementWithoutYearOrStageError)
+          end
+
+          context "but have a stage" do
+            let(:params) { { year: year, stage: :FDIS, amendments: [Pubid::Iso::Amendment.new(number: 1, **amendment_params)] } }
+
+            it "don't raise an error" do
+              expect { subject }.not_to raise_exception
+            end
           end
         end
 

@@ -566,6 +566,12 @@ module Pubid::Iso
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "ISO/IEC FDIS 23008-1/WD Amd 1" do
+      let(:pubid) { "ISO/IEC FDIS 23008-1/WD Amd 1" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "when assigns amendment" do
       let(:original) { "ISO/IEC 17025:2005" }
       let(:pubid) { "ISO/IEC 17025:2005/Amd 1:2010" }
