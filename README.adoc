@@ -76,7 +76,18 @@ pubid.to_s
 To apply iteration to document stage should be provided as well.
 Without stage error will be raised.
 
+==== Amendment and Corrigendum
+[source,ruby]
+----
+> pubid = Pubid::Iso::Identifier.new(publisher: "ISO", number: 123, part: 1, year: 2019, amendments: [{ number: "1", year: "2021", stage: :WD }])
+> pubid.to_s
+=> "ISO 1234-1:2019/WD Amd 1:2021"
 
+> pubid = Pubid::Iso::Identifier.new(publisher: "ISO", number: 123, part: 1, year: 2019, corrigendums: [{ number: "1", year: "2021", stage: :WD }])
+> pubid.to_s
+=> "ISO 1234-1:2019/WD Cor 1:2021"
+----
+See documentation on https://rubydoc.info/gems/pubid-iso/Pubid%2FIso%2FSupplement:initialize[PubId::Iso::Supplement#initialize] and https://rubydoc.info/gems/pubid-core/Pubid%2FCore%2FSupplement:initialize[Pubid::Core::Supplement#initialize] to see all available options.
 
 ==== Using format options
 [source,ruby]
@@ -121,7 +132,7 @@ Without stage error will be raised.
   part: "1",
   year: 2019,
   edition: 1,
-  amendment: {number: "1", year: "2021", stage: "DIS"}
+  amendments: {number: "1", year: "2021", stage: "DIS"}
 )
 > pubid.urn
 => "urn:iso:std:iso:8601:-1:ed-1:amd:2021:v1"
