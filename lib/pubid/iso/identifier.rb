@@ -179,5 +179,10 @@ module Pubid::Iso
           "|#{@joint_document}"
         end.to_s
     end
+
+    def typed_stage_abbrev
+      renderer = self.class.get_renderer_class.new(get_params).prerender(pdf_format: true)
+      renderer.prerendered_params[:type_stage]
+    end
   end
 end

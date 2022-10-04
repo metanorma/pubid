@@ -18,8 +18,16 @@ module Pubid::Iso::Renderer
              "ISP" => "ИСП",
     }.freeze
 
+    def render_type_stage(values, opts, params)
+      if values[:type] == "Guide"
+        super(values.slice(:stage), opts, params)
+      else
+        super
+      end
+    end
+
     def render_identifier(params)
-      if params[:type] == " Guide"
+      if params[:type] == "Guide"
         params[:type] = ""
         "Руководство #{super(params)}"
       else
@@ -43,11 +51,7 @@ module Pubid::Iso::Renderer
     end
 
     def render_stage(stage, _opts, params)
-      if params[:copublisher]
-        " #{STAGE[stage.abbr]}"
-      else
-        "/#{STAGE[stage.abbr]}"
-      end
+      STAGE[stage.abbr] unless stage.nil?
     end
 
     def render_corrigendums(corrigendums, _opts, _params)

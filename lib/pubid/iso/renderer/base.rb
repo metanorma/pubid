@@ -1,60 +1,81 @@
 module Pubid::Iso::Renderer
   class Base < Pubid::Core::Renderer::Base
+    attr_accessor :prerendered_params
+
+    # Prerender parameters
+    def prerender(with_edition: true, **args)
+      @prerendered_params =
+        if @params[:stage] || @params[:type]
+          prerender_params(@params.merge({ type_stage: @params.slice(:stage, :type) }),
+                           { with_edition: with_edition }.merge(args))
+        else
+          prerender_params(@params,
+                           { with_edition: with_edition }.merge(args))
+        end
+
+      self
+    end
+
     # Render identifier
     # @param with_edition [Boolean] include edition in output
     # @see Pubid::Core::Renderer::Base for another options
     def render(with_edition: true, **args)
-      params = prerender_params(@params,
-                                { with_edition: with_edition }.merge(args))
-      # render empty string when the key is not exist
-      params.default = ""
+      prerender(with_edition: with_edition, **args)
 
-      render_identifier(params)
+      # render empty string when the key is not exist
+      @prerendered_params.default = ""
+
+      render_identifier(@prerendered_params)
     end
 
     def render_identifier(params)
-      if @params[:type] && @params[:stage]
-        if %w(DIS FDIS).include?(@params[:stage].abbr)
-          render_base(params, "#{render_short_stage(@params[:stage].abbr)}#{@params[:type]}")
-        else
-          if params[:copublisher] && !params[:copublisher].empty?
-            render_base(params, "%{type}%{stage}" % params)
+      render_base(params, params[:type_stage]) +
+        ("%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}%{language}" % params)
+    end
+
+    def prefix(opts, params)
+      return "" if opts[:pdf_format]
+
+      params[:copublisher] ? " " : "/"
+    end
+
+    def render_type_stage(values, opts, params)
+      # prerender stage and type before
+      stage = render_stage(values[:stage], opts, params)
+      type = values[:type]
+      return unless type || stage
+
+      if type && stage
+        # don't add prefix for pdf format
+        prefix(opts, params) +
+          if %w(DIS FDIS).include?(stage)
+            "#{render_short_stage(stage)}#{type}"
+          elsif params[:copublisher] && !opts[:pdf_format]
+            # before type space if copublisher or stage, otherwise "/"
+            "#{type} #{stage}"
           else
-            render_base(params, "%{stage}%{type}" % params)
+            # space if copublisher or "/"
+            "#{stage} #{type}"
           end
-        end
       else
-        render_base(params, "%{type}%{stage}" % params)
-      end +
-        "%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}%{language}" % params
+        # when only type or stage
+        prefix(opts, params) + ("%s%s" % [type, stage])
+      end
     end
 
     def render_short_stage(stage)
-      (params[:copublisher] ? " " : "/") +
-        case stage
-        when "DIS"
-          "D"
-        when "FDIS"
-          "FD"
-        end
-    end
-
-    def render_type(type, opts, params)
-      if params[:copublisher] || (params[:stage] && params[:stage].abbr != "IS")
-        " #{type}"
-      else
-        "/#{type}"
+      case stage
+      when "DIS"
+        "D"
+      when "FDIS"
+        "FD"
       end
     end
 
-    def render_stage(stage, opts, params)
-      return if (stage.abbr == "PRF" and !opts[:with_prf]) || stage.abbr == "IS"
+    def render_stage(stage, opts, _params)
+      return if stage.nil? || (stage.abbr == "PRF" and !opts[:with_prf]) || stage.abbr == "IS"
 
-      if params[:copublisher]
-        " #{stage.abbr}"
-      else
-        "/#{stage.abbr}"
-      end
+      stage.abbr
     end
 
     def render_edition(edition, opts, _params)

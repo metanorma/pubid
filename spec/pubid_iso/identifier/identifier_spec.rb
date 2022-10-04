@@ -516,6 +516,10 @@ module Pubid::Iso
       let(:pubid) { "ISO/IEC/IEEE FDTR 17301-1-1:2016(en)" }
 
       it_behaves_like "converts pubid to pubid"
+
+      it "return typed_stage_abbrev" do
+        expect(subject.typed_stage_abbrev).to eq("FDTR")
+      end
     end
 
     context "ISO/IEC 14496-10:2014/FPDAM 1(en)" do
