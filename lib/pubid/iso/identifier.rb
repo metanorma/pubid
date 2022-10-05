@@ -3,7 +3,7 @@ module Pubid::Iso
     attr_accessor :stage,
                   :iteration, :joint_document,
                   :tctype, :sctype, :wgtype, :tcnumber, :scnumber, :wgnumber,
-                  :urn_stage, :dirtype,
+                  :dirtype,
                   # supplement for DIR type identifiers
                   :supplement
 
@@ -17,7 +17,6 @@ module Pubid::Iso
     # Pubid::Core::Identifier#initialize
     #
     # @param stage [Stage, Symbol, String] stage, e.g. "PWI", "NP", "50.00", Stage.new(abbr: :WD)
-    # @param urn_stage [Float] numeric stage for URN rendering
     # @param iteration [Integer] document iteration, eg. "1", "2", "3"
     # @param joint_document [Identifier] joint document
     # @param supplement [Supplement] supplement
@@ -40,8 +39,7 @@ module Pubid::Iso
     # @see Parser
     #
     def initialize(publisher: "ISO", number: nil, stage: nil, iteration: nil, supplement: nil,
-                   joint_document: nil, urn_stage: nil,
-                   tctype: nil, sctype: nil, wgtype: nil, tcnumber: nil,
+                   joint_document: nil, tctype: nil, sctype: nil, wgtype: nil, tcnumber: nil,
                    scnumber: nil, wgnumber:nil,
                    dir: nil, dirtype: nil, year: nil, amendments: nil,
                    corrigendums: nil, type: nil, **opts)
@@ -68,7 +66,6 @@ module Pubid::Iso
       @iteration = iteration.to_i if iteration
       @supplement = supplement if supplement
       @joint_document = joint_document if joint_document
-      @urn_stage = urn_stage if urn_stage
       @tctype = tctype if tctype
       @sctype = sctype.to_s if sctype
       @wgtype = wgtype.to_s if wgtype

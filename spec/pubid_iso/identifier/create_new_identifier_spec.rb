@@ -71,6 +71,18 @@ module Pubid::Iso
               .to eq(Pubid::Iso::HarmonizedStageCode.new("40", "60"))
           end
         end
+
+        context "when have harmonized code and abbr" do
+          let(:stage) { Stage.new(harmonized_code: "50.00", abbr: :PRF) }
+
+          it "renders separate stage for PubID" do
+            expect(subject.to_s(with_prf: true)).to eq("ISO/PRF #{number}")
+          end
+
+          it "renders separate numeric stage for URN" do
+            expect(subject.urn).to eq("urn:iso:std:iso:#{number}:stage-50.00")
+          end
+        end
       end
 
       context "when TS type" do
@@ -154,18 +166,6 @@ module Pubid::Iso
           it "raises an error" do
             expect { subject }.to raise_exception(Errors::StageInvalidError)
           end
-        end
-      end
-
-      context "when have urn_stage" do
-        let(:params) { { stage: Stage.new(harmonized_code: HarmonizedStageCode.new("50", "00"), abbr: :PRF) } }
-
-        it "renders separate stage for PubID" do
-          expect(subject.to_s(with_prf: true)).to eq("ISO/PRF #{number}")
-        end
-
-        it "renders separate numeric stage for URN" do
-          expect(subject.urn).to eq("urn:iso:std:iso:#{number}:stage-50.00")
         end
       end
 
