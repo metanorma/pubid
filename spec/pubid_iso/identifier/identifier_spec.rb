@@ -327,7 +327,7 @@ module Pubid::Iso
 
     context "ISO/IEC PDTR 20943-5" do
       let(:original) { "ISO/IEC PDTR 20943-5" }
-      let(:pubid) { "ISO/IEC TR CD 20943-5" }
+      let(:pubid) { "ISO/IEC CD TR 20943-5" }
       let(:urn) { "urn:iso:std:iso-iec:tr:20943:-5:stage-30.00" }
 
       it_behaves_like "converts pubid to urn"
@@ -336,7 +336,7 @@ module Pubid::Iso
 
     context "ISO/IEC PDTS 19583-24" do
       let(:original) { "ISO/IEC PDTS 19583-24" }
-      let(:pubid) { "ISO/IEC TS CD 19583-24" }
+      let(:pubid) { "ISO/IEC CD TS 19583-24" }
       let(:urn) { "urn:iso:std:iso-iec:ts:19583:-24:stage-30.00" }
 
       it_behaves_like "converts pubid to urn"
@@ -477,7 +477,7 @@ module Pubid::Iso
 
     context "ISO/IEC WD TS 25025" do
       let(:original) { "ISO/IEC WD TS 25025" }
-      let(:pubid) { "ISO/IEC TS WD 25025" }
+      let(:pubid) { "ISO/IEC WD TS 25025" }
       let(:urn) { "urn:iso:std:iso-iec:ts:25025:stage-20.20" }
 
       it_behaves_like "converts pubid to urn"

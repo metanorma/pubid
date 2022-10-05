@@ -16,44 +16,24 @@ module Pubid::Iso
           let(:type) { "TR" }
 
           context "when no copublisher" do
-            it { is_expected.to eq("/WD TR") }
-
-            context "when pdf format" do
-              let(:pdf_format) { true }
-              it { is_expected.to eq("WD TR") }
-            end
+            it { is_expected.to eq("WD TR") }
           end
 
           context "when have copublisher" do
             let(:copublisher) { "IEC" }
 
-            it { is_expected.to eq(" TR WD") }
-
-            context "when pdf format" do
-              let(:pdf_format) { true }
-              it { is_expected.to eq("WD TR") }
-            end
+            it { is_expected.to eq("WD TR") }
           end
         end
 
         context "when only type" do
           let(:type) { "TR" }
 
-          it { is_expected.to eq("/TR") }
+          it { is_expected.to eq("TR") }
 
           context "when have copublisher" do
             let(:copublisher) { "IEC" }
 
-            it { is_expected.to eq(" TR") }
-
-            context "when pdf format" do
-              let(:pdf_format) { true }
-              it { is_expected.to eq("TR") }
-            end
-          end
-
-          context "when pdf format" do
-            let(:pdf_format) { true }
             it { is_expected.to eq("TR") }
           end
         end
@@ -61,22 +41,12 @@ module Pubid::Iso
         context "when only stage" do
           let(:stage) { Stage.new(abbr: :WD) }
 
-          it { is_expected.to eq("/WD") }
-
-          context "when pdf format" do
-            let(:pdf_format) { true }
-            it { is_expected.to eq("WD") }
-          end
+          it { is_expected.to eq("WD") }
 
           context "when have copublisher" do
             let(:copublisher) { "IEC" }
 
-            it { is_expected.to eq(" WD") }
-
-            context "when pdf format" do
-              let(:pdf_format) { true }
-              it { is_expected.to eq("WD") }
-            end
+            it { is_expected.to eq("WD") }
           end
         end
 
@@ -86,22 +56,13 @@ module Pubid::Iso
           context "when type and stage" do
             let(:type) { "TR" }
 
-            it { is_expected.to eq("/DTR") }
-
-            context "when pdf format" do
-              let(:pdf_format) { true }
-              it { is_expected.to eq("DTR") }
-            end
+            it { is_expected.to eq("DTR") }
 
             context "when have copublisher" do
               let(:copublisher) { "IEC" }
 
-              it { is_expected.to eq(" DTR") }
+              it { is_expected.to eq("DTR") }
 
-              context "when pdf format" do
-                let(:pdf_format) { true }
-                it { is_expected.to eq("DTR") }
-              end
             end
           end
 
@@ -109,12 +70,7 @@ module Pubid::Iso
             context "when have copublisher" do
               let(:copublisher) { "IEC" }
 
-              it { is_expected.to eq(" DIS") }
-
-              context "when pdf format" do
-                let(:pdf_format) { true }
-                it { is_expected.to eq("DIS") }
-              end
+              it { is_expected.to eq("DIS") }
             end
           end
         end

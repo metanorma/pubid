@@ -181,7 +181,7 @@ module Pubid::Iso
     end
 
     def typed_stage_abbrev
-      renderer = self.class.get_renderer_class.new(get_params).prerender(pdf_format: true)
+      renderer = self.class.get_renderer_class.new(get_params).prerender
       renderer.prerendered_params[:type_stage]
     end
   end

@@ -29,14 +29,13 @@ module Pubid::Iso::Renderer
     end
 
     def render_identifier(params)
-      render_base(params, params[:type_stage]) +
+      type_stage = if params[:type_stage] && !params[:type_stage].empty?
+                     ((params[:copublisher] && !params[:copublisher].empty?) ? " " : "/") + params[:type_stage]
+                   else
+                     ""
+                   end
+      render_base(params, type_stage) +
         ("%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}%{language}" % params)
-    end
-
-    def prefix(opts, params)
-      return "" if opts[:pdf_format]
-
-      params[:copublisher] ? " " : "/"
     end
 
     def render_type_stage(values, opts, params)
@@ -47,19 +46,14 @@ module Pubid::Iso::Renderer
 
       if type && stage
         # don't add prefix for pdf format
-        prefix(opts, params) +
-          if %w(DIS FDIS).include?(stage)
-            "#{render_short_stage(stage)}#{type}"
-          elsif params[:copublisher] && !opts[:pdf_format]
-            # before type space if copublisher or stage, otherwise "/"
-            "#{type} #{stage}"
-          else
-            # space if copublisher or "/"
-            "#{stage} #{type}"
-          end
+        if %w(DIS FDIS).include?(stage)
+          "#{render_short_stage(stage)}#{type}"
+        else
+          "#{stage} #{type}"
+        end
       else
         # when only type or stage
-        prefix(opts, params) + ("%s%s" % [type, stage])
+        "#{type}#{stage}"
       end
     end
 
