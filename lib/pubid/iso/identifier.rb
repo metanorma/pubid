@@ -10,6 +10,7 @@ module Pubid::Iso
     TYPE_NAME = {
       TR: "Technical Report",
       TS: "Technical Specification",
+      PAS: "Publicly Available Specification",
     }.freeze
 
     # Creates new identifier from options provided, includes options from
