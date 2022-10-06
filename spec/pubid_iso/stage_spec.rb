@@ -147,7 +147,7 @@ RSpec.describe Pubid::Iso::Stage do
     context "when stage FDIS" do
       let(:abbrev) { :FDIS }
 
-      it { is_expected.to eq("Final Draft International Standard")}
+      it { is_expected.to eq("Final Draft International Standard") }
     end
   end
 
@@ -157,7 +157,7 @@ RSpec.describe Pubid::Iso::Stage do
     context "when stage FDIS" do
       let(:abbrev) { :FDIS }
 
-      it { is_expected.to eq("Final Draft")}
+      it { is_expected.to eq("Final Draft") }
     end
   end
 end

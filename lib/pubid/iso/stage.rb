@@ -93,10 +93,12 @@ module Pubid::Iso
       other&.harmonized_code == harmonized_code
     end
 
+    # Return stage name, eg. "Draft International Standard" for "DIS"
     def name
       STAGE_NAMES[abbr.to_sym]
     end
 
+    # Return short stage name, eg. "Draft" for "DIS"
     def short_name
       STAGE_NAMES_SHORT[abbr.to_sym]
     end

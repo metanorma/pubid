@@ -185,6 +185,7 @@ module Pubid::Iso
         end.to_s
     end
 
+    # Return typed stage abbreviation, eg. "FDTR", "DIS", "TR"
     def typed_stage_abbrev
       renderer = self.class.get_renderer_class.new(get_params).prerender
       renderer.prerendered_params[:type_stage]

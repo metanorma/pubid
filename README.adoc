@@ -138,6 +138,28 @@ See documentation on https://rubydoc.info/gems/pubid-iso/Pubid%2FIso%2FSupplemen
 => "urn:iso:std:iso:8601:-1:ed-1:amd:2021:v1"
 ----
 
+==== Typed stage abbreviation
+[source,ruby]
+----
+> pubid = Pubid::Iso::Identifier.parse("ISO/FDIS 26000:2010")
+> pubid.typed_stage_abbrev
+=> "FDIS"
+> pubid.typed_stage_name
+=> "Final Draft"
+
+> pubid = Pubid::Iso::Identifier.parse("ISO/FDTR 26000:2010")
+> pubid.typed_stage_abbrev
+=> "FDTR"
+> pubid.typed_stage_name
+=> "Final Draft Technical Report"
+
+> pubid = Pubid::Iso::Identifier.parse("ISO/WD TR 26000:2010")
+> pubid.typed_stage_abbrev
+=> "WD TR"
+> pubid.typed_stage_name
+=> "Working Draft Technical Report"
+----
+
 See documentation (https://www.rubydoc.info/gems/pubid-iso/Pubid/Iso/Identifier#initialize-instance_method[Pubid::Iso::Identifier] and https://www.rubydoc.info/gems/pubid-core/Pubid/Core/Identifier#initialize-instance_method[Pubid::Core::Identifier]) for all available attributes and options.
 
 == Elements of the PubID
