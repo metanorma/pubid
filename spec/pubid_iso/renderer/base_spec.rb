@@ -4,7 +4,7 @@ module Pubid::Iso
 
     describe "#prerender" do
       context "attribute type_stage" do
-        subject { described_class.new(params).prerender(pdf_format: pdf_format).prerendered_params[:type_stage] }
+        subject { described_class.new(params).prerender.prerendered_params[:type_stage] }
         let(:params) { { stage: stage, type: type, copublisher: copublisher } }
         let(:copublisher) { nil }
         let(:type) { nil }
