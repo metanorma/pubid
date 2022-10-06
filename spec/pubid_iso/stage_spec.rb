@@ -139,7 +139,25 @@ RSpec.describe Pubid::Iso::Stage do
 
       it { is_expected.to be_falsey }
     end
+  end
 
+  describe "#name" do
+    subject { described_class.new(abbr: abbrev).name }
 
+    context "when stage FDIS" do
+      let(:abbrev) { :FDIS }
+
+      it { is_expected.to eq("Final Draft International Standard")}
+    end
+  end
+
+  describe "#short_name" do
+    subject { described_class.new(abbr: abbrev).short_name }
+
+    context "when stage FDIS" do
+      let(:abbrev) { :FDIS }
+
+      it { is_expected.to eq("Final Draft")}
+    end
   end
 end

@@ -13,6 +13,28 @@ module Pubid::Iso
                IS: "60.60" }.freeze
 
 
+    STAGE_NAMES = {
+      FDIS: "Final Draft International Standard",
+      DIS: "Draft International Standard",
+      WD: "Working Draft",
+      PWI: "Preliminary Work Item",
+      NP: "New Proposal",
+      CD: "Committee Draft",
+      PRF: "Proof of a new International Standard",
+      IS: "International Standard",
+    }.freeze
+
+    STAGE_NAMES_SHORT = {
+      FDIS: "Final Draft",
+      DIS: "Draft",
+      WD: "Working Draft",
+      PWI: "Preliminary Work Item",
+      NP: "New Proposal",
+      CD: "Committee Draft",
+      PRF: "Proof of a new International Standard",
+      IS: "International Standard",
+    }.freeze
+
     # @param abbr [String, Symbol] abbreviation eg. :PWI, :WD
     # @param harmonized_code [String, Float, HarmonizedStageCode]
     def initialize(abbr: nil, harmonized_code: nil)
@@ -69,6 +91,14 @@ module Pubid::Iso
     # Compares one stage with another
     def ==(other)
       other&.harmonized_code == harmonized_code
+    end
+
+    def name
+      STAGE_NAMES[abbr.to_sym]
+    end
+
+    def short_name
+      STAGE_NAMES_SHORT[abbr.to_sym]
     end
   end
 end

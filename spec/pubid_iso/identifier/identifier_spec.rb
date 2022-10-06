@@ -520,6 +520,10 @@ module Pubid::Iso
       it "return typed_stage_abbrev" do
         expect(subject.typed_stage_abbrev).to eq("FDTR")
       end
+
+      it "return typed_stage_name" do
+        expect(subject.typed_stage_name).to eq("Final Draft Technical Report")
+      end
     end
 
     context "ISO/IEC 14496-10:2014/FPDAM 1(en)" do

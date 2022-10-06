@@ -7,6 +7,11 @@ module Pubid::Iso
                   # supplement for DIR type identifiers
                   :supplement
 
+    TYPE_NAME = {
+      TR: "Technical Report",
+      TS: "Technical Specification",
+    }.freeze
+
     # Creates new identifier from options provided, includes options from
     # Pubid::Core::Identifier#initialize
     #
@@ -183,6 +188,11 @@ module Pubid::Iso
     def typed_stage_abbrev
       renderer = self.class.get_renderer_class.new(get_params).prerender
       renderer.prerendered_params[:type_stage]
+    end
+
+    # Return typed stage name, eg. "Final Draft Technical Report" for "FDTR"
+    def typed_stage_name
+      "#{stage.short_name} #{TYPE_NAME[type.to_sym]}"
     end
   end
 end
