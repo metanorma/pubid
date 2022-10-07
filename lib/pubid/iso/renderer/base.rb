@@ -29,12 +29,27 @@ module Pubid::Iso::Renderer
     # @param with_edition [Boolean] include edition in output
     # @see Pubid::Core::Renderer::Base for another options
     def render(with_edition: true, **args)
-      prerender(with_edition: with_edition, **args)
+      case @params[:type]
+      when :amd
+        @params[:base].to_s +
+          # copy parameters from Identifier only supported by Amendment
+          Pubid::Iso::Amendment.new(
+            **@params.slice(:number, :year, :stage, :edition, :iteration)
+          ).render_pubid(args[:stage_format_long], args[:with_date])
+      when :cor
+        @params[:base].to_s +
+          # copy parameters from Identifier only supported by Corrigendum
+          Pubid::Iso::Corrigendum.new(
+            **@params.slice(:number, :year, :stage, :edition, :iteration)
+          ).render_pubid(args[:stage_format_long], args[:with_date])
+      else
+        prerender(with_edition: with_edition, **args)
 
-      # render empty string when the key is not exist
-      @prerendered_params.default = ""
+        # render empty string when the key is not exist
+        @prerendered_params.default = ""
 
-      render_identifier(@prerendered_params)
+        render_identifier(@prerendered_params)
+      end
     end
 
     def render_identifier(params)

@@ -186,20 +186,19 @@ module Pubid::Iso
         end
       end
 
-      context "when create document with amendment" do
-        let(:params) { { year: year, amendments: [Pubid::Iso::Amendment.new(number: 1, **amendment_params)] } }
-        let(:amendment_params) { { } }
+      context "when create amendment identifier" do
+        let(:base) { described_class.new(**{ number: number }.merge(params)) }
+
+        subject { described_class.new(type: :amd, number: 1, base: base, **amendment_params) }
+        let(:params) { { year: year } }
+
+        let(:amendment_params) { {} }
         let(:year) { 1999 }
         let(:stage) { nil }
 
-        context "when provide an array of hashes for amendments parameter instead of Pubid::Iso::Amendment" do
-          subject { described_class.parse(**{ number: number }.merge(params)) }
 
-          let(:params) { { year: year, amendments: [{ number: 1 }] } }
-
-          it "renders document with amendment year" do
-            expect(subject.to_s).to eq("ISO 123:1999/Amd 1")
-          end
+        it "renders amendment with base document" do
+          expect(subject.to_s).to eq("ISO 123:1999/Amd 1")
         end
 
         context "when document don't have year" do
@@ -210,7 +209,7 @@ module Pubid::Iso
           end
 
           context "but have a stage" do
-            let(:params) { { year: year, stage: :FDIS, amendments: [Pubid::Iso::Amendment.new(number: 1, **amendment_params)] } }
+            let(:params) { { year: year, stage: :FDIS } }
 
             it "don't raise an error" do
               expect { subject }.not_to raise_exception
@@ -249,20 +248,20 @@ module Pubid::Iso
           context "when DIS stage" do
             let(:stage) { Stage.new(abbr: :DIS) }
 
-            context "when stage is a symbol" do
-              let(:stage) { :DIS }
-
-              it "renders long stage and amendment" do
-                expect(subject.to_s).to eq("ISO #{number}:1999/DAmd 1")
-              end
-            end
-
             it "renders long stage and amendment" do
               expect(subject.to_s).to eq("ISO #{number}:1999/DAmd 1")
             end
 
             it "renders short stage and amendment" do
               expect(subject.to_s(format: :ref_num_short)).to eq("ISO #{number}:1999/DAM 1")
+            end
+
+            context "when stage is a symbol" do
+              let(:stage) { :DIS }
+
+              it "renders long stage and amendment" do
+                expect(subject.to_s).to eq("ISO #{number}:1999/DAmd 1")
+              end
             end
           end
 
@@ -288,8 +287,12 @@ module Pubid::Iso
         end
       end
 
-      context "when create document with corrigendum" do
-        let(:params) { { year: 1999, amendments: [Corrigendum.new(number: 1, **corrigendum_params)] } }
+      context "when create corrigendum identifier" do
+        let(:base) { described_class.new(**{ number: number }.merge(params)) }
+
+        subject { described_class.new(type: :cor, number: 1, base: base, **corrigendum_params) }
+
+        let(:params) { { year: 1999 } }
 
         context "when corrigendum with stage" do
           let(:corrigendum_params) { { stage: stage } }

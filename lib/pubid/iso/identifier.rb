@@ -28,6 +28,8 @@ module Pubid::Iso
     # @param scnumber [Integer] Subsommittee number, eg. "1", "2"
     # @param wgnumber [Integer] Working group number, eg. "1", "2"
     # @param dirtype [String] Directives document type, eg. "JTC"
+    # @param base [Identifier] base document for supplement's identifier
+    # @param type [nil, :tr, :ts, :amd, :cor, :guide, :dir, :tc] document's type, eg. :tr, :ts, :amd, :cor
     # @raise [Errors::SupplementWithoutYearOrStageError] when trying to apply
     #   supplement to the document without edition year or stage
     # @raise [Errors::IsStageIterationError] when trying to apply iteration
