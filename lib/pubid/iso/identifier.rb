@@ -5,12 +5,13 @@ module Pubid::Iso
                   :tctype, :sctype, :wgtype, :tcnumber, :scnumber, :wgnumber,
                   :dirtype,
                   # supplement for DIR type identifiers
-                  :supplement
+                  :supplement,
+                  :base
 
     TYPE_NAME = {
-      TR: "Technical Report",
-      TS: "Technical Specification",
-      PAS: "Publicly Available Specification",
+      tr: "Technical Report",
+      ts: "Technical Specification",
+      pas: "Publicly Available Specification",
     }.freeze
 
     # Creates new identifier from options provided, includes options from
@@ -42,12 +43,13 @@ module Pubid::Iso
                    joint_document: nil, tctype: nil, sctype: nil, wgtype: nil, tcnumber: nil,
                    scnumber: nil, wgnumber:nil,
                    dir: nil, dirtype: nil, year: nil, amendments: nil,
-                   corrigendums: nil, type: nil, **opts)
+                   corrigendums: nil, type: nil, base: nil, **opts)
       super(**opts.merge(number: number, publisher: publisher, year: year,
-                         amendments: amendments, corrigendums: corrigendums, type: type))
+                         amendments: amendments, corrigendums: corrigendums))
 
-      if (amendments || corrigendums) && (year.nil? && stage.nil?)
-        raise Errors::SupplementWithoutYearOrStageError, "Cannot apply supplement to document without edition year or stage"
+      if %i(amd cor).include?(type) && (base.year.nil? && base.stage.nil?)
+        raise Errors::SupplementWithoutYearOrStageError,
+              "Cannot apply supplement to document without base identifieredition year or stage"
       end
       if stage
         @stage = stage.is_a?(Stage) ? stage : Stage.parse(stage)
@@ -56,7 +58,7 @@ module Pubid::Iso
           raise Errors::IsStageIterationError, "IS stage document cannot have iteration"
         end
 
-        if @stage.abbr == "FDIS" && type == "PAS"
+        if @stage.abbr == "FDIS" && type == :pas
           raise Errors::StageInvalidError, "PAS type cannot have FDIS stage"
         end
       elsif iteration
@@ -74,6 +76,8 @@ module Pubid::Iso
       @wgnumber = wgnumber.to_s if wgnumber
       @dir = dir.to_s if dir
       @dirtype = dirtype.to_s if dirtype
+      @base = base if base
+      @type = type if type
     end
 
     def self.parse_from_title(title)
@@ -113,7 +117,7 @@ module Pubid::Iso
       if (@amendments || @corrigendums) && !@edition
         raise Errors::NoEditionError, "Base document must have edition"
       end
-      (@tctype && Renderer::UrnTc || @type == "DIR" && Renderer::UrnDir || Pubid::Iso::Renderer::Urn).new(get_params).render
+      (@tctype && Renderer::UrnTc || @type == :dir && Renderer::UrnDir || Pubid::Iso::Renderer::Urn).new(get_params).render
     end
 
     # Renders pubid identifier
@@ -171,14 +175,14 @@ module Pubid::Iso
       else
         if @tctype
           Renderer::Tc.new(get_params)
-        elsif @type == "DIR"
+        elsif @type == :dir
           Renderer::Dir.new(get_params)
         else
           self.class.get_renderer_class.new(get_params)
         end
       end.render(with_date: with_date, with_language_code: with_language_code, with_edition: with_edition,
                  stage_format_long: stage_format_long, with_prf: with_prf) +
-        if @joint_document && @type != "DIR"
+        if @joint_document && @type != :dir
           "|#{@joint_document}"
         end.to_s
     end

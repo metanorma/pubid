@@ -38,7 +38,7 @@ module Pubid::Iso
         end
 
         context "when have document type" do
-          let(:params) { { stage: stage, type: "TR" } }
+          let(:params) { { stage: stage, type: :tr } }
 
           it "renders stage first" do
             expect(subject.to_s).to eq("ISO/WD TR #{number}")
@@ -103,7 +103,7 @@ module Pubid::Iso
       end
 
       context "when TS type" do
-        let(:params) { { type: "TS", stage: stage } }
+        let(:params) { { type: :ts, stage: stage } }
 
         context "when DIS stage" do
           let(:stage) { :DIS }
@@ -123,7 +123,7 @@ module Pubid::Iso
       end
 
       context "when TR type" do
-        let(:params) { { type: "TR", stage: stage } }
+        let(:params) { { type: :tr, stage: stage } }
 
         context "when DIS stage" do
           let(:stage) { :DIS }
@@ -143,7 +143,7 @@ module Pubid::Iso
       end
 
       context "when PAS type" do
-        let(:params) { { type: "PAS", stage: stage } }
+        let(:params) { { type: :pas, stage: stage } }
 
         context "with WD stage" do
           let(:stage) { :WD }
@@ -336,14 +336,14 @@ module Pubid::Iso
       end
 
       context "when document have DIR type" do
-        let(:params) { { type: "DIR" } }
+        let(:params) { { type: :dir } }
 
         it "render DIR document" do
           expect(subject.to_s).to eq("ISO DIR #{number}")
         end
 
         context "when have language parameter" do
-          let(:params) { { type: "DIR", language: "en" } }
+          let(:params) { { type: :dir, language: "en" } }
 
           it "render DIR document with language" do
             expect(subject.to_s(format: :ref_num_long)).to eq("ISO DIR #{number}(en)")

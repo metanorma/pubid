@@ -44,17 +44,21 @@ module Pubid::Iso
 
     rule(type: simple(:type)) do
       russian_type = Renderer::Russian::TYPE.key(type.to_s)
-      { type: russian_type&.to_s ||
+      { type: russian_type&.downcase&.to_sym ||
         case type
         # XXX: can't put 2 alternative Russian translations to dictionary, temporary hack
-        when "GUIDE", "Руководства"
-          "Guide"
-        when "ТС"
-          "TS"
-        when "ТО"
-          "TR"
+        when "GUIDE", "Guide", "Руководства"
+          :guide
+        when "ТС", "TS"
+          :ts
+        when "ТО", "TR"
+          :tr
         when "Directives Part", "Directives, Part", "Directives,"
-          "DIR"
+          :dir
+        when "PAS"
+          :pas
+        when "DPAS"
+          :dpas
         else
           type
         end

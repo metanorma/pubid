@@ -2,6 +2,15 @@ module Pubid::Iso::Renderer
   class Base < Pubid::Core::Renderer::Base
     attr_accessor :prerendered_params
 
+    TYPE_VALUES = {
+      tr: "TR",
+      ts: "TS",
+      isp: "ISP",
+      guide: "Guide",
+      pas: "PAS",
+      dpas: "DPAS",
+    }.freeze
+
     # Prerender parameters
     def prerender(with_edition: true, **args)
       @prerendered_params =
@@ -41,7 +50,7 @@ module Pubid::Iso::Renderer
     def render_type_stage(values, opts, params)
       # prerender stage and type before
       stage = render_stage(values[:stage], opts, params)
-      type = values[:type]
+      type = values[:type] ? TYPE_VALUES[values[:type]] : nil
       return unless type || stage
 
       if type && stage
