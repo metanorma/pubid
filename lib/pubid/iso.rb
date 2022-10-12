@@ -11,6 +11,7 @@ end
 require "pubid-core"
 require_relative "iso/errors"
 require_relative "iso/stage"
+require_relative "iso/type"
 require_relative "iso/harmonized_stage_code"
 require_relative "iso/parser"
 require_relative "iso/transformer"

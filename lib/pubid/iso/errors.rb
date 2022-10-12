@@ -10,5 +10,7 @@ module Pubid::Iso
     # Error raised when supplement applied to base document without publication year or stage
     class SupplementWithoutYearOrStageError < StandardError; end
     class NoEditionError < StandardError; end
+    class WrongTypeError < StandardError; end
+    class ParseTypeError < StandardError; end
   end
 end

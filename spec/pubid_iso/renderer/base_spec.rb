@@ -13,7 +13,7 @@ module Pubid::Iso
 
         context "when type and stage" do
           let(:stage) { Stage.new(abbr: :WD) }
-          let(:type) { "TR" }
+          let(:type) { Type.new(:tr) }
 
           context "when no copublisher" do
             it { is_expected.to eq("WD TR") }

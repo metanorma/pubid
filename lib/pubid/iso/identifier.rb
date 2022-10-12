@@ -8,12 +8,6 @@ module Pubid::Iso
                   :supplement,
                   :base
 
-    TYPE_NAME = {
-      tr: "Technical Report",
-      ts: "Technical Specification",
-      pas: "Publicly Available Specification",
-    }.freeze
-
     # Creates new identifier from options provided, includes options from
     # Pubid::Core::Identifier#initialize
     #
@@ -29,7 +23,7 @@ module Pubid::Iso
     # @param wgnumber [Integer] Working group number, eg. "1", "2"
     # @param dirtype [String] Directives document type, eg. "JTC"
     # @param base [Identifier] base document for supplement's identifier
-    # @param type [nil, :tr, :ts, :amd, :cor, :guide, :dir, :tc] document's type, eg. :tr, :ts, :amd, :cor
+    # @param type [nil, :tr, :ts, :amd, :cor, :guide, :dir, :tc, Type] document's type, eg. :tr, :ts, :amd, :cor, Type.new(:tr)
     # @raise [Errors::SupplementWithoutYearOrStageError] when trying to apply
     #   supplement to the document without edition year or stage
     # @raise [Errors::IsStageIterationError] when trying to apply iteration
@@ -79,7 +73,7 @@ module Pubid::Iso
       @dir = dir.to_s if dir
       @dirtype = dirtype.to_s if dirtype
       @base = base if base
-      @type = type if type
+      @type = type.is_a?(Type) ? type : Type.new(type) unless type.nil?
     end
 
     def self.parse_from_title(title)
@@ -147,7 +141,7 @@ module Pubid::Iso
     # Render URN identifier
     # @return [String] URN identifier
     def urn
-      if %i(amd cor).include?(@type) && (@base.base.nil? && !@base.edition || (!@base.base.nil? && !@base.base.edition))
+      if %i(amd cor).include?(@type&.type) && (@base.base.nil? && !@base.edition || (!@base.base.nil? && !@base.base.edition))
         raise Errors::NoEditionError, "Base document must have edition"
       end
       (@tctype && Renderer::UrnTc || @type == :dir && Renderer::UrnDir || Pubid::Iso::Renderer::Urn).new(get_params).render
@@ -228,7 +222,7 @@ module Pubid::Iso
 
     # Return typed stage name, eg. "Final Draft Technical Report" for "FDTR"
     def typed_stage_name
-      "#{stage.short_name} #{TYPE_NAME[type.to_sym]}"
+      "#{stage.short_name} #{type.to_s(:long)}"
     end
   end
 end

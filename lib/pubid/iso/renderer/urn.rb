@@ -37,7 +37,7 @@ module Pubid::Iso::Renderer
       else
         self.class.new(supplement_params[:base].get_params).render_without_year
       end +
-        case supplement_params[:type]
+        case supplement_params[:type].type
         when :amd
           render_amendments(
             [Pubid::Iso::Amendment.new(**supplement_params.slice(:number, :year, :stage, :edition, :iteration))],
@@ -58,7 +58,7 @@ module Pubid::Iso::Renderer
     # @param with_edition [Boolean] include edition in output
     # @see Pubid::Core::Renderer::Base for another options
     def render(with_edition: true, **args)
-      if %i(amd cor).include? @params[:type]
+      if %i(amd cor).include? @params[:type]&.type
         render_supplement(@params, with_edition: with_edition, **args) +
           (@params[:base].language ? render_language(@params[:base].language, nil, nil).to_s : "")
       else
@@ -78,6 +78,10 @@ module Pubid::Iso::Renderer
 
     def render_stage(stage, _opts, params)
       ":stage-#{stage.harmonized_code}"
+    end
+
+    def render_type(type, _, _)
+      ":#{type.to_s.downcase}"
     end
   end
 end

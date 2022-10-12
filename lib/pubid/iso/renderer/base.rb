@@ -44,7 +44,7 @@ module Pubid::Iso::Renderer
           **args.merge({ with_date: true }),
         )
       end +
-        case supplement_params[:type]
+        case supplement_params[:type].type
         when :amd
           render_amendments(
             [Pubid::Iso::Amendment.new(**supplement_params.slice(:number, :year, :stage, :edition, :iteration))],
@@ -66,7 +66,7 @@ module Pubid::Iso::Renderer
     # @param with_edition [Boolean] include edition in output
     # @see Pubid::Core::Renderer::Base for another options
     def render(with_edition: true, **args)
-      if %i(amd cor).include? @params[:type]
+      if %i(amd cor).include? @params[:type]&.type
         render_supplement(@params, with_edition: with_edition, **args)
       else
         prerender(with_edition: with_edition, **args)
@@ -91,7 +91,7 @@ module Pubid::Iso::Renderer
     def render_type_stage(values, opts, params)
       # prerender stage and type before
       stage = render_stage(values[:stage], opts, params)
-      type = values[:type] ? TYPE_VALUES[values[:type]] : nil
+      type = values[:type]&.to_s
       return unless type || stage
 
       if type && stage
