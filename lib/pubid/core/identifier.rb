@@ -74,33 +74,37 @@ module Pubid::Core
       def parse(code_or_params)
         params = code_or_params.is_a?(String) ?
                    get_parser_class.new.parse(update_old_code(code_or_params)) : code_or_params
-        transform(params)
+        transform(params.is_a?(Array) ? array_to_hash(params) : params)
       rescue Parslet::ParseFailed => failure
         raise Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
       end
 
+      # Converts array of hashes into single hash
+      # array like [{ publisher: "ISO" }, { number: 1 }] to hash { publisher: "ISO", number: 1 }
+      # @param params [Array<Hash>] input array of hashes, eg. [{ a: 1 }, { b: 2 }]
+      def array_to_hash(params)
+        params.inject({}) do |r, i|
+          result = r
+          i.each do |k, v|
+            result = result.merge(k => r.key?(k) ? [v, r[k]].flatten : v)
+          end
+          result
+        end
+      end
+
       # Transform parameters hash or array or hashes to identifier
       def transform(params)
-        # Parslet returns an array when match any copublisher
-        # otherwise it's hash
-        if params.is_a?(Array)
-          new(
-            **(
-              params.inject({}) do |r, i|
-                result = r
-                i.map {|k, v| get_transformer_class.new.apply(k => v).to_a.first }.each do |k, v|
-                  result = result.merge(k => r.key?(k) ? [v, r[k]].flatten : v)
-                end
-                result
-              end
-            )
-          )
-        else
-          new(**params.map do |k, v|
-            get_transformer_class.new.apply(k => v).to_a.first
-          end.to_h)
-        end
-        # merge values repeating keys into array (for copublishers)
+        # run transform through each element,
+        # like running transformer.apply(number: 1) and transformer.apply(year: 1999)
+        # instead of running transformer on whole hash, like running transformer.apply({ number: 1, year: 1999 })
+        # where rule for number or year only will be not applied
+        # transformation only applied to rules matching the whole hash
+
+        identifier_params = params.map do |k, v|
+                              get_transformer_class.new.apply(k => v).to_a.first
+                            end.to_h
+
+        new(**identifier_params)
       end
 
       def get_amendment_class

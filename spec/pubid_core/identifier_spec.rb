@@ -103,6 +103,21 @@ RSpec.describe Pubid::Core::Identifier do
     it { is_expected.to eq("ISO 1234") }
   end
 
+  describe "#array_to_hash" do
+    subject { described_class.array_to_hash(input) }
+    let(:input) { [{ a: 1 }, { b: 2 }] }
+
+    it "merges all hashes" do
+      is_expected.to eq({ a: 1, b: 2 })
+    end
+
+    context "when same key repeating" do
+      let(:input) { [{ a: 1 }, { a: 2 }] }
+
+      it { is_expected.to eq({ a: [2, 1] }) }
+    end
+  end
+
   describe "#transform" do
     subject { described_class.transform(parsed_data) }
 
