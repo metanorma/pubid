@@ -92,6 +92,37 @@ module Pubid::Iso
     end
 
     class << self
+      def transform(params)
+        identifier_params = params.map do |k, v|
+          get_transformer_class.new.apply(k => v).to_a.first
+        end.to_h
+
+        supplement = nil
+
+        if identifier_params[:amendments]
+          identifier_params[:amendments].first.tap do |amendment|
+            supplement = new(type: :amd, number: amendment.number, year: amendment.year,
+                     stage: amendment.stage, edition: amendment.edition,
+                     iteration: amendment.iteration,
+                     base: new(**identifier_params.except(:corrigendums, :amendments)))
+          end
+        end
+
+
+        if identifier_params[:corrigendums]
+          corrigendum = identifier_params[:corrigendums].first
+          return new(type: :cor, number: corrigendum.number, year: corrigendum.year,
+                     stage: corrigendum.stage, edition: corrigendum.edition,
+                     iteration: corrigendum.iteration,
+                     base: supplement ? supplement : new(**identifier_params.except(:amendments, :corrigendums)))
+        end
+
+
+        return supplement if supplement
+
+        new(**identifier_params)
+      end
+
       def get_amendment_class
         Pubid::Iso::Amendment
       end
@@ -116,7 +147,7 @@ module Pubid::Iso
     # Render URN identifier
     # @return [String] URN identifier
     def urn
-      if (@amendments || @corrigendums) && !@edition
+      if %i(amd cor).include?(@type) && (@base.base.nil? && !@base.edition || (!@base.base.nil? && !@base.base.edition))
         raise Errors::NoEditionError, "Base document must have edition"
       end
       (@tctype && Renderer::UrnTc || @type == :dir && Renderer::UrnDir || Pubid::Iso::Renderer::Urn).new(get_params).render

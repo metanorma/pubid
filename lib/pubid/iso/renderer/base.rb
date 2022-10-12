@@ -25,30 +25,56 @@ module Pubid::Iso::Renderer
       self
     end
 
+    def render_without_language(with_edition: true, **args)
+      prerender(with_edition: with_edition, **args)
+
+      # render empty string when the key is not exist
+      @prerendered_params.default = ""
+
+      render_identifier(@prerendered_params)
+    end
+
+    # Renders amendment and corrigendum when applied through identifier type
+    def render_supplement(supplement_params, **args)
+      if supplement_params[:base].type == :amd
+        render_supplement(supplement_params[:base].get_params, **args)
+      else
+        self.class.new(supplement_params[:base].get_params).render_without_language(
+          # always render year for identifiers with supplement
+          **args.merge({ with_date: true }),
+        )
+      end +
+        case supplement_params[:type]
+        when :amd
+          render_amendments(
+            [Pubid::Iso::Amendment.new(**supplement_params.slice(:number, :year, :stage, :edition, :iteration))],
+            args,
+            nil,
+          )
+        when :cor
+          render_corrigendums(
+            [Pubid::Iso::Corrigendum.new(**supplement_params.slice(:number, :year, :stage, :edition, :iteration))],
+            args,
+            nil,
+          )
+          # copy parameters from Identifier only supported by Corrigendum
+        end +
+          (supplement_params[:base].language ? render_language(supplement_params[:base].language, args, nil) : "")
+    end
+
     # Render identifier
     # @param with_edition [Boolean] include edition in output
     # @see Pubid::Core::Renderer::Base for another options
     def render(with_edition: true, **args)
-      case @params[:type]
-      when :amd
-        @params[:base].to_s +
-          # copy parameters from Identifier only supported by Amendment
-          Pubid::Iso::Amendment.new(
-            **@params.slice(:number, :year, :stage, :edition, :iteration)
-          ).render_pubid(args[:stage_format_long], args[:with_date])
-      when :cor
-        @params[:base].to_s +
-          # copy parameters from Identifier only supported by Corrigendum
-          Pubid::Iso::Corrigendum.new(
-            **@params.slice(:number, :year, :stage, :edition, :iteration)
-          ).render_pubid(args[:stage_format_long], args[:with_date])
+      if %i(amd cor).include? @params[:type]
+        render_supplement(@params, with_edition: with_edition, **args)
       else
         prerender(with_edition: with_edition, **args)
 
         # render empty string when the key is not exist
         @prerendered_params.default = ""
 
-        render_identifier(@prerendered_params)
+        render_identifier(@prerendered_params) + @prerendered_params[:language].to_s
       end
     end
 
@@ -59,7 +85,7 @@ module Pubid::Iso::Renderer
                      ""
                    end
       render_base(params, type_stage) +
-        ("%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}%{language}" % params)
+        ("%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}" % params)
     end
 
     def render_type_stage(values, opts, params)

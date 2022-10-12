@@ -188,6 +188,10 @@ module Pubid::Iso
         expect { subject.urn }.to raise_exception(Errors::NoEditionError)
       end
 
+      it "shoud have type :amd" do
+        expect(subject.type).to eq(:amd)
+      end
+
       it_behaves_like "converts pubid to pubid"
     end
 
@@ -225,6 +229,18 @@ module Pubid::Iso
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
+
+      it "should have type :cor" do
+        expect(subject.type).to eq(:cor)
+      end
+
+      it "should have amendment as base identifier" do
+        expect(subject.base.type).to eq(:amd)
+      end
+
+      it "should have base document for amendment" do
+        expect(subject.base.base).to be_a(Identifier)
+      end
     end
 
     context "ISO/IEC 14496-30:2018/FDAmd 1" do
@@ -372,7 +388,7 @@ module Pubid::Iso
       it_behaves_like "converts pubid to pubid"
 
       it "returns part without dash" do
-        expect(subject.part).to eq("4")
+        expect(subject.base.part).to eq("4")
       end
     end
 
@@ -381,7 +397,7 @@ module Pubid::Iso
       let(:pubid) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }
       let(:pubid_without_date) { "ISO/IEC 17025:2005/Cor 1(fr)" }
       let(:pubid_single_letter_language) { "ISO/IEC 17025:2005/Cor 1:2006(F)" }
-      let(:pubid_with_edition) { "ISO/IEC 17025:2005/Cor 1:2006 ED1(fr)" }
+      let(:pubid_with_edition) { "ISO/IEC 17025:2005 ED1/Cor 1:2006(fr)" }
       let(:french_pubid) { "ISO/CEI 17025:2005/Cor.1:2006(fr)" }
       let(:urn) { "urn:iso:std:iso-iec:17025:ed-1:cor:2006:v1:fr" }
 

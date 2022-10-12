@@ -3,13 +3,14 @@ module Pubid::Iso
     attr_accessor :stage, :publisher, :edition, :iteration
 
     # @param stage [Stage, Symbol, String] stage, e.g. "PWI", "NP", "50.00", Stage.new(abbr: :WD)
-    # @param publisher [String] publisher, e.g. "ISO", "IEC"
+    # @param publisher [String] publisher, e.g. "ISO", "IEC" (only for DIR documents)
     # @param edition [Integer] edition, e.g. 1, 2, 3
     # @param iteration [Integer] iteration, e.g. 1, 2, 3
     # @see Pubid::Core::Supplement for other options
     def initialize(stage: nil, publisher: nil, edition: nil, iteration: nil, **args)
       super(**args)
       @stage = stage.is_a?(Stage) ? stage : Stage.parse(stage) if stage
+      # for DIR identifiers only
       @publisher = publisher.to_s
       @edition = edition&.to_i
       @iteration = iteration&.to_i

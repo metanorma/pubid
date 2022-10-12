@@ -9,7 +9,7 @@ module Pubid::Iso
       let(:urn) { "urn:iso:doc:iso:dir:1:2022" }
 
       it "has DIR type" do
-        expect(subject.type).to eq("DIR")
+        expect(subject.type).to eq(:dir)
       end
 
       it_behaves_like "converts pubid to urn"
