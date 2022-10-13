@@ -98,7 +98,7 @@ module Pubid::Iso
             supplement = new(type: :amd, number: amendment.number, year: amendment.year,
                      stage: amendment.stage, edition: amendment.edition,
                      iteration: amendment.iteration,
-                     base: new(**identifier_params.except(:corrigendums, :amendments)))
+                     base: new(**identifier_params.dup.tap { |h| h.delete(:amendments); h.delete(:corrigendums) }))
           end
         end
 
@@ -108,7 +108,8 @@ module Pubid::Iso
           return new(type: :cor, number: corrigendum.number, year: corrigendum.year,
                      stage: corrigendum.stage, edition: corrigendum.edition,
                      iteration: corrigendum.iteration,
-                     base: supplement ? supplement : new(**identifier_params.except(:amendments, :corrigendums)))
+                     base: supplement ? supplement :
+                             new(**identifier_params.dup.tap { |h| h.delete(:amendments); h.delete(:corrigendums) }))
         end
 
 
