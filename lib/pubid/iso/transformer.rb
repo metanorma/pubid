@@ -59,6 +59,8 @@ module Pubid::Iso
                           :pas
                         when "DPAS"
                           :dpas
+                        when "DIR"
+                          :dir
                         else
                           type
                         end) }

@@ -83,5 +83,9 @@ module Pubid::Iso::Renderer
     def render_type(type, _, _)
       ":#{type.to_s.downcase}"
     end
+
+    def render_year(year, _opts, _params)
+      ":#{year}"
+    end
   end
 end
