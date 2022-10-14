@@ -13,6 +13,22 @@ module Pubid::Core::Renderer
       @params = params
     end
 
+    # Prerender parameters and store in @prerendered_params
+    # @param opts [Hash] options for render method, eg. { with_language_code: :single, with_date: true }
+    # @return [Renderer::Base] self
+    def prerender(**opts)
+      @prerendered_params = prerender_params(@params, opts)
+      @prerendered_params.default = ""
+      self
+    end
+
+    def render_base_identifier(**args)
+      prerender(**args)
+
+      render_identifier(@prerendered_params)
+    end
+
+
     def prerender_params(params, opts)
       params.map do |key, value|
         next unless value
@@ -24,16 +40,44 @@ module Pubid::Core::Renderer
       end.compact.to_h
     end
 
+    # Renders amendment and corrigendum when applied through identifier type
+    def render_supplement(supplement_params, **args)
+      if supplement_params[:base].type == :amd
+        # render inner amendment (cor -> amd -> base)
+        render_supplement(supplement_params[:base].get_params, **args)
+      else
+        self.class.new(supplement_params[:base].get_params).render_base_identifier(
+          # always render year for identifiers with supplement
+          **args.merge({ with_date: true }),
+        )
+      end +
+        case supplement_params[:type].type
+        when :amd
+          render_amendments(
+            [Pubid::Iso::Amendment.new(**supplement_params.slice(:number, :year, :stage, :edition, :iteration))],
+            args,
+            nil,
+          )
+        when :cor
+          render_corrigendums(
+            [Pubid::Iso::Corrigendum.new(**supplement_params.slice(:number, :year, :stage, :edition, :iteration))],
+            args,
+            nil,
+          )
+          # copy parameters from Identifier only supported by Corrigendum
+        end +
+        (supplement_params[:base].language ? render_language(supplement_params[:base].language, args, nil) : "")
+    end
+
     # Render identifier
     # @param with_date [Boolean] include year in output
     # @param with_language_code [:iso,:single] render document language as 2-letter ISO 639-1 language code or single code
-    def render(with_date: true, with_language_code: :iso)
-      params = prerender_params(@params,
-                                { with_date: with_date, with_language_code: with_language_code })
-      # render empty string when the key is not exist
-      params.default = ""
-
-      render_identifier(params)
+    def render(with_date: true, with_language_code: :iso, **args)
+      if %i(amd cor).include? @params[:type]&.type
+        render_supplement(@params, **args.merge({ with_date: with_date, with_language_code: with_language_code}))
+      else
+        render_base_identifier(**args.merge({ with_date: with_date, with_language_code: with_language_code})) + @prerendered_params[:language].to_s
+      end
     end
 
     def render_base(params, prefix = "")
