@@ -1,7 +1,6 @@
 shared_examples "converts pubid to urn" do
   it "converts pubid to urn" do
-    expect(subject.urn.to_s).to eq(urn)
-    expect(subject.urn.to_s).to eq(urn)
+    expect(subject.urn).to eq(urn)
   end
 end
 
