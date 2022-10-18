@@ -12,5 +12,6 @@ module Pubid::Iso
     class NoEditionError < StandardError; end
     class WrongTypeError < StandardError; end
     class ParseTypeError < StandardError; end
+    class TypeStageInvalidError < StandardError; end
   end
 end
