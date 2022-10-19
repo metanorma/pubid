@@ -57,9 +57,9 @@ module Pubid::Iso
                       30.20 30.60 30.92 40.00 40.20 40.60 40.92 40.93 50.00 50.20 50.60
                       50.92].freeze
 
-    CANCELED_STAGES = %w[00.98 10.98 20.98 30.98 40.98 50.98 90.99 95.99].freeze
+    CANCELED_STAGES = %w[00.98 10.98 20.98 30.98 40.98 50.98 95.99].freeze
 
-    PUBLISHED_STAGES = %w[60.00 60.60 90.20 90.60 90.92 90.93 95.20 95.60 95.92].freeze
+    PUBLISHED_STAGES = %w[60.00 60.60 90.20 90.60 90.92 90.93 90.99 95.20 95.60 95.92].freeze
 
     STAGES_NAMES = {
       preliminary: "00",
