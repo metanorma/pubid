@@ -1,7 +1,8 @@
 module Pubid::Iso
   class HarmonizedStageCode
     include Comparable
-    attr_accessor :stage, :substage
+    # attr_accessor :stage, :substage
+    attr_accessor :stages
 
     DESCRIPTIONS = {
       "00.00" => "Proposal for new project received",
@@ -50,7 +51,15 @@ module Pubid::Iso
       "95.60" => "Close of voting",
       "95.92" => "Decision not to withdraw International Standard",
       "95.99" => "Withdrawal of International Standard"
-    }
+    }.freeze
+
+    DRAFT_STAGES = %w[00.00 00.20 00.60 10.00 10.20 10.60 10.92 20.00 20.20 20.60 30.00
+                      30.20 30.60 30.92 40.00 40.20 40.60 40.92 40.93 50.00 50.20 50.60
+                      50.92].freeze
+
+    CANCELED_STAGES = %w[00.98 10.98 20.98 30.98 40.98 50.98 90.99 95.99].freeze
+
+    PUBLISHED_STAGES = %w[60.00 60.60 90.20 90.60 90.92 90.93 95.20 95.60 95.92].freeze
 
     STAGES_NAMES = {
       preliminary: "00",
@@ -74,32 +83,63 @@ module Pubid::Iso
       proceed: "99",
     }.freeze
 
-    def initialize(stage, substage = "00")
-      # when stage is stage name
-      if STAGES_NAMES.key?(stage)
-        @stage = STAGES_NAMES[stage]
-        @substage = SUBSTAGES_NAMES[substage]
-      else
-        # stage is number
-        @stage, @substage = stage, substage
-        validate_stage(stage, substage)
+    # @param stage_or_code [String,Array<String>] stage number or whole harmonized code with substage
+    #   or list or stages for fuzzy stages eg. "10", 10, "20.20", ["10.20", "20.20"]
+    # @param substage [Integer, String] eg. "00", 0
+    def initialize(stage_or_code, substage = "00")
+      @stages = if stage_or_code.is_a?(Array)
+                  stage_or_code
+                elsif stage_or_code.is_a?(String) && DESCRIPTIONS.key?(stage_or_code)
+                  [stage_or_code]
+                # when stage is stage name
+                elsif STAGES_NAMES.key?(stage_or_code)
+                  ["#{STAGES_NAMES[stage_or_code]}.#{SUBSTAGES_NAMES[substage]}"]
+                else
+                  # stage is number
+                  ["#{stage_or_code}.#{substage}"]
+                end
+      validate_stages
+    end
+
+    def validate_stages
+      @stages.each do |stage|
+        # raise an error when stage is wrong
+        raise Errors::HarmonizedStageCodeInvalidError unless DESCRIPTIONS.key?(stage)
       end
     end
 
-    def validate_stage(stage, substage)
-      # raise an error if stage is not number
-      raise Errors::HarmonizedStageCodeInvalidError if Integer(stage).nil?
-
-      # raise an error when substage wrong
-      raise Errors::HarmonizedStageCodeInvalidError unless DESCRIPTIONS.key?(to_s)
-    end
-
     def to_s
-      "#{stage}.#{substage}"
+      if fuzzy?
+        return "draft" if @stages.all? { |s| DRAFT_STAGES.include?(s) }
+
+        return "canceled" if @stages.all? { |s| CANCELED_STAGES.include?(s) }
+
+        return "published" if @stages.all? { |s| PUBLISHED_STAGES.include?(s) }
+
+        raise Errors::HarmonizedStageRenderingError, "cannot render fuzzy stages"
+      else
+        @stages.first
+      end
     end
 
     def ==(other)
-      stage == other.stage && substage == other.substage
+      stages.intersection(other.stages) == other.stages
+    end
+
+    def fuzzy?
+      @stages.length > 1
+    end
+
+    def stage
+      raise Errors::HarmonizedStageRenderingError, "cannot render stage for fuzzy stages" if fuzzy?
+
+      @stages.first.split(".").first
+    end
+
+    def substage
+      raise Errors::HarmonizedStageRenderingError, "cannot render substage for fuzzy stages" if fuzzy?
+
+      @stages.first.split(".").last
     end
 
     def description
