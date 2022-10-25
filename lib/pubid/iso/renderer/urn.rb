@@ -23,13 +23,16 @@ module Pubid::Iso::Renderer
     end
 
     def render_identifier(params)
-      render_base(params) + "%{stage}"\
+      render_base(params) + "%{typed_stage}"\
       "%{corrigendum_stage}%{iteration}%{edition}%{amendments}%{corrigendums}" % params
     end
 
-    def render_stage(stage, _opts, params)
-      ":stage-#{stage.harmonized_code}"
+    def render_typed_stage(typed_stage, _opts, _params)
+      ":stage-#{typed_stage.stage.harmonized_code}" if typed_stage.stage
     end
+    # def render_stage(stage, _opts, params)
+    #   ":stage-#{stage.harmonized_code}"
+    # end
 
     def render_type(type, _, _)
       ":#{type.to_s.downcase}"

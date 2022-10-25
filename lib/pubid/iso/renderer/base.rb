@@ -17,24 +17,59 @@ module Pubid::Iso::Renderer
       super
     end
 
+    def render_supplement(supplement_params, **args)
+      if supplement_params[:base].type == :amd
+        # render inner amendment (cor -> amd -> base)
+        render_supplement(supplement_params[:base].get_params, **args)
+      else
+        self.class.new(supplement_params[:base].get_params).render_base_identifier(
+          # always render year for identifiers with supplement
+          **args.merge({ with_date: true }),
+          )
+      end +
+        case supplement_params[:typed_stage].type.type
+        when :amd
+          render_amendments(
+            [Pubid::Iso::Amendment.new(**supplement_params.slice(:number, :year, :typed_stage, :edition, :iteration))],
+            args,
+            nil,
+            )
+        when :cor
+          render_corrigendums(
+            [Pubid::Iso::Corrigendum.new(**supplement_params.slice(:number, :year, :typed_stage, :edition, :iteration))],
+            args,
+            nil,
+            )
+          # copy parameters from Identifier only supported by Corrigendum
+        end +
+        (supplement_params[:base].language ? render_language(supplement_params[:base].language, args, nil) : "")
+    end
+
     # Render identifier
     # @param with_edition [Boolean] include edition in output
     # @see Pubid::Core::Renderer::Base for another options
-    def render(with_edition: true, **args)
-      super(**args.merge({ with_edition: with_edition }))
+    def render(with_edition: true, with_language_code: :iso, with_date: true, **args)
+      # super(**args.merge({ with_edition: with_edition }))
+      if %i(amd cor).include? @params[:typed_stage]&.type&.type
+        render_supplement(@params, **args.merge({ with_date: with_date, with_language_code: with_language_code}))
+      else
+        render_base_identifier(**args.merge({ with_date: with_date, with_language_code: with_language_code})) + @prerendered_params[:language].to_s
+      end
+
     end
 
     def render_identifier(params)
-      type_stage = if params[:type_stage] && !params[:type_stage].empty?
-                     ((params[:copublisher] && !params[:copublisher].empty?) ? " " : "/") + params[:type_stage]
-                   else
-                     ""
-                   end
-      render_base(params, type_stage) +
+      typed_stage = if params[:typed_stage] && params[:typed_stage] != ""
+                      ((params[:copublisher] && !params[:copublisher].empty?) ? " " : "/") + params[:typed_stage].to_s
+                    else
+                      ""
+                    end
+      render_base(params, typed_stage) +
         ("%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}" % params)
     end
 
     def render_type_stage(values, opts, params)
+
       # prerender stage and type before
       stage = render_stage(values[:stage], opts, params)
       type = values[:type]&.to_s

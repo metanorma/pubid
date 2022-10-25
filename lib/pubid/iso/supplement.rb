@@ -1,31 +1,32 @@
 module Pubid::Iso
   class Supplement < Pubid::Core::Supplement
-    attr_accessor :stage, :publisher, :edition, :iteration
+    attr_accessor :typed_stage, :publisher, :edition, :iteration
 
     # @param stage [Stage, Symbol, String] stage, e.g. "PWI", "NP", "50.00", Stage.new(abbr: :WD)
     # @param publisher [String] publisher, e.g. "ISO", "IEC" (only for DIR documents)
     # @param edition [Integer] edition, e.g. 1, 2, 3
     # @param iteration [Integer] iteration, e.g. 1, 2, 3
     # @see Pubid::Core::Supplement for other options
-    def initialize(stage: nil, publisher: nil, edition: nil, iteration: nil, **args)
+    def initialize(typed_stage: nil, publisher: nil, edition: nil, iteration: nil, **args)
       super(**args)
-      @stage = stage.is_a?(Stage) ? stage : Stage.parse(stage) if stage
+      @typed_stage = TypedStage.parse(typed_stage) if typed_stage
       # for DIR identifiers only
       @publisher = publisher.to_s
       @edition = edition&.to_i
       @iteration = iteration&.to_i
 
-      if @iteration && @stage.nil?
+      if @iteration && @typed_stage.nil?
         raise Errors::PublishedIterationError.new("cannot assign iteration to published supplement")
       end
     end
 
     def render_pubid_stage
-      ((@stage && @stage.abbr != "IS" && @stage.abbr) || "")
+      # @typed_stage.stage.abbr != "IS" &&
+      ((@typed_stage && @typed_stage.to_s) || "")
     end
 
     def render_urn_stage
-      ((@stage && ":stage-#{@stage.harmonized_code}") || "")
+      ((@typed_stage && ":stage-#{@typed_stage.stage.harmonized_code}") || "")
     end
 
     def <=>(other)

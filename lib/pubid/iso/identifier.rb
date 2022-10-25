@@ -6,12 +6,13 @@ module Pubid::Iso
                   :dirtype,
                   # supplement for DIR type identifiers
                   :supplement,
-                  :base
+                  :base,
+                  :typed_stage
 
     # Creates new identifier from options provided, includes options from
     # Pubid::Core::Identifier#initialize
     #
-    # @param stage [Stage, Symbol, String] stage, e.g. "PWI", "NP", "50.00", Stage.new(abbr: :WD)
+    # @param stage [Stage, TypedStage, Symbol, String] stage or typed stage, e.g. "PWI", "NP", "50.00", Stage.new(abbr: :WD), "DTR"
     # @param iteration [Integer] document iteration, eg. "1", "2", "3"
     # @param joint_document [Identifier] joint document
     # @param supplement [Supplement] supplement
@@ -47,16 +48,36 @@ module Pubid::Iso
         raise Errors::SupplementWithoutYearOrStageError,
               "Cannot apply supplement to document without base identifieredition year or stage"
       end
-      if stage
-        @stage = stage.is_a?(Stage) ? stage : Stage.parse(stage)
+      # if stage
+      #   @typed_stage = typed_stage.is_a?(TypedStage) ? typed_stage : TypedStage.new(abbr: typed_stage)
+      # end
+      if stage || type
+        @typed_stage = if type
+                         TypedStage.new(type: type.is_a?(Type) ? type : Type.new(type))
+                       else
+                         TypedStage.new
+                       end
 
-        if @stage.abbr == "IS" && iteration
+        if @typed_stage.type == :is && iteration
           raise Errors::IsStageIterationError, "IS stage document cannot have iteration"
         end
 
-        if @stage.abbr == "FDIS" && type == :pas
-          raise Errors::StageInvalidError, "PAS type cannot have FDIS stage"
+        if stage
+          provided_type = @typed_stage.type
+
+          @typed_stage.parse_stage(stage)
+          if !provided_type.nil? && @typed_stage.type != provided_type
+            raise Errors::StageInvalidError,
+                  "cannot assign typed stage for document with different type (#{provided_type} vs #{@typed_stage.type})"
+          end
+
         end
+
+        # @stage = stage.is_a?(Stage) ? stage : Stage.parse(stage)
+
+        # if @typed_stage.typed_stage == "FDIS" && type == :pas
+        #   raise Errors::StageInvalidError, "PAS type cannot have FDIS stage"
+        # end
       elsif iteration
         raise Errors::IterationWithoutStageError, "Document without stage cannot have iteration"
       end
@@ -73,7 +94,7 @@ module Pubid::Iso
       @dir = dir.to_s if dir
       @dirtype = dirtype.to_s if dirtype
       @base = base if base
-      @type = type.is_a?(Type) ? type : Type.new(type) unless type.nil?
+      #@type = type.is_a?(Type) ? type : Type.new(type) unless type.nil?
     end
 
     def self.parse_from_title(title)
@@ -203,16 +224,20 @@ module Pubid::Iso
       else
         if @tctype
           Renderer::Tc.new(get_params)
-        elsif @type == :dir
+        elsif @typed_stage&.type == :dir
           Renderer::Dir.new(get_params)
         else
           self.class.get_renderer_class.new(get_params)
         end
       end.render(with_date: with_date, with_language_code: with_language_code, with_edition: with_edition,
                  stage_format_long: stage_format_long, with_prf: with_prf) +
-        if @joint_document && @type != :dir
+        if @joint_document && @typed_stage&.type != :dir
           "|#{@joint_document}"
         end.to_s
+    end
+
+    def stage
+      typed_stage&.stage
     end
 
     # Return typed stage abbreviation, eg. "FDTR", "DIS", "TR"

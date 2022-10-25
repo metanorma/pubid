@@ -133,6 +133,8 @@ module Pubid::Iso
     def stage
       raise Errors::HarmonizedStageRenderingError, "cannot render stage for fuzzy stages" if fuzzy?
 
+      return nil if @stages.empty?
+
       @stages.first.split(".").first
     end
 

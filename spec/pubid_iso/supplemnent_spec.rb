@@ -6,7 +6,7 @@ RSpec.describe Pubid::Iso::Supplement do
       end
 
       let(:supplement_year) { 2000 }
-      let(:supplement_stage) { Pubid::Iso::Stage.new(abbr: :CD) }
+      let(:supplement_stage) { Pubid::Iso::TypedStage.new(stage: :CD) }
 
       let(:pubid_number) { "1:2000" }
       let(:urn_stage) { ":stage-30.00" }

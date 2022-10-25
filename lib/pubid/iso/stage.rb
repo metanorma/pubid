@@ -7,21 +7,15 @@ module Pubid::Iso
                AWI: %w[20.00 10.99],
                WD: %w[20.20 20.60 20.98 20.99],
                CD: "30.00",
-               DIS: "40.00",
-               FDIS: "50.00",
-               PRF: "60.00",
-               IS: "60.60" }.freeze
+               PRF: "60.00"}.freeze
 
 
     STAGE_NAMES = {
-      FDIS: "Final Draft International Standard",
-      DIS: "Draft International Standard",
       WD: "Working Draft",
       PWI: "Preliminary Work Item",
       NP: "New Proposal",
       CD: "Committee Draft",
       PRF: "Proof of a new International Standard",
-      IS: "International Standard",
     }.freeze
 
     STAGE_NAMES_SHORT = {
@@ -46,7 +40,9 @@ module Pubid::Iso
                            else
                              HarmonizedStageCode.new(*harmonized_code.to_s.split("."))
                            end
-        @abbr ||= lookup_abbr(@harmonized_code.to_s) || lookup_abbr("#{@harmonized_code.stage}.00")
+        unless @harmonized_code.fuzzy?
+          @abbr ||= lookup_abbr(@harmonized_code.to_s) || lookup_abbr("#{@harmonized_code.stage}.00")
+        end
       end
 
       if abbr
@@ -85,6 +81,14 @@ module Pubid::Iso
         raise Errors::StageInvalidError unless stage.is_a?(Symbol) || stage.is_a?(String)
 
         Stage.new(abbr: stage)
+      end
+    end
+
+    def self.has_stage?(stage)
+      if stage.is_a?(Stage)
+        STAGES.key?(stage.abbr.to_sym)
+      else
+        STAGES.key?(stage.to_sym) || /\A[\d.]+\z/.match?(stage)
       end
     end
 

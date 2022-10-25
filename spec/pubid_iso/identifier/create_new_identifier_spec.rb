@@ -87,7 +87,7 @@ module Pubid::Iso
           end
 
           context "at stage FDIS" do
-            let(:stage) { Stage.new(abbr: :FDIS) }
+            let(:stage) { :fdis }
 
             it "renders separate stage for PubID" do
               expect(subject.to_s).to eq("ISO/FDIS #{number}")
@@ -103,18 +103,18 @@ module Pubid::Iso
       end
 
       context "when TS type" do
-        let(:params) { { type: :ts, stage: stage } }
+        let(:params) { { stage: stage } }
 
-        context "when DIS stage" do
-          let(:stage) { :DIS }
+        context "when DTS typed stage" do
+          let(:stage) { "DTS" }
 
           it "renders correct identifier" do
             expect(subject.to_s).to eq("ISO/DTS #{number}")
           end
         end
 
-        context "when FDIS stage" do
-          let(:stage) { :FDIS }
+        context "when FDTS typed stage" do
+          let(:stage) { "FDTS" }
 
           it "renders correct identifier" do
             expect(subject.to_s).to eq("ISO/FDTS #{number}")
@@ -123,18 +123,18 @@ module Pubid::Iso
       end
 
       context "when TR type" do
-        let(:params) { { type: :tr, stage: stage } }
+        let(:params) { { stage: stage } }
 
-        context "when DIS stage" do
-          let(:stage) { :DIS }
+        context "when DTR typed stage" do
+          let(:stage) { "DTR" }
 
           it "renders correct identifier" do
             expect(subject.to_s).to eq("ISO/DTR #{number}")
           end
         end
 
-        context "when FDIS stage" do
-          let(:stage) { :FDIS }
+        context "when FDTR typed stage" do
+          let(:stage) { "FDTR" }
 
           it "renders correct identifier" do
             expect(subject.to_s).to eq("ISO/FDTR #{number}")
@@ -161,28 +161,43 @@ module Pubid::Iso
           end
         end
 
-        context "with DIS stage" do
-          let(:stage) { :DIS }
+        context "with DPAS typed stage" do
+          let(:params) { { stage: stage } }
+          let(:stage) { "DPAS" }
 
           it "renders correct identifier" do
             expect(subject.to_s).to eq("ISO/DPAS #{number}")
           end
         end
 
-        context "with IS stage" do
-          let(:stage) { :IS }
-
-          it "renders correct identifier" do
-            expect(subject.to_s).to eq("ISO/PAS #{number}")
-          end
-        end
-
-        context "with FDIS stage" do
-          let(:stage) { :FDIS }
+        context "with FDIS typed stage" do
+          let(:stage) { :fdis }
 
           it "raises an error" do
             expect { subject }.to raise_exception(Errors::StageInvalidError)
           end
+        end
+      end
+
+      context "when have typed stage" do
+        let(:params) { { stage: typed_stage } }
+        let(:typed_stage) { "DTR" }
+
+        it "assigns typed stage" do
+          expect(subject.typed_stage).to be_a(TypedStage)
+        end
+
+        it "renders correct identifier" do
+          expect(subject.to_s).to eq("ISO/DTR #{number}")
+        end
+
+        it "has related harmonized stage codes assigned" do
+          expect(subject.typed_stage.stage.harmonized_code.stages)
+            .to eq(%w[40.00 40.20 40.60 40.92 40.93 50.00 50.20 50.60 50.92])
+        end
+
+        it "renders document with typed stage" do
+          expect(subject.to_s).to eq("ISO/DTR 123")
         end
       end
 
@@ -209,7 +224,7 @@ module Pubid::Iso
           end
 
           context "but have a stage" do
-            let(:params) { { year: year, stage: :FDIS } }
+            let(:params) { { year: year, stage: :fdis } }
 
             it "don't raise an error" do
               expect { subject }.not_to raise_exception
@@ -237,16 +252,8 @@ module Pubid::Iso
           let(:amendment_params) { { stage: stage } }
           let(:stage) { Stage.new(abbr: :DIS) }
 
-          context "when IS stage" do
-            let(:stage) { Stage.new(abbr: "IS") }
-
-            it "should not render IS stage" do
-              expect(subject.to_s).to eq("ISO 123:1999/Amd 1")
-            end
-          end
-
-          context "when DIS stage" do
-            let(:stage) { Stage.new(abbr: :DIS) }
+          context "when DAmd typed stage" do
+            let(:stage) { "DAmd" }
 
             it "renders long stage and amendment" do
               expect(subject.to_s).to eq("ISO #{number}:1999/DAmd 1")
@@ -257,7 +264,7 @@ module Pubid::Iso
             end
 
             context "when stage is a symbol" do
-              let(:stage) { :DIS }
+              let(:stage) { :damd }
 
               it "renders long stage and amendment" do
                 expect(subject.to_s).to eq("ISO #{number}:1999/DAmd 1")
@@ -297,16 +304,8 @@ module Pubid::Iso
         context "when corrigendum with stage" do
           let(:corrigendum_params) { { stage: stage } }
 
-          context "with IS stage" do
-            let(:stage) { Stage.new(abbr: "IS") }
-
-            it "should not render IS stage" do
-              expect(subject.to_s).to eq("ISO 123:1999/Cor 1")
-            end
-          end
-
-          context "with DIS stage" do
-            let(:stage) { Stage.new(abbr: :DIS) }
+          context "with DCor stage" do
+            let(:stage) { :dcor }
             it "renders long stage and corrigendum" do
               expect(subject.to_s).to eq("ISO #{number}:1999/DCor 1")
             end
@@ -319,18 +318,18 @@ module Pubid::Iso
       end
 
       context "when create identifier with iteration" do
-        let(:params) { { iteration: 1, stage: stage } }
+        let(:params) { { iteration: 1, type: type } }
 
-        context "and IS stage" do
-          let(:stage) { Stage.new(abbr: "IS") }
+        context "and IS type" do
+          let(:type) { :is }
 
           it "raises the error" do
             expect { subject }.to raise_exception(Errors::IsStageIterationError)
           end
         end
 
-        context "without stage" do
-          let(:stage) { nil }
+        context "without type" do
+          let(:type) { nil }
 
           it "raises the error" do
             expect { subject }.to raise_exception(Errors::IterationWithoutStageError)
@@ -366,7 +365,7 @@ module Pubid::Iso
         subject do
           described_class.new(number: number, year: 2019, language: "en",
                               amendments: [Pubid::Iso::Amendment.new(number: 1, year: "2021",
-                                                                     stage: Stage.new(abbr: :DIS))]).to_s(format: format)
+                                                                     typed_stage: :damd)]).to_s(format: format)
         end
         let(:number) { 123 }
 

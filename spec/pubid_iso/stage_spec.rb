@@ -160,4 +160,20 @@ RSpec.describe Pubid::Iso::Stage do
       it { is_expected.to eq("Final Draft") }
     end
   end
+
+  describe "#has_stage?" do
+    subject { described_class.has_stage?(stage) }
+
+    context "when existing stage" do
+      let(:stage) { "CD" }
+
+      it { is_expected.to be_truthy }
+    end
+
+    context "when not existing stage" do
+      let(:stage) { "ABC" }
+
+      it { is_expected.to be_falsey }
+    end
+  end
 end
