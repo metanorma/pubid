@@ -604,6 +604,14 @@ module Pubid::Iso
       it_behaves_like "converts pubid to urn"
     end
 
+    context "ISO/TS 19115-3:2016" do
+      let(:pubid) { "ISO/TS 19115-3:2016" }
+      let(:urn) { "urn:iso:std:iso:ts:19115:-3" }
+
+      it_behaves_like "converts pubid to pubid"
+      it_behaves_like "converts pubid to urn"
+    end
+
     context "when assigns amendment" do
       let(:original) { "ISO/IEC 17025:2005" }
       let(:pubid) { "ISO/IEC 17025:2005/Amd 1:2010" }
