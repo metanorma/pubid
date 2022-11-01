@@ -123,7 +123,7 @@ module Pubid::Iso
     end
 
     def ==(other)
-      stages.intersection(other.stages) == other.stages
+      (stages & other.stages) == other.stages
     end
 
     def fuzzy?
