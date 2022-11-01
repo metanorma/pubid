@@ -110,9 +110,7 @@ module Pubid::Iso
 
     def to_s
       if fuzzy?
-        return "draft" if @stages.all? { |s| DRAFT_STAGES.include?(s) }
-
-        return "canceled" if @stages.all? { |s| CANCELED_STAGES.include?(s) }
+        return "draft" if @stages.all? { |s| DRAFT_STAGES.include?(s) || CANCELED_STAGES.include?(s) }
 
         return "published" if @stages.all? { |s| PUBLISHED_STAGES.include?(s) }
 

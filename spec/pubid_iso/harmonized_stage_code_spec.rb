@@ -74,8 +74,8 @@ module Pubid::Iso
         context "when include cancelled stages" do
           let(:stage) { %w[20.00 20.20 20.60 20.98] }
 
-          it "raises an error when try to convert to single stage code" do
-            expect { subject.to_s }.to raise_exception(Errors::HarmonizedStageRenderingError)
+          it "returns draft when try to convert to single stage code" do
+            expect(subject.to_s).to eq("draft")
           end
         end
       end
@@ -83,8 +83,8 @@ module Pubid::Iso
       context "several canceled stages" do
         let(:stage) { %w[00.98 10.98 20.98] }
 
-        it "returns canceled instead of numbers" do
-          expect(subject.to_s).to eq("canceled")
+        it "returns draft instead of numbers" do
+          expect(subject.to_s).to eq("draft")
         end
       end
 
