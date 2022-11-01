@@ -42,31 +42,36 @@ module Pubid::Core::Renderer
 
     # Renders amendment and corrigendum when applied through identifier type
     def render_supplement(supplement_params, **args)
-      if supplement_params[:base].type == :amd
-        # render inner amendment (cor -> amd -> base)
-        render_supplement(supplement_params[:base].get_params, **args)
+      base = if supplement_params[:base].type == :amd
+               # render inner amendment (cor -> amd -> base)
+               render_supplement(supplement_params[:base].get_params, **args)
+             else
+               self.class.new(supplement_params[:base].get_params).render_base_identifier(
+                 # always render year for identifiers with supplement
+                 **args.merge({ with_date: true }),
+               )
+             end
+      supplement = case supplement_params[:typed_stage].type.type
+                   when :amd
+                     render_amendments(
+                       [Pubid::Iso::Amendment.new(**supplement_params.slice(:number, :year, :typed_stage, :edition, :iteration))],
+                       args,
+                       nil,
+                     )
+                   when :cor
+                     render_corrigendums(
+                       [Pubid::Iso::Corrigendum.new(**supplement_params.slice(:number, :year, :typed_stage, :edition, :iteration))],
+                       args,
+                       nil,
+                     )
+                     # copy parameters from Identifier only supported by Corrigendum
+                   end
+
+      if supplement_params[:base].language
+        base + supplement + render_language(supplement_params[:base].language, args, nil)
       else
-        self.class.new(supplement_params[:base].get_params).render_base_identifier(
-          # always render year for identifiers with supplement
-          **args.merge({ with_date: true }),
-        )
-      end +
-        case supplement_params[:type].type
-        when :amd
-          render_amendments(
-            [Pubid::Iso::Amendment.new(**supplement_params.slice(:number, :year, :stage, :edition, :iteration))],
-            args,
-            nil,
-          )
-        when :cor
-          render_corrigendums(
-            [Pubid::Iso::Corrigendum.new(**supplement_params.slice(:number, :year, :stage, :edition, :iteration))],
-            args,
-            nil,
-          )
-          # copy parameters from Identifier only supported by Corrigendum
-        end +
-        (supplement_params[:base].language ? render_language(supplement_params[:base].language, args, nil) : "")
+        base + supplement
+      end
     end
 
     # Render identifier
