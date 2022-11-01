@@ -19,6 +19,8 @@ module Pubid::Iso::Renderer
     # @param with_edition [Boolean] include edition in output
     # @see Pubid::Core::Renderer::Base for another options
     def render(with_edition: true, **args)
+      # copy type from typed stage
+      @params[:type] = @params[:typed_stage].type if @params[:typed_stage] && @params[:typed_stage].type
       super(**args.merge({ with_edition: with_edition }))
     end
 
@@ -34,8 +36,12 @@ module Pubid::Iso::Renderer
     #   ":stage-#{stage.harmonized_code}"
     # end
 
+    def render_iteration(iteration, _opts, params)
+      ".v#{iteration}" if params[:typed_stage]&.stage
+    end
+
     def render_type(type, _, _)
-      ":#{type.to_s.downcase}"
+      ":#{type.to_s.downcase}" unless type == :is
     end
 
     def render_year(year, _opts, _params)

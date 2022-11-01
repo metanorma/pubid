@@ -34,7 +34,7 @@ module Pubid::Iso
         end
 
         it "renders stage for URN" do
-          expect(subject.urn).to eq("urn:iso:std:iso:#{number}:stage-20.20")
+          expect(subject.urn).to eq("urn:iso:std:iso:#{number}:stage-draft")
         end
 
         context "when have document type" do
@@ -94,7 +94,7 @@ module Pubid::Iso
             end
 
             it "renders separate numeric stage for URN" do
-              expect(subject.urn).to eq("urn:iso:std:iso:#{number}:stage-50.00")
+              expect(subject.urn).to eq("urn:iso:std:iso:#{number}:stage-draft")
             end
           end
 

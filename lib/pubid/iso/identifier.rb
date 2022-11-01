@@ -7,7 +7,8 @@ module Pubid::Iso
                   # supplement for DIR type identifiers
                   :supplement,
                   :base,
-                  :typed_stage
+                  :typed_stage,
+                  :supplements
 
     # Creates new identifier from options provided, includes options from
     # Pubid::Core::Identifier#initialize
@@ -40,18 +41,30 @@ module Pubid::Iso
                    joint_document: nil, tctype: nil, sctype: nil, wgtype: nil, tcnumber: nil,
                    scnumber: nil, wgnumber:nil,
                    dir: nil, dirtype: nil, year: nil, amendments: nil,
-                   corrigendums: nil, type: nil, base: nil, **opts)
+                   corrigendums: nil, type: nil, base: nil, supplements: nil, **opts)
       super(**opts.merge(number: number, publisher: publisher, year: year,
                          amendments: amendments, corrigendums: corrigendums))
+
+      if supplements
+        @supplements = supplements.map do |supplement|
+          if supplement.is_a?(Hash)
+            self.class.get_transformer_class.new.apply(:supplements => [supplement])[:supplements].first
+          else
+            supplement
+          end
+        end
+      end
 
       if %i(amd cor).include?(type) && (base.year.nil? && base.stage.nil?)
         raise Errors::SupplementWithoutYearOrStageError,
               "Cannot apply supplement to document without base identifieredition year or stage"
       end
-      # if stage
-      #   @typed_stage = typed_stage.is_a?(TypedStage) ? typed_stage : TypedStage.new(abbr: typed_stage)
-      # end
-      if stage || type
+
+      if stage.is_a?(TypedStage)
+        @typed_stage = stage
+        # add type to typed stage when missing (case for amendment with stage, eg. "CD Amd")
+        @typed_stage.type = Type.new(type) if @typed_stage.type.nil? && type
+      elsif stage || type
         @typed_stage = if type
                          TypedStage.new(type: type.is_a?(Type) ? type : Type.new(type))
                        else
@@ -65,19 +78,12 @@ module Pubid::Iso
         if stage
           provided_type = @typed_stage.type
 
-          @typed_stage.parse_stage(stage)
+          @typed_stage.parse_stage(stage.is_a?(Parslet::Slice) ? stage.to_s : stage)
           if !provided_type.nil? && @typed_stage.type != provided_type
             raise Errors::StageInvalidError,
                   "cannot assign typed stage for document with different type (#{provided_type} vs #{@typed_stage.type})"
           end
-
         end
-
-        # @stage = stage.is_a?(Stage) ? stage : Stage.parse(stage)
-
-        # if @typed_stage.typed_stage == "FDIS" && type == :pas
-        #   raise Errors::StageInvalidError, "PAS type cannot have FDIS stage"
-        # end
       elsif iteration
         raise Errors::IterationWithoutStageError, "Document without stage cannot have iteration"
       end
@@ -94,7 +100,6 @@ module Pubid::Iso
       @dir = dir.to_s if dir
       @dirtype = dirtype.to_s if dirtype
       @base = base if base
-      #@type = type.is_a?(Type) ? type : Type.new(type) unless type.nil?
     end
 
     def self.parse_from_title(title)
@@ -107,34 +112,49 @@ module Pubid::Iso
     end
 
     class << self
+      def supplements_has_type?(supplements, type)
+        supplements.any? do |supplement|
+          supplement.typed_stage.type == type
+        end
+      end
+
+      def supplement_by_type(supplements, type)
+        supplements.select { |supplement| supplement.type == type }.first
+      end
+
+      def transform_supplements(supplements_params, base_params)
+        supplements = supplements_params.map do |supplement|
+          new(number: supplement[:number], year: supplement[:year],
+              stage: supplement[:typed_stage], edition: supplement[:edition],
+              iteration: supplement[:iteration],
+              base: new(**base_params))
+        end
+
+        return supplements.first if supplements.count == 1
+
+        # update corrigendum base to amendment
+        if supplements_has_type?(supplements, :cor) &&
+            supplements_has_type?(supplements, :amd) && supplements.count == 2
+
+          supplement = supplement_by_type(supplements, :cor)
+          supplement.base = supplement_by_type(supplements, :amd)
+          supplement
+        else
+          raise Errors::SupplementRenderingError, "don't know how to render provided supplements"
+        end
+      end
+
       def transform(params)
         identifier_params = params.map do |k, v|
           get_transformer_class.new.apply(k => v).to_a.first
         end.to_h
 
-        supplement = nil
-
-        if identifier_params[:amendments]
-          identifier_params[:amendments].first.tap do |amendment|
-            supplement = new(type: :amd, number: amendment.number, year: amendment.year,
-                     stage: amendment.stage, edition: amendment.edition,
-                     iteration: amendment.iteration,
-                     base: new(**identifier_params.dup.tap { |h| h.delete(:amendments); h.delete(:corrigendums) }))
-          end
+        # return supplement if supplements applied
+        if identifier_params[:supplements]
+          return transform_supplements(
+            identifier_params[:supplements],
+            identifier_params.dup.tap { |h| h.delete(:supplements) })
         end
-
-
-        if identifier_params[:corrigendums]
-          corrigendum = identifier_params[:corrigendums].first
-          return new(type: :cor, number: corrigendum.number, year: corrigendum.year,
-                     stage: corrigendum.stage, edition: corrigendum.edition,
-                     iteration: corrigendum.iteration,
-                     base: supplement ? supplement :
-                             new(**identifier_params.dup.tap { |h| h.delete(:amendments); h.delete(:corrigendums) }))
-        end
-
-
-        return supplement if supplement
 
         new(**identifier_params)
       end
@@ -163,10 +183,10 @@ module Pubid::Iso
     # Render URN identifier
     # @return [String] URN identifier
     def urn
-      if %i(amd cor).include?(@type&.type) && (@base.base.nil? && !@base.edition || (!@base.base.nil? && !@base.base.edition))
+      if %i(amd cor).include?(type&.type) && (@base.base.nil? && !@base.edition || (!@base.base.nil? && !@base.base.edition))
         raise Errors::NoEditionError, "Base document must have edition"
       end
-      (@tctype && Renderer::UrnTc || @type == :dir && Renderer::UrnDir || Pubid::Iso::Renderer::Urn).new(get_params).render
+      (@tctype && Renderer::UrnTc || type == :dir && Renderer::UrnDir || Pubid::Iso::Renderer::Urn).new(get_params).render
     end
 
     # Renders pubid identifier
@@ -240,15 +260,22 @@ module Pubid::Iso
       typed_stage&.stage
     end
 
+    def type
+      typed_stage&.type
+    end
+
     # Return typed stage abbreviation, eg. "FDTR", "DIS", "TR"
     def typed_stage_abbrev
-      renderer = self.class.get_renderer_class.new(get_params).prerender
-      renderer.prerendered_params[:type_stage]
+      typed_stage.to_s
     end
 
     # Return typed stage name, eg. "Final Draft Technical Report" for "FDTR"
     def typed_stage_name
-      "#{stage.short_name} #{type.to_s(:long)}"
+      typed_stage.name
+    end
+
+    def ==(other)
+      get_params == other.get_params
     end
   end
 end

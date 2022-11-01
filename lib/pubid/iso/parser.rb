@@ -1,7 +1,10 @@
 module Pubid::Iso
   class Parser < Pubid::Core::Parser
-    STAGES = %w[NP NWIP WD CD DIS FDIS PRF IS AWI PWI FPD pD PD FD D F].freeze
-    TYPES = %w[DATA ISP IWA R TTA TS TR PAS Guide GUIDE DIR].freeze
+    STAGES = %w[NP NWIP WD CD PRF AWI PWI FPD].freeze
+    TYPES = %w[DATA ISP IWA R TTA TS TR IS PAS Guide GUIDE DIR].freeze
+    TYPED_STAGES = %w[DIS FDIS DPAS FDTR FDTS DTS DTR PDTR PDTS].freeze
+    SUPPLEMENTS = %w[Amd Cor AMD COR]
+    STAGED_SUPPLEMENTS = %w[DAmd DAM DCor FDAmd FDCor DCOR FCOR FDCOR FDAM PDAM pDCOR FPDAM]
 
     TCTYPES = ["TC", "JTC", "PC", "IT", "CAB", "CASCO", "COPOLCO",
       "COUNCIL", "CPSG", "CS", "DEVCO", "GA", "GAAB", "INFCO",
@@ -19,6 +22,18 @@ module Pubid::Iso
     ORGANIZATIONS = %w[IEC IEEE CIW SAE CIE ASME ASTM OECD ISO IWA HL7 CEI].freeze
     rule(:stage) do
       array_to_str(Renderer::Russian::STAGE.values) | array_to_str(STAGES)
+    end
+
+    rule(:typed_stage) do
+      array_to_str(TYPED_STAGES)
+    end
+
+    rule(:staged_supplement) do
+      array_to_str(STAGED_SUPPLEMENTS)
+    end
+
+    rule(:supplements) do
+      array_to_str(SUPPLEMENTS)
     end
 
     rule(:type) do
@@ -56,24 +71,13 @@ module Pubid::Iso
       str(".") >> digits.as(:iteration)
     end
 
-    rule(:amendment) do
-      ((str("/") >> stage.as(:stage)).maybe >>
-      (str("/") | space).maybe >>
-        (str("Amd") | str("AMD") | str("AM")) >>
+    rule(:supplement) do
+      ((str("/") | space).maybe >>
+        (staged_supplement | (stage >> space).maybe >> supplements).as(:typed_stage) >>
         (space | str(".")).repeat(1).maybe >>
         digits.as(:number) >>
         (str(".") >> digits.as(:iteration)).maybe >>
-        ((str(":") | str("-")) >> digits.as(:year)).maybe).repeat(1).as(:amendments)
-    end
-
-    rule(:corrigendum) do
-      ((str("/") >> stage.as(:stage)).maybe >>
-      (str("/") | space).maybe >>
-        (str("Cor") | str("COR")) >>
-        (space | str(".")).repeat(1).maybe >>
-        digits.as(:number) >>
-        (str(".") >> digits.as(:iteration)).maybe >>
-        ((str(":") | str("-")) >> digits.as(:year)).maybe).repeat(1).as(:corrigendums)
+        ((str(":") | str("-")) >> digits.as(:year)).maybe).repeat(1).as(:supplements)
     end
 
     rule(:language) do
@@ -117,7 +121,7 @@ module Pubid::Iso
     rule(:std_document_body) do
       (type | stage.as(:stage)).maybe >>
         # for ISO/IEC WD TS 25025
-        space? >> ((stage.as(:stage) | type) >> space).maybe >>
+        space? >> ((stage.as(:stage) | typed_stage.as(:stage) | type) >> space).maybe >>
         digits.as(:number) >>
         # for identifiers like ISO 5537/IDF 26
         (str("|") >> (str("IDF").as(:publisher) >> space >> digits.as(:number)).as(:joint_document)).maybe >>
@@ -126,7 +130,7 @@ module Pubid::Iso
         # stage before amendment
         (
           # stage before corrigendum
-          ((amendment >> corrigendum.maybe) | corrigendum).maybe) >>
+          (supplement).maybe) >>
         edition.maybe >>
         language.maybe
     end
@@ -138,6 +142,7 @@ module Pubid::Iso
         # for French and Russian PubIDs starting with Guide type
         (guide_prefix.as(:type) >> space).maybe >>
         (stage.as(:stage) >> space).maybe >>
+        (typed_stage.as(:stage) >> space).maybe >>
         originator >> (space | str("/")) >>
         (tc_document_body | std_document_body | (dir_document_body >>
           (str(" + ") >> (originator >> space >> dir_document_body).as(:joint_document)).maybe))

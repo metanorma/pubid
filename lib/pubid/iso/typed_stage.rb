@@ -19,44 +19,56 @@ module Pubid::Iso
         abbr: "DTS",
         type: :ts,
         name: "Draft Technical Specification",
-        harmonized_stages: %w[],
+        harmonized_stages: %w[40.00 40.20 40.60 40.92 40.93 50.00 50.20 50.60 50.92],
       },
       fdts: {
         abbr: "FDTS",
         type: :ts,
         name: "Final Draft Technical Specification",
-        harmonized_stages: %w[],
+        harmonized_stages: %w[50.00 50.20 50.60 50.92],
       },
       fdtr: {
         abbr: "FDTR",
         type: :tr,
         name: "Final Draft Technical Report",
-        harmonized_stages: %w[],
+        harmonized_stages: %w[50.00 50.20 50.60 50.92],
       },
       fdis: {
         abbr: "FDIS",
         type: :is,
         name: "Final Draft International Standard",
-        harmonized_stages: %w[50.00],
+        harmonized_stages: %w[50.00 50.20 50.60 50.92],
       },
       dpas: {
         abbr: "DPAS",
         type: :pas,
         name: "Publicly Available Specification Draft",
-        harmonized_stages: %w[],
+        harmonized_stages: %w[40.00 40.20 40.60 40.92 40.93 50.00 50.20 50.60 50.92],
       },
       damd: {
         abbr: { short: "DAM", long: "DAmd" },
         type: :amd,
         name: "Draft Amendment",
-        harmonized_stages: %w[40.60],
+        harmonized_stages: %w[40.00 40.20 40.60 40.92 40.93 50.00 50.20 50.60 50.92],
       },
       dcor: {
         abbr: { short: "DCOR", long: "DCor" },
         type: :cor,
         name: "Draft Corrigendum",
-        harmonized_stages: %w[40.60],
-      }
+        harmonized_stages: %w[40.00 40.20 40.60 40.92 40.93 50.00 50.20 50.60 50.92],
+      },
+      fdamd: {
+        abbr: { short: "FDAM", long: "FDAmd" },
+        type: :amd,
+        name: "Final Draft Amendment",
+        harmonized_stages: %w[50.00 50.20 50.60 50.92],
+      },
+      fdcor: {
+        abbr: { short: "FDCOR", long: "FDCor" },
+        type: :cor,
+        name: "Final Draft Corrigendum",
+        harmonized_stages: %w[50.00 50.20 50.60 50.92],
+      },
     }.freeze
 
     # @param type [Symbol,Type] eg. :tr, Type.new(:tr)
@@ -68,7 +80,6 @@ module Pubid::Iso
       if abbr
         raise Errors::TypeStageInvalidError, "#{abbr} is not valid typed stage" unless TYPED_STAGES.key?(abbr)
         assign_abbreviation(abbr)
-        #@stage = Stage.new(harmonized_code: TYPED_STAGES[abbr][:harmonized_stages].first.to_s + ".00")
       elsif !@stage.nil?
         # lookup for typed stage
         @typed_stage = lookup_typed_stage
@@ -76,6 +87,8 @@ module Pubid::Iso
     end
 
     def lookup_typed_stage
+      return nil unless @stage
+
       TYPED_STAGES.each do |typed_stage, values|
         if values[:harmonized_stages].include?(@stage.harmonized_code.to_s) && values[:type] == @type&.type
           return typed_stage
@@ -87,9 +100,20 @@ module Pubid::Iso
     # Assigns type and stage according to provided typed stage abbreviation
     # @param abbr [Symbol] eg. :dtr, :damd, :dis
     def assign_abbreviation(abbr)
-      @typed_stage = abbr
-      @type = Type.new(TYPED_STAGES[abbr][:type])
-      @stage = Stage.new(harmonized_code: HarmonizedStageCode.new(TYPED_STAGES[abbr][:harmonized_stages]))
+      @typed_stage = if TYPED_STAGES.key?(abbr.downcase.to_sym)
+                       abbr.downcase.to_sym
+                     else
+                       TYPED_STAGES.select do |_, v|
+                         if v[:abbr].is_a?(Hash)
+                           v[:abbr].values.include?(abbr)
+                         else
+                           v[:abbr] == abbr
+                         end
+                       end.keys.first
+                     end
+
+      @type = Type.new(TYPED_STAGES[@typed_stage][:type])
+      @stage = Stage.new(harmonized_code: HarmonizedStageCode.new(TYPED_STAGES[@typed_stage][:harmonized_stages]))
     end
 
     # Render typed stage
@@ -133,15 +157,24 @@ module Pubid::Iso
       end
     end
 
-    # Assigns stage or typed stage depending on provided string
-    # @param stage_or_typed_stage [String, Stage] eg. "DTR", "CD", Stage.new(:CD)
+    # Assigns stage or type or typed stage or stage and type depending on provided string
+    # @param stage_or_typed_stage [String, Stage] eg. "DTR", "CD", Stage.new(:CD), "TR", "CD Amd", :dtr
     def parse_stage(stage_or_typed_stage)
-      return assign_abbreviation(stage_or_typed_stage.downcase.to_sym) if self.class.has_typed_stage?(stage_or_typed_stage)
+      if self.class.has_typed_stage?(stage_or_typed_stage)
+        return assign_abbreviation(stage_or_typed_stage)
+      end
 
       if stage_or_typed_stage.is_a?(Stage)
         @stage = stage_or_typed_stage
+      elsif stage_or_typed_stage.is_a?(String) && stage_or_typed_stage.split.count == 2 &&
+          Stage.has_stage?(stage_or_typed_stage.split.first)
+        # stage and type ("CD Amd")
+        @stage = Stage.parse(stage_or_typed_stage.split.first)
+        @type = Type.parse(stage_or_typed_stage.split.last)
+      elsif Type.has_type?(stage_or_typed_stage)
+        @type = Type.parse(stage_or_typed_stage)
       elsif Stage.has_stage?(stage_or_typed_stage)
-        @stage = Stage.parse(stage_or_typed_stage)
+        @stage = Stage.parse(stage_or_typed_stage.to_s)
       else
         raise Errors::TypeStageParseError, "cannot parse typed stage or stage"
       end
@@ -156,15 +189,16 @@ module Pubid::Iso
       typed_stage = new
       typed_stage.parse_stage(stage_or_typed_stage)
       typed_stage
-      # return stage_or_typed_stage if stage_or_typed_stage.is_a?(TypedStage)
-      #
-      # return new(abbr: stage_or_typed_stage.downcase.to_sym) if has_typed_stage?(stage_or_typed_stage.to_s)
-      #
-      # return new(stage: stage_or_typed_stage) if stage_or_typed_stage.is_a?(Stage)
-      #
-      # return new(stage: Stage.parse(stage_or_typed_stage)) if Stage.has_stage?(stage_or_typed_stage)
-      #
-      # raise Errors::TypeStageParseError, "cannot parse typed stage or stage"
+    end
+
+    def name
+      TYPED_STAGES[@typed_stage][:name]
+    end
+
+    def ==(other)
+      return false if other.nil?
+
+      type == other.type && typed_stage == other.typed_stage && stage == other.stage
     end
   end
 end

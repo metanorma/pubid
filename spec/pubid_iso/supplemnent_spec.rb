@@ -2,14 +2,14 @@ RSpec.describe Pubid::Iso::Supplement do
   describe "rendering" do
     context "when supplement has stage" do
       subject do
-        Pubid::Iso::Supplement.new(number: 1, year: supplement_year, stage: supplement_stage)
+        Pubid::Iso::Supplement.new(number: 1, year: supplement_year, typed_stage: supplement_stage)
       end
 
       let(:supplement_year) { 2000 }
       let(:supplement_stage) { Pubid::Iso::TypedStage.new(stage: :CD) }
 
       let(:pubid_number) { "1:2000" }
-      let(:urn_stage) { ":stage-30.00" }
+      let(:urn_stage) { ":stage-draft" }
       let(:urn_number) { ":2000:v1" }
 
       it { expect(subject.render_pubid_stage).to eq("CD") }
@@ -19,7 +19,7 @@ RSpec.describe Pubid::Iso::Supplement do
 
     context "when supplement has iteration" do
       subject do
-        Pubid::Iso::Supplement.new(number: 1, stage: Pubid::Iso::Stage.new(abbr: :CD), iteration: 1)
+        Pubid::Iso::Supplement.new(number: 1, typed_stage: Pubid::Iso::Stage.new(abbr: :CD), iteration: 1)
       end
 
       it { expect(subject.render_pubid_number).to eq("1.1") }
@@ -40,10 +40,10 @@ RSpec.describe Pubid::Iso::Supplement do
     end
 
     let(:first_supplement) do
-      described_class.new(number: 1, year: first_supplement_year, stage: first_supplement_stage)
+      described_class.new(number: 1, year: first_supplement_year, typed_stage: first_supplement_stage)
     end
     let(:second_supplement) do
-      described_class.new(number: 1, year: second_supplement_year, stage: second_supplement_stage)
+      described_class.new(number: 1, year: second_supplement_year, typed_stage: second_supplement_stage)
     end
     let(:first_supplement_year) { nil }
     let(:second_supplement_year) { nil }

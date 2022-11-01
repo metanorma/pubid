@@ -2,12 +2,12 @@ module Pubid::Iso
   class Stage
     attr_accessor :abbr, :harmonized_code
 
-    STAGES = { PWI: "00.00",
-               NP: "10.00",
+    STAGES = { PWI: %w[00.00 00.20 00.60 00.99],
+               NP: %w[10.00 10.20 10.60 10.92],
                AWI: %w[20.00 10.99],
-               WD: %w[20.20 20.60 20.98 20.99],
-               CD: "30.00",
-               PRF: "60.00"}.freeze
+               WD: %w[20.20 20.60 20.99],
+               CD: %w[30.00 30.20 30.60 30.92 30.99],
+               PRF: "60.00" }.freeze
 
 
     STAGE_NAMES = {
@@ -16,17 +16,6 @@ module Pubid::Iso
       NP: "New Proposal",
       CD: "Committee Draft",
       PRF: "Proof of a new International Standard",
-    }.freeze
-
-    STAGE_NAMES_SHORT = {
-      FDIS: "Final Draft",
-      DIS: "Draft",
-      WD: "Working Draft",
-      PWI: "Preliminary Work Item",
-      NP: "New Proposal",
-      CD: "Committee Draft",
-      PRF: "Proof of a new International Standard",
-      IS: "International Standard",
     }.freeze
 
     # @param abbr [String, Symbol] abbreviation eg. :PWI, :WD
@@ -38,29 +27,38 @@ module Pubid::Iso
         @harmonized_code = if harmonized_code.is_a?(HarmonizedStageCode)
                              harmonized_code
                            else
-                             HarmonizedStageCode.new(*harmonized_code.to_s.split("."))
+                             HarmonizedStageCode.new(harmonized_code)
                            end
-        unless @harmonized_code.fuzzy?
-          @abbr ||= lookup_abbr(@harmonized_code.to_s) || lookup_abbr("#{@harmonized_code.stage}.00")
-        end
+        @abbr ||= lookup_abbr(@harmonized_code.stages)
+        # unless @harmonized_code.fuzzy?
+        #   @abbr ||= lookup_abbr(@harmonized_code.to_s) || lookup_abbr("#{@harmonized_code.stage}.00")
+        # end
       end
 
       if abbr
         raise Errors::StageInvalidError, "#{abbr} is not valid stage" unless STAGES.key?(abbr.to_sym)
 
-        @harmonized_code ||= HarmonizedStageCode.new(*lookup_code(abbr).split("."))
+        @harmonized_code ||= HarmonizedStageCode.new(lookup_code(abbr))
       end
     end
 
     # Lookup for abbreviated code by numeric stage code
-    # @param lookup_code [String] stage code, e.g. "00.00", "20.20"
+    # @param lookup_code [String, Array] stage code or array of stage codes,
+    #   e.g. "00.00", "20.20", ["00.00", "00.20"]
     def lookup_abbr(lookup_code)
+      lookup_code = lookup_code.first if lookup_code.is_a?(Array) && lookup_code.count == 1
+
       STAGES.each do |abbr, codes|
         case codes
         when Array
-          codes.each do |code|
-            return abbr if code == lookup_code
+          if lookup_code.is_a?(Array)
+            return abbr if codes == lookup_code
+          else
+            return abbr if codes.include?(lookup_code)
           end
+          # codes.each do |code|
+          #   return abbr if code == lookup_code
+          # end
         when lookup_code
           return abbr
         end
@@ -70,8 +68,8 @@ module Pubid::Iso
     end
 
     def lookup_code(lookup_abbr)
-      code = STAGES[lookup_abbr.to_sym]
-      code.is_a?(Array) ? code.first : code
+      STAGES[lookup_abbr.to_sym]
+      # code.is_a?(Array) ? code.first : code
     end
 
     def self.parse(stage)
@@ -100,11 +98,6 @@ module Pubid::Iso
     # Return stage name, eg. "Draft International Standard" for "DIS"
     def name
       STAGE_NAMES[abbr.to_sym]
-    end
-
-    # Return short stage name, eg. "Draft" for "DIS"
-    def short_name
-      STAGE_NAMES_SHORT[abbr.to_sym]
     end
   end
 end

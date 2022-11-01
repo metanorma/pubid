@@ -8,13 +8,47 @@ module Pubid::Iso
       { stage: convert_stage(context[:stage]) }
     end
 
+    rule(supplements: subtree(:supplements)) do |context|
+      context[:supplements] =
+        context[:supplements].map do |supplement|
+          supplement[:typed_stage] = case supplement[:typed_stage]
+                                     when "PDAM"
+                                       "CD Amd"
+                                     when "pDCOR"
+                                       "CD Cor"
+                                     when "FCOR"
+                                       "FDCor"
+                                     when "FPDAM"
+                                       "DAmd"
+                                     when "FDAM"
+                                       "FDAmd"
+                                     else
+                                       supplement[:typed_stage]
+                                     end
+    #       Supplement.new(
+    #         number: supplement[:number],
+    #         year: supplement[:year],
+    #         typed_stage:
+    #           case supplement[:typed_stage]
+    #           when "FCOR"
+    #             "FDCor"
+    #           else
+    #             supplement[:typed_stage]
+    #           end,
+    #         iteration: supplement[:iteration]
+    #       )
+          supplement
+        end
+      context
+    end
+
     rule(amendments: subtree(:amendments)) do |context|
       context[:amendments] =
         context[:amendments].map do |amendment|
           Amendment.new(
             number: amendment[:number],
             year: amendment[:year],
-            stage: amendment[:stage] && convert_stage(amendment[:stage]),
+            typed_stage: amendment[:stage] && convert_stage(amendment[:stage]),
             iteration: amendment[:iteration])
         end
       context
@@ -26,7 +60,7 @@ module Pubid::Iso
           Corrigendum.new(
             number: corrigendum[:number],
             year: corrigendum[:year],
-            stage: corrigendum[:stage] && convert_stage(corrigendum[:stage]),
+            typed_stage: corrigendum[:stage] && convert_stage(corrigendum[:stage]),
             iteration: corrigendum[:iteration])
         end
       context
@@ -124,12 +158,17 @@ module Pubid::Iso
                "FDIS"
              when "Fpr"
                "PRF"
-             when "pD", "PD"
-               "CD"
+             # when "pD", "PD"
+             #   "CD"
+             when "PDTR"
+               "CD TR"
+             when "PDTS"
+               "CD TS"
              else
                code
              end
-      Stage.new(abbr: (russian_code || code))
+      russian_code || code
+      # Stage.new(abbr: (russian_code || code))
     end
 
     def self.convert_language(code)

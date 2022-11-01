@@ -67,5 +67,11 @@ module Pubid::Iso
 
       type == other.type
     end
+
+    def self.has_type?(type)
+      TYPE_NAMES.any? do |_, v|
+        v[:short] == type
+      end
+    end
   end
 end

@@ -18,17 +18,16 @@ module Pubid::Iso::Renderer
              "ISP" => "ИСП",
     }.freeze
 
-    def render_type_stage(values, opts, params)
-      if values[:type] == :guide
-        super(values.slice(:stage), opts, params)
-      else
-        super
-      end
+    def render_typed_stage(typed_stage, opts, params)
+      return nil if typed_stage.type == :guide
+
+      return (params[:copublisher] ? " " : "/") + STAGE[typed_stage.to_s] if STAGE.key?(typed_stage.to_s)
+
+      super
     end
 
     def render_identifier(params)
-      if params[:type] == :guide
-        params[:type] = nil
+      if @params[:typed_stage]&.type == :guide
         "Руководство #{super(params)}"
       else
         super

@@ -26,11 +26,11 @@ module Pubid::Iso
     end
 
     def render_urn_stage
-      ((@typed_stage && ":stage-#{@typed_stage.stage.harmonized_code}") || "")
+      ((@typed_stage&.stage && ":stage-#{@typed_stage.stage.harmonized_code}") || "")
     end
 
     def <=>(other)
-      (super == 0) && ((stage.nil? || stage == other.stage) && 0 || -1) || super
+      (super == 0) && ((typed_stage.nil? || typed_stage == other.typed_stage) && 0 || -1) || super
     end
 
     def render_iteration

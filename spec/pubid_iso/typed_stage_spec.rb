@@ -58,6 +58,14 @@ module Pubid::Iso
         #   expect(subject.stage).to be_nil
         # end
       end
+
+      context "when type provided" do
+        let(:stage_or_typed_stage) { "TR" }
+
+        it "assigns according type" do
+          expect(subject.type).to eq(Type.new(:tr))
+        end
+      end
     end
 
     context "when CD TR" do

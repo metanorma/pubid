@@ -1,16 +1,13 @@
 module Pubid::Iso::Renderer
   class French < Base
-    def render_type_stage(values, opts, params)
-      if values[:type] == :guide
-        super(values.slice(:stage), opts, params)
-      else
-        super
-      end
+    def render_typed_stage(typed_stage, opts, params)
+      return nil if typed_stage.type == :guide
+
+      super
     end
 
     def render_identifier(params)
-      if params[:type] == :guide
-        params[:type] = nil
+      if @params[:typed_stage]&.type == :guide
         "Guide #{super(params)}"
       else
         super

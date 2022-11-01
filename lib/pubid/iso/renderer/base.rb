@@ -51,42 +51,51 @@ module Pubid::Iso::Renderer
     def render(with_edition: true, with_language_code: :iso, with_date: true, **args)
       # super(**args.merge({ with_edition: with_edition }))
       if %i(amd cor).include? @params[:typed_stage]&.type&.type
-        render_supplement(@params, **args.merge({ with_date: with_date, with_language_code: with_language_code}))
+        render_supplement(@params, **args.merge({ with_date: with_date,
+                                                  with_language_code: with_language_code,
+                                                  with_edition: with_edition }))
       else
-        render_base_identifier(**args.merge({ with_date: with_date, with_language_code: with_language_code})) + @prerendered_params[:language].to_s
+        render_base_identifier(**args.merge({ with_date: with_date,
+                                              with_language_code: with_language_code,
+                                              with_edition: with_edition })) +
+          @prerendered_params[:language].to_s
       end
 
     end
 
     def render_identifier(params)
-      typed_stage = if params[:typed_stage] && params[:typed_stage] != ""
-                      ((params[:copublisher] && !params[:copublisher].empty?) ? " " : "/") + params[:typed_stage].to_s
-                    else
-                      ""
-                    end
-      render_base(params, typed_stage) +
+      # typed_stage = if params[:typed_stage] && params[:typed_stage] != ""
+      #                 ((params[:copublisher] && !params[:copublisher].empty?) ? " " : "/") + params[:typed_stage].to_s
+      #               else
+      #                 ""
+      #               end
+      render_base(params, params[:typed_stage]) +
         ("%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}" % params)
     end
 
-    def render_type_stage(values, opts, params)
-
-      # prerender stage and type before
-      stage = render_stage(values[:stage], opts, params)
-      type = values[:type]&.to_s
-      return unless type || stage
-
-      if type && stage
-        # don't add prefix for pdf format
-        if %w(DIS FDIS).include?(stage)
-          "#{render_short_stage(stage)}#{type}"
-        else
-          "#{stage} #{type}"
-        end
-      else
-        # when only type or stage
-        "#{type}#{stage}"
-      end
+    def render_typed_stage(typed_stage, _opts, params)
+      (params[:copublisher] ? " " : "/") + typed_stage.to_s
     end
+
+    # def render_type_stage(values, opts, params)
+    #
+    #   # prerender stage and type before
+    #   stage = render_stage(values[:stage], opts, params)
+    #   type = values[:type]&.to_s
+    #   return unless type || stage
+    #
+    #   if type && stage
+    #     # don't add prefix for pdf format
+    #     if %w(DIS FDIS).include?(stage)
+    #       "#{render_short_stage(stage)}#{type}"
+    #     else
+    #       "#{stage} #{type}"
+    #     end
+    #   else
+    #     # when only type or stage
+    #     "#{type}#{stage}"
+    #   end
+    # end
 
     def render_short_stage(stage)
       case stage
