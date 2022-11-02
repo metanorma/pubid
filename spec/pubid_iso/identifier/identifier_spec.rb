@@ -614,6 +614,12 @@ module Pubid::Iso
       it_behaves_like "converts pubid to urn"
     end
 
+    context "ISO/R 125:1966" do
+      let(:pubid) { "ISO/R 125:1966" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     describe "#parse_from_title" do
       subject { described_class.parse_from_title(title) }
       let(:title) { "#{pubid} Geographic information — Metadata — Part 1: Fundamentals" }

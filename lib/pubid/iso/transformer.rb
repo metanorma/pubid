@@ -87,14 +87,14 @@ module Pubid::Iso
                           :ts
                         when "ТО", "TR"
                           :tr
-                        when "Directives Part", "Directives, Part", "Directives,"
+                        when "Directives Part", "Directives, Part", "Directives,", "DIR"
                           :dir
                         when "PAS"
                           :pas
                         when "DPAS"
                           :dpas
-                        when "DIR"
-                          :dir
+                        when "R"
+                          :r
                         else
                           type
                         end) }

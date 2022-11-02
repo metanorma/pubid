@@ -41,6 +41,10 @@ module Pubid::Iso
       amd: {
         short: "Amd",
       },
+      r: {
+        long: "Recommendation",
+        short: "R",
+      },
     }.freeze
 
     # Create new type
@@ -64,6 +68,8 @@ module Pubid::Iso
 
     def ==(other)
       return type == other if other.is_a?(Symbol)
+
+      return false if other.nil?
 
       type == other.type
     end
