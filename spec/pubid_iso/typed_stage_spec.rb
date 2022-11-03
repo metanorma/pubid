@@ -113,5 +113,21 @@ module Pubid::Iso
         expect(subject.to_s).to eq("DTR")
       end
     end
+
+    context "when using IS type" do
+      let(:type) { :is }
+
+      it "returns nothing" do
+        expect(subject.to_s).to eq("")
+      end
+
+      context "with stage" do
+        let(:stage) { :CD }
+
+        it "returns only stage" do
+          expect(subject.to_s).to eq("CD")
+        end
+      end
+    end
   end
 end

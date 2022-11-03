@@ -128,19 +128,27 @@ module Pubid::Iso
         end
       end
 
-      result = (@stage && @stage.abbr != "IS") ? "#{@stage.abbr}" : ""
-      result += " " if !result.empty? && @type && stage_format_long
-      result + if stage_format_long
-                 "#{@type&.to_s}"
-               else
-                 if @type == :amd
-                   "AM"
-                 elsif @type == :cor
-                   "COR"
+      result = @stage ? @stage.abbr.to_s : ""
+
+      return result unless @type
+
+      if @type == :is
+        # do not render IS type
+        result
+      else
+        result += " " if !result.empty? && @type && stage_format_long
+        result + if stage_format_long
+                   @type&.to_s
                  else
-                   "#{@type&.to_s}"
+                   if @type == :amd
+                     "AM"
+                   elsif @type == :cor
+                     "COR"
+                   else
+                     @type&.to_s
+                   end
                  end
-               end
+      end
     end
 
     # Check if typed stage listed in TYPED_STAGES constant

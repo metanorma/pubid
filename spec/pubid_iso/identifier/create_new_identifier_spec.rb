@@ -191,6 +191,18 @@ module Pubid::Iso
         end
       end
 
+      context "when IS type" do
+        let(:params) { { type: :is } }
+
+        it "do not include IS stage" do
+          expect(subject.to_s).to eq("ISO #{number}")
+        end
+
+        it "do not include IS stage for URN" do
+          expect(subject.urn).to eq("urn:iso:std:iso:#{number}")
+        end
+      end
+
       context "when have typed stage" do
         let(:params) { { stage: typed_stage } }
         let(:typed_stage) { "DTR" }
