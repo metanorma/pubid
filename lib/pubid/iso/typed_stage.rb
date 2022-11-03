@@ -94,7 +94,8 @@ module Pubid::Iso
       return nil unless @stage
 
       TYPED_STAGES.each do |typed_stage, values|
-        if values[:harmonized_stages].include?(@stage.harmonized_code.to_s) && values[:type] == @type&.type
+        if values[:harmonized_stages].include?(@stage.harmonized_code.to_s) &&
+          values[:type] == @type&.type
           return typed_stage
         end
       end
@@ -136,23 +137,16 @@ module Pubid::Iso
 
       return result unless @type
 
-      if @type == :is
-        # do not render IS type
-        result
-      else
-        result += " " if !result.empty? && @type && stage_format_long
-        result + if stage_format_long
-                   @type&.to_s
-                 else
-                   if @type == :amd
-                     "AM"
-                   elsif @type == :cor
-                     "COR"
-                   else
-                     @type&.to_s
-                   end
-                 end
-      end
+      # do not render IS type
+      return result if @type == :is
+
+      result += " " if !result.empty? && @type && stage_format_long
+      return (result + @type&.to_s) if stage_format_long
+
+      return result + "AM" if @type == :amd
+      return result + "COR" if @type == :cor
+
+      result + @type&.to_s
     end
 
     # Check if typed stage listed in TYPED_STAGES constant

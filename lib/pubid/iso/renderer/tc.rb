@@ -2,7 +2,7 @@ module Pubid::Iso::Renderer
   class Tc < Base
 
     def render_identifier(params)
-      "%{publisher}%{copublisher} %{tctype} %{tcnumber}%{sctype}%{wgtype} N%{number}" % params
+      "%{publisher} %{tctype} %{tcnumber}%{sctype}%{wgtype} N%{number}" % params
     end
 
     def render_tctype(tctype, _opts, _params)

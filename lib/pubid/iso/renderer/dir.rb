@@ -2,12 +2,12 @@ module Pubid::Iso::Renderer
   class Dir < Base
 
     def render_identifier(params)
-      res = ("%{publisher}%{copublisher} DIR%{dirtype}%{number}%{year}%{supplement}" % params)
+      res = ("%{publisher} DIR%{dirtype}%{number}%{year}%{supplement}" % params)
 
       if params.key?(:joint_document)
         joint_params = prerender_params(params[:joint_document].get_params, {})
         joint_params.default = ""
-        res += (" + %{publisher}%{copublisher}%{dirtype}%{number}%{year}%{supplement}" % joint_params)
+        res += (" + %{publisher}%{dirtype}%{number}%{year}%{supplement}" % joint_params)
       end
 
       res

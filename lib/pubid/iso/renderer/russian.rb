@@ -8,8 +8,6 @@ module Pubid::Iso::Renderer
               "CD" => "КПК",
               "PD" => "ПД",
               "FPD" => "ФПД",
-
-
     }.freeze
 
     TYPE = { "Guide" => "Руководство",
@@ -21,7 +19,7 @@ module Pubid::Iso::Renderer
     def render_typed_stage(typed_stage, opts, params)
       return nil if typed_stage.type == :guide
 
-      return (params[:copublisher] ? " " : "/") + STAGE[typed_stage.to_s] if STAGE.key?(typed_stage.to_s)
+      return STAGE[typed_stage.to_s] if STAGE.key?(typed_stage.to_s)
 
       super
     end
@@ -35,17 +33,10 @@ module Pubid::Iso::Renderer
     end
 
     def render_publisher(publisher, _opts, _params)
-      PUBLISHER[publisher]
-    end
+      pub_string = super
 
-    def render_copublisher(copublisher, _opts, _params)
-      # (!@copublisher.is_a?(Array) && [@copublisher]) || @copublisher
-      if copublisher.is_a?(Array)
-        copublisher.map(&:to_s).sort.map do |copublisher|
-          "/#{PUBLISHER[copublisher].gsub('-', '/')}"
-        end.join
-      else
-        "/#{PUBLISHER[copublisher]}"
+      PUBLISHER.inject(pub_string) do |acc, (original, russian)|
+        acc.gsub!(original, russian)
       end
     end
 

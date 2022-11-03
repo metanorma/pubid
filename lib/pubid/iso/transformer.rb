@@ -107,7 +107,7 @@ module Pubid::Iso
         when "CEI"
           "IEC"
         else
-          copublisher
+          copublisher.to_s
         end
       }
     end

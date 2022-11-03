@@ -50,6 +50,8 @@ module Pubid::Iso
     # Create new type
     # @param type [Symbol]
     def initialize(type = :is)
+      type = type.to_s.downcase.to_sym unless type.is_a?(Symbol)
+
       raise Errors::WrongTypeError, "#{type} type is not available" unless TYPE_NAMES.key?(type)
 
       @type = type

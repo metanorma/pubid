@@ -6,3 +6,5 @@ gemspec
 gem "rubocop-performance"
 gem "rubocop-rake"
 gem "rubocop-rspec"
+
+gem "pubid-core", git: "https://github.com/metanorma/pubid-core", branch: "rt-update-publisher"

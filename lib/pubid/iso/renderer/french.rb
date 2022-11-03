@@ -14,8 +14,10 @@ module Pubid::Iso::Renderer
       end
     end
 
-    def render_copublisher(copublisher, opts, params)
-      "/#{copublisher.to_s.sub("IEC", "CEI")}"
+    # TODO: This should be only replacing a single entry called "IEC",
+    # not "IECEE => CEIEE"
+    def render_publisher(publisher, opts, params)
+      super.sub("/IEC ", "/CEI ")
     end
 
     def render_corrigendums(corrigendums, _opts, _params)

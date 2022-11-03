@@ -8,7 +8,6 @@ module Pubid::Iso::Renderer
       isp: "ISP",
       guide: "Guide",
       pas: "PAS",
-      dpas: "DPAS",
     }.freeze
 
     # Prerender parameters
@@ -64,52 +63,81 @@ module Pubid::Iso::Renderer
     end
 
     def render_identifier(params)
-      # typed_stage = if params[:typed_stage] && params[:typed_stage] != ""
-      #                 ((params[:copublisher] && !params[:copublisher].empty?) ? " " : "/") + params[:typed_stage].to_s
-      #               else
-      #                 ""
-      #               end
-      render_base(params, params[:typed_stage]) +
-        ("%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}" % params)
+      render_base(params)
+    end
+
+    def render_base(params, prefix = "")
+      "%{publisher}%{typed_stage} %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}" % params
+    end
+
+    def render_copublisher_string(publisher, copublishers)
+      case copublishers
+      when String
+        [publisher, copublishers].join("/")
+      when Array
+        ([publisher] + copublishers.map(&:to_s)).map do |pub|
+          pub.gsub('-', '/')
+        end.join("/")
+      else
+        raise StandardError.new("copublisher must be a string or an array")
+      end
+    end
+
+    def omit_post_publisher_symbol(typed_stage)
+      return false unless typed_stage
+
+      (
+        (
+          typed_stage.typed_stage.nil? &&
+          typed_stage.type.type == :is
+        ) ||
+        typed_stage.type.type == :dir
+      ) &&
+      (
+        !typed_stage.stage ||
+        (typed_stage.stage && typed_stage.stage.abbr.nil?)
+      )
+    end
+
+    def render_publisher(publisher, _opts, params)
+
+      # No copublishers
+      unless params[:copublisher]
+
+        # No copublisher and IS
+        # ISO xxx
+        if omit_post_publisher_symbol(params[:typed_stage])
+          return publisher
+        end
+
+        # No copublisher and not IS
+        # ISO/TR xxx
+        return "#{publisher}/"
+      end
+
+      publisher_string = render_copublisher_string(publisher, params[:copublisher])
+
+      # With copublisher and IS
+      # ISO/IEC xxx
+      if omit_post_publisher_symbol(params[:typed_stage])
+        return publisher_string
+      end
+
+      # With copublisher but not IS
+      # ISO/IEC TR xxx
+      publisher_string + " "
     end
 
     def render_typed_stage(typed_stage, _opts, params)
       return nil if typed_stage.to_s.empty?
 
-      (params[:copublisher] ? " " : "/") + typed_stage.to_s
-    end
-
-    # def render_type_stage(values, opts, params)
-    #
-    #   # prerender stage and type before
-    #   stage = render_stage(values[:stage], opts, params)
-    #   type = values[:type]&.to_s
-    #   return unless type || stage
-    #
-    #   if type && stage
-    #     # don't add prefix for pdf format
-    #     if %w(DIS FDIS).include?(stage)
-    #       "#{render_short_stage(stage)}#{type}"
-    #     else
-    #       "#{stage} #{type}"
-    #     end
-    #   else
-    #     # when only type or stage
-    #     "#{type}#{stage}"
-    #   end
-    # end
-
-    def render_short_stage(stage)
-      case stage
-      when "DIS"
-        "D"
-      when "FDIS"
-        "FD"
-      end
+      typed_stage.to_s
     end
 
     def render_stage(stage, opts, _params)
-      return if stage.nil? || (stage.abbr == "PRF" and !opts[:with_prf]) || stage.abbr == "IS"
+      return if stage.nil? ||
+        stage.type == :is ||
+        (stage.abbr == "PRF" and !opts[:with_prf])
 
       stage.abbr
     end
