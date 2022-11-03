@@ -74,6 +74,8 @@ module Pubid::Iso::Renderer
     end
 
     def render_typed_stage(typed_stage, _opts, params)
+      return nil if typed_stage.to_s.empty?
+
       (params[:copublisher] ? " " : "/") + typed_stage.to_s
     end
 

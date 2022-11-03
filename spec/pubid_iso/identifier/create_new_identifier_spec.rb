@@ -64,11 +64,23 @@ module Pubid::Iso
         end
 
         context "when stage is a code" do
-          let(:params) { { stage: "40.60" } }
+          let(:params) { { stage: "30.20" } }
 
           it "has harmonized stage assigned" do
             expect(subject.stage.harmonized_code)
-              .to eq(Pubid::Iso::HarmonizedStageCode.new("40", "60"))
+              .to eq(Pubid::Iso::HarmonizedStageCode.new("30", "20"))
+          end
+
+          it "renders identifier with associated stage" do
+            expect(subject.to_s).to eq("ISO/CD #{number}")
+          end
+
+          context "when stage code don't have associated abbreviation" do
+            let(:params) { { stage: "60.60" } }
+
+            it "renders identifier without stage" do
+              expect(subject.to_s).to eq("ISO #{number}")
+            end
           end
         end
 
