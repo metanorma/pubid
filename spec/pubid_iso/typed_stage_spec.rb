@@ -5,6 +5,10 @@ module Pubid::Iso
     let(:type) { nil }
     let(:stage) { nil }
 
+    it "assigns type by default" do
+      expect(subject.type).to be_a(Type)
+    end
+
     describe "#has_typed_stage?" do
       subject { described_class.has_typed_stage?(typed_stage) }
 

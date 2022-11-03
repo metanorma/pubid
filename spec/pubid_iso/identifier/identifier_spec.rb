@@ -604,6 +604,10 @@ module Pubid::Iso
 
       it_behaves_like "converts pubid to pubid"
       it_behaves_like "converts pubid to urn"
+
+      it "has assigned IS type" do
+        expect(subject.type).to eq(:is)
+      end
     end
 
     context "ISO/TS 19115-3:2016" do

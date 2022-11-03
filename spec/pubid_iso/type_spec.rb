@@ -1,5 +1,13 @@
 module Pubid::Iso
   RSpec.describe Type do
+    context "when don't have type" do
+      subject { described_class.new }
+
+      it "assigns IS type by default" do
+        expect(subject.type).to eq(:is)
+      end
+    end
+
     context "when using symbol" do
       subject { described_class.new(type) }
       let(:type) { :tr }

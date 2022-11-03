@@ -71,22 +71,22 @@ module Pubid::Iso
                          TypedStage.new
                        end
 
-        if @typed_stage.type == :is && iteration
+        if stage
+          @typed_stage.parse_stage(stage.is_a?(Parslet::Slice) ? stage.to_s : stage)
+          if type && @typed_stage.type != type
+            raise Errors::StageInvalidError,
+                  "cannot assign typed stage for document with different type (#{type} vs #{@typed_stage.type})"
+          end
+        elsif @typed_stage.type == :is && iteration
           raise Errors::IsStageIterationError, "IS stage document cannot have iteration"
         end
 
-        if stage
-          provided_type = @typed_stage.type
-
-          @typed_stage.parse_stage(stage.is_a?(Parslet::Slice) ? stage.to_s : stage)
-          if !provided_type.nil? && @typed_stage.type != provided_type
-            raise Errors::StageInvalidError,
-                  "cannot assign typed stage for document with different type (#{provided_type} vs #{@typed_stage.type})"
-          end
-        end
       elsif iteration
         raise Errors::IterationWithoutStageError, "Document without stage cannot have iteration"
       end
+
+      # Assign typed stage to apply default type
+      @typed_stage = TypedStage.new unless @typed_stage
 
       @iteration = iteration.to_i if iteration
       @supplement = supplement if supplement

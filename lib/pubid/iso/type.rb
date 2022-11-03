@@ -49,7 +49,7 @@ module Pubid::Iso
 
     # Create new type
     # @param type [Symbol]
-    def initialize(type)
+    def initialize(type = :is)
       raise Errors::WrongTypeError, "#{type} type is not available" unless TYPE_NAMES.key?(type)
 
       @type = type

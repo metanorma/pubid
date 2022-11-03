@@ -12,6 +12,10 @@ module Pubid::Iso
         expect(subject.to_s).to eq("ISO #{number}")
       end
 
+      it "assigns default type" do
+        expect(subject.type).to eq(:is)
+      end
+
       context "when have joint document" do
         let(:params) { { joint_document: "IDF #{number}" } }
 

@@ -74,13 +74,17 @@ module Pubid::Iso
     # @param type [Symbol,Type] eg. :tr, Type.new(:tr)
     # @param stage [Symbol,Stage] eg. :CD, Stage.new(abbr: :CD)
     def initialize(abbr: nil, type: nil, stage: nil)
-      @type = type.is_a?(Type) ? type : Type.new(type) if type
+      @type = if type
+                type.is_a?(Type) ? type : Type.new(type)
+              else
+                Type.new
+              end
       @stage = stage.is_a?(Stage) ? stage : Stage.new(abbr: stage) if stage
 
       if abbr
         raise Errors::TypeStageInvalidError, "#{abbr} is not valid typed stage" unless TYPED_STAGES.key?(abbr)
         assign_abbreviation(abbr)
-      elsif !@stage.nil?
+      elsif !@stage.nil? && !@stage.abbr
         # lookup for typed stage
         @typed_stage = lookup_typed_stage
       end
@@ -186,7 +190,7 @@ module Pubid::Iso
       else
         raise Errors::TypeStageParseError, "cannot parse typed stage or stage"
       end
-      @typed_stage = lookup_typed_stage
+      @typed_stage = lookup_typed_stage unless @stage&.abbr
     end
 
     # Parse stage or typed stage
