@@ -86,21 +86,23 @@ module Pubid::Core::Renderer
     end
 
     def render_base(params, prefix = "")
-      "%{publisher}%{copublisher}#{prefix} %{number}" % params
+      "%{publisher}#{prefix} %{number}" % params
     end
 
     def render_identifier(params)
       render_base(params)
     end
 
-    def render_copublisher(copublisher, _opts, _params)
-      # (!@copublisher.is_a?(Array) && [@copublisher]) || @copublisher
-      if copublisher.is_a?(Array)
-        copublisher.map(&:to_s).sort.map do |copublisher|
-          "/#{copublisher.gsub('-', '/')}"
-        end.join
+    def render_publisher(publisher, _opts, params)
+      return publisher unless params[:copublisher]
+
+      case params[:copublisher]
+      when Array
+        ([publisher] + params[:copublisher].map(&:to_s).sort.map(&:to_s)).map do |pub|
+          pub.gsub('-', '/')
+        end.join("/")
       else
-        "/#{copublisher}"
+        [publisher, params[:copublisher]].join("/")
       end
     end
 
