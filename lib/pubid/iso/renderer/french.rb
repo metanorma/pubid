@@ -6,6 +6,12 @@ module Pubid::Iso::Renderer
       super
     end
 
+    def omit_post_publisher_symbol?(typed_stage)
+      return true if typed_stage.type == :guide
+
+      super
+    end
+
     def render_identifier(params)
       if @params[:typed_stage]&.type == :guide
         "Guide #{super(params)}"
@@ -17,7 +23,7 @@ module Pubid::Iso::Renderer
     # TODO: This should be only replacing a single entry called "IEC",
     # not "IECEE => CEIEE"
     def render_publisher(publisher, opts, params)
-      super.sub("/IEC ", "/CEI ")
+      super.sub("/IEC", "/CEI")
     end
 
     def render_corrigendums(corrigendums, _opts, _params)

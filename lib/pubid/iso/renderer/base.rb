@@ -75,7 +75,7 @@ module Pubid::Iso::Renderer
       when String
         [publisher, copublishers].join("/")
       when Array
-        ([publisher] + copublishers.map(&:to_s)).map do |pub|
+        ([publisher] + copublishers.map(&:to_s).sort).map do |pub|
           pub.gsub('-', '/')
         end.join("/")
       else
@@ -83,7 +83,8 @@ module Pubid::Iso::Renderer
       end
     end
 
-    def omit_post_publisher_symbol(typed_stage)
+    # @return [Boolean] returns false when there are no typed stage output to include
+    def omit_post_publisher_symbol?(typed_stage)
       return false unless typed_stage
 
       (
@@ -106,7 +107,7 @@ module Pubid::Iso::Renderer
 
         # No copublisher and IS
         # ISO xxx
-        if omit_post_publisher_symbol(params[:typed_stage])
+        if omit_post_publisher_symbol?(params[:typed_stage])
           return publisher
         end
 
@@ -119,7 +120,7 @@ module Pubid::Iso::Renderer
 
       # With copublisher and IS
       # ISO/IEC xxx
-      if omit_post_publisher_symbol(params[:typed_stage])
+      if omit_post_publisher_symbol?(params[:typed_stage])
         return publisher_string
       end
 

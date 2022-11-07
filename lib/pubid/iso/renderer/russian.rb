@@ -24,6 +24,12 @@ module Pubid::Iso::Renderer
       super
     end
 
+    def omit_post_publisher_symbol?(typed_stage)
+      return true if typed_stage.type == :guide
+
+      super
+    end
+
     def render_identifier(params)
       if @params[:typed_stage]&.type == :guide
         "Руководство #{super(params)}"
@@ -32,11 +38,9 @@ module Pubid::Iso::Renderer
       end
     end
 
-    def render_publisher(publisher, _opts, _params)
-      pub_string = super
-
-      PUBLISHER.inject(pub_string) do |acc, (original, russian)|
-        acc.gsub!(original, russian)
+    def render_publisher(publisher, opts, params)
+      PUBLISHER.inject(super) do |acc, (original, russian)|
+        acc.gsub(original, russian)
       end
     end
 
