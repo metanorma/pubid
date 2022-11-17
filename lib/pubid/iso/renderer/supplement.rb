@@ -1,0 +1,20 @@
+module Pubid::Iso::Renderer
+  class Supplement < Base
+    # Render identifier
+    # @param with_edition [Boolean] include edition in output
+    # @see Pubid::Core::Renderer::Base for another options
+    def render(with_edition: true, with_language_code: :iso, with_date: true, **args)
+      @params[:base].to_s + super +
+        if @params[:base].language
+          render_language(@params[:base].language,
+                          { with_language_code: with_language_code }, nil).to_s
+        else
+          ""
+        end
+    end
+
+    def render_identifier(params)
+      "/%{typed_stage}%{stage} %{number}%{part}%{iteration}%{year}%{edition}" % params
+    end
+  end
+end

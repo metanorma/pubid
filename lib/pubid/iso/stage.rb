@@ -82,6 +82,7 @@ module Pubid::Iso
       end
     end
 
+    # @return [Boolean] true if stage exists
     def self.has_stage?(stage)
       if stage.is_a?(Stage)
         STAGES.key?(stage.abbr.to_sym)
@@ -98,6 +99,18 @@ module Pubid::Iso
     # Return stage name, eg. "Draft International Standard" for "DIS"
     def name
       STAGE_NAMES[abbr.to_sym]
+    end
+
+    # @param with_prf [Boolean]
+    # @return [Boolean] false if there are output for abbreviation should be produced
+    def empty_abbr?(with_prf: false)
+      return true if abbr == "PRF" && !with_prf
+
+      abbr.nil?
+    end
+
+    def to_s(opts)
+      abbr unless empty_abbr?(**opts)
     end
   end
 end

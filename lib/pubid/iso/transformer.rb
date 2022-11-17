@@ -25,18 +25,6 @@ module Pubid::Iso
                                      else
                                        supplement[:typed_stage]
                                      end
-    #       Supplement.new(
-    #         number: supplement[:number],
-    #         year: supplement[:year],
-    #         typed_stage:
-    #           case supplement[:typed_stage]
-    #           when "FCOR"
-    #             "FDCor"
-    #           else
-    #             supplement[:typed_stage]
-    #           end,
-    #         iteration: supplement[:iteration]
-    #       )
           supplement
         end
       context

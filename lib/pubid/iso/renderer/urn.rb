@@ -11,7 +11,7 @@ module Pubid::Iso::Renderer
                IS: 60 }.freeze
 
     def prerender(with_edition: true, **args)
-      @params[:type_stage] = @params.slice(:stage, :type) if @params[:stage] || @params[:type]
+      # @params[:type_stage] = @params.slice(:stage, :type) if @params[:stage] || @params[:type]
       super
     end
 
@@ -20,21 +20,22 @@ module Pubid::Iso::Renderer
     # @see Pubid::Core::Renderer::Base for another options
     def render(with_edition: true, **args)
       # copy type from typed stage
-      @params[:type] = @params[:typed_stage].type if @params[:typed_stage] && @params[:typed_stage].type
+      # @params[:type] = @params[:typed_stage].type if @params[:typed_stage] && @params[:typed_stage].type
       super(**args.merge({ with_edition: with_edition }))
     end
 
     def render_identifier(params)
-      render_base(params) + "%{typed_stage}"\
+      render_base(params) + "%{stage}"\
       "%{corrigendum_stage}%{iteration}%{edition}%{amendments}%{corrigendums}" % params
     end
 
-    def render_typed_stage(typed_stage, _opts, _params)
-      ":stage-#{typed_stage.stage.harmonized_code}" if typed_stage.stage
-    end
-    # def render_stage(stage, _opts, params)
-    #   ":stage-#{stage.harmonized_code}"
+    # def render_typed_stage(typed_stage, _opts, _params)
+    #   ":stage-#{typed_stage.stage.harmonized_code}" if typed_stage.stage
     # end
+    #
+    def render_stage(stage, _opts, params)
+      ":stage-#{stage.harmonized_code.to_s}"
+    end
 
     def render_iteration(iteration, _opts, params)
       ".v#{iteration}" if params[:typed_stage]&.stage

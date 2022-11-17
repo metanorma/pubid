@@ -44,30 +44,32 @@ module Pubid::Iso::Renderer
         (supplement_params[:base].language ? render_language(supplement_params[:base].language, args, nil) : "")
     end
 
+    def render_base_identifier(**args)
+      prerender(**args)
+
+      render_identifier(@prerendered_params)
+    end
+
     # Render identifier
     # @param with_edition [Boolean] include edition in output
     # @see Pubid::Core::Renderer::Base for another options
     def render(with_edition: true, with_language_code: :iso, with_date: true, **args)
       # super(**args.merge({ with_edition: with_edition }))
-      if %i(amd cor).include? @params[:typed_stage]&.type&.type
-        render_supplement(@params, **args.merge({ with_date: with_date,
-                                                  with_language_code: with_language_code,
-                                                  with_edition: with_edition }))
-      else
+      # if %i(amd cor).include? @params[:typed_stage]&.type&.type
+      #   render_supplement(@params, **args.merge({ with_date: with_date,
+      #                                             with_language_code: with_language_code,
+      #                                             with_edition: with_edition }))
+      # else
         render_base_identifier(**args.merge({ with_date: with_date,
                                               with_language_code: with_language_code,
                                               with_edition: with_edition })) +
           @prerendered_params[:language].to_s
-      end
+      # end
 
     end
 
     def render_identifier(params)
-      render_base(params)
-    end
-
-    def render_base(params, prefix = "")
-      "%{publisher}%{typed_stage} %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}" % params
+      "%{publisher}%{typed_stage}%{stage} %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}" % params
     end
 
     def render_copublisher_string(publisher, copublishers)
@@ -83,31 +85,37 @@ module Pubid::Iso::Renderer
       end
     end
 
-    # @return [Boolean] returns false when there are no typed stage output to include
-    def omit_post_publisher_symbol?(typed_stage)
-      return false unless typed_stage
+    def omit_post_publisher_symbol?(typed_stage, stage, opts)
+      # return false unless typed_stage
 
-      (
-        (
-          typed_stage.typed_stage.nil? &&
-          typed_stage.type.type == :is
-        ) ||
-        typed_stage.type.type == :dir
-      ) &&
-      (
-        !typed_stage.stage ||
-        (typed_stage.stage && typed_stage.stage.abbr.nil?)
-      )
+      (stage.nil? || stage.empty_abbr?(with_prf: opts[:with_prf])) && typed_stage.nil?
     end
 
-    def render_publisher(publisher, _opts, params)
+    # @return [Boolean] returns false when there are no typed stage output to include
+    # def omit_post_publisher_symbol?(typed_stage)
+    #   return false unless typed_stage
+    #
+    #   (
+    #     (
+    #       typed_stage.typed_stage.nil? &&
+    #       typed_stage.type.type == :is
+    #     ) ||
+    #     typed_stage.type.type == :dir
+    #   ) &&
+    #   (
+    #     !typed_stage.stage ||
+    #     (typed_stage.stage && typed_stage.stage.abbr.nil?)
+    #   )
+    # end
+
+    def render_publisher(publisher, opts, params)
 
       # No copublishers
       unless params[:copublisher]
 
         # No copublisher and IS
         # ISO xxx
-        if omit_post_publisher_symbol?(params[:typed_stage])
+        if omit_post_publisher_symbol?(params[:typed_stage], params[:stage], opts)
           return publisher
         end
 
@@ -120,7 +128,7 @@ module Pubid::Iso::Renderer
 
       # With copublisher and IS
       # ISO/IEC xxx
-      if omit_post_publisher_symbol?(params[:typed_stage])
+      if omit_post_publisher_symbol?(params[:typed_stage], params[:stage], opts)
         return publisher_string
       end
 
@@ -136,11 +144,12 @@ module Pubid::Iso::Renderer
     end
 
     def render_stage(stage, opts, _params)
-      return if stage.nil? ||
-        stage.type == :is ||
-        (stage.abbr == "PRF" and !opts[:with_prf])
+      return if stage.empty_abbr?(with_prf: opts[:with_prf])
 
-      stage.abbr
+      stage.to_s(with_prf: opts[:with_prf])
+      # return if stage.nil? || (stage.abbr == "PRF" && !opts[:with_prf])
+      #
+      # stage.abbr
     end
 
     def render_edition(edition, opts, _params)

@@ -158,5 +158,57 @@ module Pubid::Iso
         it { is_expected.to be_falsey }
       end
     end
+
+    describe "#empty_abbr?" do
+      subject { described_class.new(abbr: abbrev).empty_abbr?(with_prf: with_prf) }
+      let(:with_prf) { false }
+
+      context "when abbr is nil" do
+        let(:abbrev) { nil }
+
+        it { is_expected.to be_truthy }
+      end
+
+      context "when PRF stage" do
+        let(:abbrev) { :PRF }
+
+        it { is_expected.to be_truthy }
+
+        context "with option with_prf == true" do
+          let(:with_prf) { true }
+
+          it { is_expected.to be_falsey }
+        end
+      end
+
+      context "when CD stage" do
+        let(:abbrev) { :CD }
+
+        it { is_expected.to be_falsey }
+      end
+    end
+
+    describe "#to_s" do
+      subject { described_class.new(abbr: abbrev).to_s(opts) }
+      let(:opts) { {} }
+
+      context "when CD" do
+        let(:abbrev) { :CD }
+
+        it { is_expected.to eq("CD") }
+      end
+
+      context "when PRF" do
+        let(:abbrev) { :PRF }
+
+        it { is_expected.to be_nil }
+
+        context "when option with_prf true" do
+          let(:opts) { { with_prf: true } }
+
+          it { is_expected.to eq("PRF") }
+        end
+      end
+    end
   end
 end
