@@ -48,7 +48,7 @@ module Pubid::Iso::Renderer
     end
 
     def render_iteration(iteration, _opts, params)
-      ".v#{iteration}" if params[:typed_stage]&.stage
+      ".v#{iteration}" if params[:stage]
     end
 
     def render_type(type, _, _)

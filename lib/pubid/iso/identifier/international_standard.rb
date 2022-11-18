@@ -22,7 +22,7 @@ module Pubid::Iso
                      dir: nil, dirtype: nil, year: nil, amendments: nil,
                      corrigendums: nil, type: nil, base: nil, supplements: nil, **opts)
 
-        if iteration
+        if iteration && stage.nil?
           raise Errors::IsStageIterationError, "IS stage document cannot have iteration"
         end
 
