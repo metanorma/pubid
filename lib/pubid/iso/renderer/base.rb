@@ -2,20 +2,6 @@ module Pubid::Iso::Renderer
   class Base < Pubid::Core::Renderer::Base
     attr_accessor :prerendered_params
 
-    TYPE_VALUES = {
-      tr: "TR",
-      ts: "TS",
-      isp: "ISP",
-      guide: "Guide",
-      pas: "PAS",
-    }.freeze
-
-    # Prerender parameters
-    def prerender(with_edition: true, **args)
-      @params[:type_stage] = @params.slice(:stage, :type) if @params[:stage] || @params[:type]
-      super
-    end
-
     def render_supplement(supplement_params, **args)
       if supplement_params[:base].type == :amd
         # render inner amendment (cor -> amd -> base)

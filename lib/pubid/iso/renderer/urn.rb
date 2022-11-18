@@ -17,11 +17,21 @@ module Pubid::Iso::Renderer
 
     # Render identifier
     # @param with_edition [Boolean] include edition in output
-    # @see Pubid::Core::Renderer::Base for another options
-    def render(with_edition: true, **args)
-      # copy type from typed stage
-      # @params[:type] = @params[:typed_stage].type if @params[:typed_stage] && @params[:typed_stage].type
-      super(**args.merge({ with_edition: with_edition }))
+    def render(with_edition: true, with_date: true, with_language_code: :iso, **args)
+      if %i(amd cor).include? @params[:type]
+        render_supplement(@params, **args.merge(
+          { with_edition: with_edition,
+            with_date: with_date,
+            with_language_code: with_language_code },
+        ))
+      else
+        render_base_identifier(**args.merge(
+          { with_edition: with_edition,
+            with_date: with_date,
+            with_language_code: with_language_code },
+        )) +
+          @prerendered_params[:language].to_s
+      end
     end
 
     def render_identifier(params)

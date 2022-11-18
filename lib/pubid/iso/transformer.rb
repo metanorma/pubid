@@ -66,7 +66,7 @@ module Pubid::Iso
 
     rule(type: simple(:type)) do
       russian_type = Renderer::Russian::TYPE.key(type.to_s)
-      { type: Type.new(russian_type&.downcase&.to_sym ||
+      { type: russian_type&.downcase&.to_sym ||
                         case type
                         # XXX: can't put 2 alternative Russian translations to dictionary, temporary hack
                         when "GUIDE", "Guide", "Руководства"
@@ -85,7 +85,7 @@ module Pubid::Iso
                           :r
                         else
                           type
-                        end) }
+                        end }
     end
 
     rule(copublisher: simple(:copublisher)) do
