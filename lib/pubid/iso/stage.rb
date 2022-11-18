@@ -76,9 +76,9 @@ module Pubid::Iso
       if /\A[\d.]+\z/.match?(stage)
         Stage.new(harmonized_code: stage)
       else
-        raise Errors::StageInvalidError unless stage.is_a?(Symbol) || stage.is_a?(String)
+        raise Errors::StageInvalidError unless stage.is_a?(Symbol) || stage.is_a?(String) || stage.is_a?(Parslet::Slice)
 
-        Stage.new(abbr: stage)
+        Stage.new(abbr: stage.to_s)
       end
     end
 
