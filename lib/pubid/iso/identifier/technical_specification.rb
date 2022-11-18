@@ -19,6 +19,10 @@ module Pubid::Iso
       def self.type
         :ts
       end
+
+      def self.get_renderer_class
+        Renderer::TechnicalSpecification
+      end
     end
   end
 end
