@@ -166,7 +166,7 @@ module Pubid::Iso
 
         def transform_supplements(supplements_params, base_params)
           supplements = supplements_params.map do |supplement|
-            new(number: supplement[:number], year: supplement[:year],
+            create(number: supplement[:number], year: supplement[:year],
                 stage: supplement[:typed_stage], edition: supplement[:edition],
                 iteration: supplement[:iteration],
                 base: new(**base_params))
@@ -195,21 +195,16 @@ module Pubid::Iso
           if identifier_params[:supplements]
             return transform_supplements(
               identifier_params[:supplements],
-              identifier_params.dup.tap { |h| h.delete(:supplements) })
+              identifier_params.dup.tap { |h| h.delete(:supplements) }
+            )
           end
 
-          new(**identifier_params)
+          create(**identifier_params)
         end
 
         def descendants
           ObjectSpace.each_object(Class).select { |klass| klass < self }
         end
-
-        # def inherited(klass)
-        #   @descendants ||= []
-        #   @descendants << klass
-        #   super
-        # end
 
         # @param type [Symbol] eg. :tr, :ts
         # @return [Boolean] true if provided type matches with identifier's class type
@@ -280,7 +275,8 @@ module Pubid::Iso
       # Render URN identifier
       # @return [String] URN identifier
       def urn
-        (@tctype && Renderer::UrnTc || type == :dir && Renderer::UrnDir || Pubid::Iso::Renderer::Urn).new(get_params).render
+        (@tctype && Renderer::UrnTc || Pubid::Iso::Renderer::Urn).new(
+          get_params.merge({ type: type })).render
       end
 
       def get_params
