@@ -73,7 +73,8 @@ module Pubid::Iso
 
     rule(:supplement) do
       ((str("/") | space).maybe >>
-        (staged_supplement | (stage >> space).maybe >> supplements).as(:typed_stage) >>
+        (((stage.as(:typed_stage) >> space).maybe >> supplements.as(:type)) |
+          (staged_supplement).as(:typed_stage)) >>
         (space | str(".")).repeat(1).maybe >>
         digits.as(:number) >>
         (str(".") >> digits.as(:iteration)).maybe >>

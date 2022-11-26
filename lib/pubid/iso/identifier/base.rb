@@ -65,7 +65,6 @@ module Pubid::Iso
           end
         end
 
-
         if stage
           if stage.is_a?(Stage)
             @stage = stage
@@ -77,31 +76,6 @@ module Pubid::Iso
         elsif iteration
           raise Errors::IterationWithoutStageError, "Document without stage cannot have iteration"
         end
-
-        # if stage || type
-        #   @typed_stage = if type
-        #                    TypedStage.new(type: type.is_a?(Type) ? type : Type.new(type))
-        #                  else
-        #                    TypedStage.new
-        #                  end
-        #
-        #   if stage
-        #     @typed_stage.parse_stage(stage.is_a?(Parslet::Slice) ? stage.to_s : stage)
-        #     if type && @typed_stage.type != type
-        #       raise Errors::StageInvalidError,
-        #             "cannot assign typed stage for document with different type (#{type} vs #{@typed_stage.type})"
-        #     end
-        #   end
-        #   elsif @typed_stage.type == :is && iteration
-        #     raise Errors::IsStageIterationError, "IS stage document cannot have iteration"
-        #   end
-        #
-        # elsif iteration
-        #   raise Errors::IterationWithoutStageError, "Document without stage cannot have iteration"
-        # end
-
-        # Assign typed stage to apply default type
-        # @typed_stage = TypedStage.new unless @typed_stage
 
         @iteration = iteration.to_i if iteration
         @supplement = supplement if supplement
@@ -156,7 +130,7 @@ module Pubid::Iso
 
         def supplements_has_type?(supplements, type)
           supplements.any? do |supplement|
-            supplement.typed_stage.type == type
+            supplement.type == type
           end
         end
 
@@ -168,8 +142,8 @@ module Pubid::Iso
           supplements = supplements_params.map do |supplement|
             create(number: supplement[:number], year: supplement[:year],
                 stage: supplement[:typed_stage], edition: supplement[:edition],
-                iteration: supplement[:iteration],
-                base: new(**base_params))
+                iteration: supplement[:iteration], type: supplement[:type],
+                base: create(**base_params))
           end
 
           return supplements.first if supplements.count == 1
@@ -209,7 +183,7 @@ module Pubid::Iso
         # @param type [Symbol] eg. :tr, :ts
         # @return [Boolean] true if provided type matches with identifier's class type
         def has_type?(type)
-          type == self.type
+          type.to_s.downcase.to_sym == self.type
         end
 
         # @param typed_stage [String, Symbol] typed stage, eg. "DTR" or :dtr
@@ -275,8 +249,9 @@ module Pubid::Iso
       # Render URN identifier
       # @return [String] URN identifier
       def urn
-        (@tctype && Renderer::UrnTc || Pubid::Iso::Renderer::Urn).new(
-          get_params.merge({ type: type })).render
+        ((@tctype && Renderer::UrnTc) || Pubid::Iso::Renderer::Urn).new(
+          get_params.merge({ type: type }),
+        ).render + (language ? ":#{language}" : "")
       end
 
       def get_params

@@ -21,12 +21,6 @@ module Pubid::Iso
         @base.base.nil? && !@base.edition.nil? || (!@base.base.nil? && !@base.base.edition.nil?)
       end
 
-      def urn
-        raise Errors::NoEditionError, "Base document must have edition" unless base_has_edition?
-
-        Renderer::Urn.new(get_params).render
-      end
-
       def self.type
         :sup
       end

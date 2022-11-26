@@ -14,7 +14,11 @@ module Pubid::Iso::Renderer
     end
 
     def render_identifier(params)
-      "/%{typed_stage}%{stage} %{number}%{part}%{iteration}%{year}%{edition}" % params
+      type_prefix = params[:typed_stage].nil? || params[:typed_stage].empty? ? self.class::TYPE : ""
+
+      type_prefix = " #{type_prefix}" if params[:stage] && !params[:stage].empty?
+
+      "/%{typed_stage}%{stage}#{type_prefix} %{number}%{part}%{iteration}%{year}%{edition}" % params
     end
   end
 end

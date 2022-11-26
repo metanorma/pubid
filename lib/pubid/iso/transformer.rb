@@ -20,8 +20,8 @@ module Pubid::Iso
                                        "FDCor"
                                      when "FPDAM"
                                        "DAmd"
-                                     when "FDAM"
-                                       "FDAmd"
+                                     when "FDAmd"
+                                       "FDAM"
                                      else
                                        supplement[:typed_stage]
                                      end

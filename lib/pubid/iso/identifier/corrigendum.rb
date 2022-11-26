@@ -23,6 +23,12 @@ module Pubid::Iso
       def self.get_renderer_class
         Renderer::Corrigendum
       end
+
+      def urn
+        raise Errors::NoEditionError, "Base document must have edition" unless base_has_edition?
+
+        Renderer::UrnCorrigendum.new(get_params).render
+      end
     end
   end
 end

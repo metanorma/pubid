@@ -18,24 +18,19 @@ module Pubid::Iso::Renderer
     # Render identifier
     # @param with_edition [Boolean] include edition in output
     def render(with_edition: true, with_date: true, with_language_code: :iso, **args)
-      if %i(amd cor).include? @params[:type]
-        render_supplement(@params, **args.merge(
-          { with_edition: with_edition,
-            with_date: with_date,
-            with_language_code: with_language_code },
-        ))
-      else
-        render_base_identifier(**args.merge(
-          { with_edition: with_edition,
-            with_date: with_date,
-            with_language_code: with_language_code },
-        )) +
-          @prerendered_params[:language].to_s
-      end
+      render_base_identifier(**args.merge(
+        { with_edition: with_edition,
+          with_date: with_date,
+          with_language_code: with_language_code },
+      ))
+    end
+
+    def render_prefix(params)
+      "urn:iso:std:%{publisher}%{copublisher}%{type}:%{number}%{part}" % params
     end
 
     def render_identifier(params)
-      render_base(params) + "%{stage}"\
+      render_prefix(params) + "%{stage}"\
       "%{corrigendum_stage}%{iteration}%{edition}%{amendments}%{corrigendums}" % params
     end
 

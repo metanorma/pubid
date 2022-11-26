@@ -190,7 +190,7 @@ module Pubid::Iso
         end
 
         it "shoud have type :amd" do
-          expect(subject.typed_stage.type).to eq(:amd)
+          expect(subject.type).to eq(:amd)
         end
 
         it_behaves_like "converts pubid to pubid"
@@ -242,14 +242,14 @@ module Pubid::Iso
         end
 
         it "should have base document for amendment" do
-          expect(subject.base.base).to be_a(Identifier)
+          expect(subject.base.base).to be_a(Identifier::InternationalStandard)
         end
       end
 
       context "ISO/IEC 14496-30:2018/FDAmd 1" do
         let(:original) { "ISO/IEC 14496-30:2018/FDAmd 1 ED2" }
-        let(:pubid) { "ISO/IEC 14496-30:2018/FDAmd 1" }
-        let(:urn) { "urn:iso:std:iso-iec:14496:-30:ed-2:stage-draft:amd:1:v1" }
+        let(:pubid) { "ISO/IEC 14496-30:2018/FDAM 1" }
+        let(:urn) { "urn:iso:std:iso-iec:14496:-30:ed-2:stage-draft:amd:v1" }
 
         it_behaves_like "converts pubid to urn"
         it_behaves_like "converts pubid to pubid"
