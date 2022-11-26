@@ -2,34 +2,6 @@ module Pubid::Iso::Renderer
   class Base < Pubid::Core::Renderer::Base
     attr_accessor :prerendered_params
 
-    def render_supplement(supplement_params, **args)
-      if supplement_params[:base].type == :amd
-        # render inner amendment (cor -> amd -> base)
-        render_supplement(supplement_params[:base].get_params, **args)
-      else
-        self.class.new(supplement_params[:base].get_params).render_base_identifier(
-          # always render year for identifiers with supplement
-          **args.merge({ with_date: true }),
-          )
-      end +
-        case supplement_params[:typed_stage].type.type
-        when :amd
-          render_amendments(
-            [Pubid::Iso::Amendment.new(**supplement_params.slice(:number, :year, :typed_stage, :edition, :iteration))],
-            args,
-            nil,
-            )
-        when :cor
-          render_corrigendums(
-            [Pubid::Iso::Corrigendum.new(**supplement_params.slice(:number, :year, :typed_stage, :edition, :iteration))],
-            args,
-            nil,
-            )
-          # copy parameters from Identifier only supported by Corrigendum
-        end +
-        (supplement_params[:base].language ? render_language(supplement_params[:base].language, args, nil) : "")
-    end
-
     def render_base_identifier(**args)
       prerender(**args)
 
@@ -40,18 +12,10 @@ module Pubid::Iso::Renderer
     # @param with_edition [Boolean] include edition in output
     # @see Pubid::Core::Renderer::Base for another options
     def render(with_edition: true, with_language_code: :iso, with_date: true, **args)
-      # super(**args.merge({ with_edition: with_edition }))
-      # if %i(amd cor).include? @params[:typed_stage]&.type&.type
-      #   render_supplement(@params, **args.merge({ with_date: with_date,
-      #                                             with_language_code: with_language_code,
-      #                                             with_edition: with_edition }))
-      # else
-        render_base_identifier(**args.merge({ with_date: with_date,
-                                              with_language_code: with_language_code,
-                                              with_edition: with_edition })) +
-          @prerendered_params[:language].to_s
-      # end
-
+      render_base_identifier(**args.merge({ with_date: with_date,
+                                            with_language_code: with_language_code,
+                                            with_edition: with_edition })) +
+        @prerendered_params[:language].to_s
     end
 
     def render_identifier(params)
@@ -76,23 +40,6 @@ module Pubid::Iso::Renderer
 
       (stage.nil? || stage.empty_abbr?(with_prf: opts[:with_prf])) && typed_stage.nil?
     end
-
-    # @return [Boolean] returns false when there are no typed stage output to include
-    # def omit_post_publisher_symbol?(typed_stage)
-    #   return false unless typed_stage
-    #
-    #   (
-    #     (
-    #       typed_stage.typed_stage.nil? &&
-    #       typed_stage.type.type == :is
-    #     ) ||
-    #     typed_stage.type.type == :dir
-    #   ) &&
-    #   (
-    #     !typed_stage.stage ||
-    #     (typed_stage.stage && typed_stage.stage.abbr.nil?)
-    #   )
-    # end
 
     def render_publisher(publisher, opts, params)
 
@@ -144,14 +91,6 @@ module Pubid::Iso::Renderer
 
     def render_iteration(iteration, _opts, _params)
       ".#{iteration}"
-    end
-
-    def render_amendments(amendments, opts, _params)
-      amendments.sort.map { |amendment| amendment.render_pubid(opts[:stage_format_long], opts[:with_date]) }.join("+")
-    end
-
-    def render_corrigendums(corrigendums, opts, _params)
-      corrigendums.sort.map { |corrigendum| corrigendum.render_pubid(opts[:stage_format_long], opts[:with_date]) }.join("+")
     end
 
     def render_language(language, opts, _params)
