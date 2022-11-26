@@ -249,7 +249,7 @@ module Pubid::Iso
       context "ISO/IEC 14496-30:2018/FDAmd 1" do
         let(:original) { "ISO/IEC 14496-30:2018/FDAmd 1 ED2" }
         let(:pubid) { "ISO/IEC 14496-30:2018/FDAM 1" }
-        let(:urn) { "urn:iso:std:iso-iec:14496:-30:ed-2:stage-draft:amd:v1" }
+        let(:urn) { "urn:iso:std:iso-iec:14496:-30:ed-2:stage-draft:amd:1:v1" }
 
         it_behaves_like "converts pubid to urn"
         it_behaves_like "converts pubid to pubid"
@@ -302,7 +302,7 @@ module Pubid::Iso
       context "ISO 10791-6:2014/PWI Amd 1" do
         let(:original) { "ISO 10791-6:2014/PWI Amd 1 ED1" }
         let(:pubid) { "ISO 10791-6:2014/PWI Amd 1" }
-        let(:urn) { "urn:iso:std:iso:10791:-6:ed-1:stage-draft:amd:v1" }
+        let(:urn) { "urn:iso:std:iso:10791:-6:ed-1:stage-draft:amd:1:v1" }
 
         it_behaves_like "converts pubid to urn"
         it_behaves_like "converts pubid to pubid"
@@ -311,7 +311,7 @@ module Pubid::Iso
       context "ISO 11137-2:2013/FDAmd 1" do
         let(:original) { "ISO 11137-2:2013/FDAmd 1 ED3" }
         let(:pubid) { "ISO 11137-2:2013/FDAM 1" }
-        let(:urn) { "urn:iso:std:iso:11137:-2:ed-3:stage-draft:amd:v1" }
+        let(:urn) { "urn:iso:std:iso:11137:-2:ed-3:stage-draft:amd:1:v1" }
 
         it_behaves_like "converts pubid to urn"
         it_behaves_like "converts pubid to pubid"
