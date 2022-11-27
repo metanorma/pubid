@@ -333,12 +333,12 @@ module Pubid::Iso
 
       # Return typed stage abbreviation, eg. "FDTR", "DIS", "TR"
       def typed_stage_abbrev
-        typed_stage.to_s
+        self.class::TYPED_STAGES[typed_stage][:abbr]
       end
 
       # Return typed stage name, eg. "Final Draft Technical Report" for "FDTR"
       def typed_stage_name
-        typed_stage.name
+        self.class::TYPED_STAGES[typed_stage][:name]
       end
 
       def ==(other)
