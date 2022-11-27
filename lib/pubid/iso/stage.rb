@@ -109,7 +109,7 @@ module Pubid::Iso
       abbr.nil?
     end
 
-    def to_s(opts)
+    def to_s(opts = {})
       abbr unless empty_abbr?(**opts)
     end
   end

@@ -162,8 +162,8 @@ module Pubid::Iso
 
         def transform(params)
           identifier_params = params.map do |k, v|
-            get_transformer_class.new.apply(k => v).to_a.first
-          end.to_h
+            get_transformer_class.new.apply(k => v)
+          end.inject({}, :merge)
 
           # return supplement if supplements applied
           if identifier_params[:supplements]

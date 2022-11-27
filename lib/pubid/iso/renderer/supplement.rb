@@ -16,9 +16,14 @@ module Pubid::Iso::Renderer
     def render_identifier(params)
       type_prefix = params[:typed_stage].nil? || params[:typed_stage].empty? ? self.class::TYPE : ""
 
-      type_prefix = " #{type_prefix}" if params[:stage] && !params[:stage].empty?
+      type_prefix = " #{type_prefix}" if params[:stage].is_a?(Pubid::Iso::Stage) && !params[:stage].empty_abbr?
 
       "/%{typed_stage}%{stage}#{type_prefix} %{number}%{part}%{iteration}%{year}%{edition}" % params
+    end
+
+    def render_stage(stage, opts, params)
+      # do not render stage when already has typed stage
+      stage unless params[:typed_stage]
     end
   end
 end

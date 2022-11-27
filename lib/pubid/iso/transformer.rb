@@ -4,28 +4,32 @@ module Pubid::Iso
       { edition: "1" }
     end
 
-    rule(stage: simple(:stage)) do |context|
-      { stage: convert_stage(context[:stage]) }
+    rule(stage: subtree(:stage)) do |context|
+      stage_and_type = convert_stage(context[:stage])
+      context[:stage] = stage_and_type[:stage]
+      context[:type] = stage_and_type[:type] if stage_and_type[:type]
+      context
     end
 
     rule(supplements: subtree(:supplements)) do |context|
       context[:supplements] =
         context[:supplements].map do |supplement|
-          supplement[:typed_stage] = case supplement[:typed_stage]
-                                     when "PDAM"
-                                       "CD Amd"
-                                     when "pDCOR"
-                                       "CD Cor"
-                                     when "FCOR"
-                                       "FDCor"
-                                     when "FPDAM"
-                                       "DAmd"
-                                     when "FDAmd"
-                                       "FDAM"
-                                     else
-                                       supplement[:typed_stage]
-                                     end
-          supplement
+          supplement.merge(
+            case supplement[:typed_stage]
+            when "PDAM"
+              { typed_stage: "CD", type: "Amd" }
+            when "pDCOR"
+              { typed_stage: "CD", type: "Cor" }
+            when "FPDAM"
+              { typed_stage: "DAM" }
+            when "FDAmd"
+              { typed_stage: "FDAM" }
+            when "FDCor"
+              { typed_stage: "FCOR" }
+            else
+              {}
+            end
+          )
         end
       context
     end
@@ -105,10 +109,6 @@ module Pubid::Iso
       { publisher: russian_publisher&.to_s || publisher }
     end
 
-    # rule(year: simple(:year)) do
-    #   { year: year.to_i }
-    # end
-    #
     rule(publisher: simple(:publisher), supplement: subtree(:supplement)) do |context|
       context[:supplement] =
         Supplement.new(number: context[:supplement][:number],
@@ -135,28 +135,24 @@ module Pubid::Iso
 
     def self.convert_stage(code)
       russian_code = Renderer::Russian::STAGE.key(code.to_s)
-      # return russian_code.to_s if russian_code
+      return { stage: russian_code } if russian_code
 
-      code = case code
-             when "NWIP"
-               "NP"
-             when "D", "FPD"
-               "DIS"
-             when "FD", "F"
-               "FDIS"
-             when "Fpr"
-               "PRF"
-             # when "pD", "PD"
-             #   "CD"
-             when "PDTR"
-               "CD TR"
-             when "PDTS"
-               "CD TS"
-             else
-               code
-             end
-      russian_code || code
-      # Stage.new(abbr: (russian_code || code))
+      case code
+      when "NWIP"
+        { stage: "NP" }
+      when "D", "FPD"
+        { stage: "DIS" }
+      when "FD", "F"
+        { stage: "FDIS" }
+      when "Fpr"
+        { stage: "PRF" }
+      when "PDTR"
+        { stage: "CD", type: "TR" }
+      when "PDTS"
+        { stage: "CD", type: "TS" }
+      else
+        { stage: code }
+      end
     end
 
     def self.convert_language(code)
