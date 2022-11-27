@@ -24,8 +24,8 @@ module Pubid::Iso
               { typed_stage: "DAM" }
             when "FDAmd"
               { typed_stage: "FDAM" }
-            when "FDCor"
-              { typed_stage: "FCOR" }
+            when "FDCor", "FCOR"
+              { typed_stage: "FDCOR" }
             else
               {}
             end
