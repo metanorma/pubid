@@ -2,10 +2,47 @@ module Pubid::Iso::Renderer
   class Base < Pubid::Core::Renderer::Base
     attr_accessor :prerendered_params
 
+    TRANSLATION = {
+      russian: {
+        publisher: { "ISO" => "ИСО", "IEC" => "МЭК" },
+        stage: { "FDIS" => "ОПМС",
+                 "DIS" => "ПМС",
+                 "NP" => "НП",
+                 "AWI" => "АВИ",
+                 "CD" => "КПК",
+                 "PD" => "ПД",
+                 "FPD" => "ФПД" },
+        type: { "TS" => "ТС",
+                "TR" => "ТО",
+                "ISP" => "ИСП" },
+      },
+      french: {
+        publisher: { "IEC" => "CEI" },
+      },
+    }.freeze
+
+    PUBLISHER = { "ISO" => "ИСО", "IEC" => "МЭК" }.freeze
+    STAGE = { "FDIS" => "ОПМС",
+              "DIS" => "ПМС",
+              "NP" => "НП",
+              "AWI" => "АВИ",
+              "CD" => "КПК",
+              "PD" => "ПД",
+              "FPD" => "ФПД",
+    }.freeze
+
+    TYPE = { "Guide" => "Руководство",
+             "TS" => "ТС",
+             "TR" => "ТО",
+             "ISP" => "ИСП",
+    }.freeze
+
+
+
     def render_base_identifier(**args)
       prerender(**args)
 
-      render_identifier(@prerendered_params)
+      render_identifier(@prerendered_params, args)
     end
 
     # Render identifier
@@ -18,17 +55,24 @@ module Pubid::Iso::Renderer
         @prerendered_params[:language].to_s
     end
 
-    def render_identifier(params)
+    def render_identifier(params, opts)
       "%{publisher}%{typed_stage}%{stage} %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}" % params
     end
 
-    def render_copublisher_string(publisher, copublishers)
+    def render_copublisher_string(publisher, copublishers, opts)
       case copublishers
       when String
+        if opts[:language]
+          copublishers = TRANSLATION[opts[:language]][:publisher][copublishers] || copublishers
+        end
         [publisher, copublishers].join("/")
       when Array
         ([publisher] + copublishers.map(&:to_s).sort).map do |pub|
-          pub.gsub('-', '/')
+          if opts[:language]
+            (TRANSLATION[opts[:language]][:publisher][pub] || pub).gsub('-', '/')
+          else
+            pub
+          end
         end.join("/")
       else
         raise StandardError.new("copublisher must be a string or an array")
@@ -43,6 +87,9 @@ module Pubid::Iso::Renderer
 
     def render_publisher(publisher, opts, params)
 
+      if opts[:language]
+        publisher = TRANSLATION[opts[:language]][:publisher][publisher] || publisher
+      end
       # No copublishers
       unless params[:copublisher]
 
@@ -57,7 +104,8 @@ module Pubid::Iso::Renderer
         return "#{publisher}/"
       end
 
-      publisher_string = render_copublisher_string(publisher, params[:copublisher])
+      publisher_string = render_copublisher_string(publisher, params[:copublisher], opts)
+      publisher_string.sub!("/IEC", "/CEI") if opts[:language] == :french
 
       # With copublisher and IS
       # ISO/IEC xxx
@@ -70,8 +118,12 @@ module Pubid::Iso::Renderer
       publisher_string + " "
     end
 
-    def render_typed_stage(typed_stage, _opts, params)
+    def render_typed_stage(typed_stage, opts, params)
       return nil if typed_stage.to_s.empty?
+
+      if opts[:language]
+        return TRANSLATION[opts[:language]][:stage][typed_stage.to_s] || typed_stage.to_s
+      end
 
       typed_stage.to_s
     end
@@ -79,10 +131,12 @@ module Pubid::Iso::Renderer
     def render_stage(stage, opts, _params)
       return if stage.empty_abbr?(with_prf: opts[:with_prf])
 
+      if opts[:language]
+        return TRANSLATION[opts[:language]][:stage][stage.to_s(with_prf: opts[:with_prf])] ||
+          stage.to_s(with_prf: opts[:with_prf])
+      end
+
       stage.to_s(with_prf: opts[:with_prf])
-      # return if stage.nil? || (stage.abbr == "PRF" && !opts[:with_prf])
-      #
-      # stage.abbr
     end
 
     def render_edition(edition, opts, _params)

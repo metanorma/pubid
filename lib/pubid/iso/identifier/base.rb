@@ -311,22 +311,15 @@ module Pubid::Iso
             raise Errors::WrongFormat, "#{format} is not available"
           end
         end
-        case lang
-        when :french
-          Renderer::French.new(get_params)
-        when :russian
-          Renderer::Russian.new(get_params)
-        else
-          # if @tctype
-          #   Renderer::Tc.new(get_params)
-          # elsif @typed_stage&.type == :dir
-          #   Renderer::Dir.new(get_params)
-          # else
-          self.class.get_renderer_class.new(get_params)
-          # end
-        end.render(with_date: with_date, with_language_code: with_language_code, with_edition: with_edition,
-                   stage_format_long: stage_format_long, with_prf: with_prf) +
-          if @joint_document && @typed_stage&.type != :dir
+
+        self.class.get_renderer_class.new(get_params).render(
+          with_date: with_date,
+          with_language_code: with_language_code,
+          with_edition: with_edition,
+          stage_format_long: stage_format_long,
+          with_prf: with_prf, language: lang
+        ) +
+          if @joint_document
             "|#{@joint_document}"
           end.to_s
       end

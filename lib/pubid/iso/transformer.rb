@@ -69,11 +69,11 @@ module Pubid::Iso
     end
 
     rule(type: simple(:type)) do
-      russian_type = Renderer::Russian::TYPE.key(type.to_s)
+      russian_type = Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:type].key(type.to_s)
       { type: russian_type&.downcase&.to_sym ||
                         case type
                         # XXX: can't put 2 alternative Russian translations to dictionary, temporary hack
-                        when "GUIDE", "Guide", "Руководства"
+                        when "GUIDE", "Guide", "Руководство"
                           :guide
                         when "ТС", "TS"
                           :ts
@@ -93,7 +93,7 @@ module Pubid::Iso
     end
 
     rule(copublisher: simple(:copublisher)) do
-      russian_copublisher = Renderer::Russian::PUBLISHER.key(copublisher.to_s)
+      russian_copublisher = Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:publisher].key(copublisher.to_s)
       { copublisher: russian_copublisher&.to_s ||
         case copublisher
         when "CEI"
@@ -105,7 +105,7 @@ module Pubid::Iso
     end
 
     rule(publisher: simple(:publisher)) do
-      russian_publisher = Renderer::Russian::PUBLISHER.key(publisher.to_s)
+      russian_publisher = Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:publisher].key(publisher.to_s)
       { publisher: russian_publisher&.to_s || publisher }
     end
 
@@ -134,7 +134,7 @@ module Pubid::Iso
     end
 
     def self.convert_stage(code)
-      russian_code = Renderer::Russian::STAGE.key(code.to_s)
+      russian_code = Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:stage].key(code.to_s)
       return { stage: russian_code } if russian_code
 
       case code

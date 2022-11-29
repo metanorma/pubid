@@ -6,7 +6,7 @@ module Pubid::Iso::Renderer
       false
     end
 
-    def render_identifier(params)
+    def render_identifier(params, _opts)
       type_prefix = (params[:typed_stage].nil? || params[:typed_stage].empty?) ? "TR" : ""
 
       type_prefix = " #{type_prefix}" if params[:stage] && !params[:stage].empty?

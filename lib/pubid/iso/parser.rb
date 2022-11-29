@@ -21,7 +21,7 @@ module Pubid::Iso
 
     ORGANIZATIONS = %w[IEC IEEE CIW SAE CIE ASME ASTM OECD ISO IWA HL7 CEI].freeze
     rule(:stage) do
-      array_to_str(Renderer::Russian::STAGE.values) | array_to_str(STAGES)
+      array_to_str(Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:stage].values) | array_to_str(STAGES)
     end
 
     rule(:typed_stage) do
@@ -37,7 +37,7 @@ module Pubid::Iso
     end
 
     rule(:type) do
-      (array_to_str(Renderer::Russian::TYPE.values) | array_to_str(TYPES)).as(:type)
+      (array_to_str(Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:type].values) | array_to_str(TYPES)).as(:type)
     end
 
     rule(:tctype) do
@@ -59,7 +59,7 @@ module Pubid::Iso
     end
 
     rule(:organization) do
-      array_to_str(Renderer::Russian::PUBLISHER.values) | array_to_str(ORGANIZATIONS)
+      array_to_str(Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:publisher].values) | array_to_str(ORGANIZATIONS)
     end
 
     rule(:edition) do
