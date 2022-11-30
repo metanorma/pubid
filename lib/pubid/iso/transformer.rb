@@ -129,7 +129,7 @@ module Pubid::Iso
 
     rule(joint_document: subtree(:joint_document)) do |context|
       context[:joint_document] =
-        Identifier.new(**context[:joint_document])
+        Identifier::Base.create(**context[:joint_document])
       context
     end
 
