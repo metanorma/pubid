@@ -399,7 +399,7 @@ module Pubid::Iso
         let(:original) { "ISO/IEC 17025:2005/Cor.1:2006 ED1(fr)" }
         let(:pubid) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }
         let(:pubid_without_date) { "ISO/IEC 17025:2005/Cor 1(fr)" }
-        let(:pubid_single_letter_language) { "ISO/IEC 17025:2005/COR 1:2006(F)" }
+        let(:pubid_single_letter_language) { "ISO/IEC 17025:2005/Cor 1:2006(F)" }
         let(:pubid_with_edition) { "ISO/IEC 17025:2005 ED1/Cor 1:2006(fr)" }
         let(:french_pubid) { "ISO/CEI 17025:2005/Cor.1:2006(fr)" }
         let(:urn) { "urn:iso:std:iso-iec:17025:ed-1:cor:2006:v1:fr" }
@@ -547,7 +547,7 @@ module Pubid::Iso
 
       context "ISO/IEC 14496-10:2014/FPDAM 1(en)" do
         let(:original) { "ISO/IEC 14496-10:2014/FPDAM 1(en)" }
-        let(:pubid) { "ISO/IEC 14496-10:2014/DAmd 1(en)" }
+        let(:pubid) { "ISO/IEC 14496-10:2014/DAM 1(en)" }
 
         it_behaves_like "converts pubid to pubid"
       end
