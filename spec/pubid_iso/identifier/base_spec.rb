@@ -644,7 +644,7 @@ module Pubid::Iso
           }
         end
         let(:supplements) do
-          [{ typed_stage: "Amd", number: "2", iteration: "3" }]
+          [{ type: "Amd", number: "2", iteration: "3" }]
         end
 
         it "returns supplement as main identifier" do
@@ -653,13 +653,13 @@ module Pubid::Iso
         end
 
         it "assigns base identifier to supplement" do
-          expect(subject.base).to eq(Identifier.new(number: "1", year: 2016))
+          expect(subject.base).to eq(Identifier::Base.create(number: "1", year: 2016))
         end
 
         context "when have amendment and corrigendum" do
           let(:supplements) do
-            [{ typed_stage: "Amd", number: "1" },
-              { typed_stage: "Cor", number: "2", iteration: "3" }]
+            [{ type: "Amd", number: "1" },
+              { type: "Cor", number: "2", iteration: "3" }]
           end
 
           it "returns corrigendum as main identifier" do
