@@ -14,11 +14,12 @@ module Pubid::Iso::Renderer
     end
 
     def render_identifier(params, opts)
+      space = opts[:language] == :french ? "." : " "
       type_prefix = params[:typed_stage].nil? || params[:typed_stage].empty? ? self.class::TYPE : ""
 
       type_prefix = " #{type_prefix}" if params[:stage].is_a?(Pubid::Iso::Stage) && !params[:stage].empty_abbr?
 
-      "/%{typed_stage}%{stage}#{type_prefix} %{number}%{part}%{iteration}%{year}%{edition}" % params
+      "/%{typed_stage}%{stage}#{type_prefix}#{space}%{number}%{part}%{iteration}%{year}%{edition}" % params
     end
 
     def render_stage(stage, opts, params)
