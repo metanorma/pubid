@@ -15,11 +15,6 @@ module Pubid::Iso
                     :typed_stage,
                     :supplements
 
-      # def_delegators :Base, :type
-      # def_delegators :Base, :type
-
-      # AVAILABLE_TYPES = [Identifier::TechnicalReport, Identifier::InternationalStandard].freeze
-
       # Creates new identifier from options provided, includes options from
       # Pubid::Core::Identifier#initialize
       #
@@ -46,7 +41,6 @@ module Pubid::Iso
       # @see Identifier
       # @see Pubid::Core::Identifier
       # @see Parser
-      #
       def initialize(publisher: "ISO", number: nil, stage: nil, iteration: nil, supplement: nil,
                      joint_document: nil, tctype: nil, sctype: nil, wgtype: nil, tcnumber: nil,
                      scnumber: nil, wgnumber:nil,
@@ -73,7 +67,7 @@ module Pubid::Iso
           else
             @stage = Stage.parse(stage)
           end
-        elsif iteration
+        elsif iteration && !is_a?(Supplement)
           raise Errors::IterationWithoutStageError, "Document without stage cannot have iteration"
         end
 
