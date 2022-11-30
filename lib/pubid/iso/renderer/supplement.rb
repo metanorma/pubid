@@ -4,7 +4,7 @@ module Pubid::Iso::Renderer
     # @param with_edition [Boolean] include edition in output
     # @see Pubid::Core::Renderer::Base for another options
     def render(with_edition: true, with_language_code: :iso, with_date: true, **args)
-      @params[:base].to_s + super +
+      @params[:base].to_s(lang: args[:language], with_edition: with_edition) + super +
         if @params[:base].language
           render_language(@params[:base].language,
                           { with_language_code: with_language_code }, nil).to_s
