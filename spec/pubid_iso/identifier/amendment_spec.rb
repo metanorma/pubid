@@ -2,10 +2,11 @@ module Pubid::Iso
   module Identifier
     RSpec.describe Amendment do
       context "when create amendment identifier" do
-        let(:base) { described_class.new(**{ number: number }.merge(params)) }
+        let(:base) { Identifier::Base.create(**{ number: number }.merge(params)) }
 
-        subject { described_class.new(type: :amd, number: 1, base: base, **amendment_params) }
+        subject { described_class.new(number: 1, base: base, **amendment_params) }
         let(:params) { { year: year } }
+        let(:number) { 123 }
 
         let(:amendment_params) { {} }
         let(:year) { 1999 }
@@ -53,10 +54,10 @@ module Pubid::Iso
           let(:stage) { Stage.new(abbr: :DIS) }
 
           context "when DAmd typed stage" do
-            let(:stage) { "DAmd" }
+            let(:stage) { "DAM" }
 
             it "renders long stage and amendment" do
-              expect(subject.to_s).to eq("ISO #{number}:1999/DAmd 1")
+              expect(subject.to_s).to eq("ISO #{number}:1999/DAM 1")
             end
 
             it "renders short stage and amendment" do
@@ -67,7 +68,7 @@ module Pubid::Iso
               let(:stage) { :damd }
 
               it "renders long stage and amendment" do
-                expect(subject.to_s).to eq("ISO #{number}:1999/DAmd 1")
+                expect(subject.to_s).to eq("ISO #{number}:1999/DAM 1")
               end
             end
           end
@@ -80,7 +81,7 @@ module Pubid::Iso
             end
 
             it "renders short stage and amendment" do
-              expect(subject.to_s(format: :ref_num_short)).to eq("ISO #{number}:1999/CDAM 1")
+              expect(subject.to_s(format: :ref_num_short)).to eq("ISO #{number}:1999/CD Amd 1")
             end
           end
 
@@ -88,7 +89,7 @@ module Pubid::Iso
             let(:stage) { "40.60" }
 
             it "renders long stage and amendment" do
-              expect(subject.to_s).to eq("ISO #{number}:1999/DAmd 1")
+              expect(subject.to_s).to eq("ISO #{number}:1999/DAM 1")
             end
           end
         end

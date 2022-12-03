@@ -18,7 +18,7 @@ module Pubid::Iso
       # Creates new identifier from options provided, includes options from
       # Pubid::Core::Identifier#initialize
       #
-      # @param stage [Stage, TypedStage, Symbol, String] stage or typed stage, e.g. "PWI", "NP", "50.00", Stage.new(abbr: :WD), "DTR"
+      # @param stage [Stage, Symbol, String] stage or typed stage, e.g. "PWI", "NP", "50.00", Stage.new(abbr: :WD), "DTR"
       # @param iteration [Integer] document iteration, eg. "1", "2", "3"
       # @param joint_document [Identifier] joint document
       # @param supplement [Supplement] supplement
@@ -62,10 +62,12 @@ module Pubid::Iso
         if stage
           if stage.is_a?(Stage)
             @stage = stage
+            @typed_stage = resolve_typed_stage(@stage.harmonized_code)
           elsif self.class.has_typed_stage?(stage)
             @typed_stage, @stage = find_typed_stage(stage)
           else
             @stage = Stage.parse(stage)
+            @typed_stage = resolve_typed_stage(@stage.harmonized_code)
           end
         elsif iteration && !is_a?(Supplement)
           raise Errors::IterationWithoutStageError, "Document without stage cannot have iteration"
@@ -105,6 +107,18 @@ module Pubid::Iso
 
         [typed_stage.first,
          Stage.new(harmonized_code: HarmonizedStageCode.new(typed_stage[1][:harmonized_stages]))]
+      end
+
+      # Resolve typed stage using stage harmonized stage code
+      # @param harmonized_code [HarmonizedStageCode]
+      # @return [Symbol, nil] typed stage or nil
+      def resolve_typed_stage(harmonized_code)
+        self.class::TYPED_STAGES.each do |k, v|
+          if v[:harmonized_stages].intersection(harmonized_code.stages).sort == harmonized_code.stages.sort
+            return k
+          end
+        end
+        nil
       end
 
       def self.parse_from_title(title)
@@ -250,7 +264,7 @@ module Pubid::Iso
 
       def get_params
         instance_variables.map do |var|
-          if var.to_s == "@typed_stage"
+          if var.to_s == "@typed_stage" && @typed_stage
             [:typed_stage, self.class::TYPED_STAGES[@typed_stage][:abbr]]
           else
             [var.to_s.gsub("@", "").to_sym, instance_variable_get(var)]
