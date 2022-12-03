@@ -55,6 +55,9 @@ module Pubid::Iso::Renderer
         @prerendered_params[:language].to_s
     end
 
+    def render_base(_base, _opts, _params)
+    end
+
     def render_identifier(params, opts)
       "%{publisher}%{typed_stage}%{stage} %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}" % params
     end
