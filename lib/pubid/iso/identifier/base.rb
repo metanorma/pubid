@@ -62,7 +62,7 @@ module Pubid::Iso
         if stage
           if stage.is_a?(Stage)
             @stage = stage
-            @typed_stage = resolve_typed_stage(@stage.harmonized_code)
+            @typed_stage = resolve_typed_stage(@stage.harmonized_code) unless @stage.abbr
           elsif self.class.has_typed_stage?(stage)
             @typed_stage, @stage = find_typed_stage(stage)
           else
