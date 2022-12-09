@@ -133,7 +133,7 @@ module Pubid::Iso
       class << self
         def create(**opts)
           resolve_identifier(opts[:type], opts[:stage],
-                             opts.except(:type, :stage))
+                             opts.reject { |k, _v| [:type, :stage].include?(k) })
         end
 
         def supplements_has_type?(supplements, type)
