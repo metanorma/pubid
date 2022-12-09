@@ -6,7 +6,7 @@ module Pubid::Iso
       let(:params) { {} }
 
       it "renders document type" do
-        expect(subject.to_s).to eq("ISO TR #{number}")
+        expect(subject.to_s).to eq("ISO/TR #{number}")
       end
 
       it "returns type" do
