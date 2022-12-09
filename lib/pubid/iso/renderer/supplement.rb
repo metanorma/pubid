@@ -1,5 +1,7 @@
 module Pubid::Iso::Renderer
   class Supplement < Base
+    TYPE = "SUP".freeze
+
     # Render identifier
     # @param with_edition [Boolean] include edition in output
     # @see Pubid::Core::Renderer::Base for another options
@@ -17,14 +19,28 @@ module Pubid::Iso::Renderer
       space = opts[:language] == :french ? "." : " "
       type_prefix = params[:typed_stage].nil? || params[:typed_stage].empty? ? self.class::TYPE : ""
 
-      type_prefix = " #{type_prefix}" if params[:stage].is_a?(Pubid::Iso::Stage) && !params[:stage].empty_abbr?
+      if params[:stage].is_a?(Pubid::Iso::Stage) && !params[:stage].empty_abbr?
+        type_prefix = " #{type_prefix}"
+      end
 
-      "/%{typed_stage}%{stage}#{type_prefix}#{space}%{number}%{part}%{iteration}%{year}%{edition}" % params
+      if self.class == Supplement
+        "%{typed_stage}%{stage}%{publisher} #{type_prefix}%{number}%{part}%{iteration}%{year}%{edition}" % params
+      else
+        "/%{typed_stage}%{stage}#{type_prefix}#{space}%{number}%{part}%{iteration}%{year}%{edition}" % params
+      end
     end
 
     def render_stage(stage, opts, params)
       # do not render stage when already has typed stage
       stage unless params[:typed_stage]
+    end
+
+    def render_publisher(publisher, opts, params)
+      " #{publisher}" unless publisher.empty?
+    end
+
+    def render_edition(edition, opts, _params)
+      " Edition #{edition}" if opts[:with_edition]
     end
   end
 end

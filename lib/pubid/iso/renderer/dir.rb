@@ -1,7 +1,7 @@
 module Pubid::Iso::Renderer
   class Dir < Base
 
-    def render_identifier(params)
+    def render_identifier(params, opts)
       res = ("%{publisher} DIR%{dirtype}%{number}%{year}%{supplement}" % params)
 
       if params.key?(:joint_document)

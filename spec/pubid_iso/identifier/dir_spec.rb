@@ -1,5 +1,5 @@
 module Pubid::Iso
-  RSpec.describe Identifier do
+  RSpec.describe Identifier::Base do
     subject { described_class.parse(original || pubid) }
     let(:original) { nil }
 
@@ -51,10 +51,11 @@ module Pubid::Iso
 
     context "ISO/IEC DIR 1 ISO SUP Edition 13" do
       let(:pubid) { "ISO/IEC DIR 1 ISO SUP Edition 13" }
+      let(:pubid_with_edition) { "ISO/IEC DIR 1 ISO SUP Edition 13" }
       let(:urn) { "urn:iso:doc:iso-iec:dir:1:sup:iso:ed-13" }
 
       it_behaves_like "converts pubid to urn"
-      it_behaves_like "converts pubid to pubid"
+      it_behaves_like "converts to pubid with edition"
     end
 
     context "ISO/IEC DIR 1:2022 + IEC SUP:2022" do

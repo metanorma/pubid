@@ -150,8 +150,8 @@ module Pubid::Iso
           supplements = supplements_params.map do |supplement|
             create(number: supplement[:number], year: supplement[:year],
                 stage: supplement[:typed_stage], edition: supplement[:edition],
-                iteration: supplement[:iteration], type: supplement[:type],
-                base: create(**base_params))
+                iteration: supplement[:iteration], type: (supplement[:type] || !supplement[:typed_stage] && :sup),
+                publisher: supplement[:publisher], base: create(**base_params))
           end
 
           return supplements.first if supplements.count == 1
@@ -272,6 +272,43 @@ module Pubid::Iso
         end.to_h
       end
 
+      # @param format [:ref_num_short,:ref_num_long,:ref_dated,:ref_dated_long,:ref_undated,:ref_undated_long] create reference with specified format
+      # Format options are:
+      #   :ref_num_short -- instance reference number: 1 letter language code + short form (DAM) + dated
+      #   :ref_num_long -- instance reference number long: 2 letter language code + long form (DAmd) + dated
+      #   :ref_dated -- reference dated: no language code + short form (DAM) + dated
+      #   :ref_dated_long -- reference dated long: no language code + short form (DAM) + dated
+      #   :ref_undated -- reference undated: no language code + short form (DAM) + undated
+      #   :ref_undated_long -- reference undated long: 1 letter language code + long form (DAmd) + undated
+      def resolve_format(format = :ref_dated_long)
+        options = { with_date: true }
+        case format
+        when :ref_num_short
+          options[:with_language_code] = :single
+          options[:stage_format_long] = false
+        when :ref_num_long
+          options[:with_language_code] = :iso
+          options[:stage_format_long] = true
+        when :ref_dated
+          options[:with_language_code] = :none
+          options[:stage_format_long] = false
+        when :ref_dated_long
+          options[:with_language_code] = :none
+          options[:stage_format_long] = true
+        when :ref_undated
+          options[:with_language_code] = :none
+          options[:stage_format_long] = false
+          options[:with_date] = false
+        when :ref_undated_long
+          options[:with_language_code] = :none
+          options[:stage_format_long] = true
+          options[:with_date] = false
+        else
+          raise Errors::WrongFormat, "#{format} is not available"
+        end
+        options
+      end
+
       # Renders pubid identifier
       #
       # @param lang [:french,:russian] use language specific renderer
@@ -288,48 +325,22 @@ module Pubid::Iso
       #   :ref_undated -- reference undated: no language code + short form (DAM) + undated
       #   :ref_undated_long -- reference undated long: 1 letter language code + long form (DAmd) + undated
       # @return [String] pubid identifier
-      def to_s(lang: nil, with_date: true,
-               with_edition: false, with_prf: false,
+      def to_s(lang: nil, with_edition: false, with_prf: false,
                format: :ref_dated_long)
-        with_language_code = nil
-        stage_format_long = nil
-        if format
-          case format
-          when :ref_num_short
-            with_language_code = :single
-            stage_format_long = false
-          when :ref_num_long
-            with_language_code = :iso
-            stage_format_long = true
-          when :ref_dated
-            with_language_code = :none
-            stage_format_long = false
-          when :ref_dated_long
-            with_language_code = :none
-            stage_format_long = true
-          when :ref_undated
-            with_language_code = :none
-            stage_format_long = false
-            with_date = false
-          when :ref_undated_long
-            with_language_code = :none
-            stage_format_long = true
-            with_date = false
-          else
-            raise Errors::WrongFormat, "#{format} is not available"
-          end
-        end
 
-        self.class.get_renderer_class.new(get_params).render(
-          with_date: with_date,
-          with_language_code: with_language_code,
-          with_edition: with_edition,
-          stage_format_long: stage_format_long,
-          with_prf: with_prf, language: lang
-        ) +
+        options = resolve_format(format)
+        options[:with_edition] = with_edition
+        options[:with_prf] = with_prf
+        options[:language] = lang
+
+        self.class.get_renderer_class.new(get_params).render(**options) +
           if @joint_document
-            "|#{@joint_document}"
+            render_joint_document(@joint_document)
           end.to_s
+      end
+
+      def render_joint_document(joint_document)
+        "|#{@joint_document}"
       end
 
       # Return typed stage abbreviation, eg. "FDTR", "DIS", "TR"

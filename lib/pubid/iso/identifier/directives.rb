@@ -12,6 +12,15 @@ module Pubid::Iso
       def self.get_renderer_class
         Renderer::Dir
       end
+
+      def urn
+        Renderer::UrnDir.new(get_params).render
+      end
+
+      def render_joint_document(joint_document)
+        # remove "DIR" for short joint document format
+        "#{@joint_document}".sub(" DIR", "")
+      end
     end
   end
 end

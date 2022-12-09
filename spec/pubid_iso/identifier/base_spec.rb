@@ -398,7 +398,7 @@ module Pubid::Iso
       context "ISO/IEC 17025:2005/Cor.1:2006(fr)" do
         let(:original) { "ISO/IEC 17025:2005/Cor.1:2006 ED1(fr)" }
         let(:pubid) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }
-        let(:pubid_without_date) { "ISO/IEC 17025:2005/Cor 1(fr)" }
+        let(:pubid_without_date) { "ISO/IEC 17025:2005/Cor 1" }
         let(:pubid_single_letter_language) { "ISO/IEC 17025:2005/Cor 1:2006(F)" }
         let(:pubid_with_edition) { "ISO/IEC 17025:2005 ED1/Cor 1:2006(fr)" }
         let(:french_pubid) { "ISO/CEI 17025:2005/Cor.1:2006(fr)" }
@@ -409,7 +409,7 @@ module Pubid::Iso
         it_behaves_like "converts pubid to french pubid"
 
         it "converts to pubid without date" do
-          expect(subject.to_s(format: :ref_num_long, with_date: false)).to eq(pubid_without_date)
+          expect(subject.to_s(format: :ref_undated_long)).to eq(pubid_without_date)
         end
 
         it "converts to pubid with single letter language code" do

@@ -14,46 +14,26 @@ module Pubid::Iso
     rule(supplements: subtree(:supplements)) do |context|
       context[:supplements] =
         context[:supplements].map do |supplement|
-          supplement.merge(
-            case supplement[:typed_stage]
-            when "PDAM"
-              { typed_stage: "CD", type: "Amd" }
-            when "pDCOR"
-              { typed_stage: "CD", type: "Cor" }
-            when "FPDAM"
-              { typed_stage: "DAM" }
-            when "FDAmd"
-              { typed_stage: "FDAM" }
-            when "FDCor", "FCOR"
-              { typed_stage: "FDCOR" }
-            else
-              {}
-            end
-          )
-        end
-      context
-    end
-
-    rule(amendments: subtree(:amendments)) do |context|
-      context[:amendments] =
-        context[:amendments].map do |amendment|
-          Amendment.new(
-            number: amendment[:number],
-            year: amendment[:year],
-            typed_stage: amendment[:stage] && convert_stage(amendment[:stage]),
-            iteration: amendment[:iteration])
-        end
-      context
-    end
-
-    rule(corrigendums: subtree(:corrigendums)) do |context|
-      context[:corrigendums] =
-        context[:corrigendums].map do |corrigendum|
-          Corrigendum.new(
-            number: corrigendum[:number],
-            year: corrigendum[:year],
-            typed_stage: corrigendum[:stage] && convert_stage(corrigendum[:stage]),
-            iteration: corrigendum[:iteration])
+          if supplement[:typed_stage]
+            supplement.merge(
+              case supplement[:typed_stage]
+              when "PDAM"
+                { typed_stage: "CD", type: "Amd" }
+              when "pDCOR"
+                { typed_stage: "CD", type: "Cor" }
+              when "FPDAM"
+                { typed_stage: "DAM" }
+              when "FDAmd"
+                { typed_stage: "FDAM" }
+              when "FDCor", "FCOR"
+                { typed_stage: "FDCOR" }
+              else
+                {}
+              end
+            )
+          else
+            supplement
+          end
         end
       context
     end
@@ -109,28 +89,34 @@ module Pubid::Iso
       { publisher: russian_publisher&.to_s || publisher }
     end
 
-    rule(publisher: simple(:publisher), supplement: subtree(:supplement)) do |context|
-      context[:supplement] =
-        Supplement.new(number: context[:supplement][:number],
-                       year: context[:supplement][:year],
-                       publisher: context[:supplement][:publisher],
-                       edition: context[:supplement][:edition])
-      context
-    end
-
-    rule(supplement: subtree(:supplement)) do |context|
-      context[:supplement] =
-        Supplement.new(number: context[:supplement][:number],
-                       year: context[:supplement][:year],
-                       publisher: context[:supplement][:publisher],
-                       edition: context[:supplement][:edition])
-      context
-    end
+    # rule(publisher: simple(:publisher), supplement: subtree(:supplement)) do |context|
+    #   context[:supplement] =
+    #     Supplement.new(number: context[:supplement][:number],
+    #                    year: context[:supplement][:year],
+    #                    publisher: context[:supplement][:publisher],
+    #                    edition: context[:supplement][:edition])
+    #   context
+    # end
+    #
+    # rule(supplement: subtree(:supplement)) do |context|
+    #   context[:supplement] =
+    #     Identifier::Supplement.new(number: context[:supplement][:number],
+    #                    year: context[:supplement][:year],
+    #                    publisher: context[:supplement][:publisher],
+    #                    edition: context[:supplement][:edition])
+    #   context
+    # end
 
     rule(joint_document: subtree(:joint_document)) do |context|
       context[:joint_document] =
         Identifier::Base.create(**context[:joint_document])
       context
+    end
+
+    rule(dir_joint_document: subtree(:dir_joint_document)) do |context|
+      context[:joint_document] =
+        Identifier::Base.transform(**(context[:dir_joint_document].merge(type: :dir)))
+      context.select { |k, v| k != :dir_joint_document }
     end
 
     def self.convert_stage(code)

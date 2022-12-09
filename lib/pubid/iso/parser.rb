@@ -116,7 +116,7 @@ module Pubid::Iso
         (digits.as(:number) >> (str(":") >> year).maybe).maybe >>
         (str(" -- Consolidated").maybe >> (space? >> (organization.as(:publisher) >> space).maybe >>
           (str("SUP") | str("Supplement")) >> (str(":") >> year).maybe >>
-          dir_supplement_edition.maybe).as(:supplement)).maybe
+          dir_supplement_edition.maybe).repeat(1).as(:supplements)).maybe
     end
 
     rule(:std_document_body) do
@@ -146,7 +146,7 @@ module Pubid::Iso
         (typed_stage.as(:stage) >> space).maybe >>
         originator >> (space | str("/")) >>
         (tc_document_body | std_document_body | (dir_document_body >>
-          (str(" + ") >> (originator >> space >> dir_document_body).as(:joint_document)).maybe))
+          (str(" + ") >> (originator >> space >> dir_document_body).as(:dir_joint_document)).maybe))
     end
 
     rule(:root) { identifier }

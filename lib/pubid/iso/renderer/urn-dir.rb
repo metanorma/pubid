@@ -5,9 +5,15 @@ module Pubid::Iso::Renderer
       res = ("urn:iso:doc:%{publisher}%{copublisher}:dir%{dirtype}%{number}%{year}%{supplement}" % params)
 
       if params.key?(:joint_document)
-        joint_params = prerender_params(params[:joint_document].get_params, {})
-        joint_params.default = ""
-        res += (":%{publisher}%{copublisher}%{dirtype}%{number}%{supplement}" % joint_params)
+        if params[:joint_document].is_a?(Pubid::Iso::Identifier::Supplement)
+          joint_params = params[:joint_document].get_params
+          res += ":#{joint_params[:base].publisher.downcase}:sup:%{year}" % joint_params
+        else
+          joint_params = prerender_params(params[:joint_document].get_params, {})
+          joint_params.default = ""
+          res += (":%{publisher}%{copublisher}%{dirtype}%{number}%{supplement}" % joint_params)
+        end
+
       end
 
       res
