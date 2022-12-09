@@ -1,10 +1,10 @@
 module Pubid::Iso
-  RSpec.describe Identifier do
+  RSpec.describe Identifier::Base do
     subject { described_class.parse(original || pubid) }
     let(:original) { nil }
 
     context "ISO TC 184/SC 4 N1110" do
-      let(:pubid) { "ISO TC 184/SC 4 N1110" }
+      let(:pubid) { "ISO/TC 184/SC 4 N1110" }
       let(:urn) { "urn:iso:doc:iso:tc:184:sc:4:1110" }
 
       it_behaves_like "converts pubid to urn"
@@ -20,7 +20,7 @@ module Pubid::Iso
     end
 
     context "ISO/TC 184/SC/QC 4 N265" do
-      let(:pubid) { "ISO TC 184/SC/QC 4 N265" }
+      let(:pubid) { "ISO/TC 184/SC/QC 4 N265" }
       let(:urn) { "urn:iso:doc:iso:tc:184:sc:4:qc:265" }
 
       it_behaves_like "converts pubid to urn"
@@ -29,7 +29,7 @@ module Pubid::Iso
 
     context "ISO/TC 46 N 3064" do
       let(:original) { "ISO/TC 46 N 3064" }
-      let(:pubid) { "ISO TC 46 N3064" }
+      let(:pubid) { "ISO/TC 46 N3064" }
       let(:urn) { "urn:iso:doc:iso:tc:46:3064" }
 
       it_behaves_like "converts pubid to urn"
@@ -38,7 +38,7 @@ module Pubid::Iso
 
     context "ISO/TC 184/SC 4/WG 12 N10897" do
       let(:original) { "ISO/TC 184/SC 4/WG 12 N10897" }
-      let(:pubid) { "ISO TC 184/SC 4/WG 12 N10897" }
+      let(:pubid) { "ISO/TC 184/SC 4/WG 12 N10897" }
       let(:urn) { "urn:iso:doc:iso:tc:184:sc:4:wg:12:10897" }
 
       it_behaves_like "converts pubid to urn"
@@ -54,7 +54,7 @@ module Pubid::Iso
 
     context "ISO/TC 154/WG 5 N152" do
       let(:original) { "ISO/TC 154/WG 5 N152" }
-      let(:pubid) { "ISO TC 154/WG 5 N152" }
+      let(:pubid) { "ISO/TC 154/WG 5 N152" }
       let(:urn) { "urn:iso:doc:iso:tc:154:wg:5:152" }
 
       it_behaves_like "converts pubid to urn"
@@ -63,7 +63,7 @@ module Pubid::Iso
 
     context "ISO/TMB/DMT 154/WG 5 N152" do
       let(:original) { "ISO/TMB/DMT 154/WG 5 N152" }
-      let(:pubid) { "ISO DMT/TMB 154/WG 5 N152" }
+      let(:pubid) { "ISO/DMT/TMB 154/WG 5 N152" }
       let(:urn) { "urn:iso:doc:iso:dmt:tmb:154:wg:5:152" }
 
       it_behaves_like "converts pubid to urn"

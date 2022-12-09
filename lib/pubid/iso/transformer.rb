@@ -72,6 +72,11 @@ module Pubid::Iso
                         end }
     end
 
+    rule(tctype: subtree(:tctype))  do |context|
+      context[:type] = :tc
+      context
+    end
+
     rule(copublisher: simple(:copublisher)) do
       russian_copublisher = Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:publisher].key(copublisher.to_s)
       { copublisher: russian_copublisher&.to_s ||
@@ -88,24 +93,6 @@ module Pubid::Iso
       russian_publisher = Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:publisher].key(publisher.to_s)
       { publisher: russian_publisher&.to_s || publisher }
     end
-
-    # rule(publisher: simple(:publisher), supplement: subtree(:supplement)) do |context|
-    #   context[:supplement] =
-    #     Supplement.new(number: context[:supplement][:number],
-    #                    year: context[:supplement][:year],
-    #                    publisher: context[:supplement][:publisher],
-    #                    edition: context[:supplement][:edition])
-    #   context
-    # end
-    #
-    # rule(supplement: subtree(:supplement)) do |context|
-    #   context[:supplement] =
-    #     Identifier::Supplement.new(number: context[:supplement][:number],
-    #                    year: context[:supplement][:year],
-    #                    publisher: context[:supplement][:publisher],
-    #                    edition: context[:supplement][:edition])
-    #   context
-    # end
 
     rule(joint_document: subtree(:joint_document)) do |context|
       context[:joint_document] =
