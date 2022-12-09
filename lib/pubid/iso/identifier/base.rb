@@ -114,7 +114,7 @@ module Pubid::Iso
       # @return [Symbol, nil] typed stage or nil
       def resolve_typed_stage(harmonized_code)
         self.class::TYPED_STAGES.each do |k, v|
-          if v[:harmonized_stages].intersection(harmonized_code.stages).sort == harmonized_code.stages.sort
+          if (v[:harmonized_stages] & harmonized_code.stages) == harmonized_code.stages
             return k
           end
         end
