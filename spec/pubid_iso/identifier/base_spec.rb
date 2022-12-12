@@ -499,6 +499,14 @@ module Pubid::Iso
         let(:pubid) { "ISO/IEC WD TS 25025" }
         let(:urn) { "urn:iso:std:iso-iec:ts:25025:stage-draft" }
 
+        it "return typed_stage_abbrev" do
+          expect(subject.typed_stage_abbrev).to eq("WD TS")
+        end
+
+        it "return typed_stage_name" do
+          expect(subject.typed_stage_name).to eq("Working Draft Technical Specification")
+        end
+
         it_behaves_like "converts pubid to urn"
         it_behaves_like "converts pubid to pubid"
       end

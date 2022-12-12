@@ -353,14 +353,26 @@ module Pubid::Iso
         "|#{@joint_document}"
       end
 
+      def humanize_class_name
+        self.class.to_s.split("::").last.gsub(/[a-zA-Z](?=[A-Z])/, '\0 ')
+      end
+
       # Return typed stage abbreviation, eg. "FDTR", "DIS", "TR"
       def typed_stage_abbrev
-        self.class::TYPED_STAGES[typed_stage][:abbr]
+        if self.class::TYPED_STAGES.key?(typed_stage)
+          self.class::TYPED_STAGES[typed_stage][:abbr]
+        else
+          "#{stage.abbr} #{type.to_s.upcase}"
+        end
       end
 
       # Return typed stage name, eg. "Final Draft Technical Report" for "FDTR"
       def typed_stage_name
-        self.class::TYPED_STAGES[typed_stage][:name]
+        if self.class::TYPED_STAGES.key?(typed_stage)
+          self.class::TYPED_STAGES[typed_stage][:name]
+        else
+          "#{stage.name} #{humanize_class_name}"
+        end
       end
 
       def ==(other)
