@@ -33,7 +33,7 @@ module Pubid::Iso
 
       context "IWA 8:2009" do
         let(:pubid) { "IWA 8:2009" }
-        let(:urn) { "urn:iso:std:iwa:8" }
+        let(:urn) { "urn:iso:std:iso:iwa:8" }
 
         it_behaves_like "converts pubid to urn"
         it_behaves_like "converts pubid to pubid"
@@ -487,8 +487,8 @@ module Pubid::Iso
 
       context "AWI IWA 36" do
         let(:original) { "AWI IWA 36" }
-        let(:pubid) { "IWA/AWI 36" }
-        let(:urn) { "urn:iso:std:iwa:36:stage-draft" }
+        let(:pubid) { "AWI IWA 36" }
+        let(:urn) { "urn:iso:std:iso:iwa:36:stage-draft" }
 
         it_behaves_like "converts pubid to urn"
         it_behaves_like "converts pubid to pubid"
@@ -676,6 +676,38 @@ module Pubid::Iso
         let(:pubid) { "ISO/TTA 5:2007" }
 
         it_behaves_like "converts pubid to pubid"
+      end
+
+      context "ISO/IWA 32:2019(en)" do
+        let(:original) { "ISO/IWA 32:2019(en)" }
+        let(:pubid) { "IWA 32:2019(en)" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IWA 32:2019(en)" do
+        let(:pubid) { "IWA 32:2019(en)" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "CD IWA 37-3" do
+        let(:pubid) { "CD IWA 37-3" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "ISO/WD IWA 19" do
+        let(:original) { "ISO/WD IWA 19" }
+        let(:pubid) { "WD IWA 19" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "PRF IWA 36" do
+        let(:pubid) { "PRF IWA 36" }
+
+        it_behaves_like "converts pubid to pubid with prf"
       end
 
       describe "#parse_from_title" do

@@ -31,7 +31,7 @@ module Pubid::Iso
       "CPAG", "CSC", "ITSAG", "CSC/FIN", "CSC/NOM", "CSC/OVE",
       "CSC/SP", "CSC/FIN", "JAG"].freeze
 
-    ORGANIZATIONS = %w[IEC IEEE CIW SAE CIE ASME ASTM OECD ISO IWA HL7 CEI].freeze
+    ORGANIZATIONS = %w[IEC IEEE CIW SAE CIE ASME ASTM OECD ISO HL7 CEI].freeze
     rule(:stage) do
       array_to_str(Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:stage].values) | array_to_str(STAGES)
     end
@@ -156,7 +156,7 @@ module Pubid::Iso
         (guide_prefix.as(:type) >> space).maybe >>
         (stage.as(:stage) >> space).maybe >>
         (typed_stage.as(:stage) >> space).maybe >>
-        originator >> (space | str("/")) >>
+        (originator >> (space | str("/"))).maybe >>
         (tc_document_body | std_document_body | (dir_document_body >>
           (str(" + ") >> (originator >> space >> dir_document_body).as(:dir_joint_document)).maybe))
     end
