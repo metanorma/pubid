@@ -672,6 +672,12 @@ module Pubid::Iso
         it_behaves_like "converts pubid to pubid"
       end
 
+      context "ISO/TTA 5:2007" do
+        let(:pubid) { "ISO/TTA 5:2007" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
       describe "#parse_from_title" do
         subject { described_class.parse_from_title(title) }
         let(:title) { "#{pubid} Geographic information — Metadata — Part 1: Fundamentals" }
