@@ -12,7 +12,7 @@ module Pubid::Iso
         fdpas: {
           abbr: "FDPAS",
           name: "Publicly Available Specification Final Draft",
-          harmonized_stages: %w[50.00 50.20 50.60 50.92],
+          harmonized_stages: %w[50.00 50.20 50.60 50.92 50.98 50.99],
         },
       }.freeze
 

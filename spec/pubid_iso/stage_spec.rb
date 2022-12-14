@@ -41,8 +41,8 @@ module Pubid::Iso
           end
         end
 
-        context "when harmonized_code 50.20" do
-          let(:harmonized_code) { "50.20" }
+        context "when harmonized_code 60.00" do
+          let(:harmonized_code) { "60.00" }
 
           it "returns abbreviated code" do
             expect(subject.abbr).to eq(nil)
@@ -73,8 +73,8 @@ module Pubid::Iso
           end
         end
 
-        context "when harmonized_code 60.00" do
-          let(:harmonized_code) { "60.00" }
+        context "when harmonized_code 50.20" do
+          let(:harmonized_code) { "50.20" }
 
           it "returns abbreviated code" do
             expect(subject.abbr).to eq(:PRF)

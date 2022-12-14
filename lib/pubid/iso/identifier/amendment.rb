@@ -12,7 +12,7 @@ module Pubid::Iso
         fdamd: {
           abbr: "FDAM",
           name: "Final Draft Amendment",
-          harmonized_stages: %w[50.00 50.20 50.60 50.92],
+          harmonized_stages: %w[50.00 50.20 50.60 50.92 50.98 50.99],
         },
       }.freeze
       def initialize(publisher: "ISO", number: nil, stage: nil, iteration: nil, supplement: nil,

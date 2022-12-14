@@ -50,7 +50,7 @@ module Pubid::Iso
       context "FprISO 105-A03" do
         let(:original) { "FprISO 105-A03" }
         let(:pubid) { "ISO/PRF 105-A03" }
-        let(:urn) { "urn:iso:std:iso:105:-A03:stage-60.00" }
+        let(:urn) { "urn:iso:std:iso:105:-A03:stage-draft" }
 
         it_behaves_like "converts pubid to urn"
         it_behaves_like "converts pubid to pubid with prf"

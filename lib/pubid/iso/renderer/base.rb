@@ -131,7 +131,8 @@ module Pubid::Iso::Renderer
       typed_stage.to_s
     end
 
-    def render_stage(stage, opts, _params)
+    def render_stage(stage, opts, params)
+      return if params[:typed_stage]
       return if stage.empty_abbr?(with_prf: opts[:with_prf])
 
       if opts[:language]

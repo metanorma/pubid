@@ -7,8 +7,7 @@ module Pubid::Iso
                AWI: %w[20.00 10.99],
                WD: %w[20.20 20.60 20.98 20.99],
                CD: %w[30.00 30.20 30.60 30.92 30.98 30.99],
-               PRF: "60.00" }.freeze
-
+               PRF: %w[50.00 50.20 50.60 50.92 50.98 50.99] }.freeze
 
     STAGE_NAMES = {
       WD: "Working Draft",

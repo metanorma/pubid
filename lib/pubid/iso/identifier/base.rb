@@ -67,7 +67,7 @@ module Pubid::Iso
             @typed_stage, @stage = find_typed_stage(stage)
           else
             @stage = Stage.parse(stage)
-            @typed_stage = resolve_typed_stage(@stage.harmonized_code)
+            @typed_stage = resolve_typed_stage(@stage.harmonized_code) if @stage.empty_abbr?(with_prf: true)
           end
         elsif iteration && !is_a?(Supplement)
           raise Errors::IterationWithoutStageError, "Document without stage cannot have iteration"

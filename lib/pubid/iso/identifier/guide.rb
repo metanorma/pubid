@@ -12,7 +12,7 @@ module Pubid::Iso
         fdguide: {
           abbr: "FDGuide",
           name: "Final Draft Guide",
-          harmonized_stages: %w[50.00 50.20 50.60 50.92],
+          harmonized_stages: %w[50.00 50.20 50.60 50.92 50.98 50.99],
         },
       }.freeze
 

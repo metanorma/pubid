@@ -12,7 +12,7 @@ module Pubid::Iso
         fdis: {
           abbr: "FDIS",
           name: "Final Draft International Standard",
-          harmonized_stages: %w[50.00 50.20 50.60 50.92],
+          harmonized_stages: %w[50.00 50.20 50.60 50.92 50.98 50.99],
         },
       }.freeze
 
