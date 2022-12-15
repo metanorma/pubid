@@ -17,7 +17,7 @@ module Pubid::Iso
       }.freeze
 
       def self.type
-        :isp
+        { key: :isp, title: "International Standardized Profile" }
       end
 
       def self.get_renderer_class
