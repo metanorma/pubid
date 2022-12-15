@@ -14,7 +14,7 @@ module Pubid::Iso
         end
 
         it "assigns default type" do
-          expect(subject.type).to eq(:is)
+          expect(subject.type[:key]).to eq(:is)
         end
 
         context "when have joint document" do

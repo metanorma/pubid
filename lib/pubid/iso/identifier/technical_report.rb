@@ -17,7 +17,7 @@ module Pubid::Iso
       }.freeze
 
       def self.type
-        :tr
+        { key: :tr, title: "Technical Report" }
       end
 
       def self.get_renderer_class

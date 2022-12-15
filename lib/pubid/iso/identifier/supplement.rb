@@ -8,7 +8,7 @@ module Pubid::Iso
       end
 
       def self.type
-        :sup
+        { key: :sup, title: "Supplement" }
       end
 
       def self.get_renderer_class

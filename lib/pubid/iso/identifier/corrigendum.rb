@@ -33,7 +33,7 @@ module Pubid::Iso
       end
 
       def self.type
-        :cor
+        { key: :cor, title: "Corrigendum" }
       end
 
       def self.get_renderer_class

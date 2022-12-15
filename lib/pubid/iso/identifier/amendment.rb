@@ -32,7 +32,7 @@ module Pubid::Iso
       end
 
       def self.type
-        :amd
+        { key: :amd, title: "Amendment" }
       end
 
       def self.get_renderer_class

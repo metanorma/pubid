@@ -10,7 +10,7 @@ module Pubid::Iso
       end
 
       it "returns type" do
-        expect(subject.type).to eq(:tr)
+        expect(subject.type[:key]).to eq(:tr)
       end
 
       it "renders URN" do

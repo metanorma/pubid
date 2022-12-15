@@ -6,7 +6,7 @@ module Pubid::Iso
       TYPED_STAGES = {}.freeze
 
       def self.type
-        :tc
+        { key: :tc, title: "Technical Committee" }
       end
 
       def self.get_renderer_class

@@ -144,12 +144,12 @@ module Pubid::Iso
 
         def supplements_has_type?(supplements, type)
           supplements.any? do |supplement|
-            supplement.type == type
+            supplement.type[:key] == type
           end
         end
 
         def supplement_by_type(supplements, type)
-          supplements.select { |supplement| supplement.type == type }.first
+          supplements.select { |supplement| supplement.type[:key] == type }.first
         end
 
         def transform_supplements(supplements_params, base_params)
@@ -197,7 +197,7 @@ module Pubid::Iso
         # @param type [Symbol] eg. :tr, :ts
         # @return [Boolean] true if provided type matches with identifier's class type
         def has_type?(type)
-          type.to_s.downcase.to_sym == self.type
+          type.to_s.downcase.to_sym == self.type[:key]
         end
 
         # @param typed_stage [String, Symbol] typed stage, eg. "DTR" or :dtr
@@ -268,7 +268,7 @@ module Pubid::Iso
       # @return [String] URN identifier
       def urn
         ((@tctype && Renderer::UrnTc) || Pubid::Iso::Renderer::Urn).new(
-          get_params.merge({ type: type }),
+          get_params.merge({ type: type[:key] }),
         ).render + (language ? ":#{language}" : "")
       end
 
@@ -353,16 +353,12 @@ module Pubid::Iso
         "|#{@joint_document}"
       end
 
-      def humanize_class_name
-        self.class.to_s.split("::").last.gsub(/[a-zA-Z](?=[A-Z])/, '\0 ')
-      end
-
       # Return typed stage abbreviation, eg. "FDTR", "DIS", "TR"
       def typed_stage_abbrev
         if self.class::TYPED_STAGES.key?(typed_stage)
           self.class::TYPED_STAGES[typed_stage][:abbr]
         else
-          "#{stage.abbr} #{type.to_s.upcase}"
+          "#{stage.abbr} #{type[:key].to_s.upcase}"
         end
       end
 
@@ -371,7 +367,7 @@ module Pubid::Iso
         if self.class::TYPED_STAGES.key?(typed_stage)
           self.class::TYPED_STAGES[typed_stage][:name]
         else
-          "#{stage.name} #{humanize_class_name}"
+          "#{stage.name} #{type[:title]}"
         end
       end
 

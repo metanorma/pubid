@@ -23,7 +23,7 @@ module Pubid::Iso
       end
 
       def self.type
-        :guide
+        { key: :guide, title: "Guide" }
       end
     end
   end

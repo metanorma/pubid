@@ -190,7 +190,7 @@ module Pubid::Iso
         end
 
         it "shoud have type :amd" do
-          expect(subject.type).to eq(:amd)
+          expect(subject.type[:key]).to eq(:amd)
         end
 
         it_behaves_like "converts pubid to pubid"
@@ -234,11 +234,11 @@ module Pubid::Iso
         it_behaves_like "converts pubid to pubid"
 
         it "should have type :cor" do
-          expect(subject.type).to eq(:cor)
+          expect(subject.type[:key]).to eq(:cor)
         end
 
         it "should have amendment as base identifier" do
-          expect(subject.base.type).to eq(:amd)
+          expect(subject.base.type[:key]).to eq(:amd)
         end
 
         it "should have base document for amendment" do
@@ -615,7 +615,7 @@ module Pubid::Iso
         it_behaves_like "converts pubid to urn"
 
         it "has assigned IS type" do
-          expect(subject.type).to eq(:is)
+          expect(subject.type[:key]).to eq(:is)
         end
       end
 
@@ -696,7 +696,7 @@ module Pubid::Iso
 
         it "returns supplement as main identifier" do
           expect(subject.number).to eq("2")
-          expect(subject.type).to eq(:amd)
+          expect(subject.type[:key]).to eq(:amd)
         end
 
         it "assigns base identifier to supplement" do
@@ -710,11 +710,11 @@ module Pubid::Iso
           end
 
           it "returns corrigendum as main identifier" do
-            expect(subject.type).to eq(:cor)
+            expect(subject.type[:key]).to eq(:cor)
           end
 
           it "assigns amendment as base for corrigendum" do
-            expect(subject.base.type).to eq(:amd)
+            expect(subject.base.type[:key]).to eq(:amd)
           end
         end
       end
@@ -728,7 +728,7 @@ module Pubid::Iso
           let(:type) { :tr }
 
           it { is_expected.to a_kind_of(Identifier::TechnicalReport) }
-          it { expect(subject.type).to eq(:tr) }
+          it { expect(subject.type[:key]).to eq(:tr) }
         end
 
         context "when DTR" do

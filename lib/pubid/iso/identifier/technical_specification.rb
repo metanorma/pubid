@@ -17,7 +17,7 @@ module Pubid::Iso
       }.freeze
 
       def self.type
-        :ts
+        { key: :ts, title: "Technical Specification" }
       end
 
       def self.get_renderer_class

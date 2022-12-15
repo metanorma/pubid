@@ -6,7 +6,7 @@ module Pubid::Iso
       TYPED_STAGES = {}.freeze
 
       def self.type
-        :dir
+        { key: :dir, title: "Directives" }
       end
 
       def self.get_renderer_class

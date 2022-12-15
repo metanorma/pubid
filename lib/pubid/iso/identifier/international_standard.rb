@@ -31,7 +31,7 @@ module Pubid::Iso
 
 
       def self.type
-        :is
+        { key: :is, title: "International Standard" }
       end
     end
   end
