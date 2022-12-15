@@ -4,12 +4,12 @@ module Pubid::Iso
       def_delegators 'Pubid::Iso::Identifier::TechnologyTrendsAssessments', :type
 
       TYPED_STAGES = {
-        dts: {
+        dtta: {
           abbr: "DTTA",
           name: "Technology Trends Assessments Draft",
           harmonized_stages: %w[40.00 40.20 40.60 40.92 40.93 50.00 50.20 50.60 50.92],
         },
-        fdts: {
+        fdtta: {
           abbr: "FDTTA",
           name: "Technology Trends Assessments Final Draft",
           harmonized_stages: %w[50.00 50.20 50.60 50.92],
