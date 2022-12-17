@@ -101,7 +101,13 @@ module Pubid::Iso
           if v[:abbr].is_a?(Hash)
             v[:abbr].value?(typed_stage)
           else
-            v[:abbr] == typed_stage
+            if v.key?(:legacy_abbr)
+              v[:legacy_abbr].include?(typed_stage) || v[:abbr] == typed_stage
+            else
+              v[:abbr] == typed_stage
+            end
+            #
+            # v[:abbr] == typed_stage
           end
         end
 
@@ -203,7 +209,11 @@ module Pubid::Iso
             if v[:abbr].is_a?(Hash)
               v[:abbr].value?(typed_stage)
             else
-              v[:abbr] == typed_stage
+              if v.key?(:legacy_abbr)
+                v[:legacy_abbr].include?(typed_stage) || v[:abbr] == typed_stage
+              else
+                v[:abbr] == typed_stage
+              end
             end
           end
         end

@@ -6,11 +6,13 @@ module Pubid::Iso
       TYPED_STAGES = {
         dcor: {
           abbr: "DCOR",
+          legacy_abbr: %w[DCor],
           name: "Draft Corrigendum",
           harmonized_stages: %w[40.00 40.20 40.60 40.92 40.93 50.00 50.20 50.60 50.92],
         },
         fdcor: {
           abbr: "FDCOR",
+          legacy_abbr: %w[FDCor FCOR],
           name: "Final Draft Corrigendum",
           harmonized_stages: %w[50.00 50.20 50.60 50.92 50.98 50.99],
         },

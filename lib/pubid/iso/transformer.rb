@@ -21,12 +21,6 @@ module Pubid::Iso
                 { typed_stage: "CD", type: "Amd" }
               when "pDCOR"
                 { typed_stage: "CD", type: "Cor" }
-              when "FPDAM"
-                { typed_stage: "DAM" }
-              when "FDAmd"
-                { typed_stage: "FDAM" }
-              when "FDCor", "FCOR"
-                { typed_stage: "FDCOR" }
               else
                 {}
               end

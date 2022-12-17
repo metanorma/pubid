@@ -631,6 +631,39 @@ module Pubid::Iso
         it_behaves_like "converts pubid to pubid"
       end
 
+      context "ISO DGUIDE 84" do
+        let(:original) { "ISO DGUIDE 84" }
+        let(:pubid) { "ISO/DGuide 84" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "ISO/AWI Guide 30" do
+        let(:pubid) { "ISO/AWI Guide 30" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "ISO/DGuide 31(en)" do
+        let(:pubid) { "ISO/DGuide 31(en)" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "ISO/IEC FD GUIDE 98-1" do
+        let(:original) { "ISO/IEC FD GUIDE 98-1" }
+        let(:pubid) { "ISO/IEC FDGuide 98-1" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "ISO/IEC FD Guide 98-1" do
+        let(:original) { "ISO/IEC FD Guide 98-1" }
+        let(:pubid) { "ISO/IEC FDGuide 98-1" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
       describe "#parse_from_title" do
         subject { described_class.parse_from_title(title) }
         let(:title) { "#{pubid} Geographic information — Metadata — Part 1: Fundamentals" }

@@ -2,9 +2,21 @@ module Pubid::Iso
   class Parser < Pubid::Core::Parser
     STAGES = %w[NP NWIP WD CD PRF AWI PWI FPD].freeze
     TYPES = %w[DATA ISP IWA R TTA TS TR IS PAS Guide GUIDE DIR].freeze
-    TYPED_STAGES = %w[DIS FDIS DPAS FDTR FDTS DTS DTR PDTR PDTS].freeze
-    SUPPLEMENTS = %w[Amd Cor AMD COR]
-    STAGED_SUPPLEMENTS = %w[DAmd DAM DCor FDAmd FDCor DCOR FCOR FDCOR FDAM PDAM pDCOR FPDAM]
+    # TYPED_STAGES = %w[DIS FDIS DPAS FDTR FDTS DTS DTR PDTR PDTS].freeze
+    SUPPLEMENTS = %w[Amd Cor AMD COR].freeze
+    STAGED_SUPPLEMENTS = Pubid::Iso::Identifier::Amendment::TYPED_STAGES.map do |_, v|
+      v[:legacy_abbr] + [v[:abbr]]
+    end.flatten +
+      Pubid::Iso::Identifier::Corrigendum::TYPED_STAGES.map do |_, v|
+        v[:legacy_abbr] + [v[:abbr]]
+      end.flatten +
+      %w[pDCOR PDAM]
+
+    TYPED_STAGES = Pubid::Iso::Identifier::Base.descendants.map do |type|
+      type::TYPED_STAGES.map do |_, v|
+        v.key?(:legacy_abbr) ? (v[:legacy_abbr] + [v[:abbr]]) : v[:abbr]
+      end
+    end.flatten - STAGED_SUPPLEMENTS + %w[PDTR PDTS]
 
     TCTYPES = ["TC", "JTC", "PC", "IT", "CAB", "CASCO", "COPOLCO",
       "COUNCIL", "CPSG", "CS", "DEVCO", "GA", "GAAB", "INFCO",
