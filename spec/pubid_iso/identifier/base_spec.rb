@@ -718,6 +718,14 @@ module Pubid::Iso
         it "extracts pubid from title" do
           expect(subject.to_s).to eq(pubid)
         end
+
+        context "when title is not parsable" do
+          let(:pubid) { "WRONG_PUBLISHER 1:2345" }
+
+          it "raises an error" do
+            expect { subject }.to raise_exception(Errors::ParseError)
+          end
+        end
       end
 
       describe "#transform_supplements" do
