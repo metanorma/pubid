@@ -1,3 +1,5 @@
+require_relative "../renderer/recommendation"
+
 module Pubid::Iso
   module Identifier
     class Recommendation < Base

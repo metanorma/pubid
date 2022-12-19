@@ -1,3 +1,5 @@
+require_relative "base"
+
 module Pubid::Iso::Renderer
   class InternationalWorkshopAgreement < Base
     def omit_post_publisher_symbol?(_typed_stage, _stage, _opts)

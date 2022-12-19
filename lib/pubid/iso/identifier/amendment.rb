@@ -1,3 +1,6 @@
+require_relative "../renderer/amendment"
+require_relative "../renderer/urn-amendment"
+
 module Pubid::Iso
   module Identifier
     class Amendment < Supplement

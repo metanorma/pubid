@@ -1,3 +1,5 @@
+require_relative "../renderer/technical_report"
+
 module Pubid::Iso
   module Identifier
     class TechnicalReport < Base

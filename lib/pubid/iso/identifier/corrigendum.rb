@@ -1,3 +1,6 @@
+require_relative "../renderer/corrigendum"
+require_relative "../renderer/urn-corrigendum"
+
 module Pubid::Iso
   module Identifier
     class Corrigendum < Supplement

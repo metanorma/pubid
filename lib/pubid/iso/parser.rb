@@ -1,3 +1,6 @@
+require_relative "identifier/base"
+require_relative "renderer/base"
+
 module Pubid::Iso
   class Parser < Pubid::Core::Parser
     STAGES = %w[NP NWIP WD CD PRF AWI PWI FPD].freeze
@@ -25,7 +28,7 @@ module Pubid::Iso
       "JSAG", "JSCTF-TF", "JTCG", "JTCG-TF", "SAG_Acc", "SAG_CRMI",
       "SAG_CRMI_CG", "SAG_ESG", "SAG_ESG_CG", "SAG_MRS", "SAG SF", "SAG SF_CG",
       "SMCC", "STMG", "MENA STAR"].freeze
-    
+
     WGTYPES = ["AG", "AHG", "AhG", "WG", "JWG", "QC", "TF",
       "PPC", "CAG", "WG SGDG", "WG SR", "STAR", "STTF", "TIG",
       "CPAG", "CSC", "ITSAG", "CSC/FIN", "CSC/NOM", "CSC/OVE",

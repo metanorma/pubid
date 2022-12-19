@@ -1,3 +1,5 @@
+require_relative "../renderer/guide"
+
 module Pubid::Iso
   module Identifier
     class Guide < Base

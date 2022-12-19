@@ -1,3 +1,5 @@
+require_relative "../renderer/technical_committee"
+
 module Pubid::Iso
   module Identifier
     class TechnicalCommittee < Base

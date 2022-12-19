@@ -1,4 +1,6 @@
 require 'forwardable'
+require_relative "../renderer/urn"
+require_relative "../renderer/urn-tc"
 
 module Pubid::Iso
   module Identifier

@@ -1,3 +1,5 @@
+require_relative "urn"
+
 module Pubid::Iso::Renderer
   class UrnDir < Urn
 

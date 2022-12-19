@@ -1,3 +1,5 @@
+require_relative "../renderer/publicly_available_specification"
+
 module Pubid::Iso
   module Identifier
     class PubliclyAvailableSpecification < Base

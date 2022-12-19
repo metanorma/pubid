@@ -1,3 +1,5 @@
+require_relative "base"
+
 module Pubid::Iso::Renderer
   class Recommendation < Base
     def omit_post_publisher_symbol?(_typed_stage, _stage, _opts)

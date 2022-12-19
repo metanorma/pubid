@@ -1,3 +1,6 @@
+require_relative "../renderer/supplement"
+require_relative "../renderer/urn-supplement"
+
 module Pubid::Iso
   module Identifier
     class Supplement < Base

@@ -1,3 +1,6 @@
+require_relative "identifier/base"
+require_relative "renderer/base"
+
 module Pubid::Iso
   class Transformer < Parslet::Transform
     rule(edition: "Ed") do

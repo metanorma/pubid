@@ -1,3 +1,5 @@
+require_relative "../renderer/technical_specification"
+
 module Pubid::Iso
   module Identifier
     class TechnicalSpecification < Base

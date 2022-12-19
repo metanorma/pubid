@@ -1,3 +1,5 @@
+require_relative "../renderer/international_standardized_profile"
+
 module Pubid::Iso
   module Identifier
     class InternationalStandardizedProfile < Base

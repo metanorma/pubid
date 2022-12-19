@@ -1,3 +1,6 @@
+require_relative "../renderer/dir"
+require_relative "../renderer/urn-dir"
+
 module Pubid::Iso
   module Identifier
     class Directives < Base

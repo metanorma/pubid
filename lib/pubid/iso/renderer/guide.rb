@@ -1,3 +1,5 @@
+require_relative "base"
+
 module Pubid::Iso::Renderer
   class Guide < Base
     def render_identifier(params, opts)
