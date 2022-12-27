@@ -168,10 +168,12 @@ module Pubid::Iso
 
           # update corrigendum base to amendment
           if supplements_has_type?(supplements, :cor) &&
-              supplements_has_type?(supplements, :amd) && supplements.count == 2
+              (supplements_has_type?(supplements, :amd) ||
+                supplements_has_type?(supplements, :sup)) && supplements.count == 2
 
             supplement = supplement_by_type(supplements, :cor)
-            supplement.base = supplement_by_type(supplements, :amd)
+            supplement.base = supplement_by_type(supplements, :amd) ||
+              supplement_by_type(supplements, :sup)
             supplement
           else
             raise Errors::SupplementRenderingError, "don't know how to render provided supplements"
@@ -198,10 +200,12 @@ module Pubid::Iso
           ObjectSpace.each_object(Class).select { |klass| klass < self }
         end
 
-        # @param type [Symbol] eg. :tr, :ts
+        # @param type [Symbol, String] eg. :tr, :ts, "TS"
         # @return [Boolean] true if provided type matches with identifier's class type
         def has_type?(type)
-          type.to_s.downcase.to_sym == self.type[:key]
+          return type == self.type[:key] if type.is_a?(Symbol)
+
+          self.type.key?(:values) ? self.type[:values].include?(type) : type.to_s.downcase.to_sym == self.type[:key]
         end
 
         # @param typed_stage [String, Symbol] typed stage, eg. "DTR" or :dtr

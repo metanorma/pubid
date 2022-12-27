@@ -685,14 +685,33 @@ module Pubid::Iso
         it_behaves_like "converts pubid to pubid"
       end
 
+      context "ISO Guide 98:1995/DSuppl 1.2" do
+        let(:pubid) { "ISO Guide 98:1995/DSuppl 1.2" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
       context "IWA 32:2019(en)" do
         let(:pubid) { "IWA 32:2019(en)" }
 
         it_behaves_like "converts pubid to pubid"
       end
 
+      context "ISO/IEC Guide 98-3/NP Suppl 2" do
+        let(:pubid) { "ISO/IEC Guide 98-3/NP Suppl 2" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
       context "CD IWA 37-3" do
         let(:pubid) { "CD IWA 37-3" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "ISO/IEC Guide 98-3/Suppl.1:2008" do
+        let(:original) { "ISO/IEC Guide 98-3/Suppl.1:2008" }
+        let(:pubid) { "ISO/IEC Guide 98-3/Suppl 1:2008" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -704,10 +723,35 @@ module Pubid::Iso
         it_behaves_like "converts pubid to pubid"
       end
 
+      context "ISO/IEC Guide 98-3:2008/Suppl 1:2008/Cor 1:2009" do
+        let(:pubid) { "ISO/IEC Guide 98-3:2008/Suppl 1:2008/Cor 1:2009" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
       context "PRF IWA 36" do
         let(:pubid) { "PRF IWA 36" }
 
         it_behaves_like "converts pubid to pubid with prf"
+      end
+
+      context "ISO/IEC Guide 98-3:2008/Suppl.1:2008(en)" do
+        let(:original) { "ISO/IEC Guide 98-3:2008/Suppl.1:2008(en)" }
+        let(:pubid) { "ISO/IEC Guide 98-3:2008/Suppl 1:2008(en)" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "ISO/IEC NP Guide 98:1995/DSuppl 1.2" do
+        let(:pubid) { "ISO/IEC NP Guide 98:1995/DSuppl 1.2" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "ISO 3758:1991/Suppl:1993" do
+        let(:pubid) { "ISO 3758:1991/Suppl:1993" }
+
+        it_behaves_like "converts pubid to pubid"
       end
 
       describe "#parse_from_title" do

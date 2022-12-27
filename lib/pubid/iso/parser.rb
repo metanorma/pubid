@@ -6,12 +6,15 @@ module Pubid::Iso
     STAGES = %w[NP NWIP WD CD PRF AWI PWI FPD].freeze
     TYPES = %w[DATA ISP IWA R TTA TS TR IS PAS Guide GUIDE DIR].freeze
     # TYPED_STAGES = %w[DIS FDIS DPAS FDTR FDTS DTS DTR PDTR PDTS].freeze
-    SUPPLEMENTS = %w[Amd Cor AMD COR].freeze
+    SUPPLEMENTS = %w[Amd Cor AMD COR Suppl].freeze
     STAGED_SUPPLEMENTS = Pubid::Iso::Identifier::Amendment::TYPED_STAGES.map do |_, v|
       v[:legacy_abbr] + [v[:abbr]]
     end.flatten +
       Pubid::Iso::Identifier::Corrigendum::TYPED_STAGES.map do |_, v|
         v[:legacy_abbr] + [v[:abbr]]
+      end.flatten +
+      Pubid::Iso::Identifier::Supplement::TYPED_STAGES.map do |_, v|
+        v[:abbr]
       end.flatten +
       %w[pDCOR PDAM]
 
@@ -91,7 +94,7 @@ module Pubid::Iso
         (((stage.as(:typed_stage) >> space).maybe >> supplements.as(:type)) |
           (staged_supplement).as(:typed_stage)) >>
         (space | str(".")).repeat(1).maybe >>
-        digits.as(:number) >>
+        digits.as(:number).maybe >>
         (str(".") >> digits.as(:iteration)).maybe >>
         ((str(":") | str("-")) >> digits.as(:year)).maybe).repeat(1).as(:supplements)
     end
