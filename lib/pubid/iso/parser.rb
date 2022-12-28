@@ -18,6 +18,8 @@ module Pubid::Iso
       end.flatten +
       %w[pDCOR PDAM]
 
+    DIR_SUPPLEMENTS = %w[Supplement SUP].freeze
+
     TYPED_STAGES = Pubid::Iso::Identifier::Base.descendants.map do |type|
       type::TYPED_STAGES.map do |_, v|
         v.key?(:legacy_abbr) ? (v[:legacy_abbr] + [v[:abbr]]) : v[:abbr]
@@ -133,7 +135,7 @@ module Pubid::Iso
         (str("JTC").as(:dirtype) >> space).maybe >>
         (digits.as(:number) >> (str(":") >> year).maybe).maybe >>
         (str(" -- Consolidated").maybe >> (space? >> (organization.as(:publisher) >> space).maybe >>
-          (str("SUP") | str("Supplement")) >> (str(":") >> year).maybe >>
+          (array_to_str(DIR_SUPPLEMENTS)) >> (str(":") >> year).maybe >>
           dir_supplement_edition.maybe).repeat(1).as(:supplements)).maybe
     end
 
