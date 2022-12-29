@@ -2,7 +2,7 @@ module Pubid::Iso
   module Identifier
     RSpec.describe Corrigendum do
       context "when create corrigendum identifier" do
-        let(:base) { Identifier::Base.create(**{ number: number }.merge(params)) }
+        let(:base) { Identifier.create(**{ number: number }.merge(params)) }
 
         subject { described_class.new(type: :cor, number: 1, base: base, **corrigendum_params) }
 

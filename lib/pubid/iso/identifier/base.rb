@@ -129,23 +129,7 @@ module Pubid::Iso
         nil
       end
 
-      def self.parse_from_title(title)
-        title.split.reverse.inject(title) do |acc, part|
-          return parse(acc)
-        rescue Pubid::Core::Errors::ParseError
-          # delete parts from the title until it's parseable
-          acc.reverse.sub(part.reverse, "").reverse.strip
-        end
-
-        raise Errors::ParseError, "cannot parse #{title}"
-      end
-
       class << self
-        def create(**opts)
-          resolve_identifier(opts[:type], opts[:stage],
-                             opts.reject { |k, _v| [:type, :stage].include?(k) })
-        end
-
         def supplements_has_type?(supplements, type)
           supplements.any? do |supplement|
             supplement.type[:key] == type
@@ -158,10 +142,10 @@ module Pubid::Iso
 
         def transform_supplements(supplements_params, base_params)
           supplements = supplements_params.map do |supplement|
-            create(number: supplement[:number], year: supplement[:year],
+            Identifier.create(number: supplement[:number], year: supplement[:year],
                 stage: supplement[:typed_stage], edition: supplement[:edition],
                 iteration: supplement[:iteration], type: (supplement[:type] || !supplement[:typed_stage] && :sup),
-                publisher: supplement[:publisher], base: create(**base_params))
+                publisher: supplement[:publisher], base: Identifier.create(**base_params))
           end
 
           return supplements.first if supplements.count == 1
@@ -193,7 +177,7 @@ module Pubid::Iso
             )
           end
 
-          create(**identifier_params)
+          Identifier.create(**identifier_params)
         end
 
         def descendants
@@ -224,31 +208,6 @@ module Pubid::Iso
               end
             end
           end
-        end
-
-        # @param typed_stage_or_stage [String] typed stage or stage
-        # @return identifier's class
-        def resolve_identifier(type, typed_stage_or_stage, parameters = {})
-          return Identifier::InternationalStandard.new(**parameters) if type.nil? && typed_stage_or_stage.nil?
-
-          descendants.each do |identifier_type|
-            if type
-              return identifier_type.new(stage: typed_stage_or_stage, **parameters) if identifier_type.has_type?(type)
-
-              next
-            elsif identifier_type.has_typed_stage?(typed_stage_or_stage)
-              return identifier_type.new(stage: typed_stage_or_stage, **parameters)
-            end
-          end
-
-          # When stage is not typed stage and type is not defined
-          if type.nil? && Stage.has_stage?(typed_stage_or_stage)
-            return Identifier::InternationalStandard.new(stage: typed_stage_or_stage, **parameters)
-          end
-
-          raise Errors::TypeStageParseError, "cannot parse typed stage or stage '#{typed_stage_or_stage}'" if type.nil?
-
-          raise Errors::ParseTypeError, "cannot parse type #{type}"
         end
 
         def get_amendment_class

@@ -2,7 +2,7 @@ module Pubid::Iso
   module Identifier
     RSpec.describe Amendment do
       context "when create amendment identifier" do
-        let(:base) { Identifier::Base.create(**{ number: number }.merge(params)) }
+        let(:base) { Identifier.create(**{ number: number }.merge(params)) }
 
         subject { described_class.new(number: 1, base: base, **amendment_params) }
         let(:params) { { year: year } }
