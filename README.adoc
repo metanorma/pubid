@@ -18,7 +18,7 @@ identifiers.
 ----
 require "pubid-iso"
 
-pubid = Pubid::Iso::Identifier::Base.create(publisher: "ISO", number: 123)
+pubid = Pubid::Iso::Identifier.create(publisher: "ISO", number: 123)
 pubid.to_s
 
 => "ISO 1234"
@@ -28,7 +28,7 @@ pubid.to_s
 
 [source,ruby]
 ----
-pubid = Pubid::Iso::Identifier::Base.create(publisher: "ISO", copublisher: "IEC", number: 123)
+pubid = Pubid::Iso::Identifier.create(publisher: "ISO", copublisher: "IEC", number: 123)
 pubid.to_s
 
 => "ISO/IEC 1234"
@@ -38,7 +38,7 @@ pubid.to_s
 
 [source,ruby]
 ----
-pubid = Pubid::Iso::Identifier::Base.create(publisher: "ISO", type: "TR", number: 123)
+pubid = Pubid::Iso::Identifier.create(publisher: "ISO", type: "TR", number: 123)
 pubid.to_s
 
 => "ISO/TR 1234"
@@ -48,7 +48,7 @@ pubid.to_s
 
 [source,ruby]
 ----
-pubid = Pubid::Iso::Identifier::Base.create(publisher: "ISO", stage: :WD, number: 123)
+pubid = Pubid::Iso::Identifier.create(publisher: "ISO", stage: :WD, number: 123)
 pubid.to_s
 
 => "ISO/WD 1234"
@@ -58,7 +58,7 @@ pubid.to_s
 
 [source,ruby]
 ----
-pubid = Pubid::Iso::Identifier::Base.create(publisher: "ISO", number: 123, part: 1)
+pubid = Pubid::Iso::Identifier.create(publisher: "ISO", number: 123, part: 1)
 pubid.to_s
 
 => "ISO 1234-1"
@@ -68,7 +68,7 @@ pubid.to_s
 
 [source,ruby]
 ----
-pubid = Pubid::Iso::Identifier::Base.create(publisher: "ISO", number: 123, part: 1, stage: "DIS", iteration: 1)
+pubid = Pubid::Iso::Identifier.create(publisher: "ISO", number: 123, part: 1, stage: "DIS", iteration: 1)
 pubid.to_s
 
 => "ISO/DIS 1234-1.1"
@@ -79,13 +79,13 @@ Without stage error will be raised.
 ==== Amendment and Corrigendum
 [source,ruby]
 ----
-> base = Pubid::Iso::Identifier::Base.create(publisher: "ISO", number: 123, part: 1, year: 2019)
-> pubid = Pubid::Iso::Identifier::Base.create(type: :amd, number: 1, year: "2021", stage: "WD", base: base)
+> base = Pubid::Iso::Identifier.create(publisher: "ISO", number: 123, part: 1, year: 2019)
+> pubid = Pubid::Iso::Identifier.create(type: :amd, number: 1, year: "2021", stage: "WD", base: base)
 > pubid.to_s
 => "ISO 1234-1:2019/WD Amd 1:2021"
 
-> base = Pubid::Iso::Identifier::Base.create(publisher: "ISO", number: 123, part: 1, year: 2019)
-> pubid = Pubid::Iso::Identifier::Base.create(type: :cor, number: "1", year: "2021", stage: :WD, base: base)
+> base = Pubid::Iso::Identifier.create(publisher: "ISO", number: 123, part: 1, year: 2019)
+> pubid = Pubid::Iso::Identifier.create(type: :cor, number: "1", year: "2021", stage: :WD, base: base)
 > pubid.to_s
 => "ISO 1234-1:2019/WD Cor 1:2021"
 ----
@@ -94,14 +94,14 @@ See documentation on https://rubydoc.info/gems/pubid-iso/Pubid%2FIso%2FSupplemen
 ==== Using format options
 [source,ruby]
 ----
-> base = Pubid::Iso::Identifier::Base.create(
+> base = Pubid::Iso::Identifier.create(
   number: "8601",
   part: "1",
   year: 2019,
   edition: 1,
   language: "en"
 )
-> pubid = Pubid::Iso::Identifier::Base.create(type: :amd, number: "1", year: "2021", stage: "DAM", base: base)
+> pubid = Pubid::Iso::Identifier.create(type: :amd, number: "1", year: "2021", stage: "DAM", base: base)
 > pubid.to_s(:ref_num_short)
 => "ISO 8601-1:2019/DAM 1:2021(E)"
 > pubid.to_s(:ref_dated)
@@ -113,10 +113,10 @@ See documentation on https://rubydoc.info/gems/pubid-iso/Pubid%2FIso%2FSupplemen
 ==== Using language specific rendering
 [source,ruby]
 ----
-> pubid = Pubid::Iso::Identifier::Base.parse("ISO/FDIS 26000:2010(ru)")
+> pubid = Pubid::Iso::Identifier.parse("ISO/FDIS 26000:2010(ru)")
 > pubid.to_s(format: :ref_num_long, lang: :russian)
 => "ИСО/ОПМС 26000:2010(ru)"
-> pubid = Pubid::Iso::Identifier::Base.parse("ISO/IEC Guide 71:2001(fr)")
+> pubid = Pubid::Iso::Identifier.parse("ISO/IEC Guide 71:2001(fr)")
 > pubid.to_s(format: :ref_num_long, lang: :french)
 => "Guide ISO/CEI 71:2001(fr)"
 ----
@@ -124,13 +124,13 @@ See documentation on https://rubydoc.info/gems/pubid-iso/Pubid%2FIso%2FSupplemen
 ==== Rendering URN identifier
 [source,ruby]
 ----
-> base = Pubid::Iso::Identifier::Base.create(
+> base = Pubid::Iso::Identifier.create(
   number: "8601",
   part: "1",
   year: 2019,
   edition: 1,
 )
-> pubid = Pubid::Iso::Identifier::Base.create(type: :amd, number: "1", year: "2021", stage: "DAM", base: base)
+> pubid = Pubid::Iso::Identifier.create(type: :amd, number: "1", year: "2021", stage: "DAM", base: base)
 > pubid.urn
 => "urn:iso:std:iso:8601:-1:ed-1:stage-draft:amd:2021:v1"
 ----
@@ -138,19 +138,19 @@ See documentation on https://rubydoc.info/gems/pubid-iso/Pubid%2FIso%2FSupplemen
 ==== Typed stage abbreviation
 [source,ruby]
 ----
-> pubid = Pubid::Iso::Identifier::Base.parse("ISO/FDIS 26000:2010")
+> pubid = Pubid::Iso::Identifier.parse("ISO/FDIS 26000:2010")
 > pubid.typed_stage_abbrev
 => "FDIS"
 > pubid.typed_stage_name
 => "Final Draft International Standard"
 
-> pubid = Pubid::Iso::Identifier::Base.parse("ISO/FDTR 26000:2010")
+> pubid = Pubid::Iso::Identifier.parse("ISO/FDTR 26000:2010")
 > pubid.typed_stage_abbrev
 => "FDTR"
 > pubid.typed_stage_name
 => "Final Draft Technical Report"
 
-> pubid = Pubid::Iso::Identifier::Base.parse("ISO/WD TR 26000:2010")
+> pubid = Pubid::Iso::Identifier.parse("ISO/WD TR 26000:2010")
 > pubid.typed_stage_abbrev
 => "WD TR"
 > pubid.typed_stage_name
