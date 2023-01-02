@@ -525,6 +525,13 @@ module Pubid::Iso
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "ISO/IEC FDIS 23090-14/DAmd 1" do
+      let(:original) { "ISO/IEC FDIS 23090-14/DAmd 1" }
+      let(:pubid) { "ISO/IEC FDIS 23090-14/DAM 1" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "ISO 17301-1:2016/FCOR 2.3" do
       let(:original) { "ISO 17301-1:2016/FCOR 2.3" }
       let(:pubid) { "ISO 17301-1:2016/FDCOR 2.3" }
