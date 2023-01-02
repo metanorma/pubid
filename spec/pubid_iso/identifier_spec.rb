@@ -525,6 +525,14 @@ module Pubid::Iso
       it_behaves_like "converts pubid to pubid"
     end
 
+    # Confirms there is no short typed-stage abbreviation for Amd at WD stages
+    context "ISO/IEC FDIS 23008-1/WD Amd 1" do
+      let(:pubid) { "ISO/IEC FDIS 23008-1/WD Amd 1" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    # Confirms usage of short typed-stage abbreviation for Amd at DIS stages
     context "ISO/IEC FDIS 23090-14/DAmd 1" do
       let(:original) { "ISO/IEC FDIS 23090-14/DAmd 1" }
       let(:pubid) { "ISO/IEC FDIS 23090-14/DAM 1" }
