@@ -85,10 +85,6 @@ module Pubid::Core::Renderer
       end
     end
 
-    def render_base(params, prefix = "")
-      "%{publisher}#{prefix} %{number}" % params
-    end
-
     def render_identifier(params)
       render_base(params)
     end

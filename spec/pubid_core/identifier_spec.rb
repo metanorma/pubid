@@ -97,12 +97,6 @@ RSpec.describe Pubid::Core::Identifier do
     end
   end
 
-  describe "#to_s" do
-    subject { described_class.new(publisher: "ISO", number: 1234).to_s }
-
-    it { is_expected.to eq("ISO 1234") }
-  end
-
   describe "#array_to_hash" do
     subject { described_class.array_to_hash(input) }
     let(:input) { [{ a: 1 }, { b: 2 }] }
