@@ -195,7 +195,7 @@ module Pubid::Iso
           let(:stage) { :fdis }
 
           it "raises an error" do
-            expect { subject }.to raise_exception(Errors::StageInvalidError)
+            expect { subject }.to raise_exception(Pubid::Core::Errors::StageInvalidError)
           end
         end
       end

@@ -26,7 +26,7 @@ module Pubid::Iso
         end
 
         # When stage is not typed stage and type is not defined
-        if type.nil? && Stage.has_stage?(typed_stage_or_stage)
+        if type.nil? && (typed_stage_or_stage.is_a?(Stage) || Stage.has_stage?(typed_stage_or_stage))
           return Identifier::InternationalStandard.new(stage: typed_stage_or_stage, **parameters)
         end
 

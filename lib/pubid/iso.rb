@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 require "parslet"
+require "yaml"
 
 module Pubid
   module Iso
 
   end
 end
+
+STAGES_CONFIG = YAML.load_file(File.join(File.dirname(__FILE__), "../../stages.yaml"))
 
 require "pubid-core"
 require_relative "iso/errors"
