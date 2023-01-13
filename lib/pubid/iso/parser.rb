@@ -73,9 +73,20 @@ module Pubid::Iso
       array_to_str(WGTYPES)
     end
 
+    rule(:roman_numerals) do
+      array_to_str(%w[I V X L C D M]).repeat(1).as(:roman_numerals)
+    end
+
+    rule(:year_digits) { (str("19") | str("20")) >> match('\d').repeat(2, 2) >> digits.absent? }
+
+
+    rule(:part_matcher) do
+      year_digits.absent? >>
+        (str("Amd") | str("Cor")).absent? >> ((roman_numerals >> digits.absent?) | match['[\dA-Z]'].repeat(1)).as(:part)
+    end
+
     rule(:part) do
-      (str("-") | str("/")) >> space? >>
-        (str("Amd") | str("Cor")).absent? >> (match['[\dA-Z]'] | str("-")).repeat(1).as(:part)
+      (str("/") | str("-")) >> space? >> part_matcher >> (str("-") >> part_matcher).repeat
     end
 
     rule(:organization) do

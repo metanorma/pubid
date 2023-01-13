@@ -160,5 +160,11 @@ module Pubid::Iso::Renderer
       return ":#{year}" if params[:amendments] || params[:corrigendums]
       opts[:with_date] && ":#{year}" || ""
     end
+
+    def render_part(part, opts, _params)
+      return "-#{part.reverse.join('-')}" if part.is_a?(Array)
+
+      "-#{part}"
+    end
   end
 end

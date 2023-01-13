@@ -641,6 +641,18 @@ module Pubid::Iso
       it_behaves_like "converts pubid to urn"
     end
 
+    context "ISO/IEEE 11073-20601:2010" do
+      let(:pubid) { "ISO/IEEE 11073-20601:2010" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO 105-C06:2010" do
+      let(:pubid) { "ISO 105-C06:2010" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "ISO/R 125:1966" do
       let(:pubid) { "ISO/R 125:1966" }
 
@@ -655,21 +667,21 @@ module Pubid::Iso
 
     context "ISO/R 93/1-1963" do
       let(:original) { "ISO/R 93/1-1963" }
-      let(:pubid) { "ISO/R 93-1-1963" }
+      let(:pubid) { "ISO/R 93-1:1963" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ISO/R 300/III-1968" do
       let(:original) { "ISO/R 300/III-1968" }
-      let(:pubid) { "ISO/R 300-III-1968" }
+      let(:pubid) { "ISO/R 300-3:1968" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ISO/R 657/IV" do
       let(:original) { "ISO/R 657/IV" }
-      let(:pubid) { "ISO/R 657-IV" }
+      let(:pubid) { "ISO/R 657-4:1969" }
 
       it_behaves_like "converts pubid to pubid"
     end

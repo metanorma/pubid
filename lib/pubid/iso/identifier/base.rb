@@ -47,7 +47,7 @@ module Pubid::Iso
                      joint_document: nil, tctype: nil, sctype: nil, wgtype: nil, tcnumber: nil,
                      scnumber: nil, wgnumber:nil,
                      dir: nil, dirtype: nil, year: nil, amendments: nil,
-                     corrigendums: nil, type: nil, base: nil, supplements: nil, **opts)
+                     corrigendums: nil, type: nil, base: nil, supplements: nil, part: nil, **opts)
         super(**opts.merge(number: number, publisher: publisher, year: year,
                            amendments: amendments, corrigendums: corrigendums))
 
@@ -87,6 +87,7 @@ module Pubid::Iso
         @dir = dir.to_s if dir
         @dirtype = dirtype.to_s if dirtype
         @base = base if base
+        @part = part if part
       end
 
       # @param typed_stage [String, Symbol] eg. "DTR" or :dtr
@@ -228,6 +229,10 @@ module Pubid::Iso
 
         def get_renderer_class
           Renderer::Base
+        end
+
+        def get_update_codes
+          UPDATE_CODES
         end
       end
 

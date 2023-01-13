@@ -53,5 +53,11 @@ module Pubid::Iso::Renderer
     def render_year(year, _opts, _params)
       ":#{year}"
     end
+
+    def render_part(part, opts, _params)
+      return ":-#{part.reverse.join('-')}" if part.is_a?(Array)
+
+      ":-#{part}"
+    end
   end
 end
