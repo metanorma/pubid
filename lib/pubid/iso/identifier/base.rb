@@ -15,7 +15,8 @@ module Pubid::Iso
                     :supplement,
                     :base,
                     :typed_stage,
-                    :supplements
+                    :supplements,
+                    :addendum
 
       # Creates new identifier from options provided, includes options from
       # Pubid::Core::Identifier#initialize
@@ -47,7 +48,8 @@ module Pubid::Iso
                      joint_document: nil, tctype: nil, sctype: nil, wgtype: nil, tcnumber: nil,
                      scnumber: nil, wgnumber:nil,
                      dir: nil, dirtype: nil, year: nil, amendments: nil,
-                     corrigendums: nil, type: nil, base: nil, supplements: nil, part: nil, **opts)
+                     corrigendums: nil, type: nil, base: nil, supplements: nil,
+                     part: nil, addendum: nil, **opts)
         super(**opts.merge(number: number, publisher: publisher, year: year,
                            amendments: amendments, corrigendums: corrigendums))
 
@@ -88,6 +90,7 @@ module Pubid::Iso
         @dirtype = dirtype.to_s if dirtype
         @base = base if base
         @part = part if part
+        @addendum = addendum if addendum
       end
 
       # @param typed_stage [String, Symbol] eg. "DTR" or :dtr

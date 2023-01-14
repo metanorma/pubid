@@ -112,6 +112,12 @@ module Pubid::Iso
         ((str(":") | str("-")) >> digits.as(:year)).maybe).repeat(1).as(:supplements)
     end
 
+    rule(:addendum) do
+      (
+        ((str("/") >> (str("Add") | str("ADD"))) | (str(" — Addendum"))) >> space >> digits.as(:number) >> ((str(":")) >> digits.as(:year)).maybe
+      ).as(:addendum)
+    end
+
     rule(:language) do
       str("(") >> (
         ( # parse ru,en,fr
@@ -159,10 +165,8 @@ module Pubid::Iso
         (str("|") >> (str("IDF").as(:publisher) >> space >> digits.as(:number)).as(:joint_document)).maybe >>
         part.maybe >> iteration.maybe >>
         (space? >> (str(":") | str("-")) >> year).maybe >>
-        # stage before amendment
-        (
-          # stage before corrigendum
-          (supplement).maybe) >>
+        supplement.maybe >>
+        addendum.maybe >>
         edition.maybe >>
         language.maybe
     end

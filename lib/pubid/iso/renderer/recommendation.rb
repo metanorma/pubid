@@ -12,7 +12,16 @@ module Pubid::Iso::Renderer
 
       type_prefix = " #{type_prefix}" if params[:stage] && !params[:stage].empty?
 
-      "%{publisher}%{typed_stage}%{stage}#{type_prefix} %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}" % params
+      "%{publisher}%{typed_stage}%{stage}#{type_prefix}"\
+        " %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{addendum}%{edition}" % params
+    end
+
+    def render_addendum(addendum, _opts, _params)
+      if addendum[:year]
+        "/Add #{addendum[:number]}:#{addendum[:year]}"
+      else
+        "/Add #{addendum[:number]}"
+      end
     end
   end
 end

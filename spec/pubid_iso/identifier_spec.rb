@@ -686,6 +686,32 @@ module Pubid::Iso
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "ISO/R 947:1969/Add 1:1969" do
+      let(:pubid) { "ISO/R 947:1969/Add 1:1969" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/R 194:1969/Add 4" do
+      let(:pubid) { "ISO/R 194:1969/Add 4" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/R 91-1970 — Addendum 1" do
+      let(:original) { "ISO/R 91-1970 — Addendum 1" }
+      let(:pubid) { "ISO/R 91:1970/Add 1" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/R 91:1970/ADD 1:1975" do
+      let(:original) { "ISO/R 91:1970/ADD 1:1975" }
+      let(:pubid) { "ISO/R 91:1970/Add 1:1975" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "ISO/IEC ISP 10611-3:2003" do
       let(:pubid) { "ISO/IEC ISP 10611-3:2003" }
 
