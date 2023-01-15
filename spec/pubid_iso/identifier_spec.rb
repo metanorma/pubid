@@ -176,6 +176,10 @@ module Pubid::Iso
       let(:pubid) { "ISO/TR 27957:2008" }
       let(:urn) { "urn:iso:std:iso:tr:27957" }
 
+      it "returns self as root" do
+        expect(subject.root).to eq(subject)
+      end
+
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
     end
@@ -190,6 +194,10 @@ module Pubid::Iso
 
       it "shoud have type :amd" do
         expect(subject.type[:key]).to eq(:amd)
+      end
+
+      it "returns base identifier as root" do
+        expect(subject.root).to eq(subject.base)
       end
 
       it_behaves_like "converts pubid to pubid"
@@ -242,6 +250,10 @@ module Pubid::Iso
 
       it "should have base document for amendment" do
         expect(subject.base.base).to be_a(Identifier::InternationalStandard)
+      end
+
+      it "returns root identifer" do
+        expect(subject.root).to eq(subject.base.base)
       end
     end
 
