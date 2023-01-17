@@ -157,6 +157,22 @@ See documentation on https://rubydoc.info/gems/pubid-iso/Pubid%2FIso%2FSupplemen
 => "Working Draft Technical Report"
 ----
 
+==== Identifier's class and type
+Depending on indentifiers type when creating identifiers, it will be resolved to according to class.
+
+[source,ruby]
+----
+Pubid::Iso::Identifier.parse("ISO/TC 184/SC 4 N1000").class
+# => Pubid::Iso::Identifier::TechnicalCommittee
+Pubid::Iso::Identifier.parse("ISO/TC 184/SC 4 N1000").type
+# => {:key=>:tc, :title=>"Technical Committee"}
+Pubid::Iso::Identifier.parse("ISO 10001").class
+# => Pubid::Iso::Identifier::InternationalStandard
+Pubid::Iso::Identifier.parse("ISO 10001").type
+# => {:key=>:is, :title=>"International Standard"}
+----
+
+
 
 ==== Root identifier
 #root points to root identifier for supplements identifiers and to itself if there are no identifier.
