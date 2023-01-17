@@ -350,6 +350,7 @@ module Pubid::Iso
         get_params == other.get_params
       end
 
+      # returns root identifier
       def root
         return base.base if base&.base
 

@@ -157,6 +157,22 @@ See documentation on https://rubydoc.info/gems/pubid-iso/Pubid%2FIso%2FSupplemen
 => "Working Draft Technical Report"
 ----
 
+
+==== Root identifier
+#root points to root identifier for supplements identifiers and to itself if there are no identifier.
+[source,ruby]
+----
+> pubid = Pubid::Iso::Identifier.parse("ISO/WD TR 26000:2010")
+> pubid.root.to_s
+=> "ISO/WD TR 26000:2010"
+> pubid = Pubid::Iso::Identifier.parse("ISO 10231:2003/Amd 1:2015")
+> pubid.root.to_s
+=> "ISO 10231:2003"
+> pubid = Pubid::Iso::Identifier.parse("ISO/IEC 13818-1:2015/Amd 3:2016/Cor 1:2017")
+> pubid.root.to_s
+=> "ISO/IEC 13818-1:2015"
+----
+
 See documentation (https://www.rubydoc.info/gems/pubid-iso/Pubid/Iso/Identifier#initialize-instance_method[Pubid::Iso::Identifier] and https://www.rubydoc.info/gems/pubid-core/Pubid/Core/Identifier#initialize-instance_method[Pubid::Core::Identifier]) for all available attributes and options.
 
 == Elements of the PubID
