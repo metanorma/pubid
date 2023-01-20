@@ -34,7 +34,7 @@ module Pubid::Iso::Renderer
           "%{typed_stage}%{stage}%{publisher} SUP%{number}%{part}%{iteration}%{year}%{edition}" % params
         else
           # type_prefix = "/#{type_prefix}" unless type_prefix.empty?
-          "/%{typed_stage}%{stage}%{publisher}#{type_prefix}%{number}%{part}%{iteration}%{year}%{edition}" % params
+          "/%{typed_stage}%{stage}#{type_prefix}%{number}%{part}%{iteration}%{year}%{edition}" % params
         end
       else
         "/%{typed_stage}%{stage}#{type_prefix}%{number}%{part}%{iteration}%{year}%{edition}" % params
