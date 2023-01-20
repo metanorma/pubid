@@ -12,7 +12,11 @@ identifiers.
 . generate language specific PubID
 . generate dated vs undated PubIDs
 
-=== Usage samples
+== Usage
+
+=== Identifier creation
+
+Basic usage of the pubid-iso gem starts with the `Identifier#create` method.
 
 [source,ruby]
 ----
@@ -24,7 +28,8 @@ pubid.to_s
 => "ISO 1234"
 ----
 
-==== With coopublisher
+
+=== With co-publisher
 
 [source,ruby]
 ----
@@ -34,7 +39,7 @@ pubid.to_s
 => "ISO/IEC 1234"
 ----
 
-==== With document type
+=== With document type
 
 [source,ruby]
 ----
@@ -44,7 +49,7 @@ pubid.to_s
 => "ISO/TR 1234"
 ----
 
-==== With stage
+=== With stage
 
 [source,ruby]
 ----
@@ -54,7 +59,7 @@ pubid.to_s
 => "ISO/WD 1234"
 ----
 
-==== With part number
+=== With part number
 
 [source,ruby]
 ----
@@ -64,7 +69,12 @@ pubid.to_s
 => "ISO 1234-1"
 ----
 
-==== Iteration
+=== Iteration
+
+An iteration is a version within a stage. A stage must be provided to set
+an iteration.
+
+If an iteration exists but a stage is not set, an error will be raised.
 
 [source,ruby]
 ----
@@ -73,25 +83,50 @@ pubid.to_s
 
 => "ISO/DIS 1234-1.1"
 ----
-To apply iteration to document stage should be provided as well.
-Without stage error will be raised.
 
-==== Amendment and Corrigendum
+
+=== Supplement identifiers
+
+A supplement identifier represents a supplement on top of a base document.
+
+A supplement can be of the following types:
+
+* Amendment `:amd`
+* Addendum `:add` (superseded by Amendment)
+* Technical Corrigendum `:cor`
+* Supplement `:supp`
+
+The general construction of a supplement identifier requires a base identifier.
+
+NOTE: See documentation on
+https://rubydoc.info/gems/pubid-iso/Pubid%2FIso%2FSupplement:initialize[PubId::Iso::Supplement#initialize]
+and
+https://rubydoc.info/gems/pubid-core/Pubid%2FCore%2FSupplement:initialize[Pubid::Core::Supplement#initialize]
+to see all available options.
+
+=== Amendment
+
 [source,ruby]
 ----
 > base = Pubid::Iso::Identifier.create(publisher: "ISO", number: 123, part: 1, year: 2019)
 > pubid = Pubid::Iso::Identifier.create(type: :amd, number: 1, year: "2021", stage: "WD", base: base)
 > pubid.to_s
 => "ISO 1234-1:2019/WD Amd 1:2021"
+----
 
+=== Corrigendum
+
+[source,ruby]
+----
 > base = Pubid::Iso::Identifier.create(publisher: "ISO", number: 123, part: 1, year: 2019)
 > pubid = Pubid::Iso::Identifier.create(type: :cor, number: "1", year: "2021", stage: :WD, base: base)
 > pubid.to_s
 => "ISO 1234-1:2019/WD Cor 1:2021"
 ----
-See documentation on https://rubydoc.info/gems/pubid-iso/Pubid%2FIso%2FSupplement:initialize[PubId::Iso::Supplement#initialize] and https://rubydoc.info/gems/pubid-core/Pubid%2FCore%2FSupplement:initialize[Pubid::Core::Supplement#initialize] to see all available options.
 
-==== Using format options
+
+=== Using format options
+
 [source,ruby]
 ----
 > base = Pubid::Iso::Identifier.create(
@@ -110,7 +145,7 @@ See documentation on https://rubydoc.info/gems/pubid-iso/Pubid%2FIso%2FSupplemen
 => "ISO 8601-1:2019/DAM 1"
 ----
 
-==== Using language specific rendering
+=== Using language specific rendering
 [source,ruby]
 ----
 > pubid = Pubid::Iso::Identifier.parse("ISO/FDIS 26000:2010(ru)")
@@ -121,7 +156,8 @@ See documentation on https://rubydoc.info/gems/pubid-iso/Pubid%2FIso%2FSupplemen
 => "Guide ISO/CEI 71:2001(fr)"
 ----
 
-==== Rendering URN identifier
+=== Rendering URN identifier
+
 [source,ruby]
 ----
 > base = Pubid::Iso::Identifier.create(
@@ -135,7 +171,8 @@ See documentation on https://rubydoc.info/gems/pubid-iso/Pubid%2FIso%2FSupplemen
 => "urn:iso:std:iso:8601:-1:ed-1:stage-draft:amd:2021:v1"
 ----
 
-==== Typed stage abbreviation
+=== Typed stage abbreviation
+
 [source,ruby]
 ----
 > pubid = Pubid::Iso::Identifier.parse("ISO/FDIS 26000:2010")
@@ -157,8 +194,9 @@ See documentation on https://rubydoc.info/gems/pubid-iso/Pubid%2FIso%2FSupplemen
 => "Working Draft Technical Report"
 ----
 
-==== Identifier's class and type
-Depending on indentifiers type when creating identifiers, it will be resolved to according to class.
+=== Identifier's class and type
+
+`Identifier#parse` resolves a parsed identifier to the correct class and type.
 
 [source,ruby]
 ----
@@ -174,8 +212,16 @@ Pubid::Iso::Identifier.parse("ISO 10001").type
 
 
 
-==== Root identifier
-#root points to root identifier for supplements identifiers and to itself if there are no identifier.
+=== Root identifier
+
+`Identifier#root` points to the root identifier.
+
+The root identifier is defined as:
+
+* for supplement identifiers, the root identifier is the base identifier;
+
+* for other identifiers, the root identifier is the identifier itself.
+
 [source,ruby]
 ----
 > pubid = Pubid::Iso::Identifier.parse("ISO/WD TR 26000:2010")
@@ -189,13 +235,17 @@ Pubid::Iso::Identifier.parse("ISO 10001").type
 => "ISO/IEC 13818-1:2015"
 ----
 
-See documentation (https://www.rubydoc.info/gems/pubid-iso/Pubid/Iso/Identifier#initialize-instance_method[Pubid::Iso::Identifier] and https://www.rubydoc.info/gems/pubid-core/Pubid/Core/Identifier#initialize-instance_method[Pubid::Core::Identifier]) for all available attributes and options.
+See documentation
+(https://www.rubydoc.info/gems/pubid-iso/Pubid/Iso/Identifier#initialize-instance_method[Pubid::Iso::Identifier]
+and
+https://www.rubydoc.info/gems/pubid-core/Pubid/Core/Identifier#initialize-instance_method[Pubid::Core::Identifier])
+for all available attributes and options.
 
 == Elements of the PubID
 
 === Document identifier
 
-==== General
+=== General
 
 The ISO document identifier is assembled out of these metadata elements:
 
@@ -207,7 +257,7 @@ document type:: type of ISO deliverable
 copyright year:: year of publication of document
 language:: language of document
 
-==== Publisher
+=== Publisher
 
 This is the abbreviation of the publishing organization, typically `ISO`.
 
@@ -223,7 +273,7 @@ An International Workshop Agreement document has publisher abbreviation of
 ====
 
 
-==== Document type and stage
+=== Document type and stage
 
 ISO document stages in document identifiers are mapped as follows.
 
@@ -310,7 +360,7 @@ Once the document is published (stage 60 substage 60), no status abbreviation is
 given.
 
 
-==== Full PubID patterns
+=== Full PubID patterns
 
 The patterns are as follows:
 
