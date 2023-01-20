@@ -86,6 +86,14 @@ module Pubid::Iso
               expect(subject.to_s).to eq("ISO #{number}")
             end
           end
+
+          context "stage code 50.00" do
+            let(:params) { { stage: "50.00" } }
+
+            it "renders FDIS stage" do
+              expect(subject.to_s).to eq("ISO/FDIS #{number}")
+            end
+          end
         end
 
         context "when have harmonized code and abbr" do
