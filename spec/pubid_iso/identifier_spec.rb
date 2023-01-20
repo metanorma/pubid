@@ -598,6 +598,14 @@ module Pubid::Iso
       let(:pubid) { "ISO/PRF 6709:2022" }
       let(:pubid_with_prf) { original }
 
+      it "return typed_stage_abbrev" do
+        expect(subject.typed_stage_abbrev).to eq("PRF")
+      end
+
+      it "return typed_stage_name" do
+        expect(subject.typed_stage_name).to eq("Proof of a new International Standard")
+      end
+
       it_behaves_like "converts pubid to pubid with prf"
     end
 

@@ -29,6 +29,13 @@ module Pubid::Iso
         super
       end
 
+      def typed_stage_abbrev
+        if self.class::TYPED_STAGES.key?(typed_stage)
+          super
+        else
+          stage.abbr
+        end
+      end
 
       def self.type
         { key: :is, title: "International Standard" }
