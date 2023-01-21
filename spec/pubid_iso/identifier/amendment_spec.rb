@@ -2,7 +2,7 @@ module Pubid::Iso
   module Identifier
     RSpec.describe Amendment do
       context "when create amendment identifier" do
-        let(:base) { Identifier.create(**{ number: number }.merge(params)) }
+        let(:base) { Identifier.create(**{ number: number, edition: 1 }.merge(params)) }
 
         subject { described_class.new(number: 1, base: base, **amendment_params) }
         let(:params) { { year: year } }
@@ -15,6 +15,7 @@ module Pubid::Iso
 
         it "renders amendment with base document" do
           expect(subject.to_s).to eq("ISO 123:1999/Amd 1")
+          expect(subject.urn).to eq("urn:iso:std:iso:123:ed-1:amd:1:v1")
         end
 
         context "when document don't have year" do
