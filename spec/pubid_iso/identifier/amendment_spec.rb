@@ -93,6 +93,24 @@ module Pubid::Iso
               expect(subject.to_s).to eq("ISO #{number}:1999/DAM 1")
             end
           end
+
+          context "when stage is a harmonized code" do
+            context "when stage is 50.00" do
+              let(:stage) { "50.00" }
+
+              it "renders long stage and amendment" do
+                expect(subject.to_s).to eq("ISO #{number}:1999/FDAM 1")
+              end
+            end
+
+            context "when stage is 60.60" do
+              let(:stage) { "60.60" }
+
+              it "renders long stage and amendment" do
+                expect(subject.to_s).to eq("ISO #{number}:1999/Amd 1")
+              end
+            end
+          end
         end
       end
     end
