@@ -92,7 +92,7 @@ module Pubid::Core
     end
 
     def to_s(opts = {})
-      abbr unless empty_abbr?(**opts)
+      empty_abbr?(**opts) ? "" : abbr
     end
   end
 end

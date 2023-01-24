@@ -201,7 +201,7 @@ module Pubid::Core
       context "when PRF" do
         let(:abbrev) { :PRF }
 
-        it { is_expected.to be_nil }
+        it { is_expected.to be_empty }
 
         context "when option with_prf true" do
           let(:opts) { { with_prf: true } }
