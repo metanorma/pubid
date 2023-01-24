@@ -7,7 +7,7 @@ module Pubid::Iso
         dis: {
           abbr: "DIS",
           name: "Draft International Standard",
-          harmonized_stages: %w[40.00 40.20 40.60 40.92 40.93],
+          harmonized_stages: %w[40.00 40.20 40.60 40.92 40.93 40.98 40.99],
         },
         fdis: {
           abbr: "FDIS",

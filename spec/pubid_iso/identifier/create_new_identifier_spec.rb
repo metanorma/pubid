@@ -234,7 +234,7 @@ module Pubid::Iso
 
         it "has related harmonized stage codes assigned" do
           expect(subject.stage.harmonized_code.stages)
-            .to eq(%w[40.00 40.20 40.60 40.92 40.93 50.00 50.20 50.60 50.92])
+            .to eq(%w[40.00 40.20 40.60 40.92 40.93 40.98 40.99])
         end
 
         it "renders document with typed stage" do

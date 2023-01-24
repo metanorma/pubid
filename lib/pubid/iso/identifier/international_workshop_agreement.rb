@@ -9,7 +9,7 @@ module Pubid::Iso
         dis: {
           abbr: "DIWA",
           name: "Draft International Workshop Agreement",
-          harmonized_stages: %w[40.00 40.20 40.60 40.92 40.93],
+          harmonized_stages: %w[40.00 40.20 40.60 40.92 40.93 40.98 40.99],
         },
       }.freeze
 

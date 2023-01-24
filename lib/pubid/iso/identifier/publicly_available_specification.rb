@@ -9,7 +9,7 @@ module Pubid::Iso
         dpas: {
           abbr: "DPAS",
           name: "Publicly Available Specification Draft",
-          harmonized_stages: %w[40.00 40.20 40.60 40.92 40.93 50.00 50.20 50.60 50.92],
+          harmonized_stages: %w[40.00 40.20 40.60 40.92 40.93 40.98 40.99],
         },
         fdpas: {
           abbr: "FDPAS",
