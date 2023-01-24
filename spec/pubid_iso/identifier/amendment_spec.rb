@@ -103,6 +103,14 @@ module Pubid::Iso
               end
             end
 
+            context "when stage is 60.00" do
+              let(:stage) { "60.00" }
+
+              it "renders long stage and amendment" do
+                expect(subject.to_s).to eq("ISO #{number}:1999/Amd 1")
+              end
+            end
+
             context "when stage is 60.60" do
               let(:stage) { "60.60" }
 
