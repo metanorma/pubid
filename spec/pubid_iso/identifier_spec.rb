@@ -626,6 +626,14 @@ module Pubid::Iso
     context "ISO/PRF PAS 5643" do
       let(:pubid) { "ISO/PRF PAS 5643" }
 
+      it "return typed_stage_abbrev" do
+        expect(subject.typed_stage_abbrev).to eq("PRF PAS")
+      end
+
+      it "return typed_stage_name" do
+        expect(subject.typed_stage_name).to eq("Proof of a new Publicly Available Specification")
+      end
+
       it_behaves_like "converts pubid to pubid with prf"
     end
 
@@ -831,6 +839,15 @@ module Pubid::Iso
     context "PRF IWA 36" do
       let(:pubid) { "PRF IWA 36" }
 
+      it "return typed_stage_abbrev" do
+        expect(subject.typed_stage_abbrev).to eq("PRF IWA")
+      end
+
+      it "return typed_stage_name" do
+        expect(subject.typed_stage_name).to eq("Proof of a new International Workshop Agreement")
+      end
+
+
       it_behaves_like "converts pubid to pubid with prf"
     end
 
@@ -851,6 +868,20 @@ module Pubid::Iso
       let(:pubid) { "ISO 3758:1991/Suppl:1993" }
 
       it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/PRF TR 23249" do
+      let(:pubid) { "ISO/PRF TR 23249" }
+
+      it "return typed_stage_abbrev" do
+        expect(subject.typed_stage_abbrev).to eq("PRF TR")
+      end
+
+      it "return typed_stage_name" do
+        expect(subject.typed_stage_name).to eq("Proof of a new Technical Report")
+      end
+
+      it_behaves_like "converts pubid to pubid with prf"
     end
 
     describe "#parse_from_title" do
