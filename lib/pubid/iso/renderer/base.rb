@@ -21,23 +21,7 @@ module Pubid::Iso::Renderer
       },
     }.freeze
 
-    PUBLISHER = { "ISO" => "ИСО", "IEC" => "МЭК" }.freeze
-    STAGE = { "FDIS" => "ОПМС",
-              "DIS" => "ПМС",
-              "NP" => "НП",
-              "AWI" => "АВИ",
-              "CD" => "КПК",
-              "PD" => "ПД",
-              "FPD" => "ФПД",
-    }.freeze
-
-    TYPE = { "Guide" => "Руководство",
-             "TS" => "ТС",
-             "TR" => "ТО",
-             "ISP" => "ИСП",
-    }.freeze
-
-
+    TYPE = "".freeze
 
     def render_base_identifier(**args)
       prerender(**args)
@@ -58,8 +42,18 @@ module Pubid::Iso::Renderer
     def render_base(_base, _opts, _params)
     end
 
+    def render_type_prefix(params)
+      result = params[:typed_stage].nil? || params[:typed_stage].empty? ? self.class::TYPE : ""
+
+      if params[:stage] && !params[:stage].empty? && !result.empty?
+        " #{result}"
+      else
+        result
+      end
+    end
+
     def render_identifier(params, opts)
-      "%{publisher}%{typed_stage}%{stage} %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}" % params
+      "%{publisher}%{typed_stage}%{stage}#{render_type_prefix(params)} %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{addendum}%{edition}" % params
     end
 
     def render_copublisher_string(publisher, copublishers, opts)
@@ -165,6 +159,14 @@ module Pubid::Iso::Renderer
       return "-#{part.reverse.join('-')}" if part.is_a?(Array)
 
       "-#{part}"
+    end
+
+    def render_addendum(addendum, _opts, _params)
+      if addendum[:year]
+        "/Add #{addendum[:number]}:#{addendum[:year]}"
+      else
+        "/Add #{addendum[:number]}"
+      end
     end
   end
 end

@@ -740,6 +740,18 @@ module Pubid::Iso
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "ISO 1942:1983/Add 1:1983" do
+      let(:pubid) { "ISO 1942:1983/Add 1:1983" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/TR 8373:1988/Add 1:1990" do
+      let(:pubid) { "ISO/TR 8373:1988/Add 1:1990" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "ISO/IEC ISP 10611-3:2003" do
       let(:pubid) { "ISO/IEC ISP 10611-3:2003" }
 
