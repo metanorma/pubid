@@ -159,12 +159,19 @@ module Pubid::Ieee
     def edition
       return "" unless @edition
 
-      result = " Edition "
+      result = ""
       if @edition[:version]
-        result += @edition[:version] == "First" ? "1.0 " : "#{@edition[:version]} "
+        result += @edition[:version] == "First" ? " Edition 1.0 " : " Edition #{@edition[:version]} "
       end
 
-      result += "#{@edition[:year]}" if @edition[:year]
+      if @edition[:year]
+        result += if @edition[:version]
+                    "#{@edition[:year]}"
+                  else
+                    " #{@edition[:year]} Edition"
+                  end
+      end
+
       if @edition[:month]
         month = @edition[:month]
         month = Date.parse(@edition[:month]).month if month.to_i.zero?

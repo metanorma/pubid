@@ -110,7 +110,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE Std 1003.1, 2004 Edition" do
       let(:original) { "IEEE Std 1003.1, 2004 Edition" }
-      let(:pubid) { "IEEE Std 1003.1 Edition 2004" }
+      let(:pubid) { "IEEE Std 1003.1 2004 Edition" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -587,7 +587,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE Std 1003.1, 2013 Edition (incorporates IEEE Std 1003.1-2008, and IEEE Std 1003.1-2008/Cor 1-2013)" do
       let(:original) { "IEEE Std 1003.1, 2013 Edition (incorporates IEEE Std 1003.1-2008, and IEEE Std 1003.1-2008/Cor 1-2013)" }
-      let(:pubid) { "IEEE Std 1003.1 Edition 2013 (Incorporates IEEE Std 1003.1-2008, and IEEE Std 1003.1-2008/Cor 1-2013)" }
+      let(:pubid) { "IEEE Std 1003.1 2013 Edition (Incorporates IEEE Std 1003.1-2008, and IEEE Std 1003.1-2008/Cor 1-2013)" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -679,7 +679,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE Std 802.1s-2002 (Amendment to IEEE Std 802.1Q, 1998 Edition)" do
       let(:original) { "IEEE Std 802.1s-2002 (Amendment to IEEE Std 802.1Q, 1998 Edition)" }
-      let(:pubid) { "IEEE Std 802.1s-2002 (Amendment to IEEE Std 802.1Q Edition 1998)" }
+      let(:pubid) { "IEEE Std 802.1s-2002 (Amendment to IEEE Std 802.1Q 1998 Edition)" }
 
       it_behaves_like "converts pubid to pubid"
     end
