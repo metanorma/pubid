@@ -18,22 +18,6 @@ module Pubid::Iso
           expect(subject.urn).to eq("urn:iso:std:iso:123:ed-1:amd:1:v1")
         end
 
-        context "when document don't have year" do
-          let(:year) { nil }
-
-          it "raises an error" do
-            expect { subject }.to raise_exception(Errors::SupplementWithoutYearOrStageError)
-          end
-
-          context "but have a stage" do
-            let(:params) { { year: year, stage: :fdis } }
-
-            it "don't raise an error" do
-              expect { subject }.not_to raise_exception
-            end
-          end
-        end
-
         context "when amendment has a year" do
           let(:amendment_params) { { year: 2017 } }
 

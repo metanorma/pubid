@@ -896,6 +896,12 @@ module Pubid::Iso
       it_behaves_like "converts pubid to pubid with prf"
     end
 
+    context "ISO/IEC 23008-1/WD Amd 1" do
+      let(:pubid) { "ISO/IEC 23008-1/WD Amd 1" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     describe "#parse_from_title" do
       subject { described_class.parse_from_title(title) }
       let(:title) { "#{pubid} Geographic information — Metadata — Part 1: Fundamentals" }
