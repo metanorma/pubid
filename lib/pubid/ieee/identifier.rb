@@ -81,7 +81,7 @@ module Pubid::Ieee
 
     def to_s(format = :short)
       if @iso_identifier
-        "#{@iso_identifier.to_s(with_language_code: :single)}#{iso_amendment}#{dual_identifier}"
+        "#{@iso_identifier.to_s(format: :ref_num_short)}#{iso_amendment}#{dual_identifier}"
       else
         "#{identifier(format)}#{parameters}#{adoption}"
       end

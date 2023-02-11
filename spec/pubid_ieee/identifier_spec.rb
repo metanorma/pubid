@@ -824,6 +824,27 @@ RSpec.describe Pubid::Ieee::Identifier do
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "IEEE 1672-2006/Cor 1-2008 (Corrigendum to IEEE Std 1672-2006)" do
+      let(:original) { "IEEE 1672-2006/Cor 1-2008 (Corrigendum to IEEE Std 1672-2006)" }
+      let(:pubid) { "IEEE 1672-2006/Cor 1:2008" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/IEC/IEEE 8802-22.2:2015/Amd.2:2017(E)" do
+      let(:original) { "ISO/IEC/IEEE 8802-22.2:2015/Amd.2:2017(E)" }
+      let(:pubid) { "ISO/IEC/IEEE 8802-22:2015/Amd 2:2017(E)" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "IEEE P16085/CD, February 2018" do
+      let(:original) { "IEEE P16085/CD, February 2018" }
+      let(:pubid) { "IEEE/CD P16085, February 2018" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 
   describe "parse identifiers from examples files" do

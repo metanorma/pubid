@@ -302,18 +302,18 @@ module Pubid::Ieee
       (str("-") | str("/")) >> str(" ").maybe >>
         # (str("-") >> iso_parser.stage).absent? >>
         ((match('\d') | str("A")) >>
-          ((str("-") >> iso_parser.stage).absent? >>
+          ((str("-") >> iso_parser.typed_stage).absent? >>
           (match['\d[A-Z]'] | str("-"))).repeat).as(:part)
     end
 
     rule(:iso_part_stage_iteration) do
       iso_part >>
-      (str("-") >> iso_parser.stage.as(:stage)) >> iso_parser.iteration.maybe
+      (str("-") >> iso_parser.typed_stage.as(:stage)) >> iso_parser.iteration.maybe
     end
 
     rule(:iso_stage_part_iteration) do
       # don't consume draft from IEEE format
-      ((str("-") | str("/")) >> (str("D") >> digits).absent? >> iso_parser.stage.as(:stage)) >>
+      ((str("-") | str("/")) >> (str("D") >> digits).absent? >> (iso_parser.typed_stage.as(:stage) | iso_parser.stage.as(:stage))) >>
         iso_part.maybe >> iso_parser.iteration.maybe
     end
 
@@ -336,12 +336,12 @@ module Pubid::Ieee
         # Withdrawn e.g: WD/ISO 10360-5:2000
         # for French and Russian PubIDs starting with Guide type
       ((iso_parser.guide_prefix.as(:type) >> str(" ")).maybe >>
-      (iso_parser.stage.as(:stage) >> str(" ")).maybe >>
+      (iso_parser.typed_stage.as(:stage) >> str(" ")).maybe >>
         iso_parser.originator >> ((str(" ") | str("/")) >>
       # for ISO/FDIS
-      (iso_parser.type | iso_parser.stage.as(:stage))).maybe >>
+      (iso_parser.type | iso_parser.typed_stage.as(:stage))).maybe >>
       # for ISO/IEC WD TS 25025
-      str(" ").maybe >> ((iso_parser.stage.as(:stage) | iso_parser.type) >> str(" ")).maybe >>
+      str(" ").maybe >> ((iso_parser.typed_stage.as(:stage) | iso_parser.stage.as(:stage) | iso_parser.type) >> str(" ")).maybe >>
         (str("P").maybe >> iso_parser.digits).as(:number) >>
       # for identifiers like ISO 5537/IDF 26
       (str("|") >> (str("IDF") >> str(" ") >> digits).as(:joint_document)).maybe >>
@@ -350,7 +350,7 @@ module Pubid::Ieee
       # stage before amendment
       (
       # stage before corrigendum
-      ((iso_parser.amendment >> iso_parser.corrigendum.maybe) | iso_parser.corrigendum).maybe) >>
+      iso_parser.supplement.maybe) >>
         iso_parser.language.maybe).as(:iso_identifier)
     end
 
