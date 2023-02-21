@@ -17,17 +17,8 @@ module Pubid::Ieee
       @number = number
       @proposal = @number.to_s[0] == "P"
       @revision = revision
-      if iso_identifier
-        @iso_identifier = Pubid::Iso::Identifier.parse(iso_identifier)
-        if iso_amendment
-          @iso_identifier.amendments = [
-            Pubid::Iso::Amendment.new(
-              version: iso_amendment[:version],
-              number: iso_amendment[:year]
-            )
-          ]
-        end
-      end
+      @iso_identifier = Pubid::Iso::Identifier.parse(iso_identifier) if iso_identifier
+
       [organizations, type_status, parameters].each do |data|
         case data
         when Hash
@@ -208,7 +199,15 @@ module Pubid::Ieee
     end
 
     def amendment
-      return unless @amendment
+      return unless @amendment || @iso_amendment
+
+      if @iso_amendment
+        if @iso_amendment[:year]
+          return "/Amd#{@iso_amendment[:version]}-#{@iso_amendment[:year]}"
+        else
+          return "/Amd#{@iso_amendment[:version]}"
+        end
+      end
 
       return " (Amendment to #{@amendment})" unless @amendment.is_a?(Array)
 

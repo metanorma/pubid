@@ -67,11 +67,6 @@ module Pubid::Ieee
 
     end
 
-    rule(:revision) do
-      (comma_month_year >> space? >> str("(E)")) |
-      comma_month_year
-    end
-
     rule(:draft_status) do
       (str("Active Unapproved") | str("Unapproved") | str("Approved")).as(:draft_status)
     end

@@ -845,6 +845,26 @@ RSpec.describe Pubid::Ieee::Identifier do
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "IEEE/ISO/IEC 8802-1Q-2020/Amd31-2021" do
+      let(:original) { "IEEE/ISO/IEC 8802-1Q-2020/Amd31-2021" }
+      let(:pubid) { "IEEE/IEC/ISO 8802-1Q-2020/Amd 31:2021" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/IEC/IEEE 8802-3:2017/Cor.1:2018(E)" do
+      let(:original) { "ISO/IEC/IEEE 8802-3:2017/Cor.1:2018(E)" }
+      let(:pubid) { "ISO/IEC/IEEE 8802-3:2017/Cor 1:2018(E)" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "IEEE Std 8802-2-1994/Amd3" do
+      let(:pubid) { "IEEE Std 8802-2-1994/Amd3" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 
   describe "parse identifiers from examples files" do
