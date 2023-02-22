@@ -120,7 +120,7 @@ module Pubid::Ieee
 
     def type(format)
       result = @draft && format == :full ? "Draft " : ""
-      result += "#{@type.capitalize} " if @type
+      result += @type ? "#{@type.capitalize} " : "Std " unless @iso_identifier
       result
     end
 

@@ -24,7 +24,7 @@ RSpec.describe Pubid::Ieee::Identifier do
   describe "parse specific identifiers" do
     context "IEEE No 142-1956" do
       let(:original) { "IEEE No 142-1956" }
-      let(:pubid) { "IEEE 142-1956" }
+      let(:pubid) { "IEEE Std 142-1956" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -50,7 +50,8 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "ANSI C37.0781-1972" do
-      let(:pubid) { "ANSI C37.0781-1972" }
+      let(:original) { "ANSI C37.0781-1972" }
+      let(:pubid) { "ANSI Std C37.0781-1972" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -62,34 +63,35 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "ASA C37.1-1950" do
-      let(:pubid) { "ASA C37.1-1950" }
+      let(:original) { "ASA C37.1-1950" }
+      let(:pubid) { "ASA Std C37.1-1950" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ANSI/ IEEE C37.23-1969" do
       let(:original) { "ANSI/ IEEE C37.23-1969" }
-      let(:pubid) { "ANSI/IEEE C37.23-1969" }
+      let(:pubid) { "ANSI/IEEE Std C37.23-1969" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "AIEE No 91-1962 (ASA Y32.14-1962)" do
       let(:original) { "AIEE No 91-1962 (ASA Y32.14-1962)" }
-      let(:pubid) { "AIEE 91-1962 (ASA Y32.14-1962)" }
+      let(:pubid) { "AIEE Std 91-1962 (ASA Std Y32.14-1962)" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ANSI C37.61-1973 and IEEE Std 321-1973" do
       let(:original) { "ANSI C37.61-1973 and IEEE Std 321-1973" }
-      let(:pubid) { "ANSI C37.61-1973 (IEEE Std 321-1973)" }
+      let(:pubid) { "ANSI Std C37.61-1973 (IEEE Std 321-1973)" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE Std 623-1976 (ANSI Y32.21-1976, NCTA 006-0975)" do
-      let(:pubid) { "IEEE Std 623-1976 (ANSI Y32.21-1976, NCTA 006.0975)" }
+      let(:pubid) { "IEEE Std 623-1976 (ANSI Std Y32.21-1976, NCTA Std 006.0975)" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -145,21 +147,21 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE 1076.4 IEC 61691-5 First edition 2004-10" do
       let(:original) { "IEEE 1076.4 IEC 61691-5 First edition 2004-10" }
-      let(:pubid) { "IEEE 1076.4 (IEC 61691-5 Edition 1.0 2004-10)" }
+      let(:pubid) { "IEEE Std 1076.4 (IEC Std 61691-5 Edition 1.0 2004-10)" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ANSI PC63.10/D14, April 2020" do
-      let(:pubid) { "ANSI PC63.10/D14, April 2020" }
-      let(:full_pubid) { "ANSI Draft PC63.10/D14, April 2020" }
+      let(:pubid) { "ANSI Std PC63.10/D14, April 2020" }
+      let(:full_pubid) { "ANSI Draft Std PC63.10/D14, April 2020" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE Std 1076.1 IEC 61691-6 Edition 1.0 2009-12" do
       let(:original) { "IEEE Std 1076.1 IEC 61691-6 Edition 1.0 2009-12" }
-      let(:pubid) { "IEEE Std 1076.1 (IEC 61691-6 Edition 1.0 2009-12)" }
+      let(:pubid) { "IEEE Std 1076.1 (IEC Std 61691-6 Edition 1.0 2009-12)" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -179,19 +181,19 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "ANSI PC63.12/D12e, January 2015" do
-      let(:pubid) { "ANSI PC63.12/D12e, January 2015" }
+      let(:pubid) { "ANSI Std PC63.12/D12e, January 2015" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE P62.44/D15.3" do
-      let(:pubid) { "IEEE P62.44/D15.3" }
+      let(:pubid) { "IEEE Std P62.44/D15.3" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE C57.139/D14June 2010" do
-      let(:pubid) { "IEEE C57.139/D14, June 2010" }
+      let(:pubid) { "IEEE Std C57.139/D14, June 2010" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -218,21 +220,21 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE P1609.2.1/D12D14, June 2020" do
       let(:original) { "IEEE P1609.2.1/D12D14, June 2020" }
-      let(:pubid) { "IEEE P1609.2.1/D12D14, June 2020" }
+      let(:pubid) { "IEEE Std P1609.2.1/D12D14, June 2020" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE P1653.5/D7d1 November, 2019" do
       let(:original) { "IEEE P1653.5/D7d1 November, 2019" }
-      let(:pubid) { "IEEE P1653.5/D7.1, November 2019" }
+      let(:pubid) { "IEEE Std P1653.5/D7.1, November 2019" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE P1017/D062012" do
       let(:original) { "IEEE P1017/D062012" }
-      let(:pubid) { "IEEE P1017/D062012, June 2012" }
+      let(:pubid) { "IEEE Std P1017/D062012, June 2012" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -348,42 +350,42 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "ANSI C63.10-2013 - Redline" do
-      let(:pubid) { "ANSI C63.10-2013 - Redline" }
+      let(:pubid) { "ANSI Std C63.10-2013 - Redline" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "PC57.158/D6A, August 2016" do
       let(:original) { "PC57.158/D6A, August 2016" }
-      let(:pubid) { "IEEE PC57.158/D6A, August 2016" }
+      let(:pubid) { "IEEE Std PC57.158/D6A, August 2016" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEP62.42.1/D3, October 2014" do
       let(:original) { "IEEP62.42.1/D3, October 2014" }
-      let(:pubid) { "IEEE P62.42.1/D3, October 2014" }
+      let(:pubid) { "IEEE Std P62.42.1/D3, October 2014" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE No. 264-1968" do
       let(:original) { "IEEE No. 264-1968" }
-      let(:pubid) { "IEEE 264-1968" }
+      let(:pubid) { "IEEE Std 264-1968" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE Std 1666 IEC61691-7 Edition 1.0 2009-12" do
       let(:original) { "IEEE Std 1666 IEC61691-7 Edition 1.0 2009-12" }
-      let(:pubid) { "IEEE Std 1666 (IEC 61691-7 Edition 1.0 2009-12)" }
+      let(:pubid) { "IEEE Std 1666 (IEC Std 61691-7 Edition 1.0 2009-12)" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE No 323, April 1971" do
       let(:original) { "IEEE No 323, April 1971" }
-      let(:pubid) { "IEEE 323, April 1971" }
+      let(:pubid) { "IEEE Std 323, April 1971" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -411,7 +413,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE P802.11ajD8.0, August 2017" do
       let(:original) { "IEEE P802.11ajD8.0, August 2017" }
-      let(:pubid) { "IEEE P802.11aj/D8.0, August 2017" }
+      let(:pubid) { "IEEE Std P802.11aj/D8.0, August 2017" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -432,14 +434,14 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "ANSI C63.4a-2017 (Amendment to ANSI C63.4-2014)" do
       let(:original) { "ANSI C63.4a-2017 (Amendment to ANSI C63.4-2014)" }
-      let(:pubid) { "ANSI C63.4a-2017 (Amendment to ANSI C63.4-2014)" }
+      let(:pubid) { "ANSI Std C63.4a-2017 (Amendment to ANSI Std C63.4-2014)" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE P802.3bg/D2.1, September 2010 (Amendment of IEEE Std 802.3-2008)" do
       let(:original) { "IEEE P802.3bg/D2.1, September 2010 (Amendment of IEEE Std 802.3-2008)" }
-      let(:pubid) { "IEEE P802.3bg/D2.1, September 2010 (Amendment to IEEE Std 802.3-2008)" }
+      let(:pubid) { "IEEE Std P802.3bg/D2.1, September 2010 (Amendment to IEEE Std 802.3-2008)" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -493,14 +495,14 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "P1900.6-2011/Cor1/D3, August 2015" do
       let(:original) { "P1900.6-2011/Cor1/D3, August 2015" }
-      let(:pubid) { "IEEE P1900.6-2011/Cor 1/D3, August 2015" }
+      let(:pubid) { "IEEE Std P1900.6-2011/Cor 1/D3, August 2015" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE P1722-2016-Cor1/D0, June 2016" do
       let(:original) { "IEEE P1722-2016-Cor1/D0, June 2016" }
-      let(:pubid) { "IEEE P1722-2016/Cor 1/D0, June 2016" }
+      let(:pubid) { "IEEE Std P1722-2016/Cor 1/D0, June 2016" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -513,20 +515,20 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE Std 16-1955 (Supersedes C48-1931 and AIEE 16A 1951)" do
       let(:original) { "IEEE Std 16-1955 (Supersedes C48-1931 and AIEE 16A-1951)" }
-      let(:pubid) { "IEEE Std 16-1955 (Supersedes IEEE C48-1931 and AIEE 16A-1951)" }
+      let(:pubid) { "IEEE Std 16-1955 (Supersedes IEEE Std C48-1931 and AIEE Std 16A-1951)" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE Std 588-1976 (ANSI C37.86-1975) (Revision of IEEE Std 288-1969 and IEEE Std 328-1971)" do
-      let(:pubid) { "IEEE Std 588-1976 (ANSI C37.86-1975) (Revision of IEEE Std 288-1969 and IEEE Std 328-1971)" }
+      let(:pubid) { "IEEE Std 588-1976 (ANSI Std C37.86-1975) (Revision of IEEE Std 288-1969 and IEEE Std 328-1971)" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE Std 268-1976 (Supersedes ASTM E380-1974 IEEE Std 268-1973 IEEE Std 322-1971)" do
       let(:original) { "IEEE Std 268-1976 (Supersedes ASTM E380-1974 IEEE Std 268-1973 IEEE Std 322-1971)" }
-      let(:pubid) { "IEEE Std 268-1976 (Supersedes ASTM E380-1974, IEEE Std 268-1973, IEEE Std 322-1971)" }
+      let(:pubid) { "IEEE Std 268-1976 (Supersedes ASTM Std E380-1974, IEEE Std 268-1973, IEEE Std 322-1971)" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -539,7 +541,8 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "ASA C37.1-1937 (Reaffirmed 1945)" do
-      let(:pubid) { "ASA C37.1-1937 (Reaffirmed 1945)" }
+      let(:original) { "ASA C37.1-1937 (Reaffirmed 1945)" }
+      let(:pubid) { "ASA Std C37.1-1937 (Reaffirmed 1945)" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -553,14 +556,14 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "ANSI C50.32-1976 and IEEE Std 117-1974 (Reaffirmed 1984) (Revision of IEEE Std 117-1956)" do
       let(:original) { "ANSI C50.32-1976 and IEEE Std 117-1974 (Reaffirmed 1984) (Revision of IEEE Std 117-1956)" }
-      let(:pubid) { "ANSI C50.32-1976 (IEEE Std 117-1974) (Reaffirmed 1984) (Revision of IEEE Std 117-1956)" }
+      let(:pubid) { "ANSI Std C50.32-1976 (IEEE Std 117-1974) (Reaffirmed 1984) (Revision of IEEE Std 117-1956)" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE No 29-1941 / ASA C77.1-1943 (Reaffirmed 1971)" do
       let(:original) { "IEEE No 29-1941 / ASA C77.1-1943 (Reaffirmed 1971)" }
-      let(:pubid) { "IEEE 29-1941 (ASA C77.1-1943) (Reaffirmed 1971)" }
+      let(:pubid) { "IEEE Std 29-1941 (ASA Std C77.1-1943) (Reaffirmed 1971)" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -601,34 +604,35 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "P802-REV/D2.0 (Revision of IEEE Std 802-2001, incorporating IEEE Std 802a-2003, and IEEE Std 802b-2004)" do
       let(:original) { "P802-REV/D2.0 (Revision of IEEE Std 802-2001, incorporating IEEE Std 802a-2003, and IEEE Std 802b-2004)" }
-      let(:pubid) { "IEEE P802-REV/D2.0 (Incorporates IEEE Std 802a-2003, and IEEE Std 802b-2004) (Revision of IEEE Std 802-2001)" }
+      let(:pubid) { "IEEE Std P802-REV/D2.0 (Incorporates IEEE Std 802a-2003, and IEEE Std 802b-2004) (Revision of IEEE Std 802-2001)" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ANSI/IEEE C37.010b-1985 (Supplement to ANSI/IEEE C37.010-1979)" do
-      let(:pubid) { "ANSI/IEEE C37.010b-1985 (Supplement to ANSI/IEEE C37.010-1979)" }
+      let(:original) { "ANSI/IEEE C37.010b-1985 (Supplement to ANSI/IEEE C37.010-1979)" }
+      let(:pubid) { "ANSI/IEEE Std C37.010b-1985 (Supplement to ANSI/IEEE Std C37.010-1979)" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "NACE/IEEE P1835_D2, July 2014" do
       let(:original) { "NACE/IEEE P1835_D2, July 2014" }
-      let(:pubid) { "NACE/IEEE P1835/D2, July 2014" }
+      let(:pubid) { "NACE/IEEE Std P1835/D2, July 2014" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "NACE SP0XXX-2011/IEEE P1835_D1a, 2011" do
       let(:original) { "NACE SP0XXX-2011/IEEE P1835_D1a, 2011" }
-      let(:pubid) { "NACE SP0XXX-2011 (IEEE P1835/D1a 2011)" }
+      let(:pubid) { "NACE Std SP0XXX-2011 (IEEE Std P1835/D1a 2011)" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "NACE SP0215-2015/IEEE Std 1839-2014" do
       let(:original) { "NACE SP0215-2015/IEEE Std 1839-2014" }
-      let(:pubid) { "NACE SP0215-2015 (IEEE Std 1839-2014)" }
+      let(:pubid) { "NACE Std SP0215-2015 (IEEE Std 1839-2014)" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -647,7 +651,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "ISO/IEC 15288:2008(E) IEEE Std 15288-2008 (Revision of IEEE Std 15288-2004)" do
       let(:original) { "ISO/IEC 15288:2008(E) IEEE Std 15288-2008 (Revision of IEEE Std 15288-2004)" }
-      let(:pubid) { "ISO/IEC 15288:2008(E) (IEEE Std 15288-2008) (Revision of IEEE Std 15288-2004)" }
+      let(:pubid) { "ISO/IEC 15288:2008(E) (IEEE 15288-2008) (Revision of IEEE Std 15288-2004)" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -672,7 +676,7 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "IEEE Std 802.3cp-2021 (Amendment to IEEE 802.3-2018)" do
-      let(:pubid) { "IEEE Std 802.3cp-2021 (Amendment to IEEE 802.3-2018)" }
+      let(:pubid) { "IEEE Std 802.3cp-2021 (Amendment to IEEE Std 802.3-2018)" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -867,11 +871,14 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "IEEE 278-1967" do
-      let(:pubid) { "IEEE 278-1967" }
+      let(:original) { "IEEE 278-1967" }
+      let(:pubid) { "IEEE Std 278-1967" }
 
       it "parses last part as a year" do
         expect(subject.year).to eq("-1967")
       end
+
+      it_behaves_like "converts pubid to pubid"
     end
   end
 
