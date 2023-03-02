@@ -10,9 +10,9 @@ module Pubid::Ieee
 
     rule(identifier: subtree(:identifier)) do |data|
       if data[:identifier].is_a?(Parslet::Slice)
-        Identifier.new(**Parser.new.iso_or_ieee_identifier.parse(data[:identifier].to_s))
+        Identifier.new(**Identifier.convert_parser_parameters(**Parser.new.iso_or_ieee_identifier.parse(data[:identifier].to_s)))
       else
-        Identifier.new(**data[:identifier])
+        Identifier.new(**Identifier.convert_parser_parameters(**data[:identifier]))
       end
     end
 

@@ -4,33 +4,78 @@ require "yaml"
 UPDATE_CODES = YAML.load_file(File.join(File.dirname(__FILE__), "../../../update_codes.yaml"))
 
 module Pubid::Ieee
-  class Identifier
+  class Identifier < Pubid::Core::Identifier
     attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart,
                   :edition, :draft, :redline, :year, :month, :type, :alternative,
                   :draft_status, :revision, :adoption_year, :amendment, :supersedes,
                   :corrigendum, :corrigendum_comment, :reaffirmed, :incorporates,
                   :supplement, :proposal, :iso_identifier, :iso_amendment
 
-    def initialize(type_status: nil, number: nil, parameters: nil,
-                   organizations: { publisher: "IEEE" }, revision: nil, iso_identifier: nil,
-                   iso_amendment: nil)
-      @number = number
+    def initialize(number: nil, stage: nil, subpart: nil, edition: nil,
+                   draft: nil, redline: nil, month: nil, revision: nil,
+                   iso_identifier: nil, type: nil, alternative: nil, draft_status: nil, adoption_year: nil,
+                   amendment: nil, supersedes: nil, corrigendum: nil, corrigendum_comment: nil, reaffirmed: nil,
+                   incorporates: nil, supplement: nil, proposal: nil, iso_amendment: nil, **opts)
+
+      super(**opts.merge(number: number))#.merge(amendments: amendments, corrigendums: corrigendums))
+
+      @edition = edition if edition
+
       @proposal = @number.to_s[0] == "P"
       @revision = revision
-      @iso_identifier = Pubid::Iso::Identifier.parse(iso_identifier) if iso_identifier
-
-      [organizations, type_status, parameters].each do |data|
-        case data
-        when Hash
-          set_values(data.transform_values do |v|
-            (v.is_a?(Array) && v.first.is_a?(Hash) && Identifier.merge_parameters(v)) || v
-          end)
-        when Array
-          set_values(Identifier.merge_parameters(data))
+      if iso_identifier
+        @iso_identifier = Pubid::Iso::Identifier.parse(iso_identifier)
+      elsif draft# && type != :p
+        @type = Type.new(:draft)
+      elsif type
+        if type.is_a?(Symbol)
+          @type = Type.new(type)
+        else
+          @type = Type.parse(type)
         end
+      else
+        @type = Type.new
       end
+
+      @stage = stage
+      @subpart = subpart
+      @draft = draft
+      @redline = redline
+      @month = month
+      @revision = revision
+      @amendment = amendment
+      @corrigendum = corrigendum
+      @corrigendum_comment = corrigendum_comment
+      @alternative = alternative
+      @draft_status = draft_status
+      @adoption_year = adoption_year
+      @supersedes = supersedes
+      @reaffirmed = reaffirmed
+      @incorporates = incorporates
+      @supplement = supplement
+      @proposal = proposal
+      @iso_amendment = iso_amendment
     end
 
+    # convert parameters comes from parser to
+    def self.convert_parser_parameters(type_status: nil, parameters: nil,
+                                  organizations: { publisher: "IEEE" }, **args)
+      res = [organizations, type_status, parameters].inject({}) do |result, data|
+        result.merge(
+          case data
+          when Hash
+            data.transform_values do |v|
+              (v.is_a?(Array) && v.first.is_a?(Hash) && Identifier.merge_parameters(v)) || v
+            end
+          when Array
+            Identifier.merge_parameters(data)
+          else
+            {}
+          end
+        )
+      end
+      res.merge(args)
+    end
     def set_values(hash)
       hash.each { |key, value| send("#{key}=", value.is_a?(Parslet::Slice) && value.to_s || value) }
     end
@@ -64,12 +109,25 @@ module Pubid::Ieee
 
     def self.parse(code)
       parsed = Parser.new.parse(update_old_code(code))
-      new(**merge_parameters(Transformer.new.apply(parsed)))
+      transform(parsed)
 
     rescue Parslet::ParseFailed => failure
       raise Pubid::Ieee::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
     end
 
+    def self.transform(params)
+      identifier_params = params.map do |k, v|
+        get_transformer_class.new.apply(k => v).to_a
+      end.flatten(1).to_h
+
+      new(**convert_parser_parameters(**identifier_params))
+    end
+
+    def self.get_transformer_class
+      Transformer
+    end
+
+    # @param [:short, :full] format
     def to_s(format = :short)
       if @iso_identifier
         "#{@iso_identifier.to_s(format: :ref_num_short)}#{iso_amendment}#{dual_identifier}"
@@ -115,13 +173,13 @@ module Pubid::Ieee
     end
 
     def subpart
-      @subpart if @subpart && !@subpart.empty?
+      @subpart if @subpart && !@subpart.to_s.empty?
     end
 
     def type(format)
-      result = @draft && format == :full ? "Draft " : ""
-      result += @type ? "#{@type.capitalize} " : "Std " unless @iso_identifier || @publisher != "IEEE"
-      result
+      return unless @type
+
+      @type.to_s(@publisher != "IEEE" ? :alternative : format)
     end
 
     def year
@@ -140,9 +198,9 @@ module Pubid::Ieee
     def alternative
       if @alternative
         if @alternative.is_a?(Array)
-          " (#{@alternative.map { |a| Identifier.new(**a) }.join(', ')})"
+          " (#{@alternative.map { |a| Identifier.new(**self.class.convert_parser_parameters(**a)) }.join(', ')})"
         else
-          " (#{Identifier.new(**@alternative)})"
+          " (#{Identifier.new(**self.class.convert_parser_parameters(**@alternative))})"
         end
       end
     end

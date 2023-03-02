@@ -153,7 +153,8 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "ANSI PC63.10/D14, April 2020" do
-      let(:pubid) { "ANSI PC63.10/D14, April 2020" }
+      let(:original) { "ANSI PC63.10/D14, April 2020" }
+      let(:pubid) { "ANSI Draft PC63.10/D14, April 2020" }
       let(:full_pubid) { "ANSI Draft PC63.10/D14, April 2020" }
 
       it_behaves_like "converts pubid to pubid"
@@ -167,7 +168,7 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "IEEE Std PC37.12.1/D2.0" do
-      let(:pubid) { "IEEE Std PC37.12.1/D2.0" }
+      let(:pubid) { "IEEE Draft Std PC37.12.1/D2.0" }
       let(:full_pubid) { "IEEE Draft Std PC37.12.1/D2.0" }
 
       it_behaves_like "converts pubid to pubid"
@@ -181,19 +182,21 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "ANSI PC63.12/D12e, January 2015" do
-      let(:pubid) { "ANSI PC63.12/D12e, January 2015" }
+      let(:original) { "ANSI PC63.12/D12e, January 2015" }
+      let(:pubid) { "ANSI Draft PC63.12/D12e, January 2015" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE P62.44/D15.3" do
-      let(:pubid) { "IEEE Std P62.44/D15.3" }
+      let(:original) { "IEEE P62.44/D15.3" }
+      let(:pubid) { "IEEE Draft Std P62.44/D15.3" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE C57.139/D14June 2010" do
-      let(:pubid) { "IEEE Std C57.139/D14, June 2010" }
+      let(:pubid) { "IEEE Draft Std C57.139/D14, June 2010" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -219,45 +222,39 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "IEEE P1609.2.1/D12D14, June 2020" do
-      let(:original) { "IEEE P1609.2.1/D12D14, June 2020" }
-      let(:pubid) { "IEEE Std P1609.2.1/D12D14, June 2020" }
+      let(:pubid) { "IEEE Draft Std P1609.2.1/D12D14, June 2020" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE P1653.5/D7d1 November, 2019" do
-      let(:original) { "IEEE P1653.5/D7d1 November, 2019" }
-      let(:pubid) { "IEEE Std P1653.5/D7.1, November 2019" }
+      let(:original) { "IEEE P1653.5/D7.1, November 2019" }
+      let(:pubid) { "IEEE Draft Std P1653.5/D7.1, November 2019" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE P1017/D062012" do
-      let(:original) { "IEEE P1017/D062012" }
-      let(:pubid) { "IEEE Std P1017/D062012, June 2012" }
+      let(:pubid) { "IEEE P1017/D062012, June 2012" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE Std PC37.20.1a/D11" do
-      let(:pubid) { "IEEE Std PC37.20.1a/D11" }
+      let(:pubid) { "IEEE Draft Std PC37.20.1a/D11" }
 
       it_behaves_like "converts pubid to pubid"
-
-      it "indicates proposal stage" do
-        expect(subject.proposal).to be_truthy
-      end
     end
 
     context "IEEE Std PC37.66/D12, Apr 2005" do
-      let(:pubid) { "IEEE Std PC37.66/D12, April 2005" }
+      let(:pubid) { "IEEE Draft Std PC37.66/D12, April 2005" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE Unapproved Draft Std 11073-10471/D02, Feb 2008" do
       let(:original) { "IEEE Unapproved Draft Std 11073-10471/D02, Feb 2008" }
-      let(:pubid) { "IEEE Std 11073-10471/D02, February 2008" }
+      let(:pubid) { "IEEE Draft Std 11073-10471/D02, February 2008" }
       let(:full_pubid) { "IEEE Unapproved Draft Std 11073-10471/D02, February 2008" }
 
       it_behaves_like "converts pubid to pubid"
@@ -265,7 +262,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE Active Unapproved Draft Std PC37.59/D11, Jul 2007" do
       let(:original) { "IEEE Active Unapproved Draft Std PC37.59/D11, Jul 2007" }
-      let(:pubid) { "IEEE Std PC37.59/D11, July 2007" }
+      let(:pubid) { "IEEE Draft Std PC37.59/D11, July 2007" }
       let(:full_pubid) { "IEEE Active Unapproved Draft Std PC37.59/D11, July 2007" }
 
       it_behaves_like "converts pubid to pubid"
@@ -273,7 +270,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE Approved Draft Std P1076.1/D3.3, Feb 6, 2007" do
       let(:original) { "IEEE Approved Draft Std P1076.1/D3.3, Feb 6, 2007" }
-      let(:pubid) { "IEEE Std P1076.1/D3.3, February 6, 2007" }
+      let(:pubid) { "IEEE Draft Std P1076.1/D3.3, February 6, 2007" }
       let(:full_pubid) { "IEEE Approved Draft Std P1076.1/D3.3, February 6, 2007" }
 
       it_behaves_like "converts pubid to pubid"
@@ -281,7 +278,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE Unapproved Draft Std P11073-20601_D20 May 2008" do
       let(:original) { "IEEE Unapproved Draft Std P11073-20601_D20 May 2008" }
-      let(:pubid) { "IEEE Std P11073-20601/D20, May 2008" }
+      let(:pubid) { "IEEE Draft Std P11073-20601/D20, May 2008" }
       let(:full_pubid) { "IEEE Unapproved Draft Std P11073-20601/D20, May 2008" }
 
       it_behaves_like "converts pubid to pubid"
@@ -289,7 +286,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE Unapproved Draft Std P1616a/D4, Jan 2010" do
       let(:original) { "IEEE Unapproved Draft Std P1616a/D4, Jan 2010" }
-      let(:pubid) { "IEEE Std P1616a/D4, January 2010" }
+      let(:pubid) { "IEEE Draft Std P1616a/D4, January 2010" }
       let(:full_pubid) { "IEEE Unapproved Draft Std P1616a/D4, January 2010" }
 
       it_behaves_like "converts pubid to pubid"
@@ -297,15 +294,15 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE Unapproved Draft Std P1619/D17, Jul 07" do
       let(:original) { "IEEE Unapproved Draft Std P1619/D17, Jul 07" }
-      let(:pubid) { "IEEE Std P1619/D17, July 2007" }
+      let(:pubid) { "IEEE Draft Std P1619/D17, July 2007" }
       let(:full_pubid) { "IEEE Unapproved Draft Std P1619/D17, July 2007" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
-    context "IEEE Unapproved Std PC37.101/D13, Jun 2006" do
-      let(:original) { "IEEE Unapproved Std PC37.101/D13, Jun 2006" }
-      let(:pubid) { "IEEE Std PC37.101/D13, June 2006" }
+    context "IEEE Unapproved Draft Std PC37.101/D13, Jun 2006" do
+      let(:original) { "IEEE Unapproved Draft Std PC37.101/D13, Jun 2006" }
+      let(:pubid) { "IEEE Draft Std PC37.101/D13, June 2006" }
       let(:full_pubid) { "IEEE Unapproved Draft Std PC37.101/D13, June 2006" }
 
       it_behaves_like "converts pubid to pubid"
@@ -313,7 +310,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE Unapproved Draft Std PC62.11a/D9E, Sept 2007" do
       let(:original) { "IEEE Unapproved Draft Std PC62.11a/D9E, Sept 2007" }
-      let(:pubid) { "IEEE Std PC62.11a/D9E, September 2007" }
+      let(:pubid) { "IEEE Draft Std PC62.11a/D9E, September 2007" }
       let(:full_pubid) { "IEEE Unapproved Draft Std PC62.11a/D9E, September 2007" }
 
       it_behaves_like "converts pubid to pubid"
@@ -321,7 +318,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE Unapproved Draft Std 802.20/D4.1m, April 2008" do
       let(:original) { "IEEE Unapproved Draft Std 802.20/D4.1m, April 2008" }
-      let(:pubid) { "IEEE Std 802.20/D4.1m, April 2008" }
+      let(:pubid) { "IEEE Draft Std 802.20/D4.1m, April 2008" }
       let(:full_pubid) { "IEEE Unapproved Draft Std 802.20/D4.1m, April 2008" }
 
       it_behaves_like "converts pubid to pubid"
@@ -329,7 +326,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE Unapproved Draft Std P1003.1_D4 , Jan 2008" do
       let(:original) { "IEEE Unapproved Draft Std P1003.1_D4 , Jan 2008" }
-      let(:pubid) { "IEEE Std P1003.1/D4, January 2008" }
+      let(:pubid) { "IEEE Draft Std P1003.1/D4, January 2008" }
       let(:full_pubid) { "IEEE Unapproved Draft Std P1003.1/D4, January 2008" }
 
       it_behaves_like "converts pubid to pubid"
@@ -338,7 +335,7 @@ RSpec.describe Pubid::Ieee::Identifier do
     context "IEEE Unapproved Draft Std P11073-20601a/D13, Jan 2010" do
       let(:original) { "IEEE Unapproved Draft Std P11073-20601a/D13, Jan 2010" }
       let(:full_pubid) { "IEEE Unapproved Draft Std P11073-20601a/D13, January 2010" }
-      let(:pubid) { "IEEE Std P11073-20601a/D13, January 2010" }
+      let(:pubid) { "IEEE Draft Std P11073-20601a/D13, January 2010" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -357,14 +354,14 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "PC57.158/D6A, August 2016" do
       let(:original) { "PC57.158/D6A, August 2016" }
-      let(:pubid) { "IEEE Std PC57.158/D6A, August 2016" }
+      let(:pubid) { "IEEE Draft Std PC57.158/D6A, August 2016" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEP62.42.1/D3, October 2014" do
       let(:original) { "IEEP62.42.1/D3, October 2014" }
-      let(:pubid) { "IEEE Std P62.42.1/D3, October 2014" }
+      let(:pubid) { "IEEE Draft Std P62.42.1/D3, October 2014" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -413,7 +410,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE P802.11ajD8.0, August 2017" do
       let(:original) { "IEEE P802.11ajD8.0, August 2017" }
-      let(:pubid) { "IEEE Std P802.11aj/D8.0, August 2017" }
+      let(:pubid) { "IEEE Draft Std P802.11aj/D8.0, August 2017" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -441,7 +438,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "IEEE P802.3bg/D2.1, September 2010 (Amendment of IEEE Std 802.3-2008)" do
       let(:original) { "IEEE P802.3bg/D2.1, September 2010 (Amendment of IEEE Std 802.3-2008)" }
-      let(:pubid) { "IEEE Std P802.3bg/D2.1, September 2010 (Amendment to IEEE Std 802.3-2008)" }
+      let(:pubid) { "IEEE Draft Std P802.3bg/D2.1, September 2010 (Amendment to IEEE Std 802.3-2008)" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -495,14 +492,14 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "P1900.6-2011/Cor1/D3, August 2015" do
       let(:original) { "P1900.6-2011/Cor1/D3, August 2015" }
-      let(:pubid) { "IEEE Std P1900.6-2011/Cor 1/D3, August 2015" }
+      let(:pubid) { "IEEE Draft Std P1900.6-2011/Cor 1/D3, August 2015" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "IEEE P1722-2016-Cor1/D0, June 2016" do
       let(:original) { "IEEE P1722-2016-Cor1/D0, June 2016" }
-      let(:pubid) { "IEEE Std P1722-2016/Cor 1/D0, June 2016" }
+      let(:pubid) { "IEEE Draft Std P1722-2016/Cor 1/D0, June 2016" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -603,7 +600,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "P802-REV/D2.0 (Revision of IEEE Std 802-2001, incorporating IEEE Std 802a-2003, and IEEE Std 802b-2004)" do
       let(:original) { "P802-REV/D2.0 (Revision of IEEE Std 802-2001, incorporating IEEE Std 802a-2003, and IEEE Std 802b-2004)" }
-      let(:pubid) { "IEEE Std P802-REV/D2.0 (Incorporates IEEE Std 802a-2003, and IEEE Std 802b-2004) (Revision of IEEE Std 802-2001)" }
+      let(:pubid) { "IEEE Draft Std P802-REV/D2.0 (Incorporates IEEE Std 802a-2003, and IEEE Std 802b-2004) (Revision of IEEE Std 802-2001)" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -617,14 +614,14 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "NACE/IEEE P1835_D2, July 2014" do
       let(:original) { "NACE/IEEE P1835_D2, July 2014" }
-      let(:pubid) { "NACE/IEEE P1835/D2, July 2014" }
+      let(:pubid) { "NACE/IEEE Draft P1835/D2, July 2014" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "NACE SP0XXX-2011/IEEE P1835_D1a, 2011" do
       let(:original) { "NACE SP0XXX-2011/IEEE P1835_D1a, 2011" }
-      let(:pubid) { "NACE SP0XXX-2011 (IEEE Std P1835/D1a 2011)" }
+      let(:pubid) { "NACE SP0XXX-2011 (IEEE Draft Std P1835/D1a 2011)" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -904,5 +901,23 @@ RSpec.describe Pubid::Ieee::Identifier do
 
       it_behaves_like "parse identifiers from file"
     end
+  end
+
+  describe "#convert_parser_parameters" do
+    subject { described_class.convert_parser_parameters(**params) }
+
+    let(:params) do
+      { number: 1,
+        parameters: { year: 1999 },
+        organizations: { publisher: "IEEE" },
+        type_status: { type: "Std" }
+      }
+    end
+
+    let(:result) do
+      { number: 1, year: 1999, publisher: "IEEE", type: "Std" }
+    end
+
+    it { expect(subject).to eq(result) }
   end
 end
