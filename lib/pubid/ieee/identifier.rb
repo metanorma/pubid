@@ -11,13 +11,13 @@ module Pubid::Ieee
                   :corrigendum, :corrigendum_comment, :reaffirmed, :incorporates,
                   :supplement, :proposal, :iso_identifier, :iso_amendment
 
-    def initialize(number: nil, stage: nil, subpart: nil, edition: nil,
+    def initialize(publisher: "IEEE", number: nil, stage: nil, subpart: nil, edition: nil,
                    draft: nil, redline: nil, month: nil, revision: nil,
-                   iso_identifier: nil, type: nil, alternative: nil, draft_status: nil, adoption_year: nil,
+                   iso_identifier: nil, type: :std, alternative: nil, draft_status: nil, adoption_year: nil,
                    amendment: nil, supersedes: nil, corrigendum: nil, corrigendum_comment: nil, reaffirmed: nil,
                    incorporates: nil, supplement: nil, proposal: nil, iso_amendment: nil, **opts)
 
-      super(**opts.merge(number: number))#.merge(amendments: amendments, corrigendums: corrigendums))
+      super(**opts.merge(number: number, publisher: publisher))#.merge(amendments: amendments, corrigendums: corrigendums))
 
       @edition = edition if edition
 
