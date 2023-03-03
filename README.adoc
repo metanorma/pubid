@@ -1,0 +1,11 @@
+= BSI publication identifiers ("BSI PubID")
+
+== Purpose
+
+This gem implements a mechanism to parse and utilize BSI publication
+identifiers.
+
+== Use cases to support
+
+. generate updated PubID
+
