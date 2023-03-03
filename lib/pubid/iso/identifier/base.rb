@@ -337,7 +337,7 @@ module Pubid::Iso
         if self.class::TYPED_STAGES.key?(typed_stage)
           self.class::TYPED_STAGES[typed_stage][:abbr]
         else
-          "#{stage.abbr} #{type[:key].to_s.upcase}"
+          stage ? "#{stage.abbr} #{type[:key].to_s.upcase}" : type[:key].to_s.upcase
         end
       end
 
@@ -346,7 +346,7 @@ module Pubid::Iso
         if self.class::TYPED_STAGES.key?(typed_stage)
           self.class::TYPED_STAGES[typed_stage][:name]
         else
-          "#{stage.name} #{type[:title]}"
+          stage ? "#{stage.name} #{type[:title]}" : type[:title]
         end
       end
 

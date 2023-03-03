@@ -33,7 +33,7 @@ module Pubid::Iso
         if self.class::TYPED_STAGES.key?(typed_stage)
           super
         else
-          stage.abbr
+          stage&.abbr
         end
       end
 

@@ -222,6 +222,14 @@ module Pubid::Iso
         it "should return IS class" do
           expect(subject).to be_a(Identifier::InternationalStandard)
         end
+
+        it "returns typed_stage_name" do
+          expect(subject.typed_stage_name).to eq("International Standard")
+        end
+
+        it "returns typed_stage_abbrev" do
+          expect(subject.typed_stage_abbrev).to eq(nil)
+        end
       end
 
       context "when have typed stage" do
@@ -274,6 +282,22 @@ module Pubid::Iso
 
           it "render DIR document with language" do
             expect(subject.to_s(format: :ref_num_long)).to eq("ISO DIR #{number}(en)")
+          end
+        end
+
+        context "when PRF stage" do
+          let(:params) { { type: :dir, stage: "PRF" }}
+
+          it "render DIR document" do
+            expect(subject.to_s).to eq("ISO DIR #{number}")
+          end
+
+          it "returns typed_stage_name" do
+            expect(subject.typed_stage_name).to eq("Proof of a new Directives")
+          end
+
+          it "returns typed_stage_abbrev" do
+            expect(subject.typed_stage_abbrev).to eq("PRF DIR")
           end
         end
       end
