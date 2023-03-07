@@ -21,6 +21,12 @@ module Pubid::Bsi
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "PD 19650-0:2019" do
+      let(:pubid) { "PD 19650-0:2019" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     describe "#resolve_identifier" do
       subject { described_class.resolve_identifier(type, { number: 1 }) }
       let(:type) { nil }

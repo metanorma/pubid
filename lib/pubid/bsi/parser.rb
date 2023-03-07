@@ -1,6 +1,6 @@
 module Pubid::Bsi
   class Parser < Pubid::Core::Parser
-    TYPES = %w[PAS].freeze
+    TYPES = %w[PAS PD].freeze
 
     rule(:type) do
       array_to_str(TYPES).as(:type)

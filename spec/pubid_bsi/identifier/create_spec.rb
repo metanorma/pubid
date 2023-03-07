@@ -24,6 +24,14 @@ module Pubid::Bsi
           expect(subject.to_s).to eq("PAS #{number}")
         end
       end
+
+      context "PD type" do
+        let(:params) { { type: :pd } }
+
+        it "renders PD identifier" do
+          expect(subject.to_s).to eq("PD #{number}")
+        end
+      end
     end
   end
 end
