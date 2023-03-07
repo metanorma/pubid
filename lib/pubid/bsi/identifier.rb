@@ -13,6 +13,8 @@ module Pubid::Bsi
       # @see Pubid::Identifier::Base.parse
       def parse(*args)
         Base.parse(*args)
+      rescue Pubid::Core::Errors::ParseError
+        Pubid::Iso::Identifier.parse(*args)
       end
 
       def resolve_identifier(type, parameters = {})

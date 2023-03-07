@@ -47,6 +47,24 @@ module Pubid::Bsi
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "ISO 37101:2016" do
+      let(:pubid) { "ISO 37101:2016" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/IEC 29151" do
+      let(:pubid) { "ISO/IEC 29151" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "IEC 62366-1" do
+      let(:pubid) { "IEC 62366-1" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     describe "#resolve_identifier" do
       subject { described_class.resolve_identifier(type, { number: 1 }) }
       let(:type) { nil }

@@ -32,4 +32,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "lightly"
   spec.add_dependency "parslet"
   spec.add_dependency "pubid-core", "~> 1.5.1"
+  spec.add_dependency "pubid-iso", "~> 0.4.1"
 end

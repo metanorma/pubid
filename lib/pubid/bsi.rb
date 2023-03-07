@@ -8,6 +8,7 @@ end
 STAGES_CONFIG = {}
 
 require "pubid-core"
+require "pubid-iso"
 
 require_relative "bsi/errors"
 require_relative "bsi/identifier/base"
