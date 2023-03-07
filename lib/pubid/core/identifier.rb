@@ -107,6 +107,18 @@ module Pubid::Core
         new(**identifier_params)
       end
 
+      def descendants
+        ObjectSpace.each_object(Class).select { |klass| klass < self }
+      end
+
+      # @param type [Symbol, String] eg. :tr, :ts, "TS"
+      # @return [Boolean] true if provided type matches with identifier's class type
+      def has_type?(type)
+        return type == self.type[:key] if type.is_a?(Symbol)
+
+        self.type.key?(:values) ? self.type[:values].include?(type) : type.to_s.downcase.to_sym == self.type[:key]
+      end
+
       def get_amendment_class
         Amendment
       end
