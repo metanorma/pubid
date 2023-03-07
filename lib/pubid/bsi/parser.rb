@@ -1,6 +1,6 @@
 module Pubid::Bsi
   class Parser < Pubid::Core::Parser
-    TYPES = %w[PAS PD].freeze
+    TYPES = %w[BS PAS PD Flex].freeze
 
     rule(:type) do
       array_to_str(TYPES).as(:type)
@@ -10,8 +10,14 @@ module Pubid::Bsi
       str("-") >> digits.as(:part)
     end
 
+    rule(:edition) do
+      str("v") >> (digits >> dot >> digits).as(:edition)
+    end
+
     rule(:identifier) do
-      (str("BS") | type) >> space >> digits.as(:number) >> part.maybe >> (space? >> str(":") >> year).maybe
+      str("BSI ").maybe >> type >> space >> digits.as(:number) >> part.maybe >>
+        (space >> edition).maybe >>
+        (space? >> str(":") >> year >> (dash >> month_digits.as(:month)).maybe).maybe
     end
 
     rule(:root) { identifier }

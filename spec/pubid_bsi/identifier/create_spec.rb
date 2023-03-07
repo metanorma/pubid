@@ -32,6 +32,14 @@ module Pubid::Bsi
           expect(subject.to_s).to eq("PD #{number}")
         end
       end
+
+      context "Flex type" do
+        let(:params) { { type: :flex, edition: "3.0" } }
+
+        it "renders Flex identifier" do
+          expect(subject.to_s).to eq("BSI Flex #{number} v3.0")
+        end
+      end
     end
   end
 end

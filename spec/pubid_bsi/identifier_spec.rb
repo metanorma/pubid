@@ -27,6 +27,26 @@ module Pubid::Bsi
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "Flex 8670:2021-04" do
+      let(:original) { "Flex 8670:2021-04" }
+      let(:pubid) { "BSI Flex 8670:2021-04" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "Flex 8670 v3.0:2021-04" do
+      let(:original) { "Flex 8670 v3.0:2021-04" }
+      let(:pubid) { "BSI Flex 8670 v3.0:2021-04" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "BSI Flex 1889 v1.0:2022-07" do
+      let(:pubid) { "BSI Flex 1889 v1.0:2022-07" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     describe "#resolve_identifier" do
       subject { described_class.resolve_identifier(type, { number: 1 }) }
       let(:type) { nil }
