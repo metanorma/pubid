@@ -14,5 +14,30 @@ module Pubid::Bsi
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "PAS 1192-2:2014" do
+      let(:pubid) { "PAS 1192-2:2014" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    describe "#resolve_identifier" do
+      subject { described_class.resolve_identifier(type, { number: 1 }) }
+      let(:type) { nil }
+
+      context "when BS type" do
+        let(:type) { :bs }
+
+        it { is_expected.to a_kind_of(Identifier::BritishStandard) }
+        it { expect(subject.type[:key]).to eq(:bs) }
+      end
+
+      context "when PAS type" do
+        let(:type) { :pas }
+
+        it { is_expected.to a_kind_of(Identifier::PubliclyAvailableSpecification) }
+        it { expect(subject.type[:key]).to eq(:pas) }
+      end
+    end
   end
 end
