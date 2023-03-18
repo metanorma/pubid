@@ -30,7 +30,7 @@ module Pubid::Iso
 
         it "has harmonized stage assigned" do
           expect(subject.stage.harmonized_code)
-            .to eq(Pubid::Iso::HarmonizedStageCode.new("20", "20"))
+            .to eq(Identifier.build_harmonized_stage_code("20", "20"))
         end
 
         it "renders separate stage for PubID" do
@@ -54,7 +54,7 @@ module Pubid::Iso
 
           it "has harmonized stage assigned" do
             expect(subject.stage.harmonized_code)
-              .to eq(Pubid::Iso::HarmonizedStageCode.new("20", "20"))
+              .to eq(Identifier.build_harmonized_stage_code("20", "20"))
           end
         end
 
@@ -63,7 +63,7 @@ module Pubid::Iso
 
           it "has harmonized stage assigned" do
             expect(subject.stage.harmonized_code)
-              .to eq(Pubid::Iso::HarmonizedStageCode.new("20", "20"))
+              .to eq(Identifier.build_harmonized_stage_code("20", "20"))
           end
         end
 
@@ -72,7 +72,7 @@ module Pubid::Iso
 
           it "has harmonized stage assigned" do
             expect(subject.stage.harmonized_code)
-              .to eq(Pubid::Iso::HarmonizedStageCode.new("30", "20"))
+              .to eq(Identifier.build_harmonized_stage_code("30", "20"))
           end
 
           it "renders identifier with associated stage" do
@@ -98,7 +98,7 @@ module Pubid::Iso
 
         context "when have harmonized code and abbr" do
           context "at stage PRF" do
-            let(:stage) { Stage.new(harmonized_code: "50.00", abbr: :PRF) }
+            let(:stage) { Identifier.build_stage(harmonized_code: "50.00", abbr: :PRF) }
 
             it "renders separate stage for PubID" do
               expect(subject.to_s(with_prf: true)).to eq("ISO/PRF #{number}")

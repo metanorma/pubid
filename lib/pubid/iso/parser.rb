@@ -20,7 +20,7 @@ module Pubid::Iso
 
     DIR_SUPPLEMENTS = %w[Supplement SUP].freeze
 
-    TYPED_STAGES = Pubid::Iso::Identifier::Base.descendants.map do |type|
+    TYPED_STAGES = Identifier.config.types.map do |type|
       type::TYPED_STAGES.map do |_, v|
         v.key?(:legacy_abbr) ? (v[:legacy_abbr] + [v[:abbr]]) : v[:abbr]
       end
@@ -74,7 +74,7 @@ module Pubid::Iso
     end
 
     rule(:roman_numerals) do
-      array_to_str(%w[I V X L C D M]).repeat(1).as(:roman_numerals)
+      str("CD").absent? >> array_to_str(%w[I V X L C D M]).repeat(1).as(:roman_numerals)
     end
 
     rule(:year_digits) { (str("19") | str("20")) >> match('\d').repeat(2, 2) >> digits.absent? }

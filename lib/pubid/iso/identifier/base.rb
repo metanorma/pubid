@@ -4,7 +4,7 @@ require_relative "../renderer/urn-tc"
 
 module Pubid::Iso
   module Identifier
-    class Base < Pubid::Core::Identifier
+    class Base < Pubid::Core::Identifier::Base
       extend Forwardable
 
       attr_accessor :stage,
@@ -64,13 +64,13 @@ module Pubid::Iso
         end
 
         if stage
-          if stage.is_a?(Stage)
+          if stage.is_a?(Pubid::Core::Stage)
             @stage = stage
             @typed_stage = resolve_typed_stage(@stage.harmonized_code) unless @stage.abbr
           elsif self.class.has_typed_stage?(stage)
             @typed_stage, @stage = find_typed_stage(stage)
           else
-            @stage = Stage.parse(stage)
+            @stage = Identifier.parse_stage(stage)
             # resolve typed stage when harmonized code provided as stage
             # or stage abbreviation was not resolved
             if /\A[\d.]+\z/.match?(stage) || @stage.empty_abbr?(with_prf: true)
@@ -102,8 +102,8 @@ module Pubid::Iso
       def find_typed_stage(typed_stage)
         if typed_stage.is_a?(Symbol)
           return [typed_stage,
-           Stage.new(
-            harmonized_code: HarmonizedStageCode.new(self.class::TYPED_STAGES[typed_stage][:harmonized_stages])),
+                  Identifier.build_stage(
+                    harmonized_code: Identifier.build_harmonized_stage_code(self.class::TYPED_STAGES[typed_stage][:harmonized_stages])),
           ]
         end
 
@@ -122,7 +122,8 @@ module Pubid::Iso
         end
 
         [typed_stage.first,
-         Stage.new(harmonized_code: HarmonizedStageCode.new(typed_stage[1][:harmonized_stages]))]
+         Identifier.build_stage(
+           harmonized_code: Identifier.build_harmonized_stage_code(typed_stage[1][:harmonized_stages]))]
       end
 
       # Resolve typed stage using stage harmonized stage code
@@ -188,18 +189,6 @@ module Pubid::Iso
           Identifier.create(**identifier_params)
         end
 
-        def descendants
-          ObjectSpace.each_object(Class).select { |klass| klass < self }
-        end
-
-        # @param type [Symbol, String] eg. :tr, :ts, "TS"
-        # @return [Boolean] true if provided type matches with identifier's class type
-        def has_type?(type)
-          return type == self.type[:key] if type.is_a?(Symbol)
-
-          self.type.key?(:values) ? self.type[:values].include?(type) : type.to_s.downcase.to_sym == self.type[:key]
-        end
-
         # @param typed_stage [String, Symbol] typed stage, eg. "DTR" or :dtr
         # @return [Boolean] true when identifier has associated typed stage
         def has_typed_stage?(typed_stage)
@@ -240,6 +229,10 @@ module Pubid::Iso
 
         def get_update_codes
           UPDATE_CODES
+        end
+
+        def type_match?(parameters)
+          parameters[:type] ? has_type?(parameters[:type]) : has_typed_stage?(parameters[:stage])
         end
       end
 

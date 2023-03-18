@@ -9,13 +9,8 @@ module Pubid
   end
 end
 
-STAGES_CONFIG = YAML.load_file(File.join(File.dirname(__FILE__), "../../stages.yaml"))
-
 require "pubid-core"
 require_relative "iso/errors"
-require_relative "iso/stage"
-require_relative "iso/type"
-require_relative "iso/harmonized_stage_code"
 require_relative "iso/transformer"
 require_relative "iso/identifier"
 require_relative "iso/identifier/base"
@@ -33,4 +28,67 @@ require_relative "iso/identifier/guide"
 require_relative "iso/identifier/recommendation"
 require_relative "iso/identifier/technology_trends_assessments"
 require_relative "iso/identifier/international_workshop_agreement"
+
+config = Pubid::Core::Configuration.new
+config.stages = YAML.load_file(File.join(File.dirname(__FILE__), "../../stages.yaml"))
+config.default_type = Pubid::Iso::Identifier::InternationalStandard
+config.type_class = Pubid::Core::Type
+config.types = [Pubid::Iso::Identifier::InternationalStandard,
+                Pubid::Iso::Identifier::InternationalStandardizedProfile,
+                Pubid::Iso::Identifier::InternationalWorkshopAgreement,
+                Pubid::Iso::Identifier::Amendment,
+                Pubid::Iso::Identifier::Corrigendum,
+                Pubid::Iso::Identifier::PubliclyAvailableSpecification,
+                Pubid::Iso::Identifier::Recommendation,
+                Pubid::Iso::Identifier::Directives,
+                Pubid::Iso::Identifier::Supplement,
+                Pubid::Iso::Identifier::TechnicalCommittee,
+                Pubid::Iso::Identifier::TechnicalReport,
+                Pubid::Iso::Identifier::TechnicalSpecification,
+                Pubid::Iso::Identifier::TechnologyTrendsAssessments,
+                Pubid::Iso::Identifier::Guide]
+config.type_names = { tr: {
+                        long: "Technical Report",
+                        short: "TR",
+                      },
+                      ts: {
+                        long: "Technical Specification",
+                        short: "TS",
+                      },
+                      is: {
+                        long: "International Standard",
+                        short: "IS",
+                      },
+                      pas: {
+                        long: "Publicly Available Specification",
+                        short: "PAS",
+                      },
+                      isp: {
+                        long: "International Standardized Profiles",
+                        short: "ISP",
+                      },
+                      guide: {
+                        long: "Guide",
+                        short: "Guide",
+                      },
+                      dir: {
+                        long: "Directives",
+                        short: "DIR",
+                      },
+                      dpas: {
+                        long: "Publicly Available Specification Draft",
+                        short: "DPAS",
+                      },
+                      cor: {
+                        short: "Cor",
+                      },
+                      amd: {
+                        short: "Amd",
+                      },
+                      r: {
+                        long: "Recommendation",
+                        short: "R",
+                      } }.freeze
+Pubid::Iso::Identifier.set_config(config)
+
 require_relative "iso/parser"

@@ -36,7 +36,7 @@ module Pubid::Iso
 
         context "when amendment with stage" do
           let(:amendment_params) { { stage: stage } }
-          let(:stage) { Stage.new(abbr: :DIS) }
+          let(:stage) { Identifier.build_stage(abbr: :DIS) }
 
           context "when DAmd typed stage" do
             let(:stage) { "DAM" }
@@ -59,7 +59,7 @@ module Pubid::Iso
           end
 
           context "when CD stage" do
-            let(:stage) { Stage.new(abbr: :CD) }
+            let(:stage) { Identifier.build_stage(abbr: :CD) }
 
             it "renders long stage and amendment" do
               expect(subject.to_s(format: :ref_num_long)).to eq("ISO #{number}:1999/CD Amd 1")
