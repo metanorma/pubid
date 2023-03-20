@@ -56,11 +56,11 @@ module Pubid::Core
 
     def self.parse(stage, config:)
       if /\A[\d.]+\z/.match?(stage)
-        Stage.new(harmonized_code: stage, config: config)
+        new(harmonized_code: stage, config: config)
       else
         raise Errors::StageInvalidError unless stage.is_a?(Symbol) || stage.is_a?(String) || stage.is_a?(Parslet::Slice)
 
-        Stage.new(abbr: stage.to_s, config: config)
+        new(abbr: stage.to_s, config: config)
       end
     end
 

@@ -44,15 +44,15 @@ module Pubid::Core
     end
 
     def build_stage(**args)
-      Stage.new(config: @config, **args)
+      @config.stage_class.new(config: @config, **args)
     end
 
     def parse_stage(stage)
-      Stage.parse(stage, config: @config)
+      @config.stage_class.parse(stage, config: @config)
     end
 
     def has_stage?(stage)
-      Stage.has_stage?(stage, config: @config)
+      @config.stage_class.has_stage?(stage, config: @config)
     end
 
     def build_type(type, **args)
