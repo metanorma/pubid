@@ -78,11 +78,7 @@ module Pubid::Core::Renderer
     # @param with_date [Boolean] include year in output
     # @param with_language_code [:iso,:single] render document language as 2-letter ISO 639-1 language code or single code
     def render(with_date: true, with_language_code: :iso, **args)
-      if %i(amd cor).include? @params[:type]&.type
-        render_supplement(@params, **args.merge({ with_date: with_date, with_language_code: with_language_code}))
-      else
-        render_base_identifier(**args.merge({ with_date: with_date, with_language_code: with_language_code})) + @prerendered_params[:language].to_s
-      end
+      render_base_identifier(**args.merge({ with_date: with_date, with_language_code: with_language_code})) + @prerendered_params[:language].to_s
     end
 
     def render_identifier(params)
