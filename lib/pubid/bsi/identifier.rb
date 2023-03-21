@@ -1,36 +1,18 @@
 module Pubid::Bsi
   module Identifier
     class << self
-      # Resolve identifier's class and create new identifier
-      # @see Pubid::Identifier::Base.initialize for available options
-      def create(**opts)
-        resolve_identifier(
-          opts[:type],
-          opts.reject { |k, _v| [:type].include?(k) },
-        )
-      end
+      include Pubid::Core::Identifier
 
       # @see Pubid::Identifier::Base.parse
       def parse(*args)
-        Base.parse(*args)
+        Pubid::Iec::Identifier.parse(*args)
       rescue Pubid::Core::Errors::ParseError
-        Pubid::Iso::Identifier.parse(*args)
-      end
-
-      def resolve_identifier(type, parameters = {})
-        return Identifier::BritishStandard.new(**parameters) if type.nil?
-
-        Base.descendants.each do |identifier_type|
-          if type
-            return identifier_type.new(**parameters) if identifier_type.has_type?(type)
-
-            next
-          end
+        begin
+          Base.parse(*args)
+        rescue Pubid::Core::Errors::ParseError
+          Pubid::Iso::Identifier.parse(*args)
         end
-
-        raise Errors::ParseTypeError, "cannot parse type #{type}"
       end
-
     end
   end
 end

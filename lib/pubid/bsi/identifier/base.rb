@@ -2,7 +2,7 @@ require 'forwardable'
 
 module Pubid::Bsi
   module Identifier
-    class Base < Pubid::Core::Identifier
+    class Base < Pubid::Core::Identifier::Base
       attr_accessor :month
       extend Forwardable
 

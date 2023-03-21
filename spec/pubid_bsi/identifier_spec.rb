@@ -65,23 +65,16 @@ module Pubid::Bsi
       it_behaves_like "converts pubid to pubid"
     end
 
-    describe "#resolve_identifier" do
-      subject { described_class.resolve_identifier(type, { number: 1 }) }
-      let(:type) { nil }
+    context "IEC 60384-23:2023 ED3" do
+      let(:pubid) { "IEC 60384-23:2023 ED3" }
 
-      context "when BS type" do
-        let(:type) { :bs }
+      it_behaves_like "converts pubid to pubid"
+    end
 
-        it { is_expected.to a_kind_of(Identifier::BritishStandard) }
-        it { expect(subject.type[:key]).to eq(:bs) }
-      end
+    context "IEC 61834-1:1998+AMD1:2001 CSV" do
+      let(:pubid) { "IEC 61834-1:1998+AMD1:2001 CSV" }
 
-      context "when PAS type" do
-        let(:type) { :pas }
-
-        it { is_expected.to a_kind_of(Identifier::PubliclyAvailableSpecification) }
-        it { expect(subject.type[:key]).to eq(:pas) }
-      end
+      it_behaves_like "converts pubid to pubid"
     end
   end
 end
