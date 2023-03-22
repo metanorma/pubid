@@ -147,4 +147,16 @@ RSpec.describe Pubid::Core::Identifier::Base do
       end
     end
   end
+
+  describe "#==" do
+    subject { described_class.new(publisher: "ISO", number: 1) }
+
+    context "when equal identifiers" do
+      it { expect(subject).to eq(described_class.new(publisher: "ISO", number: 1)) }
+    end
+
+    context "when different identifiers" do
+      it { expect(subject).not_to eq(described_class.new(publisher: "ISO", number: 2)) }
+    end
+  end
 end

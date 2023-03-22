@@ -63,6 +63,10 @@ module Pubid::Core
         instance_variables.map { |var| [var.to_s.gsub("@", "").to_sym, instance_variable_get(var)] }.to_h
       end
 
+      def ==(other)
+        get_params == other.get_params
+      end
+
       # Render identifier using default renderer
       def to_s
         self.class.get_renderer_class.new(get_params).render
