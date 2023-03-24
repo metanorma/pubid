@@ -4,7 +4,7 @@ module Pubid::Bsi
       def_delegators 'Pubid::Bsi::Identifier::PublishedDocument', :type
 
       def self.type
-        { key: :pd, title: "Published Document" }
+        { key: :pd, title: "Published Document", short: "PD" }
       end
 
       def self.get_renderer_class

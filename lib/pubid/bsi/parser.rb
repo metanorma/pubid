@@ -1,9 +1,7 @@
 module Pubid::Bsi
   class Parser < Pubid::Core::Parser
-    TYPES = %w[BS PAS PD Flex].freeze
-
     rule(:type) do
-      array_to_str(TYPES).as(:type)
+      array_to_str(Identifier.config.types.map { |type| type.type[:short] }.compact).as(:type)
     end
 
     rule(:part) do

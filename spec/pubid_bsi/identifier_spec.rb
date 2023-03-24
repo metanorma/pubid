@@ -76,5 +76,11 @@ module Pubid::Bsi
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "DD 240-1:1997" do
+      let(:pubid) { "DD 240-1:1997" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end

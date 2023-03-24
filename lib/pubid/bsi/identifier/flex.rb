@@ -4,7 +4,7 @@ module Pubid::Bsi
       def_delegators 'Pubid::Bsi::Identifier::Flex', :type
 
       def self.type
-        { key: :flex, title: "Flex" }
+        { key: :flex, title: "Flex", short: "Flex" }
       end
 
       def self.get_renderer_class

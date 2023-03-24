@@ -4,7 +4,7 @@ module Pubid::Bsi
       def_delegators 'Pubid::Bsi::Identifier::BritishStandard', :type
 
       def self.type
-        { key: :bs, title: "British Standard" }
+        { key: :bs, title: "British Standard", short: "BS" }
       end
     end
   end
