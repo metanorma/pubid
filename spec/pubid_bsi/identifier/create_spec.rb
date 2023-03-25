@@ -40,6 +40,26 @@ module Pubid::Bsi
           expect(subject.to_s).to eq("BSI Flex #{number} v3.0")
         end
       end
+
+      context "supplements" do
+        let(:params) { { supplement: Identifier.create(type: type, number: 1, year: 1999) } }
+
+        context "amendment" do
+          let(:type) { :amd }
+
+          it "renders amendment" do
+            expect(subject.to_s).to eq("BS #{number}+A1:1999")
+          end
+        end
+
+        context "corrigendum" do
+          let(:type) { :cor }
+
+          it "renders amendment" do
+            expect(subject.to_s).to eq("BS #{number}+C1:1999")
+          end
+        end
+      end
     end
   end
 end

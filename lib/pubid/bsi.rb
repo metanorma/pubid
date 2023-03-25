@@ -18,12 +18,14 @@ require_relative "bsi/identifier/published_document"
 require_relative "bsi/identifier/draft_document"
 require_relative "bsi/identifier/flex"
 require_relative "bsi/identifier/amendment"
+require_relative "bsi/identifier/corrigendum"
 require_relative "bsi/renderer/base"
 require_relative "bsi/renderer/publicly_available_specification"
 require_relative "bsi/renderer/published_document"
 require_relative "bsi/renderer/draft_document"
 require_relative "bsi/renderer/flex"
 require_relative "bsi/renderer/amendment"
+require_relative "bsi/renderer/corrigendum"
 require_relative "bsi/parser"
 require_relative "bsi/identifier"
 
@@ -33,7 +35,9 @@ config.types = [Pubid::Bsi::Identifier::BritishStandard,
                 Pubid::Bsi::Identifier::Flex,
                 Pubid::Bsi::Identifier::PubliclyAvailableSpecification,
                 Pubid::Bsi::Identifier::PublishedDocument,
-                Pubid::Bsi::Identifier::DraftDocument]
+                Pubid::Bsi::Identifier::DraftDocument,
+                Pubid::Bsi::Identifier::Amendment,
+                Pubid::Bsi::Identifier::Corrigendum]
 config.type_names = {
                       bs: {
                         long: "British Standard",

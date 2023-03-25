@@ -3,7 +3,7 @@ module Pubid::Bsi::Renderer
     TYPE = "".freeze
 
     def render_identifier(params)
-      "%{publisher} %{number}%{part}%{edition}%{year}%{month}%{amendment}" % params
+      "%{publisher} %{number}%{part}%{edition}%{year}%{month}%{supplement}" % params
     end
 
     def render_month(month, _opts, _params)
@@ -12,6 +12,10 @@ module Pubid::Bsi::Renderer
 
     def render_edition(edition, _opts, _params)
       " v#{edition}"
+    end
+
+    def render_supplement(supplement, _opts, _params)
+      supplement.to_s
     end
   end
 end
