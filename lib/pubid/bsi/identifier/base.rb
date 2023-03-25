@@ -3,15 +3,16 @@ require 'forwardable'
 module Pubid::Bsi
   module Identifier
     class Base < Pubid::Core::Identifier::Base
-      attr_accessor :month
+      attr_accessor :month, :amendment
       extend Forwardable
 
       # @param month [Integer] document's month
       # @param edition [String] document's edition version, e.g. "3.0", "1.0"
-      def initialize(publisher: "BS", month: nil, edition: nil, **opts)
+      def initialize(publisher: "BS", month: nil, edition: nil, amendment: nil, **opts)
         super(**opts.merge(publisher: publisher))
         @month = month if month
         @edition = edition if edition
+        @amendment = amendment
       end
 
       class << self
@@ -31,6 +32,10 @@ module Pubid::Bsi
 
         def get_renderer_class
           Renderer::Base
+        end
+
+        def get_transformer_class
+          Transformer
         end
       end
     end

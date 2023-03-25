@@ -82,5 +82,17 @@ module Pubid::Bsi
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "BS 4592-0:2006+A1:2012" do
+      let(:pubid) { "BS 4592-0:2006+A1:2012" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "PD 5500:2021+A2:2022" do
+      let(:pubid) { "PD 5500:2021+A2:2022" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end

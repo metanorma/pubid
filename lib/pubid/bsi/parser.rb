@@ -12,10 +12,15 @@ module Pubid::Bsi
       str("v") >> (digits >> dot >> digits).as(:edition)
     end
 
+    rule(:amendment) do
+      str("+A") >> (digits.as(:number) >> str(":") >> year).as(:amendment)
+    end
+
     rule(:identifier) do
       str("BSI ").maybe >> type >> space >> digits.as(:number) >> part.maybe >>
         (space >> edition).maybe >>
-        (space? >> str(":") >> year >> (dash >> month_digits.as(:month)).maybe).maybe
+        (space? >> str(":") >> year >> (dash >> month_digits.as(:month)).maybe).maybe >>
+        amendment.maybe
     end
 
     rule(:root) { identifier }
