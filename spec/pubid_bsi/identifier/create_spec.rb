@@ -60,6 +60,23 @@ module Pubid::Bsi
           end
         end
       end
+
+      context "adoptions" do
+        let(:adopted) { Pubid::Iso::Identifier.create(number: 1) }
+        let(:params) { { adopted: adopted } }
+
+        it "renders adopted identifier" do
+          expect(subject.to_s).to eq("BS ISO 1")
+        end
+
+        context "with type" do
+          let(:params) { { adopted: adopted, type: :dd } }
+
+          it "renders adopted identifier" do
+            expect(subject.to_s).to eq("DD ISO 1")
+          end
+        end
+      end
     end
   end
 end
