@@ -100,5 +100,35 @@ module Pubid::Bsi
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "adopted documents" do
+      context "PD IEC/TR 80002-3:2014" do
+        let(:original) { "PD IEC/TR 80002-3:2014" }
+        let(:pubid) { "PD IEC TR 80002-3:2014" }
+
+        it_behaves_like "converts pubid to pubid"
+
+        it { expect(subject.adopted).to be_a(Pubid::Iec::Base) }
+        it { expect(subject.adopted.to_s).to eq("IEC TR 80002-3:2014") }
+      end
+
+      context "BS ISO/IEC 30134-1:2016" do
+        let(:pubid) { "BS ISO/IEC 30134-1:2016" }
+
+        it_behaves_like "converts pubid to pubid"
+
+        it { expect(subject.adopted).to be_a(Pubid::Iec::Base) }
+        it { expect(subject.adopted.to_s).to eq("ISO/IEC 30134-1:2016") }
+      end
+
+      context "BS ISO/PRF PAS 5643" do
+        let(:original) { "BS ISO/PRF PAS 5643" }
+        let(:pubid) { "BS ISO/PAS 5643" }
+
+        it_behaves_like "converts pubid to pubid"
+
+        it { expect(subject.adopted).to be_a(Pubid::Iso::Identifier::Base) }
+      end
+    end
   end
 end

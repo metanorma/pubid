@@ -3,16 +3,18 @@ require 'forwardable'
 module Pubid::Bsi
   module Identifier
     class Base < Pubid::Core::Identifier::Base
-      attr_accessor :month, :supplement
+      attr_accessor :month, :supplement, :adopted
       extend Forwardable
 
       # @param month [Integer] document's month
       # @param edition [String] document's edition version, e.g. "3.0", "1.0"
-      def initialize(publisher: "BS", month: nil, edition: nil, supplement: nil, **opts)
-        super(**opts.merge(publisher: publisher))
+      def initialize(publisher: "BS", month: nil, edition: nil,
+                     supplement: nil, number: nil, adopted: nil, **opts)
+        super(**opts.merge(publisher: publisher, number: number))
         @month = month if month
         @edition = edition if edition
         @supplement = supplement
+        @adopted = adopted
       end
 
       class << self

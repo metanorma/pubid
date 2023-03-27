@@ -17,10 +17,13 @@ module Pubid::Bsi
     end
 
     rule(:identifier) do
-      str("BSI ").maybe >> type >> space >> digits.as(:number) >> part.maybe >>
-        (space >> edition).maybe >>
-        (space? >> str(":") >> year >> (dash >> month_digits.as(:month)).maybe).maybe >>
-        supplement.maybe
+      str("BSI ").maybe >> type >> space >>
+        (
+          (digits.as(:number) >> part.maybe >> (space >> edition).maybe >>
+            (space? >> str(":") >> year >> (dash >> month_digits.as(:month)).maybe).maybe >>
+            supplement.maybe) |
+          match(".").repeat(1).as(:adopted)
+        )
     end
 
     rule(:root) { identifier }
