@@ -129,6 +129,24 @@ module Pubid::Bsi
 
         it { expect(subject.adopted).to be_a(Pubid::Iso::Identifier::Base) }
       end
+
+      context "BS ISO/DIS 22000:2017" do
+        let(:pubid) { "BS ISO/DIS 22000:2017" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "BS ISO/DIS 9004.1:2017" do
+        let(:pubid) { "BS ISO/DIS 9004.1:2017" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "BS ISO/FDIS 22301:2012" do
+        let(:pubid) { "BS ISO/FDIS 22301:2012" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
     end
   end
 end
