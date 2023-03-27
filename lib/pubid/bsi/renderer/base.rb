@@ -5,7 +5,7 @@ module Pubid::Bsi::Renderer
     def render_identifier(params)
       return "%{publisher} %{adopted}%{supplement}" % params unless params[:adopted].to_s.empty?
 
-      "%{publisher} %{number}%{part}%{edition}%{year}%{month}%{supplement}" % params
+      "%{publisher} %{number}%{part}%{edition}%{year}%{month}%{supplement}%{expert_commentary}" % params
     end
 
     def render_month(month, _opts, _params)
@@ -18,6 +18,10 @@ module Pubid::Bsi::Renderer
 
     def render_supplement(supplement, _opts, _params)
       supplement.to_s
+    end
+
+    def render_expert_commentary(expert_commentary, _opts, _params)
+      " ExComm" if expert_commentary
     end
   end
 end

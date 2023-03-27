@@ -198,5 +198,19 @@ module Pubid::Bsi
         end
       end
     end
+
+    context "expert commentary identifier" do
+      context "BS 5250:2021 ExComm" do
+        let(:pubid) { "BS 5250:2021 ExComm" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "BS 7273-4:2015+A1:2021 ExComm" do
+        let(:pubid) { "BS 7273-4:2015+A1:2021 ExComm" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+    end
   end
 end
