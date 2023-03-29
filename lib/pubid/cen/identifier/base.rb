@@ -11,9 +11,10 @@ module Pubid::Cen
 
       # @param month [Integer] document's month
       # @param edition [String] document's edition version, e.g. "3.0", "1.0"
-      def initialize(publisher: "EN", part: nil, **opts)
+      def initialize(publisher: "EN", part: nil, stage: nil, **opts)
         super(**opts.merge(publisher: publisher))
         @part = part if part
+        @stage = Identifier.parse_stage(stage) if stage
       end
 
       class << self

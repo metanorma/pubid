@@ -52,5 +52,17 @@ module Pubid::Cen
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "prEN 12464-1:2019" do
+      let(:pubid) { "prEN 12464-1:2019" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "FprEN 16114:2011" do
+      let(:pubid) { "FprEN 16114:2011" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end

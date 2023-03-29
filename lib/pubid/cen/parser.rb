@@ -20,8 +20,12 @@ module Pubid::Cen
                     .flatten.compact).as(:type)
     end
 
+    rule(:stage) do
+      (str("pr") | str("Fpr")).as(:stage)
+    end
+
     rule(:identifier) do
-      originator >> type.maybe >> space >> digits.as(:number) >> part >>
+      stage.maybe >> originator >> type.maybe >> space >> digits.as(:number) >> part >>
         (str(":") >> year).maybe
     end
 

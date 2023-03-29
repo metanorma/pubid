@@ -25,4 +25,6 @@ config.types = [Pubid::Cen::Identifier::TechnicalSpecification,
                 Pubid::Cen::Identifier::TechnicalReport,
                 Pubid::Cen::Identifier::Guide]
 config.type_names = {}.freeze
+config.stages = { "abbreviations" => { "Fpr" => [], "pr" => [] } }
+
 Pubid::Cen::Identifier.set_config(config)

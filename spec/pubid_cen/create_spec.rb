@@ -40,6 +40,22 @@ module Pubid::Cen
           expect(subject.to_s).to eq("CLC #{number}")
         end
       end
+
+      context "draft" do
+        let(:params) { { stage: "pr" } }
+
+        it "renders draft stage" do
+          expect(subject.to_s).to eq("prEN #{number}")
+        end
+
+        context "final draft" do
+          let(:params) { { stage: "Fpr" } }
+
+          it "renders final draft stage" do
+            expect(subject.to_s).to eq("FprEN #{number}")
+          end
+        end
+      end
     end
   end
 end
