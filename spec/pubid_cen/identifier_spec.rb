@@ -64,5 +64,29 @@ module Pubid::Cen
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "EN 60335-1:2012/A2:2019" do
+      let(:pubid) { "EN 60335-1:2012/A2:2019" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "EN 196-3:2005+A1:2008" do
+      let(:pubid) { "EN 196-3:2005+A1:2008" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "EN 196-3:2005+AС1:2008" do
+      let(:pubid) { "EN 196-3:2005+AC1:2008" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "EN 10077-1:2006+AC:2009+AC2:2009" do
+      let(:pubid) { "EN 10077-1:2006+AC:2009+AC2:2009" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end

@@ -16,7 +16,7 @@ module Pubid::Cen
     rule(:type) do
       (str("/") | space) >>
         array_to_str(
-          Identifier.config.types.map { |type| [type.type[:short], type.type[:short].upcase] }
+          Identifier.config.types.map { |type| [type.type[:short], type.type[:short]&.upcase] }
                     .flatten.compact).as(:type)
     end
 
@@ -24,9 +24,22 @@ module Pubid::Cen
       (str("pr") | str("Fpr")).as(:stage)
     end
 
+    rule(:supplement_matcher) do
+      ((str("AC").as(:type) >> digits.as(:number).maybe) |
+        (str("A").as(:type) >> digits.as(:number))) >> str(":") >> year
+    end
+
+    rule(:incorporated_supplement) do
+      str("+") >> supplement_matcher.as(:incorporated_supplements)
+    end
+
+    rule(:supplement) do
+      str("/") >> supplement_matcher.as(:supplement)
+    end
+
     rule(:identifier) do
       stage.maybe >> originator >> type.maybe >> space >> digits.as(:number) >> part >>
-        (str(":") >> year).maybe
+        (str(":") >> year).maybe >> supplement.maybe >> incorporated_supplement.repeat
     end
 
     rule(:root) { identifier }

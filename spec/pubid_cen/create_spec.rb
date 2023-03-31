@@ -56,6 +56,48 @@ module Pubid::Cen
           end
         end
       end
+
+      context "incorporated supplements" do
+        let(:params) { { incorporated_supplements: [Identifier.create(type: type, number: 1, year: 1999)] } }
+
+        context "amendment" do
+          let(:type) { :amd }
+
+          it "renders incorporated amendment" do
+            expect(subject.to_s).to eq("EN #{number}+A1:1999")
+          end
+        end
+
+        context "corrigendum" do
+          let(:type) { :cor }
+
+          it "renders incorporated corrigendum" do
+            expect(subject.to_s).to eq("EN #{number}+AC1:1999")
+          end
+        end
+      end
+
+      context "supplement" do
+        subject { described_class.create(**{ number: number }.merge(params)) }
+
+        let(:params) { { type: type, number: 1, year: 1999, base: Identifier.create(number: number) } }
+
+        context "amendment" do
+          let(:type) { :amd }
+
+          it "renders amendment" do
+            expect(subject.to_s).to eq("EN #{number}/A1:1999")
+          end
+        end
+
+        context "corrigendum" do
+          let(:type) { :cor }
+
+          it "renders corrigendum" do
+            expect(subject.to_s).to eq("EN #{number}/AC1:1999")
+          end
+        end
+      end
     end
   end
 end
