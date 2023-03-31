@@ -80,7 +80,8 @@ module Pubid::Cen
       context "supplement" do
         subject { described_class.create(**{ number: number }.merge(params)) }
 
-        let(:params) { { type: type, number: 1, year: 1999, base: Identifier.create(number: number) } }
+        let(:params) { { type: type, number: supplement_number, year: 1999, base: Identifier.create(number: number) } }
+        let(:supplement_number) { 1 }
 
         context "amendment" do
           let(:type) { :amd }
@@ -95,6 +96,14 @@ module Pubid::Cen
 
           it "renders corrigendum" do
             expect(subject.to_s).to eq("EN #{number}/AC1:1999")
+          end
+
+          context "without number" do
+            let(:supplement_number) { nil }
+
+            it "renders corrigendum" do
+              expect(subject.to_s).to eq("EN #{number}/AC:1999")
+            end
           end
         end
       end
