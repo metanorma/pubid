@@ -1,6 +1,8 @@
 module Pubid::Cen::Renderer
   class Base < Pubid::Core::Renderer::Base
     def render_identifier(params)
+      return "%{publisher} %{adopted}%{supplements}" % params unless params[:adopted].to_s.empty?
+
       "%{stage}%{publisher}%{type} %{number}%{part}%{year}%{supplements}" % params
     end
 

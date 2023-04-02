@@ -38,8 +38,9 @@ module Pubid::Cen
     end
 
     rule(:identifier) do
-      stage.maybe >> originator.maybe >> type.maybe >> space >> digits.as(:number) >> part >>
-        (str(":") >> year).maybe >> supplement.maybe >> incorporated_supplement.repeat
+      stage.maybe >> originator.maybe >> ((type.maybe >> space >> digits.as(:number) >> part >>
+        (str(":") >> year).maybe) | space >> match("[^+/]").repeat(1).as(:adopted)) >>
+        supplement.maybe >> incorporated_supplement.repeat
     end
 
     rule(:root) { identifier }

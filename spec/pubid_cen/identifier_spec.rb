@@ -100,5 +100,37 @@ module Pubid::Cen
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "adoptions" do
+      context "EN ISO 14090:2019" do
+        let(:pubid) { "EN ISO 14090:2019" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "EN IEC 62368-1:2020" do
+        let(:pubid) { "EN IEC 62368-1:2020" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "EN IEC 62368-1:2020+A11:2020" do
+        let(:pubid) { "EN IEC 62368-1:2020+A11:2020" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "EN ISO 13485:2016/AC:2016" do
+        let(:pubid) { "EN ISO 13485:2016/AC:2016" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "EN ISO 10077-1:2006+AC:2009+AC2:2009" do
+        let(:pubid) { "EN ISO 10077-1:2006+AC:2009+AC2:2009" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+    end
   end
 end

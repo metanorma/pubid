@@ -6,6 +6,8 @@ module Pubid
 end
 
 require "pubid-core"
+require "pubid-iso"
+require "pubid-iec"
 
 require_relative "cen/errors"
 require_relative "cen/transformer"

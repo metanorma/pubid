@@ -19,6 +19,12 @@ module Pubid::Cen
       context
     end
 
+    rule(adopted: subtree(:adopted)) do |context|
+      { adopted: Pubid::Iec::Identifier.parse(context[:adopted].to_s) }
+    rescue Pubid::Core::Errors::ParseError
+      { adopted: Pubid::Iso::Identifier.parse(context[:adopted].to_s) }
+    end
+
     def self.convert_supplement(supplement)
       case supplement[:type]
       when "A"

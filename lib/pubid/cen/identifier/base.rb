@@ -4,8 +4,7 @@ module Pubid::Cen
   module Identifier
     class Base < Pubid::Core::Identifier::Base
       extend Forwardable
-
-      attr_accessor :supplements
+      attr_accessor :supplements, :adopted
 
       def self.type
         { key: :en, title: "European Norm" }
@@ -13,11 +12,13 @@ module Pubid::Cen
 
       # @param month [Integer] document's month
       # @param edition [String] document's edition version, e.g. "3.0", "1.0"
-      def initialize(publisher: "EN", part: nil, stage: nil, incorporated_supplements: nil, **opts)
-        super(**opts.merge(publisher: publisher))
+      def initialize(number: nil, publisher: "EN", part: nil, stage: nil,
+                     incorporated_supplements: nil, adopted: nil, **opts)
+        super(**opts.merge(publisher: publisher, number: number))
         @part = part if part
         @stage = Identifier.parse_stage(stage) if stage
         @supplements = incorporated_supplements
+        @adopted = adopted
       end
 
       class << self

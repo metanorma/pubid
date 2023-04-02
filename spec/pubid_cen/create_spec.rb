@@ -104,8 +104,6 @@ module Pubid::Cen
       end
 
       context "supplement" do
-        subject { described_class.create(**{ number: number }.merge(params)) }
-
         let(:params) { { type: type, number: supplement_number, year: 1999, base: Identifier.create(number: number) } }
         let(:supplement_number) { 1 }
 
@@ -131,6 +129,14 @@ module Pubid::Cen
               expect(subject.to_s).to eq("EN #{number}/AC:1999")
             end
           end
+        end
+      end
+
+      context "adopted identifiers" do
+        let(:params) { { adopted: Pubid::Iso::Identifier.create(number: 1) } }
+
+        it "renders adopted identifier" do
+          expect(subject.to_s).to eq("EN ISO 1")
         end
       end
     end

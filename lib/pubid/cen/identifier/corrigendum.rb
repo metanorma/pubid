@@ -4,8 +4,8 @@ module Pubid::Cen
       def_delegators 'Pubid::Cen::Identifier::Corrigendum', :type
       attr_accessor :base
 
-      def initialize(number: nil, base: nil, **opts)
-        super(**opts.merge(number: number))
+      def initialize(base: nil, **opts)
+        super(**opts)
         @base = base
       end
 
