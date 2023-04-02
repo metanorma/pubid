@@ -147,6 +147,24 @@ module Pubid::Bsi
 
         it_behaves_like "converts pubid to pubid"
       end
+
+      context "DD CEN/TS 1992-4-2:2009" do
+        let(:pubid) { "DD CEN/TS 1992-4-2:2009" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "BS EN 15154-5:2019" do
+        let(:pubid) { "BS EN 15154-5:2019" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "PD CEN/TS 16415:2013" do
+        let(:pubid) { "PD CEN/TS 16415:2013" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
     end
   end
 end

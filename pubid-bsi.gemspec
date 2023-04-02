@@ -31,7 +31,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor"
   spec.add_dependency "lightly"
   spec.add_dependency "parslet"
-  spec.add_dependency "pubid-core", "~> 1.7.0"
-  spec.add_dependency "pubid-iso", "~> 0.5.0"
-  spec.add_dependency "pubid-iec", "~> 0.2.0"
+  spec.add_dependency "pubid-core", "~> 1.8.0"
+  spec.add_dependency "pubid-iso", "~> 0.5.2"
+  spec.add_dependency "pubid-iec", "~> 0.2.2"
+  spec.add_dependency "pubid-cen", "~> 0.1.1"
 end

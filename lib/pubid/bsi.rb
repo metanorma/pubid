@@ -8,6 +8,7 @@ end
 require "pubid-core"
 require "pubid-iso"
 require "pubid-iec"
+require "pubid-cen"
 
 require_relative "bsi/errors"
 require_relative "bsi/transformer"
