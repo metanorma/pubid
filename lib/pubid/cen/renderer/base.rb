@@ -4,6 +4,10 @@ module Pubid::Cen::Renderer
       "%{stage}%{publisher}%{type} %{number}%{part}%{year}%{supplements}" % params
     end
 
+    def render_type(type, _opts, _params)
+      ""
+    end
+
     def render_part(part, opts, _params)
       return "-#{part.reverse.join('-')}" if part.is_a?(Array)
 

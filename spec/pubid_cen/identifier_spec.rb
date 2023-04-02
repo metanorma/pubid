@@ -88,5 +88,17 @@ module Pubid::Cen
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "CWA 95000:2019" do
+      let(:pubid) { "CWA 95000:2019" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "HD 1000:1988" do
+      let(:pubid) { "HD 1000:1988" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end

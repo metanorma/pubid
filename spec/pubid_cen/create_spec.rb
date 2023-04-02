@@ -26,10 +26,36 @@ module Pubid::Cen
       end
 
       context "with type" do
-        let(:params) { { type: :ts } }
+        context "Technical Specification" do
+          let(:params) { { type: :ts } }
 
-        it "renders identifier with type" do
-          expect(subject.to_s).to eq("EN/TS #{number}")
+          it "renders identifier with type" do
+            expect(subject.to_s).to eq("EN/TS #{number}")
+          end
+        end
+
+        context "European Norm" do
+          let(:params) { { type: :en } }
+
+          it "renders identifier with type" do
+            expect(subject.to_s).to eq("EN #{number}")
+          end
+        end
+
+        context "CEN Workshop Agreement" do
+          let(:params) { { type: :cwa } }
+
+          it "renders identifier with type" do
+            expect(subject.to_s).to eq("CWA #{number}")
+          end
+        end
+
+        context "Harmonization Document" do
+          let(:params) { { type: :hd } }
+
+          it "renders identifier with type" do
+            expect(subject.to_s).to eq("HD #{number}")
+          end
         end
       end
 

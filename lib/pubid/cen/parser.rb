@@ -14,7 +14,7 @@ module Pubid::Cen
     end
 
     rule(:type) do
-      (str("/") | space) >>
+      (str("/") | space).maybe >>
         array_to_str(
           Identifier.config.types.map { |type| [type.type[:short], type.type[:short]&.upcase] }
                     .flatten.compact).as(:type)
@@ -38,7 +38,7 @@ module Pubid::Cen
     end
 
     rule(:identifier) do
-      stage.maybe >> originator >> type.maybe >> space >> digits.as(:number) >> part >>
+      stage.maybe >> originator.maybe >> type.maybe >> space >> digits.as(:number) >> part >>
         (str(":") >> year).maybe >> supplement.maybe >> incorporated_supplement.repeat
     end
 
