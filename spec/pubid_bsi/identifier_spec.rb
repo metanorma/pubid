@@ -211,6 +211,30 @@ module Pubid::Bsi
 
         it_behaves_like "converts pubid to pubid"
       end
+
+      context "BS EN ISO 13485:2016+A11:2021 ExComm" do
+        let(:pubid) { "BS EN ISO 13485:2016+A11:2021 ExComm" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "BS EN 61000-3-3:2013+A2:2021 ExComm" do
+        let(:pubid) { "BS EN 61000-3-3:2013+A2:2021 ExComm" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "BS EN IEC 62115:2020+A11:2020 ExComm" do
+        let(:pubid) { "BS EN IEC 62115:2020+A11:2020 ExComm" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "BS EN ISO/IEC 80079-34:2020 ExComm" do
+        let(:pubid) { "BS EN ISO/IEC 80079-34:2020 ExComm" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
     end
   end
 end
