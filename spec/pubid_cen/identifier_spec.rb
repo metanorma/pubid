@@ -131,6 +131,12 @@ module Pubid::Cen
 
         it_behaves_like "converts pubid to pubid"
       end
+
+      context "EN ISO/IEC 80079-34:2020 ED2" do
+        let(:pubid) { "EN ISO/IEC 80079-34:2020 ED2" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
     end
   end
 end

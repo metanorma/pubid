@@ -39,7 +39,12 @@ module Pubid::Cen
 
     rule(:identifier) do
       stage.maybe >> originator.maybe >> ((type.maybe >> space >> digits.as(:number) >> part >>
-        (str(":") >> year).maybe) | space >> match("[^+/]").repeat(1).as(:adopted)) >>
+        (str(":") >> year).maybe) | (space >> (match("[^+/]").repeat(1) >>
+        # XXX: hack to match part after "/" for identifiers like
+        # EN ISO/IEC 80079-34:2020 ED2
+        # but march only part before "/" for identifiers like
+        # EN ISO 13485:2016/AC:2016
+        (supplement.absent? >> match("[^+]").repeat(1)).maybe).as(:adopted))) >>
         supplement.maybe >> incorporated_supplement.repeat
     end
 
