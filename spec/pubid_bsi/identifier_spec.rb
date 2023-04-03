@@ -165,6 +165,32 @@ module Pubid::Bsi
 
         it_behaves_like "converts pubid to pubid"
       end
+
+      context "2-level adoptions" do
+        context "BS EN ISO 13485:2012" do
+          let(:pubid) { "BS EN ISO 13485:2012" }
+
+          it_behaves_like "converts pubid to pubid"
+        end
+
+        context "BS EN ISO 13485:2016+A11:2021" do
+          let(:pubid) { "BS EN ISO 13485:2016+A11:2021" }
+
+          it_behaves_like "converts pubid to pubid"
+        end
+
+        context "BS EN IEC 62368-1:2020+A11:2020" do
+          let(:pubid) { "BS EN IEC 62368-1:2020+A11:2020" }
+
+          it_behaves_like "converts pubid to pubid"
+        end
+
+        context "BS EN ISO/IEC 80079-34:2020 ED2" do
+          let(:pubid) { "BS EN ISO/IEC 80079-34:2020 ED2" }
+
+          it_behaves_like "converts pubid to pubid"
+        end
+      end
     end
   end
 end
