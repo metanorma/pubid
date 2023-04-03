@@ -3,7 +3,7 @@ module Pubid::Bsi::Renderer
     TYPE = "".freeze
 
     def render_identifier(params)
-      return "%{publisher} %{adopted}" % params unless params[:adopted].to_s.empty?
+      return "%{publisher} %{adopted}%{supplement}" % params unless params[:adopted].to_s.empty?
 
       "%{publisher} %{number}%{part}%{edition}%{year}%{month}%{supplement}" % params
     end

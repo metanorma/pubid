@@ -190,6 +190,12 @@ module Pubid::Bsi
 
           it_behaves_like "converts pubid to pubid"
         end
+
+        context "PD CISPR TR 16-4-5:2006+A2:2021" do
+          let(:pubid) { "PD CISPR TR 16-4-5:2006+A2:2021" }
+
+          it_behaves_like "converts pubid to pubid"
+        end
       end
     end
   end

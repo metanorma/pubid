@@ -20,10 +20,9 @@ module Pubid::Bsi
       str("BSI ").maybe >> type >> space >>
         (
           (digits.as(:number) >> part.maybe >> (space >> edition).maybe >>
-            (space? >> str(":") >> year >> (dash >> month_digits.as(:month)).maybe).maybe >>
-            supplement.maybe) |
-          match(".").repeat(1).as(:adopted)
-        )
+            (space? >> str(":") >> year >> (dash >> month_digits.as(:month)).maybe).maybe)  |
+            (match("[^+]").repeat(1).as(:adopted))
+        ) >> supplement.maybe
     end
 
     rule(:root) { identifier }
