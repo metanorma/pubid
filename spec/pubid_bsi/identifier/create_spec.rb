@@ -85,6 +85,14 @@ module Pubid::Bsi
           expect(subject.to_s).to eq("BS #{number} ExComm")
         end
       end
+
+      context "tracked changes" do
+        let(:params) { { tracked_changes: true } }
+
+        it "renders tracked changes identifier" do
+          expect(subject.to_s).to eq("BS #{number} - TC")
+        end
+      end
     end
   end
 end

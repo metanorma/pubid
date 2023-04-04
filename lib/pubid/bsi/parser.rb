@@ -20,13 +20,17 @@ module Pubid::Bsi
       space >> str("ExComm").as(:expert_commentary)
     end
 
+    rule(:tracked_changes) do
+      str(" - TC").as(:tracked_changes)
+    end
+
     rule(:identifier) do
       str("BSI ").maybe >> type >> space >>
         (
           (digits.as(:number) >> part.maybe >> (space >> edition).maybe >>
             (space? >> str(":") >> year >> (dash >> month_digits.as(:month)).maybe).maybe) |
             (expert_commentary.absent? >> space? >> match("[^+ ]").repeat(1)).repeat.as(:adopted)
-        ) >> supplement.maybe >> expert_commentary.maybe
+        ) >> supplement.maybe >> expert_commentary.maybe >> tracked_changes.maybe
     end
 
     rule(:root) { identifier }

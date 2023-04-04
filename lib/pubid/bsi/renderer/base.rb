@@ -3,9 +3,10 @@ module Pubid::Bsi::Renderer
     TYPE = "".freeze
 
     def render_identifier(params)
-      return "%{publisher} %{adopted}%{supplement}%{expert_commentary}" % params unless params[:adopted].to_s.empty?
+      suffix = "%{supplement}%{expert_commentary}%{tracked_changes}" % params
+      return "%{publisher} %{adopted}#{suffix}" % params unless params[:adopted].to_s.empty?
 
-      "%{publisher} %{number}%{part}%{edition}%{year}%{month}%{supplement}%{expert_commentary}" % params
+      "%{publisher} %{number}%{part}%{edition}%{year}%{month}#{suffix}" % params
     end
 
     def render_month(month, _opts, _params)
@@ -22,6 +23,10 @@ module Pubid::Bsi::Renderer
 
     def render_expert_commentary(expert_commentary, _opts, _params)
       " ExComm" if expert_commentary
+    end
+
+    def render_tracked_changes(tracked_changes, _opts, _params)
+      " - TC" if tracked_changes
     end
   end
 end

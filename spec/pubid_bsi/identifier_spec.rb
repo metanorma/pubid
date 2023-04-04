@@ -236,5 +236,11 @@ module Pubid::Bsi
         it_behaves_like "converts pubid to pubid"
       end
     end
+
+    context "PAS 96:2017 - TC" do
+      let(:pubid) { "PAS 96:2017 - TC" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end
