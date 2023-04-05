@@ -1,5 +1,9 @@
 module Pubid::Bsi
   class Parser < Pubid::Core::Parser
+    rule(:year) do
+      match('\d').repeat(2, 4).as(:year)
+    end
+
     rule(:type) do
       array_to_str(Identifier.config.types.map { |type| type.type[:short] }.compact).as(:type)
     end
@@ -24,8 +28,12 @@ module Pubid::Bsi
       str(" - TC").as(:tracked_changes)
     end
 
+    rule(:national_annexes) do
+      (str("NA") >> supplement.maybe >> str(" to ").ignore).as(:national_annexes)
+    end
+
     rule(:identifier) do
-      str("BSI ").maybe >> type >> space >>
+      national_annexes.maybe >> str("BSI ").maybe >> type >> space >>
         (
           (digits.as(:number) >> part.maybe >> (space >> edition).maybe >>
             (space? >> str(":") >> year >> (dash >> month_digits.as(:month)).maybe).maybe) |

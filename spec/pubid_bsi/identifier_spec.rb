@@ -242,5 +242,33 @@ module Pubid::Bsi
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "National Annexes" do
+      context "NA to BS EN 1999-1-2:2007" do
+        let(:pubid) { "NA to BS EN 1999-1-2:2007" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "NA+A1:2012 to BS EN 1993-5:2007" do
+        let(:pubid) { "NA+A1:2012 to BS EN 1993-5:2007" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "NA+A1:15 to BS EN 1993-1-4:2006+A1:2015" do
+        let(:original) { "NA+A1:15 to BS EN 1993-1-4:2006+A1:2015" }
+        let(:pubid) { "NA+A1:2015 to BS EN 1993-1-4:2006+A1:2015" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "NA+A2:18 to BS EN 1991-1-3:2003+A1:2015" do
+        let(:original) { "NA+A2:18 to BS EN 1991-1-3:2003+A1:2015" }
+        let(:pubid) { "NA+A2:2018 to BS EN 1991-1-3:2003+A1:2015" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+    end
   end
 end

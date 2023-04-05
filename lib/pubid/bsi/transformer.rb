@@ -4,6 +4,14 @@ require_relative "renderer/base"
 module Pubid::Bsi
   class Transformer < Parslet::Transform
     rule(supplement: subtree(:supplement)) do |context|
+      if context[:supplement][:year] && context[:supplement][:year].to_s.length == 2
+        context[:supplement][:year] = if context[:supplement][:year].to_i > 50
+                                        "19#{context[:supplement][:year]}"
+                                      else
+                                        "20#{context[:supplement][:year]}"
+                                      end
+      end
+
       { supplement:
           case context[:supplement][:type]
           when "A"
