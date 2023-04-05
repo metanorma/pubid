@@ -93,6 +93,23 @@ module Pubid::Bsi
           expect(subject.to_s).to eq("BS #{number} - TC")
         end
       end
+
+      context "national annex" do
+        let(:base) { described_class.create(number: number) }
+        let(:params) { { type: :na, base: base } }
+
+        it "renders national annex" do
+          expect(subject.to_s).to eq("NA to BS #{number}")
+        end
+
+        context "with ammendment" do
+          let(:params) { { type: :na, supplement: described_class.create(type: :amd, number: 1, year: 1999), base: base } }
+
+          it "renders national annex" do
+            expect(subject.to_s).to eq("NA+A1:1999 to BS #{number}")
+          end
+        end
+      end
     end
   end
 end

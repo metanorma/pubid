@@ -5,7 +5,7 @@ module Pubid::Bsi
     end
 
     rule(:type) do
-      array_to_str(Identifier.config.types.map { |type| type.type[:short] }.compact).as(:type)
+      national_annex.maybe >> array_to_str(Identifier.config.types.map { |type| type.type[:short] }.compact).as(:type)
     end
 
     rule(:part) do
@@ -28,12 +28,12 @@ module Pubid::Bsi
       str(" - TC").as(:tracked_changes)
     end
 
-    rule(:national_annexes) do
-      (str("NA") >> supplement.maybe >> str(" to ").ignore).as(:national_annexes)
+    rule(:national_annex) do
+      (str("NA").as(:type) >> supplement.maybe >> str(" to ").ignore).as(:national_annex)
     end
 
     rule(:identifier) do
-      national_annexes.maybe >> str("BSI ").maybe >> type >> space >>
+      str("BSI ").maybe >> type >> space >>
         (
           (digits.as(:number) >> part.maybe >> (space >> edition).maybe >>
             (space? >> str(":") >> year >> (dash >> month_digits.as(:month)).maybe).maybe) |
