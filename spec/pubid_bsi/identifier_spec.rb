@@ -270,5 +270,34 @@ module Pubid::Bsi
         it_behaves_like "converts pubid to pubid"
       end
     end
+
+    context "translations" do
+      context "BS 25999-1:2006 (German)" do
+        let(:pubid) { "BS 25999-1:2006 (German)" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "PAS 99:2006 (Italian Translation)" do
+        let(:original) { "PAS 99:2006 (Italian Translation)" }
+        let(:pubid) { "PAS 99:2006 (Italian)" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "PAS 9017:2020+C1 SPANISH TRANSLATION" do
+        let(:original) { "PAS 9017:2020+C1 SPANISH TRANSLATION" }
+        let(:pubid) { "PAS 9017:2020+C1 (Spanish)" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "BS ISO/IEC 17799:2005 (French version)" do
+        let(:original) { "BS ISO/IEC 17799:2005 (French version)" }
+        let(:pubid) { "BS ISO/IEC 17799:2005 (French)" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+    end
   end
 end

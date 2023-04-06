@@ -17,7 +17,7 @@ module Pubid::Bsi
     end
 
     rule(:supplement) do
-      (str("+") >> match("[AC]").as(:type) >> digits.as(:number) >> str(":") >> year).as(:supplement)
+      (str("+") >> match("[AC]").as(:type) >> digits.as(:number) >> (str(":") >> year).maybe).as(:supplement)
     end
 
     rule(:expert_commentary) do
@@ -32,13 +32,23 @@ module Pubid::Bsi
       (str("NA").as(:type) >> supplement.maybe >> str(" to ").ignore).as(:national_annex)
     end
 
+    rule(:translation) do
+      # space >> (match("[A-Z]").repeat(1).as(:translation) >> str(" TRANSLATION"))
+      space >> ((str("(") >> match("[A-Za-z]").repeat(1).as(:translation) >>
+        (space >> (str("Translation") | str("version"))).maybe >> str(")")) |
+        (match("[A-Z]").repeat(1).as(:translation) >> str(" TRANSLATION"))
+      )
+    end
+
     rule(:identifier) do
       str("BSI ").maybe >> type >> space >>
         (
           (digits.as(:number) >> part.maybe >> (space >> edition).maybe >>
             (space? >> str(":") >> year >> (dash >> month_digits.as(:month)).maybe).maybe) |
-            (expert_commentary.absent? >> space? >> match("[^+ ]").repeat(1)).repeat.as(:adopted)
-        ) >> supplement.maybe >> expert_commentary.maybe >> tracked_changes.maybe
+            # exclude expert_commentary and translation from adopted scope
+            (expert_commentary.absent? >> translation.absent? >> space? >>
+              match("[^+ ]").repeat(1)).repeat.as(:adopted)
+        ) >> supplement.maybe >> expert_commentary.maybe >> tracked_changes.maybe >> translation.maybe
     end
 
     rule(:root) { identifier }

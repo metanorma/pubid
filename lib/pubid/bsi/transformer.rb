@@ -31,5 +31,9 @@ module Pubid::Bsi
         { adopted: Pubid::Cen::Identifier.parse(context[:adopted].to_s) }
       end
     end
+
+    rule(translation: simple(:translation)) do
+      { translation: translation.to_s.downcase.capitalize }
+    end
   end
 end
