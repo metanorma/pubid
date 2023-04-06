@@ -40,6 +40,10 @@ module Pubid::Bsi
       )
     end
 
+    rule(:pdf) do
+      space >> str("PDF").as(:pdf)
+    end
+
     rule(:identifier) do
       str("BSI ").maybe >> type >> space >>
         (
@@ -48,7 +52,7 @@ module Pubid::Bsi
             # exclude expert_commentary and translation from adopted scope
             (expert_commentary.absent? >> translation.absent? >> space? >>
               match("[^+ ]").repeat(1)).repeat.as(:adopted)
-        ) >> supplement.maybe >> expert_commentary.maybe >> tracked_changes.maybe >> translation.maybe
+        ) >> supplement.maybe >> expert_commentary.maybe >> tracked_changes.maybe >> translation.maybe >> pdf.maybe
     end
 
     rule(:root) { identifier }

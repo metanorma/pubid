@@ -3,7 +3,7 @@ require 'forwardable'
 module Pubid::Bsi
   module Identifier
     class Base < Pubid::Core::Identifier::Base
-      attr_accessor :month, :supplement, :adopted, :expert_commentary, :tracked_changes, :translation
+      attr_accessor :month, :supplement, :adopted, :expert_commentary, :tracked_changes, :translation, :pdf
 
       extend Forwardable
 
@@ -12,8 +12,8 @@ module Pubid::Bsi
       def initialize(publisher: "BS", month: nil, edition: nil,
                      supplement: nil, number: nil, adopted: nil,
                      expert_commentary: false, tracked_changes: false,
-                     translation: nil, **opts)
-        
+                     translation: nil, pdf: false, **opts)
+
         super(**opts.merge(publisher: publisher, number: number))
         @month = month if month
         @edition = edition if edition
@@ -22,6 +22,7 @@ module Pubid::Bsi
         @expert_commentary = expert_commentary
         @tracked_changes = tracked_changes
         @translation = translation
+        @pdf = pdf
       end
 
       class << self

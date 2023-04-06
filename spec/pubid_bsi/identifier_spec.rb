@@ -299,5 +299,13 @@ module Pubid::Bsi
         it_behaves_like "converts pubid to pubid"
       end
     end
+
+    context "pdf" do
+      context "PD 5500:2018+A3:2020 PDF" do
+        let(:pubid) { "PD 5500:2018+A3:2020 PDF" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+    end
   end
 end

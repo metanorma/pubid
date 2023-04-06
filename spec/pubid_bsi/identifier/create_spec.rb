@@ -110,6 +110,14 @@ module Pubid::Bsi
           end
         end
       end
+
+      context "pdf" do
+        let(:params) { { pdf: true } }
+
+        it "renders pdf identifier" do
+          expect(subject.to_s).to eq("BS #{number} PDF")
+        end
+      end
     end
   end
 end
