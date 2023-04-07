@@ -3,7 +3,7 @@ module Pubid::Bsi::Renderer
     TYPE = "".freeze
 
     def render_identifier(params)
-      suffix = "%{supplement}%{expert_commentary}%{tracked_changes}%{translation}%{pdf}" % params
+      suffix = "%{supplement}%{tracked_changes}%{translation}%{pdf}" % params
       return "%{publisher} %{adopted}#{suffix}" % params unless params[:adopted].to_s.empty?
 
       "%{publisher} %{number}%{part}%{edition}%{year}%{month}#{suffix}" % params
@@ -19,10 +19,6 @@ module Pubid::Bsi::Renderer
 
     def render_supplement(supplement, _opts, _params)
       supplement.to_s
-    end
-
-    def render_expert_commentary(expert_commentary, _opts, _params)
-      " ExComm" if expert_commentary
     end
 
     def render_tracked_changes(tracked_changes, _opts, _params)

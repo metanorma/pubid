@@ -204,6 +204,10 @@ module Pubid::Bsi
         let(:pubid) { "BS 5250:2021 ExComm" }
 
         it_behaves_like "converts pubid to pubid"
+
+        it "should have commentary identifier document type" do
+          expect(subject).to be_a(Identifier::ExpertCommentary)
+        end
       end
 
       context "BS 7273-4:2015+A1:2021 ExComm" do

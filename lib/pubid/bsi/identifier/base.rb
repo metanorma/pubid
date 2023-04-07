@@ -3,7 +3,7 @@ require 'forwardable'
 module Pubid::Bsi
   module Identifier
     class Base < Pubid::Core::Identifier::Base
-      attr_accessor :month, :supplement, :adopted, :expert_commentary, :tracked_changes, :translation, :pdf
+      attr_accessor :month, :supplement, :adopted, :tracked_changes, :translation, :pdf
 
       extend Forwardable
 
@@ -19,7 +19,6 @@ module Pubid::Bsi
         @edition = edition if edition
         @supplement = supplement
         @adopted = adopted
-        @expert_commentary = expert_commentary
         @tracked_changes = tracked_changes
         @translation = translation
         @pdf = pdf
@@ -36,10 +35,20 @@ module Pubid::Bsi
         def transform(params)
           identifier_params = transform_hash(params)
 
-          return Identifier.create(**identifier_params) unless identifier_params[:national_annex]
+          if identifier_params[:national_annex]
+            return transform_national_annex(
+              identifier_params[:national_annex],
+              identifier_params.dup.tap { |h| h.delete(:national_annex) })
+          end
 
-          transform_national_annex(identifier_params[:national_annex],
-                                   identifier_params.dup.tap { |h| h.delete(:national_annex) })
+          return transform_expert_commentary(identifier_params) if identifier_params[:expert_commentary]
+
+          Identifier.create(**identifier_params)
+        end
+
+        def transform_expert_commentary(base_params)
+          Identifier.create(type: :ec,
+                            base: Identifier.create(**base_params))
         end
 
         def transform_national_annex(params, base_params)

@@ -79,7 +79,7 @@ module Pubid::Bsi
       end
 
       context "expert commentary" do
-        let(:params) { { expert_commentary: true } }
+        let(:params) { { type: :ec, base: described_class.create(number: number) } }
 
         it "renders expert commentary identifier" do
           expect(subject.to_s).to eq("BS #{number} ExComm")
