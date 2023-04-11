@@ -118,6 +118,19 @@ module Pubid::Bsi
           expect(subject.to_s).to eq("BS #{number} PDF")
         end
       end
+
+      context "collection" do
+        let(:params) do
+          { type: :collection,
+            identifiers: [Identifier.create(number: 1), Identifier.create(number: 2)],
+            year: 1999,
+            supplement: described_class.create(type: :amd, number: 1, year: 2000) }
+        end
+
+        it "renders collection with supplement and year" do
+          expect(subject.to_s).to eq("BS 1/2:1999+A1:2000")
+        end
+      end
     end
   end
 end

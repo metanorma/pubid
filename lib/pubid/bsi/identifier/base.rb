@@ -43,7 +43,19 @@ module Pubid::Bsi
 
           return transform_expert_commentary(identifier_params) if identifier_params[:expert_commentary]
 
+          return transform_collection(identifier_params) if identifier_params[:second_number]
+
           Identifier.create(**identifier_params)
+        end
+
+        def transform_collection(params)
+          first_identifier_params =
+            params.reject { |k, _| %i[second_number year supplement].include?(k) }
+          second_identifier_params = first_identifier_params.dup
+          second_identifier_params[:number] = params[:second_number]
+          Collection.new(identifiers: [Identifier.create(**first_identifier_params),
+                                       Identifier.create(**second_identifier_params)],
+                         **params.slice(:supplement, :year))
         end
 
         def transform_expert_commentary(base_params)

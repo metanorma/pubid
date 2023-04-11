@@ -22,6 +22,7 @@ require_relative "bsi/identifier/amendment"
 require_relative "bsi/identifier/corrigendum"
 require_relative "bsi/identifier/national_annex"
 require_relative "bsi/identifier/expert_commentary"
+require_relative "bsi/identifier/collection"
 require_relative "bsi/renderer/base"
 require_relative "bsi/renderer/publicly_available_specification"
 require_relative "bsi/renderer/published_document"
@@ -31,6 +32,7 @@ require_relative "bsi/renderer/amendment"
 require_relative "bsi/renderer/corrigendum"
 require_relative "bsi/renderer/national_annex"
 require_relative "bsi/renderer/expert_commentary"
+require_relative "bsi/renderer/collection"
 require_relative "bsi/parser"
 require_relative "bsi/identifier"
 
@@ -44,7 +46,8 @@ config.types = [Pubid::Bsi::Identifier::BritishStandard,
                 Pubid::Bsi::Identifier::Amendment,
                 Pubid::Bsi::Identifier::Corrigendum,
                 Pubid::Bsi::Identifier::NationalAnnex,
-                Pubid::Bsi::Identifier::ExpertCommentary]
+                Pubid::Bsi::Identifier::ExpertCommentary,
+                Pubid::Bsi::Identifier::Collection]
 config.type_names = {
                       bs: {
                         long: "British Standard",

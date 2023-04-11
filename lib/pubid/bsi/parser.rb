@@ -44,10 +44,14 @@ module Pubid::Bsi
       space >> str("PDF").as(:pdf)
     end
 
+    rule(:second_number) do
+      str("/") >> digits.as(:second_number)
+    end
+
     rule(:identifier) do
       str("BSI ").maybe >> type >> space >>
         (
-          (digits.as(:number) >> part.maybe >> (space >> edition).maybe >>
+          (digits.as(:number) >> second_number.maybe >> part.maybe >> (space >> edition).maybe >>
             (space? >> str(":") >> year >> (dash >> month_digits.as(:month)).maybe).maybe) |
             # exclude expert_commentary and translation from adopted scope
             (expert_commentary.absent? >> translation.absent? >> space? >>

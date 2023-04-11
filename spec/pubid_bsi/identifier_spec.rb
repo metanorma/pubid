@@ -311,5 +311,22 @@ module Pubid::Bsi
         it_behaves_like "converts pubid to pubid"
       end
     end
+
+    context "combined documents" do
+      context "PAS 2035/2030:2019+A1:2022" do
+        let(:pubid) { "PAS 2035/2030:2019+A1:2022" }
+
+        it_behaves_like "converts pubid to pubid"
+
+        it "should have collection type" do
+          expect(subject).to be_a(Identifier::Collection)
+        end
+
+        it "should have 2 separate identifiers" do
+          expect(subject.identifiers.first.to_s).to eq("PAS 2035")
+          expect(subject.identifiers.last.to_s).to eq("PAS 2030")
+        end
+      end
+    end
   end
 end
