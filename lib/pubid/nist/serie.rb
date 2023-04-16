@@ -5,6 +5,8 @@ module Pubid::Nist
     attr_accessor :serie, :parsed
 
     def initialize(serie:, parsed: nil)
+      raise Errors::SerieInvalidError, "#{serie} is not valid serie" unless SERIES["long"].key?(serie)
+
       @serie = serie
       @parsed = parsed
     end

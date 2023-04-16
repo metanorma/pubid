@@ -27,19 +27,19 @@ module Pubid::Nist
       end
 
       def convert(doc)
-        id = @converted_id[doc[:id]] ||= Pubid::Nist::Document.parse(doc[:id])
+        id = @converted_id[doc[:id]] ||= Pubid::Nist::Identifier.parse(doc[:id])
         return id unless doc.key?(:doi)
 
         begin
           doi = @converted_doi[doc[:doi]] ||=
-            Pubid::Nist::Document.parse(doc[:doi])
-        rescue Errors::ParseError
+            Pubid::Nist::Identifier.parse(doc[:doi])
+        rescue Pubid::Core::Errors::ParseError
           return id
         end
         # return more complete pubid
         id.merge(doi)
-      rescue Errors::ParseError
-        @converted_doi[doc[:doi]] ||= Pubid::Nist::Document.parse(doc[:doi])
+      rescue Pubid::Core::Errors::ParseError
+        @converted_doi[doc[:doi]] ||= Pubid::Nist::Identifier.parse(doc[:doi])
       end
 
       def parse_docid(doc)
@@ -62,7 +62,7 @@ module Pubid::Nist
       def comply_with_pubid
         fetch.select do |doc|
           convert(doc).to_s == doc[:id]
-        rescue Errors::ParseError
+        rescue Pubid::Core::Errors::ParseError
           false
         end
       end
@@ -70,7 +70,7 @@ module Pubid::Nist
       def different_with_pubid
         fetch.reject do |doc|
           convert(doc).to_s == doc[:id]
-        rescue Errors::ParseError
+        rescue Pubid::Core::Errors::ParseError
           true
         end
       end
@@ -78,7 +78,7 @@ module Pubid::Nist
       def parse_fail_with_pubid
         fetch.select do |doc|
           convert(doc).to_s && false
-        rescue Errors::ParseError
+        rescue Pubid::Core::Errors::ParseError
           true
         end
       end
@@ -94,7 +94,7 @@ module Pubid::Nist
             finalPubId: final_doc.to_s,
             mr: final_doc.to_s(:mr),
           }
-        rescue Errors::ParseError
+        rescue Pubid::Core::Errors::ParseError
           {
             id: doc[:id],
             doi: doc[:doi],

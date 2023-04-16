@@ -2,6 +2,7 @@
 
 require "yaml"
 require "parslet"
+require "pubid-core"
 
 module Pubid
   module Nist
@@ -11,8 +12,10 @@ end
 
 require_relative "nist/serie"
 require_relative "nist/parsers/default"
-require_relative "nist/document_transform"
-require_relative "nist/document_parser"
+require_relative "nist/update"
+require_relative "nist/transformer"
+require_relative "nist/parser"
+require_relative "nist/renderer"
 
 Dir[File.join(__dir__, 'nist/parsers', '*.rb')].each do |file|
   require file
@@ -25,7 +28,7 @@ end.map do |parser_class|
   [parser.name.split("::").last.gsub(/(.)([A-Z])/, '\1 \2').upcase, parser]
 end.to_h
 
-require_relative "nist/document"
+require_relative "nist/identifier"
 require_relative "nist/publisher"
 require_relative "nist/stage"
 require_relative "nist/errors"

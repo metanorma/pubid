@@ -1,5 +1,5 @@
 module Pubid::Nist
-  class DocumentParser < Parslet::Parser
+  class Parser < Parslet::Parser
     attr_accessor :parsed
 
     rule(:series) do
@@ -24,7 +24,8 @@ module Pubid::Nist
                  SERIES["mr"].key(parsed[:series_mr].to_s)
                end
       parser = find_parser(series)
-      parser.new.parse(parsed[:remaining].to_s).merge({ series: series })
+      parsed = parser.new.parse(parsed[:remaining].to_s)
+      parsed.is_a?(Array) ? parsed << { series: series } : parsed.merge({ series: series })
     end
 
     def find_parser(series)

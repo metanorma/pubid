@@ -3,13 +3,13 @@ module Pubid::Nist
     class NbsLc < Default
       rule(:supplement) do
         (str("supp") | str("sup")) >>
-          ((str("").as(:supplement) >> digits.as(:update_month) >> str("/") >> digits.as(:update_year)) |
+          ((str("").as(:supplement) >> (digits.as(:month) >> str("/") >> digits.as(:year)).as(:update)) |
           match('\d').repeat.as(:supplement))
       end
 
       rule(:revision) do
         str("r") >>
-          ((digits.as(:update_month) >> str("/") >> digits.as(:update_year)) |
+          ((digits.as(:month) >> str("/") >> digits.as(:year)).as(:update) |
             digits.as(:revision))
       end
 

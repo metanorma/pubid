@@ -8,7 +8,7 @@ module Pubid::Nist
       end
 
       rule(:report_number) do
-        (year_digits.as(:first_report_number) >>
+        (digits.as(:first_report_number) >>
           str("-") >> year_digits.as(:edition_year)) |
           first_report_number >> (str("-") >>
             ((digits | match("[aAB]") | str("CAS") | str("FRA")) >>
@@ -18,8 +18,8 @@ module Pubid::Nist
 
       rule(:revision) do
         str("r") >>
-          ((digits.as(:update_month) >> str("/") >> digits.as(:update_year)) |
-            (month_letters.as(:update_month) >> year_digits.as(:update_year)) |
+          ((digits.as(:month) >> str("/") >> digits.as(:year)).as(:update) |
+            (month_letters.as(:month) >> year_digits.as(:year)).as(:update) |
             digits.as(:revision) |
             str("").as(:revision))
       end

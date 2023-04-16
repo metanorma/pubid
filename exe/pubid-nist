@@ -84,9 +84,9 @@ class Pubid::Nist::CLI < Thor
 
     unless code.empty?
       if options[:format] == "string"
-        puts Pubid::Nist::Document.parse(code).to_s(options[:style].to_sym)
+        puts Pubid::Nist::Identifier.parse(code).to_s(options[:style].to_sym)
       else
-        puts Pubid::Nist::Document.parse(code).to_json
+        puts Pubid::Nist::Identifier.parse(code).to_json
       end
     end
   rescue Pubid::Nist::Errors::ParseError

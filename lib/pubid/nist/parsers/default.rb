@@ -1,16 +1,12 @@
 module Pubid::Nist
   module Parsers
-    class Default < Parslet::Parser
+    class Default < Pubid::Core::Parser
       rule(:identifier) do
-        stage.maybe >> (str(" ") | str(".")) >> report_number >> parts.repeat.as(:parts)
+        stage.maybe >> (str(" ") | str(".")) >> report_number >> parts.repeat
       end
 
-      rule(:digits) { match('\d').repeat(1) }
-      rule(:letters) { match('[A-Za-z]').repeat(1) }
-      rule(:year_digits) { match('\d').repeat(4, 4) }
       rule(:month_letters) { match('[A-Za-z]').repeat(3, 3) }
       rule(:number_suffix) { match("[aA-Z]") }
-      # rule(:small)
 
       rule(:parts) do
         (edition | revision | version | volume | part | update | addendum | translation |
@@ -79,7 +75,7 @@ module Pubid::Nist
       end
 
       rule(:update) do
-        (str("/Upd") | str("/upd")) >> digits.as(:update_number) >> str("-") >> digits.as(:update_year)
+        (str("/Upd") | str("/upd")) >> (digits.as(:number) >> str("-") >> digits.as(:year)).as(:update)
       end
 
       rule(:translation) do

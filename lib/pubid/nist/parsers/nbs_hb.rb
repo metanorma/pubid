@@ -13,7 +13,7 @@ module Pubid::Nist
 
       rule(:edition) do
         (str("supp") >> str("").as(:supplement) >>
-          (letters.as(:edition_month) >> year_digits.as(:edition_year)) |
+          (words.as(:edition_month) >> year_digits.as(:edition_year)) |
           str("e") >> year_digits.as(:edition_year)
         )
       end

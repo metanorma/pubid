@@ -1,6 +1,6 @@
 RSpec.describe Pubid::Nist::Edition do
 
-  subject { Pubid::Nist::Document.parse(short_pubid).edition }
+  subject { Pubid::Nist::Identifier.parse(short_pubid).edition }
 
   context "when NBS FIPS 107-Mar1985" do
     let(:short_pubid) { "NBS FIPS 107-Mar1985" }

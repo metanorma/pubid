@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Pubid::Nist::Document do
+RSpec.describe Pubid::Nist::Identifier do
   let(:short_pubid) { "NIST SP 800-53r5" }
   let(:mr_pubid) { short_pubid.gsub(" ", ".") }
   let(:long_pubid) { nil }
@@ -9,7 +9,7 @@ RSpec.describe Pubid::Nist::Document do
   it "parses NIST PubID using parameters" do
     expect(described_class.new(publisher: Pubid::Nist::Publisher.new(publisher: "NIST"),
                                serie: Pubid::Nist::Serie.new(serie: "NIST SP"),
-                               docnumber: "800-53", revision: 5).to_s(:mr))
+                               number: "800-53", revision: 5).to_s(:mr))
       .to eq(mr_pubid)
   end
 
@@ -246,7 +246,7 @@ RSpec.describe Pubid::Nist::Document do
     context "NIST LC 1136" do
       it "should raise error" do
         expect { described_class.parse("LCIRC 1136") }
-          .to raise_error(Pubid::Nist::Errors::ParseError)
+          .to raise_error(Pubid::Core::Errors::ParseError)
       end
     end
 
@@ -313,7 +313,7 @@ RSpec.describe Pubid::Nist::Document do
     context "when cannot parse serie" do
       it "should raise error" do
         expect { described_class.parse("NIST WRONG-SERIE 800-11") }
-          .to raise_error(Pubid::Nist::Errors::ParseError)
+          .to raise_error(Pubid::Core::Errors::ParseError)
       end
     end
 
@@ -698,7 +698,7 @@ RSpec.describe Pubid::Nist::Document do
     context "when cannot parse code" do
       it "should raise error" do
         expect { described_class.parse("NIST SP WRONG-CODE") }
-          .to raise_error(Pubid::Nist::Errors::ParseError)
+          .to raise_error(Pubid::Core::Errors::ParseError)
       end
     end
   end

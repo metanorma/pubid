@@ -1,4 +1,4 @@
-RSpec.describe Pubid::Nist::Document do
+RSpec.describe Pubid::Nist::Identifier do
   describe "#merge" do
     it "merges two documents" do
       expect(described_class.parse("NIST SP 260-162r1").merge(

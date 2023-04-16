@@ -1,4 +1,4 @@
-RSpec.describe Pubid::Nist::Document do
+RSpec.describe Pubid::Nist::Identifier do
   subject { described_class.parse(original_pubid) }
 
   let(:mr_pubid) { short_pubid.gsub(" ", ".") }

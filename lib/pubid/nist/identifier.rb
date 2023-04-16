@@ -82,20 +82,21 @@ INSERT_DESC = {
 }.freeze
 
 module Pubid::Nist
-  class Document
+  class Identifier < Pubid::Core::Identifier::Base
     attr_accessor :serie, :code, :revision, :publisher, :version, :volume,
-                  :part, :addendum, :stage, :translation, :update_number,
-                  :edition, :supplement, :update_year, :update_month,
+                  :part, :addendum, :stage, :translation,
+                  :edition, :supplement, :update,
                   :section, :appendix, :errata, :index, :insert
 
-    def initialize(publisher:, serie:, docnumber:, stage: nil, supplement: nil,
-                   edition_month: nil, edition_year: nil, edition_day: nil, **opts)
-      @publisher = publisher
-      @serie = serie
-      @code = docnumber
+    def initialize(publisher: "NIST", serie:, number: nil, stage: nil, supplement: nil,
+                   edition_month: nil, edition_year: nil, edition_day: nil, update: nil, **opts)
+      @publisher = publisher.is_a?(Publisher) ? publisher : Publisher.new(publisher: publisher)
+      @serie = serie.is_a?(Serie) ? serie : Serie.new(serie: serie)
+      @code = number
       @stage = Stage.new(stage.to_s) if stage
       @supplement = (supplement.is_a?(Array) && "") || supplement
       @edition = parse_edition(edition_month, edition_year, edition_day) if edition_month || edition_year
+      @update = update
       opts.each { |key, value| send("#{key}=", value.to_s) }
     end
 
@@ -147,26 +148,24 @@ module Pubid::Nist
       code
     end
 
-    def self.parse(code)
-      code = update_old_code(code)
-      DocumentTransform.new.apply(DocumentParser.new.parse(code))
-    rescue Parslet::ParseFailed => failure
-      raise Pubid::Nist::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
-    end
+    # def to_s(format = :short)
+    #   result = render_serie(format)
+    #   result += " " unless format == :short || stage.nil?
+    #   result += "#{stage&.to_s(format)}"\
+    #             " #{code}#{render_part(format)}#{render_edition(format)}"\
+    #             "#{render_localities(format)}"\
+    #             "#{render_update(format)}#{render_translation(format)}"
+    #   result = render_addendum(result, format)
+    #
+    #   return result.gsub(" ", ".") if format == :mr
+    #
+    #   result
+    # end
 
     def to_s(format = :short)
-      result = render_serie(format)
-      result += " " unless format == :short || stage.nil?
-      result += "#{stage&.to_s(format)}"\
-                " #{code}#{render_part(format)}#{render_edition(format)}"\
-                "#{render_localities(format)}"\
-                "#{render_update(format)}#{render_translation(format)}"
-      result = render_addendum(result, format)
-
-      return result.gsub(" ", ".") if format == :mr
-
-      result
+      self.class.get_renderer_class.new(get_params).render(format: format)
     end
+
 
     def to_json(*args)
       result = {
@@ -280,6 +279,48 @@ module Pubid::Nist
         "#{input} Add."
       when :mr
         "#{input}.add-1"
+      end
+    end
+
+    class << self
+      def create(**opts)
+        new(**opts)
+      end
+
+      # def transform(params)
+      #   identifier_params = get_transformer_class.new.apply(params)
+      #
+      #   Identifier.create(**identifier_params)
+      # end
+      def transform(params)
+        # run transform through each element,
+        # like running transformer.apply(number: 1) and transformer.apply(year: 1999)
+        # instead of running transformer on whole hash, like running transformer.apply({ number: 1, year: 1999 })
+        # where rule for number or year only will be not applied
+        # transformation only applied to rules matching the whole hash
+
+        identifier_params = params.map do |k, v|
+          get_transformer_class.new.apply({ k => v }, params)
+        end.inject({}, :merge)
+
+
+        # identifier_params = params.map do |k, v|
+        #   get_transformer_class.new.apply({k => v}, params).to_a.first
+        # end.compact.to_h
+        #
+        new(**identifier_params)
+      end
+
+      def get_parser_class
+        Parser
+      end
+
+      def get_transformer_class
+        Transformer
+      end
+
+      def get_renderer_class
+        Renderer
       end
     end
   end

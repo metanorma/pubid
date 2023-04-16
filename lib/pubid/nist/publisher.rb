@@ -6,6 +6,8 @@ module Pubid::Nist
     attr_accessor :publisher
 
     def initialize(publisher:)
+      raise Errors::PublisherInvalidError, "#{publisher} is not valid publisher" unless PUBLISHERS["long"].key?(publisher)
+
       @publisher = publisher
     end
 
