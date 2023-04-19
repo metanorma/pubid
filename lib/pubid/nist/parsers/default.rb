@@ -2,7 +2,8 @@ module Pubid::Nist
   module Parsers
     class Default < Pubid::Core::Parser
       rule(:identifier) do
-        old_stage.maybe >> (str(" ") | str(".")) >> report_number >> parts.repeat >> stage.maybe >> translation.maybe
+        old_stage.maybe >> (str(" ") | str(".")) >> report_number >>
+          parts.repeat >> draft.maybe >> stage.maybe >> translation.maybe
       end
 
       rule(:month_letters) { match('[A-Za-z]').repeat(3, 3) }
@@ -40,6 +41,10 @@ module Pubid::Nist
 
       rule(:stage) do
         (space >> (array_to_str(STAGES["id"].keys).as(:id) >> array_to_str(STAGES["type"].keys).as(:type)).as(:stage))
+      end
+
+      rule(:draft) do
+        space >> str("(Draft)").as(:draft)
       end
 
       rule(:digits_with_suffix) do

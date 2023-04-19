@@ -35,5 +35,9 @@ module Pubid::Nist
         { stage: context[:stage] }
       end
     end
+
+    rule(draft: subtree(:draft)) do |context|
+      { stage: { id: "i", type: "prd"} }
+    end
   end
 end
