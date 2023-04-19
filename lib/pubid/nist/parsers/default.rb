@@ -88,7 +88,7 @@ module Pubid::Nist
 
       rule(:translation) do
         (str("(") >> match('\w').repeat(3, 3).as(:translation) >> str(")")) |
-          (str(".") >> match('\w').repeat(3, 3).as(:translation))
+          ((str(".") | space) >> match('\w').repeat(3, 3).as(:translation))
       end
 
       rule(:edition_prefixes) { str("e") }

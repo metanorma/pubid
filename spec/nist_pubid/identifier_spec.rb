@@ -288,7 +288,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
     context "NIST.CSWP.01162020pt" do
       let(:original_pubid) { "NIST.CSWP.01162020pt" }
-      let(:short_pubid) { "NIST CSRC White Paper 01162020(por)" }
+      let(:short_pubid) { "NIST CSRC White Paper 01162020 por" }
       let(:mr_pubid) { "NIST.CSWP.01162020.por" }
 
       it_behaves_like "converts pubid to different formats"
@@ -296,7 +296,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
     context "NIST CSWP 04162018pt" do
       let(:original_pubid) { "NIST CSWP 04162018pt" }
-      let(:short_pubid) { "NIST CSRC White Paper 04162018(por)" }
+      let(:short_pubid) { "NIST CSRC White Paper 04162018 por" }
       let(:mr_pubid) { "NIST.CSWP.04162018.por" }
 
       it_behaves_like "converts pubid to different formats"
@@ -304,7 +304,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
     context "NIST CSWP 01162020id" do
       let(:original_pubid) { "NIST CSWP 01162020id" }
-      let(:short_pubid) { "NIST CSRC White Paper 01162020(ind)" }
+      let(:short_pubid) { "NIST CSRC White Paper 01162020 ind" }
       let(:mr_pubid) { "NIST.CSWP.01162020.ind" }
 
       it_behaves_like "converts pubid to different formats"
@@ -457,7 +457,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
     context "LCIRC 1088sp" do
       let(:original_pubid) { "NBS.LCIRC.1088sp" }
-      let(:short_pubid) { "NBS LC 1088(spa)" }
+      let(:short_pubid) { "NBS LC 1088 spa" }
       let(:mr_pubid) { "NBS.LC.1088.spa" }
 
       it_behaves_like "converts pubid to different formats"

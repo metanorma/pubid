@@ -54,7 +54,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
   context "NIST IR 8115chi" do
     let(:original_pubid) { "NIST IR 8115chi" }
-    let(:short_pubid) { "NIST IR 8115(zho)" }
+    let(:short_pubid) { "NIST IR 8115 zho" }
     let(:mr_pubid) { "NIST.IR.8115.zho" }
 
     it_behaves_like "converts pubid to different formats"
@@ -62,7 +62,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
   context "NIST IR 8118r1es" do
     let(:original_pubid) { "NIST IR 8118r1es" }
-    let(:short_pubid) { "NIST IR 8118r1(spa)" }
+    let(:short_pubid) { "NIST IR 8118r1 spa" }
     let(:mr_pubid) { "NIST.IR.8118r1.spa" }
 
     it_behaves_like "converts pubid to different formats"
@@ -70,7 +70,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
   context "NIST.IR.8115viet" do
     let(:original_pubid) { "NIST.IR.8115viet" }
-    let(:short_pubid) { "NIST IR 8115(vie)" }
+    let(:short_pubid) { "NIST IR 8115 vie" }
     let(:mr_pubid) { "NIST.IR.8115.vie" }
 
     it_behaves_like "converts pubid to different formats"
@@ -78,7 +78,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
   context "NIST.IR.8178port" do
     let(:original_pubid) { "NIST.IR.8178port" }
-    let(:short_pubid) { "NIST IR 8178(por)" }
+    let(:short_pubid) { "NIST IR 8178 por" }
     let(:mr_pubid) { "NIST.IR.8178.por" }
 
     it_behaves_like "converts pubid to different formats"
@@ -138,7 +138,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
   context "NISTIR 8259Aes" do
     let(:original_pubid) { "NISTIR 8259Aes" }
-    let(:short_pubid) { "NIST IR 8259A(spa)" }
+    let(:short_pubid) { "NIST IR 8259A spa" }
     let(:mr_pubid) { "NIST.IR.8259A.spa" }
 
     it_behaves_like "converts pubid to different formats"
@@ -203,7 +203,8 @@ RSpec.describe Pubid::Nist::Identifier do
   end
 
   context "NIST IR 8115(esp)" do
-    let(:short_pubid) { "NIST IR 8115(esp)" }
+    let(:original_pubid) { "NIST IR 8115(esp)" }
+    let(:short_pubid) { "NIST IR 8115 esp" }
     let(:mr_pubid) { "NIST.IR.8115.esp" }
     let(:long_pubid) do
       "National Institute of Standards and Technology Interagency or"\

@@ -116,7 +116,7 @@ module Pubid::Nist
       when :mr
         ".#{translation}"
       when :short
-        "(#{translation})"
+        " #{translation}"
       end
     end
 
