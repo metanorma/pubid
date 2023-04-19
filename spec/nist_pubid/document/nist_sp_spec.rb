@@ -289,6 +289,12 @@ RSpec.describe Pubid::Nist::Identifier do
     it_behaves_like "converts pubid to different formats"
   end
 
+  context "NIST SP 1262 ipd spa" do
+    let(:short_pubid) { "NIST SP 1262 ipd spa" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
+
   context "NIST SP 800-38e" do
     let(:original_pubid) { "NIST SP 800-38e" }
     let(:short_pubid) { "NIST SP 800-38E" }
