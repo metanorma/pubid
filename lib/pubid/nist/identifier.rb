@@ -93,7 +93,7 @@ module Pubid::Nist
       @publisher = publisher.is_a?(Publisher) ? publisher : Publisher.new(publisher: publisher)
       @serie = serie.is_a?(Serie) ? serie : Serie.new(serie: serie)
       @code = number
-      @stage = Stage.new(stage.to_s) if stage
+      @stage = Stage.new(**stage) if stage
       @supplement = (supplement.is_a?(Array) && "") || supplement
       @edition = parse_edition(edition_month, edition_year, edition_day) if edition_month || edition_year
       @update = update

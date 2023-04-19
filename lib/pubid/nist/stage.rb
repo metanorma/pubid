@@ -2,10 +2,10 @@ STAGES = YAML.load_file(File.join(File.dirname(__FILE__), "../../../stages.yaml"
 
 module Pubid::Nist
   class Stage
-    attr_accessor :stage
+    attr_accessor :id, :type
 
-    def initialize(stage)
-      @stage = stage
+    def initialize(id:, type:)
+      @id, @type = id.to_s.downcase, type.to_s.downcase
     end
 
     def to_s(format = :short)
@@ -13,16 +13,16 @@ module Pubid::Nist
 
       case format
       when :short
-        "(#{@stage})"
+        " #{@id}#{@type}"
       when :mr
-        @stage
+        "#{@id}#{@type}"
       else
-        STAGES[@stage]
+        "#{STAGES['id'][@id]} #{STAGES['type'][@type]}"
       end
     end
 
     def nil?
-      @stage.nil?
+      @id.nil? && @type.nil?
     end
   end
 end

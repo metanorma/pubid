@@ -1,5 +1,16 @@
-IPD: Initial Public Draft
-2PD: Second Public Draft
-FPD: Final Public Draft
-WD: Work-in-Progress Draft
-PRD: Preliminary Draft
+id:
+  i: Initial
+  F: Final
+  "1": Initial
+  "2": Second
+  "3": Third
+  "4": Fourth
+  "5": Fifth
+  "6": Sixth
+  "7": Seventh
+  "8": Eight
+  "9": Ninth
+type:
+  pd: Public Draft
+  wd: Work-in-Progress Draft
+  prd: Preliminary Draft

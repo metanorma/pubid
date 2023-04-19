@@ -7,9 +7,16 @@ module Pubid::Nist
     end
 
     def render_identifier(params, opts)
-      result = "%{serie}%{stage}%{code}%{volume}%{part}%{edition}%{revision}%{version}"\
-      "%{supplement}%{section}%{appendix}%{errata}%{index}%{insert}%{update}"\
-      "%{translation}" % params
+      result = case opts[:format]
+               when :short, :mr
+                 "%{serie}%{code}%{volume}%{part}%{edition}%{revision}%{version}"\
+                 "%{supplement}%{section}%{appendix}%{errata}%{index}%{insert}%{update}"\
+                 "%{stage}%{translation}" % params
+               else
+                 "%{serie}%{stage}%{code}%{volume}%{part}%{edition}%{revision}%{version}"\
+                 "%{supplement}%{section}%{appendix}%{errata}%{index}%{insert}%{update}"\
+                 "%{translation}" % params
+               end
 
       if params[:addendum] && !params[:addendum].empty?
         case opts[:format]

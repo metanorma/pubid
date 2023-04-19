@@ -2,14 +2,14 @@ module Pubid::Nist
   module Parsers
     class Default < Pubid::Core::Parser
       rule(:identifier) do
-        stage.maybe >> (str(" ") | str(".")) >> report_number >> parts.repeat
+        old_stage.maybe >> (str(" ") | str(".")) >> report_number >> parts.repeat >> stage.maybe >> translation.maybe
       end
 
       rule(:month_letters) { match('[A-Za-z]').repeat(3, 3) }
       rule(:number_suffix) { match("[aA-Z]") }
 
       rule(:parts) do
-        (edition | revision | version | volume | part | update | addendum | translation |
+        (edition | revision | version | volume | part | update | addendum |
            supplement | errata | index | insert | section | appendix)
       end
 
@@ -33,10 +33,13 @@ module Pubid::Nist
         (str("insert") | str("ins")).as(:insert)
       end
 
+      rule(:old_stage) do
+        (str("(") >> (array_to_str(STAGES["id"].keys.map(&:upcase)).as(:id) >>
+          array_to_str(STAGES["type"].keys.map(&:upcase)).as(:type)).as(:stage) >> str(")"))
+      end
+
       rule(:stage) do
-        (str("(") >> (STAGES.keys.reduce do |acc, s|
-          (acc.is_a?(String) ? str(acc) : acc) | str(s)
-        end).as(:stage) >> str(")"))
+        (space >> (array_to_str(STAGES["id"].keys).as(:id) >> array_to_str(STAGES["type"].keys).as(:type)).as(:stage))
       end
 
       rule(:digits_with_suffix) do

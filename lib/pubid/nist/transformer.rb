@@ -26,5 +26,14 @@ module Pubid::Nist
     rule(update: subtree(:update)) do |context|
       { update: Update.new(**context[:update]) }
     end
+
+    rule(stage: subtree(:stage)) do |context|
+      case context[:stage][:id]
+      when "1"
+        { stage: { id: "i", type: context[:stage][:type] } }
+      else
+        { stage: context[:stage] }
+      end
+    end
   end
 end

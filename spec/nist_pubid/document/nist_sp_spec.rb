@@ -96,7 +96,8 @@ RSpec.describe Pubid::Nist::Identifier do
   end
 
   context "NIST SP(IPD) 800-53r5" do
-    let(:short_pubid) { "NIST SP(IPD) 800-53r5" }
+    let(:original_pubid) { "NIST SP(IPD) 800-53r5" }
+    let(:short_pubid) { "NIST SP 800-53r5 ipd" }
     let(:long_pubid) do
       "National Institute of Standards and Technology Special Publication "\
           "Initial Public Draft 800-53, Revision 5"
@@ -105,13 +106,14 @@ RSpec.describe Pubid::Nist::Identifier do
       "Natl. Inst. Stand. Technol. Spec. Publ. Initial Public Draft 800-53,"\
           " Rev. 5"
     end
-    let(:mr_pubid) { "NIST.SP.IPD.800-53r5" }
+    let(:mr_pubid) { "NIST.SP.800-53r5.ipd" }
 
     it_behaves_like "converts pubid to different formats"
   end
 
   context "NIST SP(IPD) 800-53e5" do
-    let(:short_pubid) { "NIST SP(IPD) 800-53e5" }
+    let(:original_pubid) { "NIST SP(IPD) 800-53e5" }
+    let(:short_pubid) { "NIST SP 800-53e5 ipd" }
     let(:long_pubid) do
       "National Institute of Standards and Technology Special Publication "\
           "Initial Public Draft 800-53 Edition 5"
@@ -120,7 +122,14 @@ RSpec.describe Pubid::Nist::Identifier do
       "Natl. Inst. Stand. Technol. Spec. Publ. Initial Public Draft 800-53 "\
           "Ed. 5"
     end
-    let(:mr_pubid) { "NIST.SP.IPD.800-53e5" }
+    let(:mr_pubid) { "NIST.SP.800-53e5.ipd" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
+
+  # check if we can parse new format as well
+  context "NIST SP 800-53e5 ipd" do
+    let(:short_pubid) { "NIST SP 800-53e5 ipd" }
 
     it_behaves_like "converts pubid to different formats"
   end
@@ -345,6 +354,13 @@ RSpec.describe Pubid::Nist::Identifier do
   context "NIST SP 800-60 Ver. 2.0" do
     let(:original_pubid) { "NIST SP 800-60 Ver. 2.0" }
     let(:short_pubid) { "NIST SP 800-60ver2.0" }
+
+    it_behaves_like "converts pubid to different formats"
+  end
+
+  context "NIST SP(1PD) 800-189" do
+    let(:original_pubid) { "NIST SP(1PD) 800-189" }
+    let(:short_pubid) { "NIST SP 800-189 ipd" }
 
     it_behaves_like "converts pubid to different formats"
   end
