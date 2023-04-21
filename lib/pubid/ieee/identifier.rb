@@ -128,12 +128,16 @@ module Pubid::Ieee
     end
 
     # @param [:short, :full] format
-    def to_s(format = :short)
+    def to_s(format = :short, with_trademark: false)
       if @iso_identifier
         "#{@iso_identifier.to_s(format: :ref_num_short)}#{iso_amendment}#{dual_identifier}"
       else
-        "#{identifier(format)}#{parameters}#{adoption}"
+        "#{identifier(format)}#{with_trademark ? trademark(@number) : ''}#{parameters}#{adoption}"
       end
+    end
+
+    def trademark(number)
+      %w(802 2030).include?(number.to_s) ? "\u00AE" : "\u2122"
     end
 
     def iso_amendment
