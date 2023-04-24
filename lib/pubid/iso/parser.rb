@@ -157,7 +157,7 @@ module Pubid::Iso
     end
 
     rule(:std_document_body) do
-      (type | stage.as(:stage)).maybe >>
+      (type | (stage.as(:stage) >> digits.as(:iteration).maybe)).maybe >>
         # for ISO/IEC WD TS 25025
         space? >> ((stage.as(:stage) | typed_stage.as(:stage) | type) >> space).maybe >>
         digits.as(:number) >>

@@ -908,5 +908,12 @@ module Pubid::Iso
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "ISO/CD2 14065:2018" do
+      let(:original) { "ISO/CD2 14065:2018" }
+      let(:pubid) { "ISO/CD 14065.2:2018" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end
