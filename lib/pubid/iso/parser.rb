@@ -118,6 +118,10 @@ module Pubid::Iso
       ).as(:addendum)
     end
 
+    rule(:extract) do
+      str("/") >> str("Ext") >> space >> (digits.as(:number) >> str(":") >> digits.as(:year)).as(:extract)
+    end
+
     rule(:language) do
       str("(") >> (
         ( # parse ru,en,fr
@@ -166,6 +170,7 @@ module Pubid::Iso
         part.maybe >> iteration.maybe >>
         (space? >> (str(":") | str("-")) >> year).maybe >>
         supplement.maybe >>
+        extract.maybe >>
         addendum.maybe >>
         edition.maybe >>
         language.maybe

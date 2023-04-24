@@ -310,6 +310,14 @@ module Pubid::Iso
         end
       end
 
+      describe "when document have Extract type" do
+        let(:params) { { type: :ext, year: 1999, number: 1, base: described_class.create(number: number) } }
+
+        it "render Extract document" do
+          expect(subject.to_s).to eq("ISO #{number}/Ext 1:1999")
+        end
+      end
+
       describe "predefined formats" do
         subject do
           described_class.create(

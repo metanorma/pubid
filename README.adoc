@@ -349,12 +349,19 @@ final draft International Standards (FDIS) and International Standards`",
 distinguished by a numerical suffix (.2, .3, etc.).
 ____
 
-The stage iteration number is assigned accordingly for all stages, which is
-patterned as:
+[example]
+====
+ISO/CD TR 10064-2.2
+ISO/IEC CD 23264-2.4
+ISO/DIS 80369-3.2
+====
 
-* `{document stage}` (no suffix if iteration is 1); or
-* `{document stage}.{iteration number}`
-  (suffix including iteration number after 1).
+In an ISO PubID, the stage iteration number is applied to the standard
+number, patterned as:
+
+* `{document stage} {document number}` (if iteration is 1); or
+* `{document stage} {document number}.{iteration number}`
+  (if iteration is larger than 1).
 
 Once the document is published (stage 60 substage 60), no status abbreviation is
 given.

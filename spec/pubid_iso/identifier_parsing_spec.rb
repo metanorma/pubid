@@ -915,5 +915,11 @@ module Pubid::Iso
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "ISO 1101:1983/Ext 1:1983" do
+      let(:pubid) { "ISO 1101:1983/Ext 1:1983" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end

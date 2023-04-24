@@ -186,6 +186,13 @@ module Pubid::Iso
             )
           end
 
+          if identifier_params[:extract]
+            base_parameters = params.reject { |k, _| k == :extract }
+
+            return Identifier.create(base: Identifier.create(**base_parameters),
+                                     type: :ext, **identifier_params[:extract])
+          end
+
           Identifier.create(**identifier_params)
         end
 
