@@ -957,5 +957,21 @@ module Pubid::Iso
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "Unicode hyphen" do
+      context "U+2010" do
+        let(:original) { "ISO/IEC 80079‑34:2020" }
+        let(:pubid) { "ISO/IEC 80079-34:2020" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "U+2011" do
+        let(:original) { "ISO/IEC 80079‐34:2020" }
+        let(:pubid) { "ISO/IEC 80079-34:2020" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+    end
   end
 end

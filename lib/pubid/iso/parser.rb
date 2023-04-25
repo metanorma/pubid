@@ -40,6 +40,10 @@ module Pubid::Iso
       "CSC/SP", "CSC/FIN", "JAG"].freeze
 
     ORGANIZATIONS = %w[IEC IEEE CIW SAE CIE ASME ASTM OECD ISO HL7 CEI].freeze
+    rule(:dash) do
+      str("-") | str("‑") | str("‐")
+    end
+
     rule(:stage) do
       array_to_str(Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:stage].values) | array_to_str(STAGES)
     end
@@ -86,7 +90,7 @@ module Pubid::Iso
     end
 
     rule(:part) do
-      (str("/") | str("-")) >> space? >> part_matcher >> (str("-") >> part_matcher).repeat
+      (str("/") | dash) >> space? >> part_matcher >> (dash >> part_matcher).repeat
     end
 
     rule(:organization) do
@@ -109,7 +113,7 @@ module Pubid::Iso
         (space | str(".")).repeat(1).maybe >>
         digits.as(:number).maybe >>
         (str(".") >> digits.as(:iteration)).maybe >>
-        ((str(":") | str("-")) >> digits.as(:year)).maybe).repeat(1).as(:supplements)
+        ((str(":") | dash) >> digits.as(:year)).maybe).repeat(1).as(:supplements)
     end
 
     rule(:addendum) do
@@ -168,7 +172,7 @@ module Pubid::Iso
         # for identifiers like ISO 5537/IDF 26
         (str("|") >> (str("IDF").as(:publisher) >> space >> digits.as(:number)).as(:joint_document)).maybe >>
         part.maybe >> iteration.maybe >>
-        (space? >> (str(":") | str("-")) >> year).maybe >>
+        (space? >> (str(":") | dash) >> year).maybe >>
         supplement.maybe >>
         extract.maybe >>
         addendum.maybe >>
