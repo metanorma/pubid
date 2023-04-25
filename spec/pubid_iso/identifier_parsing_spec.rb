@@ -921,5 +921,41 @@ module Pubid::Iso
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "ISO/CD 105-C12" do
+      let(:pubid) { "ISO/CD 105-C12" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/IEC CD 29110-5-1-1" do
+      let(:pubid) { "ISO/IEC CD 29110-5-1-1" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/PRF TR 31700-2" do
+      let(:pubid) { "ISO/PRF TR 31700-2" }
+
+      it_behaves_like "converts pubid to pubid with prf"
+    end
+
+    context "IEC/DPAS 63086-3-1" do
+      let(:pubid) { "IEC/DPAS 63086-3-1" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "IWA 42:2022" do
+      let(:pubid) { "IWA 42:2022" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/IEEE 11073-20601:2022" do
+      let(:pubid) { "ISO/IEEE 11073-20601:2022" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end
