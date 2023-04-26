@@ -4,6 +4,11 @@ module Pubid::Iso
       def_delegators 'Pubid::Iso::Identifier::InternationalStandard', :type
 
       TYPED_STAGES = {
+        dp: {
+          abbr: "DP",
+          name: "Draft Proposal",
+          harmonized_stages: %w[],
+        },
         dis: {
           abbr: "DIS",
           name: "Draft International Standard",

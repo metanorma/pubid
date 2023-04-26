@@ -995,5 +995,11 @@ module Pubid::Iso
         it_behaves_like "converts pubid to pubid"
       end
     end
+
+    context "ISO/DP 8073" do
+      let(:pubid) { "ISO/DP 8073" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end
