@@ -18,6 +18,10 @@ module Pubid::Iso
       end.flatten +
       %w[pDCOR PDAM]
 
+    STAGED_ADDENDA = Pubid::Iso::Identifier::Addendum::TYPED_STAGES.map do |_, v|
+      v[:abbr]
+    end
+
     DIR_SUPPLEMENTS = %w[Supplement SUP].freeze
 
     TYPED_STAGES = Identifier.config.types.map do |type|
@@ -64,6 +68,10 @@ module Pubid::Iso
       (array_to_str(Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:type].values) | array_to_str(TYPES)).as(:type)
     end
 
+    rule(:staged_addenda) do
+      array_to_str(STAGED_ADDENDA)
+    end
+
     rule(:tctype) do
       # tc-types
       array_to_str(TCTYPES)
@@ -86,7 +94,8 @@ module Pubid::Iso
 
     rule(:part_matcher) do
       year_digits.absent? >>
-        (str("Amd") | str("Cor")).absent? >> ((roman_numerals >> digits.absent?) | match['[\dA-Z]'].repeat(1)).as(:part)
+        supplements.absent? >>
+        staged_addenda.absent? >> ((roman_numerals >> digits.absent?) | match['[\dA-Z]'].repeat(1)).as(:part)
     end
 
     rule(:part) do
@@ -118,8 +127,10 @@ module Pubid::Iso
 
     rule(:addendum) do
       (
-        ((str("/") >> (str("Add") | str("ADD"))) | (str(" — Addendum"))) >> space >> digits.as(:number) >> ((str(":")) >> digits.as(:year)).maybe
-      ).as(:addendum)
+        (((str("/") >> (str("Add") | str("ADD")).as(:type)) | (str(" — ") >> str("Addendum").as(:type))) |
+         (str("/") >> staged_addenda.as(:typed_stage))) >>
+          space >> digits.as(:number) >> ((str(":")) >> digits.as(:year)).maybe
+      ).repeat(1).as(:supplements)
     end
 
     rule(:extract) do

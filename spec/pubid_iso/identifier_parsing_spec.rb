@@ -973,5 +973,27 @@ module Pubid::Iso
         it_behaves_like "converts pubid to pubid"
       end
     end
+
+    context "Draft Addenda" do
+      context "ISO 2631/DAD 1" do
+        let(:pubid) { "ISO 2631/DAD 1" }
+
+        it_behaves_like "converts pubid to pubid"
+
+        it { expect(subject).to be_a(Identifier::Addendum) }
+      end
+
+      context "ISO 2553/DAD 1:1987" do
+        let(:pubid) { "ISO 2553/DAD 1:1987" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "ISO/DIS 1151-1/DAD 2" do
+        let(:pubid) { "ISO/DIS 1151-1/DAD 2" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+    end
   end
 end

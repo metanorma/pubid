@@ -29,7 +29,12 @@ module Pubid::Iso
               end
             )
           else
-            supplement
+            case supplement[:type]
+            when "Addendum"
+              supplement.merge({ type: "Add" })
+            else
+              supplement
+            end
           end
         end
       context
