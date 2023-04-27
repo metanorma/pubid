@@ -996,6 +996,12 @@ module Pubid::Iso
       end
     end
 
+    context "ISO/IEC FCD 42010" do
+      let(:pubid) { "ISO/IEC FCD 42010" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "ISO/DP 8073" do
       let(:pubid) { "ISO/DP 8073" }
 

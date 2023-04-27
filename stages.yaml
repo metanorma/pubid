@@ -4,6 +4,7 @@ abbreviations:
   AWI: ["20.00", "10.99"]
   WD: ["20.20", "20.60", "20.98", "20.99"]
   CD: ["30.00", "30.20", "30.60", "30.92", "30.98", "30.99"]
+  FCD: ["40.00", "40.20", "40.60", "40.92", "40.98", "40.99"]
   PRF: ["50.00", "50.20", "50.60", "50.92", "50.98", "50.99"]
 
 names:
@@ -11,6 +12,7 @@ names:
   PWI: Preliminary Work Item
   NP: New Proposal
   CD: Committee Draft
+  FCD: Final Committee Draft
   PRF: Proof of a new
 
 codes_description:

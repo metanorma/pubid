@@ -3,7 +3,7 @@ require_relative "renderer/base"
 
 module Pubid::Iso
   class Parser < Pubid::Core::Parser
-    STAGES = %w[NP NWIP WD CD PRF AWI PWI FPD].freeze
+    STAGES = %w[NP NWIP WD CD FCD PRF AWI PWI FPD].freeze
     TYPES = %w[DATA ISP IWA R TTA TS TR IS PAS Guide GUIDE DIR].freeze
     # TYPED_STAGES = %w[DIS FDIS DPAS FDTR FDTS DTS DTR PDTR PDTS].freeze
     SUPPLEMENTS = %w[Amd Cor AMD COR Suppl].freeze
