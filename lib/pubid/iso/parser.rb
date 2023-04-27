@@ -24,11 +24,11 @@ module Pubid::Iso
 
     DIR_SUPPLEMENTS = %w[Supplement SUP].freeze
 
-    TYPED_STAGES = Identifier.config.types.map do |type|
+    TYPED_STAGES = (Identifier.config.types.map do |type|
       type::TYPED_STAGES.map do |_, v|
         v.key?(:legacy_abbr) ? (v[:legacy_abbr] + [v[:abbr]]) : v[:abbr]
       end
-    end.flatten - STAGED_SUPPLEMENTS + %w[PDTR PDTS]
+    end.flatten - STAGED_SUPPLEMENTS + %w[PDTR PDTS]).sort_by(&:length).reverse
 
     TCTYPES = ["TC", "JTC", "PC", "IT", "CAB", "CASCO", "COPOLCO",
       "COUNCIL", "CPSG", "CS", "DEVCO", "GA", "GAAB", "INFCO",
