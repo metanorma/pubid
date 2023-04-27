@@ -1,5 +1,7 @@
 = ISO publication identifiers ("ISO PubID")
 
+image:https://badge.fury.io/rb/pubid-iso.svg["Gem Version", link="https://badge.fury.io/rb/pubid-iso"]
+
 == Purpose
 
 This gem implements a mechanism to parse and utilize ISO publication
