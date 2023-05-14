@@ -10,9 +10,9 @@ module Pubid::Ieee
 
     rule(identifier: subtree(:identifier)) do |data|
       if data[:identifier].is_a?(Parslet::Slice)
-        Identifier.new(**Identifier.convert_parser_parameters(**Parser.new.iso_or_ieee_identifier.parse(data[:identifier].to_s)))
+        Identifier::Base.transform(Identifier.convert_parser_parameters(**Parser.new.iso_or_ieee_identifier.parse(data[:identifier].to_s)))
       else
-        Identifier.new(**Identifier.convert_parser_parameters(**data[:identifier]))
+        Identifier::Base.transform(Identifier.convert_parser_parameters(**data[:identifier]))
       end
     end
 
@@ -26,6 +26,15 @@ module Pubid::Ieee
                 year
               end,
         month: Date.parse(month).strftime("%B") }
+    end
+
+    rule(type: simple(:type)) do
+      { type: case type
+        when "Standard"
+          :std
+        else
+          type
+        end }
     end
   end
 end

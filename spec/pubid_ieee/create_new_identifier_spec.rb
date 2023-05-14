@@ -1,6 +1,6 @@
 RSpec.describe Pubid::Ieee::Identifier do
   describe "creating new identifier" do
-    subject { described_class.new(**{ number: number }.merge(params)) }
+    subject { described_class.create(**{ number: number }.merge(params)) }
     let(:number) { 123 }
     let(:params) { {} }
 
@@ -18,7 +18,7 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "ISO identifier" do
-      subject { described_class.new(**params) }
+      subject { described_class.create(**params) }
       let(:params) do
         { iso_identifier:
             [{ publisher: "IEC" },
@@ -55,7 +55,7 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "revision" do
-      let(:params) { { revision: [described_class.new(number: 1)] } }
+      let(:params) { { revision: [described_class.create(number: 1)] } }
 
       it { expect(subject.to_s).to eq("IEEE Std #{number} (Revision of IEEE Std 1)") }
     end
@@ -92,7 +92,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "amendment" do
       context "with comment" do
-        let(:params) { { amendment: described_class.new(number: 1) } }
+        let(:params) { { amendment: described_class.create(number: 1) } }
 
         it { expect(subject.to_s).to eq("IEEE Std #{number} (Amendment to IEEE Std 1)") }
       end
@@ -106,7 +106,7 @@ RSpec.describe Pubid::Ieee::Identifier do
       end
 
       context "several amendments" do
-        let(:params) { { amendment: [described_class.new(number: 1), described_class.new(number: 2)] } }
+        let(:params) { { amendment: [described_class.create(number: 1), described_class.create(number: 2)] } }
 
         it { expect(subject.to_s).to eq("IEEE Std #{number} (Amendment to IEEE Std 1 as amended by IEEE Std 2)") }
       end
@@ -114,7 +114,7 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "corrigendum" do
       context "with comment" do
-        let(:params) { { year: 2000, corrigendum_comment: described_class.new(number: 1, year: 1999 ) } }
+        let(:params) { { year: 2000, corrigendum_comment: described_class.create(number: 1, year: 1999 ) } }
 
         it { expect(subject.to_s).to eq("IEEE Std #{number}-1999/Cor 1-2000") }
       end
@@ -127,7 +127,7 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "supplement" do
-      let(:params) { { supplement: described_class.new(number: 2) } }
+      let(:params) { { supplement: described_class.create(number: 2) } }
 
       it { expect(subject.to_s).to eq("IEEE Std #{number} (Supplement to IEEE Std 2)") }
     end
@@ -145,7 +145,7 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "incorporates" do
-      let(:params) { { incorporates: [described_class.new(number: 2)] } }
+      let(:params) { { incorporates: [described_class.create(number: 2)] } }
 
       it { expect(subject.to_s).to eq("IEEE Std #{number} (Incorporates IEEE Std 2)") }
     end
@@ -158,7 +158,7 @@ RSpec.describe Pubid::Ieee::Identifier do
       end
 
       context "Reaffirmation of" do
-        let(:params) { { year: 1998, reaffirmed: { reaffirmation_of: described_class.new(number: 2, year: 1999) } } }
+        let(:params) { { year: 1998, reaffirmed: { reaffirmation_of: described_class.create(number: 2, year: 1999) } } }
 
         it { expect(subject.to_s).to eq("IEEE Std #{number}-1999 (Reaffirmed 1998)") }
       end
