@@ -303,7 +303,7 @@ module Pubid::Ieee
 
     rule(:iso_part_stage_iteration) do
       iso_part >>
-      (str("-") >> iso_parser.typed_stage.as(:stage)) >> iso_parser.iteration.maybe
+      ((str("-") | str("/")) >> (iso_parser.typed_stage | iso_parser.stage).as(:stage)) >> iso_parser.iteration.maybe
     end
 
     rule(:iso_stage_part_iteration) do
@@ -320,8 +320,8 @@ module Pubid::Ieee
 
     rule(:iso_part_stage_iteration_matcher) do
       # consumes "/"
-      iso_stage_part_iteration |
       iso_part_stage_iteration |
+      iso_stage_part_iteration |
       iso_part_iteration
 
     end

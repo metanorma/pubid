@@ -884,6 +884,22 @@ module Pubid::Ieee
 
         it_behaves_like "converts pubid to pubid"
       end
+
+      context "ISO/IEC/IEEE P15026-4/DIS, February 2020" do
+        let(:original) { "ISO/IEC/IEEE P15026-4/DIS, February 2020" }
+        let(:pubid) { "ISO/IEC/IEEE DIS P15026-4, February 2020" }
+
+        it_behaves_like "converts pubid to pubid"
+
+        it { expect(subject.iso_identifier.typed_stage).to eq(:dis) }
+      end
+
+      context "ISO/IEC/IEEE P29119-1/CD, June 2020" do
+        let(:original) { "ISO/IEC/IEEE P29119-1/CD, June 2020" }
+        let(:pubid) { "ISO/IEC/IEEE CD P29119-1, June 2020" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
     end
 
     describe "parse identifiers from examples files" do
