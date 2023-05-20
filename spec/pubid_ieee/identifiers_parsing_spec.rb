@@ -900,6 +900,34 @@ module Pubid::Ieee
 
         it_behaves_like "converts pubid to pubid"
       end
+
+      context "ISO/IEC/IEEE P15026-4/DIS2, February 2021" do
+        let(:original) { "ISO/IEC/IEEE P15026-4/DIS2, February 2021" }
+        let(:pubid) { "ISO/IEC/IEEE DIS P15026-4.2, February 2021" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEC/IEEE P63113 CD4, April 2019" do
+        let(:original) { "IEC/IEEE P63113 CD4, April 2019" }
+        let(:pubid) { "IEC/IEEE CD P63113.4, April 2019" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "ISO/IEC/IEEE P12207-CD3-1502" do
+        let(:original) { "ISO/IEC/IEEE P12207-CD3-1502" }
+        let(:pubid) { "ISO/IEC/IEEE CD P12207-1502.3" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEEE/ISO/IEC P29119-3-DIS2, September 2012" do
+        let(:original) { "IEEE/ISO/IEC P29119-3-DIS2, September 2012" }
+        let(:pubid) { "IEEE/IEC/ISO DIS P29119-3.2, September 2012" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
     end
 
     describe "parse identifiers from examples files" do

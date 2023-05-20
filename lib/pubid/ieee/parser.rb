@@ -303,12 +303,14 @@ module Pubid::Ieee
 
     rule(:iso_part_stage_iteration) do
       iso_part >>
-      ((str("-") | str("/")) >> (iso_parser.typed_stage | iso_parser.stage).as(:stage)) >> iso_parser.iteration.maybe
+      ((str("-") | str("/")) >> (iso_parser.typed_stage | iso_parser.stage).as(:stage) >>
+        digits.as(:iteration).maybe) >> iso_parser.iteration.maybe
     end
 
     rule(:iso_stage_part_iteration) do
       # don't consume draft from IEEE format
-      ((str("-") | str("/")) >> (str("D") >> digits).absent? >> (iso_parser.typed_stage.as(:stage) | iso_parser.stage.as(:stage))) >>
+      ((str("-") | str("/")) >> (str("D") >> digits).absent? >>
+        (iso_parser.typed_stage.as(:stage) | iso_parser.stage.as(:stage))) >> digits.as(:iteration).maybe >>
         iso_part.maybe >> iso_parser.iteration.maybe
     end
 
@@ -318,12 +320,16 @@ module Pubid::Ieee
       iso_part >> iso_parser.iteration.maybe
     end
 
+    rule(:iso_stage_iteration) do
+      space >> (iso_parser.typed_stage.as(:stage) | iso_parser.stage.as(:stage)) >> digits.as(:iteration)
+    end
+
     rule(:iso_part_stage_iteration_matcher) do
       # consumes "/"
       iso_part_stage_iteration |
       iso_stage_part_iteration |
-      iso_part_iteration
-
+      iso_part_iteration |
+      iso_stage_iteration
     end
 
     rule(:iso_identifier) do
