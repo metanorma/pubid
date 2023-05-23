@@ -30,6 +30,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "nokogiri"
   spec.add_dependency "thor"
   spec.add_dependency "lightly"
-  spec.add_dependency "parslet"
+  spec.add_dependency "parslet", "~> 2.0.0"
   spec.add_dependency "pubid-iso", "~> 0.5.2"
 end
