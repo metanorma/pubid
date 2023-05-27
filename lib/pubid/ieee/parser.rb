@@ -68,7 +68,7 @@ module Pubid::Ieee
     end
 
     rule(:draft_status) do
-      (str("Active Unapproved") | str("Unapproved") | str("Approved")).as(:draft_status)
+      (str("Active Unapproved") | str("Unapproved") | str("Approved"))
     end
 
     rule(:draft_prefix) do
@@ -216,7 +216,7 @@ module Pubid::Ieee
     # otherwise extra identifiers parsed as dual PubIDs to the main identifier
     def parameters(atom, without_dual_pubids: false, skip_parameters: false)
       atom >>
-        ((draft_status >> space).maybe >> (str("Draft ").maybe >>
+        ((draft_status.as(:draft_status) >> space).maybe >> (str("Draft ").maybe >>
           type.as(:type) >> space.maybe).maybe).as(:type_status) >>
         number_prefix >> number >>
         (
@@ -224,6 +224,9 @@ module Pubid::Ieee
           (draft |
             part_subpart_year.maybe >> corrigendum.maybe >> draft.maybe >> iso_amendment.maybe
           ) >>
+            iso_stage_part_iteration.maybe >>
+            # ((str("-") | str("/") | str("_")) >> (str("D") >> digits).absent? >>
+            #   (iso_parser.typed_stage.as(:stage) | iso_parser.stage.as(:stage))) >> digits.as(:iteration).maybe >>
             if skip_parameters
               str("")
             else
@@ -309,9 +312,8 @@ module Pubid::Ieee
 
     rule(:iso_stage_part_iteration) do
       # don't consume draft from IEEE format
-      ((str("-") | str("/")) >> (str("D") >> digits).absent? >>
-        (iso_parser.typed_stage.as(:stage) | iso_parser.stage.as(:stage))) >> digits.as(:iteration).maybe >>
-        iso_part.maybe >> iso_parser.iteration.maybe
+      (str("-") | str("/") | str("_") | space) >> (str("D") >> digits).absent? >>
+        iso_stage_iteration >> iso_part.maybe >> iso_parser.iteration.maybe
     end
 
     # add rule when don't have stage
@@ -321,15 +323,15 @@ module Pubid::Ieee
     end
 
     rule(:iso_stage_iteration) do
-      space >> (iso_parser.typed_stage.as(:stage) | iso_parser.stage.as(:stage)) >> digits.as(:iteration)
+      (iso_parser.typed_stage.as(:stage) | iso_parser.stage.as(:stage)) >> digits.as(:iteration).maybe
     end
 
     rule(:iso_part_stage_iteration_matcher) do
       # consumes "/"
       iso_part_stage_iteration |
       iso_stage_part_iteration |
-      iso_part_iteration |
-      iso_stage_iteration
+      iso_part_iteration# |
+      # iso_stage_iteration
     end
 
     rule(:iso_identifier) do
@@ -341,6 +343,8 @@ module Pubid::Ieee
         iso_parser.originator >> ((str(" ") | str("/")) >>
       # for ISO/FDIS
       (iso_parser.type | iso_parser.typed_stage.as(:stage))).maybe >>
+      # draft std
+      # (space >> (draft_status >> space) >> (str("Draft ").maybe >> type >> space.maybe)).maybe >>
       # for ISO/IEC WD TS 25025
       str(" ").maybe >> ((iso_parser.typed_stage.as(:stage) | iso_parser.stage.as(:stage) | iso_parser.type) >> str(" ")).maybe >>
         (str("P").maybe >> iso_parser.digits).as(:number) >>
@@ -381,6 +385,7 @@ module Pubid::Ieee
         # (iso identifier) >> space >> (ieee identifier) ?
         iso_identifier >> space >> parameters((organizations >> space).maybe) | iso_identifier |
         parameters((organizations >> space).maybe)
+      # iso_identifier >> iso_parameters
     end
 
     rule(:parameters_with_optional_organizations) do

@@ -5,16 +5,16 @@ module Pubid::Ieee
     TYPE_NAMES = {
       std: {
         long: "Standard",
-        full: "Std ",
-        short: "Std ",
+        full: "Std",
+        short: "Std",
         match: %w[STD Std Standard],
         alternative: "",
       },
       draft: {
-        full: "Draft Std ",
-        short: "Draft Std ",
+        full: "Draft Std",
+        short: "Draft Std",
         match: %w[Draft],
-        alternative: "Draft ",
+        alternative: "Draft",
       },
     }.freeze
 

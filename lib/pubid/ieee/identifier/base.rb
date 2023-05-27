@@ -10,13 +10,13 @@ module Pubid::Ieee
                     :edition, :draft, :redline, :year, :month, :type, :alternative,
                     :draft_status, :revision, :adoption_year, :amendment, :supersedes,
                     :corrigendum, :corrigendum_comment, :reaffirmed, :incorporates,
-                    :supplement, :proposal, :iso_identifier, :iso_amendment
+                    :supplement, :proposal, :iso_identifier, :iso_amendment, :iteration
 
       def initialize(publisher: "IEEE", number: nil, stage: nil, subpart: nil, edition: nil,
                      draft: nil, redline: nil, month: nil, revision: nil,
                      iso_identifier: nil, type: :std, alternative: nil, draft_status: nil, adoption_year: nil,
                      amendment: nil, supersedes: nil, corrigendum: nil, corrigendum_comment: nil, reaffirmed: nil,
-                     incorporates: nil, supplement: nil, proposal: nil, iso_amendment: nil, **opts)
+                     incorporates: nil, supplement: nil, proposal: nil, iso_amendment: nil, iteration: nil, **opts)
 
         super(**opts.merge(number: number, publisher: publisher))#.merge(amendments: amendments, corrigendums: corrigendums))
 
@@ -56,6 +56,7 @@ module Pubid::Ieee
         @supplement = supplement
         @proposal = proposal
         @iso_amendment = iso_amendment
+        @iteration = iteration
       end
 
       def self.type
@@ -121,12 +122,30 @@ module Pubid::Ieee
       end
 
       def publisher
-        "#{@publisher}#{copublisher} " if @publisher && @number
+        "#{@publisher}#{copublisher}" if @publisher && @number
       end
 
       def identifier(format = :short)
-        "#{publisher}#{draft_status(format)}#{type(format)}#{number}#{part}"\
+        "#{publisher}#{stage}#{draft_status(format)}#{type(format)}#{number}#{iteration}#{part}"\
           "#{subpart}#{year}#{revision_date}"
+      end
+
+      def number
+        return "" unless @number
+
+        " #{@number}"
+      end
+
+      def stage
+        return "" unless @stage
+
+        "/#{@stage}"
+      end
+
+      def iteration
+        return "" unless @iteration
+
+        ".#{@iteration}"
       end
 
       def parameters
@@ -155,7 +174,8 @@ module Pubid::Ieee
       def type(format)
         return unless @type
 
-        @type.to_s(@publisher != "IEEE" ? :alternative : format)
+        result = @type.to_s(@publisher != "IEEE" ? :alternative : format)
+        result.empty? ? result : " #{result}"
       end
 
       def year
@@ -220,7 +240,7 @@ module Pubid::Ieee
       end
 
       def draft_status(format)
-        "#{@draft_status} " if @draft_status && format == :full
+        " #{@draft_status}" if @draft_status && format == :full
       end
 
       def revision
