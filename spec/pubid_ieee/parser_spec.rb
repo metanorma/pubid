@@ -9,6 +9,11 @@ RSpec.describe Pubid::Ieee::Parser do
 
   it "parses part" do
     expect(subject.part_subpart_year).to parse("-20601a", trace: true)
+    expect(subject.part_subpart_year).to parse(".3-2012", trace: true)
+  end
+
+  it "parses identifier_without_dual_pubids" do
+    expect(subject.identifier_without_dual_pubids).to parse("IEEE Std 802.3-2008", trace: true)
   end
 
   it "don't parse identifier with extra space" do

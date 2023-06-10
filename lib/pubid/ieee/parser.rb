@@ -27,9 +27,7 @@ module Pubid::Ieee
     end
 
     rule(:year) do
-      # -2014, April 2015
-      dash >> year_digits.as(:adoption_year) >> publication_date |
-        (dot | dash) >> year_digits.as(:year) >> str("(E)").maybe
+      (dot | dash) >> year_digits.as(:year) >> str("(E)").maybe
     end
 
     rule(:organization) do
@@ -87,7 +85,8 @@ module Pubid::Ieee
       # for D1D2
       (str("D") >> digits.as(:version)).repeat(2) |
       # for DD3, D3Q
-      (str("D") >> words_digits.as(:version)).repeat(1, 1)
+      # don't parse "DIS" as draft
+      (str("D") >> str("IS").absent? >> words_digits.as(:version)).repeat(1, 1)
     end
 
     rule(:draft) do
@@ -99,7 +98,7 @@ module Pubid::Ieee
     end
 
     rule(:part) do
-      ((dot | dash) >> words_digits).as(:part)
+      ((dot | dash) >> iso_stage_iteration.absent? >> words_digits).as(:part)
     end
 
     rule(:subpart) do
@@ -224,7 +223,7 @@ module Pubid::Ieee
           (draft |
             part_subpart_year.maybe >> corrigendum.maybe >> draft.maybe >> iso_amendment.maybe
           ) >>
-            iso_stage_part_iteration.maybe >>
+            # iso_stage_part_iteration.maybe >>
             # ((str("-") | str("/") | str("_")) >> (str("D") >> digits).absent? >>
             #   (iso_parser.typed_stage.as(:stage) | iso_parser.stage.as(:stage))) >> digits.as(:iteration).maybe >>
             if skip_parameters
@@ -305,9 +304,7 @@ module Pubid::Ieee
     end
 
     rule(:iso_part_stage_iteration) do
-      iso_part >>
-      ((str("-") | str("/")) >> (iso_parser.typed_stage | iso_parser.stage).as(:stage) >>
-        digits.as(:iteration).maybe) >> iso_parser.iteration.maybe
+      iso_part >> (str("-") | str("/") | str("_")) >> iso_stage_iteration >> iso_parser.iteration.maybe
     end
 
     rule(:iso_stage_part_iteration) do
@@ -323,7 +320,7 @@ module Pubid::Ieee
     end
 
     rule(:iso_stage_iteration) do
-      (iso_parser.typed_stage.as(:stage) | iso_parser.stage.as(:stage)) >> digits.as(:iteration).maybe
+      (iso_parser.typed_stage | iso_parser.stage).as(:stage) >> digits.as(:iteration).maybe
     end
 
     rule(:iso_part_stage_iteration_matcher) do
@@ -344,10 +341,10 @@ module Pubid::Ieee
       # for ISO/FDIS
       (iso_parser.type | iso_parser.typed_stage.as(:stage))).maybe >>
       # draft std
-      # (space >> (draft_status >> space) >> (str("Draft ").maybe >> type >> space.maybe)).maybe >>
+      # (space >> (draft_status >> space).maybe >> (str("Draft ").maybe >> type >> space.maybe)).maybe >>
       # for ISO/IEC WD TS 25025
       str(" ").maybe >> ((iso_parser.typed_stage.as(:stage) | iso_parser.stage.as(:stage) | iso_parser.type) >> str(" ")).maybe >>
-        (str("P").maybe >> iso_parser.digits).as(:number) >>
+        (str("P").maybe >> iso_parser.digits).as(:number) >> iso_parser.iteration.maybe >>
       # for identifiers like ISO 5537/IDF 26
       (str("|") >> (str("IDF") >> str(" ") >> digits).as(:joint_document)).maybe >>
         iso_part_stage_iteration_matcher.maybe >>
@@ -381,10 +378,11 @@ module Pubid::Ieee
 
     rule(:iso_or_ieee_identifier) do
       ieee_without_prefix |
+        parameters((organizations >> space).maybe) |
         (iso_identifier >> iso_parameters) |
         # (iso identifier) >> space >> (ieee identifier) ?
-        iso_identifier >> space >> parameters((organizations >> space).maybe) | iso_identifier |
-        parameters((organizations >> space).maybe)
+        iso_identifier >> space >> parameters((organizations >> space).maybe) | iso_identifier
+
       # iso_identifier >> iso_parameters
     end
 
@@ -393,7 +391,7 @@ module Pubid::Ieee
     end
 
     rule(:identifier_without_dual_pubids) do
-      iso_identifier >> iso_parameters |
+      (iso_identifier >> iso_parameters) |
       parameters((organizations >> space).maybe, without_dual_pubids: true)
     end
 

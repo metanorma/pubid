@@ -177,7 +177,7 @@ module Pubid::Ieee
 
       context "IEEE 1250 /D11 May 2010" do
         let(:original) { "IEEE 1250 /D11 May 2010" }
-        let(:pubid) { "IEEE 1250/D11, May 2010" }
+        let(:pubid) { "IEEE Draft Std 1250/D11, May 2010" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -204,20 +204,21 @@ module Pubid::Ieee
 
       context "IEEE P11073-10101/D3r7, September 2018" do
         let(:original) { "IEEE P11073-10101/D3.7, September 2018" }
-        let(:pubid) { "IEEE P11073-10101/D3.7, September 2018" }
+        let(:pubid) { "IEEE Draft Std P11073-10101/D3.7, September 2018" }
 
         it_behaves_like "converts pubid to pubid"
       end
 
       context "IEEE P11073-10420/D4D5, March 2020" do
         let(:original) { "IEEE P11073-10420/D4D5, March 2020" }
-        let(:pubid) { "IEEE P11073-10420/D4D5, March 2020" }
+        let(:pubid) { "IEEE Draft Std P11073-10420/D4D5, March 2020" }
 
         it_behaves_like "converts pubid to pubid"
       end
 
       context "IEEE P1293/D29a1, August 2018" do
-        let(:pubid) { "IEEE P1293/D29a1, August 2018" }
+        let(:original) { "IEEE P1293/D29a1, August 2018" }
+        let(:pubid) { "IEEE Draft Std P1293/D29a1, August 2018" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -236,7 +237,8 @@ module Pubid::Ieee
       end
 
       context "IEEE P1017/D062012" do
-        let(:pubid) { "IEEE P1017/D062012, June 2012" }
+        let(:original) { "IEEE P1017/D062012, June 2012" }
+        let(:pubid) { "IEEE Draft Std P1017/D062012, June 2012" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -390,21 +392,21 @@ module Pubid::Ieee
 
       context "IEEE P15026-2, April 2011" do
         let(:original) { "IEEE P15026-2, April 2011" }
-        let(:pubid) { "IEEE P15026-2, April 2011" }
+        let(:pubid) { "IEEE Std P15026-2, April 2011" }
 
         it_behaves_like "converts pubid to pubid"
       end
 
       context "IEEE P90003-2014, April 2015" do
         let(:original) { "IEEE P90003-2014, April 2015" }
-        let(:pubid) { "IEEE P90003-2014, April 2015" }
+        let(:pubid) { "IEEE Std P90003, April 2015" }
 
         it_behaves_like "converts pubid to pubid"
       end
 
       context "IEEE/IEC P60076-57-1202, July 2014" do
         let(:original) { "IEEE/IEC P60076-57-1202, July 2014" }
-        let(:pubid) { "IEEE/IEC P60076-57-1202, July 2014" }
+        let(:pubid) { "IEEE/IEC Std P60076-57-1202, July 2014" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -418,14 +420,14 @@ module Pubid::Ieee
 
       context "ISO/IEC/IEEE P26513_D2, January 2017" do
         let(:original) { "ISO/IEC/IEEE P26513_D2, January 2017" }
-        let(:pubid) { "ISO/IEC/IEEE P26513/D2, January 2017" }
+        let(:pubid) { "ISO/IEC/IEEE Draft P26513/D2, January 2017" }
 
         it_behaves_like "converts pubid to pubid"
       end
 
       context "IEEE P2410-D4, July 2019" do
         let(:original) { "IEEE P2410-D4, July 2019" }
-        let(:pubid) { "IEEE P2410/D4, July 2019" }
+        let(:pubid) { "IEEE Draft Std P2410/D4, July 2019" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -723,6 +725,12 @@ module Pubid::Ieee
         it_behaves_like "converts pubid to pubid"
       end
 
+      # context "IEEE Std 802.3-2012" do
+      #   let(:pubid) { "IEEE Std 802.3-2012" }
+      #
+      #   it_behaves_like "converts pubid to pubid"
+      # end
+
       context "IEEE STD 525-2007 (Revision of IEEE Std 525-1992/Incorporates IEEE Std 525-2007/Cor1:2008)" do
         let(:original) { "IEEE STD 525-2007 (Revision of IEEE Std 525-1992/Incorporates IEEE Std 525-2007/Cor1:2008)" }
         let(:pubid) { "IEEE Std 525-2007 (Incorporates IEEE Std 525-2007/Cor 1-2008) (Revision of IEEE Std 525-1992)" }
@@ -746,7 +754,7 @@ module Pubid::Ieee
 
       context "IEEE P1642 D8, November 2011" do
         let(:original) { "IEEE P1642 D8, November 2011" }
-        let(:pubid) { "IEEE P1642/D8, November 2011" }
+        let(:pubid) { "IEEE Draft Std P1642/D8, November 2011" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -828,7 +836,7 @@ module Pubid::Ieee
 
       context "IEEE 1672-2006/Cor 1-2008 (Corrigendum to IEEE Std 1672-2006)" do
         let(:original) { "IEEE 1672-2006/Cor 1-2008 (Corrigendum to IEEE Std 1672-2006)" }
-        let(:pubid) { "IEEE 1672-2006/Cor 1:2008" }
+        let(:pubid) { "IEEE Std 1672-2006/Cor 1-2008" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -849,7 +857,7 @@ module Pubid::Ieee
 
       context "IEEE/ISO/IEC 8802-1Q-2020/Amd31-2021" do
         let(:original) { "IEEE/ISO/IEC 8802-1Q-2020/Amd31-2021" }
-        let(:pubid) { "IEEE/IEC/ISO 8802-1Q-2020/Amd 31:2021" }
+        let(:pubid) { "IEEE/ISO/IEC Std 8802-1Q-2020/Amd31-2021" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -931,7 +939,49 @@ module Pubid::Ieee
 
       context "IEEE Unapproved Draft Std P29148_CD2, Feb 2010" do
         let(:original) { "IEEE Unapproved Draft Std P29148_CD2, Feb 2010" }
-        let(:pubid) { "IEEE/CD Std P29148.2, Feb 2010" }
+        let(:pubid) { "IEEE/CD P29148.2, February 2010" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEC/IEEE P62209-1528_FDIS, August 2019" do
+        let(:original) { "IEC/IEEE P62209-1528_FDIS, August 2019" }
+        let(:pubid) { "IEC/IEEE FDIS P62209-1528, August 2019" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEEE Std P12207_CD1" do
+        let(:original) { "IEEE Std P12207_CD1" }
+        let(:pubid) { "IEEE/CD P12207.1" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEEE Std P15288/CD1" do
+        let(:original) { "IEEE Std P15288/CD1" }
+        let(:pubid) { "IEEE/CD P15288.1" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEEE Unapproved Draft Std P12207/FDIS, Nov 2007" do
+        let(:original) { "IEEE Unapproved Draft Std P12207/FDIS, Nov 2007" }
+        let(:pubid) { "IEEE/FDIS P12207, November 2007" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEEE P15026.2/FDIS" do
+        let(:original) { "IEEE P15026.2/FDIS" }
+        let(:pubid) { "IEEE/FDIS P15026.2" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEEE Unapproved Draft Std P15026.2/FCD" do
+        let(:original) { "IEEE Unapproved Draft Std P15026.2/FCD" }
+        let(:pubid) { "IEEE/FCD P15026.2" }
 
         it_behaves_like "converts pubid to pubid"
       end

@@ -1,9 +1,9 @@
 require 'date'
 require "yaml"
 
-UPDATE_CODES = YAML.load_file(File.join(File.dirname(__FILE__), "../../../../update_codes.yaml"))
-
 module Pubid::Ieee
+  UPDATE_CODES = YAML.load_file(File.join(File.dirname(__FILE__), "../../../../update_codes.yaml"))
+
   module Identifier
     class Base < Pubid::Core::Identifier::Base
       attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart,
@@ -139,7 +139,7 @@ module Pubid::Ieee
       def stage
         return "" unless @stage
 
-        "/#{@stage}"
+        (@copublisher ? " ": "/") + @stage
       end
 
       def iteration
@@ -171,10 +171,14 @@ module Pubid::Ieee
         @subpart if @subpart && !@subpart.to_s.empty?
       end
 
+      def ieee_format?
+        (@publisher == "IEEE")# || @copublisher == "IEEE" || (@copublisher.is_a?(Array) && @copublisher.include?("IEEE")))
+      end
+
       def type(format)
         return unless @type
 
-        result = @type.to_s(@publisher != "IEEE" ? :alternative : format)
+        result = @type.to_s(ieee_format?  ? format : :alternative)
         result.empty? ? result : " #{result}"
       end
 

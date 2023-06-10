@@ -51,3 +51,8 @@ IEEE 278-1967: IEEE No 278-1967
 IEEE 730-1989: IEEE No 730-1989
 IEEE 751-1991: IEEE No 751-1991
 IEEE 1023-2020 (Revision of IEEE Std 1023-2004): IEEE No 1023-2020 (Revision of IEEE Std 1023-2004)
+# Remove Unapproved Draft Std for ISO style identifiers with iso stage
+# using "[A-Z]{2,}" to exclude /D12 (drafts) from match
+# IEEE Unapproved Draft Std P15026.2/FCD -> IEEE P15026.2/FCD
+/(IEEE )(?:Unapproved )?(?:Draft )?Std (P[\d.]+[_/][A-Z]{2,}\d?)/: \1\2
+IEEE P90003-2014, April 2015: IEEE P90003, April 2015

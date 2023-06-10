@@ -41,6 +41,10 @@ module Pubid::Ieee
         end
         result
       end
+
+      def has_stage?(stage)
+        Pubid::Iso::Identifier.has_stage?(stage)
+      end
     end
   end
 end
