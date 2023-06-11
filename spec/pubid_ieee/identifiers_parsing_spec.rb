@@ -985,6 +985,21 @@ module Pubid::Ieee
 
         it_behaves_like "converts pubid to pubid"
       end
+
+      context "IEEE P15026-1, Jul2014" do
+        let(:original) { "IEEE P15026-1, Jul2014" }
+        let(:pubid) { "IEEE Std P15026-1, Jul 2014" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEEE Unapproved Draft Std P11073-10407/D09, Sep2008" do
+        let(:original) { "IEEE Unapproved Draft Std P11073-10407/D09, Sep2008" }
+        let(:pubid) { "IEEE Draft Std P11073-10407/D09, September 2008" }
+        let(:full_pubid) { "IEEE Unapproved Draft Std P11073-10407/D09, September 2008" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
     end
 
     describe "parse identifiers from examples files" do

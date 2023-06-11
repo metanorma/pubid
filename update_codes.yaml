@@ -56,3 +56,6 @@ IEEE 1023-2020 (Revision of IEEE Std 1023-2004): IEEE No 1023-2020 (Revision of 
 # IEEE Unapproved Draft Std P15026.2/FCD -> IEEE P15026.2/FCD
 /(IEEE )(?:Unapproved )?(?:Draft )?Std (P[\d.]+[_/][A-Z]{2,}\d?)/: \1\2
 IEEE P90003-2014, April 2015: IEEE P90003, April 2015
+# Add space between year and month for dates without space, e.g. "Jul2014" -> "Jul 2014"
+/, (\w{3,4})(\d{4,4})$/: ", \\1 \\2"
+IEC/IEEE P61886-1_D2_May2020: IEC/IEEE P61886-1_D2, May 2020
