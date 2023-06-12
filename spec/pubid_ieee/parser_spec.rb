@@ -10,6 +10,7 @@ RSpec.describe Pubid::Ieee::Parser do
   it "parses part" do
     expect(subject.part_subpart_year).to parse("-20601a", trace: true)
     expect(subject.part_subpart_year).to parse(".3-2012", trace: true)
+    expect(subject.part_subpart_year).to parse("-REV", trace: true)
   end
 
   it "parses identifier_without_dual_pubids" do

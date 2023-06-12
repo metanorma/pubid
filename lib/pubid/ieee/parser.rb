@@ -102,7 +102,7 @@ module Pubid::Ieee
     end
 
     rule(:subpart) do
-      (dot | dash) >> match('[\da-z]').repeat(1)
+      (dot | dash) >> ((str("REV") | str("Rev")).maybe >> match('[\da-z]').repeat(1) | (str("REV") | str("Rev")))
     end
 
     rule(:part_subpart_year) do

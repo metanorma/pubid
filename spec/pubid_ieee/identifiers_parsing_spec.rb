@@ -1000,6 +1000,19 @@ module Pubid::Ieee
 
         it_behaves_like "converts pubid to pubid"
       end
+
+      context "IEEE P802.1AX-REV/D4.0 March 2014" do
+        let(:original) { "IEEE P802.1AX-REV/D4.0 March 2014" }
+        let(:pubid) { "IEEE Draft Std P802.1AX-REV/D4.0, March 2014" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEEE P802.11-REVmc/D2.0, October 2013" do
+        let(:pubid) { "IEEE Draft Std P802.11-REVmc/D2.0, October 2013" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
     end
 
     describe "parse identifiers from examples files" do
