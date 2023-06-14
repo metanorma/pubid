@@ -6,17 +6,20 @@ module Pubid::Ieee
 
   module Identifier
     class Base < Pubid::Core::Identifier::Base
-      attr_accessor :number, :publisher, :copublisher, :stage, :part, :subpart,
-                    :edition, :draft, :redline, :year, :month, :type, :alternative,
+      attr_accessor :subpart, :edition, :draft, :redline, :month, :alternative,
                     :draft_status, :revision, :adoption_year, :amendment, :supersedes,
                     :corrigendum, :corrigendum_comment, :reaffirmed, :incorporates,
-                    :supplement, :proposal, :iso_identifier, :iso_amendment, :iteration
+                    :supplement, :proposal, :iso_identifier, :iso_amendment,
+                    :iteration, :includes
 
       def initialize(publisher: "IEEE", number: nil, stage: nil, subpart: nil, edition: nil,
                      draft: nil, redline: nil, month: nil, revision: nil,
-                     iso_identifier: nil, type: :std, alternative: nil, draft_status: nil, adoption_year: nil,
-                     amendment: nil, supersedes: nil, corrigendum: nil, corrigendum_comment: nil, reaffirmed: nil,
-                     incorporates: nil, supplement: nil, proposal: nil, iso_amendment: nil, iteration: nil, **opts)
+                     iso_identifier: nil, type: :std, alternative: nil,
+                     draft_status: nil, adoption_year: nil,
+                     amendment: nil, supersedes: nil, corrigendum: nil,
+                     corrigendum_comment: nil, reaffirmed: nil,
+                     incorporates: nil, supplement: nil, proposal: nil,
+                     iso_amendment: nil, iteration: nil, includes: nil, **opts)
 
         super(**opts.merge(number: number, publisher: publisher))#.merge(amendments: amendments, corrigendums: corrigendums))
 
@@ -57,6 +60,7 @@ module Pubid::Ieee
         @proposal = proposal
         @iso_amendment = iso_amendment
         @iteration = iteration
+        @includes = includes
       end
 
       def self.type
@@ -150,7 +154,7 @@ module Pubid::Ieee
 
       def parameters
         "#{corrigendum}#{draft}#{edition}#{alternative}#{supersedes}"\
-        "#{reaffirmed}#{incorporates}#{supplement}#{revision}#{amendment}#{redline}"
+        "#{reaffirmed}#{incorporates}#{supplement}#{revision}#{amendment}#{includes}#{redline}"
       end
 
       def copublisher
@@ -249,6 +253,16 @@ module Pubid::Ieee
 
       def revision
         " (Revision of #{@revision.join(' and ')})" if @revision
+      end
+
+      def includes
+        return "" unless @includes
+
+        if @includes.is_a?(Hash) && @includes[:supplement]
+          return " (Includes Supplement #{@includes[:supplement]})"
+        end
+
+        " (Includes #{@includes})"
       end
 
       def revision_date

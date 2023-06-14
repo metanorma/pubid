@@ -1013,6 +1013,18 @@ module Pubid::Ieee
 
         it_behaves_like "converts pubid to pubid"
       end
+
+      context "ANSI/IEEE C37.010-1979 (Includes Supplement ANSI/IEEE C37.010d-1984)" do
+        let(:pubid) { "ANSI/IEEE C37.010-1979 (Includes Supplement ANSI/IEEE C37.010d-1984)" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEEE Std 1003.5b-1996 (Includes IEEE Std 1003.5-1992)" do
+        let(:pubid) { "IEEE Std 1003.5b-1996 (Includes IEEE Std 1003.5-1992)" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
     end
 
     describe "parse identifiers from examples files" do

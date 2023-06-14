@@ -204,9 +204,14 @@ module Pubid::Ieee
       (str("Supplement") >> str("s").maybe >> str(" to ") >> identifier_without_dual_pubids.as(:identifier)).as(:supplement)
     end
 
+    rule(:includes) do
+      (str("Includes ") >>
+        ((str("Supplement ") >> identifier_without_dual_pubids.as(:identifier)).as(:supplement) | identifier_without_dual_pubids.as(:identifier))).as(:includes)
+    end
+
     rule(:additional_parameters) do
       (space? >> str("(") >> (
-        (reaffirmed | revision | amendment | supersedes | corrigendum_comment| incorporates | supplement) >>
+        (reaffirmed | revision | amendment | supersedes | corrigendum_comment| incorporates | supplement | includes) >>
           ((str("/") | str(",")) >> space?).maybe).repeat >> str(")").maybe
       ).repeat >> redline.maybe
     end
