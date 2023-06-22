@@ -857,7 +857,7 @@ module Pubid::Ieee
 
       context "IEEE/ISO/IEC 8802-1Q-2020/Amd31-2021" do
         let(:original) { "IEEE/ISO/IEC 8802-1Q-2020/Amd31-2021" }
-        let(:pubid) { "IEEE/ISO/IEC Std 8802-1Q-2020/Amd31-2021" }
+        let(:pubid) { "IEEE/IEC/ISO Std 8802-1Q-2020/Amd31-2021" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -880,7 +880,7 @@ module Pubid::Ieee
         let(:pubid) { "IEEE Std 278-1967" }
 
         it "parses last part as a year" do
-          expect(subject.year).to eq("-1967")
+          expect(subject.year).to eq(1967)
         end
 
         it_behaves_like "converts pubid to pubid"
@@ -1022,6 +1022,12 @@ module Pubid::Ieee
 
       context "IEEE Std 1003.5b-1996 (Includes IEEE Std 1003.5-1992)" do
         let(:pubid) { "IEEE Std 1003.5b-1996 (Includes IEEE Std 1003.5-1992)" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "ISO/IEC/IEEE 31320-1:2012 (Adoption of IEEE Std 1320.1-1998)" do
+        let(:pubid) { "ISO/IEC/IEEE 31320-1:2012 (Adoption of IEEE Std 1320.1-1998)" }
 
         it_behaves_like "converts pubid to pubid"
       end

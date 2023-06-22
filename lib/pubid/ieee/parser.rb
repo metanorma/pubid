@@ -158,6 +158,10 @@ module Pubid::Ieee
       ).as(:revision)
     end
 
+    rule(:adoption) do
+      str("Adoption of ") >> identifier_without_dual_pubids.as(:adoption)
+    end
+
     rule(:previous_amendments) do
       # IEEE P802.3bp/D3.4, April 2016 (Amendment of IEEE Std 802.3-2015 as amended by IEEE Std 802.3bw-2015,
       # IEEE Std 802.3by-201X, and IEEE Std 802.3bq-201X)
@@ -211,7 +215,8 @@ module Pubid::Ieee
 
     rule(:additional_parameters) do
       (space? >> str("(") >> (
-        (reaffirmed | revision | amendment | supersedes | corrigendum_comment| incorporates | supplement | includes) >>
+        (reaffirmed | revision | amendment | supersedes |
+          corrigendum_comment| incorporates | supplement | includes | adoption) >>
           ((str("/") | str(",")) >> space?).maybe).repeat >> str(")").maybe
       ).repeat >> redline.maybe
     end

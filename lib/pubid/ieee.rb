@@ -10,6 +10,7 @@ require_relative "ieee/errors"
 require_relative "ieee/parser"
 require_relative "ieee/transformer"
 require_relative "ieee/type"
+require_relative "ieee/renderer/base"
 require_relative "ieee/identifier"
 require_relative "ieee/identifier/base"
 
