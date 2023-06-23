@@ -16,7 +16,7 @@ module Pubid::Core
                 elsif stage_or_code.is_a?(String) && config.stages["codes_description"].key?(stage_or_code)
                   [stage_or_code]
                   # when stage is stage name
-                elsif config.stages["stage_codes"].key?(stage_or_code.to_s)
+                elsif config.stages["stage_codes"]&.key?(stage_or_code.to_s)
                   ["#{config.stages["stage_codes"][stage_or_code.to_s]}.#{config.stages["substage_codes"][substage.to_s]}"]
                 else
                   # stage is number

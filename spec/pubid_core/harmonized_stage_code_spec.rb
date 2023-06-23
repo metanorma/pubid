@@ -38,11 +38,24 @@ module Pubid::Core
       it "converts to digit code" do
         expect(subject.to_s).to eq("20.20")
       end
+
+      context "when wrong symbol code" do
+        let(:stage) { :wrong_stage }
+        let(:substage) { :wrong_substage }
+
+        it "raises error" do
+          expect { subject.to_s }.to raise_exception(Errors::HarmonizedStageCodeInvalidError)
+        end
+      end
     end
 
     context "when digit code" do
-      let(:stage) { "50" }
-      let(:substage) { "00" }
+      let(:stage) { "20" }
+      let(:substage) { "20" }
+
+      it "returns digit code" do
+        expect(subject.to_s).to eq("20.20")
+      end
 
       context "wrong code" do
         let(:wrong_codes) do
