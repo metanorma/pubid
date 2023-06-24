@@ -1,0 +1,26 @@
+= JIS publication identifiers ("ITU PubID")
+
+== Purpose
+
+This gem implements a mechanism to parse and utilize ITU publication
+identifiers.
+
+== Use cases to support
+
+. generate updated PubID
+
+== Usage
+
+=== Identifier creation
+
+Basic usage of the pubid-itu gem starts with the `Identifier#create` method.
+
+[source,ruby]
+----
+require "pubid-itu"
+
+pubid = Pubid::Itu::Identifier.create(number: 1234, sector: "R", series: "V",part: 1)
+pubid.to_s
+
+=> "ITU-R V.1234-1"
+----
