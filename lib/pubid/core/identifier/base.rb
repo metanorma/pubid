@@ -5,6 +5,8 @@ module Pubid::Core
                     :type, :year, :edition, :language, :amendments,
                     :corrigendums, :stage
 
+      TYPED_STAGES = {}.freeze
+
       # Creates new identifier from options provided:
       # @param publisher [String] document's publisher, eg. "ISO"
       # @param copublisher [String,Array<String>] document's copublisher, eg. "IEC"
@@ -70,6 +72,47 @@ module Pubid::Core
       # Render identifier using default renderer
       def to_s
         self.class.get_renderer_class.new(get_params).render
+      end
+
+      # @param typed_stage [String, Symbol] eg. "DTR" or :dtr
+      # @return [[Symbol, Stage]] typed stage and stage with assigned harmonized codes
+      def find_typed_stage(typed_stage)
+        if typed_stage.is_a?(Symbol)
+          return [typed_stage,
+                  Identifier.build_stage(
+                    harmonized_code: Identifier.build_harmonized_stage_code(self.class::TYPED_STAGES[typed_stage][:harmonized_stages])),
+          ]
+        end
+
+        typed_stage = self.class::TYPED_STAGES.find do |_, v|
+          if v[:abbr].is_a?(Hash)
+            v[:abbr].value?(typed_stage)
+          else
+            if v.key?(:legacy_abbr)
+              v[:legacy_abbr].include?(typed_stage) || v[:abbr] == typed_stage
+            else
+              v[:abbr] == typed_stage
+            end
+            #
+            # v[:abbr] == typed_stage
+          end
+        end
+
+        [typed_stage.first,
+         Identifier.build_stage(
+           harmonized_code: Identifier.build_harmonized_stage_code(typed_stage[1][:harmonized_stages]))]
+      end
+
+      # Resolve typed stage using stage harmonized stage code
+      # @param harmonized_code [HarmonizedStageCode]
+      # @return [Symbol, nil] typed stage or nil
+      def resolve_typed_stage(harmonized_code)
+        self.class::TYPED_STAGES.each do |k, v|
+          if (v[:harmonized_stages] & harmonized_code.stages) == harmonized_code.stages
+            return k
+          end
+        end
+        nil
       end
 
       class << self
@@ -151,9 +194,27 @@ module Pubid::Core
           code
         end
 
+        # @param typed_stage [String, Symbol] typed stage, eg. "DTR" or :dtr
+        # @return [Boolean] true when identifier has associated typed stage
+        def has_typed_stage?(typed_stage)
+          return self::TYPED_STAGES.key?(typed_stage) if typed_stage.is_a?(Symbol)
+
+          self::TYPED_STAGES.any? do |_, v|
+            if v[:abbr].is_a?(Hash)
+              v[:abbr].value?(typed_stage)
+            else
+              if v.key?(:legacy_abbr)
+                v[:legacy_abbr].include?(typed_stage) || v[:abbr] == typed_stage
+              else
+                v[:abbr] == typed_stage
+              end
+            end
+          end
+        end
+
         # Returns true when identifier's type match with provided parameters
         def type_match?(parameters)
-          has_type?(parameters[:type])
+          parameters[:type] ? has_type?(parameters[:type]) : has_typed_stage?(parameters[:stage])
         end
       end
     end
