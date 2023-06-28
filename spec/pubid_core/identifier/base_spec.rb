@@ -159,4 +159,98 @@ RSpec.describe Pubid::Core::Identifier::Base do
       it { expect(subject).not_to eq(described_class.new(publisher: "ISO", number: 2)) }
     end
   end
+
+  describe "#resolve_typed_stage" do
+    context "when harmonized code is matching" do
+      let(:harmonized_code) { TestIdentifier.build_harmonized_stage_code("40.00")}
+
+      it { expect(TR.resolve_typed_stage(harmonized_code)).to eq(:dtr) }
+    end
+
+    context "when harmonized code is not matching" do
+      let(:harmonized_code) { TestIdentifier.build_harmonized_stage_code("20.20")}
+
+      it { expect(TR.resolve_typed_stage(harmonized_code)).to eq(nil) }
+    end
+  end
+
+  describe "#find_typed_stage" do
+    context "typed stage is symbol" do
+      let(:typed_stage) { :dtr }
+
+      it do
+        expect(TR.find_typed_stage(typed_stage)).to eq(
+          [:dtr, TestIdentifier.build_stage(harmonized_code: %w[40.00])])
+      end
+    end
+
+    context "typed stage is abbreviation" do
+      let(:typed_stage) { "DTR" }
+
+      it do
+        expect(TR.find_typed_stage(typed_stage)).to eq(
+          [:dtr, TestIdentifier.build_stage(harmonized_code: %w[40.00])])
+      end
+    end
+  end
+
+  describe "#has_type?" do
+    let(:type) { "TR" }
+
+    it { expect(TR.has_type?(type)).to be_truthy }
+    it { expect(IS.has_type?(type)).to be_falsey }
+  end
+
+  describe "has_typed_stage?" do
+    it { expect(TR.has_typed_stage?("DTR")).to be_truthy }
+    it { expect(TR.has_typed_stage?("DTS")).to be_falsey }
+  end
 end
+
+class TR < Pubid::Core::Identifier::Base
+  TYPED_STAGES = {
+    dtr: {
+      abbr: "DTR",
+      name: "Draft Technical Report",
+      harmonized_stages: %w[40.00],
+    },
+  }.freeze
+
+  def self.type
+    { key: :tr, title: "Technical Report", short: "TR" }
+  end
+
+  def self.get_identifier
+    TestIdentifier
+  end
+end
+
+class IS < Pubid::Core::Identifier::Base
+  def self.type
+    { key: :is, title: "International Standard", short: "IS" }
+  end
+end
+
+module TestIdentifier
+  class << self
+    include Pubid::Core::Identifier
+  end
+end
+
+stages = {
+  "abbreviations" => { "WD" => %w[20.20 20.60 20.98 20.99] },
+  "codes_description" => { "20.20" => "Working draft (WD) study initiated",
+                           "40.00" => "DIS registered" },
+  "stage_codes" => { reparatory: "20" },
+  "substage_codes" => { start_of_main_action: "20" },
+}
+
+config = Pubid::Core::Configuration.new
+config.stages = stages
+# config.type_class = Type
+config.default_type = IS
+config.types = [IS, TR]
+config.type_names = { tr: { long: "Technical Report",
+                            short: "TR" } }
+
+TestIdentifier.set_config(config)
