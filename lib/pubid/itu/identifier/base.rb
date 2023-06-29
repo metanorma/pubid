@@ -13,7 +13,7 @@ module Pubid::Itu
 
       # @param month [Integer] document's month
       # @param edition [String] document's edition version, e.g. "3.0", "1.0"
-      def initialize(publisher: "ITU", series:, sector:, part: nil, **opts)
+      def initialize(publisher: "ITU", series: nil, sector:, part: nil, **opts)
         super(**opts.merge(publisher: publisher))
         @series = series
         @sector = sector

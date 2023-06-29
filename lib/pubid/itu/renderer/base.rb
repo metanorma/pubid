@@ -7,13 +7,17 @@ module Pubid::Itu::Renderer
     end
 
     def render_identifier(params)
-      "%{publisher}-%{sector} %{series}.%{number}%{part}" % params
+      "%{publisher}-%{sector} %{series}%{number}%{part}" % params
     end
 
     def render_part(part, opts, _params)
       return "-#{part.reverse.join('-')}" if part.is_a?(Array)
 
       "-#{part}"
+    end
+
+    def render_series(series, _opts, _params)
+      "#{series}."
     end
   end
 end
