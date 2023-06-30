@@ -5,15 +5,32 @@ module Pubid::Itu
       (dash >> digits.as(:part)).repeat
     end
 
+    rule(:type) do
+      (dash | space) >> str("REC").as(:type)
+    end
+
     rule(:sector_series) do
-      ((str("R").as(:sector) >> space >>
-        # "R" for resolution
-        (((str("SG") >> digits) | array_to_str(Identifier.config.series["R"].keys.sort_by(&:length).reverse) | str("R")).as(:series) >> dot).maybe) |
-        (str("T").as(:sector) >> space >> (array_to_str(Identifier.config.series["T"].keys.sort_by(&:length).reverse).as(:series) >> dot).maybe) | str("D"))
+      (
+        # ITU-R
+        (str("R").as(:sector) >> type.maybe >> (space | dash) >>
+          ((
+            # SG - Study groups for "question" type
+            (str("SG") >> digits) |
+            # Recommendation series
+            array_to_str(Identifier.config.series["R"].keys.sort_by(&:length).reverse) |
+            # "R" for resolution
+            str("R")).as(:series) >> dot).maybe) |
+        # ITU-T
+        (str("T").as(:sector) >> type.maybe >> (space | dash) >>
+          # Recommendation series
+          (array_to_str(Identifier.config.series["T"].keys.sort_by(&:length).reverse).as(:series) >> dot).maybe) |
+        # ITU-D
+        str("D")
+      )
     end
 
     rule(:identifier) do
-      str("ITU-") >> sector_series >> digits.as(:number) >> part
+      str("ITU") >> (dash | space) >> sector_series >> digits.as(:number) >> part
     end
 
     rule(:root) { identifier }

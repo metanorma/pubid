@@ -21,6 +21,12 @@ module Pubid::Itu
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "ITU-R REC V.574-5" do
+      let(:pubid) { "ITU-R REC-V.574-5" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "ITU-R SA.364-6" do
       let(:pubid) { "ITU-R SA.364-6" }
 
@@ -44,6 +50,34 @@ module Pubid::Itu
     # resolution
     context "ITU-R R.9-6" do
       let(:pubid) { "ITU-R R.9-6" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ITU-T T.4" do
+      let(:pubid) { "ITU-T T.4" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ITU T-REC-T.4" do
+      let(:original) { "ITU T-REC-T.4" }
+      let(:pubid) { "ITU-T REC-T.4" }
+      let(:pubid_without_type) { "ITU-T T.4" }
+
+      it_behaves_like "converts pubid to pubid"
+      it_behaves_like "converts pubid to pubid without type"
+    end
+
+    context "ITU-T REC-T.4" do
+      let(:pubid) { "ITU-T REC-T.4" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ITU-T REC T.4" do
+      let(:original) { "ITU-T REC T.4" }
+      let(:pubid) { "ITU-T REC-T.4" }
 
       it_behaves_like "converts pubid to pubid"
     end
