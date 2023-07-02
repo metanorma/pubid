@@ -3,7 +3,7 @@ require 'forwardable'
 module Pubid::Itu
   module Identifier
     class Base < Pubid::Core::Identifier::Base
-      attr_accessor :series, :sector
+      attr_accessor :series, :sector, :month
 
       extend Forwardable
 
@@ -13,11 +13,12 @@ module Pubid::Itu
 
       # @param month [Integer] document's month
       # @param edition [String] document's edition version, e.g. "3.0", "1.0"
-      def initialize(publisher: "ITU", series: nil, sector:, part: nil, **opts)
+      def initialize(publisher: "ITU", series: nil, sector:, part: nil, month: nil, **opts)
         super(**opts.merge(publisher: publisher))
         @series = series
         @sector = sector
         @part = part if part
+        @month = month
       end
 
       def to_s(**opts)

@@ -2,7 +2,7 @@ module Pubid::Itu
   class Parser < Pubid::Core::Parser
 
     rule(:part) do
-      (dash >> digits.as(:part)).repeat
+      (dash >> year_digits.absent? >> digits.as(:part)).repeat
     end
 
     rule(:type) do
@@ -29,8 +29,13 @@ module Pubid::Itu
       )
     end
 
+    rule(:published) do
+      (dash >> year_digits.as(:year) >> month_digits.as(:month)) |
+        (space >> str("(") >> (month_digits.as(:month) >> str("/")).maybe >> year_digits.as(:year) >> str(")"))
+    end
+
     rule(:identifier) do
-      str("ITU") >> (dash | space) >> sector_series >> digits.as(:number) >> part
+      str("ITU") >> (dash | space) >> sector_series >> digits.as(:number) >> part >> published.maybe
     end
 
     rule(:root) { identifier }
