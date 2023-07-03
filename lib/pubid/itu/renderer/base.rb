@@ -7,17 +7,13 @@ module Pubid::Itu::Renderer
     end
 
     def render_identifier(params)
-      "%{publisher}-%{sector} %{type}%{series}%{number}%{part}%{month}%{year}" % params
+      "%{publisher}-%{sector} %{type}%{series}%{number}%{part}%{date}" % params
     end
 
-    def render_month(month, _opts, _params)
-      " (#{month}"
-    end
+    def render_date(date, _opts, _params)
+      return " (#{date[:year]})" unless date[:month]
 
-    def render_year(year, _opts, params)
-      return " (#{year})" unless params[:month]
-
-      "/#{year})"
+      " (#{date[:month]}/#{date[:year]})"
     end
 
     def render_type(type, opts, _params)

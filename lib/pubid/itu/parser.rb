@@ -30,8 +30,9 @@ module Pubid::Itu
     end
 
     rule(:published) do
-      (dash >> year_digits.as(:year) >> month_digits.as(:month)) |
-        (space >> str("(") >> (month_digits.as(:month) >> str("/")).maybe >> year_digits.as(:year) >> str(")"))
+      ((dash >> year_digits.as(:year) >> month_digits.as(:month)) |
+        (space >> str("(") >> (month_digits.as(:month) >> str("/")).maybe >>
+          year_digits.as(:year) >> str(")"))).as(:date)
     end
 
     rule(:identifier) do
