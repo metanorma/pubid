@@ -7,6 +7,16 @@ module Pubid::Itu
       def parse(*args)
         Base.parse(*args)
       end
+
+      def resolve_identifier(parameters = {})
+        return Question.new(**parameters) if parameters[:series].to_s.match?(/^SG/)
+
+        return Resolution.new(**parameters) if parameters[:series].to_s == "R"
+
+        return Recommendation.new(**parameters) if parameters[:series]
+
+        super
+      end
     end
   end
 end

@@ -7,9 +7,12 @@ module Pubid::Itu
       let(:pubid) { "ITU-T T.4" }
 
       it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::Recommendation) }
     end
 
     context "ITU-T L.163" do
+      let(:original) { "ITU-T L.163" }
       let(:pubid) { "ITU-T L.163" }
 
       it_behaves_like "converts pubid to pubid"
@@ -22,7 +25,8 @@ module Pubid::Itu
     end
 
     context "ITU-R REC V.574-5" do
-      let(:pubid) { "ITU-R REC-V.574-5" }
+      let(:original) { "ITU-R REC-V.574-5" }
+      let(:pubid) { "ITU-R V.574-5" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -38,6 +42,8 @@ module Pubid::Itu
       let(:pubid) { "ITU-R SG01.222-200" }
 
       it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::Question) }
     end
 
     # handbook
@@ -45,6 +51,8 @@ module Pubid::Itu
       let(:pubid) { "ITU-R 20-200" }
 
       it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_an_instance_of(Identifier::Base) }
     end
 
     # resolution
@@ -52,32 +60,29 @@ module Pubid::Itu
       let(:pubid) { "ITU-R R.9-6" }
 
       it_behaves_like "converts pubid to pubid"
-    end
 
-    context "ITU-T T.4" do
-      let(:pubid) { "ITU-T T.4" }
-
-      it_behaves_like "converts pubid to pubid"
+      it { expect(subject).to be_a(Identifier::Resolution) }
     end
 
     context "ITU T-REC-T.4" do
       let(:original) { "ITU T-REC-T.4" }
-      let(:pubid) { "ITU-T REC-T.4" }
-      let(:pubid_without_type) { "ITU-T T.4" }
+      let(:pubid) { "ITU-T T.4" }
+      let(:pubid_with_type) { "ITU-T REC-T.4" }
 
       it_behaves_like "converts pubid to pubid"
-      it_behaves_like "converts pubid to pubid without type"
+      it_behaves_like "converts pubid to pubid with type"
     end
 
     context "ITU-T REC-T.4" do
-      let(:pubid) { "ITU-T REC-T.4" }
+      let(:original) { "ITU-T REC-T.4" }
+      let(:pubid) { "ITU-T T.4" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ITU-T REC T.4" do
       let(:original) { "ITU-T REC T.4" }
-      let(:pubid) { "ITU-T REC-T.4" }
+      let(:pubid) { "ITU-T T.4" }
 
       it_behaves_like "converts pubid to pubid"
     end
@@ -96,14 +101,14 @@ module Pubid::Itu
 
     context "ITU T-REC-T.4-200307" do
       let(:original) { "ITU T-REC-T.4-200307" }
-      let(:pubid) { "ITU-T REC-T.4 (07/2003)" }
+      let(:pubid) { "ITU-T T.4 (07/2003)" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ITU T-REC-T.4-200307-I" do
       let(:original) { "ITU T-REC-T.4-200307-I" }
-      let(:pubid) { "ITU-T REC-T.4 (07/2003)" }
+      let(:pubid) { "ITU-T T.4 (07/2003)" }
 
       it_behaves_like "converts pubid to pubid"
     end

@@ -4,9 +4,9 @@ shared_examples "converts pubid to pubid" do
   end
 end
 
-shared_examples "converts pubid to pubid without type" do
+shared_examples "converts pubid to pubid with type" do
   it "converts pubid to pubid" do
-    expect(subject.to_s(without_type: true)).to eq(pubid_without_type)
+    expect(subject.to_s(with_type: true)).to eq(pubid_with_type)
   end
 end
 

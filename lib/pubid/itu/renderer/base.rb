@@ -21,7 +21,7 @@ module Pubid::Itu::Renderer
     end
 
     def render_type(type, opts, _params)
-      "#{type}-" unless opts[:without_type]
+      "#{type}-" if opts[:with_type]
     end
 
     def render_part(part, opts, _params)
