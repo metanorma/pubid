@@ -35,7 +35,7 @@ module Pubid::Itu
     end
 
     rule(:identifier) do
-      str("ITU") >> (dash | space) >> sector_series >> digits.as(:number) >> part >> published.maybe
+      str("ITU") >> (dash | space) >> sector_series >> digits.as(:number) >> part >> published.maybe >> str("-I").maybe
     end
 
     rule(:root) { identifier }

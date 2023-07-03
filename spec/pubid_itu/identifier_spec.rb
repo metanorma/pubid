@@ -101,6 +101,13 @@ module Pubid::Itu
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "ITU T-REC-T.4-200307-I" do
+      let(:original) { "ITU T-REC-T.4-200307-I" }
+      let(:pubid) { "ITU-T REC-T.4 (07/2003)" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     describe "parse identifiers from examples files" do
       context "parses IEC identifiers from itu-r.txt" do
         let(:examples_file) { "itu-r.txt" }
