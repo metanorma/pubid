@@ -2,7 +2,7 @@ require_relative "identifier/base"
 require_relative "renderer/base"
 
 module Pubid::Iso
-  class Transformer < Parslet::Transform
+  class Transformer < Pubid::Core::Transformer
     rule(edition: "Ed") do
       { edition: "1" }
     end
@@ -109,34 +109,6 @@ module Pubid::Iso
     end
 
 
-    rule(roman_numerals: simple(:roman_numerals)) do |context|
-      roman_to_int(context[:roman_numerals])
-      # case roman_numerals
-      # when "III"
-      #   3
-      # else
-      #   nil
-      # end
-    end
-
-    ROMAN_TO_INT = {
-      "I" => 1,
-      "V" => 5,
-      "X" => 10,
-      "L" => 50,
-      "C" => 100,
-      "D" => 500,
-      "M" => 1000,
-    }
-
-    def self.roman_to_int(roman)
-      sum = ROMAN_TO_INT[roman.to_s[0]]
-      roman.to_s.chars.each_cons(2) do |c1, c2|
-        sum += ROMAN_TO_INT[c2]
-        sum -= ROMAN_TO_INT[c1] * 2 if ROMAN_TO_INT[c1] < ROMAN_TO_INT[c2]
-      end
-      sum
-    end
 
     def self.convert_stage(code)
       russian_code = Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:stage].key(code.to_s)
