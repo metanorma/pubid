@@ -12,6 +12,10 @@ module Pubid::Itu
       (dash | space) >> str("REC").as(:type)
     end
 
+    rule(:subseries) do
+      dot >> digits.as(:subseries)
+    end
+
     rule(:sector_series) do
       (
         # ITU-R
@@ -49,7 +53,7 @@ module Pubid::Itu
 
     rule(:identifier) do
       str("ITU") >> (dash | space) >> sector_series >> digits.as(:number) >>
-        part >> published.maybe >> amendment.maybe >> str("-I").maybe
+        subseries.maybe >> part >> published.maybe >> amendment.maybe >> str("-I").maybe
     end
 
     rule(:root) { identifier }

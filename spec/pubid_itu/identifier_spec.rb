@@ -144,9 +144,21 @@ module Pubid::Itu
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "ITU-T G.989.2" do
+      let(:pubid) { "ITU-T G.989.2" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "ITU-T G.989 Amd. 1" do
       let(:original) { "ITU-T G.989 Amd. 1" }
       let(:pubid) { "ITU-T G.989 Amd 1" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ITU-T M.3016.1" do
+      let(:pubid) { "ITU-T M.3016.1" }
 
       it_behaves_like "converts pubid to pubid"
     end

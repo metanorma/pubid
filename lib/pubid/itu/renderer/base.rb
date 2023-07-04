@@ -7,7 +7,7 @@ module Pubid::Itu::Renderer
     end
 
     def render_identifier(params)
-      "%{publisher}-%{sector} %{type}%{series}%{number}%{part}%{amendment}%{date}" % params
+      "%{publisher}-%{sector} %{type}%{series}%{number}%{subseries}%{part}%{amendment}%{date}" % params
     end
 
     def render_date(date, _opts, _params)
@@ -32,6 +32,10 @@ module Pubid::Itu::Renderer
 
     def render_amendment(amendment, _opts, _params)
       " #{amendment}"
+    end
+
+    def render_subseries(subseries, _opts, _params)
+      ".#{subseries}"
     end
   end
 end
