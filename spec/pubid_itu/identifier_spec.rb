@@ -113,6 +113,31 @@ module Pubid::Itu
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "ITU-T OB.1096" do
+      let(:original) { "ITU-T OB.1096" }
+      let(:pubid) { "ITU-T OB.1096" }
+
+      it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::SpecialPublication) }
+    end
+
+    context "ITU-T Operational Bulletin No. 1096" do
+      let(:original) { "ITU-T Operational Bulletin No. 1096" }
+      let(:pubid) { "ITU-T OB.1096" }
+
+      it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::SpecialPublication) }
+    end
+
+    context "ITU-T OB.1096 - 15.III.2016" do
+      let(:original) { "ITU-T OB.1096 - 15.III.2016" }
+      let(:pubid) { "ITU-T OB.1096 (03/2016)" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     describe "parse identifiers from examples files" do
       context "parses IEC identifiers from itu-r.txt" do
         let(:examples_file) { "itu-r.txt" }

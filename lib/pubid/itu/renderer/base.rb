@@ -13,7 +13,7 @@ module Pubid::Itu::Renderer
     def render_date(date, _opts, _params)
       return " (#{date[:year]})" unless date[:month]
 
-      " (#{date[:month]}/#{date[:year]})"
+      " (%<month>02d/%<year>d)" % date
     end
 
     def render_type(type, opts, _params)

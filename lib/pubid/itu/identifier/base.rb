@@ -53,6 +53,10 @@ module Pubid::Itu
         def get_renderer_class
           Renderer::Base
         end
+
+        def get_transformer_class
+          Transformer
+        end
       end
     end
   end
