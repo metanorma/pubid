@@ -43,8 +43,13 @@ module Pubid::Itu
           year_digits.as(:year) >> str(")"))).as(:date)
     end
 
+    rule(:amendment) do
+      space >> str("Amd") >> dot.maybe >> space >> digits.as(:number).as(:amendment)
+    end
+
     rule(:identifier) do
-      str("ITU") >> (dash | space) >> sector_series >> digits.as(:number) >> part >> published.maybe >> str("-I").maybe
+      str("ITU") >> (dash | space) >> sector_series >> digits.as(:number) >>
+        part >> published.maybe >> amendment.maybe >> str("-I").maybe
     end
 
     rule(:root) { identifier }

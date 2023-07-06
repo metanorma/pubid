@@ -138,6 +138,19 @@ module Pubid::Itu
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "ITU-T G.989 Amd 1" do
+      let(:pubid) { "ITU-T G.989 Amd 1" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ITU-T G.989 Amd. 1" do
+      let(:original) { "ITU-T G.989 Amd. 1" }
+      let(:pubid) { "ITU-T G.989 Amd 1" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     describe "parse identifiers from examples files" do
       context "parses IEC identifiers from itu-r.txt" do
         let(:examples_file) { "itu-r.txt" }
