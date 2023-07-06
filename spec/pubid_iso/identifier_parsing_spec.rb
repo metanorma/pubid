@@ -406,6 +406,14 @@ module Pubid::Iso
       end
     end
 
+    context "ISO 10303-1047-20-21:2014 ED3" do
+      let(:original) { "ISO 10303-1047-20-21:2014 ED3" }
+
+      it "returns part with dash" do
+        expect(subject.part).to eq("1047-20-21")
+      end
+    end
+
     context "ISO/IEC 17025:2005/Cor.1:2006(fr)" do
       let(:original) { "ISO/IEC 17025:2005/Cor.1:2006 ED1(fr)" }
       let(:pubid) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }
