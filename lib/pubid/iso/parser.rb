@@ -91,7 +91,6 @@ module Pubid::Iso
 
     rule(:year_digits) { (str("19") | str("20")) >> match('\d').repeat(2, 2) >> digits.absent? }
 
-
     rule(:part_matcher) do
       year_digits.absent? >>
         supplements.absent? >>

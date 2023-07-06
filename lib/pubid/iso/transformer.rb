@@ -96,6 +96,18 @@ module Pubid::Iso
       { publisher: russian_publisher&.to_s || publisher }
     end
 
+    rule(part: simple(:part)) do
+      { part: part.to_s }
+    end
+
+    rule(part: sequence(:part)) do
+      { part: part.map(&:to_s).reverse.join("-") }
+    end
+
+    rule(number: simple(:number)) do
+      { number: number.to_s }
+    end
+
     rule(joint_document: subtree(:joint_document)) do |context|
       context[:joint_document] =
         Identifier.create(**context[:joint_document])
@@ -107,8 +119,6 @@ module Pubid::Iso
         Identifier::Base.transform(**(context[:dir_joint_document].merge(type: :dir)))
       context.select { |k, v| k != :dir_joint_document }
     end
-
-
 
     def self.convert_stage(code)
       russian_code = Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:stage].key(code.to_s)
