@@ -7,7 +7,7 @@ module Pubid::Itu::Renderer
     end
 
     def render_identifier(params)
-      "%{publisher}-%{sector} %{type}%{series}%{number}%{subseries}%{part}%{amendment}%{date}" % params
+      "%{publisher}-%{sector} %{type}%{series}%{number}%{subseries}%{part}%{second_number}%{amendment}%{date}" % params
     end
 
     def render_number(number, _opts, params)
@@ -40,6 +40,18 @@ module Pubid::Itu::Renderer
 
     def render_subseries(subseries, _opts, _params)
       ".#{subseries}"
+    end
+
+    def render_second_number(second_number, _opts, _params)
+      result = "/#{second_number[:series]}.#{second_number[:number]}"
+      if second_number[:subseries]
+        result += ".#{second_number[:subseries]}"
+      end
+      if second_number[:part]
+        result += "-#{second_number[:part]}"
+      end
+
+      result
     end
   end
 end
