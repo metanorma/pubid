@@ -22,11 +22,12 @@ module Pubid::Itu
         (str("R").as(:sector) >> type.maybe >> (space | dash) >>
           ((
             # SG - Study groups for "question" type
-            (str("SG") >> digits) |
+            ((str("SG") >> digits).as(:series) >> dot) |
             # Recommendation series
-            array_to_str(Identifier.config.series["R"].keys.sort_by(&:length).reverse) |
+            (array_to_str(Identifier.config.series["R"].keys.sort_by(&:length).reverse).as(:series) >> dot) |
+            (str("RR") | str("RRX") | str("RR5") | str("ROP") | str("HFBS")).as(:regulatory_publication) |
             # "R" for resolution
-            str("R")).as(:series) >> dot).maybe) |
+            (str("R").as(:series) >> dot))).maybe) |
         # ITU-T
         (str("T").as(:sector) >> type.maybe >> (space | dash) >>
           ((
@@ -52,7 +53,7 @@ module Pubid::Itu
     end
 
     rule(:identifier) do
-      str("ITU") >> (dash | space) >> sector_series >> digits.as(:number) >>
+      str("ITU") >> (dash | space) >> sector_series >> digits.as(:number).maybe >>
         subseries.maybe >> part >> published.maybe >> amendment.maybe >> str("-I").maybe
     end
 

@@ -10,6 +10,10 @@ module Pubid::Itu::Renderer
       "%{publisher}-%{sector} %{type}%{series}%{number}%{subseries}%{part}%{amendment}%{date}" % params
     end
 
+    def render_number(number, _opts, params)
+      params[:series] ? ".#{number}" : number
+    end
+
     def render_date(date, _opts, _params)
       return " (#{date[:year]})" unless date[:month]
 
@@ -27,7 +31,7 @@ module Pubid::Itu::Renderer
     end
 
     def render_series(series, _opts, _params)
-      "#{series}."
+      "#{series}"
     end
 
     def render_amendment(amendment, _opts, _params)

@@ -15,6 +15,14 @@ module Pubid::Itu
 
         return SpecialPublication.new(**parameters) if parameters[:series].to_s == "OB"
 
+        if parameters[:regulatory_publication]
+          return RegulatoryPublication.new(
+            **parameters.reject { |k, _| k == :regulatory_publication }.merge(
+              { series: parameters[:regulatory_publication] },
+            ),
+          )
+        end
+
         return Recommendation.new(**parameters) if parameters[:series]
 
         super

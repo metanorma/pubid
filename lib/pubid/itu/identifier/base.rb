@@ -14,8 +14,8 @@ module Pubid::Itu
       # @param month [Integer] document's month
       # @param edition [String] document's edition version, e.g. "3.0", "1.0"
       def initialize(publisher: "ITU", series: nil, sector: nil, part: nil,
-                     date: nil, amendment: nil, subseries: nil, **opts)
-        super(**opts.merge(publisher: publisher))
+                     date: nil, amendment: nil, subseries: nil, number: nil, **opts)
+        super(**opts.merge(publisher: publisher, number: number))
         @series = series
         @sector = sector
         @part = part if part
