@@ -406,14 +406,6 @@ module Pubid::Iso
       end
     end
 
-    context "ISO 10303-1047-20-21:2014 ED3" do
-      let(:original) { "ISO 10303-1047-20-21:2014 ED3" }
-
-      it "returns part with dash" do
-        expect(subject.part).to eq("1047-20-21")
-      end
-    end
-
     context "ISO/IEC 17025:2005/Cor.1:2006(fr)" do
       let(:original) { "ISO/IEC 17025:2005/Cor.1:2006 ED1(fr)" }
       let(:pubid) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }
@@ -571,6 +563,10 @@ module Pubid::Iso
       let(:pubid) { "ISO/IEC/IEEE DTS 17301-1-1:2016(en)" }
 
       it_behaves_like "converts pubid to pubid"
+
+      it "returns part with dash" do
+        expect(subject.part).to eq("1-1")
+      end
     end
 
     context "ISO/IEC/IEEE FDTR 17301-1-1:2016(en)" do

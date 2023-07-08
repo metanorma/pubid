@@ -96,16 +96,8 @@ module Pubid::Iso
       { publisher: russian_publisher&.to_s || publisher }
     end
 
-    rule(part: simple(:part)) do
-      { part: part.to_s }
-    end
-
     rule(part: sequence(:part)) do
       { part: part.map(&:to_s).reverse.join("-") }
-    end
-
-    rule(number: simple(:number)) do
-      { number: number.to_s }
     end
 
     rule(joint_document: subtree(:joint_document)) do |context|

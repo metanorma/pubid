@@ -156,8 +156,6 @@ module Pubid::Iso::Renderer
     end
 
     def render_part(part, opts, _params)
-      return "-#{part.reverse.join('-')}" if part.is_a?(Array)
-
       "-#{part}"
     end
 
