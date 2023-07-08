@@ -175,6 +175,9 @@ module Pubid::Itu
       let(:pubid) { "ITU-T G.780/Y.1351" }
 
       it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject.second_number[:series]).to eq("Y") }
+      it { expect(subject.second_number[:number]).to eq("1351") }
     end
 
     describe "parse identifiers from examples files" do

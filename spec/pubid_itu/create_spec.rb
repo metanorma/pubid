@@ -26,6 +26,15 @@ module Pubid::Itu
           end
         end
       end
+
+      context "dual-numbered identifier" do
+        let(:sector) { "T" }
+        let(:params) { { series: "G", number: 780, second_number: { series: "Y", number: 1351 } } }
+
+        it "renders dual-numbered identifier" do
+          expect(subject.to_s).to eq("ITU-T G.780/Y.1351")
+        end
+      end
     end
   end
 end
