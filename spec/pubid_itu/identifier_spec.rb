@@ -196,6 +196,13 @@ module Pubid::Itu
       it { expect(subject).to be_a(Identifier::ImplementersGuide) }
     end
 
+    context "ITU-T G.780/Y.1351 (2004) Amend. 1" do
+      let(:original) { "ITU-T G.780/Y.1351 (2004) Amend. 1" }
+      let(:pubid) { "ITU-T G.780/Y.1351 Amd 1 (2004)" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     describe "parse identifiers from examples files" do
       context "parses IEC identifiers from itu-r.txt" do
         let(:examples_file) { "itu-r.txt" }

@@ -61,7 +61,7 @@ module Pubid::Itu
     end
 
     rule(:amendment) do
-      space >> str("Amd") >> dot.maybe >> space >> digits.as(:number).as(:amendment)
+      space >> (str("Amd") | str("Amend")) >> dot.maybe >> space >> digits.as(:number).as(:amendment)
     end
 
     rule(:implementers_guide) do
