@@ -6,8 +6,12 @@ module Pubid::Itu::Renderer
       render_base_identifier(**args) + @prerendered_params[:language].to_s
     end
 
+    def render_type_series(params)
+      "%{type}%{series}" % params
+    end
+
     def render_identifier(params)
-      "%{publisher}-%{sector} %{type}%{series}%{number}%{subseries}%{part}%{second_number}%{amendment}%{date}" % params
+      "%{publisher}-%{sector} #{render_type_series(params)}%{number}%{subseries}%{part}%{second_number}%{amendment}%{date}" % params
     end
 
     def render_number(number, _opts, params)

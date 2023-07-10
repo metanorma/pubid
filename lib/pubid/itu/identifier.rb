@@ -23,7 +23,7 @@ module Pubid::Itu
           )
         end
 
-        return Recommendation.new(**parameters) if parameters[:series]
+        return Recommendation.new(**parameters) if parameters[:series] && !parameters[:type]
 
         super
       end

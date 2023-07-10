@@ -64,8 +64,15 @@ module Pubid::Itu
       space >> str("Amd") >> dot.maybe >> space >> digits.as(:number).as(:amendment)
     end
 
+    rule(:implementers_guide) do
+      str("Imp").as(:type)
+    end
+
     rule(:full_number) do
-      digits.as(:number) >> subseries.maybe >> part
+      ((implementers_guide.maybe >> digits.as(:number)) |
+        # Parse X.ImpOSI
+        (implementers_guide >> str("OSI").as(:number))
+      ) >> subseries.maybe >> part
     end
 
     rule(:identifier) do

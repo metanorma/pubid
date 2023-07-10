@@ -180,6 +180,22 @@ module Pubid::Itu
       it { expect(subject.second_number[:number]).to eq("1351") }
     end
 
+    context "ITU-T G.Imp712" do
+      let(:pubid) { "ITU-T G.Imp712" }
+
+      it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::ImplementersGuide) }
+    end
+
+    context "ITU-T X.ImpOSI" do
+      let(:pubid) { "ITU-T X.ImpOSI" }
+
+      it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::ImplementersGuide) }
+    end
+
     describe "parse identifiers from examples files" do
       context "parses IEC identifiers from itu-r.txt" do
         let(:examples_file) { "itu-r.txt" }
