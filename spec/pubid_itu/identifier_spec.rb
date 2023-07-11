@@ -203,6 +203,26 @@ module Pubid::Itu
       it_behaves_like "converts pubid to pubid"
     end
 
+    context "Supplements" do
+      context "ITU-T H Suppl. 1" do
+        let(:pubid) { "ITU-T H Suppl. 1" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "ITU-T E.156 Suppl. 2" do
+        let(:pubid) { "ITU-T E.156 Suppl. 2" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "ITU-T A Suppl. 2 (12/2022)" do
+        let(:pubid) { "ITU-T A Suppl. 2 (12/2022)" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+    end
+
     describe "parse identifiers from examples files" do
       context "parses IEC identifiers from itu-r.txt" do
         let(:examples_file) { "itu-r.txt" }

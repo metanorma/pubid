@@ -49,6 +49,15 @@ module Pubid::Itu
             get_transformer_class.new.apply(k => v)
           end.inject({}, :merge)
 
+          if identifier_params[:supplement]
+            return Identifier.create(
+              number: identifier_params[:supplement][:number],
+              type: :sup,
+              base: Identifier.create(
+                **identifier_params.dup.tap { |h| h.delete(:supplement) }),
+            )
+          end
+
           Identifier.create(**identifier_params)
         end
 

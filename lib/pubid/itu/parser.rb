@@ -36,7 +36,7 @@ module Pubid::Itu
           array_to_str(Identifier.config.series["T"].keys.sort_by(&:length).reverse)
       ).as(:series) >>
         # "No. " for Operational Bulletin
-        (dot | str(" No. "))
+        (dot | str(" No. ")).maybe
     end
 
     rule(:sector_series_number) do
@@ -69,14 +69,18 @@ module Pubid::Itu
     end
 
     rule(:full_number) do
-      ((implementers_guide.maybe >> digits.as(:number)) |
-        # Parse X.ImpOSI
-        (implementers_guide >> str("OSI").as(:number))
+      # Parse X.ImpOSI
+      ((implementers_guide >> str("OSI").as(:number)) |
+        (implementers_guide.maybe >> digits.as(:number).maybe)
       ) >> subseries.maybe >> part
     end
 
+    rule(:supplement) do
+      space >> (str("Suppl.") >> space >> digits.as(:number)).as(:supplement)
+    end
+
     rule(:identifier) do
-      str("ITU") >> (dash | space) >> sector_series_number >> published.maybe >>
+      str("ITU") >> (dash | space) >> sector_series_number >> supplement.maybe >> published.maybe >>
         amendment.maybe >> str("-I").maybe
     end
 

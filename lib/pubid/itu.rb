@@ -20,6 +20,7 @@ require_relative "itu/identifier/special_publication"
 require_relative "itu/identifier/amendment"
 require_relative "itu/identifier/regulatory_publication"
 require_relative "itu/identifier/implementers_guide"
+require_relative "itu/identifier/supplement"
 require_relative "itu/transformer"
 require_relative "itu/renderer/base"
 require_relative "itu/renderer/amendment"
@@ -37,7 +38,8 @@ config.types = [Pubid::Itu::Identifier::Base,
                 Pubid::Itu::Identifier::SpecialPublication,
                 Pubid::Itu::Identifier::Amendment,
                 Pubid::Itu::Identifier::RegulatoryPublication,
-                Pubid::Itu::Identifier::ImplementersGuide]
+                Pubid::Itu::Identifier::ImplementersGuide,
+                Pubid::Itu::Identifier::Supplement]
 config.type_names = {}.freeze
 config.series = YAML.load_file(File.join(File.dirname(__FILE__), "../../series.yaml"))
 Pubid::Itu::Identifier.set_config(config)

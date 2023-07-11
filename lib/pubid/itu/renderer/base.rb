@@ -11,14 +11,17 @@ module Pubid::Itu::Renderer
     end
 
     def render_identifier(params)
-      "%{publisher}-%{sector} #{render_type_series(params)}%{number}%{subseries}%{part}%{second_number}%{amendment}%{date}" % params
+      "%{publisher}-%{sector} #{render_type_series(params)}%{number}%{subseries}"\
+      "%{part}%{second_number}%{amendment}%{supplement}%{date}" % params
     end
 
     def render_number(number, _opts, params)
       params[:series] ? ".#{number}" : number
     end
 
-    def render_date(date, _opts, _params)
+    def render_date(date, opts, _params)
+      return if opts[:without_date]
+
       return " (#{date[:year]})" unless date[:month]
 
       " (%<month>02d/%<year>d)" % date
@@ -56,6 +59,10 @@ module Pubid::Itu::Renderer
       end
 
       result
+    end
+
+    def render_supplement(supplement, _opts, _params)
+      " Suppl. #{supplement.number}"
     end
   end
 end
