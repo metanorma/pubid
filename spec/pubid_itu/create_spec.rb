@@ -35,6 +35,26 @@ module Pubid::Itu
           expect(subject.to_s).to eq("ITU-T G.780/Y.1351")
         end
       end
+
+      context "supplement" do
+        context "series supplement" do
+          let(:sector) { "T" }
+          let(:params) { { number: 1, type: :supplement, base: Identifier.create(sector: "T", series: "H") } }
+
+          it "renders series supplement" do
+            expect(subject.to_s).to eq("ITU-T H Suppl. 1")
+          end
+        end
+
+        context "document's supplement" do
+          let(:sector) { "T" }
+          let(:params) { { number: 1, type: :supplement, base: Identifier.create(sector: "T", series: "H", number: 1) } }
+
+          it "renders series supplement" do
+            expect(subject.to_s).to eq("ITU-T H.1 Suppl. 1")
+          end
+        end
+      end
     end
   end
 end

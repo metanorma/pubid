@@ -214,12 +214,18 @@ module Pubid::Itu
         let(:pubid) { "ITU-T E.156 Suppl. 2" }
 
         it_behaves_like "converts pubid to pubid"
+
+        it { expect(subject.base.number).to eq("156") }
+        it { expect(subject).to be_a(Identifier::Supplement) }
       end
 
       context "ITU-T A Suppl. 2 (12/2022)" do
         let(:pubid) { "ITU-T A Suppl. 2 (12/2022)" }
 
         it_behaves_like "converts pubid to pubid"
+
+        it { expect(subject.base.number).to eq(nil) }
+        it { expect(subject).to be_a(Identifier::Supplement) }
       end
     end
 

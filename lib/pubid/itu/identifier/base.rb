@@ -52,7 +52,7 @@ module Pubid::Itu
           if identifier_params[:supplement]
             return Identifier.create(
               number: identifier_params[:supplement][:number],
-              type: :sup,
+              type: :supplement,
               base: Identifier.create(
                 **identifier_params.dup.tap { |h| h.delete(:supplement) }),
             )

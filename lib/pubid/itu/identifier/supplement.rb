@@ -17,7 +17,7 @@ module Pubid::Itu
       end
 
       def self.type
-        { key: :sup, title: "Supplement" }
+        { key: :supplement, title: "Supplement" }
       end
     end
   end
