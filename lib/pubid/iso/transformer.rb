@@ -97,7 +97,7 @@ module Pubid::Iso
     end
 
     rule(part: sequence(:part)) do
-      { part: part.map(&:to_s).reverse.join("-") }
+      { part: part.map(&:to_s).join("-") }
     end
 
     rule(joint_document: subtree(:joint_document)) do |context|

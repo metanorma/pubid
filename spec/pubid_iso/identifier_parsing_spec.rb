@@ -1011,5 +1011,12 @@ module Pubid::Iso
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "IEEE/ISO/IEC 8802-1Q-2020" do
+      let(:original) { "IEEE/ISO/IEC 8802-1Q-2020" }
+      let(:pubid) { "IEEE/ISO/IEC 8802-1Q:2020" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end

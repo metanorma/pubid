@@ -63,8 +63,8 @@ module Pubid::Iso
 
     context "ISO/TMB/DMT 154/WG 5 N152" do
       let(:original) { "ISO/TMB/DMT 154/WG 5 N152" }
-      let(:pubid) { "ISO/DMT/TMB 154/WG 5 N152" }
-      let(:urn) { "urn:iso:doc:iso:dmt:tmb:154:wg:5:152" }
+      let(:pubid) { "ISO/TMB/DMT 154/WG 5 N152" }
+      let(:urn) { "urn:iso:doc:iso:tmb:dmt:154:wg:5:152" }
 
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"

@@ -64,7 +64,7 @@ module Pubid::Iso::Renderer
         end
         [publisher, copublishers].join("/")
       when Array
-        ([publisher] + copublishers.map(&:to_s).sort).map do |pub|
+        ([publisher] + copublishers.map(&:to_s)).map do |pub|
           if opts[:language]
             (TRANSLATION[opts[:language]][:publisher][pub] || pub).gsub('-', '/')
           else
