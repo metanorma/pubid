@@ -127,7 +127,7 @@ module Pubid::Ieee
 
       context "IEEE/ISO/IEC P90003, February 2018 (E)" do
         let(:original) { "IEEE/ISO/IEC P90003, February 2018 (E)" }
-        let(:pubid) { "IEEE/IEC/ISO P90003, February 2018" }
+        let(:pubid) { "IEEE/ISO/IEC P90003, February 2018" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -657,7 +657,7 @@ module Pubid::Ieee
 
       context "IEEE/ISO/IEC 8802-3:2021/Amd8-2021" do
         let(:original) { "IEEE/ISO/IEC 8802-3:2021/Amd8-2021" }
-        let(:pubid) { "IEEE/IEC/ISO 8802-3:2021/Amd 8:2021" }
+        let(:pubid) { "IEEE/ISO/IEC 8802-3:2021/Amd 8:2021" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -803,7 +803,7 @@ module Pubid::Ieee
 
       context "IEEE/ISO/IEC P29119-2-DIS, December 2011" do
         let(:original) { "IEEE/ISO/IEC P29119-2-DIS, December 2011" }
-        let(:pubid) { "IEEE/IEC/ISO DIS P29119-2, December 2011" }
+        let(:pubid) { "IEEE/ISO/IEC DIS P29119-2, December 2011" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -932,7 +932,7 @@ module Pubid::Ieee
 
       context "IEEE/ISO/IEC P29119-3-DIS2, September 2012" do
         let(:original) { "IEEE/ISO/IEC P29119-3-DIS2, September 2012" }
-        let(:pubid) { "IEEE/IEC/ISO DIS P29119-3.2, September 2012" }
+        let(:pubid) { "IEEE/ISO/IEC DIS P29119-3.2, September 2012" }
 
         it_behaves_like "converts pubid to pubid"
       end
