@@ -23,7 +23,16 @@ module Pubid::Ieee
 
         super(**opts.merge(number: number, publisher: publisher))#.merge(amendments: amendments, corrigendums: corrigendums))
 
-        @edition = edition if edition
+        if edition
+          @edition = edition.update(edition) do |key, value|
+            case key
+            when :year, :month
+              value.to_i
+            else
+              value
+            end
+          end
+        end
 
         @proposal = @number.to_s[0] == "P"
         @revision = revision

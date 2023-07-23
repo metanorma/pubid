@@ -77,7 +77,7 @@ module Pubid::Ieee::Renderer
       if edition[:month]
         month = edition[:month]
         month = Date.parse(edition[:month]).month if month.to_i.zero?
-        result += "-#{sprintf('%02d', month.to_i)}"
+        result += "-#{sprintf('%02d', month)}"
       end
       result += "-#{edition[:day]}" if edition[:day]
       result
