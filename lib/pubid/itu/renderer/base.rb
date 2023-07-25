@@ -12,7 +12,7 @@ module Pubid::Itu::Renderer
 
     def render_identifier(params)
       "%{publisher}-%{sector} #{render_type_series(params)}%{number}%{subseries}"\
-      "%{part}%{second_number}%{amendment}%{supplement}%{date}" % params
+      "%{part}%{second_number}%{amendment}%{supplement}%{annex}%{date}" % params
     end
 
     def render_number(number, _opts, params)
@@ -63,6 +63,10 @@ module Pubid::Itu::Renderer
 
     def render_supplement(supplement, _opts, _params)
       " Suppl. #{supplement.number}"
+    end
+
+    def render_annex(annex, _opts, _params)
+      " Annex #{annex.number}"
     end
   end
 end

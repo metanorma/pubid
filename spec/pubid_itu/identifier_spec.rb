@@ -229,6 +229,30 @@ module Pubid::Itu
       end
     end
 
+    context "ITU-T Z.100 Annex F2 (06/2021)" do
+      let(:pubid) { "ITU-T Z.100 Annex F2 (06/2021)" }
+
+      it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::Annex) }
+    end
+
+    context "ITU-T G.729 Annex A (11/1996)" do
+      let(:pubid) { "ITU-T G.729 Annex A (11/1996)" }
+
+      it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::Annex) }
+    end
+
+    context "ITU-T G.729 Annex C+ (02/2000)" do
+      let(:pubid) { "ITU-T G.729 Annex C+ (02/2000)" }
+
+      it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::Annex) }
+    end
+
     describe "parse identifiers from examples files" do
       context "parses IEC identifiers from itu-r.txt" do
         let(:examples_file) { "itu-r.txt" }
