@@ -1,14 +1,10 @@
 module Pubid::Itu
   module Identifier
-    class Amendment < Base
+    class Amendment < Supplement
       def_delegators 'Pubid::Itu::Identifier::Amendment', :type
 
       def self.type
-        { key: :amd, title: "Amendment" }
-      end
-
-      def self.get_renderer_class
-        Renderer::Amendment
+        { key: :amendment, title: "Amendment" }
       end
     end
   end

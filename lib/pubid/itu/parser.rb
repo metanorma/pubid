@@ -83,9 +83,14 @@ module Pubid::Itu
       space >> str("Annex") >> space >> (match["A-Z"] >> digits.maybe >> str("+").maybe).as(:number).as(:annex)
     end
 
+    rule(:corrigendum) do
+      (published >> space >> str("Cor.") >> space >>
+        digits.as(:number)).as(:corrigendum)
+    end
+
     rule(:identifier) do
       str("ITU") >> (dash | space) >> sector_series_number >> supplement.maybe >>
-        annex.maybe >> published.maybe >> amendment.maybe >> str("-I").maybe
+        annex.maybe >> corrigendum.maybe >> published.maybe >> amendment.maybe >> str("-I").maybe
     end
 
     rule(:root) { identifier }

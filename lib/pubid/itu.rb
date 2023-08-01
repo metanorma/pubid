@@ -17,14 +17,14 @@ require_relative "itu/identifier/recommendation"
 require_relative "itu/identifier/question"
 require_relative "itu/identifier/resolution"
 require_relative "itu/identifier/special_publication"
+require_relative "itu/identifier/supplement"
 require_relative "itu/identifier/amendment"
 require_relative "itu/identifier/regulatory_publication"
 require_relative "itu/identifier/implementers_guide"
-require_relative "itu/identifier/supplement"
 require_relative "itu/identifier/annex"
+require_relative "itu/identifier/corrigendum"
 require_relative "itu/transformer"
 require_relative "itu/renderer/base"
-require_relative "itu/renderer/amendment"
 require_relative "itu/renderer/implementers_guide"
 require_relative "itu/parser"
 require_relative "itu/identifier"
@@ -38,6 +38,7 @@ config.types = [Pubid::Itu::Identifier::Base,
                 Pubid::Itu::Identifier::Question,
                 Pubid::Itu::Identifier::SpecialPublication,
                 Pubid::Itu::Identifier::Amendment,
+                Pubid::Itu::Identifier::Corrigendum,
                 Pubid::Itu::Identifier::RegulatoryPublication,
                 Pubid::Itu::Identifier::ImplementersGuide,
                 Pubid::Itu::Identifier::Supplement,

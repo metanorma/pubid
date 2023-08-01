@@ -44,30 +44,24 @@ module Pubid::Itu
           end
         end
 
+        def transform_supplements(type, identifier_params)
+          Identifier.create(
+            type: type,
+            base: transform(
+              **identifier_params.dup.tap { |h| h.delete(type) }),
+            **identifier_params[type],
+          )
+        end
+
         # Use Identifier#create to resolve identifier's type class
         def transform(params)
           identifier_params = params.map do |k, v|
             get_transformer_class.new.apply(k => v)
           end.inject({}, :merge)
 
-          if identifier_params[:supplement]
-            return Identifier.create(
-              number: identifier_params[:supplement][:number],
-              type: :supplement,
-              base: Identifier.create(
-                **identifier_params.dup.tap { |h| h.delete(:supplement) }),
-            )
+          %i(supplement amendment corrigendum annex).each do |type|
+            return transform_supplements(type, identifier_params) if identifier_params[type]
           end
-
-          if identifier_params[:annex]
-            return Identifier.create(
-              number: identifier_params[:annex][:number],
-              type: :annex,
-              base: Identifier.create(
-                **identifier_params.dup.tap { |h| h.delete(:annex) }),
-            )
-          end
-
           Identifier.create(**identifier_params)
         end
 

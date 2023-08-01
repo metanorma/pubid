@@ -142,6 +142,8 @@ module Pubid::Itu
       let(:pubid) { "ITU-T G.989 Amd 1" }
 
       it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::Amendment) }
     end
 
     context "ITU-T G.989.2" do
@@ -251,6 +253,23 @@ module Pubid::Itu
       it_behaves_like "converts pubid to pubid"
 
       it { expect(subject).to be_a(Identifier::Annex) }
+    end
+
+    context "ITU-T Z.100 (1999) Cor. 1 (10/2001)" do
+      let(:pubid) { "ITU-T Z.100 (1999) Cor. 1 (10/2001)" }
+
+      it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::Corrigendum) }
+    end
+
+    context "ITU-T G.729 Annex E (1998) Cor. 1 (02/2000)" do
+      let(:pubid) { "ITU-T G.729 Annex E (1998) Cor. 1 (02/2000)" }
+
+      it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::Corrigendum) }
+      it { expect(subject.base).to be_a(Identifier::Annex) }
     end
 
     describe "parse identifiers from examples files" do
