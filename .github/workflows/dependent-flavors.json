@@ -1,0 +1,12 @@
+{
+  "flavor": [
+    "itu",
+    "bsi",
+    "cen",
+    "iec",
+    "jis",
+    "ieee",
+    "iso",
+    "nist"
+  ]
+}
