@@ -1,0 +1,65 @@
+name: dependent-gems-test
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [ tests-passed, release-passed ]
+
+jobs:
+  build-matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.build-matrix.outputs.matrix }}
+    steps:
+    - uses: actions/checkout@v3
+
+    - id: build-matrix
+      run: |
+        wget https://raw.githubusercontent.com/metanorma/ci/main/.github/workflows/ruby-matrix.json
+        # remove 'middle' & 'experimental' versions
+        echo "$(jq 'del(.ruby[1, 2])' ruby-matrix.json)" > ruby-matrix.json
+
+        echo "matrix=$(jq -s add .github/workflows/dependent-flavors.json ruby-matrix.json | tr '\n' ' ')" >> $GITHUB_OUTPUT
+
+  rake:
+    name: Test dependent gem pubid-${{ matrix.flavor }} ${{ matrix.ruby.version }}-${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    needs:
+    - build-matrix
+
+    concurrency:
+      group: 'template-${{ matrix.flavor }}-${{ matrix.os }}-${{ matrix.ruby.version }}-${{ github.head_ref || github.ref_name }}'
+      cancel-in-progress: true
+
+    continue-on-error: ${{ matrix.experimental || matrix.ruby.experimental }}
+    strategy:
+      max-parallel: 10
+      fail-fast: false
+      matrix: ${{ fromJson(needs.build-matrix.outputs.matrix) }}
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        repository: metanorma/pubid-${{ matrix.flavor }}
+        path: dependent
+        fetch-depth: 1
+
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby.version }}
+        rubygems: ${{ matrix.ruby.rubygems }}
+        bundler-cache: true
+        working-directory: dependent
+
+    - run: |
+        bundle remove pubid-core || true
+        bundle add pubid-core --path ..
+      working-directory: dependent
+
+    - run: bundle exec rake
+      working-directory: dependent
