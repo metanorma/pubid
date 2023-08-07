@@ -272,6 +272,12 @@ module Pubid::Itu
       it { expect(subject.base).to be_a(Identifier::Annex) }
     end
 
+    context "ITU-T Q.400-Q.490" do
+      let(:pubid) { "ITU-T Q.400-Q.490" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     describe "parse identifiers from examples files" do
       context "parses IEC identifiers from itu-r.txt" do
         let(:examples_file) { "itu-r.txt" }

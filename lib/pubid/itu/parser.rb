@@ -34,9 +34,13 @@ module Pubid::Itu
         str("OB") | str("Operational Bulletin") |
           # Recommendation series
           array_to_str(Identifier.config.series["T"].keys.sort_by(&:length).reverse)
-      ).as(:series) >>
+      ).capture(:series).as(:series) >>
         # "No. " for Operational Bulletin
         (dot | str(" No. ")).maybe
+    end
+
+    rule(:series_range) do
+      (dash >> dynamic { |s, c| str(c.captures[:series]) } >> dot >> full_number).as(:range)
     end
 
     rule(:sector_series_number) do
@@ -47,7 +51,8 @@ module Pubid::Itu
         # ITU-T
         (str("T").as(:sector) >> type.maybe >> (space | dash) >>
           t_sector_series.maybe >> full_number >>
-          (str("/") >> t_sector_series.maybe >> full_number).as(:second_number).maybe) |
+          (str("/") >> t_sector_series.maybe >> full_number).as(:second_number).maybe >>
+          series_range.maybe) |
         # ITU-D
         (str("D") >> space >> full_number)
       )

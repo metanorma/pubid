@@ -12,7 +12,7 @@ module Pubid::Itu::Renderer
 
     def render_identifier(params)
       "%{publisher}-%{sector} #{render_type_series(params)}%{number}%{subseries}"\
-      "%{part}%{second_number}%{annex}%{amendment}%{corrigendum}%{supplement}%{date}" % params
+      "%{part}%{second_number}%{range}%{annex}%{amendment}%{corrigendum}%{supplement}%{date}" % params
     end
 
     def render_number(number, _opts, params)
@@ -71,6 +71,10 @@ module Pubid::Itu::Renderer
 
     def render_corrigendum(corrigendum, opts, params)
       "#{render_date(corrigendum[:date], opts, params)} Cor. #{corrigendum[:number]}"
+    end
+
+    def render_range(range, _opts, params)
+      "-#{params[:series]}.#{range[:number]}"
     end
   end
 end
