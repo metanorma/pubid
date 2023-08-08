@@ -93,9 +93,14 @@ module Pubid::Itu
         digits.as(:number)).as(:corrigendum)
     end
 
+    rule(:addendum) do
+      (published >> space >> str("Add.") >> space >> digits.as(:number)).as(:addendum)
+    end
+
     rule(:identifier) do
       str("ITU") >> (dash | space) >> sector_series_number >> supplement.maybe >>
-        annex.maybe >> corrigendum.maybe >> published.maybe >> amendment.maybe >> str("-I").maybe
+        annex.maybe >> corrigendum.maybe >> addendum.maybe >> published.maybe >>
+        amendment.maybe >> str("-I").maybe
     end
 
     rule(:root) { identifier }
