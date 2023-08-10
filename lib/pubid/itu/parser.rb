@@ -97,10 +97,15 @@ module Pubid::Itu
       (published >> space >> str("Add.") >> space >> digits.as(:number)).as(:addendum)
     end
 
+    rule(:appendix) do
+      (space >> str("App.") >> space >>
+        roman_numerals.as(:number)).as(:appendix)
+    end
+
     rule(:identifier) do
       str("ITU") >> (dash | space) >> sector_series_number >> supplement.maybe >>
-        annex.maybe >> corrigendum.maybe >> addendum.maybe >> published.maybe >>
-        amendment.maybe >> str("-I").maybe
+        annex.maybe >> corrigendum.maybe >> addendum.maybe >> appendix.maybe >>
+        published.maybe >> amendment.maybe >> str("-I").maybe
     end
 
     rule(:root) { identifier }

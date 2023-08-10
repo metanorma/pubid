@@ -61,7 +61,7 @@ module Pubid::Itu
             get_transformer_class.new.apply(k => v)
           end.inject({}, :merge)
 
-          %i(supplement amendment corrigendum annex addendum).each do |type|
+          %i(supplement amendment corrigendum annex addendum appendix).each do |type|
             return transform_supplements(type, identifier_params) if identifier_params[type]
           end
           Identifier.create(**identifier_params)
