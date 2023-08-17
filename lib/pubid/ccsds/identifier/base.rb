@@ -5,16 +5,17 @@ module Pubid::Ccsds
     class Base < Pubid::Core::Identifier::Base
       extend Forwardable
 
-      attr_accessor :series
+      attr_accessor :series, :retired
 
       def self.type
         { key: :ccsds, title: "The Consultative Committee for Space Data Systems" }
       end
 
-      def initialize(publisher: "CCSDS", part: nil, series: nil, **opts)
+      def initialize(publisher: "CCSDS", part: nil, series: nil, retired: nil, **opts)
         super(**opts.merge(publisher: publisher))
         @part = part || 0
         @series = series
+        @retired = retired
       end
 
       class << self

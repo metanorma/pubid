@@ -17,8 +17,13 @@ module Pubid::Ccsds
       match["A-Z"].as(:series)
     end
 
+    rule(:retired) do
+      str("-S").as(:retired)
+    end
+
     rule(:identifier) do
-      str("CCSDS") >> space >> series.maybe >> digits.as(:number) >> part >> type >> edition
+      str("CCSDS") >> space >> series.maybe >> digits.as(:number) >> part >>
+        type >> edition >> retired.maybe
     end
 
     rule(:root) { identifier }

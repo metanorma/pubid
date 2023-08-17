@@ -14,5 +14,11 @@ module Pubid::Ccsds
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "CCSDS 100.0-G-1-S" do
+      let(:pubid) { "CCSDS 100.0-G-1-S" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end

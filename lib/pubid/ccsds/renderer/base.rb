@@ -3,7 +3,7 @@ module Pubid::Ccsds::Renderer
     TYPE = "".freeze
 
     def render_identifier(params)
-      "%{publisher} %{series}%{number}%{part}%{type}%{edition}" % params
+      "%{publisher} %{series}%{number}%{part}%{type}%{edition}%{retired}" % params
     end
 
     def render_part(part, _opts, _params)
@@ -16,6 +16,10 @@ module Pubid::Ccsds::Renderer
 
     def render_edition(edition, _opts, _params)
       "-#{edition}"
+    end
+
+    def render_retired(retired, _opts, _params)
+      "-S" if retired
     end
   end
 end

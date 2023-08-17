@@ -26,6 +26,14 @@ module Pubid::Ccsds
           expect(subject.to_s).to eq("CCSDS A#{number}.0-B-1")
         end
       end
+
+      context "when retired" do
+        let(:params) { { retired: true } }
+
+        it "renders retired identifier" do
+          expect(subject.to_s).to eq("CCSDS #{number}.0-B-1-S")
+        end
+      end
     end
   end
 end
