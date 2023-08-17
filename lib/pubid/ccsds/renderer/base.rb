@@ -3,7 +3,7 @@ module Pubid::Ccsds::Renderer
     TYPE = "".freeze
 
     def render_identifier(params)
-      "%{publisher} %{number}%{part}%{type}%{edition}" % params
+      "%{publisher} %{series}%{number}%{part}%{type}%{edition}" % params
     end
 
     def render_part(part, _opts, _params)

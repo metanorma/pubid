@@ -8,5 +8,11 @@ module Pubid::Ccsds
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "CCSDS A20.1-Y-1" do
+      let(:pubid) { "CCSDS A20.1-Y-1" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end

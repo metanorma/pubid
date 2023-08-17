@@ -13,8 +13,12 @@ module Pubid::Ccsds
       (dot >> digits.as(:part)).repeat(1)
     end
 
+    rule(:series) do
+      match["A-Z"].as(:series)
+    end
+
     rule(:identifier) do
-      str("CCSDS") >> space >> digits.as(:number) >> part >> type >> edition
+      str("CCSDS") >> space >> series.maybe >> digits.as(:number) >> part >> type >> edition
     end
 
     rule(:root) { identifier }

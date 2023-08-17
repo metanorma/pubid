@@ -17,7 +17,14 @@ module Pubid::Ccsds
         it "renders identifier with part" do
           expect(subject.to_s).to eq("CCSDS #{number}.1-B-1")
         end
+      end
 
+      context "with series" do
+        let(:params) { { series: "A" } }
+
+        it "renders identifier with series" do
+          expect(subject.to_s).to eq("CCSDS A#{number}.0-B-1")
+        end
       end
     end
   end
