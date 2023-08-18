@@ -2,11 +2,11 @@ module Pubid::Ccsds
   class Parser < Pubid::Core::Parser
 
     rule(:book_color) do
-      dash >> match["BGMYO"].as(:book_color)
+      dash >> match["BGMYOR"].as(:book_color)
     end
 
     rule(:edition) do
-      dash >> digits.as(:edition)
+      dash >> (digits >> (dot >> digits).maybe).as(:edition)
     end
 
     rule(:part) do
@@ -31,7 +31,7 @@ module Pubid::Ccsds
 
     rule(:identifier) do
       str("CCSDS") >> space >> series.maybe >> digits.as(:number) >> part >>
-        book_color >> edition >> retired.maybe >> corrigendum.maybe >> language.maybe
+        book_color >> edition.maybe >> retired.maybe >> corrigendum.maybe >> language.maybe
     end
 
     rule(:root) { identifier }

@@ -12,12 +12,13 @@ module Pubid::Ccsds
       end
 
       def initialize(publisher: "CCSDS", book_color: nil, part: nil,
-                     series: nil, retired: nil, **opts)
+                     series: nil, retired: nil, edition: nil, **opts)
         super(**opts.merge(publisher: publisher))
         @book_color = book_color
         @part = part || 0
         @series = series
         @retired = retired
+        @edition = edition
       end
 
       class << self
@@ -48,6 +49,10 @@ module Pubid::Ccsds
 
         def get_renderer_class
           Renderer::Base
+        end
+
+        def get_update_codes
+          UPDATE_CODES
         end
       end
     end
