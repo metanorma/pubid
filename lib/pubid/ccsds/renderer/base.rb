@@ -21,5 +21,9 @@ module Pubid::Ccsds::Renderer
     def render_retired(retired, _opts, _params)
       "-S" if retired
     end
+
+    def render_language(language, opts, _params)
+      " - #{language} Translated"
+    end
   end
 end

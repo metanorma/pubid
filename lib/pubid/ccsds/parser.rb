@@ -25,9 +25,13 @@ module Pubid::Ccsds
       space >> str("Cor. ") >> digits.as(:number).as(:corrigendum)
     end
 
+    rule(:language) do
+      space >> dash >> space >> words.as(:language) >> space >> str("Translated")
+    end
+
     rule(:identifier) do
       str("CCSDS") >> space >> series.maybe >> digits.as(:number) >> part >>
-        book_color >> edition >> retired.maybe >> corrigendum.maybe
+        book_color >> edition >> retired.maybe >> corrigendum.maybe >> language.maybe
     end
 
     rule(:root) { identifier }

@@ -43,6 +43,14 @@ module Pubid::Ccsds
           expect(subject.to_s).to eq("CCSDS #{number}.0-B-1 Cor. 1")
         end
       end
+
+      context "with language" do
+        let(:params) { { language: "French" } }
+
+        it "renders identifier with language" do
+          expect(subject.to_s).to eq("CCSDS #{number}.0-B-1 - French Translated")
+        end
+      end
     end
   end
 end

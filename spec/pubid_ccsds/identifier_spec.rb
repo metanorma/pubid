@@ -27,5 +27,11 @@ module Pubid::Ccsds
       it_behaves_like "converts pubid to pubid"
       it { expect(subject).to be_a(Identifier::Corrigendum) }
     end
+
+    context "CCSDS 551.1-O-2 - Russian Translated" do
+      let(:pubid) { "CCSDS 551.1-O-2 - Russian Translated" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end
