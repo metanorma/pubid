@@ -7,11 +7,6 @@ module Pubid::Ccsds
       def parse(*args)
         Base.parse(*args)
       end
-
-      def resolve_identifier(parameters = {})
-        # don't use type resolving, always return base type
-        @config.default_type.new(**parameters)
-      end
     end
   end
 end

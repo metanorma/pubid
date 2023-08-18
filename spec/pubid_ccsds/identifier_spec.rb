@@ -20,5 +20,12 @@ module Pubid::Ccsds
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "CCSDS 131.2-O-1-S Cor. 1" do
+      let(:pubid) { "CCSDS 131.2-O-1-S Cor. 1" }
+
+      it_behaves_like "converts pubid to pubid"
+      it { expect(subject).to be_a(Identifier::Corrigendum) }
+    end
   end
 end

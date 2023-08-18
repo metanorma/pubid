@@ -1,9 +1,9 @@
 module Pubid::Ccsds
   RSpec.describe Identifier do
     describe "creating new identifier" do
-      subject { described_class.create(**{ number: number, type: type, edition: edition }.merge(params)) }
+      subject { described_class.create(**{ number: number, book_color: book_color, edition: edition }.merge(params)) }
       let(:number) { 123 }
-      let(:type) { "B" }
+      let(:book_color) { "B" }
       let(:edition) { 1 }
       let(:params) { {} }
 
@@ -32,6 +32,15 @@ module Pubid::Ccsds
 
         it "renders retired identifier" do
           expect(subject.to_s).to eq("CCSDS #{number}.0-B-1-S")
+        end
+      end
+
+      context "with corrigendum" do
+        let(:base) { described_class.create(**{ number: number, book_color: book_color, edition: edition }) }
+        subject { described_class.create(type: :corrigendum, number: 1, base: base) }
+
+        it "renders corrigendum" do
+          expect(subject.to_s).to eq("CCSDS #{number}.0-B-1 Cor. 1")
         end
       end
     end
