@@ -28,8 +28,8 @@ module Pubid::Ccsds
       it { expect(subject).to be_a(Identifier::Corrigendum) }
     end
 
-    context "CCSDS 551.1-0-2 - Russian Translated" do
-      let(:original) { "CCSDS 551.1-0-2 - Russian Translated" }
+    context "CCSDS 551.1-O-2 - Russian Translated" do
+      let(:original) { "CCSDS 551.1-O-2 - Russian Translated" }
       let(:pubid) { "CCSDS 551.1-O-2 - Russian Translated" }
 
       it_behaves_like "converts pubid to pubid"
