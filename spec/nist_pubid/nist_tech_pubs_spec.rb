@@ -6,7 +6,7 @@ RSpec.describe Pubid::Nist::NistTechPubs, vcr: true do
                     "NIST SP 1800-15",
                     "NIST SP 1265",
                     "NBS FIPS 83",
-                    "NISTIR 8379")
+                    "NIST IR 8379")
     end
 
     it "fetches doi identifiers" do
