@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require "parslet/rig/rspec"
 
 RSpec.describe Pubid::Nist::Identifier do
   let(:short_pubid) { "NIST SP 800-53r5" }
@@ -368,6 +369,64 @@ RSpec.describe Pubid::Nist::Identifier do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NBS FIPS 11-1-Sep30/1977" do
+      let(:original_pubid) { "NBS FIPS 11-1-Sep30/1977" }
+      let(:short_pubid) { "NBS FIPS 11-1e19770930" }
+      let(:mr) { "NBS.FIPS.11-1e19770930" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS FIPS 89-Sep1" do
+      let(:original_pubid) { "NBS FIPS 89-Sep1" }
+      let(:short_pubid) { "NBS FIPS 89e198109" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS LCIRC 1" do
+      let(:original_pubid) { "NBS LCIRC 1" }
+      let(:short_pubid) { "NBS LC 1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS LCIRC 1013r1953" do
+      let(:original_pubid) { "NBS LCIRC 1013r1953" }
+      let(:short_pubid) { "NBS LC 1013r1953" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS LCIRC 378g" do
+      let(:original_pubid) { "NBS LCIRC 378g" }
+      let(:short_pubid) { "NBS LC 378G" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS NSRDS 1" do
+      let(:original_pubid) { "NBS NSRDS 1" }
+      let(:short_pubid) { "NSRDS-NBS 1" }
+      let(:mr_pubid) { "NBS.NSRDS.1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NBS LCIRC 1088sp" do
+      let(:original_pubid) { "NBS LCIRC 1088sp" }
+      let(:short_pubid) { "NBS LC 1088 spa" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST HB 150-2d" do
+      let(:original_pubid) { "NIST HB 150-2d" }
+      let(:short_pubid) { "NIST HB 150-2D" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "NBS CRPL c4-4" do
       let(:original_pubid) { "NBS CRPL c4-4" }
       # has doi NBS.FIPS.11-1-Sep30/1977
@@ -398,8 +457,8 @@ RSpec.describe Pubid::Nist::Identifier do
 
     context "NIST AMS 300-8r1 (February 2021 update)" do
       let(:original_pubid) { "NIST AMS 300-8r1 (February 2021 update)" }
-      let(:short_pubid) { "NIST AMS 300-8r1/Upd1-201502" }
-      let(:mr_pubid) { "NIST.AMS.300-8r1.u1-201502" }
+      let(:short_pubid) { "NIST AMS 300-8r1/Upd1-202102" }
+      let(:mr_pubid) { "NIST.AMS.300-8r1.u1-202102" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -703,7 +762,30 @@ RSpec.describe Pubid::Nist::Identifier do
     end
   end
 
-  describe "access to PubID object" do
+  describe "parse identifiers from examples files" do
+    shared_examples "parse identifiers from file" do
+      it "parse identifiers from file" do
+        f = open("spec/fixtures/#{examples_file}")
+        f.readlines.each do |pub_id|
+          next if pub_id.match?("^#")
+          expect do
+            described_class.parse(pub_id.split("#").first.strip.chomp)
+          rescue Exception => failure
+            raise Pubid::Nist::Errors::ParseError,
+                  "couldn't parse #{pub_id}\n#{failure.message}"
+          end.not_to raise_error
+        end
+      end
+    end
+
+    context "parses identifiers from allrecords.txt" do
+      let(:examples_file) { "allrecords.txt" }
+
+      it_behaves_like "parse identifiers from file"
+    end
+  end
+
+    describe "access to PubID object" do
     it "returns revision" do
       expect(described_class.parse(short_pubid).revision).to eq("5")
     end
