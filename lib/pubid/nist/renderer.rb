@@ -47,6 +47,8 @@ module Pubid::Nist
     end
 
     def render_edition(edition, opts, _params)
+      return if opts[:without_edition]
+
       case opts[:format]
       when :long
         " Edition "
