@@ -2,7 +2,7 @@ module Pubid::Nist
   module Parsers
     class NistSp < Default
       rule(:version) do
-        (((str("ver") | str(" Ver. ")) >> (digits >> (str(".") >> digits).repeat).as(:version)) |
+        (((str("ver") | str(" Ver. ") | str(" Version ")) >> (digits >> (str(".") >> digits).repeat).as(:version)) |
           (str("v") >>
             (match('\d') >> str(".") >> match('\d') >> (str(".") >> match('\d')).maybe).as(:version)))
       end
@@ -39,15 +39,21 @@ module Pubid::Nist
 
       rule(:edition) do
         ((str("e") >> year_digits.as(:edition_year)) | (str("-") >> year_digits.as(:edition_year)) |
-          (str("e") >> digits.as(:edition)))
+          ((str("e") | str(" E")) >> digits.as(:edition)))
       end
 
       rule(:revision) do
-        ((str("rev") | str("r")) >> (digits >> match("[a-z]").maybe).as(:revision)) |
+        ((str("rev") | str("r") | str(" Rev. ")) >> (digits >> match("[a-z]").maybe).as(:revision)) |
           (str("-") >> digits.as(:revision)) |
           (str("r") >> match("[a-z]").as(:revision)) |
-          (str("r") >> str("").as(:revision))
+          ((str("r") | str(" Revision (r)")) >> str("").as(:revision))
       end
+
+      rule(:volume) do
+        (str("v") | str(" Vol. ")) >> digits.as(:volume)
+      end
+
+      rule(:part_prefixes) { str("pt") | str("p") | str(" Part ") }
     end
   end
 end

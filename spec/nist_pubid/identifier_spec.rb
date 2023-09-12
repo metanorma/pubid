@@ -792,6 +792,12 @@ RSpec.describe Pubid::Nist::Identifier do
 
       it_behaves_like "parse identifiers from file"
     end
+
+    context "parses identifiers from pubs-export.txt" do
+      let(:examples_file) { "pubs-export.txt" }
+
+      it_behaves_like "parse identifiers from file"
+    end
   end
 
     describe "access to PubID object" do
