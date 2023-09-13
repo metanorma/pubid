@@ -40,7 +40,8 @@ module Pubid::Nist
       end
 
       rule(:stage) do
-        (space >> (array_to_str(STAGES["id"].keys).as(:id) >> array_to_str(STAGES["type"].keys).as(:type)).as(:stage))
+        (space >> (array_to_str(STAGES["id"].keys + STAGES["id"].keys.map(&:upcase)).as(:id) >>
+          array_to_str(STAGES["type"].keys + STAGES["type"].keys.map(&:upcase)).as(:type)).as(:stage))
       end
 
       rule(:draft) do
