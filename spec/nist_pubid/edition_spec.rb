@@ -30,7 +30,8 @@ RSpec.describe Pubid::Nist::Edition do
   end
 
   context "NIST FIPS PUB 140-3" do
-    let(:short_pubid) { "FIPS PUB 140-3" }
+    let(:original_pubid) { "FIPS PUB 140-3" }
+    let(:short_pubid) { "FIPS 140-3" }
 
     it { expect(subject).to be_nil }
   end

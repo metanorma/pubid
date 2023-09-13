@@ -15,7 +15,7 @@ long:
   NBS CS-E: Commercial Standards (emergency)
   NBS CSM: Commercial Standards Monthly
   NBS FIPS: Federal Information Processing Standards Publication
-  FIPS PUB: Federal Information Processing Standards Publication
+  FIPS: Federal Information Processing Standards Publication
   NIST GCR: Grant/Contract Reports
   NBS GCR: Grant/Contract Reports
   NIST HB: Handbook
@@ -59,7 +59,7 @@ abbrev:
   NIST BSS: Bldg. Sci. Ser.
   NBS BSS: Bldg. Sci. Ser.
   NBS FIPS: Federal Inf. Process. Stds.
-  FIPS PUB: Federal Inf. Process. Stds.
+  FIPS: Federal Inf. Process. Stds.
   NIST HB: Handb.
   NBS HB: Handb.
   NIST MN: Monogr.
@@ -98,7 +98,7 @@ mr:
   NBS CS-E: NBS.CS-E
   NBS CSM: NBS.CSM
   NBS FIPS: NBS.FIPS
-  FIPS PUB: NIST.FIPS
+  FIPS: NIST.FIPS
   NIST GCR: NIST.GCR
   NBS GCR: NBS.GCR
   NIST HB: NIST.HB

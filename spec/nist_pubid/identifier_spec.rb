@@ -125,7 +125,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
     context "parse old NIST FIPS series" do
       let(:original_pubid) { "NIST FIPS 140-3" }
-      let(:short_pubid) { "NIST FIPS PUB 140-3" }
+      let(:short_pubid) { "NIST FIPS 140-3" }
       let(:mr_pubid) { "NIST.FIPS.140-3" }
       let(:long_pubid) do
         "National Institute of Standards and Technology Federal Information"\
@@ -494,7 +494,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
     context "NIST FIPS 54-1-Jan15" do
       let(:original_pubid) { "NIST FIPS 54-1-Jan15" }
-      let(:short_pubid) { "NIST FIPS PUB 54-1" }
+      let(:short_pubid) { "NIST FIPS 54-1" }
       let(:mr_pubid) { "NIST.FIPS.54-1" }
 
       it_behaves_like "converts pubid to different formats"
@@ -575,7 +575,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
     context "NIST FIPS 150-Aug1988" do
       let(:original_pubid) { "NIST FIPS 150-Aug1988" }
-      let(:short_pubid) { "NIST FIPS PUB 150e198808" }
+      let(:short_pubid) { "NIST FIPS 150e198808" }
       let(:mr_pubid) { "NIST.FIPS.150e198808" }
 
       it_behaves_like "converts pubid to different formats"

@@ -50,7 +50,7 @@ RSpec.describe Pubid::Nist::Identifier do
       it do
         expect(described_class.parse("NIST FIPS 100-1-1991").merge(
           described_class.parse("NBS.FIPS.100-1-1991")
-        ).to_s(:short)).to eq("NIST FIPS PUB 100-1e1991")
+        ).to_s(:short)).to eq("NIST FIPS 100-1e1991")
       end
     end
 
@@ -106,7 +106,7 @@ RSpec.describe Pubid::Nist::Identifier do
       it do
         expect(described_class.parse("NIST FIPS 150-Aug1988").merge(
           described_class.parse("NIST.FIPS.150-Aug1988")
-        ).to_s(:short)).to eq("NIST FIPS PUB 150e198808")
+        ).to_s(:short)).to eq("NIST FIPS 150e198808")
       end
     end
 
@@ -122,7 +122,7 @@ RSpec.describe Pubid::Nist::Identifier do
       it do
         expect(described_class.parse("NIST FIPS 54-1-Jan17").merge(
           described_class.parse("NIST.FIPS.54-1-Jan17/1991")
-        ).to_s(:short)).to eq("NIST FIPS PUB 54-1e19910117")
+        ).to_s(:short)).to eq("NIST FIPS 54-1e19910117")
       end
     end
   end
