@@ -11,8 +11,6 @@ module Pubid::Iso
                     :iteration, :joint_document,
                     :tctype, :sctype, :wgtype, :tcnumber, :scnumber, :wgnumber,
                     :dirtype,
-                    # supplement for DIR type identifiers
-                    :supplement,
                     :base,
                     :typed_stage,
                     :supplements,
@@ -24,7 +22,7 @@ module Pubid::Iso
       # @param stage [Stage, Symbol, String] stage or typed stage, e.g. "PWI", "NP", "50.00", Stage.new(abbr: :WD), "DTR"
       # @param iteration [Integer] document iteration, eg. "1", "2", "3"
       # @param joint_document [Identifier] joint document
-      # @param supplement [Supplement] supplement
+      # @param supplements [Array<Supplement>] supplements
       # @param tctype [String] Technical Committee type, eg. "TC", "JTC"
       # @param sctype [String] TC subsommittee, eg. "SC"
       # @param wgtype [String] TC working group type, eg. "AG", "AHG"
@@ -44,7 +42,7 @@ module Pubid::Iso
       # @see Identifier
       # @see Pubid::Core::Identifier
       # @see Parser
-      def initialize(publisher: "ISO", number: nil, stage: nil, iteration: nil, supplement: nil,
+      def initialize(publisher: "ISO", number: nil, stage: nil, iteration: nil,
                      joint_document: nil, tctype: nil, sctype: nil, wgtype: nil, tcnumber: nil,
                      scnumber: nil, wgnumber:nil,
                      dir: nil, dirtype: nil, year: nil, amendments: nil,
@@ -70,7 +68,6 @@ module Pubid::Iso
         end
 
         @iteration = iteration.to_i if iteration
-        @supplement = supplement if supplement
         @joint_document = joint_document if joint_document
         @tctype = tctype if tctype
         @sctype = sctype.to_s if sctype
@@ -126,7 +123,7 @@ module Pubid::Iso
           end.inject({}, :merge)
 
           # return supplement if supplements applied
-          if identifier_params[:supplements]
+          if identifier_params[:supplements] && identifier_params[:supplements].is_a?(Array)
             return transform_supplements(
               identifier_params[:supplements],
               identifier_params.dup.tap { |h| h.delete(:supplements) }

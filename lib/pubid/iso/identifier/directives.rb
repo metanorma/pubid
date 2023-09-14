@@ -8,6 +8,13 @@ module Pubid::Iso
 
       TYPED_STAGES = {}.freeze
 
+      attr_accessor :edition_publisher
+
+      def initialize(edition_publisher: nil, **opts)
+        super(**opts)
+        @edition_publisher = edition_publisher
+      end
+
       def self.type
         { key: :dir, title: "Directives" }
       end

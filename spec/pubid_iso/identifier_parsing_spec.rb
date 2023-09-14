@@ -1021,20 +1021,26 @@ module Pubid::Iso
 
     context "ISO/IEC DIR 2 ISO" do
       let(:original) { "ISO/IEC DIR 2 ISO" }
-      let(:pubid) { "ISO/IEC DIR 2" }
+      let(:pubid) { "ISO/IEC DIR 2 ISO" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ISO/IEC DIR 2 IEC" do
       let(:original) { "ISO/IEC DIR 2 IEC" }
-      let(:pubid) { "ISO/IEC DIR 2" }
+      let(:pubid) { "ISO/IEC DIR 2 IEC" }
 
       it_behaves_like "converts pubid to pubid"
     end
 
     context "ISO/IEC DIR 1 IEC SUP" do
       let(:pubid) { "ISO/IEC DIR 1 IEC SUP" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/IEC DIR JTC 1 SUP" do
+      let(:pubid) { "ISO/IEC DIR JTC 1 SUP" }
 
       it_behaves_like "converts pubid to pubid"
     end

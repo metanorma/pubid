@@ -15,28 +15,30 @@ module Pubid::Iso
     end
 
     rule(supplements: subtree(:supplements)) do |context|
-      context[:supplements] =
-        context[:supplements].map do |supplement|
-          if supplement[:typed_stage]
-            supplement.merge(
-              case supplement[:typed_stage]
-              when "PDAM"
-                { typed_stage: "CD", type: "Amd" }
-              when "pDCOR"
-                { typed_stage: "CD", type: "Cor" }
-              else
-                {}
-              end
-            )
-          else
-            case supplement[:type]
-            when "Addendum"
-              supplement.merge({ type: "Add" })
+      if context[:supplements].is_a?(Array)
+        context[:supplements] =
+          context[:supplements].map do |supplement|
+            if supplement[:typed_stage]
+              supplement.merge(
+                case supplement[:typed_stage]
+                when "PDAM"
+                  { typed_stage: "CD", type: "Amd" }
+                when "pDCOR"
+                  { typed_stage: "CD", type: "Cor" }
+                else
+                  {}
+                end
+              )
             else
-              supplement
+              case supplement[:type]
+              when "Addendum"
+                supplement.merge({ type: "Add" })
+              else
+                supplement
+              end
             end
           end
-        end
+      end
       context
     end
 

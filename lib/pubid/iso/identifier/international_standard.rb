@@ -21,11 +21,7 @@ module Pubid::Iso
         },
       }.freeze
 
-      def initialize(publisher: "ISO", number: nil, stage: nil, iteration: nil, supplement: nil,
-                     joint_document: nil, tctype: nil, sctype: nil, wgtype: nil, tcnumber: nil,
-                     scnumber: nil, wgnumber:nil,
-                     dir: nil, dirtype: nil, year: nil, amendments: nil,
-                     corrigendums: nil, type: nil, base: nil, supplements: nil, **opts)
+      def initialize(stage: nil, iteration: nil, **opts)
 
         if iteration && stage.nil?
           raise Errors::IsStageIterationError, "IS stage document cannot have iteration"
