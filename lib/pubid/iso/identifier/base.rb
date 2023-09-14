@@ -47,7 +47,7 @@ module Pubid::Iso
                      scnumber: nil, wgnumber:nil,
                      dir: nil, dirtype: nil, year: nil, amendments: nil,
                      corrigendums: nil, type: nil, base: nil, supplements: nil,
-                     part: nil, addendum: nil, **opts)
+                     part: nil, addendum: nil, edition: nil, **opts)
         super(**opts.merge(number: number, publisher: publisher, year: year,
                            amendments: amendments, corrigendums: corrigendums))
 
@@ -80,6 +80,7 @@ module Pubid::Iso
         @base = base if base
         @part = part if part
         @addendum = addendum if addendum
+        @edition = edition
       end
 
       class << self

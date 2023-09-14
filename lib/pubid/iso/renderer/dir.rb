@@ -4,7 +4,7 @@ module Pubid::Iso::Renderer
   class Dir < Base
 
     def render_identifier(params, opts)
-      res = ("%{publisher} DIR%{dirtype}%{number}%{year}%{edition_publisher}" % params)
+      res = ("%{publisher} DIR%{dirtype}%{number}%{year}%{edition}" % params)
 
       if params.key?(:joint_document)
         joint_params = prerender_params(params[:joint_document].get_params, {})
@@ -23,8 +23,8 @@ module Pubid::Iso::Renderer
       " #{dirtype}"
     end
 
-    def render_edition_publisher(edition_publisher, _opts, _params)
-      " #{edition_publisher}"
+    def render_edition(edition, _opts, _params)
+      " #{edition[:publisher]}" + (edition[:year] ? ":#{edition[:year]}" : "")
     end
   end
 end

@@ -1044,5 +1044,11 @@ module Pubid::Iso
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "ISO/IEC DIR 2 IEC:2022" do
+      let(:pubid) { "ISO/IEC DIR 2 IEC:2022" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end

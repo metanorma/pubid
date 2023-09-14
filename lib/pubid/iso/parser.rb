@@ -174,7 +174,7 @@ module Pubid::Iso
           array_to_str(DIR_SUPPLEMENTS) >> (str(":") >> year).maybe >>
           dir_supplement_edition.maybe).repeat(1).as(:supplements)).maybe >>
           # parse identifiers with publisher at the end, e.g. "ISO/IEC DIR 2 ISO"
-          (space >> organization.as(:edition_publisher)).maybe
+          (space >> organization.as(:publisher) >> (str(":") >> year).maybe).as(:edition).maybe
 
     end
 
