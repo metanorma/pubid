@@ -204,7 +204,7 @@ module Pubid::Nist
       when :mr
         "."
       when :short
-        ""
+        " "
       else
         " "
       end + stage.to_s(opts[:format])

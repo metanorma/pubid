@@ -375,7 +375,7 @@ RSpec.describe Pubid::Nist::Identifier do
     let(:short_pubid) { "NIST SP 800-189 ipd" }
 
     it "has correct iteration" do
-      expect(subject.stage.to_s).to eq(" ipd")
+      expect(subject.stage.to_s).to eq("ipd")
     end
 
     it_behaves_like "converts pubid to different formats"
@@ -386,7 +386,7 @@ RSpec.describe Pubid::Nist::Identifier do
     let(:short_pubid) { "NIST SP 800-189 ipd" }
 
     it "has correct iteration" do
-      expect(subject.stage.to_s).to eq(" ipd")
+      expect(subject.stage.to_s).to eq("ipd")
     end
 
     it_behaves_like "converts pubid to different formats"

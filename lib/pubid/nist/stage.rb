@@ -13,7 +13,7 @@ module Pubid::Nist
 
       case format
       when :short
-        " #{@id}#{@type}"
+        "#{@id}#{@type}"
       when :mr
         "#{@id}#{@type}"
       else
