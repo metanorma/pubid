@@ -3,7 +3,7 @@ module Pubid::Nist
     class NbsCirc < Default
       rule(:revision) do
         ((str("rev") >> (words >> year_digits).as(:revision)) |
-          (str("r") >> digits.as(:revision))
+          (str("r") >> (digits | (words >> year_digits)).as(:revision))
         )
       end
 

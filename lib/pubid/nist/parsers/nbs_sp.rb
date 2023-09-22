@@ -2,7 +2,7 @@ module Pubid::Nist
   module Parsers
     class NbsSp < Default
       rule(:part_prefixes) do
-        str("p") | str("P")
+        str("pt") | str("p") | str("P")
       end
 
       rule(:volume) do

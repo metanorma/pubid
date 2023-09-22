@@ -5,7 +5,7 @@ module Pubid::Nist
         (str(" ") | str(".")) >> report_number.maybe >> parts.repeat.as(:parts)
       end
 
-      rule(:part_prefixes) { str("n") }
+      rule(:part_prefixes) { str("n") | str("pt") }
     end
   end
 end

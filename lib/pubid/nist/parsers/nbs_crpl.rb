@@ -2,11 +2,11 @@ module Pubid::Nist
   module Parsers
     class NbsCrpl < Default
       rule(:first_report_number) do
-        (digits >> str("-m").maybe).as(:first_report_number)
+        (digits >> (str("-m") | str("-M")).maybe).as(:first_report_number)
       end
 
       rule(:part) do
-        str("_") >> (digits >> str("-") >> digits).as(:part)
+        (str("_") | str("pt")) >> (digits >> str("-") >> digits).as(:part)
       end
 
       rule(:supplement) do

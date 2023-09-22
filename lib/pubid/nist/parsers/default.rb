@@ -19,11 +19,11 @@ module Pubid::Nist
       end
 
       rule(:supplement) do
-        (str("supp") | str("sup")) >> match('\d').repeat.as(:supplement)
+        (str("supp") | str("sup")) >> match('[A-Z\d]').repeat.as(:supplement)
       end
 
       rule(:errata) do
-        str("-").maybe >> str("errata").as(:errata)
+        str("-").maybe >> (str("errata") | str("err")).as(:errata)
       end
 
       rule(:index) do
@@ -68,7 +68,7 @@ module Pubid::Nist
       rule(:part_prefixes) { str("pt") | str("p") }
 
       rule(:part) do
-        part_prefixes >> digits.as(:part)
+        part_prefixes >> (digits >> (str("-") >> digits).maybe).as(:part)
       end
 
       rule(:revision) do
@@ -99,7 +99,7 @@ module Pubid::Nist
       end
 
       rule(:addendum) do
-        (str("-add") | str(".add-1")).as(:addendum)
+        (str("-add") | str(".add-1") | str(" Add. 1") | str(" Add.")).as(:addendum)
       end
 
       rule(:section) do

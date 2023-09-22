@@ -770,6 +770,111 @@ RSpec.describe Pubid::Nist::Identifier do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "identifiers we produce" do
+      context "NBS FIPS 82e198009" do
+        let(:short_pubid) { "NBS FIPS 82e198009" }
+
+        it_behaves_like "converts pubid to different formats"
+      end
+
+      context "NIST FIPS 158-1e1993" do
+        let(:short_pubid) { "NIST FIPS 158-1e1993" }
+
+        it_behaves_like "converts pubid to different formats"
+      end
+
+      context "NBS CSM v9pt8" do
+        let(:short_pubid) { "NBS CSM v9pt8" }
+
+        it_behaves_like "converts pubid to different formats"
+      end
+
+      context "NBS SP 647pt2" do
+        let(:short_pubid) { "NBS SP 647pt2" }
+
+        it_behaves_like "converts pubid to different formats"
+      end
+
+      context "NIST FIPS 54-1e19910115" do
+        let(:short_pubid) { "NIST FIPS 54-1e19910115" }
+
+        it_behaves_like "converts pubid to different formats"
+      end
+
+      context "NIST SP 304Ae2017" do
+        let(:short_pubid) { "NIST SP 304Ae2017" }
+
+        it_behaves_like "converts pubid to different formats"
+      end
+
+      context "NBS CRPL 1-2pt3-1" do
+        let(:short_pubid) { "NBS CRPL 1-2pt3-1" }
+
+        it_behaves_like "converts pubid to different formats"
+      end
+
+      context "NIST CSRC White Paper 1" do
+        let(:short_pubid) { "NIST CSRC White Paper 1" }
+        let(:mr_pubid) { "NIST.CSWP.1" }
+
+        it_behaves_like "converts pubid to different formats"
+      end
+
+      context "NIST SP 800-38A Add." do
+        let(:short_pubid) { "NIST SP 800-38A Add." }
+        let(:mr_pubid) { "NIST.SP.800-38A.add-1" }
+
+        it_behaves_like "converts pubid to different formats"
+      end
+
+      context "NIST SP 800-38A Add. 1" do
+        let(:original_pubid) { "NIST SP 800-38A Add. 1" }
+        let(:short_pubid) { "NIST SP 800-38A Add." }
+        let(:mr_pubid) { "NIST.SP.800-38A.add-1" }
+
+        it_behaves_like "converts pubid to different formats"
+      end
+
+      context "NBS CIRC 74err" do
+        let(:short_pubid) { "NBS CIRC 74err" }
+
+        it_behaves_like "converts pubid to different formats"
+      end
+
+      context "NBS CIRC 13e2rJune1908" do
+        let(:short_pubid) { "NBS CIRC 13e2rJune1908" }
+
+        it_behaves_like "converts pubid to different formats"
+      end
+
+      context "NBS CRPL 1-2pt3-1supA" do
+        let(:short_pubid) { "NBS CRPL 1-2pt3-1supA" }
+
+        it_behaves_like "converts pubid to different formats"
+      end
+
+      context "NBS CRPL 4-M-5" do
+        let(:short_pubid) { "NBS CRPL 4-M-5" }
+
+        it_behaves_like "converts pubid to different formats"
+      end
+    end
+
+    context "identifier from NIST Tech Pubs" do
+      it "parse identifiers successfully" do
+        documents = Pubid::Nist::NistTechPubs.status
+        documents.each do |doc|
+          expect do
+            described_class.parse(doc[:finalPubId])
+          rescue Exception => failure
+            if doc[:finalPubId] != "parse error"
+              raise Pubid::Nist::Errors::ParseError, "cannot parse #{doc[:finalPubId]}, #{failure}"
+            end
+          end.not_to raise_error
+        end
+      end
+    end
+
     context "when cannot parse code" do
       it "should raise error" do
         expect { described_class.parse("NIST SP WRONG-CODE") }
@@ -807,7 +912,10 @@ RSpec.describe Pubid::Nist::Identifier do
     end
   end
 
-    describe "access to PubID object" do
+  describe "parse produced output", vcr: true do
+  end
+
+  describe "access to PubID object" do
     it "returns revision" do
       expect(described_class.parse(short_pubid).revision).to eq("5")
     end
