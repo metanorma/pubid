@@ -763,6 +763,13 @@ RSpec.describe Pubid::Nist::Identifier do
       it_behaves_like "converts pubid to short pubid without edition"
     end
 
+    context "NIST SP 800-121r2/Upd1" do
+      let(:short_pubid) { "NIST SP 800-121r2/Upd1" }
+      let(:mr_pubid) { "NIST.SP.800-121r2.u1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "when cannot parse code" do
       it "should raise error" do
         expect { described_class.parse("NIST SP WRONG-CODE") }
