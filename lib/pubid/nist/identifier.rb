@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 require "json"
+require "forwardable"
 
 UPDATE_CODES = YAML.load_file(File.join(File.dirname(__FILE__), "../../../update_codes.yaml"))
 
 module Pubid::Nist
   class Identifier < Pubid::Core::Identifier::Base
+    extend Forwardable
     attr_accessor :serie, :code, :revision, :publisher, :version, :volume,
                   :part, :addendum, :stage, :translation,
                   :edition, :supplement, :update,
@@ -73,7 +75,7 @@ module Pubid::Nist
 
     # @param without_edition [Boolean] render pubid without rendering edition
     def to_s(format = :short, without_edition: false)
-      self.class.get_renderer_class.new(to_h).render(format: format, without_edition: without_edition)
+      self.class.get_renderer_class.new(to_h(deep: false)).render(format: format, without_edition: without_edition)
     end
 
     def to_json(*args)
@@ -98,11 +100,6 @@ module Pubid::Nist
         new(**opts)
       end
 
-      # def transform(params)
-      #   identifier_params = get_transformer_class.new.apply(params)
-      #
-      #   Identifier.create(**identifier_params)
-      # end
       def transform(params)
         # run transform through each element,
         # like running transformer.apply(number: 1) and transformer.apply(year: 1999)
@@ -114,11 +111,12 @@ module Pubid::Nist
           get_transformer_class.new.apply({ k => v }, params)
         end.inject({}, :merge)
 
+        if identifier_params[:addendum]
+          return Addendum.new(base: new(
+            **identifier_params.dup.tap { |h| h.delete(:addendum) }
+          ), **identifier_params[:addendum])
+        end
 
-        # identifier_params = params.map do |k, v|
-        #   get_transformer_class.new.apply({k => v}, params).to_a.first
-        # end.compact.to_h
-        #
         new(**identifier_params)
       end
 
@@ -131,7 +129,7 @@ module Pubid::Nist
       end
 
       def get_renderer_class
-        Renderer
+        Renderer::Base
       end
     end
   end

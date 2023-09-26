@@ -860,7 +860,31 @@ RSpec.describe Pubid::Nist::Identifier do
       end
     end
 
-    context "identifier from NIST Tech Pubs" do
+    context "NIST SP 800-38A Add. 1" do
+      let(:original_pubid) { "NIST SP 800-38A Add. 1" }
+      let(:short_pubid) { "NIST SP 800-38A Add." }
+      let(:mr_pubid) { "NIST.SP.800-38A.add-1" }
+
+      it_behaves_like "converts pubid to different formats"
+
+      it "is addendum" do
+        expect(subject).to be_a(Pubid::Nist::Addendum)
+      end
+    end
+
+    context "NIST.SP.800-38A.add" do
+      let(:original_pubid) { "NIST.SP.800-38A.add" }
+      let(:short_pubid) { "NIST SP 800-38A Add." }
+      let(:mr_pubid) { "NIST.SP.800-38A.add-1" }
+
+      it_behaves_like "converts pubid to different formats"
+
+      it "is addendum" do
+        expect(subject).to be_a(Pubid::Nist::Addendum)
+      end
+    end
+
+    context "identifier from NIST Tech Pubs", vcr: true do
       it "parse identifiers successfully" do
         documents = Pubid::Nist::NistTechPubs.status
         documents.each do |doc|
@@ -910,9 +934,6 @@ RSpec.describe Pubid::Nist::Identifier do
 
       it_behaves_like "parse identifiers from file"
     end
-  end
-
-  describe "parse produced output", vcr: true do
   end
 
   describe "access to PubID object" do

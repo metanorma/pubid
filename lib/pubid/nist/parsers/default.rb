@@ -99,7 +99,8 @@ module Pubid::Nist
       end
 
       rule(:addendum) do
-        (str("-add") | str(".add-1") | str(" Add. 1") | str(" Add.")).as(:addendum)
+        (str("-add") | str(".add") | str(" Add.")) >>
+          (str(" ") | str("-")).maybe >> (digits | str("")).as(:number).as(:addendum)
       end
 
       rule(:section) do

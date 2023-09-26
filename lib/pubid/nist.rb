@@ -15,7 +15,8 @@ require_relative "nist/parsers/default"
 require_relative "nist/update"
 require_relative "nist/transformer"
 require_relative "nist/parser"
-require_relative "nist/renderer"
+require_relative "nist/renderer/base"
+require_relative "nist/renderer/addendum"
 
 Dir[File.join(__dir__, 'nist/parsers', '*.rb')].each do |file|
   require file
@@ -34,3 +35,4 @@ require_relative "nist/stage"
 require_relative "nist/errors"
 require_relative "nist/nist_tech_pubs"
 require_relative "nist/edition"
+require_relative "nist/addendum"
