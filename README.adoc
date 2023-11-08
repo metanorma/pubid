@@ -1,4 +1,4 @@
-= JIS publication identifiers ("CCSDS PubID")
+= CCSDS publication identifiers ("CCSDS PubID")
 
 == Purpose
 
