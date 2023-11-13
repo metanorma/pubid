@@ -55,5 +55,25 @@ module Pubid::Etsi
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "ETSI ETR 310/C1 ed.1 (1996-10)" do
+      let(:pubid) { "ETSI ETR 310/C1 ed.1 (1996-10)" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ETSI ETS 300 097-1/A1 ed.1 (1994-11)" do
+      let(:pubid) { "ETSI ETS 300 097-1/A1 ed.1 (1994-11)" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    describe "parse identifiers from examples files" do
+      context "parses ETSI identifiers from pubids.txt" do
+        let(:examples_file) { "pubids.txt" }
+
+        it_behaves_like "parse identifiers from file"
+      end
+    end
   end
 end

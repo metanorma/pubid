@@ -3,7 +3,7 @@ module Pubid::Etsi::Renderer
     TYPE = "".freeze
 
     def render_identifier(params)
-      "%{publisher} %{type} %{number}%{part}%{version}%{edition}%{published}" % params
+      "%{publisher} %{type} %{number}%{part}%{amendment}%{corrigendum}%{version}%{edition}%{published}" % params
     end
 
     def render_version(version, _opts, _params)
@@ -24,6 +24,14 @@ module Pubid::Etsi::Renderer
       else
         "-#{part}"
       end
+    end
+
+    def render_amendment(amendment, _opts, _params)
+      "/A#{amendment[:number]}"
+    end
+
+    def render_corrigendum(corrigendum, _opts, _params)
+      "/C#{corrigendum[:number]}"
     end
   end
 end

@@ -9,32 +9,20 @@ module Pubid
   end
 end
 
-
 require "pubid-core"
 
 require_relative "etsi/identifier"
 require_relative "etsi/identifier/base"
+require_relative "etsi/identifier/supplement"
+require_relative "etsi/identifier/amendment"
+require_relative "etsi/identifier/corrigendum"
 require_relative "etsi/renderer/base"
 
 config = Pubid::Core::Configuration.new
-# config.default_type = Pubid::Ccsds::Identifier::Base
-# config.types = [Pubid::Ccsds::Identifier::Base,
-#                 Pubid::Ccsds::Identifier::Corrigendum]
-# config.type_names = {}.freeze
-# Pubid::Ccsds::Identifier.set_config(config)
-# EN "European Standard"
-# ES "ETSI Standard"
-# EG "ETSI Guide"
-# TS "Technical Specification"
-# (deprecated) ETR "European telecommunications report"
-# (deprecated) ETS "European telecommunications standard"
-# (deprecated) I-ETS: Provisional ETS
-# TBR "Technical Basis for Regulation"
-# (deprecated) TCRTR "Technical Committee Report - Technical Report"
-# (deprecated) NET "Norme Européenne de Télécommunication" / "Technical
-# GR "Group Report"
-# GS "Group Specification"
-# SR "Special Report"
+config.default_type = Pubid::Etsi::Identifier::Base
+config.types = [Pubid::Etsi::Identifier::Base,
+                Pubid::Etsi::Identifier::Amendment,
+                Pubid::Etsi::Identifier::Corrigendum]
 
 config.type_names = {
   en: {

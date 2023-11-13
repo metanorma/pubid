@@ -25,6 +25,14 @@ module Pubid::Etsi
       str("ed.") >> digits.as(:edition)
     end
 
+    rule(:amendment) do
+      str("/A") >> digits.as(:number).as(:amendment)
+    end
+
+    rule(:corrigendum) do
+      str("/C") >> digits.as(:number).as(:corrigendum)
+    end
+
     rule(:number) do
       (
         # for identifiers like ETSI GTS GSM 02.01 V5.5.0
@@ -41,7 +49,7 @@ module Pubid::Etsi
     #
     rule(:identifier) do
       str("ETSI") >> space >> type >> space >>
-        number >> part.maybe >> space >>
+        number >> part.maybe >> amendment.maybe >> corrigendum.maybe >> space >>
         (version | edition) >> space >> published_date
     end
 

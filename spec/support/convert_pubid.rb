@@ -18,7 +18,8 @@ shared_examples "parse identifiers from file" do
               "couldn't parse #{pub_id}\n#{failure.message}"
       end.not_to raise_error
 
-      expect(described_class.parse(pub_id).to_s.upcase).to eq(pub_id.upcase)
+      expect(described_class.parse(pub_id).to_s.upcase)
+        .to eq(pub_id.upcase.sub(" GSM", ""))
     end
   end
 end
