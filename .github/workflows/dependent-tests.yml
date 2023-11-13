@@ -57,9 +57,10 @@ jobs:
         working-directory: dependent
 
     - run: |
-        sed -i.bak '/pubid-core/d' pubid-${{ matrix.flavor }}.gemspec
+        sed -i.bak "/pubid-core/d" pubid-${{ matrix.flavor }}.gemspec
         bundle add pubid-core --path ..
       working-directory: dependent
+      shell: bash
 
     - run: bundle exec rake
       working-directory: dependent
