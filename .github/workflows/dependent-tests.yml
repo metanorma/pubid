@@ -56,9 +56,27 @@ jobs:
         bundler-cache: true
         working-directory: dependent
 
-    - run: |
-        sed -i.bak '/pubid-core/d' pubid-${{ matrix.flavor }}.gemspec
-        bundle add pubid-core --path ..
+    - name: Replace rubygems's pubid-core with github's one
+      shell: python
+      run: |
+        import fileinput
+        import sys
+        import os
+        print("Python version:", sys.version)
+        with fileinput.FileInput('pubid-${{ matrix.flavor }}.gemspec', inplace=True) as file:
+          for line in file:
+            if 'pubid-core' not in line:
+              print(line, end='')
+        print("'pubid-core' removed from pubid-${{ matrix.flavor }}.gemspec")
+        if os.path.exists("Gemfile.lock"):
+          os.remove("Gemfile.lock")
+          print("Gemfile.lock dropped")
+        print("> git diff")
+        sys.stdout.flush()
+        os.system("git diff")
+        print("> bundle add pubid-core --path ..")
+        sys.stdout.flush()
+        os.system("bundle add pubid-core --path ..")
       working-directory: dependent
 
     - run: bundle exec rake
