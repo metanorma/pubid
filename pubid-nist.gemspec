@@ -33,6 +33,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor"
   spec.add_dependency "lightly"
   spec.add_dependency "parslet"
-  spec.add_dependency "pubid-core", "~> 1.10.3"
+  spec.add_dependency "pubid-core", "~> 1.10.4"
   spec.add_dependency "rubyzip"
 end
