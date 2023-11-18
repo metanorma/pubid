@@ -1,5 +1,5 @@
 module Pubid::Nist
-  class Edition
+  class Edition < Pubid::Core::Entity
     attr_accessor :year, :month, :day, :parsed, :sequence
 
     def initialize(parsed: nil, year: nil, month: nil, day: nil, sequence: nil)

@@ -2,7 +2,7 @@ PUBLISHERS = YAML.load_file(File.join(File.dirname(__FILE__),
                                       "../../../publishers.yaml"))
 
 module Pubid::Nist
-  class Publisher
+  class Publisher < Pubid::Core::Entity
     attr_accessor :publisher
 
     def initialize(publisher:)
@@ -15,10 +15,6 @@ module Pubid::Nist
       return @publisher if %i[short mr].include?(format)
 
       PUBLISHERS[format.to_s][@publisher]
-    end
-
-    def ==(other)
-      other.publisher == @publisher
     end
 
     def self.publishers_keys

@@ -954,4 +954,15 @@ RSpec.describe Pubid::Nist::Identifier do
         described_class.parse("NIST SP 260-162 2006ed.").weight
     end
   end
+
+  describe "#==" do
+    context "when identifiers equal" do
+      let(:id1) { described_class.parse("NIST SP 800-66r2 IPD") }
+      let(:id2) { described_class.parse("NIST SP 800-66r2 IPD") }
+
+      it "should return equal" do
+        expect(id1).to eq(id2)
+      end
+    end
+  end
 end

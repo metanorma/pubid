@@ -1,5 +1,5 @@
 module Pubid::Nist
-  class Update
+  class Update < Pubid::Core::Entity
     attr_accessor :number, :year, :month
 
     def initialize(number: nil, year: nil, month: nil)

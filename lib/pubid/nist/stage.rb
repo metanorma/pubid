@@ -1,7 +1,7 @@
 STAGES = YAML.load_file(File.join(File.dirname(__FILE__), "../../../stages.yaml"))
 
 module Pubid::Nist
-  class Stage
+  class Stage < Pubid::Core::Entity
     attr_accessor :id, :type
 
     def initialize(id:, type:)
