@@ -11,7 +11,8 @@ module Pubid::Iso::Renderer
     end
 
     def render_identifier(params, opts)
-      "%{typed_stage}%{stage}#{render_type_prefix(params)} %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{addendum}%{edition}" % params
+      stage = params.key?(:stage) ? postrender_stage(params[:stage], opts, params) : ""
+      "#{stage}#{render_type_prefix(params, opts)} %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{addendum}%{edition}" % params
     end
   end
 end

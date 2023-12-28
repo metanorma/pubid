@@ -7,7 +7,7 @@ module Pubid::Iso::Renderer
       res = ("%{publisher} DIR%{dirtype}%{number}%{year}%{edition}" % params)
 
       if params.key?(:joint_document)
-        joint_params = prerender_params(params[:joint_document].get_params, {})
+        joint_params = prerender_params(params[:joint_document].to_h(deep: false), {})
         joint_params.default = ""
         res += (" + %{publisher}%{dirtype}%{number}%{year}" % joint_params)
       end

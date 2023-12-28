@@ -13,7 +13,7 @@ module Pubid::Iso::Renderer
       return base.urn if base.base || base.is_a?(Pubid::Iso::Identifier::Directives)
 
       # to avoid rendering language as part of base
-      Urn.new(base.get_params).render
+      Urn.new(base.to_h(deep: false)).render
     end
 
     def render_number(number, _opts, params)

@@ -31,7 +31,7 @@ module Pubid::Iso
       end
 
       def typed_stage_abbrev
-        if self.class::TYPED_STAGES.key?(typed_stage)
+        if self.class::TYPED_STAGES.key?(stage)
           super
         else
           stage&.abbr

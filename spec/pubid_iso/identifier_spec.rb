@@ -27,14 +27,14 @@ module Pubid::Iso
         let(:typed_stage) { "DTR" }
 
         it { is_expected.to a_kind_of(Identifier::TechnicalReport) }
-        it { expect(subject.typed_stage).to eq(:dtr) }
+        it { expect(subject.stage.abbr).to eq(:dtr) }
       end
 
       context "when DTS" do
         let(:typed_stage) { "DTS" }
 
         it { is_expected.to a_kind_of(Identifier::TechnicalSpecification) }
-        it { expect(subject.typed_stage).to eq(:dts) }
+        it { expect(subject.stage.abbr).to eq(:dts) }
       end
 
       context "when no type or typed stage" do

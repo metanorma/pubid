@@ -32,7 +32,7 @@ module Pubid::Iso
       end
 
       def urn
-        Renderer::UrnSupplement.new(get_params).render
+        Renderer::UrnSupplement.new(to_h(deep: false)).render
       end
     end
   end

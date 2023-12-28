@@ -12,7 +12,7 @@ module Pubid::Iso
                     :tctype, :sctype, :wgtype, :tcnumber, :scnumber, :wgnumber,
                     :dirtype,
                     :base,
-                    :typed_stage,
+                    # :typed_stage,
                     :supplements,
                     :addendum
 
@@ -62,7 +62,7 @@ module Pubid::Iso
         end
 
         if stage
-          @typed_stage, @stage = resolve_stage(stage)
+          @stage = resolve_stage(stage)
         elsif iteration && !is_a?(Supplement)
           raise Errors::IterationWithoutStageError, "Document without stage cannot have iteration"
         end
@@ -178,7 +178,7 @@ module Pubid::Iso
       # @return [String] URN identifier
       def urn
         ((@tctype && Renderer::UrnTc) || Pubid::Iso::Renderer::Urn).new(
-          get_params.merge({ type: type[:key] }),
+          to_h(deep: false).merge({ type: type[:key] }),
         ).render + (language ? ":#{language}" : "")
       end
 
@@ -243,7 +243,7 @@ module Pubid::Iso
         options[:with_prf] = with_prf
         options[:language] = lang
 
-        self.class.get_renderer_class.new(get_params).render(**options) +
+        self.class.get_renderer_class.new(to_h(deep: false)).render(**options) +
           if @joint_document
             render_joint_document(@joint_document)
           end.to_s

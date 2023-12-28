@@ -24,7 +24,7 @@ module Pubid::Iso
       end
 
       def urn
-        Renderer::UrnDir.new(get_params).render
+        Renderer::UrnDir.new(to_h(deep: false)).render
       end
 
       def render_joint_document(joint_document)

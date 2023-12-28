@@ -42,10 +42,10 @@ module Pubid::Iso::Renderer
     def render_base(_base, _opts, _params)
     end
 
-    def render_type_prefix(params)
-      result = params[:typed_stage].nil? || params[:typed_stage].empty? ? self.class::TYPE : ""
+    def render_type_prefix(params, opts)
+      result = params[:stage].nil? || !params[:stage].is_a?(Pubid::Core::TypedStage) ? self.class::TYPE : ""
 
-      if params[:stage] && !params[:stage].empty? && !result.empty?
+      if params[:stage] != "" && !params[:stage].to_s(with_prf: opts[:with_prf]).empty? && !result.empty?
         " #{result}"
       else
         result
@@ -53,7 +53,8 @@ module Pubid::Iso::Renderer
     end
 
     def render_identifier(params, opts)
-      "%{publisher}%{typed_stage}%{stage}#{render_type_prefix(params)} %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{addendum}%{edition}" % params
+      stage = params.key?(:stage) ? postrender_stage(params[:stage], opts, params) : ""
+      "%{publisher}#{stage}#{render_type_prefix(params, opts)} %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{addendum}%{edition}" % params
     end
 
     def render_copublisher_string(publisher, copublishers, opts)
@@ -125,8 +126,11 @@ module Pubid::Iso::Renderer
       typed_stage.to_s
     end
 
-    def render_stage(stage, opts, params)
-      return if params[:typed_stage]
+    def render_stage(stage, _opts, _params)
+      stage
+    end
+
+    def postrender_stage(stage, opts, params)
       return if stage.empty_abbr?(with_prf: opts[:with_prf])
 
       if opts[:language]

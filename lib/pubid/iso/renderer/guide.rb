@@ -8,8 +8,8 @@ module Pubid::Iso::Renderer
       elsif opts[:language] == :russian
         "Руководство %{publisher}%{stage} %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}" % params
       else
-        if params[:typed_stage] && !params[:typed_stage].empty?
-          "%{publisher}%{typed_stage}%{stage} %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}" % params
+        if params[:stage] && params[:stage].is_a?(Pubid::Core::TypedStage)
+          "%{publisher}%{stage} %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}" % params
         else
           "%{publisher}%{stage} Guide %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{edition}" % params
         end
