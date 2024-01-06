@@ -17,10 +17,25 @@ module Pubid::Iso
       end
 
       context "when have joint document" do
-        let(:params) { { joint_document: "IDF #{number}" } }
+        let(:params) { { joint_document: { publisher: "IDF", number: number } } }
 
         it "renders correct identifier" do
           expect(subject.to_s).to eq("ISO #{number}|IDF #{number}")
+        end
+
+        context "joint document have supplement" do
+          let(:params) do
+            { publisher: "ISO", copublisher: "IEC",
+              joint_document: { publisher: "", year: 2022,
+                                base: { publisher: "IEC", type: :dir },
+                                type: :sup },
+              type: :dir
+            }
+          end
+
+          it "renders identifier with joint document" do
+            expect(subject.to_s).to eq("ISO/IEC DIR #{number} + IEC SUP:2022")
+          end
         end
       end
 
@@ -46,6 +61,10 @@ module Pubid::Iso
 
           it "renders stage first" do
             expect(subject.to_s).to eq("ISO/WD TR #{number}")
+          end
+
+          it "returns type for #to_h" do
+            expect(subject.to_h[:type]).to eq(:tr)
           end
         end
 

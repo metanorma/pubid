@@ -21,7 +21,7 @@ module Pubid::Iso
       #
       # @param stage [Stage, Symbol, String] stage or typed stage, e.g. "PWI", "NP", "50.00", Stage.new(abbr: :WD), "DTR"
       # @param iteration [Integer] document iteration, eg. "1", "2", "3"
-      # @param joint_document [Identifier] joint document
+      # @param joint_document [Identifier, Hash] joint document
       # @param supplements [Array<Supplement>] supplements
       # @param tctype [String] Technical Committee type, eg. "TC", "JTC"
       # @param sctype [String] TC subsommittee, eg. "SC"
@@ -30,7 +30,7 @@ module Pubid::Iso
       # @param scnumber [Integer] Subsommittee number, eg. "1", "2"
       # @param wgnumber [Integer] Working group number, eg. "1", "2"
       # @param dirtype [String] Directives document type, eg. "JTC"
-      # @param base [Identifier] base document for supplement's identifier
+      # @param base [Identifier, Hash] base document for supplement's identifier
       # @param type [nil, :tr, :ts, :amd, :cor, :guide, :dir, :tc, Type] document's type, eg. :tr, :ts, :amd, :cor, Type.new(:tr)
       # @raise [Errors::SupplementWithoutYearOrStageError] when trying to apply
       #   supplement to the document without edition year or stage
@@ -68,7 +68,13 @@ module Pubid::Iso
         end
 
         @iteration = iteration.to_i if iteration
-        @joint_document = joint_document if joint_document
+        if joint_document
+          if joint_document.is_a?(Hash)
+            @joint_document = Identifier.create(**joint_document)
+          else
+            @joint_document = joint_document
+          end
+        end
         @tctype = tctype if tctype
         @sctype = sctype.to_s if sctype
         @wgtype = wgtype.to_s if wgtype
@@ -77,7 +83,13 @@ module Pubid::Iso
         @wgnumber = wgnumber.to_s if wgnumber
         @dir = dir.to_s if dir
         @dirtype = dirtype.to_s if dirtype
-        @base = base if base
+        if base
+          if base.is_a?(Hash)
+            @base = Identifier.create(**base)
+          else
+            @base = base
+          end
+        end
         @part = part if part
         @addendum = addendum if addendum
         @edition = edition
