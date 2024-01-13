@@ -8,7 +8,7 @@ module Pubid::Iso
       TYPED_STAGES = {}.freeze
 
       def self.type
-        { key: :r, title: "Recommendation" }
+        { key: :r, title: "Recommendation", short: "R" }
       end
 
       def self.get_renderer_class

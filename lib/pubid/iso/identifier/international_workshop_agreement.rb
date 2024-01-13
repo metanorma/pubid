@@ -14,7 +14,7 @@ module Pubid::Iso
       }.freeze
 
       def self.type
-        { key: :iwa, title: "International Workshop Agreement" }
+        { key: :iwa, title: "International Workshop Agreement", short: "IWA" }
       end
 
       def self.get_renderer_class

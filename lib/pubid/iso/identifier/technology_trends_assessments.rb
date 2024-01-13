@@ -19,7 +19,7 @@ module Pubid::Iso
       }.freeze
 
       def self.type
-        { key: :tta, title: "Technology Trends Assessments" }
+        { key: :tta, title: "Technology Trends Assessments", short: "TTA" }
       end
 
       def self.get_renderer_class

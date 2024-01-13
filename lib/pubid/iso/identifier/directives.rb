@@ -16,7 +16,7 @@ module Pubid::Iso
       end
 
       def self.type
-        { key: :dir, title: "Directives" }
+        { key: :dir, title: "Directives", short: "DIR" }
       end
 
       def self.get_renderer_class

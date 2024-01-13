@@ -21,7 +21,7 @@ module Pubid::Iso
         },
       }.freeze
       def self.type
-        { key: :amd, title: "Amendment" }
+        { key: :amd, title: "Amendment", short: "AMD" }
       end
 
       def self.get_renderer_class

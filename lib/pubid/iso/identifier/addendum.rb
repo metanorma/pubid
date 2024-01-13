@@ -13,7 +13,7 @@ module Pubid::Iso
         },
       }.freeze
       def self.type
-        { key: :add, title: "Addendum" }
+        { key: :add, title: "Addendum", short: "ADD" }
       end
 
       def self.get_renderer_class

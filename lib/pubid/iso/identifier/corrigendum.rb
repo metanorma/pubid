@@ -22,7 +22,7 @@ module Pubid::Iso
       }.freeze
 
       def self.type
-        { key: :cor, title: "Corrigendum" }
+        { key: :cor, title: "Corrigendum", short: "COR" }
       end
 
       def self.get_renderer_class

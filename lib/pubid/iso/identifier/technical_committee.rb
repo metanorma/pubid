@@ -8,7 +8,7 @@ module Pubid::Iso
       TYPED_STAGES = {}.freeze
 
       def self.type
-        { key: :tc, title: "Technical Committee" }
+        { key: :tc, title: "Technical Committee", short: "TC" }
       end
 
       def self.get_renderer_class

@@ -25,7 +25,7 @@ module Pubid::Iso
       end
 
       def self.type
-        { key: :guide, title: "Guide" }
+        { key: :guide, title: "Guide", short: "GUIDE" }
       end
     end
   end

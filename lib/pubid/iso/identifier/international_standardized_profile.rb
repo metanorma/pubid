@@ -19,7 +19,7 @@ module Pubid::Iso
       }.freeze
 
       def self.type
-        { key: :isp, title: "International Standardized Profile" }
+        { key: :isp, title: "International Standardized Profile", short: "ISP" }
       end
 
       def self.get_renderer_class

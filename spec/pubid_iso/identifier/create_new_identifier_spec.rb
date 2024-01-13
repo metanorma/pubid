@@ -57,14 +57,14 @@ module Pubid::Iso
         end
 
         context "when have document type" do
-          let(:params) { { stage: stage, type: :tr } }
+          let(:params) { { stage: stage, type: "TR" } }
 
           it "renders stage first" do
             expect(subject.to_s).to eq("ISO/WD TR #{number}")
           end
 
           it "returns type for #to_h" do
-            expect(subject.to_h[:type]).to eq(:tr)
+            expect(subject.to_h[:type]).to eq("TR")
           end
         end
 

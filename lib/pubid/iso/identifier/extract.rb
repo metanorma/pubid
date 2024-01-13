@@ -8,7 +8,7 @@ module Pubid::Iso
       TYPED_STAGES = {}.freeze
 
       def self.type
-        { key: :ext, title: "Extract" }
+        { key: :ext, title: "Extract", short: "EXT" }
       end
 
       def self.get_renderer_class

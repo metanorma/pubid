@@ -19,7 +19,7 @@ module Pubid::Iso
       }.freeze
 
       def self.type
-        { key: :pas, title: "Publicly Available Specification" }
+        { key: :pas, title: "Publicly Available Specification", short: "PAS" }
       end
 
       def self.get_renderer_class
