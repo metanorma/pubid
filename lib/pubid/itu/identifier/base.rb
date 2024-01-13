@@ -31,7 +31,7 @@ module Pubid::Itu
       end
 
       def to_s(**opts)
-        self.class.get_renderer_class.new(get_params).render(**opts)
+        self.class.get_renderer_class.new(to_h(deep: false)).render(**opts)
       end
 
       class << self
