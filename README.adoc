@@ -1,0 +1,8 @@
+= PubID
+
+image:https://badge.fury.io/rb/pubid.svg["Gem Version", link="https://badge.fury.io/rb/pubid"]
+
+== Purpose
+
+This gem include all pubid-* gems for compatibility testing.
+
