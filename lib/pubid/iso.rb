@@ -30,6 +30,7 @@ require_relative "iso/identifier/technology_trends_assessments"
 require_relative "iso/identifier/international_workshop_agreement"
 require_relative "iso/identifier/extract"
 require_relative "iso/identifier/addendum"
+require_relative "iso/identifier/data"
 
 config = Pubid::Core::Configuration.new
 config.stages = YAML.load_file(File.join(File.dirname(__FILE__), "../../stages.yaml"))
@@ -50,7 +51,8 @@ config.types = [Pubid::Iso::Identifier::InternationalStandard,
                 Pubid::Iso::Identifier::TechnologyTrendsAssessments,
                 Pubid::Iso::Identifier::Guide,
                 Pubid::Iso::Identifier::Extract,
-                Pubid::Iso::Identifier::Addendum]
+                Pubid::Iso::Identifier::Addendum,
+                Pubid::Iso::Identifier::Data]
 config.type_names = { tr: {
                         long: "Technical Report",
                         short: "TR",
