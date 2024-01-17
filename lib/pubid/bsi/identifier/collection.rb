@@ -15,7 +15,7 @@ module Pubid::Bsi
       end
 
       def to_s
-        Renderer::Collection.new(get_params).render
+        Renderer::Collection.new(to_h(deep: false)).render
       end
     end
   end

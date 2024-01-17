@@ -15,9 +15,9 @@ module Pubid::Bsi
       { supplement:
           case context[:supplement][:type]
           when "A"
-            Identifier::Amendment.new(**context[:supplement])
+            Identifier::Amendment.new(**context[:supplement].dup.tap { |h| h.delete(:type) })
           when "C"
-            Identifier::Corrigendum.new(**context[:supplement])
+            Identifier::Corrigendum.new(**context[:supplement].dup.tap { |h| h.delete(:type) })
           end
        }
     end
