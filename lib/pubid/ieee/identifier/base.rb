@@ -114,7 +114,7 @@ module Pubid::Ieee
       def to_s(format = :short, with_trademark: false)
         opts = { format: format, with_trademark: with_trademark }
         (@iso_identifier ? @iso_identifier.to_s(format: :ref_num_short) : "") +
-          self.class.get_renderer_class.new(get_params).render(**opts) +
+          self.class.get_renderer_class.new(to_h(deep: false)).render(**opts) +
           (with_trademark ? trademark(@number) : "")
       end
 

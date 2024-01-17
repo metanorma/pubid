@@ -899,7 +899,7 @@ module Pubid::Ieee
 
         it_behaves_like "converts pubid to pubid"
 
-        it { expect(subject.iso_identifier.typed_stage).to eq(:dis) }
+        it { expect(subject.iso_identifier.stage.abbr).to eq(:dis) }
       end
 
       context "ISO/IEC/IEEE P29119-1/CD, June 2020" do
