@@ -28,9 +28,9 @@ module Pubid::Cen
     def self.convert_supplement(supplement)
       case supplement[:type]
       when "A"
-        Identifier::Amendment.new(**supplement)
+        Identifier::Amendment.new(**supplement.dup.tap { |h| h.delete(:type) })
       when "AC"
-        Identifier::Corrigendum.new(**supplement)
+        Identifier::Corrigendum.new(**supplement.dup.tap { |h| h.delete(:type) })
       end
     end
 
