@@ -45,7 +45,13 @@ module Pubid::Nist
       def parse_docid(doc)
         id = doc.at("publisher_item/item_number", "publisher_item/identifier")
                &.text&.sub(%r{^/}, "")
-        doi = doc.at("doi_data/doi").text.gsub("10.6028/", "")
+        if id == "NBS BH 10"
+          # XXX: "doi" attribute is missing for doi_data
+          doi = "NBS.BH.10"
+        else
+          doi = doc.at("doi_data/doi").text.gsub("10.6028/", "")
+        end
+
         title = doc.at("titles/title").text
         title += " #{doc.at('titles/subtitle').text}" if doc.at("titles/subtitle")
         case doi
