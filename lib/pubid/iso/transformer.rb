@@ -114,6 +114,11 @@ module Pubid::Iso
       context.select { |k, v| k != :dir_joint_document }
     end
 
+    rule(jtc_dir: simple(:jtc_dir)) do |context|
+      context[:type] = "DIR"
+      context
+    end
+
     def self.convert_stage(code)
       russian_code = Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:stage].key(code.to_s)
       return { stage: russian_code } if russian_code

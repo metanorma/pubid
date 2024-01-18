@@ -26,3 +26,5 @@ ISO/IEC Directives, IEC Supplement:2022
 ISO/IEC Directives, Part 1 -- Consolidated ISO Supplement
 ISO/IEC Directives, JTC 1 Supplement:2021
 ISO/IEC Directives, Part 1:2022 + IEC Supplement:2022
+ISO/IEC JTC 1 DIR
+ISO/IEC JTC 1 DIR:2004

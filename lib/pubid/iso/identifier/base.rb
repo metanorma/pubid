@@ -12,9 +12,9 @@ module Pubid::Iso
                     :tctype, :sctype, :wgtype, :tcnumber, :scnumber, :wgnumber,
                     :dirtype,
                     :base,
-                    # :typed_stage,
                     :supplements,
-                    :addendum
+                    :addendum,
+                    :jtc_dir
 
       # Creates new identifier from options provided, includes options from
       # Pubid::Core::Identifier#initialize
@@ -32,6 +32,7 @@ module Pubid::Iso
       # @param dirtype [String] Directives document type, eg. "JTC"
       # @param base [Identifier, Hash] base document for supplement's identifier
       # @param type [nil, :tr, :ts, :amd, :cor, :guide, :dir, :tc, Type] document's type, eg. :tr, :ts, :amd, :cor, Type.new(:tr)
+      # @param jtc_dir [String] String to indicate "JTC 1 Directives" identifier
       # @raise [Errors::SupplementWithoutYearOrStageError] when trying to apply
       #   supplement to the document without edition year or stage
       # @raise [Errors::IsStageIterationError] when trying to apply iteration
@@ -47,7 +48,7 @@ module Pubid::Iso
                      scnumber: nil, wgnumber:nil,
                      dir: nil, dirtype: nil, year: nil, amendments: nil,
                      corrigendums: nil, type: nil, base: nil, supplements: nil,
-                     part: nil, addendum: nil, edition: nil, **opts)
+                     part: nil, addendum: nil, edition: nil, jtc_dir: nil, **opts)
         super(**opts.merge(number: number, publisher: publisher, year: year,
                            amendments: amendments, corrigendums: corrigendums))
 
@@ -83,6 +84,9 @@ module Pubid::Iso
         @wgnumber = wgnumber.to_s if wgnumber
         @dir = dir.to_s if dir
         @dirtype = dirtype.to_s if dirtype
+        if jtc_dir
+          @jtc_dir = jtc_dir
+        end
         if base
           if base.is_a?(Hash)
             @base = Identifier.create(**base)

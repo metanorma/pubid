@@ -319,6 +319,33 @@ module Pubid::Iso
             expect(subject.typed_stage_abbrev).to eq("PRF DIR")
           end
         end
+
+        context "when supplement" do
+          let(:params) do
+            { base: { number: "1",
+                      copublisher: "IEC",
+                      dirtype: "JTC",
+                      type: :dir },
+              publisher: nil,
+              type: :sup }
+          end
+          let(:number) { nil }
+
+          it "render DIR document" do
+            expect(subject.to_s).to eq("ISO/IEC DIR JTC 1 SUP")
+          end
+        end
+
+        context "JTC type" do
+          let(:params) do
+            { number: "1", copublisher: "IEC", dirtype: "JTC", jtc_dir: true, type: :dir }
+          end
+          let(:number) { nil }
+
+          it "render DIR document" do
+            expect(subject.to_s).to eq("ISO/IEC JTC 1 DIR")
+          end
+        end
       end
 
       context "when another publisher" do

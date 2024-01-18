@@ -101,5 +101,11 @@ module Pubid::Iso
       it_behaves_like "converts pubid to urn"
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "ISO/IEC JTC 1 DIR" do
+      let(:pubid) { "ISO/IEC JTC 1 DIR" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end

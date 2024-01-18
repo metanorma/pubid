@@ -169,6 +169,7 @@ module Pubid::Iso
       ((str("DIR") | str("Directives Part") | str("Directives, Part") | str("Directives,")).as(:type) >> space).maybe >>
         (str("JTC").as(:dirtype) >> space).maybe >>
         (digits.as(:number) >> (str(":") >> year).maybe).maybe >>
+        (space >> str("DIR").as(:jtc_dir) >> (str(":") >> year).maybe).maybe >>
         (str(" -- Consolidated").maybe >> (str("").as(:mark) >> space? >>
           (organization.as(:publisher) >> space?).maybe >>
           array_to_str(DIR_SUPPLEMENTS) >> (str(":") >> year).maybe >>

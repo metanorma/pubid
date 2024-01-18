@@ -4,7 +4,11 @@ module Pubid::Iso::Renderer
   class Dir < Base
 
     def render_identifier(params, opts)
-      res = ("%{publisher} DIR%{dirtype}%{number}%{year}%{edition}" % params)
+      if params.key?(:jtc_dir)
+        res = ("%{publisher}%{dirtype}%{number} DIR%{year}%{edition}" % params)
+      else
+        res = ("%{publisher} DIR%{dirtype}%{number}%{year}%{edition}" % params)
+      end
 
       if params.key?(:joint_document)
         joint_params = prerender_params(params[:joint_document].to_h(deep: false), {})
