@@ -34,3 +34,8 @@ shared_examples "converts pubid to pubid with prf" do
   end
 end
 
+shared_examples "creates same identifier from #to_h output" do
+  it "creates same identifier from #to_h output" do
+    expect(subject.to_s).to eq(Pubid::Iso::Identifier.create(**subject.to_h).to_s)
+  end
+end
