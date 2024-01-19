@@ -172,7 +172,7 @@ module Pubid::Iso
         (space >> str("DIR").as(:jtc_dir) >> (str(":") >> year).maybe).maybe >>
         (str(" -- Consolidated").maybe >> (str("").as(:mark) >> space? >>
           (organization.as(:publisher) >> space?).maybe >>
-          array_to_str(DIR_SUPPLEMENTS) >> (str(":") >> year).maybe >>
+          array_to_str(DIR_SUPPLEMENTS) >> (str(":") >> (year >> (dash >> month_digits.as(:month)).maybe)).maybe >>
           dir_supplement_edition.maybe).repeat(1).as(:supplements)).maybe >>
           # parse identifiers with publisher at the end, e.g. "ISO/IEC DIR 2 ISO"
           (space >> organization.as(:publisher) >> (str(":") >> year).maybe).as(:edition).maybe

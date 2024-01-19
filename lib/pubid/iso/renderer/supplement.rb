@@ -32,7 +32,7 @@ module Pubid::Iso::Renderer
 
       if self.class == Supplement
         if opts[:base_type] == :dir
-          "%{stage}%{publisher} SUP%{number}%{part}%{iteration}%{year}%{edition}" % params
+          "%{stage}%{publisher} SUP%{number}%{part}%{iteration}%{year}%{month}%{edition}" % params
         else
           # type_prefix = "/#{type_prefix}" unless type_prefix.empty?
           "/%{stage}#{type_prefix}%{number}%{part}%{iteration}%{year}%{edition}" % params
@@ -59,6 +59,10 @@ module Pubid::Iso::Renderer
 
     def render_edition(edition, opts, _params)
       " Edition #{edition}" if opts[:with_edition]
+    end
+
+    def render_month(month, _opts, _params)
+      "-#{month}"
     end
   end
 end

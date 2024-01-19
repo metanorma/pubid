@@ -14,7 +14,8 @@ module Pubid::Iso
                     :base,
                     :supplements,
                     :addendum,
-                    :jtc_dir
+                    :jtc_dir,
+                    :month
 
       # Creates new identifier from options provided, includes options from
       # Pubid::Core::Identifier#initialize
@@ -48,7 +49,7 @@ module Pubid::Iso
                      scnumber: nil, wgnumber:nil,
                      dir: nil, dirtype: nil, year: nil, amendments: nil,
                      corrigendums: nil, type: nil, base: nil, supplements: nil,
-                     part: nil, addendum: nil, edition: nil, jtc_dir: nil, **opts)
+                     part: nil, addendum: nil, edition: nil, jtc_dir: nil, month: nil, **opts)
         super(**opts.merge(number: number, publisher: publisher, year: year,
                            amendments: amendments, corrigendums: corrigendums))
 
@@ -97,6 +98,7 @@ module Pubid::Iso
         @part = part if part
         @addendum = addendum if addendum
         @edition = edition
+        @month = month
       end
 
       class << self
@@ -113,6 +115,7 @@ module Pubid::Iso
         def transform_supplements(supplements_params, base_params)
           supplements = supplements_params.map do |supplement|
             Identifier.create(number: supplement[:number], year: supplement[:year],
+                month: supplement[:month],
                 stage: supplement[:typed_stage], edition: supplement[:edition],
                 iteration: supplement[:iteration], type: (supplement[:type] || !supplement[:typed_stage] && :sup),
                 publisher: supplement[:publisher], base: Identifier.create(**base_params))
