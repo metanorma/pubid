@@ -106,12 +106,51 @@ module Pubid::Iso
       let(:pubid) { "ISO/IEC JTC 1 DIR" }
 
       it_behaves_like "converts pubid to pubid"
+      it_behaves_like "creates same identifier from #to_h output"
+    end
+
+    context "ISO/IEC DIR 2 ISO" do
+      let(:original) { "ISO/IEC DIR 2 ISO" }
+      let(:pubid) { "ISO/IEC DIR 2 ISO" }
+
+      it_behaves_like "converts pubid to pubid"
+      it_behaves_like "creates same identifier from #to_h output"
+    end
+
+    context "ISO/IEC DIR 2 IEC" do
+      let(:original) { "ISO/IEC DIR 2 IEC" }
+      let(:pubid) { "ISO/IEC DIR 2 IEC" }
+
+      it_behaves_like "converts pubid to pubid"
+      it_behaves_like "creates same identifier from #to_h output"
+    end
+
+    context "ISO/IEC DIR 1 IEC SUP" do
+      let(:pubid) { "ISO/IEC DIR 1 IEC SUP" }
+
+      it_behaves_like "converts pubid to pubid"
+      it_behaves_like "creates same identifier from #to_h output"
+    end
+
+    context "ISO/IEC DIR JTC 1 SUP" do
+      let(:pubid) { "ISO/IEC DIR JTC 1 SUP" }
+
+      it_behaves_like "converts pubid to pubid"
+      it_behaves_like "creates same identifier from #to_h output"
+    end
+
+    context "ISO/IEC DIR 2 IEC:2022" do
+      let(:pubid) { "ISO/IEC DIR 2 IEC:2022" }
+
+      it_behaves_like "converts pubid to pubid"
+      it_behaves_like "creates same identifier from #to_h output"
     end
 
     context "ISO/IEC DIR 1 + IEC SUP:2016-05" do
       let(:pubid) { "ISO/IEC DIR 1 + IEC SUP:2016-05" }
 
       it_behaves_like "converts pubid to pubid"
+      it_behaves_like "creates same identifier from #to_h output"
     end
   end
 end
