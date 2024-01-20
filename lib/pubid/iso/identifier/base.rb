@@ -77,7 +77,9 @@ module Pubid::Iso
             @joint_document = joint_document
           end
         end
-        @tctype = tctype if tctype
+        if tctype
+          @tctype = tctype.is_a?(Array) ? tctype.map(&:to_s) : tctype.to_s
+        end
         @sctype = sctype.to_s if sctype
         @wgtype = wgtype.to_s if wgtype
         @tcnumber = tcnumber.to_s if tcnumber
@@ -95,7 +97,7 @@ module Pubid::Iso
             @base = base
           end
         end
-        @part = part if part
+        @part = part.to_s if part
         @addendum = addendum if addendum
         @edition = edition
         @month = month
