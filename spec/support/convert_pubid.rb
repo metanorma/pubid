@@ -8,6 +8,10 @@ shared_examples "converts pubid to pubid" do
   it "converts pubid to pubid" do
     expect(subject.to_s(format: :ref_num_long)).to eq(pubid)
   end
+
+  it "creates same identifier from #to_h output" do
+    expect(subject.to_s).to eq(Pubid::Iso::Identifier.create(**subject.to_h).to_s)
+  end
 end
 
 shared_examples "converts to pubid with edition" do

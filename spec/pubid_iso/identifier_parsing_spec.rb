@@ -1023,7 +1023,6 @@ module Pubid::Iso
       let(:pubid) { "ISO/DATA 3:1977" }
 
       it_behaves_like "converts pubid to pubid"
-      it_behaves_like "creates same identifier from #to_h output"
     end
   end
 end
