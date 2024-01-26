@@ -19,6 +19,10 @@ module Pubid::Iso
         },
       }.freeze
 
+      def initialize(publisher: nil, **opts)
+        super(publisher: publisher, **opts)
+      end
+
       def base_has_edition?
         @base.base.nil? && !@base.edition.nil? || (!@base.base.nil? && !@base.base.edition.nil?)
       end

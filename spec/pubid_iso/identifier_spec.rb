@@ -41,5 +41,19 @@ module Pubid::Iso
         it { is_expected.to a_kind_of(Identifier::InternationalStandard) }
       end
     end
+
+    describe "#==" do
+      subject { described_class.create(**params) }
+      let(:params) do
+        { number: "1", year: "2011",
+          base: { publisher: "ISO", number: "19110", year: "2005" },
+          type: "AMD" }
+      end
+      let(:parsed_id) { described_class.parse("ISO 19110:2005/Amd 1:2011") }
+
+      it "extracts pubid from title" do
+        expect(subject).to eq(parsed_id)
+      end
+    end
   end
 end
