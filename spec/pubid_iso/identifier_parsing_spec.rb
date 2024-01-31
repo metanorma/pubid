@@ -1024,5 +1024,11 @@ module Pubid::Iso
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "ISO 7029:2017/PRF Amd 1" do
+      let(:pubid) { "ISO 7029:2017/PRF Amd 1"}
+
+      it_behaves_like "converts pubid to pubid with prf"
+    end
   end
 end

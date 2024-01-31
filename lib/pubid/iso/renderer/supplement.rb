@@ -24,21 +24,22 @@ module Pubid::Iso::Renderer
 
     def render_identifier(params, opts)
       type_prefix = params[:stage].nil? || !params[:stage].is_a?(Pubid::Core::TypedStage) ? self.class::TYPE : ""
-      # type_prefix = params[:typed_stage].nil? || params[:typed_stage].empty? ? self.class::TYPE : ""
 
-      if params[:stage].instance_of?(Pubid::Core::Stage) && !params[:stage].empty_abbr?
+      stage = params[:stage]
+
+      if params[:stage].instance_of?(Pubid::Core::Stage) && !params[:stage].to_s(with_prf: opts[:with_prf]).empty?
         type_prefix = " #{type_prefix}"
+        stage = params[:stage].to_s(with_prf: opts[:with_prf])
       end
 
       if self.class == Supplement
         if opts[:base_type] == :dir
           "%{stage}%{publisher} SUP%{number}%{part}%{iteration}%{year}%{month}%{edition}" % params
         else
-          # type_prefix = "/#{type_prefix}" unless type_prefix.empty?
-          "/%{stage}#{type_prefix}%{number}%{part}%{iteration}%{year}%{edition}" % params
+          "/#{stage}#{type_prefix}%{number}%{part}%{iteration}%{year}%{edition}" % params
         end
       else
-        "/%{stage}#{type_prefix}%{number}%{part}%{iteration}%{year}%{edition}" % params
+        "/#{stage}#{type_prefix}%{number}%{part}%{iteration}%{year}%{edition}" % params
       end
     end
 
