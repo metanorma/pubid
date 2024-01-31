@@ -76,6 +76,30 @@ module Pubid::Bsi
             expect(subject.to_s).to eq("DD ISO 1")
           end
         end
+
+        context "adopted with year" do
+          let(:adopted) { Pubid::Iso::Identifier.create(number: 1, year: 2012) }
+
+          it "renders adopted identifier with year" do
+            expect(subject.to_s).to eq("BS ISO 1:2012")
+          end
+
+          context "base document has year" do
+            let(:params) { { adopted: adopted, year: 2013 } }
+
+            it "renders adopted identifier with base document's year" do
+              expect(subject.to_s).to eq("BS ISO 1:2013")
+            end
+          end
+        end
+
+        context "base document has year" do
+          let(:params) { { adopted: adopted, year: 2013 } }
+
+          it "renders adopted identifier with base document's year" do
+            expect(subject.to_s).to eq("BS ISO 1:2013")
+          end
+        end
       end
 
       context "expert commentary" do
