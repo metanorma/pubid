@@ -1044,7 +1044,7 @@ module Pubid::Ieee
             expect do
               described_class.parse(pub_id)
             rescue Exception => failure
-              raise Pubid::Ieee::Errors::ParseError,
+              raise Pubid::Core::Errors::ParseError,
                     "couldn't parse #{pub_id}\n#{failure.message}"
             end.not_to raise_error
           end

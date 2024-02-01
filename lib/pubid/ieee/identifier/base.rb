@@ -99,7 +99,7 @@ module Pubid::Ieee
         transform(parsed)
 
       rescue Parslet::ParseFailed => failure
-        raise Pubid::Ieee::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
+        raise Pubid::Core::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
       end
 
       def self.transform(params)
