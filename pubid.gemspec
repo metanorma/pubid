@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "pubid-core", "~> 1.12.2"
   spec.add_dependency "pubid-nist", "~> 0.2.6"
   spec.add_dependency "pubid-iso", "~> 0.7.0"
-  spec.add_dependency "pubid-ieee", "~> 0.2.1"
+  spec.add_dependency "pubid-ieee", "~> 0.2.2"
   spec.add_dependency "pubid-cen", "~> 0.2.3"
   spec.add_dependency "pubid-iec", "~> 0.3.1"
   spec.add_dependency "pubid-ccsds", "~> 0.1.3"
