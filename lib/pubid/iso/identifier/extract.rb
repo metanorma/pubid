@@ -1,4 +1,5 @@
 require_relative "../renderer/extract"
+require_relative "../renderer/urn-extract"
 
 module Pubid::Iso
   module Identifier
@@ -13,6 +14,10 @@ module Pubid::Iso
 
       def self.get_renderer_class
         Renderer::Extract
+      end
+
+      def urn
+        Renderer::UrnExtract.new(to_h(deep: false)).render
       end
     end
   end
