@@ -90,6 +90,14 @@ module Pubid::Bsi
             it "renders adopted identifier with base document's year" do
               expect(subject.to_s).to eq("BS ISO 1:2013")
             end
+
+            context "adopted document have another adopted document" do
+              let(:adopted) { Pubid::Cen::Identifier.parse("EN ISO 639:2012") }
+
+              it "renders adopted identifier with base document's year" do
+                expect(subject.to_s).to eq("BS EN ISO 639:2013")
+              end
+            end
           end
         end
 

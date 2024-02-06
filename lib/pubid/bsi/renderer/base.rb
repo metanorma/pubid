@@ -6,7 +6,13 @@ module Pubid::Bsi::Renderer
       suffix = "%{year}%{month}%{supplement}%{tracked_changes}%{translation}%{pdf}" % params
       unless params[:adopted].to_s.empty?
         # ignore year for adopted document if already defined for base document
-        params[:adopted].year = nil unless params[:year].empty?
+        unless params[:year].empty?
+          params[:adopted].year = nil
+          # ignore year for adopted identifier assigned to adopted identifier
+          if params[:adopted].respond_to?(:adopted) && params[:adopted].adopted
+            params[:adopted].adopted.year = nil
+          end
+        end
 
         return "%{publisher} %{adopted}#{suffix}" % params
       end
