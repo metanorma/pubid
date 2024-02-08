@@ -289,7 +289,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
     context "NIST.CSWP.01162020pt" do
       let(:original_pubid) { "NIST.CSWP.01162020pt" }
-      let(:short_pubid) { "NIST CSRC White Paper 01162020 por" }
+      let(:short_pubid) { "NIST CSWP 01162020 por" }
       let(:mr_pubid) { "NIST.CSWP.01162020.por" }
 
       it_behaves_like "converts pubid to different formats"
@@ -297,7 +297,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
     context "NIST CSWP 04162018pt" do
       let(:original_pubid) { "NIST CSWP 04162018pt" }
-      let(:short_pubid) { "NIST CSRC White Paper 04162018 por" }
+      let(:short_pubid) { "NIST CSWP 04162018 por" }
       let(:mr_pubid) { "NIST.CSWP.04162018.por" }
 
       it_behaves_like "converts pubid to different formats"
@@ -305,7 +305,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
     context "NIST CSWP 01162020id" do
       let(:original_pubid) { "NIST CSWP 01162020id" }
-      let(:short_pubid) { "NIST CSRC White Paper 01162020 ind" }
+      let(:short_pubid) { "NIST CSWP 01162020 ind" }
       let(:mr_pubid) { "NIST.CSWP.01162020.ind" }
 
       it_behaves_like "converts pubid to different formats"
@@ -320,7 +320,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
     context "NIST CSWP 01142020" do
       let(:original_pubid) { "NIST CSWP 01142020" }
-      let(:short_pubid) { "NIST CSRC White Paper 01142020" }
+      let(:short_pubid) { "NIST CSWP 01142020" }
       let(:mr_pubid) { "NIST.CSWP.01142020" }
 
       it_behaves_like "converts pubid to different formats"
@@ -814,7 +814,8 @@ RSpec.describe Pubid::Nist::Identifier do
       end
 
       context "NIST CSRC White Paper 1" do
-        let(:short_pubid) { "NIST CSRC White Paper 1" }
+        let(:original_pubid) { "NIST CSRC White Paper 1" }
+        let(:short_pubid) { "NIST CSWP 1" }
         let(:mr_pubid) { "NIST.CSWP.1" }
 
         it_behaves_like "converts pubid to different formats"

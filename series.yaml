@@ -48,7 +48,7 @@ long:
   NIST DCI: Data Collection Instruments
   NIST EAB: Economic Analysis Brief
   NIST Other: Other
-  CSRC White Paper: Cybersecurity Resource Center White Paper
+  CSWP: Cybersecurity Resource Center White Paper
   CSRC Book: Cybersecurity Resource Center Book
   CSRC Use Case: Cybersecurity Resource Center Use Case
   CSRC Building Block: Cybersecurity Resource Center Building Block
@@ -75,7 +75,7 @@ abbrev:
   NBS TN: Tech. Note
   NIST DCI: Data Collect. Instr.
   NIST Other: Other
-  CSRC White Paper: CSWP
+  CSWP: CSWP
   CSRC Book: CSRC Book
   CSRC Use Case: CSRC Use Case
   CSRC Building Block: CSRC Building Block
@@ -131,7 +131,7 @@ mr:
   NIST DCI: NIST.DCI
   NIST EAB: NIST.EAB
   NIST Other: NIST.O
-  CSRC White Paper: NIST.CSWP
+  CSWP: NIST.CSWP
   CSRC Book: NIST.CSB
   CSRC Use Case: NIST.CSUC
   CSRC Building Block: NIST.CSBB
