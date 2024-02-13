@@ -1,6 +1,6 @@
 module Pubid::Nist
   module Parsers
-    class NistGcr < Default
+    class Gcr < Default
       rule(:report_number) do
         (digits >>
           str("-") >> digits >> (str("-") >> digits).maybe).as(:report_number)

@@ -1,6 +1,6 @@
 module Pubid::Nist
   module Parsers
-    class NbsCirc < Default
+    class Circ < Default
       rule(:revision) do
         ((str("rev") >> (words >> year_digits).as(:revision)) |
           (str("r") >> (digits | (words >> year_digits)).as(:revision))

@@ -1,6 +1,6 @@
 module Pubid::Nist
   module Parsers
-    class NbsCsm < Default
+    class Csm < Default
       rule(:identifier) do
         (str(" ") | str(".")) >> report_number.maybe >> parts.repeat.as(:parts)
       end

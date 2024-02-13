@@ -1,6 +1,6 @@
 module Pubid::Nist
   module Parsers
-    class NistSp < Default
+    class Sp < Default
       rule(:version) do
         (((str("ver") | str(" Ver. ") | str(" Version ")) >> (digits >> (str(".") >> digits).repeat).as(:version)) |
           (str("v") >>
@@ -50,10 +50,12 @@ module Pubid::Nist
       end
 
       rule(:volume) do
-        (str("v") | str(" Vol. ")) >> digits.as(:volume)
+        # hack for NBS SP 535v2a-l vs NBS SP 535v2m-z
+        # https://github.com/metanorma/pubid-nist/issues/98
+        (str("v") | str(" Vol. ")) >> (digits >> (str("a-l") | str("m-z")).maybe >> match("[A-Z]").repeat).as(:volume)
       end
 
-      rule(:part_prefixes) { str("pt") | str("p") | str(" Part ") }
+      rule(:part_prefixes) { str("pt") | str("p") | str("P") | str(" Part ") }
     end
   end
 end

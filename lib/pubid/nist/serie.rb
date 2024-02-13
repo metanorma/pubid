@@ -12,6 +12,7 @@ module Pubid::Nist
     end
 
     def to_s(format = :short)
+      # return SERIES["abbrev"][@serie] ||
       return @serie if format == :short
 
       result = SERIES[format.to_s][@serie]

@@ -9,7 +9,7 @@ RSpec.describe Pubid::Nist::Identifier do
 
   it "parses NIST PubID using parameters" do
     expect(described_class.new(publisher: Pubid::Nist::Publisher.new(publisher: "NIST"),
-                               serie: Pubid::Nist::Serie.new(serie: "NIST SP"),
+                               serie: Pubid::Nist::Serie.new(serie: "SP"),
                                number: "800-53", revision: 5).to_s(:mr))
       .to eq(mr_pubid)
   end
@@ -44,7 +44,7 @@ RSpec.describe Pubid::Nist::Identifier do
                        "mr" => mr_pubid,
                      },
                      "publisher" => "NIST",
-                     "serie" => "NIST SP",
+                     "serie" => "SP",
                      "code" => "800-53",
                      "revision" => "5",
                    })
@@ -57,7 +57,7 @@ RSpec.describe Pubid::Nist::Identifier do
       let(:short_pubid) { "NIST NCSTAR 1-1Cv1" }
       let(:long_pubid) do
         "National Institute of Standards and Technology National Construction"\
-          " Safety Team Report 1-1C, Volume 1"
+          " Safety Team Act Reports 1-1C, Volume 1"
       end
       let(:abbrev_pubid) do
         "Natl. Inst. Stand. Technol. Natl. Constr. Tm. Act Rpt. 1-1C, Vol. 1"
@@ -140,7 +140,8 @@ RSpec.describe Pubid::Nist::Identifier do
 
     context "parse old NBS MONO series" do
       let(:original_pubid) { "NBS MONO 158" }
-      let(:short_pubid) { "NBS MN 158" }
+      let(:short_pubid) { "NBS MONO 158" }
+      let(:mr_pubid) { "NBS.MN.158" }
       let(:long_pubid) do
         "National Bureau of Standards Monograph 158"
       end
@@ -153,7 +154,8 @@ RSpec.describe Pubid::Nist::Identifier do
 
     context "parse old NIST MONO series" do
       let(:original_pubid) { "NIST MONO 178" }
-      let(:short_pubid) { "NIST MN 178" }
+      let(:short_pubid) { "NIST MONO 178" }
+      let(:mr_pubid) { "NIST.MN.178" }
       let(:long_pubid) do
         "National Institute of Standards and Technology Monograph 178"
       end
@@ -655,7 +657,8 @@ RSpec.describe Pubid::Nist::Identifier do
 
     context "NBS MONO 128p1" do
       let(:original_pubid) { "NBS MONO 128p1" }
-      let(:short_pubid) { "NBS MN 128pt1" }
+      let(:short_pubid) { "NBS MONO 128pt1" }
+      let(:mr_pubid) { "NBS.MN.128pt1" }
 
       it_behaves_like "converts pubid to different formats"
     end
@@ -883,6 +886,13 @@ RSpec.describe Pubid::Nist::Identifier do
       it "is addendum" do
         expect(subject).to be_a(Pubid::Nist::Addendum)
       end
+    end
+
+    context "NIST SP 1011v1ver2.0" do
+      let(:original_pubid) { "NIST SP 1011v1ver2.0" }
+      let(:short_pubid) { "NIST SP 1011v1ver2.0" }
+
+      it_behaves_like "converts pubid to different formats"
     end
 
     context "identifier from NIST Tech Pubs", vcr: true do

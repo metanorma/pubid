@@ -1,15 +1,7 @@
 module Pubid::Nist
   module Parsers
-    class NbsHb < Default
-      # found patterns:
-      # 44e2-1955 -> 44e2
-      # 146v1-1991
-      # 105-1-1990 -> 105-1e1990
-      # 111r1977 / 146v1
-      # 130-1979 -> 130e1979
-      # 105-8 -> 105-8
-      # 28supp1957pt1
-      # 67suppFeb1965
+    class Hb < Default
+      rule(:number_suffix) { match("[a-zA-Z]") }
 
       rule(:edition) do
         (str("supp") >> str("").as(:supplement) >>

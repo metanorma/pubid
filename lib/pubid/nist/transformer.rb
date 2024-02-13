@@ -10,8 +10,12 @@ module Pubid::Nist
     end
 
     rule(series: subtree(:series)) do |context|
-      { serie: Serie.new(serie: context[:series].to_s.gsub(".", " ")),
-        publisher: Publisher.parse(context[:series]) }
+      if context[:publisher]
+        { serie: Serie.new(serie: context[:series].to_s.gsub(".", " ")) }
+      else
+        { serie: Serie.new(serie: context[:series].to_s.gsub(".", " ")),
+          publisher: Publisher.parse(context[:series]) }
+      end
     end
 
     # remove :second_report_number from output

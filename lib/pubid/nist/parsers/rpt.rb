@@ -1,6 +1,6 @@
 module Pubid::Nist
   module Parsers
-    class NbsRpt < Default
+    class Rpt < Default
       rule(:report_number) do
         (month_letters >>
           str("-") >> (month_letters >> year_digits)).as(:report_number) |

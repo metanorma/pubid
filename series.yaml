@@ -1,78 +1,64 @@
 long:
-  NIST AMS: Advanced Manufacturing Standard
-  NIST BSS: Building Science Series
-  NBS BSS: Building Science Series
-  NBS BMS: Building Material Structures Report
+  AMS: Advanced Manufacturing Series
+  BSS: Building Science Series
+  BMS: Building Material Structures Report
   NBS BRPD-CRPL-D: Basic Radio Propagation Predictions Series
-  NBS BH: Building and Housing Reports
-  NBS CRPL: Central Radio Propagation Laboratory Reports
+  BH: Building and Housing
+  CRPL: Central Radio Propagation Laboratory Reports
   NBS CRPL-F-A: CRPL Ionospheric Data
   NBS CRPL-F-B: CRPL Solar-Geophysical Data
   NBS IP: CRPL Ionospheric Predictions
-  NBS CIRC: Circulars
+  CIRC: Circulars
   NBS CIS: Consumer Information Series
-  NBS CS: Commercial Standards
+  CS: Commercial Standards
   NBS CS-E: Commercial Standards (emergency)
-  NBS CSM: Commercial Standards Monthly
-  NBS FIPS: Federal Information Processing Standards Publication
+  CSM: Commercial Standards Monthly
   FIPS: Federal Information Processing Standards Publication
-  NIST GCR: Grant/Contract Reports
-  NBS GCR: Grant/Contract Reports
-  NIST HB: Handbook
-  NBS HB: Handbook
+  GCR: Grant/Contract Reports
+  HB: Handbooks
   NBS HR: Hydraulic Research in the United States
   NBS IRPL: Interservice Radio Propagation Laboratory
   ITL Bulletin: ITL Bulletin
   NIST LC: Letter Circular
   NBS LC: Letter Circular
-  NIST MN: Monograph
-  NBS MN: Monograph
-  NBS MP: Miscellaneous Publications
-  NIST NCSTAR: National Construction Safety Team Report
-  NIST NSRDS: National Standard Reference Data Series
+  MONO: Monograph
+  MP: Miscellaneous Publications
+  NCSTAR: National Construction Safety Team Act Reports
+  NSRDS: National Standard Reference Data Series
   NSRDS-NBS: National Standard Reference Data Series
-  NIST IR: Interagency or Internal Report
-  NBS IR: Interagency or Internal Report
-  NIST OWMWP: Office of Weights and Measures White Papers
-  NBS PC: Photographic Circulars
-  NBS RPT: Reports
+  IR: Interagency or Internal Report
+  OWMWP: Office of Weights and Measures White Papers
+  PC: Photographic Laboratory Circulars
+  RPT: Reports
   NIST PS: Voluntary Product Standards
-  NBS SIBS: Special Interior Ballistics Studies
+  SIBS: Special Interior Ballistics Studies
   NBS PS: Voluntary Product Standards
-  NIST SP: Special Publication
-  NBS SP: Special Publication
-  NIST TN: Technical Note
-  NBS TN: Technical Note
-  NBS TIBM: Technical Information on Building Materials
-  NIST TTB: Technology Transfer Brief
+  SP: Special Publication
+  TN: Technical Notes
+  TIBM: Technical Information on Building Materials for Use in the Design of Low Cost Housing
+  TTB: Technology Transfer Briefs
   NIST DCI: Data Collection Instruments
-  NIST EAB: Economic Analysis Brief
+  EAB: Economic Analysis Brief
   NIST Other: Other
-  CSWP: Cybersecurity Resource Center White Paper
+  CSWP: Cybersecurity White Papers
   CSRC Book: Cybersecurity Resource Center Book
   CSRC Use Case: Cybersecurity Resource Center Use Case
   CSRC Building Block: Cybersecurity Resource Center Building Block
   JPCRD: Journal of Physical and Chemical Reference Data
   JRES: Journal of Research of NIST
 abbrev:
-  NIST AMS: Adv. Man. Ser
-  NIST BSS: Bldg. Sci. Ser.
-  NBS BSS: Bldg. Sci. Ser.
-  NBS FIPS: Federal Inf. Process. Stds.
+  AMS: Adv. Man. Ser
+  BSS: Bldg. Sci. Ser.
   FIPS: Federal Inf. Process. Stds.
-  NIST HB: Handb.
-  NBS HB: Handb.
-  NIST MN: Monogr.
-  NBS MN: Monogr.
-  NIST NCSTAR: Natl. Constr. Tm. Act Rpt.
-  NIST NSRDS: Natl. Stand. Ret. Data Ser.
+  HB: Handb.
+  MONO: Monogr.
+  NCSTAR: Natl. Constr. Tm. Act Rpt.
+  NSRDS: Natl. Stand. Ret. Data Ser.
   NSRDS-NBS: Natl. Stand. Ret. Data Ser.
   NIST PS: Prod. Stand.
   NBS PS: Prod. Stand.
-  NIST SP: Spec. Publ.
-  NBS SP: Spec. Publ.
-  NIST TN: Tech. Note
-  NBS TN: Tech. Note
+  SP: Spec. Publ.
+  TN: Tech. Note
   NIST DCI: Data Collect. Instr.
   NIST Other: Other
   CSWP: CSWP
@@ -82,56 +68,48 @@ abbrev:
   JPCRD: J. Phys. & Chem. Ref. Data
   JRES: J. Res. Natl. Inst. Stan.
 mr:
-  NIST AMS: NIST.AMS
-  NIST BSS: NIST.BSS
-  NBS BSS: NBS.BSS
-  NBS BMS: NBS.BMS
+  AMS: AMS
+  BSS: BSS
+  BMS: BMS
   NBS BRPD-CRPL-D: NBS.BRPD-CRPL-D
-  NBS BH: NBS.BH
-  NBS CRPL: NBS.CRPL
+  BH: BH
+  CRPL: CRPL
   NBS CRPL-F-A: NBS.CRPL-F-A
   NBS CRPL-F-B: NBS.CRPL-F-B
   NBS IP: NBS.IP
-  NBS CIRC: NBS.CIRC
+  CIRC: CIRC
   NBS CIS: NBS.CIS
-  NBS CS: NBS.CS
+  CS: CS
   NBS CS-E: NBS.CS-E
-  NBS CSM: NBS.CSM
-  NBS FIPS: NBS.FIPS
-  FIPS: NIST.FIPS
-  NIST GCR: NIST.GCR
-  NBS GCR: NBS.GCR
-  NIST HB: NIST.HB
-  NBS HB: NBS.HB
+  CSM: CSM
+  FIPS: FIPS
+  GCR: GCR
+  HB: HB
   NBS HR: NBS.HR
   NBS IRPL: NBS.IRPL
   ITL Bulletin: NIST.ITLB
   NIST LC: NIST.LC
   NBS LC: NBS.LC
-  NIST MN: NIST.MN
-  NBS MN: NBS.MN
-  NBS MP: NBS.MP
-  NIST NCSTAR: NIST.NCSTAR
-  NIST NSRDS: NIST.NSRDS
+  MONO: MN
+  MP: MP
+  NCSTAR: NCSTAR
+  NSRDS: NSRDS
   NSRDS-NBS: NBS.NSRDS
-  NIST IR: NIST.IR
-  NBS IR: NBS.IR
-  NIST OWMWP: NIST.OWMWP
-  NBS PC: NBS.PC
-  NBS RPT: NBS.RPT
+  IR: IR
+  OWMWP: OWMWP
+  PC: PC
+  RPT: RPT
   NIST PS: NIST.PS
-  NBS SIBS: NBS.SIBS
+  SIBS: SIBS
   NBS PS: NBS.PS
-  NIST SP: NIST.SP
-  NBS SP: NBS.SP
-  NIST TN: NIST.TN
-  NBS TN: NBS.TN
-  NBS TIBM: NBS.TIBM
-  NIST TTB: NIST.TTB
+  SP: SP
+  TN: TN
+  TIBM: TIBM
+  TTB: TTB
   NIST DCI: NIST.DCI
-  NIST EAB: NIST.EAB
+  EAB: EAB
   NIST Other: NIST.O
-  CSWP: NIST.CSWP
+  CSWP: CSWP
   CSRC Book: NIST.CSB
   CSRC Use Case: NIST.CSUC
   CSRC Building Block: NIST.CSBB

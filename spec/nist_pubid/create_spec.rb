@@ -4,7 +4,7 @@ module Pubid::Nist
       subject { described_class.create(**{ number: number, serie: serie }.merge(params)).to_s }
       let(:number) { 123 }
       let(:params) { {} }
-      let(:serie) { "NIST SP" }
+      let(:serie) { "SP" }
 
       it "renders default publisher" do
         expect(subject).to eq("NIST SP #{number}")

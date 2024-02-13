@@ -1,6 +1,6 @@
 module Pubid::Nist
   module Parsers
-    class NbsCrpl < Default
+    class Crpl < Default
       rule(:first_report_number) do
         (digits >> (str("-m") | str("-M")).maybe).as(:first_report_number)
       end

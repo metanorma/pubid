@@ -25,7 +25,9 @@ module Pubid::Nist
           return serie.to_s(opts[:format])
         end
 
-        "#{params[:publisher].to_s(opts[:format])} #{serie.to_s(opts[:format])}"
+        "#{params[:publisher].to_s(opts[:format])}" +
+          (opts[:format] == :mr ? "." : " ") +
+          "#{serie.to_s(opts[:format])}"
       end
 
       def render_code(code, opts, _params)

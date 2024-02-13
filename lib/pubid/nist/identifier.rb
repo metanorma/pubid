@@ -15,7 +15,7 @@ module Pubid::Nist
 
     def initialize(publisher: "NIST", serie:, number: nil, stage: nil, supplement: nil,
                    edition_month: nil, edition_year: nil, edition_day: nil, update: nil, **opts)
-      @publisher = publisher.is_a?(Publisher) ? publisher : Publisher.new(publisher: publisher)
+      @publisher = publisher.is_a?(Publisher) ? publisher : Publisher.new(publisher: publisher.to_s)
       @serie = serie.is_a?(Serie) ? serie : Serie.new(serie: serie)
       @code = number
       @stage = Stage.new(**stage) if stage

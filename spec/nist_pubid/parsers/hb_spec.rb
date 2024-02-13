@@ -1,6 +1,6 @@
 require "parslet/rig/rspec"
 
-RSpec.describe Pubid::Nist::Parsers::NbsHb do
+RSpec.describe Pubid::Nist::Parsers::Hb do
   subject { described_class.new }
 
   context "when report number with edition" do

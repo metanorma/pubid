@@ -1,6 +1,6 @@
 module Pubid::Nist
   module Parsers
-    class NbsMp < Default
+    class Mp < Default
       rule(:edition) do
         (str("e") >> digits.as(:edition)) | (str("(") >> digits.as(:edition) >> str(")"))
       end
