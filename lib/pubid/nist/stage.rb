@@ -17,7 +17,7 @@ module Pubid::Nist
       when :mr
         "#{@id}#{@type}"
       else
-        "#{STAGES['id'][@id]} #{STAGES['type'][@type]}"
+        "(#{STAGES['id'][@id]} #{STAGES['type'][@type]})"
       end
     end
 

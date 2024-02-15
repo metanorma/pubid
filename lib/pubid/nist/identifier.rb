@@ -14,13 +14,18 @@ module Pubid::Nist
                   :section, :appendix, :errata, :index, :insert
 
     def initialize(publisher: "NIST", serie:, number: nil, stage: nil, supplement: nil,
-                   edition_month: nil, edition_year: nil, edition_day: nil, update: nil, **opts)
+                   edition_month: nil, edition_year: nil, edition_day: nil, update: nil,
+                   edition: nil, **opts)
       @publisher = publisher.is_a?(Publisher) ? publisher : Publisher.new(publisher: publisher.to_s)
       @serie = serie.is_a?(Serie) ? serie : Serie.new(serie: serie)
       @code = number
       @stage = Stage.new(**stage) if stage
       @supplement = (supplement.is_a?(Array) && "") || supplement
-      @edition = parse_edition(edition_month, edition_year, edition_day) if edition_month || edition_year
+      if edition_month || edition_year
+        @edition = parse_edition(edition_month, edition_year, edition_day)
+      elsif edition
+        @edition = Edition.new(number: edition)
+      end
       @update = update
       opts.each { |key, value| send("#{key}=", value.to_s) }
     end

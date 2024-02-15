@@ -14,7 +14,7 @@ module Pubid::Nist
           "%{supplement}%{section}%{appendix}%{errata}%{index}%{insert}%{update}"\
           "%{stage}%{translation}" % params
         else
-          "%{serie}%{stage}%{code}%{volume}%{part}%{edition}%{revision}%{version}"\
+          "%{serie}%{code}%{stage}%{volume}%{part}%{edition}%{revision}%{version}"\
           "%{supplement}%{section}%{appendix}%{errata}%{index}%{insert}%{update}"\
           "%{translation}" % params
         end
@@ -39,12 +39,12 @@ module Pubid::Nist
 
         case opts[:format]
         when :long
-          " Edition "
+          " #{edition.to_s(format: :long)}"
         when :abbrev
-          " Ed. "
+          " Ed. " + edition.to_s
         when :short, :mr
-          "e"
-        end + edition.to_s
+          "e" + edition.to_s
+        end
       end
 
       def render_revision(revision, opts, _params)

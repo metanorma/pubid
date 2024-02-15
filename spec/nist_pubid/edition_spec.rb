@@ -65,7 +65,7 @@ RSpec.describe Pubid::Nist::Edition do
     it { expect(subject.year).to eq(1989) }
     it { expect(subject.month).to be_nil }
     it { expect(subject.day).to be_nil }
-    it { expect(subject.sequence).to be_nil }
+    it { expect(subject.number).to be_nil }
   end
 
   context "NIST IR 5672-2018" do
@@ -75,7 +75,7 @@ RSpec.describe Pubid::Nist::Edition do
     it { expect(subject.year).to eq(2018) }
     it { expect(subject.month).to be_nil }
     it { expect(subject.day).to be_nil }
-    it { expect(subject.sequence).to be_nil }
+    it { expect(subject.number).to be_nil }
   end
 
   context "NIST IR 85-3273-10" do

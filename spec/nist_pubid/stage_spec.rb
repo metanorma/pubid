@@ -1,6 +1,6 @@
 RSpec.describe Pubid::Nist::Stage do
   let(:short_stage) { "NIST SP 800-18(IPD)" }
-  let(:long_stage) { "Initial Public Draft" }
+  let(:long_stage) { "(Initial Public Draft)" }
 
   it "returns long title for stage" do
     expect(described_class.new(id: "i", type: "pd").to_s(:long))
