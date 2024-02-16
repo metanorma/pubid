@@ -11,9 +11,13 @@ module Pubid::Nist
 
     rule(series: subtree(:series)) do |context|
       if context[:publisher]
-        { serie: Serie.new(serie: context[:series].to_s.gsub(".", " ")) }
+        if context[:series]
+          { series: Series.new(series: context[:series].to_s.gsub(".", " ")) }
+        else
+          {}
+        end
       else
-        { serie: Serie.new(serie: context[:series].to_s.gsub(".", " ")),
+        { series: Series.new(series: context[:series].to_s.gsub(".", " ")),
           publisher: Publisher.parse(context[:series]) }
       end
     end

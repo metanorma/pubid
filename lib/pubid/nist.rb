@@ -10,7 +10,7 @@ module Pubid
   end
 end
 
-require_relative "nist/serie"
+require_relative "nist/series"
 require_relative "nist/parsers/default"
 require_relative "nist/update"
 require_relative "nist/transformer"

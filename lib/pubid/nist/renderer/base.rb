@@ -10,24 +10,24 @@ module Pubid::Nist
       def render_identifier(params, opts)
         case opts[:format]
         when :short, :mr
-          "%{serie}%{code}%{volume}%{part}%{edition}%{revision}%{version}"\
+          "%{series}%{code}%{volume}%{part}%{edition}%{revision}%{version}"\
           "%{supplement}%{section}%{appendix}%{errata}%{index}%{insert}%{update}"\
           "%{stage}%{translation}" % params
         else
-          "%{serie}%{code}%{stage}%{volume}%{part}%{edition}%{revision}%{version}"\
+          "%{series}%{code}%{stage}%{volume}%{part}%{edition}%{revision}%{version}"\
           "%{supplement}%{section}%{appendix}%{errata}%{index}%{insert}%{update}"\
           "%{translation}" % params
         end
       end
 
-      def render_serie(serie, opts, params)
-        if serie.to_s(opts[:format]).include?(params[:publisher].to_s(opts[:format]))
-          return serie.to_s(opts[:format])
+      def render_series(series, opts, params)
+        if series.to_s(opts[:format]).include?(params[:publisher].to_s(opts[:format]))
+          return series.to_s(opts[:format])
         end
 
         "#{params[:publisher].to_s(opts[:format])}" +
           (opts[:format] == :mr ? "." : " ") +
-          "#{serie.to_s(opts[:format])}"
+          "#{series.to_s(opts[:format])}"
       end
 
       def render_code(code, opts, _params)

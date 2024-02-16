@@ -1,17 +1,17 @@
 module Pubid::Nist
   RSpec.describe Identifier do
     describe "creating new identifier" do
-      subject { described_class.create(**{ number: number, serie: serie }.merge(params)) }
+      subject { described_class.create(**{ number: number, series: series }.merge(params)) }
       let(:number) { 123 }
       let(:params) { {} }
-      let(:serie) { "SP" }
+      let(:series) { "SP" }
 
       it "renders default publisher" do
         expect(subject).to eq("NIST SP #{number}")
       end
 
       context "White Paper series" do
-        let(:serie) { "CSWP" }
+        let(:series) { "CSWP" }
         let(:number) { 999 }
         let(:params) { { edition_year: "2013",
                          edition_month: "01",

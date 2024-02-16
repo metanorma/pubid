@@ -8,16 +8,16 @@ UPDATE_CODES = YAML.load_file(File.join(File.dirname(__FILE__), "../../../update
 module Pubid::Nist
   class Identifier < Pubid::Core::Identifier::Base
     extend Forwardable
-    attr_accessor :serie, :code, :revision, :publisher, :version, :volume,
+    attr_accessor :series, :code, :revision, :publisher, :version, :volume,
                   :part, :addendum, :stage, :translation,
                   :edition, :supplement, :update,
                   :section, :appendix, :errata, :index, :insert
 
-    def initialize(publisher: "NIST", serie:, number: nil, stage: nil, supplement: nil,
+    def initialize(publisher: "NIST", series:, number: nil, stage: nil, supplement: nil,
                    edition_month: nil, edition_year: nil, edition_day: nil, update: nil,
                    edition: nil, **opts)
       @publisher = publisher.is_a?(Publisher) ? publisher : Publisher.new(publisher: publisher.to_s)
-      @serie = serie.is_a?(Serie) ? serie : Serie.new(serie: serie)
+      @series = series.is_a?(Series) ? series : Series.new(series: series)
       @code = number
       @stage = Stage.new(**stage) if stage
       @supplement = (supplement.is_a?(Array) && "") || supplement
@@ -61,7 +61,7 @@ module Pubid::Nist
       document.instance_variables.each do |var|
         val = document.instance_variable_get(var)
         current_val = instance_variable_get(var)
-        if [:@serie, :@publisher].include?(var) ||
+        if [:@series, :@publisher].include?(var) ||
             (val && current_val.nil?) ||
             (val && current_val.to_s.length < val.to_s.length)
           instance_variable_set(var, val)
