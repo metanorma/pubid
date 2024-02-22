@@ -41,11 +41,10 @@ RSpec.describe Pubid::Nist::Identifier do
     let(:original_pubid) { "NISTIR 8115" }
     let(:short_pubid) { "NIST IR 8115" }
     let(:long_pubid) do
-      "National Institute of Standards and Technology Interagency or"\
-          " Internal Report 8115"
+      "National Institute of Standards and Technology IR 8115"
     end
     let(:abbrev_pubid) do
-      "Natl. Inst. Stand. Technol. Interagency or Internal Report"\
+      "Natl. Inst. Stand. Technol. IR"\
           " 8115"
     end
 
@@ -207,12 +206,10 @@ RSpec.describe Pubid::Nist::Identifier do
     let(:short_pubid) { "NIST IR 8115 esp" }
     let(:mr_pubid) { "NIST.IR.8115.esp" }
     let(:long_pubid) do
-      "National Institute of Standards and Technology Interagency or"\
-          " Internal Report 8115 (ESP)"
+      "National Institute of Standards and Technology IR 8115 (ESP)"
     end
     let(:abbrev_pubid) do
-      "Natl. Inst. Stand. Technol. Interagency or Internal Report"\
-          " 8115 (ESP)"
+      "Natl. Inst. Stand. Technol. IR 8115 (ESP)"
     end
 
     it_behaves_like "converts pubid to different formats"
