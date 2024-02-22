@@ -6,6 +6,9 @@ module Pubid::Nist
 
     def initialize(id:, type:)
       @id, @type = id.to_s.downcase, type.to_s.downcase
+
+      raise ArgumentError, "id cannot be #{id.inspect}" unless STAGES['id'].key?(@id)
+      raise ArgumentError, "type cannot be #{type.inspect}" unless STAGES['type'].key?(@type)
     end
 
     def to_s(format = :short)
@@ -19,10 +22,6 @@ module Pubid::Nist
       else
         "(#{STAGES['id'][@id]} #{STAGES['type'][@type]})"
       end
-    end
-
-    def nil?
-      @id.nil? && @type.nil?
     end
   end
 end
