@@ -28,7 +28,13 @@ module Pubid::Nist
           end
         end
 
-        context "edition with sequence"
+        context "with edition year" do
+          let(:params) { { edition_year: 2021, update: Update.new(number: 5) } }
+
+          it "returns edition at the end of identifier" do
+            expect(subject.to_s(:long)).to eq("National Institute of Standards and Technology Special Publication 123 Update 5 (2021)")
+          end
+        end
       end
     end
   end

@@ -14,9 +14,9 @@ module Pubid::Nist
           "%{supplement}%{section}%{appendix}%{errata}%{index}%{insert}%{update}"\
           "%{stage}%{translation}" % params
         else
-          "%{series}%{code}%{stage}%{volume}%{part}%{edition}%{revision}%{version}"\
+          "%{series}%{code}%{stage}%{volume}%{part}%{revision}%{version}"\
           "%{supplement}%{section}%{appendix}%{errata}%{index}%{insert}%{update}"\
-          "%{translation}" % params
+          "%{edition}%{translation}" % params
         end
       end
 
