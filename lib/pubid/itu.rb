@@ -5,7 +5,14 @@ require "yaml"
 
 module Pubid
   module Itu
-
+    LANGUAGES = {
+      "ru": "R",
+      "fr": "F",
+      "en": "E",
+      "ar": "A",
+      "es": "S",
+      "zh": "C",
+    }.freeze
   end
 end
 

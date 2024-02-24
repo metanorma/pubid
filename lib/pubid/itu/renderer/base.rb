@@ -85,5 +85,9 @@ module Pubid::Itu::Renderer
     def render_appendix(appendix, _opts, _params)
       " App. #{appendix[:number]}"
     end
+
+    def render_language(language, _opts, _params)
+      "-#{LANGUAGES[language]}"
+    end
   end
 end

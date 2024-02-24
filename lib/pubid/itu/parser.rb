@@ -102,10 +102,14 @@ module Pubid::Itu
         roman_numerals.as(:number)).as(:appendix)
     end
 
+    rule(:language) do
+      str("-") >> match["EFASCR"].as(:language)
+    end
+
     rule(:identifier) do
       str("ITU") >> (dash | space) >> sector_series_number >> supplement.maybe >>
         annex.maybe >> corrigendum.maybe >> addendum.maybe >> appendix.maybe >>
-        published.maybe >> amendment.maybe >> str("-I").maybe
+        published.maybe >> amendment.maybe >> str("-I").maybe >> language.maybe
     end
 
     rule(:root) { identifier }

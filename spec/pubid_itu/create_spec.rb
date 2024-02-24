@@ -55,6 +55,14 @@ module Pubid::Itu
           end
         end
       end
+
+      context "identifier with language" do
+        let(:params) { { language: "en" } }
+
+        it "renders identifier with language" do
+          expect(subject.to_s).to eq("ITU-R V.123-E")
+        end
+      end
     end
   end
 end

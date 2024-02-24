@@ -292,6 +292,13 @@ module Pubid::Itu
       it { expect(subject).to be_a(Identifier::Appendix) }
     end
 
+    context "identifier with language" do
+      let(:pubid) { "ITU-T T.4-E" }
+
+      it_behaves_like "converts pubid to pubid"
+      it { expect(subject.language).to eq("en") }
+    end
+
     describe "parse identifiers from examples files" do
       context "parses IEC identifiers from itu-r.txt" do
         let(:examples_file) { "itu-r.txt" }
