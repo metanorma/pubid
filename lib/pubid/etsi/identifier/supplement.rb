@@ -8,8 +8,8 @@ module Pubid::Etsi
         @number = number
       end
 
-      def to_h
-        @base.to_h.merge(self.type[:key] => super)
+      def to_h(**args)
+        @base.to_h(**args).merge(self.type[:key] => super)
       end
     end
   end
