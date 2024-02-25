@@ -37,4 +37,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "pubid-itu", "~> 0.1.0"
   spec.add_dependency "pubid-jis", "~> 0.3.2"
   spec.add_dependency "pubid-bsi", "~> 0.3.2"
+  spec.add_dependency "pubid-etsi", "~> 0.1.0"
 end
