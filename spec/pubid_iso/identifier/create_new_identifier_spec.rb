@@ -140,6 +140,14 @@ module Pubid::Iso
             end
           end
         end
+
+        context "stage is PreCD" do
+          let(:stage) { "PreCD" }
+
+          it "renders separate stage for PubID" do
+            expect(subject.to_s).to eq("ISO/PreCD #{number}")
+          end
+        end
       end
 
       context "when TS type" do

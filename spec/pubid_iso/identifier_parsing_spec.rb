@@ -1032,5 +1032,19 @@ module Pubid::Iso
 
       it_behaves_like "converts pubid to pubid with prf"
     end
+
+    context "ISO/IEC preCD 29135" do
+      let(:original) { "ISO/IEC preCD 29135" }
+      let(:pubid) { "ISO/IEC PreCD 29135" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
+    context "ISO/PreCD3 17301-1" do
+      let(:original) { "ISO/PreCD3 17301-1" }
+      let(:pubid) { "ISO/PreCD 17301-1.3" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end

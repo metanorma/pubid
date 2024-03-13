@@ -49,7 +49,8 @@ module Pubid::Iso
     end
 
     rule(:stage) do
-      array_to_str(Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:stage].values) | array_to_str(STAGES)
+      array_to_str(Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:stage].values) | array_to_str(STAGES) |
+        (str("preCD") | str("PreCD"))
     end
 
     rule(:typed_stage) do

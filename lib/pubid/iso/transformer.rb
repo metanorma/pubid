@@ -136,6 +136,8 @@ module Pubid::Iso
         { stage: "CD", type: "TR" }
       when "PDTS"
         { stage: "CD", type: "TS" }
+      when "preCD"
+        { stage: "PreCD" }
       else
         { stage: code }
       end
