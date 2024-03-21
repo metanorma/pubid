@@ -61,6 +61,21 @@ pubid.to_s
 => "ISO/WD 1234"
 ----
 
+==== "PreCD" stage
+
+For "PreCD" stage we’re using a special stage called "29" that is not in the International Harmonized Codes.
+
+[source,ruby]
+----
+pubid = Pubid::Iso::Identifier.create(publisher: "ISO", stage: :PreCD, number: 123)
+pubid.to_s
+
+=> "ISO/PreCD 123"
+
+subject.stage.harmonized_code.stages
+=> ["29.00", "29.20", "29.60", "29.92", "29.98", "29.99"]
+----
+
 === With part number
 
 [source,ruby]
