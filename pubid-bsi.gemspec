@@ -28,8 +28,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
 
   spec.add_dependency "parslet"
-  spec.add_dependency "pubid-cen", "~> 0.2.3"
-  spec.add_dependency "pubid-core", "~> 1.12.2"
+  spec.add_dependency "pubid-cen", "~> 0.2.4"
+  spec.add_dependency "pubid-core", "~> 1.12.5"
   spec.add_dependency "pubid-iec", "~> 0.3.1"
-  spec.add_dependency "pubid-iso", "~> 0.7.1"
+  spec.add_dependency "pubid-iso", "~> 0.7.5"
 end

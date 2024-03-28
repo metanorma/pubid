@@ -58,4 +58,5 @@ config.type_names = {
                         short: "PAS",
                       },
                     }.freeze
+config.prefixes = ["BS", "PAS", "PD", "DD", "Flex", "BSI"]
 Pubid::Bsi::Identifier.set_config(config)
