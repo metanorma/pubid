@@ -10,6 +10,7 @@ module Pubid
   end
 end
 
+require_relative "nist/identifier"
 require_relative "nist/series"
 require_relative "nist/parsers/default"
 require_relative "nist/update"
@@ -29,10 +30,16 @@ end.map do |parser_class|
   [parser.name.split("::").last.gsub(/(.)([A-Z])/, '\1 \2').upcase, parser]
 end.to_h
 
-require_relative "nist/identifier"
+require_relative "nist/identifier/base"
 require_relative "nist/publisher"
 require_relative "nist/stage"
 require_relative "nist/errors"
 require_relative "nist/nist_tech_pubs"
 require_relative "nist/edition"
-require_relative "nist/addendum"
+require_relative "nist/identifier/addendum"
+
+config = Pubid::Core::Configuration.new
+config.stages = YAML.load_file(File.join(File.dirname(__FILE__), "../../stages.yaml"))
+config.default_type = Pubid::Nist::Identifier::Base
+config.types = [Pubid::Nist::Identifier::Addendum]
+Pubid::Nist::Identifier.set_config(config)

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require "parslet/rig/rspec"
 
-RSpec.describe Pubid::Nist::Identifier do
+RSpec.describe Pubid::Nist::Identifier::Base do
   let(:short_pubid) { "NIST SP 800-53r5" }
   let(:mr_pubid) { short_pubid.gsub(" ", ".") }
   let(:long_pubid) { nil }
@@ -872,7 +872,7 @@ RSpec.describe Pubid::Nist::Identifier do
       it_behaves_like "converts pubid to different formats"
 
       it "is addendum" do
-        expect(subject).to be_a(Pubid::Nist::Addendum)
+        expect(subject).to be_a(Pubid::Nist::Identifier::Addendum)
       end
     end
 
@@ -884,7 +884,7 @@ RSpec.describe Pubid::Nist::Identifier do
       it_behaves_like "converts pubid to different formats"
 
       it "is addendum" do
-        expect(subject).to be_a(Pubid::Nist::Addendum)
+        expect(subject).to be_a(Pubid::Nist::Identifier::Addendum)
       end
     end
 
