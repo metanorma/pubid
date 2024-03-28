@@ -42,5 +42,6 @@ config.types = [Pubid::Cen::Identifier::Base,
                 Pubid::Cen::Identifier::HarmonizationDocument]
 config.type_names = {}.freeze
 config.stages = { "abbreviations" => { "Fpr" => [], "pr" => [] } }
+config.prefixes = ["CEN", "EN", "CLC", "prEN", "FprEN", "CWA", "HD"]
 
 Pubid::Cen::Identifier.set_config(config)
