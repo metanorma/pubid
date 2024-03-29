@@ -3,6 +3,7 @@ end
 
 require_relative "pubid/registry"
 
+require "pubid-core"
 require "pubid-iso"
 require "pubid-ieee"
 require "pubid-nist"
