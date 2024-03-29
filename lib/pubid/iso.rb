@@ -95,6 +95,7 @@ config.type_names = { tr: {
                         long: "Recommendation",
                         short: "R",
                       } }.freeze
+config.prefixes = %w[ISO ИСО FprISO]
 Pubid::Iso::Identifier.set_config(config)
 
 require_relative "iso/parser"
