@@ -9,6 +9,14 @@ module Pubid
         it "returns ISO instance" do
           expect(subject).to be_a Pubid::Iso::Identifier::Base
         end
+
+        context "without ISO prefix" do
+          let(:pubid) { "IWA 8:2009" }
+
+          it "returns ISO instance" do
+            expect(subject).to be_a Pubid::Iso::Identifier::Base
+          end
+        end
       end
 
       context "when IEEE identifier provided" do
@@ -23,7 +31,7 @@ module Pubid
         let(:pubid) { "NIST SP 800-38A Add. 1" }
 
         it "returns NIST instance" do
-          expect(subject).to be_a Pubid::Nist::Identifier
+          expect(subject).to be_a Pubid::Nist::Identifier::Addendum
         end
       end
 
@@ -40,6 +48,14 @@ module Pubid
 
         it "returns CEN instance" do
           expect(subject).to be_a Pubid::Cen::Identifier::Base
+        end
+
+        context "without CEN prefix" do
+          let(:pubid) { "EN 196-3:2005+A1:2008" }
+
+          it "returns CEN instance" do
+            expect(subject).to be_a Pubid::Cen::Identifier::Base
+          end
         end
       end
 
