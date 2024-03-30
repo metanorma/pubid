@@ -59,3 +59,4 @@ IEEE P90003-2014, April 2015: IEEE P90003, April 2015
 # Add space between year and month for dates without space, e.g. "Jul2014" -> "Jul 2014"
 /, (\w{3,4})(\d{4,4})$/: ", \\1 \\2"
 IEC/IEEE P61886-1_D2_May2020: IEC/IEEE P61886-1_D2, May 2020
+IEEE Unapproved P802.21/D-14-2008-Sept: IEEE P802.21/D14

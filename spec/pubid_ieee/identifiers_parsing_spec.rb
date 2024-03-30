@@ -1031,6 +1031,13 @@ module Pubid::Ieee
 
         it_behaves_like "converts pubid to pubid"
       end
+
+      context "IEEE Unapproved P802.21/D-14-2008-Sept" do
+        let(:original) { "IEEE Unapproved P802.21/D-14-2008-Sept" }
+        let(:pubid) { "IEEE Draft Std P802.21/D14" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
     end
 
     describe "parse identifiers from examples files" do
