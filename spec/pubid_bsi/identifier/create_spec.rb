@@ -17,6 +17,22 @@ module Pubid::Bsi
         end
       end
 
+      context "when have month and edition" do
+        let(:params) { { year: 1999, month: 1, edition: 1 } }
+
+        it "renders identifier with part and year" do
+          expect(subject.to_s).to eq("BS #{number}:1999")
+        end
+
+        context "when Flex type" do
+          let(:params) { { type: :flex, year: 1999, month: 1, edition: 1 } }
+
+          it "renders identifier with part and year" do
+            expect(subject.to_s).to eq("BSI Flex #{number} v1:1999-1")
+          end
+        end
+      end
+
       context "PAS type" do
         let(:params) { { type: :pas } }
 

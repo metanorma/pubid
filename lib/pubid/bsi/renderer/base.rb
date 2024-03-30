@@ -3,7 +3,7 @@ module Pubid::Bsi::Renderer
     TYPE = "".freeze
 
     def render_identifier(params)
-      suffix = "%{year}%{month}%{supplement}%{tracked_changes}%{translation}%{pdf}" % params
+      suffix = "%{year}%{supplement}%{tracked_changes}%{translation}%{pdf}" % params
       unless params[:adopted].to_s.empty?
         # ignore year for adopted document if already defined for base document
         unless params[:year].empty?
@@ -17,7 +17,7 @@ module Pubid::Bsi::Renderer
         return "%{publisher} %{adopted}#{suffix}" % params
       end
 
-      "%{publisher} %{number}%{part}%{edition}#{suffix}" % params
+      "%{publisher} %{number}%{part}#{suffix}" % params
     end
 
     def render_month(month, _opts, _params)
