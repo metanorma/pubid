@@ -1032,9 +1032,60 @@ module Pubid::Ieee
         it_behaves_like "converts pubid to pubid"
       end
 
-      context "IEEE Unapproved P802.21/D-14-2008-Sept" do
-        let(:original) { "IEEE Unapproved P802.21/D-14-2008-Sept" }
-        let(:pubid) { "IEEE Draft Std P802.21/D14" }
+      context "IEEE Unapproved Std PC57.129_D9, Mar07" do
+        let(:original) { "IEEE Unapproved Std PC57.129_D9, Mar07" }
+        let(:pubid) { "IEEE Draft Std PC57.129/D9, March 2007" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEEE Unapproved Std P277/D2,Mar 2007" do
+        let(:original) { "IEEE Unapproved Std P277/D2,Mar 2007" }
+        let(:pubid) { "IEEE Draft Std P277/D2, March 2007" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEEE Active Unapproved Draft Std IEEE PC37.06/D8.3, July 2007" do
+        let(:original) { "IEEE Active Unapproved Draft Std IEEE PC37.06/D8.3, July 2007" }
+        let(:pubid) { "IEEE Draft Std PC37.06/D8.3, July 2007" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEEE Unapproved Draft Std PC57.21/D14, Dec. 2007" do
+        let(:original) { "IEEE Unapproved Draft Std PC57.21/D14, Dec 2007" }
+        let(:pubid) { "IEEE Draft Std PC57.21/D14, December 2007" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEEE Unapproved Draft Std P802.1AB/REVD2.2, Dec 2007" do
+        let(:original) { "IEEE Unapproved Draft Std P802.1AB/REVD2.2, Dec 2007" }
+        let(:pubid) { "IEEE Draft Std P802.1AB/D2.2, December 2007" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEEE Unapproved Draft Std PC37.301/D3 R1, Feb 2008" do
+        let(:original) { "IEEE Unapproved Draft Std PC37.301/D3 R1, Feb 2008" }
+        let(:pubid) { "IEEE Draft Std PC37.301/D3.1, February 2008" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEEE Unapproved Draft Std PC37.27/D16_Dec 2007" do
+        let(:original) { "IEEE Unapproved Draft Std PC37.27/D16_Dec 2007" }
+        let(:pubid) { "IEEE Draft Std PC37.27/D16, December 2007" }
+        let(:full_pubid) { "IEEE Unapproved Draft Std PC37.27/D16, December 2007" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEEE Unapproved Draft Std P802.1Q, 2009 Edition/D0.1, Feb 2010" do
+        let(:original) { "IEEE Unapproved Draft Std P802.1Q, 2009 Edition/D0.1, Feb 2010" }
+        let(:pubid) { "IEEE Draft Std P802.1Q 2009 Edition/D0.1, February 2010" }
+        let(:full_pubid) { "IEEE Unapproved Draft Std P802.1Q 2009 Edition/D0.1, February 2010" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -1060,6 +1111,12 @@ module Pubid::Ieee
 
       context "parses identifiers from pubid-parsed.txt" do
         let(:examples_file) { "pubid-parsed.txt" }
+
+        it_behaves_like "parse identifiers from file"
+      end
+
+      context "parses identifiers from unapproved.txt" do
+        let(:examples_file) { "unapproved.txt" }
 
         it_behaves_like "parse identifiers from file"
       end

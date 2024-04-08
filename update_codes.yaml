@@ -59,4 +59,42 @@ IEEE P90003-2014, April 2015: IEEE P90003, April 2015
 # Add space between year and month for dates without space, e.g. "Jul2014" -> "Jul 2014"
 /, (\w{3,4})(\d{4,4})$/: ", \\1 \\2"
 IEC/IEEE P61886-1_D2_May2020: IEC/IEEE P61886-1_D2, May 2020
-IEEE Unapproved P802.21/D-14-2008-Sept: IEEE P802.21/D14
+IEEE Unapproved P1076.1/D-3.3-07-Feb20: IEEE Unapproved P1076.1/D-3.3-2007-02
+IEEE Unapproved P11073.10407/D-09-08-Sep20: IEEE Unapproved P11073.10407/D-09-2008-09
+IEEE Unapproved P1597.2/D-7.1-09-Oct20: IEEE Unapproved P1597.2/D7.1-2009-10
+IEEE Unapproved P7.4.3.2/D-3-2010-01: IEEE Unapproved P7-4.3.2/D-3-2010-01
+IEEE Unapproved P802.11k/D-13.0_Mar-08-20: IEEE Unapproved P802.11k/D-13.0-2008-03
+IEEE Unapproved P802.16g/D-8-07-Feb20: IEEE Unapproved P802.16g/D-8-2007-02
+#IEEE Unapproved P802.16_Rev2/D-2-2007: IEEE Unapproved P802.16Rev2/D-2-2007
+IEEE Unapproved P802.1ah/D-4.-2008-02: IEEE Unapproved P802.1ah/D-4-2008-02
+IEEE Unapproved P802.20.2/D-2.0-09-Oct20: IEEE Unapproved P802.20.2/D-2.0-2009-10
+IEEE Unapproved P802.3/D-D1.1/Cor1-2009: IEEE Unapproved P802.3/D1.1/Cor1-2009
+IEEE Unapproved Std PC57.129_D9, Mar07: IEEE Unapproved Std PC57.129_D9, Mar 07
+IEEE Unapproved Draft Std PC62.21_D3, Sep07: IEEE Unapproved Draft Std PC62.21_D3, Sep 07
+IEEE Unapproved Draft Std P2600.2/D41b, Jan09: IEEE Unapproved Draft Std P2600.2/D41b, Jan 09
+IEEE Active Unapproved Draft Std IEEE PC37.06/D8.3, July 2007: IEEE Active Unapproved Draft Std PC37.06/D8.3, July 2007
+IEEE Unapproved Draft Std PC57.21/D14, Dec. 2007: IEEE Unapproved Draft Std PC57.21/D14, Dec 2007
+IEEE Unapproved Draft Std P802.1AB/REVD2.2, Dec 2007: IEEE Unapproved Draft Std P802.1AB/D2.2, Dec 2007
+IEEE Unapproved Draft Std PC37.301/D3 R1, Feb 2008: IEEE Unapproved Draft Std PC37.301/D3.1, Feb 2008
+IEEE Unapproved Draft Std PC37.27/D16_Dec 2007: IEEE Unapproved Draft Std PC37.27/D16, Dec 2007
+IEEE Unapproved Draft Std PC37.13 / D21, Dec 2007: IEEE Unapproved Draft Std PC37.13/D21, Dec 2007
+IEEE Unapproved Draft Std P802.1ah/D4., Feb 2008: IEEE Unapproved Draft Std P802.1ah/D4, Feb 2008
+IEEE Unapproved Draft Std P802.11k_D13.0_Mar 2008: IEEE Unapproved Draft Std P802.11k_D13.0, Mar 2008
+IEEE Unapproved Draft Std P1776/D9b, Feb. 2008: IEEE Unapproved Draft Std P1776/D9b, Feb 2008
+IEEE Unapproved Draft Std PC62.21-2003-Cor_1/D5, Mar 2008: IEEE Unapproved Draft Std PC62.21-2003-Cor1/D5, Mar 2008
+IEEE Unapproved Draft Std P1003.1 Draft 5.1, May 2008: IEEE Unapproved Draft Std P1003.1/D5.1, May 2008
+IEEE Unapproved Draft Std P802-1Qay/D5-0, Jan 09: IEEE Unapproved Draft Std P802-1Qay/D5.0, Jan 09
+IEEE Unapproved Draft Std P1775/1.9.7, Mar 2009: IEEE Unapproved Draft Std P1775/D1.9.7, Mar 2009
+IEEE Unapproved Draft Std P1044/D00005, Aug-2009: IEEE Unapproved Draft Std P1044/D5, Aug 2009
+IEEE Unapproved Draft Std P1584b/ D2, Jul 2009: IEEE Unapproved Draft Std P1584b/D2, Jul 2009
+IEEE Unapproved Draft Std P11073-10421, D6, Oct 2009: IEEE Unapproved Draft Std P11073-10421/D6, Oct 2009
+IEEE Unapproved Draft Std PC37.13.1a/D3. Nov 2009: IEEE Unapproved Draft Std PC37.13.1a/D3, Nov 2009
+IEEE Unapproved Draft Std PC37.082_IEC62271-113/D2, Jan 2010: IEEE Unapproved Draft Std PC37.082/D2, Jan 2010 (IEC 62271-113)
+IEEE Unapproved Draft Std PC37.20.7-2001 Cor 1/D3, Aug 2009: IEEE Unapproved Draft Std PC37.20.7-2001/Cor 1/D3, Aug 2009
+IEEE Unapproved Draft Std PC37.20.7-2007 Cor 1/D4: IEEE Unapproved Draft Std PC37.20.7-2007/Cor 1/D4
+IEEE Unapproved Draft Std P802.3-2008 (P802.3bb)/Cor 1/D1.1, Jan 2009: IEEE Unapproved Draft Std P802.3-2008/Cor 1/D1.1, Jan 2009 (IEEE P802.3bb)
+IEEE Unapproved Draft Std P802.3-2008 (P802.3bb)/Cor 1/D2.0, Jul 2009: IEEE Unapproved Draft Std P802.3-2008/Cor 1/D2.0, Jul 2009 (IEEE P802.3bb)
+IEEE Unapproved Draft Std P16326:2008/CD2, Sep 2008: IEEE P16326:2008/CD2, Sep 2008
+IEEE Unapproved Draft Std 16326:2009: IEEE 16326:2009
+IEEE Unapproved Draft Std PC37.082_IEC62271-113/D2, Jan 2010: IEEE Unapproved Draft Std PC37.082/D2, Jan 2010 (IEC 62271-113)
+Unapproved Draft Std ISO/IEC FDIS 15288:2007(E) IEEE P15288/D3: IEEE Unapproved Draft Std P15288/D3 (ISO/IEC FDIS 15288:2007(E))

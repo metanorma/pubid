@@ -7,6 +7,10 @@ RSpec.describe Pubid::Ieee::Parser do
     expect(subject.draft_date).to parse(", Feb 6, 2007")
   end
 
+  it "parses draft date without space" do
+    expect(subject.draft_date).to parse(",Mar 2007")
+  end
+
   it "parses part" do
     expect(subject.part_subpart_year).to parse("-20601a", trace: true)
     expect(subject.part_subpart_year).to parse(".3-2012", trace: true)
@@ -121,6 +125,10 @@ RSpec.describe Pubid::Ieee::Parser do
 
   describe "#iso_stage_part_iteration" do
     it { expect(subject.iso_stage_part_iteration).to parse("-DIS-1403") }
+  end
+
+  describe "#iso_stage_part_iteration" do
+    it { expect(subject.iso_stage_part_iteration).to parse("/CD") }
   end
 
   describe "#iso_part_stage_iteration_matcher" do

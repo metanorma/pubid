@@ -6,8 +6,8 @@ module Pubid::Ieee::Renderer
         "%{corrigendum}%{draft}%{edition})%{alternative}%{supersedes}%{reaffirmed}%{incorporates}%{supplement}"\
         "%{revision}%{iso_amendment}%{amendment}%{includes}%{redline}%{adoption}" % params
       else
-        "%{publisher}%{stage}%{draft_status}%{type}%{number}%{iteration}%{part}%{subpart}%{month}%{year}%{corrigendum_comment}"\
-        "%{corrigendum}%{draft}%{edition}%{alternative}%{supersedes}%{reaffirmed}%{incorporates}%{supplement}"\
+        "%{publisher}%{stage}%{draft_status}%{type}%{number}%{iteration}%{part}%{subpart}%{month}%{year}%{edition}%{corrigendum_comment}"\
+        "%{corrigendum}%{draft}%{alternative}%{supersedes}%{reaffirmed}%{incorporates}%{supplement}"\
         "%{revision}%{iso_amendment}%{amendment}%{includes}%{redline}%{adoption}" % params
       end
     end

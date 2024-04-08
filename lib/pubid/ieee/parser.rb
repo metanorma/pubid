@@ -16,7 +16,7 @@ module Pubid::Ieee
     rule(:words_digits) { match('[\dA-Za-z]').repeat(1) }
     rule(:words) { match("[A-Za-z]").repeat(1) }
     rule(:words?) { words.maybe }
-    rule(:year_digits) { (str("19") | str("20")) >> match('\d').repeat(2, 2) }
+    rule(:year_digits) { (str("19") | str("20")) >> match('\d').repeat(2, 2) >> digits.absent? }
 
     rule(:month_digits) do
       match('\d').repeat(2, 2)
@@ -74,7 +74,7 @@ module Pubid::Ieee
     end
 
     rule(:draft_date) do
-      ((space? >> comma | space) >> words.as(:month)).maybe >>
+      ((space? >> str(",") >> space? | space) >> words.as(:month)).maybe >>
         (
           ((space >> digits.as(:day)).maybe >> comma >> year_digits.as(:year)) |
             (comma_space >> match('\d').repeat(2, 4).as(:year))
@@ -86,14 +86,15 @@ module Pubid::Ieee
       (str("D") >> digits.as(:version)).repeat(2) |
       # for DD3, D3Q
       # don't parse "DIS" as draft
-      (str("D") >> str("IS").absent? >> words_digits.as(:version)).repeat(1, 1)
+      # "-d" suffix for IEEE Unapproved Draft Std P336/D2009-d, Jul 2009
+      (str("D") >> str("IS").absent? >> str("-").maybe >> (words_digits >> str("-d").maybe).as(:version)).repeat(1, 1)
     end
 
     rule(:draft) do
       # /D14, April 2020
       # /D7 November, 2019
       (draft_prefix >> draft_version >>
-        ((dot | str("r")) >> (digits >> words?).as(:revision)).maybe >>
+        ((dot | str("r")) >> (digits >> words? >> (dot >> digits).maybe).as(:revision)).maybe >>
         draft_date.maybe).as(:draft)
     end
 
@@ -102,7 +103,7 @@ module Pubid::Ieee
     end
 
     rule(:subpart) do
-      (dot | dash) >> ((str("REV") | str("Rev")).maybe >> match('[\da-z]').repeat(1) | (str("REV") | str("Rev")))
+      (dot | dash | str("_")) >> ((str("REV") | str("Rev")).maybe >> match('[\da-z]').repeat(1) >> (dot >> digits).maybe | (str("REV") | str("Rev")))
     end
 
     rule(:part_subpart_year) do
@@ -231,7 +232,7 @@ module Pubid::Ieee
         (
           # IEEE P2410-D4, July 2019
           (draft |
-            part_subpart_year.maybe >> corrigendum.maybe >> draft.maybe >> iso_amendment.maybe
+            part_subpart_year.maybe >> edition.as(:edition).maybe >> corrigendum.maybe >> draft.maybe >> iso_amendment.maybe
           ) >>
             # iso_stage_part_iteration.maybe >>
             # ((str("-") | str("/") | str("_")) >> (str("D") >> digits).absent? >>
@@ -357,6 +358,7 @@ module Pubid::Ieee
         (str("P").maybe >> iso_parser.digits).as(:number) >> iso_parser.iteration.maybe >>
       # for identifiers like ISO 5537/IDF 26
       (str("|") >> (str("IDF") >> str(" ") >> digits).as(:joint_document)).maybe >>
+        (str(":") >> iso_parser.year).maybe >>
         iso_part_stage_iteration_matcher.maybe >>
       (str(" ").maybe >> str(":") >> iso_parser.year).maybe >>
       # stage before amendment
