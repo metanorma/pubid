@@ -54,7 +54,7 @@ IEEE 1023-2020 (Revision of IEEE Std 1023-2004): IEEE No 1023-2020 (Revision of 
 # Remove Unapproved Draft Std for ISO style identifiers with iso stage
 # using "[A-Z]{2,}" to exclude /D12 (drafts) from match
 # IEEE Unapproved Draft Std P15026.2/FCD -> IEEE P15026.2/FCD
-/(IEEE )(?:Unapproved )?(?:Draft )?Std (P[\d.]+[_/][A-Z]{2,}\d?)/: \1\2
+#/(IEEE )(?:Unapproved )?(?:Draft )?Std (P[\d.]+[_/][A-Z]{2,}\d?)/: \1\2
 IEEE P90003-2014, April 2015: IEEE P90003, April 2015
 # Add space between year and month for dates without space, e.g. "Jul2014" -> "Jul 2014"
 /, (\w{3,4})(\d{4,4})$/: ", \\1 \\2"
@@ -98,3 +98,4 @@ IEEE Unapproved Draft Std P16326:2008/CD2, Sep 2008: IEEE P16326:2008/CD2, Sep 2
 IEEE Unapproved Draft Std 16326:2009: IEEE 16326:2009
 IEEE Unapproved Draft Std PC37.082_IEC62271-113/D2, Jan 2010: IEEE Unapproved Draft Std PC37.082/D2, Jan 2010 (IEC 62271-113)
 Unapproved Draft Std ISO/IEC FDIS 15288:2007(E) IEEE P15288/D3: IEEE Unapproved Draft Std P15288/D3 (ISO/IEC FDIS 15288:2007(E))
+IEEE Unapproved Draft Std P1635/ASHRAE 21_D4, Jan 2010: IEEE Unapproved Draft Std P1635/D4, January 2010 (ASHRAE 21)

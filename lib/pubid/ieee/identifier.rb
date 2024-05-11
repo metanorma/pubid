@@ -43,7 +43,7 @@ module Pubid::Ieee
       end
 
       def has_stage?(stage)
-        Pubid::Iso::Identifier.has_stage?(stage)
+        Pubid::Iso::Identifier.has_stage?(stage) || Pubid::Iso::Parser::TYPED_STAGES.include?(stage)
       end
     end
   end

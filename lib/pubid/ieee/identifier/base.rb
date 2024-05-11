@@ -94,20 +94,22 @@ module Pubid::Ieee
       end
 
 
-      def self.parse(code)
-        parsed = Parser.new.parse(update_old_code(code))
-        transform(parsed)
-
-      rescue Parslet::ParseFailed => failure
-        raise Pubid::Core::Errors::ParseError, "#{failure.message}\ncause: #{failure.parse_failure_cause.ascii_tree}"
-      end
-
       def self.transform(params)
+        if params[:iso_identifier] && params[:iso_identifier].is_a?(Array)
+          params[:iso_identifier] = array_to_hash(params[:iso_identifier])
+        end
         identifier_params = params.map do |k, v|
           get_transformer_class.new.apply(k => v)
         end.inject({}, :merge)
 
-        Identifier.create(**Identifier.convert_parser_parameters(**identifier_params))
+        identifier_params = Identifier.convert_parser_parameters(**identifier_params)
+
+        if identifier_params.key?(:draft) && identifier_params.key?(:month)
+          identifier_params[:draft].merge!({ year: identifier_params[:year], month: identifier_params[:month] })
+          identifier_params[:year] = identifier_params[:month] = nil
+        end
+
+        Identifier.create(**identifier_params)
       end
 
       # @param [:short, :full] format
@@ -129,6 +131,10 @@ module Pubid::Ieee
 
         def get_transformer_class
           Transformer
+        end
+
+        def get_parser_class
+          Parser
         end
       end
     end

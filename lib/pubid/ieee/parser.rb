@@ -32,11 +32,11 @@ module Pubid::Ieee
 
     rule(:organization) do
       str("IEEE") | str("AIEE") | str("ANSI") | str("ASA") | str("NCTA") |
-        str("IEC") | str("ISO") | str("ASTM") | str("NACE") | str("NSF")
+        str("IEC") | str("ISO") | str("ASTM") | str("NACE") | str("NSF") | str("ASHRAE")
     end
 
     rule(:number) do
-      str("D").absent? >> ((digits | match("[A-Z]")).repeat(1) >> match("[a-z]").maybe).as(:number)
+      str("D").absent? >> (str("P").maybe >> (digits | match("[A-Z]")).repeat(1) >> match("[a-z]").maybe).as(:number)
     end
 
     rule(:type) do
@@ -147,9 +147,9 @@ module Pubid::Ieee
     rule(:dual_pubid_without_parameters) do
       space? >>
         (
-          (str("(") >> (iso_identifier >> iso_parameters).as(:alternative) >> str(")") |
-            str("(") >> (identifier_no_params.as(:alternative) >> str(", ").maybe).repeat(1) >> str(")"))# |
-          #identifier_no_params.as(:alternative)
+          (str("(") >> (identifier_no_params.as(:alternative) >> str(", ").maybe).repeat(1) >> str(")") |
+            str("(") >> (iso_identifier >> iso_parameters).as(:alternative) >> str(")")
+            )
         )
     end
 
@@ -234,7 +234,7 @@ module Pubid::Ieee
           (draft |
             part_subpart_year.maybe >> edition.as(:edition).maybe >> corrigendum.maybe >> draft.maybe >> iso_amendment.maybe
           ) >>
-            # iso_stage_part_iteration.maybe >>
+            iso_stage_part_iteration.repeat >>
             # ((str("-") | str("/") | str("_")) >> (str("D") >> digits).absent? >>
             #   (iso_parser.typed_stage.as(:stage) | iso_parser.stage.as(:stage))) >> digits.as(:iteration).maybe >>
             if skip_parameters
@@ -362,9 +362,9 @@ module Pubid::Ieee
         iso_part_stage_iteration_matcher.maybe >>
       (str(" ").maybe >> str(":") >> iso_parser.year).maybe >>
       # stage before amendment
-      (
-      # stage before corrigendum
-      iso_parser.supplement.maybe) >>
+      iso_amendment.maybe >>
+      corrigendum.maybe >>
+      iso_parser.supplement.maybe >>
         iso_parser.language.maybe).as(:iso_identifier)
     end
 

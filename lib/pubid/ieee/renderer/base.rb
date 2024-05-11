@@ -6,8 +6,8 @@ module Pubid::Ieee::Renderer
         "%{corrigendum}%{draft}%{edition})%{alternative}%{supersedes}%{reaffirmed}%{incorporates}%{supplement}"\
         "%{revision}%{iso_amendment}%{amendment}%{includes}%{redline}%{adoption}" % params
       else
-        "%{publisher}%{stage}%{draft_status}%{type}%{number}%{iteration}%{part}%{subpart}%{month}%{year}%{edition}%{corrigendum_comment}"\
-        "%{corrigendum}%{draft}%{alternative}%{supersedes}%{reaffirmed}%{incorporates}%{supplement}"\
+        "%{publisher}%{draft_status}%{type}%{number}%{part}%{subpart}%{edition}%{stage}"\
+        "%{month}%{year}%{corrigendum_comment}%{corrigendum}%{draft}%{alternative}%{supersedes}%{reaffirmed}%{incorporates}%{supplement}"\
         "%{revision}%{iso_amendment}%{amendment}%{includes}%{redline}%{adoption}" % params
       end
     end
@@ -22,14 +22,18 @@ module Pubid::Ieee::Renderer
     end
 
     def render_type(type, opts, params)
-      result = type.to_s(params[:publisher] == "IEEE" ? opts[:format] : :alternative)
+      result = if params[:publisher] == "IEEE" ||
+                 (params[:copublisher].is_a?(Array) && params[:copublisher].include?("IEEE") || params[:copublisher] == "IEEE")
+                 type.to_s(opts[:format])
+               else
+                 type.to_s(:alternative)
+               end
 
       " #{result}" unless result.empty?
-      #" #{type}"
     end
 
     def render_part(part, _opts, _params)
-      "#{part}"
+      (part =~ /^[-.]/ ? "" : "-") + part
     end
 
     def render_month(month, _opts, _params)
@@ -91,10 +95,15 @@ module Pubid::Ieee::Renderer
       end
     end
 
-    def render_draft(draft, _opts, _params)
+    def render_draft(draft, _opts, params)
       draft = Pubid::Ieee::Identifier.merge_parameters(draft) if draft.is_a?(Array)
 
-      result = "/D#{draft[:version].is_a?(Array) ? draft[:version].join('D') : draft[:version]}"
+      result = if draft[:version].is_a?(Array)
+                 "/D#{draft[:version].join('D')}"
+               else
+                 "/#{draft[:version].to_s.match?(/^\d/) ? 'D' : ''}#{draft[:version]}"
+               end
+      result += "#{params[:iteration]}" if params[:iteration]
       result += ".#{draft[:revision]}" if draft[:revision]
       result += ", #{draft[:month]}" if draft[:month]
       result += " #{draft[:day]}," if draft[:day]
@@ -179,6 +188,10 @@ module Pubid::Ieee::Renderer
 
     def render_adoption(adoption, opts, _params)
       " (Adoption of #{Pubid::Ieee::Identifier::Base.transform(**adoption)})"
+    end
+
+    def render_stage(stage, _opts, _params)
+      "/#{stage}"
     end
   end
 end

@@ -12,7 +12,7 @@ RSpec.describe Pubid::Ieee::Identifier do
       let(:params) { { publisher: "IEC", copublisher: "IEEE" } }
 
       it "renders publisher with copublisher" do
-        expect(subject.to_s).to eq("IEC/IEEE #{number}")
+        expect(subject.to_s).to eq("IEC/IEEE Std #{number}")
       end
 
     end

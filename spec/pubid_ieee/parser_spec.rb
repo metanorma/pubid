@@ -117,6 +117,10 @@ RSpec.describe Pubid::Ieee::Parser do
       expect(subject.iso_identifier.parse("IEEE/ISO/IEC P29119-2-DIS")[:iso_identifier])
         .to include(part: "2", stage: "DIS")
     end
+
+    it "parses draft status" do
+      expect(subject.identifier).to parse("IEEE Unapproved Draft Std P29148_CD2, Feb 2010", trace: true)
+    end
   end
 
   describe "#iso_part_stage_iteration" do
