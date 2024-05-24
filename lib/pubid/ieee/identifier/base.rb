@@ -10,7 +10,7 @@ module Pubid::Ieee
                     :draft_status, :revision, :adoption_year, :amendment, :supersedes,
                     :corrigendum, :corrigendum_comment, :reaffirmed, :incorporates,
                     :supplement, :proposal, :iso_identifier, :iso_amendment,
-                    :iteration, :includes, :adoption
+                    :iteration, :includes, :adoption, :day
 
       def initialize(publisher: "IEEE", number: nil, stage: nil, subpart: nil, edition: nil,
                      draft: nil, redline: nil, month: nil, revision: nil,
@@ -19,20 +19,12 @@ module Pubid::Ieee
                      amendment: nil, supersedes: nil, corrigendum: nil,
                      corrigendum_comment: nil, reaffirmed: nil,
                      incorporates: nil, supplement: nil, proposal: nil,
-                     iso_amendment: nil, iteration: nil, includes: nil, adoption: nil, **opts)
+                     iso_amendment: nil, iteration: nil, includes: nil, adoption: nil,
+                     year: nil, day: nil, **opts)
 
         super(**opts.merge(number: number, publisher: publisher))#.merge(amendments: amendments, corrigendums: corrigendums))
 
-        if edition
-          @edition = edition.update(edition) do |key, value|
-            case key
-            when :year, :month
-              value.to_i
-            else
-              value
-            end
-          end
-        end
+        @edition = edition if edition
 
         @proposal = @number.to_s[0] == "P"
         @revision = revision
@@ -71,6 +63,8 @@ module Pubid::Ieee
         @iteration = iteration
         @includes = includes
         @adoption = adoption
+        @year = year.is_a?(Array) ? year.first.to_i : year.to_i if year
+        @day = day.to_i if day
       end
 
       def self.type
@@ -94,19 +88,56 @@ module Pubid::Ieee
       end
 
 
-      def self.transform(params)
-        if params[:iso_identifier] && params[:iso_identifier].is_a?(Array)
-          params[:iso_identifier] = array_to_hash(params[:iso_identifier])
+      def self.transform_parameters(params)
+        return params if params == ""
+
+        if params[:iso_identifier]
+          if params[:iso_identifier].is_a?(Array)
+            params[:iso_identifier] = array_to_hash(params[:iso_identifier])
+          end
+
+          if params[:iso_identifier][:month]
+            params[:month] = params[:iso_identifier][:month]
+            params[:year] = params[:iso_identifier][:year]
+            params[:iso_identifier].delete(:year)
+            params[:iso_identifier].delete(:month)
+          end
         end
-        identifier_params = params.map do |k, v|
-          get_transformer_class.new.apply(k => v)
+
+        params.map do |k, v|
+          case k
+          when :parameters, :draft, :alternative
+            v = Identifier.merge_parameters(v) if k == :draft
+            # apply transformer for each separate item when array provided
+            if v.is_a?(Array)
+              get_transformer_class.new.apply(k => v.map { |vv| transform_parameters(vv) })
+            else
+              get_transformer_class.new.apply(k => transform_parameters(v))
+            end
+          when :iso_identifier
+            v = Identifier.merge_parameters(v)
+            result = get_transformer_class.new.apply(k => v)
+            # apply transformation when output was transformed to IEEE
+            result.key?(:iso_identifier) ? result : transform_parameters(result)
+          else
+            get_transformer_class.new.apply(k => v)
+          end
         end.inject({}, :merge)
+      end
 
-        identifier_params = Identifier.convert_parser_parameters(**identifier_params)
+      def self.transform(params)
+        # transform inside parameters
 
-        if identifier_params.key?(:draft) && identifier_params.key?(:month)
-          identifier_params[:draft].merge!({ year: identifier_params[:year], month: identifier_params[:month] })
-          identifier_params[:year] = identifier_params[:month] = nil
+        identifier_params = transform_parameters(
+          Identifier.convert_parser_parameters(**params),
+        )
+
+        if identifier_params.key?(:draft) && identifier_params[:draft].key?(:year)
+          identifier_params[:year] = identifier_params[:draft][:year]
+          identifier_params[:month] = identifier_params[:draft][:month]
+          identifier_params[:day] = identifier_params[:draft][:day]
+          identifier_params[:draft].delete(:year)
+          identifier_params[:draft].delete(:month)
         end
 
         Identifier.create(**identifier_params)
@@ -115,7 +146,7 @@ module Pubid::Ieee
       # @param [:short, :full] format
       def to_s(format = :short, with_trademark: false)
         opts = { format: format, with_trademark: with_trademark }
-        (@iso_identifier ? @iso_identifier.to_s(format: :ref_num_short) : "") +
+        (@iso_identifier ? @iso_identifier.to_s(format: :ref_num_short, with_edition: true) : "") +
           self.class.get_renderer_class.new(to_h(deep: false)).render(**opts) +
           (with_trademark ? trademark(@number) : "")
       end

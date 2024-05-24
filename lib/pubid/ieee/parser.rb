@@ -49,7 +49,7 @@ module Pubid::Ieee
 
     rule(:edition) do
       (comma >> year_digits.as(:year) >> str(" Edition")) |
-        ((space | dash) >> str("Edition ") >> (digits >> dot >> digits).as(:version) >> (str(" - ") | space) >>
+        ((space | dash) >> str("Edition ") >> (digits >> dot >> digits).as(:edition) >> (str(" - ") | space) >>
         year_digits.as(:year) >> (dash >>
           month_digits.as(:month)).maybe) |
         #, February 2018 (E)
@@ -57,7 +57,7 @@ module Pubid::Ieee
         # (comma_month_year >> space? >> str("(E)")) |
         # comma_month_year |
         # First edition 2002-11-01
-        space >> str("First").as(:version) >>
+        space >> str("First").as(:edition) >>
         str(" edition ") >>
           year_digits.as(:year) >> dash >>
           month_digits.as(:month) >> (dash >>
@@ -120,7 +120,7 @@ module Pubid::Ieee
         # C57.19.101
         (part >> subpart.as(:subpart)) |
         # IEC 62525-Edition 1.0 - 2007
-        edition.as(:edition) |
+        edition |
         # IEEE P11073-10101
         # IEEE P11073-10420/D4D5
         # IEEE Unapproved Draft Std P11073-20601a/D13, Jan 2010
@@ -232,7 +232,7 @@ module Pubid::Ieee
         (
           # IEEE P2410-D4, July 2019
           (draft |
-            part_subpart_year.maybe >> edition.as(:edition).maybe >> corrigendum.maybe >> draft.maybe >> iso_amendment.maybe
+            part_subpart_year.maybe >> edition.maybe >> corrigendum.maybe >> draft.maybe >> iso_amendment.maybe
           ) >>
             iso_stage_part_iteration.repeat >>
             # ((str("-") | str("/") | str("_")) >> (str("D") >> digits).absent? >>
@@ -245,7 +245,7 @@ module Pubid::Ieee
             if skip_parameters
               str("")
             else
-              edition.as(:edition).maybe
+              edition.maybe
             end >>
             # dual-PubIDs
             ((without_dual_pubids && str("")) || dual_pubids.maybe) >>
@@ -365,13 +365,14 @@ module Pubid::Ieee
       iso_amendment.maybe >>
       corrigendum.maybe >>
       iso_parser.supplement.maybe >>
+        (edition | iso_parser.edition ).maybe >>
         iso_parser.language.maybe).as(:iso_identifier)
     end
 
     rule(:iso_parameters) do
       iso_amendment.maybe >> (dual_pubid_without_parameters.maybe >>
         (publication_date >> space? >> str("(E)").maybe).maybe >>
-        edition.as(:edition).maybe >> draft.maybe >> additional_parameters).as(:parameters)
+        edition.maybe >> draft.maybe >> additional_parameters).as(:parameters)
     end
 
     rule(:identifier_before_edition) do

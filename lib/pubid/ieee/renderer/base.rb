@@ -4,11 +4,19 @@ module Pubid::Ieee::Renderer
       if params[:iso_identifier].to_s != "" && params[:number] != ""
         " (%{publisher}%{stage}%{draft_status}%{type}%{number}%{iteration}%{part}%{subpart}%{month}%{year}%{corrigendum_comment}"\
         "%{corrigendum}%{draft}%{edition})%{alternative}%{supersedes}%{reaffirmed}%{incorporates}%{supplement}"\
-        "%{revision}%{iso_amendment}%{amendment}%{includes}%{redline}%{adoption}" % params
+        "%{revision}%{iso_amendment}%{amendment}%{edition}%{includes}%{redline}%{adoption}" % params
       else
-        "%{publisher}%{draft_status}%{type}%{number}%{part}%{subpart}%{edition}%{stage}"\
-        "%{month}%{year}%{corrigendum_comment}%{corrigendum}%{draft}%{alternative}%{supersedes}%{reaffirmed}%{incorporates}%{supplement}"\
-        "%{revision}%{iso_amendment}%{amendment}%{includes}%{redline}%{adoption}" % params
+        if params[:day].empty? && params[:month].empty?
+          # if only year - edition and draft after year
+          "%{publisher}%{draft_status}%{type}%{number}%{part}%{subpart}%{stage}"\
+          "%{year}%{edition}%{corrigendum_comment}%{corrigendum}%{draft}%{alternative}%{supersedes}%{reaffirmed}%{incorporates}%{supplement}"\
+          "%{revision}%{iso_amendment}%{amendment}%{includes}%{redline}%{adoption}" % params
+        else
+          # if year and month - edition and draft before
+          "%{publisher}%{draft_status}%{type}%{number}%{part}%{subpart}%{edition}%{stage}"\
+          "%{corrigendum_comment}%{corrigendum}%{draft}%{month}%{day}%{year}%{alternative}%{supersedes}%{reaffirmed}%{incorporates}%{supplement}"\
+          "%{revision}%{iso_amendment}%{amendment}%{includes}%{redline}%{adoption}" % params
+        end
       end
     end
 
@@ -36,8 +44,16 @@ module Pubid::Ieee::Renderer
       (part =~ /^[-.]/ ? "" : "-") + part
     end
 
-    def render_month(month, _opts, _params)
-      ", #{month}"
+    def render_day(day, _opts, params)
+      # month = Date.parse(params[:month]).month
+      # " %s-%s-%02d" % [params[:year], month, day]
+      " #{day}"
+    end
+
+    def render_month(month, _opts, params)
+      # return if params[:day]
+
+      ", #{Date::MONTHNAMES[month]}"
     end
 
     def render_corrigendum_comment(corrigendum_comment, _opts, params)
@@ -45,7 +61,10 @@ module Pubid::Ieee::Renderer
     end
 
     def render_year(year, _opts, params)
-      return " #{year}" if params[:month]
+      # return if params[:day]
+
+      # add comma when day appears before year
+      return (params[:day] ? "," : "") + " #{year}" if params[:month]
 
       if params[:corrigendum_comment]
         "-#{params[:corrigendum_comment].year}"
@@ -65,26 +84,27 @@ module Pubid::Ieee::Renderer
     end
 
     def render_edition(edition, _opts, _params)
-      result = ""
-      if edition[:version]
-        result += edition[:version] == "First" ? " Edition 1.0 " : " Edition #{edition[:version]} "
-      end
+      edition == "First" ? " Edition 1.0" : " Edition #{edition}"
+      # result = ""
+      # if edition[:version]
+      #   result +=
+      # end
 
-      if edition[:year]
-        result += if edition[:version]
-                    "#{edition[:year]}"
-                  else
-                    " #{edition[:year]} Edition"
-                  end
-      end
-
-      if edition[:month]
-        month = edition[:month]
-        month = Date.parse(edition[:month]).month if month.to_i.zero?
-        result += "-#{sprintf('%02d', month)}"
-      end
-      result += "-#{edition[:day]}" if edition[:day]
-      result
+      # if edition[:year]
+      #   result += if edition[:version]
+      #               " #{edition[:year]}"
+      #             else
+      #               " #{edition[:year]} Edition"
+      #             end
+      # end
+      #
+      # if edition[:month]
+      #   month = edition[:month]
+      #   month = Date.parse(edition[:month]).month if month.to_i.zero?
+      #   result += "-#{sprintf('%02d', month)}"
+      # end
+      # result += "-#{edition[:day]}" if edition[:day]
+      # result
     end
 
     def render_alternative(alternative, _opts, _params)
@@ -105,9 +125,9 @@ module Pubid::Ieee::Renderer
                end
       result += "#{params[:iteration]}" if params[:iteration]
       result += ".#{draft[:revision]}" if draft[:revision]
-      result += ", #{draft[:month]}" if draft[:month]
-      result += " #{draft[:day]}," if draft[:day]
-      result += " #{draft[:year]}" if draft[:year]
+      # result += ", #{draft[:month]}" if draft[:month]
+      # result += " #{draft[:day]}," if draft[:day]
+      # result += " #{draft[:year]}" if draft[:year]
       result
     end
 

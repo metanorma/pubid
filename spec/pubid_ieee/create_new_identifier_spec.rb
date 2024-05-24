@@ -36,21 +36,21 @@ RSpec.describe Pubid::Ieee::Identifier do
 
     context "edition" do
       context "only year" do
-        let(:params) { { edition: { year: 2011 } } }
+        let(:params) { { year: 2011 } }
 
-        it { expect(subject.to_s).to eq("IEEE Std #{number} 2011 Edition") }
+        it { expect(subject.to_s).to eq("IEEE Std #{number}-2011") }
       end
 
       context "year and version" do
-        let(:params) { { edition: { version: "1.0", year: 2011 } } }
+        let(:params) { { edition: "1.0", year: 2011 } }
 
-        it { expect(subject.to_s).to eq("IEEE Std #{number} Edition 1.0 2011") }
+        it { expect(subject.to_s).to eq("IEEE Std #{number}-2011 Edition 1.0") }
       end
 
       context "with month" do
-        let(:params) { { edition: { version: "1.0", year: 2011, month: 1 } } }
+        let(:params) { { edition: "1.0", year: 2011, month: 1 } }
 
-        it { expect(subject.to_s).to eq("IEEE Std #{number} Edition 1.0 2011-01") }
+        it { expect(subject.to_s).to eq("IEEE Std #{number} Edition 1.0, January 2011") }
       end
     end
 
@@ -61,7 +61,7 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "draft" do
-      let(:params) { { draft: { version: 1, revision: 2, month: "January", day: 1, year: 1999 } } }
+      let(:params) { { draft: { version: 1, revision: 2 }, month: 1, day: 1, year: 1999 } }
 
       it { expect(subject.to_s).to eq("IEEE Draft Std #{number}/D1.2, January 1, 1999") }
     end
@@ -139,7 +139,7 @@ RSpec.describe Pubid::Ieee::Identifier do
     end
 
     context "publication date" do
-      let(:params) { { month: "January", year: 1999 } }
+      let(:params) { { month: 1, year: 1999 } }
 
       it { expect(subject.to_s).to eq("IEEE Std #{number}, January 1999") }
     end

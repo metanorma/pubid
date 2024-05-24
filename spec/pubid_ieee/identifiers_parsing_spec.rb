@@ -99,28 +99,28 @@ module Pubid::Ieee
 
       context "IEC 61671-2 Edition 1.0 2016-04" do
         let(:original) { "IEC 61671-2 Edition 1.0 2016-04" }
-        let(:pubid) { "IEC 61671-2 Edition 1.0 2016-04" }
+        let(:pubid) { "IEC 61671-2 Edition 1.0, April 2016" }
 
         it_behaves_like "converts pubid to pubid"
       end
 
       context "IEC/IEEE 60076-16 Edition 2.0 2018-09" do
         let(:original) { "IEC/IEEE 60076-16 Edition 2.0 2018-09" }
-        let(:pubid) { "IEC/IEEE Std 60076-16 Edition 2.0 2018-09" }
+        let(:pubid) { "IEC/IEEE Std 60076-16 Edition 2.0, September 2018" }
 
         it_behaves_like "converts pubid to pubid"
       end
 
       context "IEEE Std 1003.1, 2004 Edition" do
         let(:original) { "IEEE Std 1003.1, 2004 Edition" }
-        let(:pubid) { "IEEE Std 1003.1 2004 Edition" }
+        let(:pubid) { "IEEE Std 1003.1-2004" }
 
         it_behaves_like "converts pubid to pubid"
       end
 
       context "IEC 62525-Edition 1.0 - 2007" do
         let(:original) { "IEC 62525-Edition 1.0 - 2007" }
-        let(:pubid) { "IEC 62525 Edition 1.0 2007" }
+        let(:pubid) { "IEC 62525-2007 Edition 1.0" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -134,21 +134,21 @@ module Pubid::Ieee
 
       context "ISO/IEC 15288 First edition 2002-11-01" do
         let(:original) { "ISO/IEC 15288 First edition 2002-11-01" }
-        let(:pubid) { "ISO/IEC 15288 Edition 1.0 2002-11-01" }
+        let(:pubid) { "ISO/IEC 15288 Edition 1.0, November 1, 2002" }
 
         it_behaves_like "converts pubid to pubid"
       end
 
       context "IEC 61523-3 First edition 2004-09" do
         let(:original) { "IEC 61523-3 First edition 2004-09" }
-        let(:pubid) { "IEC 61523-3 Edition 1.0 2004-09" }
+        let(:pubid) { "IEC 61523-3 Edition 1.0, September 2004" }
 
         it_behaves_like "converts pubid to pubid"
       end
 
       context "IEEE 1076.4 IEC 61691-5 First edition 2004-10" do
         let(:original) { "IEEE 1076.4 IEC 61691-5 First edition 2004-10" }
-        let(:pubid) { "IEEE Std 1076.4 (IEC 61691-5 Edition 1.0 2004-10)" }
+        let(:pubid) { "IEEE Std 1076.4 (IEC 61691-5 Edition 1.0, October 2004)" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -163,7 +163,7 @@ module Pubid::Ieee
 
       context "IEEE Std 1076.1 IEC 61691-6 Edition 1.0 2009-12" do
         let(:original) { "IEEE Std 1076.1 IEC 61691-6 Edition 1.0 2009-12" }
-        let(:pubid) { "IEEE Std 1076.1 (IEC 61691-6 Edition 1.0 2009-12)" }
+        let(:pubid) { "IEEE Std 1076.1 (IEC 61691-6 Edition 1.0, December 2009)" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -379,7 +379,7 @@ module Pubid::Ieee
 
       context "IEEE Std 1666 IEC61691-7 Edition 1.0 2009-12" do
         let(:original) { "IEEE Std 1666 IEC61691-7 Edition 1.0 2009-12" }
-        let(:pubid) { "IEEE Std 1666 (IEC 61691-7 Edition 1.0 2009-12)" }
+        let(:pubid) { "IEEE Std 1666 (IEC 61691-7 Edition 1.0, December 2009)" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -496,14 +496,14 @@ module Pubid::Ieee
 
       context "P1900.6-2011/Cor1/D3, August 2015" do
         let(:original) { "P1900.6-2011/Cor1/D3, August 2015" }
-        let(:pubid) { "IEEE Draft Std P1900.6-2011/Cor 1/D3, August 2015" }
+        let(:pubid) { "IEEE Draft Std P1900.6/Cor 1/D3, August 2015" }
 
         it_behaves_like "converts pubid to pubid"
       end
 
       context "IEEE P1722-2016-Cor1/D0, June 2016" do
         let(:original) { "IEEE P1722-2016-Cor1/D0, June 2016" }
-        let(:pubid) { "IEEE Draft Std P1722-2016/Cor 1/D0, June 2016" }
+        let(:pubid) { "IEEE Draft Std P1722/Cor 1/D0, June 2016" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -590,7 +590,7 @@ module Pubid::Ieee
 
       context "IEEE Std 1003.1, 2013 Edition (incorporates IEEE Std 1003.1-2008, and IEEE Std 1003.1-2008/Cor 1-2013)" do
         let(:original) { "IEEE Std 1003.1, 2013 Edition (incorporates IEEE Std 1003.1-2008, and IEEE Std 1003.1-2008/Cor 1-2013)" }
-        let(:pubid) { "IEEE Std 1003.1 2013 Edition (Incorporates IEEE Std 1003.1-2008, and IEEE Std 1003.1-2008/Cor 1-2013)" }
+        let(:pubid) { "IEEE Std 1003.1-2013 (Incorporates IEEE Std 1003.1-2008, and IEEE Std 1003.1-2008/Cor 1-2013)" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -625,7 +625,7 @@ module Pubid::Ieee
 
       context "NACE SP0XXX-2011/IEEE P1835_D1a, 2011" do
         let(:original) { "NACE SP0XXX-2011/IEEE P1835_D1a, 2011" }
-        let(:pubid) { "NACE SP0XXX-2011 (IEEE Draft Std P1835/D1a 2011)" }
+        let(:pubid) { "NACE SP0XXX-2011 (IEEE Draft Std P1835/D1a)" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -638,7 +638,8 @@ module Pubid::Ieee
       end
 
       context "IEC/IEEE 62271-37-082:2012(E) (Revision of IEEE Std C37.082-1982) - Redline" do
-        let(:pubid) { "IEC/IEEE 62271-37-082:2012(E) (Revision of IEEE Std C37.082-1982) - Redline" }
+        let(:original) { "IEC/IEEE 62271-37-082:2012(E) (Revision of IEEE Std C37.082-1982) - Redline" }
+        let(:pubid) { "IEC/IEEE Std 62271-37-082-2012 (Revision of IEEE Std C37.082-1982) - Redline(E)" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -651,13 +652,15 @@ module Pubid::Ieee
       end
 
       context "IEEE Std C37.111-2013 (IEC 60255-24 Edition 2.0 2013-04)" do
-        let(:pubid) { "IEEE Std C37.111-2013 (IEC 60255-24 Edition 2.0 2013-04)" }
+        let(:original) { "IEEE Std C37.111-2013 (IEC 60255-24 Edition 2.0 2013-04)" }
+        let(:pubid) { "IEEE Std C37.111-2013 (IEC 60255-24 ED2.0, April 2013)" }
 
         it_behaves_like "converts pubid to pubid"
       end
 
       context "IEC 61691-6 Edition 1.0 2009-12" do
-        let(:pubid) { "IEC 61691-6 Edition 1.0 2009-12" }
+        let(:original) { "IEC 61691-6 Edition 1.0 2009-12" }
+        let(:pubid) { "IEC 61691-6 Edition 1.0, December 2009" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -670,7 +673,7 @@ module Pubid::Ieee
 
       context "IEEE Std 802.1s-2002 (Amendment to IEEE Std 802.1Q, 1998 Edition)" do
         let(:original) { "IEEE Std 802.1s-2002 (Amendment to IEEE Std 802.1Q, 1998 Edition)" }
-        let(:pubid) { "IEEE Std 802.1s-2002 (Amendment to IEEE Std 802.1Q 1998 Edition)" }
+        let(:pubid) { "IEEE Std 802.1s-2002 (Amendment to IEEE Std 802.1Q-1998)" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -682,7 +685,8 @@ module Pubid::Ieee
       end
 
       context "IEC/IEEE 62582-1:2011 Edition 1.0 2011-08" do
-        let(:pubid) { "IEC/IEEE 62582-1:2011 Edition 1.0 2011-08" }
+        let(:original) { "IEC/IEEE 62582-1:2011 Edition 1.0 2011-08" }
+        let(:pubid) { "IEC/IEEE Std 62582-1 Edition 1.0, August 2011" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -702,7 +706,8 @@ module Pubid::Ieee
       end
 
       context "IEEE Std 11073-10101-2019 (Revision of ISO/IEEE 11073-10101:2004)" do
-        let(:pubid) { "IEEE Std 11073-10101-2019 (Revision of ISO/IEEE 11073-10101:2004)" }
+        let(:original) { "IEEE Std 11073-10101-2019 (Revision of ISO/IEEE 11073-10101:2004)" }
+        let(:pubid) { "IEEE Std 11073-10101-2019 (Revision of ISO/IEEE Std 11073-10101-2004)" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -735,7 +740,8 @@ module Pubid::Ieee
 
 
       context "ISO/IEC/IEEE CD P23026:2013" do
-        let(:pubid) { "ISO/IEC/IEEE CD P23026:2013" }
+        let(:original) { "ISO/IEC/IEEE CD P23026:2013" }
+        let(:pubid) { "ISO/IEC/IEEE Draft Std P23026-2013/CD" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -749,14 +755,14 @@ module Pubid::Ieee
 
       context "IEC/IEEE P62271-37-013:2015 D13.4" do
         let(:original) { "IEC/IEEE P62271-37-013:2015 D13.4" }
-        let(:pubid) { "IEC/IEEE P62271-37-013:2015/D13.4" }
+        let(:pubid) { "IEC/IEEE Draft Std P62271-37-013-2015/D13.4" }
 
         it_behaves_like "converts pubid to pubid"
       end
 
       context "ISO/IEC/IEEE P24765/D3:2017" do
         let(:original) { "ISO/IEC/IEEE P24765/D3:2017" }
-        let(:pubid) { "ISO/IEC/IEEE P24765:2017/D3" }
+        let(:pubid) { "ISO/IEC/IEEE Draft Std P24765-2017/D3" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -777,20 +783,21 @@ module Pubid::Ieee
 
       context "ISO/IEC/IEEE P15288-DIS-1403" do
         let(:original) { "ISO/IEC/IEEE P15288-DIS-1403" }
-        let(:pubid) { "ISO/IEC/IEEE Std P15288-1403/DIS" }
+        let(:pubid) { "ISO/IEC/IEEE Draft Std P15288-1403/DIS" }
 
         it_behaves_like "converts pubid to pubid"
       end
 
       context "IEC/IEEE P60214-2, FDIS 2018" do
         let(:original) { "IEC/IEEE P60214-2, FDIS 2018" }
-        let(:pubid) { "IEC/IEEE FDIS P60214-2-2018(E)" }
+        let(:pubid) { "IEC/IEEE Draft Std P60214-2-2018/FDIS(E)" }
 
         it_behaves_like "converts pubid to pubid"
       end
 
       context "ISO/IEC/IEEE 8802-A:2015(E)" do
-        let(:pubid) { "ISO/IEC/IEEE 8802-A:2015(E)" }
+        let(:original) { "ISO/IEC/IEEE 8802-A:2015(E)" }
+        let(:pubid) { "ISO/IEC/IEEE Std 8802-A-2015(E)" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -803,7 +810,8 @@ module Pubid::Ieee
       end
 
       context "ISO/IEC/IEEE CD P26513/D1, August 2015" do
-        let(:pubid) { "ISO/IEC/IEEE CD P26513/D1, August 2015" }
+        let(:original) { "ISO/IEC/IEEE CD P26513/D1, August 2015" }
+        let(:pubid) { "ISO/IEC/IEEE Draft Std P26513/D1, August 2015" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -824,7 +832,7 @@ module Pubid::Ieee
 
       context "ISO/IEC/IEEE 8802-3:2017/Cor.1:2018(E)" do
         let(:original) { "ISO/IEC/IEEE 8802-3:2017/Cor.1:2018(E)" }
-        let(:pubid) { "ISO/IEC/IEEE 8802-3:2017/Cor 1:2018(E)" }
+        let(:pubid) { "ISO/IEC/IEEE Std 8802-3-2017/Cor 1-2018(E)" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -911,7 +919,7 @@ module Pubid::Ieee
 
       context "IEEE P15026-1, Jul2014" do
         let(:original) { "IEEE P15026-1, Jul2014" }
-        let(:pubid) { "IEEE Std P15026-1, Jul 2014" }
+        let(:pubid) { "IEEE Std P15026-1, July 2014" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -951,7 +959,7 @@ module Pubid::Ieee
       end
 
       context "ISO/IEC/IEEE 31320-1:2012 (Adoption of IEEE Std 1320.1-1998)" do
-        let(:pubid) { "ISO/IEC/IEEE 31320-1:2012 (Adoption of IEEE Std 1320.1-1998)" }
+        let(:pubid) { "ISO/IEC/IEEE Std 31320-1-2012 (Adoption of IEEE Std 1320.1-1998)" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -1008,8 +1016,14 @@ module Pubid::Ieee
 
       context "IEEE Unapproved Draft Std P802.1Q, 2009 Edition/D0.1, Feb 2010" do
         let(:original) { "IEEE Unapproved Draft Std P802.1Q, 2009 Edition/D0.1, Feb 2010" }
-        let(:pubid) { "IEEE Draft Std P802.1Q 2009 Edition/D0.1, February 2010" }
-        let(:full_pubid) { "IEEE Unapproved Draft Std P802.1Q 2009 Edition/D0.1, February 2010" }
+        let(:pubid) { "IEEE Draft Std P802.1Q/D0.1, February 2010" }
+        let(:full_pubid) { "IEEE Unapproved Draft Std P802.1Q/D0.1, February 2010" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
+
+      context "IEC/IEEE TS P61869-105 ED1, September 2018" do
+        let(:pubid) { "IEC/IEEE TS P61869-105 ED1, September 2018" }
 
         it_behaves_like "converts pubid to pubid"
       end
@@ -1024,7 +1038,7 @@ module Pubid::Ieee
 
         context "IEEE/ISO/IEC 8802-3:2021/Amd8-2021" do
           let(:original) { "IEEE/ISO/IEC 8802-3:2021/Amd8-2021" }
-          let(:pubid) { "IEEE/IEC/ISO Std 8802.3-2021/Amd8-2021" }
+          let(:pubid) { "IEEE/IEC/ISO Std 8802-3-2021/Amd8-2021" }
 
           it_behaves_like "converts pubid to pubid"
         end
@@ -1067,7 +1081,7 @@ module Pubid::Ieee
 
         context "IEEE Std 24748-3:2012" do
           let(:original) { "IEEE Std 24748-3:2012" }
-          let(:pubid) { "IEEE Std 24748.3-2012" }
+          let(:pubid) { "IEEE Std 24748-3-2012" }
 
           it_behaves_like "converts pubid to pubid"
         end
@@ -1103,7 +1117,8 @@ module Pubid::Ieee
 
       context "ISO identifiers" do
         context "IEC/IEEE 60214-2:2019" do
-          let(:pubid) { "IEC/IEEE 60214-2:2019" }
+          let(:original) { "IEC/IEEE 60214-2:2019" }
+          let(:pubid) { "IEC/IEEE Std 60214-2-2019" }
 
           it_behaves_like "converts pubid to pubid"
         end
@@ -1115,9 +1130,35 @@ module Pubid::Ieee
           it_behaves_like "converts pubid to pubid"
         end
 
+        context "ISO/IEC/IEEE Draft Std P12207-1502/CD3" do
+          let(:pubid) { "ISO/IEC/IEEE Draft Std P12207-1502/CD3" }
+
+          it_behaves_like "converts pubid to pubid"
+        end
+
         context "ISO/IEC/IEEE 8802-22.2:2015/Amd.2:2017(E)" do
           let(:original) { "ISO/IEC/IEEE 8802-22.2:2015/Amd.2:2017(E)" }
           let(:pubid) { "ISO/IEC/IEEE 8802-22:2015/Amd 2:2017(E)" }
+
+          it_behaves_like "converts pubid to pubid"
+        end
+
+        context "IEC/IEEE 60076-57-1202:2017 Edition 1.0 2017-05" do
+          let(:original) { "IEC/IEEE 60076-57-1202:2017 Edition 1.0 2017-05" }
+          let(:pubid) { "IEC/IEEE Std 60076-57-1202 Edition 1.0, May 2017" }
+
+          it_behaves_like "converts pubid to pubid"
+        end
+
+        context "IEC 62142-2005 First edition 2005-06 IEEE Std 1364.1" do
+          let(:original) { "IEC 62142-2005 First edition 2005-06 IEEE Std 1364.1" }
+          let(:pubid) { "IEC 62142 Edition 1.0, June 2005 (IEEE Std 1364.1)" }
+
+          it_behaves_like "converts pubid to pubid"
+        end
+
+        context "ANSI/IEEE Std 802.5-1992 (ISO/IEC 8802-5)" do
+          let(:pubid) { "ANSI/IEEE Std 802.5-1992 (ISO/IEC 8802-5)" }
 
           it_behaves_like "converts pubid to pubid"
         end
