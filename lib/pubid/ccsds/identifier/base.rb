@@ -14,11 +14,11 @@ module Pubid::Ccsds
       def initialize(publisher: "CCSDS", book_color: nil, part: nil,
                      series: nil, retired: nil, edition: nil, **opts)
         super(**opts.merge(publisher: publisher))
-        @book_color = book_color
-        @part = part || 0
-        @series = series
-        @retired = retired
-        @edition = edition
+        @book_color = book_color.to_s
+        @part = part.to_i || 0
+        @series = series.to_s if series
+        @retired = retired ? true : false
+        @edition = edition.to_s if edition
       end
 
       class << self
