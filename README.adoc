@@ -154,11 +154,11 @@ to see all available options.
   language: "en"
 )
 > pubid = Pubid::Iso::Identifier.create(type: :amd, number: "1", year: "2021", stage: "DAM", base: base)
-> pubid.to_s(:ref_num_short)
+> pubid.to_s(format: :ref_num_short)
 => "ISO 8601-1:2019/DAM 1:2021(E)"
-> pubid.to_s(:ref_dated)
+> pubid.to_s(format: :ref_dated)
 => "ISO 8601-1:2019/DAM 1:2021"
-> pubid.to_s(:ref_undated)
+> pubid.to_s(format: :ref_undated)
 => "ISO 8601-1:2019/DAM 1"
 ----
 
