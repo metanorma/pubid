@@ -1,8 +1,60 @@
-= PubID
+= Publication identifiers library
 
 image:https://badge.fury.io/rb/pubid.svg["Gem Version", link="https://badge.fury.io/rb/pubid"]
 
-== Purpose
+Pubid is a comprehensive framework for building and working with publication identifiers. It provides a robust API for creating, modifying, parsing, exporting, and verifying document identifiers, which are crucial for various document management systems and standards compliance
 
-This gem include all pubid-* gems for compatibility testing.
+This gem includes all pubid-* gems for compatibility testing and allows parsing all identifiers from one gem.
 
+== Current use cases
+Current use cases are what we needed until now and discovered through application to pubid-* and relaton-* projects. It's not complete and will be expanding during an integration process.
+
+- build identifiers from scratch
+- modifiying identifiers
+- parsing string identifiers
+- exporting/importing to different formats or styles (hash, yaml, URN, etc.)
+- verification of compliance for identifier's representation standard (NIST PubID 1.0 for NIST, RFC 5141 for ISO URN) or using commonly discoveried patterns.
+- verification of correctness for provided input.
+- comparison two provided identifiers (with excluding attributes)
+- converting legacy identifiers to updated format
+
+== Purpose and Usage Guidelines
+
+The pubid library is intended to be used wherever operations on publication identifiers are required. It acts as an intermediary between users and publication identifiers, streamlining the processes of creation, modification, comparison, and attribute access. By centralizing these operations in pubid-core, we ensure that any updates to identifier standards are seamlessly integrated across all related projects.
+
+It is crucial to use the pubid library for all operations with identifiers to ensure that updates in identifier standards are consistently reflected in these operations. For example, if an identifier like `ISO/R 657/IV` is updated to `ISO/R 657-4:1969`, the library will automatically recognize this change. Hence, comparing:
+[source,ruby]
+----
+Pubid::Registry.parse("ISO/R 657/IV") == Pubid::Registry.parse("ISO/R 657-4:1969")
+=> true
+----
+or accessing the year:
+[source,ruby]
+----
+Pubid::Registry.parse("ISO/R 657/IV").year
+=> 1969
+----
+will yield the updated results.
+
+Moreover, changes in how identifiers are compared may cause some identifiers to become equal or unequal based on the latest updates. Thus, to reflect these changes accurately, the pubid library should be used for all publication identifier operations.
+
+=== Usage
+
+`Pubid::Registry#parse` resolves class related to identifier (`Pubid::Iso::Identifier` for "ISO" identifiers) and returns object with parsed identifier
+
+[source,ruby]
+----
+require "pubid"
+
+pubid = Pubid::Registry.parse("ISO/IEC 13213")
+pubid.class
+=> Pubid::Iso::Identifier::Base
+pubid.publisher
+=> "ISO"
+pubid.copublisher
+=> "IEC"
+pubid.number
+=> 13213
+pubid.to_s
+=> "ISO/IEC 13213"
+----
