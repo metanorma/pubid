@@ -7,22 +7,22 @@ Pubid is a comprehensive framework for building and working with publication ide
 This gem includes all pubid-* gems for compatibility testing and allows parsing all identifiers from one gem.
 
 == Current use cases
-Current use cases are what we needed until now and discovered through application to pubid-* and relaton-* projects. It's not complete and will be expanding during an integration process.
+The current use cases, as listed below, are what we have needed until now and have discovered through use of pubid to pubid-*,  metanorma-*, and relaton-* projects. Work on pubid is not complete and will be expanding during the ongoing integration process.
 
-- build identifiers from scratch
-- modifiying identifiers
+- building identifiers from scratch
+- modifiying identifiers (e.g. basing an amendment identifier on a base identifier)
 - parsing string identifiers
 - exporting/importing to different formats or styles (hash, yaml, URN, etc.)
-- verification of compliance for identifier's representation standard (NIST PubID 1.0 for NIST, RFC 5141 for ISO URN) or using commonly discoveried patterns.
-- verification of correctness for provided input.
-- comparison two provided identifiers (with excluding attributes)
+- verification of compliance for the identifier's representation standard (NIST PubID 1.0 for NIST, RFC 5141 for ISO URN), or using commonly found patterns
+- verifying that a provided identifier is correct
+- comparing two provided identifiers (with the option to exclude specified attributes)
 - converting legacy identifiers to updated format
 
 == Purpose and Usage Guidelines
 
-The pubid library is intended to be used wherever operations on publication identifiers are required. It acts as an intermediary between users and publication identifiers, streamlining the processes of creation, modification, comparison, and attribute access. By centralizing these operations in pubid-core, we ensure that any updates to identifier standards are seamlessly integrated across all related projects.
+The pubid library is intended to be used wherever operations on publication identifiers are required. It acts as an intermediary between users and publication identifiers, streamlining the processes of creation, modification, comparison, and attribute access. By centralizing these operations in pubid-core, we ensure that any updates to identifier standards are seamlessly integrated across all related projects in an ecosystem.
 
-It is crucial to use the pubid library for all operations with identifiers to ensure that updates in identifier standards are consistently reflected in these operations. For example, if an identifier like `ISO/R 657/IV` is updated to `ISO/R 657-4:1969`, the library will automatically recognize this change. Hence, comparing:
+It is crucial to use the pubid library for all operations with identifiers to ensure that updates in identifier standards are consistently reflected in these operations, and are driven by a data representation of the identifier, rather than the identifier string. For example, if an identifier like `ISO/R 657/IV` is updated to `ISO/R 657-4:1969` by a standards body, and pubid acts on that update, the library will automatically recognize this change. Hence, comparing:
 [source,ruby]
 ----
 Pubid::Registry.parse("ISO/R 657/IV") == Pubid::Registry.parse("ISO/R 657-4:1969")
@@ -40,7 +40,7 @@ Moreover, changes in how identifiers are compared may cause some identifiers to 
 
 === Usage
 
-`Pubid::Registry#parse` resolves class related to identifier (`Pubid::Iso::Identifier` for "ISO" identifiers) and returns object with parsed identifier
+`Pubid::Registry#parse` resolves the pubid class related to the identifier (`Pubid::Iso::Identifier` for "ISO" identifiers) and returns an object with the parsed identifier
 
 [source,ruby]
 ----
