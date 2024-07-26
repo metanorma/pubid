@@ -38,6 +38,26 @@ will yield the updated results.
 
 Moreover, changes in how identifiers are compared may cause some identifiers to become equal or unequal based on the latest updates. Thus, to reflect these changes accurately, the pubid library should be used for all publication identifier operations.
 
+=== Information model
+
+Technical documents in general, and standards specifically, are routinely identified and cited by document identifier, rather than by author, title, and/or publication date, as is routine practice for other bibliographic types. These document identifiers are usually somewhat arbitrary, containing a number identifying the current document as one in a sequence of documents.
+
+However, technical document identifiers typically also contain representation of at least some of the bibliographic information about the document. This is why bibliographic citation of technical document (particularly in other technical documents) is often restricted to just the document identifier and the title: the identifier is felt in such communities to convey all the relevant bibliographic information needed to make sense of the standard. (The expectations on what information is needed is different from other bibliographic types within their communities: authorship for example is typically corporate, dates are assumed by default to be the latest availabe edition, and the place of publication and publisher are identiified with the organisation publishing the document.)
+
+Pubid uses semantic representation of the bibliographic information used to generate an identifier for an organisation. That is why the format of the identifier can be updated without changing the underlying semantics it encodes. Each organisation that Pubid supports has its own semantics, but there are recurring semantic fields that Pubid uses, which drive what the identifiers look like, and which correspond to bibliographic information:
+
+* The `publisher` is the organisation responsible for the document. Standards-defining organisations, in particular, are identified by established acronyms, such as _ISO_, _IEC_, _NIST_, which are usually prefixed  to the document identifier; that prefix takes the place of a publisher field. The choice of publisher determines the flavour of Pubid that is used.
+* Technical documents are often published by multiple organisations. Such co-publication is indicated through using the acronyms of all organisations involved in the prefix; publishers after the first are indicated as `copublisher`. For example, the prefix _ISO/IEC/IEEE_ indicates that the document is copublished by all three organisations; ISO will be treated as the primary publisher by Pubid.
+* Technical documents are almost always numbered in a sequence; that `number` is used along with the publisher to identify the document uniquely.
+* Technical documents may consist of different parts, which can be referenced individually. The `part` number for the document is used in addition to the number in that case.
+* In special circumstances, multiple subsequent versions of a document can appear with the same number; this applies for example to multiple drafts. These subsequent versions can be indicated as `iteration`.
+* Often there is different numbering used for different types of technical document; for example, technical reports, technical notes, and standards have different number sequences in ISO. For that reason, the document `type` may be required in addition to the number. For inclusion in an identifier the organisation will typically have a standardised abbreviation for each of the document types.
+* In some cases, different numbering is used not for different types of document, but different defined `series`. If that is the case, the organisation will typically have a standardised abbreviation for the series as well.
+* Some organisations publish standards in multiple languages. In that case, the document `language` can also be provided, to indicate a particular language version.
+* Technical documents are often cited undated; in that case, the latest version of the document is usually assumed. If a specific edition of a document needs to be specified in the edition, this can be done by supplying an `edition` number, the `year` of publication, or both, depending on the organisation. 
+* Unlike other documents, technical documents are often circulated and cited in draft version before they are officially published. If this is routinely done, the organisation may provide for means to specify that a document is a `draft`, or the `stage` or `status` which the document has reached in the authoring process. If stages are used in citing documents, the organisation will typically have standard abbreviations for those stages, which will be used in the identifier.
+* Just as documents can be bibliographically related to other documents, document identifiers can be based on other document identifiers. This is done in Pubid by specifying two Pubid identifiers, with the first treated as an attribute of the second. The first common case of derived identifiers is when one document is a supplement of another (e.g. an appendix, a corrigendum); this is encoded in Pubid by specifying a `base` Pubid identifier, as an attribute of the derived document, with its own distinct `number`, `type` (e.g. _Appendix_), and `year`. The second case is when a document published by one organisation is `adopted` for use by another organisation: this often is indicated in document identifiers simply by prefixing the adopting organisation's acronym to the original identifier (e.g. _BS ISO 639_).
+
 === Usage
 
 `Pubid::Registry#parse` resolves the pubid class related to the identifier (`Pubid::Iso::Identifier` for "ISO" identifiers) and returns an object with the parsed identifier
@@ -59,4 +79,4 @@ pubid.to_s
 => "ISO/IEC 13213"
 ----
 
-More usage examples you can find in the https://github.com/metanorma/pubid-core[pubid-core] repository. For more specific usage guides, refer to repositories related to specific identifier providers, such as https://github.com/metanorma/pubid-iso[pubid-iso] for ISO identifiers and https://github.com/metanorma/pubid-ccsds[pubid-ccsds] for CCSDS identifier)
+You can find usage examples in the https://github.com/metanorma/pubid-core[pubid-core] repository. For more specific usage guides, refer to repositories related to specific identifier providers, such as https://github.com/metanorma/pubid-iso[pubid-iso] for ISO identifiers and https://github.com/metanorma/pubid-ccsds[pubid-ccsds] for CCSDS identifier)
