@@ -58,3 +58,5 @@ pubid.number
 pubid.to_s
 => "ISO/IEC 13213"
 ----
+
+More usage examples you can find in the https://github.com/metanorma/pubid-core[pubid-core] repository. For more specific usage guides, refer to repositories related to specific identifier providers, such as https://github.com/metanorma/pubid-iso[pubid-iso] for ISO identifiers and https://github.com/metanorma/pubid-ccsds[pubid-ccsds] for CCSDS identifier)
