@@ -7,11 +7,15 @@ module Pubid::Ccsds
 
       def initialize(base: nil, **opts)
         super(**opts)
-        @base = base
+        if base.is_a?(Hash)
+          @base = Identifier.create(**base)
+        else
+          @base = base
+        end
       end
 
       def self.type
-        { key: :corrigendum, title: "Corrigendum" }
+        { key: :corrigendum, title: "Corrigendum", short: "corrigendum" }
       end
 
       def self.get_renderer_class

@@ -36,11 +36,15 @@ module Pubid::Ccsds
       end
 
       context "with corrigendum" do
-        let(:base) { described_class.create(**{ number: number, book_color: book_color, edition: edition }) }
+        let(:base) { { number: number, book_color: book_color, edition: edition } }
         subject { described_class.create(type: :corrigendum, number: 1, base: base) }
 
         it "renders corrigendum" do
           expect(subject.to_s).to eq("CCSDS #{number}.0-B-1 Cor. 1")
+        end
+
+        it "returns type for #to_h" do
+          expect(subject.to_h[:type]).to eq("corrigendum")
         end
       end
 
