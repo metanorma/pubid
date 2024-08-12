@@ -10,9 +10,9 @@ module Pubid::Iso::Renderer
 
     def render_identifier(params, opts)
       if params[:wgnumber] && !params[:wgnumber].empty?
-        "%{publisher}%{tctype}%{stage} %{tcnumber}%{sctype}%{scnumber}%{wgtype}%{wgnumber} %{number}" % params
+        "%{publisher}%{tctype} %{tcnumber}%{sctype}%{scnumber}%{wgtype}%{wgnumber} %{number}" % params
       else
-        "%{publisher}%{tctype}%{stage} %{tcnumber}%{sctype}%{wgtype}%{scnumber} %{number}" % params
+        "%{publisher}%{tctype} %{tcnumber}%{sctype}%{wgtype}%{scnumber} %{number}" % params
       end
     end
 
