@@ -1,0 +1,25 @@
+= PLATEAU publication identifiers ("Plateau PubID")
+
+== Purpose
+
+This gem implements a mechanism to parse and utilize Plateau publication identifiers.
+
+== Use cases to support
+
+. generate updated PubID
+
+== Usage
+
+=== Identifier creation
+
+Basic usage of the pubid-plateau gem starts with the `Identifier#create` method.
+
+[source,ruby]
+----
+require "pubid-plateau"
+
+pubid = Pubid::Plateau::Identifier.create(type: :handbook, number: 1, annex: 1, edition: 1.2, )
+pubid.to_s
+
+=> "PLATEAU Handbook #01-1 第1.2版"
+----
