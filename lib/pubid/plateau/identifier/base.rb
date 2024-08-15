@@ -11,10 +11,10 @@ module Pubid::Plateau
         { key: :plateau }
       end
 
-      def initialize(publisher: "PLATEAU", annex: nil, edition: nil, **opts)
+      def initialize(number:, publisher: "PLATEAU", annex: nil, edition: nil, **opts)
         @annex = annex if annex
         @edition = edition if edition
-        super(**opts.merge(publisher: publisher))
+        super(**opts.merge(publisher: publisher, number: number.to_i))
       end
 
       class << self
@@ -32,6 +32,10 @@ module Pubid::Plateau
 
         def get_renderer_class
           Renderer::Base
+        end
+
+        def get_update_codes
+          UPDATE_CODES
         end
       end
     end

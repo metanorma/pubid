@@ -13,6 +13,13 @@ module Pubid::Plateau
 
         it_behaves_like "converts pubid to pubid"
       end
+
+      context "PLATEAU Handbook #11 第1.0版（民間活用編）" do
+        let(:original) { "PLATEAU Handbook #11 第1.0版（民間活用編）" }
+        let(:pubid) { "PLATEAU Handbook #06 第1.0版" }
+
+        it_behaves_like "converts pubid to pubid"
+      end
     end
 
     context "Technical Report" do

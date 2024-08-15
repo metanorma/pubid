@@ -19,7 +19,7 @@ module Pubid::Plateau
         let(:type) { :tr }
 
         it "renders handbook identifier" do
-          expect(subject.to_s).to eq("PLATEAU Technical Report #01-1 第1.2版")
+          expect(subject.to_s).to eq("PLATEAU Technical Report #01_1 第1.2版")
         end
       end
     end

@@ -10,7 +10,7 @@ shared_examples "parse identifiers from file" do
     f.readlines.each do |pub_id|
       next if pub_id.match?("^#")
 
-      pub_id = pub_id.split("#").first.strip.chomp
+      pub_id = pub_id.strip.chomp
       expect do
         described_class.parse(pub_id)
       rescue Exception => failure
@@ -19,7 +19,7 @@ shared_examples "parse identifiers from file" do
       end.not_to raise_error
 
       expect(described_class.parse(pub_id).to_s.upcase)
-        .to eq(pub_id.upcase.sub(" GSM", ""))
+        .to eq(pub_id.upcase)
     end
   end
 end

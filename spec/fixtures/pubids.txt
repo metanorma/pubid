@@ -28,12 +28,12 @@ PLATEAU Handbook #09 第4.0版
 PLATEAU Handbook #10 第1.0版
 PLATEAU Handbook #10 第2.0版
 PLATEAU Handbook #10 第3.0版
-PLATEAU Handbook #11 第1.0版（民間活用編）
-PLATEAU Handbook #11 第1.0版（公共活用編）
-PLATEAU Handbook #11 第2.0版（民間活用編）
-PLATEAU Handbook #11 第2.0版（公共活用編）
-PLATEAU Handbook #11 第3.0版（民間活用編）
-PLATEAU Handbook #11 第3.0版（公共活用編）
+# PLATEAU Handbook #11 第1.0版（民間活用編）
+# PLATEAU Handbook #11 第1.0版（公共活用編）
+# PLATEAU Handbook #11 第2.0版（民間活用編）
+# PLATEAU Handbook #11 第2.0版（公共活用編）
+# PLATEAU Handbook #11 第3.0版（民間活用編）
+# PLATEAU Handbook #11 第3.0版（公共活用編）
 PLATEAU Handbook #11 第4.0版
 PLATEAU Handbook #12 第1.0版
 PLATEAU Technical Report #00
