@@ -1046,5 +1046,11 @@ module Pubid::Iso
 
       it_behaves_like "converts pubid to pubid"
     end
+
+    context "ISO/UNDP PAS 53002" do
+      let(:pubid) { "ISO/UNDP PAS 53002" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
   end
 end

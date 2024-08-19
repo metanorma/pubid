@@ -43,7 +43,7 @@ module Pubid::Iso
       "CPAG", "CSC", "ITSAG", "CSC/FIN", "CSC/NOM", "CSC/OVE",
       "CSC/SP", "CSC/FIN", "JAG"].freeze
 
-    ORGANIZATIONS = %w[IEC IEEE CIW SAE CIE ASME ASTM OECD ISO HL7 CEI].freeze
+    ORGANIZATIONS = %w[IEC IEEE CIW SAE CIE ASME ASTM OECD ISO HL7 CEI UNDP].freeze
     rule(:dash) do
       str("-") | str("‑") | str("‐")
     end
