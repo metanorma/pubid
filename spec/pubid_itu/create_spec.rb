@@ -63,6 +63,28 @@ module Pubid::Itu
           expect(subject.to_s).to eq("ITU-R V.123-E")
         end
       end
+
+      context "Special Publication" do
+        let(:sector) { "T" }
+        let(:series) { "OB" }
+        let(:params) { { date: { month: 01, year: 2024 } } }
+        # let(:params) { { number: 1, type: :supplement, base: Identifier.create(sector: "T", series: "H", number: 1) } }
+
+        # Annex to ITU-T OB.1283 (01/2024)
+        it "renders identifier" do
+          expect(subject.to_s).to eq("ITU-T OB.#{number} (01/2024)")
+        end
+
+        context "Annex to Special Publication" do
+          let(:series) { nil }
+          let(:number) { nil }
+          let(:params) { { type: :annex, base: Identifier.create(sector: "T", series: "OB", number: 1) } }
+
+          it "renders annex to identifier" do
+            expect(subject.to_s).to eq("Annex to ITU-T OB.1")
+          end
+        end
+      end
     end
   end
 end
