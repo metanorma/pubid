@@ -63,6 +63,16 @@ module Pubid::Itu
           expect(subject.to_s).to eq("ITU-R V.123-E")
         end
       end
+
+      context "Contributions" do
+        let(:series) { "SG07" }
+        let(:number) { 1000 }
+        let(:params) { { type: :contribution } }
+
+        it "renders contribution identifier" do
+          expect(subject.to_s).to eq("SG07-C1000")
+        end
+      end
     end
   end
 end
