@@ -115,7 +115,16 @@ module Pubid::Itu
 
     context "ITU-T OB.1096" do
       let(:original) { "ITU-T OB.1096" }
-      let(:pubid) { "ITU-T OB.1096" }
+      let(:pubid) { "ITU-T OB No. 1096" }
+
+      it_behaves_like "converts pubid to pubid"
+
+      it { expect(subject).to be_a(Identifier::SpecialPublication) }
+    end
+
+    context "ITU-T OB.1096" do
+      let(:original) { "ITU-T OB No. 1096" }
+      let(:pubid) { "ITU-T OB No. 1096" }
 
       it_behaves_like "converts pubid to pubid"
 
@@ -124,7 +133,7 @@ module Pubid::Itu
 
     context "ITU-T Operational Bulletin No. 1096" do
       let(:original) { "ITU-T Operational Bulletin No. 1096" }
-      let(:pubid) { "ITU-T OB.1096" }
+      let(:pubid) { "ITU-T OB No. 1096" }
 
       it_behaves_like "converts pubid to pubid"
 
@@ -133,7 +142,7 @@ module Pubid::Itu
 
     context "ITU-T OB.1096 - 15.III.2016" do
       let(:original) { "ITU-T OB.1096 - 15.III.2016" }
-      let(:pubid) { "ITU-T OB.1096 (03/2016)" }
+      let(:pubid) { "ITU-T OB No. 1096 (03/2016)" }
 
       it_behaves_like "converts pubid to pubid"
     end
