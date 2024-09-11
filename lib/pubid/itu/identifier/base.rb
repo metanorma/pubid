@@ -47,12 +47,19 @@ module Pubid::Itu
         end
 
         def transform_supplements(type, identifier_params)
-          Identifier.create(
-            type: type,
-            base: transform(
-              **identifier_params.dup.tap { |h| h.delete(type) }),
-            **identifier_params[type],
-          )
+          if identifier_params[type].is_a?(Hash)
+            Identifier.create(
+              type: type,
+              base: transform(
+                **identifier_params.dup.tap { |h| h.delete(type) }),
+              **identifier_params[type],
+            )
+          else
+            Identifier.create(
+              type: type,
+              base: transform(**identifier_params.dup.tap { |h| h.delete(type) })
+            )
+          end
         end
 
         # Use Identifier#create to resolve identifier's type class
