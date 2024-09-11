@@ -301,6 +301,12 @@ module Pubid::Itu
       it { expect(subject).to be_a(Identifier::Appendix) }
     end
 
+    context "Annex to ITU-T OB.1283 (01/2024)" do
+      let(:pubid) { "Annex to ITU-T OB.1283 (01/2024)" }
+
+      it_behaves_like "converts pubid to pubid"
+    end
+
     context "identifier with language" do
       let(:pubid) { "ITU-T T.4-E" }
 

@@ -10,8 +10,14 @@ module Pubid::Itu::Renderer
       "%{type}%{series}" % params
     end
 
+    # can prepend entity, can postpend, can use item holder
+
     def render_identifier(params)
-      "%{publisher}-%{sector} #{render_type_series(params)}%{number}%{subseries}"\
+      prefix = ""
+      if @params[:annex] && @params[:annex][:number].nil?
+        prefix += "Annex to "
+      end
+      "#{prefix}%{publisher}-%{sector} #{render_type_series(params)}%{number}%{subseries}"\
       "%{part}%{second_number}%{range}%{annex}%{amendment}%{corrigendum}%{supplement}"\
       "%{addendum}%{appendix}%{date}" % params
     end
@@ -67,7 +73,7 @@ module Pubid::Itu::Renderer
     end
 
     def render_annex(annex, _opts, _params)
-      " Annex #{annex[:number]}"
+      " Annex #{annex[:number]}" if annex[:number]
     end
 
     def render_corrigendum(corrigendum, opts, params)
