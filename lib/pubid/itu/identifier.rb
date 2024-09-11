@@ -9,7 +9,7 @@ module Pubid::Itu
       end
 
       def resolve_identifier(parameters = {})
-        return Question.new(**parameters) if parameters[:series].to_s.match?(/^SG/)
+        return Question.new(**parameters) if parameters[:series].to_s.match?(/^SG/) && !parameters[:type]
 
         return Resolution.new(**parameters) if parameters[:series].to_s == "R"
 
