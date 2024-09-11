@@ -94,7 +94,7 @@ module Pubid::Itu
 
         # Annex to ITU-T OB.1283 (01/2024)
         it "renders identifier" do
-          expect(subject.to_s).to eq("ITU-T OB.#{number} (01/2024)")
+          expect(subject.to_s).to eq("ITU-T OB No. #{number} (01/2024)")
         end
       end
 
