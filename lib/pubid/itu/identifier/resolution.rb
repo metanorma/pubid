@@ -4,7 +4,7 @@ module Pubid::Itu
       def_delegators 'Pubid::Itu::Identifier::Resolution', :type
 
       def self.type
-        { key: :resolution, title: "Resolition" }
+        { key: :resolution, title: "Resolition", short: :resolution }
       end
     end
   end

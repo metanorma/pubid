@@ -33,15 +33,25 @@ module Pubid::Itu
 
     context "ITU-R SA.364-6" do
       let(:pubid) { "ITU-R SA.364-6" }
+      let(:pubid_ru) { "Рек. МСЭ-R SA.364-6" }
+      let(:pubid_es) { "Rec. UIT-R SA.364-6" }
+      let(:pubid_ar) { "ITU-R SA.364-6 التوصية" }
+      let(:pubid_cn) { "ITU-R SA.364-6建议书" }
 
       it_behaves_like "converts pubid to pubid"
+      it_behaves_like "converts pubid to russian pubid"
+      it_behaves_like "converts pubid to spanish pubid"
+      it_behaves_like "converts pubid to arabic pubid"
+      it_behaves_like "converts pubid to chinese pubid"
     end
 
     # question
     context "ITU-R SG01.222-200" do
       let(:pubid) { "ITU-R SG01.222-200" }
+      let(:pubid_ru) { "МСЭ-R SG01.222-200" }
 
       it_behaves_like "converts pubid to pubid"
+      it_behaves_like "converts pubid to russian pubid"
 
       it { expect(subject).to be_a(Identifier::Question) }
     end
@@ -170,8 +180,18 @@ module Pubid::Itu
 
     context "ITU-T M.3016.1" do
       let(:pubid) { "ITU-T M.3016.1" }
+      let(:pubid_es) { "Rec. UIT-T M.3016.1" }
+      let(:pubid_fr) { "Rec. UIT-T M.3016.1" }
+      let(:pubid_ru) { "Рек. МСЭ-T M.3016.1" }
+      let(:pubid_cn) { "ITU-T M.3016.1建议书" }
+      let(:pubid_ar) { "ITU-T M.3016.1 التوصية" }
 
       it_behaves_like "converts pubid to pubid"
+      it_behaves_like "converts pubid to french pubid"
+      it_behaves_like "converts pubid to spanish pubid"
+      it_behaves_like "converts pubid to chinese pubid"
+      it_behaves_like "converts pubid to arabic pubid"
+      it_behaves_like "converts pubid to russian pubid"
     end
 
     context "ITU-R RR (2020)" do
@@ -296,13 +316,16 @@ module Pubid::Itu
     context "ITU-T Z.100 App. II (03/1993)" do
       let(:original) { "ITU-T Z.100 App. II (03/1993)" }
       let(:pubid) { "ITU-T Z.100 App. 2 (03/1993)" }
+      let(:pubid_ru) { "Рек. МСЭ-T Z.100 App. 2 (03/1993)" }
 
       it_behaves_like "converts pubid to pubid"
+      it_behaves_like "converts pubid to russian pubid"
       it { expect(subject).to be_a(Identifier::Appendix) }
     end
 
     context "Annex to ITU-T OB.1283 (01/2024)" do
-      let(:pubid) { "Annex to ITU-T OB.1283 (01/2024)" }
+      let(:original) { "Annex to ITU-T OB.1283 (01/2024)" }
+      let(:pubid) { "Annex to ITU-T OB No. 1283 (01/2024)" }
 
       it_behaves_like "converts pubid to pubid"
     end

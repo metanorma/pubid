@@ -6,10 +6,6 @@ module Pubid::Itu
       def self.type
         { key: :sp, title: "Special Publication", short: "SP" }
       end
-
-      def self.get_renderer_class
-        Renderer::SpecialPublication
-      end
     end
   end
 end

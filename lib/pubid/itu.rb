@@ -13,6 +13,8 @@ module Pubid
       "es": "S",
       "zh": "C",
     }.freeze
+
+    I18N = YAML.load_file(File.join(File.dirname(__FILE__), "../../i18n.yaml"))
   end
 end
 
@@ -36,7 +38,6 @@ require_relative "itu/identifier/contribution"
 require_relative "itu/transformer"
 require_relative "itu/renderer/base"
 require_relative "itu/renderer/implementers_guide"
-require_relative "itu/renderer/special_publication"
 require_relative "itu/renderer/contribution"
 require_relative "itu/parser"
 require_relative "itu/identifier"

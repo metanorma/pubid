@@ -10,20 +10,48 @@ module Pubid::Itu::Renderer
       "%{type}%{series}" % params
     end
 
+    def render_base_identifier(**args)
+      prerender(**args)
+
+      # pass args to render_identifier
+      render_identifier(@prerendered_params, args)
+    end
+
     # can prepend entity, can postpend, can use item holder
 
-    def render_identifier(params)
-      prefix = ""
+    def render_identifier(params, opts)
+      postfix = prefix = ""
       if @params[:annex] && @params[:annex][:number].nil?
         prefix += "Annex to "
+      elsif opts[:language] &&
+          (type_translation = Pubid::Itu::I18N["type"][@params[:type]]&.fetch(opts[:language].to_s, nil))
+        if opts[:language] == :cn
+          postfix =+ type_translation
+        elsif opts[:language] == :ar
+          postfix += " #{type_translation}"
+        else
+          prefix += "#{type_translation} "
+        end
       end
+
       "#{prefix}%{publisher}-%{sector} #{render_type_series(params)}%{number}%{subseries}"\
       "%{part}%{second_number}%{range}%{annex}%{amendment}%{corrigendum}%{supplement}"\
-      "%{addendum}%{appendix}%{date}" % params
+      "%{addendum}%{appendix}%{date}#{postfix}" % params
+    end
+
+    def render_publisher(publisher, opts, params)
+      if opts[:language] &&
+          (publisher_translation = Pubid::Itu::I18N["publisher"][publisher]&.fetch(opts[:language].to_s, nil))
+        return super(publisher_translation, opts, params)
+      end
+
+      super
     end
 
     def render_number(number, _opts, params)
-      params[:series] ? ".#{number}" : number
+      return " No. #{number}" if params[:series] == "OB"
+
+      number
     end
 
     def render_date(date, opts, _params)
@@ -44,8 +72,8 @@ module Pubid::Itu::Renderer
       "-#{part}"
     end
 
-    def render_series(series, _opts, _params)
-      "#{series}"
+    def render_series(series, _opts, params)
+      series + (params[:series] != "OB" && params[:number] ? "." : "")
     end
 
     def render_amendment(amendment, _opts, _params)

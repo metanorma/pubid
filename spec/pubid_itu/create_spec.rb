@@ -107,7 +107,7 @@ module Pubid::Itu
         end
 
         it "renders annex to identifier" do
-          expect(subject.to_s).to eq("Annex to ITU-T OB.1")
+          expect(subject.to_s).to eq("Annex to ITU-T OB No. 1")
         end
       end
     end

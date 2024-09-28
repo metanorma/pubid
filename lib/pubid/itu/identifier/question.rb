@@ -4,7 +4,7 @@ module Pubid::Itu
       def_delegators 'Pubid::Itu::Identifier::Question', :type
 
       def self.type
-        { key: :question, title: "Question" }
+        { key: :question, title: "Question", short: :question }
       end
     end
   end
