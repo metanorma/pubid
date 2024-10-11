@@ -84,6 +84,7 @@ NIST SP 1273-draft: NIST SP 1273 (Draft)
 NIST IR 8323-draft: NIST IR 8323 (Draft)
 /NBS CRPL-F-B(?=\d+)/: "NBS CRPL-F-B "
 /NBS[.\s]CS[.\s]e/: "NBS CS-E "
+"NIST.AMS.300-8r1/upd": NIST.AMS.300-8r1-upd1
 NBS NSRDS: NSRDS-NBS
 nist ir: NIST IR
 /(?<=\d)es/: (spa)
@@ -92,3 +93,4 @@ nist ir: NIST IR
 /(?<=\d)port/: (por)
 /(?<=\d)(pt)(?!\d)/: (por)
 /(?<=\d)id/: (ind)
+/\-upd$/: "-upd1"

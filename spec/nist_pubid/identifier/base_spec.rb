@@ -895,6 +895,22 @@ RSpec.describe Pubid::Nist::Identifier::Base do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NIST.HB.135e2022-upd1" do
+      let(:original_pubid) { "NIST.HB.135e2022-upd1" }
+      let(:short_pubid) { "NIST HB 135e2022/Upd1" }
+      let(:mr_pubid) { "NIST.HB.135e2022.u1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST.IR.8170-upd" do
+      let(:original_pubid) { "NIST.IR.8170-upd" }
+      let(:short_pubid) { "NIST IR 8170/Upd1" }
+      let(:mr_pubid) { "NIST.IR.8170.u1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "identifier from NIST Tech Pubs", vcr: true do
       it "parse identifiers successfully" do
         documents = Pubid::Nist::NistTechPubs.status
@@ -942,6 +958,12 @@ RSpec.describe Pubid::Nist::Identifier::Base do
 
     context "parses identifiers from pubs-export.txt" do
       let(:examples_file) { "pubs-export.txt" }
+
+      it_behaves_like "parse identifiers from file"
+    end
+
+    context "parses identifiers from sept2024-update.txt" do
+      let(:examples_file) { "sept2024-update.txt" }
 
       it_behaves_like "parse identifiers from file"
     end

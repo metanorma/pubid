@@ -84,7 +84,7 @@ module Pubid::Nist
       end
 
       rule(:update) do
-        (str("/Upd") | str("/upd")) >> (digits.as(:number) >> (str("-") >> digits.as(:year)).maybe).as(:update)
+        (str("/Upd") | str("/upd") | str("-upd")) >> (digits.as(:number) >> (str("-") >> digits.as(:year)).maybe).as(:update)
       end
 
       rule(:translation) do
