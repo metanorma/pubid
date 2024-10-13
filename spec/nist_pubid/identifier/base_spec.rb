@@ -897,16 +897,16 @@ RSpec.describe Pubid::Nist::Identifier::Base do
 
     context "NIST.HB.135e2022-upd1" do
       let(:original_pubid) { "NIST.HB.135e2022-upd1" }
-      let(:short_pubid) { "NIST HB 135e2022/Upd1" }
-      let(:mr_pubid) { "NIST.HB.135e2022.u1" }
+      let(:short_pubid) { "NIST HB 135e2022/Upd1-202205" }
+      let(:mr_pubid) { "NIST.HB.135e2022.u1-202205" }
 
       it_behaves_like "converts pubid to different formats"
     end
 
     context "NIST.IR.8170-upd" do
       let(:original_pubid) { "NIST.IR.8170-upd" }
-      let(:short_pubid) { "NIST IR 8170/Upd1" }
-      let(:mr_pubid) { "NIST.IR.8170.u1" }
+      let(:short_pubid) { "NIST IR 8170/Upd1-202003" }
+      let(:mr_pubid) { "NIST.IR.8170.u1-202003" }
 
       it_behaves_like "converts pubid to different formats"
     end

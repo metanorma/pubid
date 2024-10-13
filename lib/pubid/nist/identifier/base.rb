@@ -73,7 +73,8 @@ module Pubid::Nist
       end
 
       def self.update_old_code(code)
-        UPDATE_CODES.each do |from, to|
+        UPDATE_CODES.map {|k ,v| k.match?(/^\/.*\/$/) ? [[k, v], [k.gsub(" ", "\."), v]] : [[k, v], [k.gsub(" ", "."), v]] }
+                    .inject([]) { |a, v| a + v}.each do |from, to|
           code = code.gsub(from.match?(/^\/.*\/$/) ? Regexp.new(from[1..-2]) : from, to)
         end
         code
