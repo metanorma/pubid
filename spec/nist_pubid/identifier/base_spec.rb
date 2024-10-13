@@ -911,6 +911,22 @@ RSpec.describe Pubid::Nist::Identifier::Base do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NIST.MONO.1-1f" do
+      let(:original_pubid) { "NIST MONO 1-1f" }
+      let(:short_pubid) { "NIST MONO 1-1F" }
+      let(:mr_pubid) { "NIST.MN.1-1F" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST.MONO.1-2bv1" do
+      let(:original_pubid) { "NIST.MONO.1-2bv1" }
+      let(:short_pubid) { "NIST MONO 1-2Bv1" }
+      let(:mr_pubid) { "NIST.MN.1-2Bv1" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "identifier from NIST Tech Pubs", vcr: true do
       it "parse identifiers successfully" do
         documents = Pubid::Nist::NistTechPubs.status
