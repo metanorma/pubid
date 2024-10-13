@@ -943,6 +943,16 @@ RSpec.describe Pubid::Nist::Identifier::Base do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NIST.CSWP.16.fpd" do
+      let(:original_pubid) { "NIST.CSWP.16.fpd" }
+      let(:short_pubid) { "NIST CSWP 16 fpd" }
+      let(:mr_pubid) { "NIST.CSWP.16.fpd" }
+
+      it_behaves_like "converts pubid to different formats"
+
+      it { expect(subject.stage.to_s).to eq("fpd") }
+    end
+
     context "identifier from NIST Tech Pubs", vcr: true do
       it "parse identifiers successfully" do
         documents = Pubid::Nist::NistTechPubs.status
