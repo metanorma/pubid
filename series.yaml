@@ -46,6 +46,8 @@ long:
   CSRC Building Block: Cybersecurity Resource Center Building Block
   JPCRD: Journal of Physical and Chemical Reference Data
   JRES: Journal of Research of NIST
+  VTS: Voting Technology Series
+  AI: NIST Trustworthy and Responsible AI
 abbrev:
   AMS: Adv. Man. Ser
   BSS: Bldg. Sci. Ser.
@@ -115,3 +117,5 @@ mr:
   CSRC Building Block: NIST.CSBB
   JPCRD: JPCRD
   JRES: NIST.JRES
+  VTS: VTS
+  AI: AI
