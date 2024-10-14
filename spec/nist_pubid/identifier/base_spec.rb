@@ -927,6 +927,22 @@ RSpec.describe Pubid::Nist::Identifier::Base do
       it_behaves_like "converts pubid to different formats"
     end
 
+    context "NIST.SP.800-124r2-draft" do
+      let(:original_pubid) { "NIST.SP.800-124r2-draft" }
+      let(:short_pubid) { "NIST SP 800-124r2 iprd" }
+      let(:mr_pubid) { "NIST.SP.800-124r2.iprd" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
+    context "NIST.SP.800-207-draft2" do
+      let(:original_pubid) { "NIST.SP.800-207-draft2" }
+      let(:short_pubid) { "NIST SP 800-207 2pd" }
+      let(:mr_pubid) { "NIST.SP.800-207.2pd" }
+
+      it_behaves_like "converts pubid to different formats"
+    end
+
     context "identifier from NIST Tech Pubs", vcr: true do
       it "parse identifiers successfully" do
         documents = Pubid::Nist::NistTechPubs.status
