@@ -23,3 +23,15 @@ pubid.to_s
 
 => "PLATEAU Handbook #01-1 第1.2版"
 ----
+
+== Handbook 11 update
+
+Handbook 11 has 2 parts for edition 1 to 3:
+
+（民間活用編）used to be Handbook 06 edition 1 to 3
+（公共活用編）used to be Handbook 04 edition 1 to 3
+Only from edition 4 they are combined into Handbook 11.
+
+In case when provided Handbook #11 edition 1 to 3 we convert it to Handbook #4 or #6
+
+Example: `"PLATEAU Handbook #11 第1.0版（民間活用編）`->  `PLATEAU Handbook #06 第1.0版`
