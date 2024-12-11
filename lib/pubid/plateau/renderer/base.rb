@@ -7,7 +7,7 @@ module Pubid::Plateau::Renderer
     end
 
     def render_number(number, _opts, _params)
-      "%02d" % number
+      "%02d" % number.to_i
     end
 
     def render_annex(annex, _opts, _params)

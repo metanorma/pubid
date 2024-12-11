@@ -28,7 +28,8 @@ module Pubid::Plateau
       it_behaves_like "converts pubid to pubid"
 
       context "with annex" do
-        let(:pubid) { "PLATEAU Technical Report #46_1" }
+        let(:original) { "PLATEAU Technical Report #46_1" }
+        let(:pubid) { "PLATEAU Technical Report #46-1" }
 
         it_behaves_like "converts pubid to pubid"
       end
