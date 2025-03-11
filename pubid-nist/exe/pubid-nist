@@ -1,0 +1,97 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require_relative "../lib/pubid-nist"
+require "thor"
+require "csv"
+require "lightly"
+
+def render_report_doc(doc)
+  [doc[:finalPubId] != doc[:id],
+   doc[:finalPubId],
+   doc[:id],
+   doc[:mr] != doc[:doi],
+   doc[:mr],
+   doc[:doi],
+   doc[:title]]
+end
+
+class Pubid::Nist::CLI < Thor
+  desc "report", "Create report for NIST Tech Pubs database (fetches from GitHub)"
+  option :csv, aliases: "-c", type: :boolean, desc: "Export to CSV format"
+  option :updated, aliases: "-u", type: :boolean,
+                   desc: "Return only updated identifiers",
+                   default: false
+  option :pull, aliases: "-p", type: :boolean,
+                desc: "Update cache from NIST Tech Pubs database",
+                default: false
+  def report
+    heading = %w(
+      ID\ changed?
+      New\ PubID
+      Document\ ID
+      DOI\ changed?
+      New\ PubID-MR
+      DOI
+      Title
+    )
+
+    Lightly.clear "documents" if options[:pull]
+    # Pubid::Nist::NistTechPubs.fetch
+    if Lightly.cached? "documents"
+      warn "Using nist-tech-pubs.xml file from local cache"
+    else
+      warn "Cached nist-tech-pubs.xml not present, downloading from GitHub..."
+    end
+
+    puts options[:csv] && heading.to_csv || heading.join(" | ")
+
+    documents = Pubid::Nist::NistTechPubs.status
+
+    documents = documents.reject { |doc| doc[:finalPubId] == doc[:id] } if options[:updated]
+
+    documents.each do |doc|
+      if options[:csv]
+        puts render_report_doc(doc).to_csv
+      else
+        puts (render_report_doc(doc).map do |v|
+          case v
+          when false
+            " -"
+          when true
+            "✅"
+          else
+            v
+          end
+        end).join(" | ")
+      end
+    end
+  end
+
+  desc "convert", "Convert legacy NIST Tech Pubs ID to NIST PubID"
+  option :style, aliases: "-s", type: :string,
+                 desc: "Convert to PubID style (short|long|mr|abbrev)",
+                 default: "short"
+  option :format, aliases: "-f", type: :string,
+                  desc: "Render in format (json|string)",
+                  default: "string"
+  def convert(code)
+    unless %w[mr long short abbrev].include?(options[:style].downcase)
+      raise "Invalid PubID style"
+    end
+
+    raise "Invalid render format" unless %w[string json].include? options[:format].downcase
+
+    unless code.empty?
+      if options[:format] == "string"
+        puts Pubid::Nist::Identifier.parse(code).to_s(options[:style].to_sym)
+      else
+        puts Pubid::Nist::Identifier.parse(code).to_json
+      end
+    end
+  rescue Pubid::Nist::Errors::ParseError
+    puts "[Error] This does not seem to be a valid NIST Tech Pubs legacy identifier"
+  end
+end
+
+Pubid::Nist::CLI.start(ARGV)

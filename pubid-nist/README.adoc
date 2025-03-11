@@ -1,0 +1,727 @@
+= NIST publication identifiers ("NIST PubID")
+
+== Purpose
+
+NIST publications are numbered according to an identification scheme.
+
+This gem implements a mechanism to parse and utilize NIST publication identifiers
+provided in the https://github.com/usnistgov/NIST-Tech-Pubs[NIST-Tech-Pubs]
+repository.
+
+This gem is introduced in the Metanorma blog post
+https://www.metanorma.org/blog/2022-01-09-pubid-nist/["Introducing NIST PubID, and the migration of publication identifiers"] on 2022-01-09.
+
+For further details on the Metanorma work on the NIST PubID, refer to the
+https://riboseinc.github.io/report-pubid-nist/["Ribose comments to Publication Identifier Syntax for NIST Technical Series Publications"]
+document.
+
+== Historic identifier patterns
+
+There are at least three major "pattern series" of identifiers due to historical
+reasons:
+
+* NIST publications produced by the PubID scheme (202X-)
+* NIST publications produced prior to the PubID scheme (1988-)
+* NBS publications, produced under the National Bureau of Standards (the
+  previous name of NIST, 1901 to 1988)
+
+This implementation attempts to support all three types of publication
+identifier patterns.
+
+== NIST PubID
+
+NIST is currently developing a unified publication identifier scheme ("PubID")
+for their technical series of publications, which allows machine-readable
+identifier parts.
+
+This scheme is described in "`Publication Identifier Syntax for NIST Technical
+Series Publications`" authored by
+https://www.nist.gov/people/james-foti[Jim Foti]
+of the https://www.nist.gov/itl/csd[CSD, ITL], and
+https://www.nist.gov/people/kathryn-miller[Kathryn Miller] and
+https://www.nist.gov/people/kate-bucher[Kate Bucher] of the
+https://www.nist.gov/associate-director-management-resources/staff-offices/information-services-office[ISO],
+Management Resources.
+
+NOTE: This scheme is still at proposal stage.
+
+This gem implements the NIST PubID scheme and allows the conversion to and from
+historic patterns.
+
+
+== Use cases to support
+
+PubID:
+
+. Given a PubID (full-form title, abbreviated-form title, short-form title),
+  generate the corresponding machine-readable (MR) PubID format
+. Given a MR PubID:
+.. generate the full-form title
+.. generate the abbreviated-form title
+.. generate short-form title
+.. generate the DOI (which is just DOI ID + MR)
+
+Historic compatibility:
+
+. Parse a historic publication identifier into its components:
+.. output the original publication identifier (i.e. store the contents in the
+  object)
+.. output a MR PubID
+
+. Parse a historic DOI into a PubID:
+.. output the original DOI (i.e. store the contents in the object)
+.. output a MR PubID
+
+== CLI conversion tool
+
+We implemented an open-source conversion tool that extracts the required PubID data elements from existing NIST Tech Pubs metadata, such as the legacy identifier, DOI, edition and publication date information, to generate the new PubID.
+`pubid-nist` provides a CLI (Command-Line Interface) and a Ruby library that can be used to create and manipulate PubID objects.
+
+== Installation
+
+The only prerequisite is to have Ruby installed. Please refer to the official https://www.ruby-lang.org/en/documentation/installation/[Ruby installation guide].
+
+The pubid-nist tool can be installed as follows.
+
+[source,sh]
+----
+$ gem install pubid-nist
+----
+
+Now you should be able to use the pubid-nist command.
+
+=== Usage
+
+=== Installation
+
+The only prerequisite is to have Ruby installed. Please refer to the
+https://www.ruby-lang.org/en/documentation/installation/[official Ruby installation guide].
+
+The `pubid-nist` tool can be installed as follows.
+
+[source,sh]
+----
+$ gem install pubid-nist
+----
+
+Now you should be able to use the `pubid-nist` command.
+
+When called without arguments (or as `pubid-nist help`) the help screen will
+be shown.
+
+[source,sh]
+----
+$ pubid-nist
+Commands:
+  pubid-nist convert         # Convert legacy NIST Tech Pubs ID to NIST PubID
+  pubid-nist help [COMMAND]  # Describe available commands or one specific command
+  pubid-nist report          # Create report for NIST Tech Pubs database (fetches from GitHub)
+----
+
+=== Converting a legacy identifier to NIST PubID
+
+The command `pubid-nist` provides a `convert` subcommand that converts a legacy
+Nist Tech Pubs identifier into the NIST PubID format.
+
+Here's how it can be used:
+
+[source,sh]
+----
+$ pubid-nist help convert
+Usage:
+  pubid-nist convert
+
+Options:
+  -s, [--style=STYLE]    # Convert to PubID style (short|long|mr|abbrev)
+                         # Default: short
+  -f, [--format=FORMAT]  # Render in format (JSON, string)
+                         # Default: string
+
+Convert legacy NIST Tech Pubs ID to NIST PubID
+----
+
+[source,sh]
+----
+$ pubid-nist convert "NIST SP 800-53a"
+NIST SP 800-53A
+$ pubid-nist convert "NIST SP 800-57p1r3"
+NIST SP 800-57pt1r3
+----
+
+The `convert` command also supports DOI conversion.
+
+[source,sh]
+----
+$ pubid-nist convert "NIST.SP.800-57p1r3"
+NIST SP 800-57pt1r3
+----
+
+In addition to outputting PubID short style, we can also output other styles
+and formats of the resulting PubID.
+
+[source,sh]
+----
+$ pubid-nist convert -s mr "NIST SP 800-53a"
+NIST.SP.800-53A
+$ pubid-nist convert -s long -f json "NIST SP 800-53a" | jq
+{
+  "styles": {
+    "short": "NIST SP 800-53A",
+    "abbrev": "Natl. Inst. Stand. Technol. Spec. Publ. 800-53A",
+    "long": "National Institute of Standards and Technology Special Publication 800-53A",
+    "mr": "NIST.SP.800-53A"
+  },
+  "publisher": "NIST",
+  "serie": "NIST SP",
+  "code": "800-53A"
+}
+----
+
+=== Generating the bulk NIST Tech Pubs migration report
+
+This is the nice part -- a single command that generates the full table of
+converted PubIDs from the NIST Tech Pubs database, comprising of 19,333
+entries.
+
+The `report` command can be used as follows:
+
+[source,sh]
+----
+$ pubid-nist help report
+Usage:
+  pubid-nist report
+
+Options:
+  [--csv], [--no-csv]  # Export to CSV format
+
+Create report for NIST Tech Pubs database (fetches from GitHub)
+----
+
+The purpose of this command is to aid the NIST PubID team in assessing the
+impact and type of changes to be made in enacting this new scheme.
+
+By default, the `report` command generates a table to indicate which migrated
+identifiers have changed, focusing on changes of two styles:
+
+* PubID in short style vs legacy publication ID
+* PubID in machine-readable style vs legacy DOI
+
+As seen in the following output, a `✅` or a `-` will be shown in the appropriate
+column of change.
+
+[source,sh]
+----
+$ pubid-nist report
+ID changed? | New PubID | Document ID | DOI changed? | New PubID-MR | DOI | Title
+ - | NBS BH 1 | NBS BH 1 |  - | NBS.BH.1 | NBS.BH.1 | Recommended minimum requirements for small dwelling construction : report of Building Code Committee July 20, 1922
+ - | NBS BH 10 | NBS BH 10 |  - | NBS.BH.10 | NBS.BH.10 | A city planning primer by the advisory committee on zoning appointed by Secretary Hoover
+ ...
+✅ | NBS BH 3A | NBS BH 3a | ✅ | NBS.BH.3A | NBS.BH.3a | A zoning primer by the advisory committee on zoning appointed by Secretary Hoover (Revised)
+ - | NBS BH 4 | NBS BH 4 |  - | NBS.BH.4 | NBS.BH.4 | How to own your home : a handbook for prospective home owners
+✅ | NBS BH 5A | NBS BH 5a | ✅ | NBS.BH.5A | NBS.BH.5a | A standard state zoning enabling act under which municipalities may adopt zoning regulations by the advisory committee on zoning appointed by Secretary Hoover (revised edition 1926)
+...
+✅ | NBS RPT 2751 | NBS report ; 2751 |  - | NBS.RPT.2751 | NBS.RPT.2751 | Stochastic search for the maximum of a function
+ ...
+✅ | NBS RPT 2831 | NBS report ; 2831 |  - | NBS.RPT.2831 | NBS.RPT.2831 | Error bounds for eigenvalues of symmetric integral equations
+----
+
+
+Better yet, the `report` command supports CSV output. The "changes" fields
+will display `true` or `false` accordingly.
+
+[source,sh]
+----
+$ pubid-nist report --csv
+ID changed?,New PubID,Document ID,DOI changed?,New PubID-MR,DOI,Title
+false,NBS BH 1,NBS BH 1,false,NBS.BH.1,NBS.BH.1,"Recommended minimum requirements for small dwelling construction : report of Building Code Committee July 20, 1922"
+false,NBS BH 10,NBS BH 10,false,NBS.BH.10,NBS.BH.10,A city planning primer by the advisory committee on zoning appointed by Secretary Hoover
+false,NBS BH 11,NBS BH 11,false,NBS.BH.11,NBS.BH.11,A standard city planning enabling act by the advisory committee on city planning and zoning appointed by secretary Hoover
+...
+true,NIST SP 260-214,NIST SP 260-14,false,NIST.SP.260-214,NIST.SP.260-214,"Analysis of Seafood Reference Materials: RM 8256, RM 8257, RM 8258 and RM 8259, Wild-Caught Coho Salmon (RM 8256), Aquacultured Coho Salmon (RM 8257), Wild-Caught Shrimp (RM 8258), Aquacultured Shrimp (RM 8259)"
+false,NIST SP 260-14,NIST SP 260-14,false,NIST.SP.260-14,NIST.SP.260-14,"Analysis of Seafood Reference Materials: RM 8256, RM 8257, RM 8258 and RM 8259, Wild-Caught Coho Salmon (RM 8256), Aquacultured Coho Salmon (RM 8257), Wild-Caught Shrimp (RM 8258), Aquacultured Shrimp (RM 8259)"
+true,NIST IR 8379,NISTIR 8379,false,NIST.IR.8379,NIST.IR.8379,Summary Report for the Virtual Workshop Addressing Public Comment on NIST Cybersecurity for IoT Guidance
+----
+
+
+The best part is that this CSV will work properly with spreadsheet editors like
+Excel and Pages.
+All you need is to export the CSV values to a CSV file, and open it in your
+favorite program.
+
+[source,sh]
+----
+$ pubid-nist report --csv > myreport.csv
+----
+
+It is easy to filter these columns in Microsoft Excel with the following steps:
+
+. Open the CSV file in Excel
+. Convert the header row into a filter row:
+  first highlight the header row, then click on "Data > Filter"
+. Filter the columns accordingly
+
+.PubID conversion report, showing mapping between legacy publication identifiers and NIST PubIDs
+image::/assets/blog/2022-01-09_2.png[PubID conversion report, showing mapping between legacy publication identifiers and NIST PubIDs]
+
+Now it's easy to screen through the anomalies and surface the data issues!
+
+
+== Elements of the PubID
+
+=== Publisher
+
+|===
+| Name | Abbrev | Short
+
+| National Institute of Standards and Technology
+| Natl. Inst. Stand. Technol.
+| NIST
+
+| National Bureau of Standards
+| Natl. Bur. Stand.
+| NBS
+
+|===
+
+=== Series
+
+|===
+| Publisher | Prefix | Name | Abbrev | MR (with Publisher) | Example
+
+| NIST | NIST AMS | Advanced Manufacturing Standard | Adv. Man. Ser | `NIST.AMS`
+| https://nvlpubs.nist.gov/nistpubs/ams/NIST.AMS.200-2.pdf[NIST AMS 200-2]
+
+| NIST | NIST BSS | Building Science Series | Bldg. Sci. Ser. | `NIST.BSS`
+| https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=901127[NIST BSS 181]
+
+| NBS | NBS BSS | Building Science Series | Bldg. Sci. Ser. | `NBS.BSS`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/BSS/nbsbuildingscience94.pdf[NBS BSS 94]
+
+| NBS | NBS BMS | Building Material Structures Report | N/A | `NBS.BMS`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/BMS/nbsbuildingmaterialsstructures140e2.pdf[NBS BMS 140 Ed. 2]
+
+| NBS | NBS BRPD-CRPL-D | Basic Radio Propagation Predictions Series | N/A | `NBS.BRPD-CRPL-D`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/brpd-crpl-d/brpd-crpl-d209.pdf[NBS BRPD-CRPL-D 209]
+
+| NBS | NBS BH | Building and Housing Reports | N/A | `NBS.BH`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/BH/nbsbuildinghousing18.pdf[NBS BH 18]
+
+| NBS | NBS CRPL | Central Radio Propagation Laboratory Reports | N/A | `NBS.CRPL`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/crpl/crpl-6-3.pdf[NBS CRPL 6-3]
+
+| NBS | NBS CRPL-F-A | CRPL Ionospheric Data | N/A | `NBS.CRPL-F-A`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/crpl-f-a/crpl-f-a245.pdf[NBS CRPL-F-A 245]
+
+| NBS | NBS CRPL-F-B | CRPL Solar-Geophysical Data | N/A | `NBS CRPL-F-B245`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/crpl-f-b/crpl-f-b245.pdf[NBS CRPL-F-B245]
+
+| NBS | NBS IP | CRPL Ionospheric Predictions | N/A | `NBS.IP`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/ip/nbsip25.pdf[NBS IP 25]
+
+| NBS | NBS CIRC | Circulars | N/A | `NBS.CIRC`
+| http://nvlpubs.nist.gov/nistpubs/Legacy/circ/nbscircular460sup1962.pdf[NBS CIRC 460sup1962]
+
+| NBS | NBS CIS | Consumer Information Series | N/A | `NBS.CIS`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/CIS/nbscis10.pdf[NBS CIS 10]
+
+| NBS | NBS CS | Commercial Standards | N/A | `NBS.CS`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/CS/cs113-51.pdf[NBS CS 113-51]
+
+| NBS | NBS CSM | Commercial Standards Monthly | N/A | `NBS.CSM`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/CSM/nbscsmv9n10.pdf[NBS CSM v9n10]
+
+| NIST | FIPS PUB | Federal Information Processing Standards Publication | Federal Inf. Process. Stds. | `NIST.FIPS`
+| https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.202.pdf[FIPS PUB 202]
+
+| NIST | NISTGCR | Grant/Contract Reports | N/A | `NIST.GCR`
+| https://nvlpubs.nist.gov/nistpubs/gcr/2017/NIST.GCR.17-917-45.pdf[NIST GCR 17-917-45]
+
+| NBS | NBS GCR | Grant/Contract Reports | N/A | `NBS.GCR`
+| https://www.nist.gov/system/files/documents/2017/05/09/NISTGCR_77_82.pdf[NBS GCR 77-82]
+
+| NIST | NIST HB | Handbook | Handb. | `NIST.HB`
+| https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=932523[NIST Handbook 150-872]
+
+| NBS | NBS HB | Handbook | Handb. | `NBS.HB`
+| https://www.nist.gov/system/files/documents/pml/wmd/NBS-Handbook-1371.pdf[NBS Handbook 137]
+
+| NBS | NBS HR | Hydraulic Research in the United States | N/A | `NBS.HR`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/HR/hr14A.pdf[NBS HR 14A]
+
+| NBS | NBS IRPL | Interservice Radio Propagation Laboratory | N/A | `NBS.IRPL`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/irpl/irpl-r27.pdf[NBS IRPL 27]
+
+| NIST | ITL Bulletin | ITL Bulletin | N/A | `NIST.ITLB`
+| https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=930751[NIST ITL Bulletin August 2020]
+
+| NIST | NIST LC | Letter Circular | N/A | `NIST.LC`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/LC/nistlettercircular1136.pdf[NIST LC 1136]
+
+| NBS | NBS LC | Letter Circular | N/A | `NBS.LC`
+| https://www.govinfo.gov/content/pkg/GOVPUB-C13-505e153915bb567dd587b7efd26b000a/pdf/GOVPUB-C13-505e153915bb567dd587b7efd26b000a.pdf[NBS LC 1128]
+
+| NIST | NIST MN | Monograph | Monogr. | `NIST.MN`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/MONO/nistmonograph175.pdf[NIST Monograph 175]
+
+| NBS | NBS MN | Monograph | Monogr. | `NBS.MN`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/MONO/nbsmonograph125supp1.pdf[NIST Monograph 125],
+https://nvlpubs.nist.gov/nistpubs/Legacy/MONO/nbsmonograph125.pdf[NIST Monograph 125, Supp. 1]
+
+| NBS | NBS MP | Miscellaneous Publications | N/A | `NBS.MP`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/MP/nbsmiscellaneouspub260e1968.pdf[NBS MP 260e1968]
+
+| NIST | NIST NCSTAR | National Construction Safety Team Report | Natl. Constr. Tm. Act Rpt. | `NIST.NCSTAR`
+| https://www.nist.gov/publications/design-and-construction-structural-systems-federal-building-and-fire-safety[NIST NCSTAR 1-1A]
+
+| NIST | NIST NSRDS | National Standard Reference Data Series | Natl. Stand. Ret. Data Ser. | `NIST.NSRDS`
+| https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=931745[NIST NSRDS 100-2021]
+
+| NBS | NSRDS-NBS | National Standard Reference Data Series | Natl. Stand. Ret. Data Ser. | `NBS.NSRDS`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/NSRDS/nbsnsrds1.pdf[NSRDS-NBS 1]
+
+| NIST | NIST IR | Interagency or Internal Report | N/A | `NIST.IR`
+| https://nvlpubs.nist.gov/nistpubs/ir/2021/NIST.IR.8347.pdf[NISTIR 8347]
+
+| NBS | NBS IR | Interagency or Internal Report | N/A | `NBS.IR`
+| https://www.nist.gov/system/files/documents/2017/04/28/nbsir-79-1776.pdf[NBSIR 79-1776]
+
+| NIST | NIST OWMWP | Office of Weights and Measures White Papers | N/A | `NIST.OWMWP`
+| https://nvlpubs.nist.gov/nistpubs/OWMWP/NIST.OWMWP.06-13-2018.pdf[NIST OWMWP 06-13-2018]
+
+| NBS | NBS PC | Photographic Circulars | N/A | `NBS.PC`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/PC/nbsphotographiccircular.pdf[NBS RPT 10394]
+
+| NBS | NBS RPT | Reports | N/A | `NBS.RPT`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/RPT/nbsreport10394.pdf[NBS PC 1]
+
+| NIST | NIST PS | Voluntary Product Standards | Prod. Stand. | `NIST.PS`
+| https://www.nist.gov/system/files/documents/2019/12/11/PS%2020-20%20final%20WERB%20approved.pdf[NIST PS 20-20]
+
+| NBS | NBS SIBS | Special Interior Ballistics Studies | N/A | `NBS.SIBS`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/SIBS/nbssibs.pdf[NBS SIBS 1]
+
+| NBS | NBS PS | Voluntary Product Standards | Prod. Stand. | `NBS.PS`
+| http://storage.cloversites.com/resinsystemsinc/documents/1569%20PDF.pdf[NBS PS 15-69]
+
+| NIST | NIST SP | Special Publication | Spec. Publ. | `NIST.SP`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-115.pdf[NIST SP 800-115]
+
+| NBS | NBS SP | Special Publication | Spec. Publ. | `NBS.SP`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nbsspecialpublication500-137.pdf[NBS SP 500-137]
+
+| NIST | NIST TN | Technical Note | Tech. Note | `NIST.TN`
+| https://nvlpubs.nist.gov/nistpubs/TechnicalNotes/NIST.TN.2156.pdf[NIST TN 2156]
+
+| NBS | NBS TN | Technical Note | Tech. Note | `NBS.TN`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/TN/nbstechnicalnote876.pdf[NBS TN 876]
+
+| NBS | NBS TIBM | Technical Information on Building Materials | N/A | `NBS.TIBM`
+| https://nvlpubs.nist.gov/nistpubs/Legacy/TIBM/nbstibm61.pdf[NBS TIBM 61]
+
+| NIST | NIST TTB | Technology Transfer Brief | N/A | `NIST.TTB`
+| https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=929334[NIST TTB 2]
+
+| NIST | NIST DCI | Data Collection Instruments | Data Collect. Instr. | `NIST.DCI`
+| https://nvlpubs.nist.gov/nistpubs/dci/NIST.DCI.002.pdf[NIST DCI 002]
+
+| NIST | NIST EAB | Economic Analysis Brief | N/A | `NIST.EAB`
+| https://nvlpubs.nist.gov/nistpubs/eab/NIST.EAB.9.pdf[NIST EAB 3]
+
+| NIST | NIST Other | Other | Other | `NIST.O`
+| https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=925900[Report to the President]
+
+| NIST | CSRC White Paper | Cybersecurity Resource Center White Paper | CSWP | `NIST.CSWP`
+| https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=932330[NIST.CSWP.04282021]
+
+| NIST | CSRC Book | Cybersecurity Resource Center Book | CSRC Book | `NIST.CSB`
+| https://csrc.nist.gov/CSRC/media/Publications/book/1974/executive-guide-to-computer-security/documents/executive-guide-to-computer-security--brochure.pdf[Executive Guide to Computer Security],
+https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=917850[Metrics to Security]
+
+| NIST | CSRC Use Case | Cybersecurity Resource Center Use Case | CSRC Use Case | `NIST.CSUC`
+| https://nccoe.nist.gov/sites/default/files/library/project-descriptions/hit-infusion-pump-project-description-final.pdf[Wireless Medical Infusion Pumps: Medical Device Security]
+
+| NIST | CSRC Building Block | Cybersecurity Resource Center Building Block | CSRC Building Block | `NIST.CSBB`
+| https://nccoe.nist.gov/sites/default/files/library/project-descriptions/dns-secure-email-project-description-final.pdf[Domain Name System-Based Security for Electronic Mail]
+
+| NIST | JPCRD | Journal of Physical and Chemical Reference Data | J. Phys. & Chem. Ref. Data | `JPCRD`
+| (excluded from PubID scheme)
+
+| NIST | JRES | Journal of Research of NIST | J. Res. Natl. Inst. Stan. | `NIST.JRES`
+| (excluded from PubID scheme)
+
+|===
+
+=== Stage
+
+The stage code element only applies to non-final publications.
+
+In most series, documents are only released as final publications, and therefore
+their PubIDs will not contain a stage code.
+
+Only some series support stage codes, e.g. SP 800 and SP 1800.
+
+|===
+| Name | Value
+
+| Initial Public Draft | IPD
+| Second Public Draft (to the Nth Public Draft) | 2PD (... nPD)
+| Final Public Draft | FPD
+| Work-in-Progress Draft | WD
+| Preliminary Draft | PreD
+
+|===
+
+=== Report number
+
+The contents and pattern of the report number are dependent on the series.
+
+Possible values:
+
+* {sequence number}
+* {subseries}-{sequence number}
+* {sequence number}-{volume}
+* {sequence number}-{edition}
+* {subseries}-{sequence number}-{edition}
+* etc.
+
+A "Part" can also be indicated by an appended alphabetic character to the end.
+
+=== Part
+
+|===
+| Name | Abbrev and Short | MR
+
+| Part | Pt. | `pt`
+| Volume | Vol. | `v`
+| Section | Sec. | `sec`
+| Supplement | Suppl. | `sup`
+| Index | Index | `indx`
+| Addendum | Add. | `add` (TBC with NIST)
+| Insert | Ins. | `ins` (TBC with NIST)
+| Errata | Err. | `err` (TBC with NIST)
+| Appendix | App. | `app` (TBC with NIST)
+
+|===
+
+=== Edition
+
+|===
+| Name | Abbrev and Short | MR
+
+| Revision | Rev. | `r`
+| Edition | Ed. | `e`
+| Version | Ver. | `ver`
+
+|===
+
+=== Translation
+
+An ISO 639-2 code that represents a translated document from English.
+
+If a document is translated from English, suffix the document with a 3-letter
+ISO 639-2 code within parentheses.
+
+Raw values seen in legacy DOIs include:
+
+|===
+| Name | Correct value | MR | Legacy values seen in DOI
+
+| Spanish | (ESP) | `esp` | `es`
+| Vietnamese | (VIE) | `vie` | `viet`
+| Portuguese | (POR) | `por` | `port` `pt`
+| Chinese | (ZHO) | `zho` | `chi`
+| Indonesian | (IND) | `ind` | `id`
+
+|===
+
+=== Update
+
+==== General
+
+When a document is updated with an errata, the original edition may be reissued
+to include the errata.
+
+These documents will display the text "includes updates as of...".
+
+In this case the document identifier will include the element "Update".
+
+|===
+| Name | Abbrev and Short | MR
+
+| Update | Upd. | `u`
+
+|===
+
+NOTE: This is similar to the ISO/IEC "Amd." and "Cor." except that the NIST
+"Upd." is applied to the original document and (typically) does not exist
+separately.
+
+==== Update number
+
+A sequential integer numbering of the update counting from the original document.
+
+The first update is numbered 1, and so forth.
+
+==== Update year
+
+The year last updated, shown as a suffix to the identifier.
+
+* "{identifier}:{update-year}"
+
+
+== PubID patterns
+
+=== Presentation
+
+Generally in this order:
+
+* No update: `{series} {stage} {report number}{part}{edition}({translation})`
+* With update: `{series} {stage} {report number}{part}{edition}({translation})/{update} {update number}:{update year}`
+
+
+=== Full PubID
+
+Samples:
+
+* National Institute of Standards and Technology Federal Information Processing Standards Publication 199
+* National Institute of Standards and Technology Special Publication 800-27, Revision A
+* National Institute of Standards and Technology Special Publication 800-39 (Second Public Draft)
+
+(originally described in https://github.com/metanorma/metanorma-nist/issues/98)
+
+=== Abbreviated PubID
+
+This form is used in the Authority section.
+
+----
+Natl. Inst. Stand. Technol. {abbrev(series)} {reportnumber} {part | abbrev(volume)}, {abbrev(revision)}
+----
+
+* `abbrev(series)` represent the abbreviation of the Series title
+* (Note: there is no `{update-date}`)
+
+Examples:
+
+* "Natl. Inst. Stand. Technol. Spec. Publ. 800-78-4"
+* "Natl. Inst. Stand. Technol. Spec. Publ. 800-116"
+* "Natl. Inst. Stand. Technol. Spec. Publ. 800-57 Part 1, Revision 4"
+
+
+(originally from https://github.com/metanorma/metanorma-nist/issues/88)
+
+=== Short PubID
+
+The "short form" is used to cite the documents within text.
+
+It is used in these situations:
+
+1. Locality references. "In Section 3.2 of SP 800-187…" (the "SP 800-187" is a link).
++
+NOTE: NIST pubs are composed of "Sections" not "Clauses"
+
+2. A generic document reference. "SP 800-53 describes…". This form does not specify a revision or update date.
+
+3. "All parts". "The SP 800-57 subseries describes key management…".
+
+("NISTIR 6885 2003 Edition (February 2003)" is a poor indicator.)
+
+The correct rule should be:
+
+----
+{abbrev(series)} {reportnumber} {abbrev(volume)} {abbrev(revision)} {edition, optional}
+----
+
+NOTE: For FIPS, `reportnumber` is the full FIPS number, including revision, e.g.,
+`140-2`.
+
+(originally from https://github.com/metanorma/metanorma-nist/issues/88)
+
+Short form date:
+
+* `Month YYYY`
+
+Examples:
+
+* NIST SP 800-53r4 (20152201) supersedes NIST SP 800-53r4 (20140115)
+* NIST SP 800 63A (December 2017) supersedes NIST SP 800-63A
+* NIST SP 800 57 Part 1 Revision 4 supersedes NIST SP 800-57 Part 1 Revision 3 ("Rev." is also accepted, and converted to "Revision")
+* NIST SP 800 160 Volume 1 supersedes NIST SP 800-160 (20180103) ("Vol." is also accepted, and converted to "Volume")
+* Undated form "NIST SP 800 53r4"
+
+Strip Revision and Date from title, only if the Revision and Date are unique for
+each document number. These are identified as "Rev. ...", "Revision ...." and "
+(Month YYYY)", whichever comes first.
+
+
+=== Machine-readable PubID
+
+Machine-readable syntax:
+
+----
+{publisher}.{series}.[{stage}.]{reportnumber}.{part}.{revision}.[{lang}.]{update-date}
+----
+
+----
+{publisher}.{series}.[{stage}.]{reportnumber}.{part}.{revision}.[{lang}.][{update}]{update-date}
+----
+
+Generally, this rule should be able to uniquely identify an edition of a document.
+
+* `{part}`
+** Part
+*** A "Part 1" document is encoded as "pt1";
+*** When a letter part is indicated, e.g. "800-63A", we should keep it as part of
+  the reportnumber (i.e., don't indicate "pt").
+
+** Volumes
+*** "Volume 1" is encoded as "v1";
+
+* `{revision}`
+** "Revision 1" is encoded as "r1"
+
+** If a superseding edition is a full revision, it will get the next Rev. #.
+** If a superseding edition is just an errata update, we use the update date
+from the title page ("includes updates as of ...") to uniquely identify this
+edition. Preferably in the `-yyyymmdd` format.
+
+* `{update}`
+** "Update 1" is encoded as "upd1"
+
+Some examples:
+
+* `NIST.SP.800-53r4-20152201` supersedes `NIST.SP.800-53r4-20140115`
+* `NIST.SP.800-63A-20171201` supersedes `NIST.SP.800-63A`
+* `NIST.SP.800-57pt1r4` supersedes `NIST.SP.800-57pt1r3`
+* `NIST.SP.800-160v1` supersedes `NIST.SP.800-160-20180103`
+* `NIST.IR.8204.upd1-2019` supersedes `NIST.IR.8204`
+* The undated form is `NIST.SP.800-53r4`
+
+(originally from https://github.com/metanorma/metanorma-nist/issues/88)
+
+
+== Examples of PubID
+
+*	SP 800 series
+** NIST SP 800-40r3
+** NIST SP 800-45ver2
+** NIST SP 800-53r4/Upd 3:2015
+** NIST SP IPD 800-53r5
+** NIST SP 800-53Ar4/Upd 1:2014
+** NIST SP 800-60v1r1
+** NIST SP 800-57pt1r4
+** NIST SP 800-73-4/Upd 1:2016
+** NIST SP 2PD 800-188
+
+* SP 1800 series
+** NIST SP 2PD 1800-13B
+** NIST SP PreD 1800-19B
+
+* NIST IR series
+** NIST IR 8011v3
+** NIST IR 8204/Upd 1:2019
+** NIST IR 8115(spa)
+
+* Other NIST Series
+** NIST HB 130e2019
+** NIST SP 1041r1/Upd 1:2012
+** NIST NCSTAR 1-1Cv1
