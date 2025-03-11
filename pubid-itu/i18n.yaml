@@ -1,0 +1,13 @@
+publisher:
+  ITU:
+    ru: МСЭ
+    es: UIT
+    fr: UIT
+
+type:
+  REC:
+    ru: Рек.
+    es: Rec.
+    fr: Rec.
+    cn: 建议书
+    ar: "التوصية"

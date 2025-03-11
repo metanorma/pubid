@@ -1,0 +1,42 @@
+R:
+  BO: Satellite delivery
+  BR: Recording for production, archival and play-out; film for television
+  BS: Broadcasting service (sound)
+  BT: Broadcasting service (television)
+  F: Fixed service
+  M: Mobile, radiodetermination, amateur and related satellite services
+  P: Radiowave propagation
+  RA: Radio astronomy
+  RS: Remote sensing systems
+  S: Fixed-satellite service
+  SA: Space applications and meteorology
+  SF: Frequency sharing and coordination between fixed-satellite and fixed service systems SM Spectrum management
+  SM: Spectrum management
+  SNG: Satellite news gathering
+  TF: Time signals and frequency standards emissions
+  V: Vocabulary and related subjects
+
+T:
+  A: Organization of the work of ITU-T
+  D: Tariff and accounting principles and international telecommunication/ICT economic and policy issues
+  E: Overall network operation, telephone service, service operation and human factors
+  F: Non-telephone telecommunication services
+  G: Transmission systems and media, digital systems and networks
+  H: Audiovisual and multimedia systems
+  I: Integrated services digital network
+  J: Cable networks and transmission of television, sound programme and other multimedia signals
+  K: Protection against interference
+  L: Environment and ICTs, climate change, e-waste, energy efficiency; construction, installation and protection of cables and other elements of outside plant
+  M: Telecommunication management, including TMN and network maintenance
+  N: "Maintenance: international sound programme and television-transmission circuits"
+  O: Specifications of measuring equipment
+  P: Telephone transmission quality, telephone installations, local line networks
+  Q: Switching and signalling, and associated measurements and tests
+  R: Telegraph transmission
+  S: Telegraph services terminal equipment
+  T: Terminals for telematic services
+  U: Telegraph switching
+  V: Data communication over the telephone network
+  X: Data networks, open system communications and security
+  Y: Global information infrastructure, Internet protocol aspects, next-generation networks, Internet of Things and smart cities
+  Z: Languages and general software aspects for telecommunication systems
