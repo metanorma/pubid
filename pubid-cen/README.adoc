@@ -1,0 +1,26 @@
+= JIS publication identifiers ("CEN PubID")
+
+== Purpose
+
+This gem implements a mechanism to parse and utilize CEN publication
+identifiers.
+
+== Use cases to support
+
+. generate updated PubID
+
+== Usage
+
+=== Identifier creation
+
+Basic usage of the pubid-cen gem starts with the `Identifier#create` method.
+
+[source,ruby]
+----
+require "pubid-cen"
+
+pubid = Pubid::Cen::Identifier.create(number: 1234, part: 1, year: 1999)
+pubid.to_s
+
+=> "EN 1234-1:1999"
+----
