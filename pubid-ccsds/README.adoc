@@ -1,0 +1,26 @@
+= CCSDS publication identifiers ("CCSDS PubID")
+
+== Purpose
+
+This gem implements a mechanism to parse and utilize CCSDS publication
+identifiers.
+
+== Use cases to support
+
+. generate updated PubID
+
+== Usage
+
+=== Identifier creation
+
+Basic usage of the pubid-ccsds gem starts with the `Identifier#create` method.
+
+[source,ruby]
+----
+require "pubid-ccsds"
+
+pubid = Pubid::Ccsds::Identifier.create(number: 1234, part: 1, type: "B", edition: 2)
+pubid.to_s
+
+=> "CCSDS 1234.1-B-2"
+----
