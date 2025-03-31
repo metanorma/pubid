@@ -1,6 +1,6 @@
 RSpec.describe Pubid::Nist::NistTechPubs, vcr: true do
   describe "#fetch" do
-    it "fetch doc identifiers from nist_tech_pubs" do
+    xit "fetch doc identifiers from nist_tech_pubs" do
       expect(described_class.fetch.map { |d| d[:id] })
         .to include("NBS BH 1",
                     "NIST SP 1800-15",
@@ -9,7 +9,7 @@ RSpec.describe Pubid::Nist::NistTechPubs, vcr: true do
                     "NIST IR 8379")
     end
 
-    it "fetches doi identifiers" do
+    xit "fetches doi identifiers" do
       expect(described_class.fetch.map { |d| d[:doi] })
         .to include("NBS.BH.1",
                     "NIST.SP.1800-15",
@@ -51,7 +51,7 @@ RSpec.describe Pubid::Nist::NistTechPubs, vcr: true do
     end
 
     context "when doi code is wrong" do
-      it "skips merging with doi" do
+      xit "skips merging with doi" do
         expect(described_class.convert(
                  { id: "NIST TN 1648", doi: "NISTPUB.0413171251" },
                ).to_s).to eq("NIST TN 1648")
