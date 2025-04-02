@@ -1,4 +1,4 @@
-require 'forwardable'
+require "forwardable"
 require_relative "../renderer/urn"
 require_relative "../renderer/urn-tc"
 
@@ -139,21 +139,21 @@ module Pubid::Iso
           end
         end
 
-        def transform(params)
-          identifier_params = params.map do |k, v|
-            get_transformer_class.new.apply(k => v)
-          end.inject({}, :merge)
+        def transform(params) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+          transformer = get_transformer_class.new
+          params = transformer.apply(root: params)
+          identifier_params = params.map { |k, v| transformer.apply(k => v) }.inject({}, :merge)
 
           # return supplement if supplements applied
-          if identifier_params[:supplements] && identifier_params[:supplements].is_a?(Array)
+          if identifier_params[:supplements].is_a?(Array)
             return transform_supplements(
               identifier_params[:supplements],
-              identifier_params.dup.tap { |h| h.delete(:supplements) }
+              identifier_params.dup.tap { |h| h.delete(:supplements) },
             )
           end
 
           if identifier_params[:extract]
-            base_parameters = params.reject { |k, _| k == :extract }
+            base_parameters = identifier_params.reject { |k, _| k == :extract }
 
             return Identifier.create(base: Identifier.create(**base_parameters),
                                      type: :ext, **identifier_params[:extract])

@@ -1,8 +1,11 @@
 require_relative "identifier/base"
 require_relative "renderer/base"
+require_relative "parser_urn"
 
 module Pubid::Iso
   class Parser < Pubid::Core::Parser
+    include Pubid::Iso::ParserUrn
+
     STAGES = %w[NP NWIP WD CD FCD PRF AWI PWI FPD].freeze
     TYPES = %w[DATA ISP IWA R TTA TS TR IS PAS Guide GUIDE DIR].freeze
     # TYPED_STAGES = %w[DIS FDIS DPAS FDTR FDTS DTS DTR PDTR PDTS].freeze
@@ -118,7 +121,7 @@ module Pubid::Iso
     rule(:supplement) do
       ((str("/") | space).maybe >>
         (((stage.as(:typed_stage) >> space).maybe >> supplements.as(:type)) |
-          (staged_supplement).as(:typed_stage)) >>
+          staged_supplement.as(:typed_stage)) >>
         (space | str(".")).repeat(1).maybe >>
         digits.as(:number).maybe >>
         (str(".") >> digits.as(:iteration)).maybe >>
@@ -129,7 +132,7 @@ module Pubid::Iso
       (
         (((str("/") >> (str("Add") | str("ADD")).as(:type)) | (str(" — ") >> str("Addendum").as(:type))) |
          (str("/") >> staged_addenda.as(:typed_stage))) >>
-          space >> digits.as(:number) >> ((str(":")) >> digits.as(:year)).maybe
+          space >> digits.as(:number) >> (str(":") >> digits.as(:year)).maybe
       ).repeat(1).as(:supplements)
     end
 
@@ -177,7 +180,6 @@ module Pubid::Iso
           dir_supplement_edition.maybe).repeat(1).as(:supplements)).maybe >>
           # parse identifiers with publisher at the end, e.g. "ISO/IEC DIR 2 ISO"
           (space >> organization.as(:publisher) >> (str(":") >> year).maybe).as(:edition).maybe
-
     end
 
     rule(:std_document_body) do
@@ -189,6 +191,7 @@ module Pubid::Iso
         (str("|") >> (str("IDF").as(:publisher) >> space >> digits.as(:number)).as(:joint_document)).maybe >>
         part.maybe >> iteration.maybe >>
         (space? >> (str(":") | dash) >> year).maybe >>
+        edition.maybe >>
         supplement.maybe >>
         extract.maybe >>
         addendum.maybe >>
@@ -209,6 +212,6 @@ module Pubid::Iso
           (str(" + ") >> (originator >> space >> dir_document_body).as(:dir_joint_document)).maybe))
     end
 
-    rule(:root) { identifier }
+    rule(:root) { identifier | urn_identifier }
   end
 end

@@ -43,3 +43,10 @@ shared_examples "creates same identifier from #to_h output" do
     expect(subject.to_s).to eq(Pubid::Iso::Identifier.create(**subject.to_h).to_s)
   end
 end
+
+shared_examples "converts urn to pubid" do |result = nil|
+  it "converts urn to pubid" do
+    result ||= original || pubid
+    expect(described_class.parse(urn).to_s(with_edition: true, format: :ref_num_long)).to eq result
+  end
+end
