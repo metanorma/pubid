@@ -1,0 +1,26 @@
+= ETSI publication identifiers ("ETSI PubID")
+
+== Purpose
+
+This gem implements a mechanism to parse and utilize ETSI publication
+identifiers.
+
+== Use cases to support
+
+. generate updated PubID
+
+== Usage
+
+=== Identifier creation
+
+Basic usage of the pubid-ccsds gem starts with the `Identifier#create` method.
+
+[source,ruby]
+----
+require "pubid-etsi"
+
+pubid = Pubid::Etsi::Identifier.create(type: "EN", number: 1234, minor: 123, part: 4, version: "1.2.3", date: "1999-01")
+pubid.to_s
+
+=> "ETSI EN 1234 123-4 V1.2.3 (1999-01)"
+----

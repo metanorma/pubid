@@ -1,0 +1,129 @@
+abbreviations:
+  PWI: ["00.00", "00.20", "00.60", "00.98", "00.99"]
+  PNW: ["10.20"]
+  NP: ["10.00", "10.60", "10.98", "10.92"]
+  ANW: ["10.99", "20.00"]
+  WD: [ "20.20", "20.60", "20.98", "20.99" ]
+  CD: ["30.00", "30.20", "30.60", "30.92", "30.98", "30.99"]
+  CDV: [ "40.00", "40.20", "40.60", "40.92", "40.98", "40.99" ]
+
+project_stages:
+  ACD: "20.99"
+  APUB: "50.99"
+  BPUB: "60.00"
+  CAN: ["30.98", "50.98"]
+  CDM: "30.60"
+  DECPUB: "60.00"
+  DEL: ["10.98", "20.98"]
+  DELPUB: "99.60"
+  MERGED: "30.97"
+
+names:
+  ACD: Approved for CD
+  ACDV: Approved for CDV
+  ADTR: Approved for DTR
+  ADTS: Approved for DTS
+  AFDIS: Approved for FDIS
+  APUB: Approved for publication
+  BPUB: Being published
+  CAN: Draft cancelled
+  CD: Draft circulated as CD
+  CDM: CD to be discussed at meeting
+  CCDV: Draft circulated as CDV
+  CDISH: Draft circulated as DISH
+  CDVM: Rejected CDV to be discussed at a meeting
+  CFDIS: Draft circulated as FDIS
+  CDPAS: Draft circulated as DPAS
+  CDTR: Draft circulated as DTR
+  CDTS: Draft circulated as DTS
+  DTRM: Rejected DTR to be discussed at meeting
+  DTSM: Rejected DTS to be discussed at meeting
+  DECDISH: DISH at editing check
+  DECFDIS: FDIS at editing check
+  DECPUB: Publication at editing check
+  DEL: Deleted/abandoned
+  DELPUB: Deleted publication
+  NCDV: CDV rejected
+  NDTR: DTR rejected
+  NDTS: DTS rejected
+  NFDIS: FDIS rejected
+  PCC: Preparation of CC
+  PNW: New work item proposal
+  PPUB: Publication issued
+  PRVC: Preparation of RVC
+  PRVDISH: Preparation of RVDISH
+  PRVD: Preparation of RVD
+  PRVDPAS: Preparation of RVDPAS
+  PRVDTR: Preparation of RVDTR
+  PRVDTS: Preparation of RVDTS
+  PRVN: Preparation of RVN
+  PWI: Preliminary work item
+  RDISH: DISH received and registered
+  RFDIS: FDIS received and registered
+  RPUB: Publication received and registered
+  TCDV: Translation of CDV
+  TDISH: Translation of DISH
+  TDTR: Translation of DTR
+  TDTS: Translation of DTS
+  TPUB: Translation of publication
+  WPUB: Publication withdrawn
+  WD: Working Draft
+  NP: New Proposal
+  CDV: Committee Draft for Vote
+  ANW: Registration of new project
+
+codes_description:
+  "00.00": Proposal for new project received
+  "00.20": Proposal for new project under review
+  "00.60": Close of review
+  "00.98": Proposal for new project abandoned
+  "00.99": Approval to ballot proposal for new project
+  "10.00": Proposal for new project registered
+  "10.20": New project ballot initiated
+  "10.60": Close of voting
+  "10.92": Proposal returned to submitter for further definition
+  "10.98": New project rejected
+  "10.99": New project approved
+  "20.00": New project registered in TC/SC work programme
+  "20.20": Working draft (WD) study initiated
+  "20.60": Close of comment period
+  "20.98": Project deleted
+  "20.99": WD approved for registration as CD
+  "30.00": Committee draft (CD) registered
+  "30.20": CD study/ballot initiated
+  "30.60": Close of voting/ comment period
+  "30.92": CD referred back to Working Group
+  "30.98": Project deleted
+  "30.99": CD approved for registration as DIS
+  "40.00": DIS registered
+  "40.20": "DIS ballot initiated: 12 weeks"
+  "40.60": Close of voting
+  "40.93": "Full report circulated: decision for new DIS ballot"
+  "40.98": Project deleted
+  "40.92": "Full report circulated: DIS referred back to TC or SC"
+  "40.99": "Full report circulated: DIS approved for registration as FDIS"
+  "50.00": Final text received or FDIS registered for formal approval
+  "50.20": "Proof sent to secretariat or FDIS ballot initiated: 8 weeks"
+  "50.60": Close of voting. Proof returned by secretariat
+  "50.92": FDIS or proof referred back to TC or SC
+  "50.98": Project deleted
+  "50.99": FDIS or proof approved for publication
+  "60.00": International Standard under publication
+  "60.60": International Standard published
+  "90.20": International Standard under systematic review
+  "90.60": Close of review
+  "90.92": International Standard to be revised
+  "90.93": International Standard confirmed
+  "90.99": Withdrawal of International Standard proposed by TC or SC
+  "95.20": Withdrawal ballot initiated
+  "95.60": Close of voting
+  "95.92": Decision not to withdraw International Standard
+  "95.99": Withdrawal of International Standard
+
+draft_codes: ["00.00", "00.20", "00.60", "00.99", "10.00", "10.20", "10.60", "10.92",
+              "10.99", "20.00", "20.20", "20.60", "20.99", "30.00",
+              "30.20", "30.60", "30.92", "30.99", "40.00", "40.20", "40.60", "40.92",
+              "40.93", "40.99", "50.00", "50.20", "50.60", "50.92", "50.99"]
+
+canceled_codes: ["00.98", "10.98", "20.98", "30.98", "40.98", "50.98", "95.99"]
+published_codes: ["60.00", "60.60", "90.20", "90.60", "90.92", "90.93", "90.99", "95.20", "95.60", "95.92"]

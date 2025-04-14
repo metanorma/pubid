@@ -1,0 +1,431 @@
+= ISO publication identifiers ("ISO PubID")
+
+image:https://badge.fury.io/rb/pubid-iso.svg["Gem Version", link="https://badge.fury.io/rb/pubid-iso"]
+
+== Purpose
+
+This gem implements a mechanism to parse and utilize ISO publication
+identifiers.
+
+== Use cases to support
+
+. generate the corresponding URN format (according to RFC 5141)
+. generate updated PubID
+. generate language specific PubID
+. generate dated vs undated PubIDs
+
+== Usage
+
+=== Identifier creation
+
+Basic usage of the pubid-iso gem starts with the `Identifier#create` method.
+
+[source,ruby]
+----
+require "pubid-iso"
+
+pubid = Pubid::Iso::Identifier.create(publisher: "ISO", number: 123)
+pubid.to_s
+
+=> "ISO 1234"
+----
+
+
+=== With co-publisher
+
+[source,ruby]
+----
+pubid = Pubid::Iso::Identifier.create(publisher: "ISO", copublisher: "IEC", number: 123)
+pubid.to_s
+
+=> "ISO/IEC 1234"
+----
+
+=== With document type
+
+[source,ruby]
+----
+pubid = Pubid::Iso::Identifier.create(publisher: "ISO", type: "TR", number: 123)
+pubid.to_s
+
+=> "ISO/TR 1234"
+----
+
+=== With stage
+
+[source,ruby]
+----
+pubid = Pubid::Iso::Identifier.create(publisher: "ISO", stage: :WD, number: 123)
+pubid.to_s
+
+=> "ISO/WD 1234"
+----
+
+==== "PreCD" stage
+
+For "PreCD" stage we’re using a special stage called "29" that is not in the International Harmonized Codes.
+
+[source,ruby]
+----
+pubid = Pubid::Iso::Identifier.create(publisher: "ISO", stage: :PreCD, number: 123)
+pubid.to_s
+
+=> "ISO/PreCD 123"
+
+subject.stage.harmonized_code.stages
+=> ["29.00", "29.20", "29.60", "29.92", "29.98", "29.99"]
+----
+
+=== With part number
+
+[source,ruby]
+----
+pubid = Pubid::Iso::Identifier.create(publisher: "ISO", number: 123, part: 1)
+pubid.to_s
+
+=> "ISO 1234-1"
+----
+
+=== Iteration
+
+An iteration is a version within a stage. A stage must be provided to set
+an iteration.
+
+If an iteration exists but a stage is not set, an error will be raised.
+
+[source,ruby]
+----
+pubid = Pubid::Iso::Identifier.create(publisher: "ISO", number: 123, part: 1, stage: "DIS", iteration: 1)
+pubid.to_s
+
+=> "ISO/DIS 1234-1.1"
+----
+
+
+=== Supplement identifiers
+
+A supplement identifier represents a supplement on top of a base document.
+
+A supplement can be of the following types:
+
+* Amendment `:amd`
+* Addendum `:add` (superseded by Amendment)
+* Technical Corrigendum `:cor`
+* Supplement `:supp`
+
+The general construction of a supplement identifier requires a base identifier.
+
+NOTE: See documentation on
+https://rubydoc.info/gems/pubid-iso/Pubid%2FIso%2FSupplement:initialize[PubId::Iso::Supplement#initialize]
+and
+https://rubydoc.info/gems/pubid-core/Pubid%2FCore%2FSupplement:initialize[Pubid::Core::Supplement#initialize]
+to see all available options.
+
+=== Amendment
+
+[source,ruby]
+----
+> base = Pubid::Iso::Identifier.create(publisher: "ISO", number: 123, part: 1, year: 2019)
+> pubid = Pubid::Iso::Identifier.create(type: :amd, number: 1, year: "2021", stage: "WD", base: base)
+> pubid.to_s
+=> "ISO 1234-1:2019/WD Amd 1:2021"
+----
+
+=== Corrigendum
+
+[source,ruby]
+----
+> base = Pubid::Iso::Identifier.create(publisher: "ISO", number: 123, part: 1, year: 2019)
+> pubid = Pubid::Iso::Identifier.create(type: :cor, number: "1", year: "2021", stage: :WD, base: base)
+> pubid.to_s
+=> "ISO 1234-1:2019/WD Cor 1:2021"
+----
+
+
+=== Using format options
+
+[source,ruby]
+----
+> base = Pubid::Iso::Identifier.create(
+  number: "8601",
+  part: "1",
+  year: 2019,
+  edition: 1,
+  language: "en"
+)
+> pubid = Pubid::Iso::Identifier.create(type: :amd, number: "1", year: "2021", stage: "DAM", base: base)
+> pubid.to_s(format: :ref_num_short)
+=> "ISO 8601-1:2019/DAM 1:2021(E)"
+> pubid.to_s(format: :ref_dated)
+=> "ISO 8601-1:2019/DAM 1:2021"
+> pubid.to_s(format: :ref_undated)
+=> "ISO 8601-1:2019/DAM 1"
+----
+
+=== Using language specific rendering
+[source,ruby]
+----
+> pubid = Pubid::Iso::Identifier.parse("ISO/FDIS 26000:2010(ru)")
+> pubid.to_s(format: :ref_num_long, lang: :russian)
+=> "ИСО/ОПМС 26000:2010(ru)"
+> pubid = Pubid::Iso::Identifier.parse("ISO/IEC Guide 71:2001(fr)")
+> pubid.to_s(format: :ref_num_long, lang: :french)
+=> "Guide ISO/CEI 71:2001(fr)"
+----
+
+=== Rendering URN identifier
+
+[source,ruby]
+----
+> base = Pubid::Iso::Identifier.create(
+  number: "8601",
+  part: "1",
+  year: 2019,
+  edition: 1,
+)
+> pubid = Pubid::Iso::Identifier.create(type: :amd, number: "1", year: "2021", stage: "DAM", base: base)
+> pubid.urn
+=> "urn:iso:std:iso:8601:-1:ed-1:stage-draft:amd:2021:v1"
+----
+
+=== Typed stage abbreviation
+
+[source,ruby]
+----
+> pubid = Pubid::Iso::Identifier.parse("ISO/FDIS 26000:2010")
+> pubid.typed_stage_abbrev
+=> "FDIS"
+> pubid.typed_stage_name
+=> "Final Draft International Standard"
+
+> pubid = Pubid::Iso::Identifier.parse("ISO/FDTR 26000:2010")
+> pubid.typed_stage_abbrev
+=> "FDTR"
+> pubid.typed_stage_name
+=> "Final Draft Technical Report"
+
+> pubid = Pubid::Iso::Identifier.parse("ISO/WD TR 26000:2010")
+> pubid.typed_stage_abbrev
+=> "WD TR"
+> pubid.typed_stage_name
+=> "Working Draft Technical Report"
+----
+
+=== Identifier's class and type
+
+`Identifier#parse` resolves a parsed identifier to the correct class and type.
+
+[source,ruby]
+----
+Pubid::Iso::Identifier.parse("ISO/TC 184/SC 4 N1000").class
+# => Pubid::Iso::Identifier::TechnicalCommittee
+Pubid::Iso::Identifier.parse("ISO/TC 184/SC 4 N1000").type
+# => {:key=>:tc, :title=>"Technical Committee"}
+Pubid::Iso::Identifier.parse("ISO 10001").class
+# => Pubid::Iso::Identifier::InternationalStandard
+Pubid::Iso::Identifier.parse("ISO 10001").type
+# => {:key=>:is, :title=>"International Standard"}
+----
+
+
+
+=== Root identifier
+
+`Identifier#root` points to the root identifier.
+
+The root identifier is defined as:
+
+* for supplement identifiers, the root identifier is the base identifier;
+
+* for other identifiers, the root identifier is the identifier itself.
+
+[source,ruby]
+----
+> pubid = Pubid::Iso::Identifier.parse("ISO/WD TR 26000:2010")
+> pubid.root.to_s
+=> "ISO/WD TR 26000:2010"
+> pubid = Pubid::Iso::Identifier.parse("ISO 10231:2003/Amd 1:2015")
+> pubid.root.to_s
+=> "ISO 10231:2003"
+> pubid = Pubid::Iso::Identifier.parse("ISO/IEC 13818-1:2015/Amd 3:2016/Cor 1:2017")
+> pubid.root.to_s
+=> "ISO/IEC 13818-1:2015"
+----
+
+See documentation
+(https://www.rubydoc.info/gems/pubid-iso/Pubid/Iso/Identifier#initialize-instance_method[Pubid::Iso::Identifier]
+and
+https://www.rubydoc.info/gems/pubid-core/Pubid/Core/Identifier#initialize-instance_method[Pubid::Core::Identifier])
+for all available attributes and options.
+
+== Elements of the PubID
+
+=== Document identifier
+
+=== General
+
+The ISO document identifier is assembled out of these metadata elements:
+
+publisher:: publisher of the document
+document stage:: stage of development of document, according to the Harmonized Stage Codes
+document number:: numeric identifier of document
+update number:: serial number of update (for amendments and technical corrigenda)
+document type:: type of ISO deliverable
+copyright year:: year of publication of document
+language:: language of document
+
+=== Publisher
+
+This is the abbreviation of the publishing organization, typically `ISO`.
+
+If the document is published under co-publishing agreements, it can contain the
+abbreviations of other publishing SDOs, delimited by `/` after `ISO`.
+
+An International Workshop Agreement document has publisher abbreviation of
+`IWA`.
+
+[example]
+====
+`ISO`, `ISO/IEC`, `ISO/IEC/IEEE`, `ISO/IEEE`, `ISO/SAE`, `IWA`
+====
+
+
+=== Document type and stage
+
+ISO document stages in document identifiers are mapped as follows.
+
+International Standard::
+
+`00.00` to `00.99`::: "`PWI`"
+`10.00` to `10.98`::: "`NP`"
+`10.99` to `20.00`::: "`AWI`"
+`20.20` to `20.99`::: "`WD`"
+`30.00` to `30.99`::: "`CD`"
+`40.00` to `40.99`::: "`DIS`"
+`50.00` to `50.99`::: "`FDIS`"
+`60.00`::: "`PRF`"
+`60.60`::: empty designation
+
+Technical Specification, Technical Report::
+
+`00.00` to `00.99`::: "`PWI {TR,TS}`"
+`10.00` to `10.98`::: "`NP {TR,TS}`"
+`10.98` to `20.00`::: "`AWI {TR,TS}`"
+`20.20` to `20.99`::: "`WD {TR,TS}`"
+`30.00` to `30.99`::: "`CD {TR,TS}`"
+`40.00` to `40.99`::: TS/TRs do not have DIS stage because they are not
+international standards.
+`50.00` to `50.99`::: TS/TRs do not have FDIS stage because they are not
+international standards.
+`60.00`::: "`PRF {TR,TS}`"
+`60.60`::: "`{TR,TS}`"
+
+//The stage abbreviations DIS and FDIS change to DTS and FDTS
+
+Amendment::
+
+`00.00` to `00.99`::: "`{base-document-id}/PWI Amd {num}`"
+`10.00` to `10.98`::: "`{base-document-id}/NP Amd {num}`"
+`10.99` to `20.00`::: "`{base-document-id}/AWI Amd {num}`"
+`20.20` to `20.99`::: "`{base-document-id}/WD Amd {num}`"
+`30.00` to `30.99`::: "`{base-document-id}/CD Amd {num}`"
+`40.00` to `40.99`::: "`{base-document-id}/DAmd {num}`"
+`50.00` to `50.99`::: "`{base-document-id}/FDAmd {num}`"
+`60.00`::: "`{base-document-id}/PRF Amd {num}`"
+`60.60`::: "`{base-document-id}/Amd {num}`"
+
+Technical Corrigendum::
+
+`00.00` to `00.99`::: "`{base-document-id}/PWI Cor {num}`"
+`10.00` to `10.98`::: "`{base-document-id}/NP Cor {num}`"
+`10.99` to `20.00`::: "`{base-document-id}/AWI Cor {num}`"
+`20.20` to `20.99`::: "`{base-document-id}/WD Cor {num}`"
+`30.00` to `30.99`::: "`{base-document-id}/CD Cor {num}`"
+`40.00` to `40.99`::: "`{base-document-id}/DIS Cor {num}`"
+`50.00` to `50.99`::: "`{base-document-id}/FDCor {num}`"
+`60.00`::: "`{base-document-id}/PRF Cor {num}`"
+`60.60`::: "`{base-document-id}/Cor {num}`"
+
+
+When the Publisher element contains a "`slash`" ("`/`"), the separation in front
+of the document stage will be converted into an empty space.
+
+[example]
+====
+`ISO/NP 33333` but `ISO/IEC NP 33333`.
+`ISO/NP TR 33333` but `ISO/IEC NP TR 33333`.
+====
+
+According to ISO Directives Part 1 (11ed), SE.2:
+
+[quote]
+____
+Working drafts (WD), committee drafts (CD), draft International Standards (DIS),
+final draft International Standards (FDIS) and International Standards`",
+"`Successive DIS on the same subject will carry the same number but will be
+distinguished by a numerical suffix (.2, .3, etc.).
+____
+
+[example]
+====
+ISO/CD TR 10064-2.2
+ISO/IEC CD 23264-2.4
+ISO/DIS 80369-3.2
+====
+
+In an ISO PubID, the stage iteration number is applied to the standard
+number, patterned as:
+
+* `{document stage} {document number}` (if iteration is 1); or
+* `{document stage} {document number}.{iteration number}`
+  (if iteration is larger than 1).
+
+Once the document is published (stage 60 substage 60), no status abbreviation is
+given.
+
+
+=== Full PubID patterns
+
+The patterns are as follows:
+
+*International Standard*::
+`{publisher} (/{document type and stage})? ({document number}) (- {part number})? (: {copyright year}) ({ISO 639 language code})?` +
++
+====
+`ISO/IEEE/FDIS 33333-2`, `ISO/IEEE 33333-2:2030(E)`
+====
+
+*Technical Report*, *Technical Specification*::
+`{publisher} (/{document type and stage}) ({document number}) (- {part number})? (: {copyright year}) ({ISO 639 language code})?` +
++
+====
+`ISO/IEC/FDIS TS 33333-2`, `ISO/TR 33333-2:2030(E)`, `ISO/IEC TR 33333-2:2030(E)`
+====
+
+*Amendments*, *Technical Corrigendum*::
+`{source document ID}/{document type and stage} {update number} (: {copyright year}) ({ISO 639 language code})?` +
++
+====
+`ISO 33333-2:2030/DIS Cor 2:2031`, `ISO 33333-2:2030/Cor 2:2032`, `ISO/IEC 33333-2:2030/Cor 2:2032`
+====
+
+
+// === Title
+
+// `:title-intro-{en,fr}:`:: The introductory component of the English or French
+// title of the document.
+
+// `:title-main-{en,fr}:`:: The main component of the English or French title of
+// the document (mandatory).
+
+// `:title-part-{en,fr}:`:: The English or French title of the document part.
+
+// `:title-amendment-{en,fr}:`:: (only when `doctype` is set to `amendment` or `technical-corrigendum`)
+// The English or French title of the amendment [added in https://github.com/metanorma/isodoc/releases/tag/v1.3.25]
+
+// `:amendment-number:`:: (only when `doctype` is set to `amendment`)
+// The number of the amendment [added in https://github.com/metanorma/isodoc/releases/tag/v1.3.25]
+
+// `:corrigendum-number:`:: (only when `doctype` is set to `technical-corrigendum`)
+// The number of the technical corrigendum [added in https://github.com/metanorma/isodoc/releases/tag/v1.3.25]
+

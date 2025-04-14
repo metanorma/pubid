@@ -1,0 +1,51 @@
+= BSI publication identifiers ("BSI PubID")
+
+== Purpose
+
+This gem implements a mechanism to parse and utilize BSI publication
+identifiers.
+
+== Use cases to support
+
+. generate updated PubID
+
+== Usage
+
+=== Identifier creation
+
+Basic usage of the pubid-bsi gem starts with the `Identifier#create` method.
+
+[source,ruby]
+----
+require "pubid-bsi"
+
+pubid = Pubid::Bsi::Identifier.create(number: 1234, part: 1, year: 1999)
+pubid.to_s
+
+=> "BS 1234-1:1999"
+----
+
+=== With document type
+
+[source,ruby]
+----
+pubid = Pubid::Bsi::Identifier.create(type: :pas, number: 1234)
+pubid.to_s
+
+=> "PAS 1234"
+----
+
+=== Identifier's class and type
+
+`Identifier#parse` resolves a parsed identifier according to the type.
+
+[source,ruby]
+----
+Pubid::Iso::Identifier.parse("PAS 1234").class
+# => Pubid::Bsi::Identifier::PubliclyAvailableSpecification
+Pubid::Iso::Identifier.parse("PAS 1234").type
+# => {:key=>:pas, :title=>"Publicly Available Specification"}
+Pubid::Iso::Identifier.parse("BS 1234").class
+# => Pubid::Bsi::Identifier::BritishStandard
+Pubid::Iso::Identifier.parse("BS 1234").type
+# => {:key=>:bs, :title=>"British Standard"}

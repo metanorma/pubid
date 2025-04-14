@@ -1,0 +1,72 @@
+name: dependent-gems-test
+
+on:
+  pull_request:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [ tests-passed, release-passed ]
+
+jobs:
+  build-matrix:
+    uses: metanorma/ci/.github/workflows/prepare-rake.yml@main
+
+  rake:
+    name: Test dependent gem relaton-iso ${{ matrix.ruby.version }}-${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    needs:
+    - build-matrix
+
+    concurrency:
+      group: '${{ matrix.flavor }}-${{ matrix.os }}-${{ matrix.ruby.version }}-${{ github.head_ref || github.ref_name }}'
+      cancel-in-progress: true
+
+    continue-on-error: ${{ matrix.experimental || matrix.ruby.experimental }}
+    strategy:
+      max-parallel: 10
+      fail-fast: false
+      matrix: ${{ fromJson(needs.build-matrix.outputs.matrix) }}
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 1
+
+    - uses: actions/checkout@v4
+      with:
+        repository: relaton/relaton-iso
+        submodules: true
+        path: dependent
+
+    - name: Replace rubygems's pubid-iso with github's one
+      shell: python
+      run: |
+        import fileinput
+        import sys
+        import os
+        print("Python version:", sys.version)
+        with fileinput.FileInput('relaton_iso.gemspec', inplace=True) as file:
+          for line in file:
+            if 'pubid-iso' not in line:
+              print(line, end='')
+        print("'pubid-iso' removed from relaton_iso.gemspec")
+        if os.path.exists("Gemfile.lock"):
+          os.remove("Gemfile.lock")
+          print("Gemfile.lock dropped")
+        print("> git diff")
+        sys.stdout.flush()
+        os.system("git diff")
+        print("> bundle add pubid-iso --path ..")
+        sys.stdout.flush()
+        os.system("bundle add pubid-iso --path ..")
+      working-directory: dependent
+
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby.version }}
+        rubygems: ${{ matrix.ruby.rubygems }}
+        bundler-cache: true
+        working-directory: dependent
+
+    - run: bundle exec rake
+      working-directory: dependent
