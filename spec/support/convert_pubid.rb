@@ -50,3 +50,10 @@ shared_examples "converts urn to pubid" do |result = nil|
     expect(described_class.parse(urn).to_s(with_edition: true, format: :ref_num_long)).to eq result
   end
 end
+
+shared_examples "converts urn to urn" do |result = nil|
+  it "converts urn to urn" do
+    result ||= urn
+    expect(described_class.parse(urn).urn).to eq result
+  end
+end

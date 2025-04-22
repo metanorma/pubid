@@ -169,6 +169,10 @@ module Pubid::Iso
       space >> (str("Edition") | str("Ed")) >> space >> digits.as(:edition)
     end
 
+    rule(:all_parts) do
+      space >> str("(all parts)").as(:all_parts)
+    end
+
     rule(:dir_document_body) do
       ((str("DIR") | str("Directives Part") | str("Directives, Part") | str("Directives,")).as(:type) >> space).maybe >>
         (str("JTC").as(:dirtype) >> space).maybe >>
@@ -196,7 +200,8 @@ module Pubid::Iso
         extract.maybe >>
         addendum.maybe >>
         edition.maybe >>
-        language.maybe
+        language.maybe >>
+        all_parts.maybe
     end
 
     rule(:identifier) do

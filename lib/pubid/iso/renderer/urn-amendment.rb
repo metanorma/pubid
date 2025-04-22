@@ -5,8 +5,8 @@ module Pubid::Iso::Renderer
     TYPE = "amd".freeze
 
     def render_identifier(params)
-      "%{base}%{stage}:amd%{year}%{number}%{edition}" \
-      "#{@params[:base].language ? (':' + @params[:base].language) : ''}" % params
+      "%<base>s%<stage>s:amd%<year>s%<number>s%<edition>s" \
+      "#{@params[:base].language ? ":#{@params[:base].language}" : ''}%<all_parts>s" % params
     end
   end
 end

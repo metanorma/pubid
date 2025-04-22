@@ -4,7 +4,7 @@ require_relative "../renderer/urn-amendment"
 module Pubid::Iso
   module Identifier
     class Amendment < Supplement
-      def_delegators 'Pubid::Iso::Identifier::Amendment', :type
+      def_delegators "Pubid::Iso::Identifier::Amendment", :type
 
       TYPED_STAGES = {
         damd: {

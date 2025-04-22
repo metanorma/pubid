@@ -102,7 +102,7 @@ module Pubid::Iso
             let(:params) { { stage: "60.60" } }
 
             it "renders identifier without stage" do
-              expect(subject.to_s).to eq("ISO #{number}")
+              expect(subject.to_s).to eq("ISO/IS #{number}")
             end
           end
 

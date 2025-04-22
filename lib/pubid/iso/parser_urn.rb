@@ -26,8 +26,20 @@ module Pubid
             (str(".v") >> digits.as(:iteration)).maybe
           end
 
+          rule(:stage_digits) do
+            match('\d').repeat(2, 2) >> str(".") >> match('\d').repeat(2, 2)
+          end
+
+          rule(:urn_stage_prefix) do
+            colon >> str("stage-")
+          end
+
+          rule(:urn_draft) do
+            str("draft") | str("published") | stage_digits
+          end
+
           rule(:urn_stage) do
-            (colon >> str("stage-draft").as(:stage) >> urn_iteration).maybe
+            (urn_stage_prefix >> urn_draft.as(:stage) >> urn_iteration).maybe
           end
 
           rule(:urn_edition) do
@@ -35,7 +47,7 @@ module Pubid
           end
 
           rule(:urn_typed_stage) do
-            (colon >> str("stage-draft").as(:typed_stage)).maybe
+            (urn_stage_prefix >> urn_draft.as(:typed_stage)).maybe
           end
 
           rule(:urn_supplement) do
@@ -47,7 +59,8 @@ module Pubid
           end
 
           rule(:urn_extract) do
-            (colon >> str("ext") >> colon >> year_digits.as(:year) >>
+            ((urn_stage_prefix >> urn_draft).maybe >>
+              colon >> str("ext") >> colon >> year_digits.as(:year) >>
               (colon >> str("v") >> digits.as(:number))).as(:extract).maybe
           end
 
@@ -59,10 +72,14 @@ module Pubid
             (colon >> (languages >> (str(",") >> languages).repeat).as(:language)).maybe
           end
 
+          rule(:urn_all_parts) do
+            (colon >> str("ser").as(:all_parts)).maybe
+          end
+
           rule(:urn_identifier) do
             str("urn:iso:std:") >> urn_publisher_copublisher >> urn_type >>
               digits.as(:number) >> urn_part >> urn_stage >> urn_edition >>
-              urn_supplement >> urn_extract >> urn_language
+              urn_supplement >> urn_extract >> urn_language >> urn_all_parts
           end
         end
       end

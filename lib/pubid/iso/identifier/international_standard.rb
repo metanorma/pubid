@@ -19,10 +19,29 @@ module Pubid::Iso
           name: "Final Draft International Standard",
           harmonized_stages: %w[50.00 50.20 50.60 50.92 50.98 50.99],
         },
+        wdr: {
+          abbr: "WDR",
+          name: "Proposed for Withdrawal",
+          harmonized_stages: %w[90.92],
+        },
+        wda: {
+          abbr: "WDA",
+          name: "Withdrawal Approved",
+          harmonized_stages: %w[90.93],
+        },
+        wdar: {
+          abbr: "WDAR",
+          name: "Withdrawal Archived",
+          harmonized_stages: %w[95.99],
+        },
+        is: {
+          abbr: "IS",
+          name: "International Standard",
+          harmonized_stages: %w[60.00 60.60],
+        },
       }.freeze
 
       def initialize(stage: nil, iteration: nil, **opts)
-
         if iteration && stage.nil?
           raise Errors::IsStageIterationError, "IS stage document cannot have iteration"
         end
