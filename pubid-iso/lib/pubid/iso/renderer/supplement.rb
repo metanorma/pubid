@@ -7,7 +7,7 @@ module Pubid::Iso::Renderer
     # Render identifier
     # @param with_edition [Boolean] include edition in output
     # @see Pubid::Core::Renderer::Base for another options
-    def render(with_edition: true, with_language_code: :iso, with_date: true, **args)
+    def render(with_edition: true, with_language_code: :iso, with_date: true, **args) # rubocop:disable Metrics/MethodLength
       @params[:base].to_s(lang: args[:language], with_edition: with_edition) +
         super(
           with_edition: with_edition, with_language_code: with_language_code, with_date: with_date,
@@ -22,7 +22,7 @@ module Pubid::Iso::Renderer
         end
     end
 
-    def render_identifier(params, opts)
+    def render_identifier(params, opts) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
       type_prefix = params[:stage].nil? || !params[:stage].is_a?(Pubid::Core::TypedStage) ? self.class::TYPE : ""
 
       stage = params[:stage]
@@ -32,14 +32,14 @@ module Pubid::Iso::Renderer
         stage = params[:stage].to_s(with_prf: opts[:with_prf])
       end
 
-      if self.class == Supplement
+      if instance_of?(Supplement)
         if opts[:base_type] == :dir
-          "%{stage}%{publisher} SUP%{number}%{part}%{iteration}%{year}%{month}%{edition}" % params
+          "%<stage>s%<publisher>s SUP%<number>s%<part>s%<iteration>s%<year>s%<month>s%<edition>s" % params
         else
-          "/#{stage}#{type_prefix}%{number}%{part}%{iteration}%{year}%{edition}" % params
+          "/#{stage}#{type_prefix}%<number>s%<part>s%<iteration>s%<year>s%<edition>s" % params
         end
       else
-        "/#{stage}#{type_prefix}%{number}%{part}%{iteration}%{year}%{edition}" % params
+        "/#{stage}#{type_prefix}%<number>s%<part>s%<iteration>s%<year>s%<edition>s" % params
       end
     end
 

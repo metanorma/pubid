@@ -3,6 +3,13 @@ require_relative "renderer/base"
 
 module Pubid::Iso
   class Transformer < Pubid::Core::Transformer
+    rule(root: subtree(:root)) do |context|
+      if context[:root][:stage] == "draft"
+        context[:root][:stage] = convert_urn_stage context[:root][:type]
+      end
+      context[:root]
+    end
+
     rule(edition: "Ed") do
       { edition: "1" }
     end
@@ -14,27 +21,25 @@ module Pubid::Iso
       context
     end
 
-    rule(supplements: subtree(:supplements)) do |context|
+    rule(supplements: subtree(:supplements)) do |context| # rubocop:disable Metrics/BlockLength
       if context[:supplements].is_a?(Array)
         context[:supplements] =
           context[:supplements].map do |supplement|
             if supplement[:typed_stage]
               supplement.merge(
                 case supplement[:typed_stage]
-                when "PDAM"
-                  { typed_stage: "CD", type: "Amd" }
-                when "pDCOR"
-                  { typed_stage: "CD", type: "Cor" }
-                else
-                  {}
-                end
+                when "PDAM" then { typed_stage: "CD", type: "Amd" }
+                when "pDCOR" then { typed_stage: "CD", type: "Cor" }
+                # when "DAD" then { typed_stage: "WD", type: "Amd" }
+                when "draft" then convert_urn_sup_draft_type supplement[:type]
+                else convert_urn_sup_stage_code(supplement)
+                end,
               )
             else
               case supplement[:type]
-              when "Addendum"
-                supplement.merge({ type: "Add" })
-              else
-                supplement
+              when "Addendum" then supplement.merge({ type: "Add" })
+              when "sup" then supplement.merge({ type: "Suppl" })
+              else supplement
               end
             end
           end
@@ -52,28 +57,9 @@ module Pubid::Iso
       end
     end
 
-    rule(type: simple(:type)) do
-      russian_type = Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:type].key(type.to_s)
-      { type: russian_type&.downcase&.to_sym ||
-                        case type
-                        # XXX: can't put 2 alternative Russian translations to dictionary, temporary hack
-                        when "GUIDE", "Guide", "Руководство"
-                          :guide
-                        when "ТС", "TS"
-                          :ts
-                        when "ТО", "TR"
-                          :tr
-                        when "Directives Part", "Directives, Part", "Directives,", "DIR"
-                          :dir
-                        when "PAS"
-                          :pas
-                        when "DPAS"
-                          :dpas
-                        when "R"
-                          :r
-                        else
-                          type
-                        end }
+    rule(type: simple(:type)) do |context|
+      russian_type = Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:type].key(context[:type].to_s)
+      { type: russian_type&.downcase&.to_sym || convert_type(context[:type]) }
     end
 
     rule(tctype: subtree(:tctype))  do |context|
@@ -81,21 +67,20 @@ module Pubid::Iso
       context
     end
 
-    rule(copublisher: simple(:copublisher)) do
-      russian_copublisher = Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:publisher].key(copublisher.to_s)
-      { copublisher: russian_copublisher&.to_s ||
-        case copublisher
-        when "CEI"
-          "IEC"
-        else
-          copublisher.to_s
-        end
-      }
+    rule(copublisher: sequence(:copublisher)) do |context|
+      copublishers = context[:copublisher].map! do |publisher|
+        convert_copublisher(publisher)
+      end
+
+      { copublisher: copublishers }
     end
 
-    rule(publisher: simple(:publisher)) do
-      russian_publisher = Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:publisher].key(publisher.to_s)
-      { publisher: russian_publisher&.to_s || publisher }
+    rule(copublisher: simple(:copublisher)) do |context|
+      { copublisher: convert_copublisher(context[:copublisher]) }
+    end
+
+    rule(publisher: simple(:publisher)) do |context|
+      { publisher: convert_publisher(context[:publisher]) }
     end
 
     rule(part: sequence(:part)) do
@@ -110,8 +95,8 @@ module Pubid::Iso
 
     rule(dir_joint_document: subtree(:dir_joint_document)) do |context|
       context[:joint_document] =
-        Identifier::Base.transform(**(context[:dir_joint_document].merge(type: :dir)))
-      context.select { |k, v| k != :dir_joint_document }
+        Identifier::Base.transform(**context[:dir_joint_document].merge(type: :dir))
+      context.reject { |k, _| k == :dir_joint_document }
     end
 
     rule(jtc_dir: simple(:jtc_dir)) do |context|
@@ -119,42 +104,104 @@ module Pubid::Iso
       context
     end
 
-    def self.convert_stage(code)
+    def self.convert_publisher(publisher)
+      pblsh = publisher.to_s.upcase
+      Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:publisher].key(pblsh) || pblsh
+    end
+
+    def self.convert_copublisher(copublisher)
+      copblsh = convert_publisher copublisher
+      Pubid::Iso::Renderer::Base::TRANSLATION[:french][:publisher].key(copblsh) || copblsh
+    end
+
+    rule(all_parts: simple(:all_parts)) do
+      ["(all parts)", "ser"].include?(all_parts) ? { all_parts: true } : {}
+    end
+
+    # Convert ISO stage to Russian and other formats if needed
+    # @param code [String] ISO stage code
+    # @return [Hash] a hash with keys :stage and optionally :type
+    def self.convert_stage(code) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/MethodLength
       russian_code = Pubid::Iso::Renderer::Base::TRANSLATION[:russian][:stage].key(code.to_s)
       return { stage: russian_code } if russian_code
 
       case code
-      when "NWIP"
-        { stage: "NP" }
-      when "D", "FPD"
-        { stage: "DIS" }
-      when "FD", "F"
-        { stage: "FDIS" }
-      when "Fpr"
-        { stage: "PRF" }
-      when "PDTR"
-        { stage: "CD", type: "TR" }
-      when "PDTS"
-        { stage: "CD", type: "TS" }
-      when "preCD"
-        { stage: "PreCD" }
-      else
-        { stage: code }
+      when "NWIP" then { stage: "NP" }
+      when "D", "FPD" then { stage: "DIS" }
+      when "FD", "F" then { stage: "FDIS" }
+      when "Fpr" then { stage: "PRF" }
+      when "PDTR" then { stage: "CD", type: "TR" }
+      when "PDTS" then { stage: "CD", type: "TS" }
+      when "preCD" then { stage: "PreCD" }
+      when "published" then { stage: "IS" }
+      # when "draft" then { stage: "WD" }
+      else { stage: convert_stage_code(code.to_s) }
       end
+    end
+
+    def self.convert_urn_sup_stage_code(sup)
+      stage_type = convert_urn_sup_type(sup[:type])
+      abbr = convert_stage_code(sup[:typed_stage])
+      stage_type[:typed_stage] = abbr if abbr
+      stage_type
+    end
+
+    def self.convert_urn_sup_type(type)
+      case type
+      when "sup" then { type: "Suppl" }
+      when String, Parslet::Slice then { type: type.to_s }
+      else {}
+      end
+    end
+
+    def self.convert_stage_code(code)
+      Identifier::InternationalStandard::TYPED_STAGES.each_value do |v|
+        return v[:abbr] if v[:harmonized_stages].include?(code)
+      end
+
+      code
     end
 
     def self.convert_language(code)
       case code
-      when "R"
-        "ru"
-      when "F"
-        "fr"
-      when "E"
-        "en"
-      when "A"
-        "ar"
+      when "R" then "ru"
+      when "F" then "fr"
+      when "E" then "en"
+      when "A" then "ar"
+      else code
+      end
+    end
+
+    def self.convert_urn_sup_draft_type(type)
+      if type == "sup"
+        { typed_stage: "DSuppl", type: "Suppl" }
       else
-        code
+        { typed_stage: "WD" }
+      end
+    end
+
+    def self.convert_urn_stage(type)
+      case type
+      when "tr" then "DTR"
+      when "ts" then "DTS"
+      when "iwa" then "DIWA"
+      when "pas" then "DPAS"
+      when "guide" then "DGuide"
+      else "D"
+      end
+    end
+
+    def self.convert_type(type) # rubocop:disable Metrics/CyclomaticComplexity,Metrics/MethodLength
+      case type
+      # XXX: can't put 2 alternative Russian translations to dictionary, temporary hack
+      when "GUIDE", "Guide", "Руководство" then :guide
+      when "ТС", "TS" then :ts
+      when "ТО", "TR" then :tr
+      when "Directives Part", "Directives, Part", "Directives,", "DIR" then :dir
+      when "PAS" then :pas
+      when "DPAS" then :dpas
+      when "R" then :r
+      else type
       end
     end
   end

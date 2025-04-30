@@ -1,4 +1,4 @@
-require 'forwardable'
+require "forwardable"
 require_relative "../renderer/urn"
 require_relative "../renderer/urn-tc"
 
@@ -114,46 +114,55 @@ module Pubid::Iso
           supplements.select { |supplement| supplement.type[:key] == type }.first
         end
 
-        def transform_supplements(supplements_params, base_params)
-          supplements = supplements_params.map do |supplement|
-            Identifier.create(number: supplement[:number], year: supplement[:year],
-                month: supplement[:month],
-                stage: supplement[:typed_stage], edition: supplement[:edition],
-                iteration: supplement[:iteration], type: (supplement[:type] || !supplement[:typed_stage] && :sup),
-                publisher: supplement[:publisher], base: Identifier.create(**base_params))
-          end
+        def transform_supplements(supplements_params, base_params) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
+          all_parts = base_params.delete(:all_parts)
 
-          return supplements.first if supplements.count == 1
+          supplements = create_supplements supplements_params, base_params
 
+          if supplements.count == 1
+            supplement = supplements.first
           # update corrigendum base to amendment
-          if supplements_has_type?(supplements, :cor) &&
+          elsif supplements_has_type?(supplements, :cor) &&
               (supplements_has_type?(supplements, :amd) ||
                 supplements_has_type?(supplements, :sup)) && supplements.count == 2
 
             supplement = supplement_by_type(supplements, :cor)
-            supplement.base = supplement_by_type(supplements, :amd) ||
-              supplement_by_type(supplements, :sup)
-            supplement
+            supplement.base = supplement_by_type(supplements, :amd) || supplement_by_type(supplements, :sup)
           else
             raise Errors::SupplementRenderingError, "don't know how to render provided supplements"
           end
+
+          supplement.all_parts = all_parts if all_parts
+          supplement
         end
 
-        def transform(params)
-          identifier_params = params.map do |k, v|
-            get_transformer_class.new.apply(k => v)
-          end.inject({}, :merge)
+        def create_supplements(params, base_params)
+          params.map do |supplement|
+            Identifier.create(
+              number: supplement[:number], year: supplement[:year],
+              month: supplement[:month],
+              stage: supplement[:typed_stage], edition: supplement[:edition],
+              iteration: supplement[:iteration], type: supplement[:type] || !supplement[:typed_stage] && :sup,
+              publisher: supplement[:publisher], base: Identifier.create(**base_params)
+            )
+          end
+        end
+
+        def transform(params) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
+          transformer = get_transformer_class.new
+          params = transformer.apply(root: params)
+          identifier_params = params.map { |k, v| transformer.apply(k => v) }.inject({}, :merge)
 
           # return supplement if supplements applied
-          if identifier_params[:supplements] && identifier_params[:supplements].is_a?(Array)
+          if identifier_params[:supplements].is_a?(Array)
             return transform_supplements(
               identifier_params[:supplements],
-              identifier_params.dup.tap { |h| h.delete(:supplements) }
+              identifier_params.dup.tap { |h| h.delete(:supplements) },
             )
           end
 
           if identifier_params[:extract]
-            base_parameters = params.reject { |k, _| k == :extract }
+            base_parameters = identifier_params.reject { |k, _| k == :extract }
 
             return Identifier.create(base: Identifier.create(**base_parameters),
                                      type: :ext, **identifier_params[:extract])
@@ -256,22 +265,24 @@ module Pubid::Iso
       #   :ref_undated -- reference undated: no language code + short form (DAM) + undated
       #   :ref_undated_long -- reference undated long: 1 letter language code + long form (DAmd) + undated
       # @return [String] pubid identifier
-      def to_s(lang: nil, with_edition: false, with_prf: false,
-               format: :ref_dated_long)
-
+      def to_s(lang: nil, with_edition: false, with_prf: false, format: :ref_dated_long)
         options = resolve_format(format)
         options[:with_edition] = with_edition
         options[:with_prf] = with_prf
         options[:language] = lang
 
         self.class.get_renderer_class.new(to_h(deep: false)).render(**options) +
-          if @joint_document
-            render_joint_document(@joint_document)
-          end.to_s
+          render_joint_document(@joint_document) + render_all_parts
       end
 
       def render_joint_document(joint_document)
+        return "" if joint_document.nil? || joint_document.to_s.empty?
+
         "|#{@joint_document}"
+      end
+
+      def render_all_parts
+        all_parts ? " (all parts)" : ""
       end
 
       # Return typed stage abbreviation, eg. "FDTR", "DIS", "TR"

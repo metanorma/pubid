@@ -3,8 +3,8 @@ require_relative "urn"
 module Pubid::Iso::Renderer
   class UrnExtract < Urn
     def render_identifier(params)
-      "%{base}%{stage}:ext%{year}%{number}%{edition}" \
-        "#{@params[:base].language ? (':' + @params[:base].language) : ''}" % params
+      "%<base>s%<stage>s:ext%<year>s%<number>s%<edition>s" \
+        "#{@params[:base].language ? ":#{@params[:base].language}" : ''}%<all_parts>s" % params
     end
 
     def render_base(base, _opts, _params)

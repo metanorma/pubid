@@ -39,10 +39,9 @@ module Pubid::Iso::Renderer
         @prerendered_params[:language].to_s
     end
 
-    def render_base(_base, _opts, _params)
-    end
+    def render_base(_base, _opts, _params); end
 
-    def render_type_prefix(params, opts)
+    def render_type_prefix(params, opts) # rubocop:disable Metrics/AbcSize
       result = params[:stage].nil? || !params[:stage].is_a?(Pubid::Core::TypedStage) ? self.class::TYPE : ""
 
       if params[:stage] != "" && !params[:stage].to_s(with_prf: opts[:with_prf]).empty? && !result.empty?
@@ -54,10 +53,12 @@ module Pubid::Iso::Renderer
 
     def render_identifier(params, opts)
       stage = params.key?(:stage) ? postrender_stage(params[:stage], opts, params) : ""
-      "%{publisher}#{stage}#{render_type_prefix(params, opts)} %{number}%{part}%{iteration}%{year}%{amendments}%{corrigendums}%{addendum}%{edition}" % params
+      type = render_type_prefix(params, opts)
+      "%<publisher>s#{stage}#{type} %<number>s%<part>s%<iteration>s%<year>s%" \
+      "<amendments>s%<corrigendums>s%<addendum>s%<edition>s" % params
     end
 
-    def render_copublisher_string(publisher, copublishers, opts)
+    def render_copublisher_string(publisher, copublishers, opts) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength,Metrics/PerceivedComplexity
       case copublishers
       when String
         if opts[:language]
@@ -83,8 +84,7 @@ module Pubid::Iso::Renderer
       (stage.nil? || stage.empty_abbr?(with_prf: opts[:with_prf])) && typed_stage.nil?
     end
 
-    def render_publisher(publisher, opts, params)
-
+    def render_publisher(publisher, opts, params) # rubocop:disable Metrics/AbcSize,Metrics/CyclomaticComplexity,Metrics/MethodLength
       if opts[:language]
         publisher = TRANSLATION[opts[:language]][:publisher][publisher] || publisher
       end
@@ -113,7 +113,7 @@ module Pubid::Iso::Renderer
 
       # With copublisher but not IS
       # ISO/IEC TR xxx
-      publisher_string + " "
+      "#{publisher_string} "
     end
 
     def render_typed_stage(typed_stage, opts, params)
@@ -130,12 +130,12 @@ module Pubid::Iso::Renderer
       stage
     end
 
-    def postrender_stage(stage, opts, params)
+    def postrender_stage(stage, opts, _params)
       return if stage.empty_abbr?(with_prf: opts[:with_prf])
 
       if opts[:language]
         return TRANSLATION[opts[:language]][:stage][stage.to_s(with_prf: opts[:with_prf])] ||
-          stage.to_s(with_prf: opts[:with_prf])
+            stage.to_s(with_prf: opts[:with_prf])
       end
 
       stage.to_s(with_prf: opts[:with_prf])
@@ -151,15 +151,17 @@ module Pubid::Iso::Renderer
 
     def render_language(language, opts, _params)
       return if opts[:with_language_code] == :none
+
       super
     end
 
     def render_year(year, opts, params)
       return ":#{year}" if params[:amendments] || params[:corrigendums]
+
       opts[:with_date] && ":#{year}" || ""
     end
 
-    def render_part(part, opts, _params)
+    def render_part(part, _opts, _params)
       "-#{part}"
     end
 

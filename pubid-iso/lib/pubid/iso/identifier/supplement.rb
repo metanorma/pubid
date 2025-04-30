@@ -4,7 +4,7 @@ require_relative "../renderer/urn-supplement"
 module Pubid::Iso
   module Identifier
     class Supplement < Base
-      def_delegators 'Pubid::Iso::Identifier::Supplement', :type
+      def_delegators "Pubid::Iso::Identifier::Supplement", :type
 
       TYPED_STAGES = {
         dsuppl: {

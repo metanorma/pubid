@@ -26,12 +26,12 @@ module Pubid::Iso::Renderer
     end
 
     def render_prefix(params)
-      "urn:iso:std:%{publisher}%{copublisher}%{type}:%{number}%{part}" % params
+      "urn:iso:std:%<publisher>s%<copublisher>s%<type>s:%<number>s%<part>s" % params
     end
 
     def render_identifier(params)
-      render_prefix(params) + "%{stage}"\
-      "%{corrigendum_stage}%{iteration}%{edition}%{amendments}%{corrigendums}" % params
+      render_prefix(params) + "%<stage>s%<corrigendum_stage>s%<iteration>s" \
+      "%<edition>s%<amendments>s%<corrigendums>s%<all_parts>s" % params
     end
 
     # def render_typed_stage(typed_stage, _opts, _params)
@@ -58,6 +58,10 @@ module Pubid::Iso::Renderer
       return ":-#{part.reverse.join('-')}" if part.is_a?(Array)
 
       ":-#{part}"
+    end
+
+    def render_all_parts(value, _opts, _params)
+      ":ser" if value == true
     end
   end
 end
