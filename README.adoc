@@ -1,0 +1,100 @@
+= PubID Monorepo
+
+This repository consolidates multiple PubID-related repositories into a single monorepo for easier management and development.
+
+== Usage
+
+=== Initial Setup
+
+1. Create a main branch with all repositories that have a main branch.
+2. Set up the monorepo:
+
+```
+mkdir monorepo
+cp monorepo_importer.rb monorepo
+cd monorepo
+git init
+git checkout -b main
+git add .
+git commit -m "Initial commit"
+```
+
+3. Run the script to import main branches of all repositories:
+
+```
+ruby monorepo_importer.rb
+```
+
+=== Updating the Monorepo
+
+To update the monorepo with the latest changes from all repositories, commit all changes and rerun the script:
+
+```
+ruby monorepo_importer.rb
+```
+
+=== Adding Additional Branches
+
+1. Create an empty branch:
+
+```
+git checkout --orphan <branch_name>
+git rm -rf pubid-*
+git add .
+git commit -m "Initial commit"
+```
+
+2. Run the script to import branches with the same name from all repositories:
+
+```
+ruby monorepo_importer.rb
+```
+
+=== Adding a New Repository
+
+To add a new repository to the current branch in the monorepo:
+
+1. Use the following Git commands:
+
+```
+git remote add remote-<repo_name> <repo_url> <branch_name>
+git fetch remote-<repo_name>
+git subtree add --prefix=<repo_name> remote-<repo_name>/<branch_name>
+```
+
+2. Add the new repository to the list of repositories in the `monorepo_importer.rb` script if it isn't already there.
+
+== Script Details
+
+The `monorepo_importer.rb` script automates the process of managing multiple repositories in a monorepo. It:
+
+- Adds remotes for each repository if they don't already exist.
+- Fetches the latest changes from each remote.
+- Pulls or adds subtrees for each repository based on the current branch.
+- Handles conflicts by overwriting with the remote branch if necessary.
+
+== Configuration
+
+The script is configured to manage the following repositories:
+
+- pubid-bsi
+- pubid-ccsds
+- pubid-cen
+- pubid-core
+- pubid-etsi
+- pubid-iec
+- pubid-ieee
+- pubid-iso
+- pubid-itu
+- pubid-jis
+- pubid-nist
+- pubid-plateau
+
+== Notes
+
+- Ensure you have the necessary permissions to access the repositories.
+- Resolve any conflicts manually if the script fails to do so automatically.
+
+== License
+
+Refer to the `LICENSE.txt` file for licensing information.
