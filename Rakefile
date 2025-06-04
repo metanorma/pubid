@@ -28,7 +28,7 @@ GEMS.each do |gem_name|
     desc "Run specs for #{gem_name}"
     task namespace_name do
       puts "Testing #{gem_name}..."
-      in_gem_dir(gem_name) { sh "bundle exec rspec" }
+      in_gem_dir(gem_name) { sh "bundle exec rake" }
     end
   end
 
