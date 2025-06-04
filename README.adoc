@@ -254,12 +254,13 @@ The release order ensures that dependencies are released before dependent gems (
 bundle exec rake release:status
 ----
 
-This shows for each gem:
+This shows a monorepo-focused release readiness summary:
 
-* Git status (clean/dirty working directory)
-* Current version from gemspec
-* Whether the current version is tagged
-* Latest git tag found
+* Repository git status (clean/dirty working directory)
+* Master version and synchronization status across all gems
+* Whether the current master version is tagged
+* Release readiness assessment with actionable guidance
+* Quick commands for common release preparation tasks
 
 === Synchronized releases
 
