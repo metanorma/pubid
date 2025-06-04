@@ -15,6 +15,7 @@ gem "pubid-iso", path: "../pubid-iso"
 gem "pubid-itu", path: "../pubid-itu"
 gem "pubid-jis", path: "../pubid-jis"
 gem "pubid-nist", path: "../pubid-nist"
+gem "pubid-plateau", path: "../pubid-plateau"
 
 gem "rake"
 gem "rspec"
