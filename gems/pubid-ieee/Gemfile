@@ -4,6 +4,7 @@ source "https://rubygems.org"
 gemspec
 
 # Use local development versions of pubid gems
+gem "pubid-core", path: "../pubid-core"
 gem "pubid-iso", path: "../pubid-iso"
 
 gem "rake"
