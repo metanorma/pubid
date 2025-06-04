@@ -1,0 +1,17 @@
+{
+  "release_order": [
+    "pubid-core",
+    "pubid-bsi",
+    "pubid-ccsds",
+    "pubid-cen",
+    "pubid-etsi",
+    "pubid-iec",
+    "pubid-ieee",
+    "pubid-iso",
+    "pubid-itu",
+    "pubid-jis",
+    "pubid-nist",
+    "pubid-plateau",
+    "pubid"
+  ]
+}
