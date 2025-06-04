@@ -1,0 +1,11 @@
+{
+  "repositories": [
+    {
+      "owner": "relaton",
+      "repo": "relaton-iso",
+      "gemspec": "relaton_iso.gemspec",
+      "description": "Test dependent gem relaton-iso"
+    }
+  ],
+  "_comment": "To add more downstream repositories, add them to the repositories array above. Each repository should have: owner, repo, gemspec (the .gemspec filename), and description (for the job name)."
+}

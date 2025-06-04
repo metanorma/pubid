@@ -1,0 +1,187 @@
+name: downstream-test
+
+on:
+  pull_request:
+  workflow_dispatch:
+  repository_dispatch:
+    types: [ tests-passed, release-passed ]
+
+jobs:
+  build-matrix:
+    uses: metanorma/ci/.github/workflows/prepare-rake.yml@main
+
+  discover-gems:
+    name: Discover pubid gems
+    runs-on: ubuntu-latest
+    outputs:
+      gems: ${{ steps.find-gems.outputs.gems }}
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 1
+    - name: Find all pubid gems
+      id: find-gems
+      run: |
+        # Find all .gemspec files in gems/* directories and extract gem names
+        gems=$(find gems -name "*.gemspec" -type f | sed 's|gems/||' | sed 's|/.*||' | sort -u | jq -R -s -c 'split("\n")[:-1]')
+        echo "Found gems: $gems"
+        echo "gems=$gems" >> $GITHUB_OUTPUT
+
+  discover-repositories:
+    name: Discover downstream repositories
+    runs-on: ubuntu-latest
+    outputs:
+      repositories: ${{ steps.find-repos.outputs.repositories }}
+      combined_matrix: ${{ steps.combined-matrix.outputs.value }}
+    needs:
+    - build-matrix
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 1
+    - name: Find downstream repositories
+      id: find-repos
+      run: |
+        # Read the downstream-tests.json configuration
+        repositories=$(jq -c '.repositories' downstream-tests.json)
+        echo "Found repositories: $repositories"
+        echo "repositories=$repositories" >> $GITHUB_OUTPUT
+    - name: Create combined matrix
+      id: combined-matrix
+      run: |
+        # Create combined matrix for repositories and ruby versions
+        ruby_matrix='${{ needs.build-matrix.outputs.matrix }}'
+        repositories_array='${{ steps.find-repos.outputs.repositories }}'
+
+        # Create combined matrix
+        combined=$(echo "$ruby_matrix" | jq --argjson repos "$repositories_array" '
+          . as $ruby_matrix |
+          $repos as $repo_list |
+          {
+            "include": [
+              $repo_list[] as $repo |
+              $ruby_matrix.include[] as $ruby |
+              ($ruby + {"repository": $repo})
+            ]
+          }
+        ')
+
+        echo "value=$(echo ${combined} | tr '\n' ' ')" >> $GITHUB_OUTPUT
+
+  rake:
+    name: ${{ matrix.repository.description }} ${{ matrix.version }}-${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    needs:
+    - build-matrix
+    - discover-gems
+    - discover-repositories
+
+    concurrency:
+      group: '${{ matrix.flavor }}-${{ matrix.os }}-${{ matrix.version }}-${{ matrix.repository.repo }}-${{ github.head_ref || github.ref_name }}'
+      cancel-in-progress: true
+
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      max-parallel: 10
+      fail-fast: false
+      matrix: ${{ fromJson(needs.discover-repositories.outputs.combined_matrix) }}
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 1
+
+    - uses: actions/checkout@v4
+      with:
+        repository: ${{ matrix.repository.owner }}/${{ matrix.repository.repo }}
+        submodules: true
+        path: dependent
+
+    - name: Initial Ruby setup to generate Gemfile.lock
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.version }}
+        rubygems: ${{ matrix.rubygems }}
+        bundler-cache: true
+        working-directory: dependent
+
+    - name: Replace rubygems's pubid gems with local ones
+      shell: python
+      run: |
+        import sys
+        import os
+        import json
+        import re
+        print("Python version:", sys.version)
+
+        # Parse Gemfile.lock to find all pubid-* gems actually installed
+        gemfile_lock_path = "Gemfile.lock"
+        pubid_gems_in_lock = []
+
+        if os.path.exists(gemfile_lock_path):
+          print(f"Parsing {gemfile_lock_path} for pubid gems...")
+          with open(gemfile_lock_path, 'r') as f:
+            content = f.read()
+            # Find all pubid-* gems in the SPECS section
+            specs_section = False
+            for line in content.split('\n'):
+              line = line.strip()
+              if line == "SPECS":
+                specs_section = True
+                continue
+              elif line == "PLATFORMS" or line == "DEPENDENCIES" or line == "BUNDLED WITH":
+                specs_section = False
+                continue
+
+              if specs_section and line.startswith('pubid-'):
+                # Extract gem name (before version info)
+                gem_name = line.split(' ')[0]
+                if gem_name not in pubid_gems_in_lock:
+                  pubid_gems_in_lock.append(gem_name)
+
+          print(f"Found pubid gems in Gemfile.lock: {pubid_gems_in_lock}")
+        else:
+          print("No Gemfile.lock found, using discovered gems list")
+          pubid_gems_in_lock = json.loads('${{ needs.discover-gems.outputs.gems }}')
+
+        # Add all found pubid gems to Gemfile with local paths
+        gemfile_additions = []
+        for gem in pubid_gems_in_lock:
+          gem_path = f"../gems/{gem}"
+          if os.path.exists(gem_path):
+            gemfile_additions.append(f'gem "{gem}", path: "{gem_path}"')
+            print(f"Will add: gem \"{gem}\", path: \"{gem_path}\"")
+          else:
+            print(f"Warning: {gem_path} does not exist, skipping {gem}")
+
+        # Append to Gemfile
+        if gemfile_additions:
+          with open("Gemfile", "a") as f:
+            f.write("\n# Local pubid gems for testing\n")
+            for addition in gemfile_additions:
+              f.write(addition + "\n")
+          print(f"Added {len(gemfile_additions)} pubid gems to Gemfile")
+
+        # Remove Gemfile.lock to force re-resolution
+        if os.path.exists("Gemfile.lock"):
+          os.remove("Gemfile.lock")
+          print("Removed Gemfile.lock to force re-resolution")
+
+        print("\n> Updated Gemfile:")
+        sys.stdout.flush()
+        os.system("tail -20 Gemfile")
+      working-directory: dependent
+
+    - name: Re-setup Ruby with local pubid gems
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.version }}
+        rubygems: ${{ matrix.rubygems }}
+        bundler-cache: true
+        working-directory: dependent
+
+    - run: bundle exec rake
+      working-directory: dependent
