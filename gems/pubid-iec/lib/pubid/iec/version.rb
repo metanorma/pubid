@@ -1,5 +1,5 @@
 module Pubid
   module Iec
-    VERSION = "0.3.2".freeze
+    VERSION = "1.15.0".freeze
   end
 end

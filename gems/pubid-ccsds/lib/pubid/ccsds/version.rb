@@ -1,5 +1,5 @@
 module Pubid
   module Ccsds
-    VERSION = "0.1.6".freeze
+    VERSION = "1.15.0".freeze
   end
 end

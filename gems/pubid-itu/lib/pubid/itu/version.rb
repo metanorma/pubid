@@ -1,5 +1,5 @@
 module Pubid
   module Itu
-    VERSION = "0.1.3".freeze
+    VERSION = "1.15.0".freeze
   end
 end
