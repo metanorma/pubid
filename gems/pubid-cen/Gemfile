@@ -3,6 +3,13 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in relaton_nist.gemspec
 gemspec
 
+# Use local development versions of pubid gems
+gem "pubid-core", path: "../pubid-core"
+gem "pubid-iec", path: "../pubid-iec"
+gem "pubid-iso", path: "../pubid-iso"
+
+gem "rake"
+gem "rspec"
 gem "rubocop-performance"
 gem "rubocop-rake"
 gem "rubocop-rspec"
