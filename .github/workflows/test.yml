@@ -1,0 +1,77 @@
+name: Test
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby-version: ['2.7', '3.0', '3.1', '3.2']
+        gem:
+          - pubid-core
+          - pubid-iso
+          - pubid-iec
+          - pubid-nist
+          - pubid-ccsds
+          - pubid-itu
+          - pubid-jis
+          - pubid-etsi
+          - pubid-plateau
+          - pubid-ieee
+          - pubid-cen
+          - pubid-bsi
+          - pubid
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Ruby ${{ matrix.ruby-version }}
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+
+    - name: Run specs for ${{ matrix.gem }}
+      run: bundle exec rake test:${{ matrix.gem }}
+      env:
+        GEM_NAME: ${{ matrix.gem }}
+
+  integration:
+    runs-on: ubuntu-latest
+    needs: test
+    strategy:
+      matrix:
+        ruby-version: ['2.7', '3.0', '3.1', '3.2']
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Ruby ${{ matrix.ruby-version }}
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+
+    - name: Run integration tests
+      run: bundle exec rake test:integration
+
+  rubocop:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1'
+        bundler-cache: true
+
+    - name: Run RuboCop
+      run: bundle exec rake rubocop:all

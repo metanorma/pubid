@@ -1,0 +1,54 @@
+# Gem build artifacts
+*.gem
+pkg/
+
+# Bundler
+.bundle/
+vendor/bundle/
+
+# RSpec
+.rspec_status
+
+# Coverage reports
+coverage/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+*.tmp
+
+# Log files
+*.log
+
+# Ruby version managers
+.ruby-version
+.rvmrc
+
+# Local environment files
+.env
+.env.local
+
+# Documentation
+doc/
+.yardoc/
+
+# Backup files
+*~
+*.bak
+
+# Lock files (keep Gemfile.lock for applications, ignore for gems)
+# Individual gems should have their own .gitignore for their Gemfile.lock
+Gemfile.lock
+
+# Build directories
+build/
+dist/
