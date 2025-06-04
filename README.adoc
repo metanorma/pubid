@@ -1,5 +1,49 @@
 = PubID: Interoperable identifiers for information resources
 
+image:https://img.shields.io/gem/v/pubid-core.svg["pubid-core Gem Version", link="https://rubygems.org/gems/pubid-core"]
+image:https://github.com/metanorma/pubid/actions/workflows/rake.yml/badge.svg["Build Status", link="https://github.com/metanorma/pubid/actions/workflows/rake.yml"]
+image:https://img.shields.io/github/issues-pr-raw/metanorma/pubid.svg["Pull Requests", link="https://github.com/metanorma/pubid/pulls"]
+image:https://img.shields.io/github/commits-since/metanorma/pubid/latest.svg["Commits since latest",link="https://github.com/metanorma/pubid/releases"]
+
+== Badges
+
+[cols="3*", options="header"]
+|===
+| Core & Meta | Standards Organizations | Regional Standards
+
+| pubid image:https://img.shields.io/gem/v/pubid.svg["pubid", link="https://rubygems.org/gems/pubid"]
+| pubid-iso image:https://img.shields.io/gem/v/pubid-iso.svg["pubid-iso", link="https://rubygems.org/gems/pubid-iso"]
+| pubid-cen image:https://img.shields.io/gem/v/pubid-cen.svg["pubid-cen", link="https://rubygems.org/gems/pubid-cen"]
+
+| pubid-core image:https://img.shields.io/gem/v/pubid-core.svg["pubid-core", link="https://rubygems.org/gems/pubid-core"]
+| pubid-iec image:https://img.shields.io/gem/v/pubid-iec.svg["pubid-iec", link="https://rubygems.org/gems/pubid-iec"]
+| pubid-bsi image:https://img.shields.io/gem/v/pubid-bsi.svg["pubid-bsi", link="https://rubygems.org/gems/pubid-bsi"]
+
+|
+| pubid-ieee image:https://img.shields.io/gem/v/pubid-ieee.svg["pubid-ieee", link="https://rubygems.org/gems/pubid-ieee"]
+| pubid-jis image:https://img.shields.io/gem/v/pubid-jis.svg["pubid-jis", link="https://rubygems.org/gems/pubid-jis"]
+
+|
+| pubid-nist image:https://img.shields.io/gem/v/pubid-nist.svg["pubid-nist", link="https://rubygems.org/gems/pubid-nist"]
+|
+
+|
+| pubid-etsi image:https://img.shields.io/gem/v/pubid-etsi.svg["pubid-etsi", link="https://rubygems.org/gems/pubid-etsi"]
+|
+
+|
+| pubid-itu image:https://img.shields.io/gem/v/pubid-itu.svg["pubid-itu", link="https://rubygems.org/gems/pubid-itu"]
+|
+
+|
+| pubid-ccsds image:https://img.shields.io/gem/v/pubid-ccsds.svg["pubid-ccsds", link="https://rubygems.org/gems/pubid-ccsds"]
+|
+
+|
+| pubid-plateau image:https://img.shields.io/gem/v/pubid-plateau.svg["pubid-plateau", link="https://rubygems.org/gems/pubid-plateau"]
+|
+|===
+
 == Overview
 
 The PubID project promotes the use of interoperable identifiers across various
