@@ -55,6 +55,12 @@ jobs:
         ruby_matrix='${{ needs.build-matrix.outputs.matrix }}'
         repositories_array='${{ steps.find-repos.outputs.repositories }}'
 
+        # Debug output
+        echo "Ruby matrix structure:"
+        echo "$ruby_matrix" | jq '.'
+        echo "Repositories array:"
+        echo "$repositories_array" | jq '.'
+
         # Create combined matrix
         combined=$(echo "$ruby_matrix" | jq --argjson repos "$repositories_array" '
           . as $ruby_matrix |
@@ -62,12 +68,15 @@ jobs:
           {
             "include": [
               $repo_list[] as $repo |
-              $ruby_matrix.include[] as $ruby |
-              ($ruby + {"repository": $repo})
+              $ruby_matrix.ruby[] as $ruby |
+              $ruby_matrix.os[] as $os |
+              ($ruby + {"repository": $repo, "os": $os})
             ]
           }
         ')
 
+        echo "Combined matrix:"
+        echo "$combined" | jq '.'
         echo "value=$(echo ${combined} | tr '\n' ' ')" >> $GITHUB_OUTPUT
 
   rake:
