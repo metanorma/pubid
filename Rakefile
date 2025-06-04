@@ -243,52 +243,107 @@ namespace :release do
     end
   end
 
-  desc "Show release status for all gems"
+  desc "Show release status for the monorepo"
   task :status do
-    puts "Checking release status..."
+    require_relative "lib/pubid/version"
+    master_version = Pubid::VERSION
+
+    puts "Release Status Summary"
+    puts "======================"
+    puts
+
+    # Repository-level checks
+    puts "Repository Status:"
+
+    # Check git status from repository root
+    clean_repo = !system("git status --porcelain | grep -q .", out: File::NULL,
+                                                               err: File::NULL)
+    if clean_repo
+      puts "  ✓ Clean working directory"
+    else
+      puts "  ✗ Has uncommitted changes"
+    end
+
+    puts "  📦 Master version: v#{master_version}"
+
+    # Check version synchronization by running a simplified version of version:check
+    puts "  🔄 Checking version synchronization..."
+    all_synced = true
+    sync_issues = []
+
+    # Check gem versions
     GEMS.each do |gem_name|
       in_gem_dir(gem_name) do
-        puts "\n#{gem_name}:"
-
-        # Check git status
-        if system("git status --porcelain | grep -q .")
-          puts "  ✗ Has uncommitted changes"
-        else
-          puts "  ✓ Clean working directory"
-        end
-
-        # Get current version from gemspec
-        begin
-          gemspec_file = Dir["*.gemspec"].first
-          if gemspec_file
+        gemspec_file = Dir["*.gemspec"].first
+        if gemspec_file
+          begin
             spec = Gem::Specification.load(gemspec_file)
-            current_version = spec.version.to_s
-            puts "  📦 Current version: v#{current_version}"
-
-            # Check if this version is already tagged
-            version_tag = "v#{current_version}"
-            if system("git tag -l #{version_tag} | grep -q #{version_tag}")
-              puts "  ✓ Version #{current_version} is tagged"
-            else
-              puts "  ! Version #{current_version} not yet tagged"
+            gem_version = spec.version.to_s
+            unless gem_version == master_version
+              all_synced = false
+              sync_issues << "#{gem_name}: #{gem_version} (expected #{master_version})"
             end
-
-            # Check if there are any version tags for this gem
-            gem_tags = `git tag -l | grep -E '^(#{gem_name}-)?v[0-9]' | sort -V`.strip.split("\n").reject(&:empty?)
-            if gem_tags.any?
-              latest_tag = gem_tags.last
-              puts "  📋 Latest tag: #{latest_tag}"
-            else
-              puts "  ! No version tags found"
-            end
-          else
-            puts "  ✗ No gemspec found"
+          rescue StandardError => e
+            all_synced = false
+            sync_issues << "#{gem_name}: Error reading version"
           end
-        rescue StandardError => e
-          puts "  ✗ Error reading version: #{e.message}"
+        else
+          all_synced = false
+          sync_issues << "#{gem_name}: No gemspec found"
         end
       end
     end
+
+    if all_synced
+      puts "  ✓ All #{GEMS.length} gems synchronized to master version"
+    else
+      puts "  ✗ Version synchronization issues found:"
+      sync_issues.first(3).each { |issue| puts "    - #{issue}" }
+      puts "    ... (run 'rake version:check' for full details)" if sync_issues.length > 3
+    end
+
+    # Check if master version is tagged
+    version_tag = "v#{master_version}"
+    if system("git tag -l #{version_tag} | grep -q #{version_tag}",
+              out: File::NULL, err: File::NULL)
+      puts "  ✓ Version v#{master_version} is tagged"
+      version_tagged = true
+    else
+      puts "  ! Version v#{master_version} not yet tagged"
+      version_tagged = false
+    end
+
+    # Show latest tag
+    latest_tag = `git tag -l | grep -E '^v[0-9]' | sort -V | tail -1`.strip
+    if latest_tag.empty?
+      puts "  ! No version tags found"
+    else
+      puts "  📋 Latest tag: #{latest_tag}"
+    end
+
+    puts
+
+    # Release readiness assessment
+    puts "Release Readiness:"
+    if clean_repo && all_synced && version_tagged
+      puts "  ✅ Ready for release"
+      puts "     All conditions met for coordinated gem release"
+    elsif clean_repo && all_synced && !version_tagged
+      puts "  🚀 Ready to release v#{master_version}"
+      puts "     Use GitHub Actions workflow or 'rake version:bump' to release"
+    else
+      puts "  ⚠️  Not ready for release"
+      puts "     Issues need to be resolved first:"
+      puts "     - Commit changes" unless clean_repo
+      puts "     - Run 'rake version:sync'" unless all_synced
+    end
+
+    puts
+    puts "Quick Commands:"
+    puts "  rake version:check      - Detailed version synchronization status"
+    puts "  rake version:sync       - Synchronize all versions and dependencies"
+    puts "  rake release:show_order - Show gem release order"
+    puts "  rake test:all           - Run all tests before release"
   end
 end
 
