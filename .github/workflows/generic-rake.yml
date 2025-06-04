@@ -104,14 +104,19 @@ jobs:
 
         # Create combined matrix
         combined=$(echo "$ruby_matrix" | jq --argjson gems "$gems_array" '
-          .include as $ruby_configs |
+          .ruby as $ruby_configs |
+          .os as $os_list |
           $gems as $gem_list |
           {
-            "gem": $gem_list,
             "include": [
               $gem_list[] as $gem |
-              $ruby_configs[] |
-              . + {"gem": $gem}
+              $ruby_configs[] as $ruby |
+              $os_list[] as $os |
+              {
+                "gem": $gem,
+                "ruby": $ruby,
+                "os": $os
+              }
             ]
           }
         ')
