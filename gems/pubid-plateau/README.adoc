@@ -18,7 +18,7 @@ Basic usage of the pubid-plateau gem starts with the `Identifier#create` method.
 ----
 require "pubid-plateau"
 
-pubid = Pubid::Plateau::Identifier.create(type: :handbook, number: 1, annex: 1, edition: 1.2, )
+pubid = Pubid::Plateau::Identifier.create(type: :handbook, number: 1, annex: 1, edition: 1.2)
 pubid.to_s
 
 => "PLATEAU Handbook #01-1 第1.2版"
@@ -26,12 +26,17 @@ pubid.to_s
 
 == Handbook 11 update
 
-Handbook 11 has 2 parts for edition 1 to 3:
+Handbook 11 has 2 parts for editions 1 to 3:
 
-（民間活用編）used to be Handbook 06 edition 1 to 3
-（公共活用編）used to be Handbook 04 edition 1 to 3
+* （民間活用編） used to be Handbook 06 editions 1 to 3
+* （公共活用編） used to be Handbook 04 editions 1 to 3
+
 Only from edition 4 they are combined into Handbook 11.
 
-In case when provided Handbook #11 edition 1 to 3 we convert it to Handbook #4 or #6
+In case when provided Handbook 11 editions 1 to 3, we convert it to Handbook 04 or 06.
 
-Example: `"PLATEAU Handbook #11 第1.0版（民間活用編）`->  `PLATEAU Handbook #06 第1.0版`
+[example]
+====
+`PLATEAU Handbook #11 第1.0版（民間活用編）` =>
+`PLATEAU Handbook #06 第1.0版`
+====
