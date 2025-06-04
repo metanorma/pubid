@@ -233,6 +233,22 @@ bundle exec rake release:pubid_core
 
 NOTE: Ensure you have proper credentials and permissions for RubyGems.
 
+=== GitHub Actions
+
+=== Rake workflow
+
+Based on the Metanorma CI generic-rake.yml workflow.
+
+Tests individual gems separately.
+
+=== Release workflow
+
+Manual workflow.
+
+Options:
+
+* Gem selection: Choose which gem to release via dropdown
+* Version control: Specify version bump type or use 'skip'
 
 == Dependency management
 
