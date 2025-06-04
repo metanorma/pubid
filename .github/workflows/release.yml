@@ -1,3 +1,4 @@
+# Releases all pubid gems to RubyGems and creates a GitHub release.
 name: release
 
 on:
@@ -12,6 +13,7 @@ on:
           - patch
           - minor
           - major
+          - skip
       dry_run:
         description: 'Dry run (do not actually release)'
         required: false
@@ -44,12 +46,18 @@ jobs:
         bundle exec rake version:check
 
     - name: Bump version
+      if: ${{ inputs.version_type != 'skip' }}
       run: |
         bundle exec rake version:bump[${{ inputs.version_type }}]
         echo "NEW_VERSION=$(bundle exec rake version:show | grep 'Master version:' | cut -d' ' -f3)" >> $GITHUB_ENV
 
+    - name: Get current version (skip mode)
+      if: ${{ inputs.version_type == 'skip' }}
+      run: |
+        echo "NEW_VERSION=$(bundle exec rake version:show | grep 'Master version:' | cut -d' ' -f3)" >> $GITHUB_ENV
+
     - name: Commit version changes
-      if: ${{ !inputs.dry_run }}
+      if: ${{ !inputs.dry_run && inputs.version_type != 'skip' }}
       run: |
         git add -A
         git commit -m "Bump version to ${{ env.NEW_VERSION }}"
@@ -95,13 +103,13 @@ jobs:
         done
 
     - name: Push changes and tags
-      if: ${{ !inputs.dry_run }}
+      if: ${{ !inputs.dry_run && inputs.version_type != 'skip' }}
       run: |
         git push origin main
         git push origin "v${{ env.NEW_VERSION }}"
 
     - name: Generate release body
-      if: ${{ !inputs.dry_run }}
+      if: ${{ !inputs.dry_run && inputs.version_type != 'skip' }}
       run: |
         # Generate release body with gems from JSON file
         echo "## Release v${{ env.NEW_VERSION }}" > release_body.md
@@ -116,7 +124,7 @@ jobs:
         done
 
     - name: Create GitHub Release
-      if: ${{ !inputs.dry_run }}
+      if: ${{ !inputs.dry_run && inputs.version_type != 'skip' }}
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -126,6 +134,14 @@ jobs:
         body_path: release_body.md
         draft: false
         prerelease: false
+
+    - name: Skip mode summary
+      if: ${{ !inputs.dry_run && inputs.version_type == 'skip' }}
+      run: |
+        echo "## Skip Mode Release Summary"
+        echo "Released gems at current version: ${{ env.NEW_VERSION }}"
+        echo "Skipped: version bump, git commit, git tag, GitHub release"
+        echo "Completed: gem build and gem push to RubyGems"
 
     - name: Dry run summary
       if: ${{ inputs.dry_run }}

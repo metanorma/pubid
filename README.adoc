@@ -294,17 +294,26 @@ The main release workflow (`release.yml`) handles coordinated releases:
 
 **Trigger:** Manual dispatch with options:
 
-* `version_type`: patch, minor, or major
+* `version_type`: patch, minor, major, or skip
 * `dry_run`: Test without actually releasing
 
 **Process:**
 
 . Validates release order and version synchronization
-. Bumps version using rake tasks
-. Commits version changes and creates tag
+. Bumps version using rake tasks (unless `skip` is selected)
+. Commits version changes and creates tag (unless `skip` is selected)
 . Builds all gems in dependency order
 . Releases gems to RubyGems with rate limiting
-. Creates GitHub release with comprehensive release notes
+. Creates GitHub release with comprehensive release notes (unless `skip` is selected)
+
+**Skip Mode:**
+
+When `version_type` is set to `skip`, the workflow will:
+
+* Use the current version without bumping
+* Build and push all gems to RubyGems
+* Skip version bumping, git commits, tagging, and GitHub release creation
+* Useful for re-releasing gems at the current version or fixing release issues
 
 **Benefits:**
 
