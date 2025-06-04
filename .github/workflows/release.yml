@@ -1,0 +1,41 @@
+name: release
+
+on:
+  workflow_dispatch:
+    inputs:
+      gem_name:
+        description: 'Select gem to release'
+        required: true
+        type: choice
+        options:
+          - pubid
+          - pubid-core
+          - pubid-iso
+          - pubid-iec
+          - pubid-nist
+          - pubid-ieee
+          - pubid-cen
+          - pubid-bsi
+          - pubid-ccsds
+          - pubid-etsi
+          - pubid-itu
+          - pubid-jis
+          - pubid-plateau
+      next_version:
+        description: |
+          Next release version. Possible values: x.y.z, major, minor, patch (or pre|rc|etc).
+          Also, you can pass 'skip' to skip 'git tag' and do 'gem push' for the current version
+        required: true
+        default: 'skip'
+
+jobs:
+  release:
+    uses: ./.github/workflows/rubygems-release.yml
+    with:
+      gem_name: ${{ github.event.inputs.gem_name }}
+      gem_directory: gems
+      monorepo: true
+      next_version: ${{ github.event.inputs.next_version }}
+    secrets:
+      rubygems-api-key: ${{ secrets.METANORMA_CI_RUBYGEMS_API_KEY }}
+      pat_token: ${{ secrets.METANORMA_CI_PAT_TOKEN }}

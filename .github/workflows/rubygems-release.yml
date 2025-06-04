@@ -1,0 +1,134 @@
+# This is the monorepo version of the metanorma/ci/rubygems-release.yml workflow.
+name: rubygems-release
+
+on:
+  workflow_call:
+    inputs:
+      gem_name:
+        description: 'Select gem to release'
+        required: false
+        type: string
+      gem_directory:
+        description: 'Directory containing individual gems'
+        required: false
+        type: string
+        default: 'gems'
+      monorepo:
+        description: 'Enable monorepo mode'
+        required: false
+        type: boolean
+        default: false
+      next_version:
+        description: |
+          Next release version. Possible values: x.y.z, major, minor, patch (or pre|rc|etc).
+          Also, you can pass 'skip' to skip 'git tag' and do 'gem push' for the current version
+        required: true
+        type: string
+      event_name:
+        description: 'deprecated github.event_name used instead'
+        required: false
+        type: string
+      release_command:
+        description: 'command to release gem'
+        required: false
+        type: string
+        default: bundle exec rake release
+      bundler_cache:
+        description: 'do bundle install'
+        required: false
+        type: boolean
+        default: true
+      post_install:
+        description: 'command to execute after bundle install'
+        required: false
+        type: string
+        default: ''
+      submodules:
+        description: 'command to load submodules'
+        required: false
+        type: boolean
+        default: true
+    secrets:
+      rubygems-api-key:
+        required: true
+      pat_token:
+        required: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      HAVE_PAT_TOKEN: ${{ secrets.pat_token != '' }}
+    defaults:
+      run:
+        working-directory: ${{ inputs.monorepo && format('{0}/{1}', inputs.gem_directory, inputs.gem_name) || './' }}
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: ${{ inputs.submodules }}
+
+    - if: github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch'
+      run: git fetch --tags origin
+      working-directory: .
+
+    - if: ${{ env.HAVE_PAT_TOKEN == 'true' }}
+      uses: metanorma/ci/gh-rubygems-setup-action@main
+      with:
+        token: ${{ secrets.pat_token }}
+
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.3'
+        bundler-cache: ${{ inputs.bundler_cache }}
+        working-directory: ${{ inputs.monorepo && format('{0}/{1}', inputs.gem_directory, inputs.gem_name) || './' }}
+
+    - if: ${{ inputs.post_install != '' }}
+      run: ${{ inputs.post_install }}
+
+    - run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+      working-directory: .
+
+    - run: gem install gem-release
+      working-directory: .
+
+    - if: github.event_name == 'workflow_dispatch' && inputs.next_version != 'skip'
+      run: gem bump --version ${{ inputs.next_version }} --tag --push
+
+    - name: publish to rubygems.org
+      env:
+        RUBYGEMS_API_KEY: ${{ secrets.rubygems-api-key }}
+      run: |
+        mkdir -p ~/.gem
+        envsubst << 'EOF' > ~/.gem/credentials
+        ---
+        :rubygems_api_key: ${RUBYGEMS_API_KEY}
+        EOF
+        chmod 0600 ~/.gem/credentials
+        ${{ inputs.release_command }}
+
+    # This workflow usually called via repository_dispatch or direct workflow_dispatch
+    # in both cases `github.ref` doesn't reflect real version so we calculate it from gemspecfile
+    - name: get current gem ref
+      id: gem-tag-ref
+      run: |
+        GEM_VERSION=$(ruby -e "puts Gem::Specification.load(Dir.glob('*.gemspec').first).version.to_s")
+        echo "value=refs/tags/v${GEM_VERSION}" >> $GITHUB_OUTPUT
+
+    - if: ${{ inputs.monorepo }}
+      uses: peter-evans/repository-dispatch@v3
+      with:
+        token: ${{ secrets.pat_token || github.token }}
+        repository: ${{ github.repository }}
+        event-type: release-passed
+        client-payload: '{"ref": "${{ steps.gem-tag-ref.outputs.value }}", "sha": "${{ github.sha }}", "type": "release-passed", "gem-name": "${{ inputs.gem_name }}"}'
+
+    - if: ${{ !inputs.monorepo }}
+      uses: peter-evans/repository-dispatch@v3
+      with:
+        token: ${{ secrets.pat_token || github.token }}
+        repository: ${{ github.repository }}
+        event-type: release-passed
+        client-payload: '{"ref": "${{ steps.gem-tag-ref.outputs.value }}", "sha": "${{ github.sha }}", "type": "release-passed"}'
