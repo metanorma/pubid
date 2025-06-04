@@ -24,15 +24,16 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.required_ruby_version = Gem::Requirement.new(">= 2.5.0")
 
-  spec.add_dependency "pubid-bsi", "~> 0.3.4"
-  spec.add_dependency "pubid-ccsds", "~> 0.1.3"
-  spec.add_dependency "pubid-cen", "~> 0.2.4"
-  spec.add_dependency "pubid-core", "~> 1.13.0"
-  spec.add_dependency "pubid-etsi", "~> 0.1.0"
-  spec.add_dependency "pubid-iec", "~> 0.3.1"
-  spec.add_dependency "pubid-ieee", "~> 0.2.2"
-  spec.add_dependency "pubid-iso", "~> 0.8.0"
-  spec.add_dependency "pubid-itu", "~> 0.1.0"
-  spec.add_dependency "pubid-jis", "~> 0.3.2"
-  spec.add_dependency "pubid-nist", "~> 0.4.0"
+  spec.add_dependency "pubid-bsi", "= 1.15.0"
+  spec.add_dependency "pubid-ccsds", "= 1.15.0"
+  spec.add_dependency "pubid-cen", "= 1.15.0"
+  spec.add_dependency "pubid-core", "= 1.15.0"
+  spec.add_dependency "pubid-etsi", "= 1.15.0"
+  spec.add_dependency "pubid-iec", "= 1.15.0"
+  spec.add_dependency "pubid-ieee", "= 1.15.0"
+  spec.add_dependency "pubid-iso", "= 1.15.0"
+  spec.add_dependency "pubid-itu", "= 1.15.0"
+  spec.add_dependency "pubid-jis", "= 1.15.0"
+  spec.add_dependency "pubid-nist", "= 1.15.0"
+  spec.add_dependency "pubid-plateau", "= 1.15.0"
 end

@@ -25,5 +25,5 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = Gem::Requirement.new(">= 2.5.0")
 
   spec.add_dependency "parslet", "~> 2.0.0"
-  spec.add_dependency "pubid-iso", "~> 0.8.0"
+  spec.add_dependency "pubid-iso", "= 1.15.0"
 end

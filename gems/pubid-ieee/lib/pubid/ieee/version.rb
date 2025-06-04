@@ -1,5 +1,5 @@
 module Pubid
   module Ieee
-    VERSION = "0.2.2".freeze
+    VERSION = "1.15.0".freeze
   end
 end
