@@ -65,7 +65,6 @@ The key feature that a PubID provides is the ability to represent
 identifiers in a structured format that can be easily parsed and understood by
 both humans and machines, in a round-trippable manner.
 
-
 == Repository
 
 This repository is a monorepo for the PubID Ruby gems, which implement the PubID
@@ -78,11 +77,11 @@ This repository contains all the `pubid-*` gems consolidated into a single
 monorepo for easier development and maintenance while preserving individual gem
 releases.
 
-
 == Structure
 
 The monorepo is organized as follows:
 
+[source]
 ----
 .
 ├── gems/                    # Individual gem directories
@@ -137,7 +136,6 @@ Each gem maintains its own:
 `spec/`:: directory for gem-specific tests
 
 Each gem has its own individual versioning and release cycle.
-
 
 === Running tests for a specific gem
 
@@ -208,6 +206,47 @@ bundle exec rake
 
 == Release management
 
+The monorepo uses a synchronized versioning system where all gems share the same version number and are released together. This ensures consistency and eliminates version mismatch issues.
+
+=== Version management
+
+The system uses a master version file (`lib/pubid/version.rb`) as the single source of truth. All gem version files and dependencies are synchronized to this master version.
+
+[source,bash]
+----
+# Show current master version
+bundle exec rake version:show
+
+# Check if all gems and dependencies are synchronized
+bundle exec rake version:check
+
+# Sync master version to all gem version files and dependencies
+bundle exec rake version:sync
+
+# Bump version and sync to all gems and dependencies
+bundle exec rake version:bump[patch]    # or minor, major
+----
+
+=== Release order management
+
+The release order is managed through a JSON configuration file
+(`release-order.json`) that defines the dependency-aware order for releasing
+gems:
+
+[source,bash]
+----
+# Generate release order JSON file
+bundle exec rake release:generate_order
+
+# Validate release order
+bundle exec rake release:validate_order
+
+# Show current release order
+bundle exec rake release:show_order
+----
+
+The release order ensures that dependencies are released before dependent gems (e.g., `pubid-core` before other gems, main `pubid` gem last).
+
 === Checking release status
 
 [source,bash]
@@ -215,40 +254,134 @@ bundle exec rake
 bundle exec rake release:status
 ----
 
-This shows:
+This shows for each gem:
 
-* Which gems have uncommitted changes
-* How many commits since the last tag
-* Release readiness status
+* Git status (clean/dirty working directory)
+* Current version from gemspec
+* Whether the current version is tagged
+* Latest git tag found
 
-=== Releasing individual gems
+=== Synchronized releases
 
-Each gem can be released independently:
+All gems are released together with the same version number to maintain consistency:
+
+**Key features:**
+
+* **Master version**: Single source of truth in `lib/pubid/version.rb`
+* **Synchronized versions**: All gems use identical version numbers
+* **Dependency synchronization**: Cross-gem dependencies use exact versions
+* **Automated management**: Rake tasks handle all synchronization
+
+[example]
+====
+Example of synchronized dependencies:
+
+[source,ruby]
+----
+# In pubid-bsi.gemspec
+spec.add_dependency "pubid-core", "= 1.15.0"
+spec.add_dependency "pubid-iso", "= 1.15.0"
+# All use exact same version
+----
+====
+
+=== GitHub Actions workflows
+
+==== Monorepo release workflow
+
+The main release workflow (`release.yml`) handles coordinated releases:
+
+**Trigger:** Manual dispatch with options:
+
+* `version_type`: patch, minor, or major
+* `dry_run`: Test without actually releasing
+
+**Process:**
+
+. Validates release order and version synchronization
+. Bumps version using rake tasks
+. Commits version changes and creates tag
+. Builds all gems in dependency order
+. Releases gems to RubyGems with rate limiting
+. Creates GitHub release with comprehensive release notes
+
+**Benefits:**
+
+* **Atomic releases**: All gems released together or none at all
+* **Dependency order**: Respects gem dependencies during release
+* **Rate limiting**: Prevents RubyGems API rate limit issues
+* **Dry run support**: Test releases without publishing
+
+==== Individual gem testing
+
+The rake workflow tests individual gems separately to ensure isolation and compatibility.
+
+=== Manual release process
+
+If needed, you can perform releases manually:
+
+. **Prepare release:**
++
+[source,bash]
+----
+# Check current status
+bundle exec rake version:show
+bundle exec rake version:check
+bundle exec rake release:status
+
+# Ensure synchronization
+bundle exec rake version:sync
+----
+
+. **Bump version:**
++
+[source,bash]
+----
+bundle exec rake version:bump[patch]  # or minor, major
+----
+
+. **Commit and tag:**
++
+[source,bash]
+----
+git add -A
+git commit -m "Bump version to $(bundle exec rake version:show | grep 'Master version:' | cut -d' ' -f3)"
+git tag "v$(bundle exec rake version:show | grep 'Master version:' | cut -d' ' -f3)"
+----
+
+. **Build and release:**
++
+[source,bash]
+----
+bundle exec rake build:all
+# Then use individual release tasks or GitHub Actions
+----
+
+=== Troubleshooting
+
+**Version sync issues:**
+
+If `rake version:check` shows mismatched versions:
 
 [source,bash]
 ----
-# Release pubid-core
-bundle exec rake release:pubid_core
+bundle exec rake version:sync
 ----
 
-NOTE: Ensure you have proper credentials and permissions for RubyGems.
+**Release failures:**
 
-=== GitHub Actions
+. Check GitHub Actions logs for specific errors
+. Verify all gems build locally: `bundle exec rake build:all`
+. Use dry run to test: Set `dry_run: true` in workflow
+. Check RubyGems credentials are configured correctly
 
-=== Rake workflow
+**Manual recovery:**
 
-Based on the Metanorma CI generic-rake.yml workflow.
+If a release partially fails:
 
-Tests individual gems separately.
-
-=== Release workflow
-
-Manual workflow.
-
-Options:
-
-* Gem selection: Choose which gem to release via dropdown
-* Version control: Specify version bump type or use 'skip'
+. Check which gems were released on RubyGems.org
+. Manually release missing gems from their directories
+. Ensure git tags are pushed: `git push origin --tags`
 
 == Dependency management
 
@@ -256,22 +389,48 @@ Options:
 
 The gems are organized in a dependency hierarchy:
 
+[source]
 ----
-pubid (v0.1.2)          # meta-gem including common gems
-
-pubid-core (v1.13.0)    # foundation gem
-├── pubid-iso (v0.8.0)
-│   └── pubid-ieee (v0.2.2)
-├── pubid-iec (v0.3.2)
-├── pubid-nist (v0.4.2)
-├── pubid-cen (v0.2.4)  # depends on iso, iec, core
-├── pubid-bsi (v0.3.4)  # depends on cen, nist, iso, iec, core
-├── pubid-etsi (v0.1.0)
-├── pubid-itu (v0.1.3)
-├── pubid-jis (v0.3.2)
-└── pubid-plateau (v0.1.1)
+pubid           # meta-gem including common gems
+pubid-core      # foundation gem
+├── pubid-iso
+│   └── pubid-ieee
+├── pubid-iec
+├── pubid-nist
+├── pubid-cen   # depends on iso, iec, core
+├── pubid-bsi   # depends on cen, nist, iso, iec, core
+├── pubid-etsi
+├── pubid-itu
+├── pubid-jis
+└── pubid-plateau
 ----
 
+[NOTE]
+====
+Since v1.15.0, all `pubid*` gems share the same version number, which is
+synchronized across all gems and tagged to this repository.
+
+For historic information, the last independent versions of pubid-* gems are:
+
+[options="1,1",options="header"]
+|===
+|Gem name | Version
+
+| pubid | v0.1.1
+| pubid-core | v0.1.2
+| pubid-iso | v1.13.0
+| pubid-ieee | v0.8.0
+| pubid-iec | v0.2.2
+| pubid-nist | v0.3.2
+| pubid-cen | v0.4.2
+| pubid-bsi | v0.2.4
+| pubid-etsi | v0.3.4
+| pubid-itu | v0.1.0
+| pubid-jis | v0.1.3
+| pubid-plateau | v0.3.2
+|===
+
+====
 
 == Available rake tasks
 
@@ -296,9 +455,19 @@ pubid-core (v1.13.0)    # foundation gem
 * `rake rubocop:all` - Run RuboCop for all gems
 * `rake rubocop:<gem_name>` - Run RuboCop for specific gem
 
+=== Version management
+
+* `rake version:show` - Show current master version
+* `rake version:check` - Check if all gems and dependencies are synchronized
+* `rake version:sync` - Sync master version to all gem version files and dependencies
+* `rake version:bump[type]` - Bump version (patch/minor/major) and sync to all gems
+
 === Release management
 
 * `rake release:status` - Check release status for all gems
+* `rake release:generate_order` - Generate release order JSON file
+* `rake release:validate_order` - Validate release order
+* `rake release:show_order` - Show current release order
 * `rake release:<gem_name>` - Release specific gem
 
 The release status shows individual gem versions from their version files and
@@ -319,6 +488,7 @@ indicates:
 === Common development workflows
 
 **Development:**
+
 [source,bash]
 ----
 bundle exec rake test:all          # Run all tests
@@ -327,6 +497,7 @@ bundle exec rake rubocop:all       # Check code quality
 ----
 
 **Working on a specific gem:**
+
 [source,bash]
 ----
 bundle exec rake test:pubid_core     # Test one gem
@@ -335,6 +506,7 @@ bundle exec rake build:pubid_core    # Build one gem
 ----
 
 **Before releasing:**
+
 [source,bash]
 ----
 bundle exec rake release:status     # Check all gem versions and status
@@ -343,6 +515,7 @@ bundle exec rake rubocop:all        # Ensure code quality
 ----
 
 **Release a gem:**
+
 [source,bash]
 ----
 bundle exec rake release:pubid_core  # Release specific gem
