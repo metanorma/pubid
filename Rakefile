@@ -245,8 +245,7 @@ namespace :release do
 
   desc "Show release status for the monorepo"
   task :status do
-    require_relative "lib/pubid/version"
-    master_version = Pubid::VERSION
+    master_version = IO.read('VERSION').strip
 
     puts "Release Status Summary"
     puts "======================"
@@ -347,17 +346,19 @@ namespace :release do
   end
 end
 
+def get_master_version
+  IO.read('VERSION').strip
+end
+
 namespace :version do
   desc "Show current master version"
   task :show do
-    require_relative "lib/pubid/version"
-    puts "Master version: #{Pubid::VERSION}"
+    puts "Master version: #{get_master_version}"
   end
 
   desc "Check if all gem versions and dependencies are synchronized with master version"
   task :check do
-    require_relative "lib/pubid/version"
-    master_version = Pubid::VERSION
+    master_version = get_master_version
     puts "Checking version synchronization..."
     puts "Master version: #{master_version}"
 
@@ -432,8 +433,7 @@ namespace :version do
 
   desc "Sync master version to all gem version files and dependencies"
   task :sync do
-    require_relative "lib/pubid/version"
-    master_version = Pubid::VERSION
+    master_version = IO.read('VERSION').strip
     puts "Syncing master version #{master_version} to all gems..."
 
     # Update version files
@@ -501,15 +501,13 @@ namespace :version do
 
   desc "Bump version and sync to all gems"
   task :bump, [:type] do |t, args|
-    require_relative "lib/pubid/version"
-
     bump_type = args[:type] || "patch"
     unless %w[major minor patch].include?(bump_type)
       puts "Error: bump type must be major, minor, or patch"
       exit 1
     end
 
-    current_version = Gem::Version.new(Pubid::VERSION)
+    current_version = Gem::Version.new(get_master_version)
     segments = current_version.segments
 
     case bump_type
@@ -524,16 +522,9 @@ namespace :version do
     puts "Bumping version from #{current_version} to #{new_version}"
 
     # Update master version file
-    master_version_file = "lib/pubid/version.rb"
-    content = File.read(master_version_file)
-    new_content = content.gsub(/VERSION = "[^"]*"\.freeze/,
-                               "VERSION = \"#{new_version}\".freeze")
-    File.write(master_version_file, new_content)
+    master_version_file = "VERSION"
+    File.write(master_version_file, new_version)
     puts "  ✓ Updated master version"
-
-    # Reload the version constant
-    Object.send(:remove_const, :Pubid) if defined?(Pubid)
-    load master_version_file
 
     # Sync to all gems
     Rake::Task["version:sync"].invoke

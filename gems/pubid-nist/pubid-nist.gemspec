@@ -1,6 +1,6 @@
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "pubid/nist/version"
+require_relative "lib/pubid/nist/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "pubid-nist"
@@ -31,7 +31,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "lightly"
   spec.add_dependency "nokogiri"
-  spec.add_dependency "parslet"
   spec.add_dependency "pubid-core", "= 1.15.0"
   spec.add_dependency "rubyzip"
   spec.add_dependency "thor"

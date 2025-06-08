@@ -206,11 +206,15 @@ bundle exec rake
 
 == Release management
 
-The monorepo uses a synchronized versioning system where all gems share the same version number and are released together. This ensures consistency and eliminates version mismatch issues.
-
 === Version management
 
-The system uses a master version file (`lib/pubid/version.rb`) as the single source of truth. All gem version files and dependencies are synchronized to this master version.
+The monorepo uses a synchronized versioning system where all gems share the same
+version number and are released together. This ensures consistency and
+eliminates version mismatch issues.
+
+The system uses a master version file (`VERSION`) as the single source of truth.
+
+All gem version files and dependencies are synchronized to this master version.
 
 [source,bash]
 ----
@@ -280,8 +284,8 @@ Example of synchronized dependencies:
 [source,ruby]
 ----
 # In pubid-bsi.gemspec
-spec.add_dependency "pubid-core", "= 1.15.0"
 spec.add_dependency "pubid-iso", "= 1.15.0"
+spec.add_dependency "pubid-iec", "= 1.15.0"
 # All use exact same version
 ----
 ====

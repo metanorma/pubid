@@ -1,6 +1,6 @@
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "pubid/bsi/version"
+require_relative "lib/pubid/bsi/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "pubid-bsi"
@@ -24,9 +24,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.required_ruby_version = Gem::Requirement.new(">= 2.5.0")
 
-  spec.add_dependency "parslet"
   spec.add_dependency "pubid-cen", "= 1.15.0"
-  spec.add_dependency "pubid-core", "= 1.15.0"
   spec.add_dependency "pubid-iec", "= 1.15.0"
   spec.add_dependency "pubid-iso", "= 1.15.0"
 end
