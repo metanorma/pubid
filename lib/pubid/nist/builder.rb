@@ -437,11 +437,13 @@ module Pubid
           component = Components::Supplement.new
           # Split the fused "Jun1925"/"Jun1926" strings into isolated start/end
           # month+year nodes (start reuses :month/:year, end uses *_end).
-          if range_start && (m = range_start.match(/\A([A-Za-z]{3,9})(\d{4})\z/))
+          # Each end is either a fused "Jun1925" (month+year) or a bare "1925"
+          # (year-only range, no month).
+          if range_start && (m = range_start.match(/\A([A-Za-z]{3,9})?(\d{4})\z/))
             component.month = m[1]
             component.year = m[2]
           end
-          if range_end && (m = range_end.match(/\A([A-Za-z]{3,9})(\d{4})\z/))
+          if range_end && (m = range_end.match(/\A([A-Za-z]{3,9})?(\d{4})\z/))
             component.month_end = m[1]
             component.year_end = m[2]
           end

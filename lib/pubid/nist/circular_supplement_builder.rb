@@ -56,10 +56,12 @@ module Pubid
           ys = range[:supp_year_start]&.to_s
           me = range[:supp_month_end]&.to_s
           ye = range[:supp_year_end]&.to_s
+          # Month is optional: a year-only range ("sup1925-1926") passes just the
+          # bare year, which supplement_from parses into year/year_end.
           identifier.supplement = @builder.supplement_from(
             value: nil, has_revision: false,
-            range_start: (ms && ys ? "#{ms}#{ys}" : nil),
-            range_end: (me && ye ? "#{me}#{ye}" : nil)
+            range_start: (ys ? "#{ms}#{ys}" : nil),
+            range_end: (ye ? "#{me}#{ye}" : nil)
           )
           return identifier
         end

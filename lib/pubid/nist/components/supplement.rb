@@ -139,8 +139,9 @@ module Pubid
         end
 
         # A range is marked by the presence of an END; START reuses month/year.
+        # Months are optional, so a year-only range ("1925-1926") also counts.
         def date_range?
-          month && year && month_end && year_end
+          year && year_end
         end
 
         def build_date_range_format
@@ -164,7 +165,9 @@ module Pubid
         end
 
         def build_long_date_range_format
-          "Supplement #{month} #{year}-#{month_end} #{year_end}"
+          start = [month, year].compact.join(" ")
+          finish = [month_end, year_end].compact.join(" ")
+          "Supplement #{start}-#{finish}"
         end
 
         def build_long_month_year_format
