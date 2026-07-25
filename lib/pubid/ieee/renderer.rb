@@ -70,12 +70,18 @@ module Pubid
         # Draft status
         parts << id.draft_status if id.draft_status
 
-        # Type - only render for IEEE/AIEE publishers, and only for non-projects
+        # Type - only render for IEEE/AIEE publishers, and only for non-projects.
+        # An unapproved draft is not yet a standard, so per IEEE guidance the
+        # "Std" token is dropped from the type when draft_status is "Unapproved"
+        # (e.g. "Draft Std" -> "Draft", "Std" -> "").
         should_render_type = id.publisher&.match?(/^(IEEE|AIEE)/)
 
         if should_render_type && !id.typed_stage&.project_status && id.type && !id.type.to_s.strip.empty? && id.type != "P"
           type_str = id.type.dup
           type_str = type_str.sub(/^P/, "") if type_str.start_with?("P")
+          if id.draft_status.to_s.match?(/unapproved/i)
+            type_str = type_str.gsub(/\bStd\b/i, "").squeeze(" ").strip
+          end
           parts << type_str unless type_str.strip.empty?
         end
 

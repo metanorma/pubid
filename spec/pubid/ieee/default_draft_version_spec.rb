@@ -6,7 +6,9 @@ RSpec.describe "IEEE default draft version — issue #205" do
   describe "Draft type without explicit version" do
     it "appends /D1 to 'IEEE Unapproved Draft Std 802.3'" do
       parsed = Pubid::Ieee.parse("IEEE Unapproved Draft Std 802.3")
-      expect(parsed.to_s).to eq("IEEE Unapproved Draft Std 802.3/D1")
+      # Per IEEE guidance (issue #209), unapproved drafts are not yet standards,
+      # so the "Std" token is dropped from the rendered type.
+      expect(parsed.to_s).to eq("IEEE Unapproved Draft 802.3/D1")
     end
 
     it "appends /D1 to 'IEEE Draft Std 802.3'" do
