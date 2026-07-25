@@ -4,4 +4,3 @@
 # subclass); its body, `.parse` (including the IEC-delegation logic), and the
 # SingleIdentifier back-compat alias live in single_identifier.rb. This file
 # just ensures it is loaded when a consumer references Pubid::Bsi::Identifier.
-require_relative "single_identifier"

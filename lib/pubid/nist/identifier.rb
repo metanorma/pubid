@@ -6,4 +6,3 @@
 # work natively (no facade needed). Its full body and `.parse` are defined in identifiers/base.rb to keep
 # that large body in one place; this file just ensures it is loaded when a
 # consumer references Pubid::Nist::Identifier directly.
-require_relative "identifiers/base"

@@ -12,7 +12,7 @@ module Pubid
 
     autoload :Aiee, "#{__dir__}/ieee/aiee"
     autoload :Builder, "#{__dir__}/ieee/builder"
-    autoload :Identifier, "#{__dir__}/ieee/identifier"
+    autoload :Identifier, "#{__dir__}/ieee/identifiers/base"
     autoload :Identifiers, "#{__dir__}/ieee/identifiers"
     autoload :Ire, "#{__dir__}/ieee/ire"
     autoload :Nesc, "#{__dir__}/ieee/nesc"

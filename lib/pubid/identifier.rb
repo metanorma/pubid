@@ -490,6 +490,84 @@ module Pubid
       false
     end
 
+    # --- Relational algebra (pubid/pubid#247) ---
+    # Each predicate returns true / false. Predicates that don't apply to
+    # this identifier type (e.g. supplement checks on a non-wrapper) return
+    # false rather than raising. This makes them safe for chain-of-checks
+    # patterns like `id.related_to?(other)`.
+
+    # Self is a supplement (amendment / corrigendum / errata / supplement)
+    # of +other+. Self must be a wrapper (has a +base+ attribute) whose
+    # inner base equals +other+.
+    def supplement_of?(other)
+      return false unless other.is_a?(::Pubid::Identifier)
+      return false unless self.class.attributes.key?(:base)
+
+      base == other
+    end
+
+    # Inverse of #supplement_of? — self is the base document and +other+
+    # is a supplement attached to it.
+    def has_supplement?(other)
+      other.is_a?(::Pubid::Identifier) && other.supplement_of?(self)
+    end
+
+    # Self and +other+ refer to the same document but differ only in the
+    # trailing date / year — the "dated vs undated" reference pattern.
+    def dated_version_of?(other)
+      return false unless other.is_a?(::Pubid::Identifier)
+
+      matches?(other, ignore: [:date, :year]) && self != other
+    end
+
+    # Self and +other+ have the same publisher + number but differ in
+    # part, subpart, or edition. This is the "sibling documents" pattern:
+    # same base standard, different sub-component.
+    def sibling_of?(other)
+      return false unless other.is_a?(::Pubid::Identifier)
+
+      publisher == other.publisher &&
+        number == other.number &&
+        self != other
+    end
+
+    # Self is an all-parts collection that covers +other+.
+    def includes?(other)
+      return false unless other.is_a?(::Pubid::Identifier)
+      return false unless all_parts
+
+      root == other.root
+    end
+
+    # Self is a draft version of +other+ (the published identifier).
+    # IEEE uses draft_status + draft; ISO/IEC use typed_stage.
+    def draft_of?(other)
+      return false unless other.is_a?(::Pubid::Identifier)
+
+      root == other.root &&
+        self != other &&
+        matches?(other, ignore: [:date, :year, :stage, :typed_stage])
+    end
+
+    # Self and +other+ have the same publisher + number + part but differ
+    # in edition / revision marker.
+    def edition_of?(other)
+      return false unless other.is_a?(::Pubid::Identifier)
+
+      publisher == other.publisher &&
+        number == other.number &&
+        part == other.part &&
+        self != other
+    end
+
+    # Any relational predicate holds.
+    def related_to?(other)
+      %i[supplement_of? has_supplement? dated_version_of? edition_of?
+         sibling_of? includes? draft_of?].any? do |m|
+        public_send(m, other)
+      end
+    end
+
     def hash
       @hash ||= compute_hash
     end

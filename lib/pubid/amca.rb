@@ -8,7 +8,7 @@ module Pubid
     # Pubid::JOINT_PREFIXES.
     PREFIXES = ["AMCA"].freeze
 
-    autoload :Identifier, "#{__dir__}/amca/identifier"
+    autoload :Identifier, "#{__dir__}/amca/identifiers/base"
     autoload :Identifiers, "#{__dir__}/amca/identifiers"
     autoload :Builder, "#{__dir__}/amca/builder"
     autoload :Parser, "#{__dir__}/amca/parser"

@@ -58,7 +58,13 @@ module Pubid
       private
 
       def default_series_path
-        File.join(__dir__, "../../../gems/pubid-nist/series.yaml")
+        # Prefer data/nist/series.yaml (the canonical home in the monorepo);
+        # fall back to archived-gems/pubid-nist/series.yaml for backward
+        # compat with the v1 layout.
+        monorepo = File.join(__dir__, "../../../data/nist/series.yaml")
+        return monorepo if File.exist?(monorepo)
+
+        File.join(__dir__, "../../../archived-gems/pubid-nist/series.yaml")
       end
 
       def load_series

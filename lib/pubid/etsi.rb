@@ -13,7 +13,7 @@ module Pubid
 
     autoload :Builder, "#{__dir__}/etsi/builder"
     autoload :Components, "#{__dir__}/etsi/components"
-    autoload :Identifier, "#{__dir__}/etsi/identifier"
+    autoload :Identifier, "#{__dir__}/etsi/identifiers/base"
     autoload :Identifiers, "#{__dir__}/etsi/identifiers"
     autoload :Parser, "#{__dir__}/etsi/parser"
     autoload :Renderer, "#{__dir__}/etsi/renderer"

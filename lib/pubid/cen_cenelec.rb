@@ -21,118 +21,122 @@ module Pubid
     autoload :UrnParser, "#{__dir__}/cen_cenelec/urn_parser"
 
     # TYPED_STAGES_REGISTRY for native CEN types
+    # Covers the CEN PROJEX stage-code table per issue #251.
     TYPED_STAGES_REGISTRY = [
-      # European Norm (EN)
+      # === European Norm (EN) lifecycle ===
+      # Preliminary (pWI EN): proposal/WI stages
       Pubid::Components::TypedStage.new(
-        code: :puben,
-        stage_code: :published,
-        type_code: :en,
-        abbr: ["EN"],
-        name: "European Norm",
+        code: :pwien, stage_code: :preliminary, type_code: :en,
+        abbr: ["pWI EN"], name: "Preliminary Work Item EN",
+        harmonized_stages: %w[00.60 10.98 10.99 20.60],
+      ),
+      # Proposal (prEN): working draft stages
+      Pubid::Components::TypedStage.new(
+        code: :pren, stage_code: :proposal, type_code: :en,
+        abbr: ["prEN"], name: "Proposal European Norm",
+        harmonized_stages: %w[30.00 30.20 30.60 30.92 30.97 30.98 30.99],
+      ),
+      # Final Proposal (FprEN): enquiry stages
+      Pubid::Components::TypedStage.new(
+        code: :fpren, stage_code: :final_proposal, type_code: :en,
+        abbr: ["FprEN"], name: "Final Proposal European Norm",
+        harmonized_stages: %w[40.00 40.20 40.60 40.92 40.97 40.98 40.99],
+      ),
+      # Formal Vote (FV prEN): COCOR + FV dispatch
+      Pubid::Components::TypedStage.new(
+        code: :fven, stage_code: :formal_vote, type_code: :en,
+        abbr: ["FV prEN"], name: "Formal Vote EN",
+        harmonized_stages: %w[43.20 43.60 43.97 43.98 45.97 45.98 45.99],
+      ),
+      # Vote (vEN): enquiry/vote
+      Pubid::Components::TypedStage.new(
+        code: :ven, stage_code: :vote, type_code: :en,
+        abbr: ["vEN"], name: "Vote EN",
+        harmonized_stages: %w[50.20 50.60 50.97 50.98],
+      ),
+      # Published (EN): ratification + publication milestones
+      Pubid::Components::TypedStage.new(
+        code: :puben, stage_code: :published, type_code: :en,
+        abbr: ["EN"], name: "European Norm",
+        harmonized_stages: %w[60.00 60.55 60.60 65.31 65.51 65.62],
+      ),
+      # Review (rvEN): 2-year review
+      Pubid::Components::TypedStage.new(
+        code: :rven, stage_code: :review, type_code: :en,
+        abbr: ["rvEN"], name: "Review EN",
+        harmonized_stages: %w[90.00 90.20 90.60 90.92 90.93 90.98],
+      ),
+      # Reactivation (racEN)
+      Pubid::Components::TypedStage.new(
+        code: :racen, stage_code: :reactivation, type_code: :en,
+        abbr: ["racEN"], name: "Re-activated EN",
+        harmonized_stages: %w[96.60],
+      ),
+      # Withdrawn (wdEN)
+      Pubid::Components::TypedStage.new(
+        code: :wden, stage_code: :withdrawn, type_code: :en,
+        abbr: ["wdEN"], name: "Withdrawn EN",
+        harmonized_stages: %w[99.60],
+      ),
+
+      # === Technical Specification (TS) ===
+      Pubid::Components::TypedStage.new(
+        code: :pubts, stage_code: :published, type_code: :ts,
+        abbr: ["TS"], name: "Technical Specification",
         harmonized_stages: %w[60.00 60.60],
       ),
       Pubid::Components::TypedStage.new(
-        code: :pren,
-        stage_code: :proposal,
-        type_code: :en,
-        abbr: ["prEN"],
-        name: "Proposal European Norm",
+        code: :prts, stage_code: :proposal, type_code: :ts,
+        abbr: ["prTS"], name: "Proposal Technical Specification",
         harmonized_stages: %w[30.00 30.20 30.60 30.92 30.98 30.99],
       ),
-      Pubid::Components::TypedStage.new(
-        code: :fpren,
-        stage_code: :final_proposal,
-        type_code: :en,
-        abbr: ["FprEN"],
-        name: "Final Proposal European Norm",
-        harmonized_stages: %w[40.00 40.20 40.60 40.92 40.98 40.99],
-      ),
 
-      # Technical Specification (TS)
+      # === Technical Report (TR) ===
       Pubid::Components::TypedStage.new(
-        code: :pubts,
-        stage_code: :published,
-        type_code: :ts,
-        abbr: ["TS"],
-        name: "Technical Specification",
-        harmonized_stages: %w[60.00 60.60],
-      ),
-      Pubid::Components::TypedStage.new(
-        code: :prts,
-        stage_code: :proposal,
-        type_code: :ts,
-        abbr: ["prTS"],
-        name: "Proposal Technical Specification",
-        harmonized_stages: %w[30.00 30.20 30.60 30.92 30.98 30.99],
-      ),
-
-      # Technical Report (TR)
-      Pubid::Components::TypedStage.new(
-        code: :pubtr,
-        stage_code: :published,
-        type_code: :tr,
-        abbr: ["TR"],
-        name: "Technical Report",
+        code: :pubtr, stage_code: :published, type_code: :tr,
+        abbr: ["TR"], name: "Technical Report",
         harmonized_stages: %w[60.00 60.60],
       ),
 
-      # CEN Workshop Agreement (CWA)
+      # === CEN Workshop Agreement (CWA) ===
       Pubid::Components::TypedStage.new(
-        code: :pubcwa,
-        stage_code: :published,
-        type_code: :cwa,
-        abbr: ["CWA"],
-        name: "CEN Workshop Agreement",
+        code: :pubcwa, stage_code: :published, type_code: :cwa,
+        abbr: ["CWA"], name: "CEN Workshop Agreement",
         harmonized_stages: %w[60.00 60.60],
       ),
 
-      # Guide
+      # === Guide ===
       Pubid::Components::TypedStage.new(
-        code: :pubguide,
-        stage_code: :published,
-        type_code: :guide,
-        abbr: ["Guide"],
-        name: "Guide",
+        code: :pubguide, stage_code: :published, type_code: :guide,
+        abbr: ["Guide"], name: "Guide",
         harmonized_stages: %w[60.00 60.60],
       ),
 
-      # Harmonization Document (HD)
+      # === Harmonization Document (HD) ===
       Pubid::Components::TypedStage.new(
-        code: :pubhd,
-        stage_code: :published,
-        type_code: :hd,
-        abbr: ["HD"],
-        name: "Harmonization Document",
+        code: :pubhd, stage_code: :published, type_code: :hd,
+        abbr: ["HD"], name: "Harmonization Document",
         harmonized_stages: %w[60.00 60.60],
       ),
 
-      # European Specification (ES)
+      # === European Specification (ES) ===
       Pubid::Components::TypedStage.new(
-        code: :pubes,
-        stage_code: :published,
-        type_code: :es,
-        abbr: ["ES"],
-        name: "European Specification",
+        code: :pubes, stage_code: :published, type_code: :es,
+        abbr: ["ES"], name: "European Specification",
         harmonized_stages: %w[60.00 60.60],
       ),
 
-      # CEN Report (CR)
+      # === CEN Report (CR) ===
       Pubid::Components::TypedStage.new(
-        code: :pubcr,
-        stage_code: :published,
-        type_code: :cr,
-        abbr: ["CR"],
-        name: "CEN Report",
+        code: :pubcr, stage_code: :published, type_code: :cr,
+        abbr: ["CR"], name: "CEN Report",
         harmonized_stages: %w[60.00 60.60],
       ),
 
-      # European Prestandard (ENV)
+      # === European Prestandard (ENV) ===
       Pubid::Components::TypedStage.new(
-        code: :pubenv,
-        stage_code: :published,
-        type_code: :env,
-        abbr: ["ENV"],
-        name: "European Prestandard",
+        code: :pubenv, stage_code: :published, type_code: :env,
+        abbr: ["ENV"], name: "European Prestandard",
         harmonized_stages: %w[60.00 60.60],
       ),
     ].freeze

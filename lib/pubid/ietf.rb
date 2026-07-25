@@ -14,7 +14,7 @@ module Pubid
     PREFIXES = ["RFC", "BCP", "STD", "FYI", "draft"].freeze
 
     autoload :Builder, "#{__dir__}/ietf/builder"
-    autoload :Identifier, "#{__dir__}/ietf/identifier"
+    autoload :Identifier, "#{__dir__}/ietf/identifiers/base"
     autoload :Identifiers, "#{__dir__}/ietf/identifiers"
     autoload :Parser, "#{__dir__}/ietf/parser"
     autoload :Renderer, "#{__dir__}/ietf/renderer"

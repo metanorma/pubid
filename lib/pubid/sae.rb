@@ -10,7 +10,7 @@ module Pubid
 
     autoload :Builder, "#{__dir__}/sae/builder"
     autoload :Components, "#{__dir__}/sae/components"
-    autoload :Identifier, "#{__dir__}/sae/identifier"
+    autoload :Identifier, "#{__dir__}/sae/identifiers/base"
     autoload :Identifiers, "#{__dir__}/sae/identifiers"
     autoload :Parser, "#{__dir__}/sae/parser"
     autoload :Renderer, "#{__dir__}/sae/renderer"

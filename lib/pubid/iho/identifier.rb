@@ -5,4 +5,3 @@
 # and the shared polymorphic `from_hash` work natively (no facade needed). Its
 # body and `.parse` live in identifiers/base.rb; this file just ensures it is loaded when a consumer
 # references Pubid::Iho::Identifier directly.
-require_relative "identifiers/base"

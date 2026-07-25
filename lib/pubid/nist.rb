@@ -21,7 +21,7 @@ module Pubid
     autoload :CircularSupplementBuilder, "#{__dir__}/nist/circular_supplement_builder"
     autoload :Components, "#{__dir__}/nist/components"
     autoload :Configuration, "#{__dir__}/nist/configuration"
-    autoload :Identifier, "#{__dir__}/nist/identifier"
+    autoload :Identifier, "#{__dir__}/nist/identifiers/base"
     autoload :Identifiers, "#{__dir__}/nist/identifiers"
     autoload :Parser, "#{__dir__}/nist/parser"
     autoload :ParserOutputNormalizer, "#{__dir__}/nist/parser_output_normalizer"

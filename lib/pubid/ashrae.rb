@@ -9,7 +9,7 @@ module Pubid
     PREFIXES = ["ASHRAE"].freeze
 
     autoload :Builder, "#{__dir__}/ashrae/builder"
-    autoload :Identifier, "#{__dir__}/ashrae/identifier"
+    autoload :Identifier, "#{__dir__}/ashrae/identifiers/base"
     autoload :Identifiers, "#{__dir__}/ashrae/identifiers"
     autoload :Parser, "#{__dir__}/ashrae/parser"
     autoload :Renderer, "#{__dir__}/ashrae/renderer"

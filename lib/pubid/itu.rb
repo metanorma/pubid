@@ -11,7 +11,7 @@ module Pubid
 
     autoload :Builder, "#{__dir__}/itu/builder"
     autoload :Components, "#{__dir__}/itu/components"
-    autoload :Identifier, "#{__dir__}/itu/identifier"
+    autoload :Identifier, "#{__dir__}/itu/identifiers/base"
     autoload :Identifiers, "#{__dir__}/itu/identifiers"
     autoload :Parser, "#{__dir__}/itu/parser"
     autoload :UrnGenerator, "#{__dir__}/itu/urn_generator"

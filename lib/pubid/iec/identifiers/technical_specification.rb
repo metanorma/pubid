@@ -53,7 +53,7 @@ module Pubid
             code: :dts,
             stage_code: :draft,
             type_code: :ts,
-            abbr: ["DTS"],
+            abbr: %w[DTS ADTS CDTS NDTS],
             name: "Draft Technical Specification",
             harmonized_stages: %w[50.00 50.20 50.60 50.92 50.98 50.99],
           ),

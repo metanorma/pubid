@@ -53,7 +53,7 @@ module Pubid
             code: :dtr,
             stage_code: :draft,
             type_code: :tr,
-            abbr: ["DTR"],
+            abbr: %w[DTR ADTR CDTR DTRM NDTR DTSM DTRM],
             name: "Draft Technical Report",
             harmonized_stages: %w[50.00 50.20 50.60 50.92 50.98 50.99],
           ),

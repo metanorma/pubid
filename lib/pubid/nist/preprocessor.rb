@@ -343,6 +343,21 @@ module Pubid
         revert_handbook_edition!
         revert_owmwp_date!
         revert_report_year_range!
+        revert_circ_supplement_year_range!
+      end
+
+      # CIRC/LCIRC year-only series supplements: "NBS CIRC sup1925-1926" is a
+      # supplement spanning a year range, so the trailing "-1926" is a range
+      # end, not an edition. convert_dashyear_to_edition! would have rewritten
+      # it to "sup1925e1926"; restore the dash so the circ_supplement_identifier
+      # grammar can read the range (pubid/pubid#152).
+      def revert_circ_supplement_year_range!
+        return unless @cleaned.include?("CIRC")
+
+        # Anchor on the series prefix ("CIRC " / "CIRC." / "LCIRC ") so only the
+        # whole-series form (sup right after the series, no base number) is
+        # reverted — a based "24sup1940e1950" keeps its genuine edition.
+        @cleaned = @cleaned.gsub(/(CIRC[ .])(supp?)(\d{4})e(\d{4})(?=\s|$)/, '\1\2\3-\4')
       end
 
       # HB handbooks: "HB 130e1979" → "HB 130-1979" (year is part of

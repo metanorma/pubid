@@ -32,6 +32,9 @@ NIST MN: NIST MONO
 '/,\s+(Rev\.|Part\.|Vol\.|Revision|Volume|Part)(?=\s|\d)/': ' \1'
 NIST MP: NBS MP
 NIST SP 260-162 2006ed.: NIST SP 260-162e2006
+# Doubled publisher+series prefix — an error in the NIST Tech Pubs source data
+# (pubid/pubid#152). Collapse the repeated "NIST AI" so the remainder parses.
+NIST AI NIST AI 100-2e2023 ipd: NIST AI 100-2e2023 ipd
 NBS CIRC 154suprev: NBS CIRC 154r1sup
 NBS CIRC supJun1925-Jun1926: NBS CIRC 24e7sup2
 NBS CIRC supJun1925-Jun1927: NBS CIRC 24e7sup3

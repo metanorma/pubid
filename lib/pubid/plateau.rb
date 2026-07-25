@@ -10,7 +10,7 @@ module Pubid
     PREFIXES = ["PLATEAU"].freeze
 
     autoload :Builder, "#{__dir__}/plateau/builder"
-    autoload :Identifier, "#{__dir__}/plateau/identifier"
+    autoload :Identifier, "#{__dir__}/plateau/identifiers/base"
     autoload :Identifiers, "#{__dir__}/plateau/identifiers"
     autoload :Parser, "#{__dir__}/plateau/parser"
     autoload :Renderer, "#{__dir__}/plateau/renderer"

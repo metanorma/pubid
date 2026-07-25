@@ -708,6 +708,11 @@ module Pubid
             # Date range supplement (no base number)
             (str("supp") >> month_abbrev.as(:supp_month_start) >> digits.as(:supp_year_start) >>
              dash >> month_abbrev.as(:supp_month_end) >> digits.as(:supp_year_end)).as(:supplement_date_range) |
+            # Year-only date range supplement to the whole series, no months
+            # (e.g. "NBS CIRC sup1925-1926" — pubid/pubid#152). Requires two
+            # 4-digit years so it can't swallow "sup3/1926" or a base number.
+            ((str("supp") | str("sup")) >> match("[0-9]").repeat(4, 4).as(:supp_year_start) >>
+             dash >> match("[0-9]").repeat(4, 4).as(:supp_year_end)).as(:supplement_date_range) |
             # With base identifier + supplement
             (
               # Capture base portion (everything before "supp" or "sup" or slash+year)
