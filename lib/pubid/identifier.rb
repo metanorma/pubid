@@ -436,7 +436,12 @@ module Pubid
         value = excluded_args.include?(name) ? nil : public_send(name)
         h[name] = exclude_from_nested(value, args)
       end
-      self.class.new(attrs)
+      # Splat the rebuilt attributes as keywords. Flavors whose identifier
+      # #initialize is keyword-only (ITU, IEEE, …) would raise ArgumentError on
+      # a positional hash under Ruby 3 kwarg separation; the base
+      # initialize(attrs = {}, options = {}) still accepts **attrs because Ruby
+      # passes keywords to a no-keyword method as a trailing positional Hash.
+      self.class.new(**attrs)
     end
 
     # The standard this identifier supplements, dropping its own supplement
