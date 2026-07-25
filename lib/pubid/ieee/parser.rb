@@ -352,8 +352,11 @@ module Pubid
           str(" and ").absent? >>
           str(", ").absent? >>
           str(" as amended by ").absent? >>
-          str(" / ").absent? >>
-          str("; ").absent? >>
+          # Stop at any "/", ";", or "-" that introduces another relationship
+          # (look-ahead: separator + relationship_type keyword). This lets the
+          # slash inside "IEEE Std 525-2007/Cor 1-2015" stay part of the
+          # identifier, while the slash before "Incorporates ..." splits.
+          relationship_break.absent? >>
           str(")").absent? >>
           match(".")
         ).repeat(1)
@@ -378,15 +381,38 @@ module Pubid
           str(" and its approved amendments").as(:approved_amendments)
       end
 
+      # A character sequence that may separate two relationships inside the
+      # parenthetical: a "/", ";", or "-" with optional surrounding spaces.
+      # Standalone it is permissive — the actual decision to split is gated by
+      # `relationship_break`, which requires another relationship_type to
+      # follow. This way the slash in "IEEE Std 525-2007/Cor 1-2015" stays
+      # part of the related identifier.
+      rule(:relationship_separator) do
+        (space.maybe >> str("/") >> space.maybe) |
+          (space.maybe >> str(";") >> space.maybe) |
+          (space.maybe >> str("-") >> space.maybe)
+      end
+
+      # Look-ahead: a separator followed by another relationship_type keyword.
+      # Used as an absent? guard in identifier_string so the parser stops
+      # consuming characters right before a new relationship begins.
+      rule(:relationship_break) do
+        relationship_separator >> space.maybe >> relationship_type
+      end
+
       # Relationship clause (handles all relationship types)
       rule(:relationship_clause) do
         space.maybe >> str("(") >>
           relationship_type.as(:relationship_type) >>
           identifier_list.as(:related_ids) >>
           as_amended_by_clause.maybe >>
-          # Handle multiple relationships separated by " / " OR "; "
+          # Additional relationships separated by "/", ";", or "-" (optionally
+          # surrounded by spaces). The separator is only honored when followed
+          # by another relationship_type — identifier-internal slashes like
+          # "/Cor 1-2015" are not mistaken for relationship breaks because
+          # identifier_string stops at relationship_break ahead.
           (
-            (str(" / ") | str("; ")) >> # Support both separators
+            relationship_separator >>
             relationship_type.as(:relationship_type) >>
             identifier_list.as(:related_ids) >>
             as_amended_by_clause.maybe
