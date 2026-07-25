@@ -55,6 +55,30 @@ module Pubid
         code&.number
       end
 
+      # ITU keeps the document number and its edition/part together inside one
+      # Code component (like ETSI, unlike ISO's separate `part` attribute), so a
+      # top-level exclude(:part) can't reach the part. Handle it during the
+      # nested-exclusion pass: when :part/:parts is excluded, return a copy of
+      # the Code with its parts cleared while keeping number/series/subseries.
+      # This lets a part-less reference (e.g. `ITU-R P.838`) match every edition
+      # (`ITU-R P.838-3`) via matches?(other, ignore: [:parts]). Any non-Code
+      # value falls through to super, so nested identifiers (common_text_twin,
+      # supplement `base`, combined `Designation`s) still recurse.
+      def exclude_from_nested(value, args)
+        part_keys = args & %i[part parts]
+        if value.is_a?(Pubid::Itu::Components::Code) && !part_keys.empty?
+          return Pubid::Itu::Components::Code.new(
+            imp_marker: value.imp_marker,
+            number: value.number,
+            series_suffix: value.series_suffix,
+            subseries: value.subseries,
+            parts: [],
+          )
+        end
+
+        super
+      end
+
       # Generate URN for this identifier
       #
       # @return [String] URN representation

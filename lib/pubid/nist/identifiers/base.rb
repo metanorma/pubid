@@ -159,21 +159,11 @@ module Pubid
         end
       end
 
-      # Return a copy with the named attributes nil'd. Overrides
-      # Pubid::Identifier#exclude because NIST's initialize is keyword-only
-      # (initialize(**attributes)) while the inherited exclude rebuilds via
-      # the positional self.class.new(attrs) form — passing a positional
-      # hash to a keyword-only initializer raises ArgumentError. Rebuild
-      # with the keyword splat instead.
-      def exclude(*args)
-        excluded_args = args.dup
-        excluded_args << :date if excluded_args.delete(:year)
-
-        attrs = self.class.attributes.each_with_object({}) do |(name, _), h|
-          h[name] = excluded_args.include?(name) ? nil : public_send(name)
-        end
-        self.class.new(**attrs)
-      end
+      # NIST inherits Pubid::Identifier#exclude directly: it now rebuilds via
+      # `self.class.new(**attrs)`, so NIST's keyword-only initialize
+      # (initialize(**attributes)) works without a local override, and the base
+      # version additionally carries the nested-identifier recursion this class's
+      # old copy lacked.
 
       # Short-form supplement fragment ("sup", "sup1924", "supJan1924",
       # "suprev", " supJun1925-Jun1926"), rendered from the structured

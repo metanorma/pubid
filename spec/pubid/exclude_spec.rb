@@ -2,6 +2,8 @@
 
 require "rspec"
 require_relative "../../lib/pubid/iso"
+require_relative "../../lib/pubid/itu"
+require_relative "../../lib/pubid/ieee"
 
 RSpec.describe Pubid::Identifier do
   describe "#exclude" do
@@ -44,6 +46,28 @@ RSpec.describe Pubid::Identifier do
       excluded = id.exclude(:languages)
       expect(excluded.to_s).to eq("ISO 9001:2015")
       expect(excluded.to_hash["languages"]).to be_nil
+    end
+  end
+
+  # Regression for #289: #exclude rebuilds via `self.class.new(**attrs)`, so
+  # flavors whose identifier #initialize is keyword-only (ITU `**kwargs`, IEEE
+  # `**args`) no longer raise ArgumentError. #matches? relies on #exclude, so
+  # it must be exercised too. Guards the shared base fix against future
+  # keyword-init flavors.
+  describe "keyword-init flavors (#289)" do
+    {
+      "ITU" => -> { Pubid::Itu.parse("ITU-R P.838") },
+      "IEEE" => -> { Pubid::Ieee.parse("IEEE 100-1992") },
+    }.each do |flavor, build|
+      it "#{flavor} #exclude does not raise" do
+        expect { build.call.exclude(:date) }.not_to raise_error
+      end
+
+      it "#{flavor} #matches? does not raise and self-matches" do
+        id = build.call
+        expect { id.matches?(id) }.not_to raise_error
+        expect(id.matches?(id)).to be true
+      end
     end
   end
 end
