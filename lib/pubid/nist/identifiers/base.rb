@@ -27,6 +27,13 @@ module Pubid
       # raw string the circular/supplement builders pass straight through.
       attribute :publisher, :string
       attribute :series, Components::Code # Set by Builder from parsed data
+      # SP subseries (Appendix A.2 of the NIST PubID Syntax): for "NIST SP 800-53"
+      # the subseries is "800" and the sequence is "53". Populated by the Builder
+      # when the series is "SP" and the first number matches a known subseries
+      # code. Informational metadata derived from series+number — ignored in
+      # equality so a manually-built id (without subseries set) still equals a
+      # parsed one.
+      attribute :subseries, Components::Code
       attribute :number, Components::Code
 
       # V2 COMPONENTS (Lutaml::Model objects) - PROPER SEPARATION
@@ -110,8 +117,12 @@ module Pubid
       #   - first_number/second_number: decomposed parts of the canonical
       #     :number, retained from the parse for building
       #   - parsed_format: records the input format for round-trip rendering
+      #   - subseries: derived from series+number (which SP subseries the
+      #     document belongs to); populated by the Builder for known SP
+      #     subseries codes. Ignored in equality so a manually-built id
+      #     without subseries set still equals a parsed one.
       EQUALITY_IGNORED_ATTRS = %i[
-        edition_component first_number second_number parsed_format
+        edition_component first_number second_number parsed_format subseries
       ].freeze
 
       # Logical identity comparison: equal when every attribute except the

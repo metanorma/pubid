@@ -379,6 +379,29 @@ module Pubid
                                                        id: extracted_revision.to_s)
         end
 
+        # Expose the SP subseries (Appendix A.2 of the NIST PubID Syntax) as
+        # a queryable attribute. For "NIST SP 800-53" the subseries is "800"
+        # (first_num) and the sequence is "53" (already folded into number).
+        # Pure metadata extraction — number is left intact so existing
+        # rendering and indexing stay byte-identical.
+        if identifier.is_a?(Identifiers::SpecialPublication) &&
+            first_num && identifier.respond_to?(:subseries=)
+          first_str = first_num.value.to_s
+          subseries_code =
+            if Identifiers::SpecialPublication::SP_SUBSERIES.include?(first_str)
+              first_str
+            elsif (m = first_str.match(/\A(\d+GB)\b/)) &&
+                Identifiers::SpecialPublication::SP_SUBSERIES.include?(m[1])
+              # Parser emits "1190GB-12" as a single first_number token; strip
+              # the suffix to surface the bare "1190GB" subseries code.
+              m[1]
+            end
+          if subseries_code
+            identifier.subseries =
+              Components::Code.new(value: subseries_code)
+          end
+        end
+
         # Series-specific post-processing (e.g., IR reverses the "84e2946"
         # form that preprocessing produced back to "84-2946").
         series.finalize_identifier(identifier, parsed_hash)
