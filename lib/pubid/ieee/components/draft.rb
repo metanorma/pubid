@@ -42,19 +42,59 @@ day: nil)
           self.day = day
         end
 
-        # Parse a draft string like "D5", "D3.4", or "5" into a Draft object.
+        # Month names as an alternation, longest-first so "September" wins over
+        # "Sep"; each may carry a trailing period ("Sept."). Used to split a
+        # rendered draft's trailing date back out.
+        MONTH_ALTERNATION =
+          MONTH_NAMES.keys.sort_by { |m| -m.length }
+            .map { |m| "#{Regexp.escape(m)}\\.?" }.join("|").freeze
+        private_constant :MONTH_ALTERNATION
+
+        DATE_SUFFIX =
+          /(?:(, | )(#{MONTH_ALTERNATION})(?: (\d{1,2}))?(?:, | )| )((?:19|20)\d{2}[a-z]{0,2})\z/
+        private_constant :DATE_SUFFIX
+
+        # Parse a rendered draft such as "/D3", "/D3.4", "/D7 Jul 2019", or a
+        # bare "D5"/"5" back into a Draft. This is the exact inverse of #to_s:
+        # `Draft.parse(d.to_s).to_s == d.to_s` must hold, because the identifier
+        # stores the draft as its rendered string and rebuilds the object with
+        # this method after `from_hash` (a mismatch breaks `to_hash` round-trip).
         # @param value [String, Draft] the value to coerce
         # @return [Draft]
         def self.parse(value)
           return value if value.is_a?(Draft)
 
-          str = value.to_s
-          if str =~ /^D(\d+)(?:\.(\d+))?/
-            new(version: $1, revision: $2)
-          else
-            new(version: str)
-          end
+          body = strip_prefix(value.to_s)
+          version, month, day, year, comma = split_date(body)
+          draft = new(version: version, month: month, day: day, year: year)
+          draft.comma_before_month = comma
+          draft
         end
+
+        # Remove the leading "/D" (or a bare leading "D"/"/") that #to_s emits,
+        # leaving the version and any trailing date.
+        def self.strip_prefix(str)
+          return str[2..] if str.start_with?("/D")
+          return str[1..] if str.start_with?("/")
+          return str[1..] if str.start_with?("D") && str.length > 1
+
+          str
+        end
+        private_class_method :strip_prefix
+
+        # Split a trailing rendered date off the version, so the version stays
+        # clean (the SI/PSI renderer reads `draft_obj.version` directly). Returns
+        # [version, month, day, year, comma_before_month].
+        def self.split_date(body)
+          m = body.match(DATE_SUFFIX)
+          return [body, nil, nil, nil, false] unless m
+
+          version = body[0...m.begin(0)]
+          # The leading group is nil for the month-less " YEAR" form.
+          comma = m[1] == ", "
+          [version, m[2], m[3], m[4], comma]
+        end
+        private_class_method :split_date
 
         # Convert month name to numeric value
         def convert_month(month_name)

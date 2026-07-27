@@ -6,6 +6,7 @@ module Pubid
       autoload :AdoptedStandard, "#{__dir__}/identifiers/adopted_standard"
       autoload :ConformanceIdentifier,
                "#{__dir__}/identifiers/conformance_identifier"
+      autoload :CodeNumber, "#{__dir__}/identifiers/code_number"
       autoload :Corrigendum, "#{__dir__}/identifiers/corrigendum"
       autoload :CsaDualPublished, "#{__dir__}/identifiers/csa_dual_published"
       autoload :DualIdentifier, "#{__dir__}/identifiers/dual_identifier"

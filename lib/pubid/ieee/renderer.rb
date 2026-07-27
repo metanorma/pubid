@@ -105,11 +105,9 @@ module Pubid
           # Append interpretation notation (/INT)
           result += "/INT" if id.interpretation
 
-          # Append conformance notation (/ConformanceNN-YYYY)
-          if id.conf_number
-            result += "/Conformance#{id.conf_number}"
-            result += "-#{id.conf_year}" if id.conf_year
-          end
+          # Conformance is always built as a ConformanceIdentifier wrapper
+          # (render_conformance), never inline on a base standard — the base no
+          # longer carries a conf_number attribute.
 
           # Append ASHRAE joint publication (/ASHRAE Guideline NN-YYYY)
           if id.ashrae_number
@@ -215,9 +213,9 @@ module Pubid
 
         result = id.base.to_s
         result += "/Cor"
-        result += ". " if id.cor_number # Add period and space for formal format
-        result += id.cor_number if id.cor_number
-        result += "-#{id.cor_year}" if id.cor_year
+        result += ". " if id.number # Add period and space for formal format
+        result += id.number if id.number
+        result += "-#{id.year}" if id.year
         result
       end
 
@@ -226,7 +224,7 @@ module Pubid
 
         result = id.base.to_s
         result += "/INT"
-        result += "-#{id.int_year}" if id.int_year
+        result += "-#{id.year}" if id.year
         result
       end
 
@@ -234,8 +232,8 @@ module Pubid
         return render_base(id) unless id.base
 
         result = id.base.to_s
-        result += "/Conformance#{id.conf_number}" if id.conf_number
-        result += "-#{id.conf_year}" if id.conf_year
+        result += "/Conformance#{id.number}" if id.number
+        result += "-#{id.year}" if id.year
         result
       end
 

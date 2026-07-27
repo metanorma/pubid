@@ -18,6 +18,9 @@ module Pubid
       #   std.publisher        # => "IEEE"
       #   std.copublisher     # => ["ANSI"]
       class Standard < Identifier
+        # Reliable string `number` for relaton's index key (see CodeNumber).
+        include CodeNumber
+
         # TYPED_STAGES for published IEEE standards
         # Standards use "Std" abbreviation for published state
         TYPED_STAGES = [

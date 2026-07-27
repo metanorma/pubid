@@ -7,7 +7,8 @@ module Pubid
       # Represents an interpretation sheet or clarification
       # Example: IEEE Std 1076/INT-1991, IEEE Std 1003.1-1988/INT
       class InterpretationIdentifier < SupplementIdentifier
-        attribute :int_year, :string
+        # Uniform `year` (the interpretation year), not `int_year` — inherited
+        # from the base, so no attribute is declared here.
 
         # TYPED_STAGES for interpretation
         # Interpretation uses "INT" abbreviation
