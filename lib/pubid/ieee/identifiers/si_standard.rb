@@ -9,6 +9,9 @@ module Pubid
       # - SI: Published standards (IEEE/ASTM SI 10-1997)
       # - PSI: Proposed SI (drafts: IEEE/ASTM PSI 10/D2, October 2015)
       class SiStandard < Identifier
+        # Reliable string `number` for relaton's index key (see CodeNumber).
+        include CodeNumber
+
         # TYPED_STAGES for SI standards
         TYPED_STAGES = [
           Components::TypedStage.new(

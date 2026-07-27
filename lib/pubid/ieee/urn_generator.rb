@@ -39,11 +39,9 @@ module Pubid
           parts << "int"
         end
 
-        if special_type != "conformance" && identifier.conf_number
-          conf = "conf.#{identifier.conf_number}"
-          conf += "-#{identifier.conf_year}" if identifier.conf_year
-          parts << conf
-        end
+        # Conformance is always a ConformanceIdentifier wrapper (special_type
+        # "conformance"), never inline on a base standard — the base no longer
+        # carries a conf_number attribute, so there is no inline conf part.
 
         if identifier.ashrae_number
           ashrae = "ashrae.#{identifier.ashrae_number}"

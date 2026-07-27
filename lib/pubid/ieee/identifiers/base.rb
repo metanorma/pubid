@@ -16,7 +16,13 @@ module Pubid
 
       attribute :publisher, :string, default: -> { "IEEE" }
       attribute :copublisher, :string, collection: true # IEC, ISO, ANSI, etc.
-      attribute :code, :string # Will store code as object in initialize
+      # NB: there is deliberately NO `attribute :code`. IEEE's document code is
+      # serialized as the split index columns (number/prefix/parts/separator) on
+      # concrete leaf types via the CodeNumber mixin; `code`/`code_obj` remain a
+      # runtime-only representation (built in #initialize, read by the renderer).
+      # The separate AIEE/NESC/IRE identifier classes (which descend from
+      # Lutaml::Model::Serializable, not this base) keep their own
+      # `attribute :code`.
       attribute :year, :string
       attribute :type, :string, default: -> { "Std" } # Std, Draft Std
       attribute :draft_status, :string                    # Unapproved, Approved, Active Unapproved
@@ -46,8 +52,6 @@ module Pubid
       attribute :interpretation, :boolean, default: -> {
         false
       } # /INT notation
-      attribute :conf_number, :string # Conformance document number
-      attribute :conf_year, :string # Conformance document year
       attribute :ashrae_number, :string # ASHRAE Guideline number
       attribute :ashrae_year, :string # ASHRAE Guideline year
       attribute :crossref, :string # IEEE cross-reference (e.g., /C62.22.1-1996)
@@ -56,7 +60,13 @@ module Pubid
       # Store actual component objects
       attr_accessor :code_obj, :draft_obj
 
-      def initialize(**args)
+      # Accept either keyword args (`new(number: "802")`, the normal path) or a
+      # single positional attribute hash (`new({number: "802"})`). The latter is
+      # what the base `Pubid::Identifier#exclude`/matching machinery uses when it
+      # rebuilds via `self.class.new(attrs)`; without it, `exclude`/`matches?`
+      # raised ArgumentError for every IEEE identifier.
+      def initialize(args = {}, **kwargs)
+        args = args.merge(kwargs) unless kwargs.empty?
         super()
 
         # Handle typed_stage if provided
@@ -64,13 +74,15 @@ module Pubid
           self.typed_stage = args[:typed_stage]
         end
 
-        # Handle code as component object
+        # Handle code as component object. `code` is runtime-only (not a lutaml
+        # attribute) — we keep the parsed Components::Code in code_obj; every
+        # leaf serializes the split index columns (number/prefix/parts/separator)
+        # via the CodeNumber mixin instead of a `code` string. The renderer reads
+        # code_obj (base #code returns it).
         if args[:code].is_a?(String)
           self.code_obj = Components::Code.parse(args[:code])
-          self.code = args[:code]
         elsif args[:code]
           self.code_obj = args[:code]
-          self.code = args[:code].to_s
         end
 
         # Handle draft as component object
@@ -125,6 +137,44 @@ module Pubid
         return nil unless draft_obj.is_a?(Components::Draft)
 
         draft_obj.numeric_month
+      end
+
+      # IEEE stores its publication date as separate `year`/`month`/`day`
+      # :string attributes, not a Components::Date, so the base #exclude's
+      # `:year`->`:date` remap can't reach them (it would nil an unused `date`
+      # component and leave the strings). After the base rebuild, nil the whole
+      # date cluster when `:year`/`:date` is excluded, so a date-less reference
+      # matches every date in the bucket (relaton partial-ref matching). NB: the
+      # base #exclude also previously raised for every IEEE id (positional
+      # `self.class.new(attrs)` vs the keyword initialize) — fixed by
+      # Identifier#initialize accepting a positional hash.
+      def exclude(*args)
+        result = super
+        if args.intersect?(%i[year date])
+          %i[year month day].each do |attr|
+            result.public_send("#{attr}=", nil) if result.respond_to?("#{attr}=")
+          end
+        end
+        result
+      end
+
+      # Compact the serialized hash (recursively, so nested Corrigendum bases
+      # are compacted too) after the normal serialize + canonicalize: collapse
+      # `typed_stage` to a scalar `stage` and strip the `/` off `draft`. See
+      # Compaction for why this is a hash transform, not lutaml attributes.
+      def to_hash(*args)
+        hash = super
+        Compaction.collapse(hash) if hash.is_a?(::Hash)
+        hash
+      end
+
+      # Inverse of the to_hash compaction: expand a scalar `stage` back into the
+      # `typed_stage` sub-hash (on a deep copy, recursively) before lutaml
+      # deserializes, so nested bases rebuild their component too. `draft` needs
+      # no expansion (Draft.parse accepts the slashless form).
+      def self.from_hash(data, options = {})
+        data = Compaction.expand(Compaction.deep_dup(data)) if data.is_a?(::Hash)
+        super
       end
 
       # Parse IEEE identifier string.

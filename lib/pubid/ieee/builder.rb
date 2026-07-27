@@ -112,11 +112,57 @@ module Pubid
         end
 
         Identifiers::IecIeeeCopublished.new(
-          copublished_number: copublished_number,
           draft_info: draft_info,
           iec_year: iec_year,
           date_info: date_info,
+          **copublished_structured(copublished_number),
         )
+      end
+
+      # Decompose an IEC/IEEE `copublished_number` into the split index columns
+      # that reconstruct it losslessly (IecIeeeCopublished#copublished_number is
+      # the inverse). First peel a trailing *publication year* (19xx/20xx with
+      # its `-`/`:` separator) into `year`/`year_sep` — a bare 4-digit strip
+      # would wrongly eat a part like "60076.57-1202" (1202 is a part, not a
+      # year). Then tokenise the remainder on `.`/`-`, keeping each part's
+      # leading separator (a single code mixes them). So `number` narrows to the
+      # bucket, `parts` matches within it, and `separators` renders it back.
+      # `year_sep` is omitted when the default `-`. Returns empty for no number.
+      def copublished_structured(copublished_number)
+        return {} if copublished_number.nil? || copublished_number.empty?
+
+        remainder, year, year_sep = peel_copublished_year(copublished_number)
+        tokens = remainder.scan(/\A[^.\-]+|[.\-][^.\-]+/)
+        { number: tokens.shift }
+          .merge(copublished_parts(tokens))
+          .merge(copublished_year(year, year_sep))
+      end
+
+      # The `parts`/`separators` columns from the tokens after the number.
+      def copublished_parts(tokens)
+        return {} if tokens.empty?
+
+        { parts: tokens.map { |t| t[1..] }, separators: tokens.map { |t| t[0] } }
+      end
+
+      # The `year`/`year_sep` columns; `year_sep` is omitted when the default `-`.
+      def copublished_year(year, year_sep)
+        return {} unless year
+
+        year_sep == "-" ? { year: year } : { year: year, year_sep: year_sep }
+      end
+
+      # Peel a trailing publication year (19xx/20xx with its `-`/`:` separator)
+      # off a copublished number, returning [remainder, year, year_sep].
+      def peel_copublished_year(copublished_number)
+        return [copublished_number, nil, nil] unless
+          copublished_number =~ /([-:])((?:19|20)\d\d)\z/
+
+        year_sep = Regexp.last_match(1)
+        year = Regexp.last_match(2)
+        trimmed = copublished_number[0...(copublished_number.length -
+          year_sep.length - year.length)]
+        [trimmed, year, year_sep]
       end
 
       # Build dual published identifier
@@ -170,6 +216,19 @@ module Pubid
           return build_corrigendum_supplement(parsed_hash)
         end
 
+        # Handle the flat draft + corrigendum form (relaton's `…/D-N/CorM-YYYY`,
+        # normalized to `…/Cor M-YYYY/D N`): the parser emits a top-level
+        # `corrigendum` hash alongside `draft`/number with NO `:base` subtree, so
+        # the supplement path above is skipped. Rebuild a real base standard
+        # (carrying the draft) and wrap it, so `to_s` renders correctly from a
+        # fresh parse and after a from_hash round-trip. The `!parsed_hash[:base]`
+        # guard keeps this disjoint from the nested-base branch above; a
+        # `:base` + nested-`corrigendum`-hash shape is not produced by the
+        # grammar, so it would fall through to `extract_attributes` (as before).
+        if parsed_hash[:corrigendum].is_a?(Hash) && !parsed_hash[:base]
+          return build_flat_corrigendum(parsed_hash)
+        end
+
         # Handle interpretation supplements (check for base + int_year)
         if parsed_hash[:base] && (parsed_hash[:int_year] || parsed_hash[:interpretation])
           return build_interpretation_supplement(parsed_hash)
@@ -194,7 +253,22 @@ module Pubid
 
         # Route to appropriate identifier class based on content
         identifier_class = determine_identifier_class(attributes)
+        rename_supplement_keys(attributes)
         identifier_class.new(**attributes)
+      end
+
+      # Supplement wrappers (Corrigendum/Conformance/Interpretation) store their
+      # ordinal/year under the uniform `number`/`year`, but the parse tree and
+      # class-routing above key on the distinct `cor_*`/`conf_*`/`int_year`
+      # names. Translate them **after** routing, just before construction. Guards
+      # ensure a plain standard's own `number`/`year` are never overwritten (it
+      # carries none of these keys).
+      def rename_supplement_keys(attributes)
+        ordinal = attributes.delete(:cor_number) || attributes.delete(:conf_number)
+        attributes[:number] = ordinal if ordinal
+        year = attributes.delete(:cor_year) || attributes.delete(:conf_year) ||
+          attributes.delete(:int_year)
+        attributes[:year] = year if year
       end
 
       # Build corrigendum supplement with recursive base parsing
@@ -263,15 +337,38 @@ module Pubid
         # Recursively parse base identifier using Base.parse
         base = Identifier.parse(base_string)
 
-        # Extract corrigendum attributes
+        # Extract corrigendum attributes (parse-tree keys are cor_*; the
+        # identifier stores them as the uniform `number`/`year`).
         cor_number = extract_value(parsed_hash[:cor_number])
         cor_year = extract_value(parsed_hash[:cor_year])
 
         # Create Corrigendum with parsed base
         Identifiers::Corrigendum.new(
           base: base,
-          cor_number: cor_number,
-          cor_year: cor_year,
+          number: cor_number,
+          year: cor_year,
+        )
+      end
+
+      # Build a Corrigendum from the flat parse tree produced by the combined
+      # `…/Cor M-YYYY/D N` form, where the corrigendum lives in a top-level
+      # `corrigendum` hash and there is no `:base` subtree. Peel the corrigendum
+      # off, build the remaining attributes into the base standard (with its
+      # draft) via the normal single-identifier path, then wrap.
+      # @param parsed_hash [Hash] flat parsed data with a :corrigendum hash
+      # @return [Identifiers::Corrigendum]
+      def build_flat_corrigendum(parsed_hash)
+        cor_data = parsed_hash[:corrigendum]
+        cor_number = extract_value(cor_data[:cor_number])
+        cor_year = extract_value(cor_data[:cor_year]) if cor_data[:cor_year]
+
+        base_hash = parsed_hash.reject { |key, _| key == :corrigendum }
+        base = build_single_identifier(base_hash)
+
+        Identifiers::Corrigendum.new(
+          base: base,
+          number: cor_number,
+          year: cor_year,
         )
       end
 
@@ -342,10 +439,10 @@ module Pubid
         # Extract interpretation attributes
         int_year = extract_value(parsed_hash[:int_year])
 
-        # Create InterpretationIdentifier with parsed base
+        # Create InterpretationIdentifier with parsed base (int_year -> year)
         Identifiers::InterpretationIdentifier.new(
           base: base,
-          int_year: int_year,
+          year: int_year,
         )
       end
 
@@ -417,11 +514,11 @@ module Pubid
         conf_number = extract_value(parsed_hash[:conf_number])
         conf_year = extract_value(parsed_hash[:conf_year])
 
-        # Create ConformanceIdentifier with parsed base
+        # Create ConformanceIdentifier with parsed base (conf_* -> number/year)
         Identifiers::ConformanceIdentifier.new(
           base: base,
-          conf_number: conf_number,
-          conf_year: conf_year,
+          number: conf_number,
+          year: conf_year,
         )
       end
 
@@ -630,8 +727,11 @@ module Pubid
           return Identifiers::RedlinedStandard
         end
 
-        # Default to base identifier
-        Identifier
+        # Default to the concrete Standard leaf (a plain published standard).
+        # Routing to a leaf — rather than instantiating the shared base
+        # Ieee::Identifier — is what lets `number` be a reliable :string index
+        # key (see Identifiers::Standard).
+        Identifiers::Standard
       end
 
       # Detect lead party for joint development identifiers

@@ -7,8 +7,12 @@ module Pubid
       # Represents conformance test documents
       # Example: IEEE Std 802.16/Conformance01-2003
       class ConformanceIdentifier < SupplementIdentifier
-        attribute :conf_number, :string
-        attribute :conf_year, :string
+        # Uniform `number` (the conformance ordinal) + inherited `year`, not
+        # `conf_number`/`conf_year`. `number` is a plain string redefining the
+        # inherited Components::Code (leaf-safe). `root.number` still returns the
+        # base document number.
+        attribute :number, :string
+        # `year` inherited from the base.
 
         # TYPED_STAGES for conformance
         # Conformance uses "Conformance" abbreviation

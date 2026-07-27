@@ -30,17 +30,26 @@ module Pubid
       # - ISO stages and IEEE drafts can coexist but are not equivalent
       # - Format conversion preserves semantic meaning within each system
       class JointDevelopment < Identifier
+        # Split index columns (number/prefix/parts/separator) instead of a
+        # `code` string, like every IEEE leaf — see CodeNumber. Rendering reads
+        # `code` (base #code → code_obj), which CodeNumber rebuilds from the
+        # split fields, so to_ieee_format / to_iso_format are unaffected.
+        include CodeNumber
+
         attribute :publishers, :string, collection: true
         attribute :lead_party, :string              # "IEEE", "ISO", "IEC", etc.
-        attribute :code, :string
         attribute :typed_stage, Components::TypedStage
         attribute :year, :string
         attribute :iso_stage, :string               # For ISO stage if present
         attribute :ieee_draft, :string              # For IEEE P/D notation if present
 
-        def initialize(**args)
+        # Accepts keyword args or a single positional hash (the base
+        # #exclude/matching rebuild passes the latter) — see
+        # Identifier#initialize.
+        def initialize(args = {}, **kwargs)
+          args = args.merge(kwargs) unless kwargs.empty?
           # Call super FIRST to initialize Lutaml::Model attributes
-          super
+          super(args)
 
           # Then handle typed_stage
           if args[:typed_stage].is_a?(Components::TypedStage)
@@ -159,6 +168,12 @@ module Pubid
           result
         end
 
+        # Public again: these override base accessors and MUST be public — lutaml
+        # serialization calls `public_send(:publisher)`, so leaving them under the
+        # `private` above made JointDevelopment#to_hash raise (it could not be
+        # serialized or round-tripped / indexed at all).
+        public
+
         # Override to ensure proper publisher handling
         def publisher
           publishers&.first || super
@@ -167,6 +182,22 @@ module Pubid
         # Override to ensure proper copublisher handling
         def copublisher
           publishers&.drop(1) || super
+        end
+
+        # `publisher`/`copublisher` are *derived* from `publishers` (the source
+        # of truth, which IS serialized). Emitting them too breaks the canonical
+        # round-trip: the derived `publisher` is default-omitted on the parse
+        # path but re-emitted after from_hash (the override returns
+        # publishers.first, not the default). Drop both — publishers rebuilds
+        # them. (JointDevelopment is a top-level root, never nested, so a
+        # to_hash-level drop is sufficient.)
+        def to_hash(*args)
+          hash = super
+          if hash.is_a?(::Hash)
+            hash.delete("publisher")
+            hash.delete("copublisher")
+          end
+          hash
         end
       end
     end

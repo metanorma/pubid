@@ -135,7 +135,12 @@ module Pubid
       # But simple cases like "623-1976" should not consume the dash before year
       rule(:number) do
         (str("P").maybe >>
-         (digits | upper).repeat(1) >> # The first component must be at least one digit
+         # The numeric core must contain at least one digit: an optional letter
+         # prefix (C, S, …) then a required `digits` run, then any digit/letter
+         # tail. The old `(digits | upper).repeat(1)` wrongly accepted an
+         # all-letter token like a bare "S" (a prefix with no number — e.g.
+         # "IEEE S"), which is not a valid IEEE identifier.
+         upper.repeat(0) >> digits >> (digits | upper).repeat(0) >>
          # Only consume dash+digits if followed by another dash+digits (multi-part pattern)
          # OR if the digits don't look like a year (not 4 digits starting with 19/20)
          # This prevents consuming "623-1976" as a number but allows "P11073-10404-10419"
@@ -800,6 +805,69 @@ module Pubid
 
       root(:identifier)
 
+      # Rewrite relaton's historical IEEE serialization into canonical pubid
+      # spellings. relaton's own formatter (Relaton::Ieee::PubId::Id#to_s) emits
+      # suffix tokens that differ from pubid's grammar:
+      #
+      #   /D-N-YYYY[-MM]  draft + trailing numeric date  (the dominant form)
+      #   /E-N[-YYYY[-MM]] edition
+      #   /R-N[-YYYY]      revision (pubid has no revision suffix)
+      #   " Redline"       redline suffix without the " - " pubid expects
+      #
+      # The draft/edition trailing date is repositioned onto the document number
+      # as a base year/month (a form pubid already parses), which also keeps the
+      # draft component clean so it round-trips through to_hash/from_hash.
+      def self.normalize_relaton_suffixes(cleaned)
+        # Bare " Redline" (relaton omits the leading " - "). pubid strips redline
+        # on the normal parse path anyway, so drop it here too.
+        cleaned = cleaned.sub(/ Redline\z/, "")
+
+        # Combined draft + corrigendum: relaton emits "…/D-N/CorM-YYYY" (draft
+        # then corrigendum), but pubid's grammar accepts the corrigendum first.
+        # Swap them so the corrigendum keeps its own year and the draft trails.
+        # The hyphen after "D" is mandatory here: relaton's formatter always
+        # emits "/D-<draft>", whereas pubid's own canonical joint-development
+        # form is "/D<draft>-<year>" (no hyphen, year kept on the draft) — which
+        # already parses and must not be repositioned. A trailing corrigendum
+        # month (the "-MM" in "/CorM-YYYY-MM") is intentionally dropped: pubid's
+        # corrigendum model carries only a year.
+        cleaned = cleaned.sub(
+          %r{\A(.*)/D-([0-9A-Za-z][0-9A-Za-z.+]*?)/Cor\.?[ ]?(\d+)(?:-((?:19|20)\d\d))?(?:-\d\d)?\z},
+        ) do
+          base, draft, cor, year = Regexp.last_match.captures
+          "#{base}/Cor #{cor}#{year ? "-#{year}" : ''}/D#{draft}"
+        end
+
+        # /D-N drafts with a trailing numeric date, when the draft is the last
+        # suffix: reposition the -YYYY[-MM] date onto the number. A following
+        # /Cor, /Amd, /R or /E suffix carries its own year, so the `\z` anchor
+        # keeps this from firing on those combined forms.
+        cleaned = cleaned.sub(
+          %r{\A(.*)/D-([0-9A-Za-z][0-9A-Za-z.+]*?)-((?:19|20)\d\d)(?:-(0[1-9]|1[0-2]))?\z},
+        ) do
+          base, draft, year, month = Regexp.last_match.captures
+          "#{base}-#{year}#{month ? "-#{month}" : ''}/D#{draft}"
+        end
+
+        # /E-N editions: relaton's "/E-2-2023-02" → pubid's "Edition 2.0 2023-02".
+        cleaned = cleaned.sub(
+          %r{\A(.*?)/E-(\d+)(?:-((?:19|20)\d\d)(?:-(0[1-9]|1[0-2]))?)?\z},
+        ) do
+          base, edition, year, month = Regexp.last_match.captures
+          date = year ? " #{year}#{month ? "-#{month}" : ''}" : ""
+          "#{base} Edition #{edition}.0#{date}"
+        end
+
+        # /R-N revisions: pubid has no revision suffix, so drop it and keep any
+        # trailing year on the number (the revised edition's publication year).
+        cleaned.sub(
+          %r{\A(.*?)/R-[0-9A-Za-z]+(?:-((?:19|20)\d\d))?\z},
+        ) do
+          base, year = Regexp.last_match.captures
+          year ? "#{base}-#{year}" : base
+        end
+      end
+
       def self.parse(string)
         # Strip .pdf extension if present (Pattern 3: File Extensions)
         cleaned = string.sub(/\.pdf$/i, "")
@@ -816,6 +884,11 @@ module Pubid
         # NEW: Normalize multiple spaces to single space
         # No valid IEEE identifier pattern needs more than 1 space
         cleaned = cleaned.gsub(/\s+/, " ")
+
+        # Normalize relaton's bespoke historical serialization (the spellings
+        # emitted by Relaton::Ieee::PubId::Id#to_s) into canonical pubid forms
+        # so `relaton-data-ieee` parses. See #normalize_relaton_suffixes.
+        cleaned = normalize_relaton_suffixes(cleaned)
 
         # NEW Session 171: CONSERVATIVE data quality fixes for TODO.IEEE-MUST-DO.txt
         # Only fix clear typos: space before dash + 4-digit year, OR dash + space + 4-digit year
