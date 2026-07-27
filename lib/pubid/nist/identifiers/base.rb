@@ -12,6 +12,77 @@ module Pubid
         Pubid::Nist.parse(identifier)
       end
 
+      # Compact, index-friendly serialization (mirrors the key_value flavors
+      # ISO/ITU/ETSI, without a 38-field key_value block). Two transforms,
+      # applied symmetrically by to_hash/from_hash so the round-trip stays
+      # idempotent:
+      #   - flatten the single-value Code components (series, number) to bare
+      #     scalars — `value` is the only stored field. NIST's
+      #     `Components::Code#part` is a *computed* reader
+      #     (`value.split("-").last`), and prefix/subpart/parts are never
+      #     assigned on series/number, so the scalar `value` is lossless:
+      #     expand recomputes exactly what the object would compute anyway;
+      #   - flatten the plain single-value components (volume) to bare scalars
+      #     too — `Components::Volume` holds only `value`, so it expands to a
+      #     bare { "value" => … } with no part;
+      #   - drop the redundant build artifacts, decomposed pieces of the
+      #     canonical number that identity/rendering never read.
+      COMPACT_FLAT_CODES = %w[series number subseries].freeze
+      COMPACT_FLAT_VALUES = %w[volume].freeze
+      COMPACT_DROP_ATTRS = %w[first_number second_number].freeze
+
+      # Deserialize a (possibly compact) hash: expand the flattened scalars
+      # back into Code sub-hashes, then let the shared polymorphic from_hash
+      # do the real work. Nested `base` documents are expanded recursively by
+      # their own from_hash via apply_mappings, so only this level is touched.
+      def self.from_hash(data, options = {})
+        super(expand_compact_hash(data), options)
+      end
+
+      # Expand a compact hash in place-safe fashion: a scalar series/number
+      # becomes { "value" => …, "part" => <last-dash segment> }.
+      def self.expand_compact_hash(data)
+        return data unless data.is_a?(::Hash)
+
+        out = data.dup
+        COMPACT_FLAT_CODES.each do |key|
+          out[key] = expand_code(out[key]) if out[key].is_a?(::String)
+        end
+        COMPACT_FLAT_VALUES.each do |key|
+          out[key] = { "value" => out[key] } if out[key].is_a?(::String)
+        end
+        out
+      end
+
+      # A flattened Code scalar -> { "value" => …, "part" => <last-dash seg> }.
+      def self.expand_code(value)
+        code = { "value" => value }
+        code["part"] = value.split("-").last if value.include?("-")
+        code
+      end
+
+      # Serialize, then apply the compact transforms (recursing into a nested
+      # `base`, which lutaml serialized via its own transform — bypassing this
+      # override — so it is not compacted otherwise).
+      def to_hash(*args)
+        hash = super
+        compact_hash!(hash) if hash.is_a?(::Hash)
+        hash
+      end
+
+      def compact_hash!(hash)
+        COMPACT_DROP_ATTRS.each { |key| hash.delete(key) }
+        (COMPACT_FLAT_CODES + COMPACT_FLAT_VALUES).each do |key|
+          value = hash[key]
+          next unless value.is_a?(::Hash) && value.key?("value")
+
+          hash[key] = value["value"]
+        end
+        compact_hash!(hash["base"]) if hash["base"].is_a?(::Hash)
+        hash
+      end
+      private :compact_hash!
+
       # Default: no typed stages. Subclasses override as needed.
       def self.typed_stages
         []
@@ -37,8 +108,13 @@ module Pubid
       attribute :number, Components::Code
 
       # V2 COMPONENTS (Lutaml::Model objects) - PROPER SEPARATION
+      # `edition` (Components::Edition: type + id + additional_text) is the
+      # single source of truth for edition/revision. The former
+      # `edition_component` (a byte-identical duplicate) and the `revision`
+      # string (always "#{edition.type}#{edition.id}") were unfinished V1->V2
+      # migration aliases; both removed. `#revision` survives as a derived
+      # reader below.
       attribute :edition, Components::Edition # Edition (type + id): e2, e2021, r5, -3
-      attribute :edition_component, Components::Edition # V2 edition component (alias)
       attribute :volume, Components::Volume # Volume component (v6)
       attribute :part, Components::Part  # Part component (n1 or pt1)
       attribute :stage, Components::Stage
@@ -57,7 +133,6 @@ module Pubid
 
       # LEGACY attributes (keep for backward compatibility during migration)
       attribute :parts, Components::Code, collection: true
-      attribute :revision, :string
       attribute :revision_year, :string # Year for revision (e.g., r6/1925, r1963, rJun1992)
       attribute :revision_month, :string # Month for revision (e.g., rJun1992)
       attribute :edition_year, :string # Legacy edition year for backward compatibility
@@ -113,7 +188,6 @@ module Pubid
       # Attributes that are build artifacts or rendering aliases, not part
       # of an identifier's logical identity. They diverge between equally-
       # valid spellings of the same id (e.g. long "Rev. 1" vs short "r1"):
-      #   - edition_component: redundant alias of :edition
       #   - first_number/second_number: decomposed parts of the canonical
       #     :number, retained from the parse for building
       #   - parsed_format: records the input format for round-trip rendering
@@ -122,7 +196,7 @@ module Pubid
       #     subseries codes. Ignored in equality so a manually-built id
       #     without subseries set still equals a parsed one.
       EQUALITY_IGNORED_ATTRS = %i[
-        edition_component first_number second_number parsed_format subseries
+        first_number second_number parsed_format subseries
       ].freeze
 
       # Logical identity comparison: equal when every attribute except the
@@ -189,15 +263,12 @@ module Pubid
         prefix + (rendered.empty? ? "sup" : rendered)
       end
 
-      # Compute revision from edition component for backward compatibility
+      # Derived, read-only revision string ("r5", "e1979", "-3") for backward
+      # compatibility. `edition` is the single stored representation; this is
+      # never persisted, compared, or merged — just a convenience view of it.
       # @return [String, nil] revision string (e.g., "r5") or nil
       def revision
-        return @revision if @revision
-
-        # Compute from edition component if available
-        if edition&.type && edition.id
-          "#{edition.type}#{edition.id}"
-        end
+        "#{edition.type}#{edition.id}" if edition&.type && edition.id
       end
 
       # Backward compatibility: translation method returns translation_component
@@ -262,6 +333,8 @@ module Pubid
       # @return [Integer] weight score (higher = more specific)
       def weight
         self.class.attributes.keys.inject(0) do |sum, key|
+          next sum if EQUALITY_IGNORED_ATTRS.include?(key)
+
           val = public_send(key)
           val && !val.to_s.empty? ? sum + 1 : sum
         end
@@ -289,7 +362,7 @@ module Pubid
                          when :edition
                            current_val.nil? || edition_greater?(new_val,
                                                                 current_val)
-                         when :volume, :part, :version, :revision
+                         when :volume, :part, :version
                            current_val.nil? || (new_val.to_s.length > current_val.to_s.length)
                          when :supplement, :errata, :index, :insert, :section, :appendix, :translation
                            true
