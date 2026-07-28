@@ -287,8 +287,6 @@ module Pubid
 
               identifier.number = Components::Code.new(value: "#{first_num.value}-#{number_part}")
               identifier.edition = edition_obj
-              identifier.edition_component = edition_obj
-              identifier.revision = "r#{edition_id}"
             # CS Emergency pattern: e104-43 -> number=104, edition_year=1943
             # Logic: e104-43 means "emergency 104 from 1943" (43 = 1943)
             elsif first_num.value.to_s.match?(/^e(\d{3})$/) &&
@@ -304,7 +302,6 @@ module Pubid
 
               identifier.number = Components::Code.new(value: number_part)
               identifier.edition = edition_obj
-              identifier.edition_component = edition_obj
             elsif first_num.value.to_s.match?(/^(\d+)e(\d+)$/) &&
                 second_num.value.to_s.match?(/^\d{2,4}$/)
               # Pattern: "11e2-1915" OR "123e2-50" parsed as first="11e2"|"123e2", second="1915"|"50"
@@ -326,7 +323,6 @@ module Pubid
               edition_obj = Components::Edition.new(type: "e",
                                                     id: edition_id, additional_text: year_part)
               identifier.edition = edition_obj
-              identifier.edition_component = edition_obj
             elsif first_num.value.to_s.match?(/^(\d+)supp?$/) &&
                 second_num.value.to_s.match?(/^\d{4}$/)
               # Pattern: "25supp-1924" parsed as first="25supp", second="1924"
@@ -351,7 +347,6 @@ module Pubid
               identifier.number = first_num
               edition_obj = Components::Edition.new(type: "e",
                                                     id: second_num.value.to_s)
-              identifier.edition_component = edition_obj
               identifier.edition = edition_obj
               identifier.edition_year = second_num.value.to_s
             elsif part_num && series.part_num_as_component?

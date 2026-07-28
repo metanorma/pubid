@@ -36,8 +36,6 @@ module Pubid
           )
           edition_obj = Components::Edition.new(type: "r", id: "1")
           identifier.edition = edition_obj
-          identifier.edition_component = edition_obj
-          identifier.revision = "r1"
           true
         end
 
@@ -52,7 +50,6 @@ module Pubid
             value: "#{match[1]}-#{match[2]}",
           )
           identifier.edition = nil
-          identifier.edition_component = nil
         end
       end
     end

@@ -201,9 +201,6 @@ module Pubid
                                            value: data[:letter_suffix].to_s.upcase),
                 edition: Components::Edition.new(type: "r",
                                                  id: data[:revision_id].to_s),
-                edition_component: Components::Edition.new(type: "r",
-                                                            id: data[:revision_id].to_s),
-                revision: "r#{data[:revision_id]}",
               }
             end
 
@@ -882,8 +879,6 @@ module Pubid
           # Store as id directly - renders as "e199206"
           {
             edition: Components::Edition.new(type: "e", id: edition_date),
-            edition_component: Components::Edition.new(type: "e",
-                                                       id: edition_date),
           }
 
         when :edition_e
@@ -894,8 +889,6 @@ module Pubid
 
           {
             edition: Components::Edition.new(type: "e", id: edition_id),
-            edition_component: Components::Edition.new(type: "e",
-                                                       id: edition_id),
           }
 
         when :edition_r
@@ -906,9 +899,6 @@ module Pubid
 
           {
             edition: Components::Edition.new(type: "r", id: edition_id),
-            edition_component: Components::Edition.new(type: "r",
-                                                       id: edition_id),
-            revision: "r#{edition_id}", # Also set revision string attribute for compatibility
           }
 
         when :edition_r_no_space
@@ -920,9 +910,6 @@ module Pubid
 
           {
             edition: Components::Edition.new(type: "r", id: edition_id),
-            edition_component: Components::Edition.new(type: "r",
-                                                       id: edition_id),
-            revision: "r#{edition_id}", # Also set revision string attribute for compatibility
           }
 
         when :edition_rev
@@ -933,9 +920,6 @@ module Pubid
 
           {
             edition: Components::Edition.new(type: "r", id: edition_id),
-            edition_component: Components::Edition.new(type: "r",
-                                                       id: edition_id),
-            revision: "r#{edition_id}", # Also set revision string attribute for compatibility
           }
 
         when :edition_r_letter
@@ -948,10 +932,6 @@ module Pubid
           {
             edition: Components::Edition.new(type: "r", id: edition_id,
                                              additional_text: edition_letter),
-            edition_component: Components::Edition.new(type: "r",
-                                                       id: edition_id,
-                                                       additional_text: edition_letter),
-            revision: "r#{edition_id}#{edition_letter}", # Also set revision string attribute for compatibility
           }
 
         when :edition_r_letter_only
@@ -962,9 +942,6 @@ module Pubid
 
           {
             edition: Components::Edition.new(type: "r", id: edition_letter),
-            edition_component: Components::Edition.new(type: "r",
-                                                       id: edition_letter),
-            revision: "r#{edition_letter}", # Also set revision string attribute for compatibility
           }
 
         when :edition_historical
@@ -975,8 +952,6 @@ module Pubid
 
           {
             edition: Components::Edition.new(type: "-", id: edition_id),
-            edition_component: Components::Edition.new(type: "-",
-                                                       id: edition_id),
           }
 
         when :edition_r_with_space_letter
@@ -996,10 +971,6 @@ module Pubid
             {
               edition: Components::Edition.new(type: "r", id: edition_id,
                                                additional_text: edition_letter),
-              edition_component: Components::Edition.new(type: "r",
-                                                         id: edition_id,
-                                                         additional_text: edition_letter),
-              revision: "r#{edition_id}#{edition_letter}",
             }
           else
             # Space was in original input - preserve format
@@ -1007,11 +978,6 @@ module Pubid
               edition: Components::Edition.new(type: "r", id: edition_id,
                                                additional_text: edition_letter,
                                                original_prefix: " r"),
-              edition_component: Components::Edition.new(type: "r",
-                                                         id: edition_id,
-                                                         additional_text: edition_letter,
-                                                         original_prefix: " r"),
-              revision: "r#{edition_id}#{edition_letter}",
             }
           end
 
@@ -1032,19 +998,12 @@ module Pubid
             # No original_prefix - space was added by preprocessing
             {
               edition: Components::Edition.new(type: "r", id: edition_id),
-              edition_component: Components::Edition.new(type: "r",
-                                                         id: edition_id),
-              revision: "r#{edition_id}",
             }
           else
             # Space was in original input - preserve format
             {
               edition: Components::Edition.new(type: "r", id: edition_id,
                                                original_prefix: " r"),
-              edition_component: Components::Edition.new(type: "r",
-                                                         id: edition_id,
-                                                         original_prefix: " r"),
-              revision: "r#{edition_id}",
             }
           end
 
@@ -1094,7 +1053,6 @@ module Pubid
                 )
                 return {
                   edition: edition_obj,
-                  edition_component: edition_obj,
                   edition_year: edition_id.to_s,
                 }
               else
@@ -1118,7 +1076,6 @@ module Pubid
           # Return as hash to set edition and edition_year
           {
             edition: edition_obj, # Main attribute for tests
-            edition_component: edition_obj, # V2 component
             edition_year: value.to_s, # Keep string for render logic
           }
 
