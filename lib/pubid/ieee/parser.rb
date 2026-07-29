@@ -960,6 +960,33 @@ module Pubid
         end
       end
 
+      # Strip the IEEE rawbib revision-notation dialects. `REV`/`Rev`
+      # (case-insensitive) + a trailing revision id `[A-Za-z0-9]+`, glued to the
+      # number or separated by `-`, `/`, `_`, `.`, or a space, and preceding the
+      # draft. pubid's canonical "<num>/D<n>/R-<x>" form already drops the
+      # revision on render (normalize_relaton_suffixes strips a trailing /R-x),
+      # so the revision-less result is *the same identifier* — and stripping
+      # (rather than reordering) leaves any trailing date/parenthetical intact,
+      # which is why forms that already parse (`Draft P…-REVmb/D3.0, Mar 2010`)
+      # are NOT disturbed. Examples:
+      #   "P802.16.2-REVa/D8" -> "P802.16.2/D8"
+      #   "P802.16/REVd/D5"   -> "P802.16/D5"
+      #   "P802.15.1REVa/D5"  -> "P802.15.1/D5"
+      #   "P802.11REVmb"      -> "P802.11"   (no draft)
+      def self.normalize_revision_notation(cleaned)
+        # Revision token that PRECEDES a draft: drop it (keep the /D…). The
+        # mandatory "/D<draft>" look-ahead right after the revision id stops it
+        # touching the English word "Revision" (never followed by a draft).
+        cleaned = cleaned.sub(
+          %r{[-/_.]?\s?[Rr][Ee][Vv][-\s]?[A-Za-z0-9]+(?=/D[0-9])},
+          "",
+        )
+        # Trailing revision glued to the number with no draft ("P802.11REVmb");
+        # a digit must immediately precede REV so a trailing English word like
+        # "…Revision" can't match.
+        cleaned.sub(%r{(\d)[Rr][Ee][Vv][A-Za-z0-9]+\s*\z}, '\1')
+      end
+
       def self.parse(string)
         # Strip .pdf extension if present (Pattern 3: File Extensions)
         cleaned = string.sub(/\.pdf$/i, "")
@@ -985,6 +1012,10 @@ module Pubid
           %r{\b(ISO/IEC/IEEE|IEEE/ISO/IEC|IEEE/IEC/ISO|ISO/IEEE|IEC/IEEE|IEEE/IEC|ISO/IEC)/ ?(FDIS|FCD|CDV|DIS\d?|CD\d?|WD|PWI|NP)\b},
           '\1 \2',
         )
+
+        # Rewrite the rawbib revision-notation dialects (REVa/REVd/glued) into
+        # the canonical /R-<x> form before the suffix normalization below.
+        cleaned = normalize_revision_notation(cleaned)
 
         # Normalize relaton's bespoke historical serialization (the spellings
         # emitted by Relaton::Ieee::PubId::Id#to_s) into canonical pubid forms

@@ -39,7 +39,7 @@ module Pubid
           Builder.new.build(parsed)
         end
 
-        def to_s(date_format: nil)
+        def to_s(date_format: nil, trademark: false)
           result = [publisher]
           result << type if type
           result << code.to_s if code
@@ -73,6 +73,7 @@ module Pubid
             base += " (#{relationship_str})"
           end
 
+          base += Pubid::Ieee.trademark_symbol(base) if trademark
           base
         end
       end

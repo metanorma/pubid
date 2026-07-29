@@ -19,6 +19,17 @@ module Pubid
       def render(context: nil, **opts)
         id = @id
 
+        result = render_id(id)
+        return result unless opts[:trademark]
+
+        "#{result}#{Pubid::Ieee.trademark_symbol(result)}"
+      end
+
+      private
+
+      # Dispatch to the type-specific renderer, returning the composed string
+      # (the trademark symbol, if requested, is appended by #render).
+      def render_id(id)
         case id
         when Identifiers::DualPublished
           render_dual_published(id)
@@ -50,8 +61,6 @@ module Pubid
           render_base(id)
         end
       end
-
-      private
 
       # ------------------------------------------------------------------
       # Base IEEE identifier rendering
