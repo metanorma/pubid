@@ -429,8 +429,10 @@ module Pubid
       end
 
       excluded_args = args.dup
-      # Map :year to :date since identifiers store years inside date
-      excluded_args << :date if excluded_args.delete(:year)
+      # Map :year to :date (year-in-date flavors), but ALSO keep :year so a
+      # flavor that models the edition as a plain `year` attribute (e.g. GOST)
+      # has it excluded too. The loop below nils whichever name the flavor has.
+      excluded_args << :date if excluded_args.include?(:year)
 
       attrs = self.class.attributes.each_with_object({}) do |(name, _), h|
         value = excluded_args.include?(name) ? nil : public_send(name)
