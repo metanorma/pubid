@@ -21,6 +21,11 @@ module Pubid
           return build_csa_dual_published(parsed)
         end
 
+        # Handle the historical IEEE/IPCEA cable designation (S-135)
+        if parsed[:s_number]
+          return build_s_designation(parsed)
+        end
+
         # Handle combined AIEE identifiers (from "Nos X and Y" preprocessing)
         if parsed[:first_aiee] && parsed[:second_aiee]
           return build_combined_aiee(parsed)
@@ -197,6 +202,33 @@ module Pubid
           ieee_identifier: ieee_id,
           csa_identifier: csa_id,
         )
+      end
+
+      # Build the historical IEEE/IPCEA cable designation (e.g. S-135).
+      #
+      # The "S-135" designation is modelled as a plain Standard whose code holds
+      # the whole "S-135" string as `number` (prefix nil). It is passed as the
+      # `number:` split column directly — NOT as `code:` — so it bypasses
+      # Components::Code.parse, which would peel "S" as a prefix and leave an
+      # empty number (breaking the relaton index key and the round-trip). This
+      # keeps `root.number` == "S-135" and renders the dash back verbatim.
+      #
+      # The "/IPCEA …" slash co-designation is stored verbatim in `crossref`
+      # (rendered as-is); the "(IPCEA …)" parenthetical variant flows through
+      # the normal `parenthetical_content` path.
+      def build_s_designation(parsed)
+        attributes = {
+          number: extract_value(parsed[:s_number]),
+          publisher: extract_value(parsed[:publisher]) || "IEEE",
+          typed_stage: Pubid::Ieee.locate_stage("Std"),
+        }
+
+        if parsed[:ipcea_copub]
+          attributes[:crossref] = extract_value(parsed[:ipcea_copub])
+        end
+        handle_parameters(parsed, attributes)
+
+        Identifiers::Standard.new(**attributes)
       end
 
       # Build single identifier
@@ -542,8 +574,20 @@ module Pubid
         end
         attributes[:code] = code_str
 
-        # Extract year
+        # Extract year (and optional numeric month, e.g. the -MM of a historical
+        # "…-2018-05" ISO-stage date)
         attributes[:year] = extract_value(parsed[:year]) if parsed[:year]
+        attributes[:month] = extract_value(parsed[:month]) if parsed[:month]
+
+        # Extract draft version if present (e.g., D8 from /D8). This applies to
+        # both the ISO-led (bucket 5: "…FDIS P15289/D-3-2017") and IEEE-led
+        # forms, so it lives before the lead-party split.
+        if parsed[:draft_version]
+          draft_ver = extract_value(parsed[:draft_version])
+          # Remove leading 'D' if present since draft_version already has it
+          draft_ver = draft_ver.sub(/^D/, "") if draft_ver
+          attributes[:ieee_draft] = "D#{draft_ver}" if draft_ver
+        end
 
         # Detect lead party based on pattern
         if parsed[:iso_stage]
@@ -560,14 +604,6 @@ module Pubid
         else
           # IEEE format - lead party is IEEE
           attributes[:lead_party] = "IEEE"
-
-          # Extract draft version if present (e.g., D8 from /D8)
-          if parsed[:draft_version]
-            draft_ver = extract_value(parsed[:draft_version])
-            # Remove leading 'D' if present since draft_version already has it
-            draft_ver = draft_ver.sub(/^D/, "") if draft_ver
-            attributes[:ieee_draft] = "D#{draft_ver}" if draft_ver
-          end
 
           # Mark as project (P prefix)
           attributes[:type] = "P"

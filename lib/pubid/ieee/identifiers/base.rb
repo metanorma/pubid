@@ -177,6 +177,15 @@ module Pubid
         super
       end
 
+      # Register the AIEE identifier for polymorphic from_hash routing. AIEE
+      # lives under the `Aiee` namespace (not `Identifiers`), so the automatic
+      # scan of `Identifiers::*` never finds it; this hook adds it to the
+      # `_type` => class map so `Pubid::Ieee::Identifier.from_hash` can route a
+      # `pubid:ieee:aiee` row back to `Aiee::Identifier`.
+      def self.additional_identifier_classes
+        [Aiee::Identifier]
+      end
+
       # Parse IEEE identifier string.
       #
       # PreParser owns all regex/dispatch logic; this method is a thin

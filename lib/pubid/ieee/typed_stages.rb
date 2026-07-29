@@ -101,11 +101,22 @@ module Pubid
         ),
 
         Components::TypedStage.new(
-          abbr: ["CD", "CD2", "CD3"],
+          abbr: ["CD", "CD1", "CD2", "CD3", "CD4"],
           stage_code: "committee_draft",
           type_code: "draft",
           ieee_draft_equivalent: "D2-D3",
           iso_stage_equivalent: "CD",
+          approval_status: "unapproved",
+          project_status: true,
+        ),
+
+        # Committee Draft for Vote (IEC/ISO-led historical stage)
+        Components::TypedStage.new(
+          abbr: ["CDV"],
+          stage_code: "committee_draft_for_vote",
+          type_code: "draft",
+          ieee_draft_equivalent: "D2-D3",
+          iso_stage_equivalent: "CDV",
           approval_status: "unapproved",
           project_status: true,
         ),

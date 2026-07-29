@@ -77,7 +77,11 @@ module Pubid
         str("IEEE") | str("AIEE") | str("ANSI") | str("ASA") |
           str("IEC") | str("ISO") | str("ASTM") | str("CSA") | str("ASME") |
           str("NACE") | str("NSF") | str("ASHRAE") | str("NCTA") | str("AESC") |
-          str("EIA") # NEW Session 224: Add EIA support
+          str("EIA") | # NEW Session 224: Add EIA support
+          # Historical / foreign co-publishers seen in relaton-data-ieee
+          # (bucket 4): AMPP, USAS (both standalone), and the IEEE sub-board /
+          # partner co-publishers USEMCSC, EAB, MPAI.
+          str("USEMCSC") | str("AMPP") | str("USAS") | str("EAB") | str("MPAI")
       end
 
       # Complex organization prefixes (Category 5: ANSI Complex)
@@ -130,6 +134,31 @@ module Pubid
         (slash >> str("C") >> digits >> dot >> digits >> dot >> digits >> dash >> year_digits).as(:ieee_crossref)
       end
 
+      # IPCEA co-designation suffix (/IPCEA P-46-426-1962). Captured verbatim
+      # (leading slash included) so it round-trips through the `crossref`
+      # attribute. Used only by the S-designation rule below.
+      rule(:ipcea_copub) do
+        (slash >> str("IPCEA") >> space >>
+         match('[A-Za-z0-9.\-]').repeat(1)).as(:ipcea_copub)
+      end
+
+      # Historical IEEE/IPCEA co-published cable designation (e.g. S-135).
+      # The "S-<digits>" number has a dash between the letter series and the
+      # digits, which the shared `number` rule deliberately rejects (that
+      # tightening is what keeps a bare "IEEE S" from parsing). So this one-off
+      # family gets its own rule rather than loosening `number` and risking the
+      # 12k-row corpus. Requiring `str("S") >> dash >> digits` keeps "IEEE S"
+      # (no dash+digit) rejected. Handles: "IEEE Std S-135", "IEEE S-135",
+      # bare "S-135", the "/IPCEA …" slash co-designation, and the
+      # "(IPCEA …)" parenthetical variant.
+      rule(:s_designation) do
+        (publisher >> space).maybe >>
+          (type_word.as(:type) >> space?).maybe >>
+          (str("S") >> dash >> digits).as(:s_number) >>
+          ipcea_copub.maybe >>
+          parenthetical.maybe
+      end
+
       # Document number - support letters and digits, with optional prefix P
       # Complex multi-part numbers like P11073-10404-10419 should be fully captured
       # But simple cases like "623-1976" should not consume the dash before year
@@ -175,7 +204,12 @@ module Pubid
 
       # Draft patterns
       rule(:draft_status) do
-        (str("Active Unapproved") | str("Unapproved") | str("Approved")) >> space
+        # "Active" (bucket 3) joins the generic draft-status path so
+        # "IEEE Active Std P… /D…" parses like the "Unapproved" forms, without
+        # touching ieee_approved_draft_identifier (which would break the
+        # issue-#209 unapproved-drops-Std rendering). Longest token first.
+        (str("Active Unapproved") | str("Unapproved") | str("Approved") |
+         str("Active")) >> space
       end
 
       rule(:draft_prefix) do
@@ -472,6 +506,11 @@ module Pubid
         str("IEC/IEEE") >>
           space >>
           str("P").absent? >> # NOT a P prefix (would be joint development)
+          # The copublished number must contain at least one digit. This rejects
+          # an all-letter placeholder like "IEC/IEEE TR" (no real document
+          # number) — the same "require a digit" tightening the Standard number
+          # rule got, applied to the copublished number grammar.
+          (match("[^0-9\n]").repeat >> digit).present? >>
           match("[^\n]").repeat(1).as(:content)
       end
 
@@ -498,15 +537,41 @@ module Pubid
       end
 
       rule(:joint_development_iso_format) do
-        # ISO/IEC/IEEE FDIS 26511:2018 (ISO-led format)
-        (str("ISO/IEC/IEEE") | str("ISO/IEEE") | str("IEC/IEEE")).as(:joint_publishers) >>
+        # ISO-led stage designations. Two spellings:
+        #   colon form  : "ISO/IEC/IEEE FDIS 26511:2018"           (already used)
+        #   corpus form : "ISO/IEC/IEEE FDIS P26515-2018-05"       (historical)
+        # The corpus form adds a leading "P" on the number, a trailing
+        # "-YYYY[-MM]" date (instead of ":YYYY"), multi-digit committee-draft
+        # stage codes (CD1..CD4) plus CDV, and a wider set of joint publishers.
+        # (roadmap items 2/3, phase 1). longest publisher token first.
+        (str("ISO/IEC/IEEE") | str("IEEE/ISO/IEC") | str("IEEE/IEC/ISO") |
+         str("ISO/IEEE") | str("IEC/IEEE") | str("IEEE/IEC") | str("ISO/IEC") |
+         str("IEEE")).as(:joint_publishers) >>
           space >>
-          # ISO stage codes
-          (str("FDIS") | str("DIS") | str("CD") | str("WD") | str("PWI") | str("NP")).as(:iso_stage) >>
+          # ISO stage codes: FDIS, FCD, CDV; DIS/CD with an optional round digit
+          # (DIS2, CD1..CD4); WD/PWI/NP. (FCD before FDIS is fine — distinct.)
+          (str("FDIS") | str("FCD") | str("CDV") |
+           (str("DIS") >> digit.maybe) |
+           (str("CD") >> digit.maybe) |
+           str("WD") | str("PWI") | str("NP")).as(:iso_stage) >>
+          # optional " Std" noise word after the stage (e.g. "FDIS Std P15288")
+          (space >> str("Std")).maybe >>
           space >>
+          str("P").maybe >> # optional project marker on the number
           digits.as(:number) >>
-          ((dot | dash) >> digits.as(:part)).maybe >> # Optional part
-          (str(":") >> year_digits.as(:year)).maybe
+          # part must not swallow the trailing year (year_digits.absent?)
+          ((dot | dash) >> year_digits.absent? >> digits.as(:part)).maybe >>
+          (
+            (str(":") >> year_digits.as(:year)) |
+            (dash >> year_digits.as(:year) >>
+             (dash >> month_numeric.as(:month)).maybe)
+          ).maybe >>
+          # Optional /D<draft> tail. normalize_relaton_suffixes repositions the
+          # historical "…/D-3-2017" onto the number as "…-2017/D3", so by the
+          # time this rule runs the draft usually trails the date (bucket 5);
+          # a date-less "/D-4" keeps its hyphen (bucket 7), hence dash.maybe.
+          (slash >> str("D") >> dash.maybe >>
+           match('[0-9.]').repeat(1).as(:draft_version)).maybe
       end
 
       # Number-first pattern: "1873-2015 IEEE Standard..."
@@ -794,6 +859,7 @@ module Pubid
           ieee_astm_si_psi | # NEW Session 171: Add IEEE/ASTM SI/PSI support
           multi_numbered_identifier | # NEW: Try multi-numbered identifiers before generic patterns
           csa_dual_published | # NEW: Try CSA dual published before generic patterns
+          s_designation | # Historical IEEE/IPCEA cable designation (S-135)
           corrigendum_identifier | # NEW: Try corrigendum before generic patterns
           interpretation_identifier | # NEW: Try interpretation identifier before generic patterns
           conformance_identifier | # NEW: Try conformance identifier before generic patterns
@@ -910,6 +976,15 @@ module Pubid
         # NEW: Normalize multiple spaces to single space
         # No valid IEEE identifier pattern needs more than 1 space
         cleaned = cleaned.gsub(/\s+/, " ")
+
+        # A joint ISO-led publisher list is sometimes crawled with a stray slash
+        # (or slash+space) before the ISO stage code — "ISO/IEC/IEEE/ FDIS …" or
+        # "ISO/IEC/IEEE/FDIS …". Restore the space separator so the stage parses
+        # (bucket 7).
+        cleaned = cleaned.gsub(
+          %r{\b(ISO/IEC/IEEE|IEEE/ISO/IEC|IEEE/IEC/ISO|ISO/IEEE|IEC/IEEE|IEEE/IEC|ISO/IEC)/ ?(FDIS|FCD|CDV|DIS\d?|CD\d?|WD|PWI|NP)\b},
+          '\1 \2',
+        )
 
         # Normalize relaton's bespoke historical serialization (the spellings
         # emitted by Relaton::Ieee::PubId::Id#to_s) into canonical pubid forms
