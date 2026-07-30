@@ -2,19 +2,24 @@
 
 require "spec_helper"
 
-# IEEE revision-notation dialects from the relaton-ieee normtitle feed. pubid
-# already accepts the canonical "…/D<n>/R-<x>" form; these variants (REV/Rev
-# glued or separated by -, /, _, ., or space, before or after the draft) mean
-# the same revision and are normalized to it before parsing.
-# (hand-off: ieee-revision-notation-grammar.)
+# IEEE revision-notation dialects from the relaton-ieee normtitle feed (REV/Rev
+# glued or separated by -, /, _, ., or space, before or after the draft).
+#
+# NUMBERED revisions ("Rev<digits>") are now PRESERVED — repositioned to the
+# canonical "…/D<n>/R-<x>" suffix, which the revision_suffix grammar rule
+# captures into the `revision` attribute (nil-residue / numbered-revision
+# hand-offs). LETTERED inline revisions ("REVa"/"REVd"/"REVmb") remain
+# STRIPPED: repositioning lettered forms regressed 28 normtitles (they often
+# carry a trailing date/parenthetical the reorder broke), and no hand-off asks
+# for lettered-inline preservation — so a lettered-inline variant collapses onto
+# its base standard (revision nil). The lettered *suffix* form "/R-a" IS
+# preserved (see nil_residue_spec) — only the *inline* lettered dialect strips.
+# (hand-off: ieee-revision-notation-grammar, ieee-numbered-revision.)
 RSpec.describe "IEEE revision-notation variants" do
   subject(:klass) { Pubid::Ieee::Identifier }
 
-  # variant => canonical equivalent (must parse to the same to_hash)
+  # NUMBERED variant => canonical /R- form (revision preserved, same to_hash)
   {
-    "IEEE Std P802.16.2-REVa/D8" => "IEEE Std P802.16.2/D8/R-a",
-    "IEEE Std P802.16/REVd/D5" => "IEEE Std P802.16/D5/R-d",
-    "IEEE Std P802.15.1REVa/D5" => "IEEE Std P802.15.1/D5/R-a",
     "IEEE Std P802.16_Rev2/D5" => "IEEE Std P802.16/D5/R-2",
     "IEEE Std P1310.Rev 3/D2" => "IEEE Std P1310/D2/R-3",
   }.each do |variant, canonical|
@@ -22,6 +27,29 @@ RSpec.describe "IEEE revision-notation variants" do
       it "parses to the same identifier as its canonical /R- form" do
         expect(klass.parse(variant).to_hash)
           .to eq(klass.parse(canonical).to_hash)
+      end
+
+      it "preserves the numbered revision" do
+        expect(klass.parse(variant).revision).not_to be_nil
+      end
+
+      it "round-trips through to_hash/from_hash" do
+        h = klass.parse(variant).to_hash
+        expect(klass.from_hash(h).to_hash).to eq(h)
+      end
+    end
+  end
+
+  # LETTERED inline variant => base (revision stripped, collapses onto the base)
+  {
+    "IEEE Std P802.16.2-REVa/D8" => "IEEE Std P802.16.2/D8",
+    "IEEE Std P802.16/REVd/D5" => "IEEE Std P802.16/D5",
+    "IEEE Std P802.15.1REVa/D5" => "IEEE Std P802.15.1/D5",
+  }.each do |variant, base|
+    context variant.inspect do
+      it "strips the lettered inline revision (collapses onto its base)" do
+        expect(klass.parse(variant).to_hash).to eq(klass.parse(base).to_hash)
+        expect(klass.parse(variant).revision).to be_nil
       end
 
       it "round-trips through to_hash/from_hash" do

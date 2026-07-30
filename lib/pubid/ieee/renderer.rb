@@ -106,6 +106,11 @@ module Pubid
           # Only attach year to code if there's no edition, no month, and no draft
           result += "-#{id.year}" if id.year && !id.draft_obj && !id.edition && !id.month
 
+          # Append the numbered/lettered revision inline, in IEEE's native
+          # position — right after the code number and before the draft
+          # ("P802.16Rev2/D3"). Keeps a revision distinct from its base standard.
+          result += "Rev#{id.revision}" if id.revision
+
           # Append draft to code - with or without space based on original format
           if id.draft_obj
             result += id.space_before_draft ? " #{id.draft_obj}" : id.draft_obj.to_s

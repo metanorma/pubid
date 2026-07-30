@@ -16,51 +16,58 @@ module Pubid
       # @param parsed [Hash, Array] the parsed identifier data
       # @return [identifier] the constructed identifier object
       def build(parsed)
+        # Parslet returns a top-level *array* of hashes when a repeated capture
+        # (e.g. the two subparts in "7.4-3-2") stops the sibling captures from
+        # hash-merging. The dispatch checks below need hash access, so read them
+        # off a merged view (`d`); build_single_identifier re-handles the array
+        # itself (preserving every subpart), so it still gets the original.
+        d = parsed.is_a?(Array) ? merge_parsed_array(parsed) : parsed
+
         # Handle CSA dual published patterns
-        if parsed[:ieee_portion] && parsed[:csa_portion]
+        if d[:ieee_portion] && d[:csa_portion]
           return build_csa_dual_published(parsed)
         end
 
         # Handle the historical IEEE/IPCEA cable designation (S-135)
-        if parsed[:s_number]
+        if d[:s_number]
           return build_s_designation(parsed)
         end
 
         # Handle combined AIEE identifiers (from "Nos X and Y" preprocessing)
-        if parsed[:first_aiee] && parsed[:second_aiee]
+        if d[:first_aiee] && d[:second_aiee]
           return build_combined_aiee(parsed)
         end
 
         # Handle dual published patterns
-        if parsed[:first] && parsed[:second]
+        if d[:first] && d[:second]
           return build_dual_published(parsed)
         end
 
         # Handle IEC/IEEE copublished patterns
-        if parsed[:content]
+        if d[:content]
           return build_iec_ieee_copublished(parsed)
         end
 
         # Handle NESC identifiers (National Electrical Safety Code)
-        if parsed[:nesc]
+        if d[:nesc]
           nesc_builder = Nesc::Builder.new
-          return nesc_builder.build(parsed[:nesc])
+          return nesc_builder.build(d[:nesc])
         end
 
         # Handle AIEE identifiers (American Institute of Electrical Engineers)
-        if parsed[:aiee]
+        if d[:aiee]
           aiee_builder = Aiee::Builder.new
-          return aiee_builder.build(parsed[:aiee])
+          return aiee_builder.build(d[:aiee])
         end
 
         # Handle IRE identifiers (Institute of Radio Engineers)
-        if parsed[:ire]
+        if d[:ire]
           ire_builder = Ire::Builder.new
-          return ire_builder.build(parsed[:ire])
+          return ire_builder.build(d[:ire])
         end
 
         # Handle IEEE/ASTM SI/PSI identifiers (Système International)
-        if parsed[:si_type]
+        if d[:si_type]
           return build_si_psi_identifier(parsed)
         end
 
@@ -578,6 +585,13 @@ module Pubid
         # "…-2018-05" ISO-stage date)
         attributes[:year] = extract_value(parsed[:year]) if parsed[:year]
         attributes[:month] = extract_value(parsed[:month]) if parsed[:month]
+
+        # Extract edition, from relaton's "/E-<n>" suffix (normalized to
+        # "Edition <n>.0"). nil-residue hand-off item 1.
+        attributes[:edition] = extract_value(parsed[:edition]) if parsed[:edition]
+        if parsed[:edition_month]
+          attributes[:edition_month] = extract_value(parsed[:edition_month])
+        end
 
         # Extract draft version if present (e.g., D8 from /D8). This applies to
         # both the ISO-led (bucket 5: "…FDIS P15289/D-3-2017") and IEEE-led

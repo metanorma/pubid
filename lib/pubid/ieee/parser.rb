@@ -75,6 +75,10 @@ module Pubid
       # Organizations
       rule(:organization) do
         str("IEEE") | str("AIEE") | str("ANSI") | str("ASA") |
+          # ANS (American Nuclear Society) — a third co-publisher on nuclear
+          # standards ("ANSI/IEEE/ANS 7.4-3-2-1982"). Listed AFTER ANSI so it
+          # never shadows the longer token.
+          str("ANS") |
           str("IEC") | str("ISO") | str("ASTM") | str("CSA") | str("ASME") |
           str("NACE") | str("NSF") | str("ASHRAE") | str("NCTA") | str("AESC") |
           str("EIA") | # NEW Session 224: Add EIA support
@@ -219,7 +223,11 @@ module Pubid
       rule(:draft_version) do
         # Enhanced to handle multiple draft notation patterns
         # D is optional to handle /08 style drafts (e.g., IEEE P1052/08)
-        (str("D") >> str("IS").absent?).maybe >> # Avoid matching "DIS" (ISO stage)
+        # A draft never begins with "R-" — that is the revision suffix
+        # (revision_suffix rule); guard so the D-less path doesn't swallow a
+        # bare "/R-<id>" (e.g. the no-draft "P1722/R-1") as a draft.
+        (str("R") >> dash).absent? >>
+          (str("D") >> str("IS").absent?).maybe >> # Avoid matching "DIS" (ISO stage)
           (
             # Pattern: D3.1 (decimal with 1-2 digits on each side) - MOST COMMON, put first
             # Also handles trailing letter: D7.3A, D2.0E
@@ -268,12 +276,23 @@ module Pubid
          draft_date.maybe).as(:draft)
       end
 
+      # Trailing revision suffix "/R-<id>". Normalization funnels every revision
+      # spelling here — IEEE's native inline "Rev<n>" (repositioned) and
+      # relaton's synthetic "/R-<x>" (kept in place) — so a single trailing rule
+      # captures them all. The id is alphanumeric ("2", "18", "i").
+      rule(:revision_suffix) do
+        slash >> str("R") >> dash >> match('[0-9A-Za-z]').repeat(1).as(:revision)
+      end
+
       # Edition - enhanced to support IEC formats like "Edition 1.0 2015-03"
       rule(:edition) do
         (comma >> year_digits.as(:year) >> str(" Edition")) |
           ((space | dash) >> str("Edition ") >>
            (digits >> dot >> digits).as(:edition) >>
-           (space | str(" - ")) >>
+           # Year separator: a space, " - ", or a bare dash (preprocessing
+           # rewrites "Edition 3.0 2016" -> "Edition 3.0-2016", the shape the
+           # normalized "/E-<n>-YYYY" suffix produces — nil-residue item 1).
+           (str(" - ") | space | dash) >>
            year_digits.as(:year) >>
            (dash >> digit.repeat(2, 2).as(:edition_month)).maybe) # Capture -MM as edition_month
       end
@@ -537,8 +556,14 @@ module Pubid
             # Variant 2: , CDV1 notation (comma before stage code)
             (comma >> (str("CDV") | str("FDIS") | str("CD") | str("DIS")).as(:iec_stage) >> digits.maybe.as(:stage_iteration))
           ).maybe >>
+          # Optional edition, from relaton's "/E-<n>" suffix normalized to
+          # "Edition <n>.0[ YYYY]" (nil-residue hand-off item 1). The edition
+          # rule carries its own year, so the year clause below simply doesn't
+          # fire when an edition is present.
+          edition.maybe >>
           ((dash >> year_digits.as(:year)) | # Either -YEAR
-           (comma.maybe >> space >> month_name.as(:month) >> space.maybe >> year_digits.as(:year))).maybe # Or Month YEAR (with optional comma)
+           (comma.maybe >> space >> month_name.as(:month) >> space.maybe >> year_digits.as(:year))).maybe >> # Or Month YEAR (with optional comma)
+          revision_suffix.maybe
       end
 
       rule(:joint_development_iso_format) do
@@ -576,7 +601,11 @@ module Pubid
           # time this rule runs the draft usually trails the date (bucket 5);
           # a date-less "/D-4" keeps its hyphen (bucket 7), hence dash.maybe.
           (slash >> str("D") >> dash.maybe >>
-           match('[0-9.]').repeat(1).as(:draft_version)).maybe
+           match('[0-9.]').repeat(1).as(:draft_version)).maybe >>
+          # Optional edition, from relaton's "/E-<n>" suffix normalized to
+          # "Edition <n>.0[ YYYY]" (nil-residue hand-off item 1).
+          edition.maybe >>
+          revision_suffix.maybe
       end
 
       # Number-first pattern: "1873-2015 IEEE Standard..."
@@ -604,6 +633,9 @@ module Pubid
           ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
           corrigendum.maybe >>
           draft.maybe >>
+          # Revision trails the draft (before any date), matching normalization's
+          # ".../D<n>/R-<x>" repositioning of "P802.16Rev2/D3 Feb 2008".
+          revision_suffix.maybe >>
           # ALSO accept month/year after draft (some patterns like /DX, Month YEAR)
           ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
           parenthetical.maybe
@@ -619,6 +651,7 @@ module Pubid
           ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
           corrigendum.maybe >>
           draft.maybe >>
+          revision_suffix.maybe >>
           # ALSO accept month/year after draft
           ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
           # Accept bare year after draft: ", 2015"
@@ -636,6 +669,7 @@ module Pubid
           # Enhanced: Accept month/year after draft number
           (space >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
           draft.maybe >>
+          revision_suffix.maybe >>
           parenthetical.maybe
       end
 
@@ -649,6 +683,7 @@ module Pubid
           number >>
           (part_subpart_year | edition).maybe >>
           draft.maybe >>
+          revision_suffix.maybe >>
           parenthetical.maybe
       end
 
@@ -889,6 +924,7 @@ module Pubid
           ashrae_copub.maybe >> # NEW: Add /ASHRAE Guideline support
           ieee_crossref.maybe >> # NEW: Add /C62.22.1-1996 cross-reference support
           draft.maybe >>
+          revision_suffix.maybe >>
           # Enhanced: Accept both comma and space before month/year
           ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
           edition.maybe >>
@@ -935,6 +971,22 @@ module Pubid
           "#{base}/Cor #{cor}#{year ? "-#{year}" : ''}/D#{draft}"
         end
 
+        # Combined draft + revision, and the empty-draft revision-only form:
+        #   "…/D-<d>/R-<x>-YYYY[-MM]"  and  "…/D-/R-<x>-YYYY"   (nil-residue #2).
+        # Reposition the base publication date onto the number (pubid's
+        # "-YYYY[-MM]" shape), keep the draft as "/D<d>" (dropped when the draft
+        # is empty), and leave a trailing "/R-<x>" the grammar captures as the
+        # revision. Runs before the plain "/D-…" reposition, which the embedded
+        # "/R-" would otherwise defeat.
+        cleaned = cleaned.sub(
+          %r{\A(.*?)/D-([0-9A-Za-z.+]*)/R-([0-9A-Za-z]+)(?:-((?:19|20)\d\d)(?:-(0[1-9]|1[0-2]))?)?\z},
+        ) do
+          base, draft, rev, year, month = Regexp.last_match.captures
+          date = year ? "-#{year}#{month ? "-#{month}" : ''}" : ""
+          draft_part = draft.to_s.empty? ? "" : "/D#{draft}"
+          "#{base}#{date}#{draft_part}/R-#{rev}"
+        end
+
         # /D-N drafts with a trailing numeric date, when the draft is the last
         # suffix: reposition the -YYYY[-MM] date onto the number. A following
         # /Cor, /Amd, /R or /E suffix carries its own year, so the `\z` anchor
@@ -955,13 +1007,15 @@ module Pubid
           "#{base} Edition #{edition}.0#{date}"
         end
 
-        # /R-N revisions: pubid has no revision suffix, so drop it and keep any
-        # trailing year on the number (the revised edition's publication year).
+        # /R-N revisions: PRESERVE them (the grammar's revision_suffix rule now
+        # captures a trailing "/R-<x>" into the `revision` attribute). Just
+        # reposition any trailing publication year onto the number, keeping the
+        # "/R-<x>" in place for the grammar.
         cleaned.sub(
-          %r{\A(.*?)/R-[0-9A-Za-z]+(?:-((?:19|20)\d\d))?\z},
+          %r{\A(.*?)/R-([0-9A-Za-z]+)(?:-((?:19|20)\d\d))?\z},
         ) do
-          base, year = Regexp.last_match.captures
-          year ? "#{base}-#{year}" : base
+          base, rev, year = Regexp.last_match.captures
+          "#{year ? "#{base}-#{year}" : base}/R-#{rev}"
         end
       end
 
@@ -979,9 +1033,28 @@ module Pubid
       #   "P802.15.1REVa/D5"  -> "P802.15.1/D5"
       #   "P802.11REVmb"      -> "P802.11"   (no draft)
       def self.normalize_revision_notation(cleaned)
-        # Revision token that PRECEDES a draft: drop it (keep the /D…). The
-        # mandatory "/D<draft>" look-ahead right after the revision id stops it
-        # touching the English word "Revision" (never followed by a draft).
+        # NUMBERED revisions ("Rev<digits>") are PRESERVED — repositioned to a
+        # trailing "/R-<n>" suffix the grammar captures as the `revision`
+        # attribute (IEEE's native inline spelling; numbered-revision hand-off).
+        # A "\d+" right after "Rev" both selects the numbered subset and keeps
+        # these off the English word "Revision". Three source positions:
+        #   after a draft : "PC37.30.2/D043 Rev 18" -> ".../D043/R-18"
+        cleaned = cleaned.sub(
+          %r{(/D[0-9A-Za-z.]*)\s+[Rr][Ee][Vv]\s*(\d+)}, '\1/R-\2'
+        )
+        #   before a draft: "P802.16Rev2/D3" -> "P802.16/D3/R-2"
+        cleaned = cleaned.sub(
+          %r{[-/_.]?\s?[Rr][Ee][Vv][-\s]?(\d+)(/D[0-9A-Za-z.]*)}, '\2/R-\1'
+        )
+        #   no draft, trailing: "P1722-rev1" -> "P1722/R-1"
+        cleaned = cleaned.sub(
+          %r{(\d)[-._]?\s?[Rr][Ee][Vv]\s*(\d+)\s*\z}, '\1/R-\2'
+        )
+
+        # LETTERED inline revisions ("REVa", "REVmb") have no pubid model and are
+        # still STRIPPED (unchanged behaviour). The numbered forms above already
+        # became "/R-<n>", so these regexes only see the lettered residue.
+        # Revision token that PRECEDES a draft: drop it (keep the /D…).
         cleaned = cleaned.sub(
           %r{[-/_.]?\s?[Rr][Ee][Vv][-\s]?[A-Za-z0-9]+(?=/D[0-9])},
           "",
