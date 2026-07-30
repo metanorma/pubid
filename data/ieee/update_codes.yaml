@@ -138,3 +138,34 @@ ISO/IEC/IEEE CD P26513/D1, August 2015: ISO/IEC/IEEE P26513/D1, August 2015
 /\boctober\b/: October
 /\bnovember\b/: November
 /\bdecember\b/: December
+
+# --- one-off IEEE normtitles migrated from relaton-ieee RawbibIdParser ---
+# Exact-match, anchored (plain keys compile to /^…$/), zero-regression: each
+# maps a specific malformed catalog string to relaton's canonical id, which
+# pubid parses losslessly. (hand-off: ieee-update-codes-oneoffs.) Group 1
+# parses on its own; the "dotted-draft" group relies on the verbatim-draft fix.
+"IEEE Std P1073.1.3.4/D3.0": "IEEE Std P11073.00101"
+"IEEE P802.1Qbu/03.0, July 2015": "IEEE P802.1Qbu/D-3.0-2015"
+"IEEE P802.11aqTM/013.0 October 2017": "IEEE P802.11aqTM/D-13.0-2017"
+"IEC/IEEE P62271-37-013:2015 D13.4": "IEC/IEEE P62271.37-013/D-13.4-2015"
+"ISO/IEC/IEEE DIS P42020:201x(E), June 2017": "ISO/IEC/IEEE DIS P42020-2017-06"
+"ISO/IEC/IEEE DIS P16326/201x, December 2018": "ISO/IEC/IEEE DIS P16326-2018-12"
+"ISO/IEC/IEEE/P21839, 2019(E)": "ISO/IEC/IEEE P21839-2019"
+"ISO/IEC/IEEE CD2 P12207-2: 201x(E), February 2019": "ISO/IEC/IEEE CD2 P12207.2-2019-02"
+"ISO/IEC/IEEE P42010.WD4:2019(E)": "ISO/IEC/IEEE P42010/D-4-2019"
+"IEC/IEEE P63195_CDV/V3, February 2020": "IEC/IEEE CDV P63195-2020-02"
+"ISO/IEC/IEEE/P16085_DIS, March 2020": "ISO/IEC/IEEE DIS P16085-2020-03"
+"ANSI/IEEE Std: Outdoor Apparatus Bushings": "ANSI/IEEE Std 21-1976-11"
+"Draft National Electrical Safety Code, January 2016": "IEEE PC2-2016-01"
+"International Standard ISO/IEC 8802-9: 1996(E) ANSI/IEEE Std 802.9, 1996 Edition": "ISO/IEC/IEEE Std 802.9-1996"
+"ISO/IEC13210: 1994 (E) ANSI/IEEE Std 1003.3-1991": "ISO/IEC/IEEE 13210-1994"
+"J-STD-016-1995": "IEEE 016-1995"
+"Nuclear EQ Sourcebook and Supplement": "IEEE 7438946"
+"PC37.30.2/D043 Rev 18, May 2015": "IEEE PC37.30-2/D-043/R-18-2015"
+"IEEE/IEC P62582 CD2 proposal, May 2017": "IEEE/IEC CD2 P62582-2017-05"
+"ISO/IEC/IEEE P16326:201x WD.4a, July 2017": "ISO/IEC/IEEE P16326/D-4a-2017-07"
+"ISO/IEC/IEEE CD.1 P21839, October 2017": "ISO/IEC/IEEE CD1 P21839-2017-10"
+"ISO/IEC/IEEE P16326:201x WD5, December 2017": "ISO/IEC/IEEE P16326/D-5-2017-12"
+"IEEE/ISO/IEC P42010.CD1-V1.0, April 2020": "IEEE/ISO/IEC CD1 P42010-2020-04"
+"Unapproved Draft Std ISO/IEC FDIS 15288:2007(E) IEEE P15288/D3,": "ISO/IEC/IEEE FDIS Std P15288/D-3-2007"
+"IS0/IEC/IEEE 8802-11:2012/Amd.5:2015(E) (Adoption of IEEE Std 802.11af-2014)": "ISO/IEC/IEEE 802.11/Amd5-2012"
