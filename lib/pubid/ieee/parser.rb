@@ -328,9 +328,14 @@ module Pubid
         ).as(:reaffirmed)
       end
 
-      # Redline
+      # Redline suffix at the very end. Accepts relaton's canonical " Redline"
+      # (space, no dash) and pubid's older " - Redline" (space-dash-space),
+      # case-insensitive. Captured (presence only) so the builder sets a
+      # `redline: true` flag the renderer restores — a redline is a distinct
+      # document and must not collapse to its base standard.
       rule(:redline) do
-        str(" - Redline").as(:redline)
+        (space >> (dash >> space).maybe >>
+         (str("Redline") | str("REDLINE") | str("redline"))).as(:redline)
       end
 
       # Book nickname (e.g., "[The Orange Book]", "[IEEE Gold Book]")
@@ -910,9 +915,9 @@ module Pubid
       # as a base year/month (a form pubid already parses), which also keeps the
       # draft component clean so it round-trips through to_hash/from_hash.
       def self.normalize_relaton_suffixes(cleaned)
-        # Bare " Redline" (relaton omits the leading " - "). pubid strips redline
-        # on the normal parse path anyway, so drop it here too.
-        cleaned = cleaned.sub(/ Redline\z/, "")
+        # NOTE: the trailing " Redline"/" - Redline" suffix is NO LONGER stripped
+        # here — the grammar's `redline` rule captures it into a redline flag so
+        # a redline id stays distinct from its base standard.
 
         # Combined draft + corrigendum: relaton emits "…/D-N/CorM-YYYY" (draft
         # then corrigendum), but pubid's grammar accepts the corrigendum first.
@@ -1300,8 +1305,6 @@ module Pubid
         # Remove period after "Std": "IEEE Std." -> "IEEE Std"
         cleaned = cleaned.gsub(/\bStd\.\s+/, "Std ")
 
-        # Redline Suffix Removal: " - Redline" at end
-        cleaned = cleaned.gsub(/\s+-\s+Redline\b.*$/, "")
 
         # Title portion removal after year: "YYYY - IEEE Standard for..."
         cleaned = cleaned.gsub(

@@ -758,10 +758,10 @@ module Pubid
           return Identifiers::AdoptedStandard
         end
 
-        # Check for redline standards (structural: has redline flag)
-        if attributes[:redline]
-          return Identifiers::RedlinedStandard
-        end
+        # A redline is a plain Standard carrying `redline: true` (a distinct
+        # document from its base) — NOT the RedlinedStandard wrapper, which
+        # expects a nested `base` the flat build path never sets. render_base
+        # restores the " - Redline" suffix from the flag.
 
         # Default to the concrete Standard leaf (a plain published standard).
         # Routing to a leaf — rather than instantiating the shared base
