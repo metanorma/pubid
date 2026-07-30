@@ -1088,10 +1088,17 @@ module Pubid
         draft_data = parsed[:draft] || parsed[:digit_draft]
         return unless draft_data
 
-        # Draft can be an array of hash elements or a single hash
+        # Draft can be an array of hash elements or a single hash. The grammar's
+        # `draft_version.repeat(1,2)` splits a dotted designator like "1.2.6"
+        # into ["1.2", ".6"], so DON'T let a plain merge overwrite it (that
+        # dropped every part but the last — "1.2.6" -> ".6"). Collect ALL the
+        # draft_version parts into an array (the version extraction below joins
+        # them back into one verbatim string) and merge the remaining keys.
         if draft_data.is_a?(Array)
-          # Merge all elements in the array
-          merged = draft_data.inject({}) { |result, elem| result.merge(elem) }
+          hashes = draft_data.select { |e| e.is_a?(Hash) }
+          versions = hashes.filter_map { |e| e[:draft_version] }
+          merged = hashes.inject({}) { |result, elem| result.merge(elem) }
+          merged[:draft_version] = versions unless versions.empty?
           draft_data = merged
         end
 
@@ -1111,6 +1118,9 @@ module Pubid
                       else
                         extract_value(dv)
                       end
+            # Normalize a leading hyphen ("/D-3.0" -> "3.0"); the draft
+            # designator is otherwise held verbatim so no digit is lost.
+            version = version.sub(/\A-/, "") if version
           end
 
           revision = extract_value(draft_data[:revision]) if draft_data[:revision]
