@@ -629,15 +629,19 @@ module Pubid
           (slash >> digits.as(:draft_version)).as(:digit_draft).maybe >>
           # FDIS and other ISO stage codes without D prefix (Pattern 3)
           fdraft.maybe >>
-          # Enhanced: Accept both comma and space before month/year
-          ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
+          # Trailing "Month YYYY" print/reaffirm date. Captured under distinct
+          # keys so it never collides with the base -YYYY identity year (a
+          # collision made Parslet drop the base year and warn "Duplicate
+          # subtrees … keys: [:year]"). The builder promotes it to the identity
+          # only when there is no base year.
+          ((comma | space) >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)).maybe >>
           corrigendum.maybe >>
           draft.maybe >>
           # Revision trails the draft (before any date), matching normalization's
           # ".../D<n>/R-<x>" repositioning of "P802.16Rev2/D3 Feb 2008".
           revision_suffix.maybe >>
           # ALSO accept month/year after draft (some patterns like /DX, Month YEAR)
-          ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
+          ((comma | space) >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)).maybe >>
           parenthetical.maybe
       end
 
@@ -647,15 +651,16 @@ module Pubid
           str("P") >> space.maybe >> # Make space after P optional
           number >>
           (part_subpart_year | edition).maybe >>
-          # Enhanced: Accept both comma and space before month/year
-          ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
+          # Trailing "Month YYYY"/bare-year date under distinct keys so they
+          # never collide with the base -YYYY identity year (see ieee_p_identifier).
+          ((comma | space) >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)).maybe >>
           corrigendum.maybe >>
           draft.maybe >>
           revision_suffix.maybe >>
           # ALSO accept month/year after draft
-          ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
+          ((comma | space) >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)).maybe >>
           # Accept bare year after draft: ", 2015"
-          ((comma | space) >> year_digits.as(:year)).maybe >>
+          ((comma | space) >> year_digits.as(:trailing_year)).maybe >>
           parenthetical.maybe
       end
 
@@ -666,8 +671,9 @@ module Pubid
           str("P") >>
           number >>
           (part_subpart_year | edition).maybe >>
-          # Enhanced: Accept month/year after draft number
-          (space >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
+          # Trailing "Month YYYY" date under distinct keys so it never collides
+          # with the base -YYYY identity year (see ieee_p_identifier).
+          (space >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)).maybe >>
           draft.maybe >>
           revision_suffix.maybe >>
           parenthetical.maybe
@@ -925,8 +931,10 @@ module Pubid
           ieee_crossref.maybe >> # NEW: Add /C62.22.1-1996 cross-reference support
           draft.maybe >>
           revision_suffix.maybe >>
-          # Enhanced: Accept both comma and space before month/year
-          ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
+          # Trailing "Month YYYY" print/reaffirm date under distinct keys so it
+          # never collides with the base -YYYY identity year (see
+          # ieee_p_identifier). The builder promotes it only when no base year.
+          ((comma | space) >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)).maybe >>
           edition.maybe >>
           parenthetical.maybe >>  # REVERT: Back to single parenthetical
           book_nickname.maybe >>  # NEW: Add book nickname support
