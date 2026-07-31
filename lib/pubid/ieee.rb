@@ -41,6 +41,14 @@ module Pubid
         Identifier.parse(input)
       end
 
+      # IEEE trademark symbol for a rendered identifier string: ® for the
+      # registered-trademark series (802/2030), ™ for everything else. Mirrors
+      # relaton-ieee's heuristic (`^IEEE (Std )?(802|2030)`); refine here if
+      # pubid gains real IEEE trademark-policy data.
+      def trademark_symbol(rendered)
+        rendered.to_s.match?(/\AIEEE (Std )?(802|2030)/) ? "®" : "™"
+      end
+
       # Auto-discover all identifier types from the Identifiers namespace
       # @return [Array<Class>] identifier classes that define a self.type Hash
       def identifier_types

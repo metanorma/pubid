@@ -278,8 +278,13 @@ module Pubid
         raise ArgumentError, "No renderer registered for format: #{format}"
       end
 
-      context = build_rendering_context(renderer, format:, **opts)
-      renderer.new(self).render(context:, **opts.slice(:with_edition))
+      # `:trademark` is a render-time flag consumed by the renderer, not the
+      # rendering context — and some flavors override build_rendering_context
+      # with a strict signature, so strip it here.
+      ctx_opts = opts.except(:trademark)
+      context = build_rendering_context(renderer, format:, **ctx_opts)
+      render_opts = opts.slice(:with_edition, :trademark)
+      renderer.new(self).render(context:, **render_opts)
     end
 
     def to_s(**opts)

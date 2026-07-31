@@ -3,7 +3,9 @@
 module Pubid
   module Renderers
     class HumanReadable < Base
-      def render(context:, with_edition: false)
+      # `**_opts` absorbs render flags that only some flavors honour (e.g. the
+      # IEEE-specific `:trademark`), so the shared renderer tolerates them.
+      def render(context:, with_edition: false, **_opts)
         parts = []
         parts << render_publisher_and_stage(context)
         parts << render_number_portion(context)

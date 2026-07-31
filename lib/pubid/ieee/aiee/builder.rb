@@ -36,9 +36,11 @@ module Pubid
           month_str = extract_value(parsed[:month])
           attributes[:month] = month_str if month_str
 
-          # Extract separator (for rendering distinction)
+          # Extract the long-form date separator ("," or ".") for rendering.
+          # Named `date_separator` on the identifier to avoid colliding with the
+          # CodeNumber code-part `separator`.
           separator_str = extract_value(parsed[:separator])
-          attributes[:separator] = separator_str if separator_str
+          attributes[:date_separator] = separator_str if separator_str
 
           # Set original format based on parsed data
           attributes[:original_format] = if separator_str || month_str

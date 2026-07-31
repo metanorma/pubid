@@ -22,6 +22,7 @@ RSpec.describe "IEEE split document number (relaton index key)" do
     "IEEE Std C37.09-2018"       => ["37", "C", ["09"], "."],
     "IEEE Std 802.16.1-2012"     => ["802", nil, %w[16 1], "."],
     "IEEE P802.16/D-3-2017-07"   => ["802", nil, %w[16], "."],   # ProjectDraft, P stripped
+    "IEEE Std S-135"             => ["S-135", nil, [], nil],      # IPCEA cable
   }.each do |ref, (number, prefix, parts, separator)|
     context ref do
       let(:root) { Pubid::Ieee::Identifier.parse(ref).root }
@@ -95,6 +96,19 @@ RSpec.describe "IEEE split document number (relaton index key)" do
   describe "rejects a numberless (letter-only) standard" do
     ["IEEE S", "IEEE Std S", "IEEE WHITE", "IEEE NESC", "IEEE SA"].each do |ref|
       it "#{ref.inspect} raises rather than yielding a numberless Standard" do
+        expect { Pubid::Ieee::Identifier.parse(ref) }
+          .to raise_error(Parslet::ParseFailed)
+      end
+    end
+  end
+
+  # Same class of junk on the IEC/IEEE copublished number: an all-letter
+  # placeholder ("IEC/IEEE TR") has no real document number, so the copublished
+  # number grammar requires a digit too (hand-off: ieee-numberless-standard-parse
+  # roadmap item 4).
+  describe "rejects a numberless IEC/IEEE copublished number" do
+    ["IEC/IEEE TR", "IEC/IEEE PAS"].each do |ref|
+      it "#{ref.inspect} raises rather than yielding a numberless row" do
         expect { Pubid::Ieee::Identifier.parse(ref) }
           .to raise_error(Parslet::ParseFailed)
       end

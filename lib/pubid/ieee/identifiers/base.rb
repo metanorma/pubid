@@ -27,6 +27,12 @@ module Pubid
       attribute :type, :string, default: -> { "Std" } # Std, Draft Std
       attribute :draft_status, :string                    # Unapproved, Approved, Active Unapproved
       attribute :draft, :string                           # Will store draft as object
+      # Numbered/lettered revision id, e.g. "2" for "P802.16Rev2", "i" for the
+      # relaton suffix "/R-i". IEEE's native inline "Rev<n>" and relaton's
+      # synthetic "/R-<x>" both feed this one attribute; rendered inline as
+      # "Rev<id>". `::Pubid::Identifier` has no `revision` attribute, so this is
+      # free of the number/stage multi-flavor collision landmine.
+      attribute :revision, :string
       attribute :edition, :string                         # Edition 1.0
       attribute :month, :string
       attribute :day, :string
@@ -175,6 +181,15 @@ module Pubid
       def self.from_hash(data, options = {})
         data = Compaction.expand(Compaction.deep_dup(data)) if data.is_a?(::Hash)
         super
+      end
+
+      # Register the AIEE identifier for polymorphic from_hash routing. AIEE
+      # lives under the `Aiee` namespace (not `Identifiers`), so the automatic
+      # scan of `Identifiers::*` never finds it; this hook adds it to the
+      # `_type` => class map so `Pubid::Ieee::Identifier.from_hash` can route a
+      # `pubid:ieee:aiee` row back to `Aiee::Identifier`.
+      def self.additional_identifier_classes
+        [Aiee::Identifier]
       end
 
       # Parse IEEE identifier string.

@@ -19,6 +19,17 @@ module Pubid
       def render(context: nil, **opts)
         id = @id
 
+        result = render_id(id)
+        return result unless opts[:trademark]
+
+        "#{result}#{Pubid::Ieee.trademark_symbol(result)}"
+      end
+
+      private
+
+      # Dispatch to the type-specific renderer, returning the composed string
+      # (the trademark symbol, if requested, is appended by #render).
+      def render_id(id)
         case id
         when Identifiers::DualPublished
           render_dual_published(id)
@@ -50,8 +61,6 @@ module Pubid
           render_base(id)
         end
       end
-
-      private
 
       # ------------------------------------------------------------------
       # Base IEEE identifier rendering
@@ -96,6 +105,11 @@ module Pubid
 
           # Only attach year to code if there's no edition, no month, and no draft
           result += "-#{id.year}" if id.year && !id.draft_obj && !id.edition && !id.month
+
+          # Append the numbered/lettered revision inline, in IEEE's native
+          # position — right after the code number and before the draft
+          # ("P802.16Rev2/D3"). Keeps a revision distinct from its base standard.
+          result += "Rev#{id.revision}" if id.revision
 
           # Append draft to code - with or without space based on original format
           if id.draft_obj

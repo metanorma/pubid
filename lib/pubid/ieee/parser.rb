@@ -75,9 +75,17 @@ module Pubid
       # Organizations
       rule(:organization) do
         str("IEEE") | str("AIEE") | str("ANSI") | str("ASA") |
+          # ANS (American Nuclear Society) — a third co-publisher on nuclear
+          # standards ("ANSI/IEEE/ANS 7.4-3-2-1982"). Listed AFTER ANSI so it
+          # never shadows the longer token.
+          str("ANS") |
           str("IEC") | str("ISO") | str("ASTM") | str("CSA") | str("ASME") |
           str("NACE") | str("NSF") | str("ASHRAE") | str("NCTA") | str("AESC") |
-          str("EIA") # NEW Session 224: Add EIA support
+          str("EIA") | # NEW Session 224: Add EIA support
+          # Historical / foreign co-publishers seen in relaton-data-ieee
+          # (bucket 4): AMPP, USAS (both standalone), and the IEEE sub-board /
+          # partner co-publishers USEMCSC, EAB, MPAI.
+          str("USEMCSC") | str("AMPP") | str("USAS") | str("EAB") | str("MPAI")
       end
 
       # Complex organization prefixes (Category 5: ANSI Complex)
@@ -130,6 +138,31 @@ module Pubid
         (slash >> str("C") >> digits >> dot >> digits >> dot >> digits >> dash >> year_digits).as(:ieee_crossref)
       end
 
+      # IPCEA co-designation suffix (/IPCEA P-46-426-1962). Captured verbatim
+      # (leading slash included) so it round-trips through the `crossref`
+      # attribute. Used only by the S-designation rule below.
+      rule(:ipcea_copub) do
+        (slash >> str("IPCEA") >> space >>
+         match('[A-Za-z0-9.\-]').repeat(1)).as(:ipcea_copub)
+      end
+
+      # Historical IEEE/IPCEA co-published cable designation (e.g. S-135).
+      # The "S-<digits>" number has a dash between the letter series and the
+      # digits, which the shared `number` rule deliberately rejects (that
+      # tightening is what keeps a bare "IEEE S" from parsing). So this one-off
+      # family gets its own rule rather than loosening `number` and risking the
+      # 12k-row corpus. Requiring `str("S") >> dash >> digits` keeps "IEEE S"
+      # (no dash+digit) rejected. Handles: "IEEE Std S-135", "IEEE S-135",
+      # bare "S-135", the "/IPCEA …" slash co-designation, and the
+      # "(IPCEA …)" parenthetical variant.
+      rule(:s_designation) do
+        (publisher >> space).maybe >>
+          (type_word.as(:type) >> space?).maybe >>
+          (str("S") >> dash >> digits).as(:s_number) >>
+          ipcea_copub.maybe >>
+          parenthetical.maybe
+      end
+
       # Document number - support letters and digits, with optional prefix P
       # Complex multi-part numbers like P11073-10404-10419 should be fully captured
       # But simple cases like "623-1976" should not consume the dash before year
@@ -175,7 +208,12 @@ module Pubid
 
       # Draft patterns
       rule(:draft_status) do
-        (str("Active Unapproved") | str("Unapproved") | str("Approved")) >> space
+        # "Active" (bucket 3) joins the generic draft-status path so
+        # "IEEE Active Std P… /D…" parses like the "Unapproved" forms, without
+        # touching ieee_approved_draft_identifier (which would break the
+        # issue-#209 unapproved-drops-Std rendering). Longest token first.
+        (str("Active Unapproved") | str("Unapproved") | str("Approved") |
+         str("Active")) >> space
       end
 
       rule(:draft_prefix) do
@@ -185,7 +223,11 @@ module Pubid
       rule(:draft_version) do
         # Enhanced to handle multiple draft notation patterns
         # D is optional to handle /08 style drafts (e.g., IEEE P1052/08)
-        (str("D") >> str("IS").absent?).maybe >> # Avoid matching "DIS" (ISO stage)
+        # A draft never begins with "R-" — that is the revision suffix
+        # (revision_suffix rule); guard so the D-less path doesn't swallow a
+        # bare "/R-<id>" (e.g. the no-draft "P1722/R-1") as a draft.
+        (str("R") >> dash).absent? >>
+          (str("D") >> str("IS").absent?).maybe >> # Avoid matching "DIS" (ISO stage)
           (
             # Pattern: D3.1 (decimal with 1-2 digits on each side) - MOST COMMON, put first
             # Also handles trailing letter: D7.3A, D2.0E
@@ -234,12 +276,23 @@ module Pubid
          draft_date.maybe).as(:draft)
       end
 
+      # Trailing revision suffix "/R-<id>". Normalization funnels every revision
+      # spelling here — IEEE's native inline "Rev<n>" (repositioned) and
+      # relaton's synthetic "/R-<x>" (kept in place) — so a single trailing rule
+      # captures them all. The id is alphanumeric ("2", "18", "i").
+      rule(:revision_suffix) do
+        slash >> str("R") >> dash >> match('[0-9A-Za-z]').repeat(1).as(:revision)
+      end
+
       # Edition - enhanced to support IEC formats like "Edition 1.0 2015-03"
       rule(:edition) do
         (comma >> year_digits.as(:year) >> str(" Edition")) |
           ((space | dash) >> str("Edition ") >>
            (digits >> dot >> digits).as(:edition) >>
-           (space | str(" - ")) >>
+           # Year separator: a space, " - ", or a bare dash (preprocessing
+           # rewrites "Edition 3.0 2016" -> "Edition 3.0-2016", the shape the
+           # normalized "/E-<n>-YYYY" suffix produces — nil-residue item 1).
+           (str(" - ") | space | dash) >>
            year_digits.as(:year) >>
            (dash >> digit.repeat(2, 2).as(:edition_month)).maybe) # Capture -MM as edition_month
       end
@@ -294,9 +347,14 @@ module Pubid
         ).as(:reaffirmed)
       end
 
-      # Redline
+      # Redline suffix at the very end. Accepts relaton's canonical " Redline"
+      # (space, no dash) and pubid's older " - Redline" (space-dash-space),
+      # case-insensitive. Captured (presence only) so the builder sets a
+      # `redline: true` flag the renderer restores — a redline is a distinct
+      # document and must not collapse to its base standard.
       rule(:redline) do
-        str(" - Redline").as(:redline)
+        (space >> (dash >> space).maybe >>
+         (str("Redline") | str("REDLINE") | str("redline"))).as(:redline)
       end
 
       # Book nickname (e.g., "[The Orange Book]", "[IEEE Gold Book]")
@@ -472,6 +530,11 @@ module Pubid
         str("IEC/IEEE") >>
           space >>
           str("P").absent? >> # NOT a P prefix (would be joint development)
+          # The copublished number must contain at least one digit. This rejects
+          # an all-letter placeholder like "IEC/IEEE TR" (no real document
+          # number) — the same "require a digit" tightening the Standard number
+          # rule got, applied to the copublished number grammar.
+          (match("[^0-9\n]").repeat >> digit).present? >>
           match("[^\n]").repeat(1).as(:content)
       end
 
@@ -493,20 +556,56 @@ module Pubid
             # Variant 2: , CDV1 notation (comma before stage code)
             (comma >> (str("CDV") | str("FDIS") | str("CD") | str("DIS")).as(:iec_stage) >> digits.maybe.as(:stage_iteration))
           ).maybe >>
+          # Optional edition, from relaton's "/E-<n>" suffix normalized to
+          # "Edition <n>.0[ YYYY]" (nil-residue hand-off item 1). The edition
+          # rule carries its own year, so the year clause below simply doesn't
+          # fire when an edition is present.
+          edition.maybe >>
           ((dash >> year_digits.as(:year)) | # Either -YEAR
-           (comma.maybe >> space >> month_name.as(:month) >> space.maybe >> year_digits.as(:year))).maybe # Or Month YEAR (with optional comma)
+           (comma.maybe >> space >> month_name.as(:month) >> space.maybe >> year_digits.as(:year))).maybe >> # Or Month YEAR (with optional comma)
+          revision_suffix.maybe
       end
 
       rule(:joint_development_iso_format) do
-        # ISO/IEC/IEEE FDIS 26511:2018 (ISO-led format)
-        (str("ISO/IEC/IEEE") | str("ISO/IEEE") | str("IEC/IEEE")).as(:joint_publishers) >>
+        # ISO-led stage designations. Two spellings:
+        #   colon form  : "ISO/IEC/IEEE FDIS 26511:2018"           (already used)
+        #   corpus form : "ISO/IEC/IEEE FDIS P26515-2018-05"       (historical)
+        # The corpus form adds a leading "P" on the number, a trailing
+        # "-YYYY[-MM]" date (instead of ":YYYY"), multi-digit committee-draft
+        # stage codes (CD1..CD4) plus CDV, and a wider set of joint publishers.
+        # (roadmap items 2/3, phase 1). longest publisher token first.
+        (str("ISO/IEC/IEEE") | str("IEEE/ISO/IEC") | str("IEEE/IEC/ISO") |
+         str("ISO/IEEE") | str("IEC/IEEE") | str("IEEE/IEC") | str("ISO/IEC") |
+         str("IEEE")).as(:joint_publishers) >>
           space >>
-          # ISO stage codes
-          (str("FDIS") | str("DIS") | str("CD") | str("WD") | str("PWI") | str("NP")).as(:iso_stage) >>
+          # ISO stage codes: FDIS, FCD, CDV; DIS/CD with an optional round digit
+          # (DIS2, CD1..CD4); WD/PWI/NP. (FCD before FDIS is fine — distinct.)
+          (str("FDIS") | str("FCD") | str("CDV") |
+           (str("DIS") >> digit.maybe) |
+           (str("CD") >> digit.maybe) |
+           str("WD") | str("PWI") | str("NP")).as(:iso_stage) >>
+          # optional " Std" noise word after the stage (e.g. "FDIS Std P15288")
+          (space >> str("Std")).maybe >>
           space >>
+          str("P").maybe >> # optional project marker on the number
           digits.as(:number) >>
-          ((dot | dash) >> digits.as(:part)).maybe >> # Optional part
-          (str(":") >> year_digits.as(:year)).maybe
+          # part must not swallow the trailing year (year_digits.absent?)
+          ((dot | dash) >> year_digits.absent? >> digits.as(:part)).maybe >>
+          (
+            (str(":") >> year_digits.as(:year)) |
+            (dash >> year_digits.as(:year) >>
+             (dash >> month_numeric.as(:month)).maybe)
+          ).maybe >>
+          # Optional /D<draft> tail. normalize_relaton_suffixes repositions the
+          # historical "…/D-3-2017" onto the number as "…-2017/D3", so by the
+          # time this rule runs the draft usually trails the date (bucket 5);
+          # a date-less "/D-4" keeps its hyphen (bucket 7), hence dash.maybe.
+          (slash >> str("D") >> dash.maybe >>
+           match('[0-9.]').repeat(1).as(:draft_version)).maybe >>
+          # Optional edition, from relaton's "/E-<n>" suffix normalized to
+          # "Edition <n>.0[ YYYY]" (nil-residue hand-off item 1).
+          edition.maybe >>
+          revision_suffix.maybe
       end
 
       # Number-first pattern: "1873-2015 IEEE Standard..."
@@ -534,6 +633,9 @@ module Pubid
           ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
           corrigendum.maybe >>
           draft.maybe >>
+          # Revision trails the draft (before any date), matching normalization's
+          # ".../D<n>/R-<x>" repositioning of "P802.16Rev2/D3 Feb 2008".
+          revision_suffix.maybe >>
           # ALSO accept month/year after draft (some patterns like /DX, Month YEAR)
           ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
           parenthetical.maybe
@@ -549,6 +651,7 @@ module Pubid
           ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
           corrigendum.maybe >>
           draft.maybe >>
+          revision_suffix.maybe >>
           # ALSO accept month/year after draft
           ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
           # Accept bare year after draft: ", 2015"
@@ -566,6 +669,7 @@ module Pubid
           # Enhanced: Accept month/year after draft number
           (space >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
           draft.maybe >>
+          revision_suffix.maybe >>
           parenthetical.maybe
       end
 
@@ -579,6 +683,7 @@ module Pubid
           number >>
           (part_subpart_year | edition).maybe >>
           draft.maybe >>
+          revision_suffix.maybe >>
           parenthetical.maybe
       end
 
@@ -794,6 +899,7 @@ module Pubid
           ieee_astm_si_psi | # NEW Session 171: Add IEEE/ASTM SI/PSI support
           multi_numbered_identifier | # NEW: Try multi-numbered identifiers before generic patterns
           csa_dual_published | # NEW: Try CSA dual published before generic patterns
+          s_designation | # Historical IEEE/IPCEA cable designation (S-135)
           corrigendum_identifier | # NEW: Try corrigendum before generic patterns
           interpretation_identifier | # NEW: Try interpretation identifier before generic patterns
           conformance_identifier | # NEW: Try conformance identifier before generic patterns
@@ -818,6 +924,7 @@ module Pubid
           ashrae_copub.maybe >> # NEW: Add /ASHRAE Guideline support
           ieee_crossref.maybe >> # NEW: Add /C62.22.1-1996 cross-reference support
           draft.maybe >>
+          revision_suffix.maybe >>
           # Enhanced: Accept both comma and space before month/year
           ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year)).maybe >>
           edition.maybe >>
@@ -844,9 +951,9 @@ module Pubid
       # as a base year/month (a form pubid already parses), which also keeps the
       # draft component clean so it round-trips through to_hash/from_hash.
       def self.normalize_relaton_suffixes(cleaned)
-        # Bare " Redline" (relaton omits the leading " - "). pubid strips redline
-        # on the normal parse path anyway, so drop it here too.
-        cleaned = cleaned.sub(/ Redline\z/, "")
+        # NOTE: the trailing " Redline"/" - Redline" suffix is NO LONGER stripped
+        # here — the grammar's `redline` rule captures it into a redline flag so
+        # a redline id stays distinct from its base standard.
 
         # Combined draft + corrigendum: relaton emits "…/D-N/CorM-YYYY" (draft
         # then corrigendum), but pubid's grammar accepts the corrigendum first.
@@ -862,6 +969,22 @@ module Pubid
         ) do
           base, draft, cor, year = Regexp.last_match.captures
           "#{base}/Cor #{cor}#{year ? "-#{year}" : ''}/D#{draft}"
+        end
+
+        # Combined draft + revision, and the empty-draft revision-only form:
+        #   "…/D-<d>/R-<x>-YYYY[-MM]"  and  "…/D-/R-<x>-YYYY"   (nil-residue #2).
+        # Reposition the base publication date onto the number (pubid's
+        # "-YYYY[-MM]" shape), keep the draft as "/D<d>" (dropped when the draft
+        # is empty), and leave a trailing "/R-<x>" the grammar captures as the
+        # revision. Runs before the plain "/D-…" reposition, which the embedded
+        # "/R-" would otherwise defeat.
+        cleaned = cleaned.sub(
+          %r{\A(.*?)/D-([0-9A-Za-z.+]*)/R-([0-9A-Za-z]+)(?:-((?:19|20)\d\d)(?:-(0[1-9]|1[0-2]))?)?\z},
+        ) do
+          base, draft, rev, year, month = Regexp.last_match.captures
+          date = year ? "-#{year}#{month ? "-#{month}" : ''}" : ""
+          draft_part = draft.to_s.empty? ? "" : "/D#{draft}"
+          "#{base}#{date}#{draft_part}/R-#{rev}"
         end
 
         # /D-N drafts with a trailing numeric date, when the draft is the last
@@ -884,14 +1007,62 @@ module Pubid
           "#{base} Edition #{edition}.0#{date}"
         end
 
-        # /R-N revisions: pubid has no revision suffix, so drop it and keep any
-        # trailing year on the number (the revised edition's publication year).
+        # /R-N revisions: PRESERVE them (the grammar's revision_suffix rule now
+        # captures a trailing "/R-<x>" into the `revision` attribute). Just
+        # reposition any trailing publication year onto the number, keeping the
+        # "/R-<x>" in place for the grammar.
         cleaned.sub(
-          %r{\A(.*?)/R-[0-9A-Za-z]+(?:-((?:19|20)\d\d))?\z},
+          %r{\A(.*?)/R-([0-9A-Za-z]+)(?:-((?:19|20)\d\d))?\z},
         ) do
-          base, year = Regexp.last_match.captures
-          year ? "#{base}-#{year}" : base
+          base, rev, year = Regexp.last_match.captures
+          "#{year ? "#{base}-#{year}" : base}/R-#{rev}"
         end
+      end
+
+      # Strip the IEEE rawbib revision-notation dialects. `REV`/`Rev`
+      # (case-insensitive) + a trailing revision id `[A-Za-z0-9]+`, glued to the
+      # number or separated by `-`, `/`, `_`, `.`, or a space, and preceding the
+      # draft. pubid's canonical "<num>/D<n>/R-<x>" form already drops the
+      # revision on render (normalize_relaton_suffixes strips a trailing /R-x),
+      # so the revision-less result is *the same identifier* — and stripping
+      # (rather than reordering) leaves any trailing date/parenthetical intact,
+      # which is why forms that already parse (`Draft P…-REVmb/D3.0, Mar 2010`)
+      # are NOT disturbed. Examples:
+      #   "P802.16.2-REVa/D8" -> "P802.16.2/D8"
+      #   "P802.16/REVd/D5"   -> "P802.16/D5"
+      #   "P802.15.1REVa/D5"  -> "P802.15.1/D5"
+      #   "P802.11REVmb"      -> "P802.11"   (no draft)
+      def self.normalize_revision_notation(cleaned)
+        # NUMBERED revisions ("Rev<digits>") are PRESERVED — repositioned to a
+        # trailing "/R-<n>" suffix the grammar captures as the `revision`
+        # attribute (IEEE's native inline spelling; numbered-revision hand-off).
+        # A "\d+" right after "Rev" both selects the numbered subset and keeps
+        # these off the English word "Revision". Three source positions:
+        #   after a draft : "PC37.30.2/D043 Rev 18" -> ".../D043/R-18"
+        cleaned = cleaned.sub(
+          %r{(/D[0-9A-Za-z.]*)\s+[Rr][Ee][Vv]\s*(\d+)}, '\1/R-\2'
+        )
+        #   before a draft: "P802.16Rev2/D3" -> "P802.16/D3/R-2"
+        cleaned = cleaned.sub(
+          %r{[-/_.]?\s?[Rr][Ee][Vv][-\s]?(\d+)(/D[0-9A-Za-z.]*)}, '\2/R-\1'
+        )
+        #   no draft, trailing: "P1722-rev1" -> "P1722/R-1"
+        cleaned = cleaned.sub(
+          %r{(\d)[-._]?\s?[Rr][Ee][Vv]\s*(\d+)\s*\z}, '\1/R-\2'
+        )
+
+        # LETTERED inline revisions ("REVa", "REVmb") have no pubid model and are
+        # still STRIPPED (unchanged behaviour). The numbered forms above already
+        # became "/R-<n>", so these regexes only see the lettered residue.
+        # Revision token that PRECEDES a draft: drop it (keep the /D…).
+        cleaned = cleaned.sub(
+          %r{[-/_.]?\s?[Rr][Ee][Vv][-\s]?[A-Za-z0-9]+(?=/D[0-9])},
+          "",
+        )
+        # Trailing revision glued to the number with no draft ("P802.11REVmb");
+        # a digit must immediately precede REV so a trailing English word like
+        # "…Revision" can't match.
+        cleaned.sub(%r{(\d)[Rr][Ee][Vv][A-Za-z0-9]+\s*\z}, '\1')
       end
 
       def self.parse(string)
@@ -910,6 +1081,19 @@ module Pubid
         # NEW: Normalize multiple spaces to single space
         # No valid IEEE identifier pattern needs more than 1 space
         cleaned = cleaned.gsub(/\s+/, " ")
+
+        # A joint ISO-led publisher list is sometimes crawled with a stray slash
+        # (or slash+space) before the ISO stage code — "ISO/IEC/IEEE/ FDIS …" or
+        # "ISO/IEC/IEEE/FDIS …". Restore the space separator so the stage parses
+        # (bucket 7).
+        cleaned = cleaned.gsub(
+          %r{\b(ISO/IEC/IEEE|IEEE/ISO/IEC|IEEE/IEC/ISO|ISO/IEEE|IEC/IEEE|IEEE/IEC|ISO/IEC)/ ?(FDIS|FCD|CDV|DIS\d?|CD\d?|WD|PWI|NP)\b},
+          '\1 \2',
+        )
+
+        # Rewrite the rawbib revision-notation dialects (REVa/REVd/glued) into
+        # the canonical /R-<x> form before the suffix normalization below.
+        cleaned = normalize_revision_notation(cleaned)
 
         # Normalize relaton's bespoke historical serialization (the spellings
         # emitted by Relaton::Ieee::PubId::Id#to_s) into canonical pubid forms
@@ -1194,8 +1378,6 @@ module Pubid
         # Remove period after "Std": "IEEE Std." -> "IEEE Std"
         cleaned = cleaned.gsub(/\bStd\.\s+/, "Std ")
 
-        # Redline Suffix Removal: " - Redline" at end
-        cleaned = cleaned.gsub(/\s+-\s+Redline\b.*$/, "")
 
         # Title portion removal after year: "YYYY - IEEE Standard for..."
         cleaned = cleaned.gsub(

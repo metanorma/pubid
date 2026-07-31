@@ -16,46 +16,58 @@ module Pubid
       # @param parsed [Hash, Array] the parsed identifier data
       # @return [identifier] the constructed identifier object
       def build(parsed)
+        # Parslet returns a top-level *array* of hashes when a repeated capture
+        # (e.g. the two subparts in "7.4-3-2") stops the sibling captures from
+        # hash-merging. The dispatch checks below need hash access, so read them
+        # off a merged view (`d`); build_single_identifier re-handles the array
+        # itself (preserving every subpart), so it still gets the original.
+        d = parsed.is_a?(Array) ? merge_parsed_array(parsed) : parsed
+
         # Handle CSA dual published patterns
-        if parsed[:ieee_portion] && parsed[:csa_portion]
+        if d[:ieee_portion] && d[:csa_portion]
           return build_csa_dual_published(parsed)
         end
 
+        # Handle the historical IEEE/IPCEA cable designation (S-135)
+        if d[:s_number]
+          return build_s_designation(parsed)
+        end
+
         # Handle combined AIEE identifiers (from "Nos X and Y" preprocessing)
-        if parsed[:first_aiee] && parsed[:second_aiee]
+        if d[:first_aiee] && d[:second_aiee]
           return build_combined_aiee(parsed)
         end
 
         # Handle dual published patterns
-        if parsed[:first] && parsed[:second]
+        if d[:first] && d[:second]
           return build_dual_published(parsed)
         end
 
         # Handle IEC/IEEE copublished patterns
-        if parsed[:content]
+        if d[:content]
           return build_iec_ieee_copublished(parsed)
         end
 
         # Handle NESC identifiers (National Electrical Safety Code)
-        if parsed[:nesc]
+        if d[:nesc]
           nesc_builder = Nesc::Builder.new
-          return nesc_builder.build(parsed[:nesc])
+          return nesc_builder.build(d[:nesc])
         end
 
         # Handle AIEE identifiers (American Institute of Electrical Engineers)
-        if parsed[:aiee]
+        if d[:aiee]
           aiee_builder = Aiee::Builder.new
-          return aiee_builder.build(parsed[:aiee])
+          return aiee_builder.build(d[:aiee])
         end
 
         # Handle IRE identifiers (Institute of Radio Engineers)
-        if parsed[:ire]
+        if d[:ire]
           ire_builder = Ire::Builder.new
-          return ire_builder.build(parsed[:ire])
+          return ire_builder.build(d[:ire])
         end
 
         # Handle IEEE/ASTM SI/PSI identifiers (Système International)
-        if parsed[:si_type]
+        if d[:si_type]
           return build_si_psi_identifier(parsed)
         end
 
@@ -197,6 +209,33 @@ module Pubid
           ieee_identifier: ieee_id,
           csa_identifier: csa_id,
         )
+      end
+
+      # Build the historical IEEE/IPCEA cable designation (e.g. S-135).
+      #
+      # The "S-135" designation is modelled as a plain Standard whose code holds
+      # the whole "S-135" string as `number` (prefix nil). It is passed as the
+      # `number:` split column directly — NOT as `code:` — so it bypasses
+      # Components::Code.parse, which would peel "S" as a prefix and leave an
+      # empty number (breaking the relaton index key and the round-trip). This
+      # keeps `root.number` == "S-135" and renders the dash back verbatim.
+      #
+      # The "/IPCEA …" slash co-designation is stored verbatim in `crossref`
+      # (rendered as-is); the "(IPCEA …)" parenthetical variant flows through
+      # the normal `parenthetical_content` path.
+      def build_s_designation(parsed)
+        attributes = {
+          number: extract_value(parsed[:s_number]),
+          publisher: extract_value(parsed[:publisher]) || "IEEE",
+          typed_stage: Pubid::Ieee.locate_stage("Std"),
+        }
+
+        if parsed[:ipcea_copub]
+          attributes[:crossref] = extract_value(parsed[:ipcea_copub])
+        end
+        handle_parameters(parsed, attributes)
+
+        Identifiers::Standard.new(**attributes)
       end
 
       # Build single identifier
@@ -542,8 +581,27 @@ module Pubid
         end
         attributes[:code] = code_str
 
-        # Extract year
+        # Extract year (and optional numeric month, e.g. the -MM of a historical
+        # "…-2018-05" ISO-stage date)
         attributes[:year] = extract_value(parsed[:year]) if parsed[:year]
+        attributes[:month] = extract_value(parsed[:month]) if parsed[:month]
+
+        # Extract edition, from relaton's "/E-<n>" suffix (normalized to
+        # "Edition <n>.0"). nil-residue hand-off item 1.
+        attributes[:edition] = extract_value(parsed[:edition]) if parsed[:edition]
+        if parsed[:edition_month]
+          attributes[:edition_month] = extract_value(parsed[:edition_month])
+        end
+
+        # Extract draft version if present (e.g., D8 from /D8). This applies to
+        # both the ISO-led (bucket 5: "…FDIS P15289/D-3-2017") and IEEE-led
+        # forms, so it lives before the lead-party split.
+        if parsed[:draft_version]
+          draft_ver = extract_value(parsed[:draft_version])
+          # Remove leading 'D' if present since draft_version already has it
+          draft_ver = draft_ver.sub(/^D/, "") if draft_ver
+          attributes[:ieee_draft] = "D#{draft_ver}" if draft_ver
+        end
 
         # Detect lead party based on pattern
         if parsed[:iso_stage]
@@ -560,14 +618,6 @@ module Pubid
         else
           # IEEE format - lead party is IEEE
           attributes[:lead_party] = "IEEE"
-
-          # Extract draft version if present (e.g., D8 from /D8)
-          if parsed[:draft_version]
-            draft_ver = extract_value(parsed[:draft_version])
-            # Remove leading 'D' if present since draft_version already has it
-            draft_ver = draft_ver.sub(/^D/, "") if draft_ver
-            attributes[:ieee_draft] = "D#{draft_ver}" if draft_ver
-          end
 
           # Mark as project (P prefix)
           attributes[:type] = "P"
@@ -722,10 +772,10 @@ module Pubid
           return Identifiers::AdoptedStandard
         end
 
-        # Check for redline standards (structural: has redline flag)
-        if attributes[:redline]
-          return Identifiers::RedlinedStandard
-        end
+        # A redline is a plain Standard carrying `redline: true` (a distinct
+        # document from its base) — NOT the RedlinedStandard wrapper, which
+        # expects a nested `base` the flat build path never sets. render_base
+        # restores the " - Redline" suffix from the flag.
 
         # Default to the concrete Standard leaf (a plain published standard).
         # Routing to a leaf — rather than instantiating the shared base
@@ -1052,10 +1102,17 @@ module Pubid
         draft_data = parsed[:draft] || parsed[:digit_draft]
         return unless draft_data
 
-        # Draft can be an array of hash elements or a single hash
+        # Draft can be an array of hash elements or a single hash. The grammar's
+        # `draft_version.repeat(1,2)` splits a dotted designator like "1.2.6"
+        # into ["1.2", ".6"], so DON'T let a plain merge overwrite it (that
+        # dropped every part but the last — "1.2.6" -> ".6"). Collect ALL the
+        # draft_version parts into an array (the version extraction below joins
+        # them back into one verbatim string) and merge the remaining keys.
         if draft_data.is_a?(Array)
-          # Merge all elements in the array
-          merged = draft_data.inject({}) { |result, elem| result.merge(elem) }
+          hashes = draft_data.select { |e| e.is_a?(Hash) }
+          versions = hashes.filter_map { |e| e[:draft_version] }
+          merged = hashes.inject({}) { |result, elem| result.merge(elem) }
+          merged[:draft_version] = versions unless versions.empty?
           draft_data = merged
         end
 
@@ -1075,6 +1132,9 @@ module Pubid
                       else
                         extract_value(dv)
                       end
+            # Normalize a leading hyphen ("/D-3.0" -> "3.0"); the draft
+            # designator is otherwise held verbatim so no digit is lost.
+            version = version.sub(/\A-/, "") if version
           end
 
           revision = extract_value(draft_data[:revision]) if draft_data[:revision]

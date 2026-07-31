@@ -24,6 +24,16 @@ RSpec.describe Pubid::Ieee::Identifier do
         expect(id.to_s).to eq("IEEE Std C37.111-2013")
       end
 
+      it "parses the historical IEEE/IPCEA S-designation cable standard" do
+        id = Pubid::Ieee.parse("IEEE S-135/IPCEA P-46-426-1962")
+
+        expect(id).to be_a(described_class)
+        expect(id.code.to_s).to eq("S-135")
+        expect(id.root.number).to eq("S-135")
+
+        expect(id.to_s).to eq("IEEE Std S-135/IPCEA P-46-426-1962")
+      end
+
       it "parses IEEE P (project) identifiers" do
         id = Pubid::Ieee.parse("IEEE P11073-10404/D10")
 
