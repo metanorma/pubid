@@ -3,16 +3,23 @@
 module Pubid
   module Jcgm
     module Identifiers
-      # A JCGM corrigendum, e.g. "JCGM 200:2008 Corrigendum" — a guide carrying
-      # a trailing " Corrigendum" marker (no iteration number). Mirrors
-      # Amendment but with a space-separated word suffix instead of "/Amd N".
+      # A JCGM corrigendum. Two surface forms are supported:
+      #
+      #   "JCGM 200:2008 Corrigendum"      — base guide + trailing " Corrigendum"
+      #                                       word, no iteration number
+      #   "JCGM 101:2008/Cor 1:2009"       — base guide + slash-separated
+      #                                       numbered corrigendum with date
+      #
+      # The first form is the JCGM-native convention. The second mirrors the
+      # ISO/IEC supplement syntax and is needed to round-trip identifiers like
+      # "JCGM 101:2008/Cor 1:2009" (corrigendum to GUM Supplement 1).
       class Corrigendum < SupplementIdentifier
         TYPED_STAGES = [
           Pubid::Components::TypedStage.new(
             code: :pubcorr,
             stage_code: :published,
             type_code: :corrigendum,
-            abbr: ["Corrigendum"],
+            abbr: %w[Corrigendum Cor],
             name: "Corrigendum",
             harmonized_stages: %w[60.00 60.60],
           ),

@@ -237,8 +237,8 @@ RSpec.describe Pubid::Jcgm do
           expect(parsed.base.date.year).to eq("2008")
         end
 
-        it "parses iteration" do
-          expect(parsed.iteration.value).to eq("1")
+        it "parses the amendment number" do
+          expect(parsed.number.value).to eq("1")
         end
 
         it "has no amendment date" do
@@ -263,8 +263,8 @@ RSpec.describe Pubid::Jcgm do
           expect(parsed.base).to be_a(Pubid::Jcgm::Identifiers::Guide)
         end
 
-        it "parses iteration" do
-          expect(parsed.iteration.value).to eq("1")
+        it "parses the amendment number" do
+          expect(parsed.number.value).to eq("1")
         end
 
         it "parses amendment full date" do
@@ -326,8 +326,60 @@ RSpec.describe Pubid::Jcgm do
           expect(parsed.base.date.year).to eq("2008")
         end
 
-        it "carries no iteration" do
-          expect(parsed.iteration).to be_nil
+        it "carries no number (word form)" do
+          expect(parsed.number).to be_nil
+        end
+
+        it "round-trips" do
+          expect(parsed.to_s).to eq(subject)
+        end
+      end
+
+      describe "JCGM 101:2008/Cor 1:2009" do
+        subject { "JCGM 101:2008/Cor 1:2009" }
+
+        let(:parsed) { described_class.parse(subject) }
+
+        it "parses as Corrigendum" do
+          expect(parsed).to be_a(Pubid::Jcgm::Identifiers::Corrigendum)
+        end
+
+        it "parses the base identifier as Guide 101:2008" do
+          expect(parsed.base).to be_a(Pubid::Jcgm::Identifiers::Guide)
+          expect(parsed.base.number.value).to eq("101")
+          expect(parsed.base.date.year).to eq("2008")
+        end
+
+        it "carries the corrigendum number" do
+          expect(parsed.number).to be_a(Pubid::Components::Code)
+          expect(parsed.number.value).to eq("1")
+        end
+
+        it "carries the corrigendum date" do
+          expect(parsed.date.year).to eq("2009")
+        end
+
+        it "round-trips" do
+          expect(parsed.to_s).to eq(subject)
+        end
+
+        it "produces a URN distinguishing the corrigendum" do
+          expect(parsed.to_urn).to eq("urn:jcgm:101:2008:corrigendum:1:2009")
+        end
+      end
+
+      describe "JCGM 101:2008/Cor 1 (dateless)" do
+        subject { "JCGM 101:2008/Cor 1" }
+
+        let(:parsed) { described_class.parse(subject) }
+
+        it "parses as Corrigendum" do
+          expect(parsed).to be_a(Pubid::Jcgm::Identifiers::Corrigendum)
+        end
+
+        it "carries the number but no date" do
+          expect(parsed.number.value).to eq("1")
+          expect(parsed.date).to be_nil
         end
 
         it "round-trips" do
