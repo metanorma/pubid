@@ -927,6 +927,18 @@ module Pubid
         if parsed[:year]
           year_str = extract_value(parsed[:year])
           attributes[:year] = year_str
+        elsif parsed[:trailing_year]
+          # No base -YYYY identity year: the trailing "Month YYYY" IS the
+          # document date (e.g. "IEEE Std 519, May 1993"), so promote it.
+          # When a base year exists it wins (the IEEE approval/identity year)
+          # and the trailing date is intentionally dropped rather than
+          # fabricating a wrong month/year pairing. The trailing captures use
+          # distinct keys (:trailing_month/:trailing_year) so they never collide
+          # with the base :year (Parslet no longer warns "Duplicate subtrees").
+          attributes[:year] = extract_value(parsed[:trailing_year])
+          if parsed[:trailing_month]
+            attributes[:month] = extract_value(parsed[:trailing_month])
+          end
         end
 
         # Extract edition_month if parsed separately
