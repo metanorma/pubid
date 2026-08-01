@@ -19,13 +19,16 @@ module Pubid
         class Handbook < Base
           # Render handbook identifier
           #
+          # @param trademark [Boolean] append the IEEE trademark symbol (™/®)
           # @return [String] YYYY NESC Handbook format with optional edition
-          def to_s
+          def to_s(trademark: false)
             abbr = "NESC"
             abbr += "(R)" if registered
             parts = ["IEEE Std #{year.year} #{abbr} Handbook"]
             parts << ", #{edition}" if edition
-            parts.join
+            result = parts.join
+            result += Pubid::Ieee.trademark_symbol(result) if trademark
+            result
           end
         end
       end
