@@ -15,9 +15,12 @@ module Pubid
         class Redline < Base
           # Render redline identifier
           #
+          # @param trademark [Boolean] append the IEEE trademark symbol (™/®)
           # @return [String] YYYY NESC Redline format
-          def to_s
-            "#{year.year} NESC Redline"
+          def to_s(trademark: false)
+            result = "#{year.year} NESC Redline"
+            result += Pubid::Ieee.trademark_symbol(result) if trademark
+            result
           end
         end
       end

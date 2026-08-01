@@ -40,7 +40,7 @@ module Pubid
           builder.build(parsed)
         end
 
-        def to_s
+        def to_s(trademark: false)
           parts = []
           # Year comes FIRST in IRE format - render as 2-digit short year
           if year
@@ -50,7 +50,9 @@ module Pubid
           parts << publisher
           parts << type if type
           parts << number.to_s if number
-          parts.join(" ")
+          result = parts.join(" ")
+          result += Pubid::Ieee.trademark_symbol(result) if trademark
+          result
         end
       end
     end

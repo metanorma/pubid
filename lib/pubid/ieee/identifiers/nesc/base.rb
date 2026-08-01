@@ -46,9 +46,12 @@ module Pubid
           # overrides this in Nesc::Standard). IEEE catalogues the year-first
           # editions with the "IEEE Std" prefix, so it is prepended here.
           #
+          # @param trademark [Boolean] append the IEEE trademark symbol (™/®)
           # @return [String] String representation
-          def to_s
-            "IEEE Std #{year.year} #{name_portion}"
+          def to_s(trademark: false)
+            result = "IEEE Std #{year.year} #{name_portion}"
+            result += Pubid::Ieee.trademark_symbol(result) if trademark
+            result
           end
 
           # The document-name portion, including the registered marks and the

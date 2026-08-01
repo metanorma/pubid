@@ -15,9 +15,12 @@ module Pubid
         class Standard < Base
           # Render standard NESC identifier
           #
+          # @param trademark [Boolean] append the IEEE trademark symbol (™/®)
           # @return [String] C2-YYYY format
-          def to_s
-            "C2-#{year.year} National Electrical Safety Code"
+          def to_s(trademark: false)
+            result = "C2-#{year.year} National Electrical Safety Code"
+            result += Pubid::Ieee.trademark_symbol(result) if trademark
+            result
           end
         end
       end

@@ -91,16 +91,17 @@ module Pubid
         # JointDevelopment has its own dual-format logic (IEEE vs ISO)
         # that doesn't go through the format registry renderer.
         # @param format [Symbol] :ieee or :iso (defaults to canonical_format)
+        # @param trademark [Boolean] append the IEEE trademark symbol (™/®)
         # @return [String] formatted identifier
-        def to_s(format: canonical_format)
-          case format
-          when :iso
-            to_iso_format
-          when :ieee
-            to_ieee_format
-          else
-            to_ieee_format
-          end
+        def to_s(format: canonical_format, trademark: false)
+          result = case format
+                   when :iso
+                     to_iso_format
+                   else
+                     to_ieee_format
+                   end
+          result += Pubid::Ieee.trademark_symbol(result) if trademark
+          result
         end
 
         private
