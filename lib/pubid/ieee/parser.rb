@@ -285,15 +285,23 @@ module Pubid
       end
 
       # Edition - enhanced to support IEC formats like "Edition 1.0 2015-03"
+      #
+      # The edition's own year is captured as :edition_year (NOT :year). The
+      # generic Std branch carries a base "-YYYY" slot AND a separate trailing
+      # `edition.maybe`; a bare :year here would collide with the base :year
+      # when both fire, so Parslet warns "Duplicate subtrees … keys: [:year]"
+      # and drops the base identity year (the same failure #299 fixed for the
+      # trailing month/year clause). The builder promotes :edition_year to the
+      # identity year only when there is no base year.
       rule(:edition) do
-        (comma >> year_digits.as(:year) >> str(" Edition")) |
+        (comma >> year_digits.as(:edition_year) >> str(" Edition")) |
           ((space | dash) >> str("Edition ") >>
            (digits >> dot >> digits).as(:edition) >>
            # Year separator: a space, " - ", or a bare dash (preprocessing
            # rewrites "Edition 3.0 2016" -> "Edition 3.0-2016", the shape the
            # normalized "/E-<n>-YYYY" suffix produces — nil-residue item 1).
            (str(" - ") | space | dash) >>
-           year_digits.as(:year) >>
+           year_digits.as(:edition_year) >>
            (dash >> digit.repeat(2, 2).as(:edition_month)).maybe) # Capture -MM as edition_month
       end
 

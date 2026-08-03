@@ -73,4 +73,47 @@ RSpec.describe "IEEE duplicate :year capture" do
     expect(id.month).to be_nil
     expect(id.to_s).to eq("IEEE Std 528-2019")
   end
+
+  # The `edition` rule ALSO exposes a top-level :year (the edition's own year),
+  # and the generic Std branch has a base-year slot AND a separate trailing
+  # `edition.maybe`. A base "-YYYY" plus a trailing "Edition X.Y[-YYYY]" then
+  # produced the same :year collision #299 fixed for the trailing month/year —
+  # Parslet warned and dropped the base identity year. The edition's year now
+  # uses a distinct :edition_year key; the base "-YYYY" wins, and the edition
+  # year is promoted to the identity only when there is no base year.
+  # (hand-off: ieee-identifier-duplicate-year-capture — edition variant.)
+  describe "base year vs. trailing edition year (no warning)" do
+    it "keeps the base year and drops the edition year, without warning" do
+      ref = "IEEE Std 802.11-2007 Edition 3.0-2009"
+      expect { klass.parse(ref) }
+        .not_to output(/Duplicate subtrees/).to_stderr
+      id = klass.parse(ref)
+      expect(id.year).to eq("2007")
+      expect(id.edition).to eq("3.0")
+      # The base identity year is preserved; the edition's year (2009) is
+      # dropped (base year wins, as in #299). The rendered form carries 2007,
+      # never the dropped 2009.
+      expect(id.to_s).to include("2007")
+      expect(id.to_s).not_to include("2009")
+    end
+  end
+
+  describe "edition-only forms keep the edition year (unchanged)" do
+    {
+      "IEEE Std 802.11 Edition 3.0-2009" => ["2009", "3.0", nil],
+      "IEEE P802.11 Edition 3.0-2009" => ["2009", "3.0", nil],
+      "IEEE Std 802.11 Edition 3.0 2015-03" => ["2015", "3.0", "03"],
+    }.each do |ref, (year, edition, edition_month)|
+      context ref.inspect do
+        it "promotes the edition year to the identity and emits no warning" do
+          expect { klass.parse(ref) }
+            .not_to output(/Duplicate subtrees/).to_stderr
+          id = klass.parse(ref)
+          expect(id.year).to eq(year)
+          expect(id.edition).to eq(edition)
+          expect(id.edition_month).to eq(edition_month)
+        end
+      end
+    end
+  end
 end
