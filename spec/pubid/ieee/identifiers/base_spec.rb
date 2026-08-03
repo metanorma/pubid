@@ -112,7 +112,9 @@ RSpec.describe Pubid::Ieee::Identifier do
         expect(related_id.number.to_s).to eq("19")
         expect(related_id.year).to eq("1938")
 
-        expect(id.to_s).to match("AIEE No 19-1943 (Supersedes AIEE No 19-1938)")
+        # The descriptive relationship narrative is deliberately kept out of
+        # to_s (bounded identifier string); it stays reachable on `relationships`.
+        expect(id.to_s).to eq("AIEE No 19-1943")
       end
     end
 
@@ -126,7 +128,7 @@ RSpec.describe Pubid::Ieee::Identifier do
         )
       end
 
-      it "renders single relationship with one identifier" do
+      it "renders the bare identifier, preserving a single relationship on the object" do
         relationship = Pubid::Ieee::Components::Relationship.new(
           relationship_type: Pubid::Ieee::Components::Relationship::REVISION_OF,
           related_identifiers: [related_id],
@@ -140,10 +142,13 @@ RSpec.describe Pubid::Ieee::Identifier do
           relationships: [relationship],
         )
 
-        expect(id.to_s).to eq("IEEE Std 802.11-2016 (Revision of IEEE Std 802.11-2012)")
+        # Descriptive narrative kept out of to_s; still available on relationships.
+        expect(id.to_s).to eq("IEEE Std 802.11-2016")
+        expect(id.relationships.first.to_s)
+          .to eq("Revision of IEEE Std 802.11-2012")
       end
 
-      it "renders multiple relationships separated by /" do
+      it "renders the bare identifier, preserving multiple relationships on the object" do
         rev_rel = Pubid::Ieee::Components::Relationship.new(
           relationship_type: Pubid::Ieee::Components::Relationship::REVISION_OF,
           related_identifiers: [related_id],
@@ -167,10 +172,12 @@ RSpec.describe Pubid::Ieee::Identifier do
           relationships: [rev_rel, inc_rel],
         )
 
-        expect(id.to_s).to eq("IEEE Std 802.11-2016 (Revision of IEEE Std 802.11-2012 / incorporates IEEE Std 802.11a-1999)")
+        expect(id.to_s).to eq("IEEE Std 802.11-2016")
+        expect(id.relationships.map(&:relationship_type))
+          .to eq(%w[revision_of incorporates])
       end
 
-      it "renders relationship with multiple identifiers" do
+      it "renders the bare identifier, preserving a relationship with multiple identifiers on the object" do
         id1 = described_class.new(
           publisher: "IEEE",
           type: "Std",
@@ -198,7 +205,9 @@ RSpec.describe Pubid::Ieee::Identifier do
           relationships: [relationship],
         )
 
-        expect(id.to_s).to eq("IEEE Std 1232-2002 (Revision of IEEE Std 1232-1995 and IEEE Std 1232.1-1997)")
+        expect(id.to_s).to eq("IEEE Std 1232-2002")
+        expect(id.relationships.first.to_s)
+          .to eq("Revision of IEEE Std 1232-1995 and IEEE Std 1232.1-1997")
       end
     end
 

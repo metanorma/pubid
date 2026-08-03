@@ -78,8 +78,11 @@ RSpec.describe "AIEE flat-column round-trip" do
       expect(klass.from_hash(h).to_hash).to eq(h)
     end
 
-    it "renders the relationship on the parse path" do
-      expect(id.to_s).to eq(ref)
+    it "renders the bare identifier, keeping the relationship on the object" do
+      # The descriptive relationship narrative is deliberately kept out of to_s
+      # (bounded identifier string); it stays reachable on `relationships`.
+      expect(id.to_s).to eq("AIEE No 28-1944")
+      expect(id.relationships.first.relationship_type).to eq("revision_of")
     end
   end
 end

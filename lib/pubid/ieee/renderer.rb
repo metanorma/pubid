@@ -160,27 +160,26 @@ module Pubid
           end
         end
 
-        # Add parenthetical content if present
+        # Bounded parenthetical markers only. The unbounded relationship/
+        # amendment narrative (relationships, revision_of, amendment_to,
+        # adoption, note) is deliberately NOT rendered here: an
+        # "as amended by …" list can run 300+ chars, and an identifier's to_s
+        # is used by consumers (relaton) as a document number and filename. The
+        # narrative is preserved on the runtime accessors (id.relationships
+        # etc.), just not embedded in the identifier string.
         parentheticals = []
 
+        # Reaffirmation year — a bounded status marker.
         reaff = id.reaffirmed
-        if reaff && !reaff.to_s.strip.empty?
-          parentheticals << "(R#{reaff})"
-        end
+        parentheticals << "(R#{reaff})" if reaff && !reaff.to_s.strip.empty?
 
+        # The catch-all parenthetical is a bounded, printed identity token, not
+        # relationship prose (e.g. the "S-135 (IPCEA P46-426)" co-designation).
+        # Long amendment narratives match the structural relationship grammar
+        # and land in `relationships`, never in this catch-all, so it stays
+        # bounded.
         if id.parenthetical_content
           parentheticals << "(#{id.parenthetical_content})"
-        elsif id.relationships && !id.relationships.empty?
-          relationship_str = id.relationships.join(" / ")
-          parentheticals << "(#{relationship_str})"
-        elsif id.revision_of
-          parentheticals << "(Revision of IEEE Std #{id.revision_of})"
-        elsif id.amendment_to
-          parentheticals << "(Amendment to IEEE Std #{id.amendment_to})"
-        elsif id.adoption
-          parentheticals << "(Adoption of #{id.adoption})"
-        elsif id.note && !id.note.to_s.strip.empty?
-          parentheticals << "(#{id.note})"
         end
 
         result += " #{parentheticals.join(' ')}" unless parentheticals.empty?
@@ -217,6 +216,12 @@ module Pubid
 
       def render_redlined_standard(id)
         result = id.base.to_s
+        # NOTE: currently unreachable — a redline is built as a flat
+        # `redline: true` on a plain Standard (see the redline invariant in
+        # CLAUDE.md), so determine_identifier_class never routes here. Kept for
+        # completeness; if this path is ever revived, note `revision_of` is a
+        # bounded single-id reference, unlike the unbounded relationship
+        # narrative that render_base deliberately drops.
         result += " (Revision of #{id.revision_of})" if id.revision_of
         result += " - Redline" if id.redline
         result
@@ -311,23 +316,18 @@ module Pubid
           parts << "-#{id.year}"
         end
 
-        # Relationships (if present)
         # Join parts with spaces, but don't insert a space before parts
         # that start with "-" or "," (e.g., "-2010", ", July 2014") so the
-        # SI form renders as "SI 10-2010" not "SI 10 -2010".
-        result = parts.each_with_object([]) do |part, acc|
+        # SI form renders as "SI 10-2010" not "SI 10 -2010". The descriptive
+        # relationships narrative is deliberately kept out of to_s (see
+        # render_base); it stays reachable on id.relationships.
+        parts.each_with_object([]) do |part, acc|
           if acc.empty? || part.to_s.start_with?("-", ",")
             acc << part.to_s
           else
             acc << " " << part.to_s
           end
         end.join
-        if id.relationships && !id.relationships.empty?
-          rel_strs = id.relationships.map(&:to_s)
-          result += " (#{rel_strs.join(' / ')})"
-        end
-
-        result
       end
     end
   end

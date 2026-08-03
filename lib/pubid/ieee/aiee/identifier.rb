@@ -68,10 +68,10 @@ module Pubid
             end
           end
 
-          if relationships && !relationships.empty?
-            relationship_str = relationships.join(" / ")
-            base += " (#{relationship_str})"
-          end
+          # The descriptive relationships narrative is deliberately kept out of
+          # to_s (an identifier string must stay bounded — it is used as a
+          # document number/filename downstream). It stays reachable on
+          # `relationships`.
 
           base += Pubid::Ieee.trademark_symbol(base) if trademark
           base

@@ -62,6 +62,13 @@ RSpec.describe "IEEE revision-notation variants" do
   it "does not mangle the word 'Revision' in a parenthetical" do
     ref = "IEEE Std 802.16-2004 (Revision of IEEE Std 802.16-2001)"
     expect { klass.parse(ref) }.not_to raise_error
-    expect(klass.parse(ref).to_s).to include("Revision")
+    parsed = klass.parse(ref)
+    # The "Revision of …" narrative is a relationship, not an inline revision
+    # notation: it must be parsed as a revision_of relationship (proving the
+    # word "Revision" wasn't mangled into a Rev token) and kept off the bounded
+    # to_s.
+    expect(parsed.to_s).to eq("IEEE Std 802.16-2004")
+    expect(parsed.relationships.first.relationship_type).to eq("revision_of")
+    expect(parsed.revision).to be_nil
   end
 end
