@@ -582,8 +582,14 @@ module Pubid
         attributes[:code] = code_str
 
         # Extract year (and optional numeric month, e.g. the -MM of a historical
-        # "…-2018-05" ISO-stage date)
-        attributes[:year] = extract_value(parsed[:year]) if parsed[:year]
+        # "…-2018-05" ISO-stage date). The joint ISO/IEC rules also use the
+        # `edition` rule, whose year is captured as :edition_year (parser.rb);
+        # it is promoted to the identity only when no base :year was captured.
+        if parsed[:year]
+          attributes[:year] = extract_value(parsed[:year])
+        elsif parsed[:edition_year]
+          attributes[:year] = extract_value(parsed[:edition_year])
+        end
         attributes[:month] = extract_value(parsed[:month]) if parsed[:month]
 
         # Extract edition, from relaton's "/E-<n>" suffix (normalized to
@@ -927,6 +933,14 @@ module Pubid
         if parsed[:year]
           year_str = extract_value(parsed[:year])
           attributes[:year] = year_str
+        elsif parsed[:edition_year]
+          # The `edition` rule captures its own year under :edition_year (not
+          # :year) so it never collides with the base -YYYY (see parser.rb).
+          # With no base year the edition's year IS the document date and is
+          # promoted to the identity (e.g. "IEEE Std 802.11 Edition 3.0-2009"
+          # -> year 2009). When a base year exists it wins above and
+          # :edition_year is dropped — the edition ordinal is still kept.
+          attributes[:year] = extract_value(parsed[:edition_year])
         elsif parsed[:trailing_year]
           # No base -YYYY identity year: the trailing "Month YYYY" IS the
           # document date (e.g. "IEEE Std 519, May 1993"), so promote it.
