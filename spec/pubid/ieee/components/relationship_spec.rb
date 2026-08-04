@@ -261,12 +261,14 @@ RSpec.describe Pubid::Ieee::Components::Relationship do
         expect(id.relationships[1].relationship_type).to eq("redesignation_of")
       end
 
-      it "renders semicolon-separated relationships correctly" do
+      it "preserves semicolon-separated relationships on the object" do
         id = Pubid::Ieee.parse("IEEE Std 100 (Reaffirmation of ANSI X; Redesignation of ANSI Y)")
         expect(id.relationships.length).to eq(2)
-        # Note: Parser uses " / " separator in rendering, not semicolon
-        expect(id.to_s).to include("Reaffirmation of")
-        expect(id.to_s).to include("Redesignation of")
+        # The descriptive relationship narrative is deliberately kept out of
+        # to_s (bounded identifier string); it stays reachable on the objects.
+        expect(id.to_s).to eq("IEEE Std 100")
+        expect(id.relationships.map(&:relationship_type))
+          .to eq(%w[reaffirmation_of redesignation_of])
       end
     end
 
