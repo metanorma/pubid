@@ -39,6 +39,8 @@ module Pubid
           render_adopted_standard(id)
         when Identifiers::RedlinedStandard
           render_redlined_standard(id)
+        when Identifiers::Amendment
+          render_amendment(id)
         when Identifiers::Corrigendum
           render_corrigendum(id)
         when Identifiers::InterpretationIdentifier
@@ -234,6 +236,16 @@ module Pubid
         result += "/Cor"
         result += ". " if id.number # Add period and space for formal format
         result += id.number if id.number
+        result += "-#{id.year}" if id.year
+        result
+      end
+
+      def render_amendment(id)
+        return render_base(id) unless id.base
+
+        result = id.base.to_s
+        result += "/Amd"
+        result += " #{id.number}" if id.number # canonical "/Amd 4-2020"
         result += "-#{id.year}" if id.year
         result
       end
