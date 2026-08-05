@@ -211,9 +211,11 @@ module Pubid
         # "Active" (bucket 3) joins the generic draft-status path so
         # "IEEE Active Std P… /D…" parses like the "Unapproved" forms, without
         # touching ieee_approved_draft_identifier (which would break the
-        # issue-#209 unapproved-drops-Std rendering). Longest token first.
-        (str("Active Unapproved") | str("Unapproved") | str("Approved") |
-         str("Active")) >> space
+        # issue-#209 unapproved-drops-Std rendering). "Active Approved" completes
+        # the two-word matrix alongside "Active Unapproved" (draft-grammar
+        # coverage: the "<status> Draft P…/D…" prefix forms). Longest token first.
+        (str("Active Unapproved") | str("Active Approved") | str("Unapproved") |
+         str("Approved") | str("Active")) >> space
       end
 
       rule(:draft_prefix) do
@@ -249,8 +251,17 @@ module Pubid
       rule(:draft_date) do
         # Enhanced to handle: ", Sept 2008" or " Sept 2008" or ", Month Year"
         ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year)) |
+          # Numeric-month form ", 05 2007" / " 05 2007" — no text month name. The
+          # year separator may be a dash: preprocessing (parser.rb ~1278) rewrites
+          # a trailing " <digits> <year>" to "<digits>-<year>", so "05 2007"
+          # reaches the grammar as "05-2007".
+          ((comma | space) >> month_numeric.as(:month) >> (space | dash) >> year_digits.as(:year)) |
           (((space? >> comma >> space?) | space) >> month_name.as(:month) >>
           (
+            # "Month DD, Year" (day then comma) and "Month DD Year" (day, no
+            # comma) — the day/year separator may be a dash for the same
+            # preprocessing reason ("July 15 2012" → "July 15-2012").
+            ((space >> digits.as(:day)) >> ((comma | space | dash) >> year_digits.as(:year))) |
             ((space >> digits.as(:day)).maybe >> comma >> year_digits.as(:year)) |
             (comma >> space? >> year_digits.as(:year)) |
             (space >> year_digits.as(:year))
@@ -650,6 +661,12 @@ module Pubid
           revision_suffix.maybe >>
           # ALSO accept month/year after draft (some patterns like /DX, Month YEAR)
           ((comma | space) >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)).maybe >>
+          # Trailing corrigendum AFTER the draft+date ("…/D1, Jan 2007/Cor. 1").
+          # The draft's own draft_date has already consumed the date, leaving
+          # "/Cor. 1" here; the resulting flat corrigendum+draft tree routes to
+          # build_flat_corrigendum (disjoint from the pre-draft corrigendum slot,
+          # which only fires when no draft precedes it).
+          corrigendum.maybe >>
           parenthetical.maybe
       end
 
@@ -669,12 +686,20 @@ module Pubid
           ((comma | space) >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)).maybe >>
           # Accept bare year after draft: ", 2015"
           ((comma | space) >> year_digits.as(:trailing_year)).maybe >>
+          # Trailing corrigendum after the draft+date (parity with ieee_p_identifier).
+          corrigendum.maybe >>
           parenthetical.maybe
       end
 
       # IEEE Draft P pattern: "IEEE Draft P802.11..." OR "Draft P802.11..." (IEEE prefix optional)
+      # An optional status phrase may precede "Draft" — "IEEE Unapproved Draft P…",
+      # "IEEE Active Approved Draft P…" — the largest index-v2 draft bucket. The
+      # status is captured (draft_status ends in a space, so "Approved Draft"
+      # splits cleanly) and round-trips as the draft_status attribute; the literal
+      # "Draft" stays a bare marker (dropped on render, like the plain form).
       rule(:ieee_draft_p_identifier) do
         (str("IEEE").as(:publisher) >> space).maybe >> # Make IEEE prefix optional
+          draft_status.as(:draft_status).maybe >>
           str("Draft") >> space >>
           str("P") >>
           number >>
@@ -943,6 +968,11 @@ module Pubid
           # never collides with the base -YYYY identity year (see
           # ieee_p_identifier). The builder promotes it only when no base year.
           ((comma | space) >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)).maybe >>
+          # Trailing corrigendum after the draft+date ("IEEE Approved P1015/D1,
+          # Jan 2007/Cor. 1"): the generic bucket is the only path a status-word
+          # form reaches. Routes via build_flat_corrigendum (disjoint from the
+          # pre-draft corrigendum slot at line 954).
+          corrigendum.maybe >>
           edition.maybe >>
           parenthetical.maybe >>  # REVERT: Back to single parenthetical
           book_nickname.maybe >>  # NEW: Add book nickname support
