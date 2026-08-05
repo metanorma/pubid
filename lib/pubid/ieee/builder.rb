@@ -268,6 +268,23 @@ module Pubid
           return build_flat_corrigendum(parsed_hash)
         end
 
+        # Handle amendment supplements — mirrors the corrigendum path above.
+        # Every amendment the grammar produces is FLAT (a top-level `amendment`
+        # hash, no `:base`): the `amendment` rule only ever appears inline via
+        # `amendment.maybe`, so `build_flat_amendment` carries all real traffic
+        # (`IEEE Std …/Amd N-YYYY` and `ISO/IEC/IEEE 8802.x/AmdN-YYYY`). The
+        # recursive-base branch below is kept for structural parity with
+        # corrigendum (which has a dedicated `corrigendum_identifier` rule
+        # emitting a `:base` + top-level `:amd_number`-style shape); no amendment
+        # grammar rule emits it today, so it would only fire if one were added.
+        if parsed_hash[:base] && parsed_hash[:amd_number]
+          return build_amendment_supplement(parsed_hash)
+        end
+
+        if parsed_hash[:amendment].is_a?(Hash) && !parsed_hash[:base]
+          return build_flat_amendment(parsed_hash)
+        end
+
         # Handle interpretation supplements (check for base + int_year)
         if parsed_hash[:base] && (parsed_hash[:int_year] || parsed_hash[:interpretation])
           return build_interpretation_supplement(parsed_hash)
@@ -296,27 +313,28 @@ module Pubid
         identifier_class.new(**attributes)
       end
 
-      # Supplement wrappers (Corrigendum/Conformance/Interpretation) store their
-      # ordinal/year under the uniform `number`/`year`, but the parse tree and
-      # class-routing above key on the distinct `cor_*`/`conf_*`/`int_year`
-      # names. Translate them **after** routing, just before construction. Guards
-      # ensure a plain standard's own `number`/`year` are never overwritten (it
-      # carries none of these keys).
+      # Supplement wrappers (Corrigendum/Amendment/Conformance/Interpretation)
+      # store their ordinal/year under the uniform `number`/`year`, but the parse
+      # tree and class-routing above key on the distinct
+      # `cor_*`/`amd_*`/`conf_*`/`int_year` names. Translate them **after**
+      # routing, just before construction. Guards ensure a plain standard's own
+      # `number`/`year` are never overwritten (it carries none of these keys).
       def rename_supplement_keys(attributes)
-        ordinal = attributes.delete(:cor_number) || attributes.delete(:conf_number)
+        ordinal = attributes.delete(:cor_number) ||
+          attributes.delete(:amd_number) || attributes.delete(:conf_number)
         attributes[:number] = ordinal if ordinal
-        year = attributes.delete(:cor_year) || attributes.delete(:conf_year) ||
-          attributes.delete(:int_year)
+        year = attributes.delete(:cor_year) || attributes.delete(:amd_year) ||
+          attributes.delete(:conf_year) || attributes.delete(:int_year)
         attributes[:year] = year if year
       end
 
-      # Build corrigendum supplement with recursive base parsing
-      # @param parsed_hash [Hash] parsed data with base and supplement info
-      # @return [Identifiers::Corrigendum] corrigendum identifier
-      def build_corrigendum_supplement(parsed_hash)
-        # Reconstruct base identifier string from parsed components
+      # Reconstruct the base identifier string from a parsed `:base` subtree
+      # (publisher/copublishers + type + number/part/subpart/year), so it can be
+      # recursively re-parsed by the supplement builders (corrigendum/amendment).
+      # @param base_data [Hash] the `:base` subtree
+      # @return [String] e.g. "IEEE Std 802.1AC-2016" or "535-2013"
+      def reconstruct_base_string(base_data)
         base_parts = []
-        base_data = parsed_hash[:base]
 
         # Extract publisher
         if base_data[:publishers]
@@ -369,12 +387,15 @@ module Pubid
         end
 
         base_parts << number_str
+        base_parts.join(" ")
+      end
 
-        # Build base string and recursively parse it
-        base_string = base_parts.join(" ")
-
-        # Recursively parse base identifier using Base.parse
-        base = Identifier.parse(base_string)
+      # Build corrigendum supplement with recursive base parsing
+      # @param parsed_hash [Hash] parsed data with base and supplement info
+      # @return [Identifiers::Corrigendum] corrigendum identifier
+      def build_corrigendum_supplement(parsed_hash)
+        # Recursively parse the base identifier reconstructed from the subtree.
+        base = Identifier.parse(reconstruct_base_string(parsed_hash[:base]))
 
         # Extract corrigendum attributes (parse-tree keys are cor_*; the
         # identifier stores them as the uniform `number`/`year`).
@@ -408,6 +429,47 @@ module Pubid
           base: base,
           number: cor_number,
           year: cor_year,
+        )
+      end
+
+      # Build amendment supplement with recursive base parsing. Mirrors
+      # {#build_corrigendum_supplement} — reconstructs the base identifier
+      # string, recursively parses it, and wraps it in an Amendment.
+      # @param parsed_hash [Hash] parsed data with base and amendment info
+      # @return [Identifiers::Amendment] amendment identifier
+      def build_amendment_supplement(parsed_hash)
+        base = Identifier.parse(reconstruct_base_string(parsed_hash[:base]))
+
+        amd_number = extract_value(parsed_hash[:amd_number])
+        amd_year = extract_value(parsed_hash[:amd_year])
+
+        Identifiers::Amendment.new(
+          base: base,
+          number: amd_number,
+          year: amd_year,
+        )
+      end
+
+      # Build an Amendment from the flat parse tree produced by the common
+      # `…/Amd N-YYYY` form, where the amendment lives in a top-level
+      # `amendment` hash and there is no `:base` subtree. Peel the amendment
+      # off, build the remaining attributes into the base standard via the
+      # normal single-identifier path, then wrap. Mirrors
+      # {#build_flat_corrigendum}.
+      # @param parsed_hash [Hash] flat parsed data with an :amendment hash
+      # @return [Identifiers::Amendment]
+      def build_flat_amendment(parsed_hash)
+        amd_data = parsed_hash[:amendment]
+        amd_number = extract_value(amd_data[:amd_number])
+        amd_year = extract_value(amd_data[:amd_year]) if amd_data[:amd_year]
+
+        base_hash = parsed_hash.reject { |key, _| key == :amendment }
+        base = build_single_identifier(base_hash)
+
+        Identifiers::Amendment.new(
+          base: base,
+          number: amd_number,
+          year: amd_year,
         )
       end
 
@@ -767,6 +829,11 @@ module Pubid
         # Check for corrigendum supplements (structural: has cor_number)
         if attributes[:cor_number]
           return Identifiers::Corrigendum
+        end
+
+        # Check for amendment supplements (structural: has amd_number)
+        if attributes[:amd_number]
+          return Identifiers::Amendment
         end
 
         # Check for multi-numbered standards (structural: has crossref or joint patterns)
