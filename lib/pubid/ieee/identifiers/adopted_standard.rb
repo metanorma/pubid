@@ -18,6 +18,20 @@ module Pubid
         def publisher
           ieee_identifier&.publisher || "IEEE"
         end
+
+        # `publisher` is *derived* from `ieee_identifier` (the serialized source
+        # of truth), so it must not be serialized. Emitting it breaks the
+        # canonical round-trip: the derived value is default-omitted on the parse
+        # path (publisher unset), but re-emitted after from_hash materializes the
+        # attribute default (the override then returns ieee_identifier.publisher,
+        # e.g. "AIEE", not the "IEEE" default). Drop it — ieee_identifier rebuilds
+        # it. (AdoptedStandard is always a top-level wrapper, never nested, so a
+        # to_hash-level drop is sufficient — same as JointDevelopment.)
+        def to_hash(*args)
+          hash = super
+          hash.delete("publisher") if hash.is_a?(::Hash)
+          hash
+        end
       end
     end
   end

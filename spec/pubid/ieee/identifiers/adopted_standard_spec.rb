@@ -47,4 +47,42 @@ RSpec.describe Pubid::Ieee::Identifiers::AdoptedStandard do
       end
     end
   end
+
+  # Regression: from_hash(to_hash).to_hash must equal to_hash. `#publisher`
+  # is a *derived* method (ieee_identifier.publisher), so lutaml omits it on
+  # the parse path (unset) but re-serializes the derived value after from_hash
+  # materializes the attribute default — an asymmetric top-level "publisher"
+  # key. See handoff ieee-adopted-standard-roundtrip; same class of bug as
+  # JointDevelopment.
+  describe "round-trip serialization" do
+    let(:klass) { Pubid::Ieee::Identifier }
+
+    [
+      "AIEE No 511-1956 (IEEE Std 275)",
+      "IEEE Std 275-1956 (AIEE No 511-1956)",
+      "AIEE No 14-1925 (AESC C22-1925)",
+    ].each do |input|
+      context "for #{input.inspect}" do
+        let(:parsed) { klass.parse(input) }
+        let(:hash) { parsed.to_hash }
+
+        it "parses as an AdoptedStandard" do
+          expect(parsed).to be_a(described_class)
+        end
+
+        it "does not serialize a top-level publisher (it is derived)" do
+          expect(hash).not_to have_key("publisher")
+        end
+
+        it "round-trips through from_hash" do
+          expect(klass.from_hash(hash).to_hash).to eq(hash)
+        end
+
+        it "still renders and derives publisher at runtime" do
+          expect(parsed.to_s).to eq(input)
+          expect(parsed.publisher).not_to be_nil
+        end
+      end
+    end
+  end
 end
