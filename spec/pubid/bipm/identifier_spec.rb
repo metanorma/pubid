@@ -79,6 +79,38 @@ RSpec.describe Pubid::Bipm::Identifier do
         expect(subject.to_s).to eq("Résolution 1 de la CGPM (1927)")
       end
     end
+
+    context "bare MRA-interpretation form (no type word)" do
+      subject { described_class.parse("CIPM 2005-06") }
+
+      it "parses as a type-less CommitteeDocument and round-trips" do
+        expect(subject).to be_a(Pubid::Bipm::Identifiers::CommitteeDocument)
+        expect(subject.group).to eq("CIPM")
+        expect(subject.type_code).to be_nil
+        expect(subject.number).to eq("2005-06")
+        expect(subject.year).to be_nil
+        expect(subject.to_s).to eq("CIPM 2005-06")
+      end
+
+      it "exposes a non-empty root.number for the relaton index" do
+        expect(subject.root.number).to eq("2005-06")
+      end
+
+      it "round-trips through to_hash/from_hash" do
+        hash = subject.to_hash
+        expect(described_class.from_hash(hash).to_hash).to eq(hash)
+      end
+
+      it "builds a URN without raising" do
+        expect(subject.to_urn.to_s).to eq("urn:bipm:cipm::2005-06")
+      end
+
+      it "carries an optional publication year when present" do
+        dated = described_class.parse("CIPM 2005-06 (2005)")
+        expect(dated.year).to eq(2005)
+        expect(dated.to_s).to eq("CIPM 2005-06 (2005)")
+      end
+    end
   end
 
   describe ".parse — meetings" do

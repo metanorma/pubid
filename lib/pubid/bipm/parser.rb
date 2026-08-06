@@ -68,6 +68,14 @@ module Pubid
           connective >> space >> group >> (space >> year_paren_nolang).maybe)
           .as(:committee_long_fr)
       end
+      # Bare MRA-interpretation form: a group directly followed by a document
+      # number with no type word (e.g. "CIPM 2005-06"). Tried last, so typed
+      # committee documents and meetings always win; only fires when a digit
+      # follows the group and the string is fully consumed.
+      rule(:committee_bare) do
+        (group >> space >> number >> (space >> year_paren).maybe)
+          .as(:committee_bare)
+      end
 
       # --- meetings ---
       rule(:meeting_en) do
@@ -101,7 +109,8 @@ module Pubid
       # After a leading group token, the shape after the first space decides:
       # a digit → meeting; a type word → committee.
       rule(:group_leading) do
-        meeting_en | meeting_fr | committee_short | committee_long_en
+        meeting_en | meeting_fr | committee_short | committee_long_en |
+          committee_bare
       end
 
       rule(:identifier) do

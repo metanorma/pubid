@@ -15,6 +15,9 @@ module Pubid
           build_committee(data[:committee_short], form: "short")
         elsif data[:committee_long_en]
           build_committee(data[:committee_long_en], form: "long", language: "E")
+        elsif data[:committee_bare]
+          # Bare MRA form: no type word, so build_committee yields nil type.
+          build_committee(data[:committee_bare], form: "short")
         elsif data[:committee_long_fr]
           build_committee(data[:committee_long_fr], form: "long", language: "F")
         elsif data[:meeting_en]

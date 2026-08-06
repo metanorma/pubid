@@ -33,9 +33,12 @@ module Pubid
       def render_committee(id)
         return render_committee_long(id) if id.long?
 
-        # short abbreviated key form
+        # short abbreviated key form. The type word is optional — the bare MRA
+        # form (e.g. "CIPM 2005-06") has no type_code, so omit it (and its
+        # leading space) rather than emit a double space.
         lang = id.language ? ", #{id.language}" : ""
-        "#{id.group} #{id.type_code}#{number_segment(id)}" \
+        type = id.type_code ? " #{id.type_code}" : ""
+        "#{id.group}#{type}#{number_segment(id)}" \
           "#{year_segment(id, lang: lang)}"
       end
 

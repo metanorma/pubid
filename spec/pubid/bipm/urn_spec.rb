@@ -14,6 +14,7 @@ RSpec.describe "Pubid::Bipm URN" do
     "Metrologia 1",
     "BIPM SI Brochure 9e v3.01 (2019/2024, E)",
     "BIPM SI Brochure sur le SI 9e v3.01 (2019/2024, F)",
+    "CIPM 2005-06",
   ]
 
   describe "#to_urn" do

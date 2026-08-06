@@ -1,0 +1,9 @@
+# Legacy / docnumber-style BIPM identifier spellings normalized to a canonical,
+# parseable Pubid::Bipm form before parsing. Keys are full-line-anchored plain
+# strings (Regexp.escaped) or /regex/ literals — see lib/pubid/core/update_codes.rb.
+#
+# CIPM MRA:2005 interpretation document (relaton-data-bipm docnumber
+# "CIPM/2005-06(REV)"): strip the slash and the "(REV)" revision marker so both
+# the docnumber and docidentifier spellings map onto the bare "CIPM 2005-06" form.
+"CIPM/2005-06(REV)": CIPM 2005-06
+"CIPM 2005-06(REV)": CIPM 2005-06
