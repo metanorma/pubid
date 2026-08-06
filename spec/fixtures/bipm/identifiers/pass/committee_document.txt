@@ -32,6 +32,10 @@ Recommandation 1 du CCL (2001)
 Résolution 1 de la CGPM (1927)
 Action 10-1 du JCRB (2003)
 
+# --- Bare MRA-interpretation form (no type word) ---
+CIPM 2005-06
+CIPM 2005-06 (2005)
+
 # --- Partial references (date omitted; year left nil for collection matching) ---
 CCTF REC 2
 CGPM DECL

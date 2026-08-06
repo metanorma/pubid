@@ -25,8 +25,10 @@ module Pubid
 
       def committee
         id = identifier
+        # type_code is nil for the bare MRA form → empty type segment, mirroring
+        # the empty-number-segment convention for number-less documents.
         parts = ["urn", "bipm", id.group.downcase,
-                 id.type_code.downcase, id.number.to_s]
+                 id.type_code.to_s.downcase, id.number.to_s]
         # A partial (date-less) reference drops the trailing year segment; a
         # number-less-but-dated doc keeps its empty number segment.
         parts << id.year if id.year

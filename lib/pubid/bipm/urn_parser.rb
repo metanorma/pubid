@@ -28,7 +28,8 @@ module Pubid
           )
         else
           Identifiers::CommitteeDocument.new(
-            group: group, type_code: parts[1].upcase,
+            group: group,
+            type_code: (parts[1].empty? ? nil : parts[1].upcase),
             number: (parts[2].empty? ? nil : parts[2]), year: parts[3]&.to_i
           )
         end
