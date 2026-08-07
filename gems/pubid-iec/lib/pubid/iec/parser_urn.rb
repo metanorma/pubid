@@ -64,20 +64,28 @@ module Pubid
               (dash >> array_to_str(VAP_CODES).as(:vap)).repeat
           end
 
-          rule(:urn_edition) do
-            (str("ed-") >> digits.as(:edition)).maybe
+          # Canonical deliverable slot: a deliverable code (csv/rlv/ser/…) or,
+          # when absent, the edition (ed-N). The two never co-occur.
+          rule(:urn_slot3) do
+            (urn_vap | (str("ed-") >> digits.as(:edition))).maybe
+          end
+
+          # Canonical adjunct: relation-marker ("::" normal, ":plus:"
+          # consolidated) + kind + ":" number + optional ":" date.
+          rule(:relation_marker) do
+            str(":plus:") | str("::")
           end
 
           rule(:urn_amendment) do
-            colon >> str("amd").as(:amendments) >>
-              (colon >> (year_digits | digits).as(:number)).maybe >>
-              (colon >> str("v") >> digits.as(:iteration)).maybe
+            (relation_marker >> str("amd") >> colon >>
+              digits.as(:number) >>
+              (colon >> year_digits.as(:year)).maybe).as(:amendments)
           end
 
           rule(:urn_corrigendum) do
-            colon >> str("cor").as(:corrigendums) >>
-              (colon >> (year_digits | digits).as(:number)).maybe >>
-              (colon >> str("v") >> digits.as(:iteration)).maybe
+            (relation_marker >> str("cor") >> colon >>
+              digits.as(:number) >>
+              (colon >> year_digits.as(:year)).maybe).as(:corrigendums)
           end
 
           rule(:urn_supplements) do
@@ -92,14 +100,17 @@ module Pubid
             (array_to_str(LANGUAGES) >> (dash >> array_to_str(LANGUAGES)).repeat).as(:language)
           end
 
+          # Positional structure: pub[:type]:number[-part][,conj]
+          #   :date:stage:deliverable:language{adjuncts}[fragment]
           rule(:urn_identifier) do
             str("urn:iec:std:") >> urn_publisher_copublisher >> urn_type >>
               urn_number >> urn_part >> urn_conjuction_part >>
               (colon >> urn_year >>
-                (colon >> (urn_stage | urn_vap).maybe >>
-                  (colon >> urn_edition >>
-                    urn_supplements >> urn_fragment >>
-                    (colon >> urn_language.maybe).maybe
+                (colon >> urn_stage.maybe >>
+                  (colon >> urn_slot3 >>
+                    (colon >> urn_language.maybe >>
+                      urn_supplements >> urn_fragment
+                    ).maybe
                   ).maybe
                 ).maybe
               ).maybe

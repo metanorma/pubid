@@ -129,7 +129,11 @@ module Pubid::Iec
 
       def normalize_urn_params!(params)
         params[:publisher] = params[:publisher].to_s.upcase
-        params[:copublisher] = params[:copublisher].to_s.upcase if params[:copublisher]
+        # copublisher may be an array (e.g. ISO/IEC/IEEE -> [iec, ieee]);
+        # upcase each element rather than the array's inspect string.
+        if params[:copublisher]
+          params[:copublisher] = Array(params[:copublisher]).map { |c| c.to_s.upcase }
+        end
         params[:type] = params[:type].to_s.upcase if params[:type]
         params[:number] = params[:number].to_s.upcase
 
@@ -142,8 +146,9 @@ module Pubid::Iec
           end
         end
 
-        # Remove amendments/corrigendums parsed as bare strings from URN
-        # (full supplement round-trip support to be added later)
+        # Canonical URN supplements parse into amendment/corrigendum objects
+        # (see ParserUrn#urn_supplements). This guard only drops any stray
+        # bare-string capture, which the canonical grammar no longer produces.
         params.delete(:amendments) if params[:amendments].is_a?(String)
         params.delete(:corrigendums) if params[:corrigendums].is_a?(String)
       end
