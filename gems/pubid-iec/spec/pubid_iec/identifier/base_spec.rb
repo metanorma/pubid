@@ -47,7 +47,7 @@ module Pubid::Iec
 
     context "IEC 60050-351:2013/AMD1:2016" do
       let(:pubid) { "IEC 60050-351:2013/AMD1:2016" }
-      let(:urn) { "urn:iec:std:iec:60050-351:2013:::amd:2016:v1:" }
+      let(:urn) { "urn:iec:std:iec:60050-351:2013:::::amd:1:2016" }
 
       it_behaves_like "converts pubid to pubid"
       it_behaves_like "converts pubid to urn"
@@ -55,7 +55,7 @@ module Pubid::Iec
 
     context "IEC 61010-2-201:2017 RLV" do
       let(:pubid) { "IEC 61010-2-201:2017 RLV" }
-      let(:urn) { "urn:iec:std:iec:61010-2-201:2017:rlv::" }
+      let(:urn) { "urn:iec:std:iec:61010-2-201:2017::rlv:" }
 
       it_behaves_like "converts pubid to pubid"
       it_behaves_like "converts pubid to urn"
@@ -73,7 +73,7 @@ module Pubid::Iec
 
     context "IEC 61666:2010+AMD1:2021 CSV" do
       let(:pubid) { "IEC 61666:2010+AMD1:2021 CSV" }
-      let(:urn) { "urn:iec:std:iec:61666:2010:csv::amd:2021:v1:" }
+      let(:urn) { "urn:iec:std:iec:61666:2010::csv::plus:amd:1:2021" }
 
       it_behaves_like "converts pubid to pubid"
       it_behaves_like "converts pubid to urn"
@@ -81,7 +81,7 @@ module Pubid::Iec
 
     context "IEC 62439-1:2010+AMD1:2012+AMD2:2016 CSV" do
       let(:pubid) { "IEC 62439-1:2010+AMD1:2012+AMD2:2016 CSV" }
-      let(:urn) { "urn:iec:std:iec:62439-1:2010:csv::amd:2012:v1:amd:2016:v2:" }
+      let(:urn) { "urn:iec:std:iec:62439-1:2010::csv::plus:amd:1:2012:plus:amd:2:2016" }
 
       it_behaves_like "converts pubid to pubid"
       it_behaves_like "converts pubid to urn"
@@ -90,7 +90,7 @@ module Pubid::Iec
     context "IEC 60529:1989+AMD1:1999 CSV/COR2:2007" do
       let(:original) { "IEC 60529:1989+AMD1:1999 CSV/COR2:2007"}
       let(:pubid) { "IEC 60529:1989+AMD1:1999 CSV/COR2:2007"}
-      let(:urn) { "urn:iec:std:iec:60529:1989:csv::amd:1999:v1:cor:2007:v2:" }
+      let(:urn) { "urn:iec:std:iec:60529:1989::csv::plus:amd:1:1999::cor:2:2007" }
 
       it_behaves_like "converts pubid to pubid"
       it_behaves_like "converts pubid to urn"
@@ -106,7 +106,7 @@ module Pubid::Iec
 
     context "IEC 60050-102:2007/AMD1:2017 ED1" do
       let(:pubid) { "IEC 60050-102:2007/AMD1:2017 ED1" }
-      let(:urn) { "urn:iec:std:iec:60050-102:2007::ed-1:amd:2017:v1:" }
+      let(:urn) { "urn:iec:std:iec:60050-102:2007::ed-1:::amd:1:2017" }
 
       it_behaves_like "converts pubid to pubid"
       it_behaves_like "converts pubid to urn"
@@ -114,7 +114,7 @@ module Pubid::Iec
 
     context "IEC 60050-111/AMD1/FRAG1 ED2" do
       let(:pubid) { "IEC 60050-111/AMD1/FRAG1 ED2" }
-      let(:urn) { "urn:iec:std:iec:60050-111:::ed-2:amd:1:v1:frag:1:" }
+      let(:urn) { "urn:iec:std:iec:60050-111:::ed-2:::amd:1:frag:1" }
 
       it_behaves_like "converts pubid to pubid"
       it_behaves_like "converts pubid to urn"
@@ -122,7 +122,7 @@ module Pubid::Iec
 
     context "IEC CA 01:2020 CSV" do
       let(:pubid) { "IEC CA 01:2020 CSV" }
-      let(:urn) { "urn:iec:std:iec:ca:01:2020:csv::" }
+      let(:urn) { "urn:iec:std:iec:ca:01:2020::csv:" }
 
       it_behaves_like "converts pubid to pubid"
       it_behaves_like "converts pubid to urn"
@@ -498,8 +498,8 @@ module Pubid::Iec
         it_behaves_like "parses URN roundtrip"
       end
 
-      context "urn:iec:std:iec:61010-2-201:2017:rlv::" do
-        let(:urn) { "urn:iec:std:iec:61010-2-201:2017:rlv::" }
+      context "urn:iec:std:iec:61010-2-201:2017::rlv:" do
+        let(:urn) { "urn:iec:std:iec:61010-2-201:2017::rlv:" }
         it_behaves_like "parses URN roundtrip"
       end
 
@@ -508,8 +508,8 @@ module Pubid::Iec
         it_behaves_like "parses URN roundtrip"
       end
 
-      context "urn:iec:std:iec:ca:01:2020:csv::" do
-        let(:urn) { "urn:iec:std:iec:ca:01:2020:csv::" }
+      context "urn:iec:std:iec:ca:01:2020::csv:" do
+        let(:urn) { "urn:iec:std:iec:ca:01:2020::csv:" }
         it_behaves_like "parses URN roundtrip"
       end
 

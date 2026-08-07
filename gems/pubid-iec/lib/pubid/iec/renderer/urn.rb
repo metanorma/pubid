@@ -52,22 +52,39 @@ module Pubid::Iec::Renderer
                WPUB: 95.99
     }.freeze
 
+    # Renders the ABNF-canonical IEC URN (ground truth in relaton-data-iec):
+    #
+    #   urn:iec:std:{pub}[-{copub}][:{type}]:{number}[-{part}][,{conj}]
+    #       :{date}:{stage}:{deliverable}:{language}{adjuncts}[{fragment}]
+    #
+    # The four positional slots after the number/part are always colon-
+    # separated even when empty. Amendments/corrigenda follow the language
+    # slot with a "::" (or ":plus:" for a consolidated amendment) relation-
+    # marker; see #render_amendments / #render_corrigendums.
     def render_identifier(params)
       result = "urn:iec:std:#{params[:publisher]}#{params[:copublisher]}" \
                "#{params[:type]}:#{params[:number]}" \
                "#{params[:part]}#{params[:conjuction_part]}"
 
-      # Positional fields — always colon-separated even when empty
+      # Positional slots — always colon-separated even when empty.
       result += ":#{strip_leading_colon(params[:year])}"
 
-      stage_value = [params[:stage], params[:vap], params[:urn_stage],
+      # Stage slot (deliverable/vap is no longer folded in here; it has its
+      # own canonical deliverable slot below).
+      stage_value = [params[:stage], params[:urn_stage],
                      params[:corrigendum_stage], params[:iteration],
                      params[:version], params[:part_version]].map(&:to_s).join
       result += ":#{strip_leading_colon(stage_value)}"
 
-      result += ":#{strip_leading_colon(params[:edition])}"
+      # Deliverable slot: "ser" (all parts), a deliverable code (csv/rlv/…),
+      # or the edition (ed-N) when neither is present.
+      result += ":#{deliverable_slot(params)}"
 
-      # Non-positional suffixes
+      # Language slot.
+      result += ":#{strip_leading_colon(params[:language].to_s)}"
+
+      # Adjuncts (amendments/corrigenda) with the relation-marker, then any
+      # fragment.
       result += params[:amendments].to_s
       result += params[:corrigendums].to_s
       result += params[:fragment].to_s
@@ -76,15 +93,9 @@ module Pubid::Iec::Renderer
     end
 
     def render(with_date: true, with_language_code: :iso, annotated: false, **args)
-      base = render_base_identifier(**args.merge(
+      render_base_identifier(**args.merge(
         with_date: with_date, with_language_code: with_language_code, annotated: annotated,
       ))
-      lang = strip_leading_colon(@prerendered_params[:language].to_s)
-      if @prerendered_params.key?(:all_parts)
-        "#{base}ser"
-      else
-        "#{base}:#{lang}"
-      end
     end
 
     def render_part(part, _opts, _params)
@@ -127,12 +138,26 @@ module Pubid::Iec::Renderer
       ":#{type.downcase}"
     end
 
-    def render_amendments(amendments, _opts, _params)
-      amendments&.map(&:urn)&.join || ""
+    # Amendments render as "{marker}amd:{number}[:{date}]". The marker is
+    # ":plus:" when the base is a consolidation (CSV/CMV) — the amendment is
+    # merged into the consolidated document — otherwise "::".
+    def render_amendments(amendments, _opts, params)
+      marker = consolidated_deliverable?(params) ? ":plus:" : "::"
+      Array(amendments).map do |amendment|
+        s = "#{marker}amd:#{amendment.number}"
+        s += ":#{amendment.year}" if amendment.year
+        s
+      end.join
     end
 
+    # Corrigenda always use the "::" relation-marker (they are separate
+    # corrections, never merged into a consolidation).
     def render_corrigendums(corrigendums, _opts, _params)
-      corrigendums&.map(&:urn)&.join || ""
+      Array(corrigendums).map do |corrigendum|
+        s = "::cor:#{corrigendum.number}"
+        s += ":#{corrigendum.year}" if corrigendum.year
+        s
+      end.join
     end
 
     def render_language(language, _opts, _params)
@@ -144,6 +169,33 @@ module Pubid::Iec::Renderer
     end
 
     private
+
+    # The canonical deliverable slot: "ser" for an all-parts series, else the
+    # rendered deliverable code (csv/rlv/cmv/exv/…), else the edition (ed-N).
+    # Deliverable and edition never co-occur in practice, so one slot serves
+    # both.
+    def deliverable_slot(params)
+      if present?(params[:all_parts])
+        "ser"
+      elsif present?(params[:vap])
+        strip_leading_colon(params[:vap])
+      elsif present?(params[:edition])
+        strip_leading_colon(params[:edition])
+      else
+        ""
+      end
+    end
+
+    # True when the base document is a consolidation that merges its
+    # amendments (CSV/CMV deliverable).
+    def consolidated_deliverable?(params)
+      Array(params[:vap]).map { |v| v.to_s.downcase }
+        .any? { |v| %w[csv cmv].include?(v) }
+    end
+
+    def present?(value)
+      !value.nil? && !value.to_s.empty?
+    end
 
     def strip_leading_colon(value)
       s = value.to_s
