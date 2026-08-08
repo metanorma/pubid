@@ -106,6 +106,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         repository: ${{ matrix.repository.owner }}/${{ matrix.repository.repo }}
+        ref: ${{ matrix.repository.ref }}   # empty string -> checkout uses the default branch
         submodules: true
         path: dependent
 
