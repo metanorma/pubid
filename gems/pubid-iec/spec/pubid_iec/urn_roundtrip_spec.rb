@@ -54,5 +54,28 @@ module Pubid::Iec
         expect(Identifier.parse(urn).urn.to_s).to eq(urn)
       end
     end
+
+    # A bare (undated) all-parts series is stored by relaton-data-iec without a
+    # trailing language slot: urn:iec:std:iec:80000:::ser (not ...:ser:).
+    context "bare all-parts series URN" do
+      ["urn:iec:std:iec:80000:::ser",
+       "urn:iec:std:iec:61076-7:::ser"].each do |urn|
+        context urn do
+          it "renders no trailing colon and round-trips" do
+            expect(Identifier.parse(urn).urn.to_s).to eq(urn)
+          end
+        end
+      end
+
+      # Guards that dropping the empty language slot does not swallow a
+      # legitimately-present language on a series.
+      context "urn:iec:std:iec:80000:::ser:fr" do
+        let(:urn) { "urn:iec:std:iec:80000:::ser:fr" }
+
+        it "keeps the language slot and round-trips" do
+          expect(Identifier.parse(urn).urn.to_s).to eq(urn)
+        end
+      end
+    end
   end
 end
