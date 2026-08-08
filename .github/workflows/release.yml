@@ -23,7 +23,10 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/v1'
+
+    permissions:
+      contents: write
 
     steps:
     - uses: actions/checkout@v4
@@ -105,7 +108,7 @@ jobs:
     - name: Push changes and tags
       if: ${{ !inputs.dry_run && inputs.version_type != 'skip' }}
       run: |
-        git push origin main
+        git push origin "HEAD:${{ github.ref_name }}"
         git push origin "v${{ env.NEW_VERSION }}"
 
     - name: Generate release body
