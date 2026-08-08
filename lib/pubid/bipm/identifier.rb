@@ -6,12 +6,13 @@ module Pubid
     # point — mirrors Pubid::Jis::Identifier. Concrete identifiers under
     # Pubid::Bipm::Identifiers descend from this class.
     #
-    # BIPM has four unrelated document families (committee documents, meetings,
-    # the Metrologia journal, and the SI Brochure) with no shared numbering, so
-    # every family-specific attribute lives here as a flat, nil-defaulted
-    # attribute and is used only by the classes that need it. The canonical
-    # `to_hash` drops any attribute at its default/empty value, so an unused
-    # attribute never appears in a family's serialized hash.
+    # BIPM has several unrelated document families (committee documents,
+    # meetings, the Metrologia journal, the SI Brochure and its appendices,
+    # mises en pratique, and Consultative-Committee guides) with no shared
+    # numbering, so every family-specific attribute lives here as a flat,
+    # nil-defaulted attribute and is used only by the classes that need it. The
+    # canonical `to_hash` drops any attribute at its default/empty value, so an
+    # unused attribute never appears in a family's serialized hash.
     class Identifier < ::Pubid::Identifier
       # Committee acronyms BIPM owns (JCGM excluded — see Pubid::Jcgm).
       GROUPS = %w[
@@ -55,6 +56,13 @@ module Pubid
       attribute :edition, :string   # "9e"
       attribute :version, :string   # "v3.01"
       attribute :years, :string     # "2019/2024"
+      # SI Brochure appendix/derived variant: "Appendix 3", "Concise", "FAQ".
+      attribute :variant, :string
+      # Mise en pratique (MEP) fields.
+      attribute :mep_code, :string    # "S1", "KUPRTM"
+      attribute :report_code, :string # MEP report variant: "BIPM-2019/05"
+      # Consultative-Committee guide kind ("MeP"/"RSI"); group + number reused.
+      attribute :guide_kind, :string
 
       # Polymorphic type map for lutaml::Model key_value (de)serialization:
       # maps each subclass's polymorphic_name to its class name so a stored hash
@@ -66,6 +74,8 @@ module Pubid
         "pubid:bipm:metrologia-article" =>
           "Pubid::Bipm::Identifiers::MetrologiaArticle",
         "pubid:bipm:si-brochure" => "Pubid::Bipm::Identifiers::SiBrochure",
+        "pubid:bipm:mep" => "Pubid::Bipm::Identifiers::Mep",
+        "pubid:bipm:guide" => "Pubid::Bipm::Identifiers::Guide",
       }.freeze
 
       key_value do
@@ -82,6 +92,10 @@ module Pubid
         map "edition", to: :edition
         map "version", to: :version
         map "years", to: :years
+        map "variant", to: :variant
+        map "mep_code", to: :mep_code
+        map "report_code", to: :report_code
+        map "guide_kind", to: :guide_kind
       end
 
       # Publisher is always "BIPM". A plain constant (not a `publisher` method)

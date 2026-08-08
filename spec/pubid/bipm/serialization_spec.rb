@@ -18,6 +18,13 @@ RSpec.describe "Pubid::Bipm serialization" do
     "Metrologia 51 1 128" => "pubid:bipm:metrologia-article",
     "Metrologia 1" => "pubid:bipm:metrologia-article",
     "BIPM SI Brochure 9e v3.01 (2019/2024, E)" => "pubid:bipm:si-brochure",
+    "SI Brochure Appendix 3" => "pubid:bipm:si-brochure",
+    "SI Brochure Concise" => "pubid:bipm:si-brochure",
+    "SI MEP S1" => "pubid:bipm:mep",
+    "SI MEP KUPRTM" => "pubid:bipm:mep",
+    "Rapport BIPM-2019/05" => "pubid:bipm:mep",
+    "CCL-GD-MeP-1" => "pubid:bipm:guide",
+    "CCEM-GD-RSI-1" => "pubid:bipm:guide",
   }
 
   cases.each do |ref, type_tag|
