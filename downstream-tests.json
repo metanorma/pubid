@@ -3,6 +3,7 @@
     {
       "owner": "relaton",
       "repo": "relaton-iso",
+      "ref": "lutaml-integration",
       "gemspec": "relaton_iso.gemspec",
       "description": "Test dependent gem relaton-iso"
     }
