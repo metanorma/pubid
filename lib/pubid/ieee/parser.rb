@@ -613,7 +613,11 @@ module Pubid
           (
             (str(":") >> year_digits.as(:year)) |
             (dash >> year_digits.as(:year) >>
-             (dash >> month_numeric.as(:month)).maybe)
+             (dash >> month_numeric.as(:month)).maybe) |
+            # Trailing text date ", April 2015" / " April 2015" (build_joint_development
+            # already reads :month/:year). No :year collision — the iso rule has no
+            # other :year capture (edition uses :edition_year).
+            ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year))
           ).maybe >>
           # Optional /D<draft> tail. normalize_relaton_suffixes repositions the
           # historical "…/D-3-2017" onto the number as "…-2017/D3", so by the
@@ -625,6 +629,46 @@ module Pubid
           # "Edition <n>.0[ YYYY]" (nil-residue hand-off item 1).
           edition.maybe >>
           revision_suffix.maybe
+      end
+
+      # Embedded (stage-LAST) ISO-led designations: the corpus writes the ISO
+      # stage AFTER the (dotted or dashed) part —
+      #   "ISO/IEC/IEEE 29119.4.FDIS, April 2015"   (dot part .4, stage .FDIS)
+      #   "ISO/IEC/IEEE 24748-5.CD3, February 2015" (dash part -5, stage .CD3)
+      #   "IEEE P24748.5.CD3, July 2015"            (bare IEEE + P)
+      # — rather than before the number (joint_development_iso_format). Same
+      # meaning as the stage-first form: `29119.4`/`29119-4` = "29119 part 4" and
+      # the trailing `.FDIS` is the ISO stage, NOT a second part. Routes through
+      # the same build_joint_development (via :joint_publishers/:iso_stage), so the
+      # stage is modeled correctly and the numeric part stays separate.
+      rule(:joint_development_embedded_stage) do
+        # publisher set mirrors joint_development_iso_format (incl. bare IEEE);
+        # longest token first.
+        (str("ISO/IEC/IEEE") | str("IEEE/ISO/IEC") | str("IEEE/IEC/ISO") |
+         str("ISO/IEEE") | str("IEC/IEEE") | str("IEEE/IEC") | str("ISO/IEC") |
+         str("IEEE")).as(:joint_publishers) >>
+          space >>
+          str("P").maybe >> # optional project marker on the number
+          digits.as(:number) >>
+          # optional numeric part (dot or dash); must not swallow a year
+          ((dot | dash) >> year_digits.absent? >> digits.as(:part)).maybe >>
+          # the embedded stage, dot-separated, closed vocab (same as iso_stage).
+          # The (digit|letter) look-ahead keeps it at a token boundary so "CD"
+          # can't match inside a longer token and a glued no-space date
+          # (".DISMay2013") is left to fall through.
+          dot >>
+          (str("FDIS") | str("FCD") | str("CDV") |
+           (str("DIS") >> digit.maybe) |
+           (str("CD") >> digit.maybe) |
+           str("WD") | str("PWI") | str("NP")).as(:iso_stage) >>
+          (digit | match("[A-Za-z]")).absent? >>
+          # optional trailing date: :YYYY, -YYYY[-MM], or text "Month YYYY"
+          (
+            (str(":") >> year_digits.as(:year)) |
+            (dash >> year_digits.as(:year) >>
+             (dash >> month_numeric.as(:month)).maybe) |
+            ((comma | space) >> month_name.as(:month) >> space >> year_digits.as(:year))
+          ).maybe
       end
 
       # Number-first pattern: "1873-2015 IEEE Standard..."
@@ -944,6 +988,7 @@ module Pubid
           conformance_identifier | # NEW: Try conformance identifier before generic patterns
           joint_development_ieee_format |
           joint_development_iso_format |
+          joint_development_embedded_stage | # stage-LAST embedded form (before generic)
           iec_ieee_copublished |
           number_first_identifier |
           ieee_approved_draft_identifier |
