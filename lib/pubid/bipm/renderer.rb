@@ -11,6 +11,8 @@ module Pubid
         when Identifiers::Meeting then render_meeting(@id)
         when Identifiers::MetrologiaArticle then render_metrologia(@id)
         when Identifiers::SiBrochure then render_si_brochure(@id)
+        when Identifiers::Mep then render_mep(@id)
+        when Identifiers::Guide then render_guide(@id)
         else
           raise "Cannot render BIPM identifier: #{@id.class}"
         end
@@ -70,10 +72,25 @@ module Pubid
       end
 
       def render_si_brochure(id)
+        # Short appendix / derived-product form indexed by relaton.
+        return "SI Brochure #{id.variant}" if id.variant
+
         phrase = id.language == "F" ? "sur le SI " : ""
         lang = id.language ? ", #{id.language}" : ""
         "BIPM SI Brochure #{phrase}#{id.edition} #{id.version} " \
           "(#{id.years}#{lang})"
+      end
+
+      # MEP: standard "SI MEP <code>", or the "Rapport BIPM-YYYY/NN" variant.
+      def render_mep(id)
+        return "Rapport #{id.report_code}" if id.report_code
+
+        "SI MEP #{id.mep_code}"
+      end
+
+      # Consultative-Committee guide: "<committee>-GD-<kind>-<number>".
+      def render_guide(id)
+        "#{id.group}-GD-#{id.guide_kind}-#{id.number}"
       end
     end
   end

@@ -1,0 +1,11 @@
+# BIPM Consultative-Committee guides — Pass
+# Short docnumber forms used as the relaton index key (data/guide-*.yaml).
+# Shape: <committee>-GD-<kind>-<number>, kind is MeP or RSI. One per line;
+# blank lines and # comments ignored.
+
+CCL-GD-MeP-1
+CCL-GD-MeP-2
+CCL-GD-MeP-3
+CCEM-GD-RSI-1
+CCM-GD-RSI-1
+CCM-GD-RSI-2

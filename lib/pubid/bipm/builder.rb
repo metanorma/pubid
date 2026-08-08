@@ -28,6 +28,12 @@ module Pubid
           build_metrologia(data[:metrologia])
         elsif data[:si_brochure]
           build_si_brochure(data[:si_brochure])
+        elsif data[:si_brochure_variant]
+          build_si_brochure_variant(data[:si_brochure_variant])
+        elsif data[:mep]
+          build_mep(data[:mep])
+        elsif data[:guide]
+          build_guide(data[:guide])
         else
           raise "Unrecognized BIPM parse tree: #{data.inspect}"
         end
@@ -70,6 +76,25 @@ module Pubid
           version: node[:version].to_s,
           years: node[:years].to_s,
           language: node[:language]&.to_s,
+        )
+      end
+
+      def build_si_brochure_variant(node)
+        Identifiers::SiBrochure.new(variant: node[:variant].to_s)
+      end
+
+      def build_mep(node)
+        Identifiers::Mep.new(
+          mep_code: node[:mep_code]&.to_s,
+          report_code: node[:report_code]&.to_s,
+        )
+      end
+
+      def build_guide(node)
+        Identifiers::Guide.new(
+          group: node[:group].to_s,
+          guide_kind: node[:guide_kind].to_s,
+          number: node[:number].to_s,
         )
       end
     end

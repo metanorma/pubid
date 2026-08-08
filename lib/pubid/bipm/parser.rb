@@ -106,6 +106,41 @@ module Pubid
           str("(") >> years >> str(", ") >> lang >> str(")")).as(:si_brochure)
       end
 
+      # --- SI Brochure appendices / derived products ---
+      # Short docnumber forms used as the relaton index key (distinct from the
+      # bespoke edition form above): an appendix, or the Concise / FAQ products.
+      rule(:brochure_variant) do
+        ((str("Appendix") >> space >> digits) | str("Concise") | str("FAQ"))
+          .as(:variant)
+      end
+      rule(:si_brochure_variant) do
+        (str("SI Brochure") >> space >> brochure_variant)
+          .as(:si_brochure_variant)
+      end
+
+      # --- Mises en pratique (MEP) ---
+      # Standard MEP code (unit letter(s) + number, or an alphabetic code), and
+      # the "Rapport BIPM-YYYY/NN" report variant. Both index off the short
+      # docnumber, not the long "Appendix 2 Part x" content string.
+      rule(:mep_code) { match["0-9A-Za-z"].repeat(1).as(:mep_code) }
+      rule(:report_code) do
+        (str("BIPM-") >> digits >> str("/") >> digits).as(:report_code)
+      end
+      rule(:mep) do
+        ((str("SI MEP") >> space >> mep_code) |
+          (str("Rapport") >> space >> report_code)).as(:mep)
+      end
+
+      # --- Consultative-Committee guides ---
+      # "<committee>-GD-<kind>-<number>", e.g. "CCL-GD-MeP-1", "CCEM-GD-RSI-1";
+      # <kind> is "MeP" (mise en pratique) or "RSI" (réalisation du SI). Reuses
+      # the shared `group` (committee) and `number` (trailing sequence).
+      rule(:guide_kind) { (str("MeP") | str("RSI")).as(:guide_kind) }
+      rule(:guide) do
+        (group >> str("-GD-") >> guide_kind >> str("-") >>
+          digits.as(:number)).as(:guide)
+      end
+
       # After a leading group token, the shape after the first space decides:
       # a digit → meeting; a type word → committee.
       rule(:group_leading) do
@@ -114,7 +149,8 @@ module Pubid
       end
 
       rule(:identifier) do
-        metrologia | si_brochure | committee_long_fr | group_leading
+        metrologia | si_brochure | si_brochure_variant | mep | guide |
+          committee_long_fr | group_leading
       end
 
       root(:identifier)

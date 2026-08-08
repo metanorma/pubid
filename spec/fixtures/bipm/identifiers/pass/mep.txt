@@ -1,0 +1,22 @@
+# BIPM mises en pratique (MEP) — Pass
+# Short docnumber forms used as the relaton index key (data/mep-*.yaml), not the
+# long "Appendix 2 Part x" content string. One identifier per line; blank lines
+# and # comments ignored.
+
+# --- Standard MEP codes (unit letter(s) + number) ---
+SI MEP A1
+SI MEP Cd1
+SI MEP K1
+SI MEP Kg1
+SI MEP M1
+SI MEP Mol1
+SI MEP S1
+
+# --- Alphabetic kelvin MEP codes ---
+SI MEP KUPRTM
+SI MEP KAPRT
+SI MEP KLJNT
+SI MEP KRPRT
+
+# --- Report variant ---
+Rapport BIPM-2019/05
