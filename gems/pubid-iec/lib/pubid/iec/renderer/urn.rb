@@ -78,10 +78,16 @@ module Pubid::Iec::Renderer
 
       # Deliverable slot: "ser" (all parts), a deliverable code (csv/rlv/…),
       # or the edition (ed-N) when neither is present.
-      result += ":#{deliverable_slot(params)}"
+      deliverable = deliverable_slot(params)
+      result += ":#{deliverable}"
 
-      # Language slot.
-      result += ":#{strip_leading_colon(params[:language].to_s)}"
+      # Language slot. A bare (undated, stage/language/adjunct-less) all-parts
+      # series omits the trailing empty language slot, matching the canonical
+      # relaton-data-iec form: urn:iec:std:iec:80000:::ser (not ...:ser:). A
+      # dated series (...:2026::ser:) or a deliverable (...::rlv:) keeps it.
+      unless bare_series?(deliverable, stage_value, params)
+        result += ":#{strip_leading_colon(params[:language].to_s)}"
+      end
 
       # Adjuncts (amendments/corrigenda) with the relation-marker, then any
       # fragment.
@@ -184,6 +190,21 @@ module Pubid::Iec::Renderer
       else
         ""
       end
+    end
+
+    # True for a bare all-parts series — deliverable "ser" with no date, stage,
+    # language or adjuncts — whose canonical URN drops the trailing language
+    # slot (urn:iec:std:iec:80000:::ser). Keyed on the rendered deliverable so
+    # it holds whether the series is carried as +all_parts+ or a +ser+ vap.
+    def bare_series?(deliverable, stage_value, params)
+      return false unless deliverable == "ser"
+      if present?(stage_value) || present?(params[:year]) ||
+          present?(params[:language])
+        return false
+      end
+
+      [params[:amendments], params[:corrigendums], params[:fragment]]
+        .all? { |adjunct| adjunct.to_s.empty? }
     end
 
     # True when the base document is a consolidation that merges its

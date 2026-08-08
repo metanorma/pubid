@@ -87,6 +87,15 @@ supplement join, the `:plus:` marker is **inferred** from the deliverable in
 Deferred (also unsupported before): typed docs with the type in the canonical
 after-date slot (`...:tr:csv:...`), ISH adjuncts, and the `ca` publisher.
 
+**Bare-series exception to the always-colon rule:** a bare (undated,
+language-less, adjunct-less) all-parts series drops the trailing empty language
+slot — `urn:iec:std:iec:80000:::ser`, *not* `...:ser:` — matching the
+relaton-data-iec ground truth. A **dated** series keeps it
+(`urn:iec:std:iec:60034:2026::ser:`), as does any deliverable
+(`...:2017::rlv:`). `Renderer::Urn#bare_series?` gates this on the rendered
+deliverable value (`"ser"`), so it holds whether the series is carried as an
+`all_parts` flag or a `ser` vap.
+
 ### Version Synchronization
 
 Master version lives in `lib/pubid/version.rb`. All gem versions and inter-gem dependencies use exact version matching and must stay synchronized. Use `rake version:bump[patch|minor|major]` to update all gems atomically.
