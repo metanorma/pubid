@@ -8,11 +8,22 @@ module Pubid
       # Example: "IEEE Standard No 18-1968 (ANSI C55.1-1968)"
       # This means IEEE adopted ANSI's standard C55.1-1968 as their Std No 18-1968
       class AdoptedStandard < Identifier
-        # IEEE's identifier for this adopted standard
-        attribute :ieee_identifier, Identifier, polymorphic: true
+        # IEEE's identifier for this adopted standard.
+        #
+        # Typed as the cross-flavor base `::Pubid::Identifier` (not the
+        # IEEE-only `Identifier`) so serialization never rejects a cross-flavor
+        # value. lutaml enforces the declared attribute type; `polymorphic:
+        # true` permits only *subclasses* of it, and a `Pubid::Ansi::…` /
+        # `Pubid::Iec::…` object is not a subclass of `Pubid::Ieee::Identifier`.
+        # The cross-flavor child carries its own `_type`, so `from_hash` routes
+        # it back via `TypeResolver`.
+        attribute :ieee_identifier, ::Pubid::Identifier, polymorphic: true
 
-        # Original identifiers from ANSI/ISO/IEC/etc (array for multi-part adoptions)
-        attribute :adopted_identifiers, Identifier, polymorphic: true,
+        # Original identifiers from ANSI/ASME/ISO/IEC/etc (array for multi-part
+        # adoptions). Cross-flavor by design: an `IEEE Std <n> (ANSI <m>)`
+        # adoption stores a `Pubid::Ansi::…` object here. See `ieee_identifier`
+        # above for why this must be `::Pubid::Identifier`, not IEEE-only.
+        attribute :adopted_identifiers, ::Pubid::Identifier, polymorphic: true,
                                               collection: true
 
         def publisher
