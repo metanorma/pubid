@@ -107,38 +107,59 @@ module Pubid
       end
 
       # --- SI Brochure appendices / derived products ---
-      # Short docnumber forms used as the relaton index key (distinct from the
-      # bespoke edition form above): an appendix, or the Concise / FAQ products.
+      # The full primary-docidentifier content the relaton crawler indexes by,
+      # e.g. "BIPM SI Brochure Appendix 3" / "…Concise" / "…FAQ". The bare
+      # "SI Brochure Appendix 3" docnumber form is accepted too (rendered back
+      # with the "BIPM " prefix, matching the base SI Brochure record).
       rule(:brochure_variant) do
         ((str("Appendix") >> space >> digits) | str("Concise") | str("FAQ"))
           .as(:variant)
       end
       rule(:si_brochure_variant) do
-        (str("SI Brochure") >> space >> brochure_variant)
-          .as(:si_brochure_variant)
+        ((str("BIPM SI Brochure") | str("SI Brochure")) >> space >>
+          brochure_variant).as(:si_brochure_variant)
+      end
+
+      # Shared "Appendix N [Annex N] Part N[.M]" tail carried by the full
+      # docidentifier content of MEPs and CC guides (the "Appendix 2 Part 1.1"
+      # or "Appendix 2 Annex 2 Part 1" suffix on "BIPM SI MEP …" etc.).
+      rule(:appendix_part) do
+        str("Appendix") >> space >> digits.as(:appendix) >>
+          (space >> str("Annex") >> space >> digits.as(:annex)).maybe >>
+          space >> str("Part") >> space >>
+          (digits >> (str(".") >> digits).maybe).as(:part)
       end
 
       # --- Mises en pratique (MEP) ---
-      # Standard MEP code (unit letter(s) + number, or an alphabetic code), and
-      # the "Rapport BIPM-YYYY/NN" report variant. Both index off the short
-      # docnumber, not the long "Appendix 2 Part x" content string.
+      # Two index-relevant spellings: the short docnumber ("SI MEP S1",
+      # "Rapport BIPM-2019/05") and the full "BIPM …" primary-docidentifier
+      # content the crawler actually keys on ("BIPM SI MEP S1 Appendix 2 Part
+      # 1.1"). The renderer reproduces whichever the identifier carries.
       rule(:mep_code) { match["0-9A-Za-z"].repeat(1).as(:mep_code) }
       rule(:report_code) do
         (str("BIPM-") >> digits >> str("/") >> digits).as(:report_code)
       end
+      rule(:mep_body) do
+        (str("SI MEP") >> space >> mep_code) |
+          (str("Rapport") >> space >> report_code)
+      end
       rule(:mep) do
-        ((str("SI MEP") >> space >> mep_code) |
-          (str("Rapport") >> space >> report_code)).as(:mep)
+        ((str("BIPM") >> space >> mep_body >> space >> appendix_part) |
+          mep_body).as(:mep)
       end
 
       # --- Consultative-Committee guides ---
-      # "<committee>-GD-<kind>-<number>", e.g. "CCL-GD-MeP-1", "CCEM-GD-RSI-1";
-      # <kind> is "MeP" (mise en pratique) or "RSI" (réalisation du SI). Reuses
-      # the shared `group` (committee) and `number` (trailing sequence).
+      # "<committee>-GD-<kind>-<number>" (e.g. "CCL-GD-MeP-1"), and its full
+      # "BIPM … Appendix 2 Part 2.2" content form. <kind> is "MeP" (mise en
+      # pratique) or "RSI" (réalisation du SI). Reuses the shared `group`
+      # (committee) and `number` (trailing sequence).
       rule(:guide_kind) { (str("MeP") | str("RSI")).as(:guide_kind) }
+      rule(:guide_body) do
+        group >> str("-GD-") >> guide_kind >> str("-") >> digits.as(:number)
+      end
       rule(:guide) do
-        (group >> str("-GD-") >> guide_kind >> str("-") >>
-          digits.as(:number)).as(:guide)
+        ((str("BIPM") >> space >> guide_body >> space >> appendix_part) |
+          guide_body).as(:guide)
       end
 
       # After a leading group token, the shape after the first space decides:

@@ -72,8 +72,9 @@ module Pubid
       end
 
       def render_si_brochure(id)
-        # Short appendix / derived-product form indexed by relaton.
-        return "SI Brochure #{id.variant}" if id.variant
+        # Appendix / derived-product form indexed by relaton, keyed on the full
+        # "BIPM SI Brochure …" primary docidentifier content.
+        return "BIPM SI Brochure #{id.variant}" if id.variant
 
         phrase = id.language == "F" ? "sur le SI " : ""
         lang = id.language ? ", #{id.language}" : ""
@@ -81,16 +82,28 @@ module Pubid
           "(#{id.years}#{lang})"
       end
 
-      # MEP: standard "SI MEP <code>", or the "Rapport BIPM-YYYY/NN" variant.
+      # MEP: short docnumber ("SI MEP <code>" / "Rapport BIPM-YYYY/NN"), or the
+      # full "BIPM … Appendix N [Annex N] Part N.M" content the crawler keys on.
       def render_mep(id)
-        return "Rapport #{id.report_code}" if id.report_code
-
-        "SI MEP #{id.mep_code}"
+        body = id.report_code ? "Rapport #{id.report_code}" : "SI MEP #{id.mep_code}"
+        render_full_content(id, body)
       end
 
-      # Consultative-Committee guide: "<committee>-GD-<kind>-<number>".
+      # CC guide: short "<committee>-GD-<kind>-<number>", or its full
+      # "BIPM … Appendix N Part N.M" content form.
       def render_guide(id)
-        "#{id.group}-GD-#{id.guide_kind}-#{id.number}"
+        body = "#{id.group}-GD-#{id.guide_kind}-#{id.number}"
+        render_full_content(id, body)
+      end
+
+      # Wrap a short body in the "BIPM … Appendix N [Annex N] Part N.M" content
+      # form when the identifier carries the appendix/part tail; otherwise emit
+      # the bare short body. `part` presence is what distinguishes the two.
+      def render_full_content(id, body)
+        return body unless id.part
+
+        annex = id.annex ? " Annex #{id.annex}" : ""
+        "BIPM #{body} Appendix #{id.appendix}#{annex} Part #{id.part}"
       end
     end
   end
