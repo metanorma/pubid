@@ -57,6 +57,24 @@ module Pubid
         date_with_month_text | date_with_month_numeric | date_year_only
       end
 
+      # Trailing print/reaffirm date "<sep>Month YYYY" — captured under the
+      # distinct :trailing_month/:trailing_year keys so it never collides with a
+      # base -YYYY identity year (the builder promotes it only when no base year
+      # exists). Accepts BOTH a month name ("May 2014") and a month-first numeric
+      # month ("05 2014"). The two variants are unambiguous: month_name never
+      # starts with a digit, and month_numeric (01-12) never matches a bare
+      # 19xx/20xx year — so a bare trailing year still falls through to callers'
+      # own bare-year clause.
+      rule(:trailing_month_year) do
+        # The numeric branch accepts `-` as well as space before the year:
+        # preprocessing (the `(\d)\s+(\d{4})` gsub) rewrites a trailing
+        # "05 2014" → "05-2014", so a numeric month reaches the grammar
+        # dash-joined; the month-name branch escapes that gsub (the char before
+        # the space is a letter) and stays space-joined.
+        ((comma | space) >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)) |
+          ((comma | space) >> month_numeric.as(:trailing_month) >> (space | dash) >> year_digits.as(:trailing_year))
+      end
+
       # Month patterns
       rule(:month_name) do
         # Period-suffixed abbreviations (longest first)
@@ -697,14 +715,14 @@ module Pubid
           # collision made Parslet drop the base year and warn "Duplicate
           # subtrees … keys: [:year]"). The builder promotes it to the identity
           # only when there is no base year.
-          ((comma | space) >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)).maybe >>
+          trailing_month_year.maybe >>
           corrigendum.maybe >>
           draft.maybe >>
           # Revision trails the draft (before any date), matching normalization's
           # ".../D<n>/R-<x>" repositioning of "P802.16Rev2/D3 Feb 2008".
           revision_suffix.maybe >>
           # ALSO accept month/year after draft (some patterns like /DX, Month YEAR)
-          ((comma | space) >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)).maybe >>
+          trailing_month_year.maybe >>
           # Trailing corrigendum AFTER the draft+date ("…/D1, Jan 2007/Cor. 1").
           # The draft's own draft_date has already consumed the date, leaving
           # "/Cor. 1" here; the resulting flat corrigendum+draft tree routes to
@@ -722,12 +740,12 @@ module Pubid
           (part_subpart_year | edition).maybe >>
           # Trailing "Month YYYY"/bare-year date under distinct keys so they
           # never collide with the base -YYYY identity year (see ieee_p_identifier).
-          ((comma | space) >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)).maybe >>
+          trailing_month_year.maybe >>
           corrigendum.maybe >>
           draft.maybe >>
           revision_suffix.maybe >>
           # ALSO accept month/year after draft
-          ((comma | space) >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)).maybe >>
+          trailing_month_year.maybe >>
           # Accept bare year after draft: ", 2015"
           ((comma | space) >> year_digits.as(:trailing_year)).maybe >>
           # Trailing corrigendum after the draft+date (parity with ieee_p_identifier).
@@ -750,7 +768,8 @@ module Pubid
           (part_subpart_year | edition).maybe >>
           # Trailing "Month YYYY" date under distinct keys so it never collides
           # with the base -YYYY identity year (see ieee_p_identifier).
-          (space >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)).maybe >>
+          ((space >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)) |
+           (space >> month_numeric.as(:trailing_month) >> (space | dash) >> year_digits.as(:trailing_year))).maybe >>
           draft.maybe >>
           revision_suffix.maybe >>
           parenthetical.maybe
@@ -1012,7 +1031,7 @@ module Pubid
           # Trailing "Month YYYY" print/reaffirm date under distinct keys so it
           # never collides with the base -YYYY identity year (see
           # ieee_p_identifier). The builder promotes it only when no base year.
-          ((comma | space) >> month_name.as(:trailing_month) >> space >> year_digits.as(:trailing_year)).maybe >>
+          trailing_month_year.maybe >>
           # Trailing corrigendum after the draft+date ("IEEE Approved P1015/D1,
           # Jan 2007/Cor. 1"): the generic bucket is the only path a status-word
           # form reaches. Routes via build_flat_corrigendum (disjoint from the
