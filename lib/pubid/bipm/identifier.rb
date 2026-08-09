@@ -63,6 +63,11 @@ module Pubid
       attribute :report_code, :string # MEP report variant: "BIPM-2019/05"
       # Consultative-Committee guide kind ("MeP"/"RSI"); group + number reused.
       attribute :guide_kind, :string
+      # Full-content "Appendix N [Annex N] Part N.M" tail shared by MEP + guide
+      # primary-docidentifier forms (nil for the bare short docnumber spelling).
+      attribute :appendix, :string
+      attribute :annex, :string
+      attribute :part, :string
 
       # Polymorphic type map for lutaml::Model key_value (de)serialization:
       # maps each subclass's polymorphic_name to its class name so a stored hash
@@ -96,6 +101,9 @@ module Pubid
         map "mep_code", to: :mep_code
         map "report_code", to: :report_code
         map "guide_kind", to: :guide_kind
+        map "appendix", to: :appendix
+        map "annex", to: :annex
+        map "part", to: :part
       end
 
       # Publisher is always "BIPM". A plain constant (not a `publisher` method)

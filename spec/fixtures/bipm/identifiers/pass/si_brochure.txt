@@ -5,8 +5,10 @@
 BIPM SI Brochure 9e v3.01 (2019/2024, E)
 BIPM SI Brochure sur le SI 9e v3.01 (2019/2024, F)
 
-# Appendix and derived-product short docnumbers (data/sib-a3.yaml,
-# data/si-brochure-concise.yaml, data/si-brochure-faq.yaml).
-SI Brochure Appendix 3
-SI Brochure Concise
-SI Brochure FAQ
+# Appendix and derived products, keyed on the full "BIPM SI Brochure …"
+# primary-docidentifier content (data/sib-a3.yaml, data/si-brochure-concise.yaml,
+# data/si-brochure-faq.yaml). The bare "SI Brochure Appendix 3" docnumber also
+# parses but renders back with the "BIPM " prefix, so only the full form here.
+BIPM SI Brochure Appendix 3
+BIPM SI Brochure Concise
+BIPM SI Brochure FAQ

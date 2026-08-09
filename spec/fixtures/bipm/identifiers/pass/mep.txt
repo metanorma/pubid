@@ -1,9 +1,10 @@
 # BIPM mises en pratique (MEP) — Pass
-# Short docnumber forms used as the relaton index key (data/mep-*.yaml), not the
-# long "Appendix 2 Part x" content string. One identifier per line; blank lines
-# and # comments ignored.
+# Two spellings, both index-relevant (data/mep-*.yaml): the short docnumber, and
+# the full "BIPM … Appendix 2 [Annex N] Part N.M" primary-docidentifier content
+# the relaton crawler actually keys index-v2 on. One identifier per line; blank
+# lines and # comments ignored.
 
-# --- Standard MEP codes (unit letter(s) + number) ---
+# --- Short docnumber form: standard MEP codes (unit letter(s) + number) ---
 SI MEP A1
 SI MEP Cd1
 SI MEP K1
@@ -12,11 +13,25 @@ SI MEP M1
 SI MEP Mol1
 SI MEP S1
 
-# --- Alphabetic kelvin MEP codes ---
+# --- Short docnumber form: alphabetic kelvin MEP codes ---
 SI MEP KUPRTM
 SI MEP KAPRT
 SI MEP KLJNT
 SI MEP KRPRT
 
-# --- Report variant ---
+# --- Short docnumber form: report variant ---
 Rapport BIPM-2019/05
+
+# --- Full primary-docidentifier content (the index-v2 key) ---
+BIPM SI MEP A1 Appendix 2 Part 4.1
+BIPM SI MEP Cd1 Appendix 2 Part 7.1
+BIPM SI MEP K1 Appendix 2 Part 5.1
+BIPM SI MEP Kg1 Appendix 2 Part 3.1
+BIPM SI MEP M1 Appendix 2 Part 2.1
+BIPM SI MEP Mol1 Appendix 2 Part 6.1
+BIPM SI MEP S1 Appendix 2 Part 1.1
+BIPM SI MEP KUPRTM Appendix 2 Annex 2 Part 1
+BIPM SI MEP KAPRT Appendix 2 Annex 1 Part 1
+BIPM SI MEP KLJNT Appendix 2 Annex 4 Part 1
+BIPM SI MEP KRPRT Appendix 2 Annex 3 Part 1
+BIPM Rapport BIPM-2019/05 Appendix 2 Part 1

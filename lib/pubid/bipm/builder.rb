@@ -87,6 +87,9 @@ module Pubid
         Identifiers::Mep.new(
           mep_code: node[:mep_code]&.to_s,
           report_code: node[:report_code]&.to_s,
+          appendix: node[:appendix]&.to_s,
+          annex: node[:annex]&.to_s,
+          part: node[:part]&.to_s,
         )
       end
 
@@ -95,6 +98,8 @@ module Pubid
           group: node[:group].to_s,
           guide_kind: node[:guide_kind].to_s,
           number: node[:number].to_s,
+          appendix: node[:appendix]&.to_s,
+          part: node[:part]&.to_s,
         )
       end
     end
