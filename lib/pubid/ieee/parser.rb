@@ -763,7 +763,11 @@ module Pubid
         (str("IEEE").as(:publisher) >> space).maybe >> # Make IEEE prefix optional
           draft_status.as(:draft_status).maybe >>
           str("Draft") >> space >>
-          str("P") >>
+          # `P` is optional — a status-word draft may carry a bare number
+          # ("IEEE Unapproved Draft 802.1ah/D4.2"), mirroring
+          # ieee_approved_draft_identifier's str("P").maybe. The `number` rule
+          # already accepts the bare forms (802.1ah, C57.15, 11073-10471).
+          str("P").maybe >>
           number >>
           (part_subpart_year | edition).maybe >>
           # Trailing "Month YYYY" date under distinct keys so it never collides
@@ -772,6 +776,12 @@ module Pubid
            (space >> month_numeric.as(:trailing_month) >> (space | dash) >> year_digits.as(:trailing_year))).maybe >>
           draft.maybe >>
           revision_suffix.maybe >>
+          # Trailing corrigendum after the draft ("…/D2.0/Cor. 1", or
+          # "…/D1.0, Dec 2007/Cor. 1" where the draft's own draft_date consumes
+          # the date, leaving "/Cor. N"). The flat corrigendum+draft tree (no
+          # :base) routes to build_flat_corrigendum, which rebuilds the base
+          # standard (carrying the draft + draft_status) and wraps it.
+          corrigendum.maybe >>
           parenthetical.maybe
       end
 
