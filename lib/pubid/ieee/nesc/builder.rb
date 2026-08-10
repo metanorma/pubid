@@ -20,6 +20,18 @@ module Pubid
       #   identifier = builder.build(parsed)
       #   # => #<Pubid::Ieee::Identifiers::Nesc::Handbook>
       class Builder
+        # The NESC's own designation (ANSI/IEEE C2). Used as the index code for
+        # the year-first forms, which print no code of their own.
+        #
+        # CAVEAT: this files the whole NESC family — including the Handbook and
+        # Redline, which are companions of the code rather than the code itself
+        # — under one `prefix "C"` + `number "2"` index key. That is deliberate:
+        # relaton narrows on `root.number` and then matches the full hash, so
+        # `_type` (and `variant`) keep the documents distinct; the alternative
+        # was an empty key, which silently defeats the binary search. Revisit if
+        # relaton ever treats `prefix + number` alone as an identity.
+        DEFAULT_CODE = "C2"
+
         # Build NESC identifier from parsed hash
         #
         # @param parsed_hash [Hash] Hash from parser
@@ -28,22 +40,18 @@ module Pubid
           # Determine identifier type based on parsed attributes
           identifier_class = determine_identifier_class(parsed_hash)
 
-          identifier = identifier_class.new
-
-          # Set code if present (C2)
-          if parsed_hash[:code]
-            code_str = parsed_hash[:code].to_s
-            identifier.code = Pubid::Ieee::Components::Code.new(
-              prefix: code_str[0], # "C" from "C2"
-              number: code_str[1..], # "2" from "C2"
-            )
-          end
+          # The code travels through the base initializer as `code:` so it lands
+          # in `code_obj` and the CodeNumber mixin hoists the flat split columns
+          # relaton indexes on. Every NESC document is the C2-designated code
+          # (or a companion of it), so the year-first forms — which print no
+          # code — still key under "C2" rather than leaving `root.number` empty.
+          identifier = identifier_class.new(
+            code: parsed_hash[:code]&.to_s || DEFAULT_CODE,
+          )
 
           # Set year (required for all NESC identifiers)
           if parsed_hash[:year]
-            identifier.year = Pubid::Components::Date.new(
-              year: parsed_hash[:year].to_s.to_i,
-            )
+            identifier.year = parsed_hash[:year].to_s
           end
 
           # Set variant (Handbook, Redline, etc.)
@@ -54,11 +62,6 @@ module Pubid
           # Set edition (for handbooks)
           if parsed_hash[:edition]
             identifier.edition = parsed_hash[:edition].to_s
-          end
-
-          # Set draft flag
-          if parsed_hash[:draft]
-            identifier.draft = true
           end
 
           # Set month (for drafts)
@@ -101,8 +104,9 @@ module Pubid
           # C2 code means standard NESC
           return Identifiers::Nesc::Standard if parsed_hash[:code]
 
-          # Fallback to base class
-          Identifiers::Nesc::Base
+          # Plain year-first edition. Never the abstract Nesc::Base — only
+          # concrete leaves carry the CodeNumber `number` column.
+          Identifiers::Nesc::Edition
         end
       end
     end

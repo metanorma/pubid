@@ -17,6 +17,12 @@ module Pubid
         #   nesc = Pubid::Ieee.parse("2017 NESC Handbook, Premier Edition")
         #   nesc.to_s  # => "IEEE Std 2017 NESC Handbook, Premier Edition"
         class Handbook < Base
+          include Pubid::Ieee::Identifiers::CodeNumber
+
+          def self.polymorphic_name
+            "pubid:ieee:nesc-handbook"
+          end
+
           # Render handbook identifier
           #
           # @param trademark [Boolean] append the IEEE trademark symbol (™/®)
@@ -24,7 +30,7 @@ module Pubid
           def to_s(trademark: false)
             abbr = "NESC"
             abbr += "(R)" if registered
-            parts = ["IEEE Std #{year.year} #{abbr} Handbook"]
+            parts = [["IEEE Std", year, "#{abbr} Handbook"].compact.join(" ")]
             parts << ", #{edition}" if edition
             result = parts.join
             result += Pubid::Ieee.trademark_symbol(result) if trademark

@@ -13,21 +13,38 @@ module Pubid
         #
         # @example Standard format
         #   nesc = Pubid::Ieee.parse("C2-1997 National Electric Safety Code")
-        #   nesc.code.value  # => "C2"
-        #   nesc.year.year   # => 1997
+        #   nesc.code.number # => "2"   (prefix "C")
+        #   nesc.year        # => "1997"
         #
         # @example Handbook format
         #   nesc = Pubid::Ieee.parse("2017 NESC Handbook, Premier Edition")
-        #   nesc.year.year   # => 2017
+        #   nesc.year        # => "2017"
         #   nesc.variant     # => "Handbook"
         #   nesc.edition     # => "Premier Edition"
-        class Base < Lutaml::Model::Serializable
-          attribute :code, Pubid::Ieee::Components::Code # "C2" code designation
-          attribute :year, Pubid::Components::Date # Publication year
-          attribute :variant, :string              # Handbook, Redline, etc.
-          attribute :edition, :string              # Edition notation
-          attribute :draft, :boolean               # Draft flag
-          attribute :month, :string                # For draft identifiers
+        #
+        # Reparented onto Pubid::Ieee::Identifier (it used to descend from bare
+        # Lutaml::Model::Serializable) so NESC shares `#root`, a polymorphic
+        # `_type` and from_hash routing with every other IEEE type — see
+        # Pubid::Ieee::Aiee::Identifier for the same migration. Three
+        # attributes were reconciled against the base to avoid type collisions:
+        #
+        #   `code`  -> travels as the runtime `code_obj` (base #code returns
+        #              it); the concrete leaves serialize the flat split
+        #              columns via the CodeNumber mixin.
+        #   `year`  -> the base's plain `:string` year (was a
+        #              Pubid::Components::Date), matching IEEE's scalar-date
+        #              convention. `nesc.year` is now "2017", not a component.
+        #   `draft` -> dropped; the base declares a `:string` `draft` (the draft
+        #              *designator*), so a boolean here would corrupt it. Test
+        #              draft-ness with `#draft?` / the Nesc::Draft class.
+        #
+        # This class is abstract and enforces it in #initialize: the builder
+        # always instantiates a concrete leaf (Nesc::Edition for the plain
+        # year-first form), because only leaves may redefine `number` as a
+        # :string (see the CodeNumber mixin) and only leaves declare the
+        # NESC-specific `polymorphic_name` that from_hash routes on.
+        class Base < Pubid::Ieee::Identifier
+          attribute :variant, :string # Handbook, Redline, etc.
           # Registered-trademark "(R)" after the full name or abbreviation
           attribute :registered, :boolean
           # Whether the "(NESC)"/"(NESC(R))" abbreviation suffix was present
@@ -35,11 +52,34 @@ module Pubid
           # Registered-trademark "(R)" inside the "(NESC(R))" suffix
           attribute :abbr_suffix_registered, :boolean
 
+          # Guards the abstract contract — see the class docs. Ruby has no
+          # `abstract`, and an instantiated Base would carry the derived
+          # `_type` "pubid:ieee:base" (which from_hash cannot resolve back to
+          # NESC) and a nil `number` (the empty relaton index key).
+          def initialize(args = {}, **kwargs)
+            if instance_of?(Base)
+              raise NotImplementedError,
+                    "#{self.class} is abstract; instantiate a concrete NESC " \
+                    "type (Standard, Edition, Handbook, Redline, Draft)"
+            end
+
+            super
+          end
+
           # Publisher portion for NESC identifiers
           #
           # @return [String] Always returns "NESC"
           def publisher_portion
             "NESC"
+          end
+
+          # Whether this is a draft of the code. NESC has no `draft` attribute
+          # of its own (the base's `draft` is the draft designator string), so
+          # draft-ness lives in the class.
+          #
+          # @return [Boolean]
+          def draft?
+            is_a?(Nesc::Draft)
           end
 
           # Rendering for year-first NESC identifiers (the C2-code standard form
@@ -49,7 +89,7 @@ module Pubid
           # @param trademark [Boolean] append the IEEE trademark symbol (™/®)
           # @return [String] String representation
           def to_s(trademark: false)
-            result = "IEEE Std #{year.year} #{name_portion}"
+            result = ["IEEE Std", year, name_portion].compact.join(" ")
             result += Pubid::Ieee.trademark_symbol(result) if trademark
             result
           end

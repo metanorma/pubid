@@ -13,7 +13,7 @@ RSpec.describe Pubid::Ieee::Identifiers::Nesc::Standard do
       end
 
       it "extracts year" do
-        expect(parsed.year.year).to eq("1997")
+        expect(parsed.year).to eq("1997")
       end
 
       it "extracts code" do
@@ -35,7 +35,7 @@ RSpec.describe Pubid::Ieee::Identifiers::Nesc::Standard do
       end
 
       it "extracts year" do
-        expect(parsed.year.year).to eq("2012")
+        expect(parsed.year).to eq("2012")
       end
 
       it "round-trips correctly" do
@@ -52,7 +52,7 @@ RSpec.describe Pubid::Ieee::Identifiers::Nesc::Standard do
       end
 
       it "extracts year" do
-        expect(parsed.year.year).to eq("2007")
+        expect(parsed.year).to eq("2007")
       end
 
       it "round-trips without comma" do
