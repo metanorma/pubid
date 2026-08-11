@@ -17,6 +17,10 @@ RSpec.describe "Pubid::Itu compact flat serialization" do
     "corrigendum" => "ITU-T Z.100 (1999) Cor. 1 (10/2001)",
     "errata" => "ITU-T G.9701 (2014) Err. 1 (07/2016)",
     "annex" => "Annex to ITU OB No. 1000",
+    "annex-of-recommendation" => "ITU-T A.23 Annex A (06/2014)",
+    "annex-of-recommendation/corrigendum" =>
+      "ITU-T G.729 Annex B (1996) Cor. 3 (03/2001)",
+    "recommendation/version" => "ITU-T H.264 (V14) (08/2021)",
     "special-publication" => "ITU OB No. 1283 (01/2024)",
     "question/numeric" => "ITU-R 234-1/7:",
     "question/letter" => "ITU-R P.3/BL/7",
@@ -120,6 +124,34 @@ RSpec.describe "Pubid::Itu compact flat serialization" do
       expect(restored.to_hash).to eq(hash)
       expect(restored.common_text_twin)
         .to be_a(Pubid::Iso::Identifiers::InternationalStandard)
+    end
+
+    it "Recommendation with a version ITU-T H.264 (V14) (08/2021)" do
+      expect(Pubid::Itu.parse("ITU-T H.264 (V14) (08/2021)").to_hash).to eq(
+        "_type" => "pubid:itu:recommendation",
+        "sector" => "T",
+        "series" => "H",
+        "number" => "264",
+        "version" => "14",
+        "year" => "2021",
+        "month" => "08",
+      )
+    end
+
+    it "AnnexOfRecommendation keeps only its label, date and a flat base" do
+      hash = Pubid::Itu.parse("ITU-T A.23 Annex A (06/2014)").to_hash
+      expect(hash).to eq(
+        "_type" => "pubid:itu:annex-of-recommendation",
+        "number" => "A",
+        "year" => "2014",
+        "month" => "06",
+        "base" => {
+          "_type" => "pubid:itu:recommendation",
+          "sector" => "T",
+          "series" => "A",
+          "number" => "23",
+        },
+      )
     end
 
     it "Supplement suppresses redundant sector/series but keeps a flat base" do

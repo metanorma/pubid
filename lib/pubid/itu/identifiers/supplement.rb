@@ -52,24 +52,33 @@ module Pubid
 
           result += " Suppl. #{number}"
 
-          # Add date if present
-          if date
-            result += if date.month
-                        " (#{date.month}/#{date.year})"
-                      else
-                        " (#{date.year})"
-                      end
-          end
+          result += render_date_suffix
 
           result
         end
 
+        # Shared by Amendment / Corrigendum / Errata.
+        #
+        # `instance_of?` (not `is_a?`) so a Suppl. never equals an Amd./Cor./
+        # Err. with the same ordinal, and so the comparison stays symmetric —
+        # with `is_a?` a Supplement accepted an Amendment but not the reverse.
+        #
+        # sector/series are compared ONLY for the base-less, series-only form
+        # ("ITU-T A Suppl. 2"), where they are the document's whole identity.
+        # When a base is present they are copies of the base's (set by
+        # Builder#build_supplement) and are deliberately not serialized (see
+        # supplement_sector_to_kv), so comparing them would make a parsed
+        # identifier unequal to the same identifier rebuilt via from_hash.
         def ==(other)
-          return false unless other.is_a?(Supplement)
+          return false unless other.instance_of?(self.class)
 
-          base == other.base &&
+          return false unless base == other.base &&
             number == other.number &&
             date == other.date
+
+          return true if base
+
+          sector == other.sector && series == other.series
         end
       end
     end

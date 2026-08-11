@@ -16,6 +16,10 @@ RSpec.describe "Pubid::Itu #root.number" do
     "ITU-T Z.100 (1999) Cor. 1 (10/2001)" => "100", # corrigendum -> base
     "ITU OB No. 1283 (01/2024)" => "1283",  # special publication
     "Annex to ITU OB No. 1000" => "1000",   # annex -> root is the base
+    "ITU-T H.264 (V14) (08/2021)" => "264", # versioned recommendation
+    "ITU-T A.23 Annex A (06/2014)" => "23", # labelled annex -> base
+    # corrigendum -> annex -> base
+    "ITU-T G.729 Annex B (1996) Cor. 3 (03/2001)" => "729",
   }.each do |ref, expected_number|
     context ref do
       let(:parsed) { Pubid::Itu.parse(ref) }

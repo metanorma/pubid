@@ -1,0 +1,19 @@
+# Labelled annexes of Recommendations — "<recommendation> Annex <label>".
+# The label is a series letter, optionally with a digit ("F3") or a "+" ("C+").
+ITU-T A.23 Annex A (06/2014)
+ITU-T Z.100 Annex F3 (10/2019)
+ITU-T Z.100 Annex F2 (11/2000)
+ITU-T Z.100 Annex F1 (11/2000)
+ITU-T H.323 Annex M2 (03/2004)
+ITU-T G.722.2 Annex B (07/2003)
+ITU-T G.711 Annex A (09/1999)
+ITU-T G.729 Annex C+ (02/2000)
+ITU-T J.112 Annex B (03/2004)
+ITU-T Q.1238.1 Annex A (06/2000)
+# The annexed Recommendation may carry its own (earlier) date
+ITU-T X.692 (2002) Annex E (03/2002)
+ITU-T G.722 (1988) Annex A (03/1993)
+# An annex is a document in its own right, so it can carry a supplement
+ITU-T G.729 Annex B (1996) Cor. 3 (03/2001)
+ITU-T G.729 Annex C+ (2000) Cor. 1 (03/2001)
+ITU-T G.722.2 Annex B (2002) Err. 1 (07/2003)

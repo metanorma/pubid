@@ -29,6 +29,7 @@ module Pubid
                 with: { to: :subseries_to_kv, from: :subseries_from_kv }
             map "parts",
                 with: { to: :parts_to_kv, from: :parts_from_kv }
+            map "version", to: :version
             map "year",
                 with: { to: :year_to_kv, from: :year_from_kv }
             map "month",

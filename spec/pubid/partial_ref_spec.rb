@@ -29,7 +29,7 @@ RSpec.describe "partial reference parsing (cross-flavor)" do
     "etsi" => { ref: "ETSI EN 300 175", omits: %i[version date] },
     "nist" => { ref: "NIST SP 800-53", omits: [:year] },
     "ieee" => { ref: "IEEE 802.3", omits: [:year] },
-    "itu" => { ref: "ITU-T G.711", omits: [:date] },
+    "itu" => { ref: "ITU-T G.711", omits: %i[date version] },
     "gost" => { ref: "ГОСТ 34.201", omits: [:year] },
     "bsi" => { ref: "BS 5839", omits: [:year] },
     "cen_cenelec" => { ref: "EN 13485", omits: [:year] },

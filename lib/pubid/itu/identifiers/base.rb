@@ -29,6 +29,13 @@ module Pubid
       attribute :code, Pubid::Itu::Components::Code
       attribute :date, Pubid::Components::Date
       attribute :language, :string
+      # "(V14)" of "ITU-T H.264 (V14) (08/2021)" — an ITU-T revision marker
+      # distinct from the publication date. Declared here (not on the leaves)
+      # because `render_base` lives here and the parser feeds it to both plain
+      # and combined recommendations, and to the nested base of a supplement.
+      # Safe from the number/stage redefinition landmine: ::Pubid::Identifier
+      # declares no `version` attribute, so this is a new one, not a retype.
+      attribute :version, :string
       attribute :common_text_twin, ::Pubid::Identifier
 
       def initialize(**kwargs)
@@ -139,16 +146,20 @@ module Pubid
                     " #{code}"
                   end
 
-        # Add date if present
-        if date
-          result += if date.month
-                      " (#{date.month}/#{date.year})"
-                    else
-                      " (#{date.year})"
-                    end
-        end
+        # Add version marker if present — always between code and date
+        result += " (V#{version})" if version
 
-        result
+        result + render_date_suffix
+      end
+
+      # " (MM/YYYY)", or " (YYYY)" when the month is unknown; "" when undated.
+      # Shared by every type that prints its date this way (Supplement and its
+      # subclasses, CombinedIdentifier, AnnexOfRecommendation). NOT used by
+      # SpecialPublication, which zero-pads its month.
+      def render_date_suffix
+        return "" unless date
+
+        date.month ? " (#{date.month}/#{date.year})" : " (#{date.year})"
       end
 
       def render_language_suffix
@@ -181,6 +192,7 @@ module Pubid
           series == other.series &&
           code == other.code &&
           date == other.date &&
+          version == other.version &&
           language == other.language &&
           common_text_twin == other.common_text_twin
       end

@@ -206,4 +206,67 @@ RSpec.describe Pubid::Itu::Identifiers::Supplement do
       end
     end
   end
+
+  # A series-only supplement ("ITU-T A Suppl. 2") carries its whole identity
+  # in sector + series; comparing only base/number/date made every series'
+  # "Suppl. 2" equal, so an index search for "ITU-T A Suppl. 2" returned 42
+  # rows.
+  describe "equality" do
+    def parse(str)
+      Pubid::Itu.parse(str)
+    end
+
+    it "distinguishes supplements of different series" do
+      expect(parse("ITU-T A Suppl. 2")).not_to eq(parse("ITU-T D Suppl. 2"))
+      expect(parse("ITU-T H Suppl. 1")).not_to eq(parse("ITU-T G Suppl. 1"))
+    end
+
+    it "distinguishes supplements of different sectors" do
+      expect(parse("ITU-T H Suppl. 1")).not_to eq(parse("ITU-R H Suppl. 1"))
+    end
+
+    it "does not match a different series once the date is ignored" do
+      expect(
+        parse("ITU-T A Suppl. 2").matches?(
+          parse("ITU-T D Suppl. 2 (10/1984)"), ignore: %i[year month]
+        ),
+      ).to be false
+    end
+
+    it "still matches the same series once the date is ignored" do
+      expect(
+        parse("ITU-T A Suppl. 2").matches?(
+          parse("ITU-T A Suppl. 2 (12/2022)"), ignore: %i[year month]
+        ),
+      ).to be true
+    end
+
+    it "keeps series-only supplements distinct as hash/set members" do
+      expect(Set[parse("ITU-T A Suppl. 2"), parse("ITU-T D Suppl. 2")].size)
+        .to eq(2)
+    end
+
+    it "distinguishes a supplement from an amendment, symmetrically" do
+      supplement = parse("ITU-T G.989 Suppl. 1")
+      amendment = parse("ITU-T G.989 Amd 1")
+
+      expect(supplement).not_to eq(amendment)
+      expect(amendment).not_to eq(supplement)
+    end
+
+    it "distinguishes a corrigendum from an errata, symmetrically" do
+      corrigendum = parse("ITU-T G.9701 (2014) Cor. 1 (07/2016)")
+      errata = parse("ITU-T G.9701 (2014) Err. 1 (07/2016)")
+
+      expect(corrigendum).not_to eq(errata)
+      expect(errata).not_to eq(corrigendum)
+    end
+
+    it "still equals the same identifier rebuilt from its hash" do
+      %w[ITU-T\ E.156\ Suppl.\ 2 ITU-T\ A\ Suppl.\ 2].each do |str|
+        id = parse(str)
+        expect(Pubid::Itu::Identifier.from_hash(id.to_hash)).to eq(id)
+      end
+    end
+  end
 end
