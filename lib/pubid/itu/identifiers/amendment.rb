@@ -16,24 +16,9 @@ module Pubid
 
           result += " Amd #{number}"
 
-          # Add date if present
-          if date
-            result += if date.month
-                        " (#{date.month}/#{date.year})"
-                      else
-                        " (#{date.year})"
-                      end
-          end
+          result += render_date_suffix
 
           result
-        end
-
-        def ==(other)
-          return false unless other.is_a?(Amendment)
-
-          base == other.base &&
-            number == other.number &&
-            date == other.date
         end
       end
     end

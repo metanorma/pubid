@@ -88,6 +88,14 @@ module Pubid
           str(")")
       end
 
+      # Version marker — "(V14)" in "ITU-T H.264 (V14) (08/2021)". Always sits
+      # between the code and the publication date, so it is spliced in before
+      # `date_part.maybe` in every document rule. `date_part` requires digits
+      # after "(", so it fails cleanly on "(V…)" and the two never compete.
+      rule(:version_part) do
+        space >> str("(V") >> digits.as(:version) >> str(")")
+      end
+
       # Language
       rule(:language) do
         dash >> match["EFASCR"].as(:language)
@@ -141,6 +149,7 @@ module Pubid
           series >> dot >>
           code >>
           combined_suffixes.maybe >>
+          version_part.maybe >>
           date_part.maybe
       end
 
@@ -149,6 +158,7 @@ module Pubid
           sector >>
           space >>
           code >>
+          version_part.maybe >>
           date_part.maybe
       end
 
@@ -156,9 +166,33 @@ module Pubid
         base_with_series | base_without_series
       end
 
-      # Supplement with base identifier (has recommendation number)
-      rule(:supplement_with_base) do
+      # Annex label — one series letter, optionally a number ("F3") and/or a
+      # "+" ("C+", ITU-T G.729 Annex C+).
+      rule(:annex_label) do
+        letter >> digits.maybe >> str("+").maybe
+      end
+
+      # A labelled annex of a Recommendation — "ITU-T A.23 Annex A (06/2014)".
+      # The annexed document is wrapped in :base so its own date (the leading
+      # "(2002)" of "ITU-T X.692 (2002) Annex E (03/2002)") lands one level down
+      # and cannot collide with the annex's date — Parslet silently keeps only
+      # the last of two same-named keys in one flattened hash.
+      rule(:annex_body) do
         base.as(:base) >>
+          space >> str("Annex") >> space >>
+          annex_label.as(:annex_number) >>
+          date_part.maybe
+      end
+
+      rule(:annex_identifier) { annex_body >> language.maybe }
+
+      # Supplement with base identifier (has recommendation number).
+      # The base may itself be an annex ("... Annex B (1996) Cor. 3 (03/2001)");
+      # annex_body is tried first because it is the longer match. When it fails
+      # (an ordinary supplement, where " Suppl." follows the code instead of
+      # " Annex") the alternation falls through to the plain base.
+      rule(:supplement_with_base) do
+        (annex_body.as(:base) | base.as(:base)) >>
           space >>
           supplement_type >>
           supplement_number >>
@@ -205,6 +239,7 @@ module Pubid
           series >> dot >>
           code >>
           combined_suffixes.maybe >>
+          version_part.maybe >>
           date_part.maybe >>
           language.maybe
       end
@@ -215,6 +250,7 @@ module Pubid
           sector >>
           space >>
           code >>
+          version_part.maybe >>
           date_part.maybe >>
           language.maybe
       end
@@ -314,6 +350,12 @@ module Pubid
         annex_to_identifier |
           special_publication |
           supplement_identifier |
+          # Both neighbours are load-bearing (PEG ordered choice never re-enters
+          # the alternation once an alternative succeeds): AFTER
+          # supplement_identifier, which matches the longer "<annex> Cor. 3"
+          # form, and BEFORE with_series, which would match the "ITU-T A.23"
+          # prefix of "ITU-T A.23 Annex A" and then fail on the unconsumed tail.
+          annex_identifier |
           handbook |
           numeric_question |
           letter_question |

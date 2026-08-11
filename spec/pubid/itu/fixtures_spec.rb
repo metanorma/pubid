@@ -3,8 +3,11 @@
 require "spec_helper"
 
 module ItuFixturesSpec
+  # __dir__ is spec/pubid/itu, so the fixtures are two levels up, not three —
+  # the extra ".." pointed at a non-existent repo-root fixtures/ and made this
+  # whole spec a no-op (it iterated an empty file list).
   FIXTURE_FILES = Dir.glob(File.join(__dir__,
-                                     "../../../fixtures/itu/identifiers/pass", "*.txt")).freeze
+                                     "../../fixtures/itu/identifiers/pass", "*.txt")).freeze
 end
 
 RSpec.describe "ITU Fixture Round-trip Tests" do

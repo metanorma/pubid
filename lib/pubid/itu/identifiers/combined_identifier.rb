@@ -55,7 +55,12 @@ module Pubid
           end
         end
 
-        def to_s
+        # Rendering hooks into `render_base` (not `to_s`) so that any wrapper
+        # composing this identifier — AnnexOfRecommendation, which renders
+        # "<base.render_base> Annex <label>" — keeps the co-designations.
+        # Overriding `to_s` instead silently dropped the "/Y.1351" half.
+        # The inherited `to_s` adds the language suffix and common-text twin.
+        def render_base(**_opts)
           result = "#{publisher}-#{sector}"
 
           # Add primary series and code
@@ -70,19 +75,10 @@ module Pubid
             result += "/#{combined.join('/')}"
           end
 
-          # Add date if present
-          if date
-            result += if date.month
-                        " (#{date.month}/#{date.year})"
-                      else
-                        " (#{date.year})"
-                      end
-          end
+          # Add version marker if present — always between code and date
+          result += " (V#{version})" if version
 
-          # Add language
-          result += "-#{language}" if language
-
-          result
+          result + render_date_suffix
         end
 
         def ==(other)
@@ -93,6 +89,7 @@ module Pubid
             code == other.code &&
             combined == other.combined &&
             date == other.date &&
+            version == other.version &&
             language == other.language
         end
       end

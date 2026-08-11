@@ -18,6 +18,15 @@ module Pubid
         # resolves to.
         twin = parse_common_text_twin(data.delete(:common_text_twin))
 
+        # Labelled annex of a Recommendation — "ITU-T A.23 Annex A (06/2014)".
+        # The annexed document is the :base subtree; :year/:month at this level
+        # are the annex's own date, not the base's.
+        if data[:annex_number]
+          annex = build_annex_of_recommendation(data)
+          annex.common_text_twin = twin if twin
+          return annex
+        end
+
         # Operational Bulletin (Special Publication) — series == "OB" or
         # legacy long form ("Operational Bulletin No. ...").
         if data[:series].to_s == "OB" || data[:_op_bull]
@@ -60,6 +69,7 @@ module Pubid
             code: code,
             combined: build_designations(data[:combined]),
             date: date,
+            version: data[:version]&.to_s,
             language: data[:language]&.to_s,
             common_text_twin: twin,
           )
@@ -70,6 +80,7 @@ module Pubid
           series: series,
           code: code,
           date: date,
+          version: data[:version]&.to_s,
           language: data[:language]&.to_s,
           common_text_twin: twin,
         )
@@ -118,6 +129,19 @@ module Pubid
         Identifiers::Annex.new(
           base: base,
           language: inner_data[:language]&.to_s,
+        )
+      end
+
+      # Build a labelled annex of a Recommendation. sector/series/code are
+      # deliberately NOT copied from the base: they are not serialized on the
+      # wrapper, so copies would make a from_hash-rebuilt annex differ from the
+      # parsed one.
+      def build_annex_of_recommendation(data)
+        Identifiers::AnnexOfRecommendation.new(
+          base: build(data[:base]),
+          number: data[:annex_number].to_s,
+          date: data[:year] ? build_date(data) : nil,
+          language: data[:language]&.to_s,
         )
       end
 
@@ -172,11 +196,23 @@ module Pubid
                             )
                           end
 
-        # Build supplement with extracted components
+        # Sector/series are copied from the base when it has them; the fallback
+        # to this level's own tokens is guarded because an annex base keeps
+        # sector/series/code on *its* base, leaving all three nil here while the
+        # supplement level carries no sector token of its own.
+        # An annex base keeps sector/series/code on *its* base, so reach through
+        # it via #root; otherwise a supplement of an annex would carry none of
+        # them and its MR string would collapse to a bare "itu.<date>".
+        base_identity = base&.sector ? base : base&.root
+        sector = base_identity&.sector ||
+          (Components::Sector.new(sector: data[:sector].to_s) if data[:sector])
+        series = base_identity&.series ||
+          (Components::Series.new(series: data[:series].to_s) if data[:series])
+
         klass.new(
-          sector: base&.sector || Components::Sector.new(sector: data[:sector].to_s),
-          series: base&.series || (data[:series] ? Components::Series.new(series: data[:series].to_s) : nil),
-          code: base&.code,
+          sector: sector,
+          series: series,
+          code: base_identity&.code,
           base: base,
           number: data[:supplement_number].to_s,
           date: supplement_date,

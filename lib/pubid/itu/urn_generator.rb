@@ -57,8 +57,14 @@ module Pubid
 
         base = maybe(:base)
         if base
-          base_gen = self.class.new(base)
-          base_urn = base_gen.generate_base_urn
+          # An annex base holds its identity in its own base (its sector/series/
+          # code are nil), so generate_base_urn would emit "urn:itu:itu"
+          # for it — go through its own to_urn instead.
+          base_urn = if base.is_a?(Identifiers::AnnexOfRecommendation)
+                       base.to_urn
+                     else
+                       self.class.new(base).generate_base_urn
+                     end
 
           base_part = base_urn.sub(/^urn:itu:/, "")
           base_parts = base_part.split(":")
