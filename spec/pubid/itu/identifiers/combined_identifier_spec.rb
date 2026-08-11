@@ -98,7 +98,7 @@ RSpec.describe Pubid::Itu::Identifiers::CombinedIdentifier do
   describe "as a supplement base" do
     # A supplement/amendment can wrap a combined recommendation; the nested
     # base must serialize (and round-trip) in its flat combined shape.
-    subject { "ITU-T G.780/Y.1351 Amd 1" }
+    subject { "ITU-T G.780/Y.1351 Amd. 1" }
 
     let(:parsed) { Pubid::Itu.parse(subject) }
 

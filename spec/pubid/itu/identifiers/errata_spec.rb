@@ -60,9 +60,7 @@ RSpec.describe Pubid::Itu::Identifiers::Errata do
   end
 
   describe "errata on another supplement (chained) — issue #230" do
-    # Errata on an Amendment. The Amendment base has its own pre-existing
-    # rendering convention of "Amd" without the period (see Amendment#to_s),
-    # so the chained round-trip yields "Amd 3" not "Amd. 3".
+    # Errata on an Amendment.
     context "ITU-T G.9701 (2014) Amd. 3 Err. 1 (12/2017)" do
       let(:parsed) { Pubid::Itu.parse("ITU-T G.9701 (2014) Amd. 3 Err. 1 (12/2017)") }
 
@@ -85,8 +83,8 @@ RSpec.describe Pubid::Itu::Identifiers::Errata do
         expect(parsed.date.month).to eq("12")
       end
 
-      it "round-trips with the Amendment's period-less rendering" do
-        expect(parsed.to_s).to eq("ITU-T G.9701 (2014) Amd 3 Err. 1 (12/2017)")
+      it "round-trips" do
+        expect(parsed.to_s).to eq("ITU-T G.9701 (2014) Amd. 3 Err. 1 (12/2017)")
       end
     end
 
