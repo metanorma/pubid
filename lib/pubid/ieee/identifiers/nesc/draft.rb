@@ -10,16 +10,28 @@ module Pubid
         # that are under development or review.
         #
         # @example
-        #   nesc = Pubid::Ieee.parse("Draft National Electrical Safety Code, January 2016")
-        #   nesc.to_s  # => "Draft National Electrical Safety Code, January 2016"
+        #   nesc = Pubid::Ieee.parse("Draft NESC, June 2011")
+        #   nesc.to_s
+        #   # => "Draft National Electrical Safety Code, June 2011"
+        #
+        # NOTE: the spelled-out "Draft National Electrical Safety Code, …" form
+        # is claimed by the generic IEEE grammar before it reaches the NESC
+        # sub-parser, so it does not currently build this class. Pre-existing
+        # dispatcher gap, pinned in spec/pubid/ieee/ire_nesc_roundtrip_spec.rb.
         class Draft < Base
+          include Pubid::Ieee::Identifiers::CodeNumber
+
+          def self.polymorphic_name
+            "pubid:ieee:nesc-draft"
+          end
+
           # Render draft identifier
           #
           # @param trademark [Boolean] append the IEEE trademark symbol (™/®)
           # @return [String] Draft format with optional month and year
           def to_s(trademark: false)
             parts = ["Draft National Electrical Safety Code"]
-            parts << ", #{month} #{year.year}" if month && year
+            parts << ", #{month} #{year}" if month && year
             result = parts.join
             result += Pubid::Ieee.trademark_symbol(result) if trademark
             result

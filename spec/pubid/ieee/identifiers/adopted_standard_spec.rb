@@ -101,6 +101,10 @@ RSpec.describe Pubid::Ieee::Identifiers::AdoptedStandard do
         Pubid::Ansi::Identifiers::Standard,
       "IEEE Std C37.111-2013 (IEC 60255-24 Edition 2.0 2013-04)" =>
         Pubid::Iec::Identifiers::InternationalStandard,
+      # IRE used to descend from bare Lutaml::Model::Serializable, so it was not
+      # a ::Pubid::Identifier either and hit the same IncorrectModelError even
+      # after the type was widened — see spec/pubid/ieee/ire_nesc_roundtrip_spec.rb.
+      "IEEE Std 159-1972 (52 IRE 7 S2)" => Pubid::Ieee::Ire::Identifier,
     }.each do |input, adopted_class|
       context "for #{input.inspect}" do
         let(:parsed) { klass.parse(input) }

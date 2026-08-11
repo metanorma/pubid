@@ -14,11 +14,12 @@ module Pubid
           # Extract type
           attributes[:type] = extract_value(parsed[:type])
 
-          # Extract number
+          # Extract the document designation. It travels as `code:` so the base
+          # initializer parses it into `code_obj` and the CodeNumber mixin
+          # hoists the flat split columns (number/prefix/parts/separator) that
+          # relaton indexes on.
           number_str = extract_value(parsed[:number])
-          if number_str
-            attributes[:number] = Components::Code.parse(number_str)
-          end
+          attributes[:code] = number_str if number_str
 
           # Extract year - handle both short (52) and full (1952) formats
           year_str = extract_value(parsed[:year])
@@ -28,13 +29,13 @@ module Pubid
             if year_int.between?(12, 63)
               year_int += 1900
             end
-            attributes[:year] = year_int
+            attributes[:year] = year_int.to_s
           end
 
           # Override with full_year if present
           full_year_str = extract_value(parsed[:full_year])
           if full_year_str
-            attributes[:year] = full_year_str.to_i
+            attributes[:year] = full_year_str.to_i.to_s
           end
 
           # Create identifier

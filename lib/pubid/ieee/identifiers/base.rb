@@ -20,9 +20,10 @@ module Pubid
       # serialized as the split index columns (number/prefix/parts/separator) on
       # concrete leaf types via the CodeNumber mixin; `code`/`code_obj` remain a
       # runtime-only representation (built in #initialize, read by the renderer).
-      # The separate AIEE/NESC/IRE identifier classes (which descend from
-      # Lutaml::Model::Serializable, not this base) keep their own
-      # `attribute :code`.
+      # This holds for every IEEE type, including the historical AIEE/IRE and
+      # the NESC family: all three used to descend from
+      # Lutaml::Model::Serializable with their own `attribute :code`, and were
+      # reparented onto this base (with the CodeNumber mixin on their leaves).
       attribute :year, :string
       attribute :type, :string, default: -> { "Std" } # Std, Draft Std
       attribute :draft_status, :string                    # Unapproved, Approved, Active Unapproved
@@ -183,13 +184,22 @@ module Pubid
         super
       end
 
-      # Register the AIEE identifier for polymorphic from_hash routing. AIEE
-      # lives under the `Aiee` namespace (not `Identifiers`), so the automatic
-      # scan of `Identifiers::*` never finds it; this hook adds it to the
-      # `_type` => class map so `Pubid::Ieee::Identifier.from_hash` can route a
-      # `pubid:ieee:aiee` row back to `Aiee::Identifier`.
+      # Register the identifier classes the automatic `Identifiers::*` scan
+      # cannot see, so `Pubid::Ieee::Identifier.from_hash` can route their rows
+      # back. The scan only looks at classes declared *directly* under
+      # `Identifiers`, which misses both AIEE and IRE (they live under their own
+      # `Aiee`/`Ire` namespaces) and the whole NESC family (nested one level
+      # deeper, under `Identifiers::Nesc`).
       def self.additional_identifier_classes
-        [Aiee::Identifier]
+        [
+          Aiee::Identifier,
+          Ire::Identifier,
+          Identifiers::Nesc::Draft,
+          Identifiers::Nesc::Edition,
+          Identifiers::Nesc::Handbook,
+          Identifiers::Nesc::Redline,
+          Identifiers::Nesc::Standard,
+        ]
       end
 
       # Parse IEEE identifier string.

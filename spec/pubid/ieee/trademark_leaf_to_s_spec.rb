@@ -38,15 +38,22 @@ RSpec.describe "IEEE leaf to_s(trademark:) compatibility" do
     end
   end
 
-  # Nesc::Draft is not reachable through the top-level parser today (the string
-  # routes to the generic Standard), so exercise it by direct construction.
+  # The spelled-out draft string is not reachable through the top-level parser
+  # today (it routes to the generic Standard), so exercise Nesc::Draft by direct
+  # construction. Draft-ness is carried by the class itself (and `#draft?`) —
+  # the old `:boolean` `draft` attribute was dropped when NESC was reparented,
+  # because the base declares `draft` as the `:string` draft designator.
   context "Nesc::Draft (direct construction)" do
     let(:id) do
       Pubid::Ieee::Identifiers::Nesc::Draft.new.tap do |d|
-        d.year = Pubid::Components::Date.new(year: 2016)
+        d.year = "2016"
         d.month = "January"
-        d.draft = true
       end
+    end
+
+    it "reports draft-ness without a draft attribute" do
+      expect(id).to be_draft
+      expect(id.draft).to be_nil
     end
 
     it "accepts trademark: true and appends the ™ symbol" do

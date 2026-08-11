@@ -13,12 +13,18 @@ module Pubid
         #   nesc = Pubid::Ieee.parse("2017 NESC Redline")
         #   nesc.to_s  # => "2017 NESC Redline"
         class Redline < Base
+          include Pubid::Ieee::Identifiers::CodeNumber
+
+          def self.polymorphic_name
+            "pubid:ieee:nesc-redline"
+          end
+
           # Render redline identifier
           #
           # @param trademark [Boolean] append the IEEE trademark symbol (™/®)
           # @return [String] YYYY NESC Redline format
           def to_s(trademark: false)
-            result = "#{year.year} NESC Redline"
+            result = [year, "NESC Redline"].compact.join(" ")
             result += Pubid::Ieee.trademark_symbol(result) if trademark
             result
           end
