@@ -86,7 +86,7 @@ module Pubid
 
         # Add amendment
         if amendment
-          parts << "Amd #{amendment}"
+          parts << "Amd. #{amendment}"
         end
 
         # Add corrigendum

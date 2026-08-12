@@ -30,8 +30,8 @@ RSpec.describe Pubid::Itu::Identifiers::Amendment do
         expect(parsed.number).to eq("1")
       end
 
-      it "round-trips" do
-        expect(parsed.to_s).to eq(subject)
+      it "normalizes 'Amd' to the canonical 'Amd.'" do
+        expect(parsed.to_s).to eq("ITU-T G.989 Amd. 1")
       end
     end
 
@@ -44,15 +44,15 @@ RSpec.describe Pubid::Itu::Identifiers::Amendment do
         expect(parsed).to be_a(described_class)
       end
 
-      it "normalizes 'Amd.' to 'Amd'" do
-        expect(parsed.to_s).to eq("ITU-T G.989 Amd 1")
+      it "round-trips" do
+        expect(parsed.to_s).to eq(subject)
       end
     end
   end
 
   describe "amendment with dates" do
-    context "ITU-T G.780/Y.1351 Amd 1 (2004)" do
-      subject { "ITU-T G.780/Y.1351 Amd 1 (2004)" }
+    context "ITU-T G.780/Y.1351 Amd. 1 (2004)" do
+      subject { "ITU-T G.780/Y.1351 Amd. 1 (2004)" }
 
       let(:parsed) { Pubid::Itu.parse(subject) }
 
@@ -81,8 +81,8 @@ RSpec.describe Pubid::Itu::Identifiers::Amendment do
       end
     end
 
-    context "ITU-T G.989 Amd 2 (06/2018)" do
-      subject { "ITU-T G.989 Amd 2 (06/2018)" }
+    context "ITU-T G.989 Amd. 2 (06/2018)" do
+      subject { "ITU-T G.989 Amd. 2 (06/2018)" }
 
       let(:parsed) { Pubid::Itu.parse(subject) }
 
@@ -99,8 +99,8 @@ RSpec.describe Pubid::Itu::Identifiers::Amendment do
       end
     end
 
-    context "ITU-T M.3016.1 Amd 1 (2020)" do
-      subject { "ITU-T M.3016.1 Amd 1 (2020)" }
+    context "ITU-T M.3016.1 Amd. 1 (2020)" do
+      subject { "ITU-T M.3016.1 Amd. 1 (2020)" }
 
       let(:parsed) { Pubid::Itu.parse(subject) }
 
@@ -123,8 +123,8 @@ RSpec.describe Pubid::Itu::Identifiers::Amendment do
   end
 
   describe "ITU-R amendments" do
-    context "ITU-R V.574-5 Amd 1" do
-      subject { "ITU-R V.574-5 Amd 1" }
+    context "ITU-R V.574-5 Amd. 1" do
+      subject { "ITU-R V.574-5 Amd. 1" }
 
       let(:parsed) { Pubid::Itu.parse(subject) }
 
@@ -150,8 +150,8 @@ RSpec.describe Pubid::Itu::Identifiers::Amendment do
       end
     end
 
-    context "ITU-R SA.364-6 Amd 2 (2015)" do
-      subject { "ITU-R SA.364-6 Amd 2 (2015)" }
+    context "ITU-R SA.364-6 Amd. 2 (2015)" do
+      subject { "ITU-R SA.364-6 Amd. 2 (2015)" }
 
       let(:parsed) { Pubid::Itu.parse(subject) }
 
@@ -174,8 +174,8 @@ RSpec.describe Pubid::Itu::Identifiers::Amendment do
   end
 
   describe "multi-digit amendment numbers" do
-    context "ITU-T G.989 Amd 10" do
-      subject { "ITU-T G.989 Amd 10" }
+    context "ITU-T G.989 Amd. 10" do
+      subject { "ITU-T G.989 Amd. 10" }
 
       let(:parsed) { Pubid::Itu.parse(subject) }
 
@@ -188,8 +188,8 @@ RSpec.describe Pubid::Itu::Identifiers::Amendment do
       end
     end
 
-    context "ITU-T G.780 Amd 25 (2019)" do
-      subject { "ITU-T G.780 Amd 25 (2019)" }
+    context "ITU-T G.780 Amd. 25 (2019)" do
+      subject { "ITU-T G.780 Amd. 25 (2019)" }
 
       let(:parsed) { Pubid::Itu.parse(subject) }
 

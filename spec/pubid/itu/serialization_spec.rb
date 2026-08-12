@@ -13,7 +13,7 @@ RSpec.describe "Pubid::Itu compact flat serialization" do
     "combined/dual" => "ITU-R SA.1745/RS.1745",
     "combined/triple" => "ITU-T G.780/Y.1351/Z.1362",
     "supplement" => "ITU-T E.156 Suppl. 2",
-    "amendment" => "ITU-T G.989 Amd 1",
+    "amendment" => "ITU-T G.989 Amd. 1",
     "corrigendum" => "ITU-T Z.100 (1999) Cor. 1 (10/2001)",
     "errata" => "ITU-T G.9701 (2014) Err. 1 (07/2016)",
     "annex" => "Annex to ITU OB No. 1000",

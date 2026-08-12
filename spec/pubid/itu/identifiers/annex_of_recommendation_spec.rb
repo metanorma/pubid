@@ -154,6 +154,7 @@ RSpec.describe Pubid::Itu::Identifiers::AnnexOfRecommendation do
       expect(parsed.number).to eq("1")
       expect(parsed.base).to be_a(described_class)
       expect(parsed.base.number).to eq("B")
+      expect(parsed.to_s).to eq("ITU-T J.112 Annex B (2001) Amd. 1 (02/2002)")
     end
 
     it "round-trips a corrigendum of an annex through to_hash/from_hash" do
