@@ -48,7 +48,14 @@ module Pubid
           # Year comes FIRST in IRE format - render as 2-digit short year
           result = [(short_year if year), publisher, type, code&.to_s]
             .compact.join(" ")
-          result += Pubid::Ieee.trademark_symbol(result) if trademark
+          # The code is the last token, so the end of the string already *is*
+          # the code boundary — but the symbol is picked from the code, not by
+          # scanning the string (which starts with the year).
+          if trademark
+            result += Pubid::Ieee.trademark_symbol_for(code_obj&.number,
+                                                       code_obj&.prefix,
+                                                       publishers: [publisher])
+          end
           result
         end
 

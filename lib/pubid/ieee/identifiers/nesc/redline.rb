@@ -25,7 +25,7 @@ module Pubid
           # @return [String] YYYY NESC Redline format
           def to_s(trademark: false)
             result = [year, "NESC Redline"].compact.join(" ")
-            result += Pubid::Ieee.trademark_symbol(result) if trademark
+            result += trademark_symbol if trademark
             result
           end
         end

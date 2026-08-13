@@ -54,8 +54,16 @@ RSpec.describe "IEEE IRE/NESC identifier reparenting" do
         expect(id.to_s).to eq(expected)
       end
 
+      # The mark attaches to the document number (metanorma/pubid#322). These
+      # forms render a name, or end with their code, so the mark lands at the
+      # end — except Nesc::Standard, which renders its "C2" code first.
       it "renders with the trademark symbol" do
-        expect(id.to_s(trademark: true)).to eq("#{expected}™")
+        marked = if expected.start_with?("C2-")
+                   expected.sub("C2-", "C2™-")
+                 else
+                   "#{expected}™"
+                 end
+        expect(id.to_s(trademark: true)).to eq(marked)
       end
 
       # relaton-index keys its binary search on `id.root.number.to_s`; a nil

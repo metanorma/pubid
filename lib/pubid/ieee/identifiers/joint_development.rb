@@ -94,14 +94,23 @@ module Pubid
         # @param trademark [Boolean] append the IEEE trademark symbol (™/®)
         # @return [String] formatted identifier
         def to_s(format: canonical_format, trademark: false)
-          result = case format
-                   when :iso
-                     to_iso_format
-                   else
-                     to_ieee_format
-                   end
-          result += Pubid::Ieee.trademark_symbol(result) if trademark
-          result
+          # The mark goes after the code number, before the draft and the year
+          # ("ISO/IEC/IEEE P26511™/D8-2018"), so it is threaded into the
+          # format builders rather than appended to the finished string.
+          mark = if trademark
+                   Pubid::Ieee.trademark_symbol_for(code&.number,
+                                                    code&.prefix,
+                                                    publishers: publishers)
+                 else
+                   ""
+                 end
+
+          case format
+          when :iso
+            to_iso_format(mark)
+          else
+            to_ieee_format(mark)
+          end
         end
 
         private
@@ -109,7 +118,7 @@ module Pubid
         # Convert to ISO format representation
         # ISO/IEC/IEEE FDIS 26511:2018
         # @return [String] ISO format string
-        def to_iso_format
+        def to_iso_format(mark = "")
           parts = []
 
           # Publishers (slash-separated)
@@ -127,6 +136,7 @@ module Pubid
 
           # Code (NO P prefix in ISO format, NO draft notation)
           code_str = code.to_s.gsub(/^P/, "")
+          code_str += mark unless code_str.empty?
           parts << code_str if code_str && !code_str.empty?
 
           # Join with space and add year with colon
@@ -139,7 +149,7 @@ module Pubid
         # Convert to IEEE format representation
         # ISO/IEC/IEEE P26511/D8-2018
         # @return [String] IEEE format string
-        def to_ieee_format
+        def to_ieee_format(mark = "")
           parts = []
 
           # Publishers (slash-separated)
@@ -152,6 +162,9 @@ module Pubid
           if typed_stage&.project_status || type == "P"
             code_str = "P#{code_str}"
           end
+
+          # Mark after the number, before the draft and the year
+          code_str += mark unless code_str.empty?
 
           # Add IEEE draft notation if available (e.g., /D8)
           if ieee_draft
