@@ -1,19 +1,22 @@
 module Pubid::Ieee::Renderer
   class Base < Pubid::Core::Renderer::Base
     def render_identifier(params)
+      # %{trademark} sits immediately after the number (and its part/subpart):
+      # IEEE attaches the mark to the standard number, before the year, the
+      # draft, the corrigendum and every other suffix — "IEEE Std 802.3®-2018".
       if params[:iso_identifier].to_s != "" && params[:number] != ""
-        " (%{publisher}%{stage}%{draft_status}%{type}%{number}%{iteration}%{part}%{subpart}%{month}%{year}%{corrigendum_comment}"\
+        " (%{publisher}%{stage}%{draft_status}%{type}%{number}%{iteration}%{part}%{subpart}%{trademark}%{month}%{year}%{corrigendum_comment}"\
         "%{corrigendum}%{draft}%{edition})%{alternative}%{supersedes}%{reaffirmed}%{incorporates}%{supplement}"\
         "%{revision}%{iso_amendment}%{amendment}%{edition}%{includes}%{redline}%{adoption}" % params
       else
         if params[:day].empty? && params[:month].empty?
           # if only year - edition and draft after year
-          "%{publisher}%{draft_status}%{type}%{number}%{part}%{subpart}%{stage}"\
+          "%{publisher}%{draft_status}%{type}%{number}%{part}%{subpart}%{trademark}%{stage}"\
           "%{year}%{edition}%{corrigendum_comment}%{corrigendum}%{draft}%{alternative}%{supersedes}%{reaffirmed}%{incorporates}%{supplement}"\
           "%{revision}%{iso_amendment}%{amendment}%{includes}%{redline}%{adoption}" % params
         else
           # if year and month - edition and draft before
-          "%{publisher}%{draft_status}%{type}%{number}%{part}%{subpart}%{edition}%{stage}"\
+          "%{publisher}%{draft_status}%{type}%{number}%{part}%{subpart}%{trademark}%{edition}%{stage}"\
           "%{corrigendum_comment}%{corrigendum}%{draft}%{month}%{day}%{year}%{alternative}%{supersedes}%{reaffirmed}%{incorporates}%{supplement}"\
           "%{revision}%{iso_amendment}%{amendment}%{includes}%{redline}%{adoption}" % params
         end
@@ -107,12 +110,21 @@ module Pubid::Ieee::Renderer
       # result
     end
 
-    def render_alternative(alternative, _opts, _params)
-      if alternative.is_a?(Array)
-        " (#{alternative.map { |a| Pubid::Ieee::Identifier::Base.new(**Pubid::Ieee::Identifier.convert_parser_parameters(**a)) }.join(', ')})"
-      else
-        " (#{Pubid::Ieee::Identifier::Base.new(**Pubid::Ieee::Identifier.convert_parser_parameters(**alternative))})"
+    def render_alternative(alternative, opts, params)
+      # An ISO-led co-publication has no IEEE number of its own — its IEEE
+      # designation is this alternative, so the trademark belongs on that
+      # number rather than on the ISO one.
+      with_trademark = opts[:with_trademark] && !params[:number]
+
+      # `annotated` is deliberately not propagated — the nested alternative was
+      # never annotated before, and this must not change plain rendering.
+      alternatives = (alternative.is_a?(Array) ? alternative : [alternative]).map do |a|
+        Pubid::Ieee::Identifier::Base
+          .new(**Pubid::Ieee::Identifier.convert_parser_parameters(**a))
+          .to_s(with_trademark: with_trademark || false)
       end
+
+      " (#{alternatives.join(', ')})"
     end
 
     def render_draft(draft, _opts, params)

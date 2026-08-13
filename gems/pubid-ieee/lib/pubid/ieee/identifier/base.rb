@@ -143,16 +143,68 @@ module Pubid::Ieee
         Identifier.create(**identifier_params)
       end
 
+      # IEEE series carrying a registered trademark ("\u00AE"); everything else
+      # takes the unregistered mark ("\u2122"). 8802 is the ISO/IEC co-published
+      # form of the 802 series, and a project number keeps its series identity,
+      # so a leading "P" is stripped before the lookup.
+      REGISTERED_SERIES = %w[802 8802 2030].freeze
+
+      # The ISO/IEC adoption of IEEE 802: the number alone identifies the
+      # series, whatever publishers are printed.
+      ISO_ADOPTED_SERIES = "8802".freeze
+
       # @param [:short, :full] format
       def to_s(format = :short, with_trademark: false, annotated: false)
         opts = { format: format, with_trademark: with_trademark, annotated: annotated }
+        params = to_h(deep: false)
+        # IEEE attaches the mark to the standard number, before the year and
+        # every suffix ("IEEE Std 1619\u2122-2007"), so it is rendered from a
+        # dedicated slot in the format templates rather than appended to the
+        # finished string. An identifier without a number of its own (an
+        # ISO-led co-publication) carries its IEEE designation in the
+        # parenthesised alternative, which is marked by the renderer instead.
+        params[:trademark] = trademark(@number) if with_trademark && @number
         (@iso_identifier ? @iso_identifier.to_s(format: :ref_num_short, with_edition: true, annotated: annotated) : "") +
-          self.class.get_renderer_class.new(to_h(deep: false)).render(**opts) +
-          (with_trademark ? trademark(@number) : "")
+          self.class.get_renderer_class.new(params).render(**opts) +
+          (with_trademark && !marks_a_number? ? trademark(fallback_number) : "")
       end
 
+      # True when the rendered string carries the mark on a number of its own:
+      # either this identifier's number, or the IEEE designation it renders as
+      # a parenthesised alternative. A form that renders neither -- an
+      # ISO-led document with no IEEE designation of its own, such as
+      # "ISO/IEC/IEEE 8802-11:2012/Amd.1:2013(E)" or "IEC 61588:2009(E)" --
+      # keeps the trailing mark rather than losing it altogether.
+      def marks_a_number?
+        !@number.nil? || !@alternative.nil?
+      end
+
+      # Document number to pick the symbol from when the mark falls back to the
+      # end of the string. The ISO identifier holds the only number there is,
+      # and for a supplement it is the *base* document that carries the series
+      # (an amendment's own `number` is its ordinal, "1").
+      def fallback_number
+        return @number if @number
+
+        iso = @iso_identifier
+        iso = iso.base while iso.respond_to?(:base) && iso.base
+        iso&.number
+      end
+
+      # The registered mark belongs to IEEE, so it is claimed only when IEEE
+      # is among the printed publishers -- another body may simply have
+      # numbered a document 802 or 2030 ("AIEE Std No. 802" predates the IEEE
+      # 802 series by two decades). The ISO/IEC adoption 8802 is identified by
+      # its number alone, whatever publishers are printed.
       def trademark(number)
-        %w(802 2030).include?(number.to_s) ? "\u00AE" : "\u2122"
+        bare = number.to_s.sub(/\AP/, "")
+        return "\u2122" unless REGISTERED_SERIES.include?(bare)
+        return "\u00AE" if bare == ISO_ADOPTED_SERIES
+
+        ieee = [@publisher, *@copublisher].compact.any? do |publisher|
+          publisher.to_s.split("/").include?("IEEE")
+        end
+        ieee ? "\u00AE" : "\u2122"
       end
 
       class << self

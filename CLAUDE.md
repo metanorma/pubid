@@ -96,6 +96,44 @@ relaton-data-iec ground truth. A **dated** series keeps it
 deliverable value (`"ser"`), so it holds whether the series is carried as an
 `all_parts` flag or a `ser` vap.
 
+### IEEE trademark position (`gems/pubid-ieee`)
+
+`to_s(with_trademark: true)` attaches the mark to the **document number**, not
+to the end of the rendered string: IEEE prints `IEEE Std 1619™-2007`,
+`IEEE Std 802.3®-2018` — the symbol sits after the number (and its
+part/subpart) and **before** the stage, year, edition, corrigendum, draft,
+month and ` - Redline`. It is therefore rendered from a `%{trademark}` slot in
+all three `Renderer::Base#render_identifier` templates, fed by
+`Identifier::Base#to_s`, rather than concatenated to the finished string.
+Plain `to_s` is unchanged (default off) — the slot renders `""` when the key
+is absent, via the `@prerendered_params.default = ""` mechanism every other
+optional slot already uses.
+
+`#trademark(number)` picks ® for `REGISTERED_SERIES = %w[802 8802 2030]` with
+any leading project `P` stripped, so `IEEE P802.1AE/D1.0`, `ANSI/IEEE 802.9a`
+and the ISO/IEC co-published `8802` series all get ® (the old list was
+`%w(802 2030)` compared verbatim). The number alone is not enough, though: the
+registered mark is **IEEE's**, so it is claimed only when `IEEE` appears among
+the printed publishers (`[@publisher, *@copublisher]`, each split on `/`) —
+otherwise `AIEE Std No. 802` and `ANSI 802.1-1985` would assert an IEEE mark on
+documents that are not part of that series (AIEE dissolved in 1963, two decades
+before IEEE 802 existed). `ISO_ADOPTED_SERIES = "8802"` is the one escape: it
+*is* the ISO/IEC adoption of IEEE 802, so its number alone decides.
+
+Two forms have no IEEE number of their own. An ISO-led co-publication carries
+its IEEE designation in the parenthesised `alternative`, so `render_alternative`
+propagates `with_trademark` into that nested identifier (`ISO/IEC 8802-3:2021
+(IEEE Std 802.3®-2021)`); each alternative is marked, as IEEE prints co-equal
+designations. A purely ISO-routed form — one whose whole identity lives in
+`iso_identifier`, e.g. `ISO/IEC/IEEE 8802-11:2012/Amd.1:2013(E)` or
+`IEC 61588:2009(E)` — has no IEEE number to attach the mark to and keeps the
+trailing mark, guarded by `#marks_a_number?`, so the mark is never silently
+lost. Note `ISO/IEC/IEEE 8802-11:2012` (no supplement) does *not* take that
+branch: it parses with `number == "8802"` and marks inline. The trailing
+fallback still picks its symbol from a number — `#fallback_number` walks the
+ISO identifier's `base` chain, because a supplement's own `number` is its
+ordinal ("1"), not the document series.
+
 ### Version Synchronization
 
 Master version lives in `lib/pubid/version.rb`. All gem versions and inter-gem dependencies use exact version matching and must stay synchronized. Use `rake version:bump[patch|minor|major]` to update all gems atomically.
