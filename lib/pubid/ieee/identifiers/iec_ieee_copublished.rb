@@ -30,10 +30,13 @@ module Pubid
         # columns (the renderer/urn read this). Not stored — number/parts/
         # separators/year fully describe it, so the verbatim string never
         # bloats an index row.
-        def copublished_number
+        # @param mark [String] IEEE trademark symbol, spliced in after the
+        #   number and its parts and before the publication year (IEEE prints
+        #   it there); "" for the ordinary, unmarked rendering.
+        def copublished_number(mark = "")
           return nil if number.to_s.empty?
 
-          core = parts_suffix
+          core = parts_suffix + mark
           core += "#{year_sep}#{year}" if year
           "#{number}#{core}"
         end

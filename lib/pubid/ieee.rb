@@ -32,6 +32,14 @@ module Pubid
       autoload :TypedStage, "#{__dir__}/ieee/components/typed_stage"
     end
 
+    # Document-number series carrying an IEEE registered trademark ("®").
+    # 8802 is the ISO/IEC co-published form of the 802 series.
+    REGISTERED_SERIES = %w[802 8802 2030].freeze
+
+    # The ISO/IEC adoption of IEEE 802: the number alone identifies the series,
+    # whatever publishers are printed.
+    ISO_ADOPTED_SERIES = "8802"
+
     class << self
       def parse(input)
         if input.length > Pubid::MAX_INPUT_LENGTH
@@ -41,12 +49,48 @@ module Pubid
         Identifier.parse(input)
       end
 
-      # IEEE trademark symbol for a rendered identifier string: ® for the
-      # registered-trademark series (802/2030), ™ for everything else. Mirrors
-      # relaton-ieee's heuristic (`^IEEE (Std )?(802|2030)`); refine here if
-      # pubid gains real IEEE trademark-policy data.
+      # True when the document number belongs to a registered-trademark series.
+      # A project number keeps its series identity, so a leading "P" is
+      # stripped. `prefix` is the code's letter series, which must be absent
+      # (or the bare project "P") — "C802.1" is a different series that merely
+      # starts with the same digits. `publishers` guards against claiming an
+      # IEEE registered mark for another body that happens to have numbered a
+      # document 802 or 2030 — "AIEE Std No. 802" predates the IEEE 802 series
+      # by two decades. It is optional: with no publishers given the number
+      # decides, which keeps the plain number lookup usable on its own.
+      # @param number [String, nil] bare document number ("802", "P802")
+      # @param prefix [String, nil] letter series of the code ("C" for C37.09)
+      # @param publishers [Array<String>, String, nil] printed publisher tokens
+      def registered_series?(number, prefix = nil, publishers: nil)
+        return false unless prefix.nil? || prefix.to_s.empty? ||
+          prefix.to_s == "P"
+
+        bare = number.to_s.delete_prefix("P")
+        return false unless REGISTERED_SERIES.include?(bare)
+        return true if bare == ISO_ADOPTED_SERIES || publishers.nil?
+
+        Array(publishers).any? { |p| p.to_s.split("/").include?("IEEE") }
+      end
+
+      # IEEE trademark symbol for a document number: ® for the registered
+      # series, ™ for everything else. This is the entry point render sites
+      # use, because they hold the identifier and so know its number — the
+      # symbol must not depend on where in the rendered string the mark lands.
+      def trademark_symbol_for(number, prefix = nil, publishers: nil)
+        if registered_series?(number, prefix, publishers: publishers)
+          "®"
+        else
+          "™"
+        end
+      end
+
+      # IEEE trademark symbol for a rendered identifier string. Kept for
+      # external callers only — every render site inside pubid passes the
+      # document number to #trademark_symbol_for instead, because the first
+      # numeric token of a rendered string is not reliably the document number
+      # (a NESC or IRE string starts with the publication year).
       def trademark_symbol(rendered)
-        rendered.to_s.match?(/\AIEEE (Std )?(802|2030)/) ? "®" : "™"
+        trademark_symbol_for(rendered.to_s[/(?<![0-9A-Za-z])P?(\d+)/, 1])
       end
 
       # Auto-discover all identifier types from the Identifiers namespace

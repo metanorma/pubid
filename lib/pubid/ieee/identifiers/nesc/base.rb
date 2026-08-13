@@ -90,8 +90,20 @@ module Pubid
           # @return [String] String representation
           def to_s(trademark: false)
             result = ["IEEE Std", year, name_portion].compact.join(" ")
-            result += Pubid::Ieee.trademark_symbol(result) if trademark
+            result += trademark_symbol if trademark
             result
+          end
+
+          # Trademark symbol for this document's own code. A NESC string starts
+          # with the publication *year*, so the string-scanning
+          # Pubid::Ieee.trademark_symbol would pick the wrong field — an
+          # edition year of 2030 would silently render ®.
+          #
+          # @return [String] "®" or "™"
+          def trademark_symbol
+            Pubid::Ieee.trademark_symbol_for(code_obj&.number,
+                                             code_obj&.prefix,
+                                             publishers: [publisher])
           end
 
           # The document-name portion, including the registered marks and the

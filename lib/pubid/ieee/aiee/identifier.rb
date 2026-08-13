@@ -46,6 +46,14 @@ module Pubid
 
           base = result.join(" ")
 
+          # IEEE attaches the mark to the number, before the date suffix
+          # ("AIEE No 13™-1930").
+          if trademark
+            base += Pubid::Ieee.trademark_symbol_for(code_obj&.number,
+                                                     code_obj&.prefix,
+                                                     publishers: [publisher])
+          end
+
           # Priority: explicit parameter > original_format > format auto-detect
           format = date_format&.to_s || original_format
           format ||= month || date_separator ? "long" : "short"
@@ -73,7 +81,6 @@ module Pubid
           # document number/filename downstream). It stays reachable on
           # `relationships`.
 
-          base += Pubid::Ieee.trademark_symbol(base) if trademark
           base
         end
       end

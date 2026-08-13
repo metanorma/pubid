@@ -33,7 +33,7 @@ module Pubid
             parts = ["Draft National Electrical Safety Code"]
             parts << ", #{month} #{year}" if month && year
             result = parts.join
-            result += Pubid::Ieee.trademark_symbol(result) if trademark
+            result += trademark_symbol if trademark
             result
           end
         end

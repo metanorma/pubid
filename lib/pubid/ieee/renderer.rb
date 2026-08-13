@@ -17,18 +17,51 @@ module Pubid
     # identifier's own publisher/code/relationship helpers.
     class Renderer < ::Pubid::Renderers::Base
       def render(context: nil, **opts)
-        id = @id
+        # IEEE attaches the trademark mark to the document number, before the
+        # year and every suffix ("IEEE Std 802.3®-2018"), so the mark is
+        # emitted by whichever method renders the number rather than appended
+        # to the finished string. A renderer instance is built per render call
+        # (Pubid::Identifier#render), so the flag is safe as instance state.
+        @trademark = opts[:trademark]
 
-        result = render_id(id)
-        return result unless opts[:trademark]
-
-        "#{result}#{Pubid::Ieee.trademark_symbol(result)}"
+        render_id(@id)
       end
 
       private
 
+      # Trademark mark for a document number, or "" when the flag is off.
+      # @param number [String, nil] bare document number
+      # @param prefix [String, nil] letter series of the code
+      # @param publishers [Array<String>] printed publisher tokens — the ®
+      #   series belongs to IEEE, not to another body numbering a document 802
+      def mark(number, prefix = nil, publishers: nil)
+        return "" unless @trademark
+
+        Pubid::Ieee.trademark_symbol_for(number, prefix, publishers: publishers)
+      end
+
+      # The publisher tokens an identifier prints, for the ® decision.
+      def publishers_of(id)
+        return id.publishers if id.respond_to?(:publishers) && id.publishers
+
+        copublishers = id.copublisher if id.respond_to?(:copublisher)
+        [id.publisher, *copublishers].compact
+      end
+
+      # Compose a child identifier, propagating the trademark flag only when it
+      # is safe. A foreign (non-IEEE) leaf may not accept the `trademark:`
+      # keyword at all — Pubid::Nist's `to_s(format = :short)` would silently
+      # swallow it as a positional Hash, and Pubid::Iso's would raise — and an
+      # adopted or parenthetical child is not the IEEE document being marked.
+      def child_to_s(child, **opts)
+        return child.to_s(**opts) unless @trademark &&
+          child.is_a?(Pubid::Ieee::Identifier)
+
+        child.to_s(**opts, trademark: true)
+      end
+
       # Dispatch to the type-specific renderer, returning the composed string
-      # (the trademark symbol, if requested, is appended by #render).
+      # (each branch inserts the trademark mark at its own number boundary).
       def render_id(id)
         case id
         when Identifiers::DualPublished
@@ -58,7 +91,7 @@ module Pubid
         when Identifiers::SiStandard
           render_si_standard(id)
         when Identifiers::JointDevelopment
-          id.to_s
+          child_to_s(id)
         else
           render_base(id)
         end
@@ -104,6 +137,11 @@ module Pubid
           if id.typed_stage&.project_status && should_render_type && !result.start_with?("P")
             result = "P#{result}"
           end
+
+          # Trademark mark — right after the number and its parts, before the
+          # year, the revision, the draft and every other suffix.
+          result += mark(id.code_obj.number, id.code_obj.prefix,
+                         publishers: publishers_of(id))
 
           # Only attach year to code if there's no edition, no month, and no draft
           result += "-#{id.year}" if id.year && !id.draft_obj && !id.edition && !id.month
@@ -200,15 +238,19 @@ module Pubid
       # ------------------------------------------------------------------
 
       def render_dual_published(id)
-        "#{id.first_identifier} and #{id.second_identifier}"
+        "#{child_to_s(id.first_identifier)} and " \
+          "#{child_to_s(id.second_identifier)}"
       end
 
       def render_dual_identifier(id)
-        "#{id.first_identifier} and #{id.second_identifier}"
+        "#{child_to_s(id.first_identifier)} and " \
+          "#{child_to_s(id.second_identifier)}"
       end
 
       def render_adopted_standard(id)
-        result = id.ieee_identifier.to_s
+        # Only the IEEE designation is marked; the adopted identifiers are
+        # other bodies' documents (and may be foreign pubid objects).
+        result = child_to_s(id.ieee_identifier)
         if id.adopted_identifiers && !id.adopted_identifiers.empty?
           adopted_strs = id.adopted_identifiers.map(&:to_s)
           result += " (#{adopted_strs.join(' and ')})"
@@ -217,7 +259,7 @@ module Pubid
       end
 
       def render_redlined_standard(id)
-        result = id.base.to_s
+        result = child_to_s(id.base)
         # NOTE: currently unreachable — a redline is built as a flat
         # `redline: true` on a plain Standard (see the redline invariant in
         # CLAUDE.md), so determine_identifier_class never routes here. Kept for
@@ -232,7 +274,7 @@ module Pubid
       def render_corrigendum(id)
         return render_base(id) unless id.base
 
-        result = id.base.to_s
+        result = child_to_s(id.base)
         result += "/Cor"
         result += ". " if id.number # Add period and space for formal format
         result += id.number if id.number
@@ -243,7 +285,7 @@ module Pubid
       def render_amendment(id)
         return render_base(id) unless id.base
 
-        result = id.base.to_s
+        result = child_to_s(id.base)
         result += "/Amd"
         result += " #{id.number}" if id.number # canonical "/Amd 4-2020"
         result += "-#{id.year}" if id.year
@@ -253,7 +295,7 @@ module Pubid
       def render_interpretation(id)
         return render_base(id) unless id.base
 
-        result = id.base.to_s
+        result = child_to_s(id.base)
         result += "/INT"
         result += "-#{id.year}" if id.year
         result
@@ -262,39 +304,52 @@ module Pubid
       def render_conformance(id)
         return render_base(id) unless id.base
 
-        result = id.base.to_s
+        result = child_to_s(id.base)
         result += "/Conformance#{id.number}" if id.number
         result += "-#{id.year}" if id.year
         result
       end
 
       def render_multi_numbered(id)
-        return id.primary_identifier.to_s unless id.secondary_identifier
+        return child_to_s(id.primary_identifier) unless id.secondary_identifier
+
+        # Co-equal designations: each carries its own mark, before its own
+        # suffixes, as IEEE prints them.
+        primary = child_to_s(id.primary_identifier)
+        secondary = child_to_s(id.secondary_identifier)
 
         secondary_code = id.secondary_identifier.code.to_s
         if secondary_code.start_with?("C") && secondary_code.match?(/^C\d+\./)
-          "#{id.primary_identifier}/#{id.secondary_identifier}"
+          "#{primary}/#{secondary}"
         else
-          "#{id.primary_identifier} and #{id.secondary_identifier}"
+          "#{primary} and #{secondary}"
         end
       end
 
       def render_parenthetical(id)
-        result = id.base.to_s
+        # The mark belongs on the base; the parenthetical is a separate token.
+        result = child_to_s(id.base)
         result += " (#{id.parenthetical_identifier})" if id.parenthetical_identifier
         result
       end
 
       def render_csa_dual_published(id)
+        # csa_identifier is a Pubid::Csa object — never marked.
         csa_str = id.csa_identifier.to_s
         csa_str = "CSA #{csa_str}" unless csa_str.start_with?("CSA", "CAN/")
 
-        "#{id.ieee_identifier}/#{csa_str}"
+        "#{child_to_s(id.ieee_identifier)}/#{csa_str}"
       end
 
       def render_iec_ieee_copublished(id)
         result = "IEC/IEEE"
-        result += " #{id.copublished_number}" if id.copublished_number
+        # copublished_number glues the parts and the publication year onto the
+        # number, so the mark is spliced in by that single implementation
+        # rather than rebuilt here; with the flag off it is passed "".
+        if id.copublished_number
+          result += " #{id.copublished_number(mark(id.number,
+                                                   publishers: %w[IEC IEEE]))}"
+        end
         result += id.draft_info if id.draft_info
         result += " IEC:#{id.iec_year}" if id.iec_year
         result += " #{id.date_info}" if id.date_info
@@ -314,8 +369,11 @@ module Pubid
                    "SI"
                  end
 
-        # Code (number) with draft version for PSI
+        # Code (number) with draft version for PSI — the mark goes after the
+        # code, before the draft and the date.
         code_part = id.code.to_s
+        code_part += mark(id.code_obj&.number, id.code_obj&.prefix,
+                          publishers: publishers_of(id))
         if id.draft_obj
           code_part += "/D#{id.draft_obj.version}"
         end

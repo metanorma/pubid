@@ -27,10 +27,12 @@ module Pubid
           # @return [String] C2-YYYY format (bare "C2" when the year is absent,
           #   e.g. a partial reference produced by `#exclude(:year)`)
           def to_s(trademark: false)
-            code_part = year ? "C2-#{year}" : "C2"
-            result = "#{code_part} National Electrical Safety Code"
-            result += Pubid::Ieee.trademark_symbol(result) if trademark
-            result
+            # Unlike the year-first NESC editions, this form renders a code, so
+            # the mark goes after it and before the year — as everywhere else.
+            code_part = "C2"
+            code_part += trademark_symbol if trademark
+            code_part += "-#{year}" if year
+            "#{code_part} National Electrical Safety Code"
           end
         end
       end
