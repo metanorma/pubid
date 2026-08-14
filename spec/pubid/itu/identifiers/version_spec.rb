@@ -136,4 +136,46 @@ RSpec.describe "ITU (V##) version" do
       expect(parsed).not_to eq(parse("ITU-T G.780/Y.1351 (V3) (2004)"))
     end
   end
+
+  # ITU emits four spellings of the same marker. All are accepted and
+  # normalised to the canonical parenthesised form on render — the hash (the
+  # relaton index gate) round-trips regardless, and this is why these strings
+  # are NOT in the byte-exact pass fixture.
+  describe "bare version spellings" do
+    {
+      "ITU-T Q.3403 v.1 (02/2016)" => ["1", "ITU-T Q.3403 (V1) (02/2016)"],
+      "ITU-T Q.1902.1 v.2 (02/2016)" => ["2", "ITU-T Q.1902.1 (V2) (02/2016)"],
+      "ITU-T H.764 V2 (11/2019)" => ["2", "ITU-T H.764 (V2) (11/2019)"],
+      "ITU-T H.222.0 v10 (04/2025)" => ["10", "ITU-T H.222.0 (V10) (04/2025)"],
+    }.each do |input, (version, canonical)|
+      context input do
+        let(:parsed) { parse(input) }
+
+        it "captures the version" do
+          expect(parsed.version).to eq(version)
+        end
+
+        it "renders the canonical parenthesised spelling" do
+          expect(parsed.to_s).to eq(canonical)
+        end
+
+        it "round-trips through from_hash" do
+          expect(Pubid::Itu::Identifier.from_hash(parsed.to_hash).to_hash)
+            .to eq(parsed.to_hash)
+        end
+
+        it "equals the canonical spelling" do
+          expect(parsed).to eq(parse(canonical))
+        end
+      end
+    end
+
+    it "still distinguishes versions across spellings" do
+      expect(parse("ITU-T Q.3403 v.1")).not_to eq(parse("ITU-T Q.3403 v.2"))
+    end
+
+    it "does not claim a version-less identifier" do
+      expect(parse("ITU-T H.264 (08/2021)").version).to be_nil
+    end
+  end
 end

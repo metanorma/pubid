@@ -27,9 +27,24 @@ module Pubid
           return annex
         end
 
+        # Labelled appendix of a Recommendation — "ITU-T G.101 App. I
+        # (05/2000)". Same shape as the annex above.
+        if data[:appendix_number]
+          appendix = build_appendix_of_recommendation(data)
+          appendix.common_text_twin = twin if twin
+          return appendix
+        end
+
         # Operational Bulletin (Special Publication) — series == "OB" or
         # legacy long form ("Operational Bulletin No. ...").
-        if data[:series].to_s == "OB" || data[:_op_bull]
+        # The series_dash guard keeps a series-code "ITU-T OB-1" out of this
+        # branch, which would drop the dash and render it "ITU OB No. 1".
+        # Belt-and-braces: `series_code_body` already refuses "OB" + dash, so
+        # nothing reaches here with both set — the guard documents that coupling
+        # so removing the parser's `absent?` fails loudly rather than silently
+        # rerouting.
+        if (data[:series].to_s == "OB" && data[:series_dash].nil?) ||
+            data[:_op_bull]
           sp = build_special_publication(data)
           sp.common_text_twin = twin if twin && sp
           return sp
@@ -70,6 +85,14 @@ module Pubid
             combined: build_designations(data[:combined]),
             date: date,
             version: data[:version]&.to_s,
+            # with_series offers these slots on either side of
+            # combined_suffixes, so a joint id can carry them too; not
+            # forwarding them let "ITU-T H.350/X.1 attachment" compare equal to
+            # the un-attached document.
+            series_word: !data[:series_word].nil?,
+            series_dash: !data[:series_dash].nil?,
+            attachment: !data[:attachment].nil?,
+            range_end: data[:range_end]&.to_s,
             language: data[:language]&.to_s,
             common_text_twin: twin,
           )
@@ -81,6 +104,10 @@ module Pubid
           code: code,
           date: date,
           version: data[:version]&.to_s,
+          series_word: !data[:series_word].nil?,
+          series_dash: !data[:series_dash].nil?,
+          attachment: !data[:attachment].nil?,
+          range_end: data[:range_end]&.to_s,
           language: data[:language]&.to_s,
           common_text_twin: twin,
         )
@@ -145,6 +172,20 @@ module Pubid
         )
       end
 
+      # Build a labelled appendix of a Recommendation. Like the annex above,
+      # sector/series/code are deliberately NOT copied from the base — they are
+      # not serialized on the wrapper, so copies would make a from_hash-rebuilt
+      # appendix differ from the parsed one.
+      def build_appendix_of_recommendation(data)
+        Identifiers::AppendixOfRecommendation.new(
+          base: build(data[:base]),
+          number: data[:appendix_number].to_s,
+          material: data[:appendix_material]&.to_s,
+          date: data[:year] ? build_date(data) : nil,
+          language: data[:language]&.to_s,
+        )
+      end
+
       # Build Handbook ("ITU-R 42.HDB").
       def build_handbook(data)
         Identifiers::Handbook.new(
@@ -180,12 +221,22 @@ module Pubid
         klass = case supplement_type
                 when "Amd"
                   Identifiers::Amendment
+                when "Add"
+                  Identifiers::Addendum
                 when "Cor"
                   Identifiers::Corrigendum
                 when "Err"
                   Identifiers::Errata
                 when "Suppl"
                   Identifiers::Supplement
+                else
+                  # Previously fell through to a nil class and died with
+                  # "undefined method 'new' for nil" one frame later. Any token
+                  # added to Parser#supplement_type without a class here should
+                  # say so.
+                  raise ArgumentError,
+                        "Unknown ITU supplement type: " \
+                        "#{data[:supplement_type].inspect}"
                 end
 
         # Build supplement date (separate from base date)
@@ -209,15 +260,33 @@ module Pubid
         series = base_identity&.series ||
           (Components::Series.new(series: data[:series].to_s) if data[:series])
 
-        klass.new(
+        attrs = {
           sector: sector,
           series: series,
           code: base_identity&.code,
           base: base,
           number: data[:supplement_number].to_s,
+          # The marker is the captured space, so its ABSENCE is the flag.
+          number_glued: data[:supplement_space].nil?,
+          slash_joined: !data[:supplement_slash].nil?,
           date: supplement_date,
           language: data[:language]&.to_s,
-        )
+        }
+        # The "series" word rides on the supplement for the base-less,
+        # series-only form; with a base it is the base's, and renders from
+        # there. It is copied up anyway (like sector/series/code above) so the
+        # supplement's own MR slug stays distinct — `render_supplement` and the
+        # base-nil-guarded key_value/== only consult it when base is nil, so
+        # the copy is render- and serialization-neutral.
+        attrs[:series_word] = if base
+                                !!base_identity&.series_word
+                              else
+                                !data[:series_word].nil?
+                              end
+        attrs[:technical] = true if data[:technical] &&
+          klass == Identifiers::Corrigendum
+
+        klass.new(**attrs)
       end
 
       private
@@ -231,8 +300,12 @@ module Pubid
             series: Components::Series.new(series: d[:series].to_s),
             code: Components::Code.new(
               number: d[:number].to_s,
+              series_suffix: d[:series_suffix]&.to_s,
+              series_suffix_spaced: !d[:series_suffix_spaced].nil?,
               subseries: d[:subseries]&.to_s,
               parts: extract_parts(d[:parts]),
+              qualifier: d[:qualifier]&.to_s,
+              qualifier_glued: !d[:qualifier].nil? && d[:qualifier_spaced].nil?,
             ),
           )
         end
@@ -243,8 +316,15 @@ module Pubid
           imp_marker: data[:imp_marker]&.to_s,
           number: data[:number].to_s,
           series_suffix: data[:series_suffix]&.to_s,
+          # The marker is the captured separating space, so its presence is
+          # the flag for the edition word and its ABSENCE is the flag for the
+          # qualifier letter (whose majority spelling is spaced).
+          series_suffix_spaced: !data[:series_suffix_spaced].nil?,
           subseries: data[:subseries]&.to_s,
           parts: extract_parts(data[:parts]),
+          qualifier: data[:qualifier]&.to_s,
+          qualifier_glued: !data[:qualifier].nil? &&
+            data[:qualifier_spaced].nil?,
         )
       end
 

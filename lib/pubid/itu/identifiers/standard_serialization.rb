@@ -25,10 +25,22 @@ module Pubid
                 with: { to: :number_to_kv, from: :number_from_kv }
             map "series_suffix",
                 with: { to: :series_suffix_to_kv, from: :series_suffix_from_kv }
+            map "series_suffix_spaced",
+                with: { to: :series_suffix_spaced_to_kv,
+                        from: :series_suffix_spaced_from_kv }
             map "subseries",
                 with: { to: :subseries_to_kv, from: :subseries_from_kv }
             map "parts",
                 with: { to: :parts_to_kv, from: :parts_from_kv }
+            map "qualifier",
+                with: { to: :qualifier_to_kv, from: :qualifier_from_kv }
+            map "qualifier_glued",
+                with: { to: :qualifier_glued_to_kv,
+                        from: :qualifier_glued_from_kv }
+            map "series_word", to: :series_word
+            map "series_dash", to: :series_dash
+            map "attachment", to: :attachment
+            map "range_end", to: :range_end
             map "version", to: :version
             map "year",
                 with: { to: :year_to_kv, from: :year_from_kv }

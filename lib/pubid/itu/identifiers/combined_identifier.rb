@@ -33,6 +33,16 @@ module Pubid
                     "number" => d.code&.number.to_s }
             row["subseries"] = d.code.subseries.to_s if d.code&.subseries
             row["parts"] = d.code.parts.map(&:to_s) if d.code&.parts&.any?
+            # Each emitted only when set, so an ordinary joint designation's
+            # row keeps its existing two-key shape.
+            if d.code&.series_suffix
+              row["series_suffix"] = d.code.series_suffix.to_s
+              row["series_suffix_spaced"] = true if d.code.series_suffix_spaced
+            end
+            if d.code&.qualifier
+              row["qualifier"] = d.code.qualifier.to_s
+              row["qualifier_glued"] = true if d.code.qualifier_glued
+            end
             row
           end
 
@@ -48,8 +58,12 @@ module Pubid
               series: Components::Series.new(series: row["series"].to_s),
               code: Components::Code.new(
                 number: row["number"].to_s,
+                series_suffix: row["series_suffix"]&.to_s,
+                series_suffix_spaced: !!row["series_suffix_spaced"],
                 subseries: row["subseries"]&.to_s,
                 parts: Array(row["parts"]).map(&:to_s),
+                qualifier: row["qualifier"]&.to_s,
+                qualifier_glued: !!row["qualifier_glued"],
               ),
             )
           end
@@ -65,15 +79,20 @@ module Pubid
 
           # Add primary series and code
           result += if series
-                      " #{series}.#{code}"
+                      " #{series}#{series_dash ? '-' : '.'}#{code}"
                     else
                       " #{code}"
                     end
+
+          result += "-#{range_end}" if range_end
 
           # Add additional designations
           if combined&.any?
             result += "/#{combined.join('/')}"
           end
+
+          result += " series" if series_word
+          result += " attachment" if attachment
 
           # Add version marker if present — always between code and date
           result += " (V#{version})" if version
@@ -90,6 +109,10 @@ module Pubid
             combined == other.combined &&
             date == other.date &&
             version == other.version &&
+            series_word == other.series_word &&
+            series_dash == other.series_dash &&
+            attachment == other.attachment &&
+            range_end == other.range_end &&
             language == other.language
         end
       end
