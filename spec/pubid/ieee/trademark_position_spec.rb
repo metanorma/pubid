@@ -58,6 +58,97 @@ RSpec.describe "IEEE trademark position" do
     end
   end
 
+  # IEC/IEEE copublished references keep an edition, a colon year or a
+  # "- Redline" tail inside `number`/`parts` rather than in dedicated
+  # attributes. The mark still belongs at the end of the code, not after the
+  # descriptive text. Note the split point varies: "60802 Edition 1" lands in
+  # `number` while "-16 Edition 2" lands in `parts`.
+  {
+    "IEC/IEEE 60076-16 Edition 2.0 2018-09" =>
+      "IEC/IEEE 60076-16™ Edition 2.0 2018-09",
+    "IEC/IEEE 60802 Edition 1.0 2026-06" =>
+      "IEC/IEEE 60802™ Edition 1.0 2026-06",
+    "IEC/IEEE 62582-2:2022 Edition 2.0 2022-11" =>
+      "IEC/IEEE 62582-2™:2022 Edition 2.0 2022-11",
+    "IEC/IEEE 60079-30-1:2025 - Redline" =>
+      "IEC/IEEE 60079-30-1™:2025 - Redline",
+    "IEC/IEEE 60780-323 Edition 1.0 2016-02 - Redline" =>
+      "IEC/IEEE 60780-323™ Edition 1.0 2016-02 - Redline",
+    # A publication year the builder could not peel (a tail follows it) stays
+    # inside the code too; the mark still belongs before it.
+    "IEC/IEEE 62395.1-2024 Redline" => "IEC/IEEE 62395.1™-2024 Redline",
+    # no descriptive tail: the year is a real attribute, mark precedes it
+    "IEC/IEEE 60076-57-129:2017" => "IEC/IEEE 60076-57-129™:2017",
+    # ...and here the builder *did* peel it, so the code never contains it
+    "IEC/IEEE 61588-2021" => "IEC/IEEE 61588™-2021",
+    "IEC/IEEE 61692-6-2021" => "IEC/IEEE 61692-6™-2021",
+    # a part that merely looks like a year (1202) is not a boundary
+    "IEC/IEEE 60076.57-1202" => "IEC/IEEE 60076.57-1202™",
+    # A leading stage word puts the first whitespace *before* the number, so
+    # it must not end the code — the mark falls back to the end instead of
+    # printing "IEC/IEEE FDIS™ 60079-30-2".
+    "IEC/IEEE FDIS 60079-30-2" => "IEC/IEEE FDIS 60079-30-2™",
+    "IEC/IEEE CD P62704-5 ED1" => "IEC/IEEE CD P62704-5™ ED1",
+    "IEC/IEEE TS P61869-105 ED1" => "IEC/IEEE TS P61869-105™ ED1",
+    # ...including a stage word that itself ends in a digit
+    "IEC/IEEE CD2 P62704-5 ED1" => "IEC/IEEE CD2 P62704-5™ ED1",
+    # A glued language marker ends the code; without that the mark would skip
+    # past it and land inside the edition phrase.
+    "IEC/IEEE 62704-1(E) Edition 1.0 2017-05" =>
+      "IEC/IEEE 62704-1™(E) Edition 1.0 2017-05",
+    # the amendment ordinal is not part of the base document's number
+    "IEC/IEEE 80005-1:2019/AMD1:2022" => "IEC/IEEE 80005-1™:2019/AMD1:2022",
+  }.each do |ref, trademarked|
+    context "\"#{ref}\"" do
+      subject(:id) { Pubid::Ieee::Identifier.parse(ref) }
+
+      it "marks the end of the code, not the end of the string" do
+        expect(id.to_s(trademark: true)).to eq(trademarked)
+      end
+
+      it "leaves plain to_s unchanged (default off)" do
+        expect(id.to_s).to eq(ref)
+      end
+    end
+  end
+
+  # The `62271-37-082` rows have been rendered three different ways across this
+  # work; the mark belongs on the *primary* designation, not on the trailing
+  # "Revision of ..." relationship text (which is a separate document's number).
+  # These forms do not round-trip to_s (the outer parentheses are dropped), so
+  # they need their own expectation rather than the table's `to_s == ref` guard.
+  #
+  # The two rows share an expectation because the builder's
+  # `content.split(" (")` swallows the trailing " - Redline" — so the redline
+  # document and its base
+  # collapse onto one `to_s` *and* one `to_hash`. That is a **pre-existing**
+  # data loss of the kind the "Redline suffix — preserve, don't drop" work fixed
+  # for plain standards, unrelated to where the mark sits; asserted here only to
+  # record today's behaviour, not to endorse it.
+  revision_of = "IEC/IEEE 62271-37-082:2012(E) " \
+                "(Revision of IEEE Std C37.082-1982)"
+  revision_of_rendered = [
+    "IEC/IEEE 62271-37-082:2012(E) Revision of IEEE Std C37.082-1982",
+    "IEC/IEEE 62271-37-082™:2012(E) Revision of IEEE Std C37.082-1982",
+  ]
+
+  {
+    revision_of => revision_of_rendered,
+    "#{revision_of} - Redline" => revision_of_rendered,
+  }.each do |ref, (plain, trademarked)|
+    context "\"#{ref}\"" do
+      subject(:id) { Pubid::Ieee::Identifier.parse(ref) }
+
+      it "marks the primary designation, not the revision reference" do
+        expect(id.to_s(trademark: true)).to eq(trademarked)
+      end
+
+      it "leaves plain to_s unchanged (default off)" do
+        expect(id.to_s).to eq(plain)
+      end
+    end
+  end
+
   # These leaves render a document *name* (or end with their code), so the
   # trailing mark already sits at the code boundary — position is unchanged.
   {
