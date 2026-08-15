@@ -1,0 +1,17 @@
+# ITU-R Reports — a publication series that numbers independently of
+# Recommendations, so the leading word is part of the identifier.
+# Byte-exact round-trip forms only; the infix "ITU-R Report BT.2020-1"
+# spelling normalizes to the leading form and lives in report_spec.rb.
+Report ITU-R BT.2020-1
+Report ITU-R BT.2020-1 (2000)
+Report ITU-R BT.2025
+Report ITU-R M.2083-0 (09/2015)
+Report ITU-R M.2134 (2008)
+Report ITU-R P.2145-2 (08/2017)
+Report ITU-R RS.2165 (2009)
+Report ITU-R F.2086-1
+Report ITU-R 2205
+Report ITU-R BT.2020-1-F
+Report ITU-R BT.2020-1 Suppl. 1
+Report ITU-R BT.2020-1 Annex A
+Report ITU-R M.2134 (2008) Cor. 1 (10/2009)

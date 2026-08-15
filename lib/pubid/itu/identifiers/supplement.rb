@@ -75,6 +75,21 @@ module Pubid
           model.series_word = value
         end
 
+        # A supplement carries no `mr_supplement_suffix`, so the shared MR
+        # renderer slugs it FLAT, from the sector/series/code Builder#build_
+        # supplement copied up from its base — which never consults the base's
+        # class. Without this, the supplement of a Report and the supplement of
+        # the same-numbered Recommendation produce one slug (and `to_slug` is an
+        # output filename, so one overwrites the other) — exactly the collision
+        # this type exists to prevent. `root` walks through an intervening annex
+        # or appendix, so a supplement of an annex of a Report is covered too.
+        def mr_type
+          type = super
+          return type unless root.is_a?(Report)
+
+          [type, "report"].compact.join(".")
+        end
+
         # Shared by every supplement type — Suppl./Amd./Cor./Err./Add. differ
         # only in the label, so each subclass supplies its own and nothing else.
         #

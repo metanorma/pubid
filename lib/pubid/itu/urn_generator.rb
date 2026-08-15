@@ -23,6 +23,12 @@ module Pubid
           parts << "itu"
         end
 
+        # An ITU-R Report numbers independently of the Recommendation series,
+        # so "BT.2020-1" alone is ambiguous — the type has to reach the URN as
+        # well as `to_s` and the MR slug, or the two documents share an
+        # identifier on that surface.
+        parts << "report" if identifier.is_a?(Identifiers::Report)
+
         if identifier.series
           series = identifier.series.to_s
           if identifier.code

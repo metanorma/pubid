@@ -16,6 +16,14 @@ module Pubid
         body = strip_namespace(urn)
         parts = split_parts(body)
         sector, code = parts
+
+        # UrnGenerator emits a "report" segment between the sector and the code
+        # for an ITU-R Report, which numbers independently of the
+        # Recommendation series (urn:itu:r:report:BT.2020-1).
+        if parts[1] == "report"
+          return flavor_parse("Report ITU-#{sector.upcase} #{parts[2]}")
+        end
+
         flavor_parse("ITU-#{sector.upcase} #{code}")
       end
     end

@@ -7,6 +7,14 @@ module Pubid
     extend Pubid::PrefixesSupport
 
     # Sole ITU publisher token (see the parser's `itu_prefix` rule).
+    #
+    # The leading "Report" of an ITU-R Report's canonical form
+    # ("Report ITU-R BT.2020-1") is deliberately NOT listed: prefix routing
+    # claims every reference beginning with the token, and "Report" is a
+    # generic English word that other SDOs' references start with — the
+    # mixin's documented exclusion for ambiguous tokens. Report references
+    # route by their "ITU" token in the infix spelling
+    # ("ITU-R Report BT.2020-1"), and `Pubid::Itu.parse` accepts both.
     PREFIXES = ["ITU"].freeze
 
     autoload :Builder, "#{__dir__}/itu/builder"
