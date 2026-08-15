@@ -6,11 +6,25 @@ module Pubid
     class Identifier < ::Pubid::Identifier
       # Parse an ITU identifier string into an identifier object.
       def self.parse(identifier)
-        parsed = Parser.parse(identifier)
+        parsed = Parser.parse(normalize_whitespace(identifier))
         Builder.build(parsed)
       rescue Parslet::ParseFailed => e
         raise "Failed to parse ITU identifier '#{identifier}': #{e.message}"
       end
+
+      # ITU's own listings occasionally carry a doubled space
+      # ("ITU-T D.271  (10/2016)"). Whitespace is never significant in an ITU
+      # identifier, so collapse runs of it rather than teaching every rule to
+      # tolerate them. Any string over the shared input-length guard is left
+      # untouched — `Pubid.parse` rejects it before this point, and the guard
+      # exists precisely to keep long inputs away from regexes.
+      def self.normalize_whitespace(identifier)
+        return identifier unless identifier.is_a?(String)
+        return identifier if identifier.length > ::Pubid::MAX_INPUT_LENGTH
+
+        identifier.gsub(/[[:space:]]+/, " ").strip
+      end
+      private_class_method :normalize_whitespace
 
       # Long-form ↔ ITU single-letter language code map. The parser produces
       # single-letter codes (E/F/S/R/A/C); API callers (e.g. metanorma-itu)
@@ -36,6 +50,28 @@ module Pubid
       # Safe from the number/stage redefinition landmine: ::Pubid::Identifier
       # declares no `version` attribute, so this is a new one, not a retype.
       attribute :version, :string
+      # The literal word "series" of "ITU-T E-100 series Suppl. 1" and
+      # "ITU-T E.1100 series Suppl. 1" — the document is the series group, not
+      # one Recommendation within it. It cannot live inside `series` itself
+      # because it also follows a *dotted* code, where folding it into the
+      # series token would corrupt the value every index row is keyed on.
+      # Named so the common case is the `false` default and stays out of
+      # `to_hash`.
+      attribute :series_word, :boolean, default: -> { false }
+      # A series-code document joins its mnemonic series to its number with a
+      # dash rather than a dot ("ITU-T EMC-5", "ITU-T SEC-QKD"). Keeping the
+      # two halves split — rather than storing "EMC-5" in `series` — is what
+      # keeps `root.number` non-empty for relaton-index. Named for the rare
+      # form, so the dotted majority stays out of `to_hash`.
+      attribute :series_dash, :boolean, default: -> { false }
+      # "ITU-T H.350 attachment (08/2003)" — the machine-readable attachment
+      # of a Recommendation, catalogued as its own record.
+      attribute :attachment, :boolean, default: -> { false }
+      # The upper bound of a Recommendation range published as one document —
+      # "ITU-T Q.120-Q.139 (11/1988)", where this holds "Q.139". A plain string
+      # rather than a structured designation: five legacy records, and the
+      # printed form is the whole of their identity.
+      attribute :range_end, :string
       attribute :common_text_twin, ::Pubid::Identifier
 
       def initialize(**kwargs)
@@ -78,8 +114,11 @@ module Pubid
             imp_marker: value.imp_marker,
             number: value.number,
             series_suffix: value.series_suffix,
+            series_suffix_spaced: value.series_suffix_spaced,
             subseries: value.subseries,
             parts: [],
+            qualifier: value.qualifier,
+            qualifier_glued: value.qualifier_glued,
           )
         end
 
@@ -107,9 +146,24 @@ module Pubid
       def mr_number_with_part
         segments = []
         segments << series&.series&.to_s&.downcase if series&.series
-        segments << code&.number&.to_s if code&.number
+        # The edition word and the qualifier letter are part of the document's
+        # identity, so they must reach the slug: without them "D.200" and
+        # "D.200 R" — and, worse, "Q.2931 B" and "Q.2931 C" — collapse onto
+        # one MR string. They are glued to the number rather than given their
+        # own "-" segment so they read as part of it ("x-50bis", "d-200r").
+        number = code&.number&.to_s
+        if number
+          number += code.series_suffix.to_s if code.series_suffix
+          number += code.qualifier.to_s.downcase if code.qualifier
+          segments << number
+        end
         segments << code&.subseries&.to_s if code&.subseries
         segments.concat(code&.parts&.map(&:to_s) || [])
+        # Same reasoning as the suffixes above, and as the URN generator: these
+        # three distinguish documents that otherwise slug identically.
+        segments << "series" if series_word
+        segments << "attachment" if attachment
+        segments << "to-#{range_end.to_s.downcase.tr('.', '-')}" if range_end
         return nil if segments.empty?
 
         segments.join("-")
@@ -139,12 +193,20 @@ module Pubid
       def render_base(**_opts)
         result = "#{publisher}-#{sector}"
 
-        # Add series and code
-        result += if series
-                    " #{series}.#{code}"
+        # Add series and code. A series with no code is a series GROUP
+        # ("ITU-T G-100 series"); without this branch it rendered a dangling
+        # trailing dot.
+        result += if series && code
+                    " #{series}#{series_dash ? '-' : '.'}#{code}"
+                  elsif series
+                    " #{series}"
                   else
                     " #{code}"
                   end
+
+        result += "-#{range_end}" if range_end
+        result += " series" if series_word
+        result += " attachment" if attachment
 
         # Add version marker if present — always between code and date
         result += " (V#{version})" if version
@@ -193,6 +255,11 @@ module Pubid
           code == other.code &&
           date == other.date &&
           version == other.version &&
+          # "the E.1100 series" is not Recommendation E.1100.
+          series_word == other.series_word &&
+          series_dash == other.series_dash &&
+          attachment == other.attachment &&
+          range_end == other.range_end &&
           language == other.language &&
           common_text_twin == other.common_text_twin
       end
@@ -243,6 +310,37 @@ module Pubid
 
       def series_suffix_from_kv(model, value)
         code_for(model).series_suffix = value.to_s
+      end
+
+      # The three spelling/qualifier fields of Components::Code. The two
+      # booleans emit only when true, so no already-published index row gains
+      # a key; `qualifier` emits only when present.
+      def series_suffix_spaced_to_kv(model, doc)
+        return unless model.code&.series_suffix_spaced
+
+        doc["series_suffix_spaced"] = true
+      end
+
+      def series_suffix_spaced_from_kv(model, value)
+        code_for(model).series_suffix_spaced = value
+      end
+
+      def qualifier_to_kv(model, doc)
+        emit_kv(doc, "qualifier", model.code&.qualifier)
+      end
+
+      def qualifier_from_kv(model, value)
+        code_for(model).qualifier = value.to_s
+      end
+
+      def qualifier_glued_to_kv(model, doc)
+        return unless model.code&.qualifier_glued
+
+        doc["qualifier_glued"] = true
+      end
+
+      def qualifier_glued_from_kv(model, value)
+        code_for(model).qualifier_glued = value
       end
 
       def subseries_to_kv(model, doc)
