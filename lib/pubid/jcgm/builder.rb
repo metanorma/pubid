@@ -82,8 +82,6 @@ module Pubid
           else
             Pubid::Components::Date.new(year: date_str)
           end
-        when :iteration
-          Pubid::Components::Code.new(value: value.to_s)
         when :type_with_stage
           typed_stage = locate_typed_stage(value.to_s)
           {

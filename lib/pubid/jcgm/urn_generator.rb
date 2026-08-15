@@ -97,10 +97,9 @@ module Pubid
             parts << supp_type if supp_type
           end
 
-          iteration = maybe(:iteration)
-          if iteration
-            iter = iteration.to_s
-            parts << iter
+          # The supplement's own number (the "1" in "/Cor 1") — NOT iteration.
+          if identifier.number
+            parts << identifier.number.to_s
           end
 
           if identifier.date&.is_a?(::Pubid::Components::Date) && identifier.date.present?

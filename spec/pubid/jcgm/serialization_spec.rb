@@ -81,7 +81,7 @@ RSpec.describe "JCGM serialization" do
         },
       },
       "JCGM 100:2008/Amd 1:2023" => {
-        "_type" => "pubid:jcgm:amendment", "iteration" => "1", "year" => "2023",
+        "_type" => "pubid:jcgm:amendment", "number" => "1", "year" => "2023",
         "base" => {
           "_type" => "pubid:jcgm:guide", "number" => "100", "year" => "2008"
         }

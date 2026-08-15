@@ -25,7 +25,16 @@ module Pubid
       private
 
       def render_corrigendum(id)
+        # Two surface forms:
+        #   "JCGM 200:2008 Corrigendum"  — number absent (word form)
+        #   "JCGM 101:2008/Cor 1:2009"   — number present (numbered form)
+        return "#{id.base}/Cor #{id.number}#{corrigendum_date_suffix(id)}" if id.number
+
         "#{id.base} Corrigendum"
+      end
+
+      def corrigendum_date_suffix(id)
+        id.date ? ":#{id.date}" : ""
       end
 
       def render_meeting(id)
@@ -43,7 +52,7 @@ module Pubid
       def render_amendment(id, context)
         result = id.base.to_s if id.base
         result += "/Amd"
-        result += " #{id.iteration.render(context:)}" if id.iteration
+        result += " #{id.number.render(context:)}" if id.number
         result += ":#{id.date}" if id.date
         result
       end

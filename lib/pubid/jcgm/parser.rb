@@ -12,7 +12,7 @@ module Pubid
 
       rule(:identifier) do
         meeting_identifier | amendment_identifier | corrigendum_identifier |
-          base | named_guide_identifier
+          numbered_corrigendum_identifier | base | named_guide_identifier
       end
 
       # "JCGM 200:2008 Corrigendum" — a base guide plus a trailing
@@ -24,6 +24,17 @@ module Pubid
       rule(:corrigendum_identifier) do
         base.as(:base) >> space >>
           str("Corrigendum").as(:type_with_stage)
+      end
+
+      # "JCGM 101:2008/Cor 1:2009" — a base guide plus a slash-separated
+      # numbered corrigendum (mirrors the ISO/IEC supplement form). The
+      # trailing :YYYY is optional so "JCGM 101:2008/Cor 1" also parses.
+      # Must precede base for the same PEG-commit reason as corrigendum_identifier.
+      rule(:numbered_corrigendum_identifier) do
+        base.as(:base) >>
+          str("/") >> str("Cor").as(:type_with_stage) >>
+          space >> digits.as(:number) >>
+          corrigendum_date.maybe
       end
 
       # Dateless "named" guides: "JCGM GUM", "JCGM VIM-3" (and future "VIM-N").
@@ -65,7 +76,7 @@ module Pubid
       rule(:amendment_identifier) do
         base.as(:base) >>
           str("/") >> amendment_type >>
-          space >> amendment_number >>
+          space >> digits.as(:number) >>
           amendment_date.maybe
       end
 
@@ -117,10 +128,15 @@ module Pubid
       end
 
       rule(:amendment_number) do
-        digits.as(:iteration)
+        digits.as(:number)
       end
 
       rule(:amendment_date) do
+        str(":") >> (full_date | year_only)
+      end
+
+      # Numbered corrigendum date: same shape as amendment_date.
+      rule(:corrigendum_date) do
         str(":") >> (full_date | year_only)
       end
     end
