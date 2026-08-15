@@ -22,6 +22,16 @@ RSpec.describe "ITU identifier distinctness across rendering surfaces" do
     "series groups" => ["ITU-T E-100 Suppl. 2 (10/1984)", "ITU-T E-300 Suppl. 2 (10/1984)"],
     "appendix material" => ["ITU-T G.726 App. II test vectors (03/1991)", "ITU-T G.726 App. II (03/1991)"],
     "appendix labels" => ["ITU-T G.113 App. I", "ITU-T G.113 App. II"],
+    # Reports and Recommendations number independently, so these are two real,
+    # both-current ITU documents that happen to share a series/number/edition.
+    "report vs recommendation" => ["Report ITU-R BT.2020-1", "ITU-R BT.2020-1"],
+    # A supplement slugs FLAT (no mr_supplement_suffix), from the sector/series/
+    # code copied up from its base — so report-ness has to reach it explicitly.
+    "report supplement" => ["Report ITU-R BT.2020-1 Suppl. 1",
+                            "ITU-R BT.2020-1 Suppl. 1"],
+    "report corrigendum" => ["Report ITU-R M.2134 (2008) Cor. 1 (10/2009)",
+                             "ITU-R M.2134 (2008) Cor. 1 (10/2009)"],
+    "report annex" => ["Report ITU-R BT.2020-1 Annex A", "ITU-R BT.2020-1 Annex A"],
   }.freeze
 
   # These differ only in their SUPPLEMENT TYPE, which the ITU URN convention

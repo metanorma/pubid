@@ -11,6 +11,8 @@ RSpec.describe "Pubid::Itu #root.number" do
     "ITU-R 234-1/7:" => "234",              # numeric question
     "ITU-R P.3/BL/7" => "3",                # letter-series question
     "ITU-R 23.HDB" => "23",                 # handbook
+    "Report ITU-R BT.2020-1 (2000)" => "2020",     # report
+    "Report ITU-R BT.2020-1 Suppl. 1" => "2020",   # supplement -> report base
     "ITU-T G.780/Y.1351" => "780",          # combined (primary)
     "ITU-T E.156 Suppl. 2" => "156",        # supplement -> root is the base
     "ITU-T Z.100 (1999) Cor. 1 (10/2001)" => "100", # corrigendum -> base

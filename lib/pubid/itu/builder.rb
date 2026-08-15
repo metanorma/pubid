@@ -98,7 +98,13 @@ module Pubid
           )
         end
 
-        Identifiers::Recommendation.new(
+        # A Report ("Report ITU-R BT.2020-1") is shaped exactly like a
+        # Recommendation — only the leading word, captured as :report_marker,
+        # tells the two apart, and it has to, because the two series number
+        # independently and the same series/number is two real documents.
+        klass = data[:report_marker] ? Identifiers::Report : Identifiers::Recommendation
+
+        klass.new(
           sector: sector,
           series: series,
           code: code,

@@ -247,8 +247,16 @@ module Pubid
         opts
       end
 
+      # Class-strict, like Supplement#== — the ITU *type* is part of the
+      # identity, not just the sector/series/number. Report ITU-R BT.2020-1 and
+      # Recommendation ITU-R BT.2020-1 are two different, both-current
+      # documents; an `is_a?` guard would make them equal (and `#matches?`
+      # resolve one to the other). Using `self.class` rather than a hard-coded
+      # class keeps the comparison symmetric in both directions, and closes the
+      # same one-way holes that existed against CombinedIdentifier and
+      # SpecialPublication.
       def ==(other)
-        return false unless other.is_a?(Pubid::Itu::Identifier)
+        return false unless other.instance_of?(self.class)
 
         sector == other.sector &&
           series == other.series &&

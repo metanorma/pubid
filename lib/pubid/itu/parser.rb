@@ -334,13 +334,63 @@ module Pubid
 
       rule(:series_code_identifier) { base_series_code >> language.maybe }
 
+      # ITU-R Report — "Report ITU-R BT.2020-1 (2000)". Reports number
+      # independently of Recommendations, so the leading word is the ONLY thing
+      # distinguishing two real, different documents that share a
+      # series/number/edition. It is captured (unlike the decorative
+      # "Recommendation " of `itu_prefix`) so it reaches the built object.
+      rule(:report_word) { str("Report").as(:report_marker) }
+
+      # One body for both the with- and without-series shapes: `(series >> dot)`
+      # backtracks as a unit, so a numeric code ("Report ITU-R 2205") simply
+      # skips it.
+      #
+      # Deliberately NO combined_suffixes: a joint "Report X/Y" would reach
+      # Builder#build's `combined` branch, which builds a CombinedIdentifier and
+      # would silently drop the marker — a clean parse failure is better than a
+      # Report that comes back as a Recommendation. The OB guard mirrors
+      # series_code_body's: an Operational Bulletin is cross-bureau, and
+      # "Report ITU-T OB.1" would otherwise route to SpecialPublication (marker
+      # dropped) or hit validate_ob_no_sector!, whose ArgumentError escapes
+      # Identifier.parse's Parslet::ParseFailed rescue.
+      rule(:report_body) do
+        (str("OB") >> dot).absent? >>
+          (series >> dot).maybe >>
+          code >>
+          range_end.maybe >>
+          code_suffixes >>
+          series_word.maybe >>
+          attachment.maybe >>
+          version_part.maybe >>
+          date_part.maybe
+      end
+
+      # Both spellings ITU and downstream bibliographies use. `to_s` renders
+      # the leading (ITU's own) form for either.
+      rule(:base_report) do
+        (report_word >> space >> itu_prefix >> sector >> space >> report_body) |
+          (itu_prefix >> sector >> space >> report_word >> space >> report_body)
+      end
+
+      # Slot in `rule(:identifier)`: AFTER supplement/annex/appendix (all of
+      # which reach a Report through `base` and match the longer wrapped form
+      # "Report ITU-R BT.2020-1 Suppl. 1"), and BEFORE with_series, which would
+      # match the infix spelling's "ITU-R" prefix and then fail on the
+      # unconsumed " Report ...".
+      rule(:report_identifier) { base_report >> language.maybe }
+
       # base_series_code goes LAST: it cannot shadow base_with_series (which
       # needs series >> dot — "EMC" then "." fails on "-", and the greedy
       # "IMP" of "IMPL" then fails on "L") nor base_without_series (whose code
       # needs digits or "Imp"), so the last slot is both safe and the smallest
       # blast radius.
+      # base_report goes FIRST and is order-free: `itu_prefix` admits only
+      # "Recommendation " or "ITU", and `letter` is [A-Z], so neither `series`
+      # (of base_with_series) nor `series_code_body` can consume the "Report"
+      # token of either spelling. Its presence is what lets a supplement, annex
+      # or appendix wrap a Report.
       rule(:base) do
-        base_with_series | base_without_series | base_series_code
+        base_report | base_with_series | base_without_series | base_series_code
       end
 
       # Annex label — one series letter, optionally a number ("F3") and/or a
@@ -600,6 +650,8 @@ module Pubid
           # (which would match the "ITU-T G.101" prefix and then fail on the
           # unconsumed " App. I").
           appendix_identifier |
+          # Slot reasoning at the rule itself.
+          report_identifier |
           handbook |
           numeric_question |
           letter_question |
