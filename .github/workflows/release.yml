@@ -60,10 +60,40 @@ jobs:
         fi
         echo "Resolved version: $NEW_VERSION"
 
+    # Fail fast with an actionable message instead of an opaque 401 from
+    # gem push: a missing/empty secret resolves to empty credentials.
+    - name: Check RubyGems credentials
+      if: ${{ !inputs.dry_run }}
+      env:
+        RUBYGEMS_API_KEY: ${{ secrets.METANORMA_CI_RUBYGEMS_API_KEY }}
+      run: |
+        if [ -z "$RUBYGEMS_API_KEY" ]; then
+          echo "::error::The METANORMA_CI_RUBYGEMS_API_KEY secret is missing or empty."
+          echo "::error::Set it under pubid organization Settings > Secrets and variables > Actions,"
+          echo "::error::scoped to this repository."
+          exit 1
+        fi
+        echo "RubyGems API key is configured (length: ${#RUBYGEMS_API_KEY})"
+
+    # Fail before any commit/tag/push when the target version is already on
+    # RubyGems (e.g. a 'skip' re-run after a partially completed release).
+    - name: Check version is not already published
+      if: ${{ !inputs.dry_run }}
+      run: |
+        VERSION="${{ steps.version.outputs.value }}"
+        if curl -sf "https://rubygems.org/api/v1/versions/pubid.json" \
+          | jq -e --arg v "$VERSION" '[.[].number] | index($v) != null' > /dev/null; then
+          echo "::error::pubid $VERSION is already published to RubyGems."
+          echo "::error::Bump to a new version instead of re-pushing the same one."
+          exit 1
+        fi
+        echo "pubid $VERSION is not yet published — proceeding."
+
     - name: Commit and tag
       if: ${{ !inputs.dry_run && inputs.next_version != 'skip' }}
       run: |
-        git commit -am "Bump version to ${{ steps.version.outputs.value }}"
+        git commit -am "Bump version to ${{ steps.version.outputs.value }}" \
+          || echo "No version changes to commit"
         git tag "v${{ steps.version.outputs.value }}"
 
     - name: Build gem
@@ -80,7 +110,12 @@ jobs:
         :rubygems_api_key: ${RUBYGEMS_API_KEY}
         EOF
         chmod 0600 ~/.gem/credentials
-        gem push "pubid-${{ steps.version.outputs.value }}.gem"
+        if ! gem push "pubid-${{ steps.version.outputs.value }}.gem"; then
+          echo "::error::gem push failed. A 401 'Invalid credentials' means the API key stored"
+          echo "::error::in METANORMA_CI_RUBYGEMS_API_KEY was revoked or regenerated:"
+          echo "::error::recreate it on rubygems.org (push_rubygem scope) and update the secret."
+          exit 1
+        fi
 
     - name: Push branch and tag
       if: ${{ !inputs.dry_run && inputs.next_version != 'skip' }}
@@ -99,8 +134,7 @@ jobs:
         fi
         gh release create "v${{ steps.version.outputs.value }}" \
           --title "Release v${{ steps.version.outputs.value }}" \
-          --notes "Prerelease of pubid V2 (single-gem layout)." \
-          --target "${{ github.sha }}" \
+          --generate-notes \
           "${FLAGS[@]}"
 
     - name: Dry-run summary
