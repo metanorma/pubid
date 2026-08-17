@@ -1,5 +1,9 @@
 # Releases the root pubid gem to RubyGems and creates a GitHub release.
 # V2 single-gem layout: builds and pushes only ./pubid.gemspec.
+# Pushes to RubyGems authenticate via trusted publishing (GitHub Actions
+# OIDC): publisher configured on rubygems.org for repo pubid/pubid with
+# workflow filename release.yml. No API key secret is used — do not write
+# ~/.gem/credentials in this workflow, its presence would override OIDC.
 name: release
 
 on:
@@ -23,6 +27,7 @@ jobs:
 
     permissions:
       contents: write
+      id-token: write
 
     steps:
     - uses: actions/checkout@v4
@@ -34,6 +39,9 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.3'
+        # gem push only speaks OIDC trusted publishing on RubyGems >= 3.6;
+        # Ruby 3.3 bundles an older RubyGems, so pin the latest explicitly.
+        rubygems: latest
         bundler-cache: true
 
     - name: Configure Git
@@ -60,21 +68,6 @@ jobs:
         fi
         echo "Resolved version: $NEW_VERSION"
 
-    # Fail fast with an actionable message instead of an opaque 401 from
-    # gem push: a missing/empty secret resolves to empty credentials.
-    - name: Check RubyGems credentials
-      if: ${{ !inputs.dry_run }}
-      env:
-        RUBYGEMS_API_KEY: ${{ secrets.METANORMA_CI_RUBYGEMS_API_KEY }}
-      run: |
-        if [ -z "$RUBYGEMS_API_KEY" ]; then
-          echo "::error::The METANORMA_CI_RUBYGEMS_API_KEY secret is missing or empty."
-          echo "::error::Set it under pubid organization Settings > Secrets and variables > Actions,"
-          echo "::error::scoped to this repository."
-          exit 1
-        fi
-        echo "RubyGems API key is configured (length: ${#RUBYGEMS_API_KEY})"
-
     # Fail before any commit/tag/push when the target version is already on
     # RubyGems (e.g. a 'skip' re-run after a partially completed release).
     - name: Check version is not already published
@@ -99,21 +92,16 @@ jobs:
     - name: Build gem
       run: gem build pubid.gemspec
 
+    # Authenticates via OIDC trusted publishing (no credentials file): gem
+    # push mints a token using this job's id-token: write permission.
     - name: Push gem to RubyGems
       if: ${{ !inputs.dry_run }}
-      env:
-        RUBYGEMS_API_KEY: ${{ secrets.METANORMA_CI_RUBYGEMS_API_KEY }}
       run: |
-        mkdir -p ~/.gem
-        cat > ~/.gem/credentials << EOF
-        ---
-        :rubygems_api_key: ${RUBYGEMS_API_KEY}
-        EOF
-        chmod 0600 ~/.gem/credentials
         if ! gem push "pubid-${{ steps.version.outputs.value }}.gem"; then
-          echo "::error::gem push failed. A 401 'Invalid credentials' means the API key stored"
-          echo "::error::in METANORMA_CI_RUBYGEMS_API_KEY was revoked or regenerated:"
-          echo "::error::recreate it on rubygems.org (push_rubygem scope) and update the secret."
+          echo "::error::gem push failed. Pushes authenticate via the RubyGems trusted publisher"
+          echo "::error::for pubid/pubid + release.yml. Verify on rubygems.org that the publisher"
+          echo "::error::matches (repository owner/name, workflow filename, environment), that this"
+          echo "::error::job has id-token: write, and that RubyGems >= 3.6 is installed."
           exit 1
         fi
 
