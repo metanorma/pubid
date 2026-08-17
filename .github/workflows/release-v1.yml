@@ -8,6 +8,11 @@
 # releases the single v2 pubid gem from its own release.yml — keep the two
 # filenames distinct.
 #
+# This file must also exist on the default branch (main) so GitHub lists
+# release-v1 as a dispatchable workflow in the Actions UI; when dispatched
+# with branch v1, the copy on v1 is the one that runs. Keep the two copies
+# identical.
+#
 # Pushes authenticate via trusted publishing (GitHub Actions OIDC): no API
 # key secret is used, and no ~/.gem/credentials may be written in this
 # workflow — a present credentials file would override OIDC.
@@ -35,7 +40,9 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/v1'
+    # v1-stream only: main has no gems/ layout, and the main branch releases
+    # through release.yml instead. Dispatch this workflow with branch = v1.
+    if: github.ref == 'refs/heads/v1'
 
     permissions:
       contents: write
