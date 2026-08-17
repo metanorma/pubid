@@ -1,0 +1,184 @@
+# Releases all v1-stream pubid gems to RubyGems and creates a GitHub release.
+#
+# This is the V1-STREAM release workflow (multi-gem layout under gems/).
+# It is deliberately named release-v1.yml so RubyGems trusted publishers can
+# scope their authorization by workflow filename: publishers for the v1 gems
+# (pubid-core, pubid-iso, ... and the 1.x pubid meta-gem) must be configured
+# for repo pubid/pubid with workflow filename release-v1.yml. The main branch
+# releases the single v2 pubid gem from its own release.yml — keep the two
+# filenames distinct.
+#
+# This file must also exist on the default branch (main) so GitHub lists
+# release-v1 as a dispatchable workflow in the Actions UI; when dispatched
+# with branch v1, the copy on v1 is the one that runs. Keep the two copies
+# identical.
+#
+# Pushes authenticate via trusted publishing (GitHub Actions OIDC): no API
+# key secret is used, and no ~/.gem/credentials may be written in this
+# workflow — a present credentials file would override OIDC.
+name: release-v1
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Version bump type'
+        required: true
+        default: 'patch'
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+          - skip
+      dry_run:
+        description: 'Dry run (do not actually release)'
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    # v1-stream only: main has no gems/ layout, and the main branch releases
+    # through release.yml instead. Dispatch this workflow with branch = v1.
+    if: github.ref == 'refs/heads/v1'
+
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.3'
+        # gem push only speaks OIDC trusted publishing on RubyGems >= 3.6;
+        # Ruby 3.3 bundles an older RubyGems, so pin the latest explicitly.
+        rubygems: latest
+        bundler-cache: true
+
+    - name: Configure Git
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Check version synchronization
+      run: |
+        bundle exec rake version:check
+
+    - name: Bump version
+      if: ${{ inputs.version_type != 'skip' }}
+      run: |
+        bundle exec rake version:bump[${{ inputs.version_type }}]
+        echo "NEW_VERSION=$(bundle exec rake version:show | grep 'Master version:' | cut -d' ' -f3)" >> $GITHUB_ENV
+
+    - name: Get current version (skip mode)
+      if: ${{ inputs.version_type == 'skip' }}
+      run: |
+        echo "NEW_VERSION=$(bundle exec rake version:show | grep 'Master version:' | cut -d' ' -f3)" >> $GITHUB_ENV
+
+    - name: Commit version changes
+      if: ${{ !inputs.dry_run && inputs.version_type != 'skip' }}
+      run: |
+        git commit -am "Bump version to ${{ env.NEW_VERSION }}"
+        git tag "v${{ env.NEW_VERSION }}"
+
+    - name: Build all gems
+      run: |
+        bundle exec rake build:all
+
+    # Authenticates via OIDC trusted publishing (no credentials file): gem
+    # push mints a token using this job's id-token: write permission. A gem
+    # whose version is already published is skipped rather than failed, so a
+    # re-run after a partially completed release can resume the loop.
+    - name: Release gems to RubyGems
+      if: ${{ !inputs.dry_run }}
+      run: |
+        # Validate release order first
+        bundle exec rake release:validate_order
+
+        # Read gems from JSON file in dependency order
+        GEMS=($(jq -r '.release_order[]' release-order.json))
+
+        push_failed=0
+        for gem in "${GEMS[@]}"; do
+          echo "Releasing $gem..."
+          cd "gems/$gem"
+          gem_file=$(ls *.gem | head -1)
+          if [ ! -f "$gem_file" ]; then
+            echo "::error::No gem file found for $gem"
+            exit 1
+          fi
+          if curl -sf "https://rubygems.org/api/v1/versions/$gem.json" \
+            | jq -e --arg v "${NEW_VERSION}" '[.[].number] | index($v) != null' > /dev/null; then
+            echo "↷ $gem ${NEW_VERSION} already published — skipping"
+          elif ! gem push "$gem_file"; then
+            echo "::error::gem push failed for $gem. Pushes authenticate via the RubyGems"
+            echo "::error::trusted publisher for pubid/pubid + release-v1.yml. Verify on"
+            echo "::error::rubygems.org that this gem has a publisher matching this workflow"
+            echo "::error::filename, that the job has id-token: write, and that RubyGems >= 3.6"
+            echo "::error::is installed."
+            push_failed=1
+          else
+            echo "✓ Released $gem"
+          fi
+          cd ../..
+          # Wait a bit between releases to avoid rate limiting
+          sleep 10
+        done
+
+        exit $push_failed
+
+    - name: Push changes and tags
+      if: ${{ !inputs.dry_run && inputs.version_type != 'skip' }}
+      run: |
+        git push origin "HEAD:${{ github.ref_name }}"
+        git push origin "v${{ env.NEW_VERSION }}"
+
+    - name: Generate release body
+      if: ${{ !inputs.dry_run && inputs.version_type != 'skip' }}
+      run: |
+        # Generate release body with gems from JSON file
+        echo "## Release v${{ env.NEW_VERSION }}" > release_body.md
+        echo "" >> release_body.md
+        echo "This release includes all pubid gems synchronized to version ${{ env.NEW_VERSION }}." >> release_body.md
+        echo "" >> release_body.md
+        echo "### Released Gems:" >> release_body.md
+
+        # Read gems from JSON and add to release body
+        jq -r '.release_order[]' release-order.json | while read gem; do
+          echo "- $gem v${{ env.NEW_VERSION }}" >> release_body.md
+        done
+
+    - name: Create GitHub Release
+      if: ${{ !inputs.dry_run && inputs.version_type != 'skip' }}
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: "v${{ env.NEW_VERSION }}"
+        release_name: "Release v${{ env.NEW_VERSION }}"
+        body_path: release_body.md
+        draft: false
+        prerelease: false
+
+    - name: Skip mode summary
+      if: ${{ !inputs.dry_run && inputs.version_type == 'skip' }}
+      run: |
+        echo "## Skip Mode Release Summary"
+        echo "Released gems at current version: ${{ env.NEW_VERSION }}"
+        echo "Skipped: version bump, git commit, git tag, GitHub release"
+        echo "Completed: gem build and gem push to RubyGems"
+
+    - name: Dry run summary
+      if: ${{ inputs.dry_run }}
+      run: |
+        echo "## Dry Run Summary"
+        echo "Would have released version: ${{ env.NEW_VERSION }}"
+        echo "All gems built successfully:"
+        find gems -name "*.gem" -exec basename {} \;
