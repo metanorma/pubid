@@ -1,9 +1,10 @@
 # Releases the root pubid gem to RubyGems and creates a GitHub release.
 # V2 single-gem layout: builds and pushes only ./pubid.gemspec.
-# Pushes to RubyGems authenticate via trusted publishing (GitHub Actions
-# OIDC): publisher configured on rubygems.org for repo pubid/pubid with
-# workflow filename release.yml. No API key secret is used — do not write
-# ~/.gem/credentials in this workflow, its presence would override OIDC.
+# Pushes authenticate via trusted publishing (GitHub Actions OIDC):
+# publisher configured on rubygems.org for repo pubid/pubid with workflow
+# filename release.yml. The exchange is performed by the
+# rubygems/configure-rubygems-credentials step below — plain gem push has no
+# native OIDC support. No long-lived API key secret is used.
 name: release
 
 on:
@@ -39,9 +40,6 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.3'
-        # gem push only speaks OIDC trusted publishing on RubyGems >= 3.6;
-        # Ruby 3.3 bundles an older RubyGems, so pin the latest explicitly.
-        rubygems: latest
         bundler-cache: true
 
     - name: Configure Git
@@ -92,8 +90,12 @@ jobs:
     - name: Build gem
       run: gem build pubid.gemspec
 
-    # Authenticates via OIDC trusted publishing (no credentials file): gem
-    # push mints a token using this job's id-token: write permission.
+    # gem push has no native OIDC support: this step exchanges the job's
+    # OIDC token (via id-token: write) for a short-lived RubyGems API key.
+    - name: Configure RubyGems credentials (trusted publishing)
+      if: ${{ !inputs.dry_run }}
+      uses: rubygems/configure-rubygems-credentials@dc5a8d8553e6ee01fc26761a49e99e733d17954a # v2.1.0
+
     - name: Push gem to RubyGems
       if: ${{ !inputs.dry_run }}
       run: |
@@ -101,7 +103,8 @@ jobs:
           echo "::error::gem push failed. Pushes authenticate via the RubyGems trusted publisher"
           echo "::error::for pubid/pubid + release.yml. Verify on rubygems.org that the publisher"
           echo "::error::matches (repository owner/name, workflow filename, environment), that this"
-          echo "::error::job has id-token: write, and that RubyGems >= 3.6 is installed."
+          echo "::error::job has id-token: write, and that the configure-rubygems-credentials"
+          echo "::error::step above succeeded."
           exit 1
         fi
 
