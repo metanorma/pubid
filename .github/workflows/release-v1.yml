@@ -13,9 +13,10 @@
 # with branch v1, the copy on v1 is the one that runs. Keep the two copies
 # identical.
 #
-# Pushes authenticate via trusted publishing (GitHub Actions OIDC): no API
-# key secret is used, and no ~/.gem/credentials may be written in this
-# workflow — a present credentials file would override OIDC.
+# Pushes authenticate via trusted publishing (GitHub Actions OIDC). The
+# exchange is performed by the rubygems/configure-rubygems-credentials step
+# below — plain gem push has no native OIDC support. No long-lived API key
+# secret is used.
 name: release-v1
 
 on:
@@ -57,9 +58,6 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.3'
-        # gem push only speaks OIDC trusted publishing on RubyGems >= 3.6;
-        # Ruby 3.3 bundles an older RubyGems, so pin the latest explicitly.
-        rubygems: latest
         bundler-cache: true
 
     - name: Configure Git
@@ -92,10 +90,14 @@ jobs:
       run: |
         bundle exec rake build:all
 
-    # Authenticates via OIDC trusted publishing (no credentials file): gem
-    # push mints a token using this job's id-token: write permission. A gem
-    # whose version is already published is skipped rather than failed, so a
-    # re-run after a partially completed release can resume the loop.
+    # gem push has no native OIDC support: this step exchanges the job's
+    # OIDC token (via id-token: write) for a short-lived RubyGems API key.
+    - name: Configure RubyGems credentials (trusted publishing)
+      if: ${{ !inputs.dry_run }}
+      uses: rubygems/configure-rubygems-credentials@dc5a8d8553e6ee01fc26761a49e99e733d17954a # v2.1.0
+
+    # A gem whose version is already published is skipped rather than failed,
+    # so a re-run after a partially completed release can resume the loop.
     - name: Release gems to RubyGems
       if: ${{ !inputs.dry_run }}
       run: |
@@ -121,8 +123,8 @@ jobs:
             echo "::error::gem push failed for $gem. Pushes authenticate via the RubyGems"
             echo "::error::trusted publisher for pubid/pubid + release-v1.yml. Verify on"
             echo "::error::rubygems.org that this gem has a publisher matching this workflow"
-            echo "::error::filename, that the job has id-token: write, and that RubyGems >= 3.6"
-            echo "::error::is installed."
+            echo "::error::filename, that the job has id-token: write, and that the"
+            echo "::error::configure-rubygems-credentials step above succeeded."
             push_failed=1
           else
             echo "✓ Released $gem"
