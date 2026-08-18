@@ -21,7 +21,7 @@ module Pubid
 
       def corpus_flavors
         Dir[File.join(corpus_dir, "*")].select { |path| File.directory?(path) }
-                                       .map { |p| File.basename(p) }
+          .map { |p| File.basename(p) }
       end
 
       def corpus_dir

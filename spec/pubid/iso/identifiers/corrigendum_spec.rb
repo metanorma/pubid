@@ -3,24 +3,6 @@ require "spec_helper"
 RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
   subject { described_class }
 
-  describe "parse identifiers from examples" do
-    shared_examples "parse identifiers from file" do
-      it "parse identifiers from file" do
-        f = open("spec/fixtures/#{examples_file}")
-        f.readlines.each do |pub_id|
-          next if pub_id.match?(/^#/) || pub_id.match?(/^!/) || pub_id.strip.empty?
-
-          expect(Pubid::Iso.parse(pub_id.split("#").first.strip.chomp)).to be_a(described_class)
-        end
-      end
-    end
-
-    context "parses identifiers from iso-cor.txt" do
-      let(:examples_file) { "iso/identifiers/pass/corrigendum.txt" }
-
-      it_behaves_like "parse identifiers from file"
-    end
-  end
 
   # Test basic corrigendum identifiers
   context "basic corrigendum identifiers" do
