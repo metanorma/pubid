@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "yaml"
+require "json"
 
 module Pubid
   # The shared, language-independent conformance corpus (conformance/).
@@ -30,6 +31,18 @@ module Pubid
         when String, Integer, Float, TrueClass, FalseClass, NilClass then value
         else value.to_s
         end
+      end
+
+      # Heuristic PubID styling version per input string. v1 = legacy
+      # "ISO/R 2533/3-1975" forms; v2 = classic dotted/uppercase supplement
+      # spellings ("ISO 9001:2001/AMD.1:2010"); v3 = modern ("Amd 1:2010").
+      # Heuristic until the model exposes its parsed format natively
+      # (TODO.restructure/12).
+      def style_for(input)
+        return "v1" if /\bISO\/R\b|\bISO R\b/.match?(input)
+        return "v2" if /\b(?:Amd|AMD|Cor|COR|Suppl|SUPPL)\.\d/.match?(input)
+
+        "v3"
       end
 
       def component_tree(hash)

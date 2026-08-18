@@ -19,6 +19,7 @@
     human: CISPR 16-1-3:2004/COR1:2006
     urn: urn:iec:std:cispr:16-1-3:2004:::::cor:1:2006
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0002
   input: CISPR 16-1-5:2014/COR1:2020
   identifier:
@@ -39,6 +40,7 @@
     human: CISPR 16-1-5:2014/COR1:2020
     urn: urn:iec:std:cispr:16-1-5:2014:::::cor:1:2020
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0003
   input: CISPR 16-2-1:2014/COR1:2020
   identifier:
@@ -59,6 +61,7 @@
     human: CISPR 16-2-1:2014/COR1:2020
     urn: urn:iec:std:cispr:16-2-1:2014:::::cor:1:2020
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0004
   input: CISPR 16-4-2:2011/AMD2:2018/COR1:2019
   identifier:
@@ -85,6 +88,7 @@
     human: CISPR 16-4-2:2011/AMD2:2018/COR1:2019
     urn: urn:iec:std:cispr:16-4-2:2011:::::amd:2:2018::cor:1:2019
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0005
   input: CISPR 16-4-2:2011/COR1:2013
   identifier:
@@ -105,6 +109,7 @@
     human: CISPR 16-4-2:2011/COR1:2013
     urn: urn:iec:std:cispr:16-4-2:2011:::::cor:1:2013
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0006
   input: IEC 60050-113:2011/COR1:2011
   identifier:
@@ -122,6 +127,7 @@
     human: IEC 60050-113:2011/COR1:2011
     urn: urn:iec:std:iec:60050-113:2011:::::cor:1:2011
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0007
   input: IEC 60050-113:2011/COR1:2011 ED1
   identifier:
@@ -141,6 +147,7 @@
     human: IEC 60050-113:2011/COR1:2011 ED1
     urn: urn:iec:std:iec:60050-113:2011:::::cor:1:2011
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0008
   input: IEC 60050-351:1998/COR1:1999 ED2
   identifier:
@@ -160,6 +167,7 @@
     human: IEC 60050-351:1998/COR1:1999 ED2
     urn: urn:iec:std:iec:60050-351:1998:::::cor:1:1999
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0009
   input: IEC 60050-702:1992/COR1:1992
   identifier:
@@ -177,6 +185,7 @@
     human: IEC 60050-702:1992/COR1:1992
     urn: urn:iec:std:iec:60050-702:1992:::::cor:1:1992
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0010
   input: IEC 60050-702:1992/COR2:1994
   identifier:
@@ -194,6 +203,7 @@
     human: IEC 60050-702:1992/COR2:1994
     urn: urn:iec:std:iec:60050-702:1992:::::cor:2:1994
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0011
   input: IEC 60050-731:1991/COR1:1992
   identifier:
@@ -211,6 +221,7 @@
     human: IEC 60050-731:1991/COR1:1992
     urn: urn:iec:std:iec:60050-731:1991:::::cor:1:1992
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0012
   input: IEC 60094-2:1994/COR1:1995
   identifier:
@@ -228,6 +239,7 @@
     human: IEC 60094-2:1994/COR1:1995
     urn: urn:iec:std:iec:60094-2:1994:::::cor:1:1995
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0013
   input: IEC 60268-17:1990/COR1:1991
   identifier:
@@ -245,6 +257,7 @@
     human: IEC 60268-17:1990/COR1:1991
     urn: urn:iec:std:iec:60268-17:1990:::::cor:1:1991
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0014
   input: IEC 60268-7:2010/COR1:2012
   identifier:
@@ -262,6 +275,7 @@
     human: IEC 60268-7:2010/COR1:2012
     urn: urn:iec:std:iec:60268-7:2010:::::cor:1:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0015
   input: IEC 60287-1-1:1994+AMD1:1995+AMD2:2001 CSV/COR1:2006
   identifier:
@@ -293,6 +307,7 @@
     human: IEC 60287-1-1:1994+AMD1:1995+AMD2:2001 CSV/COR1:2006
     urn: urn:iec:std:iec:60287-1-1:1994::csv::plus:amd:1:1995:plus:amd:2:2001::cor:1:2006
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0016
   input: IEC 60315-1:1988/COR1:1997
   identifier:
@@ -310,6 +325,7 @@
     human: IEC 60315-1:1988/COR1:1997
     urn: urn:iec:std:iec:60315-1:1988:::::cor:1:1997
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0017
   input: IEC 60315-3:1989/COR1:1994
   identifier:
@@ -327,6 +343,7 @@
     human: IEC 60315-3:1989/COR1:1994
     urn: urn:iec:std:iec:60315-3:1989:::::cor:1:1994
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0018
   input: IEC 60315-6:1991/COR1:1997
   identifier:
@@ -344,6 +361,7 @@
     human: IEC 60315-6:1991/COR1:1997
     urn: urn:iec:std:iec:60315-6:1991:::::cor:1:1997
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0019
   input: IEC 60335-1:2001+AMD1:2004 CSV/COR1:2005
   identifier:
@@ -371,6 +389,7 @@
     human: IEC 60335-1:2001+AMD1:2004 CSV/COR1:2005
     urn: urn:iec:std:iec:60335-1:2001::csv::plus:amd:1:2004::cor:1:2005
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0020
   input: IEC 60335-1:2010+AMD1:2013 CSV/COR1:2014
   identifier:
@@ -398,6 +417,7 @@
     human: IEC 60335-1:2010+AMD1:2013 CSV/COR1:2014
     urn: urn:iec:std:iec:60335-1:2010::csv::plus:amd:1:2013::cor:1:2014
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0021
   input: IEC 60335-2-13:2002+AMD1:2004 CSV/COR1:2006
   identifier:
@@ -426,6 +446,7 @@
     human: IEC 60335-2-13:2002+AMD1:2004 CSV/COR1:2006
     urn: urn:iec:std:iec:60335-2-13:2002::csv::plus:amd:1:2004::cor:1:2006
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0022
   input: IEC 60335-2-27:2009+AMD1:2012+AMD2:2015 CSV/COR1:2015
   identifier:
@@ -457,6 +478,7 @@
     human: IEC 60335-2-27:2009+AMD1:2012+AMD2:2015 CSV/COR1:2015
     urn: urn:iec:std:iec:60335-2-27:2009::csv::plus:amd:1:2012:plus:amd:2:2015::cor:1:2015
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0023
   input: IEC 60335-2-35:2002+AMD1:2006 CSV/COR1:2007
   identifier:
@@ -485,6 +507,7 @@
     human: IEC 60335-2-35:2002+AMD1:2006 CSV/COR1:2007
     urn: urn:iec:std:iec:60335-2-35:2002::csv::plus:amd:1:2006::cor:1:2007
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0024
   input: IEC 60335-2-7:2008+AMD1:2011 CSV/COR1:2012
   identifier:
@@ -513,6 +536,7 @@
     human: IEC 60335-2-7:2008+AMD1:2011 CSV/COR1:2012
     urn: urn:iec:std:iec:60335-2-7:2008::csv::plus:amd:1:2011::cor:1:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0025
   input: IEC 60335-2-9:2008+AMD1:2012 CSV/COR1:2013
   identifier:
@@ -541,6 +565,7 @@
     human: IEC 60335-2-9:2008+AMD1:2012 CSV/COR1:2013
     urn: urn:iec:std:iec:60335-2-9:2008::csv::plus:amd:1:2012::cor:1:2013
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0026
   input: IEC 60364-4-41:2005+AMD1:2017 CSV/COR1:2018
   identifier:
@@ -569,6 +594,7 @@
     human: IEC 60364-4-41:2005+AMD1:2017 CSV/COR1:2018
     urn: urn:iec:std:iec:60364-4-41:2005::csv::plus:amd:1:2017::cor:1:2018
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0027
   input: IEC 60529:1989+AMD1:1999 CSV/COR1:2003
   identifier:
@@ -595,6 +621,7 @@
     human: IEC 60529:1989+AMD1:1999 CSV/COR1:2003
     urn: urn:iec:std:iec:60529:1989::csv::plus:amd:1:1999::cor:1:2003
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0028
   input: IEC 60529:1989+AMD1:1999 CSV/COR2:2007
   identifier:
@@ -621,6 +648,7 @@
     human: IEC 60529:1989+AMD1:1999 CSV/COR2:2007
     urn: urn:iec:std:iec:60529:1989::csv::plus:amd:1:1999::cor:2:2007
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0029
   input: IEC 60529:1989+AMD1:1999 CSV/COR3:2009
   identifier:
@@ -647,6 +675,7 @@
     human: IEC 60529:1989+AMD1:1999 CSV/COR3:2009
     urn: urn:iec:std:iec:60529:1989::csv::plus:amd:1:1999::cor:3:2009
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0030
   input: IEC 60529:1989+AMD1:1999+AMD2:2013 CSV/COR1:2013
   identifier:
@@ -676,6 +705,7 @@
     human: IEC 60529:1989+AMD1:1999+AMD2:2013 CSV/COR1:2013
     urn: urn:iec:std:iec:60529:1989::csv::plus:amd:1:1999:plus:amd:2:2013::cor:1:2013
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0031
   input: IEC 60529:1989+AMD1:1999+AMD2:2013 CSV/COR2:2015
   identifier:
@@ -705,6 +735,7 @@
     human: IEC 60529:1989+AMD1:1999+AMD2:2013 CSV/COR2:2015
     urn: urn:iec:std:iec:60529:1989::csv::plus:amd:1:1999:plus:amd:2:2013::cor:2:2015
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0032
   input: IEC 60601-1:2005+AMD1:2012 CSV/COR1:2012
   identifier:
@@ -732,6 +763,7 @@
     human: IEC 60601-1:2005+AMD1:2012 CSV/COR1:2012
     urn: urn:iec:std:iec:60601-1:2005::csv::plus:amd:1:2012::cor:1:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0033
   input: IEC 60664-1:1992+AMD1:2000+AMD2:2002 CSV/COR1:2002
   identifier:
@@ -762,6 +794,7 @@
     human: IEC 60664-1:1992+AMD1:2000+AMD2:2002 CSV/COR1:2002
     urn: urn:iec:std:iec:60664-1:1992::csv::plus:amd:1:2000:plus:amd:2:2002::cor:1:2002
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0034
   input: IEC 60721-3-3:1994+AMD1:1995+AMD2:1996 CSV/COR1:2008
   identifier:
@@ -793,24 +826,8 @@
     human: IEC 60721-3-3:1994+AMD1:1995+AMD2:1996 CSV/COR1:2008
     urn: urn:iec:std:iec:60721-3-3:1994::csv::plus:amd:1:1995:plus:amd:2:1996::cor:1:2008
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0035
-  input: IEC 60728-11:2016/COR1:2016
-  identifier:
-    type: corrigendum
-    components:
-      number: '1'
-      year: '2016'
-    base:
-      type: international_standard
-      components:
-        number: '60728'
-        part: '11'
-        year: '2016'
-  representations:
-    human: IEC 60728-11:2016/COR1:2016
-    urn: urn:iec:std:iec:60728-11:2016:::::cor:1:2016
-  roundtrip: true
-- id: iec.corrigendum.0036
   input: IEC 60728-113:2018/COR1:2018
   identifier:
     type: corrigendum
@@ -827,6 +844,25 @@
     human: IEC 60728-113:2018/COR1:2018
     urn: urn:iec:std:iec:60728-113:2018:::::cor:1:2018
   roundtrip: true
+  style: v3
+- id: iec.corrigendum.0036
+  input: IEC 60728-11:2016/COR1:2016
+  identifier:
+    type: corrigendum
+    components:
+      number: '1'
+      year: '2016'
+    base:
+      type: international_standard
+      components:
+        number: '60728'
+        part: '11'
+        year: '2016'
+  representations:
+    human: IEC 60728-11:2016/COR1:2016
+    urn: urn:iec:std:iec:60728-11:2016:::::cor:1:2016
+  roundtrip: true
+  style: v3
 - id: iec.corrigendum.0037
   input: IEC 60728-13-1:2017/COR1:2017
   identifier:
@@ -845,6 +881,7 @@
     human: IEC 60728-13-1:2017/COR1:2017
     urn: urn:iec:std:iec:60728-13-1:2017:::::cor:1:2017
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0038
   input: IEC 60728-13:2010/COR1:2010
   identifier:
@@ -862,6 +899,7 @@
     human: IEC 60728-13:2010/COR1:2010
     urn: urn:iec:std:iec:60728-13:2010:::::cor:1:2010
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0039
   input: IEC 60730-2-8:2018+AMD1:2021 CSV/COR1:2022
   identifier:
@@ -890,6 +928,7 @@
     human: IEC 60730-2-8:2018+AMD1:2021 CSV/COR1:2022
     urn: urn:iec:std:iec:60730-2-8:2018::csv::plus:amd:1:2021::cor:1:2022
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0040
   input: IEC 60947-1:1999+AMD1:2000+AMD2:2001 CSV/COR1:2002
   identifier:
@@ -920,6 +959,7 @@
     human: IEC 60947-1:1999+AMD1:2000+AMD2:2001 CSV/COR1:2002
     urn: urn:iec:std:iec:60947-1:1999::csv::plus:amd:1:2000:plus:amd:2:2001::cor:1:2002
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0041
   input: IEC 60947-2:2016+AMD1:2019 CSV/COR1:2019
   identifier:
@@ -947,6 +987,7 @@
     human: IEC 60947-2:2016+AMD1:2019 CSV/COR1:2019
     urn: urn:iec:std:iec:60947-2:2016::csv::plus:amd:1:2019::cor:1:2019
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0042
   input: IEC 60947-3:2008+AMD1:2012 CSV/COR1:2012
   identifier:
@@ -974,6 +1015,7 @@
     human: IEC 60947-3:2008+AMD1:2012 CSV/COR1:2012
     urn: urn:iec:std:iec:60947-3:2008::csv::plus:amd:1:2012::cor:1:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0043
   input: IEC 61000-3-2:2005+AMD1:2008+AMD2:2009 CSV/COR1:2009
   identifier:
@@ -1005,6 +1047,7 @@
     human: IEC 61000-3-2:2005+AMD1:2008+AMD2:2009 CSV/COR1:2009
     urn: urn:iec:std:iec:61000-3-2:2005::csv::plus:amd:1:2008:plus:amd:2:2009::cor:1:2009
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0044
   input: IEC 61009-1:2010+AMD1:2012 CSV/COR1:2012
   identifier:
@@ -1032,6 +1075,7 @@
     human: IEC 61009-1:2010+AMD1:2012 CSV/COR1:2012
     urn: urn:iec:std:iec:61009-1:2010::csv::plus:amd:1:2012::cor:1:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0045
   input: IEC 61010-031:2015+AMD1:2018 CSV/COR1:2018
   identifier:
@@ -1059,6 +1103,7 @@
     human: IEC 61010-031:2015+AMD1:2018 CSV/COR1:2018
     urn: urn:iec:std:iec:61010-031:2015::csv::plus:amd:1:2018::cor:1:2018
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0046
   input: IEC 61158-4-7:2007/COR1:2014
   identifier:
@@ -1077,6 +1122,7 @@
     human: IEC 61158-4-7:2007/COR1:2014
     urn: urn:iec:std:iec:61158-4-7:2007:::::cor:1:2014
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0047
   input: IEC 61237-3:1995/COR1:1995
   identifier:
@@ -1094,25 +1140,8 @@
     human: IEC 61237-3:1995/COR1:1995
     urn: urn:iec:std:iec:61237-3:1995:::::cor:1:1995
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0048
-  input: IEC 61300-2-1:2009/COR1:2010
-  identifier:
-    type: corrigendum
-    components:
-      number: '1'
-      year: '2010'
-    base:
-      type: international_standard
-      components:
-        number: '61300'
-        part: '2'
-        subpart: '1'
-        year: '2009'
-  representations:
-    human: IEC 61300-2-1:2009/COR1:2010
-    urn: urn:iec:std:iec:61300-2-1:2009:::::cor:1:2010
-  roundtrip: true
-- id: iec.corrigendum.0049
   input: IEC 61300-2-12:2009/COR1:2011
   identifier:
     type: corrigendum
@@ -1130,7 +1159,8 @@
     human: IEC 61300-2-12:2009/COR1:2011
     urn: urn:iec:std:iec:61300-2-12:2009:::::cor:1:2011
   roundtrip: true
-- id: iec.corrigendum.0050
+  style: v3
+- id: iec.corrigendum.0049
   input: IEC 61300-2-19:2012/COR1:2020
   identifier:
     type: corrigendum
@@ -1148,6 +1178,26 @@
     human: IEC 61300-2-19:2012/COR1:2020
     urn: urn:iec:std:iec:61300-2-19:2012:::::cor:1:2020
   roundtrip: true
+  style: v3
+- id: iec.corrigendum.0050
+  input: IEC 61300-2-1:2009/COR1:2010
+  identifier:
+    type: corrigendum
+    components:
+      number: '1'
+      year: '2010'
+    base:
+      type: international_standard
+      components:
+        number: '61300'
+        part: '2'
+        subpart: '1'
+        year: '2009'
+  representations:
+    human: IEC 61300-2-1:2009/COR1:2010
+    urn: urn:iec:std:iec:61300-2-1:2009:::::cor:1:2010
+  roundtrip: true
+  style: v3
 - id: iec.corrigendum.0051
   input: IEC 61300-2-28:2013/COR1:2013
   identifier:
@@ -1166,6 +1216,7 @@
     human: IEC 61300-2-28:2013/COR1:2013
     urn: urn:iec:std:iec:61300-2-28:2013:::::cor:1:2013
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0052
   input: IEC 61300-2-46:2019/COR1:2022
   identifier:
@@ -1184,6 +1235,7 @@
     human: IEC 61300-2-46:2019/COR1:2022
     urn: urn:iec:std:iec:61300-2-46:2019:::::cor:1:2022
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0053
   input: IEC 61300-2-50:2007/COR1:2015
   identifier:
@@ -1202,6 +1254,7 @@
     human: IEC 61300-2-50:2007/COR1:2015
     urn: urn:iec:std:iec:61300-2-50:2007:::::cor:1:2015
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0054
   input: IEC 61300-2-51:2007/COR1:2015
   identifier:
@@ -1220,6 +1273,7 @@
     human: IEC 61300-2-51:2007/COR1:2015
     urn: urn:iec:std:iec:61300-2-51:2007:::::cor:1:2015
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0055
   input: IEC 61300-3-50:2013/COR1:2015
   identifier:
@@ -1238,6 +1292,7 @@
     human: IEC 61300-3-50:2013/COR1:2015
     urn: urn:iec:std:iec:61300-3-50:2013:::::cor:1:2015
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0056
   input: IEC 61300-3-50:2013/COR2:2015
   identifier:
@@ -1256,6 +1311,7 @@
     human: IEC 61300-3-50:2013/COR2:2015
     urn: urn:iec:std:iec:61300-3-50:2013:::::cor:2:2015
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0057
   input: IEC 61400-1:2005+AMD1:2010 CSV/COR1:2016
   identifier:
@@ -1283,6 +1339,7 @@
     human: IEC 61400-1:2005+AMD1:2010 CSV/COR1:2016
     urn: urn:iec:std:iec:61400-1:2005::csv::plus:amd:1:2010::cor:1:2016
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0058
   input: IEC 61481:2001+AMD1:2002 CSV/COR1:2002
   identifier:
@@ -1309,6 +1366,7 @@
     human: IEC 61481:2001+AMD1:2002 CSV/COR1:2002
     urn: urn:iec:std:iec:61481:2001::csv::plus:amd:1:2002::cor:1:2002
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0059
   input: IEC 61603-1:1997/COR1:1997
   identifier:
@@ -1326,6 +1384,7 @@
     human: IEC 61603-1:1997/COR1:1997
     urn: urn:iec:std:iec:61603-1:1997:::::cor:1:1997
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0060
   input: IEC 61643-1:1998+AMD1:2001 CSV/COR1:2003
   identifier:
@@ -1353,6 +1412,7 @@
     human: IEC 61643-1:1998+AMD1:2001 CSV/COR1:2003
     urn: urn:iec:std:iec:61643-1:1998::csv::plus:amd:1:2001::cor:1:2003
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0061
   input: IEC 61753-084-2:2007/COR1:2008
   identifier:
@@ -1371,6 +1431,7 @@
     human: IEC 61753-084-2:2007/COR1:2008
     urn: urn:iec:std:iec:61753-084-2:2007:::::cor:1:2008
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0062
   input: IEC 61753-1:2018/COR1:2019
   identifier:
@@ -1388,6 +1449,7 @@
     human: IEC 61753-1:2018/COR1:2019
     urn: urn:iec:std:iec:61753-1:2018:::::cor:1:2019
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0063
   input: IEC 61754-15:2009/COR1:2014
   identifier:
@@ -1405,6 +1467,7 @@
     human: IEC 61754-15:2009/COR1:2014
     urn: urn:iec:std:iec:61754-15:2009:::::cor:1:2014
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0064
   input: IEC 61755-3-1:2006/COR1:2009
   identifier:
@@ -1423,6 +1486,7 @@
     human: IEC 61755-3-1:2006/COR1:2009
     urn: urn:iec:std:iec:61755-3-1:2006:::::cor:1:2009
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0065
   input: IEC 61755-3-2:2006/COR1:2009
   identifier:
@@ -1441,6 +1505,7 @@
     human: IEC 61755-3-2:2006/COR1:2009
     urn: urn:iec:std:iec:61755-3-2:2006:::::cor:1:2009
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0066
   input: IEC 61834-10:2001/COR1:2001
   identifier:
@@ -1458,6 +1523,7 @@
     human: IEC 61834-10:2001/COR1:2001
     urn: urn:iec:std:iec:61834-10:2001:::::cor:1:2001
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0067
   input: IEC 61937-4:2003/COR1:2004
   identifier:
@@ -1475,6 +1541,7 @@
     human: IEC 61937-4:2003/COR1:2004
     urn: urn:iec:std:iec:61937-4:2003:::::cor:1:2004
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0068
   input: IEC 61966-2-1:1999/COR1:2014
   identifier:
@@ -1493,6 +1560,7 @@
     human: IEC 61966-2-1:1999/COR1:2014
     urn: urn:iec:std:iec:61966-2-1:1999:::::cor:1:2014
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0069
   input: IEC 61966-2-2:2003/COR1:2003
   identifier:
@@ -1511,6 +1579,7 @@
     human: IEC 61966-2-2:2003/COR1:2003
     urn: urn:iec:std:iec:61966-2-2:2003:::::cor:1:2003
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0070
   input: IEC 61966-2-4:2006/COR1:2006
   identifier:
@@ -1529,6 +1598,7 @@
     human: IEC 61966-2-4:2006/COR1:2006
     urn: urn:iec:std:iec:61966-2-4:2006:::::cor:1:2006
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0071
   input: IEC 62002-1:2008/COR1:2008
   identifier:
@@ -1546,6 +1616,7 @@
     human: IEC 62002-1:2008/COR1:2008
     urn: urn:iec:std:iec:62002-1:2008:::::cor:1:2008
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0072
   input: IEC 62023:2011/COR1:2012
   identifier:
@@ -1562,6 +1633,7 @@
     human: IEC 62023:2011/COR1:2012
     urn: urn:iec:std:iec:62023:2011:::::cor:1:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0073
   input: IEC 62061:2005+AMD1:2012+AMD2:2015 CSV/COR1:2015
   identifier:
@@ -1591,6 +1663,7 @@
     human: IEC 62061:2005+AMD1:2012+AMD2:2015 CSV/COR1:2015
     urn: urn:iec:std:iec:62061:2005::csv::plus:amd:1:2012:plus:amd:2:2015::cor:1:2015
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0074
   input: IEC 62439-7:2011/COR1:2015
   identifier:
@@ -1608,6 +1681,7 @@
     human: IEC 62439-7:2011/COR1:2015
     urn: urn:iec:std:iec:62439-7:2011:::::cor:1:2015
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0075
   input: IEC 62443-2-4:2015/COR1:2015
   identifier:
@@ -1626,6 +1700,7 @@
     human: IEC 62443-2-4:2015/COR1:2015
     urn: urn:iec:std:iec:62443-2-4:2015:::::cor:1:2015
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0076
   input: IEC 62443-3-3:2013/COR1:2014
   identifier:
@@ -1644,6 +1719,7 @@
     human: IEC 62443-3-3:2013/COR1:2014
     urn: urn:iec:std:iec:62443-3-3:2013:::::cor:1:2014
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0077
   input: IEC 62459:2010/COR1:2015
   identifier:
@@ -1660,6 +1736,7 @@
     human: IEC 62459:2010/COR1:2015
     urn: urn:iec:std:iec:62459:2010:::::cor:1:2015
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0078
   input: IEC 62591:2016/COR1:2021
   identifier:
@@ -1676,6 +1753,7 @@
     human: IEC 62591:2016/COR1:2021
     urn: urn:iec:std:iec:62591:2016:::::cor:1:2021
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0079
   input: IEC 62601:2015/COR1:2021
   identifier:
@@ -1692,6 +1770,7 @@
     human: IEC 62601:2015/COR1:2021
     urn: urn:iec:std:iec:62601:2015:::::cor:1:2021
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0080
   input: IEC 62702-1-1:2016/COR1:2018
   identifier:
@@ -1710,6 +1789,7 @@
     human: IEC 62702-1-1:2016/COR1:2018
     urn: urn:iec:std:iec:62702-1-1:2016:::::cor:1:2018
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0081
   input: IEC 62881:2018/COR1:2019
   identifier:
@@ -1726,6 +1806,7 @@
     human: IEC 62881:2018/COR1:2019
     urn: urn:iec:std:iec:62881:2018:::::cor:1:2019
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0082
   input: IEC 62948:2017/COR1:2021
   identifier:
@@ -1742,6 +1823,7 @@
     human: IEC 62948:2017/COR1:2021
     urn: urn:iec:std:iec:62948:2017:::::cor:1:2021
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0083
   input: IEC 63029:2017/COR1:2018
   identifier:
@@ -1758,6 +1840,7 @@
     human: IEC 63029:2017/COR1:2018
     urn: urn:iec:std:iec:63029:2017:::::cor:1:2018
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0084
   input: IEC 82045-2:2004/COR1:2014
   identifier:
@@ -1775,6 +1858,7 @@
     human: IEC 82045-2:2004/COR1:2014
     urn: urn:iec:std:iec:82045-2:2004:::::cor:1:2014
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0085
   input: IEC TR 61602:1996/COR1:2008
   identifier:
@@ -1791,6 +1875,7 @@
     human: IEC TR 61602:1996/COR1:2008
     urn: urn:iec:std:iec:61602:1996:tr::::cor:1:2008
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0086
   input: ISO/IEC 10918-1:1994/COR1:2005
   identifier:
@@ -1814,6 +1899,7 @@
     human: ISO/IEC 10918-1:1994/COR1:2005
     urn: urn:iec:std:iso-iec:10918-1:1994:::::cor:1:2005
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0087
   input: ISO/IEC 11172-1:1993/COR1:1996
   identifier:
@@ -1837,6 +1923,7 @@
     human: ISO/IEC 11172-1:1993/COR1:1996
     urn: urn:iec:std:iso-iec:11172-1:1993:::::cor:1:1996
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0088
   input: ISO/IEC 11172-1:1993/COR2:1999
   identifier:
@@ -1860,6 +1947,7 @@
     human: ISO/IEC 11172-1:1993/COR2:1999
     urn: urn:iec:std:iso-iec:11172-1:1993:::::cor:2:1999
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0089
   input: ISO/IEC 11172-2:1993/COR1:1996
   identifier:
@@ -1883,6 +1971,7 @@
     human: ISO/IEC 11172-2:1993/COR1:1996
     urn: urn:iec:std:iso-iec:11172-2:1993:::::cor:1:1996
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0090
   input: ISO/IEC 11172-2:1993/COR2:1999
   identifier:
@@ -1906,6 +1995,7 @@
     human: ISO/IEC 11172-2:1993/COR2:1999
     urn: urn:iec:std:iso-iec:11172-2:1993:::::cor:2:1999
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0091
   input: ISO/IEC 11172-2:1993/COR3:2003
   identifier:
@@ -1929,6 +2019,7 @@
     human: ISO/IEC 11172-2:1993/COR3:2003
     urn: urn:iec:std:iso-iec:11172-2:1993:::::cor:3:2003
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0092
   input: ISO/IEC 11172-2:1993/COR4:2006
   identifier:
@@ -1952,6 +2043,7 @@
     human: ISO/IEC 11172-2:1993/COR4:2006
     urn: urn:iec:std:iso-iec:11172-2:1993:::::cor:4:2006
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0093
   input: ISO/IEC 11172-3:1993/COR1:1996
   identifier:
@@ -1975,6 +2067,7 @@
     human: ISO/IEC 11172-3:1993/COR1:1996
     urn: urn:iec:std:iso-iec:11172-3:1993:::::cor:1:1996
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0094
   input: ISO/IEC 11172-4:1995/COR1:2007
   identifier:
@@ -1998,6 +2091,7 @@
     human: ISO/IEC 11172-4:1995/COR1:2007
     urn: urn:iec:std:iso-iec:11172-4:1995:::::cor:1:2007
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0095
   input: ISO/IEC 11544:1993/COR1:1995
   identifier:
@@ -2020,6 +2114,7 @@
     human: ISO/IEC 11544:1993/COR1:1995
     urn: urn:iec:std:iso-iec:11544:1993:::::cor:1:1995
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0096
   input: ISO/IEC 11544:1993/COR2:2001
   identifier:
@@ -2042,6 +2137,7 @@
     human: ISO/IEC 11544:1993/COR2:2001
     urn: urn:iec:std:iso-iec:11544:1993:::::cor:2:2001
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0097
   input: ISO/IEC 13522-5:1997/COR1:1999
   identifier:
@@ -2065,6 +2161,7 @@
     human: ISO/IEC 13522-5:1997/COR1:1999
     urn: urn:iec:std:iso-iec:13522-5:1997:::::cor:1:1999
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0098
   input: ISO/IEC 13818-1:2019/COR1:2020
   identifier:
@@ -2088,6 +2185,7 @@
     human: ISO/IEC 13818-1:2019/COR1:2020
     urn: urn:iec:std:iso-iec:13818-1:2019:::::cor:1:2020
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0099
   input: ISO/IEC 13818-4:2004/AMD2:2005/COR1:2007
   identifier:
@@ -2119,6 +2217,7 @@
     human: ISO/IEC 13818-4:2004/AMD2:2005/COR1:2007
     urn: urn:iec:std:iso-iec:13818-4:2004:::::amd:2:2005::cor:1:2007
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0100
   input: ISO/IEC 13818-4:2004/AMD2:2005/COR2:2009
   identifier:
@@ -2150,6 +2249,7 @@
     human: ISO/IEC 13818-4:2004/AMD2:2005/COR2:2009
     urn: urn:iec:std:iso-iec:13818-4:2004:::::amd:2:2005::cor:2:2009
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0101
   input: ISO/IEC 13818-4:2004/COR1:2007
   identifier:
@@ -2173,6 +2273,7 @@
     human: ISO/IEC 13818-4:2004/COR1:2007
     urn: urn:iec:std:iso-iec:13818-4:2004:::::cor:1:2007
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0102
   input: ISO/IEC 13818-4:2004/COR2:2011
   identifier:
@@ -2196,6 +2297,7 @@
     human: ISO/IEC 13818-4:2004/COR2:2011
     urn: urn:iec:std:iso-iec:13818-4:2004:::::cor:2:2011
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0103
   input: ISO/IEC 13818-4:2004/COR3:2012
   identifier:
@@ -2219,6 +2321,7 @@
     human: ISO/IEC 13818-4:2004/COR3:2012
     urn: urn:iec:std:iso-iec:13818-4:2004:::::cor:3:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0104
   input: ISO/IEC 13818-6:1998/AMD1:2000/COR1:2002
   identifier:
@@ -2250,6 +2353,7 @@
     human: ISO/IEC 13818-6:1998/AMD1:2000/COR1:2002
     urn: urn:iec:std:iso-iec:13818-6:1998:::::amd:1:2000::cor:1:2002
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0105
   input: ISO/IEC 13818-6:1998/COR1:1999
   identifier:
@@ -2273,6 +2377,7 @@
     human: ISO/IEC 13818-6:1998/COR1:1999
     urn: urn:iec:std:iso-iec:13818-6:1998:::::cor:1:1999
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0106
   input: ISO/IEC 13818-6:1998/COR2:2002
   identifier:
@@ -2296,6 +2401,7 @@
     human: ISO/IEC 13818-6:1998/COR2:2002
     urn: urn:iec:std:iso-iec:13818-6:1998:::::cor:2:2002
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0107
   input: ISO/IEC 13818-7:2006/COR1:2009
   identifier:
@@ -2319,6 +2425,7 @@
     human: ISO/IEC 13818-7:2006/COR1:2009
     urn: urn:iec:std:iso-iec:13818-7:2006:::::cor:1:2009
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0108
   input: ISO/IEC 13818-7:2006/COR2:2010
   identifier:
@@ -2342,6 +2449,7 @@
     human: ISO/IEC 13818-7:2006/COR2:2010
     urn: urn:iec:std:iso-iec:13818-7:2006:::::cor:2:2010
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0109
   input: ISO/IEC 14496-16:2011/COR1:2015
   identifier:
@@ -2365,6 +2473,7 @@
     human: ISO/IEC 14496-16:2011/COR1:2015
     urn: urn:iec:std:iso-iec:14496-16:2011:::::cor:1:2015
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0110
   input: ISO/IEC 14496-18:2004/COR1:2007
   identifier:
@@ -2388,153 +2497,8 @@
     human: ISO/IEC 14496-18:2004/COR1:2007
     urn: urn:iec:std:iso-iec:14496-18:2004:::::cor:1:2007
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0111
-  input: ISO/IEC 14496-2:2004/AMD3:2007/COR1:2008
-  identifier:
-    type: corrigendum
-    components:
-      number: '1'
-      year: '2008'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: amendment
-      components:
-        number: '3'
-        year: '2007'
-        publisher: ISO
-        copublishers:
-        - IEC
-      base:
-        type: international_standard
-        components:
-          number: '14496'
-          part: '2'
-          year: '2004'
-          publisher: ISO
-          copublishers:
-          - IEC
-  representations:
-    human: ISO/IEC 14496-2:2004/AMD3:2007/COR1:2008
-    urn: urn:iec:std:iso-iec:14496-2:2004:::::amd:3:2007::cor:1:2008
-  roundtrip: true
-- id: iec.corrigendum.0112
-  input: ISO/IEC 14496-2:2004/COR1:2004
-  identifier:
-    type: corrigendum
-    components:
-      number: '1'
-      year: '2004'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: international_standard
-      components:
-        number: '14496'
-        part: '2'
-        year: '2004'
-        publisher: ISO
-        copublishers:
-        - IEC
-  representations:
-    human: ISO/IEC 14496-2:2004/COR1:2004
-    urn: urn:iec:std:iso-iec:14496-2:2004:::::cor:1:2004
-  roundtrip: true
-- id: iec.corrigendum.0113
-  input: ISO/IEC 14496-2:2004/COR2:2007
-  identifier:
-    type: corrigendum
-    components:
-      number: '2'
-      year: '2007'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: international_standard
-      components:
-        number: '14496'
-        part: '2'
-        year: '2004'
-        publisher: ISO
-        copublishers:
-        - IEC
-  representations:
-    human: ISO/IEC 14496-2:2004/COR2:2007
-    urn: urn:iec:std:iso-iec:14496-2:2004:::::cor:2:2007
-  roundtrip: true
-- id: iec.corrigendum.0114
-  input: ISO/IEC 14496-2:2004/COR3:2008
-  identifier:
-    type: corrigendum
-    components:
-      number: '3'
-      year: '2008'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: international_standard
-      components:
-        number: '14496'
-        part: '2'
-        year: '2004'
-        publisher: ISO
-        copublishers:
-        - IEC
-  representations:
-    human: ISO/IEC 14496-2:2004/COR3:2008
-    urn: urn:iec:std:iso-iec:14496-2:2004:::::cor:3:2008
-  roundtrip: true
-- id: iec.corrigendum.0115
-  input: ISO/IEC 14496-2:2004/COR4:2010
-  identifier:
-    type: corrigendum
-    components:
-      number: '4'
-      year: '2010'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: international_standard
-      components:
-        number: '14496'
-        part: '2'
-        year: '2004'
-        publisher: ISO
-        copublishers:
-        - IEC
-  representations:
-    human: ISO/IEC 14496-2:2004/COR4:2010
-    urn: urn:iec:std:iso-iec:14496-2:2004:::::cor:4:2010
-  roundtrip: true
-- id: iec.corrigendum.0116
-  input: ISO/IEC 14496-2:2004/COR5:2013
-  identifier:
-    type: corrigendum
-    components:
-      number: '5'
-      year: '2013'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: international_standard
-      components:
-        number: '14496'
-        part: '2'
-        year: '2004'
-        publisher: ISO
-        copublishers:
-        - IEC
-  representations:
-    human: ISO/IEC 14496-2:2004/COR5:2013
-    urn: urn:iec:std:iso-iec:14496-2:2004:::::cor:5:2013
-  roundtrip: true
-- id: iec.corrigendum.0117
   input: ISO/IEC 14496-20:2008/COR1:2010
   identifier:
     type: corrigendum
@@ -2557,7 +2521,8 @@
     human: ISO/IEC 14496-20:2008/COR1:2010
     urn: urn:iec:std:iso-iec:14496-20:2008:::::cor:1:2010
   roundtrip: true
-- id: iec.corrigendum.0118
+  style: v3
+- id: iec.corrigendum.0112
   input: ISO/IEC 14496-21:2006/COR1:2007
   identifier:
     type: corrigendum
@@ -2580,7 +2545,8 @@
     human: ISO/IEC 14496-21:2006/COR1:2007
     urn: urn:iec:std:iso-iec:14496-21:2006:::::cor:1:2007
   roundtrip: true
-- id: iec.corrigendum.0119
+  style: v3
+- id: iec.corrigendum.0113
   input: ISO/IEC 14496-26:2010/COR2:2011
   identifier:
     type: corrigendum
@@ -2603,7 +2569,8 @@
     human: ISO/IEC 14496-26:2010/COR2:2011
     urn: urn:iec:std:iso-iec:14496-26:2010:::::cor:2:2011
   roundtrip: true
-- id: iec.corrigendum.0120
+  style: v3
+- id: iec.corrigendum.0114
   input: ISO/IEC 14496-26:2010/COR3:2011
   identifier:
     type: corrigendum
@@ -2626,7 +2593,8 @@
     human: ISO/IEC 14496-26:2010/COR3:2011
     urn: urn:iec:std:iso-iec:14496-26:2010:::::cor:3:2011
   roundtrip: true
-- id: iec.corrigendum.0121
+  style: v3
+- id: iec.corrigendum.0115
   input: ISO/IEC 14496-26:2010/COR4:2011
   identifier:
     type: corrigendum
@@ -2649,7 +2617,8 @@
     human: ISO/IEC 14496-26:2010/COR4:2011
     urn: urn:iec:std:iso-iec:14496-26:2010:::::cor:4:2011
   roundtrip: true
-- id: iec.corrigendum.0122
+  style: v3
+- id: iec.corrigendum.0116
   input: ISO/IEC 14496-26:2010/COR5:2012
   identifier:
     type: corrigendum
@@ -2672,7 +2641,8 @@
     human: ISO/IEC 14496-26:2010/COR5:2012
     urn: urn:iec:std:iso-iec:14496-26:2010:::::cor:5:2012
   roundtrip: true
-- id: iec.corrigendum.0123
+  style: v3
+- id: iec.corrigendum.0117
   input: ISO/IEC 14496-26:2010/COR6:2013
   identifier:
     type: corrigendum
@@ -2695,7 +2665,8 @@
     human: ISO/IEC 14496-26:2010/COR6:2013
     urn: urn:iec:std:iso-iec:14496-26:2010:::::cor:6:2013
   roundtrip: true
-- id: iec.corrigendum.0124
+  style: v3
+- id: iec.corrigendum.0118
   input: ISO/IEC 14496-26:2010/COR7:2013
   identifier:
     type: corrigendum
@@ -2718,7 +2689,8 @@
     human: ISO/IEC 14496-26:2010/COR7:2013
     urn: urn:iec:std:iso-iec:14496-26:2010:::::cor:7:2013
   roundtrip: true
-- id: iec.corrigendum.0125
+  style: v3
+- id: iec.corrigendum.0119
   input: ISO/IEC 14496-26:2010/COR8:2015
   identifier:
     type: corrigendum
@@ -2741,7 +2713,8 @@
     human: ISO/IEC 14496-26:2010/COR8:2015
     urn: urn:iec:std:iso-iec:14496-26:2010:::::cor:8:2015
   roundtrip: true
-- id: iec.corrigendum.0126
+  style: v3
+- id: iec.corrigendum.0120
   input: ISO/IEC 14496-27:2009/AMD2:2011/COR1:2015
   identifier:
     type: corrigendum
@@ -2772,7 +2745,8 @@
     human: ISO/IEC 14496-27:2009/AMD2:2011/COR1:2015
     urn: urn:iec:std:iso-iec:14496-27:2009:::::amd:2:2011::cor:1:2015
   roundtrip: true
-- id: iec.corrigendum.0127
+  style: v3
+- id: iec.corrigendum.0121
   input: ISO/IEC 14496-28:2012/COR1:2013
   identifier:
     type: corrigendum
@@ -2795,7 +2769,8 @@
     human: ISO/IEC 14496-28:2012/COR1:2013
     urn: urn:iec:std:iso-iec:14496-28:2012:::::cor:1:2013
   roundtrip: true
-- id: iec.corrigendum.0128
+  style: v3
+- id: iec.corrigendum.0122
   input: ISO/IEC 14496-28:2012/COR2:2014
   identifier:
     type: corrigendum
@@ -2818,6 +2793,159 @@
     human: ISO/IEC 14496-28:2012/COR2:2014
     urn: urn:iec:std:iso-iec:14496-28:2012:::::cor:2:2014
   roundtrip: true
+  style: v3
+- id: iec.corrigendum.0123
+  input: ISO/IEC 14496-2:2004/AMD3:2007/COR1:2008
+  identifier:
+    type: corrigendum
+    components:
+      number: '1'
+      year: '2008'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: amendment
+      components:
+        number: '3'
+        year: '2007'
+        publisher: ISO
+        copublishers:
+        - IEC
+      base:
+        type: international_standard
+        components:
+          number: '14496'
+          part: '2'
+          year: '2004'
+          publisher: ISO
+          copublishers:
+          - IEC
+  representations:
+    human: ISO/IEC 14496-2:2004/AMD3:2007/COR1:2008
+    urn: urn:iec:std:iso-iec:14496-2:2004:::::amd:3:2007::cor:1:2008
+  roundtrip: true
+  style: v3
+- id: iec.corrigendum.0124
+  input: ISO/IEC 14496-2:2004/COR1:2004
+  identifier:
+    type: corrigendum
+    components:
+      number: '1'
+      year: '2004'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: international_standard
+      components:
+        number: '14496'
+        part: '2'
+        year: '2004'
+        publisher: ISO
+        copublishers:
+        - IEC
+  representations:
+    human: ISO/IEC 14496-2:2004/COR1:2004
+    urn: urn:iec:std:iso-iec:14496-2:2004:::::cor:1:2004
+  roundtrip: true
+  style: v3
+- id: iec.corrigendum.0125
+  input: ISO/IEC 14496-2:2004/COR2:2007
+  identifier:
+    type: corrigendum
+    components:
+      number: '2'
+      year: '2007'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: international_standard
+      components:
+        number: '14496'
+        part: '2'
+        year: '2004'
+        publisher: ISO
+        copublishers:
+        - IEC
+  representations:
+    human: ISO/IEC 14496-2:2004/COR2:2007
+    urn: urn:iec:std:iso-iec:14496-2:2004:::::cor:2:2007
+  roundtrip: true
+  style: v3
+- id: iec.corrigendum.0126
+  input: ISO/IEC 14496-2:2004/COR3:2008
+  identifier:
+    type: corrigendum
+    components:
+      number: '3'
+      year: '2008'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: international_standard
+      components:
+        number: '14496'
+        part: '2'
+        year: '2004'
+        publisher: ISO
+        copublishers:
+        - IEC
+  representations:
+    human: ISO/IEC 14496-2:2004/COR3:2008
+    urn: urn:iec:std:iso-iec:14496-2:2004:::::cor:3:2008
+  roundtrip: true
+  style: v3
+- id: iec.corrigendum.0127
+  input: ISO/IEC 14496-2:2004/COR4:2010
+  identifier:
+    type: corrigendum
+    components:
+      number: '4'
+      year: '2010'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: international_standard
+      components:
+        number: '14496'
+        part: '2'
+        year: '2004'
+        publisher: ISO
+        copublishers:
+        - IEC
+  representations:
+    human: ISO/IEC 14496-2:2004/COR4:2010
+    urn: urn:iec:std:iso-iec:14496-2:2004:::::cor:4:2010
+  roundtrip: true
+  style: v3
+- id: iec.corrigendum.0128
+  input: ISO/IEC 14496-2:2004/COR5:2013
+  identifier:
+    type: corrigendum
+    components:
+      number: '5'
+      year: '2013'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: international_standard
+      components:
+        number: '14496'
+        part: '2'
+        year: '2004'
+        publisher: ISO
+        copublishers:
+        - IEC
+  representations:
+    human: ISO/IEC 14496-2:2004/COR5:2013
+    urn: urn:iec:std:iso-iec:14496-2:2004:::::cor:5:2013
+  roundtrip: true
+  style: v3
 - id: iec.corrigendum.0129
   input: ISO/IEC 14496-4:2004/AMD1:2005/COR1:2005
   identifier:
@@ -2849,6 +2977,7 @@
     human: ISO/IEC 14496-4:2004/AMD1:2005/COR1:2005
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:1:2005::cor:1:2005
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0130
   input: ISO/IEC 14496-4:2004/AMD1:2005/COR2:2008
   identifier:
@@ -2880,6 +3009,7 @@
     human: ISO/IEC 14496-4:2004/AMD1:2005/COR2:2008
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:1:2005::cor:2:2008
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0131
   input: ISO/IEC 14496-4:2004/AMD38:2010/COR1:2012
   identifier:
@@ -2911,6 +3041,7 @@
     human: ISO/IEC 14496-4:2004/AMD38:2010/COR1:2012
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:38:2010::cor:1:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0132
   input: ISO/IEC 14496-4:2004/AMD6:2005/COR1:2007
   identifier:
@@ -2942,6 +3073,7 @@
     human: ISO/IEC 14496-4:2004/AMD6:2005/COR1:2007
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:6:2005::cor:1:2007
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0133
   input: ISO/IEC 14496-4:2004/AMD9:2006/COR1:2007
   identifier:
@@ -2973,6 +3105,7 @@
     human: ISO/IEC 14496-4:2004/AMD9:2006/COR1:2007
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:9:2006::cor:1:2007
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0134
   input: ISO/IEC 14496-4:2004/AMD9:2006/COR2:2012
   identifier:
@@ -3004,6 +3137,7 @@
     human: ISO/IEC 14496-4:2004/AMD9:2006/COR2:2012
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:9:2006::cor:2:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0135
   input: ISO/IEC 14496-4:2004/COR1:2005
   identifier:
@@ -3027,6 +3161,7 @@
     human: ISO/IEC 14496-4:2004/COR1:2005
     urn: urn:iec:std:iso-iec:14496-4:2004:::::cor:1:2005
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0136
   input: ISO/IEC 14496-4:2004/COR2:2007
   identifier:
@@ -3050,6 +3185,7 @@
     human: ISO/IEC 14496-4:2004/COR2:2007
     urn: urn:iec:std:iso-iec:14496-4:2004:::::cor:2:2007
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0137
   input: ISO/IEC 14496-4:2004/COR4:2008
   identifier:
@@ -3073,6 +3209,7 @@
     human: ISO/IEC 14496-4:2004/COR4:2008
     urn: urn:iec:std:iso-iec:14496-4:2004:::::cor:4:2008
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0138
   input: ISO/IEC 14496-4:2004/COR7:2010
   identifier:
@@ -3096,38 +3233,8 @@
     human: ISO/IEC 14496-4:2004/COR7:2010
     urn: urn:iec:std:iso-iec:14496-4:2004:::::cor:7:2010
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0139
-  input: ISO/IEC 14496-5:2001/AMD1:2002/COR1:2008
-  identifier:
-    type: corrigendum
-    components:
-      number: '1'
-      year: '2008'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: amendment
-      components:
-        number: '1'
-        year: '2002'
-        publisher: ISO
-        copublishers:
-        - IEC
-      base:
-        type: international_standard
-        components:
-          number: '14496'
-          part: '5'
-          year: '2001'
-          publisher: ISO
-          copublishers:
-          - IEC
-  representations:
-    human: ISO/IEC 14496-5:2001/AMD1:2002/COR1:2008
-    urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:1:2002::cor:1:2008
-  roundtrip: true
-- id: iec.corrigendum.0140
   input: ISO/IEC 14496-5:2001/AMD10:2007/COR1:2008
   identifier:
     type: corrigendum
@@ -3158,7 +3265,8 @@
     human: ISO/IEC 14496-5:2001/AMD10:2007/COR1:2008
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:10:2007::cor:1:2008
   roundtrip: true
-- id: iec.corrigendum.0141
+  style: v3
+- id: iec.corrigendum.0140
   input: ISO/IEC 14496-5:2001/AMD10:2007/COR2:2008
   identifier:
     type: corrigendum
@@ -3189,7 +3297,8 @@
     human: ISO/IEC 14496-5:2001/AMD10:2007/COR2:2008
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:10:2007::cor:2:2008
   roundtrip: true
-- id: iec.corrigendum.0142
+  style: v3
+- id: iec.corrigendum.0141
   input: ISO/IEC 14496-5:2001/AMD10:2007/COR3:2009
   identifier:
     type: corrigendum
@@ -3220,7 +3329,8 @@
     human: ISO/IEC 14496-5:2001/AMD10:2007/COR3:2009
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:10:2007::cor:3:2009
   roundtrip: true
-- id: iec.corrigendum.0143
+  style: v3
+- id: iec.corrigendum.0142
   input: ISO/IEC 14496-5:2001/AMD10:2007/COR4:2010
   identifier:
     type: corrigendum
@@ -3251,7 +3361,8 @@
     human: ISO/IEC 14496-5:2001/AMD10:2007/COR4:2010
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:10:2007::cor:4:2010
   roundtrip: true
-- id: iec.corrigendum.0144
+  style: v3
+- id: iec.corrigendum.0143
   input: ISO/IEC 14496-5:2001/AMD10:2007/COR5:2011
   identifier:
     type: corrigendum
@@ -3282,7 +3393,8 @@
     human: ISO/IEC 14496-5:2001/AMD10:2007/COR5:2011
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:10:2007::cor:5:2011
   roundtrip: true
-- id: iec.corrigendum.0145
+  style: v3
+- id: iec.corrigendum.0144
   input: ISO/IEC 14496-5:2001/AMD10:2007/COR6:2012
   identifier:
     type: corrigendum
@@ -3313,7 +3425,8 @@
     human: ISO/IEC 14496-5:2001/AMD10:2007/COR6:2012
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:10:2007::cor:6:2012
   roundtrip: true
-- id: iec.corrigendum.0146
+  style: v3
+- id: iec.corrigendum.0145
   input: ISO/IEC 14496-5:2001/AMD14:2009/COR1:2010
   identifier:
     type: corrigendum
@@ -3344,6 +3457,39 @@
     human: ISO/IEC 14496-5:2001/AMD14:2009/COR1:2010
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:14:2009::cor:1:2010
   roundtrip: true
+  style: v3
+- id: iec.corrigendum.0146
+  input: ISO/IEC 14496-5:2001/AMD1:2002/COR1:2008
+  identifier:
+    type: corrigendum
+    components:
+      number: '1'
+      year: '2008'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: amendment
+      components:
+        number: '1'
+        year: '2002'
+        publisher: ISO
+        copublishers:
+        - IEC
+      base:
+        type: international_standard
+        components:
+          number: '14496'
+          part: '5'
+          year: '2001'
+          publisher: ISO
+          copublishers:
+          - IEC
+  representations:
+    human: ISO/IEC 14496-5:2001/AMD1:2002/COR1:2008
+    urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:1:2002::cor:1:2008
+  roundtrip: true
+  style: v3
 - id: iec.corrigendum.0147
   input: ISO/IEC 14496-5:2001/AMD24:2009/COR1:2012
   identifier:
@@ -3375,6 +3521,7 @@
     human: ISO/IEC 14496-5:2001/AMD24:2009/COR1:2012
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:24:2009::cor:1:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0148
   input: ISO/IEC 14496-5:2001/AMD24:2009/COR2:2013
   identifier:
@@ -3406,6 +3553,7 @@
     human: ISO/IEC 14496-5:2001/AMD24:2009/COR2:2013
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:24:2009::cor:2:2013
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0149
   input: ISO/IEC 14496-5:2001/AMD24:2009/COR3:2017
   identifier:
@@ -3437,6 +3585,7 @@
     human: ISO/IEC 14496-5:2001/AMD24:2009/COR3:2017
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:24:2009::cor:3:2017
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0150
   input: ISO/IEC 14496-5:2001/AMD27:2011/COR1:2015
   identifier:
@@ -3468,6 +3617,7 @@
     human: ISO/IEC 14496-5:2001/AMD27:2011/COR1:2015
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:27:2011::cor:1:2015
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0151
   input: ISO/IEC 14496-5:2001/AMD5:2004/COR1:2011
   identifier:
@@ -3499,6 +3649,7 @@
     human: ISO/IEC 14496-5:2001/AMD5:2004/COR1:2011
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:5:2004::cor:1:2011
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0152
   input: ISO/IEC 14496-5:2001/AMD6:2005/COR1:2006
   identifier:
@@ -3530,6 +3681,7 @@
     human: ISO/IEC 14496-5:2001/AMD6:2005/COR1:2006
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:6:2005::cor:1:2006
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0153
   input: ISO/IEC 15444-9:2005/COR1:2007
   identifier:
@@ -3553,6 +3705,7 @@
     human: ISO/IEC 15444-9:2005/COR1:2007
     urn: urn:iec:std:iso-iec:15444-9:2005:::::cor:1:2007
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0154
   input: ISO/IEC 15444-9:2005/COR2:2008
   identifier:
@@ -3576,6 +3729,7 @@
     human: ISO/IEC 15444-9:2005/COR2:2008
     urn: urn:iec:std:iso-iec:15444-9:2005:::::cor:2:2008
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0155
   input: ISO/IEC 15444-9:2005/COR3:2011
   identifier:
@@ -3599,7 +3753,32 @@
     human: ISO/IEC 15444-9:2005/COR3:2011
     urn: urn:iec:std:iso-iec:15444-9:2005:::::cor:3:2011
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0156
+  input: ISO/IEC 15938-10:2005/COR1:2007
+  identifier:
+    type: corrigendum
+    components:
+      number: '1'
+      year: '2007'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: international_standard
+      components:
+        number: '15938'
+        part: '10'
+        year: '2005'
+        publisher: ISO
+        copublishers:
+        - IEC
+  representations:
+    human: ISO/IEC 15938-10:2005/COR1:2007
+    urn: urn:iec:std:iso-iec:15938-10:2005:::::cor:1:2007
+  roundtrip: true
+  style: v3
+- id: iec.corrigendum.0157
   input: ISO/IEC 15938-1:2002/AMD1:2005/COR1:2005
   identifier:
     type: corrigendum
@@ -3630,7 +3809,8 @@
     human: ISO/IEC 15938-1:2002/AMD1:2005/COR1:2005
     urn: urn:iec:std:iso-iec:15938-1:2002:::::amd:1:2005::cor:1:2005
   roundtrip: true
-- id: iec.corrigendum.0157
+  style: v3
+- id: iec.corrigendum.0158
   input: ISO/IEC 15938-1:2002/COR1:2004
   identifier:
     type: corrigendum
@@ -3653,7 +3833,8 @@
     human: ISO/IEC 15938-1:2002/COR1:2004
     urn: urn:iec:std:iso-iec:15938-1:2002:::::cor:1:2004
   roundtrip: true
-- id: iec.corrigendum.0158
+  style: v3
+- id: iec.corrigendum.0159
   input: ISO/IEC 15938-1:2002/COR2:2005
   identifier:
     type: corrigendum
@@ -3676,29 +3857,7 @@
     human: ISO/IEC 15938-1:2002/COR2:2005
     urn: urn:iec:std:iso-iec:15938-1:2002:::::cor:2:2005
   roundtrip: true
-- id: iec.corrigendum.0159
-  input: ISO/IEC 15938-10:2005/COR1:2007
-  identifier:
-    type: corrigendum
-    components:
-      number: '1'
-      year: '2007'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: international_standard
-      components:
-        number: '15938'
-        part: '10'
-        year: '2005'
-        publisher: ISO
-        copublishers:
-        - IEC
-  representations:
-    human: ISO/IEC 15938-10:2005/COR1:2007
-    urn: urn:iec:std:iso-iec:15938-10:2005:::::cor:1:2007
-  roundtrip: true
+  style: v3
 - id: iec.corrigendum.0160
   input: ISO/IEC 15938-3:2002/AMD1:2004/COR1:2005
   identifier:
@@ -3730,6 +3889,7 @@
     human: ISO/IEC 15938-3:2002/AMD1:2004/COR1:2005
     urn: urn:iec:std:iso-iec:15938-3:2002:::::amd:1:2004::cor:1:2005
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0161
   input: ISO/IEC 15938-3:2002/AMD1:2004/COR2:2007
   identifier:
@@ -3761,6 +3921,7 @@
     human: ISO/IEC 15938-3:2002/AMD1:2004/COR2:2007
     urn: urn:iec:std:iso-iec:15938-3:2002:::::amd:1:2004::cor:2:2007
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0162
   input: ISO/IEC 15938-3:2002/AMD2:2006/COR1:2007
   identifier:
@@ -3792,6 +3953,7 @@
     human: ISO/IEC 15938-3:2002/AMD2:2006/COR1:2007
     urn: urn:iec:std:iso-iec:15938-3:2002:::::amd:2:2006::cor:1:2007
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0163
   input: ISO/IEC 15938-3:2002/COR1:2004
   identifier:
@@ -3815,6 +3977,7 @@
     human: ISO/IEC 15938-3:2002/COR1:2004
     urn: urn:iec:std:iso-iec:15938-3:2002:::::cor:1:2004
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0164
   input: ISO/IEC 15938-5:2003/COR1:2004
   identifier:
@@ -3838,6 +4001,7 @@
     human: ISO/IEC 15938-5:2003/COR1:2004
     urn: urn:iec:std:iso-iec:15938-5:2003:::::cor:1:2004
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0165
   input: ISO/IEC 21000-15:2006/COR1:2008
   identifier:
@@ -3861,6 +4025,7 @@
     human: ISO/IEC 21000-15:2006/COR1:2008
     urn: urn:iec:std:iso-iec:21000-15:2006:::::cor:1:2008
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0166
   input: ISO/IEC 21000-4:2006/COR1:2012
   identifier:
@@ -3884,6 +4049,7 @@
     human: ISO/IEC 21000-4:2006/COR1:2012
     urn: urn:iec:std:iso-iec:21000-4:2006:::::cor:1:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0167
   input: ISO/IEC 21000-6:2004/COR1:2005
   identifier:
@@ -3907,6 +4073,7 @@
     human: ISO/IEC 21000-6:2004/COR1:2005
     urn: urn:iec:std:iso-iec:21000-6:2004:::::cor:1:2005
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0168
   input: ISO/IEC 21000-6:2004/COR2:2007
   identifier:
@@ -3930,6 +4097,7 @@
     human: ISO/IEC 21000-6:2004/COR2:2007
     urn: urn:iec:std:iso-iec:21000-6:2004:::::cor:2:2007
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0169
   input: ISO/IEC 21000-7:2007/COR1:2008
   identifier:
@@ -3953,6 +4121,7 @@
     human: ISO/IEC 21000-7:2007/COR1:2008
     urn: urn:iec:std:iso-iec:21000-7:2007:::::cor:1:2008
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0170
   input: ISO/IEC 23000-10:2012/COR2:2014
   identifier:
@@ -3976,6 +4145,7 @@
     human: ISO/IEC 23000-10:2012/COR2:2014
     urn: urn:iec:std:iso-iec:23000-10:2012:::::cor:2:2014
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0171
   input: ISO/IEC 23000-9:2008/AMD1:2010/COR1:2011
   identifier:
@@ -4007,6 +4177,7 @@
     human: ISO/IEC 23000-9:2008/AMD1:2010/COR1:2011
     urn: urn:iec:std:iso-iec:23000-9:2008:::::amd:1:2010::cor:1:2011
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0172
   input: ISO/IEC 23000-9:2008/AMD1:2010/COR2:2012
   identifier:
@@ -4038,6 +4209,7 @@
     human: ISO/IEC 23000-9:2008/AMD1:2010/COR2:2012
     urn: urn:iec:std:iso-iec:23000-9:2008:::::amd:1:2010::cor:2:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0173
   input: ISO/IEC 23000-9:2008/COR1:2008
   identifier:
@@ -4061,6 +4233,7 @@
     human: ISO/IEC 23000-9:2008/COR1:2008
     urn: urn:iec:std:iso-iec:23000-9:2008:::::cor:1:2008
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0174
   input: ISO/IEC 23001-1:2006/COR1:2007
   identifier:
@@ -4084,6 +4257,7 @@
     human: ISO/IEC 23001-1:2006/COR1:2007
     urn: urn:iec:std:iso-iec:23001-1:2006:::::cor:1:2007
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0175
   input: ISO/IEC 23001-1:2006/COR2:2007
   identifier:
@@ -4107,6 +4281,7 @@
     human: ISO/IEC 23001-1:2006/COR2:2007
     urn: urn:iec:std:iso-iec:23001-1:2006:::::cor:2:2007
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0176
   input: ISO/IEC 23002-1:2006/AMD1:2008/COR1:2013
   identifier:
@@ -4138,6 +4313,7 @@
     human: ISO/IEC 23002-1:2006/AMD1:2008/COR1:2013
     urn: urn:iec:std:iso-iec:23002-1:2006:::::amd:1:2008::cor:1:2013
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0177
   input: ISO/IEC 23003-1:2007/AMD1:2008/COR1:2011
   identifier:
@@ -4169,6 +4345,7 @@
     human: ISO/IEC 23003-1:2007/AMD1:2008/COR1:2011
     urn: urn:iec:std:iso-iec:23003-1:2007:::::amd:1:2008::cor:1:2011
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0178
   input: ISO/IEC 23003-1:2007/AMD1:2008/COR2:2012
   identifier:
@@ -4200,6 +4377,7 @@
     human: ISO/IEC 23003-1:2007/AMD1:2008/COR2:2012
     urn: urn:iec:std:iso-iec:23003-1:2007:::::amd:1:2008::cor:2:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0179
   input: ISO/IEC 23003-1:2007/AMD1:2008/COR3:2015
   identifier:
@@ -4231,6 +4409,7 @@
     human: ISO/IEC 23003-1:2007/AMD1:2008/COR3:2015
     urn: urn:iec:std:iso-iec:23003-1:2007:::::amd:1:2008::cor:3:2015
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0180
   input: ISO/IEC 23003-1:2007/AMD2:2008/COR1:2009
   identifier:
@@ -4262,6 +4441,7 @@
     human: ISO/IEC 23003-1:2007/AMD2:2008/COR1:2009
     urn: urn:iec:std:iso-iec:23003-1:2007:::::amd:2:2008::cor:1:2009
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0181
   input: ISO/IEC 23003-1:2007/AMD2:2008/COR2:2011
   identifier:
@@ -4293,6 +4473,7 @@
     human: ISO/IEC 23003-1:2007/AMD2:2008/COR2:2011
     urn: urn:iec:std:iso-iec:23003-1:2007:::::amd:2:2008::cor:2:2011
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0182
   input: ISO/IEC 23003-1:2007/AMD2:2008/COR3:2012
   identifier:
@@ -4324,6 +4505,7 @@
     human: ISO/IEC 23003-1:2007/AMD2:2008/COR3:2012
     urn: urn:iec:std:iso-iec:23003-1:2007:::::amd:2:2008::cor:3:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0183
   input: ISO/IEC 23003-1:2007/AMD2:2008/COR4:2013
   identifier:
@@ -4355,6 +4537,7 @@
     human: ISO/IEC 23003-1:2007/AMD2:2008/COR4:2013
     urn: urn:iec:std:iso-iec:23003-1:2007:::::amd:2:2008::cor:4:2013
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0184
   input: ISO/IEC 23003-1:2007/COR1:2008
   identifier:
@@ -4378,6 +4561,7 @@
     human: ISO/IEC 23003-1:2007/COR1:2008
     urn: urn:iec:std:iso-iec:23003-1:2007:::::cor:1:2008
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0185
   input: ISO/IEC 23003-1:2007/COR2:2009
   identifier:
@@ -4401,6 +4585,7 @@
     human: ISO/IEC 23003-1:2007/COR2:2009
     urn: urn:iec:std:iso-iec:23003-1:2007:::::cor:2:2009
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0186
   input: ISO/IEC 23003-1:2007/COR3:2010
   identifier:
@@ -4424,6 +4609,7 @@
     human: ISO/IEC 23003-1:2007/COR3:2010
     urn: urn:iec:std:iso-iec:23003-1:2007:::::cor:3:2010
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0187
   input: ISO/IEC 23003-1:2007/COR4:2012
   identifier:
@@ -4447,6 +4633,7 @@
     human: ISO/IEC 23003-1:2007/COR4:2012
     urn: urn:iec:std:iso-iec:23003-1:2007:::::cor:4:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0188
   input: ISO/IEC 23007-1:2010/AMD1:2012/COR1:2012
   identifier:
@@ -4478,6 +4665,7 @@
     human: ISO/IEC 23007-1:2010/AMD1:2012/COR1:2012
     urn: urn:iec:std:iso-iec:23007-1:2010:::::amd:1:2012::cor:1:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0189
   input: ISO/IEC 23007-1:2010/AMD1:2012/COR2:2014
   identifier:
@@ -4509,6 +4697,7 @@
     human: ISO/IEC 23007-1:2010/AMD1:2012/COR2:2014
     urn: urn:iec:std:iso-iec:23007-1:2010:::::amd:1:2012::cor:2:2014
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0190
   input: ISO/IEC 23008-11:2015/COR1:2017
   identifier:
@@ -4532,6 +4721,7 @@
     human: ISO/IEC 23008-11:2015/COR1:2017
     urn: urn:iec:std:iso-iec:23008-11:2015:::::cor:1:2017
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0191
   input: ISO/IEC 23008-12:2017/COR1:2020
   identifier:
@@ -4555,6 +4745,7 @@
     human: ISO/IEC 23008-12:2017/COR1:2020
     urn: urn:iec:std:iso-iec:23008-12:2017:::::cor:1:2020
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0192
   input: ISO/IEC 24800-3:2010/COR1:2012
   identifier:
@@ -4578,6 +4769,7 @@
     human: ISO/IEC 24800-3:2010/COR1:2012
     urn: urn:iec:std:iso-iec:24800-3:2010:::::cor:1:2012
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0193
   input: ISO/IEC TR 11172-5:1998/COR1:2007
   identifier:
@@ -4601,6 +4793,7 @@
     human: ISO/IEC TR 11172-5:1998/COR1:2007
     urn: urn:iec:std:iso-iec:11172-5:1998:tr::::cor:1:2007
   roundtrip: true
+  style: v3
 - id: iec.corrigendum.0194
   input: ISO/IEC TR 15938-8:2002/COR1:2005
   identifier:
@@ -4624,3 +4817,4 @@
     human: ISO/IEC TR 15938-8:2002/COR1:2005
     urn: urn:iec:std:iso-iec:15938-8:2002:tr::::cor:1:2005
   roundtrip: true
+  style: v3

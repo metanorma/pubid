@@ -10,6 +10,7 @@
     human: ISO/DTS 18759
     urn: urn:iso:std:iso:ts:18759:DTS
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0002
   input: ISO/DTS 21328.4
   identifier:
@@ -22,6 +23,7 @@
     human: ISO/DTS 21328.4
     urn: urn:iso:std:iso:ts:21328:DTS.4
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0003
   input: ISO/DTS 21602
   identifier:
@@ -33,6 +35,7 @@
     human: ISO/DTS 21602
     urn: urn:iso:std:iso:ts:21602:DTS
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0004
   input: ISO/DTS 23885.3
   identifier:
@@ -45,6 +48,7 @@
     human: ISO/DTS 23885.3
     urn: urn:iso:std:iso:ts:23885:DTS.3
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0005
   input: ISO/DTS 24064.2
   identifier:
@@ -57,6 +61,7 @@
     human: ISO/DTS 24064.2
     urn: urn:iso:std:iso:ts:24064:DTS.2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0006
   input: ISO/DTS 24420
   identifier:
@@ -68,6 +73,7 @@
     human: ISO/DTS 24420
     urn: urn:iso:std:iso:ts:24420:DTS
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0007
   input: ISO/DTS 24519.2
   identifier:
@@ -80,6 +86,7 @@
     human: ISO/DTS 24519.2
     urn: urn:iso:std:iso:ts:24519:DTS.2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0008
   input: ISO/IEC DTS 25052-1.2
   identifier:
@@ -95,6 +102,7 @@
     human: ISO/IEC DTS 25052-1.2
     urn: urn:iso:std:iso-iec:ts:25052:-1:DTS.2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0009
   input: ISO/IEC DTS 4213.2
   identifier:
@@ -109,6 +117,7 @@
     human: ISO/IEC DTS 4213.2
     urn: urn:iso:std:iso-iec:ts:4213:DTS.2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0010
   input: ISO/IEC DTS 5723
   identifier:
@@ -122,6 +131,7 @@
     human: ISO/IEC DTS 5723
     urn: urn:iso:std:iso-iec:ts:5723:DTS
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0011
   input: ISO/IEC PDTS 19583-24
   identifier:
@@ -136,6 +146,7 @@
     human: ISO/IEC PDTS 19583-24
     urn: urn:iso:std:iso-iec:ts:19583:-24:CDTS
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0012
   input: ISO/IEC PDTS 27008
   identifier:
@@ -149,6 +160,7 @@
     human: ISO/IEC PDTS 27008
     urn: urn:iso:std:iso-iec:ts:27008:CDTS
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0013
   input: ISO/IEC PDTS 27035-3
   identifier:
@@ -163,6 +175,7 @@
     human: ISO/IEC PDTS 27035-3
     urn: urn:iso:std:iso-iec:ts:27035:-3:CDTS
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0014
   input: ISO/IEC TS 17021-10
   identifier:
@@ -176,6 +189,7 @@
     human: ISO/IEC TS 17021-10
     urn: urn:iso:std:iso-iec:ts:17021:-10
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0015
   input: ISO/IEC TS 17021-11
   identifier:
@@ -189,6 +203,7 @@
     human: ISO/IEC TS 17021-11
     urn: urn:iso:std:iso-iec:ts:17021:-11
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0016
   input: ISO/IEC TS 17021-2
   identifier:
@@ -202,6 +217,7 @@
     human: ISO/IEC TS 17021-2
     urn: urn:iso:std:iso-iec:ts:17021:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0017
   input: ISO/IEC TS 17021-2:2012
   identifier:
@@ -216,6 +232,7 @@
     human: ISO/IEC TS 17021-2:2012
     urn: urn:iso:std:iso-iec:ts:17021:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0018
   input: ISO/IEC TS 17021-3
   identifier:
@@ -229,6 +246,7 @@
     human: ISO/IEC TS 17021-3
     urn: urn:iso:std:iso-iec:ts:17021:-3
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0019
   input: ISO/IEC TS 17021-4
   identifier:
@@ -242,6 +260,7 @@
     human: ISO/IEC TS 17021-4
     urn: urn:iso:std:iso-iec:ts:17021:-4
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0020
   input: ISO/IEC TS 17021-5:2014
   identifier:
@@ -256,6 +275,7 @@
     human: ISO/IEC TS 17021-5:2014
     urn: urn:iso:std:iso-iec:ts:17021:-5
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0021
   input: ISO/IEC TS 17021-6
   identifier:
@@ -269,6 +289,7 @@
     human: ISO/IEC TS 17021-6
     urn: urn:iso:std:iso-iec:ts:17021:-6
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0022
   input: ISO/IEC TS 17021-7
   identifier:
@@ -282,6 +303,7 @@
     human: ISO/IEC TS 17021-7
     urn: urn:iso:std:iso-iec:ts:17021:-7
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0023
   input: ISO/IEC TS 17021-9
   identifier:
@@ -295,6 +317,7 @@
     human: ISO/IEC TS 17021-9
     urn: urn:iso:std:iso-iec:ts:17021:-9
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0024
   input: ISO/IEC TS 17961:2013
   identifier:
@@ -308,6 +331,7 @@
     human: ISO/IEC TS 17961:2013
     urn: urn:iso:std:iso-iec:ts:17961
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0025
   input: ISO/IEC TS 18661-1
   identifier:
@@ -321,6 +345,7 @@
     human: ISO/IEC TS 18661-1
     urn: urn:iso:std:iso-iec:ts:18661:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0026
   input: ISO/IEC TS 18661-3
   identifier:
@@ -334,6 +359,7 @@
     human: ISO/IEC TS 18661-3
     urn: urn:iso:std:iso-iec:ts:18661:-3
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0027
   input: ISO/IEC TS 18661-4
   identifier:
@@ -347,6 +373,7 @@
     human: ISO/IEC TS 18661-4
     urn: urn:iso:std:iso-iec:ts:18661:-4
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0028
   input: ISO/IEC TS 18661-5
   identifier:
@@ -360,6 +387,7 @@
     human: ISO/IEC TS 18661-5
     urn: urn:iso:std:iso-iec:ts:18661:-5
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0029
   input: ISO/IEC TS 19795-9
   identifier:
@@ -373,6 +401,7 @@
     human: ISO/IEC TS 19795-9
     urn: urn:iso:std:iso-iec:ts:19795:-9
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0030
   input: ISO/IEC TS 20540:2018
   identifier:
@@ -386,6 +415,7 @@
     human: ISO/IEC TS 20540:2018
     urn: urn:iso:std:iso-iec:ts:20540
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0031
   input: ISO/IEC TS 22424-2
   identifier:
@@ -399,6 +429,7 @@
     human: ISO/IEC TS 22424-2
     urn: urn:iso:std:iso-iec:ts:22424:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0032
   input: ISO/IEC TS 24192-1
   identifier:
@@ -412,6 +443,7 @@
     human: ISO/IEC TS 24192-1
     urn: urn:iso:std:iso-iec:ts:24192:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0033
   input: ISO/IEC TS 24192-2
   identifier:
@@ -425,6 +457,7 @@
     human: ISO/IEC TS 24192-2
     urn: urn:iso:std:iso-iec:ts:24192:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0034
   input: ISO/IEC TS 24748-6
   identifier:
@@ -438,6 +471,7 @@
     human: ISO/IEC TS 24748-6
     urn: urn:iso:std:iso-iec:ts:24748:-6
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0035
   input: ISO/IEC TS 25011:2017
   identifier:
@@ -451,6 +485,7 @@
     human: ISO/IEC TS 25011:2017
     urn: urn:iso:std:iso-iec:ts:25011
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0036
   input: ISO/IEC TS 29112:2012
   identifier:
@@ -464,6 +499,7 @@
     human: ISO/IEC TS 29112:2012
     urn: urn:iso:std:iso-iec:ts:29112
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0037
   input: ISO/IEC TS 29125:2017
   identifier:
@@ -477,6 +513,7 @@
     human: ISO/IEC TS 29125:2017
     urn: urn:iso:std:iso-iec:ts:29125
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0038
   input: ISO/IEC TS 30103:2015
   identifier:
@@ -490,6 +527,7 @@
     human: ISO/IEC TS 30103:2015
     urn: urn:iso:std:iso-iec:ts:30103
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0039
   input: ISO/IEC TS 30104:2015
   identifier:
@@ -503,6 +541,7 @@
     human: ISO/IEC TS 30104:2015
     urn: urn:iso:std:iso-iec:ts:30104
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0040
   input: ISO/IEC WD TS 25025
   identifier:
@@ -516,6 +555,7 @@
     human: ISO/IEC WD TS 25025
     urn: urn:iso:std:iso-iec:ts:25025:WD
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0041
   input: ISO/NP TS 20594-1
   identifier:
@@ -528,6 +568,7 @@
     human: ISO/NP TS 20594-1
     urn: urn:iso:std:iso:ts:20594:-1:stage-10.00
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0042
   input: ISO/NP TS 20597-1
   identifier:
@@ -540,6 +581,7 @@
     human: ISO/NP TS 20597-1
     urn: urn:iso:std:iso:ts:20597:-1:stage-10.00
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0043
   input: ISO/NP TS 20598-1
   identifier:
@@ -552,6 +594,7 @@
     human: ISO/NP TS 20598-1
     urn: urn:iso:std:iso:ts:20598:-1:stage-10.00
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0044
   input: ISO/PRF TS 6304
   identifier:
@@ -563,6 +606,7 @@
     human: ISO/PRF TS 6304
     urn: urn:iso:std:iso:ts:6304:stage-50.00
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0045
   input: ISO/TS 10303-1634
   identifier:
@@ -574,6 +618,7 @@
     human: ISO/TS 10303-1634
     urn: urn:iso:std:iso:ts:10303:-1634
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0046
   input: ISO/TS 10303-1634:2014
   identifier:
@@ -586,6 +631,7 @@
     human: ISO/TS 10303-1634:2014
     urn: urn:iso:std:iso:ts:10303:-1634
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0047
   input: ISO/TS 10303-1690
   identifier:
@@ -597,6 +643,7 @@
     human: ISO/TS 10303-1690
     urn: urn:iso:std:iso:ts:10303:-1690
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0048
   input: ISO/TS 10303-1690:2014
   identifier:
@@ -609,6 +656,7 @@
     human: ISO/TS 10303-1690:2014
     urn: urn:iso:std:iso:ts:10303:-1690
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0049
   input: ISO/TS 10303-1751
   identifier:
@@ -620,6 +668,7 @@
     human: ISO/TS 10303-1751
     urn: urn:iso:std:iso:ts:10303:-1751
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0050
   input: ISO/TS 10303-1751:2014
   identifier:
@@ -632,6 +681,7 @@
     human: ISO/TS 10303-1751:2014
     urn: urn:iso:std:iso:ts:10303:-1751
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0051
   input: ISO/TS 10303-1804
   identifier:
@@ -643,6 +693,7 @@
     human: ISO/TS 10303-1804
     urn: urn:iso:std:iso:ts:10303:-1804
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0052
   input: ISO/TS 10303-1846
   identifier:
@@ -654,6 +705,7 @@
     human: ISO/TS 10303-1846
     urn: urn:iso:std:iso:ts:10303:-1846
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0053
   input: ISO/TS 10303-304
   identifier:
@@ -665,6 +717,7 @@
     human: ISO/TS 10303-304
     urn: urn:iso:std:iso:ts:10303:-304
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0054
   input: ISO/TS 10303-325:2004
   identifier:
@@ -677,6 +730,7 @@
     human: ISO/TS 10303-325:2004
     urn: urn:iso:std:iso:ts:10303:-325
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0055
   input: ISO/TS 10832:2009
   identifier:
@@ -688,6 +742,7 @@
     human: ISO/TS 10832:2009
     urn: urn:iso:std:iso:ts:10832
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0056
   input: ISO/TS 10993-20
   identifier:
@@ -699,6 +754,7 @@
     human: ISO/TS 10993-20
     urn: urn:iso:std:iso:ts:10993:-20
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0057
   input: ISO/TS 10993-20:2006
   identifier:
@@ -711,6 +767,7 @@
     human: ISO/TS 10993-20:2006
     urn: urn:iso:std:iso:ts:10993:-20
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0058
   input: ISO/TS 11080:2009
   identifier:
@@ -722,6 +779,7 @@
     human: ISO/TS 11080:2009
     urn: urn:iso:std:iso:ts:11080
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0059
   input: ISO/TS 11133-1:2000
   identifier:
@@ -734,6 +792,7 @@
     human: ISO/TS 11133-1:2000
     urn: urn:iso:std:iso:ts:11133:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0060
   input: ISO/TS 11133-2:2003
   identifier:
@@ -746,6 +805,7 @@
     human: ISO/TS 11133-2:2003
     urn: urn:iso:std:iso:ts:11133:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0061
   input: ISO/TS 11155-1:2001
   identifier:
@@ -758,6 +818,7 @@
     human: ISO/TS 11155-1:2001
     urn: urn:iso:std:iso:ts:11155:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0062
   input: ISO/TS 11155-2:2002
   identifier:
@@ -770,6 +831,7 @@
     human: ISO/TS 11155-2:2002
     urn: urn:iso:std:iso:ts:11155:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0063
   input: ISO/TS 11405:2015
   identifier:
@@ -781,6 +843,7 @@
     human: ISO/TS 11405:2015
     urn: urn:iso:std:iso:ts:11405
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0064
   input: ISO/TS 11633-1:2019
   identifier:
@@ -793,6 +856,7 @@
     human: ISO/TS 11633-1:2019
     urn: urn:iso:std:iso:ts:11633:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0065
   input: ISO/TS 11665-13:2017
   identifier:
@@ -805,6 +869,7 @@
     human: ISO/TS 11665-13:2017
     urn: urn:iso:std:iso:ts:11665:-13
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0066
   input: ISO/TS 11774:2011
   identifier:
@@ -816,6 +881,7 @@
     human: ISO/TS 11774:2011
     urn: urn:iso:std:iso:ts:11774
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0067
   input: ISO/TS 11999-2:2015
   identifier:
@@ -828,6 +894,7 @@
     human: ISO/TS 11999-2:2015
     urn: urn:iso:std:iso:ts:11999:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0068
   input: ISO/TS 12103-3
   identifier:
@@ -839,6 +906,7 @@
     human: ISO/TS 12103-3
     urn: urn:iso:std:iso:ts:12103:-3
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0069
   input: ISO/TS 12512:2017
   identifier:
@@ -850,6 +918,7 @@
     human: ISO/TS 12512:2017
     urn: urn:iso:std:iso:ts:12512
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0070
   input: ISO/TS 12913-2:2018
   identifier:
@@ -862,6 +931,7 @@
     human: ISO/TS 12913-2:2018
     urn: urn:iso:std:iso:ts:12913:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0071
   input: ISO/TS 13140-2:2012
   identifier:
@@ -874,6 +944,7 @@
     human: ISO/TS 13140-2:2012
     urn: urn:iso:std:iso:ts:13140:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0072
   input: ISO/TS 13143-1:2011
   identifier:
@@ -886,6 +957,7 @@
     human: ISO/TS 13143-1:2011
     urn: urn:iso:std:iso:ts:13143:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0073
   input: ISO/TS 13143-2:2011
   identifier:
@@ -898,6 +970,7 @@
     human: ISO/TS 13143-2:2011
     urn: urn:iso:std:iso:ts:13143:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0074
   input: ISO/TS 13471-1:2017
   identifier:
@@ -910,6 +983,7 @@
     human: ISO/TS 13471-1:2017
     urn: urn:iso:std:iso:ts:13471:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0075
   input: ISO/TS 13498:2011
   identifier:
@@ -921,6 +995,7 @@
     human: ISO/TS 13498:2011
     urn: urn:iso:std:iso:ts:13498
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0076
   input: ISO/TS 13499:2014
   identifier:
@@ -932,6 +1007,7 @@
     human: ISO/TS 13499:2014
     urn: urn:iso:std:iso:ts:13499
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0077
   input: ISO/TS 13499:2019
   identifier:
@@ -943,6 +1019,7 @@
     human: ISO/TS 13499:2019
     urn: urn:iso:std:iso:ts:13499
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0078
   input: ISO/TS 14067:2014
   identifier:
@@ -954,6 +1031,7 @@
     human: ISO/TS 14067:2014
     urn: urn:iso:std:iso:ts:14067
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0079
   input: ISO/TS 14071:2014
   identifier:
@@ -965,6 +1043,7 @@
     human: ISO/TS 14071:2014
     urn: urn:iso:std:iso:ts:14071
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0080
   input: ISO/TS 14071:2016
   identifier:
@@ -976,6 +1055,7 @@
     human: ISO/TS 14071:2016
     urn: urn:iso:std:iso:ts:14071
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0081
   input: ISO/TS 14072:2014
   identifier:
@@ -987,6 +1067,7 @@
     human: ISO/TS 14072:2014
     urn: urn:iso:std:iso:ts:14072
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0082
   input: ISO/TS 14415:2005
   identifier:
@@ -998,6 +1079,7 @@
     human: ISO/TS 14415:2005
     urn: urn:iso:std:iso:ts:14415
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0083
   input: ISO/TS 14441:2013
   identifier:
@@ -1009,6 +1091,7 @@
     human: ISO/TS 14441:2013
     urn: urn:iso:std:iso:ts:14441
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0084
   input: ISO/TS 14569-2:2001
   identifier:
@@ -1021,6 +1104,7 @@
     human: ISO/TS 14569-2:2001
     urn: urn:iso:std:iso:ts:14569:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0085
   input: ISO/TS 14907-1:2005
   identifier:
@@ -1033,6 +1117,7 @@
     human: ISO/TS 14907-1:2005
     urn: urn:iso:std:iso:ts:14907:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0086
   input: ISO/TS 14907-1:2010
   identifier:
@@ -1045,6 +1130,7 @@
     human: ISO/TS 14907-1:2010
     urn: urn:iso:std:iso:ts:14907:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0087
   input: ISO/TS 14907-1:2015
   identifier:
@@ -1057,6 +1143,7 @@
     human: ISO/TS 14907-1:2015
     urn: urn:iso:std:iso:ts:14907:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0088
   input: ISO/TS 14907-2
   identifier:
@@ -1068,6 +1155,7 @@
     human: ISO/TS 14907-2
     urn: urn:iso:std:iso:ts:14907:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0089
   input: ISO/TS 14907-2:2006
   identifier:
@@ -1080,6 +1168,7 @@
     human: ISO/TS 14907-2:2006
     urn: urn:iso:std:iso:ts:14907:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0090
   input: ISO/TS 14907-2:2016
   identifier:
@@ -1092,6 +1181,7 @@
     human: ISO/TS 14907-2:2016
     urn: urn:iso:std:iso:ts:14907:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0091
   input: ISO/TS 14934-1:2002
   identifier:
@@ -1104,6 +1194,7 @@
     human: ISO/TS 14934-1:2002
     urn: urn:iso:std:iso:ts:14934:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0092
   input: ISO/TS 14934-4:2007
   identifier:
@@ -1116,6 +1207,7 @@
     human: ISO/TS 14934-4:2007
     urn: urn:iso:std:iso:ts:14934:-4
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0093
   input: ISO/TS 15029-2:2012
   identifier:
@@ -1128,6 +1220,7 @@
     human: ISO/TS 15029-2:2012
     urn: urn:iso:std:iso:ts:15029:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0094
   input: ISO/TS 15311-1
   identifier:
@@ -1139,6 +1232,7 @@
     human: ISO/TS 15311-1
     urn: urn:iso:std:iso:ts:15311:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0095
   input: ISO/TS 15311-1:2016
   identifier:
@@ -1151,6 +1245,7 @@
     human: ISO/TS 15311-1:2016
     urn: urn:iso:std:iso:ts:15311:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0096
   input: ISO/TS 15311-1:2019
   identifier:
@@ -1163,6 +1258,7 @@
     human: ISO/TS 15311-1:2019
     urn: urn:iso:std:iso:ts:15311:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0097
   input: ISO/TS 15311-2:2018
   identifier:
@@ -1175,6 +1271,7 @@
     human: ISO/TS 15311-2:2018
     urn: urn:iso:std:iso:ts:15311:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0098
   input: ISO/TS 15791-2:2017
   identifier:
@@ -1187,6 +1284,7 @@
     human: ISO/TS 15791-2:2017
     urn: urn:iso:std:iso:ts:15791:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0099
   input: ISO/TS 15827:2007
   identifier:
@@ -1198,6 +1296,7 @@
     human: ISO/TS 15827:2007
     urn: urn:iso:std:iso:ts:15827
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0100
   input: ISO/TS 15883-5:2005
   identifier:
@@ -1210,6 +1309,7 @@
     human: ISO/TS 15883-5:2005
     urn: urn:iso:std:iso:ts:15883:-5
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0101
   input: ISO/TS 15926-12:2018
   identifier:
@@ -1222,6 +1322,7 @@
     human: ISO/TS 15926-12:2018
     urn: urn:iso:std:iso:ts:15926:-12
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0102
   input: ISO/TS 15926-8:2011
   identifier:
@@ -1234,6 +1335,7 @@
     human: ISO/TS 15926-8:2011
     urn: urn:iso:std:iso:ts:15926:-8
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0103
   input: ISO/TS 16189
   identifier:
@@ -1244,6 +1346,7 @@
     human: ISO/TS 16189
     urn: urn:iso:std:iso:ts:16189
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0104
   input: ISO/TS 16190
   identifier:
@@ -1254,6 +1357,7 @@
     human: ISO/TS 16190
     urn: urn:iso:std:iso:ts:16190
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0105
   input: ISO/TS 16195:2013
   identifier:
@@ -1265,6 +1369,7 @@
     human: ISO/TS 16195:2013
     urn: urn:iso:std:iso:ts:16195
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0106
   input: ISO/TS 16401-1:2012
   identifier:
@@ -1277,6 +1382,7 @@
     human: ISO/TS 16401-1:2012
     urn: urn:iso:std:iso:ts:16401:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0107
   input: ISO/TS 16401-2:2012
   identifier:
@@ -1289,6 +1395,7 @@
     human: ISO/TS 16401-2:2012
     urn: urn:iso:std:iso:ts:16401:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0108
   input: ISO/TS 16403-1
   identifier:
@@ -1300,6 +1407,7 @@
     human: ISO/TS 16403-1
     urn: urn:iso:std:iso:ts:16403:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0109
   input: ISO/TS 16407-1:2011
   identifier:
@@ -1312,6 +1420,7 @@
     human: ISO/TS 16407-1:2011
     urn: urn:iso:std:iso:ts:16407:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0110
   input: ISO/TS 16407-2:2012
   identifier:
@@ -1324,6 +1433,7 @@
     human: ISO/TS 16407-2:2012
     urn: urn:iso:std:iso:ts:16407:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0111
   input: ISO/TS 16410-1:2011
   identifier:
@@ -1336,6 +1446,7 @@
     human: ISO/TS 16410-1:2011
     urn: urn:iso:std:iso:ts:16410:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0112
   input: ISO/TS 16410-2:2012
   identifier:
@@ -1348,6 +1459,7 @@
     human: ISO/TS 16410-2:2012
     urn: urn:iso:std:iso:ts:16410:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0113
   input: ISO/TS 16479:2012
   identifier:
@@ -1359,6 +1471,7 @@
     human: ISO/TS 16479:2012
     urn: urn:iso:std:iso:ts:16479
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0114
   input: ISO/TS 16491:2012
   identifier:
@@ -1370,6 +1483,7 @@
     human: ISO/TS 16491:2012
     urn: urn:iso:std:iso:ts:16491
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0115
   input: ISO/TS 16553:2006
   identifier:
@@ -1381,6 +1495,7 @@
     human: ISO/TS 16553:2006
     urn: urn:iso:std:iso:ts:16553
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0116
   input: ISO/TS 16630:2003
   identifier:
@@ -1392,6 +1507,7 @@
     human: ISO/TS 16630:2003
     urn: urn:iso:std:iso:ts:16630
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0117
   input: ISO/TS 16688:2017
   identifier:
@@ -1403,6 +1519,7 @@
     human: ISO/TS 16688:2017
     urn: urn:iso:std:iso:ts:16688
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0118
   input: ISO/TS 16774-3:2016
   identifier:
@@ -1415,6 +1532,7 @@
     human: ISO/TS 16774-3:2016
     urn: urn:iso:std:iso:ts:16774:-3
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0119
   input: ISO/TS 16774-4:2016
   identifier:
@@ -1427,6 +1545,7 @@
     human: ISO/TS 16774-4:2016
     urn: urn:iso:std:iso:ts:16774:-4
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0120
   input: ISO/TS 16774-5:2017
   identifier:
@@ -1439,6 +1558,7 @@
     human: ISO/TS 16774-5:2017
     urn: urn:iso:std:iso:ts:16774:-5
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0121
   input: ISO/TS 16774-6:2017
   identifier:
@@ -1451,6 +1571,7 @@
     human: ISO/TS 16774-6:2017
     urn: urn:iso:std:iso:ts:16774:-6
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0122
   input: ISO/TS 16782:2016
   identifier:
@@ -1462,6 +1583,7 @@
     human: ISO/TS 16782:2016
     urn: urn:iso:std:iso:ts:16782
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0123
   input: ISO/TS 16791
   identifier:
@@ -1472,6 +1594,7 @@
     human: ISO/TS 16791
     urn: urn:iso:std:iso:ts:16791
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0124
   input: ISO/TS 16791:2014
   identifier:
@@ -1483,6 +1606,7 @@
     human: ISO/TS 16791:2014
     urn: urn:iso:std:iso:ts:16791
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0125
   input: ISO/TS 16943
   identifier:
@@ -1493,6 +1617,7 @@
     human: ISO/TS 16943
     urn: urn:iso:std:iso:ts:16943
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0126
   input: ISO/TS 16949:2002
   identifier:
@@ -1504,6 +1629,7 @@
     human: ISO/TS 16949:2002
     urn: urn:iso:std:iso:ts:16949
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0127
   input: ISO/TS 17033:2019
   identifier:
@@ -1515,6 +1641,7 @@
     human: ISO/TS 17033:2019
     urn: urn:iso:std:iso:ts:17033
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0128
   input: ISO/TS 17226
   identifier:
@@ -1525,6 +1652,7 @@
     human: ISO/TS 17226
     urn: urn:iso:std:iso:ts:17226
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0129
   input: ISO/TS 17234:2003
   identifier:
@@ -1536,6 +1664,7 @@
     human: ISO/TS 17234:2003
     urn: urn:iso:std:iso:ts:17234
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0130
   input: ISO/TS 17251:2016
   identifier:
@@ -1547,6 +1676,7 @@
     human: ISO/TS 17251:2016
     urn: urn:iso:std:iso:ts:17251
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0131
   input: ISO/TS 17420-4
   identifier:
@@ -1558,6 +1688,7 @@
     human: ISO/TS 17420-4
     urn: urn:iso:std:iso:ts:17420:-4
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0132
   input: ISO/TS 17420-5
   identifier:
@@ -1569,6 +1700,7 @@
     human: ISO/TS 17420-5
     urn: urn:iso:std:iso:ts:17420:-5
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0133
   input: ISO/TS 17420-9
   identifier:
@@ -1580,6 +1712,7 @@
     human: ISO/TS 17420-9
     urn: urn:iso:std:iso:ts:17420:-9
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0134
   input: ISO/TS 17423:2014
   identifier:
@@ -1591,6 +1724,7 @@
     human: ISO/TS 17423:2014
     urn: urn:iso:std:iso:ts:17423
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0135
   input: ISO/TS 17431:2006
   identifier:
@@ -1602,6 +1736,7 @@
     human: ISO/TS 17431:2006
     urn: urn:iso:std:iso:ts:17431
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0136
   input: ISO/TS 17477:2003
   identifier:
@@ -1613,6 +1748,7 @@
     human: ISO/TS 17477:2003
     urn: urn:iso:std:iso:ts:17477
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0137
   input: ISO/TS 17536-2:2017
   identifier:
@@ -1625,6 +1761,7 @@
     human: ISO/TS 17536-2:2017
     urn: urn:iso:std:iso:ts:17536:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0138
   input: ISO/TS 17536-5:2018
   identifier:
@@ -1637,6 +1774,7 @@
     human: ISO/TS 17536-5:2018
     urn: urn:iso:std:iso:ts:17536:-5
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0139
   input: ISO/TS 17582:2014
   identifier:
@@ -1648,6 +1786,7 @@
     human: ISO/TS 17582:2014
     urn: urn:iso:std:iso:ts:17582
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0140
   input: ISO/TS 17822-1:2014
   identifier:
@@ -1660,6 +1799,7 @@
     human: ISO/TS 17822-1:2014
     urn: urn:iso:std:iso:ts:17822:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0141
   input: ISO/TS 17865:2016
   identifier:
@@ -1671,19 +1811,8 @@
     human: ISO/TS 17865:2016
     urn: urn:iso:std:iso:ts:17865
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0142
-  input: ISO/TS 17892-1:2004
-  identifier:
-    type: technical_specification
-    components:
-      number: '17892'
-      part: '1'
-      year: '2004'
-  representations:
-    human: ISO/TS 17892-1:2004
-    urn: urn:iso:std:iso:ts:17892:-1
-  roundtrip: true
-- id: iso.technical_specification.0143
   input: ISO/TS 17892-10:2004
   identifier:
     type: technical_specification
@@ -1695,7 +1824,8 @@
     human: ISO/TS 17892-10:2004
     urn: urn:iso:std:iso:ts:17892:-10
   roundtrip: true
-- id: iso.technical_specification.0144
+  style: v3
+- id: iso.technical_specification.0143
   input: ISO/TS 17892-11:2004
   identifier:
     type: technical_specification
@@ -1707,7 +1837,8 @@
     human: ISO/TS 17892-11:2004
     urn: urn:iso:std:iso:ts:17892:-11
   roundtrip: true
-- id: iso.technical_specification.0145
+  style: v3
+- id: iso.technical_specification.0144
   input: ISO/TS 17892-12:2004
   identifier:
     type: technical_specification
@@ -1719,6 +1850,20 @@
     human: ISO/TS 17892-12:2004
     urn: urn:iso:std:iso:ts:17892:-12
   roundtrip: true
+  style: v3
+- id: iso.technical_specification.0145
+  input: ISO/TS 17892-1:2004
+  identifier:
+    type: technical_specification
+    components:
+      number: '17892'
+      part: '1'
+      year: '2004'
+  representations:
+    human: ISO/TS 17892-1:2004
+    urn: urn:iso:std:iso:ts:17892:-1
+  roundtrip: true
+  style: v3
 - id: iso.technical_specification.0146
   input: ISO/TS 17892-4:2004
   identifier:
@@ -1731,6 +1876,7 @@
     human: ISO/TS 17892-4:2004
     urn: urn:iso:std:iso:ts:17892:-4
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0147
   input: ISO/TS 17892-5:2004
   identifier:
@@ -1743,6 +1889,7 @@
     human: ISO/TS 17892-5:2004
     urn: urn:iso:std:iso:ts:17892:-5
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0148
   input: ISO/TS 17892-6:2004
   identifier:
@@ -1755,6 +1902,7 @@
     human: ISO/TS 17892-6:2004
     urn: urn:iso:std:iso:ts:17892:-6
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0149
   input: ISO/TS 17892-7:2004
   identifier:
@@ -1767,6 +1915,7 @@
     human: ISO/TS 17892-7:2004
     urn: urn:iso:std:iso:ts:17892:-7
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0150
   input: ISO/TS 17892-8:2004
   identifier:
@@ -1779,6 +1928,7 @@
     human: ISO/TS 17892-8:2004
     urn: urn:iso:std:iso:ts:17892:-8
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0151
   input: ISO/TS 17892-9:2004
   identifier:
@@ -1791,6 +1941,7 @@
     human: ISO/TS 17892-9:2004
     urn: urn:iso:std:iso:ts:17892:-9
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0152
   input: ISO/TS 17975:2015
   identifier:
@@ -1802,6 +1953,7 @@
     human: ISO/TS 17975:2015
     urn: urn:iso:std:iso:ts:17975
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0153
   input: ISO/TS 17988
   identifier:
@@ -1812,6 +1964,7 @@
     human: ISO/TS 17988
     urn: urn:iso:std:iso:ts:17988
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0154
   input: ISO/TS 17988:2014
   identifier:
@@ -1823,6 +1976,7 @@
     human: ISO/TS 17988:2014
     urn: urn:iso:std:iso:ts:17988
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0155
   input: ISO/TS 18173:2005
   identifier:
@@ -1834,6 +1988,7 @@
     human: ISO/TS 18173:2005
     urn: urn:iso:std:iso:ts:18173
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0156
   input: ISO/TS 18220:2016
   identifier:
@@ -1845,6 +2000,7 @@
     human: ISO/TS 18220:2016
     urn: urn:iso:std:iso:ts:18220
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0157
   input: ISO/TS 18506:2014
   identifier:
@@ -1856,6 +2012,7 @@
     human: ISO/TS 18506:2014
     urn: urn:iso:std:iso:ts:18506
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0158
   input: ISO/TS 18684:2015
   identifier:
@@ -1867,6 +2024,7 @@
     human: ISO/TS 18684:2015
     urn: urn:iso:std:iso:ts:18684
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0159
   input: ISO/TS 19016:2019
   identifier:
@@ -1878,6 +2036,7 @@
     human: ISO/TS 19016:2019
     urn: urn:iso:std:iso:ts:19016
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0160
   input: ISO/TS 19021:2018
   identifier:
@@ -1889,6 +2048,7 @@
     human: ISO/TS 19021:2018
     urn: urn:iso:std:iso:ts:19021
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0161
   input: ISO/TS 19150-1:2012
   identifier:
@@ -1901,6 +2061,7 @@
     human: ISO/TS 19150-1:2012
     urn: urn:iso:std:iso:ts:19150:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0162
   input: ISO/TS 19256
   identifier:
@@ -1911,6 +2072,7 @@
     human: ISO/TS 19256
     urn: urn:iso:std:iso:ts:19256
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0163
   input: ISO/TS 19256:2016
   identifier:
@@ -1922,6 +2084,7 @@
     human: ISO/TS 19256:2016
     urn: urn:iso:std:iso:ts:19256
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0164
   input: ISO/TS 19278:2019
   identifier:
@@ -1933,6 +2096,7 @@
     human: ISO/TS 19278:2019
     urn: urn:iso:std:iso:ts:19278
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0165
   input: ISO/TS 19293:2018
   identifier:
@@ -1944,6 +2108,7 @@
     human: ISO/TS 19293:2018
     urn: urn:iso:std:iso:ts:19293
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0166
   input: ISO/TS 19466:2017
   identifier:
@@ -1955,6 +2120,7 @@
     human: ISO/TS 19466:2017
     urn: urn:iso:std:iso:ts:19466
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0167
   input: ISO/TS 19475-1:2018
   identifier:
@@ -1967,6 +2133,7 @@
     human: ISO/TS 19475-1:2018
     urn: urn:iso:std:iso:ts:19475:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0168
   input: ISO/TS 19475-3:2018
   identifier:
@@ -1979,6 +2146,7 @@
     human: ISO/TS 19475-3:2018
     urn: urn:iso:std:iso:ts:19475:-3
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0169
   input: ISO/TS 19713-1:2010
   identifier:
@@ -1991,6 +2159,7 @@
     human: ISO/TS 19713-1:2010
     urn: urn:iso:std:iso:ts:19713:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0170
   input: ISO/TS 19713-2:2010
   identifier:
@@ -2003,6 +2172,7 @@
     human: ISO/TS 19713-2:2010
     urn: urn:iso:std:iso:ts:19713:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0171
   input: ISO/TS 19736:2017
   identifier:
@@ -2014,6 +2184,7 @@
     human: ISO/TS 19736:2017
     urn: urn:iso:std:iso:ts:19736
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0172
   input: ISO/TS 19808
   identifier:
@@ -2024,6 +2195,7 @@
     human: ISO/TS 19808
     urn: urn:iso:std:iso:ts:19808
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0173
   input: ISO/TS 19850
   identifier:
@@ -2034,6 +2206,7 @@
     human: ISO/TS 19850
     urn: urn:iso:std:iso:ts:19850
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0174
   input: ISO/TS 19858:2015
   identifier:
@@ -2045,6 +2218,7 @@
     human: ISO/TS 19858:2015
     urn: urn:iso:std:iso:ts:19858
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0175
   input: ISO/TS 19880-1:2016
   identifier:
@@ -2057,6 +2231,7 @@
     human: ISO/TS 19880-1:2016
     urn: urn:iso:std:iso:ts:19880:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0176
   input: ISO/TS 20026:2017
   identifier:
@@ -2068,6 +2243,7 @@
     human: ISO/TS 20026:2017
     urn: urn:iso:std:iso:ts:20026
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0177
   input: ISO/TS 20049-2
   identifier:
@@ -2079,6 +2255,7 @@
     human: ISO/TS 20049-2
     urn: urn:iso:std:iso:ts:20049:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0178
   input: ISO/TS 20131-1:2018
   identifier:
@@ -2091,6 +2268,7 @@
     human: ISO/TS 20131-1:2018
     urn: urn:iso:std:iso:ts:20131:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0179
   input: ISO/TS 20282-2:2013
   identifier:
@@ -2103,6 +2281,7 @@
     human: ISO/TS 20282-2:2013
     urn: urn:iso:std:iso:ts:20282:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0180
   input: ISO/TS 20399-1:2018
   identifier:
@@ -2115,6 +2294,7 @@
     human: ISO/TS 20399-1:2018
     urn: urn:iso:std:iso:ts:20399:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0181
   input: ISO/TS 20405:2018
   identifier:
@@ -2126,6 +2306,7 @@
     human: ISO/TS 20405:2018
     urn: urn:iso:std:iso:ts:20405
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0182
   input: ISO/TS 20452:2007
   identifier:
@@ -2137,6 +2318,7 @@
     human: ISO/TS 20452:2007
     urn: urn:iso:std:iso:ts:20452
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0183
   input: ISO/TS 20460:2015
   identifier:
@@ -2148,6 +2330,7 @@
     human: ISO/TS 20460:2015
     urn: urn:iso:std:iso:ts:20460
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0184
   input: ISO/TS 20612:2007
   identifier:
@@ -2159,6 +2342,7 @@
     human: ISO/TS 20612:2007
     urn: urn:iso:std:iso:ts:20612
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0185
   input: ISO/TS 20836:2005
   identifier:
@@ -2170,6 +2354,7 @@
     human: ISO/TS 20836:2005
     urn: urn:iso:std:iso:ts:20836
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0186
   input: ISO/TS 21083-2:2019
   identifier:
@@ -2182,6 +2367,7 @@
     human: ISO/TS 21083-2:2019
     urn: urn:iso:std:iso:ts:21083:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0187
   input: ISO/TS 21189:2019
   identifier:
@@ -2193,6 +2379,7 @@
     human: ISO/TS 21189:2019
     urn: urn:iso:std:iso:ts:21189
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0188
   input: ISO/TS 21193:2019
   identifier:
@@ -2204,6 +2391,7 @@
     human: ISO/TS 21193:2019
     urn: urn:iso:std:iso:ts:21193
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0189
   input: ISO/TS 21256-1
   identifier:
@@ -2215,6 +2403,7 @@
     human: ISO/TS 21256-1
     urn: urn:iso:std:iso:ts:21256:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0190
   input: ISO/TS 21268-1:2007
   identifier:
@@ -2227,6 +2416,7 @@
     human: ISO/TS 21268-1:2007
     urn: urn:iso:std:iso:ts:21268:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0191
   input: ISO/TS 21268-2:2007
   identifier:
@@ -2239,6 +2429,7 @@
     human: ISO/TS 21268-2:2007
     urn: urn:iso:std:iso:ts:21268:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0192
   input: ISO/TS 21268-3:2007
   identifier:
@@ -2251,6 +2442,7 @@
     human: ISO/TS 21268-3:2007
     urn: urn:iso:std:iso:ts:21268:-3
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0193
   input: ISO/TS 21387
   identifier:
@@ -2261,6 +2453,7 @@
     human: ISO/TS 21387
     urn: urn:iso:std:iso:ts:21387
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0194
   input: ISO/TS 21522:2017
   identifier:
@@ -2272,6 +2465,7 @@
     human: ISO/TS 21522:2017
     urn: urn:iso:std:iso:ts:21522
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0195
   input: ISO/TS 21526:2019
   identifier:
@@ -2283,6 +2477,7 @@
     human: ISO/TS 21526:2019
     urn: urn:iso:std:iso:ts:21526
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0196
   input: ISO/TS 21547:2010
   identifier:
@@ -2294,6 +2489,7 @@
     human: ISO/TS 21547:2010
     urn: urn:iso:std:iso:ts:21547
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0197
   input: ISO/TS 21913
   identifier:
@@ -2304,6 +2500,7 @@
     human: ISO/TS 21913
     urn: urn:iso:std:iso:ts:21913
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0198
   input: ISO/TS 21957
   identifier:
@@ -2314,6 +2511,7 @@
     human: ISO/TS 21957
     urn: urn:iso:std:iso:ts:21957
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0199
   input: ISO/TS 22003:2013
   identifier:
@@ -2325,6 +2523,7 @@
     human: ISO/TS 22003:2013
     urn: urn:iso:std:iso:ts:22003
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0200
   input: ISO/TS 22077-4:2019
   identifier:
@@ -2337,6 +2536,7 @@
     human: ISO/TS 22077-4:2019
     urn: urn:iso:std:iso:ts:22077:-4
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0201
   input: ISO/TS 22133-1
   identifier:
@@ -2348,6 +2548,7 @@
     human: ISO/TS 22133-1
     urn: urn:iso:std:iso:ts:22133:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0202
   input: ISO/TS 22163:2017
   identifier:
@@ -2359,6 +2560,7 @@
     human: ISO/TS 22163:2017
     urn: urn:iso:std:iso:ts:22163
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0203
   input: ISO/TS 22239-1:2009
   identifier:
@@ -2371,6 +2573,7 @@
     human: ISO/TS 22239-1:2009
     urn: urn:iso:std:iso:ts:22239:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0204
   input: ISO/TS 22239-1:2018
   identifier:
@@ -2383,6 +2586,7 @@
     human: ISO/TS 22239-1:2018
     urn: urn:iso:std:iso:ts:22239:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0205
   input: ISO/TS 22269:2005
   identifier:
@@ -2394,6 +2598,7 @@
     human: ISO/TS 22269:2005
     urn: urn:iso:std:iso:ts:22269
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0206
   input: ISO/TS 22421
   identifier:
@@ -2404,6 +2609,7 @@
     human: ISO/TS 22421
     urn: urn:iso:std:iso:ts:22421
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0207
   input: ISO/TS 22456
   identifier:
@@ -2414,6 +2620,7 @@
     human: ISO/TS 22456
     urn: urn:iso:std:iso:ts:22456
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0208
   input: ISO/TS 22475-2:2006
   identifier:
@@ -2426,6 +2633,7 @@
     human: ISO/TS 22475-2:2006
     urn: urn:iso:std:iso:ts:22475:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0209
   input: ISO/TS 22476-10:2005
   identifier:
@@ -2438,6 +2646,7 @@
     human: ISO/TS 22476-10:2005
     urn: urn:iso:std:iso:ts:22476:-10
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0210
   input: ISO/TS 22476-11:2005
   identifier:
@@ -2450,6 +2659,7 @@
     human: ISO/TS 22476-11:2005
     urn: urn:iso:std:iso:ts:22476:-11
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0211
   input: ISO/TS 22499:2019
   identifier:
@@ -2461,6 +2671,7 @@
     human: ISO/TS 22499:2019
     urn: urn:iso:std:iso:ts:22499
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0212
   input: ISO/TS 22559-1:2004
   identifier:
@@ -2473,6 +2684,7 @@
     human: ISO/TS 22559-1:2004
     urn: urn:iso:std:iso:ts:22559:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0213
   input: ISO/TS 22559-2:2010
   identifier:
@@ -2485,6 +2697,7 @@
     human: ISO/TS 22559-2:2010
     urn: urn:iso:std:iso:ts:22559:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0214
   input: ISO/TS 22559-3:2011
   identifier:
@@ -2497,6 +2710,7 @@
     human: ISO/TS 22559-3:2011
     urn: urn:iso:std:iso:ts:22559:-3
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0215
   input: ISO/TS 22559-4:2011
   identifier:
@@ -2509,6 +2723,7 @@
     human: ISO/TS 22559-4:2011
     urn: urn:iso:std:iso:ts:22559:-4
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0216
   input: ISO/TS 22583
   identifier:
@@ -2519,6 +2734,7 @@
     human: ISO/TS 22583
     urn: urn:iso:std:iso:ts:22583
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0217
   input: ISO/TS 22756
   identifier:
@@ -2529,6 +2745,7 @@
     human: ISO/TS 22756
     urn: urn:iso:std:iso:ts:22756
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0218
   input: ISO/TS 22911:2005
   identifier:
@@ -2540,6 +2757,7 @@
     human: ISO/TS 22911:2005
     urn: urn:iso:std:iso:ts:22911
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0219
   input: ISO/TS 22911:2016
   identifier:
@@ -2551,6 +2769,7 @@
     human: ISO/TS 22911:2016
     urn: urn:iso:std:iso:ts:22911
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0220
   input: ISO/TS 23016-1:2019
   identifier:
@@ -2563,6 +2782,7 @@
     human: ISO/TS 23016-1:2019
     urn: urn:iso:std:iso:ts:23016:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0221
   input: ISO/TS 23051
   identifier:
@@ -2573,6 +2793,7 @@
     human: ISO/TS 23051
     urn: urn:iso:std:iso:ts:23051
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0222
   input: ISO/TS 23128
   identifier:
@@ -2583,6 +2804,7 @@
     human: ISO/TS 23128
     urn: urn:iso:std:iso:ts:23128
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0223
   input: ISO/TS 23165:2006
   identifier:
@@ -2594,6 +2816,7 @@
     human: ISO/TS 23165:2006
     urn: urn:iso:std:iso:ts:23165
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0224
   input: ISO/TS 23258
   identifier:
@@ -2604,6 +2827,7 @@
     human: ISO/TS 23258
     urn: urn:iso:std:iso:ts:23258
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0225
   input: ISO/TS 23261
   identifier:
@@ -2614,6 +2838,7 @@
     human: ISO/TS 23261
     urn: urn:iso:std:iso:ts:23261
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0226
   input: ISO/TS 23406
   identifier:
@@ -2624,6 +2849,7 @@
     human: ISO/TS 23406
     urn: urn:iso:std:iso:ts:23406
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0227
   input: ISO/TS 23520
   identifier:
@@ -2634,6 +2860,7 @@
     human: ISO/TS 23520
     urn: urn:iso:std:iso:ts:23520
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0228
   input: ISO/TS 23565
   identifier:
@@ -2644,6 +2871,7 @@
     human: ISO/TS 23565
     urn: urn:iso:std:iso:ts:23565
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0229
   input: ISO/TS 23657
   identifier:
@@ -2654,6 +2882,7 @@
     human: ISO/TS 23657
     urn: urn:iso:std:iso:ts:23657
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0230
   input: ISO/TS 23810:2006
   identifier:
@@ -2665,6 +2894,7 @@
     human: ISO/TS 23810:2006
     urn: urn:iso:std:iso:ts:23810
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0231
   input: ISO/TS 23810:2012
   identifier:
@@ -2676,6 +2906,7 @@
     human: ISO/TS 23810:2012
     urn: urn:iso:std:iso:ts:23810
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0232
   input: ISO/TS 23810:2018
   identifier:
@@ -2687,6 +2918,7 @@
     human: ISO/TS 23810:2018
     urn: urn:iso:std:iso:ts:23810
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0233
   input: ISO/TS 24155:2007
   identifier:
@@ -2698,6 +2930,7 @@
     human: ISO/TS 24155:2007
     urn: urn:iso:std:iso:ts:24155
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0234
   input: ISO/TS 24172
   identifier:
@@ -2708,6 +2941,7 @@
     human: ISO/TS 24172
     urn: urn:iso:std:iso:ts:24172
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0235
   input: ISO/TS 24399
   identifier:
@@ -2718,6 +2952,7 @@
     human: ISO/TS 24399
     urn: urn:iso:std:iso:ts:24399
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0236
   input: ISO/TS 24534-2:2007
   identifier:
@@ -2730,6 +2965,7 @@
     human: ISO/TS 24534-2:2007
     urn: urn:iso:std:iso:ts:24534:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0237
   input: ISO/TS 24817:2006
   identifier:
@@ -2741,6 +2977,7 @@
     human: ISO/TS 24817:2006
     urn: urn:iso:std:iso:ts:24817
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0238
   input: ISO/TS 24817:2011
   identifier:
@@ -2752,6 +2989,7 @@
     human: ISO/TS 24817:2011
     urn: urn:iso:std:iso:ts:24817
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0239
   input: ISO/TS 25107:2019
   identifier:
@@ -2763,6 +3001,7 @@
     human: ISO/TS 25107:2019
     urn: urn:iso:std:iso:ts:25107
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0240
   input: ISO/TS 25108:2018
   identifier:
@@ -2774,6 +3013,7 @@
     human: ISO/TS 25108:2018
     urn: urn:iso:std:iso:ts:25108
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0241
   input: ISO/TS 25238
   identifier:
@@ -2784,6 +3024,7 @@
     human: ISO/TS 25238
     urn: urn:iso:std:iso:ts:25238
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0242
   input: ISO/TS 27469:2010
   identifier:
@@ -2795,6 +3036,7 @@
     human: ISO/TS 27469:2010
     urn: urn:iso:std:iso:ts:27469
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0243
   input: ISO/TS 27469:2011
   identifier:
@@ -2806,6 +3048,7 @@
     human: ISO/TS 27469:2011
     urn: urn:iso:std:iso:ts:27469
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0244
   input: ISO/TS 29001:2003
   identifier:
@@ -2817,6 +3060,7 @@
     human: ISO/TS 29001:2003
     urn: urn:iso:std:iso:ts:29001
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0245
   input: ISO/TS 29001:2007
   identifier:
@@ -2828,6 +3072,7 @@
     human: ISO/TS 29001:2007
     urn: urn:iso:std:iso:ts:29001
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0246
   input: ISO/TS 29001:2010
   identifier:
@@ -2839,6 +3084,7 @@
     human: ISO/TS 29001:2010
     urn: urn:iso:std:iso:ts:29001
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0247
   input: ISO/TS 29001:2011
   identifier:
@@ -2850,6 +3096,7 @@
     human: ISO/TS 29001:2011
     urn: urn:iso:std:iso:ts:29001
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0248
   input: ISO/TS 29062:2009
   identifier:
@@ -2861,6 +3108,7 @@
     human: ISO/TS 29062:2009
     urn: urn:iso:std:iso:ts:29062
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0249
   input: ISO/TS 34700:2016
   identifier:
@@ -2872,6 +3120,7 @@
     human: ISO/TS 34700:2016
     urn: urn:iso:std:iso:ts:34700
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0250
   input: ISO/TS 3632-2:2003
   identifier:
@@ -2884,6 +3133,7 @@
     human: ISO/TS 3632-2:2003
     urn: urn:iso:std:iso:ts:3632:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0251
   input: ISO/TS 3691-7:2011
   identifier:
@@ -2896,6 +3146,7 @@
     human: ISO/TS 3691-7:2011
     urn: urn:iso:std:iso:ts:3691:-7
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0252
   input: ISO/TS 3691-8:2012
   identifier:
@@ -2908,6 +3159,7 @@
     human: ISO/TS 3691-8:2012
     urn: urn:iso:std:iso:ts:3691:-8
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0253
   input: ISO/TS 3691-8:2019
   identifier:
@@ -2920,6 +3172,7 @@
     human: ISO/TS 3691-8:2019
     urn: urn:iso:std:iso:ts:3691:-8
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0254
   input: ISO/TS 37151:2015
   identifier:
@@ -2931,6 +3184,7 @@
     human: ISO/TS 37151:2015
     urn: urn:iso:std:iso:ts:37151
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0255
   input: ISO/TS 3716
   identifier:
@@ -2941,6 +3195,7 @@
     human: ISO/TS 3716
     urn: urn:iso:std:iso:ts:3716
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0256
   input: ISO/TS 3716:2006
   identifier:
@@ -2952,6 +3207,7 @@
     human: ISO/TS 3716:2006
     urn: urn:iso:std:iso:ts:3716
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0257
   input: ISO/TS 3814:2014
   identifier:
@@ -2963,6 +3219,7 @@
     human: ISO/TS 3814:2014
     urn: urn:iso:std:iso:ts:3814
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0258
   input: ISO/TS 4869-5:2006
   identifier:
@@ -2975,6 +3232,7 @@
     human: ISO/TS 4869-5:2006
     urn: urn:iso:std:iso:ts:4869:-5
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0259
   input: ISO/TS 54001:2019
   identifier:
@@ -2986,6 +3244,7 @@
     human: ISO/TS 54001:2019
     urn: urn:iso:std:iso:ts:54001
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0260
   input: ISO/TS 5658-1:2006
   identifier:
@@ -2998,6 +3257,7 @@
     human: ISO/TS 5658-1:2006
     urn: urn:iso:std:iso:ts:5658:-1
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0261
   input: ISO/TS 5660-4:2016
   identifier:
@@ -3010,6 +3270,7 @@
     human: ISO/TS 5660-4:2016
     urn: urn:iso:std:iso:ts:5660:-4
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0262
   input: ISO/TS 7240-30
   identifier:
@@ -3021,6 +3282,7 @@
     human: ISO/TS 7240-30
     urn: urn:iso:std:iso:ts:7240:-30
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0263
   input: ISO/TS 7240-9:2006
   identifier:
@@ -3033,6 +3295,7 @@
     human: ISO/TS 7240-9:2006
     urn: urn:iso:std:iso:ts:7240:-9
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0264
   input: ISO/TS 7240-9:2012
   identifier:
@@ -3045,6 +3308,7 @@
     human: ISO/TS 7240-9:2012
     urn: urn:iso:std:iso:ts:7240:-9
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0265
   input: ISO/TS 7821:2005
   identifier:
@@ -3056,6 +3320,7 @@
     human: ISO/TS 7821:2005
     urn: urn:iso:std:iso:ts:7821
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0266
   input: ISO/TS 80004-3:2010(F)
   identifier:
@@ -3071,6 +3336,7 @@
     human: ISO/TS 80004-3:2010(F)
     urn: urn:iso:std:iso:ts:80004:-3:fr
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0267
   input: ISO/TS 80004-3:2010(fr)
   identifier:
@@ -3086,6 +3352,7 @@
     human: ISO/TS 80004-3:2010(fr)
     urn: urn:iso:std:iso:ts:80004:-3:fr
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0268
   input: ISO/TS 8100-21:2018
   identifier:
@@ -3098,6 +3365,7 @@
     human: ISO/TS 8100-21:2018
     urn: urn:iso:std:iso:ts:8100:-21
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0269
   input: ISO/TS 8100-3:2019
   identifier:
@@ -3110,6 +3378,7 @@
     human: ISO/TS 8100-3:2019
     urn: urn:iso:std:iso:ts:8100:-3
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0270
   input: ISO/TS 81060-4
   identifier:
@@ -3121,6 +3390,7 @@
     human: ISO/TS 81060-4
     urn: urn:iso:std:iso:ts:81060:-4
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0271
   input: ISO/TS 81060-5
   identifier:
@@ -3132,6 +3402,7 @@
     human: ISO/TS 81060-5
     urn: urn:iso:std:iso:ts:81060:-5
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0272
   input: ISO/TS 82304-2
   identifier:
@@ -3143,6 +3414,7 @@
     human: ISO/TS 82304-2
     urn: urn:iso:std:iso:ts:82304:-2
   roundtrip: true
+  style: v3
 - id: iso.technical_specification.0273
   input: ISO/TS 8611-4:2013
   identifier:
@@ -3155,3 +3427,4 @@
     human: ISO/TS 8611-4:2013
     urn: urn:iso:std:iso:ts:8611:-4
   roundtrip: true
+  style: v3

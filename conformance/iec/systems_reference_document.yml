@@ -11,6 +11,7 @@
     human: IEC SRD 62559-4:2020
     urn: 'urn:iec:std:iec:62559-4:2020:srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0002
   input: IEC SRD 62913-1:2019
   identifier:
@@ -23,6 +24,7 @@
     human: IEC SRD 62913-1:2019
     urn: 'urn:iec:std:iec:62913-1:2019:srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0003
   input: IEC SRD 62913-2-1:2019
   identifier:
@@ -36,6 +38,7 @@
     human: IEC SRD 62913-2-1:2019
     urn: 'urn:iec:std:iec:62913-2-1:2019:srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0004
   input: IEC SRD 62913-2-2:2019
   identifier:
@@ -49,6 +52,7 @@
     human: IEC SRD 62913-2-2:2019
     urn: 'urn:iec:std:iec:62913-2-2:2019:srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0005
   input: IEC SRD 62913-2-3:2019
   identifier:
@@ -62,6 +66,7 @@
     human: IEC SRD 62913-2-3:2019
     urn: 'urn:iec:std:iec:62913-2-3:2019:srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0006
   input: IEC SRD 62913-2-4:2019
   identifier:
@@ -75,6 +80,7 @@
     human: IEC SRD 62913-2-4:2019
     urn: 'urn:iec:std:iec:62913-2-4:2019:srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0007
   input: IEC SRD 63199:2020
   identifier:
@@ -86,6 +92,7 @@
     human: IEC SRD 63199:2020
     urn: 'urn:iec:std:iec:63199:2020:srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0008
   input: IEC SRD 63200:2021
   identifier:
@@ -97,6 +104,7 @@
     human: IEC SRD 63200:2021
     urn: 'urn:iec:std:iec:63200:2021:srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0009
   input: IEC SRD 63219:2022
   identifier:
@@ -108,6 +116,7 @@
     human: IEC SRD 63219:2022
     urn: 'urn:iec:std:iec:63219:2022:srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0010
   input: IEC SRD 63234-1:2020
   identifier:
@@ -120,6 +129,7 @@
     human: IEC SRD 63234-1:2020
     urn: 'urn:iec:std:iec:63234-1:2020:srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0011
   input: IEC SRD 63234-2:2020
   identifier:
@@ -132,6 +142,7 @@
     human: IEC SRD 63234-2:2020
     urn: 'urn:iec:std:iec:63234-2:2020:srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0012
   input: IEC SRD 63255-2 ED1
   identifier:
@@ -145,6 +156,7 @@
     human: IEC SRD 63255-2 ED1
     urn: 'urn:iec:std:iec:63255-2::srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0013
   input: IEC SRD 63268:2020
   identifier:
@@ -156,6 +168,7 @@
     human: IEC SRD 63268:2020
     urn: 'urn:iec:std:iec:63268:2020:srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0014
   input: IEC SRD 63271-1 ED1
   identifier:
@@ -169,6 +182,7 @@
     human: IEC SRD 63271-1 ED1
     urn: 'urn:iec:std:iec:63271-1::srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0015
   input: IEC SRD 63271-2 ED1
   identifier:
@@ -182,6 +196,7 @@
     human: IEC SRD 63271-2 ED1
     urn: 'urn:iec:std:iec:63271-2::srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0016
   input: IEC SRD 63314 ED1
   identifier:
@@ -194,6 +209,7 @@
     human: IEC SRD 63314 ED1
     urn: 'urn:iec:std:iec:63314::srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0017
   input: IEC SRD 63317 ED1
   identifier:
@@ -206,6 +222,7 @@
     human: IEC SRD 63317 ED1
     urn: 'urn:iec:std:iec:63317::srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0018
   input: IEC SRD 63408 ED1
   identifier:
@@ -218,6 +235,7 @@
     human: IEC SRD 63408 ED1
     urn: 'urn:iec:std:iec:63408::srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0019
   input: IEC SRD 63416 ED1
   identifier:
@@ -230,6 +248,7 @@
     human: IEC SRD 63416 ED1
     urn: 'urn:iec:std:iec:63416::srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0020
   input: IEC SRD 63420 ED1
   identifier:
@@ -242,6 +261,7 @@
     human: IEC SRD 63420 ED1
     urn: 'urn:iec:std:iec:63420::srd::'
   roundtrip: true
+  style: v3
 - id: iec.systems_reference_document.0021
   input: IEC SRD 63426 ED1
   identifier:
@@ -254,3 +274,4 @@
     human: IEC SRD 63426 ED1
     urn: 'urn:iec:std:iec:63426::srd::'
   roundtrip: true
+  style: v3

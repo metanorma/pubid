@@ -16,6 +16,7 @@
     human: IEC 60695-2-1/0:1994
     urn: 'urn:iec:std:iec:60695-2-1::::'
   roundtrip: true
+  style: v3
 - id: iec.sheet_identifier.0002
   input: IEC 60695-2-1/1:1994
   identifier:
@@ -33,6 +34,7 @@
     human: IEC 60695-2-1/1:1994
     urn: 'urn:iec:std:iec:60695-2-1::::'
   roundtrip: true
+  style: v3
 - id: iec.sheet_identifier.0003
   input: IEC 60695-2-1/2:1994
   identifier:
@@ -50,6 +52,7 @@
     human: IEC 60695-2-1/2:1994
     urn: 'urn:iec:std:iec:60695-2-1::::'
   roundtrip: true
+  style: v3
 - id: iec.sheet_identifier.0004
   input: IEC 60695-2-1/3:1994
   identifier:
@@ -67,6 +70,7 @@
     human: IEC 60695-2-1/3:1994
     urn: 'urn:iec:std:iec:60695-2-1::::'
   roundtrip: true
+  style: v3
 - id: iec.sheet_identifier.0005
   input: IEC 60695-2-4/1:1991
   identifier:
@@ -84,6 +88,7 @@
     human: IEC 60695-2-4/1:1991
     urn: 'urn:iec:std:iec:60695-2-4::::'
   roundtrip: true
+  style: v3
 - id: iec.sheet_identifier.0006
   input: IEC TS 60695-2-4/2:1994
   identifier:
@@ -101,3 +106,4 @@
     human: IEC TS 60695-2-4/2:1994
     urn: 'urn:iec:std:iec:60695-2-4::ts::'
   roundtrip: true
+  style: v3

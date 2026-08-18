@@ -17,6 +17,7 @@
     human: CISPR 12:2007/AMD1:2009
     urn: urn:iec:std:cispr:12:2007:::::amd:1:2009
   roundtrip: true
+  style: v3
 - id: iec.amendment.0002
   input: CISPR 16-1-2:2014/AMD1:2017
   identifier:
@@ -37,6 +38,7 @@
     human: CISPR 16-1-2:2014/AMD1:2017
     urn: urn:iec:std:cispr:16-1-2:2014:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0003
   input: CISPR 16-1-3:2004/AMD1:2016
   identifier:
@@ -57,6 +59,7 @@
     human: CISPR 16-1-3:2004/AMD1:2016
     urn: urn:iec:std:cispr:16-1-3:2004:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0004
   input: CISPR 16-1-3:2004/AMD2:2020
   identifier:
@@ -77,27 +80,8 @@
     human: CISPR 16-1-3:2004/AMD2:2020
     urn: urn:iec:std:cispr:16-1-3:2004:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0005
-  input: CISPR 16-1-4:2019/AMD1:2020
-  identifier:
-    type: amendment
-    components:
-      number: '1'
-      year: '2020'
-      publisher: CISPR
-    base:
-      type: international_standard
-      components:
-        number: '16'
-        part: '1'
-        subpart: '4'
-        year: '2019'
-        publisher: CISPR
-  representations:
-    human: CISPR 16-1-4:2019/AMD1:2020
-    urn: urn:iec:std:cispr:16-1-4:2019:::::amd:1:2020
-  roundtrip: true
-- id: iec.amendment.0006
   input: CISPR 16-1-4/AMD2 ED4
   identifier:
     type: amendment
@@ -117,6 +101,28 @@
     human: CISPR 16-1-4/AMD2 ED4
     urn: 'urn:iec:std:cispr:16-1-4::::::amd:2:'
   roundtrip: true
+  style: v3
+- id: iec.amendment.0006
+  input: CISPR 16-1-4:2019/AMD1:2020
+  identifier:
+    type: amendment
+    components:
+      number: '1'
+      year: '2020'
+      publisher: CISPR
+    base:
+      type: international_standard
+      components:
+        number: '16'
+        part: '1'
+        subpart: '4'
+        year: '2019'
+        publisher: CISPR
+  representations:
+    human: CISPR 16-1-4:2019/AMD1:2020
+    urn: urn:iec:std:cispr:16-1-4:2019:::::amd:1:2020
+  roundtrip: true
+  style: v3
 - id: iec.amendment.0007
   input: CISPR 16-1-5:2014/AMD1:2016
   identifier:
@@ -137,6 +143,7 @@
     human: CISPR 16-1-5:2014/AMD1:2016
     urn: urn:iec:std:cispr:16-1-5:2014:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0008
   input: CISPR 16-1-6:2014/AMD1:2017
   identifier:
@@ -157,6 +164,7 @@
     human: CISPR 16-1-6:2014/AMD1:2017
     urn: urn:iec:std:cispr:16-1-6:2014:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0009
   input: CISPR 16-1-6:2014/AMD2:2022
   identifier:
@@ -177,6 +185,7 @@
     human: CISPR 16-1-6:2014/AMD2:2022
     urn: urn:iec:std:cispr:16-1-6:2014:::::amd:2:2022
   roundtrip: true
+  style: v3
 - id: iec.amendment.0010
   input: CISPR 16-2-1:2014/AMD1:2017
   identifier:
@@ -197,27 +206,8 @@
     human: CISPR 16-2-1:2014/AMD1:2017
     urn: urn:iec:std:cispr:16-2-1:2014:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0011
-  input: CISPR 16-2-3:2016/AMD1:2019
-  identifier:
-    type: amendment
-    components:
-      number: '1'
-      year: '2019'
-      publisher: CISPR
-    base:
-      type: international_standard
-      components:
-        number: '16'
-        part: '2'
-        subpart: '3'
-        year: '2016'
-        publisher: CISPR
-  representations:
-    human: CISPR 16-2-3:2016/AMD1:2019
-    urn: urn:iec:std:cispr:16-2-3:2016:::::amd:1:2019
-  roundtrip: true
-- id: iec.amendment.0012
   input: CISPR 16-2-3/AMD2 ED4
   identifier:
     type: amendment
@@ -237,6 +227,28 @@
     human: CISPR 16-2-3/AMD2 ED4
     urn: 'urn:iec:std:cispr:16-2-3::::::amd:2:'
   roundtrip: true
+  style: v3
+- id: iec.amendment.0012
+  input: CISPR 16-2-3:2016/AMD1:2019
+  identifier:
+    type: amendment
+    components:
+      number: '1'
+      year: '2019'
+      publisher: CISPR
+    base:
+      type: international_standard
+      components:
+        number: '16'
+        part: '2'
+        subpart: '3'
+        year: '2016'
+        publisher: CISPR
+  representations:
+    human: CISPR 16-2-3:2016/AMD1:2019
+    urn: urn:iec:std:cispr:16-2-3:2016:::::amd:1:2019
+  roundtrip: true
+  style: v3
 - id: iec.amendment.0013
   input: CISPR 16-4-2:2011/AMD1:2014
   identifier:
@@ -257,6 +269,7 @@
     human: CISPR 16-4-2:2011/AMD1:2014
     urn: urn:iec:std:cispr:16-4-2:2011:::::amd:1:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0014
   input: CISPR 16-4-2:2011/AMD2:2018
   identifier:
@@ -277,6 +290,7 @@
     human: CISPR 16-4-2:2011/AMD2:2018
     urn: urn:iec:std:cispr:16-4-2:2011:::::amd:2:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0015
   input: CISPR 36/AMD1 ED1
   identifier:
@@ -295,6 +309,7 @@
     human: CISPR 36/AMD1 ED1
     urn: 'urn:iec:std:cispr:36::::::amd:1:'
   roundtrip: true
+  style: v3
 - id: iec.amendment.0016
   input: CISPR TR 16-4-3:2004/AMD1:2006
   identifier:
@@ -315,6 +330,7 @@
     human: CISPR TR 16-4-3:2004/AMD1:2006
     urn: urn:iec:std:cispr:16-4-3:2004:tr::::amd:1:2006
   roundtrip: true
+  style: v3
 - id: iec.amendment.0017
   input: CISPR TR 16-4-5:2006/AMD1:2014
   identifier:
@@ -335,6 +351,7 @@
     human: CISPR TR 16-4-5:2006/AMD1:2014
     urn: urn:iec:std:cispr:16-4-5:2006:tr::::amd:1:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0018
   input: CISPR TR 16-4-5:2006/AMD2:2021
   identifier:
@@ -355,6 +372,7 @@
     human: CISPR TR 16-4-5:2006/AMD2:2021
     urn: urn:iec:std:cispr:16-4-5:2006:tr::::amd:2:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0019
   input: IEC 60050-102:2007/AMD1:2017
   identifier:
@@ -372,6 +390,7 @@
     human: IEC 60050-102:2007/AMD1:2017
     urn: urn:iec:std:iec:60050-102:2007:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0020
   input: IEC 60050-102:2007/AMD1:2017 ED1
   identifier:
@@ -391,6 +410,7 @@
     human: IEC 60050-102:2007/AMD1:2017 ED1
     urn: urn:iec:std:iec:60050-102:2007:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0021
   input: IEC 60050-102:2007/AMD2:2020
   identifier:
@@ -408,6 +428,7 @@
     human: IEC 60050-102:2007/AMD2:2020
     urn: urn:iec:std:iec:60050-102:2007:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0022
   input: IEC 60050-102:2007/AMD2:2020 ED1
   identifier:
@@ -427,6 +448,7 @@
     human: IEC 60050-102:2007/AMD2:2020 ED1
     urn: urn:iec:std:iec:60050-102:2007:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0023
   input: IEC 60050-102:2007/AMD3:2021
   identifier:
@@ -444,6 +466,7 @@
     human: IEC 60050-102:2007/AMD3:2021
     urn: urn:iec:std:iec:60050-102:2007:::::amd:3:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0024
   input: IEC 60050-102:2007/AMD3:2021 ED1
   identifier:
@@ -463,6 +486,7 @@
     human: IEC 60050-102:2007/AMD3:2021 ED1
     urn: urn:iec:std:iec:60050-102:2007:::::amd:3:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0025
   input: IEC 60050-103:2009/AMD1:2017
   identifier:
@@ -480,6 +504,7 @@
     human: IEC 60050-103:2009/AMD1:2017
     urn: urn:iec:std:iec:60050-103:2009:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0026
   input: IEC 60050-103:2009/AMD1:2017 ED1
   identifier:
@@ -499,6 +524,7 @@
     human: IEC 60050-103:2009/AMD1:2017 ED1
     urn: urn:iec:std:iec:60050-103:2009:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0027
   input: IEC 60050-103:2009/AMD2:2019
   identifier:
@@ -516,6 +542,7 @@
     human: IEC 60050-103:2009/AMD2:2019
     urn: urn:iec:std:iec:60050-103:2009:::::amd:2:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0028
   input: IEC 60050-103:2009/AMD2:2019 ED1
   identifier:
@@ -535,6 +562,7 @@
     human: IEC 60050-103:2009/AMD2:2019 ED1
     urn: urn:iec:std:iec:60050-103:2009:::::amd:2:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0029
   input: IEC 60050-103:2009/AMD3:2020
   identifier:
@@ -552,6 +580,7 @@
     human: IEC 60050-103:2009/AMD3:2020
     urn: urn:iec:std:iec:60050-103:2009:::::amd:3:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0030
   input: IEC 60050-103:2009/AMD3:2020 ED1
   identifier:
@@ -571,6 +600,7 @@
     human: IEC 60050-103:2009/AMD3:2020 ED1
     urn: urn:iec:std:iec:60050-103:2009:::::amd:3:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0031
   input: IEC 60050-103:2009/AMD4:2021
   identifier:
@@ -588,6 +618,7 @@
     human: IEC 60050-103:2009/AMD4:2021
     urn: urn:iec:std:iec:60050-103:2009:::::amd:4:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0032
   input: IEC 60050-103:2009/AMD4:2021 ED1
   identifier:
@@ -607,6 +638,7 @@
     human: IEC 60050-103:2009/AMD4:2021 ED1
     urn: urn:iec:std:iec:60050-103:2009:::::amd:4:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0033
   input: IEC 60050-111:1996/AMD1:2005
   identifier:
@@ -624,6 +656,7 @@
     human: IEC 60050-111:1996/AMD1:2005
     urn: urn:iec:std:iec:60050-111:1996:::::amd:1:2005
   roundtrip: true
+  style: v3
 - id: iec.amendment.0034
   input: IEC 60050-111:1996/AMD1:2005 ED2
   identifier:
@@ -643,6 +676,7 @@
     human: IEC 60050-111:1996/AMD1:2005 ED2
     urn: urn:iec:std:iec:60050-111:1996:::::amd:1:2005
   roundtrip: true
+  style: v3
 - id: iec.amendment.0035
   input: IEC 60050-112:2010/AMD1:2019
   identifier:
@@ -660,6 +694,7 @@
     human: IEC 60050-112:2010/AMD1:2019
     urn: urn:iec:std:iec:60050-112:2010:::::amd:1:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0036
   input: IEC 60050-112:2010/AMD1:2019 ED1
   identifier:
@@ -679,6 +714,7 @@
     human: IEC 60050-112:2010/AMD1:2019 ED1
     urn: urn:iec:std:iec:60050-112:2010:::::amd:1:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0037
   input: IEC 60050-112:2010/AMD2:2020
   identifier:
@@ -696,6 +732,7 @@
     human: IEC 60050-112:2010/AMD2:2020
     urn: urn:iec:std:iec:60050-112:2010:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0038
   input: IEC 60050-112:2010/AMD2:2020 ED1
   identifier:
@@ -715,7 +752,26 @@
     human: IEC 60050-112:2010/AMD2:2020 ED1
     urn: urn:iec:std:iec:60050-112:2010:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0039
+  input: IEC 60050-113/AMD5 ED1
+  identifier:
+    type: amendment
+    components:
+      number: '5'
+      edition:
+        number: '1'
+    base:
+      type: international_standard
+      components:
+        number: '60050'
+        part: '113'
+  representations:
+    human: IEC 60050-113/AMD5 ED1
+    urn: 'urn:iec:std:iec:60050-113::::::amd:5:'
+  roundtrip: true
+  style: v3
+- id: iec.amendment.0040
   input: IEC 60050-113:2011/AMD1:2014
   identifier:
     type: amendment
@@ -732,7 +788,8 @@
     human: IEC 60050-113:2011/AMD1:2014
     urn: urn:iec:std:iec:60050-113:2011:::::amd:1:2014
   roundtrip: true
-- id: iec.amendment.0040
+  style: v3
+- id: iec.amendment.0041
   input: IEC 60050-113:2011/AMD1:2014 ED1
   identifier:
     type: amendment
@@ -751,7 +808,8 @@
     human: IEC 60050-113:2011/AMD1:2014 ED1
     urn: urn:iec:std:iec:60050-113:2011:::::amd:1:2014
   roundtrip: true
-- id: iec.amendment.0041
+  style: v3
+- id: iec.amendment.0042
   input: IEC 60050-113:2011/AMD2:2019
   identifier:
     type: amendment
@@ -768,7 +826,8 @@
     human: IEC 60050-113:2011/AMD2:2019
     urn: urn:iec:std:iec:60050-113:2011:::::amd:2:2019
   roundtrip: true
-- id: iec.amendment.0042
+  style: v3
+- id: iec.amendment.0043
   input: IEC 60050-113:2011/AMD2:2019 ED1
   identifier:
     type: amendment
@@ -787,7 +846,8 @@
     human: IEC 60050-113:2011/AMD2:2019 ED1
     urn: urn:iec:std:iec:60050-113:2011:::::amd:2:2019
   roundtrip: true
-- id: iec.amendment.0043
+  style: v3
+- id: iec.amendment.0044
   input: IEC 60050-113:2011/AMD3:2020
   identifier:
     type: amendment
@@ -804,7 +864,8 @@
     human: IEC 60050-113:2011/AMD3:2020
     urn: urn:iec:std:iec:60050-113:2011:::::amd:3:2020
   roundtrip: true
-- id: iec.amendment.0044
+  style: v3
+- id: iec.amendment.0045
   input: IEC 60050-113:2011/AMD3:2020 ED1
   identifier:
     type: amendment
@@ -823,7 +884,8 @@
     human: IEC 60050-113:2011/AMD3:2020 ED1
     urn: urn:iec:std:iec:60050-113:2011:::::amd:3:2020
   roundtrip: true
-- id: iec.amendment.0045
+  style: v3
+- id: iec.amendment.0046
   input: IEC 60050-113:2011/AMD4:2020
   identifier:
     type: amendment
@@ -840,7 +902,8 @@
     human: IEC 60050-113:2011/AMD4:2020
     urn: urn:iec:std:iec:60050-113:2011:::::amd:4:2020
   roundtrip: true
-- id: iec.amendment.0046
+  style: v3
+- id: iec.amendment.0047
   input: IEC 60050-113:2011/AMD4:2020 ED1
   identifier:
     type: amendment
@@ -859,23 +922,7 @@
     human: IEC 60050-113:2011/AMD4:2020 ED1
     urn: urn:iec:std:iec:60050-113:2011:::::amd:4:2020
   roundtrip: true
-- id: iec.amendment.0047
-  input: IEC 60050-113/AMD5 ED1
-  identifier:
-    type: amendment
-    components:
-      number: '5'
-      edition:
-        number: '1'
-    base:
-      type: international_standard
-      components:
-        number: '60050'
-        part: '113'
-  representations:
-    human: IEC 60050-113/AMD5 ED1
-    urn: 'urn:iec:std:iec:60050-113::::::amd:5:'
-  roundtrip: true
+  style: v3
 - id: iec.amendment.0048
   input: IEC 60050-114:2014/AMD1:2017
   identifier:
@@ -893,6 +940,7 @@
     human: IEC 60050-114:2014/AMD1:2017
     urn: urn:iec:std:iec:60050-114:2014:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0049
   input: IEC 60050-114:2014/AMD1:2017 ED1
   identifier:
@@ -912,6 +960,7 @@
     human: IEC 60050-114:2014/AMD1:2017 ED1
     urn: urn:iec:std:iec:60050-114:2014:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0050
   input: IEC 60050-121:1998/AMD1:2002
   identifier:
@@ -929,6 +978,7 @@
     human: IEC 60050-121:1998/AMD1:2002
     urn: urn:iec:std:iec:60050-121:1998:::::amd:1:2002
   roundtrip: true
+  style: v3
 - id: iec.amendment.0051
   input: IEC 60050-121:1998/AMD1:2002 ED2
   identifier:
@@ -948,6 +998,7 @@
     human: IEC 60050-121:1998/AMD1:2002 ED2
     urn: urn:iec:std:iec:60050-121:1998:::::amd:1:2002
   roundtrip: true
+  style: v3
 - id: iec.amendment.0052
   input: IEC 60050-121:1998/AMD2:2008
   identifier:
@@ -965,6 +1016,7 @@
     human: IEC 60050-121:1998/AMD2:2008
     urn: urn:iec:std:iec:60050-121:1998:::::amd:2:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0053
   input: IEC 60050-121:1998/AMD2:2008 ED2
   identifier:
@@ -984,6 +1036,7 @@
     human: IEC 60050-121:1998/AMD2:2008 ED2
     urn: urn:iec:std:iec:60050-121:1998:::::amd:2:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0054
   input: IEC 60050-121:1998/AMD3:2019
   identifier:
@@ -1001,6 +1054,7 @@
     human: IEC 60050-121:1998/AMD3:2019
     urn: urn:iec:std:iec:60050-121:1998:::::amd:3:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0055
   input: IEC 60050-121:1998/AMD3:2019 ED2
   identifier:
@@ -1020,6 +1074,7 @@
     human: IEC 60050-121:1998/AMD3:2019 ED2
     urn: urn:iec:std:iec:60050-121:1998:::::amd:3:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0056
   input: IEC 60050-121:1998/AMD4:2021
   identifier:
@@ -1037,6 +1092,7 @@
     human: IEC 60050-121:1998/AMD4:2021
     urn: urn:iec:std:iec:60050-121:1998:::::amd:4:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0057
   input: IEC 60050-121:1998/AMD4:2021 ED2
   identifier:
@@ -1056,6 +1112,7 @@
     human: IEC 60050-121:1998/AMD4:2021 ED2
     urn: urn:iec:std:iec:60050-121:1998:::::amd:4:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0058
   input: IEC 60050-121:1998/AMD5:2021
   identifier:
@@ -1073,6 +1130,7 @@
     human: IEC 60050-121:1998/AMD5:2021
     urn: urn:iec:std:iec:60050-121:1998:::::amd:5:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0059
   input: IEC 60050-121:1998/AMD5:2021 ED2
   identifier:
@@ -1092,6 +1150,7 @@
     human: IEC 60050-121:1998/AMD5:2021 ED2
     urn: urn:iec:std:iec:60050-121:1998:::::amd:5:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0060
   input: IEC 60050-131:1978/AMD1:1984
   identifier:
@@ -1109,6 +1168,7 @@
     human: IEC 60050-131:1978/AMD1:1984
     urn: urn:iec:std:iec:60050-131:1978:::::amd:1:1984
   roundtrip: true
+  style: v3
 - id: iec.amendment.0061
   input: IEC 60050-131:1978/AMD1:1984 ED1
   identifier:
@@ -1128,6 +1188,7 @@
     human: IEC 60050-131:1978/AMD1:1984 ED1
     urn: urn:iec:std:iec:60050-131:1978:::::amd:1:1984
   roundtrip: true
+  style: v3
 - id: iec.amendment.0062
   input: IEC 60050-131:2002/AMD1:2008
   identifier:
@@ -1145,6 +1206,7 @@
     human: IEC 60050-131:2002/AMD1:2008
     urn: urn:iec:std:iec:60050-131:2002:::::amd:1:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0063
   input: IEC 60050-131:2002/AMD1:2008 ED2
   identifier:
@@ -1164,6 +1226,7 @@
     human: IEC 60050-131:2002/AMD1:2008 ED2
     urn: urn:iec:std:iec:60050-131:2002:::::amd:1:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0064
   input: IEC 60050-131:2002/AMD2:2013
   identifier:
@@ -1181,6 +1244,7 @@
     human: IEC 60050-131:2002/AMD2:2013
     urn: urn:iec:std:iec:60050-131:2002:::::amd:2:2013
   roundtrip: true
+  style: v3
 - id: iec.amendment.0065
   input: IEC 60050-131:2002/AMD2:2013 ED2
   identifier:
@@ -1200,6 +1264,7 @@
     human: IEC 60050-131:2002/AMD2:2013 ED2
     urn: urn:iec:std:iec:60050-131:2002:::::amd:2:2013
   roundtrip: true
+  style: v3
 - id: iec.amendment.0066
   input: IEC 60050-131:2002/AMD3:2019
   identifier:
@@ -1217,6 +1282,7 @@
     human: IEC 60050-131:2002/AMD3:2019
     urn: urn:iec:std:iec:60050-131:2002:::::amd:3:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0067
   input: IEC 60050-131:2002/AMD3:2019 ED2
   identifier:
@@ -1236,6 +1302,7 @@
     human: IEC 60050-131:2002/AMD3:2019 ED2
     urn: urn:iec:std:iec:60050-131:2002:::::amd:3:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0068
   input: IEC 60050-131:2002/AMD4:2021
   identifier:
@@ -1253,6 +1320,7 @@
     human: IEC 60050-131:2002/AMD4:2021
     urn: urn:iec:std:iec:60050-131:2002:::::amd:4:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0069
   input: IEC 60050-131:2002/AMD4:2021 ED2
   identifier:
@@ -1272,6 +1340,7 @@
     human: IEC 60050-131:2002/AMD4:2021 ED2
     urn: urn:iec:std:iec:60050-131:2002:::::amd:4:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0070
   input: IEC 60050-131:2002/AMD5:2021
   identifier:
@@ -1289,6 +1358,7 @@
     human: IEC 60050-131:2002/AMD5:2021
     urn: urn:iec:std:iec:60050-131:2002:::::amd:5:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0071
   input: IEC 60050-131:2002/AMD5:2021 ED2
   identifier:
@@ -1308,6 +1378,7 @@
     human: IEC 60050-131:2002/AMD5:2021 ED2
     urn: urn:iec:std:iec:60050-131:2002:::::amd:5:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0072
   input: IEC 60050-151:1978/AMD1:1987
   identifier:
@@ -1325,6 +1396,7 @@
     human: IEC 60050-151:1978/AMD1:1987
     urn: urn:iec:std:iec:60050-151:1978:::::amd:1:1987
   roundtrip: true
+  style: v3
 - id: iec.amendment.0073
   input: IEC 60050-151:1978/AMD1:1987 ED1
   identifier:
@@ -1344,6 +1416,7 @@
     human: IEC 60050-151:1978/AMD1:1987 ED1
     urn: urn:iec:std:iec:60050-151:1978:::::amd:1:1987
   roundtrip: true
+  style: v3
 - id: iec.amendment.0074
   input: IEC 60050-151:2001/AMD1:2013
   identifier:
@@ -1361,6 +1434,7 @@
     human: IEC 60050-151:2001/AMD1:2013
     urn: urn:iec:std:iec:60050-151:2001:::::amd:1:2013
   roundtrip: true
+  style: v3
 - id: iec.amendment.0075
   input: IEC 60050-151:2001/AMD1:2013 ED2
   identifier:
@@ -1380,6 +1454,7 @@
     human: IEC 60050-151:2001/AMD1:2013 ED2
     urn: urn:iec:std:iec:60050-151:2001:::::amd:1:2013
   roundtrip: true
+  style: v3
 - id: iec.amendment.0076
   input: IEC 60050-151:2001/AMD2:2014
   identifier:
@@ -1397,6 +1472,7 @@
     human: IEC 60050-151:2001/AMD2:2014
     urn: urn:iec:std:iec:60050-151:2001:::::amd:2:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0077
   input: IEC 60050-151:2001/AMD2:2014 ED2
   identifier:
@@ -1416,6 +1492,7 @@
     human: IEC 60050-151:2001/AMD2:2014 ED2
     urn: urn:iec:std:iec:60050-151:2001:::::amd:2:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0078
   input: IEC 60050-151:2001/AMD3:2019
   identifier:
@@ -1433,6 +1510,7 @@
     human: IEC 60050-151:2001/AMD3:2019
     urn: urn:iec:std:iec:60050-151:2001:::::amd:3:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0079
   input: IEC 60050-151:2001/AMD3:2019 ED2
   identifier:
@@ -1452,6 +1530,7 @@
     human: IEC 60050-151:2001/AMD3:2019 ED2
     urn: urn:iec:std:iec:60050-151:2001:::::amd:3:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0080
   input: IEC 60050-151:2001/AMD4:2020
   identifier:
@@ -1469,6 +1548,7 @@
     human: IEC 60050-151:2001/AMD4:2020
     urn: urn:iec:std:iec:60050-151:2001:::::amd:4:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0081
   input: IEC 60050-151:2001/AMD4:2020 ED2
   identifier:
@@ -1488,6 +1568,7 @@
     human: IEC 60050-151:2001/AMD4:2020 ED2
     urn: urn:iec:std:iec:60050-151:2001:::::amd:4:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0082
   input: IEC 60050-151:2001/AMD5:2021
   identifier:
@@ -1505,6 +1586,7 @@
     human: IEC 60050-151:2001/AMD5:2021
     urn: urn:iec:std:iec:60050-151:2001:::::amd:5:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0083
   input: IEC 60050-151:2001/AMD5:2021 ED2
   identifier:
@@ -1524,43 +1606,8 @@
     human: IEC 60050-151:2001/AMD5:2021 ED2
     urn: urn:iec:std:iec:60050-151:2001:::::amd:5:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0084
-  input: IEC 60050-161:1990/AMD1:1997
-  identifier:
-    type: amendment
-    components:
-      number: '1'
-      year: '1997'
-    base:
-      type: international_standard
-      components:
-        number: '60050'
-        part: '161'
-        year: '1990'
-  representations:
-    human: IEC 60050-161:1990/AMD1:1997
-    urn: urn:iec:std:iec:60050-161:1990:::::amd:1:1997
-  roundtrip: true
-- id: iec.amendment.0085
-  input: IEC 60050-161:1990/AMD1:1997 ED1
-  identifier:
-    type: amendment
-    components:
-      number: '1'
-      year: '1997'
-      edition:
-        number: '1'
-    base:
-      type: international_standard
-      components:
-        number: '60050'
-        part: '161'
-        year: '1990'
-  representations:
-    human: IEC 60050-161:1990/AMD1:1997 ED1
-    urn: urn:iec:std:iec:60050-161:1990:::::amd:1:1997
-  roundtrip: true
-- id: iec.amendment.0086
   input: IEC 60050-161:1990/AMD10:2021
   identifier:
     type: amendment
@@ -1577,7 +1624,8 @@
     human: IEC 60050-161:1990/AMD10:2021
     urn: urn:iec:std:iec:60050-161:1990:::::amd:10:2021
   roundtrip: true
-- id: iec.amendment.0087
+  style: v3
+- id: iec.amendment.0085
   input: IEC 60050-161:1990/AMD10:2021 ED1
   identifier:
     type: amendment
@@ -1596,6 +1644,45 @@
     human: IEC 60050-161:1990/AMD10:2021 ED1
     urn: urn:iec:std:iec:60050-161:1990:::::amd:10:2021
   roundtrip: true
+  style: v3
+- id: iec.amendment.0086
+  input: IEC 60050-161:1990/AMD1:1997
+  identifier:
+    type: amendment
+    components:
+      number: '1'
+      year: '1997'
+    base:
+      type: international_standard
+      components:
+        number: '60050'
+        part: '161'
+        year: '1990'
+  representations:
+    human: IEC 60050-161:1990/AMD1:1997
+    urn: urn:iec:std:iec:60050-161:1990:::::amd:1:1997
+  roundtrip: true
+  style: v3
+- id: iec.amendment.0087
+  input: IEC 60050-161:1990/AMD1:1997 ED1
+  identifier:
+    type: amendment
+    components:
+      number: '1'
+      year: '1997'
+      edition:
+        number: '1'
+    base:
+      type: international_standard
+      components:
+        number: '60050'
+        part: '161'
+        year: '1990'
+  representations:
+    human: IEC 60050-161:1990/AMD1:1997 ED1
+    urn: urn:iec:std:iec:60050-161:1990:::::amd:1:1997
+  roundtrip: true
+  style: v3
 - id: iec.amendment.0088
   input: IEC 60050-161:1990/AMD2:1998
   identifier:
@@ -1613,6 +1700,7 @@
     human: IEC 60050-161:1990/AMD2:1998
     urn: urn:iec:std:iec:60050-161:1990:::::amd:2:1998
   roundtrip: true
+  style: v3
 - id: iec.amendment.0089
   input: IEC 60050-161:1990/AMD2:1998 ED1
   identifier:
@@ -1632,6 +1720,7 @@
     human: IEC 60050-161:1990/AMD2:1998 ED1
     urn: urn:iec:std:iec:60050-161:1990:::::amd:2:1998
   roundtrip: true
+  style: v3
 - id: iec.amendment.0090
   input: IEC 60050-161:1990/AMD3:2014
   identifier:
@@ -1649,6 +1738,7 @@
     human: IEC 60050-161:1990/AMD3:2014
     urn: urn:iec:std:iec:60050-161:1990:::::amd:3:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0091
   input: IEC 60050-161:1990/AMD4:2014
   identifier:
@@ -1666,6 +1756,7 @@
     human: IEC 60050-161:1990/AMD4:2014
     urn: urn:iec:std:iec:60050-161:1990:::::amd:4:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0092
   input: IEC 60050-161:1990/AMD4:2014 ED1
   identifier:
@@ -1685,6 +1776,7 @@
     human: IEC 60050-161:1990/AMD4:2014 ED1
     urn: urn:iec:std:iec:60050-161:1990:::::amd:4:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0093
   input: IEC 60050-161:1990/AMD5:2015
   identifier:
@@ -1702,6 +1794,7 @@
     human: IEC 60050-161:1990/AMD5:2015
     urn: urn:iec:std:iec:60050-161:1990:::::amd:5:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0094
   input: IEC 60050-161:1990/AMD5:2015 ED1
   identifier:
@@ -1721,6 +1814,7 @@
     human: IEC 60050-161:1990/AMD5:2015 ED1
     urn: urn:iec:std:iec:60050-161:1990:::::amd:5:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0095
   input: IEC 60050-161:1990/AMD6:2016
   identifier:
@@ -1738,6 +1832,7 @@
     human: IEC 60050-161:1990/AMD6:2016
     urn: urn:iec:std:iec:60050-161:1990:::::amd:6:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0096
   input: IEC 60050-161:1990/AMD6:2016 ED1
   identifier:
@@ -1757,6 +1852,7 @@
     human: IEC 60050-161:1990/AMD6:2016 ED1
     urn: urn:iec:std:iec:60050-161:1990:::::amd:6:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0097
   input: IEC 60050-161:1990/AMD7:2017
   identifier:
@@ -1774,6 +1870,7 @@
     human: IEC 60050-161:1990/AMD7:2017
     urn: urn:iec:std:iec:60050-161:1990:::::amd:7:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0098
   input: IEC 60050-161:1990/AMD7:2017 ED1
   identifier:
@@ -1793,6 +1890,7 @@
     human: IEC 60050-161:1990/AMD7:2017 ED1
     urn: urn:iec:std:iec:60050-161:1990:::::amd:7:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0099
   input: IEC 60050-161:1990/AMD8:2018
   identifier:
@@ -1810,6 +1908,7 @@
     human: IEC 60050-161:1990/AMD8:2018
     urn: urn:iec:std:iec:60050-161:1990:::::amd:8:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0100
   input: IEC 60050-161:1990/AMD8:2018 ED1
   identifier:
@@ -1829,6 +1928,7 @@
     human: IEC 60050-161:1990/AMD8:2018 ED1
     urn: urn:iec:std:iec:60050-161:1990:::::amd:8:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0101
   input: IEC 60050-161:1990/AMD9:2019
   identifier:
@@ -1846,6 +1946,7 @@
     human: IEC 60050-161:1990/AMD9:2019
     urn: urn:iec:std:iec:60050-161:1990:::::amd:9:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0102
   input: IEC 60050-161:1990/AMD9:2019 ED1
   identifier:
@@ -1865,6 +1966,7 @@
     human: IEC 60050-161:1990/AMD9:2019 ED1
     urn: urn:iec:std:iec:60050-161:1990:::::amd:9:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0103
   input: IEC 60050-191:1990/AMD1:1999
   identifier:
@@ -1882,6 +1984,7 @@
     human: IEC 60050-191:1990/AMD1:1999
     urn: urn:iec:std:iec:60050-191:1990:::::amd:1:1999
   roundtrip: true
+  style: v3
 - id: iec.amendment.0104
   input: IEC 60050-191:1990/AMD1:1999 ED1
   identifier:
@@ -1901,6 +2004,7 @@
     human: IEC 60050-191:1990/AMD1:1999 ED1
     urn: urn:iec:std:iec:60050-191:1990:::::amd:1:1999
   roundtrip: true
+  style: v3
 - id: iec.amendment.0105
   input: IEC 60050-191:1990/AMD2:2002
   identifier:
@@ -1918,6 +2022,7 @@
     human: IEC 60050-191:1990/AMD2:2002
     urn: urn:iec:std:iec:60050-191:1990:::::amd:2:2002
   roundtrip: true
+  style: v3
 - id: iec.amendment.0106
   input: IEC 60050-191:1990/AMD2:2002 ED1
   identifier:
@@ -1937,6 +2042,7 @@
     human: IEC 60050-191:1990/AMD2:2002 ED1
     urn: urn:iec:std:iec:60050-191:1990:::::amd:2:2002
   roundtrip: true
+  style: v3
 - id: iec.amendment.0107
   input: IEC 60050-192:2015/AMD1:2016
   identifier:
@@ -1954,6 +2060,7 @@
     human: IEC 60050-192:2015/AMD1:2016
     urn: urn:iec:std:iec:60050-192:2015:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0108
   input: IEC 60050-192:2015/AMD1:2016 ED1
   identifier:
@@ -1973,6 +2080,7 @@
     human: IEC 60050-192:2015/AMD1:2016 ED1
     urn: urn:iec:std:iec:60050-192:2015:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0109
   input: IEC 60050-195:1998/AMD1:2001
   identifier:
@@ -1990,6 +2098,7 @@
     human: IEC 60050-195:1998/AMD1:2001
     urn: urn:iec:std:iec:60050-195:1998:::::amd:1:2001
   roundtrip: true
+  style: v3
 - id: iec.amendment.0110
   input: IEC 60050-195:1998/AMD1:2001 ED1
   identifier:
@@ -2009,6 +2118,7 @@
     human: IEC 60050-195:1998/AMD1:2001 ED1
     urn: urn:iec:std:iec:60050-195:1998:::::amd:1:2001
   roundtrip: true
+  style: v3
 - id: iec.amendment.0111
   input: IEC 60050-212:2010/AMD1:2015
   identifier:
@@ -2026,6 +2136,7 @@
     human: IEC 60050-212:2010/AMD1:2015
     urn: urn:iec:std:iec:60050-212:2010:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0112
   input: IEC 60050-212:2010/AMD1:2015 ED2
   identifier:
@@ -2045,6 +2156,7 @@
     human: IEC 60050-212:2010/AMD1:2015 ED2
     urn: urn:iec:std:iec:60050-212:2010:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0113
   input: IEC 60050-212:2010/AMD2:2015
   identifier:
@@ -2062,6 +2174,7 @@
     human: IEC 60050-212:2010/AMD2:2015
     urn: urn:iec:std:iec:60050-212:2010:::::amd:2:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0114
   input: IEC 60050-212:2010/AMD2:2015 ED2
   identifier:
@@ -2081,6 +2194,7 @@
     human: IEC 60050-212:2010/AMD2:2015 ED2
     urn: urn:iec:std:iec:60050-212:2010:::::amd:2:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0115
   input: IEC 60050-212:2010/AMD3:2020
   identifier:
@@ -2098,6 +2212,7 @@
     human: IEC 60050-212:2010/AMD3:2020
     urn: urn:iec:std:iec:60050-212:2010:::::amd:3:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0116
   input: IEC 60050-212:2010/AMD3:2020 ED2
   identifier:
@@ -2117,6 +2232,7 @@
     human: IEC 60050-212:2010/AMD3:2020 ED2
     urn: urn:iec:std:iec:60050-212:2010:::::amd:3:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0117
   input: IEC 60050-221:1990/AMD1:1993
   identifier:
@@ -2134,6 +2250,7 @@
     human: IEC 60050-221:1990/AMD1:1993
     urn: urn:iec:std:iec:60050-221:1990:::::amd:1:1993
   roundtrip: true
+  style: v3
 - id: iec.amendment.0118
   input: IEC 60050-221:1990/AMD1:1993 ED1
   identifier:
@@ -2153,6 +2270,7 @@
     human: IEC 60050-221:1990/AMD1:1993 ED1
     urn: urn:iec:std:iec:60050-221:1990:::::amd:1:1993
   roundtrip: true
+  style: v3
 - id: iec.amendment.0119
   input: IEC 60050-221:1990/AMD2:1999
   identifier:
@@ -2170,6 +2288,7 @@
     human: IEC 60050-221:1990/AMD2:1999
     urn: urn:iec:std:iec:60050-221:1990:::::amd:2:1999
   roundtrip: true
+  style: v3
 - id: iec.amendment.0120
   input: IEC 60050-221:1990/AMD2:1999 ED1
   identifier:
@@ -2189,6 +2308,7 @@
     human: IEC 60050-221:1990/AMD2:1999 ED1
     urn: urn:iec:std:iec:60050-221:1990:::::amd:2:1999
   roundtrip: true
+  style: v3
 - id: iec.amendment.0121
   input: IEC 60050-221:1990/AMD3:2007
   identifier:
@@ -2206,6 +2326,7 @@
     human: IEC 60050-221:1990/AMD3:2007
     urn: urn:iec:std:iec:60050-221:1990:::::amd:3:2007
   roundtrip: true
+  style: v3
 - id: iec.amendment.0122
   input: IEC 60050-221:1990/AMD3:2007 ED1
   identifier:
@@ -2225,6 +2346,7 @@
     human: IEC 60050-221:1990/AMD3:2007 ED1
     urn: urn:iec:std:iec:60050-221:1990:::::amd:3:2007
   roundtrip: true
+  style: v3
 - id: iec.amendment.0123
   input: IEC 60050-221:1990/AMD4:2020
   identifier:
@@ -2242,6 +2364,7 @@
     human: IEC 60050-221:1990/AMD4:2020
     urn: urn:iec:std:iec:60050-221:1990:::::amd:4:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0124
   input: IEC 60050-221:1990/AMD4:2020 ED1
   identifier:
@@ -2261,6 +2384,7 @@
     human: IEC 60050-221:1990/AMD4:2020 ED1
     urn: urn:iec:std:iec:60050-221:1990:::::amd:4:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0125
   input: IEC 60050-300:2001/AMD1:2015
   identifier:
@@ -2278,6 +2402,7 @@
     human: IEC 60050-300:2001/AMD1:2015
     urn: urn:iec:std:iec:60050-300:2001:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0126
   input: IEC 60050-300:2001/AMD1:2015 ED1
   identifier:
@@ -2297,6 +2422,7 @@
     human: IEC 60050-300:2001/AMD1:2015 ED1
     urn: urn:iec:std:iec:60050-300:2001:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0127
   input: IEC 60050-300:2001/AMD2:2016
   identifier:
@@ -2314,6 +2440,7 @@
     human: IEC 60050-300:2001/AMD2:2016
     urn: urn:iec:std:iec:60050-300:2001:::::amd:2:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0128
   input: IEC 60050-300:2001/AMD2:2016 ED1
   identifier:
@@ -2333,6 +2460,7 @@
     human: IEC 60050-300:2001/AMD2:2016 ED1
     urn: urn:iec:std:iec:60050-300:2001:::::amd:2:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0129
   input: IEC 60050-300:2001/AMD3:2017
   identifier:
@@ -2350,6 +2478,7 @@
     human: IEC 60050-300:2001/AMD3:2017
     urn: urn:iec:std:iec:60050-300:2001:::::amd:3:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0130
   input: IEC 60050-300:2001/AMD3:2017 ED1
   identifier:
@@ -2369,6 +2498,7 @@
     human: IEC 60050-300:2001/AMD3:2017 ED1
     urn: urn:iec:std:iec:60050-300:2001:::::amd:3:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0131
   input: IEC 60050-300:2001/AMD4:2020
   identifier:
@@ -2386,6 +2516,7 @@
     human: IEC 60050-300:2001/AMD4:2020
     urn: urn:iec:std:iec:60050-300:2001:::::amd:4:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0132
   input: IEC 60050-300:2001/AMD4:2020 ED1
   identifier:
@@ -2405,6 +2536,7 @@
     human: IEC 60050-300:2001/AMD4:2020 ED1
     urn: urn:iec:std:iec:60050-300:2001:::::amd:4:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0133
   input: IEC 60050-351:1975/AMD1:1978
   identifier:
@@ -2422,6 +2554,7 @@
     human: IEC 60050-351:1975/AMD1:1978
     urn: urn:iec:std:iec:60050-351:1975:::::amd:1:1978
   roundtrip: true
+  style: v3
 - id: iec.amendment.0134
   input: IEC 60050-351:1975/AMD1:1978 ED1
   identifier:
@@ -2441,6 +2574,7 @@
     human: IEC 60050-351:1975/AMD1:1978 ED1
     urn: urn:iec:std:iec:60050-351:1975:::::amd:1:1978
   roundtrip: true
+  style: v3
 - id: iec.amendment.0135
   input: IEC 60050-351:2013/AMD1:2016
   identifier:
@@ -2458,6 +2592,7 @@
     human: IEC 60050-351:2013/AMD1:2016
     urn: urn:iec:std:iec:60050-351:2013:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0136
   input: IEC 60050-351:2013/AMD1:2016 ED4
   identifier:
@@ -2477,6 +2612,7 @@
     human: IEC 60050-351:2013/AMD1:2016 ED4
     urn: urn:iec:std:iec:60050-351:2013:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0137
   input: IEC 60050-371:1984/AMD1:1997
   identifier:
@@ -2494,6 +2630,7 @@
     human: IEC 60050-371:1984/AMD1:1997
     urn: urn:iec:std:iec:60050-371:1984:::::amd:1:1997
   roundtrip: true
+  style: v3
 - id: iec.amendment.0138
   input: IEC 60050-371:1984/AMD1:1997 ED1
   identifier:
@@ -2513,6 +2650,7 @@
     human: IEC 60050-371:1984/AMD1:1997 ED1
     urn: urn:iec:std:iec:60050-371:1984:::::amd:1:1997
   roundtrip: true
+  style: v3
 - id: iec.amendment.0139
   input: IEC 60050-393:1996/AMD1:2000 ED1
   identifier:
@@ -2532,6 +2670,7 @@
     human: IEC 60050-393:1996/AMD1:2000 ED1
     urn: urn:iec:std:iec:60050-393:1996:::::amd:1:2000
   roundtrip: true
+  style: v3
 - id: iec.amendment.0140
   input: IEC 60050-394:1995/AMD1:1996 ED1
   identifier:
@@ -2551,6 +2690,7 @@
     human: IEC 60050-394:1995/AMD1:1996 ED1
     urn: urn:iec:std:iec:60050-394:1995:::::amd:1:1996
   roundtrip: true
+  style: v3
 - id: iec.amendment.0141
   input: IEC 60050-394:1995/AMD2:2000 ED1
   identifier:
@@ -2570,6 +2710,7 @@
     human: IEC 60050-394:1995/AMD2:2000 ED1
     urn: urn:iec:std:iec:60050-394:1995:::::amd:2:2000
   roundtrip: true
+  style: v3
 - id: iec.amendment.0142
   input: IEC 60050-395:2014/AMD1:2016
   identifier:
@@ -2587,6 +2728,7 @@
     human: IEC 60050-395:2014/AMD1:2016
     urn: urn:iec:std:iec:60050-395:2014:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0143
   input: IEC 60050-395:2014/AMD1:2016 ED1
   identifier:
@@ -2606,6 +2748,7 @@
     human: IEC 60050-395:2014/AMD1:2016 ED1
     urn: urn:iec:std:iec:60050-395:2014:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0144
   input: IEC 60050-395:2014/AMD2:2020
   identifier:
@@ -2623,6 +2766,7 @@
     human: IEC 60050-395:2014/AMD2:2020
     urn: urn:iec:std:iec:60050-395:2014:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0145
   input: IEC 60050-395:2014/AMD2:2020 ED1
   identifier:
@@ -2642,6 +2786,7 @@
     human: IEC 60050-395:2014/AMD2:2020 ED1
     urn: urn:iec:std:iec:60050-395:2014:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0146
   input: IEC 60050-411:1996/AMD1:2007
   identifier:
@@ -2659,6 +2804,7 @@
     human: IEC 60050-411:1996/AMD1:2007
     urn: urn:iec:std:iec:60050-411:1996:::::amd:1:2007
   roundtrip: true
+  style: v3
 - id: iec.amendment.0147
   input: IEC 60050-411:1996/AMD1:2007 ED2
   identifier:
@@ -2678,6 +2824,7 @@
     human: IEC 60050-411:1996/AMD1:2007 ED2
     urn: urn:iec:std:iec:60050-411:1996:::::amd:1:2007
   roundtrip: true
+  style: v3
 - id: iec.amendment.0148
   input: IEC 60050-411:1996/AMD2:2021
   identifier:
@@ -2695,6 +2842,7 @@
     human: IEC 60050-411:1996/AMD2:2021
     urn: urn:iec:std:iec:60050-411:1996:::::amd:2:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0149
   input: IEC 60050-411:1996/AMD2:2021 ED2
   identifier:
@@ -2714,6 +2862,7 @@
     human: IEC 60050-411:1996/AMD2:2021 ED2
     urn: urn:iec:std:iec:60050-411:1996:::::amd:2:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0150
   input: IEC 60050-426:2008/AMD1:2015 ED2
   identifier:
@@ -2733,6 +2882,7 @@
     human: IEC 60050-426:2008/AMD1:2015 ED2
     urn: urn:iec:std:iec:60050-426:2008:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0151
   input: IEC 60050-431:1980/AMD1:2021
   identifier:
@@ -2750,6 +2900,7 @@
     human: IEC 60050-431:1980/AMD1:2021
     urn: urn:iec:std:iec:60050-431:1980:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0152
   input: IEC 60050-431:1980/AMD1:2021 ED1
   identifier:
@@ -2769,6 +2920,7 @@
     human: IEC 60050-431:1980/AMD1:2021 ED1
     urn: urn:iec:std:iec:60050-431:1980:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0153
   input: IEC 60050-441:1984/AMD1:2000
   identifier:
@@ -2786,6 +2938,7 @@
     human: IEC 60050-441:1984/AMD1:2000
     urn: urn:iec:std:iec:60050-441:1984:::::amd:1:2000
   roundtrip: true
+  style: v3
 - id: iec.amendment.0154
   input: IEC 60050-441:1984/AMD1:2000 ED2
   identifier:
@@ -2805,6 +2958,7 @@
     human: IEC 60050-441:1984/AMD1:2000 ED2
     urn: urn:iec:std:iec:60050-441:1984:::::amd:1:2000
   roundtrip: true
+  style: v3
 - id: iec.amendment.0155
   input: IEC 60050-442:1998/AMD1:2015
   identifier:
@@ -2822,6 +2976,7 @@
     human: IEC 60050-442:1998/AMD1:2015
     urn: urn:iec:std:iec:60050-442:1998:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0156
   input: IEC 60050-442:1998/AMD1:2015 ED1
   identifier:
@@ -2841,6 +2996,7 @@
     human: IEC 60050-442:1998/AMD1:2015 ED1
     urn: urn:iec:std:iec:60050-442:1998:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0157
   input: IEC 60050-442:1998/AMD2:2015
   identifier:
@@ -2858,6 +3014,7 @@
     human: IEC 60050-442:1998/AMD2:2015
     urn: urn:iec:std:iec:60050-442:1998:::::amd:2:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0158
   input: IEC 60050-442:1998/AMD2:2015 ED1
   identifier:
@@ -2877,6 +3034,7 @@
     human: IEC 60050-442:1998/AMD2:2015 ED1
     urn: urn:iec:std:iec:60050-442:1998:::::amd:2:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0159
   input: IEC 60050-442:1998/AMD3:2019
   identifier:
@@ -2894,6 +3052,7 @@
     human: IEC 60050-442:1998/AMD3:2019
     urn: urn:iec:std:iec:60050-442:1998:::::amd:3:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0160
   input: IEC 60050-442:1998/AMD3:2019 ED1
   identifier:
@@ -2913,6 +3072,7 @@
     human: IEC 60050-442:1998/AMD3:2019 ED1
     urn: urn:iec:std:iec:60050-442:1998:::::amd:3:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0161
   input: IEC 60050-461:1984/AMD1:1993
   identifier:
@@ -2930,6 +3090,7 @@
     human: IEC 60050-461:1984/AMD1:1993
     urn: urn:iec:std:iec:60050-461:1984:::::amd:1:1993
   roundtrip: true
+  style: v3
 - id: iec.amendment.0162
   input: IEC 60050-461:1984/AMD1:1993 ED1
   identifier:
@@ -2949,6 +3110,7 @@
     human: IEC 60050-461:1984/AMD1:1993 ED1
     urn: urn:iec:std:iec:60050-461:1984:::::amd:1:1993
   roundtrip: true
+  style: v3
 - id: iec.amendment.0163
   input: IEC 60050-461:1984/AMD2:1999
   identifier:
@@ -2966,6 +3128,7 @@
     human: IEC 60050-461:1984/AMD2:1999
     urn: urn:iec:std:iec:60050-461:1984:::::amd:2:1999
   roundtrip: true
+  style: v3
 - id: iec.amendment.0164
   input: IEC 60050-461:1984/AMD2:1999 ED1
   identifier:
@@ -2985,6 +3148,7 @@
     human: IEC 60050-461:1984/AMD2:1999 ED1
     urn: urn:iec:std:iec:60050-461:1984:::::amd:2:1999
   roundtrip: true
+  style: v3
 - id: iec.amendment.0165
   input: IEC 60050-466:1990/AMD1:2020
   identifier:
@@ -3002,6 +3166,7 @@
     human: IEC 60050-466:1990/AMD1:2020
     urn: urn:iec:std:iec:60050-466:1990:::::amd:1:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0166
   input: IEC 60050-466:1990/AMD1:2020 ED1
   identifier:
@@ -3021,6 +3186,7 @@
     human: IEC 60050-466:1990/AMD1:2020 ED1
     urn: urn:iec:std:iec:60050-466:1990:::::amd:1:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0167
   input: IEC 60050-466:1990/AMD2:2021
   identifier:
@@ -3038,6 +3204,7 @@
     human: IEC 60050-466:1990/AMD2:2021
     urn: urn:iec:std:iec:60050-466:1990:::::amd:2:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0168
   input: IEC 60050-466:1990/AMD2:2021 ED1
   identifier:
@@ -3057,6 +3224,7 @@
     human: IEC 60050-466:1990/AMD2:2021 ED1
     urn: urn:iec:std:iec:60050-466:1990:::::amd:2:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0169
   input: IEC 60050-466:1990/AMD3:2021
   identifier:
@@ -3074,6 +3242,7 @@
     human: IEC 60050-466:1990/AMD3:2021
     urn: urn:iec:std:iec:60050-466:1990:::::amd:3:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0170
   input: IEC 60050-466:1990/AMD3:2021 ED1
   identifier:
@@ -3093,6 +3262,7 @@
     human: IEC 60050-466:1990/AMD3:2021 ED1
     urn: urn:iec:std:iec:60050-466:1990:::::amd:3:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0171
   input: IEC 60050-471:2007/AMD1:2015
   identifier:
@@ -3110,6 +3280,7 @@
     human: IEC 60050-471:2007/AMD1:2015
     urn: urn:iec:std:iec:60050-471:2007:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0172
   input: IEC 60050-471:2007/AMD1:2015 ED2
   identifier:
@@ -3129,6 +3300,7 @@
     human: IEC 60050-471:2007/AMD1:2015 ED2
     urn: urn:iec:std:iec:60050-471:2007:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0173
   input: IEC 60050-482:2004/AMD1:2016
   identifier:
@@ -3146,6 +3318,7 @@
     human: IEC 60050-482:2004/AMD1:2016
     urn: urn:iec:std:iec:60050-482:2004:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0174
   input: IEC 60050-482:2004/AMD1:2016 ED1
   identifier:
@@ -3165,6 +3338,7 @@
     human: IEC 60050-482:2004/AMD1:2016 ED1
     urn: urn:iec:std:iec:60050-482:2004:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0175
   input: IEC 60050-482:2004/AMD2:2020
   identifier:
@@ -3182,6 +3356,7 @@
     human: IEC 60050-482:2004/AMD2:2020
     urn: urn:iec:std:iec:60050-482:2004:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0176
   input: IEC 60050-482:2004/AMD2:2020 ED1
   identifier:
@@ -3201,6 +3376,7 @@
     human: IEC 60050-482:2004/AMD2:2020 ED1
     urn: urn:iec:std:iec:60050-482:2004:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0177
   input: IEC 60050-486/AMD1 ED1
   identifier:
@@ -3218,6 +3394,7 @@
     human: IEC 60050-486/AMD1 ED1
     urn: 'urn:iec:std:iec:60050-486::::::amd:1:'
   roundtrip: true
+  style: v3
 - id: iec.amendment.0178
   input: IEC 60050-521:2002/AMD1:2017
   identifier:
@@ -3235,6 +3412,7 @@
     human: IEC 60050-521:2002/AMD1:2017
     urn: urn:iec:std:iec:60050-521:2002:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0179
   input: IEC 60050-521:2002/AMD1:2017 ED2
   identifier:
@@ -3254,6 +3432,7 @@
     human: IEC 60050-521:2002/AMD1:2017 ED2
     urn: urn:iec:std:iec:60050-521:2002:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0180
   input: IEC 60050-521:2002/AMD2:2018
   identifier:
@@ -3271,6 +3450,7 @@
     human: IEC 60050-521:2002/AMD2:2018
     urn: urn:iec:std:iec:60050-521:2002:::::amd:2:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0181
   input: IEC 60050-521:2002/AMD2:2018 ED2
   identifier:
@@ -3290,6 +3470,7 @@
     human: IEC 60050-521:2002/AMD2:2018 ED2
     urn: urn:iec:std:iec:60050-521:2002:::::amd:2:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0182
   input: IEC 60050-523:2018/AMD1:2019
   identifier:
@@ -3307,6 +3488,7 @@
     human: IEC 60050-523:2018/AMD1:2019
     urn: urn:iec:std:iec:60050-523:2018:::::amd:1:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0183
   input: IEC 60050-523:2018/AMD1:2019 ED1
   identifier:
@@ -3326,6 +3508,7 @@
     human: IEC 60050-523:2018/AMD1:2019 ED1
     urn: urn:iec:std:iec:60050-523:2018:::::amd:1:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0184
   input: IEC 60050-531:1974/AMD1:2017
   identifier:
@@ -3343,6 +3526,7 @@
     human: IEC 60050-531:1974/AMD1:2017
     urn: urn:iec:std:iec:60050-531:1974:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0185
   input: IEC 60050-531:1974/AMD1:2017 ED1
   identifier:
@@ -3362,6 +3546,7 @@
     human: IEC 60050-531:1974/AMD1:2017 ED1
     urn: urn:iec:std:iec:60050-531:1974:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0186
   input: IEC 60050-531:1974/AMD2:2020
   identifier:
@@ -3379,6 +3564,7 @@
     human: IEC 60050-531:1974/AMD2:2020
     urn: urn:iec:std:iec:60050-531:1974:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0187
   input: IEC 60050-531:1974/AMD2:2020 ED1
   identifier:
@@ -3398,6 +3584,7 @@
     human: IEC 60050-531:1974/AMD2:2020 ED1
     urn: urn:iec:std:iec:60050-531:1974:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0188
   input: IEC 60050-541:1990/AMD1:2015
   identifier:
@@ -3415,6 +3602,7 @@
     human: IEC 60050-541:1990/AMD1:2015
     urn: urn:iec:std:iec:60050-541:1990:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0189
   input: IEC 60050-541:1990/AMD1:2015 ED1
   identifier:
@@ -3434,6 +3622,7 @@
     human: IEC 60050-541:1990/AMD1:2015 ED1
     urn: urn:iec:std:iec:60050-541:1990:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0190
   input: IEC 60050-551-20:2001/AMD1:2017
   identifier:
@@ -3452,6 +3641,7 @@
     human: IEC 60050-551-20:2001/AMD1:2017
     urn: urn:iec:std:iec:60050-551-20:2001:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0191
   input: IEC 60050-551-20:2001/AMD1:2017 ED1
   identifier:
@@ -3472,6 +3662,7 @@
     human: IEC 60050-551-20:2001/AMD1:2017 ED1
     urn: urn:iec:std:iec:60050-551-20:2001:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0192
   input: IEC 60050-561:1991/AMD1:1995 ED1
   identifier:
@@ -3491,6 +3682,7 @@
     human: IEC 60050-561:1991/AMD1:1995 ED1
     urn: urn:iec:std:iec:60050-561:1991:::::amd:1:1995
   roundtrip: true
+  style: v3
 - id: iec.amendment.0193
   input: IEC 60050-561:1991/AMD2:1997 ED1
   identifier:
@@ -3510,6 +3702,7 @@
     human: IEC 60050-561:1991/AMD2:1997 ED1
     urn: urn:iec:std:iec:60050-561:1991:::::amd:2:1997
   roundtrip: true
+  style: v3
 - id: iec.amendment.0194
   input: IEC 60050-561:2014/AMD1:2016
   identifier:
@@ -3527,6 +3720,7 @@
     human: IEC 60050-561:2014/AMD1:2016
     urn: urn:iec:std:iec:60050-561:2014:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0195
   input: IEC 60050-561:2014/AMD1:2016 ED2
   identifier:
@@ -3546,6 +3740,7 @@
     human: IEC 60050-561:2014/AMD1:2016 ED2
     urn: urn:iec:std:iec:60050-561:2014:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0196
   input: IEC 60050-561:2014/AMD2:2020
   identifier:
@@ -3563,6 +3758,7 @@
     human: IEC 60050-561:2014/AMD2:2020
     urn: urn:iec:std:iec:60050-561:2014:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0197
   input: IEC 60050-561:2014/AMD2:2020 ED2
   identifier:
@@ -3582,6 +3778,7 @@
     human: IEC 60050-561:2014/AMD2:2020 ED2
     urn: urn:iec:std:iec:60050-561:2014:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0198
   input: IEC 60050-561:2014/AMD3:2021
   identifier:
@@ -3599,6 +3796,7 @@
     human: IEC 60050-561:2014/AMD3:2021
     urn: urn:iec:std:iec:60050-561:2014:::::amd:3:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0199
   input: IEC 60050-561:2014/AMD3:2021 ED2
   identifier:
@@ -3618,6 +3816,7 @@
     human: IEC 60050-561:2014/AMD3:2021 ED2
     urn: urn:iec:std:iec:60050-561:2014:::::amd:3:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0200
   input: IEC 60050-561:2014/AMD4:2021
   identifier:
@@ -3635,6 +3834,7 @@
     human: IEC 60050-561:2014/AMD4:2021
     urn: urn:iec:std:iec:60050-561:2014:::::amd:4:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0201
   input: IEC 60050-561:2014/AMD4:2021 ED2
   identifier:
@@ -3654,6 +3854,7 @@
     human: IEC 60050-561:2014/AMD4:2021 ED2
     urn: urn:iec:std:iec:60050-561:2014:::::amd:4:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0202
   input: IEC 60050-581:1978/AMD1:1998 ED1
   identifier:
@@ -3673,6 +3874,7 @@
     human: IEC 60050-581:1978/AMD1:1998 ED1
     urn: urn:iec:std:iec:60050-581:1978:::::amd:1:1998
   roundtrip: true
+  style: v3
 - id: iec.amendment.0203
   input: IEC 60050-601:1985/AMD1:1998
   identifier:
@@ -3690,6 +3892,7 @@
     human: IEC 60050-601:1985/AMD1:1998
     urn: urn:iec:std:iec:60050-601:1985:::::amd:1:1998
   roundtrip: true
+  style: v3
 - id: iec.amendment.0204
   input: IEC 60050-601:1985/AMD1:1998 ED1
   identifier:
@@ -3709,6 +3912,7 @@
     human: IEC 60050-601:1985/AMD1:1998 ED1
     urn: urn:iec:std:iec:60050-601:1985:::::amd:1:1998
   roundtrip: true
+  style: v3
 - id: iec.amendment.0205
   input: IEC 60050-601:1985/AMD2:2020
   identifier:
@@ -3726,6 +3930,7 @@
     human: IEC 60050-601:1985/AMD2:2020
     urn: urn:iec:std:iec:60050-601:1985:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0206
   input: IEC 60050-601:1985/AMD2:2020 ED1
   identifier:
@@ -3745,6 +3950,7 @@
     human: IEC 60050-601:1985/AMD2:2020 ED1
     urn: urn:iec:std:iec:60050-601:1985:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0207
   input: IEC 60050-603:1986/AMD1:1998
   identifier:
@@ -3762,6 +3968,7 @@
     human: IEC 60050-603:1986/AMD1:1998
     urn: urn:iec:std:iec:60050-603:1986:::::amd:1:1998
   roundtrip: true
+  style: v3
 - id: iec.amendment.0208
   input: IEC 60050-603:1986/AMD1:1998 ED1
   identifier:
@@ -3781,6 +3988,7 @@
     human: IEC 60050-603:1986/AMD1:1998 ED1
     urn: urn:iec:std:iec:60050-603:1986:::::amd:1:1998
   roundtrip: true
+  style: v3
 - id: iec.amendment.0209
   input: IEC 60050-604:1987/AMD1:1998 ED1
   identifier:
@@ -3800,6 +4008,7 @@
     human: IEC 60050-604:1987/AMD1:1998 ED1
     urn: urn:iec:std:iec:60050-604:1987:::::amd:1:1998
   roundtrip: true
+  style: v3
 - id: iec.amendment.0210
   input: IEC 60050-604:1987/AMD2:2015 ED1
   identifier:
@@ -3819,6 +4028,7 @@
     human: IEC 60050-604:1987/AMD2:2015 ED1
     urn: urn:iec:std:iec:60050-604:1987:::::amd:2:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0211
   input: IEC 60050-617:2009/AMD1:2011
   identifier:
@@ -3836,6 +4046,7 @@
     human: IEC 60050-617:2009/AMD1:2011
     urn: urn:iec:std:iec:60050-617:2009:::::amd:1:2011
   roundtrip: true
+  style: v3
 - id: iec.amendment.0212
   input: IEC 60050-617:2009/AMD1:2011 ED1
   identifier:
@@ -3855,6 +4066,7 @@
     human: IEC 60050-617:2009/AMD1:2011 ED1
     urn: urn:iec:std:iec:60050-617:2009:::::amd:1:2011
   roundtrip: true
+  style: v3
 - id: iec.amendment.0213
   input: IEC 60050-617:2009/AMD2:2017
   identifier:
@@ -3872,6 +4084,7 @@
     human: IEC 60050-617:2009/AMD2:2017
     urn: urn:iec:std:iec:60050-617:2009:::::amd:2:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0214
   input: IEC 60050-617:2009/AMD2:2017 ED1
   identifier:
@@ -3891,6 +4104,7 @@
     human: IEC 60050-617:2009/AMD2:2017 ED1
     urn: urn:iec:std:iec:60050-617:2009:::::amd:2:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0215
   input: IEC 60050-617:2009/AMD3:2018
   identifier:
@@ -3908,6 +4122,7 @@
     human: IEC 60050-617:2009/AMD3:2018
     urn: urn:iec:std:iec:60050-617:2009:::::amd:3:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0216
   input: IEC 60050-617:2009/AMD3:2018 ED1
   identifier:
@@ -3927,6 +4142,7 @@
     human: IEC 60050-617:2009/AMD3:2018 ED1
     urn: urn:iec:std:iec:60050-617:2009:::::amd:3:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0217
   input: IEC 60050-651/AMD1 ED2
   identifier:
@@ -3944,6 +4160,7 @@
     human: IEC 60050-651/AMD1 ED2
     urn: 'urn:iec:std:iec:60050-651::::::amd:1:'
   roundtrip: true
+  style: v3
 - id: iec.amendment.0218
   input: IEC 60050-691:1973/AMD1:2019
   identifier:
@@ -3961,6 +4178,7 @@
     human: IEC 60050-691:1973/AMD1:2019
     urn: urn:iec:std:iec:60050-691:1973:::::amd:1:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0219
   input: IEC 60050-691:1973/AMD1:2019 ED1
   identifier:
@@ -3980,6 +4198,7 @@
     human: IEC 60050-691:1973/AMD1:2019 ED1
     urn: urn:iec:std:iec:60050-691:1973:::::amd:1:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0220
   input: IEC 60050-701:1988/AMD1:2016
   identifier:
@@ -3997,6 +4216,7 @@
     human: IEC 60050-701:1988/AMD1:2016
     urn: urn:iec:std:iec:60050-701:1988:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0221
   input: IEC 60050-701:1988/AMD1:2016 ED1
   identifier:
@@ -4016,6 +4236,7 @@
     human: IEC 60050-701:1988/AMD1:2016 ED1
     urn: urn:iec:std:iec:60050-701:1988:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0222
   input: IEC 60050-701:1988/AMD2:2019
   identifier:
@@ -4033,6 +4254,7 @@
     human: IEC 60050-701:1988/AMD2:2019
     urn: urn:iec:std:iec:60050-701:1988:::::amd:2:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0223
   input: IEC 60050-701:1988/AMD2:2019 ED1
   identifier:
@@ -4052,6 +4274,7 @@
     human: IEC 60050-701:1988/AMD2:2019 ED1
     urn: urn:iec:std:iec:60050-701:1988:::::amd:2:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0224
   input: IEC 60050-702:1992/AMD1:2016
   identifier:
@@ -4069,6 +4292,7 @@
     human: IEC 60050-702:1992/AMD1:2016
     urn: urn:iec:std:iec:60050-702:1992:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0225
   input: IEC 60050-702:1992/AMD1:2016 ED1
   identifier:
@@ -4088,6 +4312,7 @@
     human: IEC 60050-702:1992/AMD1:2016 ED1
     urn: urn:iec:std:iec:60050-702:1992:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0226
   input: IEC 60050-702:1992/AMD2:2016
   identifier:
@@ -4105,6 +4330,7 @@
     human: IEC 60050-702:1992/AMD2:2016
     urn: urn:iec:std:iec:60050-702:1992:::::amd:2:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0227
   input: IEC 60050-702:1992/AMD2:2016 ED1
   identifier:
@@ -4124,6 +4350,7 @@
     human: IEC 60050-702:1992/AMD2:2016 ED1
     urn: urn:iec:std:iec:60050-702:1992:::::amd:2:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0228
   input: IEC 60050-702:1992/AMD3:2017
   identifier:
@@ -4141,6 +4368,7 @@
     human: IEC 60050-702:1992/AMD3:2017
     urn: urn:iec:std:iec:60050-702:1992:::::amd:3:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0229
   input: IEC 60050-702:1992/AMD3:2017 ED1
   identifier:
@@ -4160,6 +4388,7 @@
     human: IEC 60050-702:1992/AMD3:2017 ED1
     urn: urn:iec:std:iec:60050-702:1992:::::amd:3:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0230
   input: IEC 60050-702:1992/AMD4:2018
   identifier:
@@ -4177,6 +4406,7 @@
     human: IEC 60050-702:1992/AMD4:2018
     urn: urn:iec:std:iec:60050-702:1992:::::amd:4:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0231
   input: IEC 60050-702:1992/AMD4:2018 ED1
   identifier:
@@ -4196,6 +4426,7 @@
     human: IEC 60050-702:1992/AMD4:2018 ED1
     urn: urn:iec:std:iec:60050-702:1992:::::amd:4:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0232
   input: IEC 60050-702:1992/AMD5:2019
   identifier:
@@ -4213,6 +4444,7 @@
     human: IEC 60050-702:1992/AMD5:2019
     urn: urn:iec:std:iec:60050-702:1992:::::amd:5:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0233
   input: IEC 60050-702:1992/AMD5:2019 ED1
   identifier:
@@ -4232,6 +4464,7 @@
     human: IEC 60050-702:1992/AMD5:2019 ED1
     urn: urn:iec:std:iec:60050-702:1992:::::amd:5:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0234
   input: IEC 60050-702:1992/AMD6:2021
   identifier:
@@ -4249,6 +4482,7 @@
     human: IEC 60050-702:1992/AMD6:2021
     urn: urn:iec:std:iec:60050-702:1992:::::amd:6:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0235
   input: IEC 60050-702:1992/AMD6:2021 ED1
   identifier:
@@ -4268,7 +4502,26 @@
     human: IEC 60050-702:1992/AMD6:2021 ED1
     urn: urn:iec:std:iec:60050-702:1992:::::amd:6:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0236
+  input: IEC 60050-704/AMD2 ED1
+  identifier:
+    type: amendment
+    components:
+      number: '2'
+      edition:
+        number: '1'
+    base:
+      type: international_standard
+      components:
+        number: '60050'
+        part: '704'
+  representations:
+    human: IEC 60050-704/AMD2 ED1
+    urn: 'urn:iec:std:iec:60050-704::::::amd:2:'
+  roundtrip: true
+  style: v3
+- id: iec.amendment.0237
   input: IEC 60050-704:1993/AMD1:2016
   identifier:
     type: amendment
@@ -4285,7 +4538,8 @@
     human: IEC 60050-704:1993/AMD1:2016
     urn: urn:iec:std:iec:60050-704:1993:::::amd:1:2016
   roundtrip: true
-- id: iec.amendment.0237
+  style: v3
+- id: iec.amendment.0238
   input: IEC 60050-704:1993/AMD1:2016 ED1
   identifier:
     type: amendment
@@ -4304,7 +4558,8 @@
     human: IEC 60050-704:1993/AMD1:2016 ED1
     urn: urn:iec:std:iec:60050-704:1993:::::amd:1:2016
   roundtrip: true
-- id: iec.amendment.0238
+  style: v3
+- id: iec.amendment.0239
   input: IEC 60050-704:1993/AMD2:2017
   identifier:
     type: amendment
@@ -4321,7 +4576,8 @@
     human: IEC 60050-704:1993/AMD2:2017
     urn: urn:iec:std:iec:60050-704:1993:::::amd:2:2017
   roundtrip: true
-- id: iec.amendment.0239
+  style: v3
+- id: iec.amendment.0240
   input: IEC 60050-704:1993/AMD2:2017 ED1
   identifier:
     type: amendment
@@ -4340,7 +4596,8 @@
     human: IEC 60050-704:1993/AMD2:2017 ED1
     urn: urn:iec:std:iec:60050-704:1993:::::amd:2:2017
   roundtrip: true
-- id: iec.amendment.0240
+  style: v3
+- id: iec.amendment.0241
   input: IEC 60050-704:1993/AMD3:2018
   identifier:
     type: amendment
@@ -4357,7 +4614,8 @@
     human: IEC 60050-704:1993/AMD3:2018
     urn: urn:iec:std:iec:60050-704:1993:::::amd:3:2018
   roundtrip: true
-- id: iec.amendment.0241
+  style: v3
+- id: iec.amendment.0242
   input: IEC 60050-704:1993/AMD3:2018 ED1
   identifier:
     type: amendment
@@ -4376,7 +4634,8 @@
     human: IEC 60050-704:1993/AMD3:2018 ED1
     urn: urn:iec:std:iec:60050-704:1993:::::amd:3:2018
   roundtrip: true
-- id: iec.amendment.0242
+  style: v3
+- id: iec.amendment.0243
   input: IEC 60050-704:1993/AMD4:2019
   identifier:
     type: amendment
@@ -4393,7 +4652,8 @@
     human: IEC 60050-704:1993/AMD4:2019
     urn: urn:iec:std:iec:60050-704:1993:::::amd:4:2019
   roundtrip: true
-- id: iec.amendment.0243
+  style: v3
+- id: iec.amendment.0244
   input: IEC 60050-704:1993/AMD4:2019 ED1
   identifier:
     type: amendment
@@ -4412,23 +4672,7 @@
     human: IEC 60050-704:1993/AMD4:2019 ED1
     urn: urn:iec:std:iec:60050-704:1993:::::amd:4:2019
   roundtrip: true
-- id: iec.amendment.0244
-  input: IEC 60050-704/AMD2 ED1
-  identifier:
-    type: amendment
-    components:
-      number: '2'
-      edition:
-        number: '1'
-    base:
-      type: international_standard
-      components:
-        number: '60050'
-        part: '704'
-  representations:
-    human: IEC 60050-704/AMD2 ED1
-    urn: 'urn:iec:std:iec:60050-704::::::amd:2:'
-  roundtrip: true
+  style: v3
 - id: iec.amendment.0245
   input: IEC 60050-705:1995/AMD1:2015
   identifier:
@@ -4446,6 +4690,7 @@
     human: IEC 60050-705:1995/AMD1:2015
     urn: urn:iec:std:iec:60050-705:1995:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0246
   input: IEC 60050-705:1995/AMD1:2015 ED1
   identifier:
@@ -4465,6 +4710,7 @@
     human: IEC 60050-705:1995/AMD1:2015 ED1
     urn: urn:iec:std:iec:60050-705:1995:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0247
   input: IEC 60050-705:1995/AMD2:2016
   identifier:
@@ -4482,6 +4728,7 @@
     human: IEC 60050-705:1995/AMD2:2016
     urn: urn:iec:std:iec:60050-705:1995:::::amd:2:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0248
   input: IEC 60050-705:1995/AMD2:2016 ED1
   identifier:
@@ -4501,6 +4748,7 @@
     human: IEC 60050-705:1995/AMD2:2016 ED1
     urn: urn:iec:std:iec:60050-705:1995:::::amd:2:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0249
   input: IEC 60050-705:1995/AMD3:2017
   identifier:
@@ -4518,6 +4766,7 @@
     human: IEC 60050-705:1995/AMD3:2017
     urn: urn:iec:std:iec:60050-705:1995:::::amd:3:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0250
   input: IEC 60050-705:1995/AMD3:2017 ED1
   identifier:
@@ -4537,6 +4786,7 @@
     human: IEC 60050-705:1995/AMD3:2017 ED1
     urn: urn:iec:std:iec:60050-705:1995:::::amd:3:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0251
   input: IEC 60050-705:1995/AMD4:2019
   identifier:
@@ -4554,6 +4804,7 @@
     human: IEC 60050-705:1995/AMD4:2019
     urn: urn:iec:std:iec:60050-705:1995:::::amd:4:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0252
   input: IEC 60050-705:1995/AMD4:2019 ED1
   identifier:
@@ -4573,6 +4824,7 @@
     human: IEC 60050-705:1995/AMD4:2019 ED1
     urn: urn:iec:std:iec:60050-705:1995:::::amd:4:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0253
   input: IEC 60050-705:1995/AMD5:2020
   identifier:
@@ -4590,6 +4842,7 @@
     human: IEC 60050-705:1995/AMD5:2020
     urn: urn:iec:std:iec:60050-705:1995:::::amd:5:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0254
   input: IEC 60050-705:1995/AMD5:2020 ED1
   identifier:
@@ -4609,6 +4862,7 @@
     human: IEC 60050-705:1995/AMD5:2020 ED1
     urn: urn:iec:std:iec:60050-705:1995:::::amd:5:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0255
   input: IEC 60050-705:1995/AMD6:2021
   identifier:
@@ -4626,6 +4880,7 @@
     human: IEC 60050-705:1995/AMD6:2021
     urn: urn:iec:std:iec:60050-705:1995:::::amd:6:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0256
   input: IEC 60050-705:1995/AMD6:2021 ED1
   identifier:
@@ -4645,6 +4900,7 @@
     human: IEC 60050-705:1995/AMD6:2021 ED1
     urn: urn:iec:std:iec:60050-705:1995:::::amd:6:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0257
   input: IEC 60050-705:1995/AMD7:2021
   identifier:
@@ -4662,6 +4918,7 @@
     human: IEC 60050-705:1995/AMD7:2021
     urn: urn:iec:std:iec:60050-705:1995:::::amd:7:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0258
   input: IEC 60050-705:1995/AMD7:2021 ED1
   identifier:
@@ -4681,6 +4938,7 @@
     human: IEC 60050-705:1995/AMD7:2021 ED1
     urn: urn:iec:std:iec:60050-705:1995:::::amd:7:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0259
   input: IEC 60050-712:1992/AMD1:2021
   identifier:
@@ -4698,6 +4956,7 @@
     human: IEC 60050-712:1992/AMD1:2021
     urn: urn:iec:std:iec:60050-712:1992:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0260
   input: IEC 60050-712:1992/AMD1:2021 ED1
   identifier:
@@ -4717,6 +4976,7 @@
     human: IEC 60050-712:1992/AMD1:2021 ED1
     urn: urn:iec:std:iec:60050-712:1992:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0261
   input: IEC 60050-713:1998/AMD1:2016
   identifier:
@@ -4734,6 +4994,7 @@
     human: IEC 60050-713:1998/AMD1:2016
     urn: urn:iec:std:iec:60050-713:1998:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0262
   input: IEC 60050-713:1998/AMD1:2016 ED1
   identifier:
@@ -4753,6 +5014,7 @@
     human: IEC 60050-713:1998/AMD1:2016 ED1
     urn: urn:iec:std:iec:60050-713:1998:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0263
   input: IEC 60050-713:1998/AMD2:2017
   identifier:
@@ -4770,6 +5032,7 @@
     human: IEC 60050-713:1998/AMD2:2017
     urn: urn:iec:std:iec:60050-713:1998:::::amd:2:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0264
   input: IEC 60050-713:1998/AMD2:2017 ED1
   identifier:
@@ -4789,6 +5052,7 @@
     human: IEC 60050-713:1998/AMD2:2017 ED1
     urn: urn:iec:std:iec:60050-713:1998:::::amd:2:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0265
   input: IEC 60050-713:1998/AMD3:2018
   identifier:
@@ -4806,6 +5070,7 @@
     human: IEC 60050-713:1998/AMD3:2018
     urn: urn:iec:std:iec:60050-713:1998:::::amd:3:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0266
   input: IEC 60050-713:1998/AMD3:2018 ED1
   identifier:
@@ -4825,6 +5090,7 @@
     human: IEC 60050-713:1998/AMD3:2018 ED1
     urn: urn:iec:std:iec:60050-713:1998:::::amd:3:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0267
   input: IEC 60050-713:1998/AMD4:2019
   identifier:
@@ -4842,6 +5108,7 @@
     human: IEC 60050-713:1998/AMD4:2019
     urn: urn:iec:std:iec:60050-713:1998:::::amd:4:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0268
   input: IEC 60050-713:1998/AMD4:2019 ED1
   identifier:
@@ -4861,6 +5128,7 @@
     human: IEC 60050-713:1998/AMD4:2019 ED1
     urn: urn:iec:std:iec:60050-713:1998:::::amd:4:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0269
   input: IEC 60050-713:1998/AMD5:2021
   identifier:
@@ -4878,6 +5146,7 @@
     human: IEC 60050-713:1998/AMD5:2021
     urn: urn:iec:std:iec:60050-713:1998:::::amd:5:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0270
   input: IEC 60050-713:1998/AMD5:2021 ED1
   identifier:
@@ -4897,6 +5166,7 @@
     human: IEC 60050-713:1998/AMD5:2021 ED1
     urn: urn:iec:std:iec:60050-713:1998:::::amd:5:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0271
   input: IEC 60050-714:1992/AMD1:2016
   identifier:
@@ -4914,6 +5184,7 @@
     human: IEC 60050-714:1992/AMD1:2016
     urn: urn:iec:std:iec:60050-714:1992:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0272
   input: IEC 60050-714:1992/AMD1:2016 ED1
   identifier:
@@ -4933,6 +5204,7 @@
     human: IEC 60050-714:1992/AMD1:2016 ED1
     urn: urn:iec:std:iec:60050-714:1992:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0273
   input: IEC 60050-714:1992/AMD2:2017
   identifier:
@@ -4950,6 +5222,7 @@
     human: IEC 60050-714:1992/AMD2:2017
     urn: urn:iec:std:iec:60050-714:1992:::::amd:2:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0274
   input: IEC 60050-714:1992/AMD2:2017 ED1
   identifier:
@@ -4969,6 +5242,7 @@
     human: IEC 60050-714:1992/AMD2:2017 ED1
     urn: urn:iec:std:iec:60050-714:1992:::::amd:2:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0275
   input: IEC 60050-714:1992/AMD3:2018
   identifier:
@@ -4986,6 +5260,7 @@
     human: IEC 60050-714:1992/AMD3:2018
     urn: urn:iec:std:iec:60050-714:1992:::::amd:3:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0276
   input: IEC 60050-714:1992/AMD3:2018 ED1
   identifier:
@@ -5005,6 +5280,7 @@
     human: IEC 60050-714:1992/AMD3:2018 ED1
     urn: urn:iec:std:iec:60050-714:1992:::::amd:3:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0277
   input: IEC 60050-714:1992/AMD4:2019
   identifier:
@@ -5022,6 +5298,7 @@
     human: IEC 60050-714:1992/AMD4:2019
     urn: urn:iec:std:iec:60050-714:1992:::::amd:4:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0278
   input: IEC 60050-714:1992/AMD4:2019 ED1
   identifier:
@@ -5041,6 +5318,7 @@
     human: IEC 60050-714:1992/AMD4:2019 ED1
     urn: urn:iec:std:iec:60050-714:1992:::::amd:4:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0279
   input: IEC 60050-715:1996/AMD1:2016
   identifier:
@@ -5058,6 +5336,7 @@
     human: IEC 60050-715:1996/AMD1:2016
     urn: urn:iec:std:iec:60050-715:1996:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0280
   input: IEC 60050-715:1996/AMD1:2016 ED1
   identifier:
@@ -5077,6 +5356,7 @@
     human: IEC 60050-715:1996/AMD1:2016 ED1
     urn: urn:iec:std:iec:60050-715:1996:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0281
   input: IEC 60050-715:1996/AMD2:2019
   identifier:
@@ -5094,6 +5374,7 @@
     human: IEC 60050-715:1996/AMD2:2019
     urn: urn:iec:std:iec:60050-715:1996:::::amd:2:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0282
   input: IEC 60050-715:1996/AMD2:2019 ED1
   identifier:
@@ -5113,6 +5394,7 @@
     human: IEC 60050-715:1996/AMD2:2019 ED1
     urn: urn:iec:std:iec:60050-715:1996:::::amd:2:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0283
   input: IEC 60050-715:1996/AMD3:2021
   identifier:
@@ -5130,6 +5412,7 @@
     human: IEC 60050-715:1996/AMD3:2021
     urn: urn:iec:std:iec:60050-715:1996:::::amd:3:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0284
   input: IEC 60050-715:1996/AMD3:2021 ED1
   identifier:
@@ -5149,6 +5432,7 @@
     human: IEC 60050-715:1996/AMD3:2021 ED1
     urn: urn:iec:std:iec:60050-715:1996:::::amd:3:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0285
   input: IEC 60050-721:1991/AMD1:2016
   identifier:
@@ -5166,6 +5450,7 @@
     human: IEC 60050-721:1991/AMD1:2016
     urn: urn:iec:std:iec:60050-721:1991:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0286
   input: IEC 60050-721:1991/AMD1:2016 ED1
   identifier:
@@ -5185,6 +5470,7 @@
     human: IEC 60050-721:1991/AMD1:2016 ED1
     urn: urn:iec:std:iec:60050-721:1991:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0287
   input: IEC 60050-721:1991/AMD2:2017
   identifier:
@@ -5202,6 +5488,7 @@
     human: IEC 60050-721:1991/AMD2:2017
     urn: urn:iec:std:iec:60050-721:1991:::::amd:2:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0288
   input: IEC 60050-721:1991/AMD2:2017 ED1
   identifier:
@@ -5221,6 +5508,7 @@
     human: IEC 60050-721:1991/AMD2:2017 ED1
     urn: urn:iec:std:iec:60050-721:1991:::::amd:2:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0289
   input: IEC 60050-721:1991/AMD3:2018
   identifier:
@@ -5238,6 +5526,7 @@
     human: IEC 60050-721:1991/AMD3:2018
     urn: urn:iec:std:iec:60050-721:1991:::::amd:3:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0290
   input: IEC 60050-721:1991/AMD3:2018 ED1
   identifier:
@@ -5257,6 +5546,7 @@
     human: IEC 60050-721:1991/AMD3:2018 ED1
     urn: urn:iec:std:iec:60050-721:1991:::::amd:3:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0291
   input: IEC 60050-721:1991/AMD4:2019
   identifier:
@@ -5274,6 +5564,7 @@
     human: IEC 60050-721:1991/AMD4:2019
     urn: urn:iec:std:iec:60050-721:1991:::::amd:4:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0292
   input: IEC 60050-721:1991/AMD4:2019 ED1
   identifier:
@@ -5293,6 +5584,7 @@
     human: IEC 60050-721:1991/AMD4:2019 ED1
     urn: urn:iec:std:iec:60050-721:1991:::::amd:4:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0293
   input: IEC 60050-721:1991/AMD5:2021
   identifier:
@@ -5310,6 +5602,7 @@
     human: IEC 60050-721:1991/AMD5:2021
     urn: urn:iec:std:iec:60050-721:1991:::::amd:5:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0294
   input: IEC 60050-721:1991/AMD5:2021 ED1
   identifier:
@@ -5329,6 +5622,7 @@
     human: IEC 60050-721:1991/AMD5:2021 ED1
     urn: urn:iec:std:iec:60050-721:1991:::::amd:5:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0295
   input: IEC 60050-722:1992/AMD1:2017
   identifier:
@@ -5346,6 +5640,7 @@
     human: IEC 60050-722:1992/AMD1:2017
     urn: urn:iec:std:iec:60050-722:1992:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0296
   input: IEC 60050-722:1992/AMD1:2017 ED1
   identifier:
@@ -5365,6 +5660,7 @@
     human: IEC 60050-722:1992/AMD1:2017 ED1
     urn: urn:iec:std:iec:60050-722:1992:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0297
   input: IEC 60050-723:1997/AMD1:1999
   identifier:
@@ -5382,6 +5678,7 @@
     human: IEC 60050-723:1997/AMD1:1999
     urn: urn:iec:std:iec:60050-723:1997:::::amd:1:1999
   roundtrip: true
+  style: v3
 - id: iec.amendment.0298
   input: IEC 60050-723:1997/AMD1:1999 ED1
   identifier:
@@ -5401,6 +5698,7 @@
     human: IEC 60050-723:1997/AMD1:1999 ED1
     urn: urn:iec:std:iec:60050-723:1997:::::amd:1:1999
   roundtrip: true
+  style: v3
 - id: iec.amendment.0299
   input: IEC 60050-723:1997/AMD2:2016
   identifier:
@@ -5418,6 +5716,7 @@
     human: IEC 60050-723:1997/AMD2:2016
     urn: urn:iec:std:iec:60050-723:1997:::::amd:2:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0300
   input: IEC 60050-723:1997/AMD2:2016 ED1
   identifier:
@@ -5437,6 +5736,7 @@
     human: IEC 60050-723:1997/AMD2:2016 ED1
     urn: urn:iec:std:iec:60050-723:1997:::::amd:2:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0301
   input: IEC 60050-723:1997/AMD3:2017
   identifier:
@@ -5454,6 +5754,7 @@
     human: IEC 60050-723:1997/AMD3:2017
     urn: urn:iec:std:iec:60050-723:1997:::::amd:3:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0302
   input: IEC 60050-723:1997/AMD3:2017 ED1
   identifier:
@@ -5473,6 +5774,7 @@
     human: IEC 60050-723:1997/AMD3:2017 ED1
     urn: urn:iec:std:iec:60050-723:1997:::::amd:3:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0303
   input: IEC 60050-723:1997/AMD4:2018
   identifier:
@@ -5490,6 +5792,7 @@
     human: IEC 60050-723:1997/AMD4:2018
     urn: urn:iec:std:iec:60050-723:1997:::::amd:4:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0304
   input: IEC 60050-723:1997/AMD4:2018 ED1
   identifier:
@@ -5509,6 +5812,7 @@
     human: IEC 60050-723:1997/AMD4:2018 ED1
     urn: urn:iec:std:iec:60050-723:1997:::::amd:4:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0305
   input: IEC 60050-723:1997/AMD5:2019
   identifier:
@@ -5526,6 +5830,7 @@
     human: IEC 60050-723:1997/AMD5:2019
     urn: urn:iec:std:iec:60050-723:1997:::::amd:5:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0306
   input: IEC 60050-723:1997/AMD5:2019 ED1
   identifier:
@@ -5545,6 +5850,7 @@
     human: IEC 60050-723:1997/AMD5:2019 ED1
     urn: urn:iec:std:iec:60050-723:1997:::::amd:5:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0307
   input: IEC 60050-723:1997/AMD6:2020
   identifier:
@@ -5562,6 +5868,7 @@
     human: IEC 60050-723:1997/AMD6:2020
     urn: urn:iec:std:iec:60050-723:1997:::::amd:6:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0308
   input: IEC 60050-723:1997/AMD6:2020 ED1
   identifier:
@@ -5581,6 +5888,7 @@
     human: IEC 60050-723:1997/AMD6:2020 ED1
     urn: urn:iec:std:iec:60050-723:1997:::::amd:6:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0309
   input: IEC 60050-723:1997/AMD7:2021
   identifier:
@@ -5598,6 +5906,7 @@
     human: IEC 60050-723:1997/AMD7:2021
     urn: urn:iec:std:iec:60050-723:1997:::::amd:7:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0310
   input: IEC 60050-723:1997/AMD7:2021 ED1
   identifier:
@@ -5617,6 +5926,7 @@
     human: IEC 60050-723:1997/AMD7:2021 ED1
     urn: urn:iec:std:iec:60050-723:1997:::::amd:7:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0311
   input: IEC 60050-725:1994/AMD1:2016
   identifier:
@@ -5634,6 +5944,7 @@
     human: IEC 60050-725:1994/AMD1:2016
     urn: urn:iec:std:iec:60050-725:1994:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0312
   input: IEC 60050-725:1994/AMD1:2016 ED2
   identifier:
@@ -5653,6 +5964,7 @@
     human: IEC 60050-725:1994/AMD1:2016 ED2
     urn: urn:iec:std:iec:60050-725:1994:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0313
   input: IEC 60050-725:1994/AMD2:2019
   identifier:
@@ -5670,6 +5982,7 @@
     human: IEC 60050-725:1994/AMD2:2019
     urn: urn:iec:std:iec:60050-725:1994:::::amd:2:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0314
   input: IEC 60050-725:1994/AMD2:2019 ED2
   identifier:
@@ -5689,6 +6002,7 @@
     human: IEC 60050-725:1994/AMD2:2019 ED2
     urn: urn:iec:std:iec:60050-725:1994:::::amd:2:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0315
   input: IEC 60050-725:1994/AMD3:2021
   identifier:
@@ -5706,6 +6020,7 @@
     human: IEC 60050-725:1994/AMD3:2021
     urn: urn:iec:std:iec:60050-725:1994:::::amd:3:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0316
   input: IEC 60050-725:1994/AMD3:2021 ED2
   identifier:
@@ -5725,6 +6040,7 @@
     human: IEC 60050-725:1994/AMD3:2021 ED2
     urn: urn:iec:std:iec:60050-725:1994:::::amd:3:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0317
   input: IEC 60050-726:1982/AMD1:2016
   identifier:
@@ -5742,6 +6058,7 @@
     human: IEC 60050-726:1982/AMD1:2016
     urn: urn:iec:std:iec:60050-726:1982:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0318
   input: IEC 60050-726:1982/AMD1:2016 ED1
   identifier:
@@ -5761,6 +6078,7 @@
     human: IEC 60050-726:1982/AMD1:2016 ED1
     urn: urn:iec:std:iec:60050-726:1982:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0319
   input: IEC 60050-726:1982/AMD2:2017
   identifier:
@@ -5778,6 +6096,7 @@
     human: IEC 60050-726:1982/AMD2:2017
     urn: urn:iec:std:iec:60050-726:1982:::::amd:2:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0320
   input: IEC 60050-726:1982/AMD2:2017 ED1
   identifier:
@@ -5797,6 +6116,7 @@
     human: IEC 60050-726:1982/AMD2:2017 ED1
     urn: urn:iec:std:iec:60050-726:1982:::::amd:2:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0321
   input: IEC 60050-726:1982/AMD3:2018
   identifier:
@@ -5814,6 +6134,7 @@
     human: IEC 60050-726:1982/AMD3:2018
     urn: urn:iec:std:iec:60050-726:1982:::::amd:3:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0322
   input: IEC 60050-726:1982/AMD3:2018 ED1
   identifier:
@@ -5833,6 +6154,7 @@
     human: IEC 60050-726:1982/AMD3:2018 ED1
     urn: urn:iec:std:iec:60050-726:1982:::::amd:3:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0323
   input: IEC 60050-726:1982/AMD4:2019
   identifier:
@@ -5850,6 +6172,7 @@
     human: IEC 60050-726:1982/AMD4:2019
     urn: urn:iec:std:iec:60050-726:1982:::::amd:4:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0324
   input: IEC 60050-726:1982/AMD4:2019 ED1
   identifier:
@@ -5869,6 +6192,7 @@
     human: IEC 60050-726:1982/AMD4:2019 ED1
     urn: urn:iec:std:iec:60050-726:1982:::::amd:4:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0325
   input: IEC 60050-726:1982/AMD5:2020
   identifier:
@@ -5886,6 +6210,7 @@
     human: IEC 60050-726:1982/AMD5:2020
     urn: urn:iec:std:iec:60050-726:1982:::::amd:5:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0326
   input: IEC 60050-726:1982/AMD5:2020 ED1
   identifier:
@@ -5905,6 +6230,7 @@
     human: IEC 60050-726:1982/AMD5:2020 ED1
     urn: urn:iec:std:iec:60050-726:1982:::::amd:5:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0327
   input: IEC 60050-726:1982/AMD6:2021
   identifier:
@@ -5922,6 +6248,7 @@
     human: IEC 60050-726:1982/AMD6:2021
     urn: urn:iec:std:iec:60050-726:1982:::::amd:6:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0328
   input: IEC 60050-726:1982/AMD6:2021 ED1
   identifier:
@@ -5941,6 +6268,7 @@
     human: IEC 60050-726:1982/AMD6:2021 ED1
     urn: urn:iec:std:iec:60050-726:1982:::::amd:6:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0329
   input: IEC 60050-726:1982/AMD7:2021
   identifier:
@@ -5958,6 +6286,7 @@
     human: IEC 60050-726:1982/AMD7:2021
     urn: urn:iec:std:iec:60050-726:1982:::::amd:7:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0330
   input: IEC 60050-726:1982/AMD7:2021 ED1
   identifier:
@@ -5977,6 +6306,7 @@
     human: IEC 60050-726:1982/AMD7:2021 ED1
     urn: urn:iec:std:iec:60050-726:1982:::::amd:7:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0331
   input: IEC 60050-731:1991/AMD1:2016
   identifier:
@@ -5994,6 +6324,7 @@
     human: IEC 60050-731:1991/AMD1:2016
     urn: urn:iec:std:iec:60050-731:1991:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0332
   input: IEC 60050-731:1991/AMD1:2016 ED1
   identifier:
@@ -6013,6 +6344,7 @@
     human: IEC 60050-731:1991/AMD1:2016 ED1
     urn: urn:iec:std:iec:60050-731:1991:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0333
   input: IEC 60050-731:1991/AMD2:2017
   identifier:
@@ -6030,6 +6362,7 @@
     human: IEC 60050-731:1991/AMD2:2017
     urn: urn:iec:std:iec:60050-731:1991:::::amd:2:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0334
   input: IEC 60050-731:1991/AMD2:2017 ED1
   identifier:
@@ -6049,6 +6382,7 @@
     human: IEC 60050-731:1991/AMD2:2017 ED1
     urn: urn:iec:std:iec:60050-731:1991:::::amd:2:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0335
   input: IEC 60050-731:1991/AMD3:2018
   identifier:
@@ -6066,6 +6400,7 @@
     human: IEC 60050-731:1991/AMD3:2018
     urn: urn:iec:std:iec:60050-731:1991:::::amd:3:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0336
   input: IEC 60050-731:1991/AMD3:2018 ED1
   identifier:
@@ -6085,6 +6420,7 @@
     human: IEC 60050-731:1991/AMD3:2018 ED1
     urn: urn:iec:std:iec:60050-731:1991:::::amd:3:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0337
   input: IEC 60050-731:1991/AMD4:2019
   identifier:
@@ -6102,6 +6438,7 @@
     human: IEC 60050-731:1991/AMD4:2019
     urn: urn:iec:std:iec:60050-731:1991:::::amd:4:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0338
   input: IEC 60050-731:1991/AMD4:2019 ED1
   identifier:
@@ -6121,6 +6458,7 @@
     human: IEC 60050-731:1991/AMD4:2019 ED1
     urn: urn:iec:std:iec:60050-731:1991:::::amd:4:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0339
   input: IEC 60050-731:1991/AMD5:2020
   identifier:
@@ -6138,6 +6476,7 @@
     human: IEC 60050-731:1991/AMD5:2020
     urn: urn:iec:std:iec:60050-731:1991:::::amd:5:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0340
   input: IEC 60050-731:1991/AMD5:2020 ED1
   identifier:
@@ -6157,6 +6496,7 @@
     human: IEC 60050-731:1991/AMD5:2020 ED1
     urn: urn:iec:std:iec:60050-731:1991:::::amd:5:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0341
   input: IEC 60050-731:1991/AMD6:2021
   identifier:
@@ -6174,6 +6514,7 @@
     human: IEC 60050-731:1991/AMD6:2021
     urn: urn:iec:std:iec:60050-731:1991:::::amd:6:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0342
   input: IEC 60050-731:1991/AMD6:2021 ED1
   identifier:
@@ -6193,6 +6534,7 @@
     human: IEC 60050-731:1991/AMD6:2021 ED1
     urn: urn:iec:std:iec:60050-731:1991:::::amd:6:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0343
   input: IEC 60050-732:2010/AMD1:2014
   identifier:
@@ -6210,6 +6552,7 @@
     human: IEC 60050-732:2010/AMD1:2014
     urn: urn:iec:std:iec:60050-732:2010:::::amd:1:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0344
   input: IEC 60050-732:2010/AMD2:2016
   identifier:
@@ -6227,6 +6570,7 @@
     human: IEC 60050-732:2010/AMD2:2016
     urn: urn:iec:std:iec:60050-732:2010:::::amd:2:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0345
   input: IEC 60050-732:2010/AMD2:2016 ED1
   identifier:
@@ -6246,6 +6590,7 @@
     human: IEC 60050-732:2010/AMD2:2016 ED1
     urn: urn:iec:std:iec:60050-732:2010:::::amd:2:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0346
   input: IEC 60050-732:2010/AMD3:2021
   identifier:
@@ -6263,6 +6608,7 @@
     human: IEC 60050-732:2010/AMD3:2021
     urn: urn:iec:std:iec:60050-732:2010:::::amd:3:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0347
   input: IEC 60050-732:2010/AMD3:2021 ED1
   identifier:
@@ -6282,6 +6628,7 @@
     human: IEC 60050-732:2010/AMD3:2021 ED1
     urn: urn:iec:std:iec:60050-732:2010:::::amd:3:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0348
   input: IEC 60050-801:1994/AMD1:2018
   identifier:
@@ -6299,6 +6646,7 @@
     human: IEC 60050-801:1994/AMD1:2018
     urn: urn:iec:std:iec:60050-801:1994:::::amd:1:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0349
   input: IEC 60050-801:1994/AMD1:2018 ED2
   identifier:
@@ -6318,6 +6666,7 @@
     human: IEC 60050-801:1994/AMD1:2018 ED2
     urn: urn:iec:std:iec:60050-801:1994:::::amd:1:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0350
   input: IEC 60050-801:1994/AMD2:2021
   identifier:
@@ -6335,6 +6684,7 @@
     human: IEC 60050-801:1994/AMD2:2021
     urn: urn:iec:std:iec:60050-801:1994:::::amd:2:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0351
   input: IEC 60050-801:1994/AMD2:2021 ED2
   identifier:
@@ -6354,6 +6704,7 @@
     human: IEC 60050-801:1994/AMD2:2021 ED2
     urn: urn:iec:std:iec:60050-801:1994:::::amd:2:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0352
   input: IEC 60050-801:1994/AMD3:2021
   identifier:
@@ -6371,6 +6722,7 @@
     human: IEC 60050-801:1994/AMD3:2021
     urn: urn:iec:std:iec:60050-801:1994:::::amd:3:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0353
   input: IEC 60050-801:1994/AMD3:2021 ED2
   identifier:
@@ -6390,6 +6742,7 @@
     human: IEC 60050-801:1994/AMD3:2021 ED2
     urn: urn:iec:std:iec:60050-801:1994:::::amd:3:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0354
   input: IEC 60050-801:1994/AMD4:2021
   identifier:
@@ -6407,6 +6760,7 @@
     human: IEC 60050-801:1994/AMD4:2021
     urn: urn:iec:std:iec:60050-801:1994:::::amd:4:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0355
   input: IEC 60050-801:1994/AMD4:2021 ED2
   identifier:
@@ -6426,6 +6780,7 @@
     human: IEC 60050-801:1994/AMD4:2021 ED2
     urn: urn:iec:std:iec:60050-801:1994:::::amd:4:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0356
   input: IEC 60050-802:2011/AMD1:2021
   identifier:
@@ -6443,6 +6798,7 @@
     human: IEC 60050-802:2011/AMD1:2021
     urn: urn:iec:std:iec:60050-802:2011:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0357
   input: IEC 60050-802:2011/AMD1:2021 ED1
   identifier:
@@ -6462,6 +6818,7 @@
     human: IEC 60050-802:2011/AMD1:2021 ED1
     urn: urn:iec:std:iec:60050-802:2011:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0358
   input: IEC 60050-806:1996/AMD1:2001
   identifier:
@@ -6479,6 +6836,7 @@
     human: IEC 60050-806:1996/AMD1:2001
     urn: urn:iec:std:iec:60050-806:1996:::::amd:1:2001
   roundtrip: true
+  style: v3
 - id: iec.amendment.0359
   input: IEC 60050-806:1996/AMD1:2001 ED2
   identifier:
@@ -6498,6 +6856,7 @@
     human: IEC 60050-806:1996/AMD1:2001 ED2
     urn: urn:iec:std:iec:60050-806:1996:::::amd:1:2001
   roundtrip: true
+  style: v3
 - id: iec.amendment.0360
   input: IEC 60050-806:1996/AMD2:2018
   identifier:
@@ -6515,6 +6874,7 @@
     human: IEC 60050-806:1996/AMD2:2018
     urn: urn:iec:std:iec:60050-806:1996:::::amd:2:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0361
   input: IEC 60050-806:1996/AMD2:2018 ED2
   identifier:
@@ -6534,6 +6894,7 @@
     human: IEC 60050-806:1996/AMD2:2018 ED2
     urn: urn:iec:std:iec:60050-806:1996:::::amd:2:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0362
   input: IEC 60050-808:2002/AMD1:2018
   identifier:
@@ -6551,6 +6912,7 @@
     human: IEC 60050-808:2002/AMD1:2018
     urn: urn:iec:std:iec:60050-808:2002:::::amd:1:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0363
   input: IEC 60050-808:2002/AMD1:2018 ED1
   identifier:
@@ -6570,6 +6932,7 @@
     human: IEC 60050-808:2002/AMD1:2018 ED1
     urn: urn:iec:std:iec:60050-808:2002:::::amd:1:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0364
   input: IEC 60050-811:2017/AMD1:2021
   identifier:
@@ -6587,6 +6950,7 @@
     human: IEC 60050-811:2017/AMD1:2021
     urn: urn:iec:std:iec:60050-811:2017:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0365
   input: IEC 60050-811:2017/AMD1:2021 ED2
   identifier:
@@ -6606,6 +6970,7 @@
     human: IEC 60050-811:2017/AMD1:2021 ED2
     urn: urn:iec:std:iec:60050-811:2017:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0366
   input: IEC 60050-815:2015/AMD1:2016
   identifier:
@@ -6623,6 +6988,7 @@
     human: IEC 60050-815:2015/AMD1:2016
     urn: urn:iec:std:iec:60050-815:2015:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0367
   input: IEC 60050-815:2015/AMD1:2016 ED2
   identifier:
@@ -6642,6 +7008,7 @@
     human: IEC 60050-815:2015/AMD1:2016 ED2
     urn: urn:iec:std:iec:60050-815:2015:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0368
   input: IEC 60050-815:2015/AMD2:2020
   identifier:
@@ -6659,6 +7026,7 @@
     human: IEC 60050-815:2015/AMD2:2020
     urn: urn:iec:std:iec:60050-815:2015:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0369
   input: IEC 60050-815:2015/AMD2:2020 ED2
   identifier:
@@ -6678,6 +7046,7 @@
     human: IEC 60050-815:2015/AMD2:2020 ED2
     urn: urn:iec:std:iec:60050-815:2015:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0370
   input: IEC 60050-815:2015/AMD3:2021
   identifier:
@@ -6695,6 +7064,7 @@
     human: IEC 60050-815:2015/AMD3:2021
     urn: urn:iec:std:iec:60050-815:2015:::::amd:3:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0371
   input: IEC 60050-815:2015/AMD3:2021 ED2
   identifier:
@@ -6714,6 +7084,7 @@
     human: IEC 60050-815:2015/AMD3:2021 ED2
     urn: urn:iec:std:iec:60050-815:2015:::::amd:3:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0372
   input: IEC 60050-826:1982/AMD1:1990 ED1
   identifier:
@@ -6733,6 +7104,7 @@
     human: IEC 60050-826:1982/AMD1:1990 ED1
     urn: urn:iec:std:iec:60050-826:1982:::::amd:1:1990
   roundtrip: true
+  style: v3
 - id: iec.amendment.0373
   input: IEC 60050-826:1982/AMD2:1995 ED1
   identifier:
@@ -6752,6 +7124,7 @@
     human: IEC 60050-826:1982/AMD2:1995 ED1
     urn: urn:iec:std:iec:60050-826:1982:::::amd:2:1995
   roundtrip: true
+  style: v3
 - id: iec.amendment.0374
   input: IEC 60050-826:1982/AMD3:1999 ED1
   identifier:
@@ -6771,6 +7144,7 @@
     human: IEC 60050-826:1982/AMD3:1999 ED1
     urn: urn:iec:std:iec:60050-826:1982:::::amd:3:1999
   roundtrip: true
+  style: v3
 - id: iec.amendment.0375
   input: IEC 60050-841:2004/AMD1:2021
   identifier:
@@ -6788,6 +7162,7 @@
     human: IEC 60050-841:2004/AMD1:2021
     urn: urn:iec:std:iec:60050-841:2004:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0376
   input: IEC 60050-841:2004/AMD1:2021 ED2
   identifier:
@@ -6807,6 +7182,7 @@
     human: IEC 60050-841:2004/AMD1:2021 ED2
     urn: urn:iec:std:iec:60050-841:2004:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0377
   input: IEC 60050-845:1987/AMD1:2016 ED1
   identifier:
@@ -6826,6 +7202,7 @@
     human: IEC 60050-845:1987/AMD1:2016 ED1
     urn: urn:iec:std:iec:60050-845:1987:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0378
   input: IEC 60050-845:1987/AMD2:2019 ED1
   identifier:
@@ -6845,6 +7222,7 @@
     human: IEC 60050-845:1987/AMD2:2019 ED1
     urn: urn:iec:std:iec:60050-845:1987:::::amd:2:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0379
   input: IEC 60050-845:1987/AMD3:2020 ED1
   identifier:
@@ -6864,6 +7242,7 @@
     human: IEC 60050-845:1987/AMD3:2020 ED1
     urn: urn:iec:std:iec:60050-845:1987:::::amd:3:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0380
   input: IEC 60050-851:2008/AMD1:2014
   identifier:
@@ -6881,6 +7260,7 @@
     human: IEC 60050-851:2008/AMD1:2014
     urn: urn:iec:std:iec:60050-851:2008:::::amd:1:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0381
   input: IEC 60050-871/AMD1 ED1
   identifier:
@@ -6898,6 +7278,7 @@
     human: IEC 60050-871/AMD1 ED1
     urn: 'urn:iec:std:iec:60050-871::::::amd:1:'
   roundtrip: true
+  style: v3
 - id: iec.amendment.0382
   input: IEC 60050-881:1983/AMD1:2014
   identifier:
@@ -6915,6 +7296,7 @@
     human: IEC 60050-881:1983/AMD1:2014
     urn: urn:iec:std:iec:60050-881:1983:::::amd:1:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0383
   input: IEC 60050-881:1983/AMD1:2014 ED1
   identifier:
@@ -6934,6 +7316,7 @@
     human: IEC 60050-881:1983/AMD1:2014 ED1
     urn: urn:iec:std:iec:60050-881:1983:::::amd:1:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0384
   input: IEC 60050-881:1983/AMD2:2019
   identifier:
@@ -6951,6 +7334,7 @@
     human: IEC 60050-881:1983/AMD2:2019
     urn: urn:iec:std:iec:60050-881:1983:::::amd:2:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0385
   input: IEC 60050-881:1983/AMD2:2019 ED1
   identifier:
@@ -6970,6 +7354,7 @@
     human: IEC 60050-881:1983/AMD2:2019 ED1
     urn: urn:iec:std:iec:60050-881:1983:::::amd:2:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0386
   input: IEC 60050-881:1983/AMD3:2020
   identifier:
@@ -6987,6 +7372,7 @@
     human: IEC 60050-881:1983/AMD3:2020
     urn: urn:iec:std:iec:60050-881:1983:::::amd:3:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0387
   input: IEC 60050-881:1983/AMD3:2020 ED1
   identifier:
@@ -7006,6 +7392,7 @@
     human: IEC 60050-881:1983/AMD3:2020 ED1
     urn: urn:iec:std:iec:60050-881:1983:::::amd:3:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0388
   input: IEC 60050-891:1998/AMD1:2018
   identifier:
@@ -7023,6 +7410,7 @@
     human: IEC 60050-891:1998/AMD1:2018
     urn: urn:iec:std:iec:60050-891:1998:::::amd:1:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0389
   input: IEC 60050-891:1998/AMD1:2018 ED1
   identifier:
@@ -7042,6 +7430,7 @@
     human: IEC 60050-891:1998/AMD1:2018 ED1
     urn: urn:iec:std:iec:60050-891:1998:::::amd:1:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0390
   input: IEC 60050-903:2013/AMD1:2014
   identifier:
@@ -7059,6 +7448,7 @@
     human: IEC 60050-903:2013/AMD1:2014
     urn: urn:iec:std:iec:60050-903:2013:::::amd:1:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0391
   input: IEC 60050-903:2013/AMD1:2014 ED1
   identifier:
@@ -7078,6 +7468,7 @@
     human: IEC 60050-903:2013/AMD1:2014 ED1
     urn: urn:iec:std:iec:60050-903:2013:::::amd:1:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0392
   input: IEC 60050-903:2013/AMD2:2015
   identifier:
@@ -7095,6 +7486,7 @@
     human: IEC 60050-903:2013/AMD2:2015
     urn: urn:iec:std:iec:60050-903:2013:::::amd:2:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0393
   input: IEC 60050-903:2013/AMD2:2015 ED1
   identifier:
@@ -7114,6 +7506,7 @@
     human: IEC 60050-903:2013/AMD2:2015 ED1
     urn: urn:iec:std:iec:60050-903:2013:::::amd:2:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0394
   input: IEC 60050-904:2014/AMD1:2015
   identifier:
@@ -7131,6 +7524,7 @@
     human: IEC 60050-904:2014/AMD1:2015
     urn: urn:iec:std:iec:60050-904:2014:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0395
   input: IEC 60050-904:2014/AMD1:2015 ED1
   identifier:
@@ -7150,6 +7544,7 @@
     human: IEC 60050-904:2014/AMD1:2015 ED1
     urn: urn:iec:std:iec:60050-904:2014:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0396
   input: IEC 60050-904:2014/AMD2:2016
   identifier:
@@ -7167,6 +7562,7 @@
     human: IEC 60050-904:2014/AMD2:2016
     urn: urn:iec:std:iec:60050-904:2014:::::amd:2:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0397
   input: IEC 60050-904:2014/AMD2:2016 ED1
   identifier:
@@ -7186,6 +7582,7 @@
     human: IEC 60050-904:2014/AMD2:2016 ED1
     urn: urn:iec:std:iec:60050-904:2014:::::amd:2:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0398
   input: IEC 60050-904:2014/AMD3:2019
   identifier:
@@ -7203,6 +7600,7 @@
     human: IEC 60050-904:2014/AMD3:2019
     urn: urn:iec:std:iec:60050-904:2014:::::amd:3:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0399
   input: IEC 60050-904:2014/AMD3:2019 ED1
   identifier:
@@ -7222,6 +7620,7 @@
     human: IEC 60050-904:2014/AMD3:2019 ED1
     urn: urn:iec:std:iec:60050-904:2014:::::amd:3:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0400
   input: IEC 60094-1:1981/AMD1:1994
   identifier:
@@ -7239,6 +7638,7 @@
     human: IEC 60094-1:1981/AMD1:1994
     urn: urn:iec:std:iec:60094-1:1981:::::amd:1:1994
   roundtrip: true
+  style: v3
 - id: iec.amendment.0401
   input: IEC 60094-3:1979/AMD2:1988
   identifier:
@@ -7256,6 +7656,7 @@
     human: IEC 60094-3:1979/AMD2:1988
     urn: urn:iec:std:iec:60094-3:1979:::::amd:2:1988
   roundtrip: true
+  style: v3
 - id: iec.amendment.0402
   input: IEC 60094-3:1979/AMD3:1996
   identifier:
@@ -7273,6 +7674,7 @@
     human: IEC 60094-3:1979/AMD3:1996
     urn: urn:iec:std:iec:60094-3:1979:::::amd:3:1996
   roundtrip: true
+  style: v3
 - id: iec.amendment.0403
   input: IEC 60094-4:1986/AMD1:1994
   identifier:
@@ -7290,6 +7692,7 @@
     human: IEC 60094-4:1986/AMD1:1994
     urn: urn:iec:std:iec:60094-4:1986:::::amd:1:1994
   roundtrip: true
+  style: v3
 - id: iec.amendment.0404
   input: IEC 60094-5:1988/AMD1:1996
   identifier:
@@ -7307,6 +7710,7 @@
     human: IEC 60094-5:1988/AMD1:1996
     urn: urn:iec:std:iec:60094-5:1988:::::amd:1:1996
   roundtrip: true
+  style: v3
 - id: iec.amendment.0405
   input: IEC 60094-7:1986/AMD1:1996
   identifier:
@@ -7324,6 +7728,7 @@
     human: IEC 60094-7:1986/AMD1:1996
     urn: urn:iec:std:iec:60094-7:1986:::::amd:1:1996
   roundtrip: true
+  style: v3
 - id: iec.amendment.0406
   input: IEC 60107-3:1988/AMD1:1999
   identifier:
@@ -7341,6 +7746,7 @@
     human: IEC 60107-3:1988/AMD1:1999
     urn: urn:iec:std:iec:60107-3:1988:::::amd:1:1999
   roundtrip: true
+  style: v3
 - id: iec.amendment.0407
   input: IEC 60107-4:1988/AMD1:1999
   identifier:
@@ -7358,6 +7764,7 @@
     human: IEC 60107-4:1988/AMD1:1999
     urn: urn:iec:std:iec:60107-4:1988:::::amd:1:1999
   roundtrip: true
+  style: v3
 - id: iec.amendment.0408
   input: IEC 60107-5:1992/AMD1:1999
   identifier:
@@ -7375,41 +7782,8 @@
     human: IEC 60107-5:1992/AMD1:1999
     urn: urn:iec:std:iec:60107-5:1992:::::amd:1:1999
   roundtrip: true
+  style: v3
 - id: iec.amendment.0409
-  input: IEC 60268-1:1985/AMD1:1988
-  identifier:
-    type: amendment
-    components:
-      number: '1'
-      year: '1988'
-    base:
-      type: international_standard
-      components:
-        number: '60268'
-        part: '1'
-        year: '1985'
-  representations:
-    human: IEC 60268-1:1985/AMD1:1988
-    urn: urn:iec:std:iec:60268-1:1985:::::amd:1:1988
-  roundtrip: true
-- id: iec.amendment.0410
-  input: IEC 60268-1:1985/AMD2:1988
-  identifier:
-    type: amendment
-    components:
-      number: '2'
-      year: '1988'
-    base:
-      type: international_standard
-      components:
-        number: '60268'
-        part: '1'
-        year: '1985'
-  representations:
-    human: IEC 60268-1:1985/AMD2:1988
-    urn: urn:iec:std:iec:60268-1:1985:::::amd:2:1988
-  roundtrip: true
-- id: iec.amendment.0411
   input: IEC 60268-11:1987/AMD1:1989
   identifier:
     type: amendment
@@ -7426,7 +7800,8 @@
     human: IEC 60268-11:1987/AMD1:1989
     urn: urn:iec:std:iec:60268-11:1987:::::amd:1:1989
   roundtrip: true
-- id: iec.amendment.0412
+  style: v3
+- id: iec.amendment.0410
   input: IEC 60268-11:1987/AMD2:1991
   identifier:
     type: amendment
@@ -7443,7 +7818,8 @@
     human: IEC 60268-11:1987/AMD2:1991
     urn: urn:iec:std:iec:60268-11:1987:::::amd:2:1991
   roundtrip: true
-- id: iec.amendment.0413
+  style: v3
+- id: iec.amendment.0411
   input: IEC 60268-12:1987/AMD1:1991
   identifier:
     type: amendment
@@ -7460,7 +7836,8 @@
     human: IEC 60268-12:1987/AMD1:1991
     urn: urn:iec:std:iec:60268-12:1987:::::amd:1:1991
   roundtrip: true
-- id: iec.amendment.0414
+  style: v3
+- id: iec.amendment.0412
   input: IEC 60268-12:1987/AMD2:1994
   identifier:
     type: amendment
@@ -7477,6 +7854,43 @@
     human: IEC 60268-12:1987/AMD2:1994
     urn: urn:iec:std:iec:60268-12:1987:::::amd:2:1994
   roundtrip: true
+  style: v3
+- id: iec.amendment.0413
+  input: IEC 60268-1:1985/AMD1:1988
+  identifier:
+    type: amendment
+    components:
+      number: '1'
+      year: '1988'
+    base:
+      type: international_standard
+      components:
+        number: '60268'
+        part: '1'
+        year: '1985'
+  representations:
+    human: IEC 60268-1:1985/AMD1:1988
+    urn: urn:iec:std:iec:60268-1:1985:::::amd:1:1988
+  roundtrip: true
+  style: v3
+- id: iec.amendment.0414
+  input: IEC 60268-1:1985/AMD2:1988
+  identifier:
+    type: amendment
+    components:
+      number: '2'
+      year: '1988'
+    base:
+      type: international_standard
+      components:
+        number: '60268'
+        part: '1'
+        year: '1985'
+  representations:
+    human: IEC 60268-1:1985/AMD2:1988
+    urn: urn:iec:std:iec:60268-1:1985:::::amd:2:1988
+  roundtrip: true
+  style: v3
 - id: iec.amendment.0415
   input: IEC 60268-2:1987/AMD1:1991
   identifier:
@@ -7494,6 +7908,7 @@
     human: IEC 60268-2:1987/AMD1:1991
     urn: urn:iec:std:iec:60268-2:1987:::::amd:1:1991
   roundtrip: true
+  style: v3
 - id: iec.amendment.0416
   input: IEC 60268-5:2003/AMD1:2007
   identifier:
@@ -7511,6 +7926,7 @@
     human: IEC 60268-5:2003/AMD1:2007
     urn: urn:iec:std:iec:60268-5:2003:::::amd:1:2007
   roundtrip: true
+  style: v3
 - id: iec.amendment.0417
   input: IEC 60268-7:2010/AMD1:2020
   identifier:
@@ -7528,6 +7944,7 @@
     human: IEC 60268-7:2010/AMD1:2020
     urn: urn:iec:std:iec:60268-7:2010:::::amd:1:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0418
   input: IEC 60315-3:1989/AMD1:1999
   identifier:
@@ -7545,6 +7962,7 @@
     human: IEC 60315-3:1989/AMD1:1999
     urn: urn:iec:std:iec:60315-3:1989:::::amd:1:1999
   roundtrip: true
+  style: v3
 - id: iec.amendment.0419
   input: IEC 60386:1972/AMD1:1988
   identifier:
@@ -7561,6 +7979,7 @@
     human: IEC 60386:1972/AMD1:1988
     urn: urn:iec:std:iec:60386:1972:::::amd:1:1988
   roundtrip: true
+  style: v3
 - id: iec.amendment.0420
   input: IEC 60558:1982/AMD1:1987
   identifier:
@@ -7577,6 +7996,7 @@
     human: IEC 60558:1982/AMD1:1987
     urn: urn:iec:std:iec:60558:1982:::::amd:1:1987
   roundtrip: true
+  style: v3
 - id: iec.amendment.0421
   input: IEC 60558:1982/AMD2:1993
   identifier:
@@ -7593,6 +8013,7 @@
     human: IEC 60558:1982/AMD2:1993
     urn: urn:iec:std:iec:60558:1982:::::amd:2:1993
   roundtrip: true
+  style: v3
 - id: iec.amendment.0422
   input: IEC 60602:1980/AMD1:1987
   identifier:
@@ -7609,6 +8030,7 @@
     human: IEC 60602:1980/AMD1:1987
     urn: urn:iec:std:iec:60602:1980:::::amd:1:1987
   roundtrip: true
+  style: v3
 - id: iec.amendment.0423
   input: IEC 60712:1993/AMD1:1993
   identifier:
@@ -7625,6 +8047,7 @@
     human: IEC 60712:1993/AMD1:1993
     urn: urn:iec:std:iec:60712:1993:::::amd:1:1993
   roundtrip: true
+  style: v3
 - id: iec.amendment.0424
   input: IEC 60728-7-1:2003/AMD1:2015
   identifier:
@@ -7643,6 +8066,7 @@
     human: IEC 60728-7-1:2003/AMD1:2015
     urn: urn:iec:std:iec:60728-7-1:2003:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0425
   input: IEC 60728-9:2000/AMD1:2005
   identifier:
@@ -7660,6 +8084,7 @@
     human: IEC 60728-9:2000/AMD1:2005
     urn: urn:iec:std:iec:60728-9:2000:::::amd:1:2005
   roundtrip: true
+  style: v3
 - id: iec.amendment.0426
   input: IEC 60856:1986/AMD1:1991
   identifier:
@@ -7676,6 +8101,7 @@
     human: IEC 60856:1986/AMD1:1991
     urn: urn:iec:std:iec:60856:1986:::::amd:1:1991
   roundtrip: true
+  style: v3
 - id: iec.amendment.0427
   input: IEC 60856:1986/AMD2:1997
   identifier:
@@ -7692,6 +8118,7 @@
     human: IEC 60856:1986/AMD2:1997
     urn: urn:iec:std:iec:60856:1986:::::amd:2:1997
   roundtrip: true
+  style: v3
 - id: iec.amendment.0428
   input: IEC 60857:1986/AMD1:1991
   identifier:
@@ -7708,6 +8135,7 @@
     human: IEC 60857:1986/AMD1:1991
     urn: urn:iec:std:iec:60857:1986:::::amd:1:1991
   roundtrip: true
+  style: v3
 - id: iec.amendment.0429
   input: IEC 60857:1986/AMD2:1997
   identifier:
@@ -7724,6 +8152,7 @@
     human: IEC 60857:1986/AMD2:1997
     urn: urn:iec:std:iec:60857:1986:::::amd:2:1997
   roundtrip: true
+  style: v3
 - id: iec.amendment.0430
   input: IEC 61016:1989/AMD1:1999
   identifier:
@@ -7740,6 +8169,7 @@
     human: IEC 61016:1989/AMD1:1999
     urn: urn:iec:std:iec:61016:1989:::::amd:1:1999
   roundtrip: true
+  style: v3
 - id: iec.amendment.0431
   input: IEC 61096:1992/AMD1:1996
   identifier:
@@ -7756,6 +8186,7 @@
     human: IEC 61096:1992/AMD1:1996
     urn: urn:iec:std:iec:61096:1992:::::amd:1:1996
   roundtrip: true
+  style: v3
 - id: iec.amendment.0432
   input: IEC 61158-3-2:2014/AMD1:2019
   identifier:
@@ -7774,6 +8205,7 @@
     human: IEC 61158-3-2:2014/AMD1:2019
     urn: urn:iec:std:iec:61158-3-2:2014:::::amd:1:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0433
   input: IEC 61300-2-4:2019/AMD1:2020
   identifier:
@@ -7792,6 +8224,7 @@
     human: IEC 61300-2-4:2019/AMD1:2020
     urn: urn:iec:std:iec:61300-2-4:2019:::::amd:1:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0434
   input: IEC 61603-2:1997/AMD1:2004
   identifier:
@@ -7809,6 +8242,7 @@
     human: IEC 61603-2:1997/AMD1:2004
     urn: urn:iec:std:iec:61603-2:1997:::::amd:1:2004
   roundtrip: true
+  style: v3
 - id: iec.amendment.0435
   input: IEC 61666:2010/AMD1:2021
   identifier:
@@ -7825,6 +8259,7 @@
     human: IEC 61666:2010/AMD1:2021
     urn: urn:iec:std:iec:61666:2010:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0436
   input: IEC 61753-1:2018/AMD1:2020
   identifier:
@@ -7842,6 +8277,7 @@
     human: IEC 61753-1:2018/AMD1:2020
     urn: urn:iec:std:iec:61753-1:2018:::::amd:1:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0437
   input: IEC 61754-20/AMD1 ED2
   identifier:
@@ -7859,6 +8295,7 @@
     human: IEC 61754-20/AMD1 ED2
     urn: 'urn:iec:std:iec:61754-20::::::amd:1:'
   roundtrip: true
+  style: v3
 - id: iec.amendment.0438
   input: IEC 61755-3-6:2006/AMD1:2012
   identifier:
@@ -7877,6 +8314,7 @@
     human: IEC 61755-3-6:2006/AMD1:2012
     urn: urn:iec:std:iec:61755-3-6:2006:::::amd:1:2012
   roundtrip: true
+  style: v3
 - id: iec.amendment.0439
   input: IEC 61784-3-12:2010/AMD1:2019
   identifier:
@@ -7895,6 +8333,7 @@
     human: IEC 61784-3-12:2010/AMD1:2019
     urn: urn:iec:std:iec:61784-3-12:2010:::::amd:1:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0440
   input: IEC 61784-3-18:2011/AMD1:2016
   identifier:
@@ -7913,6 +8352,7 @@
     human: IEC 61784-3-18:2011/AMD1:2016
     urn: urn:iec:std:iec:61784-3-18:2011:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0441
   input: IEC 61784-3-18:2011/AMD2:2021
   identifier:
@@ -7931,6 +8371,7 @@
     human: IEC 61784-3-18:2011/AMD2:2021
     urn: urn:iec:std:iec:61784-3-18:2011:::::amd:2:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0442
   input: IEC 61784-5-10:2010/AMD1:2015
   identifier:
@@ -7949,6 +8390,7 @@
     human: IEC 61784-5-10:2010/AMD1:2015
     urn: urn:iec:std:iec:61784-5-10:2010:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0443
   input: IEC 61784-5-15:2010/AMD1:2015
   identifier:
@@ -7967,6 +8409,7 @@
     human: IEC 61784-5-15:2010/AMD1:2015
     urn: urn:iec:std:iec:61784-5-15:2010:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0444
   input: IEC 61784-5-4:2010/AMD1:2015
   identifier:
@@ -7985,6 +8428,7 @@
     human: IEC 61784-5-4:2010/AMD1:2015
     urn: urn:iec:std:iec:61784-5-4:2010:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0445
   input: IEC 61834-1:1998/AMD1:2001
   identifier:
@@ -8002,6 +8446,7 @@
     human: IEC 61834-1:1998/AMD1:2001
     urn: urn:iec:std:iec:61834-1:1998:::::amd:1:2001
   roundtrip: true
+  style: v3
 - id: iec.amendment.0446
   input: IEC 61834-4:1998/AMD1:2010
   identifier:
@@ -8019,6 +8464,7 @@
     human: IEC 61834-4:1998/AMD1:2010
     urn: urn:iec:std:iec:61834-4:1998:::::amd:1:2010
   roundtrip: true
+  style: v3
 - id: iec.amendment.0447
   input: IEC 61883-8:2008/AMD1:2014
   identifier:
@@ -8036,23 +8482,8 @@
     human: IEC 61883-8:2008/AMD1:2014
     urn: urn:iec:std:iec:61883-8:2008:::::amd:1:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0448
-  input: IEC 61918:2018/AMD1:2022
-  identifier:
-    type: amendment
-    components:
-      number: '1'
-      year: '2022'
-    base:
-      type: international_standard
-      components:
-        number: '61918'
-        year: '2018'
-  representations:
-    human: IEC 61918:2018/AMD1:2022
-    urn: urn:iec:std:iec:61918:2018:::::amd:1:2022
-  roundtrip: true
-- id: iec.amendment.0449
   input: IEC 61918/AMD2 ED4
   identifier:
     type: amendment
@@ -8068,6 +8499,24 @@
     human: IEC 61918/AMD2 ED4
     urn: 'urn:iec:std:iec:61918::::::amd:2:'
   roundtrip: true
+  style: v3
+- id: iec.amendment.0449
+  input: IEC 61918:2018/AMD1:2022
+  identifier:
+    type: amendment
+    components:
+      number: '1'
+      year: '2022'
+    base:
+      type: international_standard
+      components:
+        number: '61918'
+        year: '2018'
+  representations:
+    human: IEC 61918:2018/AMD1:2022
+    urn: urn:iec:std:iec:61918:2018:::::amd:1:2022
+  roundtrip: true
+  style: v3
 - id: iec.amendment.0450
   input: IEC 61937-3:2017/AMD1:2020
   identifier:
@@ -8085,6 +8534,7 @@
     human: IEC 61937-3:2017/AMD1:2020
     urn: urn:iec:std:iec:61937-3:2017:::::amd:1:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0451
   input: IEC 61937-5:2006/AMD1:2019
   identifier:
@@ -8102,6 +8552,7 @@
     human: IEC 61937-5:2006/AMD1:2019
     urn: urn:iec:std:iec:61937-5:2006:::::amd:1:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0452
   input: IEC 61937-6:2006/AMD1:2014
   identifier:
@@ -8119,6 +8570,7 @@
     human: IEC 61937-6:2006/AMD1:2014
     urn: urn:iec:std:iec:61937-6:2006:::::amd:1:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0453
   input: IEC 61937-7:2004/AMD1:2016
   identifier:
@@ -8136,6 +8588,7 @@
     human: IEC 61937-7:2004/AMD1:2016
     urn: urn:iec:std:iec:61937-7:2004:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0454
   input: IEC 61966-2-1:1999/AMD1:2003
   identifier:
@@ -8154,6 +8607,7 @@
     human: IEC 61966-2-1:1999/AMD1:2003
     urn: urn:iec:std:iec:61966-2-1:1999:::::amd:1:2003
   roundtrip: true
+  style: v3
 - id: iec.amendment.0455
   input: IEC 61966-2-4:2006/AMD1:2016
   identifier:
@@ -8172,6 +8626,7 @@
     human: IEC 61966-2-4:2006/AMD1:2016
     urn: urn:iec:std:iec:61966-2-4:2006:::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0456
   input: IEC 61966-2-4:2006/AMD2:2021
   identifier:
@@ -8190,6 +8645,7 @@
     human: IEC 61966-2-4:2006/AMD2:2021
     urn: urn:iec:std:iec:61966-2-4:2006:::::amd:2:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0457
   input: IEC 62227:2008/AMD1:2012
   identifier:
@@ -8206,6 +8662,7 @@
     human: IEC 62227:2008/AMD1:2012
     urn: urn:iec:std:iec:62227:2008:::::amd:1:2012
   roundtrip: true
+  style: v3
 - id: iec.amendment.0458
   input: IEC 62439-1:2010/AMD1:2012
   identifier:
@@ -8223,6 +8680,7 @@
     human: IEC 62439-1:2010/AMD1:2012
     urn: urn:iec:std:iec:62439-1:2010:::::amd:1:2012
   roundtrip: true
+  style: v3
 - id: iec.amendment.0459
   input: IEC 62439-1:2010/AMD2:2016
   identifier:
@@ -8240,6 +8698,7 @@
     human: IEC 62439-1:2010/AMD2:2016
     urn: urn:iec:std:iec:62439-1:2010:::::amd:2:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0460
   input: IEC 62439-4:2010/AMD1:2012
   identifier:
@@ -8257,6 +8716,7 @@
     human: IEC 62439-4:2010/AMD1:2012
     urn: urn:iec:std:iec:62439-4:2010:::::amd:1:2012
   roundtrip: true
+  style: v3
 - id: iec.amendment.0461
   input: IEC 62443-2-4:2015/AMD1:2017
   identifier:
@@ -8275,6 +8735,7 @@
     human: IEC 62443-2-4:2015/AMD1:2017
     urn: urn:iec:std:iec:62443-2-4:2015:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0462
   input: IEC 62648:2012/AMD1:2015
   identifier:
@@ -8291,6 +8752,7 @@
     human: IEC 62648:2012/AMD1:2015
     urn: urn:iec:std:iec:62648:2012:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0463
   input: IEC 62657-2:2017/AMD1:2019
   identifier:
@@ -8308,6 +8770,7 @@
     human: IEC 62657-2:2017/AMD1:2019
     urn: urn:iec:std:iec:62657-2:2017:::::amd:1:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0464
   input: IEC 62734:2014/AMD1:2019
   identifier:
@@ -8324,6 +8787,7 @@
     human: IEC 62734:2014/AMD1:2019
     urn: urn:iec:std:iec:62734:2014:::::amd:1:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0465
   input: IEC 62760:2016/AMD1:2019
   identifier:
@@ -8340,6 +8804,7 @@
     human: IEC 62760:2016/AMD1:2019
     urn: urn:iec:std:iec:62760:2016:::::amd:1:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0466
   input: IEC 80416-3:2002/AMD1:2011
   identifier:
@@ -8357,6 +8822,7 @@
     human: IEC 80416-3:2002/AMD1:2011
     urn: urn:iec:std:iec:80416-3:2002:::::amd:1:2011
   roundtrip: true
+  style: v3
 - id: iec.amendment.0467
   input: IEC TS 60695-2-4/AMD2:1994
   identifier:
@@ -8374,6 +8840,7 @@
     human: IEC TS 60695-2-4/AMD2:1994
     urn: urn:iec:std:iec:60695-2-4::ts::::amd:2:1994
   roundtrip: true
+  style: v3
 - id: iec.amendment.0468
   input: IEC TS 62436:2008/AMD1:2016
   identifier:
@@ -8390,6 +8857,7 @@
     human: IEC TS 62436:2008/AMD1:2016
     urn: urn:iec:std:iec:62436:2008:ts::::amd:1:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0469
   input: IEC TS 63134/AMD1 ED1
   identifier:
@@ -8406,6 +8874,7 @@
     human: IEC TS 63134/AMD1 ED1
     urn: 'urn:iec:std:iec:63134::ts::::amd:1:'
   roundtrip: true
+  style: v3
 - id: iec.amendment.0470
   input: ISO/IEC 10918-3:1997/AMD1:1999
   identifier:
@@ -8429,6 +8898,7 @@
     human: ISO/IEC 10918-3:1997/AMD1:1999
     urn: urn:iec:std:iso-iec:10918-3:1997:::::amd:1:1999
   roundtrip: true
+  style: v3
 - id: iec.amendment.0471
   input: ISO/IEC 10918-4:1999/AMD1:2013
   identifier:
@@ -8452,6 +8922,7 @@
     human: ISO/IEC 10918-4:1999/AMD1:2013
     urn: urn:iec:std:iso-iec:10918-4:1999:::::amd:1:2013
   roundtrip: true
+  style: v3
 - id: iec.amendment.0472
   input: ISO/IEC 13818-1:2019/AMD1:2020
   identifier:
@@ -8475,6 +8946,7 @@
     human: ISO/IEC 13818-1:2019/AMD1:2020
     urn: urn:iec:std:iso-iec:13818-1:2019:::::amd:1:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0473
   input: ISO/IEC 13818-4:2004/AMD1:2005
   identifier:
@@ -8498,6 +8970,7 @@
     human: ISO/IEC 13818-4:2004/AMD1:2005
     urn: urn:iec:std:iso-iec:13818-4:2004:::::amd:1:2005
   roundtrip: true
+  style: v3
 - id: iec.amendment.0474
   input: ISO/IEC 13818-4:2004/AMD2:2005
   identifier:
@@ -8521,6 +8994,7 @@
     human: ISO/IEC 13818-4:2004/AMD2:2005
     urn: urn:iec:std:iso-iec:13818-4:2004:::::amd:2:2005
   roundtrip: true
+  style: v3
 - id: iec.amendment.0475
   input: ISO/IEC 13818-4:2004/AMD3:2009
   identifier:
@@ -8544,6 +9018,7 @@
     human: ISO/IEC 13818-4:2004/AMD3:2009
     urn: urn:iec:std:iso-iec:13818-4:2004:::::amd:3:2009
   roundtrip: true
+  style: v3
 - id: iec.amendment.0476
   input: ISO/IEC 13818-6:1998/AMD1:2000
   identifier:
@@ -8567,6 +9042,7 @@
     human: ISO/IEC 13818-6:1998/AMD1:2000
     urn: urn:iec:std:iso-iec:13818-6:1998:::::amd:1:2000
   roundtrip: true
+  style: v3
 - id: iec.amendment.0477
   input: ISO/IEC 13818-6:1998/AMD2:2000
   identifier:
@@ -8590,6 +9066,7 @@
     human: ISO/IEC 13818-6:1998/AMD2:2000
     urn: urn:iec:std:iso-iec:13818-6:1998:::::amd:2:2000
   roundtrip: true
+  style: v3
 - id: iec.amendment.0478
   input: ISO/IEC 13818-6:1998/AMD3:2001
   identifier:
@@ -8613,6 +9090,7 @@
     human: ISO/IEC 13818-6:1998/AMD3:2001
     urn: urn:iec:std:iso-iec:13818-6:1998:::::amd:3:2001
   roundtrip: true
+  style: v3
 - id: iec.amendment.0479
   input: ISO/IEC 13818-7:2006/AMD1:2007
   identifier:
@@ -8636,53 +9114,8 @@
     human: ISO/IEC 13818-7:2006/AMD1:2007
     urn: urn:iec:std:iso-iec:13818-7:2006:::::amd:1:2007
   roundtrip: true
+  style: v3
 - id: iec.amendment.0480
-  input: ISO/IEC 14496-1:2010/AMD1:2010
-  identifier:
-    type: amendment
-    components:
-      number: '1'
-      year: '2010'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: international_standard
-      components:
-        number: '14496'
-        part: '1'
-        year: '2010'
-        publisher: ISO
-        copublishers:
-        - IEC
-  representations:
-    human: ISO/IEC 14496-1:2010/AMD1:2010
-    urn: urn:iec:std:iso-iec:14496-1:2010:::::amd:1:2010
-  roundtrip: true
-- id: iec.amendment.0481
-  input: ISO/IEC 14496-1:2010/AMD2:2014
-  identifier:
-    type: amendment
-    components:
-      number: '2'
-      year: '2014'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: international_standard
-      components:
-        number: '14496'
-        part: '1'
-        year: '2010'
-        publisher: ISO
-        copublishers:
-        - IEC
-  representations:
-    human: ISO/IEC 14496-1:2010/AMD2:2014
-    urn: urn:iec:std:iso-iec:14496-1:2010:::::amd:2:2014
-  roundtrip: true
-- id: iec.amendment.0482
   input: ISO/IEC 14496-15:2019/AMD1:2020
   identifier:
     type: amendment
@@ -8705,7 +9138,8 @@
     human: ISO/IEC 14496-15:2019/AMD1:2020
     urn: urn:iec:std:iso-iec:14496-15:2019:::::amd:1:2020
   roundtrip: true
-- id: iec.amendment.0483
+  style: v3
+- id: iec.amendment.0481
   input: ISO/IEC 14496-16:2011/AMD1:2011
   identifier:
     type: amendment
@@ -8728,7 +9162,8 @@
     human: ISO/IEC 14496-16:2011/AMD1:2011
     urn: urn:iec:std:iso-iec:14496-16:2011:::::amd:1:2011
   roundtrip: true
-- id: iec.amendment.0484
+  style: v3
+- id: iec.amendment.0482
   input: ISO/IEC 14496-16:2011/AMD2:2014
   identifier:
     type: amendment
@@ -8751,7 +9186,8 @@
     human: ISO/IEC 14496-16:2011/AMD2:2014
     urn: urn:iec:std:iso-iec:14496-16:2011:::::amd:2:2014
   roundtrip: true
-- id: iec.amendment.0485
+  style: v3
+- id: iec.amendment.0483
   input: ISO/IEC 14496-16:2011/AMD3:2016
   identifier:
     type: amendment
@@ -8774,7 +9210,8 @@
     human: ISO/IEC 14496-16:2011/AMD3:2016
     urn: urn:iec:std:iso-iec:14496-16:2011:::::amd:3:2016
   roundtrip: true
-- id: iec.amendment.0486
+  style: v3
+- id: iec.amendment.0484
   input: ISO/IEC 14496-16:2011/AMD4:2017
   identifier:
     type: amendment
@@ -8797,7 +9234,8 @@
     human: ISO/IEC 14496-16:2011/AMD4:2017
     urn: urn:iec:std:iso-iec:14496-16:2011:::::amd:4:2017
   roundtrip: true
-- id: iec.amendment.0487
+  style: v3
+- id: iec.amendment.0485
   input: ISO/IEC 14496-18:2004/AMD1:2014
   identifier:
     type: amendment
@@ -8820,13 +9258,14 @@
     human: ISO/IEC 14496-18:2004/AMD1:2014
     urn: urn:iec:std:iso-iec:14496-18:2004:::::amd:1:2014
   roundtrip: true
-- id: iec.amendment.0488
-  input: ISO/IEC 14496-2:2004/AMD1:2004
+  style: v3
+- id: iec.amendment.0486
+  input: ISO/IEC 14496-1:2010/AMD1:2010
   identifier:
     type: amendment
     components:
       number: '1'
-      year: '2004'
+      year: '2010'
       publisher: ISO
       copublishers:
       - IEC
@@ -8834,22 +9273,23 @@
       type: international_standard
       components:
         number: '14496'
-        part: '2'
-        year: '2004'
+        part: '1'
+        year: '2010'
         publisher: ISO
         copublishers:
         - IEC
   representations:
-    human: ISO/IEC 14496-2:2004/AMD1:2004
-    urn: urn:iec:std:iso-iec:14496-2:2004:::::amd:1:2004
+    human: ISO/IEC 14496-1:2010/AMD1:2010
+    urn: urn:iec:std:iso-iec:14496-1:2010:::::amd:1:2010
   roundtrip: true
-- id: iec.amendment.0489
-  input: ISO/IEC 14496-2:2004/AMD2:2005
+  style: v3
+- id: iec.amendment.0487
+  input: ISO/IEC 14496-1:2010/AMD2:2014
   identifier:
     type: amendment
     components:
       number: '2'
-      year: '2005'
+      year: '2014'
       publisher: ISO
       copublishers:
       - IEC
@@ -8857,85 +9297,17 @@
       type: international_standard
       components:
         number: '14496'
-        part: '2'
-        year: '2004'
+        part: '1'
+        year: '2010'
         publisher: ISO
         copublishers:
         - IEC
   representations:
-    human: ISO/IEC 14496-2:2004/AMD2:2005
-    urn: urn:iec:std:iso-iec:14496-2:2004:::::amd:2:2005
+    human: ISO/IEC 14496-1:2010/AMD2:2014
+    urn: urn:iec:std:iso-iec:14496-1:2010:::::amd:2:2014
   roundtrip: true
-- id: iec.amendment.0490
-  input: ISO/IEC 14496-2:2004/AMD3:2007
-  identifier:
-    type: amendment
-    components:
-      number: '3'
-      year: '2007'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: international_standard
-      components:
-        number: '14496'
-        part: '2'
-        year: '2004'
-        publisher: ISO
-        copublishers:
-        - IEC
-  representations:
-    human: ISO/IEC 14496-2:2004/AMD3:2007
-    urn: urn:iec:std:iso-iec:14496-2:2004:::::amd:3:2007
-  roundtrip: true
-- id: iec.amendment.0491
-  input: ISO/IEC 14496-2:2004/AMD4:2008
-  identifier:
-    type: amendment
-    components:
-      number: '4'
-      year: '2008'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: international_standard
-      components:
-        number: '14496'
-        part: '2'
-        year: '2004'
-        publisher: ISO
-        copublishers:
-        - IEC
-  representations:
-    human: ISO/IEC 14496-2:2004/AMD4:2008
-    urn: urn:iec:std:iso-iec:14496-2:2004:::::amd:4:2008
-  roundtrip: true
-- id: iec.amendment.0492
-  input: ISO/IEC 14496-2:2004/AMD5:2009
-  identifier:
-    type: amendment
-    components:
-      number: '5'
-      year: '2009'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: international_standard
-      components:
-        number: '14496'
-        part: '2'
-        year: '2004'
-        publisher: ISO
-        copublishers:
-        - IEC
-  representations:
-    human: ISO/IEC 14496-2:2004/AMD5:2009
-    urn: urn:iec:std:iso-iec:14496-2:2004:::::amd:5:2009
-  roundtrip: true
-- id: iec.amendment.0493
+  style: v3
+- id: iec.amendment.0488
   input: ISO/IEC 14496-20:2008/AMD1:2009
   identifier:
     type: amendment
@@ -8958,7 +9330,8 @@
     human: ISO/IEC 14496-20:2008/AMD1:2009
     urn: urn:iec:std:iso-iec:14496-20:2008:::::amd:1:2009
   roundtrip: true
-- id: iec.amendment.0494
+  style: v3
+- id: iec.amendment.0489
   input: ISO/IEC 14496-20:2008/AMD2:2010
   identifier:
     type: amendment
@@ -8981,7 +9354,8 @@
     human: ISO/IEC 14496-20:2008/AMD2:2010
     urn: urn:iec:std:iso-iec:14496-20:2008:::::amd:2:2010
   roundtrip: true
-- id: iec.amendment.0495
+  style: v3
+- id: iec.amendment.0490
   input: ISO/IEC 14496-20:2008/AMD3:2010
   identifier:
     type: amendment
@@ -9004,7 +9378,8 @@
     human: ISO/IEC 14496-20:2008/AMD3:2010
     urn: urn:iec:std:iso-iec:14496-20:2008:::::amd:3:2010
   roundtrip: true
-- id: iec.amendment.0496
+  style: v3
+- id: iec.amendment.0491
   input: ISO/IEC 14496-22:2019/AMD1:2020
   identifier:
     type: amendment
@@ -9027,7 +9402,8 @@
     human: ISO/IEC 14496-22:2019/AMD1:2020
     urn: urn:iec:std:iso-iec:14496-22:2019:::::amd:1:2020
   roundtrip: true
-- id: iec.amendment.0497
+  style: v3
+- id: iec.amendment.0492
   input: ISO/IEC 14496-26:2010/AMD2:2010
   identifier:
     type: amendment
@@ -9050,7 +9426,8 @@
     human: ISO/IEC 14496-26:2010/AMD2:2010
     urn: urn:iec:std:iso-iec:14496-26:2010:::::amd:2:2010
   roundtrip: true
-- id: iec.amendment.0498
+  style: v3
+- id: iec.amendment.0493
   input: ISO/IEC 14496-26:2010/AMD3:2014
   identifier:
     type: amendment
@@ -9073,7 +9450,8 @@
     human: ISO/IEC 14496-26:2010/AMD3:2014
     urn: urn:iec:std:iso-iec:14496-26:2010:::::amd:3:2014
   roundtrip: true
-- id: iec.amendment.0499
+  style: v3
+- id: iec.amendment.0494
   input: ISO/IEC 14496-26:2010/AMD4:2016
   identifier:
     type: amendment
@@ -9096,7 +9474,8 @@
     human: ISO/IEC 14496-26:2010/AMD4:2016
     urn: urn:iec:std:iso-iec:14496-26:2010:::::amd:4:2016
   roundtrip: true
-- id: iec.amendment.0500
+  style: v3
+- id: iec.amendment.0495
   input: ISO/IEC 14496-26:2010/AMD5:2018
   identifier:
     type: amendment
@@ -9119,7 +9498,8 @@
     human: ISO/IEC 14496-26:2010/AMD5:2018
     urn: urn:iec:std:iso-iec:14496-26:2010:::::amd:5:2018
   roundtrip: true
-- id: iec.amendment.0501
+  style: v3
+- id: iec.amendment.0496
   input: ISO/IEC 14496-27:2009/AMD2:2011
   identifier:
     type: amendment
@@ -9142,7 +9522,8 @@
     human: ISO/IEC 14496-27:2009/AMD2:2011
     urn: urn:iec:std:iso-iec:14496-27:2009:::::amd:2:2011
   roundtrip: true
-- id: iec.amendment.0502
+  style: v3
+- id: iec.amendment.0497
   input: ISO/IEC 14496-27:2009/AMD3:2011
   identifier:
     type: amendment
@@ -9165,7 +9546,8 @@
     human: ISO/IEC 14496-27:2009/AMD3:2011
     urn: urn:iec:std:iso-iec:14496-27:2009:::::amd:3:2011
   roundtrip: true
-- id: iec.amendment.0503
+  style: v3
+- id: iec.amendment.0498
   input: ISO/IEC 14496-27:2009/AMD4:2012
   identifier:
     type: amendment
@@ -9188,7 +9570,8 @@
     human: ISO/IEC 14496-27:2009/AMD4:2012
     urn: urn:iec:std:iso-iec:14496-27:2009:::::amd:4:2012
   roundtrip: true
-- id: iec.amendment.0504
+  style: v3
+- id: iec.amendment.0499
   input: ISO/IEC 14496-27:2009/AMD5:2015
   identifier:
     type: amendment
@@ -9211,7 +9594,8 @@
     human: ISO/IEC 14496-27:2009/AMD5:2015
     urn: urn:iec:std:iso-iec:14496-27:2009:::::amd:5:2015
   roundtrip: true
-- id: iec.amendment.0505
+  style: v3
+- id: iec.amendment.0500
   input: ISO/IEC 14496-27:2009/AMD6:2015
   identifier:
     type: amendment
@@ -9234,12 +9618,37 @@
     human: ISO/IEC 14496-27:2009/AMD6:2015
     urn: urn:iec:std:iso-iec:14496-27:2009:::::amd:6:2015
   roundtrip: true
-- id: iec.amendment.0506
-  input: ISO/IEC 14496-4:2004/AMD1:2005
+  style: v3
+- id: iec.amendment.0501
+  input: ISO/IEC 14496-2:2004/AMD1:2004
   identifier:
     type: amendment
     components:
       number: '1'
+      year: '2004'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: international_standard
+      components:
+        number: '14496'
+        part: '2'
+        year: '2004'
+        publisher: ISO
+        copublishers:
+        - IEC
+  representations:
+    human: ISO/IEC 14496-2:2004/AMD1:2004
+    urn: urn:iec:std:iso-iec:14496-2:2004:::::amd:1:2004
+  roundtrip: true
+  style: v3
+- id: iec.amendment.0502
+  input: ISO/IEC 14496-2:2004/AMD2:2005
+  identifier:
+    type: amendment
+    components:
+      number: '2'
       year: '2005'
       publisher: ISO
       copublishers:
@@ -9248,16 +9657,89 @@
       type: international_standard
       components:
         number: '14496'
-        part: '4'
+        part: '2'
         year: '2004'
         publisher: ISO
         copublishers:
         - IEC
   representations:
-    human: ISO/IEC 14496-4:2004/AMD1:2005
-    urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:1:2005
+    human: ISO/IEC 14496-2:2004/AMD2:2005
+    urn: urn:iec:std:iso-iec:14496-2:2004:::::amd:2:2005
   roundtrip: true
-- id: iec.amendment.0507
+  style: v3
+- id: iec.amendment.0503
+  input: ISO/IEC 14496-2:2004/AMD3:2007
+  identifier:
+    type: amendment
+    components:
+      number: '3'
+      year: '2007'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: international_standard
+      components:
+        number: '14496'
+        part: '2'
+        year: '2004'
+        publisher: ISO
+        copublishers:
+        - IEC
+  representations:
+    human: ISO/IEC 14496-2:2004/AMD3:2007
+    urn: urn:iec:std:iso-iec:14496-2:2004:::::amd:3:2007
+  roundtrip: true
+  style: v3
+- id: iec.amendment.0504
+  input: ISO/IEC 14496-2:2004/AMD4:2008
+  identifier:
+    type: amendment
+    components:
+      number: '4'
+      year: '2008'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: international_standard
+      components:
+        number: '14496'
+        part: '2'
+        year: '2004'
+        publisher: ISO
+        copublishers:
+        - IEC
+  representations:
+    human: ISO/IEC 14496-2:2004/AMD4:2008
+    urn: urn:iec:std:iso-iec:14496-2:2004:::::amd:4:2008
+  roundtrip: true
+  style: v3
+- id: iec.amendment.0505
+  input: ISO/IEC 14496-2:2004/AMD5:2009
+  identifier:
+    type: amendment
+    components:
+      number: '5'
+      year: '2009'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: international_standard
+      components:
+        number: '14496'
+        part: '2'
+        year: '2004'
+        publisher: ISO
+        copublishers:
+        - IEC
+  representations:
+    human: ISO/IEC 14496-2:2004/AMD5:2009
+    urn: urn:iec:std:iso-iec:14496-2:2004:::::amd:5:2009
+  roundtrip: true
+  style: v3
+- id: iec.amendment.0506
   input: ISO/IEC 14496-4:2004/AMD10:2005
   identifier:
     type: amendment
@@ -9280,7 +9762,8 @@
     human: ISO/IEC 14496-4:2004/AMD10:2005
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:10:2005
   roundtrip: true
-- id: iec.amendment.0508
+  style: v3
+- id: iec.amendment.0507
   input: ISO/IEC 14496-4:2004/AMD17:2007
   identifier:
     type: amendment
@@ -9303,12 +9786,13 @@
     human: ISO/IEC 14496-4:2004/AMD17:2007
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:17:2007
   roundtrip: true
-- id: iec.amendment.0509
-  input: ISO/IEC 14496-4:2004/AMD2:2005
+  style: v3
+- id: iec.amendment.0508
+  input: ISO/IEC 14496-4:2004/AMD1:2005
   identifier:
     type: amendment
     components:
-      number: '2'
+      number: '1'
       year: '2005'
       publisher: ISO
       copublishers:
@@ -9323,10 +9807,11 @@
         copublishers:
         - IEC
   representations:
-    human: ISO/IEC 14496-4:2004/AMD2:2005
-    urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:2:2005
+    human: ISO/IEC 14496-4:2004/AMD1:2005
+    urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:1:2005
   roundtrip: true
-- id: iec.amendment.0510
+  style: v3
+- id: iec.amendment.0509
   input: ISO/IEC 14496-4:2004/AMD23:2008
   identifier:
     type: amendment
@@ -9349,7 +9834,8 @@
     human: ISO/IEC 14496-4:2004/AMD23:2008
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:23:2008
   roundtrip: true
-- id: iec.amendment.0511
+  style: v3
+- id: iec.amendment.0510
   input: ISO/IEC 14496-4:2004/AMD24:2008
   identifier:
     type: amendment
@@ -9372,7 +9858,8 @@
     human: ISO/IEC 14496-4:2004/AMD24:2008
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:24:2008
   roundtrip: true
-- id: iec.amendment.0512
+  style: v3
+- id: iec.amendment.0511
   input: ISO/IEC 14496-4:2004/AMD25:2008
   identifier:
     type: amendment
@@ -9395,7 +9882,8 @@
     human: ISO/IEC 14496-4:2004/AMD25:2008
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:25:2008
   roundtrip: true
-- id: iec.amendment.0513
+  style: v3
+- id: iec.amendment.0512
   input: ISO/IEC 14496-4:2004/AMD26:2008
   identifier:
     type: amendment
@@ -9418,7 +9906,8 @@
     human: ISO/IEC 14496-4:2004/AMD26:2008
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:26:2008
   roundtrip: true
-- id: iec.amendment.0514
+  style: v3
+- id: iec.amendment.0513
   input: ISO/IEC 14496-4:2004/AMD27:2008
   identifier:
     type: amendment
@@ -9441,7 +9930,8 @@
     human: ISO/IEC 14496-4:2004/AMD27:2008
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:27:2008
   roundtrip: true
-- id: iec.amendment.0515
+  style: v3
+- id: iec.amendment.0514
   input: ISO/IEC 14496-4:2004/AMD28:2008
   identifier:
     type: amendment
@@ -9464,7 +9954,8 @@
     human: ISO/IEC 14496-4:2004/AMD28:2008
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:28:2008
   roundtrip: true
-- id: iec.amendment.0516
+  style: v3
+- id: iec.amendment.0515
   input: ISO/IEC 14496-4:2004/AMD29:2008
   identifier:
     type: amendment
@@ -9487,12 +9978,13 @@
     human: ISO/IEC 14496-4:2004/AMD29:2008
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:29:2008
   roundtrip: true
-- id: iec.amendment.0517
-  input: ISO/IEC 14496-4:2004/AMD3:2005
+  style: v3
+- id: iec.amendment.0516
+  input: ISO/IEC 14496-4:2004/AMD2:2005
   identifier:
     type: amendment
     components:
-      number: '3'
+      number: '2'
       year: '2005'
       publisher: ISO
       copublishers:
@@ -9507,10 +9999,11 @@
         copublishers:
         - IEC
   representations:
-    human: ISO/IEC 14496-4:2004/AMD3:2005
-    urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:3:2005
+    human: ISO/IEC 14496-4:2004/AMD2:2005
+    urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:2:2005
   roundtrip: true
-- id: iec.amendment.0518
+  style: v3
+- id: iec.amendment.0517
   input: ISO/IEC 14496-4:2004/AMD30:2009
   identifier:
     type: amendment
@@ -9533,7 +10026,8 @@
     human: ISO/IEC 14496-4:2004/AMD30:2009
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:30:2009
   roundtrip: true
-- id: iec.amendment.0519
+  style: v3
+- id: iec.amendment.0518
   input: ISO/IEC 14496-4:2004/AMD31:2009
   identifier:
     type: amendment
@@ -9556,7 +10050,8 @@
     human: ISO/IEC 14496-4:2004/AMD31:2009
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:31:2009
   roundtrip: true
-- id: iec.amendment.0520
+  style: v3
+- id: iec.amendment.0519
   input: ISO/IEC 14496-4:2004/AMD35:2009
   identifier:
     type: amendment
@@ -9579,7 +10074,8 @@
     human: ISO/IEC 14496-4:2004/AMD35:2009
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:35:2009
   roundtrip: true
-- id: iec.amendment.0521
+  style: v3
+- id: iec.amendment.0520
   input: ISO/IEC 14496-4:2004/AMD37:2009
   identifier:
     type: amendment
@@ -9602,7 +10098,8 @@
     human: ISO/IEC 14496-4:2004/AMD37:2009
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:37:2009
   roundtrip: true
-- id: iec.amendment.0522
+  style: v3
+- id: iec.amendment.0521
   input: ISO/IEC 14496-4:2004/AMD38:2010
   identifier:
     type: amendment
@@ -9625,12 +10122,13 @@
     human: ISO/IEC 14496-4:2004/AMD38:2010
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:38:2010
   roundtrip: true
-- id: iec.amendment.0523
-  input: ISO/IEC 14496-4:2004/AMD4:2005
+  style: v3
+- id: iec.amendment.0522
+  input: ISO/IEC 14496-4:2004/AMD3:2005
   identifier:
     type: amendment
     components:
-      number: '4'
+      number: '3'
       year: '2005'
       publisher: ISO
       copublishers:
@@ -9645,10 +10143,11 @@
         copublishers:
         - IEC
   representations:
-    human: ISO/IEC 14496-4:2004/AMD4:2005
-    urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:4:2005
+    human: ISO/IEC 14496-4:2004/AMD3:2005
+    urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:3:2005
   roundtrip: true
-- id: iec.amendment.0524
+  style: v3
+- id: iec.amendment.0523
   input: ISO/IEC 14496-4:2004/AMD40:2011
   identifier:
     type: amendment
@@ -9671,7 +10170,8 @@
     human: ISO/IEC 14496-4:2004/AMD40:2011
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:40:2011
   roundtrip: true
-- id: iec.amendment.0525
+  style: v3
+- id: iec.amendment.0524
   input: ISO/IEC 14496-4:2004/AMD41:2014
   identifier:
     type: amendment
@@ -9694,7 +10194,8 @@
     human: ISO/IEC 14496-4:2004/AMD41:2014
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:41:2014
   roundtrip: true
-- id: iec.amendment.0526
+  style: v3
+- id: iec.amendment.0525
   input: ISO/IEC 14496-4:2004/AMD42:2014
   identifier:
     type: amendment
@@ -9717,7 +10218,8 @@
     human: ISO/IEC 14496-4:2004/AMD42:2014
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:42:2014
   roundtrip: true
-- id: iec.amendment.0527
+  style: v3
+- id: iec.amendment.0526
   input: ISO/IEC 14496-4:2004/AMD43:2015
   identifier:
     type: amendment
@@ -9740,7 +10242,8 @@
     human: ISO/IEC 14496-4:2004/AMD43:2015
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:43:2015
   roundtrip: true
-- id: iec.amendment.0528
+  style: v3
+- id: iec.amendment.0527
   input: ISO/IEC 14496-4:2004/AMD45:2016
   identifier:
     type: amendment
@@ -9763,7 +10266,8 @@
     human: ISO/IEC 14496-4:2004/AMD45:2016
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:45:2016
   roundtrip: true
-- id: iec.amendment.0529
+  style: v3
+- id: iec.amendment.0528
   input: ISO/IEC 14496-4:2004/AMD46:2019
   identifier:
     type: amendment
@@ -9786,6 +10290,31 @@
     human: ISO/IEC 14496-4:2004/AMD46:2019
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:46:2019
   roundtrip: true
+  style: v3
+- id: iec.amendment.0529
+  input: ISO/IEC 14496-4:2004/AMD4:2005
+  identifier:
+    type: amendment
+    components:
+      number: '4'
+      year: '2005'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: international_standard
+      components:
+        number: '14496'
+        part: '4'
+        year: '2004'
+        publisher: ISO
+        copublishers:
+        - IEC
+  representations:
+    human: ISO/IEC 14496-4:2004/AMD4:2005
+    urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:4:2005
+  roundtrip: true
+  style: v3
 - id: iec.amendment.0530
   input: ISO/IEC 14496-4:2004/AMD5:2005
   identifier:
@@ -9809,6 +10338,7 @@
     human: ISO/IEC 14496-4:2004/AMD5:2005
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:5:2005
   roundtrip: true
+  style: v3
 - id: iec.amendment.0531
   input: ISO/IEC 14496-4:2004/AMD6:2005
   identifier:
@@ -9832,6 +10362,7 @@
     human: ISO/IEC 14496-4:2004/AMD6:2005
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:6:2005
   roundtrip: true
+  style: v3
 - id: iec.amendment.0532
   input: ISO/IEC 14496-4:2004/AMD7:2005
   identifier:
@@ -9855,6 +10386,7 @@
     human: ISO/IEC 14496-4:2004/AMD7:2005
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:7:2005
   roundtrip: true
+  style: v3
 - id: iec.amendment.0533
   input: ISO/IEC 14496-4:2004/AMD9:2006
   identifier:
@@ -9878,30 +10410,8 @@
     human: ISO/IEC 14496-4:2004/AMD9:2006
     urn: urn:iec:std:iso-iec:14496-4:2004:::::amd:9:2006
   roundtrip: true
+  style: v3
 - id: iec.amendment.0534
-  input: ISO/IEC 14496-5:2001/AMD1:2002
-  identifier:
-    type: amendment
-    components:
-      number: '1'
-      year: '2002'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: international_standard
-      components:
-        number: '14496'
-        part: '5'
-        year: '2001'
-        publisher: ISO
-        copublishers:
-        - IEC
-  representations:
-    human: ISO/IEC 14496-5:2001/AMD1:2002
-    urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:1:2002
-  roundtrip: true
-- id: iec.amendment.0535
   input: ISO/IEC 14496-5:2001/AMD10:2007
   identifier:
     type: amendment
@@ -9924,7 +10434,8 @@
     human: ISO/IEC 14496-5:2001/AMD10:2007
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:10:2007
   roundtrip: true
-- id: iec.amendment.0536
+  style: v3
+- id: iec.amendment.0535
   input: ISO/IEC 14496-5:2001/AMD11:2007
   identifier:
     type: amendment
@@ -9947,7 +10458,8 @@
     human: ISO/IEC 14496-5:2001/AMD11:2007
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:11:2007
   roundtrip: true
-- id: iec.amendment.0537
+  style: v3
+- id: iec.amendment.0536
   input: ISO/IEC 14496-5:2001/AMD12:2007
   identifier:
     type: amendment
@@ -9970,7 +10482,8 @@
     human: ISO/IEC 14496-5:2001/AMD12:2007
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:12:2007
   roundtrip: true
-- id: iec.amendment.0538
+  style: v3
+- id: iec.amendment.0537
   input: ISO/IEC 14496-5:2001/AMD13:2008
   identifier:
     type: amendment
@@ -9993,7 +10506,8 @@
     human: ISO/IEC 14496-5:2001/AMD13:2008
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:13:2008
   roundtrip: true
-- id: iec.amendment.0539
+  style: v3
+- id: iec.amendment.0538
   input: ISO/IEC 14496-5:2001/AMD14:2009
   identifier:
     type: amendment
@@ -10016,7 +10530,8 @@
     human: ISO/IEC 14496-5:2001/AMD14:2009
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:14:2009
   roundtrip: true
-- id: iec.amendment.0540
+  style: v3
+- id: iec.amendment.0539
   input: ISO/IEC 14496-5:2001/AMD15:2010
   identifier:
     type: amendment
@@ -10039,7 +10554,8 @@
     human: ISO/IEC 14496-5:2001/AMD15:2010
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:15:2010
   roundtrip: true
-- id: iec.amendment.0541
+  style: v3
+- id: iec.amendment.0540
   input: ISO/IEC 14496-5:2001/AMD16:2008
   identifier:
     type: amendment
@@ -10062,7 +10578,8 @@
     human: ISO/IEC 14496-5:2001/AMD16:2008
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:16:2008
   roundtrip: true
-- id: iec.amendment.0542
+  style: v3
+- id: iec.amendment.0541
   input: ISO/IEC 14496-5:2001/AMD17:2008
   identifier:
     type: amendment
@@ -10085,7 +10602,8 @@
     human: ISO/IEC 14496-5:2001/AMD17:2008
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:17:2008
   roundtrip: true
-- id: iec.amendment.0543
+  style: v3
+- id: iec.amendment.0542
   input: ISO/IEC 14496-5:2001/AMD18:2008
   identifier:
     type: amendment
@@ -10108,7 +10626,8 @@
     human: ISO/IEC 14496-5:2001/AMD18:2008
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:18:2008
   roundtrip: true
-- id: iec.amendment.0544
+  style: v3
+- id: iec.amendment.0543
   input: ISO/IEC 14496-5:2001/AMD19:2009
   identifier:
     type: amendment
@@ -10131,13 +10650,14 @@
     human: ISO/IEC 14496-5:2001/AMD19:2009
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:19:2009
   roundtrip: true
-- id: iec.amendment.0545
-  input: ISO/IEC 14496-5:2001/AMD2:2003
+  style: v3
+- id: iec.amendment.0544
+  input: ISO/IEC 14496-5:2001/AMD1:2002
   identifier:
     type: amendment
     components:
-      number: '2'
-      year: '2003'
+      number: '1'
+      year: '2002'
       publisher: ISO
       copublishers:
       - IEC
@@ -10151,10 +10671,11 @@
         copublishers:
         - IEC
   representations:
-    human: ISO/IEC 14496-5:2001/AMD2:2003
-    urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:2:2003
+    human: ISO/IEC 14496-5:2001/AMD1:2002
+    urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:1:2002
   roundtrip: true
-- id: iec.amendment.0546
+  style: v3
+- id: iec.amendment.0545
   input: ISO/IEC 14496-5:2001/AMD20:2009
   identifier:
     type: amendment
@@ -10177,7 +10698,8 @@
     human: ISO/IEC 14496-5:2001/AMD20:2009
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:20:2009
   roundtrip: true
-- id: iec.amendment.0547
+  style: v3
+- id: iec.amendment.0546
   input: ISO/IEC 14496-5:2001/AMD21:2009
   identifier:
     type: amendment
@@ -10200,7 +10722,8 @@
     human: ISO/IEC 14496-5:2001/AMD21:2009
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:21:2009
   roundtrip: true
-- id: iec.amendment.0548
+  style: v3
+- id: iec.amendment.0547
   input: ISO/IEC 14496-5:2001/AMD22:2009
   identifier:
     type: amendment
@@ -10223,7 +10746,8 @@
     human: ISO/IEC 14496-5:2001/AMD22:2009
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:22:2009
   roundtrip: true
-- id: iec.amendment.0549
+  style: v3
+- id: iec.amendment.0548
   input: ISO/IEC 14496-5:2001/AMD23:2010
   identifier:
     type: amendment
@@ -10246,7 +10770,8 @@
     human: ISO/IEC 14496-5:2001/AMD23:2010
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:23:2010
   roundtrip: true
-- id: iec.amendment.0550
+  style: v3
+- id: iec.amendment.0549
   input: ISO/IEC 14496-5:2001/AMD24:2009
   identifier:
     type: amendment
@@ -10269,7 +10794,8 @@
     human: ISO/IEC 14496-5:2001/AMD24:2009
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:24:2009
   roundtrip: true
-- id: iec.amendment.0551
+  style: v3
+- id: iec.amendment.0550
   input: ISO/IEC 14496-5:2001/AMD25:2009
   identifier:
     type: amendment
@@ -10292,7 +10818,8 @@
     human: ISO/IEC 14496-5:2001/AMD25:2009
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:25:2009
   roundtrip: true
-- id: iec.amendment.0552
+  style: v3
+- id: iec.amendment.0551
   input: ISO/IEC 14496-5:2001/AMD26:2011
   identifier:
     type: amendment
@@ -10315,7 +10842,8 @@
     human: ISO/IEC 14496-5:2001/AMD26:2011
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:26:2011
   roundtrip: true
-- id: iec.amendment.0553
+  style: v3
+- id: iec.amendment.0552
   input: ISO/IEC 14496-5:2001/AMD27:2011
   identifier:
     type: amendment
@@ -10338,7 +10866,8 @@
     human: ISO/IEC 14496-5:2001/AMD27:2011
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:27:2011
   roundtrip: true
-- id: iec.amendment.0554
+  style: v3
+- id: iec.amendment.0553
   input: ISO/IEC 14496-5:2001/AMD28:2011
   identifier:
     type: amendment
@@ -10361,7 +10890,8 @@
     human: ISO/IEC 14496-5:2001/AMD28:2011
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:28:2011
   roundtrip: true
-- id: iec.amendment.0555
+  style: v3
+- id: iec.amendment.0554
   input: ISO/IEC 14496-5:2001/AMD29:2011
   identifier:
     type: amendment
@@ -10384,12 +10914,13 @@
     human: ISO/IEC 14496-5:2001/AMD29:2011
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:29:2011
   roundtrip: true
-- id: iec.amendment.0556
-  input: ISO/IEC 14496-5:2001/AMD3:2003
+  style: v3
+- id: iec.amendment.0555
+  input: ISO/IEC 14496-5:2001/AMD2:2003
   identifier:
     type: amendment
     components:
-      number: '3'
+      number: '2'
       year: '2003'
       publisher: ISO
       copublishers:
@@ -10404,10 +10935,11 @@
         copublishers:
         - IEC
   representations:
-    human: ISO/IEC 14496-5:2001/AMD3:2003
-    urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:3:2003
+    human: ISO/IEC 14496-5:2001/AMD2:2003
+    urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:2:2003
   roundtrip: true
-- id: iec.amendment.0557
+  style: v3
+- id: iec.amendment.0556
   input: ISO/IEC 14496-5:2001/AMD30:2011
   identifier:
     type: amendment
@@ -10430,7 +10962,8 @@
     human: ISO/IEC 14496-5:2001/AMD30:2011
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:30:2011
   roundtrip: true
-- id: iec.amendment.0558
+  style: v3
+- id: iec.amendment.0557
   input: ISO/IEC 14496-5:2001/AMD31:2012
   identifier:
     type: amendment
@@ -10453,7 +10986,8 @@
     human: ISO/IEC 14496-5:2001/AMD31:2012
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:31:2012
   roundtrip: true
-- id: iec.amendment.0559
+  style: v3
+- id: iec.amendment.0558
   input: ISO/IEC 14496-5:2001/AMD32:2015
   identifier:
     type: amendment
@@ -10476,7 +11010,8 @@
     human: ISO/IEC 14496-5:2001/AMD32:2015
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:32:2015
   roundtrip: true
-- id: iec.amendment.0560
+  style: v3
+- id: iec.amendment.0559
   input: ISO/IEC 14496-5:2001/AMD33:2015
   identifier:
     type: amendment
@@ -10499,7 +11034,8 @@
     human: ISO/IEC 14496-5:2001/AMD33:2015
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:33:2015
   roundtrip: true
-- id: iec.amendment.0561
+  style: v3
+- id: iec.amendment.0560
   input: ISO/IEC 14496-5:2001/AMD34:2014
   identifier:
     type: amendment
@@ -10522,7 +11058,8 @@
     human: ISO/IEC 14496-5:2001/AMD34:2014
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:34:2014
   roundtrip: true
-- id: iec.amendment.0562
+  style: v3
+- id: iec.amendment.0561
   input: ISO/IEC 14496-5:2001/AMD35:2015
   identifier:
     type: amendment
@@ -10545,7 +11082,8 @@
     human: ISO/IEC 14496-5:2001/AMD35:2015
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:35:2015
   roundtrip: true
-- id: iec.amendment.0563
+  style: v3
+- id: iec.amendment.0562
   input: ISO/IEC 14496-5:2001/AMD36:2015
   identifier:
     type: amendment
@@ -10568,7 +11106,8 @@
     human: ISO/IEC 14496-5:2001/AMD36:2015
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:36:2015
   roundtrip: true
-- id: iec.amendment.0564
+  style: v3
+- id: iec.amendment.0563
   input: ISO/IEC 14496-5:2001/AMD37:2015
   identifier:
     type: amendment
@@ -10591,7 +11130,8 @@
     human: ISO/IEC 14496-5:2001/AMD37:2015
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:37:2015
   roundtrip: true
-- id: iec.amendment.0565
+  style: v3
+- id: iec.amendment.0564
   input: ISO/IEC 14496-5:2001/AMD39:2016
   identifier:
     type: amendment
@@ -10614,13 +11154,14 @@
     human: ISO/IEC 14496-5:2001/AMD39:2016
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:39:2016
   roundtrip: true
-- id: iec.amendment.0566
-  input: ISO/IEC 14496-5:2001/AMD4:2004
+  style: v3
+- id: iec.amendment.0565
+  input: ISO/IEC 14496-5:2001/AMD3:2003
   identifier:
     type: amendment
     components:
-      number: '4'
-      year: '2004'
+      number: '3'
+      year: '2003'
       publisher: ISO
       copublishers:
       - IEC
@@ -10634,10 +11175,11 @@
         copublishers:
         - IEC
   representations:
-    human: ISO/IEC 14496-5:2001/AMD4:2004
-    urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:4:2004
+    human: ISO/IEC 14496-5:2001/AMD3:2003
+    urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:3:2003
   roundtrip: true
-- id: iec.amendment.0567
+  style: v3
+- id: iec.amendment.0566
   input: ISO/IEC 14496-5:2001/AMD40:2019
   identifier:
     type: amendment
@@ -10660,7 +11202,8 @@
     human: ISO/IEC 14496-5:2001/AMD40:2019
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:40:2019
   roundtrip: true
-- id: iec.amendment.0568
+  style: v3
+- id: iec.amendment.0567
   input: ISO/IEC 14496-5:2001/AMD41:2019
   identifier:
     type: amendment
@@ -10683,7 +11226,8 @@
     human: ISO/IEC 14496-5:2001/AMD41:2019
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:41:2019
   roundtrip: true
-- id: iec.amendment.0569
+  style: v3
+- id: iec.amendment.0568
   input: ISO/IEC 14496-5:2001/AMD42:2017
   identifier:
     type: amendment
@@ -10706,7 +11250,8 @@
     human: ISO/IEC 14496-5:2001/AMD42:2017
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:42:2017
   roundtrip: true
-- id: iec.amendment.0570
+  style: v3
+- id: iec.amendment.0569
   input: ISO/IEC 14496-5:2001/AMD43:2018
   identifier:
     type: amendment
@@ -10729,6 +11274,31 @@
     human: ISO/IEC 14496-5:2001/AMD43:2018
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:43:2018
   roundtrip: true
+  style: v3
+- id: iec.amendment.0570
+  input: ISO/IEC 14496-5:2001/AMD4:2004
+  identifier:
+    type: amendment
+    components:
+      number: '4'
+      year: '2004'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: international_standard
+      components:
+        number: '14496'
+        part: '5'
+        year: '2001'
+        publisher: ISO
+        copublishers:
+        - IEC
+  representations:
+    human: ISO/IEC 14496-5:2001/AMD4:2004
+    urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:4:2004
+  roundtrip: true
+  style: v3
 - id: iec.amendment.0571
   input: ISO/IEC 14496-5:2001/AMD5:2004
   identifier:
@@ -10752,6 +11322,7 @@
     human: ISO/IEC 14496-5:2001/AMD5:2004
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:5:2004
   roundtrip: true
+  style: v3
 - id: iec.amendment.0572
   input: ISO/IEC 14496-5:2001/AMD6:2005
   identifier:
@@ -10775,6 +11346,7 @@
     human: ISO/IEC 14496-5:2001/AMD6:2005
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:6:2005
   roundtrip: true
+  style: v3
 - id: iec.amendment.0573
   input: ISO/IEC 14496-5:2001/AMD7:2005
   identifier:
@@ -10798,6 +11370,7 @@
     human: ISO/IEC 14496-5:2001/AMD7:2005
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:7:2005
   roundtrip: true
+  style: v3
 - id: iec.amendment.0574
   input: ISO/IEC 14496-5:2001/AMD8:2006
   identifier:
@@ -10821,6 +11394,7 @@
     human: ISO/IEC 14496-5:2001/AMD8:2006
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:8:2006
   roundtrip: true
+  style: v3
 - id: iec.amendment.0575
   input: ISO/IEC 14496-5:2001/AMD9:2007
   identifier:
@@ -10844,6 +11418,7 @@
     human: ISO/IEC 14496-5:2001/AMD9:2007
     urn: urn:iec:std:iso-iec:14496-5:2001:::::amd:9:2007
   roundtrip: true
+  style: v3
 - id: iec.amendment.0576
   input: ISO/IEC 15444-11:2007/AMD1:2013
   identifier:
@@ -10867,6 +11442,7 @@
     human: ISO/IEC 15444-11:2007/AMD1:2013
     urn: urn:iec:std:iso-iec:15444-11:2007:::::amd:1:2013
   roundtrip: true
+  style: v3
 - id: iec.amendment.0577
   input: ISO/IEC 15444-3:2007/AMD1:2010
   identifier:
@@ -10890,6 +11466,7 @@
     human: ISO/IEC 15444-3:2007/AMD1:2010
     urn: urn:iec:std:iso-iec:15444-3:2007:::::amd:1:2010
   roundtrip: true
+  style: v3
 - id: iec.amendment.0578
   input: ISO/IEC 15444-8:2007/AMD1:2008
   identifier:
@@ -10913,6 +11490,7 @@
     human: ISO/IEC 15444-8:2007/AMD1:2008
     urn: urn:iec:std:iso-iec:15444-8:2007:::::amd:1:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0579
   input: ISO/IEC 15444-9:2005/AMD1:2006
   identifier:
@@ -10936,6 +11514,7 @@
     human: ISO/IEC 15444-9:2005/AMD1:2006
     urn: urn:iec:std:iso-iec:15444-9:2005:::::amd:1:2006
   roundtrip: true
+  style: v3
 - id: iec.amendment.0580
   input: ISO/IEC 15444-9:2005/AMD2:2008
   identifier:
@@ -10959,6 +11538,7 @@
     human: ISO/IEC 15444-9:2005/AMD2:2008
     urn: urn:iec:std:iso-iec:15444-9:2005:::::amd:2:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0581
   input: ISO/IEC 15444-9:2005/AMD3:2008
   identifier:
@@ -10982,6 +11562,7 @@
     human: ISO/IEC 15444-9:2005/AMD3:2008
     urn: urn:iec:std:iso-iec:15444-9:2005:::::amd:3:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0582
   input: ISO/IEC 15444-9:2005/AMD4:2010
   identifier:
@@ -11005,6 +11586,7 @@
     human: ISO/IEC 15444-9:2005/AMD4:2010
     urn: urn:iec:std:iso-iec:15444-9:2005:::::amd:4:2010
   roundtrip: true
+  style: v3
 - id: iec.amendment.0583
   input: ISO/IEC 15444-9:2005/AMD5:2014
   identifier:
@@ -11028,6 +11610,7 @@
     human: ISO/IEC 15444-9:2005/AMD5:2014
     urn: urn:iec:std:iso-iec:15444-9:2005:::::amd:5:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0584
   input: ISO/IEC 15938-1:2002/AMD1:2005
   identifier:
@@ -11051,6 +11634,7 @@
     human: ISO/IEC 15938-1:2002/AMD1:2005
     urn: urn:iec:std:iso-iec:15938-1:2002:::::amd:1:2005
   roundtrip: true
+  style: v3
 - id: iec.amendment.0585
   input: ISO/IEC 15938-1:2002/AMD2:2006
   identifier:
@@ -11074,6 +11658,7 @@
     human: ISO/IEC 15938-1:2002/AMD2:2006
     urn: urn:iec:std:iso-iec:15938-1:2002:::::amd:2:2006
   roundtrip: true
+  style: v3
 - id: iec.amendment.0586
   input: ISO/IEC 15938-3:2002/AMD1:2004
   identifier:
@@ -11097,6 +11682,7 @@
     human: ISO/IEC 15938-3:2002/AMD1:2004
     urn: urn:iec:std:iso-iec:15938-3:2002:::::amd:1:2004
   roundtrip: true
+  style: v3
 - id: iec.amendment.0587
   input: ISO/IEC 15938-3:2002/AMD2:2006
   identifier:
@@ -11120,6 +11706,7 @@
     human: ISO/IEC 15938-3:2002/AMD2:2006
     urn: urn:iec:std:iso-iec:15938-3:2002:::::amd:2:2006
   roundtrip: true
+  style: v3
 - id: iec.amendment.0588
   input: ISO/IEC 15938-3:2002/AMD3:2009
   identifier:
@@ -11143,6 +11730,7 @@
     human: ISO/IEC 15938-3:2002/AMD3:2009
     urn: urn:iec:std:iso-iec:15938-3:2002:::::amd:3:2009
   roundtrip: true
+  style: v3
 - id: iec.amendment.0589
   input: ISO/IEC 15938-3:2002/AMD4:2010
   identifier:
@@ -11166,6 +11754,7 @@
     human: ISO/IEC 15938-3:2002/AMD4:2010
     urn: urn:iec:std:iso-iec:15938-3:2002:::::amd:4:2010
   roundtrip: true
+  style: v3
 - id: iec.amendment.0590
   input: ISO/IEC 15938-4:2002/AMD1:2004
   identifier:
@@ -11189,6 +11778,7 @@
     human: ISO/IEC 15938-4:2002/AMD1:2004
     urn: urn:iec:std:iso-iec:15938-4:2002:::::amd:1:2004
   roundtrip: true
+  style: v3
 - id: iec.amendment.0591
   input: ISO/IEC 15938-4:2002/AMD2:2006
   identifier:
@@ -11212,6 +11802,7 @@
     human: ISO/IEC 15938-4:2002/AMD2:2006
     urn: urn:iec:std:iso-iec:15938-4:2002:::::amd:2:2006
   roundtrip: true
+  style: v3
 - id: iec.amendment.0592
   input: ISO/IEC 15938-5:2003/AMD1:2004
   identifier:
@@ -11235,6 +11826,7 @@
     human: ISO/IEC 15938-5:2003/AMD1:2004
     urn: urn:iec:std:iso-iec:15938-5:2003:::::amd:1:2004
   roundtrip: true
+  style: v3
 - id: iec.amendment.0593
   input: ISO/IEC 15938-5:2003/AMD2:2005
   identifier:
@@ -11258,6 +11850,7 @@
     human: ISO/IEC 15938-5:2003/AMD2:2005
     urn: urn:iec:std:iso-iec:15938-5:2003:::::amd:2:2005
   roundtrip: true
+  style: v3
 - id: iec.amendment.0594
   input: ISO/IEC 15938-5:2003/AMD3:2008
   identifier:
@@ -11281,6 +11874,7 @@
     human: ISO/IEC 15938-5:2003/AMD3:2008
     urn: urn:iec:std:iso-iec:15938-5:2003:::::amd:3:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0595
   input: ISO/IEC 15938-5:2003/AMD4:2012
   identifier:
@@ -11304,6 +11898,7 @@
     human: ISO/IEC 15938-5:2003/AMD4:2012
     urn: urn:iec:std:iso-iec:15938-5:2003:::::amd:4:2012
   roundtrip: true
+  style: v3
 - id: iec.amendment.0596
   input: ISO/IEC 15938-5:2003/AMD5:2015
   identifier:
@@ -11327,6 +11922,7 @@
     human: ISO/IEC 15938-5:2003/AMD5:2015
     urn: urn:iec:std:iso-iec:15938-5:2003:::::amd:5:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0597
   input: ISO/IEC 15938-7:2003/AMD1:2005
   identifier:
@@ -11350,6 +11946,7 @@
     human: ISO/IEC 15938-7:2003/AMD1:2005
     urn: urn:iec:std:iso-iec:15938-7:2003:::::amd:1:2005
   roundtrip: true
+  style: v3
 - id: iec.amendment.0598
   input: ISO/IEC 15938-7:2003/AMD2:2007
   identifier:
@@ -11373,6 +11970,7 @@
     human: ISO/IEC 15938-7:2003/AMD2:2007
     urn: urn:iec:std:iso-iec:15938-7:2003:::::amd:2:2007
   roundtrip: true
+  style: v3
 - id: iec.amendment.0599
   input: ISO/IEC 15938-7:2003/AMD3:2007
   identifier:
@@ -11396,6 +11994,7 @@
     human: ISO/IEC 15938-7:2003/AMD3:2007
     urn: urn:iec:std:iso-iec:15938-7:2003:::::amd:3:2007
   roundtrip: true
+  style: v3
 - id: iec.amendment.0600
   input: ISO/IEC 15938-7:2003/AMD4:2008
   identifier:
@@ -11419,6 +12018,7 @@
     human: ISO/IEC 15938-7:2003/AMD4:2008
     urn: urn:iec:std:iso-iec:15938-7:2003:::::amd:4:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0601
   input: ISO/IEC 15938-7:2003/AMD5:2010
   identifier:
@@ -11442,6 +12042,7 @@
     human: ISO/IEC 15938-7:2003/AMD5:2010
     urn: urn:iec:std:iso-iec:15938-7:2003:::::amd:5:2010
   roundtrip: true
+  style: v3
 - id: iec.amendment.0602
   input: ISO/IEC 15938-7:2003/AMD6:2011
   identifier:
@@ -11465,6 +12066,7 @@
     human: ISO/IEC 15938-7:2003/AMD6:2011
     urn: urn:iec:std:iso-iec:15938-7:2003:::::amd:6:2011
   roundtrip: true
+  style: v3
 - id: iec.amendment.0603
   input: ISO/IEC 15938-9:2005/AMD1:2012
   identifier:
@@ -11488,6 +12090,7 @@
     human: ISO/IEC 15938-9:2005/AMD1:2012
     urn: urn:iec:std:iso-iec:15938-9:2005:::::amd:1:2012
   roundtrip: true
+  style: v3
 - id: iec.amendment.0604
   input: ISO/IEC 19566-5:2019/AMD1:2021
   identifier:
@@ -11511,6 +12114,7 @@
     human: ISO/IEC 19566-5:2019/AMD1:2021
     urn: urn:iec:std:iso-iec:19566-5:2019:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0605
   input: ISO/IEC 19566-6:2019/AMD1:2021
   identifier:
@@ -11534,6 +12138,7 @@
     human: ISO/IEC 19566-6:2019/AMD1:2021
     urn: urn:iec:std:iso-iec:19566-6:2019:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0606
   input: ISO/IEC 21000-10:2006/AMD1:2006
   identifier:
@@ -11557,6 +12162,7 @@
     human: ISO/IEC 21000-10:2006/AMD1:2006
     urn: urn:iec:std:iso-iec:21000-10:2006:::::amd:1:2006
   roundtrip: true
+  style: v3
 - id: iec.amendment.0607
   input: ISO/IEC 21000-15:2006/AMD1:2008
   identifier:
@@ -11580,6 +12186,7 @@
     human: ISO/IEC 21000-15:2006/AMD1:2008
     urn: urn:iec:std:iso-iec:21000-15:2006:::::amd:1:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0608
   input: ISO/IEC 21000-18:2007/AMD1:2008
   identifier:
@@ -11603,6 +12210,7 @@
     human: ISO/IEC 21000-18:2007/AMD1:2008
     urn: urn:iec:std:iso-iec:21000-18:2007:::::amd:1:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0609
   input: ISO/IEC 21000-19:2010/AMD1:2018
   identifier:
@@ -11626,6 +12234,7 @@
     human: ISO/IEC 21000-19:2010/AMD1:2018
     urn: urn:iec:std:iso-iec:21000-19:2010:::::amd:1:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0610
   input: ISO/IEC 21000-2:2005/AMD1:2012
   identifier:
@@ -11649,6 +12258,7 @@
     human: ISO/IEC 21000-2:2005/AMD1:2012
     urn: urn:iec:std:iso-iec:21000-2:2005:::::amd:1:2012
   roundtrip: true
+  style: v3
 - id: iec.amendment.0611
   input: ISO/IEC 21000-3:2003/AMD1:2007
   identifier:
@@ -11672,6 +12282,7 @@
     human: ISO/IEC 21000-3:2003/AMD1:2007
     urn: urn:iec:std:iso-iec:21000-3:2003:::::amd:1:2007
   roundtrip: true
+  style: v3
 - id: iec.amendment.0612
   input: ISO/IEC 21000-3:2003/AMD2:2013
   identifier:
@@ -11695,6 +12306,7 @@
     human: ISO/IEC 21000-3:2003/AMD2:2013
     urn: urn:iec:std:iso-iec:21000-3:2003:::::amd:2:2013
   roundtrip: true
+  style: v3
 - id: iec.amendment.0613
   input: ISO/IEC 21000-4:2006/AMD1:2007
   identifier:
@@ -11718,6 +12330,7 @@
     human: ISO/IEC 21000-4:2006/AMD1:2007
     urn: urn:iec:std:iso-iec:21000-4:2006:::::amd:1:2007
   roundtrip: true
+  style: v3
 - id: iec.amendment.0614
   input: ISO/IEC 21000-4:2006/AMD2:2012
   identifier:
@@ -11741,6 +12354,7 @@
     human: ISO/IEC 21000-4:2006/AMD2:2012
     urn: urn:iec:std:iso-iec:21000-4:2006:::::amd:2:2012
   roundtrip: true
+  style: v3
 - id: iec.amendment.0615
   input: ISO/IEC 21000-5:2004/AMD1:2007
   identifier:
@@ -11764,6 +12378,7 @@
     human: ISO/IEC 21000-5:2004/AMD1:2007
     urn: urn:iec:std:iso-iec:21000-5:2004:::::amd:1:2007
   roundtrip: true
+  style: v3
 - id: iec.amendment.0616
   input: ISO/IEC 21000-5:2004/AMD2:2007
   identifier:
@@ -11787,6 +12402,7 @@
     human: ISO/IEC 21000-5:2004/AMD2:2007
     urn: urn:iec:std:iso-iec:21000-5:2004:::::amd:2:2007
   roundtrip: true
+  style: v3
 - id: iec.amendment.0617
   input: ISO/IEC 21000-5:2004/AMD3:2008
   identifier:
@@ -11810,6 +12426,7 @@
     human: ISO/IEC 21000-5:2004/AMD3:2008
     urn: urn:iec:std:iso-iec:21000-5:2004:::::amd:3:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0618
   input: ISO/IEC 21000-6:2004/AMD1:2006
   identifier:
@@ -11833,6 +12450,7 @@
     human: ISO/IEC 21000-6:2004/AMD1:2006
     urn: urn:iec:std:iso-iec:21000-6:2004:::::amd:1:2006
   roundtrip: true
+  style: v3
 - id: iec.amendment.0619
   input: ISO/IEC 21000-7:2007/AMD1:2008
   identifier:
@@ -11856,6 +12474,7 @@
     human: ISO/IEC 21000-7:2007/AMD1:2008
     urn: urn:iec:std:iso-iec:21000-7:2007:::::amd:1:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0620
   input: ISO/IEC 21000-8:2008/AMD1:2009
   identifier:
@@ -11879,6 +12498,7 @@
     human: ISO/IEC 21000-8:2008/AMD1:2009
     urn: urn:iec:std:iso-iec:21000-8:2008:::::amd:1:2009
   roundtrip: true
+  style: v3
 - id: iec.amendment.0621
   input: ISO/IEC 21000-8:2008/AMD2:2011
   identifier:
@@ -11902,6 +12522,7 @@
     human: ISO/IEC 21000-8:2008/AMD2:2011
     urn: urn:iec:std:iso-iec:21000-8:2008:::::amd:2:2011
   roundtrip: true
+  style: v3
 - id: iec.amendment.0622
   input: ISO/IEC 21000-8:2008/AMD3:2015
   identifier:
@@ -11925,6 +12546,7 @@
     human: ISO/IEC 21000-8:2008/AMD3:2015
     urn: urn:iec:std:iso-iec:21000-8:2008:::::amd:3:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0623
   input: ISO/IEC 21000-8:2008/AMD4:2018
   identifier:
@@ -11948,6 +12570,7 @@
     human: ISO/IEC 21000-8:2008/AMD4:2018
     urn: urn:iec:std:iso-iec:21000-8:2008:::::amd:4:2018
   roundtrip: true
+  style: v3
 - id: iec.amendment.0624
   input: ISO/IEC 21000-9:2005/AMD1:2008
   identifier:
@@ -11971,6 +12594,7 @@
     human: ISO/IEC 21000-9:2005/AMD1:2008
     urn: urn:iec:std:iso-iec:21000-9:2005:::::amd:1:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0625
   input: ISO/IEC 21794-2:2021/AMD1:2021
   identifier:
@@ -11994,6 +12618,7 @@
     human: ISO/IEC 21794-2:2021/AMD1:2021
     urn: urn:iec:std:iso-iec:21794-2:2021:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0626
   input: ISO/IEC 23000-10:2012/AMD1:2014
   identifier:
@@ -12017,6 +12642,7 @@
     human: ISO/IEC 23000-10:2012/AMD1:2014
     urn: urn:iec:std:iso-iec:23000-10:2012:::::amd:1:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0627
   input: ISO/IEC 23000-11:2009/AMD1:2011
   identifier:
@@ -12040,6 +12666,7 @@
     human: ISO/IEC 23000-11:2009/AMD1:2011
     urn: urn:iec:std:iso-iec:23000-11:2009:::::amd:1:2011
   roundtrip: true
+  style: v3
 - id: iec.amendment.0628
   input: ISO/IEC 23000-11:2009/AMD2:2011
   identifier:
@@ -12063,6 +12690,7 @@
     human: ISO/IEC 23000-11:2009/AMD2:2011
     urn: urn:iec:std:iso-iec:23000-11:2009:::::amd:2:2011
   roundtrip: true
+  style: v3
 - id: iec.amendment.0629
   input: ISO/IEC 23000-11:2009/AMD3:2014
   identifier:
@@ -12086,6 +12714,7 @@
     human: ISO/IEC 23000-11:2009/AMD3:2014
     urn: urn:iec:std:iso-iec:23000-11:2009:::::amd:3:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0630
   input: ISO/IEC 23000-12:2010/AMD1:2011
   identifier:
@@ -12109,6 +12738,7 @@
     human: ISO/IEC 23000-12:2010/AMD1:2011
     urn: urn:iec:std:iso-iec:23000-12:2010:::::amd:1:2011
   roundtrip: true
+  style: v3
 - id: iec.amendment.0631
   input: ISO/IEC 23000-12:2010/AMD2:2012
   identifier:
@@ -12132,6 +12762,7 @@
     human: ISO/IEC 23000-12:2010/AMD2:2012
     urn: urn:iec:std:iso-iec:23000-12:2010:::::amd:2:2012
   roundtrip: true
+  style: v3
 - id: iec.amendment.0632
   input: ISO/IEC 23000-12:2010/AMD3:2013
   identifier:
@@ -12155,6 +12786,7 @@
     human: ISO/IEC 23000-12:2010/AMD3:2013
     urn: urn:iec:std:iso-iec:23000-12:2010:::::amd:3:2013
   roundtrip: true
+  style: v3
 - id: iec.amendment.0633
   input: ISO/IEC 23000-15:2016/AMD1:2017
   identifier:
@@ -12178,6 +12810,7 @@
     human: ISO/IEC 23000-15:2016/AMD1:2017
     urn: urn:iec:std:iso-iec:23000-15:2016:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0634
   input: ISO/IEC 23000-19:2020/AMD1:2021
   identifier:
@@ -12201,6 +12834,7 @@
     human: ISO/IEC 23000-19:2020/AMD1:2021
     urn: urn:iec:std:iso-iec:23000-19:2020:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0635
   input: ISO/IEC 23000-21:2019/AMD1:2021
   identifier:
@@ -12224,6 +12858,7 @@
     human: ISO/IEC 23000-21:2019/AMD1:2021
     urn: urn:iec:std:iso-iec:23000-21:2019:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0636
   input: ISO/IEC 23000-22:2019/AMD1:2021
   identifier:
@@ -12247,6 +12882,7 @@
     human: ISO/IEC 23000-22:2019/AMD1:2021
     urn: urn:iec:std:iso-iec:23000-22:2019:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0637
   input: ISO/IEC 23000-22:2019/AMD2:2021
   identifier:
@@ -12270,6 +12906,7 @@
     human: ISO/IEC 23000-22:2019/AMD2:2021
     urn: urn:iec:std:iso-iec:23000-22:2019:::::amd:2:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0638
   input: ISO/IEC 23000-3:2007/AMD1:2009
   identifier:
@@ -12293,6 +12930,7 @@
     human: ISO/IEC 23000-3:2007/AMD1:2009
     urn: urn:iec:std:iso-iec:23000-3:2007:::::amd:1:2009
   roundtrip: true
+  style: v3
 - id: iec.amendment.0639
   input: ISO/IEC 23000-3:2007/AMD2:2010
   identifier:
@@ -12316,6 +12954,7 @@
     human: ISO/IEC 23000-3:2007/AMD2:2010
     urn: urn:iec:std:iso-iec:23000-3:2007:::::amd:2:2010
   roundtrip: true
+  style: v3
 - id: iec.amendment.0640
   input: ISO/IEC 23000-4:2009/AMD1:2009
   identifier:
@@ -12339,6 +12978,7 @@
     human: ISO/IEC 23000-4:2009/AMD1:2009
     urn: urn:iec:std:iso-iec:23000-4:2009:::::amd:1:2009
   roundtrip: true
+  style: v3
 - id: iec.amendment.0641
   input: ISO/IEC 23000-4:2009/AMD2:2009
   identifier:
@@ -12362,6 +13002,7 @@
     human: ISO/IEC 23000-4:2009/AMD2:2009
     urn: urn:iec:std:iso-iec:23000-4:2009:::::amd:2:2009
   roundtrip: true
+  style: v3
 - id: iec.amendment.0642
   input: ISO/IEC 23000-7:2008/AMD1:2009
   identifier:
@@ -12385,6 +13026,7 @@
     human: ISO/IEC 23000-7:2008/AMD1:2009
     urn: urn:iec:std:iso-iec:23000-7:2008:::::amd:1:2009
   roundtrip: true
+  style: v3
 - id: iec.amendment.0643
   input: ISO/IEC 23000-9:2008/AMD1:2010
   identifier:
@@ -12408,6 +13050,7 @@
     human: ISO/IEC 23000-9:2008/AMD1:2010
     urn: urn:iec:std:iso-iec:23000-9:2008:::::amd:1:2010
   roundtrip: true
+  style: v3
 - id: iec.amendment.0644
   input: ISO/IEC 23000-9:2008/AMD2:2010
   identifier:
@@ -12431,53 +13074,8 @@
     human: ISO/IEC 23000-9:2008/AMD2:2010
     urn: urn:iec:std:iso-iec:23000-9:2008:::::amd:2:2010
   roundtrip: true
+  style: v3
 - id: iec.amendment.0645
-  input: ISO/IEC 23001-1:2006/AMD1:2007
-  identifier:
-    type: amendment
-    components:
-      number: '1'
-      year: '2007'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: international_standard
-      components:
-        number: '23001'
-        part: '1'
-        year: '2006'
-        publisher: ISO
-        copublishers:
-        - IEC
-  representations:
-    human: ISO/IEC 23001-1:2006/AMD1:2007
-    urn: urn:iec:std:iso-iec:23001-1:2006:::::amd:1:2007
-  roundtrip: true
-- id: iec.amendment.0646
-  input: ISO/IEC 23001-1:2006/AMD2:2008
-  identifier:
-    type: amendment
-    components:
-      number: '2'
-      year: '2008'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: international_standard
-      components:
-        number: '23001'
-        part: '1'
-        year: '2006'
-        publisher: ISO
-        copublishers:
-        - IEC
-  representations:
-    human: ISO/IEC 23001-1:2006/AMD2:2008
-    urn: urn:iec:std:iso-iec:23001-1:2006:::::amd:2:2008
-  roundtrip: true
-- id: iec.amendment.0647
   input: ISO/IEC 23001-10:2020/AMD1:2021
   identifier:
     type: amendment
@@ -12500,7 +13098,8 @@
     human: ISO/IEC 23001-10:2020/AMD1:2021
     urn: urn:iec:std:iso-iec:23001-10:2020:::::amd:1:2021
   roundtrip: true
-- id: iec.amendment.0648
+  style: v3
+- id: iec.amendment.0646
   input: ISO/IEC 23001-14:2019/AMD1:2021
   identifier:
     type: amendment
@@ -12523,6 +13122,55 @@
     human: ISO/IEC 23001-14:2019/AMD1:2021
     urn: urn:iec:std:iso-iec:23001-14:2019:::::amd:1:2021
   roundtrip: true
+  style: v3
+- id: iec.amendment.0647
+  input: ISO/IEC 23001-1:2006/AMD1:2007
+  identifier:
+    type: amendment
+    components:
+      number: '1'
+      year: '2007'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: international_standard
+      components:
+        number: '23001'
+        part: '1'
+        year: '2006'
+        publisher: ISO
+        copublishers:
+        - IEC
+  representations:
+    human: ISO/IEC 23001-1:2006/AMD1:2007
+    urn: urn:iec:std:iso-iec:23001-1:2006:::::amd:1:2007
+  roundtrip: true
+  style: v3
+- id: iec.amendment.0648
+  input: ISO/IEC 23001-1:2006/AMD2:2008
+  identifier:
+    type: amendment
+    components:
+      number: '2'
+      year: '2008'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: international_standard
+      components:
+        number: '23001'
+        part: '1'
+        year: '2006'
+        publisher: ISO
+        copublishers:
+        - IEC
+  representations:
+    human: ISO/IEC 23001-1:2006/AMD2:2008
+    urn: urn:iec:std:iso-iec:23001-1:2006:::::amd:2:2008
+  roundtrip: true
+  style: v3
 - id: iec.amendment.0649
   input: ISO/IEC 23001-7:2016/AMD1:2019
   identifier:
@@ -12546,6 +13194,7 @@
     human: ISO/IEC 23001-7:2016/AMD1:2019
     urn: urn:iec:std:iso-iec:23001-7:2016:::::amd:1:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0650
   input: ISO/IEC 23002-1:2006/AMD1:2008
   identifier:
@@ -12569,6 +13218,7 @@
     human: ISO/IEC 23002-1:2006/AMD1:2008
     urn: urn:iec:std:iso-iec:23002-1:2006:::::amd:1:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0651
   input: ISO/IEC 23003-1:2007/AMD1:2008
   identifier:
@@ -12592,6 +13242,7 @@
     human: ISO/IEC 23003-1:2007/AMD1:2008
     urn: urn:iec:std:iso-iec:23003-1:2007:::::amd:1:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0652
   input: ISO/IEC 23003-1:2007/AMD2:2008
   identifier:
@@ -12615,6 +13266,7 @@
     human: ISO/IEC 23003-1:2007/AMD2:2008
     urn: urn:iec:std:iso-iec:23003-1:2007:::::amd:2:2008
   roundtrip: true
+  style: v3
 - id: iec.amendment.0653
   input: ISO/IEC 23003-1:2007/AMD3:2016
   identifier:
@@ -12638,6 +13290,7 @@
     human: ISO/IEC 23003-1:2007/AMD3:2016
     urn: urn:iec:std:iso-iec:23003-1:2007:::::amd:3:2016
   roundtrip: true
+  style: v3
 - id: iec.amendment.0654
   input: ISO/IEC 23003-1:2007/AMD4:2017
   identifier:
@@ -12661,6 +13314,7 @@
     human: ISO/IEC 23003-1:2007/AMD4:2017
     urn: urn:iec:std:iso-iec:23003-1:2007:::::amd:4:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0655
   input: ISO/IEC 23003-3:2020/AMD1:2021
   identifier:
@@ -12684,6 +13338,7 @@
     human: ISO/IEC 23003-3:2020/AMD1:2021
     urn: urn:iec:std:iso-iec:23003-3:2020:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0656
   input: ISO/IEC 23007-1:2010/AMD1:2012
   identifier:
@@ -12707,6 +13362,7 @@
     human: ISO/IEC 23007-1:2010/AMD1:2012
     urn: urn:iec:std:iso-iec:23007-1:2010:::::amd:1:2012
   roundtrip: true
+  style: v3
 - id: iec.amendment.0657
   input: ISO/IEC 23007-3:2011/AMD1:2015
   identifier:
@@ -12730,30 +13386,8 @@
     human: ISO/IEC 23007-3:2011/AMD1:2015
     urn: urn:iec:std:iso-iec:23007-3:2011:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0658
-  input: ISO/IEC 23008-1:2017/AMD1:2017
-  identifier:
-    type: amendment
-    components:
-      number: '1'
-      year: '2017'
-      publisher: ISO
-      copublishers:
-      - IEC
-    base:
-      type: international_standard
-      components:
-        number: '23008'
-        part: '1'
-        year: '2017'
-        publisher: ISO
-        copublishers:
-        - IEC
-  representations:
-    human: ISO/IEC 23008-1:2017/AMD1:2017
-    urn: urn:iec:std:iso-iec:23008-1:2017:::::amd:1:2017
-  roundtrip: true
-- id: iec.amendment.0659
   input: ISO/IEC 23008-10:2015/AMD1:2021
   identifier:
     type: amendment
@@ -12776,7 +13410,8 @@
     human: ISO/IEC 23008-10:2015/AMD1:2021
     urn: urn:iec:std:iso-iec:23008-10:2015:::::amd:1:2021
   roundtrip: true
-- id: iec.amendment.0660
+  style: v3
+- id: iec.amendment.0659
   input: ISO/IEC 23008-12:2017/AMD1:2020
   identifier:
     type: amendment
@@ -12799,6 +13434,31 @@
     human: ISO/IEC 23008-12:2017/AMD1:2020
     urn: urn:iec:std:iso-iec:23008-12:2017:::::amd:1:2020
   roundtrip: true
+  style: v3
+- id: iec.amendment.0660
+  input: ISO/IEC 23008-1:2017/AMD1:2017
+  identifier:
+    type: amendment
+    components:
+      number: '1'
+      year: '2017'
+      publisher: ISO
+      copublishers:
+      - IEC
+    base:
+      type: international_standard
+      components:
+        number: '23008'
+        part: '1'
+        year: '2017'
+        publisher: ISO
+        copublishers:
+        - IEC
+  representations:
+    human: ISO/IEC 23008-1:2017/AMD1:2017
+    urn: urn:iec:std:iso-iec:23008-1:2017:::::amd:1:2017
+  roundtrip: true
+  style: v3
 - id: iec.amendment.0661
   input: ISO/IEC 23008-2:2020/AMD1:2021
   identifier:
@@ -12822,6 +13482,7 @@
     human: ISO/IEC 23008-2:2020/AMD1:2021
     urn: urn:iec:std:iso-iec:23008-2:2020:::::amd:1:2021
   roundtrip: true
+  style: v3
 - id: iec.amendment.0662
   input: ISO/IEC 23008-3:2019/AMD1:2019
   identifier:
@@ -12845,6 +13506,7 @@
     human: ISO/IEC 23008-3:2019/AMD1:2019
     urn: urn:iec:std:iso-iec:23008-3:2019:::::amd:1:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0663
   input: ISO/IEC 23008-3:2019/AMD2:2020
   identifier:
@@ -12868,6 +13530,7 @@
     human: ISO/IEC 23008-3:2019/AMD2:2020
     urn: urn:iec:std:iso-iec:23008-3:2019:::::amd:2:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0664
   input: ISO/IEC 23008-5:2017/AMD1:2017
   identifier:
@@ -12891,6 +13554,7 @@
     human: ISO/IEC 23008-5:2017/AMD1:2017
     urn: urn:iec:std:iso-iec:23008-5:2017:::::amd:1:2017
   roundtrip: true
+  style: v3
 - id: iec.amendment.0665
   input: ISO/IEC 23008-8:2018/AMD1:2019
   identifier:
@@ -12914,6 +13578,7 @@
     human: ISO/IEC 23008-8:2018/AMD1:2019
     urn: urn:iec:std:iso-iec:23008-8:2018:::::amd:1:2019
   roundtrip: true
+  style: v3
 - id: iec.amendment.0666
   input: ISO/IEC 23009-5:2017/AMD1:2020
   identifier:
@@ -12937,6 +13602,7 @@
     human: ISO/IEC 23009-5:2017/AMD1:2020
     urn: urn:iec:std:iso-iec:23009-5:2017:::::amd:1:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0667
   input: ISO/IEC 23091-3:2018/AMD1:2022
   identifier:
@@ -12960,6 +13626,7 @@
     human: ISO/IEC 23091-3:2018/AMD1:2022
     urn: urn:iec:std:iso-iec:23091-3:2018:::::amd:1:2022
   roundtrip: true
+  style: v3
 - id: iec.amendment.0668
   input: ISO/IEC 24800-3:2010/AMD1:2015
   identifier:
@@ -12983,6 +13650,7 @@
     human: ISO/IEC 24800-3:2010/AMD1:2015
     urn: urn:iec:std:iso-iec:24800-3:2010:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0669
   input: ISO/IEC 29170-2:2015/AMD1:2020
   identifier:
@@ -13006,6 +13674,7 @@
     human: ISO/IEC 29170-2:2015/AMD1:2020
     urn: urn:iec:std:iso-iec:29170-2:2015:::::amd:1:2020
   roundtrip: true
+  style: v3
 - id: iec.amendment.0670
   input: ISO/IEC 29199-4:2010/AMD1:2014
   identifier:
@@ -13029,6 +13698,7 @@
     human: ISO/IEC 29199-4:2010/AMD1:2014
     urn: urn:iec:std:iso-iec:29199-4:2010:::::amd:1:2014
   roundtrip: true
+  style: v3
 - id: iec.amendment.0671
   input: ISO/IEC 29199-5:2012/AMD1:2015
   identifier:
@@ -13052,6 +13722,7 @@
     human: ISO/IEC 29199-5:2012/AMD1:2015
     urn: urn:iec:std:iso-iec:29199-5:2012:::::amd:1:2015
   roundtrip: true
+  style: v3
 - id: iec.amendment.0672
   input: ISO/IEC 29500-1/AMD1:2010
   identifier:
@@ -13074,6 +13745,7 @@
     human: ISO/IEC 29500-1/AMD1:2010
     urn: urn:iec:std:iso-iec:29500-1::::::amd:1:2010
   roundtrip: true
+  style: v3
 - id: iec.amendment.0673
   input: ISO/IEC TR 15938-11:2005/AMD1:2012
   identifier:
@@ -13097,6 +13769,7 @@
     human: ISO/IEC TR 15938-11:2005/AMD1:2012
     urn: urn:iec:std:iso-iec:15938-11:2005:tr::::amd:1:2012
   roundtrip: true
+  style: v3
 - id: iec.amendment.0674
   input: ISO/IEC TR 15938-8:2002/AMD1:2004
   identifier:
@@ -13120,6 +13793,7 @@
     human: ISO/IEC TR 15938-8:2002/AMD1:2004
     urn: urn:iec:std:iso-iec:15938-8:2002:tr::::amd:1:2004
   roundtrip: true
+  style: v3
 - id: iec.amendment.0675
   input: ISO/IEC TR 15938-8:2002/AMD2:2006
   identifier:
@@ -13143,6 +13817,7 @@
     human: ISO/IEC TR 15938-8:2002/AMD2:2006
     urn: urn:iec:std:iso-iec:15938-8:2002:tr::::amd:2:2006
   roundtrip: true
+  style: v3
 - id: iec.amendment.0676
   input: ISO/IEC TR 15938-8:2002/AMD3:2007
   identifier:
@@ -13166,6 +13841,7 @@
     human: ISO/IEC TR 15938-8:2002/AMD3:2007
     urn: urn:iec:std:iso-iec:15938-8:2002:tr::::amd:3:2007
   roundtrip: true
+  style: v3
 - id: iec.amendment.0677
   input: ISO/IEC TR 15938-8:2002/AMD4:2009
   identifier:
@@ -13189,6 +13865,7 @@
     human: ISO/IEC TR 15938-8:2002/AMD4:2009
     urn: urn:iec:std:iso-iec:15938-8:2002:tr::::amd:4:2009
   roundtrip: true
+  style: v3
 - id: iec.amendment.0678
   input: ISO/IEC TR 15938-8:2002/AMD5:2010
   identifier:
@@ -13212,6 +13889,7 @@
     human: ISO/IEC TR 15938-8:2002/AMD5:2010
     urn: urn:iec:std:iso-iec:15938-8:2002:tr::::amd:5:2010
   roundtrip: true
+  style: v3
 - id: iec.amendment.0679
   input: ISO/IEC TR 15938-8:2002/AMD6:2011
   identifier:
@@ -13235,3 +13913,4 @@
     human: ISO/IEC TR 15938-8:2002/AMD6:2011
     urn: urn:iec:std:iso-iec:15938-8:2002:tr::::amd:6:2011
   roundtrip: true
+  style: v3

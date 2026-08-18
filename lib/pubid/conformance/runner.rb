@@ -29,8 +29,10 @@ module Pubid
       end
 
       def run_flavor(flavor)
-        flavor_module = Pubid::Registry.get(flavor)
-        raise ArgumentError, "unknown flavor #{flavor}" unless flavor_module
+        @current_flavor = Pubid::Registry.get(flavor)
+        if @current_flavor.nil?
+          raise ArgumentError, "unknown flavor #{flavor}"
+        end
 
         stats = Hash.new(0)
         failures = []
@@ -52,8 +54,14 @@ module Pubid
           return
         end
 
+        if test_case["expect"].nil? && test_case["identifier"].nil?
+          stats[:reclassify] += 1
+          return
+        end
+
         identifier = flavor_module.parse(test_case.fetch("input"))
         stats[:cases] += 1
+        check_aliases(identifier, test_case, id, stats, failures)
         check_tree(identifier, test_case, id, stats, failures)
         check_representations(identifier, test_case, id, stats, failures)
         check_roundtrip(identifier, flavor_module, test_case, id, stats,
@@ -70,6 +78,23 @@ module Pubid
         failures << "#{test_case['id']} unexpectedly parsed"
       rescue StandardError
         stats[:error_ok] += 1
+      end
+
+      def check_aliases(identifier, test_case, id, stats, failures)
+        Array(test_case["non_normalized_aliases"]).each do |alias_entry|
+          aliased = flavor_parse(alias_entry["input"])
+          next if aliased && aliased.to_s == test_case.dig("representations", 
+                                                           "human")
+
+          stats[:fail_alias] += 1
+          failures << "#{id} alias #{alias_entry['input']}"
+        end
+      end
+
+      def flavor_parse(input)
+        @current_flavor.parse(input)
+      rescue StandardError
+        nil
       end
 
       def check_tree(identifier, test_case, id, stats, failures)
@@ -119,9 +144,9 @@ module Pubid
       end
 
       def report(flavor, stats, failures)
-        puts format("%-6s cases=%-6d error-cases=%-4d failures=%d",
+        puts format("%-6s cases=%-6d error=%-4d reclassify=%-3d failures=%d",
                     flavor, stats[:cases], stats[:error_cases],
-                    failures.size)
+                    stats[:reclassify], failures.size)
         failures.first(10).each { |f| puts "  FAIL #{f}" }
         return if failures.size <= 10
 

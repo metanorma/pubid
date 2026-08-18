@@ -10,6 +10,7 @@
     human: ISO/TTA 1:1994
     urn: urn:iso:std:iso:tta:1
   roundtrip: true
+  style: v3
 - id: iso.technology_trends_assessments.0002
   input: ISO/TTA 1:1994(en)
   identifier:
@@ -24,6 +25,7 @@
     human: ISO/TTA 1:1994(en)
     urn: urn:iso:std:iso:tta:1:en
   roundtrip: true
+  style: v3
 - id: iso.technology_trends_assessments.0003
   input: ISO/TTA 2
   identifier:
@@ -34,6 +36,7 @@
     human: ISO/TTA 2
     urn: urn:iso:std:iso:tta:2
   roundtrip: true
+  style: v3
 - id: iso.technology_trends_assessments.0004
   input: ISO/TTA 2:1997
   identifier:
@@ -45,6 +48,7 @@
     human: ISO/TTA 2:1997
     urn: urn:iso:std:iso:tta:2
   roundtrip: true
+  style: v3
 - id: iso.technology_trends_assessments.0005
   input: ISO/TTA 2:1997(en)
   identifier:
@@ -59,6 +63,7 @@
     human: ISO/TTA 2:1997(en)
     urn: urn:iso:std:iso:tta:2:en
   roundtrip: true
+  style: v3
 - id: iso.technology_trends_assessments.0006
   input: ISO/TTA 3:2001(en)
   identifier:
@@ -73,6 +78,7 @@
     human: ISO/TTA 3:2001(en)
     urn: urn:iso:std:iso:tta:3:en
   roundtrip: true
+  style: v3
 - id: iso.technology_trends_assessments.0007
   input: ISO/TTA 4:2002
   identifier:
@@ -84,6 +90,7 @@
     human: ISO/TTA 4:2002
     urn: urn:iso:std:iso:tta:4
   roundtrip: true
+  style: v3
 - id: iso.technology_trends_assessments.0008
   input: ISO/TTA 5:2006
   identifier:
@@ -95,6 +102,7 @@
     human: ISO/TTA 5:2006
     urn: urn:iso:std:iso:tta:5
   roundtrip: true
+  style: v3
 - id: iso.technology_trends_assessments.0009
   input: ISO/TTA 5:2007
   identifier:
@@ -106,3 +114,4 @@
     human: ISO/TTA 5:2007
     urn: urn:iso:std:iso:tta:5
   roundtrip: true
+  style: v3

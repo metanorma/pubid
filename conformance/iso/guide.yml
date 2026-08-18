@@ -13,7 +13,8 @@
     human: ISO Guide 73:2009(fr)
     urn: urn:iso:std:iso:guide:73:fr
   roundtrip: true
-- id: iso.guide.0005
+  style: v3
+- id: iso.guide.0002
   input: ISO/IEC Guide 17:2016
   identifier:
     type: guide
@@ -26,7 +27,8 @@
     human: ISO/IEC Guide 17:2016
     urn: urn:iso:std:iso-iec:guide:17
   roundtrip: true
-- id: iso.guide.0009
+  style: v3
+- id: iso.guide.0003
   input: ISO/IEC Guide 41:2003
   identifier:
     type: guide
@@ -39,7 +41,8 @@
     human: ISO/IEC Guide 41:2003
     urn: urn:iso:std:iso-iec:guide:41
   roundtrip: true
-- id: iso.guide.0010
+  style: v3
+- id: iso.guide.0004
   input: ISO/IEC Guide 46:2017
   identifier:
     type: guide
@@ -52,7 +55,8 @@
     human: ISO/IEC Guide 46:2017
     urn: urn:iso:std:iso-iec:guide:46
   roundtrip: true
-- id: iso.guide.0011
+  style: v3
+- id: iso.guide.0005
   input: ISO/IEC Guide 51:2014
   identifier:
     type: guide
@@ -65,7 +69,8 @@
     human: ISO/IEC Guide 51:2014
     urn: urn:iso:std:iso-iec:guide:51
   roundtrip: true
-- id: iso.guide.0012
+  style: v3
+- id: iso.guide.0006
   input: ISO/IEC Guide 63:2019
   identifier:
     type: guide
@@ -78,7 +83,8 @@
     human: ISO/IEC Guide 63:2019
     urn: urn:iso:std:iso-iec:guide:63
   roundtrip: true
-- id: iso.guide.0013
+  style: v3
+- id: iso.guide.0007
   input: ISO/IEC Guide 71:2014
   identifier:
     type: guide
@@ -91,7 +97,8 @@
     human: ISO/IEC Guide 71:2014
     urn: urn:iso:std:iso-iec:guide:71
   roundtrip: true
-- id: iso.guide.0014
+  style: v3
+- id: iso.guide.0008
   input: ISO/IEC Guide 99:2007(ru)
   identifier:
     type: guide
@@ -107,3 +114,4 @@
     human: ISO/IEC Guide 99:2007(ru)
     urn: urn:iso:std:iso-iec:guide:99:ru
   roundtrip: true
+  style: v3

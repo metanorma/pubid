@@ -12,6 +12,7 @@
     human: IEC TS 60034-16-3:1996
     urn: 'urn:iec:std:iec:60034-16-3:1996:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0002
   input: IEC TS 60034-17:1998
   identifier:
@@ -24,6 +25,7 @@
     human: IEC TS 60034-17:1998
     urn: 'urn:iec:std:iec:60034-17:1998:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0003
   input: IEC TS 60034-17:2002
   identifier:
@@ -36,6 +38,7 @@
     human: IEC TS 60034-17:2002
     urn: 'urn:iec:std:iec:60034-17:2002:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0004
   input: IEC TS 60034-17:2006
   identifier:
@@ -48,6 +51,7 @@
     human: IEC TS 60034-17:2006
     urn: 'urn:iec:std:iec:60034-17:2006:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0005
   input: IEC TS 60034-18-22:1996
   identifier:
@@ -61,6 +65,7 @@
     human: IEC TS 60034-18-22:1996
     urn: 'urn:iec:std:iec:60034-18-22:1996:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0006
   input: IEC TS 60034-18-33:1995
   identifier:
@@ -74,6 +79,7 @@
     human: IEC TS 60034-18-33:1995
     urn: 'urn:iec:std:iec:60034-18-33:1995:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0007
   input: IEC TS 60034-18-33:2010
   identifier:
@@ -87,6 +93,7 @@
     human: IEC TS 60034-18-33:2010
     urn: 'urn:iec:std:iec:60034-18-33:2010:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0008
   input: IEC TS 60034-18-34:2000
   identifier:
@@ -100,6 +107,7 @@
     human: IEC TS 60034-18-34:2000
     urn: 'urn:iec:std:iec:60034-18-34:2000:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0009
   input: IEC TS 60034-18-41:2006
   identifier:
@@ -113,6 +121,7 @@
     human: IEC TS 60034-18-41:2006
     urn: 'urn:iec:std:iec:60034-18-41:2006:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0010
   input: IEC TS 60034-18-42:2008
   identifier:
@@ -126,6 +135,7 @@
     human: IEC TS 60034-18-42:2008
     urn: 'urn:iec:std:iec:60034-18-42:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0011
   input: IEC TS 60034-2-3:2013
   identifier:
@@ -139,6 +149,7 @@
     human: IEC TS 60034-2-3:2013
     urn: 'urn:iec:std:iec:60034-2-3:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0012
   input: IEC TS 60034-20-1:2002
   identifier:
@@ -152,6 +163,7 @@
     human: IEC TS 60034-20-1:2002
     urn: 'urn:iec:std:iec:60034-20-1:2002:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0013
   input: IEC TS 60034-23:2003
   identifier:
@@ -164,6 +176,7 @@
     human: IEC TS 60034-23:2003
     urn: 'urn:iec:std:iec:60034-23:2003:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0014
   input: IEC TS 60034-24:2009
   identifier:
@@ -176,6 +189,7 @@
     human: IEC TS 60034-24:2009
     urn: 'urn:iec:std:iec:60034-24:2009:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0015
   input: IEC TS 60034-25:2004
   identifier:
@@ -188,6 +202,7 @@
     human: IEC TS 60034-25:2004
     urn: 'urn:iec:std:iec:60034-25:2004:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0016
   input: IEC TS 60034-25:2007
   identifier:
@@ -200,6 +215,7 @@
     human: IEC TS 60034-25:2007
     urn: 'urn:iec:std:iec:60034-25:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0017
   input: IEC TS 60034-25:2014
   identifier:
@@ -212,6 +228,7 @@
     human: IEC TS 60034-25:2014
     urn: 'urn:iec:std:iec:60034-25:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0018
   input: IEC TS 60034-26:2002
   identifier:
@@ -224,6 +241,7 @@
     human: IEC TS 60034-26:2002
     urn: 'urn:iec:std:iec:60034-26:2002:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0019
   input: IEC TS 60034-27-2:2012
   identifier:
@@ -237,6 +255,7 @@
     human: IEC TS 60034-27-2:2012
     urn: 'urn:iec:std:iec:60034-27-2:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0020
   input: IEC TS 60034-27-5:2021
   identifier:
@@ -250,6 +269,7 @@
     human: IEC TS 60034-27-5:2021
     urn: 'urn:iec:std:iec:60034-27-5:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0021
   input: IEC TS 60034-27:2006
   identifier:
@@ -262,6 +282,7 @@
     human: IEC TS 60034-27:2006
     urn: 'urn:iec:std:iec:60034-27:2006:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0022
   input: IEC TS 60034-30-2:2016
   identifier:
@@ -275,6 +296,7 @@
     human: IEC TS 60034-30-2:2016
     urn: 'urn:iec:std:iec:60034-30-2:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0023
   input: IEC TS 60034-31:2010
   identifier:
@@ -287,6 +309,7 @@
     human: IEC TS 60034-31:2010
     urn: 'urn:iec:std:iec:60034-31:2010:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0024
   input: IEC TS 60034-31:2021
   identifier:
@@ -299,6 +322,7 @@
     human: IEC TS 60034-31:2021
     urn: 'urn:iec:std:iec:60034-31:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0025
   input: IEC TS 60034-32:2016
   identifier:
@@ -311,6 +335,7 @@
     human: IEC TS 60034-32:2016
     urn: 'urn:iec:std:iec:60034-32:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0026
   input: IEC TS 60034-34:2020
   identifier:
@@ -323,6 +348,7 @@
     human: IEC TS 60034-34:2020
     urn: 'urn:iec:std:iec:60034-34:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0027
   input: IEC TS 60071-5:2002
   identifier:
@@ -335,6 +361,7 @@
     human: IEC TS 60071-5:2002
     urn: 'urn:iec:std:iec:60071-5:2002:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0028
   input: IEC TS 60076-14:2004
   identifier:
@@ -347,6 +374,7 @@
     human: IEC TS 60076-14:2004
     urn: 'urn:iec:std:iec:60076-14:2004:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0029
   input: IEC TS 60076-14:2009
   identifier:
@@ -359,6 +387,7 @@
     human: IEC TS 60076-14:2009
     urn: 'urn:iec:std:iec:60076-14:2009:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0030
   input: IEC TS 60076-19:2013
   identifier:
@@ -371,6 +400,7 @@
     human: IEC TS 60076-19:2013
     urn: 'urn:iec:std:iec:60076-19:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0031
   input: IEC TS 60076-20:2017
   identifier:
@@ -383,6 +413,7 @@
     human: IEC TS 60076-20:2017
     urn: 'urn:iec:std:iec:60076-20:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0032
   input: IEC TS 60076-23:2018
   identifier:
@@ -395,6 +426,7 @@
     human: IEC TS 60076-23:2018
     urn: 'urn:iec:std:iec:60076-23:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0033
   input: IEC TS 60079-27:2002
   identifier:
@@ -407,6 +439,7 @@
     human: IEC TS 60079-27:2002
     urn: 'urn:iec:std:iec:60079-27:2002:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0034
   input: IEC TS 60079-39:2015
   identifier:
@@ -419,6 +452,7 @@
     human: IEC TS 60079-39:2015
     urn: 'urn:iec:std:iec:60079-39:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0035
   input: IEC TS 60079-40:2015
   identifier:
@@ -431,6 +465,7 @@
     human: IEC TS 60079-40:2015
     urn: 'urn:iec:std:iec:60079-40:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0036
   input: IEC TS 60079-42:2019
   identifier:
@@ -443,6 +478,7 @@
     human: IEC TS 60079-42:2019
     urn: 'urn:iec:std:iec:60079-42:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0037
   input: IEC TS 60079-43:2017
   identifier:
@@ -455,6 +491,7 @@
     human: IEC TS 60079-43:2017
     urn: 'urn:iec:std:iec:60079-43:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0038
   input: IEC TS 60079-46:2017
   identifier:
@@ -467,6 +504,7 @@
     human: IEC TS 60079-46:2017
     urn: 'urn:iec:std:iec:60079-46:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0039
   input: IEC TS 60079-47:2021
   identifier:
@@ -479,6 +517,7 @@
     human: IEC TS 60079-47:2021
     urn: 'urn:iec:std:iec:60079-47:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0040
   input: IEC TS 60110-2:2000
   identifier:
@@ -491,6 +530,7 @@
     human: IEC TS 60110-2:2000
     urn: 'urn:iec:std:iec:60110-2:2000:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0041
   input: IEC TS 60204-34:2016
   identifier:
@@ -503,6 +543,7 @@
     human: IEC TS 60204-34:2016
     urn: 'urn:iec:std:iec:60204-34:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0042
   input: IEC TS 60216-7-1:2015
   identifier:
@@ -516,6 +557,7 @@
     human: IEC TS 60216-7-1:2015
     urn: 'urn:iec:std:iec:60216-7-1:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0043
   input: IEC TS 60318-7:2011
   identifier:
@@ -528,6 +570,7 @@
     human: IEC TS 60318-7:2011
     urn: 'urn:iec:std:iec:60318-7:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0044
   input: IEC TS 60318-7:2017
   identifier:
@@ -540,6 +583,7 @@
     human: IEC TS 60318-7:2017
     urn: 'urn:iec:std:iec:60318-7:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0045
   input: IEC TS 60332-3:1992
   identifier:
@@ -552,6 +596,7 @@
     human: IEC TS 60332-3:1992
     urn: 'urn:iec:std:iec:60332-3:1992:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0046
   input: IEC TS 60349-3:1995
   identifier:
@@ -564,6 +609,7 @@
     human: IEC TS 60349-3:1995
     urn: 'urn:iec:std:iec:60349-3:1995:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0047
   input: IEC TS 60349-3:2010
   identifier:
@@ -576,6 +622,7 @@
     human: IEC TS 60349-3:2010
     urn: 'urn:iec:std:iec:60349-3:2010:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0048
   input: IEC TS 60364-8-3:2020
   identifier:
@@ -589,6 +636,7 @@
     human: IEC TS 60364-8-3:2020
     urn: 'urn:iec:std:iec:60364-8-3:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0049
   input: IEC TS 60479-1:1984
   identifier:
@@ -601,6 +649,7 @@
     human: IEC TS 60479-1:1984
     urn: 'urn:iec:std:iec:60479-1:1984:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0050
   input: IEC TS 60479-1:1994
   identifier:
@@ -613,6 +662,7 @@
     human: IEC TS 60479-1:1994
     urn: 'urn:iec:std:iec:60479-1:1994:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0051
   input: IEC TS 60479-2:2007
   identifier:
@@ -625,6 +675,7 @@
     human: IEC TS 60479-2:2007
     urn: 'urn:iec:std:iec:60479-2:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0052
   input: IEC TS 60514:1975
   identifier:
@@ -636,6 +687,7 @@
     human: IEC TS 60514:1975
     urn: 'urn:iec:std:iec:60514:1975:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0053
   input: IEC TS 60519-5:2008
   identifier:
@@ -648,6 +700,7 @@
     human: IEC TS 60519-5:2008
     urn: 'urn:iec:std:iec:60519-5:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0054
   input: IEC TS 60536-2:1992
   identifier:
@@ -660,6 +713,7 @@
     human: IEC TS 60536-2:1992
     urn: 'urn:iec:std:iec:60536-2:1992:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0055
   input: IEC TS 60610:1978
   identifier:
@@ -671,6 +725,7 @@
     human: IEC TS 60610:1978
     urn: 'urn:iec:std:iec:60610:1978:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0056
   input: IEC TS 60680:2008
   identifier:
@@ -682,6 +737,7 @@
     human: IEC TS 60680:2008
     urn: 'urn:iec:std:iec:60680:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0057
   input: IEC TS 60695-1-14:2017
   identifier:
@@ -695,6 +751,7 @@
     human: IEC TS 60695-1-14:2017
     urn: 'urn:iec:std:iec:60695-1-14:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0058
   input: IEC TS 60695-1-20:2008
   identifier:
@@ -708,6 +765,7 @@
     human: IEC TS 60695-1-20:2008
     urn: 'urn:iec:std:iec:60695-1-20:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0059
   input: IEC TS 60695-1-40:2002
   identifier:
@@ -721,6 +779,7 @@
     human: IEC TS 60695-1-40:2002
     urn: 'urn:iec:std:iec:60695-1-40:2002:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0060
   input: IEC TS 60695-11-11:2008
   identifier:
@@ -734,6 +793,7 @@
     human: IEC TS 60695-11-11:2008
     urn: 'urn:iec:std:iec:60695-11-11:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0061
   input: IEC TS 60695-11-11:2016
   identifier:
@@ -747,6 +807,7 @@
     human: IEC TS 60695-11-11:2016
     urn: 'urn:iec:std:iec:60695-11-11:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0062
   input: IEC TS 60695-11-21:2005
   identifier:
@@ -760,6 +821,7 @@
     human: IEC TS 60695-11-21:2005
     urn: 'urn:iec:std:iec:60695-11-21:2005:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0063
   input: IEC TS 60695-11-3:2000
   identifier:
@@ -773,6 +835,7 @@
     human: IEC TS 60695-11-3:2000
     urn: 'urn:iec:std:iec:60695-11-3:2000:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0064
   input: IEC TS 60695-11-3:2004
   identifier:
@@ -786,33 +849,8 @@
     human: IEC TS 60695-11-3:2004
     urn: 'urn:iec:std:iec:60695-11-3:2004:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0065
-  input: IEC TS 60695-11-4:2000
-  identifier:
-    type: technical_specification
-    components:
-      number: '60695'
-      part: '11'
-      subpart: '4'
-      year: '2000'
-  representations:
-    human: IEC TS 60695-11-4:2000
-    urn: 'urn:iec:std:iec:60695-11-4:2000:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0066
-  input: IEC TS 60695-11-4:2004
-  identifier:
-    type: technical_specification
-    components:
-      number: '60695'
-      part: '11'
-      subpart: '4'
-      year: '2004'
-  representations:
-    human: IEC TS 60695-11-4:2004
-    urn: 'urn:iec:std:iec:60695-11-4:2004:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0067
   input: IEC TS 60695-11-40:2002
   identifier:
     type: technical_specification
@@ -825,7 +863,8 @@
     human: IEC TS 60695-11-40:2002
     urn: 'urn:iec:std:iec:60695-11-40:2002:ts::'
   roundtrip: true
-- id: iec.technical_specification.0068
+  style: v3
+- id: iec.technical_specification.0066
   input: IEC TS 60695-11-40:2021
   identifier:
     type: technical_specification
@@ -838,6 +877,35 @@
     human: IEC TS 60695-11-40:2021
     urn: 'urn:iec:std:iec:60695-11-40:2021:ts::'
   roundtrip: true
+  style: v3
+- id: iec.technical_specification.0067
+  input: IEC TS 60695-11-4:2000
+  identifier:
+    type: technical_specification
+    components:
+      number: '60695'
+      part: '11'
+      subpart: '4'
+      year: '2000'
+  representations:
+    human: IEC TS 60695-11-4:2000
+    urn: 'urn:iec:std:iec:60695-11-4:2000:ts::'
+  roundtrip: true
+  style: v3
+- id: iec.technical_specification.0068
+  input: IEC TS 60695-11-4:2004
+  identifier:
+    type: technical_specification
+    components:
+      number: '60695'
+      part: '11'
+      subpart: '4'
+      year: '2004'
+  representations:
+    human: IEC TS 60695-11-4:2004
+    urn: 'urn:iec:std:iec:60695-11-4:2004:ts::'
+  roundtrip: true
+  style: v3
 - id: iec.technical_specification.0069
   input: IEC TS 60695-2-20:2004
   identifier:
@@ -851,6 +919,7 @@
     human: IEC TS 60695-2-20:2004
     urn: 'urn:iec:std:iec:60695-2-20:2004:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0070
   input: IEC TS 60695-2-20:2021
   identifier:
@@ -864,6 +933,7 @@
     human: IEC TS 60695-2-20:2021
     urn: 'urn:iec:std:iec:60695-2-20:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0071
   input: IEC TS 60695-5-2:1994
   identifier:
@@ -877,6 +947,7 @@
     human: IEC TS 60695-5-2:1994
     urn: 'urn:iec:std:iec:60695-5-2:1994:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0072
   input: IEC TS 60695-5-2:2002
   identifier:
@@ -890,6 +961,7 @@
     human: IEC TS 60695-5-2:2002
     urn: 'urn:iec:std:iec:60695-5-2:2002:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0073
   input: IEC TS 60695-5-3:2003
   identifier:
@@ -903,6 +975,7 @@
     human: IEC TS 60695-5-3:2003
     urn: 'urn:iec:std:iec:60695-5-3:2003:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0074
   input: IEC TS 60695-6-2:2001
   identifier:
@@ -916,6 +989,7 @@
     human: IEC TS 60695-6-2:2001
     urn: 'urn:iec:std:iec:60695-6-2:2001:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0075
   input: IEC TS 60695-6-2:2005
   identifier:
@@ -929,6 +1003,7 @@
     human: IEC TS 60695-6-2:2005
     urn: 'urn:iec:std:iec:60695-6-2:2005:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0076
   input: IEC TS 60695-6-30:1996
   identifier:
@@ -942,6 +1017,7 @@
     human: IEC TS 60695-6-30:1996
     urn: 'urn:iec:std:iec:60695-6-30:1996:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0077
   input: IEC TS 60695-6-30:2013
   identifier:
@@ -955,6 +1031,7 @@
     human: IEC TS 60695-6-30:2013
     urn: 'urn:iec:std:iec:60695-6-30:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0078
   input: IEC TS 60695-6-31:1999
   identifier:
@@ -968,6 +1045,7 @@
     human: IEC TS 60695-6-31:1999
     urn: 'urn:iec:std:iec:60695-6-31:1999:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0079
   input: IEC TS 60695-6-31:2013
   identifier:
@@ -981,6 +1059,7 @@
     human: IEC TS 60695-6-31:2013
     urn: 'urn:iec:std:iec:60695-6-31:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0080
   input: IEC TS 60695-7-3:1998
   identifier:
@@ -994,6 +1073,7 @@
     human: IEC TS 60695-7-3:1998
     urn: 'urn:iec:std:iec:60695-7-3:1998:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0081
   input: IEC TS 60695-7-3:2004
   identifier:
@@ -1007,6 +1087,7 @@
     human: IEC TS 60695-7-3:2004
     urn: 'urn:iec:std:iec:60695-7-3:2004:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0082
   input: IEC TS 60695-7-4:1995
   identifier:
@@ -1020,6 +1101,7 @@
     human: IEC TS 60695-7-4:1995
     urn: 'urn:iec:std:iec:60695-7-4:1995:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0083
   input: IEC TS 60695-7-50:2002
   identifier:
@@ -1033,6 +1115,7 @@
     human: IEC TS 60695-7-50:2002
     urn: 'urn:iec:std:iec:60695-7-50:2002:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0084
   input: IEC TS 60695-7-51:2002
   identifier:
@@ -1046,6 +1129,7 @@
     human: IEC TS 60695-7-51:2002
     urn: 'urn:iec:std:iec:60695-7-51:2002:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0085
   input: IEC TS 60695-8-2:2000
   identifier:
@@ -1059,6 +1143,7 @@
     human: IEC TS 60695-8-2:2000
     urn: 'urn:iec:std:iec:60695-8-2:2000:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0086
   input: IEC TS 60695-8-3:2008
   identifier:
@@ -1072,6 +1157,7 @@
     human: IEC TS 60695-8-3:2008
     urn: 'urn:iec:std:iec:60695-8-3:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0087
   input: IEC TS 60695-9-2:2001
   identifier:
@@ -1085,6 +1171,7 @@
     human: IEC TS 60695-9-2:2001
     urn: 'urn:iec:std:iec:60695-9-2:2001:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0088
   input: IEC TS 60695-9-2:2005
   identifier:
@@ -1098,6 +1185,7 @@
     human: IEC TS 60695-9-2:2005
     urn: 'urn:iec:std:iec:60695-9-2:2005:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0089
   input: IEC TS 60727-1:1982
   identifier:
@@ -1110,6 +1198,7 @@
     human: IEC TS 60727-1:1982
     urn: 'urn:iec:std:iec:60727-1:1982:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0090
   input: IEC TS 60727-2:1993
   identifier:
@@ -1122,6 +1211,7 @@
     human: IEC TS 60727-2:1993
     urn: 'urn:iec:std:iec:60727-2:1993:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0091
   input: IEC TS 60747-19-2:2021
   identifier:
@@ -1135,6 +1225,7 @@
     human: IEC TS 60747-19-2:2021
     urn: 'urn:iec:std:iec:60747-19-2:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0092
   input: IEC TS 60815-1:2008
   identifier:
@@ -1147,6 +1238,7 @@
     human: IEC TS 60815-1:2008
     urn: 'urn:iec:std:iec:60815-1:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0093
   input: IEC TS 60815-2:2008
   identifier:
@@ -1159,6 +1251,7 @@
     human: IEC TS 60815-2:2008
     urn: 'urn:iec:std:iec:60815-2:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0094
   input: IEC TS 60815-3:2008
   identifier:
@@ -1171,6 +1264,7 @@
     human: IEC TS 60815-3:2008
     urn: 'urn:iec:std:iec:60815-3:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0095
   input: IEC TS 60815-4:2016
   identifier:
@@ -1183,6 +1277,7 @@
     human: IEC TS 60815-4:2016
     urn: 'urn:iec:std:iec:60815-4:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0096
   input: IEC TS 60825-6:1999
   identifier:
@@ -1195,6 +1290,7 @@
     human: IEC TS 60825-6:1999
     urn: 'urn:iec:std:iec:60825-6:1999:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0097
   input: IEC TS 60825-7:2000
   identifier:
@@ -1207,6 +1303,7 @@
     human: IEC TS 60825-7:2000
     urn: 'urn:iec:std:iec:60825-7:2000:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0098
   input: IEC TS 60839-7-8:2019
   identifier:
@@ -1220,6 +1317,7 @@
     human: IEC TS 60839-7-8:2019
     urn: 'urn:iec:std:iec:60839-7-8:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0099
   input: IEC TS 60859:1999
   identifier:
@@ -1231,6 +1329,7 @@
     human: IEC TS 60859:1999
     urn: 'urn:iec:std:iec:60859:1999:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0100
   input: IEC TS 60868-0:1991
   identifier:
@@ -1243,6 +1342,7 @@
     human: IEC TS 60868-0:1991
     urn: 'urn:iec:std:iec:60868-0:1991:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0101
   input: IEC TS 60870-5-601:2006
   identifier:
@@ -1256,6 +1356,7 @@
     human: IEC TS 60870-5-601:2006
     urn: 'urn:iec:std:iec:60870-5-601:2006:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0102
   input: IEC TS 60870-5-601:2015
   identifier:
@@ -1269,6 +1370,7 @@
     human: IEC TS 60870-5-601:2015
     urn: 'urn:iec:std:iec:60870-5-601:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0103
   input: IEC TS 60870-5-604:2007
   identifier:
@@ -1282,6 +1384,7 @@
     human: IEC TS 60870-5-604:2007
     urn: 'urn:iec:std:iec:60870-5-604:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0104
   input: IEC TS 60870-5-7:2013
   identifier:
@@ -1295,6 +1398,7 @@
     human: IEC TS 60870-5-7:2013
     urn: 'urn:iec:std:iec:60870-5-7:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0105
   input: IEC TS 60870-6-504:1998
   identifier:
@@ -1308,6 +1412,7 @@
     human: IEC TS 60870-6-504:1998
     urn: 'urn:iec:std:iec:60870-6-504:1998:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0106
   input: IEC TS 60870-6-602:2001
   identifier:
@@ -1321,6 +1426,7 @@
     human: IEC TS 60870-6-602:2001
     urn: 'urn:iec:std:iec:60870-6-602:2001:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0107
   input: IEC TS 60871-2:1999
   identifier:
@@ -1333,6 +1439,7 @@
     human: IEC TS 60871-2:1999
     urn: 'urn:iec:std:iec:60871-2:1999:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0108
   input: IEC TS 60871-3:1996
   identifier:
@@ -1345,6 +1452,7 @@
     human: IEC TS 60871-3:1996
     urn: 'urn:iec:std:iec:60871-3:1996:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0109
   input: IEC TS 60871-3:2015
   identifier:
@@ -1357,6 +1465,7 @@
     human: IEC TS 60871-3:2015
     urn: 'urn:iec:std:iec:60871-3:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0110
   input: IEC TS 60899:1987
   identifier:
@@ -1368,6 +1477,7 @@
     human: IEC TS 60899:1987
     urn: 'urn:iec:std:iec:60899:1987:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0111
   input: IEC TS 60904-1-2:2019
   identifier:
@@ -1381,6 +1491,7 @@
     human: IEC TS 60904-1-2:2019
     urn: 'urn:iec:std:iec:60904-1-2:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0112
   input: IEC TS 60904-13:2018
   identifier:
@@ -1393,6 +1504,7 @@
     human: IEC TS 60904-13:2018
     urn: 'urn:iec:std:iec:60904-13:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0113
   input: IEC TS 60909-1:1991
   identifier:
@@ -1405,6 +1517,7 @@
     human: IEC TS 60909-1:1991
     urn: 'urn:iec:std:iec:60909-1:1991:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0114
   input: IEC TS 60919-3:1999
   identifier:
@@ -1417,6 +1530,7 @@
     human: IEC TS 60919-3:1999
     urn: 'urn:iec:std:iec:60919-3:1999:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0115
   input: IEC TS 60932:1988
   identifier:
@@ -1428,6 +1542,7 @@
     human: IEC TS 60932:1988
     urn: 'urn:iec:std:iec:60932:1988:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0116
   input: IEC TS 60933-2:1991
   identifier:
@@ -1440,6 +1555,7 @@
     human: IEC TS 60933-2:1991
     urn: 'urn:iec:std:iec:60933-2:1991:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0117
   input: IEC TS 60941:1988
   identifier:
@@ -1451,6 +1567,7 @@
     human: IEC TS 60941:1988
     urn: 'urn:iec:std:iec:60941:1988:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0118
   input: IEC TS 60947-5-4:1996
   identifier:
@@ -1464,6 +1581,7 @@
     human: IEC TS 60947-5-4:1996
     urn: 'urn:iec:std:iec:60947-5-4:1996:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0119
   input: IEC TS 60947-7-5:2021
   identifier:
@@ -1477,6 +1595,7 @@
     human: IEC TS 60947-7-5:2021
     urn: 'urn:iec:std:iec:60947-7-5:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0120
   input: IEC TS 61000-1-2:2001
   identifier:
@@ -1490,6 +1609,7 @@
     human: IEC TS 61000-1-2:2001
     urn: 'urn:iec:std:iec:61000-1-2:2001:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0121
   input: IEC TS 61000-1-2:2008
   identifier:
@@ -1503,6 +1623,7 @@
     human: IEC TS 61000-1-2:2008
     urn: 'urn:iec:std:iec:61000-1-2:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0122
   input: IEC TS 61000-2-5:1995
   identifier:
@@ -1516,6 +1637,7 @@
     human: IEC TS 61000-2-5:1995
     urn: 'urn:iec:std:iec:61000-2-5:1995:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0123
   input: IEC TS 61000-3-4:1998
   identifier:
@@ -1529,6 +1651,7 @@
     human: IEC TS 61000-3-4:1998
     urn: 'urn:iec:std:iec:61000-3-4:1998:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0124
   input: IEC TS 61000-3-5:1994
   identifier:
@@ -1542,6 +1665,7 @@
     human: IEC TS 61000-3-5:1994
     urn: 'urn:iec:std:iec:61000-3-5:1994:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0125
   input: IEC TS 61000-3-5:2009
   identifier:
@@ -1555,6 +1679,7 @@
     human: IEC TS 61000-3-5:2009
     urn: 'urn:iec:std:iec:61000-3-5:2009:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0126
   input: IEC TS 61000-5-10:2017
   identifier:
@@ -1568,6 +1693,7 @@
     human: IEC TS 61000-5-10:2017
     urn: 'urn:iec:std:iec:61000-5-10:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0127
   input: IEC TS 61000-5-4:1996
   identifier:
@@ -1581,6 +1707,7 @@
     human: IEC TS 61000-5-4:1996
     urn: 'urn:iec:std:iec:61000-5-4:1996:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0128
   input: IEC TS 61000-5-8:2009
   identifier:
@@ -1594,6 +1721,7 @@
     human: IEC TS 61000-5-8:2009
     urn: 'urn:iec:std:iec:61000-5-8:2009:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0129
   input: IEC TS 61000-5-9:2009
   identifier:
@@ -1607,6 +1735,7 @@
     human: IEC TS 61000-5-9:2009
     urn: 'urn:iec:std:iec:61000-5-9:2009:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0130
   input: IEC TS 61000-6-5:2001
   identifier:
@@ -1620,6 +1749,7 @@
     human: IEC TS 61000-6-5:2001
     urn: 'urn:iec:std:iec:61000-6-5:2001:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0131
   input: IEC TS 61022:1989
   identifier:
@@ -1631,6 +1761,7 @@
     human: IEC TS 61022:1989
     urn: 'urn:iec:std:iec:61022:1989:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0132
   input: IEC TS 61034-2:1991
   identifier:
@@ -1643,6 +1774,7 @@
     human: IEC TS 61034-2:1991
     urn: 'urn:iec:std:iec:61034-2:1991:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0133
   input: IEC TS 61044:2021
   identifier:
@@ -1654,6 +1786,7 @@
     human: IEC TS 61044:2021
     urn: 'urn:iec:std:iec:61044:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0134
   input: IEC TS 61071-2:1994
   identifier:
@@ -1666,6 +1799,7 @@
     human: IEC TS 61071-2:1994
     urn: 'urn:iec:std:iec:61071-2:1994:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0135
   input: IEC TS 61072:1991
   identifier:
@@ -1677,6 +1811,7 @@
     human: IEC TS 61072:1991
     urn: 'urn:iec:std:iec:61072:1991:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0136
   input: IEC TS 61081:1991
   identifier:
@@ -1688,6 +1823,7 @@
     human: IEC TS 61081:1991
     urn: 'urn:iec:std:iec:61081:1991:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0137
   input: IEC TS 61085:1992
   identifier:
@@ -1699,6 +1835,7 @@
     human: IEC TS 61085:1992
     urn: 'urn:iec:std:iec:61085:1992:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0138
   input: IEC TS 61087:1991
   identifier:
@@ -1710,6 +1847,7 @@
     human: IEC TS 61087:1991
     urn: 'urn:iec:std:iec:61087:1991:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0139
   input: IEC TS 61094-7:2006
   identifier:
@@ -1722,6 +1860,7 @@
     human: IEC TS 61094-7:2006
     urn: 'urn:iec:std:iec:61094-7:2006:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0140
   input: IEC TS 61149:1995
   identifier:
@@ -1733,6 +1872,7 @@
     human: IEC TS 61149:1995
     urn: 'urn:iec:std:iec:61149:1995:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0141
   input: IEC TS 61158-3:1999
   identifier:
@@ -1745,6 +1885,7 @@
     human: IEC TS 61158-3:1999
     urn: 'urn:iec:std:iec:61158-3:1999:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0142
   input: IEC TS 61158-4:1999
   identifier:
@@ -1757,6 +1898,7 @@
     human: IEC TS 61158-4:1999
     urn: 'urn:iec:std:iec:61158-4:1999:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0143
   input: IEC TS 61158-5:1999
   identifier:
@@ -1769,6 +1911,7 @@
     human: IEC TS 61158-5:1999
     urn: 'urn:iec:std:iec:61158-5:1999:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0144
   input: IEC TS 61158-6:1999
   identifier:
@@ -1781,6 +1924,7 @@
     human: IEC TS 61158-6:1999
     urn: 'urn:iec:std:iec:61158-6:1999:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0145
   input: IEC TS 61169-1-51:2020
   identifier:
@@ -1794,6 +1938,7 @@
     human: IEC TS 61169-1-51:2020
     urn: 'urn:iec:std:iec:61169-1-51:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0146
   input: IEC TS 61170:1993
   identifier:
@@ -1805,6 +1950,7 @@
     human: IEC TS 61170:1993
     urn: 'urn:iec:std:iec:61170:1993:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0147
   input: IEC TS 61189-3-301:2016
   identifier:
@@ -1818,6 +1964,7 @@
     human: IEC TS 61189-3-301:2016
     urn: 'urn:iec:std:iec:61189-3-301:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0148
   input: IEC TS 61200-101:2018
   identifier:
@@ -1830,6 +1977,7 @@
     human: IEC TS 61200-101:2018
     urn: 'urn:iec:std:iec:61200-101:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0149
   input: IEC TS 61200-102:2020
   identifier:
@@ -1842,6 +1990,7 @@
     human: IEC TS 61200-102:2020
     urn: 'urn:iec:std:iec:61200-102:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0150
   input: IEC TS 61200-53:1994
   identifier:
@@ -1854,6 +2003,7 @@
     human: IEC TS 61200-53:1994
     urn: 'urn:iec:std:iec:61200-53:1994:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0151
   input: IEC TS 61201:2007
   identifier:
@@ -1865,6 +2015,7 @@
     human: IEC TS 61201:2007
     urn: 'urn:iec:std:iec:61201:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0152
   input: IEC TS 61206:1993
   identifier:
@@ -1876,6 +2027,7 @@
     human: IEC TS 61206:1993
     urn: 'urn:iec:std:iec:61206:1993:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0153
   input: IEC TS 61208:1992
   identifier:
@@ -1887,6 +2039,7 @@
     human: IEC TS 61208:1992
     urn: 'urn:iec:std:iec:61208:1992:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0154
   input: IEC TS 61211:1994
   identifier:
@@ -1898,6 +2051,7 @@
     human: IEC TS 61211:1994
     urn: 'urn:iec:std:iec:61211:1994:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0155
   input: IEC TS 61220:1993
   identifier:
@@ -1909,6 +2063,7 @@
     human: IEC TS 61220:1993
     urn: 'urn:iec:std:iec:61220:1993:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0156
   input: IEC TS 61221:1993
   identifier:
@@ -1920,6 +2075,7 @@
     human: IEC TS 61221:1993
     urn: 'urn:iec:std:iec:61221:1993:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0157
   input: IEC TS 61223-1:1993
   identifier:
@@ -1932,6 +2088,7 @@
     human: IEC TS 61223-1:1993
     urn: 'urn:iec:std:iec:61223-1:1993:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0158
   input: IEC TS 61223-2-1:1993
   identifier:
@@ -1945,6 +2102,7 @@
     human: IEC TS 61223-2-1:1993
     urn: 'urn:iec:std:iec:61223-2-1:1993:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0159
   input: IEC TS 61223-2-2:1993
   identifier:
@@ -1958,6 +2116,7 @@
     human: IEC TS 61223-2-2:1993
     urn: 'urn:iec:std:iec:61223-2-2:1993:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0160
   input: IEC TS 61223-2-3:1993
   identifier:
@@ -1971,6 +2130,7 @@
     human: IEC TS 61223-2-3:1993
     urn: 'urn:iec:std:iec:61223-2-3:1993:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0161
   input: IEC TS 61231:1993
   identifier:
@@ -1982,6 +2142,7 @@
     human: IEC TS 61231:1993
     urn: 'urn:iec:std:iec:61231:1993:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0162
   input: IEC TS 61231:1999
   identifier:
@@ -1993,6 +2154,7 @@
     human: IEC TS 61231:1999
     urn: 'urn:iec:std:iec:61231:1999:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0163
   input: IEC TS 61233:1994
   identifier:
@@ -2004,6 +2166,7 @@
     human: IEC TS 61233:1994
     urn: 'urn:iec:std:iec:61233:1994:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0164
   input: IEC TS 61238-2:1997
   identifier:
@@ -2016,6 +2179,7 @@
     human: IEC TS 61238-2:1997
     urn: 'urn:iec:std:iec:61238-2:1997:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0165
   input: IEC TS 61241-2-2:1993
   identifier:
@@ -2029,6 +2193,7 @@
     human: IEC TS 61241-2-2:1993
     urn: 'urn:iec:std:iec:61241-2-2:1993:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0166
   input: IEC TS 61244-1:1993
   identifier:
@@ -2041,6 +2206,7 @@
     human: IEC TS 61244-1:1993
     urn: 'urn:iec:std:iec:61244-1:1993:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0167
   input: IEC TS 61244-1:2014
   identifier:
@@ -2053,6 +2219,7 @@
     human: IEC TS 61244-1:2014
     urn: 'urn:iec:std:iec:61244-1:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0168
   input: IEC TS 61244-2:1996
   identifier:
@@ -2065,6 +2232,7 @@
     human: IEC TS 61244-2:1996
     urn: 'urn:iec:std:iec:61244-2:1996:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0169
   input: IEC TS 61244-2:2014
   identifier:
@@ -2077,6 +2245,7 @@
     human: IEC TS 61244-2:2014
     urn: 'urn:iec:std:iec:61244-2:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0170
   input: IEC TS 61244-3:1998
   identifier:
@@ -2089,6 +2258,7 @@
     human: IEC TS 61244-3:1998
     urn: 'urn:iec:std:iec:61244-3:1998:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0171
   input: IEC TS 61244-3:2005
   identifier:
@@ -2101,6 +2271,7 @@
     human: IEC TS 61244-3:2005
     urn: 'urn:iec:std:iec:61244-3:2005:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0172
   input: IEC TS 61245:1993
   identifier:
@@ -2112,6 +2283,7 @@
     human: IEC TS 61245:1993
     urn: 'urn:iec:std:iec:61245:1993:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0173
   input: IEC TS 61245:2015
   identifier:
@@ -2123,6 +2295,7 @@
     human: IEC TS 61245:2015
     urn: 'urn:iec:std:iec:61245:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0174
   input: IEC TS 61251:1993
   identifier:
@@ -2134,6 +2307,7 @@
     human: IEC TS 61251:1993
     urn: 'urn:iec:std:iec:61251:1993:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0175
   input: IEC TS 61251:2008
   identifier:
@@ -2145,6 +2319,7 @@
     human: IEC TS 61251:2008
     urn: 'urn:iec:std:iec:61251:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0176
   input: IEC TS 61278:1997
   identifier:
@@ -2156,6 +2331,7 @@
     human: IEC TS 61278:1997
     urn: 'urn:iec:std:iec:61278:1997:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0177
   input: IEC TS 61287-2:2001
   identifier:
@@ -2168,6 +2344,7 @@
     human: IEC TS 61287-2:2001
     urn: 'urn:iec:std:iec:61287-2:2001:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0178
   input: IEC TS 61312-2:1999
   identifier:
@@ -2180,6 +2357,7 @@
     human: IEC TS 61312-2:1999
     urn: 'urn:iec:std:iec:61312-2:1999:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0179
   input: IEC TS 61312-3:2000
   identifier:
@@ -2192,6 +2370,7 @@
     human: IEC TS 61312-3:2000
     urn: 'urn:iec:std:iec:61312-3:2000:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0180
   input: IEC TS 61312-4:1998
   identifier:
@@ -2204,6 +2383,7 @@
     human: IEC TS 61312-4:1998
     urn: 'urn:iec:std:iec:61312-4:1998:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0181
   input: IEC TS 61318:1994
   identifier:
@@ -2215,6 +2395,7 @@
     human: IEC TS 61318:1994
     urn: 'urn:iec:std:iec:61318:1994:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0182
   input: IEC TS 61321-1:1994
   identifier:
@@ -2227,6 +2408,7 @@
     human: IEC TS 61321-1:1994
     urn: 'urn:iec:std:iec:61321-1:1994:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0183
   input: IEC TS 61328:1995
   identifier:
@@ -2238,6 +2420,7 @@
     human: IEC TS 61328:1995
     urn: 'urn:iec:std:iec:61328:1995:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0184
   input: IEC TS 61334-5-1:1996
   identifier:
@@ -2251,6 +2434,7 @@
     human: IEC TS 61334-5-1:1996
     urn: 'urn:iec:std:iec:61334-5-1:1996:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0185
   input: IEC TS 61334-5-2:1998
   identifier:
@@ -2264,6 +2448,7 @@
     human: IEC TS 61334-5-2:1998
     urn: 'urn:iec:std:iec:61334-5-2:1998:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0186
   input: IEC TS 61334-5-3:2001
   identifier:
@@ -2277,6 +2462,7 @@
     human: IEC TS 61334-5-3:2001
     urn: 'urn:iec:std:iec:61334-5-3:2001:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0187
   input: IEC TS 61334-5-4:2001
   identifier:
@@ -2290,6 +2476,7 @@
     human: IEC TS 61334-5-4:2001
     urn: 'urn:iec:std:iec:61334-5-4:2001:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0188
   input: IEC TS 61334-5-5:2001
   identifier:
@@ -2303,6 +2490,7 @@
     human: IEC TS 61334-5-5:2001
     urn: 'urn:iec:std:iec:61334-5-5:2001:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0189
   input: IEC TS 61340-4-2:2013
   identifier:
@@ -2316,6 +2504,7 @@
     human: IEC TS 61340-4-2:2013
     urn: 'urn:iec:std:iec:61340-4-2:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0190
   input: IEC TS 61340-5-1:1998
   identifier:
@@ -2329,6 +2518,7 @@
     human: IEC TS 61340-5-1:1998
     urn: 'urn:iec:std:iec:61340-5-1:1998:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0191
   input: IEC TS 61340-5-2:1999
   identifier:
@@ -2342,6 +2532,7 @@
     human: IEC TS 61340-5-2:1999
     urn: 'urn:iec:std:iec:61340-5-2:1999:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0192
   input: IEC TS 61340-5-4:2021
   identifier:
@@ -2355,6 +2546,7 @@
     human: IEC TS 61340-5-4:2021
     urn: 'urn:iec:std:iec:61340-5-4:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0193
   input: IEC TS 61354:1995
   identifier:
@@ -2366,6 +2558,7 @@
     human: IEC TS 61354:1995
     urn: 'urn:iec:std:iec:61354:1995:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0194
   input: IEC TS 61356:1995
   identifier:
@@ -2377,6 +2570,7 @@
     human: IEC TS 61356:1995
     urn: 'urn:iec:std:iec:61356:1995:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0195
   input: IEC TS 61359:1995
   identifier:
@@ -2388,6 +2582,7 @@
     human: IEC TS 61359:1995
     urn: 'urn:iec:std:iec:61359:1995:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0196
   input: IEC TS 61370:2002
   identifier:
@@ -2399,6 +2594,7 @@
     human: IEC TS 61370:2002
     urn: 'urn:iec:std:iec:61370:2002:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0197
   input: IEC TS 61375-2-4:2017
   identifier:
@@ -2412,6 +2608,7 @@
     human: IEC TS 61375-2-4:2017
     urn: 'urn:iec:std:iec:61375-2-4:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0198
   input: IEC TS 61382-1:1996
   identifier:
@@ -2424,6 +2621,7 @@
     human: IEC TS 61382-1:1996
     urn: 'urn:iec:std:iec:61382-1:1996:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0199
   input: IEC TS 61390:1996
   identifier:
@@ -2435,6 +2633,7 @@
     human: IEC TS 61390:1996
     urn: 'urn:iec:std:iec:61390:1996:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0200
   input: IEC TS 61394:1997
   identifier:
@@ -2446,6 +2645,7 @@
     human: IEC TS 61394:1997
     urn: 'urn:iec:std:iec:61394:1997:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0201
   input: IEC TS 61400-13:2001
   identifier:
@@ -2458,6 +2658,7 @@
     human: IEC TS 61400-13:2001
     urn: 'urn:iec:std:iec:61400-13:2001:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0202
   input: IEC TS 61400-14:2005
   identifier:
@@ -2470,6 +2671,7 @@
     human: IEC TS 61400-14:2005
     urn: 'urn:iec:std:iec:61400-14:2005:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0203
   input: IEC TS 61400-23:2001
   identifier:
@@ -2482,6 +2684,7 @@
     human: IEC TS 61400-23:2001
     urn: 'urn:iec:std:iec:61400-23:2001:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0204
   input: IEC TS 61400-25-71:2019
   identifier:
@@ -2495,6 +2698,7 @@
     human: IEC TS 61400-25-71:2019
     urn: 'urn:iec:std:iec:61400-25-71:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0205
   input: IEC TS 61400-26-1:2011
   identifier:
@@ -2508,6 +2712,7 @@
     human: IEC TS 61400-26-1:2011
     urn: 'urn:iec:std:iec:61400-26-1:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0206
   input: IEC TS 61400-26-2:2014
   identifier:
@@ -2521,6 +2726,7 @@
     human: IEC TS 61400-26-2:2014
     urn: 'urn:iec:std:iec:61400-26-2:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0207
   input: IEC TS 61400-26-3:2016
   identifier:
@@ -2534,6 +2740,7 @@
     human: IEC TS 61400-26-3:2016
     urn: 'urn:iec:std:iec:61400-26-3:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0208
   input: IEC TS 61400-3-2:2019
   identifier:
@@ -2547,6 +2754,7 @@
     human: IEC TS 61400-3-2:2019
     urn: 'urn:iec:std:iec:61400-3-2:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0209
   input: IEC TS 61423-1:1995
   identifier:
@@ -2559,6 +2767,7 @@
     human: IEC TS 61423-1:1995
     urn: 'urn:iec:std:iec:61423-1:1995:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0210
   input: IEC TS 61423-2:1995
   identifier:
@@ -2571,6 +2780,7 @@
     human: IEC TS 61423-2:1995
     urn: 'urn:iec:std:iec:61423-2:1995:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0211
   input: IEC TS 61430:1997
   identifier:
@@ -2582,6 +2792,7 @@
     human: IEC TS 61430:1997
     urn: 'urn:iec:std:iec:61430:1997:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0212
   input: IEC TS 61439-7:2014
   identifier:
@@ -2594,6 +2805,7 @@
     human: IEC TS 61439-7:2014
     urn: 'urn:iec:std:iec:61439-7:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0213
   input: IEC TS 61462:1998
   identifier:
@@ -2605,6 +2817,7 @@
     human: IEC TS 61462:1998
     urn: 'urn:iec:std:iec:61462:1998:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0214
   input: IEC TS 61463:2016
   identifier:
@@ -2616,6 +2829,7 @@
     human: IEC TS 61463:2016
     urn: 'urn:iec:std:iec:61463:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0215
   input: IEC TS 61464:1998
   identifier:
@@ -2627,6 +2841,7 @@
     human: IEC TS 61464:1998
     urn: 'urn:iec:std:iec:61464:1998:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0216
   input: IEC TS 61467:1997
   identifier:
@@ -2638,6 +2853,7 @@
     human: IEC TS 61467:1997
     urn: 'urn:iec:std:iec:61467:1997:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0217
   input: IEC TS 61496-4-2:2014
   identifier:
@@ -2651,6 +2867,7 @@
     human: IEC TS 61496-4-2:2014
     urn: 'urn:iec:std:iec:61496-4-2:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0218
   input: IEC TS 61496-4-3:2015
   identifier:
@@ -2664,6 +2881,7 @@
     human: IEC TS 61496-4-3:2015
     urn: 'urn:iec:std:iec:61496-4-3:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0219
   input: IEC TS 61508-3-1:2016
   identifier:
@@ -2677,6 +2895,7 @@
     human: IEC TS 61508-3-1:2016
     urn: 'urn:iec:std:iec:61508-3-1:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0220
   input: IEC TS 61586:1997
   identifier:
@@ -2688,6 +2907,7 @@
     human: IEC TS 61586:1997
     urn: 'urn:iec:std:iec:61586:1997:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0221
   input: IEC TS 61586:2017
   identifier:
@@ -2699,6 +2919,7 @@
     human: IEC TS 61586:2017
     urn: 'urn:iec:std:iec:61586:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0222
   input: IEC TS 61587-3:1999
   identifier:
@@ -2711,6 +2932,7 @@
     human: IEC TS 61587-3:1999
     urn: 'urn:iec:std:iec:61587-3:1999:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0223
   input: IEC TS 61624:1997
   identifier:
@@ -2722,6 +2944,7 @@
     human: IEC TS 61624:1997
     urn: 'urn:iec:std:iec:61624:1997:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0224
   input: IEC TS 61633:1995
   identifier:
@@ -2733,6 +2956,7 @@
     human: IEC TS 61633:1995
     urn: 'urn:iec:std:iec:61633:1995:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0225
   input: IEC TS 61634:1995
   identifier:
@@ -2744,6 +2968,7 @@
     human: IEC TS 61634:1995
     urn: 'urn:iec:std:iec:61634:1995:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0226
   input: IEC TS 61639:1996
   identifier:
@@ -2755,6 +2980,7 @@
     human: IEC TS 61639:1996
     urn: 'urn:iec:std:iec:61639:1996:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0227
   input: IEC TS 61640:1998
   identifier:
@@ -2766,6 +2992,7 @@
     human: IEC TS 61640:1998
     urn: 'urn:iec:std:iec:61640:1998:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0228
   input: IEC TS 61662:1995
   identifier:
@@ -2777,6 +3004,7 @@
     human: IEC TS 61662:1995
     urn: 'urn:iec:std:iec:61662:1995:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0229
   input: IEC TS 61724-2:2016
   identifier:
@@ -2789,6 +3017,7 @@
     human: IEC TS 61724-2:2016
     urn: 'urn:iec:std:iec:61724-2:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0230
   input: IEC TS 61724-3:2016
   identifier:
@@ -2801,6 +3030,7 @@
     human: IEC TS 61724-3:2016
     urn: 'urn:iec:std:iec:61724-3:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0231
   input: IEC TS 61774:1997
   identifier:
@@ -2812,6 +3042,7 @@
     human: IEC TS 61774:1997
     urn: 'urn:iec:std:iec:61774:1997:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0232
   input: IEC TS 61800-8:2010
   identifier:
@@ -2824,6 +3055,7 @@
     human: IEC TS 61800-8:2010
     urn: 'urn:iec:std:iec:61800-8:2010:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0233
   input: IEC TS 61804-1:2003
   identifier:
@@ -2836,6 +3068,7 @@
     human: IEC TS 61804-1:2003
     urn: 'urn:iec:std:iec:61804-1:2003:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0234
   input: IEC TS 61813:2000
   identifier:
@@ -2847,6 +3080,7 @@
     human: IEC TS 61813:2000
     urn: 'urn:iec:std:iec:61813:2000:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0235
   input: IEC TS 61816:1995
   identifier:
@@ -2858,6 +3092,7 @@
     human: IEC TS 61816:1995
     urn: 'urn:iec:std:iec:61816:1995:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0236
   input: IEC TS 61827:2004
   identifier:
@@ -2869,6 +3104,7 @@
     human: IEC TS 61827:2004
     urn: 'urn:iec:std:iec:61827:2004:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0237
   input: IEC TS 61836:1997
   identifier:
@@ -2880,6 +3116,7 @@
     human: IEC TS 61836:1997
     urn: 'urn:iec:std:iec:61836:1997:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0238
   input: IEC TS 61836:2007
   identifier:
@@ -2891,6 +3128,7 @@
     human: IEC TS 61836:2007
     urn: 'urn:iec:std:iec:61836:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0239
   input: IEC TS 61841:1996
   identifier:
@@ -2902,6 +3140,7 @@
     human: IEC TS 61841:1996
     urn: 'urn:iec:std:iec:61841:1996:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0240
   input: IEC TS 61850-1-2:2020
   identifier:
@@ -2915,6 +3154,7 @@
     human: IEC TS 61850-1-2:2020
     urn: 'urn:iec:std:iec:61850-1-2:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0241
   input: IEC TS 61850-2:2003
   identifier:
@@ -2927,6 +3167,7 @@
     human: IEC TS 61850-2:2003
     urn: 'urn:iec:std:iec:61850-2:2003:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0242
   input: IEC TS 61850-2:2019
   identifier:
@@ -2939,6 +3180,7 @@
     human: IEC TS 61850-2:2019
     urn: 'urn:iec:std:iec:61850-2:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0243
   input: IEC TS 61850-7-7:2018
   identifier:
@@ -2952,6 +3194,7 @@
     human: IEC TS 61850-7-7:2018
     urn: 'urn:iec:std:iec:61850-7-7:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0244
   input: IEC TS 61850-80-1:2008
   identifier:
@@ -2965,6 +3208,7 @@
     human: IEC TS 61850-80-1:2008
     urn: 'urn:iec:std:iec:61850-80-1:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0245
   input: IEC TS 61850-80-1:2016
   identifier:
@@ -2978,6 +3222,7 @@
     human: IEC TS 61850-80-1:2016
     urn: 'urn:iec:std:iec:61850-80-1:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0246
   input: IEC TS 61850-80-4:2016
   identifier:
@@ -2991,6 +3236,7 @@
     human: IEC TS 61850-80-4:2016
     urn: 'urn:iec:std:iec:61850-80-4:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0247
   input: IEC TS 61873:2001
   identifier:
@@ -3002,6 +3248,7 @@
     human: IEC TS 61873:2001
     urn: 'urn:iec:std:iec:61873:2001:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0248
   input: IEC TS 61895:1999
   identifier:
@@ -3013,6 +3260,7 @@
     human: IEC TS 61895:1999
     urn: 'urn:iec:std:iec:61895:1999:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0249
   input: IEC TS 61902:1998
   identifier:
@@ -3024,6 +3272,7 @@
     human: IEC TS 61902:1998
     urn: 'urn:iec:std:iec:61902:1998:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0250
   input: IEC TS 61911:1998
   identifier:
@@ -3035,6 +3284,7 @@
     human: IEC TS 61911:1998
     urn: 'urn:iec:std:iec:61911:1998:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0251
   input: IEC TS 61915:2003
   identifier:
@@ -3046,6 +3296,7 @@
     human: IEC TS 61915:2003
     urn: 'urn:iec:std:iec:61915:2003:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0252
   input: IEC TS 61934:2006
   identifier:
@@ -3057,6 +3308,7 @@
     human: IEC TS 61934:2006
     urn: 'urn:iec:std:iec:61934:2006:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0253
   input: IEC TS 61934:2011
   identifier:
@@ -3068,6 +3320,7 @@
     human: IEC TS 61934:2011
     urn: 'urn:iec:std:iec:61934:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0254
   input: IEC TS 61936-2:2015
   identifier:
@@ -3080,6 +3333,7 @@
     human: IEC TS 61936-2:2015
     urn: 'urn:iec:std:iec:61936-2:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0255
   input: IEC TS 61941:2000
   identifier:
@@ -3091,6 +3345,7 @@
     human: IEC TS 61941:2000
     urn: 'urn:iec:std:iec:61941:2000:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0256
   input: IEC TS 61944:2000
   identifier:
@@ -3102,6 +3357,7 @@
     human: IEC TS 61944:2000
     urn: 'urn:iec:std:iec:61944:2000:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0257
   input: IEC TS 61945:2000
   identifier:
@@ -3113,6 +3369,7 @@
     human: IEC TS 61945:2000
     urn: 'urn:iec:std:iec:61945:2000:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0258
   input: IEC TS 61949:2007
   identifier:
@@ -3124,6 +3381,7 @@
     human: IEC TS 61949:2007
     urn: 'urn:iec:std:iec:61949:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0259
   input: IEC TS 61956:1999
   identifier:
@@ -3135,6 +3393,7 @@
     human: IEC TS 61956:1999
     urn: 'urn:iec:std:iec:61956:1999:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0260
   input: IEC TS 61967-3:2005
   identifier:
@@ -3147,6 +3406,7 @@
     human: IEC TS 61967-3:2005
     urn: 'urn:iec:std:iec:61967-3:2005:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0261
   input: IEC TS 61967-3:2014
   identifier:
@@ -3159,6 +3419,7 @@
     human: IEC TS 61967-3:2014
     urn: 'urn:iec:std:iec:61967-3:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0262
   input: IEC TS 61968-14:2015
   identifier:
@@ -3171,6 +3432,7 @@
     human: IEC TS 61968-14:2015
     urn: 'urn:iec:std:iec:61968-14:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0263
   input: IEC TS 61968-2:2003
   identifier:
@@ -3183,6 +3445,7 @@
     human: IEC TS 61968-2:2003
     urn: 'urn:iec:std:iec:61968-2:2003:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0264
   input: IEC TS 61968-2:2011
   identifier:
@@ -3195,6 +3458,7 @@
     human: IEC TS 61968-2:2011
     urn: 'urn:iec:std:iec:61968-2:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0265
   input: IEC TS 61970-2:2004
   identifier:
@@ -3207,6 +3471,7 @@
     human: IEC TS 61970-2:2004
     urn: 'urn:iec:std:iec:61970-2:2004:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0266
   input: IEC TS 61970-401:2005
   identifier:
@@ -3219,6 +3484,7 @@
     human: IEC TS 61970-401:2005
     urn: 'urn:iec:std:iec:61970-401:2005:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0267
   input: IEC TS 61970-555:2016
   identifier:
@@ -3231,6 +3497,7 @@
     human: IEC TS 61970-555:2016
     urn: 'urn:iec:std:iec:61970-555:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0268
   input: IEC TS 61970-556:2016
   identifier:
@@ -3243,6 +3510,7 @@
     human: IEC TS 61970-556:2016
     urn: 'urn:iec:std:iec:61970-556:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0269
   input: IEC TS 61970-600-1:2017
   identifier:
@@ -3256,6 +3524,7 @@
     human: IEC TS 61970-600-1:2017
     urn: 'urn:iec:std:iec:61970-600-1:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0270
   input: IEC TS 61970-600-2:2017
   identifier:
@@ -3269,6 +3538,7 @@
     human: IEC TS 61970-600-2:2017
     urn: 'urn:iec:std:iec:61970-600-2:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0271
   input: IEC TS 61980-2:2019
   identifier:
@@ -3281,6 +3551,7 @@
     human: IEC TS 61980-2:2019
     urn: 'urn:iec:std:iec:61980-2:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0272
   input: IEC TS 61980-3:2019
   identifier:
@@ -3293,6 +3564,7 @@
     human: IEC TS 61980-3:2019
     urn: 'urn:iec:std:iec:61980-3:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0273
   input: IEC TS 61994-1:2003
   identifier:
@@ -3305,6 +3577,7 @@
     human: IEC TS 61994-1:2003
     urn: 'urn:iec:std:iec:61994-1:2003:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0274
   input: IEC TS 61994-1:2007
   identifier:
@@ -3317,6 +3590,7 @@
     human: IEC TS 61994-1:2007
     urn: 'urn:iec:std:iec:61994-1:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0275
   input: IEC TS 61994-2:2000
   identifier:
@@ -3329,6 +3603,7 @@
     human: IEC TS 61994-2:2000
     urn: 'urn:iec:std:iec:61994-2:2000:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0276
   input: IEC TS 61994-2:2011
   identifier:
@@ -3341,6 +3616,7 @@
     human: IEC TS 61994-2:2011
     urn: 'urn:iec:std:iec:61994-2:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0277
   input: IEC TS 61994-3:2004
   identifier:
@@ -3353,6 +3629,7 @@
     human: IEC TS 61994-3:2004
     urn: 'urn:iec:std:iec:61994-3:2004:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0278
   input: IEC TS 61994-3:2011
   identifier:
@@ -3365,6 +3642,7 @@
     human: IEC TS 61994-3:2011
     urn: 'urn:iec:std:iec:61994-3:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0279
   input: IEC TS 61994-3:2021
   identifier:
@@ -3377,6 +3655,7 @@
     human: IEC TS 61994-3:2021
     urn: 'urn:iec:std:iec:61994-3:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0280
   input: IEC TS 61994-4-1:2001
   identifier:
@@ -3390,6 +3669,7 @@
     human: IEC TS 61994-4-1:2001
     urn: 'urn:iec:std:iec:61994-4-1:2001:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0281
   input: IEC TS 61994-4-1:2007
   identifier:
@@ -3403,6 +3683,7 @@
     human: IEC TS 61994-4-1:2007
     urn: 'urn:iec:std:iec:61994-4-1:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0282
   input: IEC TS 61994-4-2:2003
   identifier:
@@ -3416,6 +3697,7 @@
     human: IEC TS 61994-4-2:2003
     urn: 'urn:iec:std:iec:61994-4-2:2003:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0283
   input: IEC TS 61994-4-2:2011
   identifier:
@@ -3429,6 +3711,7 @@
     human: IEC TS 61994-4-2:2011
     urn: 'urn:iec:std:iec:61994-4-2:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0284
   input: IEC TS 61994-4-3:2008
   identifier:
@@ -3442,6 +3725,7 @@
     human: IEC TS 61994-4-3:2008
     urn: 'urn:iec:std:iec:61994-4-3:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0285
   input: IEC TS 61994-4-4:2005
   identifier:
@@ -3455,6 +3739,7 @@
     human: IEC TS 61994-4-4:2005
     urn: 'urn:iec:std:iec:61994-4-4:2005:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0286
   input: IEC TS 61994-4-4:2010
   identifier:
@@ -3468,6 +3753,7 @@
     human: IEC TS 61994-4-4:2010
     urn: 'urn:iec:std:iec:61994-4-4:2010:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0287
   input: IEC TS 61994-5:2019
   identifier:
@@ -3480,6 +3766,7 @@
     human: IEC TS 61994-5:2019
     urn: 'urn:iec:std:iec:61994-5:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0288
   input: IEC TS 62005-9-5 ED1
   identifier:
@@ -3494,6 +3781,7 @@
     human: IEC TS 62005-9-5 ED1
     urn: 'urn:iec:std:iec:62005-9-5::ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0289
   input: IEC TS 62033:2000
   identifier:
@@ -3505,6 +3793,7 @@
     human: IEC TS 62033:2000
     urn: 'urn:iec:std:iec:62033:2000:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0290
   input: IEC TS 62045-1:2006
   identifier:
@@ -3517,6 +3806,7 @@
     human: IEC TS 62045-1:2006
     urn: 'urn:iec:std:iec:62045-1:2006:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0291
   input: IEC TS 62046:2004
   identifier:
@@ -3528,6 +3818,7 @@
     human: IEC TS 62046:2004
     urn: 'urn:iec:std:iec:62046:2004:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0292
   input: IEC TS 62046:2008
   identifier:
@@ -3539,6 +3830,7 @@
     human: IEC TS 62046:2008
     urn: 'urn:iec:std:iec:62046:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0293
   input: IEC TS 62056-1-1:2016
   identifier:
@@ -3552,6 +3844,7 @@
     human: IEC TS 62056-1-1:2016
     urn: 'urn:iec:std:iec:62056-1-1:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0294
   input: IEC TS 62056-41:1998
   identifier:
@@ -3564,6 +3857,7 @@
     human: IEC TS 62056-41:1998
     urn: 'urn:iec:std:iec:62056-41:1998:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0295
   input: IEC TS 62056-51:1998
   identifier:
@@ -3576,6 +3870,7 @@
     human: IEC TS 62056-51:1998
     urn: 'urn:iec:std:iec:62056-51:1998:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0296
   input: IEC TS 62056-52:1998
   identifier:
@@ -3588,6 +3883,7 @@
     human: IEC TS 62056-52:1998
     urn: 'urn:iec:std:iec:62056-52:1998:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0297
   input: IEC TS 62056-6-9:2016
   identifier:
@@ -3601,6 +3897,7 @@
     human: IEC TS 62056-6-9:2016
     urn: 'urn:iec:std:iec:62056-6-9:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0298
   input: IEC TS 62056-8-20:2016
   identifier:
@@ -3614,6 +3911,7 @@
     human: IEC TS 62056-8-20:2016
     urn: 'urn:iec:std:iec:62056-8-20:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0299
   input: IEC TS 62056-9-1:2016
   identifier:
@@ -3627,6 +3925,7 @@
     human: IEC TS 62056-9-1:2016
     urn: 'urn:iec:std:iec:62056-9-1:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0300
   input: IEC TS 62073:2003
   identifier:
@@ -3638,6 +3937,7 @@
     human: IEC TS 62073:2003
     urn: 'urn:iec:std:iec:62073:2003:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0301
   input: IEC TS 62073:2016
   identifier:
@@ -3649,6 +3949,7 @@
     human: IEC TS 62073:2016
     urn: 'urn:iec:std:iec:62073:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0302
   input: IEC TS 62081:1999
   identifier:
@@ -3660,6 +3961,7 @@
     human: IEC TS 62081:1999
     urn: 'urn:iec:std:iec:62081:1999:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0303
   input: IEC TS 62091:2003
   identifier:
@@ -3671,6 +3973,7 @@
     human: IEC TS 62091:2003
     urn: 'urn:iec:std:iec:62091:2003:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0304
   input: IEC TS 62098:2000
   identifier:
@@ -3682,6 +3985,7 @@
     human: IEC TS 62098:2000
     urn: 'urn:iec:std:iec:62098:2000:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0305
   input: IEC TS 62100:2004
   identifier:
@@ -3693,6 +3997,7 @@
     human: IEC TS 62100:2004
     urn: 'urn:iec:std:iec:62100:2004:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0306
   input: IEC TS 62101:2005
   identifier:
@@ -3704,6 +4009,7 @@
     human: IEC TS 62101:2005
     urn: 'urn:iec:std:iec:62101:2005:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0307
   input: IEC TS 62129-3:2014
   identifier:
@@ -3716,6 +4022,7 @@
     human: IEC TS 62129-3:2014
     urn: 'urn:iec:std:iec:62129-3:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0308
   input: IEC TS 62132-9:2014
   identifier:
@@ -3728,6 +4035,7 @@
     human: IEC TS 62132-9:2014
     urn: 'urn:iec:std:iec:62132-9:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0309
   input: IEC TS 62143:2002
   identifier:
@@ -3739,6 +4047,7 @@
     human: IEC TS 62143:2002
     urn: 'urn:iec:std:iec:62143:2002:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0310
   input: IEC TS 62196-3-1:2020
   identifier:
@@ -3752,6 +4061,7 @@
     human: IEC TS 62196-3-1:2020
     urn: 'urn:iec:std:iec:62196-3-1:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0311
   input: IEC TS 62215-2:2007
   identifier:
@@ -3764,6 +4074,7 @@
     human: IEC TS 62215-2:2007
     urn: 'urn:iec:std:iec:62215-2:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0312
   input: IEC TS 62224:2007
   identifier:
@@ -3775,6 +4086,7 @@
     human: IEC TS 62224:2007
     urn: 'urn:iec:std:iec:62224:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0313
   input: IEC TS 62224:2013
   identifier:
@@ -3786,6 +4098,7 @@
     human: IEC TS 62224:2013
     urn: 'urn:iec:std:iec:62224:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0314
   input: IEC TS 62228:2007
   identifier:
@@ -3797,6 +4110,7 @@
     human: IEC TS 62228:2007
     urn: 'urn:iec:std:iec:62228:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0315
   input: IEC TS 62229:2006
   identifier:
@@ -3808,6 +4122,7 @@
     human: IEC TS 62229:2006
     urn: 'urn:iec:std:iec:62229:2006:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0316
   input: IEC TS 62229:2017
   identifier:
@@ -3819,6 +4134,7 @@
     human: IEC TS 62229:2017
     urn: 'urn:iec:std:iec:62229:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0317
   input: IEC TS 62239-1:2012
   identifier:
@@ -3831,6 +4147,7 @@
     human: IEC TS 62239-1:2012
     urn: 'urn:iec:std:iec:62239-1:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0318
   input: IEC TS 62239-1:2015
   identifier:
@@ -3843,6 +4160,7 @@
     human: IEC TS 62239-1:2015
     urn: 'urn:iec:std:iec:62239-1:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0319
   input: IEC TS 62239-2:2017
   identifier:
@@ -3855,6 +4173,7 @@
     human: IEC TS 62239-2:2017
     urn: 'urn:iec:std:iec:62239-2:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0320
   input: IEC TS 62239:2003
   identifier:
@@ -3866,6 +4185,7 @@
     human: IEC TS 62239:2003
     urn: 'urn:iec:std:iec:62239:2003:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0321
   input: IEC TS 62239:2008
   identifier:
@@ -3877,43 +4197,8 @@
     human: IEC TS 62239:2008
     urn: 'urn:iec:std:iec:62239:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0322
-  input: IEC TS 62257-1:2003
-  identifier:
-    type: technical_specification
-    components:
-      number: '62257'
-      part: '1'
-      year: '2003'
-  representations:
-    human: IEC TS 62257-1:2003
-    urn: 'urn:iec:std:iec:62257-1:2003:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0323
-  input: IEC TS 62257-1:2013
-  identifier:
-    type: technical_specification
-    components:
-      number: '62257'
-      part: '1'
-      year: '2013'
-  representations:
-    human: IEC TS 62257-1:2013
-    urn: 'urn:iec:std:iec:62257-1:2013:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0324
-  input: IEC TS 62257-1:2015
-  identifier:
-    type: technical_specification
-    components:
-      number: '62257'
-      part: '1'
-      year: '2015'
-  representations:
-    human: IEC TS 62257-1:2015
-    urn: 'urn:iec:std:iec:62257-1:2015:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0325
   input: IEC TS 62257-12-1:2007
   identifier:
     type: technical_specification
@@ -3926,7 +4211,8 @@
     human: IEC TS 62257-12-1:2007
     urn: 'urn:iec:std:iec:62257-12-1:2007:ts::'
   roundtrip: true
-- id: iec.technical_specification.0326
+  style: v3
+- id: iec.technical_specification.0323
   input: IEC TS 62257-12-1:2015
   identifier:
     type: technical_specification
@@ -3939,6 +4225,46 @@
     human: IEC TS 62257-12-1:2015
     urn: 'urn:iec:std:iec:62257-12-1:2015:ts::'
   roundtrip: true
+  style: v3
+- id: iec.technical_specification.0324
+  input: IEC TS 62257-1:2003
+  identifier:
+    type: technical_specification
+    components:
+      number: '62257'
+      part: '1'
+      year: '2003'
+  representations:
+    human: IEC TS 62257-1:2003
+    urn: 'urn:iec:std:iec:62257-1:2003:ts::'
+  roundtrip: true
+  style: v3
+- id: iec.technical_specification.0325
+  input: IEC TS 62257-1:2013
+  identifier:
+    type: technical_specification
+    components:
+      number: '62257'
+      part: '1'
+      year: '2013'
+  representations:
+    human: IEC TS 62257-1:2013
+    urn: 'urn:iec:std:iec:62257-1:2013:ts::'
+  roundtrip: true
+  style: v3
+- id: iec.technical_specification.0326
+  input: IEC TS 62257-1:2015
+  identifier:
+    type: technical_specification
+    components:
+      number: '62257'
+      part: '1'
+      year: '2015'
+  representations:
+    human: IEC TS 62257-1:2015
+    urn: 'urn:iec:std:iec:62257-1:2015:ts::'
+  roundtrip: true
+  style: v3
 - id: iec.technical_specification.0327
   input: IEC TS 62257-2:2004
   identifier:
@@ -3951,6 +4277,7 @@
     human: IEC TS 62257-2:2004
     urn: 'urn:iec:std:iec:62257-2:2004:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0328
   input: IEC TS 62257-2:2015
   identifier:
@@ -3963,6 +4290,7 @@
     human: IEC TS 62257-2:2015
     urn: 'urn:iec:std:iec:62257-2:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0329
   input: IEC TS 62257-3:2004
   identifier:
@@ -3975,6 +4303,7 @@
     human: IEC TS 62257-3:2004
     urn: 'urn:iec:std:iec:62257-3:2004:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0330
   input: IEC TS 62257-3:2015
   identifier:
@@ -3987,6 +4316,7 @@
     human: IEC TS 62257-3:2015
     urn: 'urn:iec:std:iec:62257-3:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0331
   input: IEC TS 62257-4:2005
   identifier:
@@ -3999,6 +4329,7 @@
     human: IEC TS 62257-4:2005
     urn: 'urn:iec:std:iec:62257-4:2005:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0332
   input: IEC TS 62257-4:2015
   identifier:
@@ -4011,6 +4342,7 @@
     human: IEC TS 62257-4:2015
     urn: 'urn:iec:std:iec:62257-4:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0333
   input: IEC TS 62257-5:2005
   identifier:
@@ -4023,6 +4355,7 @@
     human: IEC TS 62257-5:2005
     urn: 'urn:iec:std:iec:62257-5:2005:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0334
   input: IEC TS 62257-5:2015
   identifier:
@@ -4035,6 +4368,7 @@
     human: IEC TS 62257-5:2015
     urn: 'urn:iec:std:iec:62257-5:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0335
   input: IEC TS 62257-6:2005
   identifier:
@@ -4047,6 +4381,7 @@
     human: IEC TS 62257-6:2005
     urn: 'urn:iec:std:iec:62257-6:2005:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0336
   input: IEC TS 62257-6:2015
   identifier:
@@ -4059,6 +4394,7 @@
     human: IEC TS 62257-6:2015
     urn: 'urn:iec:std:iec:62257-6:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0337
   input: IEC TS 62257-7-1:2006
   identifier:
@@ -4072,6 +4408,7 @@
     human: IEC TS 62257-7-1:2006
     urn: 'urn:iec:std:iec:62257-7-1:2006:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0338
   input: IEC TS 62257-7-1:2010
   identifier:
@@ -4085,6 +4422,7 @@
     human: IEC TS 62257-7-1:2010
     urn: 'urn:iec:std:iec:62257-7-1:2010:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0339
   input: IEC TS 62257-7-2:2022
   identifier:
@@ -4098,6 +4436,7 @@
     human: IEC TS 62257-7-2:2022
     urn: 'urn:iec:std:iec:62257-7-2:2022:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0340
   input: IEC TS 62257-7-3:2008
   identifier:
@@ -4111,6 +4450,7 @@
     human: IEC TS 62257-7-3:2008
     urn: 'urn:iec:std:iec:62257-7-3:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0341
   input: IEC TS 62257-7-3:2018
   identifier:
@@ -4124,6 +4464,7 @@
     human: IEC TS 62257-7-3:2018
     urn: 'urn:iec:std:iec:62257-7-3:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0342
   input: IEC TS 62257-7-4:2019
   identifier:
@@ -4137,6 +4478,7 @@
     human: IEC TS 62257-7-4:2019
     urn: 'urn:iec:std:iec:62257-7-4:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0343
   input: IEC TS 62257-7:2008
   identifier:
@@ -4149,6 +4491,7 @@
     human: IEC TS 62257-7:2008
     urn: 'urn:iec:std:iec:62257-7:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0344
   input: IEC TS 62257-8-1:2007
   identifier:
@@ -4162,6 +4505,7 @@
     human: IEC TS 62257-8-1:2007
     urn: 'urn:iec:std:iec:62257-8-1:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0345
   input: IEC TS 62257-8-1:2018
   identifier:
@@ -4175,6 +4519,7 @@
     human: IEC TS 62257-8-1:2018
     urn: 'urn:iec:std:iec:62257-8-1:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0346
   input: IEC TS 62257-9-1:2008
   identifier:
@@ -4188,6 +4533,7 @@
     human: IEC TS 62257-9-1:2008
     urn: 'urn:iec:std:iec:62257-9-1:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0347
   input: IEC TS 62257-9-1:2016
   identifier:
@@ -4201,6 +4547,7 @@
     human: IEC TS 62257-9-1:2016
     urn: 'urn:iec:std:iec:62257-9-1:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0348
   input: IEC TS 62257-9-2:2006
   identifier:
@@ -4214,6 +4561,7 @@
     human: IEC TS 62257-9-2:2006
     urn: 'urn:iec:std:iec:62257-9-2:2006:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0349
   input: IEC TS 62257-9-2:2016
   identifier:
@@ -4227,6 +4575,7 @@
     human: IEC TS 62257-9-2:2016
     urn: 'urn:iec:std:iec:62257-9-2:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0350
   input: IEC TS 62257-9-3:2006
   identifier:
@@ -4240,6 +4589,7 @@
     human: IEC TS 62257-9-3:2006
     urn: 'urn:iec:std:iec:62257-9-3:2006:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0351
   input: IEC TS 62257-9-3:2016
   identifier:
@@ -4253,6 +4603,7 @@
     human: IEC TS 62257-9-3:2016
     urn: 'urn:iec:std:iec:62257-9-3:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0352
   input: IEC TS 62257-9-4:2006
   identifier:
@@ -4266,6 +4617,7 @@
     human: IEC TS 62257-9-4:2006
     urn: 'urn:iec:std:iec:62257-9-4:2006:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0353
   input: IEC TS 62257-9-4:2016
   identifier:
@@ -4279,6 +4631,7 @@
     human: IEC TS 62257-9-4:2016
     urn: 'urn:iec:std:iec:62257-9-4:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0354
   input: IEC TS 62257-9-5:2007
   identifier:
@@ -4292,6 +4645,7 @@
     human: IEC TS 62257-9-5:2007
     urn: 'urn:iec:std:iec:62257-9-5:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0355
   input: IEC TS 62257-9-5:2013
   identifier:
@@ -4305,6 +4659,7 @@
     human: IEC TS 62257-9-5:2013
     urn: 'urn:iec:std:iec:62257-9-5:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0356
   input: IEC TS 62257-9-5:2016
   identifier:
@@ -4318,6 +4673,7 @@
     human: IEC TS 62257-9-5:2016
     urn: 'urn:iec:std:iec:62257-9-5:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0357
   input: IEC TS 62257-9-6:2008
   identifier:
@@ -4331,6 +4687,7 @@
     human: IEC TS 62257-9-6:2008
     urn: 'urn:iec:std:iec:62257-9-6:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0358
   input: IEC TS 62257-9-7:2019
   identifier:
@@ -4344,6 +4701,7 @@
     human: IEC TS 62257-9-7:2019
     urn: 'urn:iec:std:iec:62257-9-7:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0359
   input: IEC TS 62257-9-8:2020
   identifier:
@@ -4357,6 +4715,7 @@
     human: IEC TS 62257-9-8:2020
     urn: 'urn:iec:std:iec:62257-9-8:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0360
   input: IEC TS 62271-210:2013
   identifier:
@@ -4369,6 +4728,7 @@
     human: IEC TS 62271-210:2013
     urn: 'urn:iec:std:iec:62271-210:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0361
   input: IEC TS 62271-304:2008
   identifier:
@@ -4381,6 +4741,7 @@
     human: IEC TS 62271-304:2008
     urn: 'urn:iec:std:iec:62271-304:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0362
   input: IEC TS 62271-304:2019
   identifier:
@@ -4393,6 +4754,7 @@
     human: IEC TS 62271-304:2019
     urn: 'urn:iec:std:iec:62271-304:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0363
   input: IEC TS 62282-1:2005
   identifier:
@@ -4405,6 +4767,7 @@
     human: IEC TS 62282-1:2005
     urn: 'urn:iec:std:iec:62282-1:2005:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0364
   input: IEC TS 62282-1:2010
   identifier:
@@ -4417,6 +4780,7 @@
     human: IEC TS 62282-1:2010
     urn: 'urn:iec:std:iec:62282-1:2010:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0365
   input: IEC TS 62282-1:2013
   identifier:
@@ -4429,6 +4793,7 @@
     human: IEC TS 62282-1:2013
     urn: 'urn:iec:std:iec:62282-1:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0366
   input: IEC TS 62282-7-1:2010
   identifier:
@@ -4442,6 +4807,7 @@
     human: IEC TS 62282-7-1:2010
     urn: 'urn:iec:std:iec:62282-7-1:2010:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0367
   input: IEC TS 62282-7-1:2017
   identifier:
@@ -4455,6 +4821,7 @@
     human: IEC TS 62282-7-1:2017
     urn: 'urn:iec:std:iec:62282-7-1:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0368
   input: IEC TS 62282-7-2:2014
   identifier:
@@ -4468,6 +4835,7 @@
     human: IEC TS 62282-7-2:2014
     urn: 'urn:iec:std:iec:62282-7-2:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0369
   input: IEC TS 62282-9-101:2020
   identifier:
@@ -4481,6 +4849,7 @@
     human: IEC TS 62282-9-101:2020
     urn: 'urn:iec:std:iec:62282-9-101:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0370
   input: IEC TS 62282-9-102:2021
   identifier:
@@ -4494,6 +4863,7 @@
     human: IEC TS 62282-9-102:2021
     urn: 'urn:iec:std:iec:62282-9-102:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0371
   input: IEC TS 62306:2006
   identifier:
@@ -4505,6 +4875,7 @@
     human: IEC TS 62306:2006
     urn: 'urn:iec:std:iec:62306:2006:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0372
   input: IEC TS 62312-1-1:2008
   identifier:
@@ -4518,6 +4889,7 @@
     human: IEC TS 62312-1-1:2008
     urn: 'urn:iec:std:iec:62312-1-1:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0373
   input: IEC TS 62312-1-1:2018
   identifier:
@@ -4531,6 +4903,7 @@
     human: IEC TS 62312-1-1:2018
     urn: 'urn:iec:std:iec:62312-1-1:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0374
   input: IEC TS 62312-2:2007
   identifier:
@@ -4543,6 +4916,7 @@
     human: IEC TS 62312-2:2007
     urn: 'urn:iec:std:iec:62312-2:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0375
   input: IEC TS 62312-2:2018
   identifier:
@@ -4555,6 +4929,7 @@
     human: IEC TS 62312-2:2018
     urn: 'urn:iec:std:iec:62312-2:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0376
   input: IEC TS 62318:2003
   identifier:
@@ -4566,6 +4941,7 @@
     human: IEC TS 62318:2003
     urn: 'urn:iec:std:iec:62318:2003:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0377
   input: IEC TS 62325-502:2005
   identifier:
@@ -4578,6 +4954,7 @@
     human: IEC TS 62325-502:2005
     urn: 'urn:iec:std:iec:62325-502:2005:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0378
   input: IEC TS 62325-503:2014
   identifier:
@@ -4590,6 +4967,7 @@
     human: IEC TS 62325-503:2014
     urn: 'urn:iec:std:iec:62325-503:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0379
   input: IEC TS 62325-504:2015
   identifier:
@@ -4602,6 +4980,7 @@
     human: IEC TS 62325-504:2015
     urn: 'urn:iec:std:iec:62325-504:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0380
   input: IEC TS 62332-1:2005
   identifier:
@@ -4614,6 +4993,7 @@
     human: IEC TS 62332-1:2005
     urn: 'urn:iec:std:iec:62332-1:2005:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0381
   input: IEC TS 62332-1:2011
   identifier:
@@ -4626,6 +5006,7 @@
     human: IEC TS 62332-1:2011
     urn: 'urn:iec:std:iec:62332-1:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0382
   input: IEC TS 62332-2:2014
   identifier:
@@ -4638,6 +5019,7 @@
     human: IEC TS 62332-2:2014
     urn: 'urn:iec:std:iec:62332-2:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0383
   input: IEC TS 62332-3:2016
   identifier:
@@ -4650,6 +5032,7 @@
     human: IEC TS 62332-3:2016
     urn: 'urn:iec:std:iec:62332-3:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0384
   input: IEC TS 62341-6-5:2019
   identifier:
@@ -4663,6 +5046,7 @@
     human: IEC TS 62341-6-5:2019
     urn: 'urn:iec:std:iec:62341-6-5:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0385
   input: IEC TS 62344:2013
   identifier:
@@ -4674,19 +5058,8 @@
     human: IEC TS 62344:2013
     urn: 'urn:iec:std:iec:62344:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0386
-  input: IEC TS 62351-1:2007
-  identifier:
-    type: technical_specification
-    components:
-      number: '62351'
-      part: '1'
-      year: '2007'
-  representations:
-    human: IEC TS 62351-1:2007
-    urn: 'urn:iec:std:iec:62351-1:2007:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0387
   input: IEC TS 62351-100-1:2018
   identifier:
     type: technical_specification
@@ -4699,7 +5072,8 @@
     human: IEC TS 62351-100-1:2018
     urn: 'urn:iec:std:iec:62351-100-1:2018:ts::'
   roundtrip: true
-- id: iec.technical_specification.0388
+  style: v3
+- id: iec.technical_specification.0387
   input: IEC TS 62351-100-3:2020
   identifier:
     type: technical_specification
@@ -4712,6 +5086,20 @@
     human: IEC TS 62351-100-3:2020
     urn: 'urn:iec:std:iec:62351-100-3:2020:ts::'
   roundtrip: true
+  style: v3
+- id: iec.technical_specification.0388
+  input: IEC TS 62351-1:2007
+  identifier:
+    type: technical_specification
+    components:
+      number: '62351'
+      part: '1'
+      year: '2007'
+  representations:
+    human: IEC TS 62351-1:2007
+    urn: 'urn:iec:std:iec:62351-1:2007:ts::'
+  roundtrip: true
+  style: v3
 - id: iec.technical_specification.0389
   input: IEC TS 62351-2:2008
   identifier:
@@ -4724,6 +5112,7 @@
     human: IEC TS 62351-2:2008
     urn: 'urn:iec:std:iec:62351-2:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0390
   input: IEC TS 62351-3:2007
   identifier:
@@ -4736,6 +5125,7 @@
     human: IEC TS 62351-3:2007
     urn: 'urn:iec:std:iec:62351-3:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0391
   input: IEC TS 62351-4:2007
   identifier:
@@ -4748,6 +5138,7 @@
     human: IEC TS 62351-4:2007
     urn: 'urn:iec:std:iec:62351-4:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0392
   input: IEC TS 62351-5:2009
   identifier:
@@ -4760,6 +5151,7 @@
     human: IEC TS 62351-5:2009
     urn: 'urn:iec:std:iec:62351-5:2009:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0393
   input: IEC TS 62351-5:2013
   identifier:
@@ -4772,6 +5164,7 @@
     human: IEC TS 62351-5:2013
     urn: 'urn:iec:std:iec:62351-5:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0394
   input: IEC TS 62351-6:2007
   identifier:
@@ -4784,6 +5177,7 @@
     human: IEC TS 62351-6:2007
     urn: 'urn:iec:std:iec:62351-6:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0395
   input: IEC TS 62351-7:2010
   identifier:
@@ -4796,6 +5190,7 @@
     human: IEC TS 62351-7:2010
     urn: 'urn:iec:std:iec:62351-7:2010:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0396
   input: IEC TS 62351-8:2011
   identifier:
@@ -4808,6 +5203,7 @@
     human: IEC TS 62351-8:2011
     urn: 'urn:iec:std:iec:62351-8:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0397
   input: IEC TS 62361-102:2018
   identifier:
@@ -4820,6 +5216,7 @@
     human: IEC TS 62361-102:2018
     urn: 'urn:iec:std:iec:62361-102:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0398
   input: IEC TS 62367:2004
   identifier:
@@ -4831,6 +5228,7 @@
     human: IEC TS 62367:2004
     urn: 'urn:iec:std:iec:62367:2004:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0399
   input: IEC TS 62371:2008
   identifier:
@@ -4842,6 +5240,7 @@
     human: IEC TS 62371:2008
     urn: 'urn:iec:std:iec:62371:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0400
   input: IEC TS 62393:2005
   identifier:
@@ -4853,6 +5252,7 @@
     human: IEC TS 62393:2005
     urn: 'urn:iec:std:iec:62393:2005:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0401
   input: IEC TS 62395-2:2008
   identifier:
@@ -4865,6 +5265,7 @@
     human: IEC TS 62395-2:2008
     urn: 'urn:iec:std:iec:62395-2:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0402
   input: IEC TS 62396-1:2006
   identifier:
@@ -4877,6 +5278,7 @@
     human: IEC TS 62396-1:2006
     urn: 'urn:iec:std:iec:62396-1:2006:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0403
   input: IEC TS 62396-2:2008
   identifier:
@@ -4889,6 +5291,7 @@
     human: IEC TS 62396-2:2008
     urn: 'urn:iec:std:iec:62396-2:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0404
   input: IEC TS 62396-3:2008
   identifier:
@@ -4901,6 +5304,7 @@
     human: IEC TS 62396-3:2008
     urn: 'urn:iec:std:iec:62396-3:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0405
   input: IEC TS 62396-4:2008
   identifier:
@@ -4913,6 +5317,7 @@
     human: IEC TS 62396-4:2008
     urn: 'urn:iec:std:iec:62396-4:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0406
   input: IEC TS 62396-5:2008
   identifier:
@@ -4925,6 +5330,7 @@
     human: IEC TS 62396-5:2008
     urn: 'urn:iec:std:iec:62396-5:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0407
   input: IEC TS 62398:2004
   identifier:
@@ -4936,6 +5342,7 @@
     human: IEC TS 62398:2004
     urn: 'urn:iec:std:iec:62398:2004:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0408
   input: IEC TS 62404:2007
   identifier:
@@ -4947,6 +5354,7 @@
     human: IEC TS 62404:2007
     urn: 'urn:iec:std:iec:62404:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0409
   input: IEC TS 62433-1:2011
   identifier:
@@ -4959,6 +5367,7 @@
     human: IEC TS 62433-1:2011
     urn: 'urn:iec:std:iec:62433-1:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0410
   input: IEC TS 62436:2008
   identifier:
@@ -4970,6 +5379,7 @@
     human: IEC TS 62436:2008
     urn: 'urn:iec:std:iec:62436:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0411
   input: IEC TS 62441:2006
   identifier:
@@ -4981,6 +5391,7 @@
     human: IEC TS 62441:2006
     urn: 'urn:iec:std:iec:62441:2006:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0412
   input: IEC TS 62441:2011
   identifier:
@@ -4992,6 +5403,7 @@
     human: IEC TS 62441:2011
     urn: 'urn:iec:std:iec:62441:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0413
   input: IEC TS 62443-1-1:2009
   identifier:
@@ -5005,6 +5417,7 @@
     human: IEC TS 62443-1-1:2009
     urn: 'urn:iec:std:iec:62443-1-1:2009:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0414
   input: IEC TS 62443-1-5 ED1
   identifier:
@@ -5019,6 +5432,7 @@
     human: IEC TS 62443-1-5 ED1
     urn: 'urn:iec:std:iec:62443-1-5::ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0415
   input: IEC TS 62443-6-1 ED1
   identifier:
@@ -5033,6 +5447,7 @@
     human: IEC TS 62443-6-1 ED1
     urn: 'urn:iec:std:iec:62443-6-1::ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0416
   input: IEC TS 62443-6-2 ED1
   identifier:
@@ -5047,6 +5462,7 @@
     human: IEC TS 62443-6-2 ED1
     urn: 'urn:iec:std:iec:62443-6-2::ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0417
   input: IEC TS 62446-3:2017
   identifier:
@@ -5059,6 +5475,7 @@
     human: IEC TS 62446-3:2017
     urn: 'urn:iec:std:iec:62446-3:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0418
   input: IEC TS 62454:2007
   identifier:
@@ -5070,6 +5487,7 @@
     human: IEC TS 62454:2007
     urn: 'urn:iec:std:iec:62454:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0419
   input: IEC TS 62462:2007
   identifier:
@@ -5081,6 +5499,7 @@
     human: IEC TS 62462:2007
     urn: 'urn:iec:std:iec:62462:2007:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0420
   input: IEC TS 62462:2017
   identifier:
@@ -5092,6 +5511,7 @@
     human: IEC TS 62462:2017
     urn: 'urn:iec:std:iec:62462:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0421
   input: IEC TS 62478:2016
   identifier:
@@ -5103,6 +5523,7 @@
     human: IEC TS 62478:2016
     urn: 'urn:iec:std:iec:62478:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0422
   input: IEC TS 62492-1:2008
   identifier:
@@ -5115,6 +5536,7 @@
     human: IEC TS 62492-1:2008
     urn: 'urn:iec:std:iec:62492-1:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0423
   input: IEC TS 62492-2:2013
   identifier:
@@ -5127,6 +5549,7 @@
     human: IEC TS 62492-2:2013
     urn: 'urn:iec:std:iec:62492-2:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0424
   input: IEC TS 62500:2008
   identifier:
@@ -5138,6 +5561,7 @@
     human: IEC TS 62500:2008
     urn: 'urn:iec:std:iec:62500:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0425
   input: IEC TS 62504:2011
   identifier:
@@ -5149,6 +5573,7 @@
     human: IEC TS 62504:2011
     urn: 'urn:iec:std:iec:62504:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0426
   input: IEC TS 62538:2008
   identifier:
@@ -5160,6 +5585,7 @@
     human: IEC TS 62538:2008
     urn: 'urn:iec:std:iec:62538:2008:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0427
   input: IEC TS 62548:2013
   identifier:
@@ -5171,6 +5597,7 @@
     human: IEC TS 62548:2013
     urn: 'urn:iec:std:iec:62548:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0428
   input: IEC TS 62556:2014
   identifier:
@@ -5182,6 +5609,7 @@
     human: IEC TS 62556:2014
     urn: 'urn:iec:std:iec:62556:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0429
   input: IEC TS 62558:2011
   identifier:
@@ -5193,6 +5621,7 @@
     human: IEC TS 62558:2011
     urn: 'urn:iec:std:iec:62558:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0430
   input: IEC TS 62561-8:2018
   identifier:
@@ -5205,6 +5634,7 @@
     human: IEC TS 62561-8:2018
     urn: 'urn:iec:std:iec:62561-8:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0431
   input: IEC TS 62564-1:2009
   identifier:
@@ -5217,6 +5647,7 @@
     human: IEC TS 62564-1:2009
     urn: 'urn:iec:std:iec:62564-1:2009:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0432
   input: IEC TS 62564-1:2011
   identifier:
@@ -5229,6 +5660,7 @@
     human: IEC TS 62564-1:2011
     urn: 'urn:iec:std:iec:62564-1:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0433
   input: IEC TS 62564-1:2016
   identifier:
@@ -5241,6 +5673,7 @@
     human: IEC TS 62564-1:2016
     urn: 'urn:iec:std:iec:62564-1:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0434
   input: IEC TS 62565-4-1:2019
   identifier:
@@ -5254,6 +5687,7 @@
     human: IEC TS 62565-4-1:2019
     urn: 'urn:iec:std:iec:62565-4-1:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0435
   input: IEC TS 62565-4-2:2018
   identifier:
@@ -5267,6 +5701,7 @@
     human: IEC TS 62565-4-2:2018
     urn: 'urn:iec:std:iec:62565-4-2:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0436
   input: IEC TS 62565-5-2:2022
   identifier:
@@ -5280,6 +5715,7 @@
     human: IEC TS 62565-5-2:2022
     urn: 'urn:iec:std:iec:62565-5-2:2022:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0437
   input: IEC TS 62578:2009
   identifier:
@@ -5291,6 +5727,7 @@
     human: IEC TS 62578:2009
     urn: 'urn:iec:std:iec:62578:2009:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0438
   input: IEC TS 62578:2015
   identifier:
@@ -5302,6 +5739,7 @@
     human: IEC TS 62578:2015
     urn: 'urn:iec:std:iec:62578:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0439
   input: IEC TS 62579:2010
   identifier:
@@ -5313,6 +5751,7 @@
     human: IEC TS 62579:2010
     urn: 'urn:iec:std:iec:62579:2010:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0440
   input: IEC TS 62580-2:2016
   identifier:
@@ -5325,6 +5764,7 @@
     human: IEC TS 62580-2:2016
     urn: 'urn:iec:std:iec:62580-2:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0441
   input: IEC TS 62592:2009
   identifier:
@@ -5336,6 +5776,7 @@
     human: IEC TS 62592:2009
     urn: 'urn:iec:std:iec:62592:2009:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0442
   input: IEC TS 62592:2012
   identifier:
@@ -5347,6 +5788,7 @@
     human: IEC TS 62592:2012
     urn: 'urn:iec:std:iec:62592:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0443
   input: IEC TS 62597:2011
   identifier:
@@ -5358,43 +5800,8 @@
     human: IEC TS 62597:2011
     urn: 'urn:iec:std:iec:62597:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0444
-  input: IEC TS 62600-1:2020
-  identifier:
-    type: technical_specification
-    components:
-      number: '62600'
-      part: '1'
-      year: '2020'
-  representations:
-    human: IEC TS 62600-1:2020
-    urn: 'urn:iec:std:iec:62600-1:2020:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0445
-  input: IEC TS 62600-10:2015
-  identifier:
-    type: technical_specification
-    components:
-      number: '62600'
-      part: '10'
-      year: '2015'
-  representations:
-    human: IEC TS 62600-10:2015
-    urn: 'urn:iec:std:iec:62600-10:2015:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0446
-  input: IEC TS 62600-10:2021
-  identifier:
-    type: technical_specification
-    components:
-      number: '62600'
-      part: '10'
-      year: '2021'
-  representations:
-    human: IEC TS 62600-10:2021
-    urn: 'urn:iec:std:iec:62600-10:2021:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0447
   input: IEC TS 62600-100:2012
   identifier:
     type: technical_specification
@@ -5406,7 +5813,8 @@
     human: IEC TS 62600-100:2012
     urn: 'urn:iec:std:iec:62600-100:2012:ts::'
   roundtrip: true
-- id: iec.technical_specification.0448
+  style: v3
+- id: iec.technical_specification.0445
   input: IEC TS 62600-101:2015
   identifier:
     type: technical_specification
@@ -5418,7 +5826,8 @@
     human: IEC TS 62600-101:2015
     urn: 'urn:iec:std:iec:62600-101:2015:ts::'
   roundtrip: true
-- id: iec.technical_specification.0449
+  style: v3
+- id: iec.technical_specification.0446
   input: IEC TS 62600-102:2016
   identifier:
     type: technical_specification
@@ -5430,7 +5839,8 @@
     human: IEC TS 62600-102:2016
     urn: 'urn:iec:std:iec:62600-102:2016:ts::'
   roundtrip: true
-- id: iec.technical_specification.0450
+  style: v3
+- id: iec.technical_specification.0447
   input: IEC TS 62600-103:2018
   identifier:
     type: technical_specification
@@ -5442,43 +5852,47 @@
     human: IEC TS 62600-103:2018
     urn: 'urn:iec:std:iec:62600-103:2018:ts::'
   roundtrip: true
+  style: v3
+- id: iec.technical_specification.0448
+  input: IEC TS 62600-10:2015
+  identifier:
+    type: technical_specification
+    components:
+      number: '62600'
+      part: '10'
+      year: '2015'
+  representations:
+    human: IEC TS 62600-10:2015
+    urn: 'urn:iec:std:iec:62600-10:2015:ts::'
+  roundtrip: true
+  style: v3
+- id: iec.technical_specification.0449
+  input: IEC TS 62600-10:2021
+  identifier:
+    type: technical_specification
+    components:
+      number: '62600'
+      part: '10'
+      year: '2021'
+  representations:
+    human: IEC TS 62600-10:2021
+    urn: 'urn:iec:std:iec:62600-10:2021:ts::'
+  roundtrip: true
+  style: v3
+- id: iec.technical_specification.0450
+  input: IEC TS 62600-1:2020
+  identifier:
+    type: technical_specification
+    components:
+      number: '62600'
+      part: '1'
+      year: '2020'
+  representations:
+    human: IEC TS 62600-1:2020
+    urn: 'urn:iec:std:iec:62600-1:2020:ts::'
+  roundtrip: true
+  style: v3
 - id: iec.technical_specification.0451
-  input: IEC TS 62600-2:2016
-  identifier:
-    type: technical_specification
-    components:
-      number: '62600'
-      part: '2'
-      year: '2016'
-  representations:
-    human: IEC TS 62600-2:2016
-    urn: 'urn:iec:std:iec:62600-2:2016:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0452
-  input: IEC TS 62600-2:2019
-  identifier:
-    type: technical_specification
-    components:
-      number: '62600'
-      part: '2'
-      year: '2019'
-  representations:
-    human: IEC TS 62600-2:2019
-    urn: 'urn:iec:std:iec:62600-2:2019:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0453
-  input: IEC TS 62600-20:2019
-  identifier:
-    type: technical_specification
-    components:
-      number: '62600'
-      part: '20'
-      year: '2019'
-  representations:
-    human: IEC TS 62600-20:2019
-    urn: 'urn:iec:std:iec:62600-20:2019:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0454
   input: IEC TS 62600-200:2013
   identifier:
     type: technical_specification
@@ -5490,7 +5904,8 @@
     human: IEC TS 62600-200:2013
     urn: 'urn:iec:std:iec:62600-200:2013:ts::'
   roundtrip: true
-- id: iec.technical_specification.0455
+  style: v3
+- id: iec.technical_specification.0452
   input: IEC TS 62600-201:2015
   identifier:
     type: technical_specification
@@ -5502,7 +5917,8 @@
     human: IEC TS 62600-201:2015
     urn: 'urn:iec:std:iec:62600-201:2015:ts::'
   roundtrip: true
-- id: iec.technical_specification.0456
+  style: v3
+- id: iec.technical_specification.0453
   input: IEC TS 62600-202:2022
   identifier:
     type: technical_specification
@@ -5514,31 +5930,47 @@
     human: IEC TS 62600-202:2022
     urn: 'urn:iec:std:iec:62600-202:2022:ts::'
   roundtrip: true
+  style: v3
+- id: iec.technical_specification.0454
+  input: IEC TS 62600-20:2019
+  identifier:
+    type: technical_specification
+    components:
+      number: '62600'
+      part: '20'
+      year: '2019'
+  representations:
+    human: IEC TS 62600-20:2019
+    urn: 'urn:iec:std:iec:62600-20:2019:ts::'
+  roundtrip: true
+  style: v3
+- id: iec.technical_specification.0455
+  input: IEC TS 62600-2:2016
+  identifier:
+    type: technical_specification
+    components:
+      number: '62600'
+      part: '2'
+      year: '2016'
+  representations:
+    human: IEC TS 62600-2:2016
+    urn: 'urn:iec:std:iec:62600-2:2016:ts::'
+  roundtrip: true
+  style: v3
+- id: iec.technical_specification.0456
+  input: IEC TS 62600-2:2019
+  identifier:
+    type: technical_specification
+    components:
+      number: '62600'
+      part: '2'
+      year: '2019'
+  representations:
+    human: IEC TS 62600-2:2019
+    urn: 'urn:iec:std:iec:62600-2:2019:ts::'
+  roundtrip: true
+  style: v3
 - id: iec.technical_specification.0457
-  input: IEC TS 62600-3:2020
-  identifier:
-    type: technical_specification
-    components:
-      number: '62600'
-      part: '3'
-      year: '2020'
-  representations:
-    human: IEC TS 62600-3:2020
-    urn: 'urn:iec:std:iec:62600-3:2020:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0458
-  input: IEC TS 62600-30:2018
-  identifier:
-    type: technical_specification
-    components:
-      number: '62600'
-      part: '30'
-      year: '2018'
-  representations:
-    human: IEC TS 62600-30:2018
-    urn: 'urn:iec:std:iec:62600-30:2018:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0459
   input: IEC TS 62600-300:2019
   identifier:
     type: technical_specification
@@ -5550,7 +5982,8 @@
     human: IEC TS 62600-300:2019
     urn: 'urn:iec:std:iec:62600-300:2019:ts::'
   roundtrip: true
-- id: iec.technical_specification.0460
+  style: v3
+- id: iec.technical_specification.0458
   input: IEC TS 62600-301:2019
   identifier:
     type: technical_specification
@@ -5562,19 +5995,34 @@
     human: IEC TS 62600-301:2019
     urn: 'urn:iec:std:iec:62600-301:2019:ts::'
   roundtrip: true
-- id: iec.technical_specification.0461
-  input: IEC TS 62600-4:2020
+  style: v3
+- id: iec.technical_specification.0459
+  input: IEC TS 62600-30:2018
   identifier:
     type: technical_specification
     components:
       number: '62600'
-      part: '4'
+      part: '30'
+      year: '2018'
+  representations:
+    human: IEC TS 62600-30:2018
+    urn: 'urn:iec:std:iec:62600-30:2018:ts::'
+  roundtrip: true
+  style: v3
+- id: iec.technical_specification.0460
+  input: IEC TS 62600-3:2020
+  identifier:
+    type: technical_specification
+    components:
+      number: '62600'
+      part: '3'
       year: '2020'
   representations:
-    human: IEC TS 62600-4:2020
-    urn: 'urn:iec:std:iec:62600-4:2020:ts::'
+    human: IEC TS 62600-3:2020
+    urn: 'urn:iec:std:iec:62600-3:2020:ts::'
   roundtrip: true
-- id: iec.technical_specification.0462
+  style: v3
+- id: iec.technical_specification.0461
   input: IEC TS 62600-40:2019
   identifier:
     type: technical_specification
@@ -5586,6 +6034,20 @@
     human: IEC TS 62600-40:2019
     urn: 'urn:iec:std:iec:62600-40:2019:ts::'
   roundtrip: true
+  style: v3
+- id: iec.technical_specification.0462
+  input: IEC TS 62600-4:2020
+  identifier:
+    type: technical_specification
+    components:
+      number: '62600'
+      part: '4'
+      year: '2020'
+  representations:
+    human: IEC TS 62600-4:2020
+    urn: 'urn:iec:std:iec:62600-4:2020:ts::'
+  roundtrip: true
+  style: v3
 - id: iec.technical_specification.0463
   input: IEC TS 62603-1:2014
   identifier:
@@ -5598,6 +6060,7 @@
     human: IEC TS 62603-1:2014
     urn: 'urn:iec:std:iec:62603-1:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0464
   input: IEC TS 62607-2-1:2012
   identifier:
@@ -5611,6 +6074,7 @@
     human: IEC TS 62607-2-1:2012
     urn: 'urn:iec:std:iec:62607-2-1:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0465
   input: IEC TS 62607-2-4:2020
   identifier:
@@ -5624,6 +6088,7 @@
     human: IEC TS 62607-2-4:2020
     urn: 'urn:iec:std:iec:62607-2-4:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0466
   input: IEC TS 62607-3-2:2017
   identifier:
@@ -5637,6 +6102,7 @@
     human: IEC TS 62607-3-2:2017
     urn: 'urn:iec:std:iec:62607-3-2:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0467
   input: IEC TS 62607-3-3:2020
   identifier:
@@ -5650,6 +6116,7 @@
     human: IEC TS 62607-3-3:2020
     urn: 'urn:iec:std:iec:62607-3-3:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0468
   input: IEC TS 62607-4-1:2014
   identifier:
@@ -5663,6 +6130,7 @@
     human: IEC TS 62607-4-1:2014
     urn: 'urn:iec:std:iec:62607-4-1:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0469
   input: IEC TS 62607-4-1:2015
   identifier:
@@ -5676,6 +6144,7 @@
     human: IEC TS 62607-4-1:2015
     urn: 'urn:iec:std:iec:62607-4-1:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0470
   input: IEC TS 62607-4-2:2016
   identifier:
@@ -5689,6 +6158,7 @@
     human: IEC TS 62607-4-2:2016
     urn: 'urn:iec:std:iec:62607-4-2:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0471
   input: IEC TS 62607-4-3:2015
   identifier:
@@ -5702,6 +6172,7 @@
     human: IEC TS 62607-4-3:2015
     urn: 'urn:iec:std:iec:62607-4-3:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0472
   input: IEC TS 62607-4-4:2016
   identifier:
@@ -5715,6 +6186,7 @@
     human: IEC TS 62607-4-4:2016
     urn: 'urn:iec:std:iec:62607-4-4:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0473
   input: IEC TS 62607-4-5:2017
   identifier:
@@ -5728,6 +6200,7 @@
     human: IEC TS 62607-4-5:2017
     urn: 'urn:iec:std:iec:62607-4-5:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0474
   input: IEC TS 62607-4-6:2018
   identifier:
@@ -5741,6 +6214,7 @@
     human: IEC TS 62607-4-6:2018
     urn: 'urn:iec:std:iec:62607-4-6:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0475
   input: IEC TS 62607-4-7:2018
   identifier:
@@ -5754,6 +6228,7 @@
     human: IEC TS 62607-4-7:2018
     urn: 'urn:iec:std:iec:62607-4-7:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0476
   input: IEC TS 62607-4-8:2020
   identifier:
@@ -5767,6 +6242,7 @@
     human: IEC TS 62607-4-8:2020
     urn: 'urn:iec:std:iec:62607-4-8:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0477
   input: IEC TS 62607-5-1:2014
   identifier:
@@ -5780,6 +6256,7 @@
     human: IEC TS 62607-5-1:2014
     urn: 'urn:iec:std:iec:62607-5-1:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0478
   input: IEC TS 62607-5-3:2020
   identifier:
@@ -5793,20 +6270,8 @@
     human: IEC TS 62607-5-3:2020
     urn: 'urn:iec:std:iec:62607-5-3:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0479
-  input: IEC TS 62607-6-1:2020
-  identifier:
-    type: technical_specification
-    components:
-      number: '62607'
-      part: '6'
-      subpart: '1'
-      year: '2020'
-  representations:
-    human: IEC TS 62607-6-1:2020
-    urn: 'urn:iec:std:iec:62607-6-1:2020:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0480
   input: IEC TS 62607-6-10:2021
   identifier:
     type: technical_specification
@@ -5819,7 +6284,8 @@
     human: IEC TS 62607-6-10:2021
     urn: 'urn:iec:std:iec:62607-6-10:2021:ts::'
   roundtrip: true
-- id: iec.technical_specification.0481
+  style: v3
+- id: iec.technical_specification.0480
   input: IEC TS 62607-6-11:2022
   identifier:
     type: technical_specification
@@ -5832,7 +6298,8 @@
     human: IEC TS 62607-6-11:2022
     urn: 'urn:iec:std:iec:62607-6-11:2022:ts::'
   roundtrip: true
-- id: iec.technical_specification.0482
+  style: v3
+- id: iec.technical_specification.0481
   input: IEC TS 62607-6-13:2020
   identifier:
     type: technical_specification
@@ -5845,7 +6312,8 @@
     human: IEC TS 62607-6-13:2020
     urn: 'urn:iec:std:iec:62607-6-13:2020:ts::'
   roundtrip: true
-- id: iec.technical_specification.0483
+  style: v3
+- id: iec.technical_specification.0482
   input: IEC TS 62607-6-14:2020
   identifier:
     type: technical_specification
@@ -5858,7 +6326,8 @@
     human: IEC TS 62607-6-14:2020
     urn: 'urn:iec:std:iec:62607-6-14:2020:ts::'
   roundtrip: true
-- id: iec.technical_specification.0484
+  style: v3
+- id: iec.technical_specification.0483
   input: IEC TS 62607-6-19:2021
   identifier:
     type: technical_specification
@@ -5871,6 +6340,21 @@
     human: IEC TS 62607-6-19:2021
     urn: 'urn:iec:std:iec:62607-6-19:2021:ts::'
   roundtrip: true
+  style: v3
+- id: iec.technical_specification.0484
+  input: IEC TS 62607-6-1:2020
+  identifier:
+    type: technical_specification
+    components:
+      number: '62607'
+      part: '6'
+      subpart: '1'
+      year: '2020'
+  representations:
+    human: IEC TS 62607-6-1:2020
+    urn: 'urn:iec:std:iec:62607-6-1:2020:ts::'
+  roundtrip: true
+  style: v3
 - id: iec.technical_specification.0485
   input: IEC TS 62607-6-3:2020
   identifier:
@@ -5884,6 +6368,7 @@
     human: IEC TS 62607-6-3:2020
     urn: 'urn:iec:std:iec:62607-6-3:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0486
   input: IEC TS 62607-6-4:2016
   identifier:
@@ -5897,6 +6382,7 @@
     human: IEC TS 62607-6-4:2016
     urn: 'urn:iec:std:iec:62607-6-4:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0487
   input: IEC TS 62607-6-6:2021
   identifier:
@@ -5910,6 +6396,7 @@
     human: IEC TS 62607-6-6:2021
     urn: 'urn:iec:std:iec:62607-6-6:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0488
   input: IEC TS 62607-6-9:2022
   identifier:
@@ -5923,6 +6410,7 @@
     human: IEC TS 62607-6-9:2022
     urn: 'urn:iec:std:iec:62607-6-9:2022:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0489
   input: IEC TS 62607-8-1:2020
   identifier:
@@ -5936,6 +6424,7 @@
     human: IEC TS 62607-8-1:2020
     urn: 'urn:iec:std:iec:62607-8-1:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0490
   input: IEC TS 62607-8-2:2021
   identifier:
@@ -5949,6 +6438,7 @@
     human: IEC TS 62607-8-2:2021
     urn: 'urn:iec:std:iec:62607-8-2:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0491
   input: IEC TS 62607-9-1:2021
   identifier:
@@ -5962,6 +6452,7 @@
     human: IEC TS 62607-9-1:2021
     urn: 'urn:iec:std:iec:62607-9-1:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0492
   input: IEC TS 62610-1:2009
   identifier:
@@ -5974,6 +6465,7 @@
     human: IEC TS 62610-1:2009
     urn: 'urn:iec:std:iec:62610-1:2009:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0493
   input: IEC TS 62610-2:2011
   identifier:
@@ -5986,6 +6478,7 @@
     human: IEC TS 62610-2:2011
     urn: 'urn:iec:std:iec:62610-2:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0494
   input: IEC TS 62610-3:2009
   identifier:
@@ -5998,6 +6491,7 @@
     human: IEC TS 62610-3:2009
     urn: 'urn:iec:std:iec:62610-3:2009:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0495
   input: IEC TS 62622:2012
   identifier:
@@ -6009,6 +6503,7 @@
     human: IEC TS 62622:2012
     urn: 'urn:iec:std:iec:62622:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0496
   input: IEC TS 62627-09:2016
   identifier:
@@ -6021,6 +6516,7 @@
     human: IEC TS 62627-09:2016
     urn: 'urn:iec:std:iec:62627-09:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0497
   input: IEC TS 62642-7:2011
   identifier:
@@ -6033,6 +6529,7 @@
     human: IEC TS 62642-7:2011
     urn: 'urn:iec:std:iec:62642-7:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0498
   input: IEC TS 62644:2012
   identifier:
@@ -6044,6 +6541,7 @@
     human: IEC TS 62644:2012
     urn: 'urn:iec:std:iec:62644:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0499
   input: IEC TS 62647-1:2012
   identifier:
@@ -6056,19 +6554,8 @@
     human: IEC TS 62647-1:2012
     urn: 'urn:iec:std:iec:62647-1:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0500
-  input: IEC TS 62647-2:2012
-  identifier:
-    type: technical_specification
-    components:
-      number: '62647'
-      part: '2'
-      year: '2012'
-  representations:
-    human: IEC TS 62647-2:2012
-    urn: 'urn:iec:std:iec:62647-2:2012:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0501
   input: IEC TS 62647-21:2013
   identifier:
     type: technical_specification
@@ -6080,7 +6567,8 @@
     human: IEC TS 62647-21:2013
     urn: 'urn:iec:std:iec:62647-21:2013:ts::'
   roundtrip: true
-- id: iec.technical_specification.0502
+  style: v3
+- id: iec.technical_specification.0501
   input: IEC TS 62647-22:2013
   identifier:
     type: technical_specification
@@ -6092,7 +6580,8 @@
     human: IEC TS 62647-22:2013
     urn: 'urn:iec:std:iec:62647-22:2013:ts::'
   roundtrip: true
-- id: iec.technical_specification.0503
+  style: v3
+- id: iec.technical_specification.0502
   input: IEC TS 62647-23:2013
   identifier:
     type: technical_specification
@@ -6104,6 +6593,20 @@
     human: IEC TS 62647-23:2013
     urn: 'urn:iec:std:iec:62647-23:2013:ts::'
   roundtrip: true
+  style: v3
+- id: iec.technical_specification.0503
+  input: IEC TS 62647-2:2012
+  identifier:
+    type: technical_specification
+    components:
+      number: '62647'
+      part: '2'
+      year: '2012'
+  representations:
+    human: IEC TS 62647-2:2012
+    urn: 'urn:iec:std:iec:62647-2:2012:ts::'
+  roundtrip: true
+  style: v3
 - id: iec.technical_specification.0504
   input: IEC TS 62647-3:2014
   identifier:
@@ -6116,6 +6619,7 @@
     human: IEC TS 62647-3:2014
     urn: 'urn:iec:std:iec:62647-3:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0505
   input: IEC TS 62647-4:2018
   identifier:
@@ -6128,6 +6632,7 @@
     human: IEC TS 62647-4:2018
     urn: 'urn:iec:std:iec:62647-4:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0506
   input: IEC TS 62654:2012
   identifier:
@@ -6139,6 +6644,7 @@
     human: IEC TS 62654:2012
     urn: 'urn:iec:std:iec:62654:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0507
   input: IEC TS 62656-2:2013
   identifier:
@@ -6151,6 +6657,7 @@
     human: IEC TS 62656-2:2013
     urn: 'urn:iec:std:iec:62656-2:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0508
   input: IEC TS 62657-1:2014
   identifier:
@@ -6163,6 +6670,7 @@
     human: IEC TS 62657-1:2014
     urn: 'urn:iec:std:iec:62657-1:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0509
   input: IEC TS 62657-2:2011
   identifier:
@@ -6175,6 +6683,7 @@
     human: IEC TS 62657-2:2011
     urn: 'urn:iec:std:iec:62657-2:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0510
   input: IEC TS 62661-2-1:2013
   identifier:
@@ -6188,6 +6697,7 @@
     human: IEC TS 62661-2-1:2013
     urn: 'urn:iec:std:iec:62661-2-1:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0511
   input: IEC TS 62666:2010
   identifier:
@@ -6199,6 +6709,7 @@
     human: IEC TS 62666:2010
     urn: 'urn:iec:std:iec:62666:2010:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0512
   input: IEC TS 62666:2016
   identifier:
@@ -6210,6 +6721,7 @@
     human: IEC TS 62666:2016
     urn: 'urn:iec:std:iec:62666:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0513
   input: IEC TS 62668-1:2012
   identifier:
@@ -6222,6 +6734,7 @@
     human: IEC TS 62668-1:2012
     urn: 'urn:iec:std:iec:62668-1:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0514
   input: IEC TS 62668-1:2014
   identifier:
@@ -6234,6 +6747,7 @@
     human: IEC TS 62668-1:2014
     urn: 'urn:iec:std:iec:62668-1:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0515
   input: IEC TS 62668-1:2016
   identifier:
@@ -6246,6 +6760,7 @@
     human: IEC TS 62668-1:2016
     urn: 'urn:iec:std:iec:62668-1:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0516
   input: IEC TS 62668-2:2014
   identifier:
@@ -6258,6 +6773,7 @@
     human: IEC TS 62668-2:2014
     urn: 'urn:iec:std:iec:62668-2:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0517
   input: IEC TS 62668-2:2016
   identifier:
@@ -6270,6 +6786,7 @@
     human: IEC TS 62668-2:2016
     urn: 'urn:iec:std:iec:62668-2:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0518
   input: IEC TS 62672-1:2013
   identifier:
@@ -6282,6 +6799,7 @@
     human: IEC TS 62672-1:2013
     urn: 'urn:iec:std:iec:62672-1:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0519
   input: IEC TS 62686-1:2012
   identifier:
@@ -6294,6 +6812,7 @@
     human: IEC TS 62686-1:2012
     urn: 'urn:iec:std:iec:62686-1:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0520
   input: IEC TS 62686-1:2015
   identifier:
@@ -6306,6 +6825,7 @@
     human: IEC TS 62686-1:2015
     urn: 'urn:iec:std:iec:62686-1:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0521
   input: IEC TS 62686-2:2019
   identifier:
@@ -6318,6 +6838,7 @@
     human: IEC TS 62686-2:2019
     urn: 'urn:iec:std:iec:62686-2:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0522
   input: IEC TS 62700:2014
   identifier:
@@ -6329,6 +6850,7 @@
     human: IEC TS 62700:2014
     urn: 'urn:iec:std:iec:62700:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0523
   input: IEC TS 62702-2:2016
   identifier:
@@ -6341,6 +6863,7 @@
     human: IEC TS 62702-2:2016
     urn: 'urn:iec:std:iec:62702-2:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0524
   input: IEC TS 62715-5-2:2016
   identifier:
@@ -6354,6 +6877,7 @@
     human: IEC TS 62715-5-2:2016
     urn: 'urn:iec:std:iec:62715-5-2:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0525
   input: IEC TS 62715-5-4:2019
   identifier:
@@ -6367,6 +6891,7 @@
     human: IEC TS 62715-5-4:2019
     urn: 'urn:iec:std:iec:62715-5-4:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0526
   input: IEC TS 62720:2013
   identifier:
@@ -6378,6 +6903,7 @@
     human: IEC TS 62720:2013
     urn: 'urn:iec:std:iec:62720:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0527
   input: IEC TS 62720:2017
   identifier:
@@ -6389,6 +6915,7 @@
     human: IEC TS 62720:2017
     urn: 'urn:iec:std:iec:62720:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0528
   input: IEC TS 62727:2012
   identifier:
@@ -6400,6 +6927,7 @@
     human: IEC TS 62727:2012
     urn: 'urn:iec:std:iec:62727:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0529
   input: IEC TS 62735-1:2015
   identifier:
@@ -6412,6 +6940,7 @@
     human: IEC TS 62735-1:2015
     urn: 'urn:iec:std:iec:62735-1:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0530
   input: IEC TS 62735-2:2016
   identifier:
@@ -6424,6 +6953,7 @@
     human: IEC TS 62735-2:2016
     urn: 'urn:iec:std:iec:62735-2:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0531
   input: IEC TS 62736:2016
   identifier:
@@ -6435,6 +6965,7 @@
     human: IEC TS 62736:2016
     urn: 'urn:iec:std:iec:62736:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0532
   input: IEC TS 62738:2018
   identifier:
@@ -6446,6 +6977,7 @@
     human: IEC TS 62738:2018
     urn: 'urn:iec:std:iec:62738:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0533
   input: IEC TS 62743:2012
   identifier:
@@ -6457,6 +6989,7 @@
     human: IEC TS 62743:2012
     urn: 'urn:iec:std:iec:62743:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0534
   input: IEC TS 62746-3:2015
   identifier:
@@ -6469,6 +7002,7 @@
     human: IEC TS 62746-3:2015
     urn: 'urn:iec:std:iec:62746-3:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0535
   input: IEC TS 62749:2015
   identifier:
@@ -6480,6 +7014,7 @@
     human: IEC TS 62749:2015
     urn: 'urn:iec:std:iec:62749:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0536
   input: IEC TS 62758:2012
   identifier:
@@ -6491,6 +7026,7 @@
     human: IEC TS 62758:2012
     urn: 'urn:iec:std:iec:62758:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0537
   input: IEC TS 62763:2013
   identifier:
@@ -6502,6 +7038,7 @@
     human: IEC TS 62763:2013
     urn: 'urn:iec:std:iec:62763:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0538
   input: IEC TS 62764-1:2019
   identifier:
@@ -6514,6 +7051,7 @@
     human: IEC TS 62764-1:2019
     urn: 'urn:iec:std:iec:62764-1:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0539
   input: IEC TS 62768:2012
   identifier:
@@ -6525,6 +7063,7 @@
     human: IEC TS 62768:2012
     urn: 'urn:iec:std:iec:62768:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0540
   input: IEC TS 62771:2012
   identifier:
@@ -6536,6 +7075,7 @@
     human: IEC TS 62771:2012
     urn: 'urn:iec:std:iec:62771:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0541
   input: IEC TS 62773:2014
   identifier:
@@ -6547,6 +7087,7 @@
     human: IEC TS 62773:2014
     urn: 'urn:iec:std:iec:62773:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0542
   input: IEC TS 62775:2016
   identifier:
@@ -6558,6 +7099,7 @@
     human: IEC TS 62775:2016
     urn: 'urn:iec:std:iec:62775:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0543
   input: IEC TS 62782:2016
   identifier:
@@ -6569,6 +7111,7 @@
     human: IEC TS 62782:2016
     urn: 'urn:iec:std:iec:62782:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0544
   input: IEC TS 62786:2017
   identifier:
@@ -6580,6 +7123,7 @@
     human: IEC TS 62786:2017
     urn: 'urn:iec:std:iec:62786:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0545
   input: IEC TS 62788-2:2017
   identifier:
@@ -6592,6 +7136,7 @@
     human: IEC TS 62788-2:2017
     urn: 'urn:iec:std:iec:62788-2:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0546
   input: IEC TS 62788-5-2:2020
   identifier:
@@ -6605,6 +7150,7 @@
     human: IEC TS 62788-5-2:2020
     urn: 'urn:iec:std:iec:62788-5-2:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0547
   input: IEC TS 62788-7-2:2017
   identifier:
@@ -6618,6 +7164,7 @@
     human: IEC TS 62788-7-2:2017
     urn: 'urn:iec:std:iec:62788-7-2:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0548
   input: IEC TS 62789:2014
   identifier:
@@ -6629,6 +7176,7 @@
     human: IEC TS 62789:2014
     urn: 'urn:iec:std:iec:62789:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0549
   input: IEC TS 62791:2015
   identifier:
@@ -6640,6 +7188,7 @@
     human: IEC TS 62791:2015
     urn: 'urn:iec:std:iec:62791:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0550
   input: IEC TS 62796:2013
   identifier:
@@ -6651,6 +7200,7 @@
     human: IEC TS 62796:2013
     urn: 'urn:iec:std:iec:62796:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0551
   input: IEC TS 62804-1-1:2020
   identifier:
@@ -6664,6 +7214,7 @@
     human: IEC TS 62804-1-1:2020
     urn: 'urn:iec:std:iec:62804-1-1:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0552
   input: IEC TS 62804-1:2015
   identifier:
@@ -6676,6 +7227,7 @@
     human: IEC TS 62804-1:2015
     urn: 'urn:iec:std:iec:62804-1:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0553
   input: IEC TS 62804-2:2022
   identifier:
@@ -6688,6 +7240,7 @@
     human: IEC TS 62804-2:2022
     urn: 'urn:iec:std:iec:62804-2:2022:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0554
   input: IEC TS 62832-1:2016
   identifier:
@@ -6700,6 +7253,7 @@
     human: IEC TS 62832-1:2016
     urn: 'urn:iec:std:iec:62832-1:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0555
   input: IEC TS 62835:2015
   identifier:
@@ -6711,6 +7265,7 @@
     human: IEC TS 62835:2015
     urn: 'urn:iec:std:iec:62835:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0556
   input: IEC TS 62836:2020
   identifier:
@@ -6722,6 +7277,7 @@
     human: IEC TS 62836:2020
     urn: 'urn:iec:std:iec:62836:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0557
   input: IEC TS 62840-1:2016
   identifier:
@@ -6734,6 +7290,7 @@
     human: IEC TS 62840-1:2016
     urn: 'urn:iec:std:iec:62840-1:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0558
   input: IEC TS 62844:2016
   identifier:
@@ -6745,6 +7302,7 @@
     human: IEC TS 62844:2016
     urn: 'urn:iec:std:iec:62844:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0559
   input: IEC TS 62850:2013
   identifier:
@@ -6756,6 +7314,7 @@
     human: IEC TS 62850:2013
     urn: 'urn:iec:std:iec:62850:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0560
   input: IEC TS 62861:2017
   identifier:
@@ -6767,6 +7326,7 @@
     human: IEC TS 62861:2017
     urn: 'urn:iec:std:iec:62861:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0561
   input: IEC TS 62862-1-1:2018
   identifier:
@@ -6780,6 +7340,7 @@
     human: IEC TS 62862-1-1:2018
     urn: 'urn:iec:std:iec:62862-1-1:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0562
   input: IEC TS 62862-1-2:2017
   identifier:
@@ -6793,6 +7354,7 @@
     human: IEC TS 62862-1-2:2017
     urn: 'urn:iec:std:iec:62862-1-2:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0563
   input: IEC TS 62862-1-3:2017
   identifier:
@@ -6806,6 +7368,7 @@
     human: IEC TS 62862-1-3:2017
     urn: 'urn:iec:std:iec:62862-1-3:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0564
   input: IEC TS 62862-2-1:2021
   identifier:
@@ -6819,6 +7382,7 @@
     human: IEC TS 62862-2-1:2021
     urn: 'urn:iec:std:iec:62862-2-1:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0565
   input: IEC TS 62862-3-3:2020
   identifier:
@@ -6832,6 +7396,7 @@
     human: IEC TS 62862-3-3:2020
     urn: 'urn:iec:std:iec:62862-3-3:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0566
   input: IEC TS 62871-1:2015
   identifier:
@@ -6844,6 +7409,7 @@
     human: IEC TS 62871-1:2015
     urn: 'urn:iec:std:iec:62871-1:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0567
   input: IEC TS 62871-2:2019
   identifier:
@@ -6856,6 +7422,7 @@
     human: IEC TS 62871-2:2019
     urn: 'urn:iec:std:iec:62871-2:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0568
   input: IEC TS 62872-1:2019
   identifier:
@@ -6868,6 +7435,7 @@
     human: IEC TS 62872-1:2019
     urn: 'urn:iec:std:iec:62872-1:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0569
   input: IEC TS 62872:2015
   identifier:
@@ -6879,6 +7447,7 @@
     human: IEC TS 62872:2015
     urn: 'urn:iec:std:iec:62872:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0570
   input: IEC TS 62876-2-1:2018
   identifier:
@@ -6892,6 +7461,7 @@
     human: IEC TS 62876-2-1:2018
     urn: 'urn:iec:std:iec:62876-2-1:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0571
   input: IEC TS 62876-3-1:2022
   identifier:
@@ -6905,6 +7475,7 @@
     human: IEC TS 62876-3-1:2022
     urn: 'urn:iec:std:iec:62876-3-1:2022:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0572
   input: IEC TS 62878-2-1:2015
   identifier:
@@ -6918,6 +7489,7 @@
     human: IEC TS 62878-2-1:2015
     urn: 'urn:iec:std:iec:62878-2-1:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0573
   input: IEC TS 62878-2-3:2015
   identifier:
@@ -6931,6 +7503,7 @@
     human: IEC TS 62878-2-3:2015
     urn: 'urn:iec:std:iec:62878-2-3:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0574
   input: IEC TS 62878-2-4:2015
   identifier:
@@ -6944,6 +7517,7 @@
     human: IEC TS 62878-2-4:2015
     urn: 'urn:iec:std:iec:62878-2-4:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0575
   input: IEC TS 62882:2020
   identifier:
@@ -6955,6 +7529,7 @@
     human: IEC TS 62882:2020
     urn: 'urn:iec:std:iec:62882:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0576
   input: IEC TS 62885-1:2016
   identifier:
@@ -6967,6 +7542,7 @@
     human: IEC TS 62885-1:2016
     urn: 'urn:iec:std:iec:62885-1:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0577
   input: IEC TS 62885-1:2018
   identifier:
@@ -6979,6 +7555,7 @@
     human: IEC TS 62885-1:2018
     urn: 'urn:iec:std:iec:62885-1:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0578
   input: IEC TS 62886:2016
   identifier:
@@ -6990,6 +7567,7 @@
     human: IEC TS 62886:2016
     urn: 'urn:iec:std:iec:62886:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0579
   input: IEC TS 62893-4-2:2021
   identifier:
@@ -7003,6 +7581,7 @@
     human: IEC TS 62893-4-2:2021
     urn: 'urn:iec:std:iec:62893-4-2:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0580
   input: IEC TS 62896:2015
   identifier:
@@ -7014,6 +7593,7 @@
     human: IEC TS 62896:2015
     urn: 'urn:iec:std:iec:62896:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0581
   input: IEC TS 62898-1:2017
   identifier:
@@ -7026,6 +7606,7 @@
     human: IEC TS 62898-1:2017
     urn: 'urn:iec:std:iec:62898-1:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0582
   input: IEC TS 62898-2:2018
   identifier:
@@ -7038,6 +7619,7 @@
     human: IEC TS 62898-2:2018
     urn: 'urn:iec:std:iec:62898-2:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0583
   input: IEC TS 62898-3-1:2020
   identifier:
@@ -7051,6 +7633,7 @@
     human: IEC TS 62898-3-1:2020
     urn: 'urn:iec:std:iec:62898-3-1:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0584
   input: IEC TS 62903:2018
   identifier:
@@ -7062,6 +7645,7 @@
     human: IEC TS 62903:2018
     urn: 'urn:iec:std:iec:62903:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0585
   input: IEC TS 62910:2015
   identifier:
@@ -7073,6 +7657,7 @@
     human: IEC TS 62910:2015
     urn: 'urn:iec:std:iec:62910:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0586
   input: IEC TS 62913-1 ED1
   identifier:
@@ -7086,6 +7671,7 @@
     human: IEC TS 62913-1 ED1
     urn: 'urn:iec:std:iec:62913-1::ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0587
   input: IEC TS 62915:2018
   identifier:
@@ -7097,6 +7683,7 @@
     human: IEC TS 62915:2018
     urn: 'urn:iec:std:iec:62915:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0588
   input: IEC TS 62916:2017
   identifier:
@@ -7108,6 +7695,7 @@
     human: IEC TS 62916:2017
     urn: 'urn:iec:std:iec:62916:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0589
   input: IEC TS 62933-2-2:2022
   identifier:
@@ -7121,6 +7709,7 @@
     human: IEC TS 62933-2-2:2022
     urn: 'urn:iec:std:iec:62933-2-2:2022:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0590
   input: IEC TS 62933-3-1:2018
   identifier:
@@ -7134,6 +7723,7 @@
     human: IEC TS 62933-3-1:2018
     urn: 'urn:iec:std:iec:62933-3-1:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0591
   input: IEC TS 62933-4-1:2017
   identifier:
@@ -7147,6 +7737,7 @@
     human: IEC TS 62933-4-1:2017
     urn: 'urn:iec:std:iec:62933-4-1:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0592
   input: IEC TS 62933-5-1:2017
   identifier:
@@ -7160,6 +7751,7 @@
     human: IEC TS 62933-5-1:2017
     urn: 'urn:iec:std:iec:62933-5-1:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0593
   input: IEC TS 62939-2:2018
   identifier:
@@ -7172,6 +7764,7 @@
     human: IEC TS 62939-2:2018
     urn: 'urn:iec:std:iec:62939-2:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0594
   input: IEC TS 62941:2016
   identifier:
@@ -7183,6 +7776,7 @@
     human: IEC TS 62941:2016
     urn: 'urn:iec:std:iec:62941:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0595
   input: IEC TS 62950:2017
   identifier:
@@ -7194,6 +7788,7 @@
     human: IEC TS 62950:2017
     urn: 'urn:iec:std:iec:62950:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0596
   input: IEC TS 62965:2016
   identifier:
@@ -7205,6 +7800,7 @@
     human: IEC TS 62965:2016
     urn: 'urn:iec:std:iec:62965:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0597
   input: IEC TS 62966-3:2021
   identifier:
@@ -7217,6 +7813,7 @@
     human: IEC TS 62966-3:2021
     urn: 'urn:iec:std:iec:62966-3:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0598
   input: IEC TS 62972:2016
   identifier:
@@ -7228,6 +7825,7 @@
     human: IEC TS 62972:2016
     urn: 'urn:iec:std:iec:62972:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0599
   input: IEC TS 62977-3-1:2019
   identifier:
@@ -7241,6 +7839,7 @@
     human: IEC TS 62977-3-1:2019
     urn: 'urn:iec:std:iec:62977-3-1:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0600
   input: IEC TS 62989:2018
   identifier:
@@ -7252,6 +7851,7 @@
     human: IEC TS 62989:2018
     urn: 'urn:iec:std:iec:62989:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0601
   input: IEC TS 62993:2017
   identifier:
@@ -7263,6 +7863,7 @@
     human: IEC TS 62993:2017
     urn: 'urn:iec:std:iec:62993:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0602
   input: IEC TS 62994:2019
   identifier:
@@ -7274,6 +7875,7 @@
     human: IEC TS 62994:2019
     urn: 'urn:iec:std:iec:62994:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0603
   input: IEC TS 62996:2017
   identifier:
@@ -7285,6 +7887,7 @@
     human: IEC TS 62996:2017
     urn: 'urn:iec:std:iec:62996:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0604
   input: IEC TS 62997:2017
   identifier:
@@ -7296,6 +7899,7 @@
     human: IEC TS 62997:2017
     urn: 'urn:iec:std:iec:62997:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0605
   input: IEC TS 62998-1:2019
   identifier:
@@ -7308,6 +7912,7 @@
     human: IEC TS 62998-1:2019
     urn: 'urn:iec:std:iec:62998-1:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0606
   input: IEC TS 63001:2019
   identifier:
@@ -7319,6 +7924,7 @@
     human: IEC TS 63001:2019
     urn: 'urn:iec:std:iec:63001:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0607
   input: IEC TS 63014-1:2018
   identifier:
@@ -7331,6 +7937,7 @@
     human: IEC TS 63014-1:2018
     urn: 'urn:iec:std:iec:63014-1:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0608
   input: IEC TS 63019:2019
   identifier:
@@ -7342,6 +7949,7 @@
     human: IEC TS 63019:2019
     urn: 'urn:iec:std:iec:63019:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0609
   input: IEC TS 63033-1:2017
   identifier:
@@ -7354,6 +7962,7 @@
     human: IEC TS 63033-1:2017
     urn: 'urn:iec:std:iec:63033-1:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0610
   input: IEC TS 63042-101:2019
   identifier:
@@ -7366,6 +7975,7 @@
     human: IEC TS 63042-101:2019
     urn: 'urn:iec:std:iec:63042-101:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0611
   input: IEC TS 63042-102:2021
   identifier:
@@ -7378,6 +7988,7 @@
     human: IEC TS 63042-102:2021
     urn: 'urn:iec:std:iec:63042-102:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0612
   input: IEC TS 63042-201:2018
   identifier:
@@ -7390,6 +8001,7 @@
     human: IEC TS 63042-201:2018
     urn: 'urn:iec:std:iec:63042-201:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0613
   input: IEC TS 63042-202:2021
   identifier:
@@ -7402,6 +8014,7 @@
     human: IEC TS 63042-202:2021
     urn: 'urn:iec:std:iec:63042-202:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0614
   input: IEC TS 63042-301:2018
   identifier:
@@ -7414,6 +8027,7 @@
     human: IEC TS 63042-301:2018
     urn: 'urn:iec:std:iec:63042-301:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0615
   input: IEC TS 63042-302:2021
   identifier:
@@ -7426,6 +8040,7 @@
     human: IEC TS 63042-302:2021
     urn: 'urn:iec:std:iec:63042-302:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0616
   input: IEC TS 63049:2017
   identifier:
@@ -7437,6 +8052,7 @@
     human: IEC TS 63049:2017
     urn: 'urn:iec:std:iec:63049:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0617
   input: IEC TS 63050:2019
   identifier:
@@ -7448,6 +8064,7 @@
     human: IEC TS 63050:2019
     urn: 'urn:iec:std:iec:63050:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0618
   input: IEC TS 63053:2017
   identifier:
@@ -7459,6 +8076,7 @@
     human: IEC TS 63053:2017
     urn: 'urn:iec:std:iec:63053:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0619
   input: IEC TS 63058:2021
   identifier:
@@ -7470,6 +8088,7 @@
     human: IEC TS 63058:2021
     urn: 'urn:iec:std:iec:63058:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0620
   input: IEC TS 63060:2019
   identifier:
@@ -7481,6 +8100,7 @@
     human: IEC TS 63060:2019
     urn: 'urn:iec:std:iec:63060:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0621
   input: IEC TS 63064:2018
   identifier:
@@ -7492,6 +8112,7 @@
     human: IEC TS 63064:2018
     urn: 'urn:iec:std:iec:63064:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0622
   input: IEC TS 63066:2017
   identifier:
@@ -7503,6 +8124,7 @@
     human: IEC TS 63066:2017
     urn: 'urn:iec:std:iec:63066:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0623
   input: IEC TS 63070:2019
   identifier:
@@ -7514,6 +8136,7 @@
     human: IEC TS 63070:2019
     urn: 'urn:iec:std:iec:63070:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0624
   input: IEC TS 63081:2019
   identifier:
@@ -7525,6 +8148,7 @@
     human: IEC TS 63081:2019
     urn: 'urn:iec:std:iec:63081:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0625
   input: IEC TS 63102:2021
   identifier:
@@ -7536,6 +8160,7 @@
     human: IEC TS 63102:2021
     urn: 'urn:iec:std:iec:63102:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0626
   input: IEC TS 63105:2021
   identifier:
@@ -7547,6 +8172,7 @@
     human: IEC TS 63105:2021
     urn: 'urn:iec:std:iec:63105:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0627
   input: IEC TS 63106-1:2020
   identifier:
@@ -7559,6 +8185,7 @@
     human: IEC TS 63106-1:2020
     urn: 'urn:iec:std:iec:63106-1:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0628
   input: IEC TS 63106-2:2022
   identifier:
@@ -7571,6 +8198,7 @@
     human: IEC TS 63106-2:2022
     urn: 'urn:iec:std:iec:63106-2:2022:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0629
   input: IEC TS 63107:2020
   identifier:
@@ -7582,6 +8210,7 @@
     human: IEC TS 63107:2020
     urn: 'urn:iec:std:iec:63107:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0630
   input: IEC TS 63109:2022
   identifier:
@@ -7593,6 +8222,7 @@
     human: IEC TS 63109:2022
     urn: 'urn:iec:std:iec:63109:2022:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0631
   input: IEC TS 63116:2021
   identifier:
@@ -7604,6 +8234,7 @@
     human: IEC TS 63116:2021
     urn: 'urn:iec:std:iec:63116:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0632
   input: IEC TS 63117:2021
   identifier:
@@ -7615,6 +8246,7 @@
     human: IEC TS 63117:2021
     urn: 'urn:iec:std:iec:63117:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0633
   input: IEC TS 63126:2020
   identifier:
@@ -7626,6 +8258,7 @@
     human: IEC TS 63126:2020
     urn: 'urn:iec:std:iec:63126:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0634
   input: IEC TS 63134:2020
   identifier:
@@ -7637,6 +8270,7 @@
     human: IEC TS 63134:2020
     urn: 'urn:iec:std:iec:63134:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0635
   input: IEC TS 63140:2021
   identifier:
@@ -7648,6 +8282,7 @@
     human: IEC TS 63140:2021
     urn: 'urn:iec:std:iec:63140:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0636
   input: IEC TS 63144-1:2020
   identifier:
@@ -7660,6 +8295,7 @@
     human: IEC TS 63144-1:2020
     urn: 'urn:iec:std:iec:63144-1:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0637
   input: IEC TS 63156:2021
   identifier:
@@ -7671,6 +8307,7 @@
     human: IEC TS 63156:2021
     urn: 'urn:iec:std:iec:63156:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0638
   input: IEC TS 63157:2019
   identifier:
@@ -7682,6 +8319,7 @@
     human: IEC TS 63157:2019
     urn: 'urn:iec:std:iec:63157:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0639
   input: IEC TS 63163:2021
   identifier:
@@ -7693,6 +8331,7 @@
     human: IEC TS 63163:2021
     urn: 'urn:iec:std:iec:63163:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0640
   input: IEC TS 63164-1:2020
   identifier:
@@ -7705,6 +8344,7 @@
     human: IEC TS 63164-1:2020
     urn: 'urn:iec:std:iec:63164-1:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0641
   input: IEC TS 63181-1:2019
   identifier:
@@ -7717,6 +8357,7 @@
     human: IEC TS 63181-1:2019
     urn: 'urn:iec:std:iec:63181-1:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0642
   input: IEC TS 63202-2:2021
   identifier:
@@ -7729,6 +8370,7 @@
     human: IEC TS 63202-2:2021
     urn: 'urn:iec:std:iec:63202-2:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0643
   input: IEC TS 63208:2020
   identifier:
@@ -7740,6 +8382,7 @@
     human: IEC TS 63208:2020
     urn: 'urn:iec:std:iec:63208:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0644
   input: IEC TS 63209-1:2021
   identifier:
@@ -7752,6 +8395,7 @@
     human: IEC TS 63209-1:2021
     urn: 'urn:iec:std:iec:63209-1:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0645
   input: IEC TS 63217:2021
   identifier:
@@ -7763,6 +8407,7 @@
     human: IEC TS 63217:2021
     urn: 'urn:iec:std:iec:63217:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0646
   input: IEC TS 63222-1:2021
   identifier:
@@ -7775,6 +8420,7 @@
     human: IEC TS 63222-1:2021
     urn: 'urn:iec:std:iec:63222-1:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0647
   input: IEC TS 63236-1:2021
   identifier:
@@ -7787,6 +8433,7 @@
     human: IEC TS 63236-1:2021
     urn: 'urn:iec:std:iec:63236-1:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0648
   input: IEC TS 63236-2:2021
   identifier:
@@ -7799,6 +8446,7 @@
     human: IEC TS 63236-2:2021
     urn: 'urn:iec:std:iec:63236-2:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0649
   input: IEC TS 63236-3:2021
   identifier:
@@ -7811,6 +8459,7 @@
     human: IEC TS 63236-3:2021
     urn: 'urn:iec:std:iec:63236-3:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0650
   input: IEC TS 63266 ED1
   identifier:
@@ -7823,6 +8472,7 @@
     human: IEC TS 63266 ED1
     urn: 'urn:iec:std:iec:63266::ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0651
   input: IEC TS 63297:2021
   identifier:
@@ -7834,6 +8484,7 @@
     human: IEC TS 63297:2021
     urn: 'urn:iec:std:iec:63297:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0652
   input: IEC TS 63334:2021
   identifier:
@@ -7845,6 +8496,7 @@
     human: IEC TS 63334:2021
     urn: 'urn:iec:std:iec:63334:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0653
   input: IEC TS 63349-2:2022
   identifier:
@@ -7857,6 +8509,7 @@
     human: IEC TS 63349-2:2022
     urn: 'urn:iec:std:iec:63349-2:2022:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0654
   input: IEC TS 63417 ED1
   identifier:
@@ -7869,6 +8522,7 @@
     human: IEC TS 63417 ED1
     urn: 'urn:iec:std:iec:63417::ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0655
   input: IEC TS 63433 ED1
   identifier:
@@ -7881,6 +8535,7 @@
     human: IEC TS 63433 ED1
     urn: 'urn:iec:std:iec:63433::ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0656
   input: IEC TS 63443 ED1
   identifier:
@@ -7893,6 +8548,7 @@
     human: IEC TS 63443 ED1
     urn: 'urn:iec:std:iec:63443::ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0657
   input: IEC TS 63444 ED1
   identifier:
@@ -7905,6 +8561,7 @@
     human: IEC TS 63444 ED1
     urn: 'urn:iec:std:iec:63444::ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0658
   input: IEC TS 80004-9:2017
   identifier:
@@ -7917,6 +8574,7 @@
     human: IEC TS 80004-9:2017
     urn: 'urn:iec:std:iec:80004-9:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0659
   input: ISO TS 10797:2012
   identifier:
@@ -7929,6 +8587,7 @@
     human: ISO TS 10797:2012
     urn: 'urn:iec:std:iso:10797:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0660
   input: ISO TS 10974:2012
   identifier:
@@ -7941,6 +8600,7 @@
     human: ISO TS 10974:2012
     urn: 'urn:iec:std:iso:10974:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0661
   input: ISO TS 10974:2018
   identifier:
@@ -7953,6 +8613,7 @@
     human: ISO TS 10974:2018
     urn: 'urn:iec:std:iso:10974:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0662
   input: ISO TS 13278:2011
   identifier:
@@ -7965,6 +8626,7 @@
     human: ISO TS 13278:2011
     urn: 'urn:iec:std:iso:13278:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0663
   input: ISO TS 21356-1:2021
   identifier:
@@ -7978,6 +8640,7 @@
     human: ISO TS 21356-1:2021
     urn: 'urn:iec:std:iso:21356-1:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0664
   input: ISO TS 22292:2021
   identifier:
@@ -7990,6 +8653,7 @@
     human: ISO TS 22292:2021
     urn: 'urn:iec:std:iso:22292:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0665
   input: ISO TS 23302:2021
   identifier:
@@ -8002,33 +8666,8 @@
     human: ISO TS 23302:2021
     urn: 'urn:iec:std:iso:23302:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0666
-  input: ISO TS 80004-1:2010
-  identifier:
-    type: technical_specification
-    components:
-      number: '80004'
-      part: '1'
-      year: '2010'
-      publisher: ISO
-  representations:
-    human: ISO TS 80004-1:2010
-    urn: 'urn:iec:std:iso:80004-1:2010:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0667
-  input: ISO TS 80004-1:2015
-  identifier:
-    type: technical_specification
-    components:
-      number: '80004'
-      part: '1'
-      year: '2015'
-      publisher: ISO
-  representations:
-    human: ISO TS 80004-1:2015
-    urn: 'urn:iec:std:iso:80004-1:2015:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0668
   input: ISO TS 80004-11:2017
   identifier:
     type: technical_specification
@@ -8041,7 +8680,8 @@
     human: ISO TS 80004-11:2017
     urn: 'urn:iec:std:iso:80004-11:2017:ts::'
   roundtrip: true
-- id: iec.technical_specification.0669
+  style: v3
+- id: iec.technical_specification.0667
   input: ISO TS 80004-12:2016
   identifier:
     type: technical_specification
@@ -8054,7 +8694,8 @@
     human: ISO TS 80004-12:2016
     urn: 'urn:iec:std:iso:80004-12:2016:ts::'
   roundtrip: true
-- id: iec.technical_specification.0670
+  style: v3
+- id: iec.technical_specification.0668
   input: ISO TS 80004-13:2017
   identifier:
     type: technical_specification
@@ -8067,6 +8708,35 @@
     human: ISO TS 80004-13:2017
     urn: 'urn:iec:std:iso:80004-13:2017:ts::'
   roundtrip: true
+  style: v3
+- id: iec.technical_specification.0669
+  input: ISO TS 80004-1:2010
+  identifier:
+    type: technical_specification
+    components:
+      number: '80004'
+      part: '1'
+      year: '2010'
+      publisher: ISO
+  representations:
+    human: ISO TS 80004-1:2010
+    urn: 'urn:iec:std:iso:80004-1:2010:ts::'
+  roundtrip: true
+  style: v3
+- id: iec.technical_specification.0670
+  input: ISO TS 80004-1:2015
+  identifier:
+    type: technical_specification
+    components:
+      number: '80004'
+      part: '1'
+      year: '2015'
+      publisher: ISO
+  representations:
+    human: ISO TS 80004-1:2015
+    urn: 'urn:iec:std:iso:80004-1:2015:ts::'
+  roundtrip: true
+  style: v3
 - id: iec.technical_specification.0671
   input: ISO TS 80004-2:2015
   identifier:
@@ -8080,6 +8750,7 @@
     human: ISO TS 80004-2:2015
     urn: 'urn:iec:std:iso:80004-2:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0672
   input: ISO TS 80004-3:2010
   identifier:
@@ -8093,6 +8764,7 @@
     human: ISO TS 80004-3:2010
     urn: 'urn:iec:std:iso:80004-3:2010:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0673
   input: ISO TS 80004-3:2020
   identifier:
@@ -8106,6 +8778,7 @@
     human: ISO TS 80004-3:2020
     urn: 'urn:iec:std:iso:80004-3:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0674
   input: ISO TS 80004-4:2011
   identifier:
@@ -8119,6 +8792,7 @@
     human: ISO TS 80004-4:2011
     urn: 'urn:iec:std:iso:80004-4:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0675
   input: ISO TS 80004-5:2011
   identifier:
@@ -8132,6 +8806,7 @@
     human: ISO TS 80004-5:2011
     urn: 'urn:iec:std:iso:80004-5:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0676
   input: ISO TS 80004-6:2013
   identifier:
@@ -8145,6 +8820,7 @@
     human: ISO TS 80004-6:2013
     urn: 'urn:iec:std:iso:80004-6:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0677
   input: ISO TS 80004-6:2021
   identifier:
@@ -8158,6 +8834,7 @@
     human: ISO TS 80004-6:2021
     urn: 'urn:iec:std:iso:80004-6:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0678
   input: ISO TS 80004-7:2011
   identifier:
@@ -8171,6 +8848,7 @@
     human: ISO TS 80004-7:2011
     urn: 'urn:iec:std:iso:80004-7:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0679
   input: ISO TS 80004-8:2013
   identifier:
@@ -8184,6 +8862,7 @@
     human: ISO TS 80004-8:2013
     urn: 'urn:iec:std:iso:80004-8:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0680
   input: ISO TS 80004-8:2020
   identifier:
@@ -8197,6 +8876,7 @@
     human: ISO TS 80004-8:2020
     urn: 'urn:iec:std:iso:80004-8:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0681
   input: ISO TS 81060-5:2020
   identifier:
@@ -8210,6 +8890,7 @@
     human: ISO TS 81060-5:2020
     urn: 'urn:iec:std:iso:81060-5:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0682
   input: ISO TS 81346-10:2015
   identifier:
@@ -8223,6 +8904,7 @@
     human: ISO TS 81346-10:2015
     urn: 'urn:iec:std:iso:81346-10:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0683
   input: ISO TS 82304-2:2021
   identifier:
@@ -8236,6 +8918,7 @@
     human: ISO TS 82304-2:2021
     urn: 'urn:iec:std:iso:82304-2:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0684
   input: ISO/IEC TS 11179-30:2019
   identifier:
@@ -8251,6 +8934,7 @@
     human: ISO/IEC TS 11179-30:2019
     urn: 'urn:iec:std:iso-iec:11179-30:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0685
   input: ISO/IEC TS 11581-41:2014
   identifier:
@@ -8266,6 +8950,7 @@
     human: ISO/IEC TS 11581-41:2014
     urn: 'urn:iec:std:iso-iec:11581-41:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0686
   input: ISO/IEC TS 11801-9903:2021
   identifier:
@@ -8281,6 +8966,7 @@
     human: ISO/IEC TS 11801-9903:2021
     urn: 'urn:iec:std:iso-iec:11801-9903:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0687
   input: ISO/IEC TS 13249-7:2013
   identifier:
@@ -8296,6 +8982,7 @@
     human: ISO/IEC TS 13249-7:2013
     urn: 'urn:iec:std:iso-iec:13249-7:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0688
   input: ISO/IEC TS 15504-10:2011
   identifier:
@@ -8311,6 +8998,7 @@
     human: ISO/IEC TS 15504-10:2011
     urn: 'urn:iec:std:iso-iec:15504-10:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0689
   input: ISO/IEC TS 15504-8:2012
   identifier:
@@ -8326,6 +9014,7 @@
     human: ISO/IEC TS 15504-8:2012
     urn: 'urn:iec:std:iso-iec:15504-8:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0690
   input: ISO/IEC TS 15504-9:2011
   identifier:
@@ -8341,6 +9030,7 @@
     human: ISO/IEC TS 15504-9:2011
     urn: 'urn:iec:std:iso-iec:15504-9:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0691
   input: ISO/IEC TS 17021-10:2018
   identifier:
@@ -8356,6 +9046,7 @@
     human: ISO/IEC TS 17021-10:2018
     urn: 'urn:iec:std:iso-iec:17021-10:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0692
   input: ISO/IEC TS 17021-11:2018
   identifier:
@@ -8371,6 +9062,7 @@
     human: ISO/IEC TS 17021-11:2018
     urn: 'urn:iec:std:iso-iec:17021-11:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0693
   input: ISO/IEC TS 17021-12:2020
   identifier:
@@ -8386,6 +9078,7 @@
     human: ISO/IEC TS 17021-12:2020
     urn: 'urn:iec:std:iso-iec:17021-12:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0694
   input: ISO/IEC TS 17021-13:2021
   identifier:
@@ -8401,6 +9094,7 @@
     human: ISO/IEC TS 17021-13:2021
     urn: 'urn:iec:std:iso-iec:17021-13:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0695
   input: ISO/IEC TS 17021-14:2022
   identifier:
@@ -8416,6 +9110,7 @@
     human: ISO/IEC TS 17021-14:2022
     urn: 'urn:iec:std:iso-iec:17021-14:2022:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0696
   input: ISO/IEC TS 17021-2:2012
   identifier:
@@ -8431,6 +9126,7 @@
     human: ISO/IEC TS 17021-2:2012
     urn: 'urn:iec:std:iso-iec:17021-2:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0697
   input: ISO/IEC TS 17021-3:2013
   identifier:
@@ -8446,6 +9142,7 @@
     human: ISO/IEC TS 17021-3:2013
     urn: 'urn:iec:std:iso-iec:17021-3:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0698
   input: ISO/IEC TS 17021-4:2013
   identifier:
@@ -8461,6 +9158,7 @@
     human: ISO/IEC TS 17021-4:2013
     urn: 'urn:iec:std:iso-iec:17021-4:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0699
   input: ISO/IEC TS 17021-5:2014
   identifier:
@@ -8476,6 +9174,7 @@
     human: ISO/IEC TS 17021-5:2014
     urn: 'urn:iec:std:iso-iec:17021-5:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0700
   input: ISO/IEC TS 17021-6:2014
   identifier:
@@ -8491,6 +9190,7 @@
     human: ISO/IEC TS 17021-6:2014
     urn: 'urn:iec:std:iso-iec:17021-6:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0701
   input: ISO/IEC TS 17021-7:2014
   identifier:
@@ -8506,6 +9206,7 @@
     human: ISO/IEC TS 17021-7:2014
     urn: 'urn:iec:std:iso-iec:17021-7:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0702
   input: ISO/IEC TS 17021-8:2019
   identifier:
@@ -8521,6 +9222,7 @@
     human: ISO/IEC TS 17021-8:2019
     urn: 'urn:iec:std:iso-iec:17021-8:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0703
   input: ISO/IEC TS 17021-9:2016
   identifier:
@@ -8536,6 +9238,7 @@
     human: ISO/IEC TS 17021-9:2016
     urn: 'urn:iec:std:iso-iec:17021-9:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0704
   input: ISO/IEC TS 17022:2012
   identifier:
@@ -8550,6 +9253,7 @@
     human: ISO/IEC TS 17022:2012
     urn: 'urn:iec:std:iso-iec:17022:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0705
   input: ISO/IEC TS 17023:2013
   identifier:
@@ -8564,6 +9268,7 @@
     human: ISO/IEC TS 17023:2013
     urn: 'urn:iec:std:iso-iec:17023:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0706
   input: ISO/IEC TS 17027:2014
   identifier:
@@ -8578,6 +9283,7 @@
     human: ISO/IEC TS 17027:2014
     urn: 'urn:iec:std:iso-iec:17027:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0707
   input: ISO/IEC TS 17961:2013
   identifier:
@@ -8592,6 +9298,7 @@
     human: ISO/IEC TS 17961:2013
     urn: 'urn:iec:std:iso-iec:17961:2013:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0708
   input: ISO/IEC TS 18508:2015
   identifier:
@@ -8606,6 +9313,7 @@
     human: ISO/IEC TS 18508:2015
     urn: 'urn:iec:std:iso-iec:18508:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0709
   input: ISO/IEC TS 18661-1:2014
   identifier:
@@ -8621,6 +9329,7 @@
     human: ISO/IEC TS 18661-1:2014
     urn: 'urn:iec:std:iso-iec:18661-1:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0710
   input: ISO/IEC TS 18661-2:2015
   identifier:
@@ -8636,6 +9345,7 @@
     human: ISO/IEC TS 18661-2:2015
     urn: 'urn:iec:std:iso-iec:18661-2:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0711
   input: ISO/IEC TS 18661-3:2015
   identifier:
@@ -8651,6 +9361,7 @@
     human: ISO/IEC TS 18661-3:2015
     urn: 'urn:iec:std:iso-iec:18661-3:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0712
   input: ISO/IEC TS 18661-4:2015
   identifier:
@@ -8666,6 +9377,7 @@
     human: ISO/IEC TS 18661-4:2015
     urn: 'urn:iec:std:iso-iec:18661-4:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0713
   input: ISO/IEC TS 18661-5:2016
   identifier:
@@ -8681,6 +9393,7 @@
     human: ISO/IEC TS 18661-5:2016
     urn: 'urn:iec:std:iso-iec:18661-5:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0714
   input: ISO/IEC TS 18822:2015
   identifier:
@@ -8695,6 +9408,7 @@
     human: ISO/IEC TS 18822:2015
     urn: 'urn:iec:std:iso-iec:18822:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0715
   input: ISO/IEC TS 19216:2018
   identifier:
@@ -8709,6 +9423,7 @@
     human: ISO/IEC TS 19216:2018
     urn: 'urn:iec:std:iso-iec:19216:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0716
   input: ISO/IEC TS 19217:2015
   identifier:
@@ -8723,6 +9438,7 @@
     human: ISO/IEC TS 19217:2015
     urn: 'urn:iec:std:iso-iec:19217:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0717
   input: ISO/IEC TS 19249:2017
   identifier:
@@ -8737,6 +9453,7 @@
     human: ISO/IEC TS 19249:2017
     urn: 'urn:iec:std:iso-iec:19249:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0718
   input: ISO/IEC TS 19568:2015
   identifier:
@@ -8751,6 +9468,7 @@
     human: ISO/IEC TS 19568:2015
     urn: 'urn:iec:std:iso-iec:19568:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0719
   input: ISO/IEC TS 19568:2017
   identifier:
@@ -8765,6 +9483,7 @@
     human: ISO/IEC TS 19568:2017
     urn: 'urn:iec:std:iso-iec:19568:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0720
   input: ISO/IEC TS 19570:2015
   identifier:
@@ -8779,6 +9498,7 @@
     human: ISO/IEC TS 19570:2015
     urn: 'urn:iec:std:iso-iec:19570:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0721
   input: ISO/IEC TS 19570:2018
   identifier:
@@ -8793,6 +9513,7 @@
     human: ISO/IEC TS 19570:2018
     urn: 'urn:iec:std:iso-iec:19570:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0722
   input: ISO/IEC TS 19571:2016
   identifier:
@@ -8807,6 +9528,7 @@
     human: ISO/IEC TS 19571:2016
     urn: 'urn:iec:std:iso-iec:19571:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0723
   input: ISO/IEC TS 19608:2018
   identifier:
@@ -8821,6 +9543,7 @@
     human: ISO/IEC TS 19608:2018
     urn: 'urn:iec:std:iso-iec:19608:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0724
   input: ISO/IEC TS 19763-13:2016
   identifier:
@@ -8836,6 +9559,7 @@
     human: ISO/IEC TS 19763-13:2016
     urn: 'urn:iec:std:iso-iec:19763-13:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0725
   input: ISO/IEC TS 19795-9:2019
   identifier:
@@ -8851,6 +9575,7 @@
     human: ISO/IEC TS 19795-9:2019
     urn: 'urn:iec:std:iso-iec:19795-9:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0726
   input: ISO/IEC TS 19841:2015
   identifier:
@@ -8865,6 +9590,7 @@
     human: ISO/IEC TS 19841:2015
     urn: 'urn:iec:std:iso-iec:19841:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0727
   input: ISO/IEC TS 20000-11:2021
   identifier:
@@ -8880,6 +9606,7 @@
     human: ISO/IEC TS 20000-11:2021
     urn: 'urn:iec:std:iso-iec:20000-11:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0728
   input: ISO/IEC TS 20000-5:2022
   identifier:
@@ -8895,6 +9622,7 @@
     human: ISO/IEC TS 20000-5:2022
     urn: 'urn:iec:std:iso-iec:20000-5:2022:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0729
   input: ISO/IEC TS 20013:2015
   identifier:
@@ -8909,6 +9637,7 @@
     human: ISO/IEC TS 20013:2015
     urn: 'urn:iec:std:iso-iec:20013:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0730
   input: ISO/IEC TS 20027:2015
   identifier:
@@ -8923,6 +9652,7 @@
     human: ISO/IEC TS 20027:2015
     urn: 'urn:iec:std:iso-iec:20027:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0731
   input: ISO/IEC TS 20071-11:2012
   identifier:
@@ -8938,6 +9668,7 @@
     human: ISO/IEC TS 20071-11:2012
     urn: 'urn:iec:std:iso-iec:20071-11:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0732
   input: ISO/IEC TS 20071-15:2017
   identifier:
@@ -8953,6 +9684,7 @@
     human: ISO/IEC TS 20071-15:2017
     urn: 'urn:iec:std:iso-iec:20071-15:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0733
   input: ISO/IEC TS 20071-21:2015
   identifier:
@@ -8968,6 +9700,7 @@
     human: ISO/IEC TS 20071-21:2015
     urn: 'urn:iec:std:iso-iec:20071-21:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0734
   input: ISO/IEC TS 20071-25:2017
   identifier:
@@ -8983,6 +9716,7 @@
     human: ISO/IEC TS 20071-25:2017
     urn: 'urn:iec:std:iso-iec:20071-25:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0735
   input: ISO/IEC TS 20540:2018
   identifier:
@@ -8997,6 +9731,7 @@
     human: ISO/IEC TS 20540:2018
     urn: 'urn:iec:std:iso-iec:20540:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0736
   input: ISO/IEC TS 20748-3:2020
   identifier:
@@ -9012,6 +9747,7 @@
     human: ISO/IEC TS 20748-3:2020
     urn: 'urn:iec:std:iso-iec:20748-3:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0737
   input: ISO/IEC TS 20748-4:2019
   identifier:
@@ -9027,6 +9763,7 @@
     human: ISO/IEC TS 20748-4:2019
     urn: 'urn:iec:std:iso-iec:20748-4:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0738
   input: ISO/IEC TS 21425:2017
   identifier:
@@ -9041,6 +9778,7 @@
     human: ISO/IEC TS 21425:2017
     urn: 'urn:iec:std:iso-iec:21425:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0739
   input: ISO/IEC TS 21544:2018
   identifier:
@@ -9055,6 +9793,7 @@
     human: ISO/IEC TS 21544:2018
     urn: 'urn:iec:std:iso-iec:21544:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0740
   input: ISO/IEC TS 22237-1:2018
   identifier:
@@ -9070,6 +9809,7 @@
     human: ISO/IEC TS 22237-1:2018
     urn: 'urn:iec:std:iso-iec:22237-1:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0741
   input: ISO/IEC TS 22237-2:2018
   identifier:
@@ -9085,22 +9825,8 @@
     human: ISO/IEC TS 22237-2:2018
     urn: 'urn:iec:std:iso-iec:22237-2:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0742
-  input: ISO/IEC TS 22237-3:2018
-  identifier:
-    type: technical_specification
-    components:
-      number: '22237'
-      part: '3'
-      year: '2018'
-      publisher: ISO
-      copublishers:
-      - IEC
-  representations:
-    human: ISO/IEC TS 22237-3:2018
-    urn: 'urn:iec:std:iso-iec:22237-3:2018:ts::'
-  roundtrip: true
-- id: iec.technical_specification.0743
   input: ISO/IEC TS 22237-30:2022
   identifier:
     type: technical_specification
@@ -9115,6 +9841,23 @@
     human: ISO/IEC TS 22237-30:2022
     urn: 'urn:iec:std:iso-iec:22237-30:2022:ts::'
   roundtrip: true
+  style: v3
+- id: iec.technical_specification.0743
+  input: ISO/IEC TS 22237-3:2018
+  identifier:
+    type: technical_specification
+    components:
+      number: '22237'
+      part: '3'
+      year: '2018'
+      publisher: ISO
+      copublishers:
+      - IEC
+  representations:
+    human: ISO/IEC TS 22237-3:2018
+    urn: 'urn:iec:std:iso-iec:22237-3:2018:ts::'
+  roundtrip: true
+  style: v3
 - id: iec.technical_specification.0744
   input: ISO/IEC TS 22237-4:2018
   identifier:
@@ -9130,6 +9873,7 @@
     human: ISO/IEC TS 22237-4:2018
     urn: 'urn:iec:std:iso-iec:22237-4:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0745
   input: ISO/IEC TS 22237-5:2018
   identifier:
@@ -9145,6 +9889,7 @@
     human: ISO/IEC TS 22237-5:2018
     urn: 'urn:iec:std:iso-iec:22237-5:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0746
   input: ISO/IEC TS 22237-6:2018
   identifier:
@@ -9160,6 +9905,7 @@
     human: ISO/IEC TS 22237-6:2018
     urn: 'urn:iec:std:iso-iec:22237-6:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0747
   input: ISO/IEC TS 22237-7:2018
   identifier:
@@ -9175,6 +9921,7 @@
     human: ISO/IEC TS 22237-7:2018
     urn: 'urn:iec:std:iso-iec:22237-7:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0748
   input: ISO/IEC TS 22277:2017
   identifier:
@@ -9189,6 +9936,7 @@
     human: ISO/IEC TS 22277:2017
     urn: 'urn:iec:std:iso-iec:22277:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0749
   input: ISO/IEC TS 22424-1:2020
   identifier:
@@ -9204,6 +9952,7 @@
     human: ISO/IEC TS 22424-1:2020
     urn: 'urn:iec:std:iso-iec:22424-1:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0750
   input: ISO/IEC TS 22424-2:2020
   identifier:
@@ -9219,6 +9968,7 @@
     human: ISO/IEC TS 22424-2:2020
     urn: 'urn:iec:std:iso-iec:22424-2:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0751
   input: ISO/IEC TS 22924:2021
   identifier:
@@ -9233,6 +9983,7 @@
     human: ISO/IEC TS 22924:2021
     urn: 'urn:iec:std:iso-iec:22924:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0752
   input: ISO/IEC TS 23078-1:2020
   identifier:
@@ -9248,6 +9999,7 @@
     human: ISO/IEC TS 23078-1:2020
     urn: 'urn:iec:std:iso-iec:23078-1:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0753
   input: ISO/IEC TS 23078-2:2020
   identifier:
@@ -9263,6 +10015,7 @@
     human: ISO/IEC TS 23078-2:2020
     urn: 'urn:iec:std:iso-iec:23078-2:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0754
   input: ISO/IEC TS 23078-3:2021
   identifier:
@@ -9278,6 +10031,7 @@
     human: ISO/IEC TS 23078-3:2021
     urn: 'urn:iec:std:iso-iec:23078-3:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0755
   input: ISO/IEC TS 23167:2020
   identifier:
@@ -9292,6 +10046,7 @@
     human: ISO/IEC TS 23167:2020
     urn: 'urn:iec:std:iso-iec:23167:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0756
   input: ISO/IEC TS 23360-1-6:2021
   identifier:
@@ -9308,6 +10063,7 @@
     human: ISO/IEC TS 23360-1-6:2021
     urn: 'urn:iec:std:iso-iec:23360-1-6:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0757
   input: ISO/IEC TS 23532-1:2021
   identifier:
@@ -9323,6 +10079,7 @@
     human: ISO/IEC TS 23532-1:2021
     urn: 'urn:iec:std:iso-iec:23532-1:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0758
   input: ISO/IEC TS 23532-2:2021
   identifier:
@@ -9338,6 +10095,7 @@
     human: ISO/IEC TS 23532-2:2021
     urn: 'urn:iec:std:iso-iec:23532-2:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0759
   input: ISO/IEC TS 23619:2021
   identifier:
@@ -9352,6 +10110,7 @@
     human: ISO/IEC TS 23619:2021
     urn: 'urn:iec:std:iso-iec:23619:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0760
   input: ISO/IEC TS 23884:2021
   identifier:
@@ -9366,6 +10125,7 @@
     human: ISO/IEC TS 23884:2021
     urn: 'urn:iec:std:iso-iec:23884:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0761
   input: ISO/IEC TS 24192-1:2021
   identifier:
@@ -9381,6 +10141,7 @@
     human: ISO/IEC TS 24192-1:2021
     urn: 'urn:iec:std:iso-iec:24192-1:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0762
   input: ISO/IEC TS 24192-2:2021
   identifier:
@@ -9396,6 +10157,7 @@
     human: ISO/IEC TS 24192-2:2021
     urn: 'urn:iec:std:iso-iec:24192-2:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0763
   input: ISO/IEC TS 24748-1:2016
   identifier:
@@ -9411,6 +10173,7 @@
     human: ISO/IEC TS 24748-1:2016
     urn: 'urn:iec:std:iso-iec:24748-1:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0764
   input: ISO/IEC TS 24748-6:2016
   identifier:
@@ -9426,6 +10189,7 @@
     human: ISO/IEC TS 24748-6:2016
     urn: 'urn:iec:std:iso-iec:24748-6:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0765
   input: ISO/IEC TS 24751-4:2019
   identifier:
@@ -9441,6 +10205,7 @@
     human: ISO/IEC TS 24751-4:2019
     urn: 'urn:iec:std:iso-iec:24751-4:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0766
   input: ISO/IEC TS 24790:2012
   identifier:
@@ -9455,6 +10220,7 @@
     human: ISO/IEC TS 24790:2012
     urn: 'urn:iec:std:iso-iec:24790:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0767
   input: ISO/IEC TS 25011:2017
   identifier:
@@ -9469,6 +10235,7 @@
     human: ISO/IEC TS 25011:2017
     urn: 'urn:iec:std:iso-iec:25011:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0768
   input: ISO/IEC TS 25025:2021
   identifier:
@@ -9483,6 +10250,7 @@
     human: ISO/IEC TS 25025:2021
     urn: 'urn:iec:std:iso-iec:25025:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0769
   input: ISO/IEC TS 27006-2:2021
   identifier:
@@ -9498,6 +10266,7 @@
     human: ISO/IEC TS 27006-2:2021
     urn: 'urn:iec:std:iso-iec:27006-2:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0770
   input: ISO/IEC TS 27008:2019
   identifier:
@@ -9512,6 +10281,7 @@
     human: ISO/IEC TS 27008:2019
     urn: 'urn:iec:std:iso-iec:27008:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0771
   input: ISO/IEC TS 27022:2021
   identifier:
@@ -9526,6 +10296,7 @@
     human: ISO/IEC TS 27022:2021
     urn: 'urn:iec:std:iso-iec:27022:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0772
   input: ISO/IEC TS 27034-5-1:2018
   identifier:
@@ -9542,6 +10313,7 @@
     human: ISO/IEC TS 27034-5-1:2018
     urn: 'urn:iec:std:iso-iec:27034-5-1:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0773
   input: ISO/IEC TS 27100:2020
   identifier:
@@ -9556,6 +10328,7 @@
     human: ISO/IEC TS 27100:2020
     urn: 'urn:iec:std:iso-iec:27100:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0774
   input: ISO/IEC TS 27110:2021
   identifier:
@@ -9570,6 +10343,7 @@
     human: ISO/IEC TS 27110:2021
     urn: 'urn:iec:std:iso-iec:27110:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0775
   input: ISO/IEC TS 27570:2021
   identifier:
@@ -9584,6 +10358,7 @@
     human: ISO/IEC TS 27570:2021
     urn: 'urn:iec:std:iso-iec:27570:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0776
   input: ISO/IEC TS 29003:2018
   identifier:
@@ -9598,6 +10373,7 @@
     human: ISO/IEC TS 29003:2018
     urn: 'urn:iec:std:iso-iec:29003:2018:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0777
   input: ISO/IEC TS 29112:2012
   identifier:
@@ -9612,6 +10388,7 @@
     human: ISO/IEC TS 29112:2012
     urn: 'urn:iec:std:iso-iec:29112:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0778
   input: ISO/IEC TS 29113:2012
   identifier:
@@ -9626,6 +10403,7 @@
     human: ISO/IEC TS 29113:2012
     urn: 'urn:iec:std:iso-iec:29113:2012:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0779
   input: ISO/IEC TS 29140-1:2011
   identifier:
@@ -9641,6 +10419,7 @@
     human: ISO/IEC TS 29140-1:2011
     urn: 'urn:iec:std:iso-iec:29140-1:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0780
   input: ISO/IEC TS 29140-2:2011
   identifier:
@@ -9656,6 +10435,7 @@
     human: ISO/IEC TS 29140-2:2011
     urn: 'urn:iec:std:iso-iec:29140-2:2011:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0781
   input: ISO/IEC TS 29140:2020
   identifier:
@@ -9670,6 +10450,7 @@
     human: ISO/IEC TS 29140:2020
     urn: 'urn:iec:std:iso-iec:29140:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0782
   input: ISO/IEC TS 29167-15:2017
   identifier:
@@ -9685,6 +10466,7 @@
     human: ISO/IEC TS 29167-15:2017
     urn: 'urn:iec:std:iso-iec:29167-15:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0783
   input: ISO/IEC TS 30103:2015
   identifier:
@@ -9699,6 +10481,7 @@
     human: ISO/IEC TS 30103:2015
     urn: 'urn:iec:std:iso-iec:30103:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0784
   input: ISO/IEC TS 30104:2015
   identifier:
@@ -9713,6 +10496,7 @@
     human: ISO/IEC TS 30104:2015
     urn: 'urn:iec:std:iso-iec:30104:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0785
   input: ISO/IEC TS 30105-6:2021
   identifier:
@@ -9728,6 +10512,7 @@
     human: ISO/IEC TS 30105-6:2021
     urn: 'urn:iec:std:iso-iec:30105-6:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0786
   input: ISO/IEC TS 30135-1:2014
   identifier:
@@ -9743,6 +10528,7 @@
     human: ISO/IEC TS 30135-1:2014
     urn: 'urn:iec:std:iso-iec:30135-1:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0787
   input: ISO/IEC TS 30135-2:2014
   identifier:
@@ -9758,6 +10544,7 @@
     human: ISO/IEC TS 30135-2:2014
     urn: 'urn:iec:std:iso-iec:30135-2:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0788
   input: ISO/IEC TS 30135-3:2014
   identifier:
@@ -9773,6 +10560,7 @@
     human: ISO/IEC TS 30135-3:2014
     urn: 'urn:iec:std:iso-iec:30135-3:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0789
   input: ISO/IEC TS 30135-4:2014
   identifier:
@@ -9788,6 +10576,7 @@
     human: ISO/IEC TS 30135-4:2014
     urn: 'urn:iec:std:iso-iec:30135-4:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0790
   input: ISO/IEC TS 30135-5:2014
   identifier:
@@ -9803,6 +10592,7 @@
     human: ISO/IEC TS 30135-5:2014
     urn: 'urn:iec:std:iso-iec:30135-5:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0791
   input: ISO/IEC TS 30135-6:2014
   identifier:
@@ -9818,6 +10608,7 @@
     human: ISO/IEC TS 30135-6:2014
     urn: 'urn:iec:std:iso-iec:30135-6:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0792
   input: ISO/IEC TS 30135-7:2014
   identifier:
@@ -9833,6 +10624,7 @@
     human: ISO/IEC TS 30135-7:2014
     urn: 'urn:iec:std:iso-iec:30135-7:2014:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0793
   input: ISO/IEC TS 33030:2017
   identifier:
@@ -9847,6 +10639,7 @@
     human: ISO/IEC TS 33030:2017
     urn: 'urn:iec:std:iso-iec:33030:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0794
   input: ISO/IEC TS 33052:2016
   identifier:
@@ -9861,6 +10654,7 @@
     human: ISO/IEC TS 33052:2016
     urn: 'urn:iec:std:iso-iec:33052:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0795
   input: ISO/IEC TS 33053:2019
   identifier:
@@ -9875,6 +10669,7 @@
     human: ISO/IEC TS 33053:2019
     urn: 'urn:iec:std:iso-iec:33053:2019:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0796
   input: ISO/IEC TS 33054:2020
   identifier:
@@ -9889,6 +10684,7 @@
     human: ISO/IEC TS 33054:2020
     urn: 'urn:iec:std:iso-iec:33054:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0797
   input: ISO/IEC TS 33060:2020
   identifier:
@@ -9903,6 +10699,7 @@
     human: ISO/IEC TS 33060:2020
     urn: 'urn:iec:std:iso-iec:33060:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0798
   input: ISO/IEC TS 33061:2021
   identifier:
@@ -9917,6 +10714,7 @@
     human: ISO/IEC TS 33061:2021
     urn: 'urn:iec:std:iso-iec:33061:2021:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0799
   input: ISO/IEC TS 33072:2016
   identifier:
@@ -9931,6 +10729,7 @@
     human: ISO/IEC TS 33072:2016
     urn: 'urn:iec:std:iso-iec:33072:2016:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0800
   input: ISO/IEC TS 33073:2017
   identifier:
@@ -9945,6 +10744,7 @@
     human: ISO/IEC TS 33073:2017
     urn: 'urn:iec:std:iso-iec:33073:2017:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0801
   input: ISO/IEC TS 33074:2020
   identifier:
@@ -9959,6 +10759,7 @@
     human: ISO/IEC TS 33074:2020
     urn: 'urn:iec:std:iso-iec:33074:2020:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0802
   input: ISO/IEC TS 38501:2015
   identifier:
@@ -9973,6 +10774,7 @@
     human: ISO/IEC TS 38501:2015
     urn: 'urn:iec:std:iso-iec:38501:2015:ts::'
   roundtrip: true
+  style: v3
 - id: iec.technical_specification.0803
   input: ISO/IEC TS 38505-3:2021
   identifier:
@@ -9988,3 +10790,4 @@
     human: ISO/IEC TS 38505-3:2021
     urn: 'urn:iec:std:iso-iec:38505-3:2021:ts::'
   roundtrip: true
+  style: v3

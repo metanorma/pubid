@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: https://pubid.dev/conformance/case-2.0.0.yaml
+$id: https://pubid.com/conformance/case-2.0.0.yaml
 title: PubID Conformance Corpus Case v2
 description: >-
   One case in the language-independent test library. identifier is the
@@ -22,6 +22,22 @@ properties:
     type: object
     additionalProperties:
       type: string
+  style:
+    type: string
+    enum: [v1, v2, v3]
+    description: PubID styling version (v1 legacy ISO/R, v2 dotted uppercase, v3 modern); heuristic until model-truth (TODO 12).
+  non_normalized_aliases:
+    type: array
+    items:
+      type: object
+      required: [input, style]
+      additionalProperties: false
+      properties:
+        input:
+          type: string
+        style:
+          type: string
+          enum: [v1, v2, v3]
   roundtrip:
     type: boolean
   expect:

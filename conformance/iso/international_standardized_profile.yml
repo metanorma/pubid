@@ -13,6 +13,7 @@
     human: ISO/IEC ISP 10611-3:2003
     urn: urn:iso:std:iso-iec:isp:10611:-3
   roundtrip: true
+  style: v3
 - id: iso.international_standardized_profile.0002
   input: ISO/IEC ISP 10611-4:2003
   identifier:
@@ -27,6 +28,7 @@
     human: ISO/IEC ISP 10611-4:2003
     urn: urn:iso:std:iso-iec:isp:10611:-4
   roundtrip: true
+  style: v3
 - id: iso.international_standardized_profile.0003
   input: ISO/IEC ISP 10613-5:1994
   identifier:
@@ -41,6 +43,7 @@
     human: ISO/IEC ISP 10613-5:1994
     urn: urn:iso:std:iso-iec:isp:10613:-5
   roundtrip: true
+  style: v3
 - id: iso.international_standardized_profile.0004
   input: ISO/IEC ISP 11186-3:2000
   identifier:
@@ -55,6 +58,7 @@
     human: ISO/IEC ISP 11186-3:2000
     urn: urn:iso:std:iso-iec:isp:11186:-3
   roundtrip: true
+  style: v3
 - id: iso.international_standardized_profile.0005
   input: ISO/IEC ISP 11188-1:1995
   identifier:
@@ -69,6 +73,7 @@
     human: ISO/IEC ISP 11188-1:1995
     urn: urn:iso:std:iso-iec:isp:11188:-1
   roundtrip: true
+  style: v3
 - id: iso.international_standardized_profile.0006
   input: ISO/IEC ISP 12062-1:1995
   identifier:
@@ -83,6 +88,7 @@
     human: ISO/IEC ISP 12062-1:1995
     urn: urn:iso:std:iso-iec:isp:12062:-1
   roundtrip: true
+  style: v3
 - id: iso.international_standardized_profile.0007
   input: ISO/IEC ISP 12062-1:2003
   identifier:
@@ -97,6 +103,7 @@
     human: ISO/IEC ISP 12062-1:2003
     urn: urn:iso:std:iso-iec:isp:12062:-1
   roundtrip: true
+  style: v3
 - id: iso.international_standardized_profile.0008
   input: ISO/IEC ISP 12062-2:2003
   identifier:
@@ -111,6 +118,7 @@
     human: ISO/IEC ISP 12062-2:2003
     urn: urn:iso:std:iso-iec:isp:12062:-2
   roundtrip: true
+  style: v3
 - id: iso.international_standardized_profile.0009
   input: ISO/IEC ISP 12062-3
   identifier:
@@ -124,6 +132,7 @@
     human: ISO/IEC ISP 12062-3
     urn: urn:iso:std:iso-iec:isp:12062:-3
   roundtrip: true
+  style: v3
 - id: iso.international_standardized_profile.0010
   input: ISO/IEC ISP 12062-4:2003
   identifier:
@@ -138,6 +147,7 @@
     human: ISO/IEC ISP 12062-4:2003
     urn: urn:iso:std:iso-iec:isp:12062:-4
   roundtrip: true
+  style: v3
 - id: iso.international_standardized_profile.0011
   input: ISO/IEC ISP 12062-5
   identifier:
@@ -151,6 +161,7 @@
     human: ISO/IEC ISP 12062-5
     urn: urn:iso:std:iso-iec:isp:12062:-5
   roundtrip: true
+  style: v3
 - id: iso.international_standardized_profile.0012
   input: ISO/IEC ISP 12062-5:2003
   identifier:
@@ -165,6 +176,7 @@
     human: ISO/IEC ISP 12062-5:2003
     urn: urn:iso:std:iso-iec:isp:12062:-5
   roundtrip: true
+  style: v3
 - id: iso.international_standardized_profile.0013
   input: ISO/IEC ISP 12063-3
   identifier:
@@ -178,3 +190,4 @@
     human: ISO/IEC ISP 12063-3
     urn: urn:iso:std:iso-iec:isp:12063:-3
   roundtrip: true
+  style: v3

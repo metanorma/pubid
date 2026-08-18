@@ -48,4 +48,16 @@ inside the default test suite.
 
 ## Current size (2026-08-18)
 
-iso: 7,511 cases + 62 debt; iec: 12,299 cases + 4 debt; failures: 0.
+See docs and _unparsed/_negative tallies per flavor; run rake conformance:run.
+
+## Styling versions and normalization aliases
+
+Every case and alias carries a `style` (v1 = legacy "ISO/R 2533/3-1975",
+v2 = classic dotted/uppercase "ISO 9001:2001/AMD.1:2010", v3 = modern
+"ISO 9001:2001/Amd 1:2010"). Fixture lines that normalize to the same
+identifier collapse into one canonical v-entry with the old spellings
+recorded as `non_normalized_aliases` ({input, style}) - the corpus thus
+encodes "old => normalized", and the normalized form is what round-trips.
+Exact duplicate fixture lines are counted (duplicates), not silently
+absorbed. Fail-fixture lines that the current parser unexpectedly accepts
+are recorded as reclassify debt, not hidden.

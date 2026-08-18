@@ -1,6 +1,6 @@
 ---
 - id: iso.bundled_identifier.0001
-  input: ISO/IEC DIR 1 + IEC SUP:2016-05
+  input: ISO/IEC DIR 1 + IEC SUP:2016-05-05
   identifier:
     type: bundled_identifier
     components:
@@ -19,6 +19,10 @@
     human: ISO/IEC DIR 1 + IEC SUP:2016-05-05
     urn: urn:iso:doc:iso-iec:dir:1:iec:sup:2016
   roundtrip: true
+  style: v3
+  non_normalized_aliases:
+  - input: ISO/IEC DIR 1 + IEC SUP:2016-05
+    style: v3
 - id: iso.bundled_identifier.0002
   input: ISO/IEC DIR 1:2022 + IEC SUP:2022
   identifier:
@@ -39,3 +43,4 @@
     human: ISO/IEC DIR 1:2022 + IEC SUP:2022
     urn: urn:iso:doc:iso-iec:dir:1:2022:iec:sup:2022
   roundtrip: true
+  style: v3

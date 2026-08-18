@@ -11,6 +11,7 @@
     human: IEC PAS 60050-732:2007
     urn: 'urn:iec:std:iec:60050-732:2007:pas::'
   roundtrip: true
+  style: v3
 - id: iec.publicly_available_specification.0002
   input: IEC PAS 60050-732:2007 ED1
   identifier:
@@ -25,6 +26,7 @@
     human: IEC PAS 60050-732:2007 ED1
     urn: 'urn:iec:std:iec:60050-732:2007:pas::'
   roundtrip: true
+  style: v3
 - id: iec.publicly_available_specification.0003
   input: IEC PAS 63088:2017
   identifier:
@@ -36,6 +38,7 @@
     human: IEC PAS 63088:2017
     urn: 'urn:iec:std:iec:63088:2017:pas::'
   roundtrip: true
+  style: v3
 - id: iec.publicly_available_specification.0004
   input: IEC PAS 63095-1:2017
   identifier:
@@ -48,6 +51,7 @@
     human: IEC PAS 63095-1:2017
     urn: 'urn:iec:std:iec:63095-1:2017:pas::'
   roundtrip: true
+  style: v3
 - id: iec.publicly_available_specification.0005
   input: IEC PAS 63095-2:2017
   identifier:
@@ -60,6 +64,7 @@
     human: IEC PAS 63095-2:2017
     urn: 'urn:iec:std:iec:63095-2:2017:pas::'
   roundtrip: true
+  style: v3
 - id: iec.publicly_available_specification.0006
   input: IEC PAS 63131:2017
   identifier:
@@ -71,6 +76,7 @@
     human: IEC PAS 63131:2017
     urn: 'urn:iec:std:iec:63131:2017:pas::'
   roundtrip: true
+  style: v3
 - id: iec.publicly_available_specification.0007
   input: IEC PAS 63256:2020
   identifier:
@@ -82,6 +88,7 @@
     human: IEC PAS 63256:2020
     urn: 'urn:iec:std:iec:63256:2020:pas::'
   roundtrip: true
+  style: v3
 - id: iec.publicly_available_specification.0008
   input: IEC PAS 63267-3-30:2021
   identifier:
@@ -95,6 +102,7 @@
     human: IEC PAS 63267-3-30:2021
     urn: 'urn:iec:std:iec:63267-3-30:2021:pas::'
   roundtrip: true
+  style: v3
 - id: iec.publicly_available_specification.0009
   input: IEC PAS 63267-3-31:2020
   identifier:
@@ -108,6 +116,7 @@
     human: IEC PAS 63267-3-31:2020
     urn: 'urn:iec:std:iec:63267-3-31:2020:pas::'
   roundtrip: true
+  style: v3
 - id: iec.publicly_available_specification.0010
   input: IEC PAS 63325:2020
   identifier:
@@ -119,6 +128,7 @@
     human: IEC PAS 63325:2020
     urn: 'urn:iec:std:iec:63325:2020:pas::'
   roundtrip: true
+  style: v3
 - id: iec.publicly_available_specification.0011
   input: IEC PAS 63441 ED1
   identifier:
@@ -131,6 +141,7 @@
     human: IEC PAS 63441 ED1
     urn: 'urn:iec:std:iec:63441::pas::'
   roundtrip: true
+  style: v3
 - id: iec.publicly_available_specification.0012
   input: ISO PAS 81346-101 ED1
   identifier:
@@ -145,3 +156,4 @@
     human: ISO PAS 81346-101 ED1
     urn: 'urn:iec:std:iso:81346-101::pas::'
   roundtrip: true
+  style: v3

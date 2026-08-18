@@ -10,6 +10,7 @@
     human: IEC GUIDE 103:1980
     urn: 'urn:iec:std:iec:103:1980:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0002
   input: IEC GUIDE 108:2019
   identifier:
@@ -21,6 +22,7 @@
     human: IEC GUIDE 108:2019
     urn: 'urn:iec:std:iec:108:2019:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0003
   input: IEC GUIDE 115:2021
   identifier:
@@ -32,6 +34,7 @@
     human: IEC GUIDE 115:2021
     urn: 'urn:iec:std:iec:115:2021:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0004
   input: ISO/IEC GUIDE 13:1977
   identifier:
@@ -46,6 +49,7 @@
     human: ISO/IEC GUIDE 13:1977
     urn: 'urn:iec:std:iso-iec:13:1977:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0005
   input: ISO/IEC GUIDE 14:2003
   identifier:
@@ -60,6 +64,7 @@
     human: ISO/IEC GUIDE 14:2003
     urn: 'urn:iec:std:iso-iec:14:2003:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0006
   input: ISO/IEC GUIDE 14:2018
   identifier:
@@ -74,6 +79,7 @@
     human: ISO/IEC GUIDE 14:2018
     urn: 'urn:iec:std:iso-iec:14:2018:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0007
   input: ISO/IEC GUIDE 15:1977
   identifier:
@@ -88,6 +94,7 @@
     human: ISO/IEC GUIDE 15:1977
     urn: 'urn:iec:std:iso-iec:15:1977:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0008
   input: ISO/IEC GUIDE 16:1978
   identifier:
@@ -102,6 +109,7 @@
     human: ISO/IEC GUIDE 16:1978
     urn: 'urn:iec:std:iso-iec:16:1978:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0009
   input: ISO/IEC GUIDE 17:2016
   identifier:
@@ -116,35 +124,8 @@
     human: ISO/IEC GUIDE 17:2016
     urn: 'urn:iec:std:iso-iec:17:2016:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0010
-  input: ISO/IEC GUIDE 2:1986
-  identifier:
-    type: guide
-    components:
-      number: '2'
-      year: '1986'
-      publisher: ISO
-      copublishers:
-      - IEC
-  representations:
-    human: ISO/IEC GUIDE 2:1986
-    urn: 'urn:iec:std:iso-iec:2:1986:guide::'
-  roundtrip: true
-- id: iec.guide.0011
-  input: ISO/IEC GUIDE 2:2004
-  identifier:
-    type: guide
-    components:
-      number: '2'
-      year: '2004'
-      publisher: ISO
-      copublishers:
-      - IEC
-  representations:
-    human: ISO/IEC GUIDE 2:2004
-    urn: 'urn:iec:std:iso-iec:2:2004:guide::'
-  roundtrip: true
-- id: iec.guide.0012
   input: ISO/IEC GUIDE 21-1:2005
   identifier:
     type: guide
@@ -159,7 +140,8 @@
     human: ISO/IEC GUIDE 21-1:2005
     urn: 'urn:iec:std:iso-iec:21-1:2005:guide::'
   roundtrip: true
-- id: iec.guide.0013
+  style: v3
+- id: iec.guide.0011
   input: ISO/IEC GUIDE 21-2:2005
   identifier:
     type: guide
@@ -174,7 +156,8 @@
     human: ISO/IEC GUIDE 21-2:2005
     urn: 'urn:iec:std:iso-iec:21-2:2005:guide::'
   roundtrip: true
-- id: iec.guide.0014
+  style: v3
+- id: iec.guide.0012
   input: ISO/IEC GUIDE 21:1981
   identifier:
     type: guide
@@ -188,7 +171,8 @@
     human: ISO/IEC GUIDE 21:1981
     urn: 'urn:iec:std:iso-iec:21:1981:guide::'
   roundtrip: true
-- id: iec.guide.0015
+  style: v3
+- id: iec.guide.0013
   input: ISO/IEC GUIDE 22:1982
   identifier:
     type: guide
@@ -202,7 +186,8 @@
     human: ISO/IEC GUIDE 22:1982
     urn: 'urn:iec:std:iso-iec:22:1982:guide::'
   roundtrip: true
-- id: iec.guide.0016
+  style: v3
+- id: iec.guide.0014
   input: ISO/IEC GUIDE 23:1982
   identifier:
     type: guide
@@ -216,7 +201,8 @@
     human: ISO/IEC GUIDE 23:1982
     urn: 'urn:iec:std:iso-iec:23:1982:guide::'
   roundtrip: true
-- id: iec.guide.0017
+  style: v3
+- id: iec.guide.0015
   input: ISO/IEC GUIDE 25:1982
   identifier:
     type: guide
@@ -230,7 +216,8 @@
     human: ISO/IEC GUIDE 25:1982
     urn: 'urn:iec:std:iso-iec:25:1982:guide::'
   roundtrip: true
-- id: iec.guide.0018
+  style: v3
+- id: iec.guide.0016
   input: ISO/IEC GUIDE 28:1982
   identifier:
     type: guide
@@ -244,7 +231,8 @@
     human: ISO/IEC GUIDE 28:1982
     urn: 'urn:iec:std:iso-iec:28:1982:guide::'
   roundtrip: true
-- id: iec.guide.0019
+  style: v3
+- id: iec.guide.0017
   input: ISO/IEC GUIDE 28:2004
   identifier:
     type: guide
@@ -258,21 +246,38 @@
     human: ISO/IEC GUIDE 28:2004
     urn: 'urn:iec:std:iso-iec:28:2004:guide::'
   roundtrip: true
-- id: iec.guide.0020
-  input: ISO/IEC GUIDE 3:1981
+  style: v3
+- id: iec.guide.0018
+  input: ISO/IEC GUIDE 2:1986
   identifier:
     type: guide
     components:
-      number: '3'
-      year: '1981'
+      number: '2'
+      year: '1986'
       publisher: ISO
       copublishers:
       - IEC
   representations:
-    human: ISO/IEC GUIDE 3:1981
-    urn: 'urn:iec:std:iso-iec:3:1981:guide::'
+    human: ISO/IEC GUIDE 2:1986
+    urn: 'urn:iec:std:iso-iec:2:1986:guide::'
   roundtrip: true
-- id: iec.guide.0021
+  style: v3
+- id: iec.guide.0019
+  input: ISO/IEC GUIDE 2:2004
+  identifier:
+    type: guide
+    components:
+      number: '2'
+      year: '2004'
+      publisher: ISO
+      copublishers:
+      - IEC
+  representations:
+    human: ISO/IEC GUIDE 2:2004
+    urn: 'urn:iec:std:iso-iec:2:2004:guide::'
+  roundtrip: true
+  style: v3
+- id: iec.guide.0020
   input: ISO/IEC GUIDE 36:1982
   identifier:
     type: guide
@@ -286,7 +291,8 @@
     human: ISO/IEC GUIDE 36:1982
     urn: 'urn:iec:std:iso-iec:36:1982:guide::'
   roundtrip: true
-- id: iec.guide.0022
+  style: v3
+- id: iec.guide.0021
   input: ISO/IEC GUIDE 37:1983
   identifier:
     type: guide
@@ -300,7 +306,8 @@
     human: ISO/IEC GUIDE 37:1983
     urn: 'urn:iec:std:iso-iec:37:1983:guide::'
   roundtrip: true
-- id: iec.guide.0023
+  style: v3
+- id: iec.guide.0022
   input: ISO/IEC GUIDE 37:1995
   identifier:
     type: guide
@@ -314,7 +321,8 @@
     human: ISO/IEC GUIDE 37:1995
     urn: 'urn:iec:std:iso-iec:37:1995:guide::'
   roundtrip: true
-- id: iec.guide.0024
+  style: v3
+- id: iec.guide.0023
   input: ISO/IEC GUIDE 37:2012
   identifier:
     type: guide
@@ -328,7 +336,8 @@
     human: ISO/IEC GUIDE 37:2012
     urn: 'urn:iec:std:iso-iec:37:2012:guide::'
   roundtrip: true
-- id: iec.guide.0025
+  style: v3
+- id: iec.guide.0024
   input: ISO/IEC GUIDE 38:1983
   identifier:
     type: guide
@@ -342,7 +351,8 @@
     human: ISO/IEC GUIDE 38:1983
     urn: 'urn:iec:std:iso-iec:38:1983:guide::'
   roundtrip: true
-- id: iec.guide.0026
+  style: v3
+- id: iec.guide.0025
   input: ISO/IEC GUIDE 39:1983
   identifier:
     type: guide
@@ -356,6 +366,22 @@
     human: ISO/IEC GUIDE 39:1983
     urn: 'urn:iec:std:iso-iec:39:1983:guide::'
   roundtrip: true
+  style: v3
+- id: iec.guide.0026
+  input: ISO/IEC GUIDE 3:1981
+  identifier:
+    type: guide
+    components:
+      number: '3'
+      year: '1981'
+      publisher: ISO
+      copublishers:
+      - IEC
+  representations:
+    human: ISO/IEC GUIDE 3:1981
+    urn: 'urn:iec:std:iso-iec:3:1981:guide::'
+  roundtrip: true
+  style: v3
 - id: iec.guide.0027
   input: ISO/IEC GUIDE 40:1983
   identifier:
@@ -370,6 +396,7 @@
     human: ISO/IEC GUIDE 40:1983
     urn: 'urn:iec:std:iso-iec:40:1983:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0028
   input: ISO/IEC GUIDE 41:2003
   identifier:
@@ -384,6 +411,7 @@
     human: ISO/IEC GUIDE 41:2003
     urn: 'urn:iec:std:iso-iec:41:2003:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0029
   input: ISO/IEC GUIDE 41:2018
   identifier:
@@ -398,6 +426,7 @@
     human: ISO/IEC GUIDE 41:2018
     urn: 'urn:iec:std:iso-iec:41:2018:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0030
   input: ISO/IEC GUIDE 43-1:1997
   identifier:
@@ -413,6 +442,7 @@
     human: ISO/IEC GUIDE 43-1:1997
     urn: 'urn:iec:std:iso-iec:43-1:1997:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0031
   input: ISO/IEC GUIDE 43-2:1997
   identifier:
@@ -428,6 +458,7 @@
     human: ISO/IEC GUIDE 43-2:1997
     urn: 'urn:iec:std:iso-iec:43-2:1997:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0032
   input: ISO/IEC GUIDE 43:1984
   identifier:
@@ -442,6 +473,7 @@
     human: ISO/IEC GUIDE 43:1984
     urn: 'urn:iec:std:iso-iec:43:1984:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0033
   input: ISO/IEC GUIDE 44:1985
   identifier:
@@ -456,6 +488,7 @@
     human: ISO/IEC GUIDE 44:1985
     urn: 'urn:iec:std:iso-iec:44:1985:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0034
   input: ISO/IEC GUIDE 45:1985
   identifier:
@@ -470,6 +503,7 @@
     human: ISO/IEC GUIDE 45:1985
     urn: 'urn:iec:std:iso-iec:45:1985:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0035
   input: ISO/IEC GUIDE 46:1985
   identifier:
@@ -484,6 +518,7 @@
     human: ISO/IEC GUIDE 46:1985
     urn: 'urn:iec:std:iso-iec:46:1985:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0036
   input: ISO/IEC GUIDE 46:2017
   identifier:
@@ -498,6 +533,7 @@
     human: ISO/IEC GUIDE 46:2017
     urn: 'urn:iec:std:iso-iec:46:2017:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0037
   input: ISO/IEC GUIDE 48:1986
   identifier:
@@ -512,6 +548,7 @@
     human: ISO/IEC GUIDE 48:1986
     urn: 'urn:iec:std:iso-iec:48:1986:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0038
   input: ISO/IEC GUIDE 49:1986
   identifier:
@@ -526,6 +563,7 @@
     human: ISO/IEC GUIDE 49:1986
     urn: 'urn:iec:std:iso-iec:49:1986:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0039
   input: ISO/IEC GUIDE 50:1987
   identifier:
@@ -540,6 +578,7 @@
     human: ISO/IEC GUIDE 50:1987
     urn: 'urn:iec:std:iso-iec:50:1987:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0040
   input: ISO/IEC GUIDE 50:2002
   identifier:
@@ -554,6 +593,7 @@
     human: ISO/IEC GUIDE 50:2002
     urn: 'urn:iec:std:iso-iec:50:2002:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0041
   input: ISO/IEC GUIDE 50:2014
   identifier:
@@ -568,6 +608,7 @@
     human: ISO/IEC GUIDE 50:2014
     urn: 'urn:iec:std:iso-iec:50:2014:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0042
   input: ISO/IEC GUIDE 51:1990
   identifier:
@@ -582,6 +623,7 @@
     human: ISO/IEC GUIDE 51:1990
     urn: 'urn:iec:std:iso-iec:51:1990:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0043
   input: ISO/IEC GUIDE 51:1999
   identifier:
@@ -596,6 +638,7 @@
     human: ISO/IEC GUIDE 51:1999
     urn: 'urn:iec:std:iso-iec:51:1999:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0044
   input: ISO/IEC GUIDE 53:2005
   identifier:
@@ -610,6 +653,7 @@
     human: ISO/IEC GUIDE 53:2005
     urn: 'urn:iec:std:iso-iec:53:2005:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0045
   input: ISO/IEC GUIDE 59:1994
   identifier:
@@ -624,6 +668,7 @@
     human: ISO/IEC GUIDE 59:1994
     urn: 'urn:iec:std:iso-iec:59:1994:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0046
   input: ISO/IEC GUIDE 60:2004
   identifier:
@@ -638,6 +683,7 @@
     human: ISO/IEC GUIDE 60:2004
     urn: 'urn:iec:std:iso-iec:60:2004:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0047
   input: ISO/IEC GUIDE 63:1999
   identifier:
@@ -652,6 +698,7 @@
     human: ISO/IEC GUIDE 63:1999
     urn: 'urn:iec:std:iso-iec:63:1999:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0048
   input: ISO/IEC GUIDE 63:2012
   identifier:
@@ -666,6 +713,7 @@
     human: ISO/IEC GUIDE 63:2012
     urn: 'urn:iec:std:iso-iec:63:2012:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0049
   input: ISO/IEC GUIDE 65:1996
   identifier:
@@ -680,6 +728,7 @@
     human: ISO/IEC GUIDE 65:1996
     urn: 'urn:iec:std:iso-iec:65:1996:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0050
   input: ISO/IEC GUIDE 67:2004
   identifier:
@@ -694,35 +743,8 @@
     human: ISO/IEC GUIDE 67:2004
     urn: 'urn:iec:std:iso-iec:67:2004:guide::'
   roundtrip: true
+  style: v3
 - id: iec.guide.0051
-  input: ISO/IEC GUIDE 7:1982
-  identifier:
-    type: guide
-    components:
-      number: '7'
-      year: '1982'
-      publisher: ISO
-      copublishers:
-      - IEC
-  representations:
-    human: ISO/IEC GUIDE 7:1982
-    urn: 'urn:iec:std:iso-iec:7:1982:guide::'
-  roundtrip: true
-- id: iec.guide.0052
-  input: ISO/IEC GUIDE 7:1994
-  identifier:
-    type: guide
-    components:
-      number: '7'
-      year: '1994'
-      publisher: ISO
-      copublishers:
-      - IEC
-  representations:
-    human: ISO/IEC GUIDE 7:1994
-    urn: 'urn:iec:std:iso-iec:7:1994:guide::'
-  roundtrip: true
-- id: iec.guide.0053
   input: ISO/IEC GUIDE 71:2001
   identifier:
     type: guide
@@ -736,7 +758,8 @@
     human: ISO/IEC GUIDE 71:2001
     urn: 'urn:iec:std:iso-iec:71:2001:guide::'
   roundtrip: true
-- id: iec.guide.0054
+  style: v3
+- id: iec.guide.0052
   input: ISO/IEC GUIDE 73:2002
   identifier:
     type: guide
@@ -750,7 +773,8 @@
     human: ISO/IEC GUIDE 73:2002
     urn: 'urn:iec:std:iso-iec:73:2002:guide::'
   roundtrip: true
-- id: iec.guide.0055
+  style: v3
+- id: iec.guide.0053
   input: ISO/IEC GUIDE 75:2006
   identifier:
     type: guide
@@ -764,7 +788,8 @@
     human: ISO/IEC GUIDE 75:2006
     urn: 'urn:iec:std:iso-iec:75:2006:guide::'
   roundtrip: true
-- id: iec.guide.0056
+  style: v3
+- id: iec.guide.0054
   input: ISO/IEC GUIDE 76:2008
   identifier:
     type: guide
@@ -778,6 +803,37 @@
     human: ISO/IEC GUIDE 76:2008
     urn: 'urn:iec:std:iso-iec:76:2008:guide::'
   roundtrip: true
+  style: v3
+- id: iec.guide.0055
+  input: ISO/IEC GUIDE 7:1982
+  identifier:
+    type: guide
+    components:
+      number: '7'
+      year: '1982'
+      publisher: ISO
+      copublishers:
+      - IEC
+  representations:
+    human: ISO/IEC GUIDE 7:1982
+    urn: 'urn:iec:std:iso-iec:7:1982:guide::'
+  roundtrip: true
+  style: v3
+- id: iec.guide.0056
+  input: ISO/IEC GUIDE 7:1994
+  identifier:
+    type: guide
+    components:
+      number: '7'
+      year: '1994'
+      publisher: ISO
+      copublishers:
+      - IEC
+  representations:
+    human: ISO/IEC GUIDE 7:1994
+    urn: 'urn:iec:std:iso-iec:7:1994:guide::'
+  roundtrip: true
+  style: v3
 - id: iec.guide.0057
   input: ISO/IEC GUIDE 98-6:2021
   identifier:
@@ -793,3 +849,4 @@
     human: ISO/IEC GUIDE 98-6:2021
     urn: 'urn:iec:std:iso-iec:98-6:2021:guide::'
   roundtrip: true
+  style: v3

@@ -10,6 +10,7 @@
     human: ISO/AWI PAS 14018
     urn: urn:iso:std:iso:pas:14018:stage-10.99
   roundtrip: true
+  style: v3
 - id: iso.pas.0002
   input: ISO/AWI PAS 24499
   identifier:
@@ -21,6 +22,7 @@
     human: ISO/AWI PAS 24499
     urn: urn:iso:std:iso:pas:24499:stage-10.99
   roundtrip: true
+  style: v3
 - id: iso.pas.0003
   input: ISO/AWI PAS 5672
   identifier:
@@ -32,6 +34,7 @@
     human: ISO/AWI PAS 5672
     urn: urn:iso:std:iso:pas:5672:stage-10.99
   roundtrip: true
+  style: v3
 - id: iso.pas.0004
   input: ISO/AWI PAS 8329
   identifier:
@@ -43,6 +46,7 @@
     human: ISO/AWI PAS 8329
     urn: urn:iso:std:iso:pas:8329:stage-10.99
   roundtrip: true
+  style: v3
 - id: iso.pas.0005
   input: ISO/AWI PAS 8800
   identifier:
@@ -54,6 +58,7 @@
     human: ISO/AWI PAS 8800
     urn: urn:iso:std:iso:pas:8800:stage-10.99
   roundtrip: true
+  style: v3
 - id: iso.pas.0006
   input: ISO/AWI PAS 8926
   identifier:
@@ -65,6 +70,7 @@
     human: ISO/AWI PAS 8926
     urn: urn:iso:std:iso:pas:8926:stage-10.99
   roundtrip: true
+  style: v3
 - id: iso.pas.0007
   input: ISO/CD PAS 22399
   identifier:
@@ -76,6 +82,7 @@
     human: ISO/CD PAS 22399
     urn: urn:iso:std:iso:pas:22399:CD
   roundtrip: true
+  style: v3
 - id: iso.pas.0008
   input: ISO/CD PAS 24019
   identifier:
@@ -87,6 +94,7 @@
     human: ISO/CD PAS 24019
     urn: urn:iso:std:iso:pas:24019:CD
   roundtrip: true
+  style: v3
 - id: iso.pas.0009
   input: ISO/PAS 11856:2003
   identifier:
@@ -98,6 +106,7 @@
     human: ISO/PAS 11856:2003
     urn: urn:iso:std:iso:pas:11856
   roundtrip: true
+  style: v3
 - id: iso.pas.0010
   input: ISO/PAS 12868:2009
   identifier:
@@ -109,6 +118,7 @@
     human: ISO/PAS 12868:2009
     urn: urn:iso:std:iso:pas:12868
   roundtrip: true
+  style: v3
 - id: iso.pas.0011
   input: ISO/PAS 13396:2009
   identifier:
@@ -120,6 +130,7 @@
     human: ISO/PAS 13396:2009
     urn: urn:iso:std:iso:pas:13396
   roundtrip: true
+  style: v3
 - id: iso.pas.0012
   input: ISO/PAS 13613:2010
   identifier:
@@ -131,6 +142,7 @@
     human: ISO/PAS 13613:2010
     urn: urn:iso:std:iso:pas:13613
   roundtrip: true
+  style: v3
 - id: iso.pas.0013
   input: ISO/PAS 16739:2005
   identifier:
@@ -142,6 +154,7 @@
     human: ISO/PAS 16739:2005
     urn: urn:iso:std:iso:pas:16739
   roundtrip: true
+  style: v3
 - id: iso.pas.0014
   input: ISO/PAS 17001:2005
   identifier:
@@ -153,6 +166,7 @@
     human: ISO/PAS 17001:2005
     urn: urn:iso:std:iso:pas:17001
   roundtrip: true
+  style: v3
 - id: iso.pas.0015
   input: ISO/PAS 17005:2008
   identifier:
@@ -164,6 +178,7 @@
     human: ISO/PAS 17005:2008
     urn: urn:iso:std:iso:pas:17005
   roundtrip: true
+  style: v3
 - id: iso.pas.0016
   input: ISO/PAS 17208-1:2012
   identifier:
@@ -176,6 +191,7 @@
     human: ISO/PAS 17208-1:2012
     urn: urn:iso:std:iso:pas:17208:-1
   roundtrip: true
+  style: v3
 - id: iso.pas.0017
   input: ISO/PAS 17506:2012
   identifier:
@@ -187,6 +203,7 @@
     human: ISO/PAS 17506:2012
     urn: urn:iso:std:iso:pas:17506
   roundtrip: true
+  style: v3
 - id: iso.pas.0018
   input: ISO/PAS 18761:2013
   identifier:
@@ -198,6 +215,7 @@
     human: ISO/PAS 18761:2013
     urn: urn:iso:std:iso:pas:18761
   roundtrip: true
+  style: v3
 - id: iso.pas.0019
   input: ISO/PAS 19363:2017
   identifier:
@@ -209,6 +227,7 @@
     human: ISO/PAS 19363:2017
     urn: urn:iso:std:iso:pas:19363
   roundtrip: true
+  style: v3
 - id: iso.pas.0020
   input: ISO/PAS 19450
   identifier:
@@ -219,6 +238,7 @@
     human: ISO/PAS 19450
     urn: urn:iso:std:iso:pas:19450
   roundtrip: true
+  style: v3
 - id: iso.pas.0021
   input: ISO/PAS 19450:2015
   identifier:
@@ -230,6 +250,7 @@
     human: ISO/PAS 19450:2015
     urn: urn:iso:std:iso:pas:19450
   roundtrip: true
+  style: v3
 - id: iso.pas.0022
   input: ISO/PAS 19695:2015
   identifier:
@@ -241,6 +262,7 @@
     human: ISO/PAS 19695:2015
     urn: urn:iso:std:iso:pas:19695
   roundtrip: true
+  style: v3
 - id: iso.pas.0023
   input: ISO/PAS 19891-1:2016
   identifier:
@@ -253,6 +275,7 @@
     human: ISO/PAS 19891-1:2016
     urn: urn:iso:std:iso:pas:19891:-1
   roundtrip: true
+  style: v3
 - id: iso.pas.0024
   input: ISO/PAS 20065:2016
   identifier:
@@ -264,6 +287,7 @@
     human: ISO/PAS 20065:2016
     urn: urn:iso:std:iso:pas:20065
   roundtrip: true
+  style: v3
 - id: iso.pas.0025
   input: ISO/PAS 20282-4:2007
   identifier:
@@ -276,6 +300,7 @@
     human: ISO/PAS 20282-4:2007
     urn: urn:iso:std:iso:pas:20282:-4
   roundtrip: true
+  style: v3
 - id: iso.pas.0026
   input: ISO/PAS 21448:2019
   identifier:
@@ -287,6 +312,7 @@
     human: ISO/PAS 21448:2019
     urn: urn:iso:std:iso:pas:21448
   roundtrip: true
+  style: v3
 - id: iso.pas.0027
   input: ISO/PAS 22241-1:2005
   identifier:
@@ -299,6 +325,7 @@
     human: ISO/PAS 22241-1:2005
     urn: urn:iso:std:iso:pas:22241:-1
   roundtrip: true
+  style: v3
 - id: iso.pas.0028
   input: ISO/PAS 22241-2:2005
   identifier:
@@ -311,6 +338,7 @@
     human: ISO/PAS 22241-2:2005
     urn: urn:iso:std:iso:pas:22241:-2
   roundtrip: true
+  style: v3
 - id: iso.pas.0029
   input: ISO/PAS 23263:2019(en)
   identifier:
@@ -325,6 +353,7 @@
     human: ISO/PAS 23263:2019(en)
     urn: urn:iso:std:iso:pas:23263:en
   roundtrip: true
+  style: v3
 - id: iso.pas.0030
   input: ISO/PAS 23678-1
   identifier:
@@ -336,6 +365,7 @@
     human: ISO/PAS 23678-1
     urn: urn:iso:std:iso:pas:23678:-1
   roundtrip: true
+  style: v3
 - id: iso.pas.0031
   input: ISO/PAS 23678-2
   identifier:
@@ -347,6 +377,7 @@
     human: ISO/PAS 23678-2
     urn: urn:iso:std:iso:pas:23678:-2
   roundtrip: true
+  style: v3
 - id: iso.pas.0032
   input: ISO/PAS 23678-3
   identifier:
@@ -358,6 +389,7 @@
     human: ISO/PAS 23678-3
     urn: urn:iso:std:iso:pas:23678:-3
   roundtrip: true
+  style: v3
 - id: iso.pas.0033
   input: ISO/PAS 23678-4
   identifier:
@@ -369,6 +401,7 @@
     human: ISO/PAS 23678-4
     urn: urn:iso:std:iso:pas:23678:-4
   roundtrip: true
+  style: v3
 - id: iso.pas.0034
   input: ISO/PAS 23678-4:2020
   identifier:
@@ -381,6 +414,7 @@
     human: ISO/PAS 23678-4:2020
     urn: urn:iso:std:iso:pas:23678:-4
   roundtrip: true
+  style: v3
 - id: iso.pas.0035
   input: ISO/PAS 24019
   identifier:
@@ -391,6 +425,7 @@
     human: ISO/PAS 24019
     urn: urn:iso:std:iso:pas:24019
   roundtrip: true
+  style: v3
 - id: iso.pas.0036
   input: ISO/PAS 24019:2020
   identifier:
@@ -402,6 +437,7 @@
     human: ISO/PAS 24019:2020
     urn: urn:iso:std:iso:pas:24019
   roundtrip: true
+  style: v3
 - id: iso.pas.0037
   input: ISO/PAS 27145-1:2006
   identifier:
@@ -414,6 +450,7 @@
     human: ISO/PAS 27145-1:2006
     urn: urn:iso:std:iso:pas:27145:-1
   roundtrip: true
+  style: v3
 - id: iso.pas.0038
   input: ISO/PAS 27145-2:2006
   identifier:
@@ -426,6 +463,7 @@
     human: ISO/PAS 27145-2:2006
     urn: urn:iso:std:iso:pas:27145:-2
   roundtrip: true
+  style: v3
 - id: iso.pas.0039
   input: ISO/PAS 27145-3:2006
   identifier:
@@ -438,6 +476,7 @@
     human: ISO/PAS 27145-3:2006
     urn: urn:iso:std:iso:pas:27145:-3
   roundtrip: true
+  style: v3
 - id: iso.pas.0040
   input: ISO/PAS 27145-4:2006
   identifier:
@@ -450,6 +489,7 @@
     human: ISO/PAS 27145-4:2006
     urn: urn:iso:std:iso:pas:27145:-4
   roundtrip: true
+  style: v3
 - id: iso.pas.0041
   input: ISO/PAS 28000:2005
   identifier:
@@ -461,6 +501,7 @@
     human: ISO/PAS 28000:2005
     urn: urn:iso:std:iso:pas:28000
   roundtrip: true
+  style: v3
 - id: iso.pas.0042
   input: ISO/PAS 28002:2010
   identifier:
@@ -472,6 +513,7 @@
     human: ISO/PAS 28002:2010
     urn: urn:iso:std:iso:pas:28002
   roundtrip: true
+  style: v3
 - id: iso.pas.0043
   input: ISO/PAS 28005-2:2009
   identifier:
@@ -484,6 +526,7 @@
     human: ISO/PAS 28005-2:2009
     urn: urn:iso:std:iso:pas:28005:-2
   roundtrip: true
+  style: v3
 - id: iso.pas.0044
   input: ISO/PAS 3930:2009
   identifier:
@@ -495,6 +538,7 @@
     human: ISO/PAS 3930:2009
     urn: urn:iso:std:iso:pas:3930
   roundtrip: true
+  style: v3
 - id: iso.pas.0045
   input: ISO/PAS 45005:2020
   identifier:
@@ -506,6 +550,7 @@
     human: ISO/PAS 45005:2020
     urn: urn:iso:std:iso:pas:45005
   roundtrip: true
+  style: v3
 - id: iso.pas.0046
   input: ISO/PAS 45005:2020(en)
   identifier:
@@ -520,6 +565,7 @@
     human: ISO/PAS 45005:2020(en)
     urn: urn:iso:std:iso:pas:45005:en
   roundtrip: true
+  style: v3
 - id: iso.pas.0047
   input: ISO/PAS 5101:2021
   identifier:
@@ -531,6 +577,7 @@
     human: ISO/PAS 5101:2021
     urn: urn:iso:std:iso:pas:5101
   roundtrip: true
+  style: v3
 - id: iso.pas.0048
   input: ISO/PAS 5112
   identifier:
@@ -541,6 +588,7 @@
     human: ISO/PAS 5112
     urn: urn:iso:std:iso:pas:5112
   roundtrip: true
+  style: v3
 - id: iso.pas.0049
   input: ISO/PAS 5643:2021
   identifier:
@@ -552,6 +600,7 @@
     human: ISO/PAS 5643:2021
     urn: urn:iso:std:iso:pas:5643
   roundtrip: true
+  style: v3
 - id: iso.pas.0050
   input: ISO/PRF PAS 22596
   identifier:
@@ -563,6 +612,7 @@
     human: ISO/PRF PAS 22596
     urn: urn:iso:std:iso:pas:22596:stage-60.00
   roundtrip: true
+  style: v3
 - id: iso.pas.0051
   input: ISO/SAE PAS 22736:2021
   identifier:
@@ -576,3 +626,4 @@
     human: ISO/SAE PAS 22736:2021
     urn: urn:iso:std:iso-sae:pas:22736
   roundtrip: true
+  style: v3

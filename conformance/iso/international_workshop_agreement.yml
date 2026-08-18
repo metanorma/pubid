@@ -10,6 +10,7 @@
     human: AWI IWA 36
     urn: urn:iso:std:iso:iwa:36:stage-10.99
   roundtrip: true
+  style: v3
 - id: iso.international_workshop_agreement.0002
   input: AWI IWA 39
   identifier:
@@ -21,6 +22,7 @@
     human: AWI IWA 39
     urn: urn:iso:std:iso:iwa:39:stage-10.99
   roundtrip: true
+  style: v3
 - id: iso.international_workshop_agreement.0003
   input: AWI IWA 41
   identifier:
@@ -32,6 +34,7 @@
     human: AWI IWA 41
     urn: urn:iso:std:iso:iwa:41:stage-10.99
   roundtrip: true
+  style: v3
 - id: iso.international_workshop_agreement.0004
   input: CD IWA 37
   identifier:
@@ -43,6 +46,7 @@
     human: CD IWA 37
     urn: urn:iso:std:iso:iwa:37:CD
   roundtrip: true
+  style: v3
 - id: iso.international_workshop_agreement.0005
   input: CD IWA 37-1
   identifier:
@@ -55,6 +59,7 @@
     human: CD IWA 37-1
     urn: urn:iso:std:iso:iwa:37:-1:CD
   roundtrip: true
+  style: v3
 - id: iso.international_workshop_agreement.0006
   input: CD IWA 37-2
   identifier:
@@ -67,6 +72,7 @@
     human: CD IWA 37-2
     urn: urn:iso:std:iso:iwa:37:-2:CD
   roundtrip: true
+  style: v3
 - id: iso.international_workshop_agreement.0007
   input: CD IWA 37-3
   identifier:
@@ -79,29 +85,8 @@
     human: CD IWA 37-3
     urn: urn:iso:std:iso:iwa:37:-3:CD
   roundtrip: true
-- id: iso.international_workshop_agreement.0009
-  input: IWA 1:2001
-  identifier:
-    type: international_workshop_agreement
-    components:
-      number: '1'
-      year: '2001'
-  representations:
-    human: IWA 1:2001
-    urn: urn:iso:std:iso:iwa:1
-  roundtrip: true
-- id: iso.international_workshop_agreement.0010
-  input: IWA 1:2005
-  identifier:
-    type: international_workshop_agreement
-    components:
-      number: '1'
-      year: '2005'
-  representations:
-    human: IWA 1:2005
-    urn: urn:iso:std:iso:iwa:1
-  roundtrip: true
-- id: iso.international_workshop_agreement.0011
+  style: v3
+- id: iso.international_workshop_agreement.0008
   input: IWA 14-1:2013
   identifier:
     type: international_workshop_agreement
@@ -113,7 +98,8 @@
     human: IWA 14-1:2013
     urn: urn:iso:std:iso:iwa:14:-1
   roundtrip: true
-- id: iso.international_workshop_agreement.0012
+  style: v3
+- id: iso.international_workshop_agreement.0009
   input: IWA 19:2017
   identifier:
     type: international_workshop_agreement
@@ -124,6 +110,43 @@
     human: IWA 19:2017
     urn: urn:iso:std:iso:iwa:19
   roundtrip: true
+  style: v3
+- id: iso.international_workshop_agreement.0010
+  input: IWA 1:2001
+  identifier:
+    type: international_workshop_agreement
+    components:
+      number: '1'
+      year: '2001'
+  representations:
+    human: IWA 1:2001
+    urn: urn:iso:std:iso:iwa:1
+  roundtrip: true
+  style: v3
+- id: iso.international_workshop_agreement.0011
+  input: IWA 1:2005
+  identifier:
+    type: international_workshop_agreement
+    components:
+      number: '1'
+      year: '2005'
+  representations:
+    human: IWA 1:2005
+    urn: urn:iso:std:iso:iwa:1
+  roundtrip: true
+  style: v3
+- id: iso.international_workshop_agreement.0012
+  input: IWA 24:2016
+  identifier:
+    type: international_workshop_agreement
+    components:
+      number: '24'
+      year: '2016'
+  representations:
+    human: IWA 24:2016
+    urn: urn:iso:std:iso:iwa:24
+  roundtrip: true
+  style: v3
 - id: iso.international_workshop_agreement.0013
   input: IWA 2:2003
   identifier:
@@ -135,18 +158,8 @@
     human: IWA 2:2003
     urn: urn:iso:std:iso:iwa:2
   roundtrip: true
+  style: v3
 - id: iso.international_workshop_agreement.0014
-  input: IWA 24:2016
-  identifier:
-    type: international_workshop_agreement
-    components:
-      number: '24'
-      year: '2016'
-  representations:
-    human: IWA 24:2016
-    urn: urn:iso:std:iso:iwa:24
-  roundtrip: true
-- id: iso.international_workshop_agreement.0015
   input: IWA 31:2020
   identifier:
     type: international_workshop_agreement
@@ -157,7 +170,8 @@
     human: IWA 31:2020
     urn: urn:iso:std:iso:iwa:31
   roundtrip: true
-- id: iso.international_workshop_agreement.0016
+  style: v3
+- id: iso.international_workshop_agreement.0015
   input: IWA 34:2021
   identifier:
     type: international_workshop_agreement
@@ -168,7 +182,8 @@
     human: IWA 34:2021
     urn: urn:iso:std:iso:iwa:34
   roundtrip: true
-- id: iso.international_workshop_agreement.0017
+  style: v3
+- id: iso.international_workshop_agreement.0016
   input: IWA 35:2020
   identifier:
     type: international_workshop_agreement
@@ -179,7 +194,8 @@
     human: IWA 35:2020
     urn: urn:iso:std:iso:iwa:35
   roundtrip: true
-- id: iso.international_workshop_agreement.0018
+  style: v3
+- id: iso.international_workshop_agreement.0017
   input: IWA 8:2009
   identifier:
     type: international_workshop_agreement
@@ -190,7 +206,8 @@
     human: IWA 8:2009
     urn: urn:iso:std:iso:iwa:8
   roundtrip: true
-- id: iso.international_workshop_agreement.0019
+  style: v3
+- id: iso.international_workshop_agreement.0018
   input: PRF IWA 36
   identifier:
     type: international_workshop_agreement
@@ -201,7 +218,8 @@
     human: PRF IWA 36
     urn: urn:iso:std:iso:iwa:36:stage-50.00
   roundtrip: true
-- id: iso.international_workshop_agreement.0020
+  style: v3
+- id: iso.international_workshop_agreement.0019
   input: PRF IWA 40
   identifier:
     type: international_workshop_agreement
@@ -212,3 +230,4 @@
     human: PRF IWA 40
     urn: urn:iso:std:iso:iwa:40:stage-50.00
   roundtrip: true
+  style: v3

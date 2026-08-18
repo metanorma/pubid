@@ -1,5 +1,5 @@
 $schema: https://json-schema.org/draft/2020-12/schema
-$id: https://pubid.dev/schema/scheme-1.0.0.yaml
+$id: https://pubid.com/schema/scheme-1.0.0.yaml
 title: PubID Scheme Declaration
 description: >-
   Single source of truth declaration for one PubID flavor. Data only: no

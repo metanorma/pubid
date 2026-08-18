@@ -1,5 +1,5 @@
 ---
-- id: iso.amendment.0009.debt
+- id: iso.debt.3660789594727966876
   input: "!ISO 10993-4:2002/Amd.1:2006(E)!ISO 10993-4:2002/Amd 1:2006(E)"
   expect:
     error:
@@ -7,7 +7,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.amendment.0016.debt
+- id: iso.debt.2719141661350419042
   input: "!ISO 1247:1974/Amd.1:1982(fr)!ISO 1247:1974/Amd 1:1982(fr)"
   expect:
     error:
@@ -15,7 +15,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.amendment.0017.debt
+- id: iso.debt.2787994214640360857
   input: "!ISO 13017:2012/Amd.1:2015(fr)!ISO 13017:2012/Amd 1:2015(fr)"
   expect:
     error:
@@ -23,7 +23,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.amendment.0029.debt
+- id: iso.debt.2159759824018975412
   input: "!ISO 17301-1:2016/Amd.1:2017(F)!ISO 17301-1:2016/Amd 1:2017(F)"
   expect:
     error:
@@ -31,7 +31,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.amendment.0062.debt
+- id: iso.debt.2242917205720882736
   input: "!ISO 178:2010/Amd.1:2013(fr)!ISO 178:2010/Amd 1:2013(fr)"
   expect:
     error:
@@ -39,7 +39,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.amendment.0090.debt
+- id: iso.debt.4273715007294900789
   input: "!ISO 5492:2008/Amd.1:2016(de)!ISO 5492:2008/Amd 1:2016(de)"
   expect:
     error:
@@ -47,7 +47,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.amendment.0091.debt
+- id: iso.debt.4119507986762211931
   input: "!ISO 5492:2008/Amd.1:2016(es)!ISO 5492:2008/Amd 1:2016(es)"
   expect:
     error:
@@ -55,7 +55,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.amendment.0092.debt
+- id: iso.debt.4498953525110721367
   input: "!ISO 5492:2008/Amd.1:2016(fr)!ISO 5492:2008/Amd 1:2016(fr)"
   expect:
     error:
@@ -63,7 +63,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.amendment.0093.debt
+- id: iso.debt.4267740783854291048
   input: "!ISO 5492:2008/Amd.1:2016(ru)!ISO 5492:2008/Amd 1:2016(ru)"
   expect:
     error:
@@ -71,7 +71,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.amendment.0110.debt
+- id: iso.debt.1335180655177461445
   input: "!ISO 8624:2011/Amd.1:2015(fr)!ISO 8624:2011/Amd 1:2015(fr)"
   expect:
     error:
@@ -79,7 +79,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.amendment.0111.debt
+- id: iso.debt.1322904858395058226
   input: "!ISO 8637:2010/Amd.1:2013(ru)!ISO 8637:2010/Amd 1:2013(ru)"
   expect:
     error:
@@ -87,7 +87,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.amendment.0164.debt
+- id: iso.debt.3445542969132540861
   input: "!ISO/IEC 26300:2006/Amd.1:2012!ISO/IEC 26300:2006/Amd 1:2012"
   expect:
     error:
@@ -95,7 +95,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.bundled_identifier.0003.debt
+- id: iso.debt.4133323250276367419
   input: "!ISO/IEC Directives, Part 1:2022 + IEC Supplement:2022!ISO/IEC DIR 1:2022
     + IEC SUP:2022"
   expect:
@@ -104,7 +104,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.corrigendum.0009.debt
+- id: iso.debt.2841976207869405227
   input: "!ISO 11783-2:2012/Cor.1:2012(fr)!ISO 11783-2:2012/Cor 1:2012(fr)"
   expect:
     error:
@@ -112,7 +112,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.corrigendum.0013.debt
+- id: iso.debt.2075491412696763745
   input: "!ISO 1436:2009/Cor.1:2010(ru)!ISO 1436:2009/Cor 1:2010(ru)"
   expect:
     error:
@@ -120,7 +120,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.corrigendum.0014.debt
+- id: iso.debt.3469493781891632726
   input: "!ISO 14687-1:1999/Cor.1:2001(fr)!ISO 14687-1:1999/Cor 1:2001(fr)"
   expect:
     error:
@@ -128,7 +128,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.corrigendum.0032.debt
+- id: iso.debt.3307411703859285058
   input: "!ISO 17301-1:2016/FCOR 2.3!ISO 17301-1:2016/FDCOR 2.3"
   expect:
     error:
@@ -136,7 +136,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.corrigendum.0033.debt
+- id: iso.debt.4055090406110336395
   input: "!ISO 17301-1:2016/FCOR 2.3:2022!ISO 17301-1:2016/FDCOR 2.3:2022"
   expect:
     error:
@@ -144,7 +144,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.corrigendum.0058.debt
+- id: iso.debt.4002082329319751265
   input: "!ISO 6709:2008/Cor. 1:2009!ISO 6709:2008/Cor 1:2009"
   expect:
     error:
@@ -152,7 +152,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.corrigendum.0061.debt
+- id: iso.debt.221331644042903106
   input: "!ISO 9606-1:2012/Cor.2:2013(F)!ISO 9606-1:2012/Cor 2:2013(F)"
   expect:
     error:
@@ -160,7 +160,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.corrigendum.0062.debt
+- id: iso.debt.3115016463401358861
   input: "!ISO/CEI 10164-5:1993/Amd.1:1995/Cor.1:1996(fr)!ISO/CEI 10164-5:1993/Amd
     1:1995/Cor 1:1996(fr)"
   expect:
@@ -169,7 +169,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.corrigendum.0063.debt
+- id: iso.debt.310011918417889015
   input: "!ISO/CEI 17025:2005/Cor.1:2006(F)!ISO/CEI 17025:2005/Cor 1:2006(F)"
   expect:
     error:
@@ -177,7 +177,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.corrigendum.0064.debt
+- id: iso.debt.931870447116404920
   input: "!ISO/IEC 10646-1:1993/pDCOR.2!ISO/IEC 10646-1:1993/CD Cor 2"
   expect:
     error:
@@ -185,7 +185,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.corrigendum.0076.debt
+- id: iso.debt.3440230404354589757
   input: "!ISO/IEC 15938-7:2003/Amd 5:2010/CD Cor 1!ISO/IEC 15938-7:2003/AMD 5:2010/CD
     Cor 1"
   expect:
@@ -194,7 +194,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.corrigendum.0077.debt
+- id: iso.debt.1894637693476683269
   input: "!ISO/IEC 17025:2005/Cor.1:2006(F)!ISO/IEC 17025:2005/Cor 1:2006(F)"
   expect:
     error:
@@ -202,7 +202,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.corrigendum.0078.debt
+- id: iso.debt.2965367735111133749
   input: "!ISO/IEC 17025:2005/Cor.1:2006(fr)!ISO/IEC 17025:2005/Cor 1:2006(fr)"
   expect:
     error:
@@ -210,7 +210,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.corrigendum.0080.debt
+- id: iso.debt.3136213121947905781
   input: "!ISO/IEC 19794-7:2014/Amd 1:2015/CD Cor 1!ISO/IEC 19794-7:2014/AMD 1:2015/CD
     Cor 1"
   expect:
@@ -219,7 +219,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.directives.0009.debt
+- id: iso.debt.355109551228478752
   input: "!ISO/IEC Directives Part 1!ISO/IEC DIR 1"
   expect:
     error:
@@ -227,7 +227,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.directives.0010.debt
+- id: iso.debt.4240716731362635363
   input: "!ISO/IEC Directives Part 2!ISO/IEC DIR 2"
   expect:
     error:
@@ -235,7 +235,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.directives.0011.debt
+- id: iso.debt.3105797593048123046
   input: "!ISO/IEC Directives, Part 1!ISO/IEC DIR 1"
   expect:
     error:
@@ -243,7 +243,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.directives.0012.debt
+- id: iso.debt.923922470753906452
   input: "!ISO/IEC Directives, Part 1:2022!ISO/IEC DIR 1:2022"
   expect:
     error:
@@ -251,7 +251,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.directives.0013.debt
+- id: iso.debt.3922750409911980287
   input: "!ISO/IEC Directives, Part 2!ISO/IEC DIR 2"
   expect:
     error:
@@ -259,7 +259,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.directives.0014.debt
+- id: iso.debt.940522763349927915
   input: "!ISO/IEC Directives, Part 2:2021!ISO/IEC DIR 2:2021"
   expect:
     error:
@@ -267,7 +267,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.directives_supplement.0003.debt
+- id: iso.debt.2860893524644270461
   input: "!ISO/IEC DIR 1 ISO SUP Ed 13!ISO/IEC DIR 1 ISO SUP Edition 13"
   expect:
     error:
@@ -275,7 +275,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.directives_supplement.0010.debt
+- id: iso.debt.1739212661110060362
   input: "!ISO/IEC Directives, IEC Supplement:2022!ISO/IEC DIR IEC SUP:2022"
   expect:
     error:
@@ -283,7 +283,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.directives_supplement.0011.debt
+- id: iso.debt.2716920836985628218
   input: "!ISO/IEC Directives, JTC 1 Supplement:2021!ISO/IEC DIR JTC 1 SUP:2021"
   expect:
     error:
@@ -291,7 +291,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.directives_supplement.0012.debt
+- id: iso.debt.536711667467814895
   input: "!ISO/IEC Directives, Part 1 -- Consolidated ISO Supplement!ISO/IEC DIR 1
     ISO SUP"
   expect:
@@ -300,7 +300,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.guide.0002.debt
+- id: iso.debt.4178641837877424253
   input: "!ISO/GUIDE 1:1972!ISO Guide 1:1972"
   expect:
     error:
@@ -308,7 +308,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.guide.0003.debt
+- id: iso.debt.2857954076539524360
   input: "!ISO/GUIDE 2:1976!ISO Guide 2:1976"
   expect:
     error:
@@ -316,7 +316,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.guide.0004.debt
+- id: iso.debt.1419056856328176645
   input: "!ISO/GUIDE 2:1978!ISO Guide 2:1978"
   expect:
     error:
@@ -324,7 +324,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.guide.0006.debt
+- id: iso.debt.176599023000255593
   input: "!ISO/IEC GUIDE 2:2004(E/F/R)!ISO/IEC Guide 2:2004(E/F/R)"
   expect:
     error:
@@ -332,7 +332,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.guide.0007.debt
+- id: iso.debt.383626058274293279
   input: "!ISO/IEC GUIDE 38:1983!ISO/IEC Guide 38:1983"
   expect:
     error:
@@ -340,7 +340,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.guide.0008.debt
+- id: iso.debt.2188682543493398685
   input: "!ISO/IEC GUIDE 39:1988!ISO/IEC Guide 39:1988"
   expect:
     error:
@@ -348,7 +348,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.0001.debt
+- id: iso.debt.2490687848232725451
   input: "!Guide ISO 34:2009!ISO/Guide 34:2009"
   expect:
     error:
@@ -356,7 +356,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.0002.debt
+- id: iso.debt.3905521814907566952
   input: "!Guide ISO/CEI 37:1995!ISO/CEI Guide 37:1995"
   expect:
     error:
@@ -364,7 +364,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.0003.debt
+- id: iso.debt.3885573302378818457
   input: "!Guide ISO/CEI 50!ISO/CEI Guide 50"
   expect:
     error:
@@ -372,7 +372,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.0004.debt
+- id: iso.debt.961601888751149758
   input: "!Guide ISO/CEI 51:1999!ISO/CEI Guide 51:1999"
   expect:
     error:
@@ -380,7 +380,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.0005.debt
+- id: iso.debt.4093485257837600700
   input: "!GUIDE ISO/CEI 71:2001(F)!ISO/CEI Guide 71:2001(F)"
   expect:
     error:
@@ -388,7 +388,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.0006.debt
+- id: iso.debt.397358554634579403
   input: "!Guide ISO/IEC 59:1994!ISO/IEC Guide 59:1994"
   expect:
     error:
@@ -396,7 +396,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.0673.debt
+- id: iso.debt.2533327222562127964
   input: "!ISO 11553-1 Ed.2!ISO 11553-1"
   expect:
     error:
@@ -404,7 +404,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.1403.debt
+- id: iso.debt.1615961748363365610
   input: "!ISO 14442:2006 Ed 2!ISO 14442:2006"
   expect:
     error:
@@ -412,7 +412,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.1963.debt
+- id: iso.debt.3981851139581479989
   input: "!ISO 16001:2008 Ed 1!ISO 16001:2008"
   expect:
     error:
@@ -420,7 +420,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.2149.debt
+- id: iso.debt.3790526932802934862
   input: "!ISO 16622:2002 Ed 1!ISO 16622:2002"
   expect:
     error:
@@ -428,7 +428,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.2306.debt
+- id: iso.debt.2172208261990837872
   input: "!ISO 17121:2000 Ed 1!ISO 17121:2000"
   expect:
     error:
@@ -436,7 +436,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.3757.debt
+- id: iso.debt.1328425579632827042
   input: "!ISO 22610:2006 Ed!ISO 22610:2006"
   expect:
     error:
@@ -444,7 +444,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.4362.debt
+- id: iso.debt.2525466558443379961
   input: "!ISO 293:2004 Ed 3!ISO 293:2004"
   expect:
     error:
@@ -452,7 +452,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.5886.debt
+- id: iso.debt.718426993219407137
   input: "!ISO 9652-4:2000 Ed 1!ISO 9652-4:2000"
   expect:
     error:
@@ -460,7 +460,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.6013.debt
+- id: iso.debt.4423910579074544546
   input: "!ISO/CD2 14065:2018!ISO/CD 14065.2:2018"
   expect:
     error:
@@ -468,7 +468,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.6432.debt
+- id: iso.debt.3936139180835944112
   input: "!ISO/IEC 30142 ED1!ISO/IEC 30142"
   expect:
     error:
@@ -476,7 +476,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_standard.6552.debt
+- id: iso.debt.4502290057044507974
   input: "!ISO/NWIP 19144-4!ISO/NP 19144-4"
   expect:
     error:
@@ -484,7 +484,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.international_workshop_agreement.0008.debt
+- id: iso.debt.3053186255492152372
   input: "!ISO/WD IWA 19!WD IWA 19"
   expect:
     error:
@@ -492,7 +492,7 @@
   notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [NSB_ISO_IDENTIFIER,
     TC_DOCUMENT, DIRECTIVES_IDENTIFIERS, JCGM_IDENTIFIER, ISO_R_SUPPLEMENT_IDENTIFIER,
     ISO_R_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_SUPPLEMENT_IDENTIFIER, SUPPLEMENT_SUPPLE'
-- id: iso.recommendation.0017.debt
+- id: iso.debt.1950865611343100600
   input: "!ISO/R 170-1960!ISO/R 170:1960"
   expect:
     error:

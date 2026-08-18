@@ -20,6 +20,7 @@
     human: IEC 60050-111/AMD1/FRAG1 ED2
     urn: 'urn:iec:std:iec:60050-111::::::amd:1:'
   roundtrip: true
+  style: v3
 - id: iec.fragment_identifier.0002
   input: IEC 60050-121/AMD2/FRAG1 ED2
   identifier:
@@ -41,6 +42,7 @@
     human: IEC 60050-121/AMD2/FRAG1 ED2
     urn: 'urn:iec:std:iec:60050-121::::::amd:2:'
   roundtrip: true
+  style: v3
 - id: iec.fragment_identifier.0003
   input: IEC 60050-131/AMD1/FRAG1 ED2
   identifier:
@@ -62,6 +64,7 @@
     human: IEC 60050-131/AMD1/FRAG1 ED2
     urn: 'urn:iec:std:iec:60050-131::::::amd:1:'
   roundtrip: true
+  style: v3
 - id: iec.fragment_identifier.0004
   input: IEC 60050-191/AMD1/FRAG1 ED1
   identifier:
@@ -83,6 +86,7 @@
     human: IEC 60050-191/AMD1/FRAG1 ED1
     urn: 'urn:iec:std:iec:60050-191::::::amd:1:'
   roundtrip: true
+  style: v3
 - id: iec.fragment_identifier.0005
   input: IEC 60050-191/AMD2/FRAG2 ED1
   identifier:
@@ -104,6 +108,7 @@
     human: IEC 60050-191/AMD2/FRAG2 ED1
     urn: 'urn:iec:std:iec:60050-191::::::amd:2:'
   roundtrip: true
+  style: v3
 - id: iec.fragment_identifier.0006
   input: IEC 60050-191/FRAG1 ED2
   identifier:
@@ -121,6 +126,7 @@
     human: IEC 60050-191/FRAG1 ED2
     urn: 'urn:iec:std:iec:60050-191::::'
   roundtrip: true
+  style: v3
 - id: iec.fragment_identifier.0007
   input: IEC 60050-447/FRAG3 ED2
   identifier:
@@ -138,6 +144,7 @@
     human: IEC 60050-447/FRAG3 ED2
     urn: 'urn:iec:std:iec:60050-447::::'
   roundtrip: true
+  style: v3
 - id: iec.fragment_identifier.0008
   input: IEC 60050-521/AMD1/FRAG1 ED1
   identifier:
@@ -159,6 +166,7 @@
     human: IEC 60050-521/AMD1/FRAG1 ED1
     urn: 'urn:iec:std:iec:60050-521::::::amd:1:'
   roundtrip: true
+  style: v3
 - id: iec.fragment_identifier.0009
   input: IEC 60050-521/FRAG1 ED2
   identifier:
@@ -176,6 +184,7 @@
     human: IEC 60050-521/FRAG1 ED2
     urn: 'urn:iec:std:iec:60050-521::::'
   roundtrip: true
+  style: v3
 - id: iec.fragment_identifier.0010
   input: IEC 60050-604/AMD2/FRAG1 ED1
   identifier:
@@ -197,6 +206,7 @@
     human: IEC 60050-604/AMD2/FRAG1 ED1
     urn: 'urn:iec:std:iec:60050-604::::::amd:2:'
   roundtrip: true
+  style: v3
 - id: iec.fragment_identifier.0011
   input: IEC 60050-614/FRAG1 ED1
   identifier:
@@ -214,6 +224,7 @@
     human: IEC 60050-614/FRAG1 ED1
     urn: 'urn:iec:std:iec:60050-614::::'
   roundtrip: true
+  style: v3
 - id: iec.fragment_identifier.0012
   input: IEC 60050-723/FRAG3 ED1
   identifier:
@@ -231,7 +242,8 @@
     human: IEC 60050-723/FRAG3 ED1
     urn: 'urn:iec:std:iec:60050-723::::'
   roundtrip: true
-- id: iec.fragment_identifier.0014
+  style: v3
+- id: iec.fragment_identifier.0013
   input: IEC 60050-807/FRAG2 ED1
   identifier:
     type: fragment_identifier
@@ -248,7 +260,8 @@
     human: IEC 60050-807/FRAG2 ED1
     urn: 'urn:iec:std:iec:60050-807::::'
   roundtrip: true
-- id: iec.fragment_identifier.0015
+  style: v3
+- id: iec.fragment_identifier.0014
   input: IEC 60050-811/FRAG1 ED2
   identifier:
     type: fragment_identifier
@@ -265,7 +278,8 @@
     human: IEC 60050-811/FRAG1 ED2
     urn: 'urn:iec:std:iec:60050-811::::'
   roundtrip: true
-- id: iec.fragment_identifier.0016
+  style: v3
+- id: iec.fragment_identifier.0015
   input: IEC 60050-821/FRAG2 ED1
   identifier:
     type: fragment_identifier
@@ -282,7 +296,8 @@
     human: IEC 60050-821/FRAG2 ED1
     urn: 'urn:iec:std:iec:60050-821::::'
   roundtrip: true
-- id: iec.fragment_identifier.0017
+  style: v3
+- id: iec.fragment_identifier.0016
   input: IEC 60050-891/FRAG1 ED1
   identifier:
     type: fragment_identifier
@@ -299,3 +314,4 @@
     human: IEC 60050-891/FRAG1 ED1
     urn: 'urn:iec:std:iec:60050-891::::'
   roundtrip: true
+  style: v3
