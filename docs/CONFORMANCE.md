@@ -61,3 +61,14 @@ encodes "old => normalized", and the normalized form is what round-trips.
 Exact duplicate fixture lines are counted (duplicates), not silently
 absorbed. Fail-fixture lines that the current parser unexpectedly accepts
 are recorded as reclassify debt, not hidden.
+
+
+## Reconciliation semantics
+
+Canonical inputs are the normalized human rendering and may be synthesized
+(phantom): when no fixture line spells the normalized form, the case input
+is the normalized form and every fixture spelling is an alias. Exact
+duplicate lines are counted. Cases whose parse is nondeterministic in the
+reference implementation (order-dependent; e.g. bundled directive
+supplements) are quarantined with notes and excluded from gates until the
+reference bug is fixed.

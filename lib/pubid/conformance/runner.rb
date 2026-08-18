@@ -39,18 +39,18 @@ module Pubid
         files = Dir[File.join(corpus_dir, flavor, "*.yml")]
         files.each do |path|
           YAML.safe_load_file(path).each do |test_case|
-            execute(test_case, flavor_module, stats, failures)
+            execute(test_case, @current_flavor, stats, failures)
           end
         end
         report(flavor, stats, failures)
         failures
       end
 
-      def execute(test_case, flavor_module, stats, failures)
+      def execute(test_case, @current_flavor, stats, failures)
         id = test_case.fetch("id")
         expectation = test_case["expect"]
         if expectation&.key?("error")
-          execute_error_case(test_case, flavor_module, stats, failures)
+          execute_error_case(test_case, @current_flavor, stats, failures)
           return
         end
 
@@ -59,21 +59,21 @@ module Pubid
           return
         end
 
-        identifier = flavor_module.parse(test_case.fetch("input"))
+        identifier = @current_flavor.parse(test_case.fetch("input"))
         stats[:cases] += 1
         check_aliases(identifier, test_case, id, stats, failures)
         check_tree(identifier, test_case, id, stats, failures)
         check_representations(identifier, test_case, id, stats, failures)
-        check_roundtrip(identifier, flavor_module, test_case, id, stats,
+        check_roundtrip(identifier, @current_flavor, test_case, id, stats,
                         failures)
       rescue StandardError => e
         stats[:fail_parse] += 1
         failures << "#{id} raised #{e.class}"
       end
 
-      def execute_error_case(test_case, flavor_module, stats, failures)
+      def execute_error_case(test_case, @current_flavor, stats, failures)
         stats[:error_cases] += 1
-        flavor_module.parse(test_case.fetch("input"))
+        @current_flavor.parse(test_case.fetch("input"))
         stats[:fail_error] += 1
         failures << "#{test_case['id']} unexpectedly parsed"
       rescue StandardError
@@ -115,12 +115,12 @@ module Pubid
         end
       end
 
-      def check_roundtrip(identifier, flavor_module, test_case, id, stats,
+      def check_roundtrip(identifier, @current_flavor, test_case, id, stats,
                           failures)
         return unless test_case["roundtrip"]
 
         hash = identifier.to_hash
-        return if flavor_module::Identifier.from_hash(hash).to_hash == hash
+        return if @current_flavor::Identifier.from_hash(hash).to_hash == hash
 
         stats[:fail_roundtrip] += 1
         failures << "#{id} roundtrip"
