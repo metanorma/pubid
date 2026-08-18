@@ -1,32 +1,51 @@
 # PubID Conformance Corpus
 
-`conformance/` is the shared behavioral contract: the same cases run under
-rspec (Ruby, TODO.restructure/11) and vitest (pubid-ts, TODO.restructure/28).
-A case file is a YAML array of case objects; the authoritative shape is
-`conformance/corpus.schema.yaml`.
+`conformance/` is the language-independent test library. Inputs are the
+entire ground-truth fixture library (every line, nothing sampled); the
+component tree and representations are recorded from the reference
+implementation. A second implementation (pubid-ts) must rebuild each
+identifier from the tree and reproduce every representation.
 
-## Gates (all must hold unless the case says otherwise)
+## Case format (v2, conformance/corpus.schema.yaml)
 
-1. `parse(input).to_s` is byte-exact with `expect.to_s`.
-2. `parse(input).to_hash` deep-equals `expect.to_hash` (canonical no-defaults
-   form; key order-insensitive compare, TODO.restructure/13 contract).
-3. `from_hash(to_hash)` round-trips: `from_hash(parse(input).to_hash).to_hash
-   == parse(input).to_hash`.
-4. `to_urn`, when declared, must round-trip through `parse_urn` where the
-   flavor supports URN parsing.
-5. `expect.error.class_name` cases assert the raised error class (message via
-   optional `message_pattern`).
+    - id: iso.amendment.0001
+      input: "ISO 9001:2015/Amd 1:2020"
+      identifier:            # semantic component tree
+        type: amendment      # identifier_types[].key from schema/{flavor}.yaml
+        components: {number: "9001", year: "2015", publisher: ISO}
+        base: {type: international_standard, components: {...}}
+      representations:       # every proper output format
+        human: "ISO 9001:2015/Amd 1:2020"
+        urn: "urn:iso:std:iso:9001:amd:2020:v1"
+      roundtrip: true
 
-## Layout and provenance
+The corpus is pure YAML: component objects that leak through serialization
+are reduced to their string rendering; no language-specific tags exist.
 
-- `conformance/{flavor}/*.yml` - one or more files per flavor; ids are stable
-  (`{flavor}.{type}.{seq}`).
-- Seed cases are hand-verified anchors recorded from the reference
-  implementation. Bulk generation arrives with TODO.restructure/10:
-  every regeneration diff is reviewed, each identifier type keeps at least
-  one hand-verified anchor, negative cases are curated by hand.
+## Files
 
-## IDs
+- `conformance/{flavor}/{type}.yml` - positive cases, one file per
+  identifier type, ids `{flavor}.{type}.{seq}` (stable, never renumbered).
+- `conformance/{flavor}/_unparsed.yml` - VISIBLE DEBT: ground-truth pass
+  fixtures the reference cannot parse, with the error class and message.
+  Never treated as expected-failure contract; fix and regenerate.
+- `conformance/{flavor}/_negative.yml` - fail fixtures (expected errors).
 
-Stable forever once committed. Never renumber; retire a case by deleting it
-with a rationale in the PR description, not by editing its expectations.
+## Gates (per case)
+
+1. parse(input) rebuilds the recorded component tree.
+2. parse(input) reproduces every recorded representation byte-exactly.
+3. from_hash(to_hash) round-trips where roundtrip is true.
+
+## Tooling
+
+    bundle exec rake conformance:generate[iso]  # migrate fixtures to corpus
+    bundle exec rake conformance:run            # execute corpus, exit on fail
+
+Regeneration is deterministic on unchanged code. Regeneration diffs are
+reviewed in PRs. spec/pubid/conformance_corpus_spec.rb runs the same cases
+inside the default test suite.
+
+## Current size (2026-08-18)
+
+iso: 7,511 cases + 62 debt; iec: 12,299 cases + 4 debt; failures: 0.

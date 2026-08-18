@@ -1,0 +1,103 @@
+---
+- id: iec.sheet_identifier.0001
+  input: IEC 60695-2-1/0:1994
+  identifier:
+    type: sheet_identifier
+    components:
+      sheet_number: '0'
+      sheet_year: '1994'
+    base:
+      type: international_standard
+      components:
+        number: '60695'
+        part: '2'
+        subpart: '1'
+  representations:
+    human: IEC 60695-2-1/0:1994
+    urn: 'urn:iec:std:iec:60695-2-1::::'
+  roundtrip: true
+- id: iec.sheet_identifier.0002
+  input: IEC 60695-2-1/1:1994
+  identifier:
+    type: sheet_identifier
+    components:
+      sheet_number: '1'
+      sheet_year: '1994'
+    base:
+      type: international_standard
+      components:
+        number: '60695'
+        part: '2'
+        subpart: '1'
+  representations:
+    human: IEC 60695-2-1/1:1994
+    urn: 'urn:iec:std:iec:60695-2-1::::'
+  roundtrip: true
+- id: iec.sheet_identifier.0003
+  input: IEC 60695-2-1/2:1994
+  identifier:
+    type: sheet_identifier
+    components:
+      sheet_number: '2'
+      sheet_year: '1994'
+    base:
+      type: international_standard
+      components:
+        number: '60695'
+        part: '2'
+        subpart: '1'
+  representations:
+    human: IEC 60695-2-1/2:1994
+    urn: 'urn:iec:std:iec:60695-2-1::::'
+  roundtrip: true
+- id: iec.sheet_identifier.0004
+  input: IEC 60695-2-1/3:1994
+  identifier:
+    type: sheet_identifier
+    components:
+      sheet_number: '3'
+      sheet_year: '1994'
+    base:
+      type: international_standard
+      components:
+        number: '60695'
+        part: '2'
+        subpart: '1'
+  representations:
+    human: IEC 60695-2-1/3:1994
+    urn: 'urn:iec:std:iec:60695-2-1::::'
+  roundtrip: true
+- id: iec.sheet_identifier.0005
+  input: IEC 60695-2-4/1:1991
+  identifier:
+    type: sheet_identifier
+    components:
+      sheet_number: '1'
+      sheet_year: '1991'
+    base:
+      type: international_standard
+      components:
+        number: '60695'
+        part: '2'
+        subpart: '4'
+  representations:
+    human: IEC 60695-2-4/1:1991
+    urn: 'urn:iec:std:iec:60695-2-4::::'
+  roundtrip: true
+- id: iec.sheet_identifier.0006
+  input: IEC TS 60695-2-4/2:1994
+  identifier:
+    type: sheet_identifier
+    components:
+      sheet_number: '2'
+      sheet_year: '1994'
+    base:
+      type: technical_specification
+      components:
+        number: '60695'
+        part: '2'
+        subpart: '4'
+  representations:
+    human: IEC TS 60695-2-4/2:1994
+    urn: 'urn:iec:std:iec:60695-2-4::ts::'
+  roundtrip: true

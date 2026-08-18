@@ -3,45 +3,46 @@
 require "spec_helper"
 require "yaml"
 
-# Executes the shared conformance corpus (conformance/**/*.yml) against the
-# Ruby reference implementation. Gates are defined in docs/CONFORMANCE.md.
-# Seed harness for TODO.restructure/11; the parameterized per-case executor
-# arrives with the TODO.restructure/10 generator.
+# Executes the neutral corpus type files (conformance/{flavor}/{type}.yml)
+# against the Ruby reference implementation. Debt (_unparsed.yml) and
+# negative (_negative.yml) files are covered by rake conformance:run.
 RSpec.describe "conformance corpus" do
-  it "passes every recorded case", :aggregate_failures do
-    Pubid.eager_load_flavors!
-    files = Dir[File.expand_path("../../conformance/**/*.yml", __dir__)]
-    expect(files).not_to be_empty
+  flavors = Dir[File.expand_path("../../conformance/*", __dir__)]
+    .select { |path| File.directory?(path) }
+    .map { |path| File.basename(path) }
 
-    files.each do |path|
-      flavor = File.basename(File.dirname(path))
+  flavors.each do |flavor|
+    it "passes every #{flavor} case", :aggregate_failures do
+      Pubid.eager_load_flavors!
       flavor_module = Pubid::Registry.get(flavor)
       expect(flavor_module).not_to be_nil, "unknown flavor #{flavor}"
 
-      YAML.safe_load_file(path).each do |test_case|
-        label = "#{flavor}/#{test_case.fetch('id')}"
-        expectation = test_case.fetch("expect")
-        identifier = flavor_module.parse(test_case.fetch("input"))
+      type_files = Dir[File.expand_path("../../conformance/#{flavor}/*.yml",
+                                        __dir__)]
+        .reject { |path| File.basename(path).start_with?("_") }
+      expect(type_files).not_to be_empty
 
-        expect(identifier.to_s).to eq(expectation.fetch("to_s")), 
-                                   "#{label} to_s"
-        if expectation["class_name"]
-          expect(identifier.class.name)
-            .to eq(expectation["class_name"]), "#{label} class"
-        end
-        if expectation["to_hash"]
-          expect(identifier.to_hash)
-            .to eq(expectation["to_hash"]), "#{label} to_hash"
-        end
-        if expectation["to_urn"]
-          expect(identifier.to_urn)
-            .to eq(expectation["to_urn"]), "#{label} to_urn"
-        end
-        next unless expectation["roundtrip"]
+      type_files.each do |path|
+        YAML.safe_load_file(path).each do |test_case|
+          label = "#{flavor}/#{test_case.fetch('id')}"
+          identifier = flavor_module.parse(test_case.fetch("input"))
 
-        hash = identifier.to_hash
-        expect(flavor_module::Identifier.from_hash(hash).to_hash)
-          .to eq(hash), "#{label} from_hash round-trip"
+          tree = Pubid::Conformance.component_tree(identifier.to_hash)
+          expect(tree).to eq(test_case.fetch("identifier")),
+                          "#{label} component tree"
+          representations = test_case.fetch("representations")
+          expect(identifier.to_s)
+            .to eq(representations.fetch("human")), "#{label} human"
+          if representations["urn"]
+            expect(identifier.to_urn).to eq(representations["urn"]),
+                                         "#{label} urn"
+          end
+          next unless test_case["roundtrip"]
+
+          hash = identifier.to_hash
+          expect(flavor_module::Identifier.from_hash(hash).to_hash)
+            .to eq(hash), "#{label} from_hash round-trip"
+        end
       end
     end
   end

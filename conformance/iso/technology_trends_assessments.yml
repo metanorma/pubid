@@ -1,0 +1,108 @@
+---
+- id: iso.technology_trends_assessments.0001
+  input: ISO/TTA 1:1994
+  identifier:
+    type: technology_trends_assessments
+    components:
+      number: '1'
+      year: '1994'
+  representations:
+    human: ISO/TTA 1:1994
+    urn: urn:iso:std:iso:tta:1
+  roundtrip: true
+- id: iso.technology_trends_assessments.0002
+  input: ISO/TTA 1:1994(en)
+  identifier:
+    type: technology_trends_assessments
+    components:
+      number: '1'
+      year: '1994'
+      languages:
+      - code: en
+        original_code: en
+  representations:
+    human: ISO/TTA 1:1994(en)
+    urn: urn:iso:std:iso:tta:1:en
+  roundtrip: true
+- id: iso.technology_trends_assessments.0003
+  input: ISO/TTA 2
+  identifier:
+    type: technology_trends_assessments
+    components:
+      number: '2'
+  representations:
+    human: ISO/TTA 2
+    urn: urn:iso:std:iso:tta:2
+  roundtrip: true
+- id: iso.technology_trends_assessments.0004
+  input: ISO/TTA 2:1997
+  identifier:
+    type: technology_trends_assessments
+    components:
+      number: '2'
+      year: '1997'
+  representations:
+    human: ISO/TTA 2:1997
+    urn: urn:iso:std:iso:tta:2
+  roundtrip: true
+- id: iso.technology_trends_assessments.0005
+  input: ISO/TTA 2:1997(en)
+  identifier:
+    type: technology_trends_assessments
+    components:
+      number: '2'
+      year: '1997'
+      languages:
+      - code: en
+        original_code: en
+  representations:
+    human: ISO/TTA 2:1997(en)
+    urn: urn:iso:std:iso:tta:2:en
+  roundtrip: true
+- id: iso.technology_trends_assessments.0006
+  input: ISO/TTA 3:2001(en)
+  identifier:
+    type: technology_trends_assessments
+    components:
+      number: '3'
+      year: '2001'
+      languages:
+      - code: en
+        original_code: en
+  representations:
+    human: ISO/TTA 3:2001(en)
+    urn: urn:iso:std:iso:tta:3:en
+  roundtrip: true
+- id: iso.technology_trends_assessments.0007
+  input: ISO/TTA 4:2002
+  identifier:
+    type: technology_trends_assessments
+    components:
+      number: '4'
+      year: '2002'
+  representations:
+    human: ISO/TTA 4:2002
+    urn: urn:iso:std:iso:tta:4
+  roundtrip: true
+- id: iso.technology_trends_assessments.0008
+  input: ISO/TTA 5:2006
+  identifier:
+    type: technology_trends_assessments
+    components:
+      number: '5'
+      year: '2006'
+  representations:
+    human: ISO/TTA 5:2006
+    urn: urn:iso:std:iso:tta:5
+  roundtrip: true
+- id: iso.technology_trends_assessments.0009
+  input: ISO/TTA 5:2007
+  identifier:
+    type: technology_trends_assessments
+    components:
+      number: '5'
+      year: '2007'
+  representations:
+    human: ISO/TTA 5:2007
+    urn: urn:iso:std:iso:tta:5
+  roundtrip: true

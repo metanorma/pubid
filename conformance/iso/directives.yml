@@ -1,0 +1,132 @@
+---
+- id: iso.directives.0001
+  input: ISO/IEC DIR 1
+  identifier:
+    type: directives
+    components:
+      number: '1'
+      copublishers:
+      - IEC
+  representations:
+    human: ISO/IEC DIR 1
+    urn: urn:iso:doc:iso-iec:dir:1
+  roundtrip: true
+- id: iso.directives.0002
+  input: ISO/IEC DIR 1:2022
+  identifier:
+    type: directives
+    components:
+      number: '1'
+      year: '2022'
+      copublishers:
+      - IEC
+  representations:
+    human: ISO/IEC DIR 1:2022
+    urn: urn:iso:doc:iso-iec:dir:1:2022
+  roundtrip: true
+- id: iso.directives.0003
+  input: ISO/IEC DIR 2
+  identifier:
+    type: directives
+    components:
+      number: '2'
+      copublishers:
+      - IEC
+  representations:
+    human: ISO/IEC DIR 2
+    urn: urn:iso:doc:iso-iec:dir:2
+  roundtrip: true
+- id: iso.directives.0004
+  input: ISO/IEC DIR 2 IEC
+  identifier:
+    type: directives
+    components:
+      number: '2'
+      part: IEC
+      copublishers:
+      - IEC
+  representations:
+    human: ISO/IEC DIR 2 IEC
+    urn: urn:iso:doc:iso-iec:dir:2:iec
+  roundtrip: true
+- id: iso.directives.0005
+  input: ISO/IEC DIR 2 IEC:2022
+  identifier:
+    type: directives
+    components:
+      number: '2'
+      part: IEC
+      year: '2022'
+      copublishers:
+      - IEC
+  representations:
+    human: ISO/IEC DIR 2 IEC:2022
+    urn: urn:iso:doc:iso-iec:dir:2:iec:2022
+  roundtrip: true
+- id: iso.directives.0006
+  input: ISO/IEC DIR 2 ISO
+  identifier:
+    type: directives
+    components:
+      number: '2'
+      part: ISO
+      copublishers:
+      - IEC
+  representations:
+    human: ISO/IEC DIR 2 ISO
+    urn: urn:iso:doc:iso-iec:dir:2:iso
+  roundtrip: true
+- id: iso.directives.0007
+  input: ISO/IEC DIR 2 ISO:2022
+  identifier:
+    type: directives
+    components:
+      number: '2'
+      part: ISO
+      year: '2022'
+      copublishers:
+      - IEC
+  representations:
+    human: ISO/IEC DIR 2 ISO:2022
+    urn: urn:iso:doc:iso-iec:dir:2:iso:2022
+  roundtrip: true
+- id: iso.directives.0008
+  input: ISO/IEC DIR 2:2021
+  identifier:
+    type: directives
+    components:
+      number: '2'
+      year: '2021'
+      copublishers:
+      - IEC
+  representations:
+    human: ISO/IEC DIR 2:2021
+    urn: urn:iso:doc:iso-iec:dir:2:2021
+  roundtrip: true
+- id: iso.directives.0015
+  input: ISO/IEC JTC 1 DIR
+  identifier:
+    type: directives
+    components:
+      copublishers:
+      - IEC
+      subgroup:
+        value: JTC 1
+  representations:
+    human: ISO/IEC JTC 1 DIR
+    urn: urn:iso:doc:iso-iec:jtc:1:dir
+  roundtrip: true
+- id: iso.directives.0016
+  input: ISO/IEC JTC 1 DIR:2004
+  identifier:
+    type: directives
+    components:
+      year: '2004'
+      copublishers:
+      - IEC
+      subgroup:
+        value: JTC 1
+  representations:
+    human: ISO/IEC JTC 1 DIR:2004
+    urn: urn:iso:doc:iso-iec:jtc:1:dir:2004
+  roundtrip: true

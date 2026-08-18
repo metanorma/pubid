@@ -1,0 +1,33 @@
+---
+- id: iec.fragment_identifier.0013.debt
+  input: IEC 60050-802/COR1/FRAGC1 ED1
+  expect:
+    error:
+      class_name: Parslet::ParseFailed
+  notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [WORKING_PROGRAMME_WITH_PUBLISHER,
+    WORKING_PROGRAMME, TECHNICAL_GROUP, WORKING_DOCUMENT, SHEET_SUPPLEMENT_IDENTIFIER,
+    SHEET_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_IDENTIFIER, STANDALONE_SUP'
+- id: iec.international_standard.2535.debt
+  input: "!IEC CA 01:2025-10!IEC CA 01:2025"
+  expect:
+    error:
+      class_name: Parslet::ParseFailed
+  notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [WORKING_PROGRAMME_WITH_PUBLISHER,
+    WORKING_PROGRAMME, TECHNICAL_GROUP, WORKING_DOCUMENT, SHEET_SUPPLEMENT_IDENTIFIER,
+    SHEET_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_IDENTIFIER, STANDALONE_SUP'
+- id: iec.international_standard.2546.debt
+  input: "!IECEE 02:2025-06(en)!IECEE 02:2025"
+  expect:
+    error:
+      class_name: Parslet::ParseFailed
+  notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [WORKING_PROGRAMME_WITH_PUBLISHER,
+    WORKING_PROGRAMME, TECHNICAL_GROUP, WORKING_DOCUMENT, SHEET_SUPPLEMENT_IDENTIFIER,
+    SHEET_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_IDENTIFIER, STANDALONE_SUP'
+- id: iec.international_standard.2547.debt
+  input: "!IEC CA 01:2025-10(en)!IEC CA 01:2025"
+  expect:
+    error:
+      class_name: Parslet::ParseFailed
+  notes: 'unparsed ground-truth fixture: Parslet::ParseFailed: Expected one of [WORKING_PROGRAMME_WITH_PUBLISHER,
+    WORKING_PROGRAMME, TECHNICAL_GROUP, WORKING_DOCUMENT, SHEET_SUPPLEMENT_IDENTIFIER,
+    SHEET_IDENTIFIER, SUPPLEMENT_SUPPLEMENT_IDENTIFIER, STANDALONE_SUP'

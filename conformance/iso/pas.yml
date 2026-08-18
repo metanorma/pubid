@@ -1,0 +1,578 @@
+---
+- id: iso.pas.0001
+  input: ISO/AWI PAS 14018
+  identifier:
+    type: pas
+    components:
+      number: '14018'
+      stage: awipas
+  representations:
+    human: ISO/AWI PAS 14018
+    urn: urn:iso:std:iso:pas:14018:stage-10.99
+  roundtrip: true
+- id: iso.pas.0002
+  input: ISO/AWI PAS 24499
+  identifier:
+    type: pas
+    components:
+      number: '24499'
+      stage: awipas
+  representations:
+    human: ISO/AWI PAS 24499
+    urn: urn:iso:std:iso:pas:24499:stage-10.99
+  roundtrip: true
+- id: iso.pas.0003
+  input: ISO/AWI PAS 5672
+  identifier:
+    type: pas
+    components:
+      number: '5672'
+      stage: awipas
+  representations:
+    human: ISO/AWI PAS 5672
+    urn: urn:iso:std:iso:pas:5672:stage-10.99
+  roundtrip: true
+- id: iso.pas.0004
+  input: ISO/AWI PAS 8329
+  identifier:
+    type: pas
+    components:
+      number: '8329'
+      stage: awipas
+  representations:
+    human: ISO/AWI PAS 8329
+    urn: urn:iso:std:iso:pas:8329:stage-10.99
+  roundtrip: true
+- id: iso.pas.0005
+  input: ISO/AWI PAS 8800
+  identifier:
+    type: pas
+    components:
+      number: '8800'
+      stage: awipas
+  representations:
+    human: ISO/AWI PAS 8800
+    urn: urn:iso:std:iso:pas:8800:stage-10.99
+  roundtrip: true
+- id: iso.pas.0006
+  input: ISO/AWI PAS 8926
+  identifier:
+    type: pas
+    components:
+      number: '8926'
+      stage: awipas
+  representations:
+    human: ISO/AWI PAS 8926
+    urn: urn:iso:std:iso:pas:8926:stage-10.99
+  roundtrip: true
+- id: iso.pas.0007
+  input: ISO/CD PAS 22399
+  identifier:
+    type: pas
+    components:
+      number: '22399'
+      stage: cdpas
+  representations:
+    human: ISO/CD PAS 22399
+    urn: urn:iso:std:iso:pas:22399:CD
+  roundtrip: true
+- id: iso.pas.0008
+  input: ISO/CD PAS 24019
+  identifier:
+    type: pas
+    components:
+      number: '24019'
+      stage: cdpas
+  representations:
+    human: ISO/CD PAS 24019
+    urn: urn:iso:std:iso:pas:24019:CD
+  roundtrip: true
+- id: iso.pas.0009
+  input: ISO/PAS 11856:2003
+  identifier:
+    type: pas
+    components:
+      number: '11856'
+      year: '2003'
+  representations:
+    human: ISO/PAS 11856:2003
+    urn: urn:iso:std:iso:pas:11856
+  roundtrip: true
+- id: iso.pas.0010
+  input: ISO/PAS 12868:2009
+  identifier:
+    type: pas
+    components:
+      number: '12868'
+      year: '2009'
+  representations:
+    human: ISO/PAS 12868:2009
+    urn: urn:iso:std:iso:pas:12868
+  roundtrip: true
+- id: iso.pas.0011
+  input: ISO/PAS 13396:2009
+  identifier:
+    type: pas
+    components:
+      number: '13396'
+      year: '2009'
+  representations:
+    human: ISO/PAS 13396:2009
+    urn: urn:iso:std:iso:pas:13396
+  roundtrip: true
+- id: iso.pas.0012
+  input: ISO/PAS 13613:2010
+  identifier:
+    type: pas
+    components:
+      number: '13613'
+      year: '2010'
+  representations:
+    human: ISO/PAS 13613:2010
+    urn: urn:iso:std:iso:pas:13613
+  roundtrip: true
+- id: iso.pas.0013
+  input: ISO/PAS 16739:2005
+  identifier:
+    type: pas
+    components:
+      number: '16739'
+      year: '2005'
+  representations:
+    human: ISO/PAS 16739:2005
+    urn: urn:iso:std:iso:pas:16739
+  roundtrip: true
+- id: iso.pas.0014
+  input: ISO/PAS 17001:2005
+  identifier:
+    type: pas
+    components:
+      number: '17001'
+      year: '2005'
+  representations:
+    human: ISO/PAS 17001:2005
+    urn: urn:iso:std:iso:pas:17001
+  roundtrip: true
+- id: iso.pas.0015
+  input: ISO/PAS 17005:2008
+  identifier:
+    type: pas
+    components:
+      number: '17005'
+      year: '2008'
+  representations:
+    human: ISO/PAS 17005:2008
+    urn: urn:iso:std:iso:pas:17005
+  roundtrip: true
+- id: iso.pas.0016
+  input: ISO/PAS 17208-1:2012
+  identifier:
+    type: pas
+    components:
+      number: '17208'
+      part: '1'
+      year: '2012'
+  representations:
+    human: ISO/PAS 17208-1:2012
+    urn: urn:iso:std:iso:pas:17208:-1
+  roundtrip: true
+- id: iso.pas.0017
+  input: ISO/PAS 17506:2012
+  identifier:
+    type: pas
+    components:
+      number: '17506'
+      year: '2012'
+  representations:
+    human: ISO/PAS 17506:2012
+    urn: urn:iso:std:iso:pas:17506
+  roundtrip: true
+- id: iso.pas.0018
+  input: ISO/PAS 18761:2013
+  identifier:
+    type: pas
+    components:
+      number: '18761'
+      year: '2013'
+  representations:
+    human: ISO/PAS 18761:2013
+    urn: urn:iso:std:iso:pas:18761
+  roundtrip: true
+- id: iso.pas.0019
+  input: ISO/PAS 19363:2017
+  identifier:
+    type: pas
+    components:
+      number: '19363'
+      year: '2017'
+  representations:
+    human: ISO/PAS 19363:2017
+    urn: urn:iso:std:iso:pas:19363
+  roundtrip: true
+- id: iso.pas.0020
+  input: ISO/PAS 19450
+  identifier:
+    type: pas
+    components:
+      number: '19450'
+  representations:
+    human: ISO/PAS 19450
+    urn: urn:iso:std:iso:pas:19450
+  roundtrip: true
+- id: iso.pas.0021
+  input: ISO/PAS 19450:2015
+  identifier:
+    type: pas
+    components:
+      number: '19450'
+      year: '2015'
+  representations:
+    human: ISO/PAS 19450:2015
+    urn: urn:iso:std:iso:pas:19450
+  roundtrip: true
+- id: iso.pas.0022
+  input: ISO/PAS 19695:2015
+  identifier:
+    type: pas
+    components:
+      number: '19695'
+      year: '2015'
+  representations:
+    human: ISO/PAS 19695:2015
+    urn: urn:iso:std:iso:pas:19695
+  roundtrip: true
+- id: iso.pas.0023
+  input: ISO/PAS 19891-1:2016
+  identifier:
+    type: pas
+    components:
+      number: '19891'
+      part: '1'
+      year: '2016'
+  representations:
+    human: ISO/PAS 19891-1:2016
+    urn: urn:iso:std:iso:pas:19891:-1
+  roundtrip: true
+- id: iso.pas.0024
+  input: ISO/PAS 20065:2016
+  identifier:
+    type: pas
+    components:
+      number: '20065'
+      year: '2016'
+  representations:
+    human: ISO/PAS 20065:2016
+    urn: urn:iso:std:iso:pas:20065
+  roundtrip: true
+- id: iso.pas.0025
+  input: ISO/PAS 20282-4:2007
+  identifier:
+    type: pas
+    components:
+      number: '20282'
+      part: '4'
+      year: '2007'
+  representations:
+    human: ISO/PAS 20282-4:2007
+    urn: urn:iso:std:iso:pas:20282:-4
+  roundtrip: true
+- id: iso.pas.0026
+  input: ISO/PAS 21448:2019
+  identifier:
+    type: pas
+    components:
+      number: '21448'
+      year: '2019'
+  representations:
+    human: ISO/PAS 21448:2019
+    urn: urn:iso:std:iso:pas:21448
+  roundtrip: true
+- id: iso.pas.0027
+  input: ISO/PAS 22241-1:2005
+  identifier:
+    type: pas
+    components:
+      number: '22241'
+      part: '1'
+      year: '2005'
+  representations:
+    human: ISO/PAS 22241-1:2005
+    urn: urn:iso:std:iso:pas:22241:-1
+  roundtrip: true
+- id: iso.pas.0028
+  input: ISO/PAS 22241-2:2005
+  identifier:
+    type: pas
+    components:
+      number: '22241'
+      part: '2'
+      year: '2005'
+  representations:
+    human: ISO/PAS 22241-2:2005
+    urn: urn:iso:std:iso:pas:22241:-2
+  roundtrip: true
+- id: iso.pas.0029
+  input: ISO/PAS 23263:2019(en)
+  identifier:
+    type: pas
+    components:
+      number: '23263'
+      year: '2019'
+      languages:
+      - code: en
+        original_code: en
+  representations:
+    human: ISO/PAS 23263:2019(en)
+    urn: urn:iso:std:iso:pas:23263:en
+  roundtrip: true
+- id: iso.pas.0030
+  input: ISO/PAS 23678-1
+  identifier:
+    type: pas
+    components:
+      number: '23678'
+      part: '1'
+  representations:
+    human: ISO/PAS 23678-1
+    urn: urn:iso:std:iso:pas:23678:-1
+  roundtrip: true
+- id: iso.pas.0031
+  input: ISO/PAS 23678-2
+  identifier:
+    type: pas
+    components:
+      number: '23678'
+      part: '2'
+  representations:
+    human: ISO/PAS 23678-2
+    urn: urn:iso:std:iso:pas:23678:-2
+  roundtrip: true
+- id: iso.pas.0032
+  input: ISO/PAS 23678-3
+  identifier:
+    type: pas
+    components:
+      number: '23678'
+      part: '3'
+  representations:
+    human: ISO/PAS 23678-3
+    urn: urn:iso:std:iso:pas:23678:-3
+  roundtrip: true
+- id: iso.pas.0033
+  input: ISO/PAS 23678-4
+  identifier:
+    type: pas
+    components:
+      number: '23678'
+      part: '4'
+  representations:
+    human: ISO/PAS 23678-4
+    urn: urn:iso:std:iso:pas:23678:-4
+  roundtrip: true
+- id: iso.pas.0034
+  input: ISO/PAS 23678-4:2020
+  identifier:
+    type: pas
+    components:
+      number: '23678'
+      part: '4'
+      year: '2020'
+  representations:
+    human: ISO/PAS 23678-4:2020
+    urn: urn:iso:std:iso:pas:23678:-4
+  roundtrip: true
+- id: iso.pas.0035
+  input: ISO/PAS 24019
+  identifier:
+    type: pas
+    components:
+      number: '24019'
+  representations:
+    human: ISO/PAS 24019
+    urn: urn:iso:std:iso:pas:24019
+  roundtrip: true
+- id: iso.pas.0036
+  input: ISO/PAS 24019:2020
+  identifier:
+    type: pas
+    components:
+      number: '24019'
+      year: '2020'
+  representations:
+    human: ISO/PAS 24019:2020
+    urn: urn:iso:std:iso:pas:24019
+  roundtrip: true
+- id: iso.pas.0037
+  input: ISO/PAS 27145-1:2006
+  identifier:
+    type: pas
+    components:
+      number: '27145'
+      part: '1'
+      year: '2006'
+  representations:
+    human: ISO/PAS 27145-1:2006
+    urn: urn:iso:std:iso:pas:27145:-1
+  roundtrip: true
+- id: iso.pas.0038
+  input: ISO/PAS 27145-2:2006
+  identifier:
+    type: pas
+    components:
+      number: '27145'
+      part: '2'
+      year: '2006'
+  representations:
+    human: ISO/PAS 27145-2:2006
+    urn: urn:iso:std:iso:pas:27145:-2
+  roundtrip: true
+- id: iso.pas.0039
+  input: ISO/PAS 27145-3:2006
+  identifier:
+    type: pas
+    components:
+      number: '27145'
+      part: '3'
+      year: '2006'
+  representations:
+    human: ISO/PAS 27145-3:2006
+    urn: urn:iso:std:iso:pas:27145:-3
+  roundtrip: true
+- id: iso.pas.0040
+  input: ISO/PAS 27145-4:2006
+  identifier:
+    type: pas
+    components:
+      number: '27145'
+      part: '4'
+      year: '2006'
+  representations:
+    human: ISO/PAS 27145-4:2006
+    urn: urn:iso:std:iso:pas:27145:-4
+  roundtrip: true
+- id: iso.pas.0041
+  input: ISO/PAS 28000:2005
+  identifier:
+    type: pas
+    components:
+      number: '28000'
+      year: '2005'
+  representations:
+    human: ISO/PAS 28000:2005
+    urn: urn:iso:std:iso:pas:28000
+  roundtrip: true
+- id: iso.pas.0042
+  input: ISO/PAS 28002:2010
+  identifier:
+    type: pas
+    components:
+      number: '28002'
+      year: '2010'
+  representations:
+    human: ISO/PAS 28002:2010
+    urn: urn:iso:std:iso:pas:28002
+  roundtrip: true
+- id: iso.pas.0043
+  input: ISO/PAS 28005-2:2009
+  identifier:
+    type: pas
+    components:
+      number: '28005'
+      part: '2'
+      year: '2009'
+  representations:
+    human: ISO/PAS 28005-2:2009
+    urn: urn:iso:std:iso:pas:28005:-2
+  roundtrip: true
+- id: iso.pas.0044
+  input: ISO/PAS 3930:2009
+  identifier:
+    type: pas
+    components:
+      number: '3930'
+      year: '2009'
+  representations:
+    human: ISO/PAS 3930:2009
+    urn: urn:iso:std:iso:pas:3930
+  roundtrip: true
+- id: iso.pas.0045
+  input: ISO/PAS 45005:2020
+  identifier:
+    type: pas
+    components:
+      number: '45005'
+      year: '2020'
+  representations:
+    human: ISO/PAS 45005:2020
+    urn: urn:iso:std:iso:pas:45005
+  roundtrip: true
+- id: iso.pas.0046
+  input: ISO/PAS 45005:2020(en)
+  identifier:
+    type: pas
+    components:
+      number: '45005'
+      year: '2020'
+      languages:
+      - code: en
+        original_code: en
+  representations:
+    human: ISO/PAS 45005:2020(en)
+    urn: urn:iso:std:iso:pas:45005:en
+  roundtrip: true
+- id: iso.pas.0047
+  input: ISO/PAS 5101:2021
+  identifier:
+    type: pas
+    components:
+      number: '5101'
+      year: '2021'
+  representations:
+    human: ISO/PAS 5101:2021
+    urn: urn:iso:std:iso:pas:5101
+  roundtrip: true
+- id: iso.pas.0048
+  input: ISO/PAS 5112
+  identifier:
+    type: pas
+    components:
+      number: '5112'
+  representations:
+    human: ISO/PAS 5112
+    urn: urn:iso:std:iso:pas:5112
+  roundtrip: true
+- id: iso.pas.0049
+  input: ISO/PAS 5643:2021
+  identifier:
+    type: pas
+    components:
+      number: '5643'
+      year: '2021'
+  representations:
+    human: ISO/PAS 5643:2021
+    urn: urn:iso:std:iso:pas:5643
+  roundtrip: true
+- id: iso.pas.0050
+  input: ISO/PRF PAS 22596
+  identifier:
+    type: pas
+    components:
+      number: '22596'
+      stage: prfpas
+  representations:
+    human: ISO/PRF PAS 22596
+    urn: urn:iso:std:iso:pas:22596:stage-60.00
+  roundtrip: true
+- id: iso.pas.0051
+  input: ISO/SAE PAS 22736:2021
+  identifier:
+    type: pas
+    components:
+      number: '22736'
+      year: '2021'
+      copublishers:
+      - SAE
+  representations:
+    human: ISO/SAE PAS 22736:2021
+    urn: urn:iso:std:iso-sae:pas:22736
+  roundtrip: true

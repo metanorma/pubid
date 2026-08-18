@@ -1,0 +1,2131 @@
+---
+- id: iec.interpretation_sheet.0001
+  input: CISPR 14-1:2016/ISH1:2017
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2017'
+      publisher: CISPR
+    base:
+      type: international_standard
+      components:
+        number: '14'
+        part: '1'
+        year: '2016'
+        publisher: CISPR
+  representations:
+    human: CISPR 14-1:2016/ISH1:2017
+    urn: urn:iec:std:cispr:14-1:2016:::::ish:1:2017
+  roundtrip: true
+- id: iec.interpretation_sheet.0002
+  input: CISPR 14-1:2016/ISH2:2017
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2017'
+      publisher: CISPR
+    base:
+      type: international_standard
+      components:
+        number: '14'
+        part: '1'
+        year: '2016'
+        publisher: CISPR
+  representations:
+    human: CISPR 14-1:2016/ISH2:2017
+    urn: urn:iec:std:cispr:14-1:2016:::::ish:2:2017
+  roundtrip: true
+- id: iec.interpretation_sheet.0003
+  input: CISPR 15:2005/ISH1:2013
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2013'
+      publisher: CISPR
+    base:
+      type: international_standard
+      components:
+        number: '15'
+        year: '2005'
+        publisher: CISPR
+  representations:
+    human: CISPR 15:2005/ISH1:2013
+    urn: urn:iec:std:cispr:15:2005:::::ish:1:2013
+  roundtrip: true
+- id: iec.interpretation_sheet.0004
+  input: CISPR 15:2005/ISH2:2013
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2013'
+      publisher: CISPR
+    base:
+      type: international_standard
+      components:
+        number: '15'
+        year: '2005'
+        publisher: CISPR
+  representations:
+    human: CISPR 15:2005/ISH2:2013
+    urn: urn:iec:std:cispr:15:2005:::::ish:2:2013
+  roundtrip: true
+- id: iec.interpretation_sheet.0005
+  input: CISPR 15:2013/ISH1:2013
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2013'
+      publisher: CISPR
+    base:
+      type: international_standard
+      components:
+        number: '15'
+        year: '2013'
+        publisher: CISPR
+  representations:
+    human: CISPR 15:2013/ISH1:2013
+    urn: urn:iec:std:cispr:15:2013:::::ish:1:2013
+  roundtrip: true
+- id: iec.interpretation_sheet.0006
+  input: CISPR 15:2013/ISH2:2013
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2013'
+      publisher: CISPR
+    base:
+      type: international_standard
+      components:
+        number: '15'
+        year: '2013'
+        publisher: CISPR
+  representations:
+    human: CISPR 15:2013/ISH2:2013
+    urn: urn:iec:std:cispr:15:2013:::::ish:2:2013
+  roundtrip: true
+- id: iec.interpretation_sheet.0007
+  input: CISPR 15:2018/ISH1:2019
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2019'
+      publisher: CISPR
+    base:
+      type: international_standard
+      components:
+        number: '15'
+        year: '2018'
+        publisher: CISPR
+  representations:
+    human: CISPR 15:2018/ISH1:2019
+    urn: urn:iec:std:cispr:15:2018:::::ish:1:2019
+  roundtrip: true
+- id: iec.interpretation_sheet.0008
+  input: CISPR 16-1-1:2015/ISH1:2018
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2018'
+      publisher: CISPR
+    base:
+      type: international_standard
+      components:
+        number: '16'
+        part: '1'
+        subpart: '1'
+        year: '2015'
+        publisher: CISPR
+  representations:
+    human: CISPR 16-1-1:2015/ISH1:2018
+    urn: urn:iec:std:cispr:16-1-1:2015:::::ish:1:2018
+  roundtrip: true
+- id: iec.interpretation_sheet.0009
+  input: CISPR 22:2008/ISH1:2009
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2009'
+      publisher: CISPR
+    base:
+      type: international_standard
+      components:
+        number: '22'
+        year: '2008'
+        publisher: CISPR
+  representations:
+    human: CISPR 22:2008/ISH1:2009
+    urn: urn:iec:std:cispr:22:2008:::::ish:1:2009
+  roundtrip: true
+- id: iec.interpretation_sheet.0010
+  input: CISPR 22:2008/ISH2:2010
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2010'
+      publisher: CISPR
+    base:
+      type: international_standard
+      components:
+        number: '22'
+        year: '2008'
+        publisher: CISPR
+  representations:
+    human: CISPR 22:2008/ISH2:2010
+    urn: urn:iec:std:cispr:22:2008:::::ish:2:2010
+  roundtrip: true
+- id: iec.interpretation_sheet.0011
+  input: CISPR 22:2008/ISH3:2012
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '3'
+      year: '2012'
+      publisher: CISPR
+    base:
+      type: international_standard
+      components:
+        number: '22'
+        year: '2008'
+        publisher: CISPR
+  representations:
+    human: CISPR 22:2008/ISH3:2012
+    urn: urn:iec:std:cispr:22:2008:::::ish:3:2012
+  roundtrip: true
+- id: iec.interpretation_sheet.0012
+  input: CISPR 25:2002/ISH1:2007
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2007'
+      publisher: CISPR
+    base:
+      type: international_standard
+      components:
+        number: '25'
+        year: '2002'
+        publisher: CISPR
+  representations:
+    human: CISPR 25:2002/ISH1:2007
+    urn: urn:iec:std:cispr:25:2002:::::ish:1:2007
+  roundtrip: true
+- id: iec.interpretation_sheet.0013
+  input: IEC 60076-11:2018/ISH1:2020
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2020'
+    base:
+      type: international_standard
+      components:
+        number: '60076'
+        part: '11'
+        year: '2018'
+  representations:
+    human: IEC 60076-11:2018/ISH1:2020
+    urn: urn:iec:std:iec:60076-11:2018:::::ish:1:2020
+  roundtrip: true
+- id: iec.interpretation_sheet.0014
+  input: IEC 60079-0:1998/ISH1:2008
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2008'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '0'
+        year: '1998'
+  representations:
+    human: IEC 60079-0:1998/ISH1:2008
+    urn: urn:iec:std:iec:60079-0:1998:::::ish:1:2008
+  roundtrip: true
+- id: iec.interpretation_sheet.0015
+  input: IEC 60079-0:2004/ISH1:2008
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2008'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '0'
+        year: '2004'
+  representations:
+    human: IEC 60079-0:2004/ISH1:2008
+    urn: urn:iec:std:iec:60079-0:2004:::::ish:1:2008
+  roundtrip: true
+- id: iec.interpretation_sheet.0016
+  input: IEC 60079-0:2007/ISH1:2008
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2008'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '0'
+        year: '2007'
+  representations:
+    human: IEC 60079-0:2007/ISH1:2008
+    urn: urn:iec:std:iec:60079-0:2007:::::ish:1:2008
+  roundtrip: true
+- id: iec.interpretation_sheet.0017
+  input: IEC 60079-0:2007/ISH2:2019
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2019'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '0'
+        year: '2007'
+  representations:
+    human: IEC 60079-0:2007/ISH2:2019
+    urn: urn:iec:std:iec:60079-0:2007:::::ish:2:2019
+  roundtrip: true
+- id: iec.interpretation_sheet.0018
+  input: IEC 60079-0:2011/ISH1:2013
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2013'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '0'
+        year: '2011'
+  representations:
+    human: IEC 60079-0:2011/ISH1:2013
+    urn: urn:iec:std:iec:60079-0:2011:::::ish:1:2013
+  roundtrip: true
+- id: iec.interpretation_sheet.0019
+  input: IEC 60079-0:2011/ISH2:2014
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2014'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '0'
+        year: '2011'
+  representations:
+    human: IEC 60079-0:2011/ISH2:2014
+    urn: urn:iec:std:iec:60079-0:2011:::::ish:2:2014
+  roundtrip: true
+- id: iec.interpretation_sheet.0020
+  input: IEC 60079-0:2011/ISH3:2018
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '3'
+      year: '2018'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '0'
+        year: '2011'
+  representations:
+    human: IEC 60079-0:2011/ISH3:2018
+    urn: urn:iec:std:iec:60079-0:2011:::::ish:3:2018
+  roundtrip: true
+- id: iec.interpretation_sheet.0021
+  input: IEC 60079-0:2011/ISH4:2019
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '4'
+      year: '2019'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '0'
+        year: '2011'
+  representations:
+    human: IEC 60079-0:2011/ISH4:2019
+    urn: urn:iec:std:iec:60079-0:2011:::::ish:4:2019
+  roundtrip: true
+- id: iec.interpretation_sheet.0022
+  input: IEC 60079-0:2017/ISH1:2019
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2019'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '0'
+        year: '2017'
+  representations:
+    human: IEC 60079-0:2017/ISH1:2019
+    urn: urn:iec:std:iec:60079-0:2017:::::ish:1:2019
+  roundtrip: true
+- id: iec.interpretation_sheet.0023
+  input: IEC 60079-0:2017/ISH2:2019
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2019'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '0'
+        year: '2017'
+  representations:
+    human: IEC 60079-0:2017/ISH2:2019
+    urn: urn:iec:std:iec:60079-0:2017:::::ish:2:2019
+  roundtrip: true
+- id: iec.interpretation_sheet.0024
+  input: IEC 60079-1:2001/ISH1:2007
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2007'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '1'
+        year: '2001'
+  representations:
+    human: IEC 60079-1:2001/ISH1:2007
+    urn: urn:iec:std:iec:60079-1:2001:::::ish:1:2007
+  roundtrip: true
+- id: iec.interpretation_sheet.0025
+  input: IEC 60079-1:2003/ISH1:2007
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2007'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '1'
+        year: '2003'
+  representations:
+    human: IEC 60079-1:2003/ISH1:2007
+    urn: urn:iec:std:iec:60079-1:2003:::::ish:1:2007
+  roundtrip: true
+- id: iec.interpretation_sheet.0026
+  input: IEC 60079-1:2014/ISH1:2020
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2020'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '1'
+        year: '2014'
+  representations:
+    human: IEC 60079-1:2014/ISH1:2020
+    urn: urn:iec:std:iec:60079-1:2014:::::ish:1:2020
+  roundtrip: true
+- id: iec.interpretation_sheet.0027
+  input: IEC 60079-11:2006/ISH1:2019
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2019'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '11'
+        year: '2006'
+  representations:
+    human: IEC 60079-11:2006/ISH1:2019
+    urn: urn:iec:std:iec:60079-11:2006:::::ish:1:2019
+  roundtrip: true
+- id: iec.interpretation_sheet.0028
+  input: IEC 60079-11:2011/ISH1:2014
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2014'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '11'
+        year: '2011'
+  representations:
+    human: IEC 60079-11:2011/ISH1:2014
+    urn: urn:iec:std:iec:60079-11:2011:::::ish:1:2014
+  roundtrip: true
+- id: iec.interpretation_sheet.0029
+  input: IEC 60079-11:2011/ISH2:2016
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2016'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '11'
+        year: '2011'
+  representations:
+    human: IEC 60079-11:2011/ISH2:2016
+    urn: urn:iec:std:iec:60079-11:2011:::::ish:2:2016
+  roundtrip: true
+- id: iec.interpretation_sheet.0030
+  input: IEC 60079-11:2011/ISH3:2016
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '3'
+      year: '2016'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '11'
+        year: '2011'
+  representations:
+    human: IEC 60079-11:2011/ISH3:2016
+    urn: urn:iec:std:iec:60079-11:2011:::::ish:3:2016
+  roundtrip: true
+- id: iec.interpretation_sheet.0031
+  input: IEC 60079-11:2011/ISH4:2019
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '4'
+      year: '2019'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '11'
+        year: '2011'
+  representations:
+    human: IEC 60079-11:2011/ISH4:2019
+    urn: urn:iec:std:iec:60079-11:2011:::::ish:4:2019
+  roundtrip: true
+- id: iec.interpretation_sheet.0032
+  input: IEC 60079-11:2011/ISH5:2019
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '5'
+      year: '2019'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '11'
+        year: '2011'
+  representations:
+    human: IEC 60079-11:2011/ISH5:2019
+    urn: urn:iec:std:iec:60079-11:2011:::::ish:5:2019
+  roundtrip: true
+- id: iec.interpretation_sheet.0033
+  input: IEC 60079-11:2011/ISH6:2019
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '6'
+      year: '2019'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '11'
+        year: '2011'
+  representations:
+    human: IEC 60079-11:2011/ISH6:2019
+    urn: urn:iec:std:iec:60079-11:2011:::::ish:6:2019
+  roundtrip: true
+- id: iec.interpretation_sheet.0034
+  input: IEC 60079-14:2013/ISH1:2017
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2017'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '14'
+        year: '2013'
+  representations:
+    human: IEC 60079-14:2013/ISH1:2017
+    urn: urn:iec:std:iec:60079-14:2013:::::ish:1:2017
+  roundtrip: true
+- id: iec.interpretation_sheet.0035
+  input: IEC 60079-14:2013/ISH2:2020
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2020'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '14'
+        year: '2013'
+  representations:
+    human: IEC 60079-14:2013/ISH2:2020
+    urn: urn:iec:std:iec:60079-14:2013:::::ish:2:2020
+  roundtrip: true
+- id: iec.interpretation_sheet.0036
+  input: IEC 60079-15:2010/ISH1:2016
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2016'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '15'
+        year: '2010'
+  representations:
+    human: IEC 60079-15:2010/ISH1:2016
+    urn: urn:iec:std:iec:60079-15:2010:::::ish:1:2016
+  roundtrip: true
+- id: iec.interpretation_sheet.0037
+  input: IEC 60079-25:2003/ISH1:2023
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2023'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '25'
+        year: '2003'
+  representations:
+    human: IEC 60079-25:2003/ISH1:2023
+    urn: urn:iec:std:iec:60079-25:2003:::::ish:1:2023
+  roundtrip: true
+- id: iec.interpretation_sheet.0038
+  input: IEC 60079-25:2010/ISH1:2023
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2023'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '25'
+        year: '2010'
+  representations:
+    human: IEC 60079-25:2010/ISH1:2023
+    urn: urn:iec:std:iec:60079-25:2010:::::ish:1:2023
+  roundtrip: true
+- id: iec.interpretation_sheet.0039
+  input: IEC 60079-28:2006/ISH1:2014
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2014'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '28'
+        year: '2006'
+  representations:
+    human: IEC 60079-28:2006/ISH1:2014
+    urn: urn:iec:std:iec:60079-28:2006:::::ish:1:2014
+  roundtrip: true
+- id: iec.interpretation_sheet.0040
+  input: IEC 60079-28:2006/ISH2:2019
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2019'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '28'
+        year: '2006'
+  representations:
+    human: IEC 60079-28:2006/ISH2:2019
+    urn: urn:iec:std:iec:60079-28:2006:::::ish:2:2019
+  roundtrip: true
+- id: iec.interpretation_sheet.0041
+  input: IEC 60079-28:2015/ISH1:2019
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2019'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '28'
+        year: '2015'
+  representations:
+    human: IEC 60079-28:2015/ISH1:2019
+    urn: urn:iec:std:iec:60079-28:2015:::::ish:1:2019
+  roundtrip: true
+- id: iec.interpretation_sheet.0042
+  input: IEC 60079-29-1:2007/ISH1:2009
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2009'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '29'
+        subpart: '1'
+        year: '2007'
+  representations:
+    human: IEC 60079-29-1:2007/ISH1:2009
+    urn: urn:iec:std:iec:60079-29-1:2007:::::ish:1:2009
+  roundtrip: true
+- id: iec.interpretation_sheet.0043
+  input: IEC 60079-29-1:2016/ISH1:2019
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2019'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '29'
+        subpart: '1'
+        year: '2016'
+  representations:
+    human: IEC 60079-29-1:2016/ISH1:2019
+    urn: urn:iec:std:iec:60079-29-1:2016:::::ish:1:2019
+  roundtrip: true
+- id: iec.interpretation_sheet.0044
+  input: IEC 60079-29-1:2016/ISH2:2019
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2019'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '29'
+        subpart: '1'
+        year: '2016'
+  representations:
+    human: IEC 60079-29-1:2016/ISH2:2019
+    urn: urn:iec:std:iec:60079-29-1:2016:::::ish:2:2019
+  roundtrip: true
+- id: iec.interpretation_sheet.0045
+  input: IEC 60079-31:2008/ISH1:2022
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2022'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '31'
+        year: '2008'
+  representations:
+    human: IEC 60079-31:2008/ISH1:2022
+    urn: urn:iec:std:iec:60079-31:2008:::::ish:1:2022
+  roundtrip: true
+- id: iec.interpretation_sheet.0046
+  input: IEC 60079-31:2013/ISH1:2022
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2022'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '31'
+        year: '2013'
+  representations:
+    human: IEC 60079-31:2013/ISH1:2022
+    urn: urn:iec:std:iec:60079-31:2013:::::ish:1:2022
+  roundtrip: true
+- id: iec.interpretation_sheet.0047
+  input: IEC 60079-7:2015/ISH1:2016
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2016'
+    base:
+      type: international_standard
+      components:
+        number: '60079'
+        part: '7'
+        year: '2015'
+  representations:
+    human: IEC 60079-7:2015/ISH1:2016
+    urn: urn:iec:std:iec:60079-7:2015:::::ish:1:2016
+  roundtrip: true
+- id: iec.interpretation_sheet.0048
+  input: IEC 60086-4:2019/ISH1:2020
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2020'
+    base:
+      type: international_standard
+      components:
+        number: '60086'
+        part: '4'
+        year: '2019'
+  representations:
+    human: IEC 60086-4:2019/ISH1:2020
+    urn: urn:iec:std:iec:60086-4:2019:::::ish:1:2020
+  roundtrip: true
+- id: iec.interpretation_sheet.0049
+  input: IEC 60332-3-24:2018/ISH1:2019
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2019'
+    base:
+      type: international_standard
+      components:
+        number: '60332'
+        part: '3'
+        subpart: '24'
+        year: '2018'
+  representations:
+    human: IEC 60332-3-24:2018/ISH1:2019
+    urn: urn:iec:std:iec:60332-3-24:2018:::::ish:1:2019
+  roundtrip: true
+- id: iec.interpretation_sheet.0050
+  input: IEC 60335-1:1976/ISH1:1976
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '1976'
+    base:
+      type: international_standard
+      components:
+        number: '60335'
+        part: '1'
+        year: '1976'
+  representations:
+    human: IEC 60335-1:1976/ISH1:1976
+    urn: urn:iec:std:iec:60335-1:1976:::::ish:1:1976
+  roundtrip: true
+- id: iec.interpretation_sheet.0051
+  input: IEC 60335-1:1991/ISH1:1993
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '1993'
+    base:
+      type: international_standard
+      components:
+        number: '60335'
+        part: '1'
+        year: '1991'
+  representations:
+    human: IEC 60335-1:1991/ISH1:1993
+    urn: urn:iec:std:iec:60335-1:1991:::::ish:1:1993
+  roundtrip: true
+- id: iec.interpretation_sheet.0052
+  input: IEC 60335-1:1991/ISH2:1994
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '1994'
+    base:
+      type: international_standard
+      components:
+        number: '60335'
+        part: '1'
+        year: '1991'
+  representations:
+    human: IEC 60335-1:1991/ISH2:1994
+    urn: urn:iec:std:iec:60335-1:1991:::::ish:2:1994
+  roundtrip: true
+- id: iec.interpretation_sheet.0053
+  input: IEC 60335-1:2001/AMD1:2004/ISH1:2007
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2007'
+    base:
+      type: amendment
+      components:
+        number: '1'
+        year: '2004'
+      base:
+        type: international_standard
+        components:
+          number: '60335'
+          part: '1'
+          year: '2001'
+  representations:
+    human: IEC 60335-1:2001/AMD1:2004/ISH1:2007
+    urn: urn:iec:std:iec:60335-1:2001:::::amd:1:2004::ish:1:2007
+  roundtrip: true
+- id: iec.interpretation_sheet.0054
+  input: IEC 60335-1:2010/AMD2:2016/ISH1:2020
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2020'
+    base:
+      type: amendment
+      components:
+        number: '2'
+        year: '2016'
+      base:
+        type: international_standard
+        components:
+          number: '60335'
+          part: '1'
+          year: '2010'
+  representations:
+    human: IEC 60335-1:2010/AMD2:2016/ISH1:2020
+    urn: urn:iec:std:iec:60335-1:2010:::::amd:2:2016::ish:1:2020
+  roundtrip: true
+- id: iec.interpretation_sheet.0055
+  input: IEC 60335-1:2020/ISH1:2021
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2021'
+    base:
+      type: international_standard
+      components:
+        number: '60335'
+        part: '1'
+        year: '2020'
+  representations:
+    human: IEC 60335-1:2020/ISH1:2021
+    urn: urn:iec:std:iec:60335-1:2020:::::ish:1:2021
+  roundtrip: true
+- id: iec.interpretation_sheet.0056
+  input: IEC 60335-2-15:1995/ISH1:1996
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '1996'
+    base:
+      type: international_standard
+      components:
+        number: '60335'
+        part: '2'
+        subpart: '15'
+        year: '1995'
+  representations:
+    human: IEC 60335-2-15:1995/ISH1:1996
+    urn: urn:iec:std:iec:60335-2-15:1995:::::ish:1:1996
+  roundtrip: true
+- id: iec.interpretation_sheet.0057
+  input: IEC 60335-2-2:1983/ISH1:1991
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '1991'
+    base:
+      type: international_standard
+      components:
+        number: '60335'
+        part: '2'
+        subpart: '2'
+        year: '1983'
+  representations:
+    human: IEC 60335-2-2:1983/ISH1:1991
+    urn: urn:iec:std:iec:60335-2-2:1983:::::ish:1:1991
+  roundtrip: true
+- id: iec.interpretation_sheet.0058
+  input: IEC 60335-2-2:2009/ISH1:2016
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2016'
+    base:
+      type: international_standard
+      components:
+        number: '60335'
+        part: '2'
+        subpart: '2'
+        year: '2009'
+  representations:
+    human: IEC 60335-2-2:2009/ISH1:2016
+    urn: urn:iec:std:iec:60335-2-2:2009:::::ish:1:2016
+  roundtrip: true
+- id: iec.interpretation_sheet.0059
+  input: IEC 60335-2-24:2010/AMD2:2017/ISH1:2018
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2018'
+    base:
+      type: amendment
+      components:
+        number: '2'
+        year: '2017'
+      base:
+        type: international_standard
+        components:
+          number: '60335'
+          part: '2'
+          subpart: '24'
+          year: '2010'
+  representations:
+    human: IEC 60335-2-24:2010/AMD2:2017/ISH1:2018
+    urn: urn:iec:std:iec:60335-2-24:2010:::::amd:2:2017::ish:1:2018
+  roundtrip: true
+- id: iec.interpretation_sheet.0060
+  input: IEC 60335-2-24:2010/AMD2:2017/ISH2:2020
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2020'
+    base:
+      type: amendment
+      components:
+        number: '2'
+        year: '2017'
+      base:
+        type: international_standard
+        components:
+          number: '60335'
+          part: '2'
+          subpart: '24'
+          year: '2010'
+  representations:
+    human: IEC 60335-2-24:2010/AMD2:2017/ISH2:2020
+    urn: urn:iec:std:iec:60335-2-24:2010:::::amd:2:2017::ish:2:2020
+  roundtrip: true
+- id: iec.interpretation_sheet.0061
+  input: IEC 60335-2-3:1993/ISH1:1996
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '1996'
+    base:
+      type: international_standard
+      components:
+        number: '60335'
+        part: '2'
+        subpart: '3'
+        year: '1993'
+  representations:
+    human: IEC 60335-2-3:1993/ISH1:1996
+    urn: urn:iec:std:iec:60335-2-3:1993:::::ish:1:1996
+  roundtrip: true
+- id: iec.interpretation_sheet.0062
+  input: IEC 60335-2-35:1991/ISH2:1991
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '1991'
+    base:
+      type: international_standard
+      components:
+        number: '60335'
+        part: '2'
+        subpart: '35'
+        year: '1991'
+  representations:
+    human: IEC 60335-2-35:1991/ISH2:1991
+    urn: urn:iec:std:iec:60335-2-35:1991:::::ish:2:1991
+  roundtrip: true
+- id: iec.interpretation_sheet.0063
+  input: IEC 60335-2-5:1992/ISH1:1996
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '1996'
+    base:
+      type: international_standard
+      components:
+        number: '60335'
+        part: '2'
+        subpart: '5'
+        year: '1992'
+  representations:
+    human: IEC 60335-2-5:1992/ISH1:1996
+    urn: urn:iec:std:iec:60335-2-5:1992:::::ish:1:1996
+  roundtrip: true
+- id: iec.interpretation_sheet.0064
+  input: IEC 60335-2-5:2012/ISH1:2019
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2019'
+    base:
+      type: international_standard
+      components:
+        number: '60335'
+        part: '2'
+        subpart: '5'
+        year: '2012'
+  representations:
+    human: IEC 60335-2-5:2012/ISH1:2019
+    urn: urn:iec:std:iec:60335-2-5:2012:::::ish:1:2019
+  roundtrip: true
+- id: iec.interpretation_sheet.0065
+  input: IEC 60335-2-89:2010/ISH1:2014
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2014'
+    base:
+      type: international_standard
+      components:
+        number: '60335'
+        part: '2'
+        subpart: '89'
+        year: '2010'
+  representations:
+    human: IEC 60335-2-89:2010/ISH1:2014
+    urn: urn:iec:std:iec:60335-2-89:2010:::::ish:1:2014
+  roundtrip: true
+- id: iec.interpretation_sheet.0066
+  input: IEC 60350-1:2016/ISH1:2021
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2021'
+    base:
+      type: international_standard
+      components:
+        number: '60350'
+        part: '1'
+        year: '2016'
+  representations:
+    human: IEC 60350-1:2016/ISH1:2021
+    urn: urn:iec:std:iec:60350-1:2016:::::ish:1:2021
+  roundtrip: true
+- id: iec.interpretation_sheet.0067
+  input: IEC 60432-1:1993/ISH1:1996
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '1996'
+    base:
+      type: international_standard
+      components:
+        number: '60432'
+        part: '1'
+        year: '1993'
+  representations:
+    human: IEC 60432-1:1993/ISH1:1996
+    urn: urn:iec:std:iec:60432-1:1993:::::ish:1:1996
+  roundtrip: true
+- id: iec.interpretation_sheet.0068
+  input: IEC 60598-1:1992/ISH1:1996
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '1996'
+    base:
+      type: international_standard
+      components:
+        number: '60598'
+        part: '1'
+        year: '1992'
+  representations:
+    human: IEC 60598-1:1992/ISH1:1996
+    urn: urn:iec:std:iec:60598-1:1992:::::ish:1:1996
+  roundtrip: true
+- id: iec.interpretation_sheet.0069
+  input: IEC 60598-1:1996/ISH1:1997
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '1997'
+    base:
+      type: international_standard
+      components:
+        number: '60598'
+        part: '1'
+        year: '1996'
+  representations:
+    human: IEC 60598-1:1996/ISH1:1997
+    urn: urn:iec:std:iec:60598-1:1996:::::ish:1:1997
+  roundtrip: true
+- id: iec.interpretation_sheet.0070
+  input: IEC 60598-1:1999/ISH1:2001
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2001'
+    base:
+      type: international_standard
+      components:
+        number: '60598'
+        part: '1'
+        year: '1999'
+  representations:
+    human: IEC 60598-1:1999/ISH1:2001
+    urn: urn:iec:std:iec:60598-1:1999:::::ish:1:2001
+  roundtrip: true
+- id: iec.interpretation_sheet.0071
+  input: IEC 60598-1:1999/ISH25:2001
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '25'
+      year: '2001'
+    base:
+      type: international_standard
+      components:
+        number: '60598'
+        part: '1'
+        year: '1999'
+  representations:
+    human: IEC 60598-1:1999/ISH25:2001
+    urn: urn:iec:std:iec:60598-1:1999:::::ish:25:2001
+  roundtrip: true
+- id: iec.interpretation_sheet.0072
+  input: IEC 60598-1:1999/ISH26:2001
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '26'
+      year: '2001'
+    base:
+      type: international_standard
+      components:
+        number: '60598'
+        part: '1'
+        year: '1999'
+  representations:
+    human: IEC 60598-1:1999/ISH26:2001
+    urn: urn:iec:std:iec:60598-1:1999:::::ish:26:2001
+  roundtrip: true
+- id: iec.interpretation_sheet.0073
+  input: IEC 60598-1:1999/ISH27:2001
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '27'
+      year: '2001'
+    base:
+      type: international_standard
+      components:
+        number: '60598'
+        part: '1'
+        year: '1999'
+  representations:
+    human: IEC 60598-1:1999/ISH27:2001
+    urn: urn:iec:std:iec:60598-1:1999:::::ish:27:2001
+  roundtrip: true
+- id: iec.interpretation_sheet.0074
+  input: IEC 60598-1:2003/ISH1:2004
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2004'
+    base:
+      type: international_standard
+      components:
+        number: '60598'
+        part: '1'
+        year: '2003'
+  representations:
+    human: IEC 60598-1:2003/ISH1:2004
+    urn: urn:iec:std:iec:60598-1:2003:::::ish:1:2004
+  roundtrip: true
+- id: iec.interpretation_sheet.0075
+  input: IEC 60598-1:2014/ISH1:2016
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2016'
+    base:
+      type: international_standard
+      components:
+        number: '60598'
+        part: '1'
+        year: '2014'
+  representations:
+    human: IEC 60598-1:2014/ISH1:2016
+    urn: urn:iec:std:iec:60598-1:2014:::::ish:1:2016
+  roundtrip: true
+- id: iec.interpretation_sheet.0076
+  input: IEC 60598-2-20:1996/ISH1:2001
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2001'
+    base:
+      type: international_standard
+      components:
+        number: '60598'
+        part: '2'
+        subpart: '20'
+        year: '1996'
+  representations:
+    human: IEC 60598-2-20:1996/ISH1:2001
+    urn: urn:iec:std:iec:60598-2-20:1996:::::ish:1:2001
+  roundtrip: true
+- id: iec.interpretation_sheet.0077
+  input: IEC 60598-2-20:1996/ISH2:2003
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2003'
+    base:
+      type: international_standard
+      components:
+        number: '60598'
+        part: '2'
+        subpart: '20'
+        year: '1996'
+  representations:
+    human: IEC 60598-2-20:1996/ISH2:2003
+    urn: urn:iec:std:iec:60598-2-20:1996:::::ish:2:2003
+  roundtrip: true
+- id: iec.interpretation_sheet.0078
+  input: IEC 60598-2-20:1996/ISH3:2003
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '3'
+      year: '2003'
+    base:
+      type: international_standard
+      components:
+        number: '60598'
+        part: '2'
+        subpart: '20'
+        year: '1996'
+  representations:
+    human: IEC 60598-2-20:1996/ISH3:2003
+    urn: urn:iec:std:iec:60598-2-20:1996:::::ish:3:2003
+  roundtrip: true
+- id: iec.interpretation_sheet.0079
+  input: IEC 60598-2-3:1993/ISH1:2001
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2001'
+    base:
+      type: international_standard
+      components:
+        number: '60598'
+        part: '2'
+        subpart: '3'
+        year: '1993'
+  representations:
+    human: IEC 60598-2-3:1993/ISH1:2001
+    urn: urn:iec:std:iec:60598-2-3:1993:::::ish:1:2001
+  roundtrip: true
+- id: iec.interpretation_sheet.0080
+  input: IEC 60598-2-5:1998/ISH1:2001
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2001'
+    base:
+      type: international_standard
+      components:
+        number: '60598'
+        part: '2'
+        subpart: '5'
+        year: '1998'
+  representations:
+    human: IEC 60598-2-5:1998/ISH1:2001
+    urn: urn:iec:std:iec:60598-2-5:1998:::::ish:1:2001
+  roundtrip: true
+- id: iec.interpretation_sheet.0081
+  input: IEC 60598-2-6:1994/ISH1:2001
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2001'
+    base:
+      type: international_standard
+      components:
+        number: '60598'
+        part: '2'
+        subpart: '6'
+        year: '1994'
+  representations:
+    human: IEC 60598-2-6:1994/ISH1:2001
+    urn: urn:iec:std:iec:60598-2-6:1994:::::ish:1:2001
+  roundtrip: true
+- id: iec.interpretation_sheet.0082
+  input: IEC 60601-1-2:2007/ISH1:2010
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2010'
+    base:
+      type: international_standard
+      components:
+        number: '60601'
+        part: '1'
+        subpart: '2'
+        year: '2007'
+  representations:
+    human: IEC 60601-1-2:2007/ISH1:2010
+    urn: urn:iec:std:iec:60601-1-2:2007:::::ish:1:2010
+  roundtrip: true
+- id: iec.interpretation_sheet.0083
+  input: IEC 60601-1:2005/AMD1:2012/ISH1:2021
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2021'
+    base:
+      type: amendment
+      components:
+        number: '1'
+        year: '2012'
+      base:
+        type: international_standard
+        components:
+          number: '60601'
+          part: '1'
+          year: '2005'
+  representations:
+    human: IEC 60601-1:2005/AMD1:2012/ISH1:2021
+    urn: urn:iec:std:iec:60601-1:2005:::::amd:1:2012::ish:1:2021
+  roundtrip: true
+- id: iec.interpretation_sheet.0084
+  input: IEC 60601-1:2005/ISH1:2008
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2008'
+    base:
+      type: international_standard
+      components:
+        number: '60601'
+        part: '1'
+        year: '2005'
+  representations:
+    human: IEC 60601-1:2005/ISH1:2008
+    urn: urn:iec:std:iec:60601-1:2005:::::ish:1:2008
+  roundtrip: true
+- id: iec.interpretation_sheet.0085
+  input: IEC 60601-1:2005/ISH2:2009
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2009'
+    base:
+      type: international_standard
+      components:
+        number: '60601'
+        part: '1'
+        year: '2005'
+  representations:
+    human: IEC 60601-1:2005/ISH2:2009
+    urn: urn:iec:std:iec:60601-1:2005:::::ish:2:2009
+  roundtrip: true
+- id: iec.interpretation_sheet.0086
+  input: IEC 60601-1:2005/ISH3:2013
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '3'
+      year: '2013'
+    base:
+      type: international_standard
+      components:
+        number: '60601'
+        part: '1'
+        year: '2005'
+  representations:
+    human: IEC 60601-1:2005/ISH3:2013
+    urn: urn:iec:std:iec:60601-1:2005:::::ish:3:2013
+  roundtrip: true
+- id: iec.interpretation_sheet.0087
+  input: IEC 60601-2-33:2022/ISH1:2023
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2023'
+    base:
+      type: international_standard
+      components:
+        number: '60601'
+        part: '2'
+        subpart: '33'
+        year: '2022'
+  representations:
+    human: IEC 60601-2-33:2022/ISH1:2023
+    urn: urn:iec:std:iec:60601-2-33:2022:::::ish:1:2023
+  roundtrip: true
+- id: iec.interpretation_sheet.0088
+  input: IEC 60669-1:1998/ISH1:2012
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2012'
+    base:
+      type: international_standard
+      components:
+        number: '60669'
+        part: '1'
+        year: '1998'
+  representations:
+    human: IEC 60669-1:1998/ISH1:2012
+    urn: urn:iec:std:iec:60669-1:1998:::::ish:1:2012
+  roundtrip: true
+- id: iec.interpretation_sheet.0089
+  input: IEC 60669-2-1:2002/ISH1:2011
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2011'
+    base:
+      type: international_standard
+      components:
+        number: '60669'
+        part: '2'
+        subpart: '1'
+        year: '2002'
+  representations:
+    human: IEC 60669-2-1:2002/ISH1:2011
+    urn: urn:iec:std:iec:60669-2-1:2002:::::ish:1:2011
+  roundtrip: true
+- id: iec.interpretation_sheet.0090
+  input: IEC 60669-2-1:2002/ISH2:2012
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2012'
+    base:
+      type: international_standard
+      components:
+        number: '60669'
+        part: '2'
+        subpart: '1'
+        year: '2002'
+  representations:
+    human: IEC 60669-2-1:2002/ISH2:2012
+    urn: urn:iec:std:iec:60669-2-1:2002:::::ish:2:2012
+  roundtrip: true
+- id: iec.interpretation_sheet.0091
+  input: IEC 60809:2014/AMD1:2017/ISH1:2017
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2017'
+    base:
+      type: amendment
+      components:
+        number: '1'
+        year: '2017'
+      base:
+        type: international_standard
+        components:
+          number: '60809'
+          year: '2014'
+  representations:
+    human: IEC 60809:2014/AMD1:2017/ISH1:2017
+    urn: urn:iec:std:iec:60809:2014:::::amd:1:2017::ish:1:2017
+  roundtrip: true
+- id: iec.interpretation_sheet.0092
+  input: IEC 60825-1:2007/ISH1:2009
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2009'
+    base:
+      type: international_standard
+      components:
+        number: '60825'
+        part: '1'
+        year: '2007'
+  representations:
+    human: IEC 60825-1:2007/ISH1:2009
+    urn: urn:iec:std:iec:60825-1:2007:::::ish:1:2009
+  roundtrip: true
+- id: iec.interpretation_sheet.0093
+  input: IEC 60825-1:2007/ISH2:2011
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2011'
+    base:
+      type: international_standard
+      components:
+        number: '60825'
+        part: '1'
+        year: '2007'
+  representations:
+    human: IEC 60825-1:2007/ISH2:2011
+    urn: urn:iec:std:iec:60825-1:2007:::::ish:2:2011
+  roundtrip: true
+- id: iec.interpretation_sheet.0094
+  input: IEC 60825-1:2014/ISH1:2017
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2017'
+    base:
+      type: international_standard
+      components:
+        number: '60825'
+        part: '1'
+        year: '2014'
+  representations:
+    human: IEC 60825-1:2014/ISH1:2017
+    urn: urn:iec:std:iec:60825-1:2014:::::ish:1:2017
+  roundtrip: true
+- id: iec.interpretation_sheet.0095
+  input: IEC 60825-1:2014/ISH2:2017
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2017'
+    base:
+      type: international_standard
+      components:
+        number: '60825'
+        part: '1'
+        year: '2014'
+  representations:
+    human: IEC 60825-1:2014/ISH2:2017
+    urn: urn:iec:std:iec:60825-1:2014:::::ish:2:2017
+  roundtrip: true
+- id: iec.interpretation_sheet.0096
+  input: IEC 60825-2:2000/ISH1:2001
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2001'
+    base:
+      type: international_standard
+      components:
+        number: '60825'
+        part: '2'
+        year: '2000'
+  representations:
+    human: IEC 60825-2:2000/ISH1:2001
+    urn: urn:iec:std:iec:60825-2:2000:::::ish:1:2001
+  roundtrip: true
+- id: iec.interpretation_sheet.0097
+  input: IEC 60825-2:2004/ISH1:2008
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2008'
+    base:
+      type: international_standard
+      components:
+        number: '60825'
+        part: '2'
+        year: '2004'
+  representations:
+    human: IEC 60825-2:2004/ISH1:2008
+    urn: urn:iec:std:iec:60825-2:2004:::::ish:1:2008
+  roundtrip: true
+- id: iec.interpretation_sheet.0098
+  input: IEC 60825-2:2004/ISH2:2018
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '2'
+      year: '2018'
+    base:
+      type: international_standard
+      components:
+        number: '60825'
+        part: '2'
+        year: '2004'
+  representations:
+    human: IEC 60825-2:2004/ISH2:2018
+    urn: urn:iec:std:iec:60825-2:2004:::::ish:2:2018
+  roundtrip: true
+- id: iec.interpretation_sheet.0099
+  input: IEC 60947-4-1:2018/ISH1:2020
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2020'
+    base:
+      type: international_standard
+      components:
+        number: '60947'
+        part: '4'
+        subpart: '1'
+        year: '2018'
+  representations:
+    human: IEC 60947-4-1:2018/ISH1:2020
+    urn: urn:iec:std:iec:60947-4-1:2018:::::ish:1:2020
+  roundtrip: true
+- id: iec.interpretation_sheet.0100
+  input: IEC 60998-1:2002/ISH1:2005
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2005'
+    base:
+      type: international_standard
+      components:
+        number: '60998'
+        part: '1'
+        year: '2002'
+  representations:
+    human: IEC 60998-1:2002/ISH1:2005
+    urn: urn:iec:std:iec:60998-1:2002:::::ish:1:2005
+  roundtrip: true
+- id: iec.interpretation_sheet.0101
+  input: IEC 61000-3-12:2011/ISH1:2012
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2012'
+    base:
+      type: international_standard
+      components:
+        number: '61000'
+        part: '3'
+        subpart: '12'
+        year: '2011'
+  representations:
+    human: IEC 61000-3-12:2011/ISH1:2012
+    urn: urn:iec:std:iec:61000-3-12:2011:::::ish:1:2012
+  roundtrip: true
+- id: iec.interpretation_sheet.0102
+  input: IEC 61000-3-2:2018/AMD1:2020/ISH1:2021
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2021'
+    base:
+      type: amendment
+      components:
+        number: '1'
+        year: '2020'
+      base:
+        type: international_standard
+        components:
+          number: '61000'
+          part: '3'
+          subpart: '2'
+          year: '2018'
+  representations:
+    human: IEC 61000-3-2:2018/AMD1:2020/ISH1:2021
+    urn: urn:iec:std:iec:61000-3-2:2018:::::amd:1:2020::ish:1:2021
+  roundtrip: true
+- id: iec.interpretation_sheet.0103
+  input: IEC 61000-4-11:2004/ISH1:2010
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2010'
+    base:
+      type: international_standard
+      components:
+        number: '61000'
+        part: '4'
+        subpart: '11'
+        year: '2004'
+  representations:
+    human: IEC 61000-4-11:2004/ISH1:2010
+    urn: urn:iec:std:iec:61000-4-11:2004:::::ish:1:2010
+  roundtrip: true
+- id: iec.interpretation_sheet.0104
+  input: IEC 61000-4-15:2010/ISH1:2017
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2017'
+    base:
+      type: international_standard
+      components:
+        number: '61000'
+        part: '4'
+        subpart: '15'
+        year: '2010'
+  representations:
+    human: IEC 61000-4-15:2010/ISH1:2017
+    urn: urn:iec:std:iec:61000-4-15:2010:::::ish:1:2017
+  roundtrip: true
+- id: iec.interpretation_sheet.0105
+  input: IEC 61000-4-3:2006/ISH1:2008
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2008'
+    base:
+      type: international_standard
+      components:
+        number: '61000'
+        part: '4'
+        subpart: '3'
+        year: '2006'
+  representations:
+    human: IEC 61000-4-3:2006/ISH1:2008
+    urn: urn:iec:std:iec:61000-4-3:2006:::::ish:1:2008
+  roundtrip: true
+- id: iec.interpretation_sheet.0106
+  input: IEC 61000-6-3:2006/AMD1:2010/ISH1:2011
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2011'
+    base:
+      type: amendment
+      components:
+        number: '1'
+        year: '2010'
+      base:
+        type: international_standard
+        components:
+          number: '61000'
+          part: '6'
+          subpart: '3'
+          year: '2006'
+  representations:
+    human: IEC 61000-6-3:2006/AMD1:2010/ISH1:2011
+    urn: urn:iec:std:iec:61000-6-3:2006:::::amd:1:2010::ish:1:2011
+  roundtrip: true
+- id: iec.interpretation_sheet.0107
+  input: IEC 61000-6-4:2006/AMD1:2010/ISH1:2011
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2011'
+    base:
+      type: amendment
+      components:
+        number: '1'
+        year: '2010'
+      base:
+        type: international_standard
+        components:
+          number: '61000'
+          part: '6'
+          subpart: '4'
+          year: '2006'
+  representations:
+    human: IEC 61000-6-4:2006/AMD1:2010/ISH1:2011
+    urn: urn:iec:std:iec:61000-6-4:2006:::::amd:1:2010::ish:1:2011
+  roundtrip: true
+- id: iec.interpretation_sheet.0108
+  input: IEC 61010-1:2010/ISH1:2013
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2013'
+    base:
+      type: international_standard
+      components:
+        number: '61010'
+        part: '1'
+        year: '2010'
+  representations:
+    human: IEC 61010-1:2010/ISH1:2013
+    urn: urn:iec:std:iec:61010-1:2010:::::ish:1:2013
+  roundtrip: true
+- id: iec.interpretation_sheet.0109
+  input: IEC 61326-3-2:2008/ISH1:2013
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2013'
+    base:
+      type: international_standard
+      components:
+        number: '61326'
+        part: '3'
+        subpart: '2'
+        year: '2008'
+  representations:
+    human: IEC 61326-3-2:2008/ISH1:2013
+    urn: urn:iec:std:iec:61326-3-2:2008:::::ish:1:2013
+  roundtrip: true
+- id: iec.interpretation_sheet.0110
+  input: IEC 61347-1:2000/ISH1:2006
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2006'
+    base:
+      type: international_standard
+      components:
+        number: '61347'
+        part: '1'
+        year: '2000'
+  representations:
+    human: IEC 61347-1:2000/ISH1:2006
+    urn: urn:iec:std:iec:61347-1:2000:::::ish:1:2006
+  roundtrip: true
+- id: iec.interpretation_sheet.0111
+  input: IEC 61547:2009/ISH1:2013
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2013'
+    base:
+      type: international_standard
+      components:
+        number: '61547'
+        year: '2009'
+  representations:
+    human: IEC 61547:2009/ISH1:2013
+    urn: urn:iec:std:iec:61547:2009:::::ish:1:2013
+  roundtrip: true
+- id: iec.interpretation_sheet.0112
+  input: IEC 61558-1:1997/ISH1:2003
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2003'
+    base:
+      type: international_standard
+      components:
+        number: '61558'
+        part: '1'
+        year: '1997'
+  representations:
+    human: IEC 61558-1:1997/ISH1:2003
+    urn: urn:iec:std:iec:61558-1:1997:::::ish:1:2003
+  roundtrip: true
+- id: iec.interpretation_sheet.0113
+  input: IEC 61810-1:2015/ISH1:2023
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2023'
+    base:
+      type: international_standard
+      components:
+        number: '61810'
+        part: '1'
+        year: '2015'
+  representations:
+    human: IEC 61810-1:2015/ISH1:2023
+    urn: urn:iec:std:iec:61810-1:2015:::::ish:1:2023
+  roundtrip: true
+- id: iec.interpretation_sheet.0114
+  input: IEC 61869-11:2017/ISH1:2021
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2021'
+    base:
+      type: international_standard
+      components:
+        number: '61869'
+        part: '11'
+        year: '2017'
+  representations:
+    human: IEC 61869-11:2017/ISH1:2021
+    urn: urn:iec:std:iec:61869-11:2017:::::ish:1:2021
+  roundtrip: true
+- id: iec.interpretation_sheet.0115
+  input: IEC 61869-2:2012/ISH1:2022
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2022'
+    base:
+      type: international_standard
+      components:
+        number: '61869'
+        part: '2'
+        year: '2012'
+  representations:
+    human: IEC 61869-2:2012/ISH1:2022
+    urn: urn:iec:std:iec:61869-2:2012:::::ish:1:2022
+  roundtrip: true
+- id: iec.interpretation_sheet.0116
+  input: IEC 62040-2:2016/ISH1:2018
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2018'
+    base:
+      type: international_standard
+      components:
+        number: '62040'
+        part: '2'
+        year: '2016'
+  representations:
+    human: IEC 62040-2:2016/ISH1:2018
+    urn: urn:iec:std:iec:62040-2:2016:::::ish:1:2018
+  roundtrip: true
+- id: iec.interpretation_sheet.0117
+  input: IEC 62052-31:2015/ISH1:2019
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2019'
+    base:
+      type: international_standard
+      components:
+        number: '62052'
+        part: '31'
+        year: '2015'
+  representations:
+    human: IEC 62052-31:2015/ISH1:2019
+    urn: urn:iec:std:iec:62052-31:2015:::::ish:1:2019
+  roundtrip: true
+- id: iec.interpretation_sheet.0118
+  input: IEC 62271-1:2017/ISH1:2021
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2021'
+    base:
+      type: international_standard
+      components:
+        number: '62271'
+        part: '1'
+        year: '2017'
+  representations:
+    human: IEC 62271-1:2017/ISH1:2021
+    urn: urn:iec:std:iec:62271-1:2017:::::ish:1:2021
+  roundtrip: true
+- id: iec.interpretation_sheet.0119
+  input: IEC 62549:2011/ISH1:2015
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2015'
+    base:
+      type: international_standard
+      components:
+        number: '62549'
+        year: '2011'
+  representations:
+    human: IEC 62549:2011/ISH1:2015
+    urn: urn:iec:std:iec:62549:2011:::::ish:1:2015
+  roundtrip: true
+- id: iec.interpretation_sheet.0120
+  input: IEC 62776:2014/ISH1:2018
+  identifier:
+    type: interpretation_sheet
+    components:
+      number: '1'
+      year: '2018'
+    base:
+      type: international_standard
+      components:
+        number: '62776'
+        year: '2014'
+  representations:
+    human: IEC 62776:2014/ISH1:2018
+    urn: urn:iec:std:iec:62776:2014:::::ish:1:2018
+  roundtrip: true

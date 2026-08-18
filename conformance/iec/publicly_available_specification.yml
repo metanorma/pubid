@@ -1,0 +1,147 @@
+---
+- id: iec.publicly_available_specification.0001
+  input: IEC PAS 60050-732:2007
+  identifier:
+    type: publicly_available_specification
+    components:
+      number: '60050'
+      part: '732'
+      year: '2007'
+  representations:
+    human: IEC PAS 60050-732:2007
+    urn: 'urn:iec:std:iec:60050-732:2007:pas::'
+  roundtrip: true
+- id: iec.publicly_available_specification.0002
+  input: IEC PAS 60050-732:2007 ED1
+  identifier:
+    type: publicly_available_specification
+    components:
+      number: '60050'
+      part: '732'
+      year: '2007'
+      edition:
+        number: '1'
+  representations:
+    human: IEC PAS 60050-732:2007 ED1
+    urn: 'urn:iec:std:iec:60050-732:2007:pas::'
+  roundtrip: true
+- id: iec.publicly_available_specification.0003
+  input: IEC PAS 63088:2017
+  identifier:
+    type: publicly_available_specification
+    components:
+      number: '63088'
+      year: '2017'
+  representations:
+    human: IEC PAS 63088:2017
+    urn: 'urn:iec:std:iec:63088:2017:pas::'
+  roundtrip: true
+- id: iec.publicly_available_specification.0004
+  input: IEC PAS 63095-1:2017
+  identifier:
+    type: publicly_available_specification
+    components:
+      number: '63095'
+      part: '1'
+      year: '2017'
+  representations:
+    human: IEC PAS 63095-1:2017
+    urn: 'urn:iec:std:iec:63095-1:2017:pas::'
+  roundtrip: true
+- id: iec.publicly_available_specification.0005
+  input: IEC PAS 63095-2:2017
+  identifier:
+    type: publicly_available_specification
+    components:
+      number: '63095'
+      part: '2'
+      year: '2017'
+  representations:
+    human: IEC PAS 63095-2:2017
+    urn: 'urn:iec:std:iec:63095-2:2017:pas::'
+  roundtrip: true
+- id: iec.publicly_available_specification.0006
+  input: IEC PAS 63131:2017
+  identifier:
+    type: publicly_available_specification
+    components:
+      number: '63131'
+      year: '2017'
+  representations:
+    human: IEC PAS 63131:2017
+    urn: 'urn:iec:std:iec:63131:2017:pas::'
+  roundtrip: true
+- id: iec.publicly_available_specification.0007
+  input: IEC PAS 63256:2020
+  identifier:
+    type: publicly_available_specification
+    components:
+      number: '63256'
+      year: '2020'
+  representations:
+    human: IEC PAS 63256:2020
+    urn: 'urn:iec:std:iec:63256:2020:pas::'
+  roundtrip: true
+- id: iec.publicly_available_specification.0008
+  input: IEC PAS 63267-3-30:2021
+  identifier:
+    type: publicly_available_specification
+    components:
+      number: '63267'
+      part: '3'
+      subpart: '30'
+      year: '2021'
+  representations:
+    human: IEC PAS 63267-3-30:2021
+    urn: 'urn:iec:std:iec:63267-3-30:2021:pas::'
+  roundtrip: true
+- id: iec.publicly_available_specification.0009
+  input: IEC PAS 63267-3-31:2020
+  identifier:
+    type: publicly_available_specification
+    components:
+      number: '63267'
+      part: '3'
+      subpart: '31'
+      year: '2020'
+  representations:
+    human: IEC PAS 63267-3-31:2020
+    urn: 'urn:iec:std:iec:63267-3-31:2020:pas::'
+  roundtrip: true
+- id: iec.publicly_available_specification.0010
+  input: IEC PAS 63325:2020
+  identifier:
+    type: publicly_available_specification
+    components:
+      number: '63325'
+      year: '2020'
+  representations:
+    human: IEC PAS 63325:2020
+    urn: 'urn:iec:std:iec:63325:2020:pas::'
+  roundtrip: true
+- id: iec.publicly_available_specification.0011
+  input: IEC PAS 63441 ED1
+  identifier:
+    type: publicly_available_specification
+    components:
+      number: '63441'
+      edition:
+        number: '1'
+  representations:
+    human: IEC PAS 63441 ED1
+    urn: 'urn:iec:std:iec:63441::pas::'
+  roundtrip: true
+- id: iec.publicly_available_specification.0012
+  input: ISO PAS 81346-101 ED1
+  identifier:
+    type: publicly_available_specification
+    components:
+      number: '81346'
+      part: '101'
+      edition:
+        number: '1'
+      publisher: ISO
+  representations:
+    human: ISO PAS 81346-101 ED1
+    urn: 'urn:iec:std:iso:81346-101::pas::'
+  roundtrip: true
