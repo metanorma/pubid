@@ -3,7 +3,7 @@
 `conformance/` is the shared behavioral contract: the same cases run under
 rspec (Ruby, TODO.restructure/11) and vitest (pubid-ts, TODO.restructure/28).
 A case file is a YAML array of case objects; the authoritative shape is
-`conformance/corpus.schema.json`.
+`conformance/corpus.schema.yaml`.
 
 ## Gates (all must hold unless the case says otherwise)
 

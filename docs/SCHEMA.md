@@ -6,7 +6,7 @@ consume these files; neither implementation owns the data.
 
 ## Layout
 
-- `schema/schema.schema.json` - JSON Schema (draft 2020-12) for one flavor
+- `schema/schema.schema.yaml` - JSON Schema (draft 2020-12) for one flavor
   declaration.
 - `schema/core/joint_prefixes.yaml` - canonical joint/co-publication tokens,
   merged into each participating flavor's prefixes at load.
@@ -15,7 +15,7 @@ consume these files; neither implementation owns the data.
 
 ## Field reference
 
-See schema.schema.json (authoritative). Key semantics:
+See schema.schema.yaml (authoritative). Key semantics:
 
 - `prefixes`: the flavor's OWN leading tokens only. Joint tokens are never
   duplicated here; they come from `schema/core/joint_prefixes.yaml`, which is

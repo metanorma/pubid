@@ -15,6 +15,7 @@ require "pubid/lutaml/no_store_registration"
 require "pubid/prefixes_support"
 
 module Pubid
+  autoload :Schema, "pubid/schema"
   # Upper bound on the length of an identifier string accepted by any +parse+
   # entry point. Real-world standards identifiers are well under 200 characters;
   # this limit exists purely to keep pathological, attacker-controlled inputs
@@ -66,20 +67,13 @@ module Pubid
     end
   end
 
-  # Canonical joint / co-publication leading tokens, injected symmetrically into
-  # every participating flavor's +prefixes+ (see {PrefixesSupport}). Single
-  # source of truth: editing an entry here updates both sides at once
-  # (e.g. +"ISO/IEC"+ appears in +Pubid::Iso.prefixes+ and +Pubid::Iec.prefixes+),
-  # so co-publication symmetry can never drift. Keyed by
+  # Canonical joint / co-publication leading tokens, sourced at boot from
+  # schema/core/joint_prefixes.yaml - the single source of truth. Injected
+  # symmetrically into every participating flavor's +prefixes+ (see
+  # {PrefixesSupport}) so co-publication symmetry can never drift. Keyed by
   # {PrefixesSupport#prefix_flavor_key}.
-  JOINT_PREFIXES = {
-    iso: ["ISO/IEC", "IEC/ISO", "ISO/IEC/IEEE"],
-    iec: ["ISO/IEC", "IEC/ISO", "ISO/IEC/IEEE"],
-    ieee: ["ISO/IEC/IEEE"],
-    ansi: ["ANSI/ASHRAE", "ANSI/AMCA"],
-    ashrae: ["ANSI/ASHRAE"],
-    amca: ["ANSI/AMCA"],
-  }.freeze
+  JOINT_PREFIXES = Schema::Loader.joint_prefixes_map
+    .transform_keys(&:to_sym).freeze
 
   autoload :Parser, "pubid/parser"
   autoload :Components, "pubid/components"
@@ -165,7 +159,10 @@ module Pubid
   # @param format [Symbol] :auto, :human, :mr_string, or :urn
   # @return [Identifier] The parsed identifier
   def self.parse(string, format: :auto)
-    raise ArgumentError, INPUT_TOO_LONG_MESSAGE if string.length > MAX_INPUT_LENGTH
+    if string.length > MAX_INPUT_LENGTH
+      raise ArgumentError, 
+            INPUT_TOO_LONG_MESSAGE
+    end
 
     format = FormatDetector.detect(string) if format == :auto
 

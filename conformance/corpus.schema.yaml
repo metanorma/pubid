@@ -1,0 +1,57 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://pubid.dev/conformance/case-1.0.0.yaml
+title: PubID Conformance Corpus Case
+description: >-
+  One case. Corpus files are YAML arrays of these objects. The same cases
+  run under the Ruby rspec harness (TODO.restructure/11) and the TS vitest
+  harness (TODO.restructure/28).
+type: object
+required: [id, input, expect]
+additionalProperties: false
+properties:
+  id:
+    type: string
+    pattern: '^[a-z0-9][a-z0-9._-]*$'
+  input:
+    type: string
+    maxLength: 1000
+  options:
+    type: object
+    additionalProperties: true
+  expect:
+    oneOf:
+      - $ref: '#/$defs/success'
+      - $ref: '#/$defs/failure'
+$defs:
+  success:
+    type: object
+    required: [to_s]
+    additionalProperties: false
+    properties:
+      class_name:
+        type: string
+      to_s:
+        type: string
+      to_hash:
+        type: object
+        description: Canonical no-defaults form (TODO.restructure/13).
+      to_urn:
+        type: string
+      roundtrip:
+        type: boolean
+      notes:
+        type: string
+  failure:
+    type: object
+    required: [error]
+    additionalProperties: false
+    properties:
+      error:
+        type: object
+        required: [class_name]
+        additionalProperties: false
+        properties:
+          class_name:
+            type: string
+          message_pattern:
+            type: string
