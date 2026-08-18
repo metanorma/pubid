@@ -33,14 +33,14 @@ module Pubid
           debt.concat(type_debt)
           next if cases.empty?
 
-          write_yaml(File.join(output_dir, "#{type}.yml"), cases)
+          write_yaml(File.join(output_dir, "#{type}.yaml"), cases)
           results[:files] += 1
         end
         results[:debt] = debt.size
-        write_yaml(File.join(output_dir, "_unparsed.yml"), debt) if debt.any?
+        write_yaml(File.join(output_dir, "_debt.yaml"), debt) if debt.any?
         negative = build_negative_cases(results)
         if negative.any?
-          write_yaml(File.join(output_dir, "_negative.yml"), negative)
+          write_yaml(File.join(output_dir, "_negative.yaml"), negative)
         end
         results
       end
@@ -48,7 +48,8 @@ module Pubid
       private
 
       def pass_files
-        Dir[File.join(fixtures_dir, "identifiers", "pass", "*.txt")]
+        Dir[File.join(fixtures_dir, "identifiers", "pass", "*.txt")] +
+          Dir[File.join(fixtures_dir, "identifiers", "full", "*.txt")]
       end
 
       def fail_files
@@ -56,7 +57,13 @@ module Pubid
       end
 
       def fixtures_dir
-        File.expand_path("../../../spec/fixtures/#{@flavor}", __dir__)
+        File.join(tests_repo, "reference-docs", @flavor)
+      end
+
+      def tests_repo
+        @tests_repo ||= ENV.fetch("PUBID_TESTS_PATH",
+                                  File.expand_path("../../../../pubid-tests",
+                                                   __dir__))
       end
 
       def fixture_lines(path)
@@ -88,7 +95,7 @@ module Pubid
             debt << record[:debt]
             next
           end
-          key = JSON.generate(record[:case]["identifier"]["components"]) +
+          key = JSON.generate(record[:case]["identifier"]) +
             record[:case]["representations"]["human"]
           (groups[key] ||= { record: record[:case], 
                              inputs: [] })[:inputs] << input
@@ -103,7 +110,6 @@ module Pubid
           record = group[:record]
           record["id"] = format("%s.%s.%04d", @flavor, type, index + 1)
           canonical = canonical_input(group)
-          record["input"] = canonical
           record["style"] = Conformance.style_for(canonical)
           inputs = group[:inputs]
           duplicates = [inputs.count(canonical) - 1, 0].max
@@ -115,7 +121,7 @@ module Pubid
               { "input" => a, "style" => Conformance.style_for(a) }
             end
           end
-          results[:roundtrip_failures] += 1 unless record["roundtrip"]
+          results[:roundtrip_failures] += 1 if record["roundtrip"] == false
           results[:cases] += 1
           record
         end
@@ -131,17 +137,36 @@ module Pubid
         representations = { "human" => identifier.to_s }
         urn = safe_urn(identifier)
         representations["urn"] = urn if urn
-        { case: { "id" => nil,
-                  "input" => input,
-                  "identifier" => Conformance.component_tree(hash),
-                  "representations" => representations,
-                  "roundtrip" => round_trips?(hash) } }
+        record = { "id" => nil,
+                   "identifier" => Conformance.plainify(hash) }
+        record["representations"] = representations
+        record["roundtrip"] = false unless round_trips?(hash)
+        quarantine!(record) if bundled_month_bug?(hash)
+        { case: record }
       rescue StandardError => e
         { debt: { "id" => "#{@flavor}.debt.#{input.hash.abs}",
                   "input" => input,
-                  "expect" => { "error" => { "class_name" => e.class.name } },
+                  "expect" => { "error" =>
+                                { "code" => Conformance.error_code_for(e) } },
                   "notes" => "unparsed ground-truth fixture: " \
                              "#{e.class}: #{e.message.to_s[0, 200]}" } }
+      end
+
+      # Reference implementation parses bundled directive supplements with
+      # month-bearing dates nondeterministically across load orders (a
+      # spurious day component appears). Quarantine deterministically.
+      def bundled_month_bug?(hash)
+        hash.to_s.include?("bundled_identifier") && hash.to_s.include?("month")
+      end
+
+      def quarantine!(record)
+        record.delete("identifier")
+        record.delete("representations")
+        record.delete("roundtrip")
+        record.delete("non_normalized_aliases")
+        record["notes"] = "nondeterministic parse in reference " \
+                          "implementation (month/day divergence) - " \
+                          "reference bug, quarantined from gates"
       end
 
       def round_trips?(hash)
@@ -175,7 +200,8 @@ module Pubid
           "notes" => "fail fixture unexpectedly parsed - reclassify" }
       rescue StandardError => e
         { "id" => id, "input" => input,
-          "expect" => { "error" => { "class_name" => e.class.name } } }
+          "expect" => { "error" =>
+                        { "code" => Conformance.error_code_for(e) } } }
       end
 
       def write_yaml(path, entries)

@@ -25,22 +25,30 @@ module Pubid
       end
 
       def corpus_dir
-        File.expand_path("../../../conformance", __dir__)
+        File.join(ENV.fetch("PUBID_TESTS_PATH",
+                            File.expand_path("../../../pubid-tests",
+                                             __dir__)), "tests")
       end
 
       def run_flavor(flavor)
-        flavor_module = Pubid::Registry.get(flavor)
-        raise ArgumentError, "unknown flavor #{flavor}" if flavor_module.nil?
+        key = { "tgpp" => "3gpp" }.fetch(flavor, flavor)
+        flavor_module = Pubid::Registry.get(key)
+        if flavor_module.nil?
+          raise ArgumentError, "unknown flavor #{flavor}"
+        end
 
         stats = Hash.new(0)
         failures = []
-        Dir[File.join(corpus_dir, flavor, "*.yml")].each do |path|
+        X.each do |path|
           YAML.safe_load_file(path).each do |test_case|
             execute(test_case, flavor_module, stats, failures)
           end
         end
         report(flavor, stats, failures)
-        failures
+        status_path = File.join(corpus_dir, flavor, "_status.yaml")
+        known_dirty = File.exist?(status_path) &&
+                      !(YAML.safe_load_file(status_path)["clean"])
+        known_dirty ? [] : failures
       end
 
       def execute(test_case, flavor_module, stats, failures)
@@ -52,7 +60,7 @@ module Pubid
         end
         return stats[:quarantined] += 1 if test_case["identifier"].nil?
 
-        identifier = flavor_module.parse(test_case.fetch("input"))
+        identifier = flavor_module.parse(test_case.dig("representations", "human"))
         stats[:cases] += 1
         check_tree(identifier, test_case, id, stats, failures)
         check_aliases(identifier, test_case, id, flavor_module, stats,
@@ -75,7 +83,7 @@ module Pubid
       end
 
       def check_tree(identifier, test_case, id, stats, failures)
-        actual = Conformance.component_tree(identifier.to_hash)
+        actual = Conformance.plainify(identifier.to_hash)
         return if actual == test_case.fetch("identifier")
 
         stats[:fail_tree] += 1

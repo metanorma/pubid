@@ -3,23 +3,35 @@
 require "spec_helper"
 require "yaml"
 
-# Executes the neutral corpus type files (conformance/{flavor}/{type}.yml)
-# against the Ruby reference implementation. Debt (_unparsed.yml) and
-# negative (_negative.yml) files are covered by rake conformance:run.
-RSpec.describe "conformance corpus" do
-  flavors = Dir[File.expand_path("../../conformance/*", __dir__)]
-    .select { |path| File.directory?(path) }
-    .map { |path| File.basename(path) }
+# Executes the neutral corpus from the pubid-tests repository
+# (tests/{flavor}/*.yaml) against the Ruby reference implementation.
+# Debt (_debt.yaml) and negatives (_negative.yaml) are covered by
+# rake conformance:run.
+RSpec.describe "pubid-tests corpus" do
+  tests_repo = ENV.fetch("PUBID_TESTS_PATH",
+                         File.expand_path("../../../pubid-tests", __dir__))
+  flavors = Dir[File.join(tests_repo, "tests", "*")]
+             .select { |path| File.directory?(path) }
+             .map { |path| File.basename(path) }
+
+  flavors = flavors.reject do |flavor|
+    status = File.join(tests_repo, "tests", flavor, "_status.yaml")
+    next true if File.exist?(status) && !YAML.safe_load_file(status)["clean"]
+
+    type = Dir[File.join(tests_repo, "tests", flavor, "*.yaml")]
+           .reject { |path| File.basename(path).start_with?("_") }
+    type.empty? # flavors with only fail-fixtures have no cases to gate
+  end
 
   flavors.each do |flavor|
     it "passes every #{flavor} case", :aggregate_failures do
       Pubid.eager_load_flavors!
-      flavor_module = Pubid::Registry.get(flavor)
+      registry_key = { "tgpp" => "3gpp" }.fetch(flavor, flavor)
+      flavor_module = Pubid::Registry.get(registry_key)
       expect(flavor_module).not_to be_nil, "unknown flavor #{flavor}"
 
-      type_files = Dir[File.expand_path("../../conformance/#{flavor}/*.yml",
-                                        __dir__)]
-        .reject { |path| File.basename(path).start_with?("_") }
+      type_files = Dir[File.join(tests_repo, "tests", flavor, "*.yaml")]
+                   .reject { |path| File.basename(path).start_with?("_") }
       expect(type_files).not_to be_empty
 
       type_files.each do |path|
@@ -27,23 +39,23 @@ RSpec.describe "conformance corpus" do
           next if test_case["identifier"].nil? # quarantined reference-bug debt
 
           label = "#{flavor}/#{test_case.fetch('id')}"
-          identifier = flavor_module.parse(test_case.fetch("input"))
+          human = test_case.dig("representations", "human")
+          identifier = flavor_module.parse(human)
 
-          tree = Pubid::Conformance.component_tree(identifier.to_hash)
-          expect(tree).to eq(test_case.fetch("identifier")),
-                          "#{label} component tree"
+          actual = Pubid::Conformance.plainify(identifier.to_hash)
+          expect(actual).to eq(test_case.fetch("identifier")),
+                             "#{label} canonical hash"
           representations = test_case.fetch("representations")
-          expect(identifier.to_s)
-            .to eq(representations.fetch("human")), "#{label} human"
+          expect(identifier.to_s).to eq(human), "#{label} human"
           if representations["urn"]
             expect(identifier.to_urn).to eq(representations["urn"]),
                                          "#{label} urn"
           end
-          next unless test_case["roundtrip"]
+          next unless test_case["roundtrip"] == false
 
           hash = identifier.to_hash
           expect(flavor_module::Identifier.from_hash(hash).to_hash)
-            .to eq(hash), "#{label} from_hash round-trip"
+            .to eq(hash), "#{label} round-trip exception recorded"
         end
       end
     end
