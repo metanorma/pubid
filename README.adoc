@@ -1756,7 +1756,8 @@ require 'pubid'
 
 # update_codes.yaml: "NBS HB: NIST HB"
 id = Pubid::Nist.parse("NBS HB 105-1")
-id.to_s  # => "NIST HB 105-1" (NBS→NIST correction applied)
+id.to_s  # => "NBS HB 105-1" (NBS identity preserved - documents published
+         # by NBS, i.e. before/equal 1988, keep their NBS identifiers forever)
 
 # update_codes.yaml: "FIPS.140-2: FIPS 140-2" (normalizes dotted format)
 id = Pubid::Nist.parse("FIPS.140-2")
