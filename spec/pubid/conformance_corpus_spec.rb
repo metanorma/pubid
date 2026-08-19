@@ -8,6 +8,12 @@ require "yaml"
 # Debt (_debt.yaml) and negatives (_negative.yaml) are covered by
 # rake conformance:run.
 RSpec.describe "pubid-tests corpus" do
+  corpus_repo = ENV.fetch("PUBID_TESTS_PATH",
+    File.expand_path("../../../pubid-tests", __dir__))
+  unless File.directory?(File.join(corpus_repo, "tests"))
+    raise "pubid-tests corpus not found at #{corpus_repo}: " \
+          "clone pubid/pubid-tests as a sibling or set PUBID_TESTS_PATH"
+  end
   tests_repo = ENV.fetch("PUBID_TESTS_PATH",
                          File.expand_path("../../../pubid-tests", __dir__))
   flavors = Dir[File.join(tests_repo, "tests", "*")]
