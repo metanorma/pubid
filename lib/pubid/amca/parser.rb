@@ -51,6 +51,9 @@ module Pubid
       end
 
       # Reaffirmation year (R2008, R2010, etc.)
+      # Bare parenthesised year, e.g. "(2010)"
+      rule(:paren_year) { lparen >> digits.as(:reaffirmed) >> rparen }
+
       rule(:reaffirmation) do
         lparen >> str("R") >> digits.as(:reaffirmed) >> rparen
       end
@@ -95,7 +98,8 @@ module Pubid
           # Either a letter code (JW, KB, etc.) or a dash-number pattern
           (
             (interpretation_code >> interp_keyword) |
-            ((str("–") | str("-")) >> digits.as(:interpretation_year) >> interp_keyword.maybe)
+            ((str("–") | str("-")) >> space.maybe >> digits.as(:interpretation_year) >> interp_keyword.maybe) |
+((str("–") | str("-")) >> space.maybe >> interpretation_code)
           )
         ).as(:interpretation) |
           # Simple interpretation: AMCA 511 Interp
@@ -112,9 +116,9 @@ module Pubid
           copublisher.as(:copublisher).maybe >> space >>
           str("Publication").as(:publication_keyword) >> space >>
           code >>
-          (dash >> year_digits.as(:year)).maybe >>
+          (space.maybe >> dash >> year_digits.as(:year)).maybe >>
           (space >> revision).maybe >>
-          (space >> reaffirmation).maybe
+          (space >> (reaffirmation | paren_year)).maybe
         ).as(:publication)
       end
 
@@ -124,10 +128,10 @@ module Pubid
           copublisher.as(:copublisher).maybe >> space >>
           type.as(:type).maybe >> space.maybe >>
           code >>
-          (dash >> year_digits.as(:year)).maybe >>
+          (space.maybe >> dash >> year_digits.as(:year)).maybe >>
           (space >> additional_copublisher).maybe >>
           suffix.maybe >>
-          (space >> reaffirmation).maybe
+          (space >> (reaffirmation | paren_year)).maybe
         ).as(:standard)
       end
 

@@ -46,7 +46,7 @@ module Pubid
               dot >>
               (
                 # SSC with complex subdivision: BPVC.SSC.XI.II.V.IX
-                (str("SSC") >> (dot >> roman_numeral).repeat(1).as(:ssc_sections)).as(:ssc_code) |
+                (str("SSC") >> (dot >> roman_numeral).repeat(0).as(:ssc_sections)).as(:ssc_code) |
                 # CC = Case Code: BPVC.CC.BPV or BPVC.CC.NC.XI
                 (str("CC") >> dot >> bpvc_letter_code.as(:case_code) >>
                  (dot >> (roman_numeral | bpvc_letter_code)).maybe.as(:case_sub)) |
@@ -94,7 +94,7 @@ module Pubid
 
       # Joint publisher patterns
       rule(:iso_asme_publisher) do
-        str("ISO/ASME").as(:joint_publisher) >> space
+        str("ISO/ASME").as(:joint_publisher) >> space.maybe
       end
 
       rule(:asme_ans_publisher) do
@@ -104,13 +104,13 @@ module Pubid
       rule(:csa_asme_publisher) do
         csa_publisher.as(:first_publisher) >> space >>
           match("[A-Z0-9.]").repeat(1).as(:first_code) >>
-          slash >> asme_publisher.as(:second_publisher) >> space
+          space.maybe >> slash >> asme_publisher.as(:second_publisher) >> space
       end
 
       rule(:api_asme_publisher) do
         api_publisher.as(:first_publisher) >> space >>
           match("[0-9-]").repeat(1).as(:first_code) >>
-          slash >> asme_publisher.as(:second_publisher) >> space
+          space.maybe >> slash >> asme_publisher.as(:second_publisher) >> space
       end
 
       # Standard ASME publisher
@@ -146,7 +146,7 @@ module Pubid
 
       # PTC special: space-separated number with optional suffix
       rule(:ptc_number) do
-        space >>
+        space.maybe >>
           (
             match("[0-9]").repeat(1) >>
             (dot >> match("[0-9]").repeat(1)).repeat
@@ -157,7 +157,7 @@ module Pubid
 
       # TR special: space-separated number (like "ASME TR A17.1-8.4-2013")
       rule(:tr_number) do
-        space >>
+        space.maybe >>
           (
             match("[A-Z0-9]").repeat(1) >>
             (dot >> match("[0-9A-Z]").repeat(1)).repeat >>
@@ -253,7 +253,9 @@ module Pubid
       # Joint published identifier - ISO/ASME
       rule(:iso_asme_identifier) do
         iso_asme_publisher >>
-          number_part >>
+          # Year may precede the number ("ISO/ASME-2015") or follow it
+          (dash >> (draft_year | year_4digit)).maybe >>
+          number_part.maybe >>
           (dash >> (draft_year | year_4digit)).maybe >>
           language.maybe >>
           reaffirmation.maybe
@@ -273,6 +275,8 @@ module Pubid
       rule(:standard) do
         publisher >>
           (
+            # Year-only form (e.g. "ISO/ASME-2015")
+            ((dash >> (draft_year | year_4digit))) |
             # Special case for PTC with space-separated number
             (str("PTC").as(:designator) >> ptc_number >>
              (dash >> (draft_year | year_4digit)).maybe) |
@@ -280,7 +284,7 @@ module Pubid
             (str("TR").as(:designator) >> tr_number >>
              (dash >> (draft_year | year_4digit)).maybe) |
             # Regular pattern with designator + optional spaced number
-            (designator >> spaced_number_part.maybe >>
+            (designator >> (dash >> year_4digit).maybe >> spaced_number_part.maybe >>
              # CSA portion can be followed by handbook keyword
              ((csa_portion >> handbook_keyword.maybe) | handbook_keyword).maybe >>
              # Language can come before or after year
