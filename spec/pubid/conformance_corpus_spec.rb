@@ -10,7 +10,13 @@ require "yaml"
 RSpec.describe "pubid-tests corpus" do
   corpus_repo = ENV.fetch("PUBID_TESTS_PATH",
     File.expand_path("../../../pubid-tests", __dir__))
-  unless File.directory?(File.join(corpus_repo, "tests"))
+  corpus_present = File.directory?(File.join(corpus_repo, "tests"))
+  if !corpus_present && ENV["GITHUB_WORKFLOW"] && ENV["GITHUB_WORKFLOW"] != "conformance"
+    # The rake matrix does not carry a pubid-tests checkout; the dedicated
+    # conformance workflow gates the corpus. Skip loudly here - never
+    # silently pass, never fail an unrelated matrix.
+    before { skip "pubid-tests corpus absent; gated by the conformance workflow" }
+  elsif !corpus_present
     raise "pubid-tests corpus not found at #{corpus_repo}: " \
           "clone pubid/pubid-tests as a sibling or set PUBID_TESTS_PATH"
   end
