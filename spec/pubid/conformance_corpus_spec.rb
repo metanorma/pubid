@@ -3,25 +3,25 @@
 require "spec_helper"
 require "yaml"
 
-# Executes the neutral corpus from the pubid-tests repository
+# Executes the neutral corpus from the pubid-testsuite repository
 # (tests/{flavor}/*.yaml) against the Ruby reference implementation.
 # Debt (_debt.yaml) and negatives (_negative.yaml) are covered by
 # rake conformance:run.
-RSpec.describe "pubid-tests corpus" do
-  corpus_repo = ENV.fetch("PUBID_TESTS_PATH",
-    File.expand_path("../../../pubid-tests", __dir__))
+RSpec.describe "pubid-testsuite corpus" do
+  corpus_repo = ENV.fetch("PUBID_TESTSUITE_PATH",
+    File.expand_path("../../../pubid-testsuite", __dir__))
   corpus_present = File.directory?(File.join(corpus_repo, "tests"))
   if !corpus_present && ENV["GITHUB_WORKFLOW"] && ENV["GITHUB_WORKFLOW"] != "conformance"
-    # The rake matrix does not carry a pubid-tests checkout; the dedicated
+    # The rake matrix does not carry a pubid-testsuite checkout; the dedicated
     # conformance workflow gates the corpus. Skip loudly here - never
     # silently pass, never fail an unrelated matrix.
-    before { skip "pubid-tests corpus absent; gated by the conformance workflow" }
+    before { skip "pubid-testsuite corpus absent; gated by the conformance workflow" }
   elsif !corpus_present
-    raise "pubid-tests corpus not found at #{corpus_repo}: " \
-          "clone pubid/pubid-tests as a sibling or set PUBID_TESTS_PATH"
+    raise "pubid-testsuite corpus not found at #{corpus_repo}: " \
+          "clone pubid/pubid-testsuite as a sibling or set PUBID_TESTSUITE_PATH"
   end
-  tests_repo = ENV.fetch("PUBID_TESTS_PATH",
-                         File.expand_path("../../../pubid-tests", __dir__))
+  tests_repo = ENV.fetch("PUBID_TESTSUITE_PATH",
+                         File.expand_path("../../../pubid-testsuite", __dir__))
   flavors = Dir[File.join(tests_repo, "tests", "*")]
              .select { |path| File.directory?(path) }
              .map { |path| File.basename(path) }

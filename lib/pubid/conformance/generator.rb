@@ -61,8 +61,8 @@ module Pubid
       end
 
       def tests_repo
-        @tests_repo ||= ENV.fetch("PUBID_TESTS_PATH",
-                                  File.expand_path("../../../../pubid-tests",
+        @tests_repo ||= ENV.fetch("PUBID_TESTSUITE_PATH",
+                                  File.expand_path("../../../../pubid-testsuite",
                                                    __dir__))
       end
 

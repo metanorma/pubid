@@ -2,7 +2,7 @@
 
 module Pubid
   module Conformance
-    # Executes the pubid-tests corpus against this implementation.
+    # Executes the pubid-testsuite corpus against this implementation.
     # CLEAN flavors hard-gate (failures abort); DIRTY flavors report as
     # the known reference-defect ledger.
     class Runner
@@ -25,8 +25,8 @@ module Pubid
       end
 
       def corpus_dir
-        File.join(ENV.fetch("PUBID_TESTS_PATH",
-                            File.expand_path("../../../../pubid-tests",
+        File.join(ENV.fetch("PUBID_TESTSUITE_PATH",
+                            File.expand_path("../../../../pubid-testsuite",
                                              __dir__)), "tests")
       end
 

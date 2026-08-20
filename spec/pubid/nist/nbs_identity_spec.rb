@@ -30,10 +30,10 @@ RSpec.describe "NBS publisher identity" do
   end
 
   it "corpus never records NBS aliases on NIST canonicals" do
-    tests_repo = ENV.fetch("PUBID_TESTS_PATH",
-                           File.expand_path("../../../../pubid-tests", __dir__))
+    tests_repo = ENV.fetch("PUBID_TESTSUITE_PATH",
+                           File.expand_path("../../../../pubid-testsuite", __dir__))
     nist = File.join(tests_repo, "tests", "nist")
-    skip "pubid-tests not checked out" unless Dir.exist?(nist)
+    skip "pubid-testsuite not checked out" unless Dir.exist?(nist)
 
     crossed = []
     Dir[File.join(nist, "*.yaml")].each do |path|

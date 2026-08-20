@@ -9,8 +9,8 @@ namespace :conformance do
     require "pubid"
     require "pubid/conformance"
     flavor = args[:flavor] || "iso"
-    tests_repo = ENV.fetch("PUBID_TESTS_PATH",
-                           File.expand_path("../../../pubid-tests", __dir__))
+    tests_repo = ENV.fetch("PUBID_TESTSUITE_PATH",
+                           File.expand_path("../../../pubid-testsuite", __dir__))
     output_dir = File.join(tests_repo, "tests", flavor)
     FileUtils.mkdir_p(output_dir)
     results = Pubid::Conformance::Generator.new(flavor)
