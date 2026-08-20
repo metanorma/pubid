@@ -63,8 +63,8 @@ RSpec.describe Pubid::Ietf::Identifier do
           expect(parsed).to be_a(Pubid::Ietf::Identifiers::InternetDraft)
         end
 
-        it "keeps the leading draft- in name and splits the version" do
-          expect(parsed.name).to eq("draft-giuliano-treedn")
+        it "keeps the leading draft- in number and splits the version" do
+          expect(parsed.number).to eq("draft-giuliano-treedn")
           expect(parsed.version).to eq("02")
         end
 
@@ -79,7 +79,7 @@ RSpec.describe Pubid::Ietf::Identifier do
         let(:parsed) { described_class.parse(subject) }
 
         it "has a nil version" do
-          expect(parsed.name).to eq("draft-giuliano-treedn")
+          expect(parsed.number).to eq("draft-giuliano-treedn")
           expect(parsed.version).to be_nil
         end
 
@@ -93,8 +93,8 @@ RSpec.describe Pubid::Ietf::Identifier do
 
         let(:parsed) { described_class.parse(subject) }
 
-        it "keeps the digits in the name and has no version" do
-          expect(parsed.name).to eq("draft-adams-cast-256")
+        it "keeps the digits in the number and has no version" do
+          expect(parsed.number).to eq("draft-adams-cast-256")
           expect(parsed.version).to be_nil
         end
 
@@ -109,7 +109,7 @@ RSpec.describe Pubid::Ietf::Identifier do
         let(:parsed) { described_class.parse(subject) }
 
         it "splits only the final two-digit version" do
-          expect(parsed.name).to eq("draft-aboba-context-802")
+          expect(parsed.number).to eq("draft-aboba-context-802")
           expect(parsed.version).to eq("00")
         end
 
@@ -120,7 +120,7 @@ RSpec.describe Pubid::Ietf::Identifier do
 
       it "handles a slug ending in four digits (no version)" do
         parsed = described_class.parse("draft-ietf-mpls-ldp-survey2002")
-        expect(parsed.name).to eq("draft-ietf-mpls-ldp-survey2002")
+        expect(parsed.number).to eq("draft-ietf-mpls-ldp-survey2002")
         expect(parsed.version).to be_nil
         expect(parsed.to_s).to eq("draft-ietf-mpls-ldp-survey2002")
       end
@@ -131,6 +131,58 @@ RSpec.describe Pubid::Ietf::Identifier do
         expect(described_class.parse("draft-conta-ipv6-nd_ext_ind-00").to_s)
           .to eq("draft-conta-ipv6-nd_ext_ind-00")
       end
+
+      # Two historical shapes the relaton-data-ids corpus carries: a dot inside
+      # a topic token, and uppercase letters in protocol/organisation names.
+      # 50 of the 166,740 published draft ids need them (21 dotted, 29 upper).
+      context "dotted slugs" do
+        it "splits the trailing version after a dotted token" do
+          parsed = described_class.parse("draft-ietf-pilc-2.5g3g-12")
+          expect(parsed.number).to eq("draft-ietf-pilc-2.5g3g")
+          expect(parsed.version).to eq("12")
+          expect(parsed.to_s).to eq("draft-ietf-pilc-2.5g3g-12")
+        end
+
+        it "keeps a dot that is not part of a version" do
+          parsed = described_class.parse("draft-manning-ip4.int-roe-00")
+          expect(parsed.number).to eq("draft-manning-ip4.int-roe")
+          expect(parsed.version).to eq("00")
+        end
+
+        it "keeps a dotted version-like token inside the slug" do
+          # "v1.0" is a topic token, not the draft version; only the final
+          # "-NN" is the version.
+          parsed = described_class.parse("draft-ietf-trade-iotp-v1.0-dsig-05")
+          expect(parsed.number).to eq("draft-ietf-trade-iotp-v1.0-dsig")
+          expect(parsed.version).to eq("05")
+        end
+
+        it "handles a dotted tail with no version" do
+          expect(described_class.parse("draft-ietf-pem-ansix9.17-00").to_s)
+            .to eq("draft-ietf-pem-ansix9.17-00")
+        end
+      end
+
+      context "uppercase slugs" do
+        it "preserves case in the slug" do
+          parsed = described_class.parse("draft-chapin-clnp-ISO8473-00")
+          expect(parsed.number).to eq("draft-chapin-clnp-ISO8473")
+          expect(parsed.version).to eq("00")
+          expect(parsed.to_s).to eq("draft-chapin-clnp-ISO8473-00")
+        end
+
+        it "handles mixed case and a + sign" do
+          expect(described_class.parse("draft-okanoue-mobileip-R+A-00").to_s)
+            .to eq("draft-okanoue-mobileip-R+A-00")
+        end
+
+        it "handles both a dot and uppercase in one slug" do
+          expect(
+            described_class.parse("draft-nielsen-v6ops-3GPP-zeroconf-goals-00")
+              .to_s,
+          ).to eq("draft-nielsen-v6ops-3GPP-zeroconf-goals-00")
+        end
+      end
     end
 
     context "invalid input" do
@@ -140,6 +192,23 @@ RSpec.describe Pubid::Ietf::Identifier do
 
       it "raises on trailing garbage" do
         expect { described_class.parse("RFC 2119x") }
+          .to raise_error(StandardError)
+      end
+
+      # The widened draft character class is still a closed set: a space or a
+      # slash inside a slug is crawler junk, not an identifier.
+      it "raises on a space inside a draft slug" do
+        expect { described_class.parse("draft-lee-pce-wson routing-00") }
+          .to raise_error(StandardError)
+      end
+
+      it "raises on a slash inside a draft slug" do
+        expect { described_class.parse("draft-foo/bar-00") }
+          .to raise_error(StandardError)
+      end
+
+      it "raises on an ampersand inside a draft slug" do
+        expect { described_class.parse("draft-caviglia-mp2cp&cp2mp-00") }
           .to raise_error(StandardError)
       end
     end

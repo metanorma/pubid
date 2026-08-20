@@ -7,22 +7,13 @@ module Pubid
     # Pubid::Ietf::Identifiers descend from this class, so a parsed IETF id is
     # an instance of Pubid::Ietf::Identifier.
     #
-    # All families are flat, supplement-free, and use plain string attributes:
+    # All families are flat, supplement-free, and use plain string attributes.
+    # Those attributes are declared on the LEAVES by Identifiers::Serialization
+    # (see the determinism note there — never re-add `attribute :number` here):
     #   * Rfc            -> number ("2119")
-    #   * Bcp/Std/Fyi    -> series ("BCP"/"STD"/"FYI") + number ("3")
-    #   * InternetDraft  -> name ("draft-giuliano-treedn") + optional version
+    #   * Bcp/Std/Fyi    -> number ("3") + a derived `series` reader
+    #   * InternetDraft  -> number ("draft-giuliano-treedn") + optional version
     class Identifier < ::Pubid::Identifier
-      # Numeric part of an RFC or sub-series id, kept as a string (no zero-pad
-      # in the printed form, so "2119" not "02119").
-      attribute :number, :string
-      # Sub-series token for BCP/STD/FYI ("BCP"/"STD"/"FYI"); nil otherwise.
-      attribute :series, :string
-      # Full Internet-Draft slug including the leading "draft-"; nil otherwise.
-      attribute :name, :string
-      # Internet-Draft version, a two-digit string preserving zero-pad ("02");
-      # nil for the unversioned "latest" sibling.
-      attribute :version, :string
-
       # Polymorphic type map for lutaml::Model key_value (de)serialization: maps
       # each subclass's polymorphic_name to its class name so a stored hash
       # rebuilds the correct identifier type via the shared from_hash dispatch.
@@ -35,16 +26,10 @@ module Pubid
           "Pubid::Ietf::Identifiers::InternetDraft",
       }.freeze
 
-      # Only these keys serialize; the inherited Pubid::Identifier attributes
-      # are intentionally dropped. nil-valued attributes are stripped by the
-      # base canonicalizer, so each family serializes just the keys it uses.
-      key_value do
-        map "_type", to: :_type, polymorphic_map: IETF_TYPE_MAP
-        map "number", to: :number
-        map "series", to: :series
-        map "name", to: :name
-        map "version", to: :version
-      end
+      # NOTE: no `key_value` block here on purpose. The mapping lives on the
+      # leaves (Identifiers::Serialization); a block on this shared parent would
+      # be inherited-and-merged by every leaf and re-emit keys the leaf did not
+      # declare.
 
       # Publisher is always "IETF". A plain constant (not a `publisher` method)
       # so it doesn't shadow the inherited lutaml `publisher` attribute, which
@@ -62,14 +47,22 @@ module Pubid
       # Parse an IETF identifier string into the appropriate identifier object.
       # @param identifier [String] the IETF identifier string to parse
       # @return [Identifier] the concrete identifier object
+      # @raise [ArgumentError] if the input exceeds Pubid::MAX_INPUT_LENGTH
       # @raise [RuntimeError] if parsing fails
       def self.parse(identifier)
+        # Inline length guard (CodeQL rb/polynomial-redos barrier) — must be
+        # the first statement. This class-level funnel is what relaton reaches
+        # directly through `pubid_class: ::Pubid::Ietf::Identifier`, so it
+        # cannot rely on the guard in Pubid::Ietf.parse.
+        if identifier.length > Pubid::MAX_INPUT_LENGTH
+          raise ArgumentError, Pubid::INPUT_TOO_LONG_MESSAGE
+        end
+
         parsed = Parser.parse(identifier)
         Builder.build(parsed)
       rescue Parslet::ParseFailed => e
         raise "Failed to parse IETF identifier '#{identifier}': #{e.message}"
       end
     end
-
   end
 end

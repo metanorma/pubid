@@ -5,6 +5,8 @@ module Pubid
     module Identifiers
       # An RFC (Request for Comments), e.g. "RFC 2119".
       class Rfc < Identifier
+        include Serialization
+
         TYPED_STAGES = [
           Pubid::Components::TypedStage.new(
             code: :rfc,

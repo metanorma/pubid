@@ -1,5 +1,13 @@
 # IETF FYI (For Your Information) - Pass
-# Sampled from relaton-data-rfcsubseries
+#
+# The COMPLETE published FYI corpus, so the default suite covers every
+# sub-series id (relaton-data-rfcsubseries is only 365 rows in total).
+#
+# Note the zero-padded rfc-index.xml spelling (FYI0009) is deliberately NOT
+# here: it parses but renders back as the canonical unpadded form, and this
+# file is byte-exact. It is pinned by spec/pubid/ietf/zero_padded_spec.rb.
+#
+# Source: relaton-data-rfcsubseries index-v1.yaml (branch v2)
 
 FYI 2
 FYI 3
@@ -7,3 +15,33 @@ FYI 4
 FYI 5
 FYI 6
 FYI 7
+FYI 8
+FYI 9
+FYI 10
+FYI 11
+FYI 12
+FYI 13
+FYI 14
+FYI 15
+FYI 16
+FYI 18
+FYI 19
+FYI 20
+FYI 21
+FYI 22
+FYI 23
+FYI 24
+FYI 25
+FYI 26
+FYI 27
+FYI 28
+FYI 29
+FYI 30
+FYI 31
+FYI 32
+FYI 33
+FYI 34
+FYI 35
+FYI 36
+FYI 37
+FYI 38

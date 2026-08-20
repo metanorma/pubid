@@ -37,6 +37,7 @@ RSpec.describe "Identifier to_hash/from_hash round-trip" do
     "Pubid::Ieee"       => "IEEE 802.3-2018",
     "Pubid::Iana"       => "IANA _6lowpan-parameters",
     "Pubid::Iho"        => "IHO S-57",
+    "Pubid::Ietf"       => "RFC 2119",
     "Pubid::Iso"        => "ISO 9001:2015",
     "Pubid::Itu"        => "ITU-T G.711",
     "Pubid::Jcgm"       => "JCGM 100:2008",

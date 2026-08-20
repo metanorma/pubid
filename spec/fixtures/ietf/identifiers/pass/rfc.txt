@@ -1,5 +1,13 @@
 # IETF RFC - Pass
-# Sampled from relaton-data-rfcs
+#
+# Sampled from relaton-data-rfcs (branch v2), plus the numeric boundaries of
+# the published corpus. The RFC form is just "RFC <digits>", so a sample plus
+# the boundaries covers it; the full 9,757-row check is
+# spec/pubid/ietf/corpus_round_trip_spec.rb (opt-in via PUBID_IETF_CORPUS).
+#
+# The zero-padded rfc-index.xml spelling (RFC0001) is deliberately NOT here:
+# it parses but renders back unpadded, and this file is byte-exact. It is
+# pinned by spec/pubid/ietf/zero_padded_spec.rb.
 
 RFC 1
 RFC 104
@@ -17,3 +25,4 @@ RFC 7376
 RFC 8277
 RFC 9188
 RFC 967
+RFC 9968
