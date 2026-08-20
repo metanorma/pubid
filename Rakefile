@@ -27,6 +27,16 @@ namespace :test do
   task :integration do
     sh "bundle exec rspec spec/integration"
   end
+
+  # A convenience entry point, not an extra gate: the spec file lives under
+  # spec/pubid, so `test:all` already loads it — it just self-skips unless
+  # PUBID_IETF_CORPUS is set. Setting that variable therefore also adds the
+  # (~100s) corpus run to a plain `rake`.
+  desc "IETF corpus round-trip (needs PUBID_IETF_CORPUS=<dir containing " \
+       "relaton-data-{rfcs,rfcsubseries,ids}>)"
+  task :corpus_ietf do
+    sh "bundle exec rspec spec/pubid/ietf/corpus_round_trip_spec.rb"
+  end
 end
 
 desc "Run the full spec suite (alias of test:all)"

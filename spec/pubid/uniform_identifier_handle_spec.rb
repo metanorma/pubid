@@ -32,6 +32,7 @@ RSpec.describe "Uniform per-flavor Identifier handle" do
     "iec"         => ["IEC 60050:2011", "IEC 60050-300:2001+AMD1:2005 CSV"],
     "ieee"        => ["IEEE 802.3-2018"],
     "iho"         => ["IHO S-57"],
+    "ietf"        => ["RFC 2119", "STD 66", "draft-ietf-quic-transport-34"],
     "iso"         => ["ISO 9001:2015", "ISO 9001:2015/Amd 1:2020"],
     "itu"         => ["ITU-T G.711"],
     "jcgm"        => ["JCGM 100:2008"],

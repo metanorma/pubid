@@ -31,12 +31,16 @@ RSpec.describe "ReDoS input-length guard" do
     "Pubid::Iso.parse" => ->(s) { Pubid::Iso.parse(s) },
     "Pubid::Iec.parse" => ->(s) { Pubid::Iec.parse(s) },
     "Pubid::Idf.parse" => ->(s) { Pubid::Idf.parse(s) },
+    "Pubid::Ietf.parse" => ->(s) { Pubid::Ietf.parse(s) },
     # Class-level funnels that direct callers (and CodeQL sources) can hit
     # without passing through the module-level method above.
     "Pubid::Bsi::Identifier.parse" => ->(s) { Pubid::Bsi::Identifier.parse(s) },
     "Pubid::Csa::Identifier.parse" => ->(s) { Pubid::Csa::Identifier.parse(s) },
     "Pubid::Iso::Identifier.parse" => ->(s) { Pubid::Iso::Identifier.parse(s) },
     "Pubid::Iec::Identifier.parse" => ->(s) { Pubid::Iec::Identifier.parse(s) },
+    # relaton reaches this one directly via `pubid_class:`.
+    "Pubid::Ietf::Identifier.parse" =>
+      ->(s) { Pubid::Ietf::Identifier.parse(s) },
   }.freeze
 
   it "exposes a sane, documented maximum input length" do

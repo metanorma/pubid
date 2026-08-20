@@ -1,5 +1,13 @@
 # IETF STD (Internet Standard) - Pass
-# Sampled from relaton-data-rfcsubseries
+#
+# The COMPLETE published STD corpus, so the default suite covers every
+# sub-series id (relaton-data-rfcsubseries is only 365 rows in total).
+#
+# Note the zero-padded rfc-index.xml spelling (STD0009) is deliberately NOT
+# here: it parses but renders back as the canonical unpadded form, and this
+# file is byte-exact. It is pinned by spec/pubid/ietf/zero_padded_spec.rb.
+#
+# Source: relaton-data-rfcsubseries index-v1.yaml (branch v2)
 
 STD 3
 STD 5
@@ -7,3 +15,90 @@ STD 6
 STD 7
 STD 8
 STD 9
+STD 10
+STD 11
+STD 13
+STD 16
+STD 17
+STD 19
+STD 20
+STD 21
+STD 22
+STD 23
+STD 24
+STD 25
+STD 26
+STD 27
+STD 28
+STD 29
+STD 30
+STD 31
+STD 32
+STD 33
+STD 35
+STD 36
+STD 37
+STD 38
+STD 40
+STD 41
+STD 42
+STD 43
+STD 44
+STD 45
+STD 46
+STD 47
+STD 48
+STD 49
+STD 51
+STD 52
+STD 53
+STD 54
+STD 55
+STD 56
+STD 57
+STD 58
+STD 59
+STD 60
+STD 61
+STD 62
+STD 63
+STD 64
+STD 65
+STD 66
+STD 67
+STD 68
+STD 69
+STD 70
+STD 71
+STD 72
+STD 73
+STD 74
+STD 75
+STD 76
+STD 77
+STD 78
+STD 79
+STD 80
+STD 81
+STD 82
+STD 83
+STD 84
+STD 85
+STD 86
+STD 87
+STD 88
+STD 89
+STD 90
+STD 91
+STD 92
+STD 93
+STD 94
+STD 95
+STD 96
+STD 97
+STD 98
+STD 99
+STD 100
+STD 101
+STD 102
+STD 103

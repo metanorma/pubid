@@ -5,6 +5,17 @@ module Pubid
     module Identifiers
       # An FYI (For Your Information) sub-series id, e.g. "FYI 1".
       class Fyi < Identifier
+        include Serialization
+
+        # The series token is derived from the class, not stored:
+        # `_type` already encodes it, so serializing `series` would
+        # duplicate the type in every index row.
+        SERIES = "FYI"
+
+        def series
+          SERIES
+        end
+
         TYPED_STAGES = [
           Pubid::Components::TypedStage.new(
             code: :fyi,

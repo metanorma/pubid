@@ -21,9 +21,17 @@ module Pubid
         when "rfc" then "RFC #{parts[0]}"
         when "bcp", "std", "fyi" then "#{type.upcase} #{parts[0]}"
         when "id" then draft_text(parts)
-        else
-          raise Errors::ParseError, "Invalid IETF URN type: #{type.inspect}"
+        else invalid_type!(type)
         end
+      end
+
+      # `Errors` is defined under Pubid::UrnParser (the module), which is
+      # neither in this class's lexical scope nor an ancestor of Base, so the
+      # constant must be fully qualified — a bare `Errors::ParseError` raises
+      # NameError instead of the intended error.
+      def invalid_type!(type)
+        raise Pubid::UrnParser::Errors::ParseError,
+              "Invalid IETF URN type: #{type.inspect}"
       end
 
       def draft_text(parts)

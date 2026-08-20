@@ -3,6 +3,7 @@
 module Pubid
   module Ietf
     module Identifiers
+      autoload :Serialization, "#{__dir__}/identifiers/serialization"
       autoload :Rfc, "#{__dir__}/identifiers/rfc"
       autoload :Bcp, "#{__dir__}/identifiers/bcp"
       autoload :Std, "#{__dir__}/identifiers/std"
