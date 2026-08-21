@@ -37,6 +37,14 @@ namespace :test do
   task :corpus_ietf do
     sh "bundle exec rspec spec/pubid/ietf/corpus_round_trip_spec.rb"
   end
+
+  # Same shape as :corpus_ietf above — self-skips unless PUBID_IANA_CORPUS is
+  # set, so it costs the default suite nothing.
+  desc "IANA corpus round-trip (needs PUBID_IANA_CORPUS=<dir containing " \
+       "relaton-data-iana>)"
+  task :corpus_iana do
+    sh "bundle exec rspec spec/pubid/iana/corpus_round_trip_spec.rb"
+  end
 end
 
 desc "Run the full spec suite (alias of test:all)"

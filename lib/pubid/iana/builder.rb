@@ -10,8 +10,10 @@ module Pubid
       end
 
       def build(data)
+        # The top-level slug is stored as `number` — it is the relaton-index
+        # key; `Identifier#registry` reads it back.
         Identifiers::Registry.new(
-          registry: data[:registry].to_s,
+          number: data[:registry].to_s,
           sub_registry: data[:sub_registry]&.to_s,
         )
       end
