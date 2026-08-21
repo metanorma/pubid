@@ -28,6 +28,7 @@ RSpec.describe "Uniform per-flavor Identifier handle" do
     "cie"         => ["CIE 198:2011"],
     "csa"         => ["CSA C22.2 NO. 0:20"],
     "etsi"        => ["ETSI EG 200 053 V1.5.1 (2004-06)"],
+    "iana"        => ["IANA calipso", "IANA _6lowpan-parameters/lowpan_nhc"],
     "idf"         => ["IDF 146:2003"],
     "iec"         => ["IEC 60050:2011", "IEC 60050-300:2001+AMD1:2005 CSV"],
     "ieee"        => ["IEEE 802.3-2018"],
