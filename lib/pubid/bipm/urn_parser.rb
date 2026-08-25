@@ -35,17 +35,25 @@ module Pubid
         end
       end
 
+      # `number` is the relaton index key and is derived, not printed, so it has
+      # to be set here exactly as `Builder` sets it — a URN-reconstructed
+      # identifier must agree with a parsed one attribute for attribute.
       def build_metrologia(parts)
         Identifiers::MetrologiaArticle.new(
-          volume: parts[1]&.to_i, issue: parts[2], article: parts[3],
+          number: presence(parts[1]), issue: parts[2], article: parts[3],
         )
       end
 
       def build_si_brochure(parts)
         Identifiers::SiBrochure.new(
-          language: parts[1].to_s.upcase, edition: parts[2],
-          version: parts[3], years: parts[4]
+          number: presence(parts[2]), language: parts[1].to_s.upcase,
+          edition: parts[2], version: parts[3], years: parts[4]
         )
+      end
+
+      # A URN segment that was never filled in is an empty string, not nil.
+      def presence(segment)
+        segment unless segment.nil? || segment.empty?
       end
     end
   end

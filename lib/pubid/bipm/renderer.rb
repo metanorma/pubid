@@ -75,11 +75,19 @@ module Pubid
         # Appendix / derived-product form indexed by relaton, keyed on the full
         # "BIPM SI Brochure …" primary docidentifier content.
         return "BIPM SI Brochure #{id.variant}" if id.variant
+        # Bare or sectioned reference: no edition means no version and no year
+        # to print either — just the brochure, optionally down to one part.
+        return "BIPM SI Brochure#{part_segment(id)}" unless id.edition
 
         phrase = id.language == "F" ? "sur le SI " : ""
         lang = id.language ? ", #{id.language}" : ""
         "BIPM SI Brochure #{phrase}#{id.edition} #{id.version} " \
           "(#{id.years}#{lang})"
+      end
+
+      # Optional " Part <n>" segment of an SI Brochure section reference.
+      def part_segment(id)
+        id.part ? " Part #{id.part}" : ""
       end
 
       # MEP: short docnumber ("SI MEP <code>" / "Rapport BIPM-YYYY/NN"), or the

@@ -15,6 +15,18 @@ module Pubid
         def self.type
           { key: :mep, web: :mep, title: "Mise en pratique", short: "mep" }
         end
+
+        # MR: `bipm.mep.<code>`. Exactly one of `mep_code` / `report_code` is
+        # set; the report code carries a `/` that `mr_slug` sanitises away. The
+        # full-content "Appendix 2 Part x" tail is the same document, so it
+        # stays out of the slug.
+        def mr_type
+          "mep"
+        end
+
+        def mr_number_with_part
+          mr_slug(mep_code || report_code)
+        end
       end
     end
   end

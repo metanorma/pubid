@@ -21,7 +21,11 @@ module Pubid
         (digits >> (str("-") >> digits).repeat).as(:number)
       end
       rule(:year) { match["0-9"].repeat(4, 4).as(:year) }
-      rule(:lang) { match["EF"].as(:language) }
+      # "E"/"F" as BIPM prints them, plus the two-letter codes consumer
+      # references use (longest first, so "EN" is never read as a bare "E").
+      rule(:lang) do
+        (str("EN") | str("FR") | match["EF"]).as(:language)
+      end
       # "(YYYY)" or "(YYYY, E)"
       rule(:year_paren) do
         str("(") >> year >> (str(", ") >> lang).maybe >> str(")")
@@ -34,7 +38,7 @@ module Pubid
         tokens.sort_by { |t| -t.length }.map { |t| str(t) }.reduce(:|)
       end
 
-      rule(:group) { alternation(Identifier::GROUPS).as(:group) }
+      rule(:group) { alternation(Identifier::PARSEABLE_GROUPS).as(:group) }
 
       rule(:type_abbrev) do
         alternation(Identifier::TYPE_CODES).as(:type_word)
@@ -49,6 +53,9 @@ module Pubid
       end
       rule(:connective) { str("de la") | str("du") }
       rule(:ordinal) { str("st") | str("nd") | str("rd") | str("th") }
+      # The word naming a meeting in French. BIPM prints it lowercase; a
+      # consumer reference capitalizes it, as relaton's `Id::TYPES` does.
+      rule(:meeting_word_fr) { str("Réunion") | str("réunion") }
 
       # --- committee documents ---
       # The trailing "(YYYY)" date is optional (`.maybe`) so a partial reference
@@ -68,6 +75,17 @@ module Pubid
           connective >> space >> group >> (space >> year_paren_nolang).maybe)
           .as(:committee_long_fr)
       end
+      # Loose consumer form: a French type name in the English (group-leading)
+      # word order, e.g. "CIPM Décision 101-1 (2012)". BIPM never prints this,
+      # so it renders back as the canonical "Décision 101-1 du CIPM (2012)".
+      # Tried after `committee_long_en`, which is what keeps the words both
+      # languages share ("Action", "Statement") English.
+      rule(:committee_group_fr) do
+        (group >> space >> type_name_fr >>
+          (space >> number).maybe >> (space >> year_paren_nolang).maybe)
+          .as(:committee_long_fr)
+      end
+
       # Bare MRA-interpretation form: a group directly followed by a document
       # number with no type word (e.g. "CIPM 2005-06"). Tried last, so typed
       # committee documents and meetings always win; only fires when a digit
@@ -78,13 +96,26 @@ module Pubid
       end
 
       # --- meetings ---
+      # Canonical: "<group> <n><ordinal> Meeting [(YYYY)]". The second branch is
+      # the loose consumer word order "<group> Meeting <n>", which relaton's
+      # bespoke grammar accepts; both build the same tree, so the loose form
+      # renders back in the canonical spelling.
       rule(:meeting_en) do
-        (group >> space >> number >> ordinal >> space >>
-          str("Meeting") >> (space >> year_paren).maybe).as(:meeting_en)
+        ((group >> space >> number >> ordinal >> space >> str("Meeting") >>
+          (space >> year_paren).maybe) |
+         (group >> space >> str("Meeting") >> space >> number >>
+           (space >> year_paren).maybe)).as(:meeting_en)
       end
+      # Canonical: "<group> <n><sup>e</sup> réunion [(YYYY)]". The second and
+      # third branches are the loose consumer spellings — the plain "e" ordinal
+      # and the "<group> Réunion <n>" word order.
       rule(:meeting_fr) do
-        (group >> space >> number >> str("<sup>e</sup>") >> space >>
-          str("réunion") >> (space >> year_paren).maybe).as(:meeting_fr)
+        ((group >> space >> number >> str("<sup>e</sup>") >> space >>
+          str("réunion") >> (space >> year_paren).maybe) |
+         (group >> space >> number >> str("e") >> space >> meeting_word_fr >>
+           (space >> year_paren).maybe) |
+         (group >> space >> meeting_word_fr >> space >> number >>
+           (space >> year_paren).maybe)).as(:meeting_fr)
       end
 
       # --- Metrologia journal ---
@@ -99,8 +130,12 @@ module Pubid
       rule(:edition) { (digits >> str("e")).as(:edition) }
       rule(:version) { (str("v") >> match["0-9."].repeat(1)).as(:version) }
       rule(:years) { (digits >> (str("/") >> digits).maybe).as(:years) }
+      # The "BIPM " prefix is optional, as it is on the variant and section
+      # rules: `si-brochure.yaml` stores the docnumber WITHOUT it, and
+      # `Relaton::Bipm::Bibliography.search` strips a leading "BIPM " before it
+      # ever reaches pubid. Either spelling renders back with the prefix.
       rule(:si_brochure) do
-        (str("BIPM SI Brochure") >> space >>
+        ((str("BIPM SI Brochure") | str("SI Brochure")) >> space >>
           (str("sur le SI") >> space).maybe >>
           edition >> space >> version >> space >>
           str("(") >> years >> str(", ") >> lang >> str(")")).as(:si_brochure)
@@ -118,6 +153,24 @@ module Pubid
       rule(:si_brochure_variant) do
         ((str("BIPM SI Brochure") | str("SI Brochure")) >> space >>
           brochure_variant).as(:si_brochure_variant)
+      end
+
+      # Bare and sectioned SI Brochure references: "SI Brochure",
+      # "SI Brochure Part 1". Neither names an edition, so both are partial
+      # references whose `number` stays nil and which wildcard every edition —
+      # the same reading a date-less "CCTF REC 2" gets. "Part N" points at a
+      # section INSIDE the brochure, not a separate record, so it rides in the
+      # shared `part` attribute and stays out of the index key, exactly as the
+      # MEP/guide "Part N.M" tail does. Listed after the edition and variant
+      # rules for readability, not for correctness: Parslet threads
+      # `consume_all` down through an alternation, so an alternative that
+      # matches only a PREFIX ("SI Brochure" of "SI Brochure Concise") counts
+      # as a failure and the next one is tried whatever the order. Order only
+      # decides between two alternatives that BOTH consume the whole input.
+      rule(:si_brochure_section) do
+        ((str("BIPM SI Brochure") | str("SI Brochure")) >>
+          (space >> str("Part") >> space >> digits.as(:part)).maybe)
+          .as(:si_brochure_section)
       end
 
       # Shared "Appendix N [Annex N] Part N[.M]" tail carried by the full
@@ -166,12 +219,12 @@ module Pubid
       # a digit → meeting; a type word → committee.
       rule(:group_leading) do
         meeting_en | meeting_fr | committee_short | committee_long_en |
-          committee_bare
+          committee_group_fr | committee_bare
       end
 
       rule(:identifier) do
-        metrologia | si_brochure | si_brochure_variant | mep | guide |
-          committee_long_fr | group_leading
+        metrologia | si_brochure | si_brochure_variant | si_brochure_section |
+          mep | guide | committee_long_fr | group_leading
       end
 
       root(:identifier)

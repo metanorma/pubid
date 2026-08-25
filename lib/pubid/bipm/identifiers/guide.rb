@@ -18,6 +18,17 @@ module Pubid
         def self.type
           { key: :guide, web: :guide, title: "Guide", short: "guide" }
         end
+
+        # MR: `bipm.guide.<group>-<kind>-<number>`. Both the committee and the
+        # kind are needed — the trailing sequence restarts per committee, so
+        # `CCL-GD-MeP-1` and `CCEM-GD-RSI-1` both carry number "1".
+        def mr_type
+          "guide"
+        end
+
+        def mr_number_with_part
+          mr_slug(group, guide_kind, number)
+        end
       end
     end
   end

@@ -60,4 +60,62 @@ RSpec.describe "Pubid::Bipm serialization" do
     expect(Pubid::Bipm.parse("CCL Recommendation 1 (2001)").to_hash["form"])
       .to eq("long")
   end
+
+  # The relaton index key. Where it would merely duplicate another key it is
+  # NOT stored twice: a Metrologia article's `volume` is derived from `number`
+  # (the IANA `registry` / IETF `series` pattern). `variant` / `edition` and
+  # `mep_code` / `report_code` DO stay, because each pair shares one class and
+  # the renderer needs to know which of the two a value is — `9e v3.01
+  # (2019/2024, E)` vs `Concise`, `SI MEP S1` vs `Rapport BIPM-2019/05`.
+  #
+  # Unlike the IEEE `CodeNumber` mixin the derivation is one-way — `Builder` is
+  # the constructor of record and nothing rebuilds `number` after `from_hash`;
+  # see the note on `build_metrologia` in lib/pubid/bipm/builder.rb.
+  describe "the index key `number` serializes for every family" do
+    keys = {
+      "Metrologia 51 1 128" => "51",
+      "BIPM SI Brochure 9e v3.01 (2019/2024, E)" => "9e",
+      "BIPM SI Brochure Appendix 3" => "Appendix 3",
+      "SI MEP S1" => "S1",
+      "Rapport BIPM-2019/05" => "BIPM-2019/05",
+      "BIPM SI MEP KUPRTM Appendix 2 Annex 2 Part 1" => "KUPRTM",
+      "CCL-GD-MeP-1" => "1",
+      "CCTF REC 2 (2012)" => "2",
+      "CGPM 17th Meeting (1983)" => "17",
+    }
+
+    keys.each do |ref, number|
+      it "#{ref} stores number #{number.inspect} and restores it" do
+        hash = Pubid::Bipm.parse(ref).to_hash
+        expect(hash["number"]).to eq(number)
+        expect(Pubid::Bipm::Identifier.from_hash(hash).number).to eq(number)
+      end
+    end
+
+    # 6,204 of the 6,206 published rows that carry a derived `number` are
+    # Metrologia articles, so storing `volume` beside it would duplicate one
+    # value across essentially the whole index.
+    it "never stores a Metrologia volume beside the number" do
+      hash = Pubid::Bipm.parse("Metrologia 55 1A 06007").to_hash
+      expect(hash).not_to have_key("volume")
+      expect(hash.keys)
+        .to contain_exactly("_type", "number", "issue", "article")
+    end
+
+    it "still exposes the volume as an Integer, derived from the number" do
+      id = Pubid::Bipm.parse("Metrologia 55 1A 06007")
+      expect(id.volume).to eq(55)
+      expect(Pubid::Bipm::Identifier.from_hash(id.to_hash).volume).to eq(55)
+      expect(Pubid::Bipm.parse("Metrologia").volume).to be_nil
+    end
+
+    it "drops the key for the number-less committee declaration" do
+      expect(Pubid::Bipm.parse("CGPM DECL (1889)").to_hash)
+        .not_to have_key("number")
+    end
+
+    it "drops the key for the journal-level Metrologia record" do
+      expect(Pubid::Bipm.parse("Metrologia").to_hash).not_to have_key("number")
+    end
+  end
 end
