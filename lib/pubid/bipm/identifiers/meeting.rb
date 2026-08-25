@@ -35,6 +35,18 @@ module Pubid
         def ordinal_en
           "#{number}#{self.class.ordinal_suffix(number)}"
         end
+
+        # MR: `bipm.meeting.<group>-<number>.<year>`. The English and French
+        # spellings of one meeting collapse onto the same slug on purpose.
+        def mr_type
+          "meeting"
+        end
+
+        # The group has to be in the number segment or the 17th CGPM and the
+        # 17th CIPM meeting would share a slug.
+        def mr_number_with_part
+          mr_slug(group, number)
+        end
       end
     end
   end

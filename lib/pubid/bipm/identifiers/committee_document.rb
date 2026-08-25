@@ -18,6 +18,18 @@ module Pubid
           { key: :committee_document, web: :committee_document,
             title: "Committee Document", short: "committee-document" }
         end
+
+        # MR: `bipm.<type>.<group>-<number>.<year>[.<lang>]`. The type code
+        # discriminates REC/RES/DECN/ACT/DECL; the bare CIPM MRA form has none.
+        def mr_type
+          type_code&.downcase
+        end
+
+        # The group has to be in the number segment or `CCTF REC 2` and
+        # `CCEM REC 2` would share a slug.
+        def mr_number_with_part
+          mr_slug(group, number)
+        end
       end
     end
   end

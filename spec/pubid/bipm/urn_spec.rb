@@ -34,6 +34,19 @@ RSpec.describe "Pubid::Bipm URN" do
   end
 
   describe "UrnParser" do
+    # The URN omits the printed surface detail on purpose, but a reconstructed
+    # identifier still has to carry the derived relaton index key `number`, or
+    # a URN round-trip silently empties the key a parsed identifier has.
+    it "keeps the index key across a URN round-trip" do
+      ["CCTF REC 2 (2012)", "CGPM 17th Meeting (1983)", "Metrologia 51 1 128",
+       "BIPM SI Brochure 9e v3.01 (2019/2024, E)"].each do |ref|
+        id = Pubid::Bipm.parse(ref)
+        back = Pubid::Bipm::UrnParser.parse(id.to_urn)
+        expect(back.root.number).to eq(id.root.number)
+        expect(back.root.number).not_to be_empty
+      end
+    end
+
     it "reconstructs the identifier from the URN" do
       expect(Pubid::Bipm::UrnParser.parse("urn:bipm:cctf:rec:2:2012").to_s)
         .to eq("CCTF REC 2 (2012)")

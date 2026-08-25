@@ -195,6 +195,7 @@ RSpec.describe "Lossless MR string (issue #142)" do
         Oiml: "OIML R 87:2016",
         Itu: "ITU-T G.650",
         Cie: "CIE S 017/E:2011",
+        Bipm: "CCTF REC 2 (2012)",
       }
       samples.each do |const, ref|
         id = Pubid.const_get(const).parse(ref)
@@ -230,6 +231,12 @@ RSpec.describe "Lossless MR string (issue #142)" do
       [Pubid::Oiml, "OIML R 87:2016"],
       [Pubid::Itu, "ITU-T G.650"],
       [Pubid::Cie, "CIE S 017/E:2011"],
+      # BIPM values carry `/` (the MEP report code) and spaces (the SI Brochure
+      # variant), both of which have to be transformed away.
+      [Pubid::Bipm, "CCTF REC 2 (2012, F)"],
+      [Pubid::Bipm, "Metrologia 55 1A 06007"],
+      [Pubid::Bipm, "Rapport BIPM-2019/05"],
+      [Pubid::Bipm, "BIPM SI Brochure Appendix 3"],
       [Pubid::Nist, "NIST SP 800-53"],
     ]
     safe_slug_cases.each do |flavor, ref|
@@ -301,6 +308,7 @@ RSpec.describe "Lossless MR string (issue #142)" do
         Sae: "SAE J300:2019",
         Ansi: "ANSI X3.4:1963",
         Idf: "IDF 1:2018",
+        Bipm: "Metrologia 51 1 128",
       }
 
       samples.each do |const, ref|
