@@ -1,0 +1,84 @@
+# Cases this implementation explicitly cannot handle yet.
+# Rules: entries need reason + ref; a pending case that passes raises
+# the pending-satisfied alarm and MUST be unmarked (TODO.correct-test-suite/04).
+---
+bsi.adopted_european_norm.0861:
+  reason: nested polymorphic from_hash drops the adopted_identifier chain
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.adopted_european_norm.0862:
+  reason: nested polymorphic from_hash drops the adopted_identifier chain
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0217:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0572:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0574:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0777:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0781:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0784:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0785:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0786:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0787:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0788:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0789:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0794:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0797:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0798:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0799:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0800:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0801:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A
+bsi.bundled_identifier.0803:
+  reason: bundled members lose prefix/explicit_prefix through from_hash
+  since: "2026-08-26"
+  ref: TODO.correct-test-suite/08 PR-A

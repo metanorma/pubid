@@ -38,8 +38,8 @@ module Pubid
 
         stats = Hash.new(0)
         failures = []
-        case_files(flavor).each do |path|
-          YAML.safe_load_file(path).each do |test_case|
+        Corpus.case_files(flavor, corpus_dir).each do |path|
+          Corpus.load_file(path).each do |test_case|
             execute(test_case, flavor_module, stats, failures)
           end
         end
@@ -47,26 +47,47 @@ module Pubid
         known_dirty?(flavor) ? [] : failures
       end
 
-      def case_files(flavor)
-        Dir[File.join(corpus_dir, flavor, "*.yaml")]
-          .reject { |path| File.basename(path).start_with?("_") }.sort
-      end
-
       def known_dirty?(flavor)
         status = File.join(corpus_dir, flavor, "_status.yaml")
         File.exist?(status) && !YAML.safe_load_file(status)["clean"]
       end
 
+      # Every corpus case lands in exactly one quadrant:
+      #   pass | FAIL (not pending, breaks the CLEAN gate) | pending
+      #   (explicitly not handled yet, see Conformance::Pending) | review
+      #   (the expectation itself is flagged for human verification).
       def execute(test_case, flavor_module, stats, failures)
-        id = test_case.fetch("id")
-        if test_case["expect"]&.key?("error")
+        id = test_case.id
+        return stats[:review] += 1 if test_case.review?
+
+        if Pending.for(id)
+          run_pending(id, test_case, flavor_module, stats, failures)
+        else
+          run_case(test_case, flavor_module, stats, failures)
+        end
+      end
+
+      # Pending cases still run: a pending case that PASSES is reported as
+      # pending-satisfied - a cleanup alarm, the marker must be removed.
+      def run_pending(id, test_case, flavor_module, stats, failures)
+        stats[:pending] += 1
+        before = failures.size
+        run_case(test_case, flavor_module, stats, failures)
+        return failures.slice!(before..) if failures.size > before
+
+        stats[:pending_satisfied] += 1
+        puts "  PENDING-SATISFIED #{id} - remove the marker"
+      end
+
+      def run_case(test_case, flavor_module, stats, failures)
+        id = test_case.id
+        if test_case.error_case?
           execute_error_case(test_case, flavor_module, stats, failures)
           return
         end
-        return stats[:quarantined] += 1 if test_case["identifier"].nil?
+        return stats[:quarantined] += 1 if test_case.quarantined?
 
-        human = test_case.dig("representations", "human")
-        identifier = flavor_module.parse(human)
+        identifier = flavor_module.parse(test_case.representations.human)
         stats[:cases] += 1
         check_tree(identifier, test_case, id, stats, failures)
         check_representations(identifier, test_case, id, stats, failures)
@@ -80,23 +101,23 @@ module Pubid
 
       def execute_error_case(test_case, flavor_module, stats, failures)
         stats[:error_cases] += 1
-        flavor_module.parse(test_case.fetch("input"))
+        flavor_module.parse(test_case.input)
         stats[:fail_error] += 1
-        failures << "#{test_case['id']} unexpectedly parsed"
+        failures << "#{test_case.id} unexpectedly parsed"
       rescue StandardError
         stats[:error_ok] += 1
       end
 
       def check_tree(identifier, test_case, id, stats, failures)
         actual = Conformance.plainify(identifier.to_hash)
-        return if actual == test_case.fetch("identifier")
+        return if actual == test_case.identifier
 
         stats[:fail_tree] += 1
         failures << "#{id} canonical hash"
       end
 
       def check_representations(identifier, test_case, id, stats, failures)
-        test_case.fetch("representations").each do |format, expected|
+        test_case.representations.to_hash.each do |format, expected|
           actual = represent(identifier, format)
           next if actual == expected
 
@@ -106,22 +127,22 @@ module Pubid
       end
 
       def check_aliases(test_case, id, flavor_module, stats, failures)
-        human = test_case.dig("representations", "human")
-        Array(test_case["non_normalized_aliases"]).each do |entry|
-          aliased = flavor_module.parse(entry["spelling"])
+        human = test_case.representations.human
+        test_case.non_normalized_aliases.each do |entry|
+          aliased = flavor_module.parse(entry.spelling)
           next if aliased.to_s == human
 
           stats[:fail_alias] += 1
-          failures << "#{id} alias #{entry['spelling']}"
+          failures << "#{id} alias #{entry.spelling}"
         rescue StandardError
           stats[:fail_alias] += 1
-          failures << "#{id} alias #{entry['spelling']} raised"
+          failures << "#{id} alias #{entry.spelling} raised"
         end
       end
 
       def check_roundtrip(identifier, flavor_module, test_case, id, stats,
                           failures)
-        return unless test_case["roundtrip"] == false
+        return unless test_case.roundtrip_failure_expected?
 
         hash = identifier.to_hash
         ok = flavor_module::Identifier.from_hash(hash).to_hash == hash
@@ -143,9 +164,13 @@ module Pubid
       end
 
       def report(flavor, stats, failures)
-        puts format("%-6s cases=%-6d err=%-4d quar=%-3d fail=%d",
-                    flavor, stats[:cases], stats[:error_cases],
-                    stats[:quarantined], failures.size)
+        puts format(
+          "%-6s cases=%-6d err=%-4d quar=%-3d fail=%-4d " \
+          "pend=%-4d pendok=%-3d review=%d",
+          flavor, stats[:cases], stats[:error_cases], stats[:quarantined],
+          failures.size, stats[:pending], stats[:pending_satisfied],
+          stats[:review]
+        )
         failures.first(10).each { |f| puts "  FAIL #{f}" }
       end
     end
