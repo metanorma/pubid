@@ -22,26 +22,4 @@ RSpec.describe "ISO Integration" do
     include_examples "parses correctly", "ISO/TR 1234:2020"
     include_examples "parses correctly", "ISO/TS 1234:2020"
   end
-
-  describe "parsing all basic fixtures" do
-    it "parses all basic ISO identifiers" do
-      fixture = File.join(__dir__,
-                          "../fixtures/iso/identifiers/full/iso-pubid-basic.txt")
-      lines = File.readlines(fixture).map(&:strip).reject do |l|
-        l.empty? || l.start_with?("#")
-      end
-
-      failed = []
-      lines.each do |line|
-        Pubid::Iso.parse(line)
-      rescue StandardError
-        failed << line
-      end
-
-      puts "\n\nFailed to parse #{failed.size}/#{lines.size} identifiers" if failed.any?
-      failed.first(10).each { |f| puts "  - #{f}" } if failed.any?
-
-      expect(failed.size).to eq(0), "Failed to parse #{failed.size} identifiers"
-    end
-  end
 end

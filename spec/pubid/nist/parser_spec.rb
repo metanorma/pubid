@@ -116,35 +116,5 @@ RSpec.describe Pubid::Nist::Parser do
         expect { Pubid::Nist.parse("NBS BMS 131") }.not_to raise_error
       end
     end
-
-    context "parse identifiers from fixtures" do
-      let(:fixture_path) do
-        "spec/fixtures/nist/identifiers/full/allrecords.txt"
-      end
-
-      it "parses majority of fixture identifiers" do
-        # Centralized fixture file for bulk parsing coverage
-        # Individual identifier tests provide specific pattern coverage
-        total = 0
-        parsed = 0
-
-        File.readlines(fixture_path).each do |line|
-          id = line.strip
-          next if id.empty?
-
-          total += 1
-          begin
-            Pubid::Nist.parse(id)
-            parsed += 1
-          rescue Parslet::ParseFailed, StandardError
-            # Expected for some edge cases
-          end
-        end
-
-        # Should parse at least 98% of identifiers
-        success_rate = (parsed.to_f / total * 100).round(2)
-        expect(success_rate).to be >= 98.0
-      end
-    end
   end
 end

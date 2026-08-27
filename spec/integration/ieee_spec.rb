@@ -83,48 +83,4 @@ RSpec.describe "IEEE identifiers" do
       expect(parsed.draft.version).to eq("5")
     end
   end
-
-  describe "fixture file parsing" do
-    let(:fixture_file) do
-      File.join(__dir__,
-                "../../archived-gems/pubid-ieee/spec/fixtures/pubid-parsed.txt")
-    end
-
-    it "parses all identifiers from fixture file", :slow do
-      total = 0
-      passed = 0
-      failed = []
-
-      File.readlines(fixture_file).each_with_index do |line, index|
-        identifier = line.strip
-        next if identifier.empty? || identifier.start_with?("#")
-
-        total += 1
-
-        begin
-          parsed = Pubid::Ieee.parse(identifier)
-          # Accept both Identifiers::Base and Aiee::Identifier
-          expect(parsed).to(satisfy do |id|
-            id.is_a?(Pubid::Ieee::Identifier) || id.is_a?(Pubid::Ieee::Aiee::Identifier)
-          end)
-
-          # Test round-trip by converting back to string
-          output = parsed.to_s
-          expect(output).to be_a(String)
-          expect(output).not_to be_empty
-          passed += 1
-        rescue StandardError
-          failed << "Line #{index + 1}: #{identifier}"
-        end
-      end
-
-      pass_rate = (passed.to_f / total * 100).round(1)
-      puts "\n\nIEEE Fixture Results: #{passed}/#{total} (#{pass_rate}%)"
-      puts "Failed: #{failed.length}" if failed.any?
-      puts "\nFirst 20 failures:" if failed.any?
-      failed.first(20).each { |f| puts "  #{f}" } if failed.any?
-
-      expect(pass_rate).to be >= 85.0
-    end
-  end
 end

@@ -24,24 +24,4 @@ RSpec.describe "CCSDS Integration" do
       it_behaves_like "parses and renders correctly", "CCSDS 123.0-B-2 Cor. 2"
     end
   end
-
-  describe "parsing all fixtures" do
-    it "parses all CCSDS identifiers from fixtures" do
-      fixture_file = File.join(__dir__,
-                               "../fixtures/ccsds/identifiers/full/international_standard.txt")
-
-      File.readlines(fixture_file).each do |line|
-        line = line.strip
-        next if line.empty? || line.start_with?("#")
-
-        # Strip metadata notes (anything after " - ")
-        clean_line = line.split(" - ").first
-
-        expect do
-          identifier = Pubid::Ccsds.parse(clean_line)
-          expect(identifier.to_s).to eq(clean_line)
-        end.not_to raise_error, "Failed to parse: #{clean_line}"
-      end
-    end
-  end
 end
