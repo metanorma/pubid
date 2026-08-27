@@ -24,6 +24,12 @@ module Pubid
         def cases(flavor, corpus_dir)
           case_files(flavor, corpus_dir).flat_map { |p| load_file(p) }
         end
+
+        # The must-fail payload (fail fixtures decoded by the exporter).
+        def negative_file(flavor, corpus_dir)
+          path = File.join(corpus_dir, flavor, "_negative.yaml")
+          File.exist?(path) ? [path] : []
+        end
       end
     end
   end

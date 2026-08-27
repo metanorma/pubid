@@ -5,8 +5,10 @@ require "yaml"
 
 # Executes the neutral corpus from the pubid-testsuite repository
 # (tests/{flavor}/*.yaml) against the Ruby reference implementation.
-# Debt (_debt.yaml) and negatives (_negative.yaml) are covered by
-# rake conformance:run.
+# Negatives (tests/{flavor}/_negative.yaml, expect.error rows) gate
+# rejection behavior here; reclassification rows (fail fixtures the
+# reference now parses) are report-only in rake conformance:run, and
+# debt (_debt.yaml) stays a visible ledger in the testsuite.
 RSpec.describe "pubid-testsuite corpus" do
   corpus_repo = ENV.fetch("PUBID_TESTSUITE_PATH",
     File.expand_path("../../../pubid-testsuite", __dir__))
@@ -77,6 +79,19 @@ RSpec.describe "pubid-testsuite corpus" do
         end
 
         mismatches
+      end
+
+      negative_file = File.join(tests_repo, "tests", flavor, "_negative.yaml")
+      if File.exist?(negative_file)
+        Pubid::Conformance::Corpus.load_file(negative_file).each do |test_case|
+          # Rows without expect.error are reclassification alarms
+          # (fail fixtures the reference now parses) - runner territory.
+          next unless test_case.error_case?
+
+          expect { flavor_module.parse(test_case.input) }
+            .to raise_error(StandardError),
+                "#{flavor}/#{test_case.id} unexpectedly parsed"
+        end
       end
 
       pending_satisfied = []

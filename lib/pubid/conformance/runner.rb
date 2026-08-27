@@ -43,6 +43,11 @@ module Pubid
             execute(test_case, flavor_module, stats, failures)
           end
         end
+        Corpus.negative_file(flavor, corpus_dir).each do |path|
+          Corpus.load_file(path).each do |test_case|
+            execute_negative(test_case, flavor_module, stats, failures)
+          end
+        end
         report(flavor, stats, failures)
         known_dirty?(flavor) ? [] : failures
       end
@@ -97,6 +102,17 @@ module Pubid
       rescue StandardError => e
         stats[:fail_parse] += 1
         failures << "#{id} raised #{e.class}"
+      end
+
+      # Negatives (fail fixtures decoded by the exporter). A row with
+      # expect.error must be rejected by the reference; a row without it
+      # is the exporter's reclassification alarm - the fail-fixture line
+      # now parses, so the fixture belongs in pass/ - reported, never
+      # gated, like the PENDING-SATISFIED alarm.
+      def execute_negative(test_case, flavor_module, stats, failures)
+        return stats[:reclass] += 1 unless test_case.error_case?
+
+        execute_error_case(test_case, flavor_module, stats, failures)
       end
 
       def execute_error_case(test_case, flavor_module, stats, failures)
@@ -166,10 +182,10 @@ module Pubid
       def report(flavor, stats, failures)
         puts format(
           "%-6s cases=%-6d err=%-4d quar=%-3d fail=%-4d " \
-          "pend=%-4d pendok=%-3d review=%d",
+          "pend=%-4d pendok=%-3d reclass=%-4d review=%d",
           flavor, stats[:cases], stats[:error_cases], stats[:quarantined],
           failures.size, stats[:pending], stats[:pending_satisfied],
-          stats[:review]
+          stats[:reclass], stats[:review]
         )
         failures.first(10).each { |f| puts "  FAIL #{f}" }
       end
