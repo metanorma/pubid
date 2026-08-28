@@ -17,7 +17,9 @@ module Pubid
         attribute :year, :integer
         attribute :stage, :string # prEN, FprEN
         attribute :supplements, :string, collection: true # Amendments and corrigenda
-        attribute :adopted_identifier, Base, polymorphic: true # Nested identifier object (ISO, IEC, etc.)
+        # Cross-flavor adoption: holds ISO/IEC/IEEE objects, so the type
+        # is the cross-flavor root (lutaml enforces at serialization).
+        attribute :adopted_identifier, ::Pubid::Identifier, polymorphic: true
         attribute :edition, :string # Edition number
 
         def ==(other)

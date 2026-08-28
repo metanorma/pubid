@@ -6,7 +6,7 @@ module Pubid
       # AdoptedEuropeanNorm wraps ISO/IEC identifiers
       # Example: "EN ISO 8601:2019" where ISO 8601:2019 is an ISO identifier object
       class AdoptedEuropeanNorm < EuropeanNorm
-        attribute :adopted_identifier, Base, polymorphic: true # ISO/IEC/IEEE object
+        attribute :adopted_identifier, ::Pubid::Identifier, polymorphic: true # ISO/IEC/IEEE object
 
         # Override self.type to return nil so that AdoptedEuropeanNorm is NOT
         # registered as a type in CenCenelec.identifier_types. The class is a

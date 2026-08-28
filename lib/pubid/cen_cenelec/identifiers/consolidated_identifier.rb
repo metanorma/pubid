@@ -3,10 +3,15 @@
 module Pubid
   module CenCenelec
     module Identifiers
-      # Consolidated Identifier - contains base document plus supplements
-      # Example: "EN 196-3:2005+A1:2008" = [EN 196-3:2005, Amendment(base + params)]
+      # Consolidated Identifier - base document plus supplements.
+      # "EN 196-3:2005+A1:2008" = [EN 196-3:2005, Amendment(base + params)]
       class ConsolidatedIdentifier < Base
-        attribute :identifiers, Base, polymorphic: true, collection: true
+        # Members span both flavor chains: SingleIdentifier documents (EN,
+        # the base document) and Identifiers::Base supplements (Amendment).
+        # The flavor handle is their common root - the type lutaml enforces
+        # at serialization. Polymorphic _type routing covers both.
+        attribute :identifiers, Pubid::CenCenelec::Identifier,
+                  polymorphic: true, collection: true
 
         # Delegate to first identifier (base document)
         def publisher
@@ -21,8 +26,15 @@ module Pubid
           identifiers&.first&.year
         end
 
+        # Members are polymorphic and mixed-chain: SingleIdentifier-chain
+        # documents (EN, the usual first member) declare no +parts+ - the
+        # part of "EN 196-3" lives in the member's own number - while
+        # Identifiers::Base descendants (Amendment, ...) carry the
+        # attribute. Delegate only when the member has it; a part-less
+        # base document has no parts to expose.
         def parts
-          identifiers&.first&.parts
+          first = identifiers&.first
+          first.parts unless first.is_a?(SingleIdentifier)
         end
 
         def type

@@ -6,7 +6,7 @@ module Pubid
       # Corrigendum Identifier
       # Contains a base identifier plus corrigendum parameters
       class Corrigendum < Base
-        attribute :base, Base, polymorphic: true
+        attribute :base, Pubid::CenCenelec::Identifier, polymorphic: true
         attribute :corrigendum_number, :string
         attribute :corrigendum_year, :integer
         attribute :corrigendum_month, :string
