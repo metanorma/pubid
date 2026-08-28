@@ -37,7 +37,16 @@ module Pubid
     @flavors = {}
 
     class << self
-      attr_reader :flavors
+      # The registered flavors, always key-sorted and frozen. Sorted so
+      # no behavior can observe registration (= module load) order -
+      # hosts autoload flavor modules in any order, and order-dependent
+      # iteration once routed the same identifier to different flavors
+      # per process. Frozen so the raw table is not public mutable
+      # state; #register is the only mutator.
+      # @return [Hash{String => Module}]
+      def flavors
+        @flavors.sort.to_h.freeze
+      end
 
       # Register a flavor with the registry
       # @param name [String, Symbol] Flavor name (e.g., :iso, :iec)

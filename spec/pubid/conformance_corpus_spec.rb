@@ -48,38 +48,13 @@ RSpec.describe "pubid-testsuite corpus" do
                    .reject { |path| File.basename(path).start_with?("_") }
       expect(type_files).not_to be_empty
 
-      # Returns the case's mismatch list (empty == passing). Deliberately
-      # NOT built from `expect`: under :aggregate_failures a failed
-      # expectation does not raise, so exception-based control flow would
-      # misread real failures as passes (and pending cases as satisfied).
+      # The check core lives in Conformance::Checks, shared with the
+      # runner: it returns the case's mismatch list (empty == passing) -
+      # a list, not exceptions, because aggregate_failures does not raise.
       check = lambda do |test_case|
-        label = "#{flavor}/#{test_case.id}"
-        reps = test_case.representations
-        mismatches = []
-
-        begin
-          identifier = flavor_module.parse(reps.human)
-        rescue StandardError => e
-          next mismatches << "#{label} raised #{e.class}"
-        end
-
-        actual = Pubid::Conformance.plainify(identifier.to_hash)
-        mismatches << "#{label} canonical hash" if actual != test_case.identifier
-        mismatches << "#{label} human" if identifier.to_s != reps.human
-        mismatches << "#{label} urn" if reps.urn && identifier.to_urn != reps.urn
-
-        if test_case.roundtrip_failure_expected?
-          begin
-            hash = identifier.to_hash
-            mismatches << "#{label} round-trip exception recorded" if
-              flavor_module::Identifier.from_hash(hash).to_hash != hash
-          rescue StandardError
-            mismatches << "#{label} round-trip raised"
-          end
-        end
-
-        mismatches
+        Pubid::Conformance::Checks.check_case(test_case, flavor_module)
       end
+
 
       negative_file = File.join(tests_repo, "tests", flavor, "_negative.yaml")
       if File.exist?(negative_file)

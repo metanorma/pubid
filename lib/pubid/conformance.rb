@@ -11,6 +11,7 @@ module Pubid
   # representations, normalization aliases, styling, and neutral error
   # codes for debt/negative records.
   module Conformance
+    autoload :Checks, "pubid/conformance/checks"
     autoload :Corpus, "pubid/conformance/corpus"
     autoload :Generator, "pubid/conformance/generator"
     autoload :Pending, "pubid/conformance/pending"

@@ -90,23 +90,27 @@ module Pubid
       end
 
       def run_case(test_case, flavor_module, stats, failures)
-        id = test_case.id
         if test_case.error_case?
           execute_error_case(test_case, flavor_module, stats, failures)
           return
         end
         return stats[:quarantined] += 1 if test_case.quarantined?
 
-        identifier = flavor_module.parse(test_case.representations.human)
         stats[:cases] += 1
-        check_tree(identifier, test_case, id, stats, failures)
-        check_representations(identifier, test_case, id, stats, failures)
-        check_aliases(test_case, id, flavor_module, stats, failures)
-        check_roundtrip(identifier, flavor_module, test_case, id, stats,
-                        failures)
-      rescue StandardError => e
-        stats[:fail_parse] += 1
-        failures << "#{id} raised #{e.class}"
+        Checks.check_case(test_case, flavor_module).each do |mismatch|
+          stat_for(mismatch, stats)
+          failures << mismatch
+        end
+      end
+
+      def stat_for(mismatch, stats)
+        case mismatch
+        when / raised\z/ then stats[:fail_parse] += 1
+        when /canonical hash/ then stats[:fail_tree] += 1
+        when / human\z/, / urn\z/ then stats[:"fail_#{mismatch.split.last}"] += 1
+        when / alias/ then stats[:fail_alias] += 1
+        else stats[:fail_roundtrip] += 1
+        end
       end
 
       # Negatives (fail fixtures decoded by the exporter). A row with
@@ -129,60 +133,10 @@ module Pubid
         stats[:error_ok] += 1
       end
 
-      def check_tree(identifier, test_case, id, stats, failures)
-        actual = Conformance.plainify(identifier.to_hash)
-        return if actual == test_case.identifier
 
-        stats[:fail_tree] += 1
-        failures << "#{id} canonical hash"
-      end
 
-      def check_representations(identifier, test_case, id, stats, failures)
-        test_case.representations.to_hash.each do |format, expected|
-          actual = represent(identifier, format)
-          next if actual == expected
 
-          stats[:"fail_#{format}"] += 1
-          failures << "#{id} representation #{format}"
-        end
-      end
 
-      def check_aliases(test_case, id, flavor_module, stats, failures)
-        human = test_case.representations.human
-        test_case.non_normalized_aliases.each do |entry|
-          aliased = flavor_module.parse(entry.spelling)
-          next if aliased.to_s == human
-
-          stats[:fail_alias] += 1
-          failures << "#{id} alias #{entry.spelling}"
-        rescue StandardError
-          stats[:fail_alias] += 1
-          failures << "#{id} alias #{entry.spelling} raised"
-        end
-      end
-
-      def check_roundtrip(identifier, flavor_module, test_case, id, stats,
-                          failures)
-        return unless test_case.roundtrip_failure_expected?
-
-        hash = identifier.to_hash
-        ok = flavor_module::Identifier.from_hash(hash).to_hash == hash
-        return if ok
-
-        stats[:fail_roundtrip] += 1
-        failures << "#{id} roundtrip"
-      rescue StandardError
-        stats[:fail_roundtrip] += 1
-        failures << "#{id} roundtrip raised"
-      end
-
-      def represent(identifier, format)
-        case format
-        when "human" then identifier.to_s
-        when "urn" then identifier.to_urn
-        else raise ArgumentError, "unknown representation #{format}"
-        end
-      end
 
       def report(flavor, stats, failures)
         puts format(
