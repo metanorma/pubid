@@ -19,7 +19,7 @@ module Pubid
         id = @id
         body = +""
         body << "#{id.type_prefix}-" if id.type_prefix
-        body << id.code.to_s
+        body << id.number.to_s
         body << "-#{id.date}" if id.date
 
         with_publisher?(id) ? "#{PUBLISHER} #{body}" : body

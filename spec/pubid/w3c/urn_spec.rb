@@ -10,7 +10,7 @@ RSpec.describe "W3C URN Generation" do
       expect(urn).to eq("urn:w3c:wd:charmod:19991129")
     end
 
-    it "generates a URN for a bare code" do
+    it "generates a URN for a bare slug" do
       urn = Pubid::W3c.parse("W3C 2dcontext").to_urn
       expect(urn).to eq("urn:w3c:2dcontext")
     end

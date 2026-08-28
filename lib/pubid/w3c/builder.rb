@@ -3,7 +3,7 @@
 module Pubid
   module W3c
     # Turns the parse tree into a concrete identifier: picks the class from the
-    # leading maturity token and splits the captured remainder into code + date.
+    # leading maturity token and splits the captured remainder into slug + date.
     class Builder
       # Maturity token -> concrete identifier class name (resolved lazily so the
       # Identifiers namespace need not be loaded at class-definition time).
@@ -22,7 +22,7 @@ module Pubid
 
       # A trailing "-<digits>" group is the date only when the digit run is
       # exactly 8 (YYYYMMDD), 6 (legacy YYMMDD) or 4 (legacy MMDD) wide. No real
-      # W3C code ends in such a run, so this never mis-splits a code that merely
+      # W3C slug ends in such a run, so this never mis-splits a slug that merely
       # ends in a short digit run (e.g. "url-1", "ATAG10").
       DATE_RE = /\A(.+)-(\d{8}|\d{6}|\d{4})\z/
 
@@ -31,8 +31,8 @@ module Pubid
       end
 
       def build(data)
-        code, date = split_date(data[:rest].to_s)
-        klass_for(data[:type]&.to_s).new(code: code, date: date)
+        number, date = split_date(data[:rest].to_s)
+        klass_for(data[:type]&.to_s).new(number: number, date: date)
       end
 
       private
@@ -42,7 +42,7 @@ module Pubid
         Identifiers.const_get(name)
       end
 
-      # @return [Array(String, String|nil)] the code and the optional date
+      # @return [Array(String, String|nil)] the slug and the optional date
       def split_date(rest)
         if (m = DATE_RE.match(rest))
           [m[1], m[2]]

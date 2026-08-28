@@ -7,13 +7,39 @@ module Pubid
     # this class (one per W3C maturity level), so a parsed W3C id is an
     # instance of Pubid::W3c::Identifier.
     #
-    # W3C identifiers are flat: a slug `code`, an optional publication `date`
+    # W3C identifiers are flat: a slug `number`, an optional publication `date`
     # (kept verbatim as a string — width varies: 8-digit YYYYMMDD, or legacy
     # 6-digit YYMMDD / 4-digit MMDD), and a document-type carried by the
     # concrete class (its `type_prefix` returns the printed token, e.g. "WD").
     class Identifier < ::Pubid::Identifier
-      # Slug, e.g. "charmod", "css-backgrounds-3", "07-WebData".
-      attribute :code, :string
+      # Document slug, e.g. "charmod", "css-backgrounds-3", "07-WebData".
+      #
+      # This is the relaton index key: Relaton::Index sorts and bsearches every
+      # row on `id.root.number.to_s`, and an empty key degrades that binary
+      # search to a linear scan over the whole index — silently, with no error.
+      # Every W3C identifier is its own root (the flavor has no supplement or
+      # wrapper type), so this attribute is always the key and must never be
+      # empty. It was named `code` before; there is no alias.
+      #
+      # It redefines the parent ::Pubid::Identifier's
+      # `attribute :number, Components::Code` as a plain :string. CLAUDE.md
+      # records that doing so on a class the concrete types INHERIT from can
+      # resolve against the parent definition nondeterministically under
+      # multi-flavor load (the IEEE lesson). That hazard does not apply to W3C's
+      # shape, and the reason is worth keeping: lutaml's `inherited` hook
+      # deep-dups the parent's attribute table into each subclass at
+      # class-definition time (serialize/initialization.rb#initialize_attrs), so
+      # a subclass holds a SNAPSHOT, not a live view. A base-level override is
+      # therefore safe iff every subclass body opens after this body has run —
+      # and Ruby resolves the superclass constant, running this file to
+      # completion, before opening any leaf body. That holds because this class
+      # lives in ONE file, in ONE class body, and is never reopened. Split it
+      # the way IEEE splits its base and a leaf can snapshot a half-built
+      # parent, silently reverting `number` to Components::Code. The `date`
+      # override below has relied on the same property since the flavor landed.
+      # spec/pubid/w3c/root_number_spec.rb pins it, and is only meaningful under
+      # the FULL suite.
+      attribute :number, :string
       # Publication date verbatim, or nil. Overrides the base Components::Date
       # attribute with a plain string (same mechanism JIS uses for `number`):
       # W3C dates are opaque digit runs that must round-trip exactly, and are
@@ -46,7 +72,7 @@ module Pubid
 
       key_value do
         map "_type", to: :_type, polymorphic_map: W3C_TYPE_MAP
-        map "code", to: :code
+        map "number", to: :number
         map "date", to: :date
       end
 
@@ -55,7 +81,7 @@ module Pubid
       # would otherwise fail serialization type validation.
       PUBLISHER = "W3C"
 
-      # The printed document-type token (e.g. "WD"). nil for the bare-code
+      # The printed document-type token (e.g. "WD"). nil for the bare-slug
       # Standard form; concrete typed subclasses override it.
       def type_prefix
         nil
