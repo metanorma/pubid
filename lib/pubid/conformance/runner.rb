@@ -11,6 +11,11 @@ module Pubid
       def run(flavors = corpus_flavors)
         require "pubid"
 
+        if flavors.empty?
+          raise ArgumentError, "no corpus flavors found at #{corpus_dir} - " \
+                               "refusing to report vacuous success"
+        end
+
         Pubid.eager_load_flavors!
         flavors.each_with_object([]) do |flavor, failures|
           failures.concat(run_flavor(flavor))

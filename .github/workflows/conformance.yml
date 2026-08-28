@@ -11,6 +11,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: pubid/pubid-testsuite
+          # The corpus lives on init/reference-data until pubid-testsuite
+          # PR #1 merges it to main; drop the pin at merge time.
+          ref: init/reference-data
           path: pubid-testsuite
       - uses: ruby/setup-ruby@v1
         with:
