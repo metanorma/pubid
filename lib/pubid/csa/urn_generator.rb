@@ -3,16 +3,23 @@
 module Pubid
   module Csa
     class UrnGenerator < Pubid::UrnGenerator::Base
+      # A code_only identifier printed no publisher, so it keeps an empty
+      # publisher segment rather than falling back to "csa" in #generate.
       def urn_publisher_prefix
+        return "" if code_only?
         return nil unless identifier.publisher_prefix
 
         identifier.publisher_prefix.to_s.downcase
       end
 
-      def urn_number
-        return nil unless identifier.code
+      def code_only?
+        identifier.respond_to?(:code_only) && identifier.code_only
+      end
 
-        identifier.code.render(context: URN_CONTEXT)
+      def urn_number
+        return nil unless identifier.number
+
+        identifier.number.render(context: URN_CONTEXT)
       end
 
       def urn_no_number

@@ -15,13 +15,13 @@ RSpec.describe Pubid::Csa::Identifiers::Combined do
         end
 
         it "parses first identifier" do
-          expect(parsed.first.code.value).to eq("A23.1")
-          expect(parsed.first.year).to eq("2024")
+          expect(parsed.identifiers[0].number.value).to eq("A23.1")
+          expect(parsed.identifiers[0].year).to eq("2024")
         end
 
         it "parses second identifier" do
-          expect(parsed.second.code.value).to eq("A23.2")
-          expect(parsed.second.year).to eq("2024")
+          expect(parsed.identifiers[1].number.value).to eq("A23.2")
+          expect(parsed.identifiers[1].year).to eq("2024")
         end
 
         it "uses slash separator" do
@@ -39,11 +39,11 @@ RSpec.describe Pubid::Csa::Identifiers::Combined do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses first code" do
-          expect(parsed.first.code.value).to eq("A23.1")
+          expect(parsed.identifiers[0].number.value).to eq("A23.1")
         end
 
         it "parses second code" do
-          expect(parsed.second.code.value).to eq("A23.2")
+          expect(parsed.identifiers[1].number.value).to eq("A23.2")
         end
 
         it "round-trips correctly" do
@@ -63,14 +63,14 @@ RSpec.describe Pubid::Csa::Identifiers::Combined do
         end
 
         it "parses first identifier" do
-          expect(parsed.first.code.value).to eq("A123.1")
-          expect(parsed.first.year).to eq("2005")
-          expect(parsed.first.year_format).to eq("dash")
+          expect(parsed.identifiers[0].number.value).to eq("A123.1")
+          expect(parsed.identifiers[0].year).to eq("2005")
+          expect(parsed.identifiers[0].year_format).to eq("dash")
         end
 
         it "parses second identifier without prefix" do
-          expect(parsed.second.code.value).to eq("A123.5")
-          expect(parsed.second.year).to eq("2005")
+          expect(parsed.identifiers[1].number.value).to eq("A123.5")
+          expect(parsed.identifiers[1].year).to eq("2005")
         end
 
         it "parses reaffirmation" do
@@ -88,13 +88,13 @@ RSpec.describe Pubid::Csa::Identifiers::Combined do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses first identifier" do
-          expect(parsed.first.code.value).to eq("B128.1")
-          expect(parsed.first.year).to eq("2006")
+          expect(parsed.identifiers[0].number.value).to eq("B128.1")
+          expect(parsed.identifiers[0].year).to eq("2006")
         end
 
         it "parses second identifier" do
-          expect(parsed.second.code.value).to eq("B128.2")
-          expect(parsed.second.year).to eq("2006")
+          expect(parsed.identifiers[1].number.value).to eq("B128.2")
+          expect(parsed.identifiers[1].year).to eq("2006")
         end
 
         it "parses reaffirmation" do
@@ -118,18 +118,18 @@ RSpec.describe Pubid::Csa::Identifiers::Combined do
         end
 
         it "parses first identifier" do
-          expect(parsed.first.code.value).to eq("B44")
-          expect(parsed.first.year).to eq("2019")
+          expect(parsed.identifiers[0].number.value).to eq("B44")
+          expect(parsed.identifiers[0].year).to eq("2019")
         end
 
         it "parses second identifier" do
-          expect(parsed.second.code.value).to eq("B44.1")
-          expect(parsed.second.year).to eq("2019")
+          expect(parsed.identifiers[1].number.value).to eq("B44.1")
+          expect(parsed.identifiers[1].year).to eq("2019")
         end
 
         it "parses third identifier" do
-          expect(parsed.third.code.value).to eq("B44.2")
-          expect(parsed.third.year).to eq("2019")
+          expect(parsed.identifiers[2].number.value).to eq("B44.2")
+          expect(parsed.identifiers[2].year).to eq("2019")
         end
 
         it "round-trips correctly" do
@@ -149,15 +149,15 @@ RSpec.describe Pubid::Csa::Identifiers::Combined do
         end
 
         it "parses first with CAN/CSA prefix" do
-          expect(parsed.first.publisher_prefix).to eq("CAN/CSA-")
-          expect(parsed.first.code.value).to eq("B138.1")
-          expect(parsed.first.year).to eq("2017")
+          expect(parsed.identifiers[0].publisher_prefix).to eq("CAN/CSA-")
+          expect(parsed.identifiers[0].number.value).to eq("B138.1")
+          expect(parsed.identifiers[0].year).to eq("2017")
         end
 
         it "parses second with CAN/CSA prefix" do
-          expect(parsed.second.publisher_prefix).to eq("CAN/CSA-")
-          expect(parsed.second.code.value).to eq("B138.2")
-          expect(parsed.second.year).to eq("2017")
+          expect(parsed.identifiers[1].publisher_prefix).to eq("CAN/CSA-")
+          expect(parsed.identifiers[1].number.value).to eq("B138.2")
+          expect(parsed.identifiers[1].year).to eq("2017")
         end
 
         it "parses reaffirmation" do
@@ -181,13 +181,13 @@ RSpec.describe Pubid::Csa::Identifiers::Combined do
         end
 
         it "parses first as Standard" do
-          expect(parsed.first).to be_a(Pubid::Csa::Identifiers::Standard)
-          expect(parsed.first.code.value).to eq("N285.0")
+          expect(parsed.identifiers[0]).to be_a(Pubid::Csa::Identifiers::Standard)
+          expect(parsed.identifiers[0].number.value).to eq("N285.0")
         end
 
         it "parses second as Series" do
-          expect(parsed.second).to be_a(Pubid::Csa::Identifiers::Series)
-          expect(parsed.second.code.value).to eq("N285.6")
+          expect(parsed.identifiers[1]).to be_a(Pubid::Csa::Identifiers::Series)
+          expect(parsed.identifiers[1].number.value).to eq("N285.6")
         end
 
         it "round-trips correctly" do
@@ -203,14 +203,14 @@ RSpec.describe Pubid::Csa::Identifiers::Combined do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses first identifier" do
-          expect(parsed.first.code.value).to eq("Z245.11")
-          expect(parsed.first.year).to eq("2025")
-          expect(parsed.first.year_format).to eq("colon")
+          expect(parsed.identifiers[0].number.value).to eq("Z245.11")
+          expect(parsed.identifiers[0].year).to eq("2025")
+          expect(parsed.identifiers[0].year_format).to eq("colon")
         end
 
         it "parses second identifier" do
-          expect(parsed.second.code.value).to eq("Z245.12")
-          expect(parsed.second.year_format).to eq("colon")
+          expect(parsed.identifiers[1].number.value).to eq("Z245.12")
+          expect(parsed.identifiers[1].year_format).to eq("colon")
         end
 
         it "round-trips correctly" do
@@ -226,15 +226,15 @@ RSpec.describe Pubid::Csa::Identifiers::Combined do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses first with dash format" do
-          expect(parsed.first.code.value).to eq("C22.10")
-          expect(parsed.first.year).to eq("2010")
-          expect(parsed.first.year_format).to eq("dash")
+          expect(parsed.identifiers[0].number.value).to eq("C22.10")
+          expect(parsed.identifiers[0].year).to eq("2010")
+          expect(parsed.identifiers[0].year_format).to eq("dash")
         end
 
         it "parses second with dash format" do
-          expect(parsed.second.code.value).to eq("C22.10")
-          expect(parsed.second.year).to eq("2018")
-          expect(parsed.second.year_format).to eq("dash")
+          expect(parsed.identifiers[1].number.value).to eq("C22.10")
+          expect(parsed.identifiers[1].year).to eq("2018")
+          expect(parsed.identifiers[1].year_format).to eq("dash")
         end
 
         it "round-trips correctly" do
@@ -250,11 +250,11 @@ RSpec.describe Pubid::Csa::Identifiers::Combined do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses first decimal code" do
-          expect(parsed.first.code.value).to eq("A440.2")
+          expect(parsed.identifiers[0].number.value).to eq("A440.2")
         end
 
         it "parses second decimal code" do
-          expect(parsed.second.code.value).to eq("A440.3")
+          expect(parsed.identifiers[1].number.value).to eq("A440.3")
         end
 
         it "round-trips correctly" do
@@ -274,11 +274,11 @@ RSpec.describe Pubid::Csa::Identifiers::Combined do
         end
 
         it "first has publisher" do
-          expect(parsed.first.has_publisher).to be true
+          expect(parsed.identifiers[0].has_publisher).to be true
         end
 
         it "second is continuation (no publisher prefix in rendering)" do
-          expect(parsed.second.has_publisher).to be_falsey
+          expect(parsed.identifiers[1].has_publisher).to be_falsey
         end
 
         it "round-trips correctly" do
@@ -294,13 +294,13 @@ RSpec.describe Pubid::Csa::Identifiers::Combined do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses first as French" do
-          expect(parsed.first.french).to be true
-          expect(parsed.first.year).to eq("2020")
+          expect(parsed.identifiers[0].french).to be true
+          expect(parsed.identifiers[0].year).to eq("2020")
         end
 
         it "parses second as French" do
-          expect(parsed.second.french).to be true
-          expect(parsed.second.year).to eq("2020")
+          expect(parsed.identifiers[1].french).to be true
+          expect(parsed.identifiers[1].year).to eq("2020")
         end
 
         it "round-trips correctly" do
@@ -316,8 +316,8 @@ RSpec.describe Pubid::Csa::Identifiers::Combined do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses both identifiers" do
-          expect(parsed.first.code.value).to eq("A231.1")
-          expect(parsed.second.code.value).to eq("A231.2")
+          expect(parsed.identifiers[0].number.value).to eq("A231.1")
+          expect(parsed.identifiers[1].number.value).to eq("A231.2")
         end
 
         it "parses reaffirmation" do

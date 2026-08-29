@@ -12,7 +12,7 @@ module Pubid
       #
       # This is a wrapper pattern where:
       #   - CAN/ indicates Canadian adoption
-      #   - The wrapped_identifier is the actual CSA standard being adopted
+      #   - The base is the actual CSA standard being adopted
       #
       # This is semantically different from a string prefix because:
       #   - CAN/ wraps an entire identifier (which may itself be complex)
@@ -23,29 +23,29 @@ module Pubid
           # For CAN3- identifiers, don't add CAN/ prefix (CAN3- is already complete)
           # For Series with CAN/CSA- prefix, don't add CAN/ (it's already complete)
           # For CAN/CSA- identifiers, CAN/ wraps CSA- part
-          if wrapped_identifier.class.attributes.key?(:publisher_prefix) && wrapped_identifier.publisher_prefix
-            prefix = wrapped_identifier.publisher_prefix
+          if base.class.attributes.key?(:publisher_prefix) && base.publisher_prefix
+            prefix = base.publisher_prefix
             # CAN3- is standalone, just render wrapped identifier
             # CAN/CSA- is already complete for Series identifiers
-            if prefix == "CAN3-" || (prefix == "CAN/CSA-" && wrapped_identifier.is_a?(Identifiers::Series))
-              result = wrapped_identifier.to_s
+            if prefix == "CAN3-" || (prefix == "CAN/CSA-" && base.is_a?(Identifiers::Series))
+              result = base.to_s
             else
               # For other cases, prepend CAN/ prefix
-              result = "CAN/#{wrapped_identifier}"
+              result = "CAN/#{base}"
             end
           else
             # No publisher_prefix, prepend CAN/
-            result = "CAN/#{wrapped_identifier}"
+            result = "CAN/#{base}"
           end
-          # Only add reaffirmation from wrapper if wrapped_identifier doesn't have one
+          # Only add reaffirmation from wrapper if base doesn't have one
           # (to avoid duplicates - Identifier.parse sets it on both)
-          if reaffirmation && !(wrapped_identifier.class.attributes.key?(:reaffirmation) && wrapped_identifier.reaffirmation)
+          if reaffirmation && !(base.class.attributes.key?(:reaffirmation) && base.reaffirmation)
             # Determine if space is needed before reaffirmation
             # Space needed if year is 2-digit and reaffirmation is 4-digit (original format)
             # No space if both year and reaffirmation are 2-digit
             # Check original_year_4digit flag - if false, year was originally 2-digit
-            year_was_2digit = wrapped_identifier.class.attributes.key?(:original_year_4digit) &&
-              !wrapped_identifier.original_year_4digit
+            year_was_2digit = base.class.attributes.key?(:original_year_4digit) &&
+              !base.original_year_4digit
             # Check original_reaffirmation_4digit flag
             reaffirmation_was_4digit = original_reaffirmation_4digit
 

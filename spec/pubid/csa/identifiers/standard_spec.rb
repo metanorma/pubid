@@ -15,7 +15,7 @@ RSpec.describe Pubid::Csa::Identifiers::Standard do
         end
 
         it "parses code" do
-          expect(parsed.code.value).to eq("B149.1")
+          expect(parsed.number.value).to eq("B149.1")
         end
 
         it "parses year as 2020" do
@@ -41,7 +41,7 @@ RSpec.describe Pubid::Csa::Identifiers::Standard do
         end
 
         it "parses code" do
-          expect(parsed.code.value).to eq("B149.3")
+          expect(parsed.number.value).to eq("B149.3")
         end
 
         it "parses 2-digit year as 2025" do
@@ -63,7 +63,7 @@ RSpec.describe Pubid::Csa::Identifiers::Standard do
         end
 
         it "parses single letter code" do
-          expect(parsed.code.value).to eq("Z462")
+          expect(parsed.number.value).to eq("Z462")
         end
 
         it "parses year" do
@@ -87,7 +87,7 @@ RSpec.describe Pubid::Csa::Identifiers::Standard do
         end
 
         it "parses code" do
-          expect(parsed.code.value).to eq("C22.1")
+          expect(parsed.number.value).to eq("C22.1")
         end
 
         it "parses year as 2015" do
@@ -109,7 +109,7 @@ RSpec.describe Pubid::Csa::Identifiers::Standard do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses code" do
-          expect(parsed.code.value).to eq("C22.1")
+          expect(parsed.number.value).to eq("C22.1")
         end
 
         it "parses year" do
@@ -133,7 +133,7 @@ RSpec.describe Pubid::Csa::Identifiers::Standard do
         end
 
         it "parses code" do
-          expect(parsed.code.value).to eq("A123.17")
+          expect(parsed.number.value).to eq("A123.17")
         end
 
         it "parses designation year" do
@@ -249,7 +249,7 @@ RSpec.describe Pubid::Csa::Identifiers::Standard do
         end
 
         it "parses code with HB suffix" do
-          expect(parsed.code.value).to eq("C22.1HB")
+          expect(parsed.number.value).to eq("C22.1HB")
         end
 
         it "parses year" do
@@ -271,7 +271,7 @@ RSpec.describe Pubid::Csa::Identifiers::Standard do
         end
 
         it "parses pure numeric code with HB suffix" do
-          expect(parsed.code.value).to eq("15189HB")
+          expect(parsed.number.value).to eq("15189HB")
         end
 
         it "parses year" do
@@ -293,7 +293,7 @@ RSpec.describe Pubid::Csa::Identifiers::Standard do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses code with HB" do
-          expect(parsed.code.value).to eq("B149HB")
+          expect(parsed.number.value).to eq("B149HB")
         end
 
         it "parses year" do
@@ -317,7 +317,7 @@ RSpec.describe Pubid::Csa::Identifiers::Standard do
         end
 
         it "parses code" do
-          expect(parsed.code.value).to eq("B149.1")
+          expect(parsed.number.value).to eq("B149.1")
         end
 
         it "parses year" do
@@ -341,7 +341,7 @@ RSpec.describe Pubid::Csa::Identifiers::Standard do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses multi-part code" do
-          expect(parsed.code.value).to eq("Z259.2.4")
+          expect(parsed.number.value).to eq("Z259.2.4")
         end
 
         it "parses year" do
@@ -369,7 +369,7 @@ RSpec.describe Pubid::Csa::Identifiers::Standard do
         end
 
         it "parses code" do
-          expect(parsed.code.value).to eq("Z299.1")
+          expect(parsed.number.value).to eq("Z299.1")
         end
 
         it "leaves year nil" do
@@ -387,7 +387,7 @@ RSpec.describe Pubid::Csa::Identifiers::Standard do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses code" do
-          expect(parsed.code.value).to eq("B149.1")
+          expect(parsed.number.value).to eq("B149.1")
         end
 
         it "leaves year nil" do

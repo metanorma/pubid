@@ -78,24 +78,26 @@ RSpec.describe "Identifier to_hash/from_hash round-trip" do
     end
   end
 
-  # CSA's general forms round-trip (covered above), but the CAN/CSA adoption +
-  # revision form does not yet. It is a WrapperIdentifier (a plain
-  # Lutaml::Model::Serializable, not a Pubid::Identifier) whose nested
-  # `wrapped_identifier` is an attr_accessor — invisible to serialization, so it
-  # is nil after from_hash. Making it a polymorphic lutaml attribute is the right
-  # shape, but it needs (a) cross-flavor `_type` dispatch for the nested id
-  # (CanadianAdopted wraps CSA, CsaAdopted wraps ISO/IEC/CISPR), which the
-  # static class_map doesn't resolve cleanly, and (b) a fix for
-  # CanadianAdopted#to_s, which references `original_reaffirmation_4digit` on
-  # itself (it lives on the wrapped id). Tracked separately; the working CSA
-  # forms stay protected by the suite above.
-  describe "CSA CAN/CSA adoption+revision form" do
-    it "round-trips CAN/CSA-A123.2-03 (R2023)" do
-      pending "wrapped_identifier (attr_accessor on a Lutaml wrapper) is not " \
-              "serialized; needs polymorphic nested-id dispatch + a to_s fix"
-      id = Pubid::Csa.parse("CAN/CSA-A123.2-03 (R2023)")
-      restored = id.class.from_hash(id.to_hash)
-      expect(restored.to_s).to eq(id.to_s)
+  # The CSA container types used to be plain Lutaml::Model::Serializable
+  # objects holding their wrapped id in an attr_accessor, invisible to
+  # serialization — so this form came back from from_hash with no identifier in
+  # it at all. They are now real Pubid::Identifier subclasses with a polymorphic
+  # `base` attribute (cross-flavor, because CsaAdopted wraps ISO/IEC/CISPR ids,
+  # which the nested `_type` dispatch resolves).
+  describe "CSA container types" do
+    {
+      "CAN/CSA-A123.2-03 (R2023)" => "CanadianAdopted",
+      "CSA ISO/IEC 8824-1:22" => "CsaAdopted",
+      "CSA B149.1:25 Code, Handbook & Training Package" => "Package",
+      "CSA A23.1:24/CSA A23.2:24" => "Combined",
+    }.each do |ref, type|
+      it "round-trips #{ref} (#{type})" do
+        id = Pubid::Csa.parse(ref)
+        restored = Pubid::Csa::Identifier.from_hash(id.to_hash)
+        expect(restored.class).to eq(id.class)
+        expect(restored.to_s).to eq(id.to_s)
+        expect(restored.to_hash).to eq(id.to_hash)
+      end
     end
   end
 end

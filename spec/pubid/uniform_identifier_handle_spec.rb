@@ -26,7 +26,12 @@ RSpec.describe "Uniform per-flavor Identifier handle" do
     "ccsds"       => ["CCSDS 100.0-G-1"],
     "cen_cenelec" => ["EN 50128:2011"],
     "cie"         => ["CIE 198:2011"],
-    "csa"         => ["CSA C22.2 NO. 0:20"],
+    # The four container types are real identifiers now, so the flavor handle
+    # covers them like any other wrapper.
+    "csa"         => ["CSA C22.2 NO. 0:20",
+                      "CAN/CSA-A123.2-03 (R2023)",
+                      "CSA ISO/IEC 8824-1:22",
+                      "CSA A23.1:24/CSA A23.2:24"],
     "etsi"        => ["ETSI EG 200 053 V1.5.1 (2004-06)"],
     "iana"        => ["IANA calipso", "IANA _6lowpan-parameters/lowpan_nhc"],
     "idf"         => ["IDF 146:2003"],

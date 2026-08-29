@@ -15,12 +15,12 @@ RSpec.describe Pubid::Csa::Identifiers::CsaAdopted do
         end
 
         it "parses wrapped ISO/IEC identifier" do
-          expect(parsed.wrapped_identifier).to be_a(Pubid::Iso::Identifiers::InternationalStandard)
+          expect(parsed.base).to be_a(Pubid::Iso::Identifiers::InternationalStandard)
         end
 
         it "parses number and part separately" do
-          expect(parsed.wrapped_identifier.number.value).to eq("8824")
-          expect(parsed.wrapped_identifier.part.value).to eq("1")
+          expect(parsed.base.number.value).to eq("8824")
+          expect(parsed.base.part.value).to eq("1")
         end
 
         it "parses year as 2-digit in rendering" do
@@ -34,8 +34,8 @@ RSpec.describe Pubid::Csa::Identifiers::CsaAdopted do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses multi-part number (number and part separately)" do
-          expect(parsed.wrapped_identifier.number.value).to eq("9594")
-          expect(parsed.wrapped_identifier.part.value).to eq("2")
+          expect(parsed.base.number.value).to eq("9594")
+          expect(parsed.base.part.value).to eq("2")
         end
 
         it "round-trips" do
@@ -53,11 +53,11 @@ RSpec.describe Pubid::Csa::Identifiers::CsaAdopted do
         end
 
         it "parses wrapped amendment" do
-          expect(parsed.wrapped_identifier).to be_a(Pubid::Iso::Identifiers::Amendment)
+          expect(parsed.base).to be_a(Pubid::Iso::Identifiers::Amendment)
         end
 
         it "parses amendment number" do
-          expect(parsed.wrapped_identifier.number.value).to eq("1")
+          expect(parsed.base.number.value).to eq("1")
         end
 
         it "round-trips" do
@@ -77,7 +77,7 @@ RSpec.describe Pubid::Csa::Identifiers::CsaAdopted do
         end
 
         it "parses wrapped Technical Report" do
-          expect(parsed.wrapped_identifier).to be_a(Pubid::Iso::Identifiers::TechnicalReport)
+          expect(parsed.base).to be_a(Pubid::Iso::Identifiers::TechnicalReport)
         end
 
         it "parses reaffirmation" do
@@ -95,11 +95,11 @@ RSpec.describe Pubid::Csa::Identifiers::CsaAdopted do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses TR with amendment" do
-          expect(parsed.wrapped_identifier).to be_a(Pubid::Iso::Identifiers::Amendment)
+          expect(parsed.base).to be_a(Pubid::Iso::Identifiers::Amendment)
         end
 
         it "parses amendment number" do
-          expect(parsed.wrapped_identifier.number.value).to eq("1")
+          expect(parsed.base.number.value).to eq("1")
         end
 
         it "parses reaffirmation" do
@@ -117,8 +117,8 @@ RSpec.describe Pubid::Csa::Identifiers::CsaAdopted do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses multi-part TR number (number and part separately)" do
-          expect(parsed.wrapped_identifier.number.value).to eq("12785")
-          expect(parsed.wrapped_identifier.part.value).to eq("3")
+          expect(parsed.base.number.value).to eq("12785")
+          expect(parsed.base.part.value).to eq("3")
         end
 
         it "round-trips" do
@@ -138,11 +138,11 @@ RSpec.describe Pubid::Csa::Identifiers::CsaAdopted do
         end
 
         it "wrapped identifier is CsaAdopted" do
-          expect(parsed.wrapped_identifier).to be_a(described_class)
+          expect(parsed.base).to be_a(described_class)
         end
 
         it "parses ISO number" do
-          expect(parsed.wrapped_identifier.wrapped_identifier.number.value).to eq("10012")
+          expect(parsed.base.base.number.value).to eq("10012")
         end
 
         it "parses reaffirmation" do
@@ -161,7 +161,7 @@ RSpec.describe Pubid::Csa::Identifiers::CsaAdopted do
 
         it "parses nested adoption structure" do
           expect(parsed).to be_a(Pubid::Csa::Identifiers::CanadianAdopted)
-          expect(parsed.wrapped_identifier).to be_a(described_class)
+          expect(parsed.base).to be_a(described_class)
         end
 
         it "round-trips" do
@@ -181,12 +181,12 @@ RSpec.describe Pubid::Csa::Identifiers::CsaAdopted do
         end
 
         it "wrapped identifier is CsaAdopted" do
-          expect(parsed.wrapped_identifier).to be_a(described_class)
+          expect(parsed.base).to be_a(described_class)
         end
 
         it "parses IEC number and parts separately" do
-          expect(parsed.wrapped_identifier.wrapped_identifier.number.value).to eq("61000")
-          expect(parsed.wrapped_identifier.wrapped_identifier.part.value).to eq("4")
+          expect(parsed.base.base.number.value).to eq("61000")
+          expect(parsed.base.base.part.value).to eq("4")
         end
 
         it "parses reaffirmation" do
@@ -205,7 +205,7 @@ RSpec.describe Pubid::Csa::Identifiers::CsaAdopted do
 
         it "parses IEC with amendment" do
           # ISO parser is used for both ISO and IEC standards
-          expect(parsed.wrapped_identifier.wrapped_identifier).to be_a(Pubid::Iso::Identifiers::Amendment)
+          expect(parsed.base.base).to be_a(Pubid::Iso::Identifiers::Amendment)
         end
 
         it "round-trips" do
@@ -225,7 +225,7 @@ RSpec.describe Pubid::Csa::Identifiers::CsaAdopted do
         end
 
         it "parses CEI/IEC copublisher format" do
-          expect(parsed.wrapped_identifier.wrapped_identifier.publisher.to_s).to eq("IEC")
+          expect(parsed.base.base.publisher.to_s).to eq("IEC")
         end
 
         it "round-trips" do
@@ -242,7 +242,7 @@ RSpec.describe Pubid::Csa::Identifiers::CsaAdopted do
 
         it "parses amendment with CEI/IEC" do
           # ISO parser is used for both ISO and IEC standards
-          expect(parsed.wrapped_identifier.wrapped_identifier).to be_a(Pubid::Iso::Identifiers::Amendment)
+          expect(parsed.base.base).to be_a(Pubid::Iso::Identifiers::Amendment)
         end
 
         it "round-trips" do
@@ -264,11 +264,11 @@ RSpec.describe Pubid::Csa::Identifiers::CsaAdopted do
         end
 
         it "wrapped identifier is CsaAdopted" do
-          expect(parsed.wrapped_identifier).to be_a(described_class)
+          expect(parsed.base).to be_a(described_class)
         end
 
         it "parses ISO number" do
-          expect(parsed.wrapped_identifier.wrapped_identifier.number.value).to eq("9001")
+          expect(parsed.base.base.number.value).to eq("9001")
         end
 
         it "round-trips" do

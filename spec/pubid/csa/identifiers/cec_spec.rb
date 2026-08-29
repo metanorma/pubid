@@ -159,7 +159,7 @@ RSpec.describe Pubid::Csa::Identifiers::Cec do
         end
 
         it "wraps CecIdentifier" do
-          expect(parsed.wrapped_identifier).to be_a(described_class)
+          expect(parsed.base).to be_a(described_class)
         end
 
         it "preserves CAN/CSA- prefix in rendering" do
@@ -177,7 +177,7 @@ RSpec.describe Pubid::Csa::Identifiers::Cec do
         end
 
         it "wraps CecIdentifier" do
-          expect(parsed.wrapped_identifier).to be_a(described_class)
+          expect(parsed.base).to be_a(described_class)
         end
       end
     end

@@ -15,7 +15,7 @@ RSpec.describe Pubid::Csa::Identifiers::Series do
         end
 
         it "parses code" do
-          expect(parsed.code.value).to eq("Z240")
+          expect(parsed.number.value).to eq("Z240")
         end
 
         it "parses series prefix" do
@@ -49,7 +49,7 @@ RSpec.describe Pubid::Csa::Identifiers::Series do
         end
 
         it "parses code" do
-          expect(parsed.code.value).to eq("Z240")
+          expect(parsed.number.value).to eq("Z240")
         end
 
         it "parses RV series prefix" do
@@ -77,7 +77,7 @@ RSpec.describe Pubid::Csa::Identifiers::Series do
         end
 
         it "parses code" do
-          expect(parsed.code.value).to eq("Z245.20")
+          expect(parsed.number.value).to eq("Z245.20")
         end
 
         it "has no series prefix" do
@@ -103,7 +103,7 @@ RSpec.describe Pubid::Csa::Identifiers::Series do
         end
 
         it "parses code" do
-          expect(parsed.code.value).to eq("Z341")
+          expect(parsed.number.value).to eq("Z341")
         end
 
         it "has no series prefix" do
@@ -132,27 +132,27 @@ RSpec.describe Pubid::Csa::Identifiers::Series do
         end
 
         it "wraps a Series identifier" do
-          expect(parsed.wrapped_identifier).to be_a(described_class)
+          expect(parsed.base).to be_a(described_class)
         end
 
         it "wrapped Series has publisher prefix" do
-          expect(parsed.wrapped_identifier.publisher_prefix).to eq("CAN/CSA-")
+          expect(parsed.base.publisher_prefix).to eq("CAN/CSA-")
         end
 
         it "parses code" do
-          expect(parsed.wrapped_identifier.code.value).to eq("A220")
+          expect(parsed.base.number.value).to eq("A220")
         end
 
         it "parses year" do
-          expect(parsed.wrapped_identifier.year).to eq("2006")
+          expect(parsed.base.year).to eq("2006")
         end
 
         it "parses reaffirmation" do
-          expect(parsed.wrapped_identifier.reaffirmation).to eq("2021")
+          expect(parsed.base.reaffirmation).to eq("2021")
         end
 
         it "uses dash format" do
-          expect(parsed.wrapped_identifier.year_format).to eq("dash")
+          expect(parsed.base.year_format).to eq("dash")
         end
 
         it "round-trips correctly" do
@@ -171,19 +171,19 @@ RSpec.describe Pubid::Csa::Identifiers::Series do
         end
 
         it "wraps a Series identifier" do
-          expect(parsed.wrapped_identifier).to be_a(described_class)
+          expect(parsed.base).to be_a(described_class)
         end
 
         it "wrapped Series has publisher prefix" do
-          expect(parsed.wrapped_identifier.publisher_prefix).to eq("CAN/CSA-")
+          expect(parsed.base.publisher_prefix).to eq("CAN/CSA-")
         end
 
         it "parses code" do
-          expect(parsed.wrapped_identifier.code.value).to eq("B45")
+          expect(parsed.base.number.value).to eq("B45")
         end
 
         it "parses year" do
-          expect(parsed.wrapped_identifier.year).to eq("2002")
+          expect(parsed.base.year).to eq("2002")
         end
 
         it "parses reaffirmation" do
@@ -206,15 +206,15 @@ RSpec.describe Pubid::Csa::Identifiers::Series do
         end
 
         it "wraps a Series identifier" do
-          expect(parsed.wrapped_identifier).to be_a(described_class)
+          expect(parsed.base).to be_a(described_class)
         end
 
         it "parses code" do
-          expect(parsed.wrapped_identifier.code.value).to eq("C448")
+          expect(parsed.base.number.value).to eq("C448")
         end
 
         it "parses year" do
-          expect(parsed.wrapped_identifier.year).to eq("2013")
+          expect(parsed.base.year).to eq("2013")
         end
 
         it "round-trips correctly" do
@@ -233,19 +233,19 @@ RSpec.describe Pubid::Csa::Identifiers::Series do
         end
 
         it "wraps a Series identifier" do
-          expect(parsed.wrapped_identifier).to be_a(described_class)
+          expect(parsed.base).to be_a(described_class)
         end
 
         it "parses code" do
-          expect(parsed.wrapped_identifier.code.value).to eq("F378")
+          expect(parsed.base.number.value).to eq("F378")
         end
 
         it "parses year" do
-          expect(parsed.wrapped_identifier.year).to eq("2011")
+          expect(parsed.base.year).to eq("2011")
         end
 
         it "parses reaffirmation" do
-          expect(parsed.wrapped_identifier.reaffirmation).to eq("2016")
+          expect(parsed.base.reaffirmation).to eq("2016")
         end
 
         it "round-trips correctly" do
@@ -265,7 +265,7 @@ RSpec.describe Pubid::Csa::Identifiers::Series do
         end
 
         it "parses code" do
-          expect(parsed.code.value).to eq("A165")
+          expect(parsed.number.value).to eq("A165")
         end
 
         it "parses year" do
@@ -289,7 +289,7 @@ RSpec.describe Pubid::Csa::Identifiers::Series do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses code" do
-          expect(parsed.code.value).to eq("B139")
+          expect(parsed.number.value).to eq("B139")
         end
 
         it "parses year" do
@@ -309,7 +309,7 @@ RSpec.describe Pubid::Csa::Identifiers::Series do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses code" do
-          expect(parsed.code.value).to eq("B139")
+          expect(parsed.number.value).to eq("B139")
         end
 
         it "parses year as 2024" do

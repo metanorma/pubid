@@ -5,16 +5,23 @@ require "lutaml/model"
 module Pubid
   module Csa
     module Identifiers
-      # CombinedIdentifier represents CSA identifiers combined with "/" separator
+      # Combined represents CSA identifiers joined with "/" or ", "
       # Examples:
       #   CSA A23.1:24/CSA A23.2:24
       #   CSA N285.0:23/CSA N285.6 SERIES:23
       #   CSA A123.1-05/A123.5-05 (R2015)
       #   CSA B44:19/B44.1:19/B44.2:19 (triple combined)
-      class Combined < Lutaml::Model::Serializable
-        attribute :first, Standard
-        attribute :second, Standard
-        attribute :third, Standard
+      class Combined < Identifier
+        # The co-equal designations, in printed order.
+        #
+        # One polymorphic collection, the IEC ConsolidatedIdentifier shape —
+        # not the historical first/second/third triple, which hard-capped the
+        # form at three and froze a non-standard hash shape. The first member
+        # is the primary designation, which is what #root walks so the index
+        # key is non-empty. Typed cross-flavor for the same reason as
+        # WrapperIdentifier#base.
+        attribute :identifiers, ::Pubid::Identifier, polymorphic: true,
+                                                     collection: true
         attribute :reaffirmation, :string
         attribute :original_reaffirmation_4digit, :boolean, default: -> {
           false
@@ -23,54 +30,63 @@ module Pubid
         attribute :year_format, :string # Dummy for compatibility
         attribute :separator, :string, default: -> { "/" } # "/" or ", "
 
-        # CSA combined ids are not Pubid::Identifier objects, so they do not
-        # inherit #root. They are their own origin for matching purposes.
+        # A combined id stores its members in `identifiers`, not `base`, so
+        # walk the primary designation to the origin document
+        # (Iec::Identifiers::ConsolidatedIdentifier does the same).
         def root
-          self
+          identifiers&.first&.root || self
+        end
+
+        # Co-equal designations, so both matching primitives reduce to the
+        # primary one — the Iec::Identifiers::ConsolidatedIdentifier shape.
+        def base_document
+          identifiers&.first&.base_document || self
+        end
+
+        def drop_supplements
+          identifiers&.first || self
         end
 
         def to_s
-          # For comma separator, render both parts with full prefix
-          # For slash separator, second/third parts without prefix
-          if separator == ", "
-            # Comma: Both with full CSA prefix
-            parts = [first.to_s, second.to_s]
-            parts << third.to_s if third
-          else
-            # Slash: Second and third without CSA prefix (continuation)
-            parts = [first.to_s]
-            parts << render_continuation(second)
-            parts << render_continuation(third) if third
-          end
-
+          parts = render_parts
           result = parts.join(separator || "/")
-
-          # Reaffirmation - preserve original format and determine spacing
-          if reaffirmation
-            # For combined identifiers, check year format from first identifier
-            # to determine spacing
-            year_was_2digit = first.class.attributes.key?(:original_year_4digit) && !first.original_year_4digit
-
-            # Check if reaffirmation was originally 4-digit
-            # Note: We need to track this at the Combined level, but for now
-            # assume 4-digit if the value is 4 digits and starts with 19/20
-            reaffirmation_was_4digit = reaffirmation.to_s.length == 4 &&
-              reaffirmation.to_s.start_with?("19", "20")
-
-            # Determine spacing based on original formats
-            # Space needed if year is 2-digit and reaffirmation is 4-digit
-            result += if year_was_2digit && reaffirmation_was_4digit
-                        " (R#{reaffirmation})"
-                      else
-                        "(R#{reaffirmation})"
-                      end
-          end
-
+          result += render_reaffirmation if reaffirmation
           result += package if package
           result
         end
 
         private
+
+        # With a comma separator every designation carries its full prefix;
+        # with a slash the trailing ones are continuations printed bare.
+        def render_parts
+          return identifiers.map(&:to_s) if separator == ", "
+
+          identifiers.each_with_index.map do |identifier, index|
+            index.zero? ? identifier.to_s : render_continuation(identifier)
+          end
+        end
+
+        # Reaffirmation - preserve original format and determine spacing.
+        # A space is needed when the year was printed 2-digit and the
+        # reaffirmation 4-digit; the year format comes from the primary
+        # designation.
+        def render_reaffirmation
+          primary = identifiers&.first
+          year_was_2digit =
+            primary &&
+            primary.class.attributes.key?(:original_year_4digit) &&
+            !primary.original_year_4digit
+
+          reaffirmation_was_4digit = reaffirmation.to_s.length == 4 &&
+            reaffirmation.to_s.start_with?("19", "20")
+
+          if year_was_2digit && reaffirmation_was_4digit
+            " (R#{reaffirmation})"
+          else
+            "(R#{reaffirmation})"
+          end
+        end
 
         # Render identifier without CSA prefix (unless has_publisher is true)
         def render_continuation(identifier)
@@ -78,12 +94,10 @@ module Pubid
 
           # Add CSA prefix if present in original
           if identifier.has_publisher
-            prefix = identifier.publisher_prefix || "CSA"
-            !prefix.end_with?("-")
-            parts << prefix
+            parts << (identifier.publisher_prefix || "CSA")
           end
 
-          code_part = identifier.code.to_s if identifier.code
+          code_part = identifier.number.to_s if identifier.number
 
           # NO. keyword
           if identifier.no_number
@@ -98,34 +112,42 @@ module Pubid
             code_part += " SERIES"
           end
 
-          # Year with proper format (colon or dash)
-          if identifier.year
-            separator = identifier.year_format == "dash" ? "-" : ":"
-            year_part = separator
-            year_part += identifier.year_prefix if identifier.year_prefix # Add M or F prefix
-            year_part += "F" if identifier.french && identifier.year_format != "dash" && !identifier.year_prefix # Only add F if no prefix
-            # Convert 4-digit year back to 2-digit
-            year_str = identifier.year.to_s
-            year_part += if year_str.length == 4 && year_str.start_with?("20")
-                           year_str[2..3]
-                         else
-                           year_str
-                         end
-            code_part += year_part
-          end
+          code_part += render_continuation_year(identifier) if identifier.year
 
           parts << code_part if code_part
 
-          # Join with proper spacing based on prefix
-          if identifier.has_publisher && parts.length > 1
-            prefix = parts[0]
-            needs_space = !prefix.end_with?("-")
-            if needs_space
-              parts.join(" ")
-            else
-              # No space after dash-ending prefix
-              parts[0] + parts[1..].join(" ")
-            end
+          join_continuation(identifier, parts)
+        end
+
+        # Year with proper format (colon or dash)
+        def render_continuation_year(identifier)
+          separator = identifier.year_format == "dash" ? "-" : ":"
+          year_part = separator
+          # Add M or F prefix
+          year_part += identifier.year_prefix if identifier.year_prefix
+          # Only add F if no prefix
+          if identifier.french && identifier.year_format != "dash" &&
+              !identifier.year_prefix
+            year_part += "F"
+          end
+          # Convert 4-digit year back to 2-digit
+          year_str = identifier.year.to_s
+          year_part + if year_str.length == 4 && year_str.start_with?("20")
+                        year_str[2..3]
+                      else
+                        year_str
+                      end
+        end
+
+        # Join with proper spacing based on prefix
+        def join_continuation(identifier, parts)
+          return parts.join(" ") unless identifier.has_publisher &&
+            parts.length > 1
+
+          prefix = parts[0]
+          if prefix.end_with?("-")
+            # No space after dash-ending prefix
+            prefix + parts[1..].join(" ")
           else
             parts.join(" ")
           end

@@ -8,7 +8,7 @@ require "spec_helper"
 # contract across all camps:
 #   - base camp: every wrapper exposes `base`; #root walks it to the origin
 #   - consolidated bundles (`identifiers` collection): #root -> first id's root
-#   - CSA Lutaml wrappers (not Pubid::Identifier): #root returns self (no raise)
+#   - CSA containers: real identifiers too, walking `base`/`identifiers`
 Pubid.eager_load_flavors!
 
 RSpec.describe Pubid::Identifier do
@@ -72,11 +72,17 @@ RSpec.describe Pubid::Identifier do
       end
     end
 
-    context "CSA Lutaml wrappers (not a Pubid::Identifier)" do
-      it "#root returns self without raising" do
+    context "CSA container types" do
+      it "a Canadian adoption roots to the standard it wraps" do
         id = Pubid::Csa.parse("CAN/CSA-A123.2-03")
-        expect { id.root }.not_to raise_error
-        expect(id.root).to equal(id)
+        expect(id.root).not_to equal(id)
+        expect(id.root).to be_a(Pubid::Csa::Identifiers::Standard)
+        expect(id.root.number.to_s).to eq("A123.2")
+      end
+
+      it "a combined id roots to its primary designation" do
+        id = Pubid::Csa.parse("CSA A23.1:24/CSA A23.2:24")
+        expect(id.root.to_s).to eq("CSA A23.1:24")
       end
     end
   end

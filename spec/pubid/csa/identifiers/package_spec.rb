@@ -18,7 +18,7 @@ RSpec.describe Pubid::Csa::Identifiers::Package do
 
         it "parses base identifier" do
           expect(parsed.base).to be_a(Pubid::Csa::Identifiers::Standard)
-          expect(parsed.base.code.value).to eq("B149.1")
+          expect(parsed.base.number.value).to eq("B149.1")
         end
 
         it "round-trips" do
@@ -36,7 +36,7 @@ RSpec.describe Pubid::Csa::Identifiers::Package do
         end
 
         it "parses base identifier" do
-          expect(parsed.base.code.value).to eq("C22.1")
+          expect(parsed.base.number.value).to eq("C22.1")
         end
 
         it "round-trips" do
@@ -72,7 +72,7 @@ RSpec.describe Pubid::Csa::Identifiers::Package do
         end
 
         it "parses base identifier" do
-          expect(parsed.base.code.value).to eq("C22.1")
+          expect(parsed.base.number.value).to eq("C22.1")
         end
 
         it "round-trips" do
@@ -104,7 +104,7 @@ RSpec.describe Pubid::Csa::Identifiers::Package do
         end
 
         it "parses base identifier" do
-          expect(parsed.base.code.value).to eq("C22.10")
+          expect(parsed.base.number.value).to eq("C22.10")
         end
 
         it "round-trips" do
@@ -122,7 +122,7 @@ RSpec.describe Pubid::Csa::Identifiers::Package do
         end
 
         it "parses base identifier" do
-          expect(parsed.base.code.value).to eq("B108")
+          expect(parsed.base.number.value).to eq("B108")
         end
 
         it "round-trips" do

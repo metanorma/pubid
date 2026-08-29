@@ -15,7 +15,7 @@ RSpec.describe Pubid::Csa::Identifiers::Base do
         end
 
         it "parses code" do
-          expect(parsed.code.value).to eq("B149.1")
+          expect(parsed.number.value).to eq("B149.1")
         end
 
         it "parses year" do
@@ -37,11 +37,11 @@ RSpec.describe Pubid::Csa::Identifiers::Base do
         end
 
         it "parses code from wrapped identifier" do
-          expect(parsed.wrapped_identifier.code.value).to eq("A123.1")
+          expect(parsed.base.number.value).to eq("A123.1")
         end
 
         it "parses year with dash format" do
-          expect(parsed.wrapped_identifier.year).to eq("2005")
+          expect(parsed.base.year).to eq("2005")
         end
 
         it "round-trips" do
@@ -59,11 +59,11 @@ RSpec.describe Pubid::Csa::Identifiers::Base do
         end
 
         it "parses code" do
-          expect(parsed.wrapped_identifier.code.value).to eq("B78.1")
+          expect(parsed.base.number.value).to eq("B78.1")
         end
 
         it "parses year with M prefix" do
-          expect(parsed.wrapped_identifier.year).to eq("1983")
+          expect(parsed.base.year).to eq("1983")
         end
 
         it "round-trips" do
@@ -171,15 +171,15 @@ RSpec.describe Pubid::Csa::Identifiers::Base do
         end
 
         it "wraps CecIdentifier" do
-          expect(parsed.wrapped_identifier).to be_a(Pubid::Csa::Identifiers::Cec)
+          expect(parsed.base).to be_a(Pubid::Csa::Identifiers::Cec)
         end
 
         it "parses CEC part" do
-          expect(parsed.wrapped_identifier.cec_part.value).to eq("C22.2")
+          expect(parsed.base.cec_part.value).to eq("C22.2")
         end
 
         it "parses NO. number" do
-          expect(parsed.wrapped_identifier.no_number.value).to eq("60601-1")
+          expect(parsed.base.no_number.value).to eq("60601-1")
         end
 
         it "round-trips correctly" do
@@ -195,7 +195,7 @@ RSpec.describe Pubid::Csa::Identifiers::Base do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses code" do
-          expect(parsed.code.value).to eq("A123.17")
+          expect(parsed.number.value).to eq("A123.17")
         end
 
         it "parses original year" do
@@ -221,7 +221,7 @@ RSpec.describe Pubid::Csa::Identifiers::Base do
         end
 
         it "parses original year" do
-          expect(parsed.wrapped_identifier.year).to eq("2003")
+          expect(parsed.base.year).to eq("2003")
         end
 
         it "round-trips" do
@@ -263,7 +263,7 @@ RSpec.describe Pubid::Csa::Identifiers::Base do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses multi-part decimal code" do
-          expect(parsed.code.value).to eq("Z259.2.4")
+          expect(parsed.number.value).to eq("Z259.2.4")
         end
 
         it "parses year" do

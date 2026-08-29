@@ -101,7 +101,7 @@ module Pubid
           else
             begin
               Pubid::Iso.parse(base_str)
-            rescue Pubid::Errors::ParseError
+            rescue Parslet::ParseFailed
               Pubid::Iec.parse(base_str)
             end
           end
@@ -128,17 +128,17 @@ module Pubid
           end
           amendment_str = "#{base_str}/Amd #{parsed_hash[:adoption_amendment]}:#{wrapped_amendment_year}"
 
-          wrapped_identifier = if adoption_org.start_with?("ISO", "CEI")
-                                 Pubid::Iso.parse(amendment_str)
-                               elsif adoption_org.start_with?("IEC")
-                                 Pubid::Iec.parse(amendment_str)
-                               else
-                                 begin
-                                   Pubid::Iso.parse(amendment_str)
-                                 rescue Pubid::Errors::ParseError
-                                   Pubid::Iec.parse(amendment_str)
-                                 end
-                               end
+          base = if adoption_org.start_with?("ISO", "CEI")
+                   Pubid::Iso.parse(amendment_str)
+                 elsif adoption_org.start_with?("IEC")
+                   Pubid::Iec.parse(amendment_str)
+                 else
+                   begin
+                     Pubid::Iso.parse(amendment_str)
+                   rescue Parslet::ParseFailed
+                     Pubid::Iec.parse(amendment_str)
+                   end
+                 end
         else
           # No amendment, simple base identifier
           wrapped_id_str = "#{adoption_org} #{adoption_number}#{year_sep}#{wrapped_year}"
@@ -148,20 +148,20 @@ module Pubid
             wrapped_id_str = wrapped_id_str.sub("CEI/IEC", "IEC")
           end
 
-          wrapped_identifier = if adoption_org.start_with?("ISO", "CEI")
-                                 Pubid::Iso.parse(wrapped_id_str)
-                               elsif adoption_org.start_with?("IEC")
-                                 Pubid::Iec.parse(wrapped_id_str)
-                               else
-                                 begin
-                                   Pubid::Iso.parse(wrapped_id_str)
-                                 rescue Pubid::Errors::ParseError
-                                   Pubid::Iec.parse(wrapped_id_str)
-                                 end
-                               end
+          base = if adoption_org.start_with?("ISO", "CEI")
+                   Pubid::Iso.parse(wrapped_id_str)
+                 elsif adoption_org.start_with?("IEC")
+                   Pubid::Iec.parse(wrapped_id_str)
+                 else
+                   begin
+                     Pubid::Iso.parse(wrapped_id_str)
+                   rescue Parslet::ParseFailed
+                     Pubid::Iec.parse(wrapped_id_str)
+                   end
+                 end
         end
 
-        adoption.wrapped_identifier = wrapped_identifier
+        adoption.base = base
 
         # Handle reaffirmation
         if parsed_hash[:reaffirmation]
@@ -195,23 +195,25 @@ module Pubid
           # SERIES matched - build Series identifier with CAN/CSA- prefix
           # The Series.to_s will handle rendering as "CAN/CSA-A220 SERIES-06"
           # (keeping the full prefix instead of "CAN/CSA-A220...")
-          wrapped_identifier = build_series(wrapped_data)
+          base = build_series(wrapped_data)
           # Set the full publisher_prefix on the wrapped Series for proper rendering
-          # The test expects wrapped_identifier.publisher_prefix to be "CAN/CSA-"
+          # The test expects base.publisher_prefix to be "CAN/CSA-"
         elsif parsed_hash.key?(:cec_part)
           # CEC matched - build Cec identifier
-          wrapped_identifier = build_cec(wrapped_data)
+          base = build_cec(wrapped_data)
         else
           # Standard CSA identifier
-          wrapped_identifier = build_single(wrapped_data)
+          base = build_single(wrapped_data)
         end
-        wrapped_identifier.publisher_prefix = original_prefix if original_prefix && wrapped_identifier.class.attributes.key?(:publisher_prefix)
+        base.publisher_prefix = original_prefix if original_prefix && base.class.attributes.key?(:publisher_prefix)
 
-        canadian_adopted.wrapped_identifier = wrapped_identifier
+        canadian_adopted.base = base
 
-        # Handle reaffirmation - supports both 2-digit and 4-digit years
-        # Note: CanadianAdopted (WrapperIdentifier) doesn't track original_reaffirmation_4digit
-        # That's only for Series/Cec identifiers
+        # Handle reaffirmation - supports both 2-digit and 4-digit years.
+        # The wrapper's own original_reaffirmation_4digit is left at its
+        # default: CanadianAdopted#to_s only consults it when the wrapped id
+        # carries no reaffirmation of its own, and Series/Cec track the printed
+        # width themselves.
         if parsed_hash[:reaffirmation_4digit]
           # Original was 4-digit (e.g., "R2019")
           canadian_adopted.reaffirmation = parsed_hash[:reaffirmation_4digit].to_s
@@ -251,7 +253,7 @@ module Pubid
 
         # Code
         if parsed_hash[:code]
-          series.code = Components::Code.new(value: parsed_hash[:code].to_s)
+          series.number = Components::Code.new(value: parsed_hash[:code].to_s)
         end
 
         # Year format and year
@@ -451,10 +453,10 @@ module Pubid
       def build_combined(parsed_hash)
         combined = Identifiers::Combined.new
 
-        # Build each part
-        combined.first = build_single(parsed_hash[:first])
-        combined.second = build_single(parsed_hash[:second])
-        combined.third = build_single(parsed_hash[:third]) if parsed_hash[:third]
+        # Build each designation, in printed order, into one collection.
+        combined.identifiers = %i[first second third]
+          .filter_map { |key| parsed_hash[key] }
+          .map { |part| build_single(part) }
 
         # Detect separator from parser marker
         combined.separator = if parsed_hash[:comma_separator]
@@ -495,15 +497,13 @@ module Pubid
         identifier_class = select_identifier_class(data)
         identifier = identifier_class.new
 
-        # Publisher prefix (CAN/CSA-, CAN3-, or CSA)
-        # For code_only identifiers (no prefix in original), set to empty string
-        # to prevent default "CSA" from being added in rendering
+        # Publisher prefix (CAN/CSA-, CAN3-, or CSA).
+        # A code with no prefix in the original is a code_only identifier; the
+        # flag stops rendering from supplying the default "CSA".
         if data[:publisher_prefix]
           identifier.publisher_prefix = data[:publisher_prefix].to_s
-        elsif data[:code] && !data[:publisher_prefix]
-          # Code exists but no publisher_prefix = code_only identifier
-          # Use empty string to indicate "no prefix wanted"
-          identifier.publisher_prefix = ""
+        elsif data[:code]
+          identifier.code_only = true
         end
 
         # Publisher presence flag
@@ -520,13 +520,13 @@ module Pubid
           # Pattern: "C22.1-15" should become code="C22.1", year="2015"
           if !data[:year] && code_value =~ /^(.+)-(\d{2})$/
             # Split code and year
-            identifier.code = Components::Code.new(value: $1)
+            identifier.number = Components::Code.new(value: $1)
             # Convert 2-digit year to 4-digit
             year_2digit = $2
             identifier.year = "20#{year_2digit}"
             identifier.year_format = "dash"
           else
-            identifier.code = Components::Code.new(value: code_value)
+            identifier.number = Components::Code.new(value: code_value)
           end
         end
 
