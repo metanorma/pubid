@@ -62,12 +62,15 @@ RSpec.describe "partial reference parsing (cross-flavor)" do
     # OGC: the "<yy>" year is the mandatory leading field of the "<yy>-<nnn>"
     # number, so there is no dateless partial form to construct.
     "ogc" => { ref: "24-032r1", omits: [] },
-    # AMCA/3GPP genuinely REQUIRE the trailing component today (AMCA the "-YY"
-    # year, 3GPP the "/VERSION"), so no partial form parses yet — partial-ref
-    # support for them is future laggard work. Use the canonical full form as a
-    # plain "still parses" regression guard (omits: []) until that lands.
+    # AMCA genuinely REQUIRES the trailing "-YY" year today, so no partial form
+    # parses yet — partial-ref support for it is future laggard work. Use the
+    # canonical full form as a plain "still parses" regression guard
+    # (omits: []) until that lands.
     "amca" => { ref: "AMCA Publication 211-22", omits: [] },
-    "3gpp" => { ref: "TS 01.01:REL-96/5.0.0", omits: [] },
+    # 3GPP: both trailing qualifiers are separable — ":<release>" and
+    # "/<version>" are each optional, so a bare document reference parses with
+    # both nil.
+    "3gpp" => { ref: "3GPP TS 23.207", omits: %i[release version] },
     # W3C: the publication date is an optional, separable trailing "-YYYYMMDD"
     # group; a type+code reference with no date parses with date nil.
     "w3c" => { ref: "W3C NOTE-xml-names", omits: [:date] },

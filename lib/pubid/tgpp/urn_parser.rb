@@ -16,12 +16,14 @@ module Pubid
       def parse_urn(urn)
         body = strip_namespace(urn)
         type, code, release, version = split_parts(body)
-        # The rare no-release form (e.g. TS 29.215/2.0.0) serialises with an
-        # empty release chunk ("urn:3gpp:ts:29.215::2.0.0"); rebuild it without
-        # the release colon.
-        head = "#{type.upcase} #{code}"
-        head += ":#{release}" unless release.nil? || release.empty?
-        flavor_parse("#{head}/#{version}")
+        # A partial identifier drops its trailing segments, and the no-release
+        # form (e.g. TS 29.215/2.0.0) serialises with an empty release chunk
+        # ("urn:3gpp:ts:29.215::2.0.0"). Rebuild only the segments present, so
+        # neither the release colon nor the version slash dangles.
+        result = "#{type.upcase} #{code}"
+        result += ":#{release}" unless release.nil? || release.empty?
+        result += "/#{version}" unless version.nil? || version.empty?
+        flavor_parse(result)
       end
     end
   end
