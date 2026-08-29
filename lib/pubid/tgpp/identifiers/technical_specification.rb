@@ -4,8 +4,8 @@ module Pubid
   module Tgpp
     module Identifiers
       # Technical Specification identifier type.
-      # Format: [3GPP ]TS NN.NNN[suffix][-part…]:<release>/<version>
-      # Example: TS 23.207:REL-4/2.0.0
+      # Format: [3GPP ]TS NN.NNN[suffix][-part…][:<release>][/<version>]
+      # Example: TS 23.207:REL-4/2.0.0, or the partial "TS 23.207".
       class TechnicalSpecification < Pubid::Tgpp::Identifier
         TYPED_STAGES = [
           Pubid::Components::TypedStage.new(

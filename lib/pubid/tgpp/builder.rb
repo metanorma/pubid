@@ -13,7 +13,7 @@ module Pubid
           suffix: data[:suffix]&.to_s,
           parts: extract_part_strings(data[:parts]),
           release: data[:release]&.to_s,
-          version: data[:version].to_s,
+          version: data[:version]&.to_s,
         )
       end
 

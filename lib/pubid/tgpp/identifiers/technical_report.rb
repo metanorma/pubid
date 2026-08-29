@@ -4,8 +4,8 @@ module Pubid
   module Tgpp
     module Identifiers
       # Technical Report identifier type.
-      # Format: [3GPP ]TR NN.NNN[suffix][-part…]:<release>/<version>
-      # Example: TR 00.01U:UMTS/3.0.0
+      # Format: [3GPP ]TR NN.NNN[suffix][-part…][:<release>][/<version>]
+      # Example: TR 00.01U:UMTS/3.0.0, or the partial "TR 00.01U".
       class TechnicalReport < Pubid::Tgpp::Identifier
         TYPED_STAGES = [
           Pubid::Components::TypedStage.new(

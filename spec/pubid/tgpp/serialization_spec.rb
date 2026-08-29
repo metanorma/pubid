@@ -14,6 +14,10 @@ RSpec.describe "Pubid::Tgpp identifier hash round-trip" do
     "TS 26.171-1:REL-8/8.0.0",        # single part
     "TS 29.198-04-1:REL-5/5.0.0",     # two-level zero-padded parts
     "TS 02.68:Release 2000/9.0.0",    # 'Release N' release form
+    "TS 29.215/2.0.0",                # release omitted
+    "TS 23.207:REL-4",                # version omitted
+    "TS 23.207",                      # bare user reference
+    "TR 00.01U",                      # bare, with a letter suffix
   ]
 
   refs.each do |ref|
