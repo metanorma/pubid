@@ -73,7 +73,14 @@ module Pubid
         @with_publisher = false
       end
 
-      # Parse a 3GPP identifier string into an identifier object
+      # Parse a 3GPP identifier string into an identifier object.
+      #
+      # Let Parslet::ParseFailed propagate on a bad reference (matching ISO and
+      # ETSI), so relaton-cli's `rescue Parslet::ParseFailed` fetch handler
+      # catches it instead of a bare RuntimeError. The length guard keeps its
+      # ArgumentError — that is a different failure (input too long, not
+      # unparseable) and it is the ReDoS barrier.
+      #
       # @param identifier [String] The 3GPP identifier string to parse
       # @return [Identifier] The appropriate identifier object
       def self.parse(identifier)
@@ -83,8 +90,6 @@ module Pubid
 
         parsed = Parser.parse(identifier)
         Builder.build(parsed)
-      rescue Parslet::ParseFailed => e
-        raise "Failed to parse 3GPP identifier '#{identifier}': #{e.message}"
       end
     end
   end
