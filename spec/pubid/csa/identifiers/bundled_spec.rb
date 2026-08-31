@@ -15,13 +15,13 @@ RSpec.describe Pubid::Csa::Identifiers::Bundled do
         end
 
         it "parses base identifier" do
-          expect(parsed.base.code.value).to eq("B149.1")
+          expect(parsed.base.number.value).to eq("B149.1")
           expect(parsed.base.year).to eq("2020")
         end
 
         it "parses bundled identifier" do
           expect(parsed.bundled_with.length).to eq(1)
-          expect(parsed.bundled_with.first.code.value).to eq("B149.2")
+          expect(parsed.bundled_with.first.number.value).to eq("B149.2")
           expect(parsed.bundled_with.first.year).to eq("2020")
         end
 
@@ -40,11 +40,11 @@ RSpec.describe Pubid::Csa::Identifiers::Bundled do
         end
 
         it "parses base code" do
-          expect(parsed.base.code.value).to eq("Z245.1")
+          expect(parsed.base.number.value).to eq("Z245.1")
         end
 
         it "parses bundled code" do
-          expect(parsed.bundled_with.first.code.value).to eq("Z245.2")
+          expect(parsed.bundled_with.first.number.value).to eq("Z245.2")
         end
 
         it "round-trips correctly" do
@@ -64,12 +64,12 @@ RSpec.describe Pubid::Csa::Identifiers::Bundled do
         end
 
         it "parses base identifier" do
-          expect(parsed.base.code.value).to eq("A23.1")
+          expect(parsed.base.number.value).to eq("A23.1")
           expect(parsed.base.year).to eq("2019")
         end
 
         it "parses bundled identifier" do
-          expect(parsed.bundled_with.first.code.value).to eq("A23.2")
+          expect(parsed.bundled_with.first.number.value).to eq("A23.2")
           expect(parsed.bundled_with.first.year).to eq("2019")
         end
 
@@ -88,11 +88,11 @@ RSpec.describe Pubid::Csa::Identifiers::Bundled do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses base code" do
-          expect(parsed.base.code.value).to eq("B108.1")
+          expect(parsed.base.number.value).to eq("B108.1")
         end
 
         it "parses bundled code" do
-          expect(parsed.bundled_with.first.code.value).to eq("B108.2")
+          expect(parsed.bundled_with.first.number.value).to eq("B108.2")
         end
 
         it "parses reaffirmation" do
@@ -116,13 +116,13 @@ RSpec.describe Pubid::Csa::Identifiers::Bundled do
         end
 
         it "parses base with dash format" do
-          expect(parsed.base.code.value).to eq("C22.1")
+          expect(parsed.base.number.value).to eq("C22.1")
           expect(parsed.base.year).to eq("2015")
           expect(parsed.base.year_format).to eq("dash")
         end
 
         it "parses bundled with dash format" do
-          expect(parsed.bundled_with.first.code.value).to eq("C22.2")
+          expect(parsed.bundled_with.first.number.value).to eq("C22.2")
           expect(parsed.bundled_with.first.year).to eq("2015")
           expect(parsed.bundled_with.first.year_format).to eq("dash")
         end
@@ -168,13 +168,13 @@ RSpec.describe Pubid::Csa::Identifiers::Bundled do
         end
 
         it "parses base identifier" do
-          expect(parsed.base.code.value).to eq("A1")
+          expect(parsed.base.number.value).to eq("A1")
         end
 
         it "parses two bundled identifiers" do
           expect(parsed.bundled_with.length).to eq(2)
-          expect(parsed.bundled_with[0].code.value).to eq("A2")
-          expect(parsed.bundled_with[1].code.value).to eq("A3")
+          expect(parsed.bundled_with[0].number.value).to eq("A2")
+          expect(parsed.bundled_with[1].number.value).to eq("A3")
         end
 
         it "round-trips correctly" do
@@ -194,11 +194,11 @@ RSpec.describe Pubid::Csa::Identifiers::Bundled do
         end
 
         it "parses base code (NO. normalized)" do
-          expect(parsed.base.code.value).to eq("C22.2-1")
+          expect(parsed.base.number.value).to eq("C22.2-1")
         end
 
         it "parses bundled code (NO. normalized)" do
-          expect(parsed.bundled_with.first.code.value).to eq("C22.2-2")
+          expect(parsed.bundled_with.first.number.value).to eq("C22.2-2")
         end
 
         it "round-trips in normalized form" do
@@ -222,11 +222,11 @@ RSpec.describe Pubid::Csa::Identifiers::Bundled do
         end
 
         it "parses base code" do
-          expect(parsed.base.code.value).to eq("B127.1")
+          expect(parsed.base.number.value).to eq("B127.1")
         end
 
         it "parses bundled identifier without prefix" do
-          expect(parsed.bundled_with.first.code.value).to eq("B127.2")
+          expect(parsed.bundled_with.first.number.value).to eq("B127.2")
         end
 
         it "parses reaffirmation" do
@@ -246,11 +246,11 @@ RSpec.describe Pubid::Csa::Identifiers::Bundled do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses base decimal code" do
-          expect(parsed.base.code.value).to eq("Z259.13")
+          expect(parsed.base.number.value).to eq("Z259.13")
         end
 
         it "parses bundled decimal code" do
-          expect(parsed.bundled_with.first.code.value).to eq("Z259.14")
+          expect(parsed.bundled_with.first.number.value).to eq("Z259.14")
         end
 
         it "round-trips correctly" do

@@ -170,6 +170,24 @@ RSpec.describe "Lossless MR string (issue #142)" do
       id = Pubid::Csa.parse("CSA B149.1:2020")
       expect(id.to_mr_string).to eq("csa.b149.1.2020")
     end
+
+    # The three semantic mappings (` ` → `.`, `:` → `.`, `/` → `-`) carry CSA's
+    # segment structure; everything outside [a-z0-9._-] is then neutralised by
+    # charset, so parentheses, commas, ampersands and plus signs — all of which
+    # appear in real CSA references — cannot reach a filename.
+    {
+      "CAN/CSA-A123.2-03 (R2023)" => "can-csa-a123.2-03.-r2023",
+      "CSA C22.2 NO. 100:14 (R2024)" => "csa.c22.2.no..100.14.-r2024",
+      "CSA B149.1:25 Code, Handbook & Training Package" =>
+        "csa.b149.1.25.code-.handbook.-.training.package",
+      "CSA A23.1:24/CSA A23.2:24" => "csa.a23.1.24-csa.a23.2.24",
+    }.each do |ref, slug|
+      it "neutralises every unsafe character in #{ref}" do
+        mr = Pubid::Csa.parse(ref).to_mr_string
+        expect(mr).to eq(slug)
+        expect(mr).to match(/\A[a-z0-9._-]+\z/)
+      end
+    end
   end
 
   describe "IDF" do

@@ -5,23 +5,33 @@ require "lutaml/model"
 module Pubid
   module Csa
     module Identifiers
-      class Bundled < Lutaml::Model::Serializable
-        attribute :base, Standard
-        attribute :bundled_with, Standard, collection: true
+      class Bundled < Identifier
+        # The consolidated base document and the amendments bundled with it.
+        # Both are typed cross-flavor and polymorphic — see
+        # WrapperIdentifier#base — because a bundle's base is routinely a Cec,
+        # which is not a Standard subclass. #root is inherited: it walks
+        # `base` to the origin document.
+        attribute :base, ::Pubid::Identifier, polymorphic: true
+        attribute :bundled_with, ::Pubid::Identifier, polymorphic: true,
+                                                      collection: true
         attribute :reaffirmation, :string
         attribute :original_reaffirmation_4digit, :boolean, default: -> {
           false
         }
         attribute :year_format, :string # Add for compatibility with identifier.rb
 
-        # CSA bundles are not Pubid::Identifier objects, so they do not inherit
-        # #root. They are their own origin for matching purposes.
-        def root
-          self
+        # A bundle is a base document consolidated with its amendments, so
+        # both matching primitives peel to that base.
+        def base_document
+          base ? base.base_document : self
+        end
+
+        def drop_supplements
+          base || self
         end
 
         def to_s
-          # For Cec identifiers, use normalized form (code instead of cec_part + NO.)
+          # For Cec identifiers, use normalized form (number instead of cec_part + NO.)
           # This is used for "normalized form" rendering in bundled identifiers
           if base.is_a?(Cec)
             # Render base with normalized code format
@@ -37,7 +47,7 @@ module Pubid
                              end
                            end
             base_str = (needs_space ? "#{prefix} " : prefix) +
-              base.code.value.to_s + # Use normalized code (e.g., "C22.2-1")
+              base.number.value.to_s + # Normalized code (e.g. "C22.2-1")
               ":#{year_display}"
             parts = [base_str]
           else
@@ -50,7 +60,7 @@ module Pubid
             bundled_with.each do |bundled|
               # For Cec identifiers, use normalized code format
               if bundled.is_a?(Cec)
-                bundled_part = bundled.code.value.to_s # Normalized code (e.g., "C22.2-2")
+                bundled_part = bundled.number.value.to_s # e.g. "C22.2-2"
                 if bundled.year
                   # Use dash if year_format is dash, otherwise colon
                   separator = bundled.year_format == "dash" ? "-" : ":"
@@ -68,7 +78,7 @@ module Pubid
               else
                 # Standard rendering for other identifier types
                 bundled_part = ""
-                bundled_part += bundled.code.to_s if bundled.code
+                bundled_part += bundled.number.to_s if bundled.number
 
                 if bundled.year
                   # Use dash if year_format is dash, otherwise colon

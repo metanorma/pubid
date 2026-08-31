@@ -15,11 +15,11 @@ RSpec.describe Pubid::Csa::Identifiers::CanadianAdopted do
         end
 
         it "parses code" do
-          expect(parsed.wrapped_identifier.code.value).to eq("A123.2")
+          expect(parsed.base.number.value).to eq("A123.2")
         end
 
         it "parses year" do
-          expect(parsed.wrapped_identifier.year).to eq("2003")
+          expect(parsed.base.year).to eq("2003")
         end
 
         it "round-trips" do
@@ -37,7 +37,7 @@ RSpec.describe Pubid::Csa::Identifiers::CanadianAdopted do
         end
 
         it "parses original year" do
-          expect(parsed.wrapped_identifier.year).to eq("2004")
+          expect(parsed.base.year).to eq("2004")
         end
 
         it "round-trips" do
@@ -55,19 +55,19 @@ RSpec.describe Pubid::Csa::Identifiers::CanadianAdopted do
         end
 
         it "wraps CecIdentifier" do
-          expect(parsed.wrapped_identifier).to be_a(Pubid::Csa::Identifiers::Cec)
+          expect(parsed.base).to be_a(Pubid::Csa::Identifiers::Cec)
         end
 
         it "parses CEC part" do
-          expect(parsed.wrapped_identifier.cec_part.value).to eq("C22.2")
+          expect(parsed.base.cec_part.value).to eq("C22.2")
         end
 
         it "parses NO. number" do
-          expect(parsed.wrapped_identifier.no_number.value).to eq("1010.2.031")
+          expect(parsed.base.no_number.value).to eq("1010.2.031")
         end
 
         it "parses year" do
-          expect(parsed.wrapped_identifier.year).to eq("1994")
+          expect(parsed.base.year).to eq("1994")
         end
 
         it "parses short reaffirmation year" do
@@ -91,11 +91,11 @@ RSpec.describe Pubid::Csa::Identifiers::CanadianAdopted do
         end
 
         it "parses code" do
-          expect(parsed.wrapped_identifier.code.value).to eq("A220")
+          expect(parsed.base.number.value).to eq("A220")
         end
 
         it "parses series indicator" do
-          expect(parsed.wrapped_identifier.series).to be(true)
+          expect(parsed.base.series).to be(true)
         end
 
         it "parses reaffirmation" do
@@ -113,7 +113,7 @@ RSpec.describe Pubid::Csa::Identifiers::CanadianAdopted do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses series notation" do
-          expect(parsed.wrapped_identifier.series).to be(true)
+          expect(parsed.base.series).to be(true)
         end
 
         it "round-trips" do
@@ -133,11 +133,11 @@ RSpec.describe Pubid::Csa::Identifiers::CanadianAdopted do
         end
 
         it "parses code" do
-          expect(parsed.wrapped_identifier.code.value).to eq("A451.1")
+          expect(parsed.base.number.value).to eq("A451.1")
         end
 
         it "parses year with M prefix" do
-          expect(parsed.wrapped_identifier.year).to eq("1986")
+          expect(parsed.base.year).to eq("1986")
         end
 
         it "parses reaffirmation" do
@@ -155,11 +155,11 @@ RSpec.describe Pubid::Csa::Identifiers::CanadianAdopted do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses code with decimal" do
-          expect(parsed.wrapped_identifier.code.value).to eq("Z299.0")
+          expect(parsed.base.number.value).to eq("Z299.0")
         end
 
         it "parses 2-digit year" do
-          expect(parsed.wrapped_identifier.year).to eq("1986")
+          expect(parsed.base.year).to eq("1986")
         end
 
         it "round-trips" do
@@ -173,7 +173,7 @@ RSpec.describe Pubid::Csa::Identifiers::CanadianAdopted do
         let(:parsed) { Pubid::Csa.parse(subject) }
 
         it "parses M-prefix year" do
-          expect(parsed.wrapped_identifier.year).to eq("1983")
+          expect(parsed.base.year).to eq("1983")
         end
 
         it "round-trips" do
@@ -193,19 +193,19 @@ RSpec.describe Pubid::Csa::Identifiers::CanadianAdopted do
         end
 
         it "wraps CecIdentifier" do
-          expect(parsed.wrapped_identifier).to be_a(Pubid::Csa::Identifiers::Cec)
+          expect(parsed.base).to be_a(Pubid::Csa::Identifiers::Cec)
         end
 
         it "parses CEC part" do
-          expect(parsed.wrapped_identifier.cec_part.value).to eq("C22.2")
+          expect(parsed.base.cec_part.value).to eq("C22.2")
         end
 
         it "parses NO. number" do
-          expect(parsed.wrapped_identifier.no_number.value).to eq("60079-11")
+          expect(parsed.base.no_number.value).to eq("60079-11")
         end
 
         it "parses year" do
-          expect(parsed.wrapped_identifier.year).to eq("2014")
+          expect(parsed.base.year).to eq("2014")
         end
 
         it "round-trips correctly" do
@@ -223,19 +223,19 @@ RSpec.describe Pubid::Csa::Identifiers::CanadianAdopted do
         end
 
         it "wraps CecIdentifier" do
-          expect(parsed.wrapped_identifier).to be_a(Pubid::Csa::Identifiers::Cec)
+          expect(parsed.base).to be_a(Pubid::Csa::Identifiers::Cec)
         end
 
         it "parses CEC part" do
-          expect(parsed.wrapped_identifier.cec_part.value).to eq("C22.2")
+          expect(parsed.base.cec_part.value).to eq("C22.2")
         end
 
         it "parses NO. number" do
-          expect(parsed.wrapped_identifier.no_number.value).to eq("60601-1-9")
+          expect(parsed.base.no_number.value).to eq("60601-1-9")
         end
 
         it "parses year" do
-          expect(parsed.wrapped_identifier.year).to eq("2015")
+          expect(parsed.base.year).to eq("2015")
         end
 
         it "parses reaffirmation" do
@@ -259,16 +259,16 @@ RSpec.describe Pubid::Csa::Identifiers::CanadianAdopted do
         end
 
         it "parses both identifiers" do
-          expect(parsed.first).to be_a(Pubid::Csa::Identifiers::Standard)
-          expect(parsed.second).to be_a(Pubid::Csa::Identifiers::Standard)
+          expect(parsed.identifiers[0]).to be_a(Pubid::Csa::Identifiers::Standard)
+          expect(parsed.identifiers[1]).to be_a(Pubid::Csa::Identifiers::Standard)
         end
 
         it "first identifier has publisher prefix" do
-          expect(parsed.first.publisher_prefix).to eq("CAN/CSA-")
+          expect(parsed.identifiers[0].publisher_prefix).to eq("CAN/CSA-")
         end
 
         it "second identifier has publisher prefix" do
-          expect(parsed.second.publisher_prefix).to eq("CAN/CSA-")
+          expect(parsed.identifiers[1].publisher_prefix).to eq("CAN/CSA-")
         end
 
         it "round-trips" do

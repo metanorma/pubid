@@ -35,7 +35,7 @@ module Pubid
 
       # Base rendering: "CSA B149.1:20", "CAN/CSA-C22.2-05"
       def render_base(id)
-        prefix = id.publisher_prefix || "CSA"
+        prefix = publisher_prefix_for(id)
 
         # Handle code_only identifiers (empty string means no prefix)
         if prefix == ""
@@ -51,7 +51,7 @@ module Pubid
         end
 
         # Code and year together
-        code_part = id.code.to_s if id.code
+        code_part = id.number.to_s if id.number
 
         # NO. keyword
         if id.no_number
@@ -131,7 +131,7 @@ module Pubid
         parts = []
 
         # Publisher prefix (CSA, CAN/CSA-, CAN3-)
-        prefix = id.publisher_prefix || "CSA"
+        prefix = publisher_prefix_for(id)
 
         # Determine if we need space after prefix
         # CAN/CSA- and CAN3- end with dash, so no space needed
@@ -203,7 +203,7 @@ module Pubid
         result = series_publisher_prefix_portion(id)
 
         # Add code FIRST (before SERIES keyword)
-        result += id.code.to_s
+        result += id.number.to_s
 
         # Add space before series prefix/SERIES keyword
         result += " "
@@ -255,8 +255,16 @@ module Pubid
         end
       end
 
+      # The publisher prefix to print. A code_only identifier printed none, so
+      # it must not gain the default "CSA" — see SingleIdentifier#code_only.
+      def publisher_prefix_for(id)
+        return "" if id.respond_to?(:code_only) && id.code_only
+
+        id.publisher_prefix || "CSA"
+      end
+
       def series_publisher_prefix_portion(id)
-        prefix = id.publisher_prefix || "CSA"
+        prefix = publisher_prefix_for(id)
 
         # Handle code_only identifiers (empty string means no prefix)
         return "" if prefix == ""

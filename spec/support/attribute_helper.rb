@@ -32,7 +32,8 @@ module AttributeHelper
   # @param identifier [Object] The identifier instance
   # @param expected_code [String] Expected code value
   def expect_code(identifier, expected_code)
-    code = identifier.code
+    # Flavors that renamed the slug attribute (CSA, W3C) key on `number`.
+    code = identifier.respond_to?(:code) ? identifier.code : identifier.number
 
     if code.respond_to?(:value)
       expect(code.value).to eq(expected_code)

@@ -8,35 +8,30 @@ module Pubid
     # collections of other identifiers or package materials.
     #
     # Examples:
-    #   - PackageIdentifier: Base + package materials
-    #   - Future: BundleIdentifier refactor to use composite
+    #   - Package: base + package materials
     #
     # This follows the Composite pattern where an identifier can contain
     # other identifiers or additional metadata as a collection.
-    class CompositeIdentifier < Lutaml::Model::Serializable
-      # The primary/base identifier
-      # Use attr_accessor since it can be any identifier object
-      attr_accessor :base
+    class CompositeIdentifier < Identifier
+      # The primary/base identifier. A real lutaml attribute under the uniform
+      # `base` name, so `#root` walks it and it survives serialization — see
+      # WrapperIdentifier#base for why the type is the cross-flavor
+      # ::Pubid::Identifier.
+      attribute :base, ::Pubid::Identifier, polymorphic: true
 
       # Subclasses MUST implement to_s to define how they render
       def to_s
         raise NotImplementedError, "Subclasses must implement to_s method"
       end
 
-      # CSA composites serialise through `to_s`, so MR mirrors that with
-      # ` ` → `.`, `:` → `.`, `/` → `-`, then lowercased (issue #142).
-      def to_mr_string
-        to_s.tr(" ", ".").tr(":", ".").tr("/", "-").downcase
+      # A package peels to the standard it packages — see
+      # WrapperIdentifier#base_document.
+      def base_document
+        base ? base.base_document : self
       end
 
-      def to_slug
-        to_mr_string
-      end
-
-      # CSA composites are not Pubid::Identifier objects, so they do not inherit
-      # #root. They are their own origin for matching purposes.
-      def root
-        self
+      def drop_supplements
+        base || self
       end
     end
   end

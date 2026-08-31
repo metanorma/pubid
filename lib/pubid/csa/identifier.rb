@@ -2,11 +2,13 @@
 
 module Pubid
   module Csa
-    # Common base class for all CSA identifiers. SingleIdentifier (and the
-    # concrete Identifiers::* types through it) descends from it, so every CSA
-    # identifier is `is_a?(Pubid::Csa::Identifier)` natively and gets the shared
-    # polymorphic `from_hash`. (The Wrapper/Composite container models are
-    # separate Lutaml::Model types, not identifiers.)
+    # Common base class for EVERY CSA identifier — the single-document types
+    # through SingleIdentifier, and the container types (WrapperIdentifier,
+    # CompositeIdentifier, Bundled, Combined) directly. So every CSA identifier
+    # is `is_a?(Pubid::Csa::Identifier)` natively and gets the shared
+    # polymorphic `from_hash`, `#root`, `#exclude` and MR rendering. The
+    # containers used to be separate Lutaml::Model types, which is what made
+    # `root.number` raise rather than return the relaton index key.
     class Identifier < ::Pubid::Identifier
       def self.parse(input)
         if input.length > Pubid::MAX_INPUT_LENGTH
@@ -14,10 +16,14 @@ module Pubid
         end
 
         # Filter out comments
-        return nil if input.start_with?("#")
+        if input.start_with?("#")
+          raise Parslet::ParseFailed, "Not a CSA identifier (comment): #{input}"
+        end
 
-        # Filter out non-standards
-        return nil if input.match?(/^CSA (Communities|Group|Learning|OnDemand|Update)/)
+        # Filter out non-standards (memberships, courses, newsletters)
+        if input.match?(/^CSA (Communities|Group|Learning|OnDemand|Update)/)
+          raise Parslet::ParseFailed, "Not a CSA standard: #{input}"
+        end
 
         # Preprocessing: normalize CEI to IEC (French name)
         input = input.gsub("CEI/IEC", "IEC").gsub(/\bCEI\b/, "IEC")
@@ -46,16 +52,14 @@ module Pubid
 
             # Parse normally (will create Bundled or Combined identifier)
             tree = Parser.new.parse(normalized)
-            result = Builder.new.build(tree)
+            result = build!(tree, input)
 
             # Apply CAN/CSA- prefix to the appropriate parts
-            if result
-              set_publisher_prefix(result, "CAN/CSA-")
+            set_publisher_prefix(result, "CAN/CSA-")
 
-              # Handle reaffirmation if present
-              if (wrapped_input =~ /\(R(\d{4})\)/) && result.class.attributes.key?(:reaffirmation)
-                result.reaffirmation = $1
-              end
+            # Handle reaffirmation if present
+            if (wrapped_input =~ /\(R(\d{4})\)/) && result.class.attributes.key?(:reaffirmation)
+              result.reaffirmation = $1
             end
 
             return result
@@ -91,8 +95,7 @@ module Pubid
           wrapped_input = wrapped_input.sub(/^CSA-/, "CSA ")
 
           # Parse the wrapped identifier recursively
-          wrapped_identifier = parse(wrapped_input)
-          return nil unless wrapped_identifier
+          base = parse(wrapped_input)
 
           # NOTE: Series identifiers should be wrapped in CanadianAdopted when
           # they have CAN/CSA- prefix. The Series will handle rendering correctly.
@@ -101,32 +104,35 @@ module Pubid
           # Set publisher prefix on wrapped identifier
           # For Series identifiers with CAN/ wrapper, use full "CAN/CSA-" prefix
           # For other identifiers, use the detected original_prefix ("CSA-" or "CSA")
-          if wrapped_identifier.class.attributes.key?(:publisher_prefix)
-            if is_can_csa && wrapped_identifier.is_a?(Identifiers::Series)
+          if base.class.attributes.key?(:publisher_prefix)
+            if is_can_csa && base.is_a?(Identifiers::Series)
               # Series gets full "CAN/CSA-" prefix for proper rendering
-              wrapped_identifier.publisher_prefix = "CAN/CSA-"
+              base.publisher_prefix = "CAN/CSA-"
             elsif original_prefix
-              # For Combined identifiers, set on first identifier
-              if wrapped_identifier.is_a?(Identifiers::Combined) && wrapped_identifier.first
-                wrapped_identifier.first.publisher_prefix = original_prefix if wrapped_identifier.first.class.attributes.key?(:publisher_prefix)
+              # For Combined identifiers, set on the primary designation
+              if base.is_a?(Identifiers::Combined) && base.identifiers&.first
+                primary = base.identifiers.first
+                if primary.class.attributes.key?(:publisher_prefix)
+                  primary.publisher_prefix = original_prefix
+                end
               else
                 # For non-Combined identifiers, set directly
-                wrapped_identifier.publisher_prefix = original_prefix
+                base.publisher_prefix = original_prefix
               end
             end
           end
 
-          # Set reaffirmation on wrapped_identifier if it has the attribute
-          if wrapped_identifier.class.attributes.key?(:reaffirmation) && reaffirm_year
-            wrapped_identifier.reaffirmation = reaffirm_year
-            if wrapped_identifier.class.attributes.key?(:original_reaffirmation_4digit)
-              wrapped_identifier.original_reaffirmation_4digit = reaffirmation_was_4digit
+          # Set reaffirmation on base if it has the attribute
+          if base.class.attributes.key?(:reaffirmation) && reaffirm_year
+            base.reaffirmation = reaffirm_year
+            if base.class.attributes.key?(:original_reaffirmation_4digit)
+              base.original_reaffirmation_4digit = reaffirmation_was_4digit
             end
           end
 
           # Create CanadianAdoptedIdentifier wrapper
           result = Identifiers::CanadianAdopted.new
-          result.wrapped_identifier = wrapped_identifier
+          result.base = base
           result.reaffirmation = reaffirm_year if reaffirm_year
 
           return result
@@ -157,44 +163,43 @@ module Pubid
           end
 
           # Parse the wrapped identifier recursively
-          wrapped_identifier = parse(wrapped_input)
-          return nil unless wrapped_identifier
+          base = parse(wrapped_input)
 
           # Set year_format for dash format identifiers (preserve original 2-digit year)
-          if has_dash_year && wrapped_identifier.class.attributes.key?(:year_format)
-            wrapped_identifier.year_format = "dash"
+          if has_dash_year && base.class.attributes.key?(:year_format)
+            base.year_format = "dash"
             # Mark original year as 2-digit so renderer converts back (1986 → 86)
-            if wrapped_identifier.class.attributes.key?(:original_year_4digit)
-              wrapped_identifier.original_year_4digit = false
+            if base.class.attributes.key?(:original_year_4digit)
+              base.original_year_4digit = false
             end
           end
 
           # Check if this is a Series identifier - return it directly with CAN3- prefix
           # Series identifiers are complete identifier types and handle the prefix themselves
           # They don't need to be wrapped in CanadianAdopted
-          if wrapped_identifier.is_a?(Identifiers::Series)
-            wrapped_identifier.publisher_prefix = "CAN3-"
-            wrapped_identifier.reaffirmation = reaffirm_year if reaffirm_year
-            wrapped_identifier.original_reaffirmation_4digit = reaffirmation_was_4digit
-            return wrapped_identifier
+          if base.is_a?(Identifiers::Series)
+            base.publisher_prefix = "CAN3-"
+            base.reaffirmation = reaffirm_year if reaffirm_year
+            base.original_reaffirmation_4digit = reaffirmation_was_4digit
+            return base
           end
 
           # Set CAN3- as publisher prefix on wrapped identifier
-          if wrapped_identifier.class.attributes.key?(:publisher_prefix)
-            wrapped_identifier.publisher_prefix = "CAN3-"
+          if base.class.attributes.key?(:publisher_prefix)
+            base.publisher_prefix = "CAN3-"
           end
 
-          # Set reaffirmation on wrapped_identifier if it has the attribute
-          if wrapped_identifier.class.attributes.key?(:reaffirmation) && reaffirm_year
-            wrapped_identifier.reaffirmation = reaffirm_year
-            if wrapped_identifier.class.attributes.key?(:original_reaffirmation_4digit)
-              wrapped_identifier.original_reaffirmation_4digit = reaffirmation_was_4digit
+          # Set reaffirmation on base if it has the attribute
+          if base.class.attributes.key?(:reaffirmation) && reaffirm_year
+            base.reaffirmation = reaffirm_year
+            if base.class.attributes.key?(:original_reaffirmation_4digit)
+              base.original_reaffirmation_4digit = reaffirmation_was_4digit
             end
           end
 
           # Create CanadianAdoptedIdentifier wrapper
           result = Identifiers::CanadianAdopted.new
-          result.wrapped_identifier = wrapped_identifier
+          result.base = base
           result.reaffirmation = reaffirm_year if reaffirm_year
 
           return result
@@ -250,13 +255,17 @@ module Pubid
             "/Amd #{amendment_num}#{separator}#{amend_full_year}"
           end
 
-          # Parse with appropriate flavor parser
-          wrapped_identifier = parse_external_standard(wrapped_input)
-          return nil unless wrapped_identifier
+          # Parse with appropriate flavor parser. The helper probes several
+          # flavors and reports failure with nil; the public contract is a
+          # raise, so translate here.
+          base = parse_external_standard(wrapped_input)
+          unless base
+            raise Parslet::ParseFailed, "Unparseable adopted standard: #{input}"
+          end
 
           # Create CsaAdoptedIdentifier wrapper
           result = Identifiers::CsaAdopted.new
-          result.wrapped_identifier = wrapped_identifier
+          result.base = base
           result.reaffirmation = reaffirm_year if reaffirm_year
 
           return result
@@ -337,12 +346,9 @@ module Pubid
               break if token.match?(/^PACKAGE$/i)
 
               test_input = base_input.empty? ? token : "#{base_input} #{token}"
-              parsed = parse(test_input)
-              if parsed
-                base_input = test_input
-              else
-                break
-              end
+              break unless try_parse(test_input)
+
+              base_input = test_input
             end
 
             # Extract materials as everything between base and PACKAGE
@@ -354,9 +360,13 @@ module Pubid
             end
           end
 
-          # Parse base identifier recursively
-          base = base_input ? parse(base_input) : nil
-          return nil unless base
+          # Parse the base identifier recursively. An unparseable base is a
+          # failed package, not a nil.
+          if base_input.nil? || base_input.empty?
+            raise Parslet::ParseFailed, "Unparseable package base: #{input}"
+          end
+
+          base = parse(base_input)
 
           # Create PackageIdentifier
           result = Identifiers::Package.new
@@ -393,21 +403,38 @@ module Pubid
         normalized = normalized.gsub("CAN3-", "CSA ")
 
         tree = Parser.new.parse(normalized)
-        result = Builder.new.build(tree)
+        result = build!(tree, input)
 
         # Set publisher prefix if detected
-        if result && publisher_prefix
-          set_publisher_prefix(result, publisher_prefix)
-        end
+        set_publisher_prefix(result, publisher_prefix) if publisher_prefix
 
         # Set year format if detected as dash and not already set
-        if result && has_dash_year && result.year_format.nil?
-          result.year_format = "dash"
-        end
+        result.year_format = "dash" if has_dash_year && result.year_format.nil?
 
         result
       rescue Parslet::ParseFailed => e
         raise e
+      end
+
+      # Build a parse tree into an identifier, or fail loudly.
+      #
+      # Builder#build can return nil for a tree it recognises but cannot map
+      # to a class. `parse` must return an identifier or raise — every flavor
+      # but `api` already honours that — because a nil surfaces in the caller
+      # as a NoMethodError far from the input that caused it, rather than as a
+      # catchable parse failure.
+      def self.build!(tree, input)
+        Builder.new.build(tree) ||
+          raise(Parslet::ParseFailed, "Unparseable CSA identifier: #{input}")
+      end
+
+      # Probe whether a string parses. The package base scan walks
+      # progressively longer prefixes and keeps the longest that succeeds, so
+      # it is the one caller that genuinely wants a nil rather than a raise.
+      def self.try_parse(input)
+        parse(input)
+      rescue Parslet::ParseFailed, ArgumentError
+        nil
       end
 
       def self.set_publisher_prefix(obj, prefix)
@@ -416,16 +443,16 @@ module Pubid
           obj.publisher_prefix = prefix
         end
 
-        # Set on combined identifier parts
+        # Set on combined identifier parts. The primary designation always
+        # takes the prefix; a trailing one only when it printed a publisher of
+        # its own (a bare continuation must stay bare).
         if obj.is_a?(Identifiers::Combined)
-          if obj.first&.class&.attributes&.key?(:publisher_prefix)
-            obj.first.publisher_prefix = prefix
-          end
-          if obj.second && obj.second.class.attributes.key?(:has_publisher) && obj.second.has_publisher && obj.second.class.attributes.key?(:publisher_prefix)
-            obj.second.publisher_prefix = prefix
-          end
-          if obj.third && obj.third.class.attributes.key?(:has_publisher) && obj.third.has_publisher && obj.third.class.attributes.key?(:publisher_prefix)
-            obj.third.publisher_prefix = prefix
+          Array(obj.identifiers).each_with_index do |part, index|
+            next unless part.class.attributes.key?(:publisher_prefix)
+            next if index.positive? &&
+              !(part.class.attributes.key?(:has_publisher) && part.has_publisher)
+
+            part.publisher_prefix = prefix
           end
         end
 
@@ -489,15 +516,29 @@ module Pubid
       end
 
       # CSA encodes its identity across many shape-specific attributes
-      # (`publisher_prefix`, `code`, `no_number`, `series`, `series_prefix`,
+      # (`publisher_prefix`, `number`, `no_number`, `series`, `series_prefix`,
       # `package`, `reaffirmation`, `year` with prefix/format/French markers,
       # etc.) that the generic MrString renderer doesn't know about. The
       # CSA `to_s` already round-trips losslessly through the CSA parser, so
       # MR mirrors it: ` ` → `.`, `:` → `.` (so the year never looks like
       # another code segment), `/` → `-` (CAN/CSA- prefix), then lowercased
       # to match the all-lowercase MR convention (issue #142).
+      #
+      # Those three are the SEMANTIC mappings — they carry CSA's segment
+      # structure. Everything else is then neutralised by CHARSET, not by an
+      # enumerated escape list, so a character that appears in a future
+      # reference cannot leak into what `to_slug` hands a filesystem. CSA
+      # references really do carry `(`, `)`, `,`, `&` and `+` today
+      # (`CSA C22.2 NO. 100:14 (R2024)`, `… Code, Handbook & Training
+      # Package`, `… + A1:15`), and the old `tr` chain let all of them
+      # through — 601 of 816 slugs were not filename-safe. The BIPM `mr_slug`
+      # precedent.
       def to_mr_string
-        to_s.tr(" ", ".").tr(":", ".").tr("/", "-").downcase
+        to_s
+          .downcase
+          .tr(" ", ".").tr(":", ".").tr("/", "-")
+          .gsub(/[^a-z0-9._-]+/, "-")
+          .gsub(/\A[-.]+|[-.]+\z/, "")
       end
 
       def to_slug

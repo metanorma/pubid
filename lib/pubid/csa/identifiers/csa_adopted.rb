@@ -18,7 +18,7 @@ module Pubid
       #
       # This is a wrapper pattern where:
       #   - CSA prefix indicates adoption
-      #   - The wrapped_identifier is the external standard (ISO/IEC/CISPR)
+      #   - The base is the external standard (ISO/IEC/CISPR)
       #   - Wrapped identifier is recursively parsed using external flavor parsers
       class CsaAdopted < WrapperIdentifier
         # Publisher prefix (e.g., "CSA-", "CAN3-") for rendering
@@ -27,7 +27,7 @@ module Pubid
 
         def to_s
           # Get string representation from wrapped identifier
-          base_str = wrapped_identifier.to_s
+          base_str = base.to_s
 
           # Convert 4-digit years to 2-digit for CSA adoption format
           # ISO/IEC TR 12785-3:2015 → ISO/IEC TR 12785-3:15
