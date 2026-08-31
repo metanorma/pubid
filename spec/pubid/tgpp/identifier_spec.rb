@@ -255,6 +255,69 @@ RSpec.describe Pubid::Tgpp::Identifier do
       end
     end
 
+    # The relaton index case: the reference comes from parsed user text, the
+    # candidate row comes from `from_hash`. The two construction paths must
+    # produce identifiers that compare equal, or every part-less lookup fails
+    # silently. `#matches?` is `exclude(*ignore) == other.exclude(*ignore)`, and
+    # `exclude` rebuilds through `self.class.new(**attrs)`, so a `[]` / nil
+    # difference in `parts` survives it.
+    context "a partial reference matches a deserialized index row" do
+      let(:bare) { described_class.parse("TS 23.207") }
+
+      def row(ref)
+        described_class.from_hash(described_class.parse(ref).to_hash)
+      end
+
+      it "matches a part-less row rebuilt from its hash" do
+        expect(bare.matches?(row("TS 23.207:REL-4/4.0.0"),
+                             ignore: %i[release version])).to be true
+      end
+
+      it "matches a row that omits the release" do
+        ref = described_class.parse("TS 29.215")
+        expect(ref.matches?(row("TS 29.215/2.0.0"),
+                            ignore: %i[release version])).to be true
+      end
+
+      it "matches a row carrying a letter suffix" do
+        ref = described_class.parse("TR 00.01U")
+        expect(ref.matches?(row("TR 00.01U:UMTS/3.0.0"),
+                            ignore: %i[release version])).to be true
+      end
+
+      # The two negatives below guard against the fix over-reaching. Neither
+      # was broken by the `parts` defect (both were already false), so they are
+      # discrimination guards, not regression guards — and each is built to
+      # fail on exactly one attribute, not incidentally on the number.
+
+      # Same number, same (empty) parts: the only difference is the class, so
+      # this rides on Lutaml::Model::ComparableModel#same_class?.
+      it "does not match a row of the other document type" do
+        expect(bare.matches?(row("TR 23.207:REL-4/4.0.0"),
+                             ignore: %i[release version])).to be false
+      end
+
+      # Same number "23.207" and same class: the only difference is `parts`,
+      # so a `#matches?` that ignored parts entirely would fail here.
+      it "does not match a parts-carrying row" do
+        expect(bare.matches?(row("TS 23.207-1:REL-4/4.0.0"),
+                             ignore: %i[release version])).to be false
+      end
+
+      # The hand-off's acceptance case: a row hash written by hand, as the
+      # published index stores it, with no `parts` key at all.
+      it "matches a hand-built index row hash" do
+        ref = described_class.parse("3GPP TS 23.207")
+        stored = described_class.from_hash(
+          "_type" => "pubid:3gpp:technical-specification",
+          "number" => "23.207",
+          "release" => "REL-19",
+          "version" => "19.0.0",
+        )
+        expect(ref.matches?(stored, ignore: %i[release version])).to be true
+      end
+    end
+
     context "still rejects incomplete or malformed input" do
       [
         "TS",                    # type alone

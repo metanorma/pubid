@@ -14,7 +14,13 @@ module Pubid
       attribute :suffix, :string
       # 1–2 hyphen parts (e.g. "26.171-1", "29.198-04-1"); strings preserve any
       # zero-padding.
-      attribute :parts, :string, collection: true
+      # `initialize_empty` makes a part-less identifier hold `[]` on BOTH
+      # construction paths: Builder always passes an array, but the serialized
+      # hash carries no `parts` key, so from_hash used to leave it nil and the
+      # two compared unequal — which silently broke `#matches?` (and so every
+      # part-less relaton index lookup). It does not change the serialized
+      # shape: lutaml omits an empty collection either way. See CLAUDE.md.
+      attribute :parts, :string, collection: true, initialize_empty: true
       # Raw release token, stored verbatim: "REL-4", "Ph1", "UMTS",
       # "Release 2000".
       attribute :release, :string
