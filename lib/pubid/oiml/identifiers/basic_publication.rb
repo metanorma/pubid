@@ -4,6 +4,8 @@ module Pubid
   module Oiml
     module Identifiers
       class BasicPublication < SingleIdentifier
+        include CodeNumber
+
         def type_string
           "B"
         end

@@ -14,7 +14,6 @@ module Pubid
       end
 
       attribute :type, :string
-      attribute :code, Pubid::Etsi::Components::Code
       attribute :version, Pubid::Etsi::Components::Version
       attribute :date, Pubid::Components::Date
       # Stored as a plain string (always "ETSI") so it round-trips through
@@ -32,27 +31,33 @@ module Pubid
           date == other.date
       end
 
-      private
+      # The document code is composed from the split index columns declared on
+      # EtsiStandard (`number`/`minor`/`parts`). Returning nil here keeps `==`
+      # and the URN generator total for the abstract base and for a supplement
+      # whose own base is missing; EtsiStandard composes the real value and
+      # SupplementIdentifier delegates to its base.
+      def code
+        nil
+      end
 
-      # ETSI keeps the number and part together inside one Code component
-      # (unlike ISO's separate `part` attribute), so a top-level exclude(:part)
-      # can't reach the part. Handle it during the nested-exclusion pass: when
-      # :part/:parts is excluded, return a copy of the Code with its parts
-      # cleared while keeping the number/minor. This propagates into supplement
-      # wrappers too, because the base #exclude recurses through here with the
-      # original args. It lets a part-less reference match all parts via
-      # matches?(ignore: [..., :part]).
-      def exclude_from_nested(value, args)
+      # `parts` is a plain collection attribute on the leaf, so the base
+      # #exclude reaches it directly and nils it. It must come back as an EMPTY
+      # ARRAY instead: a part-less reference parses with `parts` defaulting to
+      # [], so a nil here would make `==` — and therefore #matches? — fail
+      # against exactly the reference this exclusion exists to match. Same
+      # "reset the whole cluster" rule recorded for CSA's year and IEEE's
+      # year/month/day in CLAUDE.md.
+      #
+      # This also covers supplements: the base #exclude recurses into the
+      # nested `base` identifier through exclude_from_nested, which re-enters
+      # this method on the inner EtsiStandard.
+      def exclude(*args)
+        result = super
         part_keys = args & %i[part parts]
-        if value.is_a?(Pubid::Etsi::Components::Code) && !part_keys.empty?
-          return Pubid::Etsi::Components::Code.new(
-            number: value.number,
-            minor: value.minor,
-            parts: [],
-          )
+        if !part_keys.empty? && result.respond_to?(:parts=)
+          result.parts = []
         end
-
-        super
+        result
       end
     end
 
