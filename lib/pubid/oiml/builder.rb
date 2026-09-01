@@ -152,7 +152,11 @@ module Pubid
             code_attrs[:suffix] = parsed_hash[:code_suffix].to_s
             code_attrs[:space_suffix] = true if parsed_hash.key?(:space_suffix)
           end
-          identifier.code = Components::Code.new(**code_attrs)
+          # The code fields are flat index columns on the leaf (see
+          # Identifiers::CodeNumber) — `number` is what relaton-index keys on —
+          # so they are assigned individually rather than as a Code object.
+          # Bulletin has no code columns and never reaches this branch.
+          code_attrs.each { |name, value| identifier.public_send(:"#{name}=", value) }
         end
 
         # Handle other attributes

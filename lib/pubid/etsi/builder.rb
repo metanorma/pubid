@@ -52,9 +52,14 @@ module Pubid
         version = build_version(data)
         date = build_date(data)
 
+        # The code fields are stored as flat index columns on the leaf (see
+        # EtsiStandard) — `number` is what relaton-index keys on — so the Code
+        # object built above is unpacked rather than assigned.
         Identifiers::EtsiStandard.new(
           type: data[:type].to_s,
-          code: code,
+          number: code.number,
+          minor: code.minor,
+          parts: code.parts || [],
           version: version,
           date: date,
         )

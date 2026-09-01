@@ -88,6 +88,16 @@ module Pubid
           raise NotImplementedError
         end
 
+        # Make Renderers::MrString recurse into `base` instead of slugging the
+        # supplement flat. Without this the flat path reads the supplement's own
+        # `number` — its ordinal, 1 — and the base document is dropped entirely,
+        # so every "/C1" corrigendum published in one month shared the slug
+        # `etsi.1.<date>`. `to_slug` is an output FILENAME, so that is an
+        # overwrite. Same fix as ITU's AnnexOfRecommendation (see CLAUDE.md).
+        def mr_supplement_suffix
+          [supplement_notation.to_s.downcase, number].compact.join(".")
+        end
+
         def ==(other)
           return false unless other.is_a?(SupplementIdentifier)
           return false unless other.class == self.class

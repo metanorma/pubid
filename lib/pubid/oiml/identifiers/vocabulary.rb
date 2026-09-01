@@ -4,6 +4,8 @@ module Pubid
   module Oiml
     module Identifiers
       class Vocabulary < SingleIdentifier
+        include CodeNumber
+
         def type_string
           "V"
         end
