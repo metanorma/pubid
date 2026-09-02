@@ -61,24 +61,4 @@ RSpec.describe "ETSI Integration" do
                       "ETSI GTS GSM 02.01 V5.5.0 (1999-01)"
     end
   end
-
-  describe "parsing all fixtures" do
-    it "parses all identifiers from fixtures" do
-      fixture_dir = File.join(__dir__,
-                              "../../spec/fixtures/etsi/identifiers/full")
-
-      # Read all fixture files from full directory
-      Dir.glob(File.join(fixture_dir, "*.txt")).each do |fixture_file|
-        File.readlines(fixture_file).each do |line|
-          line = line.strip
-          next if line.empty? || line.start_with?("#")
-
-          expect do
-            identifier = Pubid::Etsi.parse(line)
-            expect(identifier.to_s).to eq(line)
-          end.not_to raise_error, "Failed to parse: #{line}"
-        end
-      end
-    end
-  end
 end

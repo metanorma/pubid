@@ -227,9 +227,6 @@ module Pubid
 
       # Reaffirmation rendering helper - shared across Base, Cec, and Series
       def render_reaffirmation(id)
-        # Check if year was originally 2-digit (original_year_4digit flag)
-        year_was_2digit = !id.original_year_4digit
-
         # Check if reaffirmation was originally 4-digit (original_reaffirmation_4digit flag)
         reaffirmation_was_4digit = id.original_reaffirmation_4digit
 
@@ -245,12 +242,11 @@ module Pubid
                               id.reaffirmation.to_s
                             end
 
-        # Determine spacing based on original formats
-        if year_was_2digit && reaffirmation_was_4digit
-          # Year was 2-digit, reaffirmation was 4-digit → add space
+        # CSA style: a 4-digit reaffirmation is space-separated, a 2-digit
+        # one binds directly to the year (…-94(R04))
+        if reaffirmation_was_4digit
           " (R#{reaffirmation_str})"
         else
-          # Both 2-digit, both 4-digit, or other cases → no space
           "(R#{reaffirmation_str})"
         end
       end

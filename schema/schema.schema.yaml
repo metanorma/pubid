@@ -1,0 +1,96 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://pubid.com/schema/scheme-1.0.0.yaml
+title: PubID Scheme Declaration
+description: >-
+  Single source of truth declaration for one PubID flavor. Data only: no
+  code, no language-specific constructs. Regexes must stay in the portable
+  subset (TODO.restructure/16).
+type: object
+required: [flavor, schema_version, prefixes, identifier_types]
+additionalProperties: false
+properties:
+  flavor:
+    type: string
+    pattern: '^[a-z0-9][a-z0-9_]*$'
+  schema_version:
+    type: string
+    pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+  title:
+    type: string
+  prefixes:
+    type: array
+    minItems: 1
+    uniqueItems: true
+    items:
+      type: string
+    description: >-
+      Own leading tokens only. Joint/co-publication tokens are merged at
+      load time from schema/core/joint_prefixes.yaml.
+  prefix_policy:
+    type: object
+    additionalProperties: true
+  update_codes:
+    type: object
+    additionalProperties:
+      type: string
+    description: >-
+      Pre-parse normalization map. Keys are literals or /regex/ patterns
+      (same convention as data/{flavor}/update_codes.yaml).
+  identifier_types:
+    type: array
+    items:
+      type: object
+      required: [key, title]
+      additionalProperties: false
+      properties:
+        key:
+          type: string
+        title:
+          type: string
+        short:
+          type: [string, "null"]
+        abbr:
+          type: array
+          items:
+            type: string
+        kind:
+          enum: [base, supplement, wrapper, bundled, adopted]
+        class_name:
+          type: string
+          description: Ruby class under the flavor Identifiers namespace.
+        typed_stages:
+          type: array
+          items:
+            type: object
+            required: [stage_code, abbr]
+            additionalProperties: false
+            properties:
+              stage_code:
+                type: string
+              type_code:
+                type: string
+              abbr:
+                type: array
+                items:
+                  type: string
+              name:
+                type: string
+              harmonized_stages:
+                type: array
+                items:
+                  type: string
+                  pattern: '^[0-9]{2}\.[0-9]{2}$'
+        examples:
+          type: array
+          items:
+            type: string
+        attributes:
+          type: array
+          items:
+            type: string
+  render_profiles:
+    type: object
+    additionalProperties: true
+  urn:
+    type: object
+    additionalProperties: true

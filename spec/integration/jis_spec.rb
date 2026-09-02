@@ -141,21 +141,4 @@ RSpec.describe "JIS Integration" do
       expect(all_parts_id).not_to eq(different_id)
     end
   end
-
-  describe "parsing all fixtures" do
-    it "parses all identifiers from jis-pubids.txt" do
-      fixture_file = File.join(__dir__,
-                               "../fixtures/jis/identifiers/full/international_standard.txt")
-
-      File.readlines(fixture_file).each do |line|
-        line = line.strip
-        next if line.empty? || line.start_with?("#")
-
-        expect do
-          identifier = Pubid::Jis.parse(line)
-          expect(identifier.to_s.upcase).to eq(line.upcase)
-        end.not_to raise_error, "Failed to parse: #{line}"
-      end
-    end
-  end
 end

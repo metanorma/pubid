@@ -120,21 +120,58 @@ module Pubid
         [m[1], m[2]]
       end
 
-      # Try every registered flavor (other than GOST itself) as a parser
-      # for a foreign adopted identifier. Returns the first successful
-      # parse, or nil if none recognize the string.
+      # Route a foreign adopted identifier to its owning flavor, then
+      # fall back to trying every other flavor as a parser. Returns the
+      # first successful parse, or nil if none recognize the string.
+      #
+      # The prefix route is what makes this deterministic: Registry
+      # insertion order is module-load order, which belongs to the host
+      # application (a script that references Pubid::Ieee before
+      # Pubid::Astm registers IEEE first, and IEEE's grammar accepts
+      # "ASTM D129-18" as a publisher token plus an IEEE code), so a
+      # first-success loop over insertion order routed the same GOST
+      # adoption to different flavors per process. The fallback loop
+      # iterates sorted flavor names for the same reason.
       def parse_foreign(raw)
         ::Pubid.eager_load_flavors!
-        ::Pubid::Registry.flavors.each_value do |mod|
+
+        owner = prefix_owner(raw)
+        parsed = owner && parse_quietly(owner, raw)
+        return parsed if parsed
+
+        try_each_flavor(raw)
+      end
+
+      def parse_quietly(mod, raw)
+        mod.parse(raw)
+      rescue StandardError
+        nil
+      end
+
+      def try_each_flavor(raw)
+        ::Pubid::Registry.flavor_names.sort.each do |name|
+          mod = ::Pubid::Registry.get(name)
           next if mod == ::Pubid::Gost
 
-          begin
-            return mod.parse(raw)
-          rescue StandardError
-            next
-          end
+          parsed = parse_quietly(mod, raw)
+          return parsed if parsed
         end
         nil
+      end
+
+      # The single flavor owning the longest registered prefix that the
+      # string starts with; nil when no prefix matches or the prefix is
+      # jointly owned (joint forms go through the fallback loop, where
+      # every owner parses them correctly).
+      def prefix_owner(raw)
+        index = ::Pubid.prefix_flavors
+        match = index.keys
+                   .select { |p| raw.start_with?("#{p} ") || raw == p }
+                   .max_by(&:length)
+        return nil unless match
+
+        owners = index[match]
+        owners.one? ? ::Pubid::Registry.get(owners.first) : nil
       end
 
       def stringify(value)

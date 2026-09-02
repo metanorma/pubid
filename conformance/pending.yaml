@@ -1,0 +1,4 @@
+# Cases this implementation explicitly cannot handle yet.
+# Rules: entries need reason + ref; a pending case that passes raises
+# the pending-satisfied alarm and MUST be unmarked (TODO.correct-test-suite/04).
+---

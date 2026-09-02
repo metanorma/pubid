@@ -132,6 +132,10 @@ module Pubid
       # @param parsed [Hash] the parsed interpretation data
       # @return [Identifiers::Interpretation] the constructed interpretation identifier
       def build_interpretation(parsed)
+        # "AMCA 511 Interp" with no code/year is the standard itself
+        unless parsed[:interpretation_code] || parsed[:interpretation_year]
+          return build_standard(parsed)
+        end
         attributes = extract_attributes(parsed)
 
         # Extract interpretation code (JW, KB, RG, AW, AH, or number)

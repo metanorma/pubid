@@ -20,6 +20,10 @@ module Pubid
           else
             normalized = Core::UpdateCodes.apply(identifier, :iso)
             normalized = normalize_cyrillic(normalized)
+            normalized = normalized.gsub(
+            /\bGuide\s+(ISO)(?!\/)/i,
+            '\1 Guide'
+          )
             parse_with_builder(normalized)
           end
         end
@@ -44,6 +48,13 @@ module Pubid
           # Translate Russian abbreviations (order matters: longer first)
           normalized = normalized.gsub("Руководства", "GUIDE")
           normalized = normalized.gsub("Руководство", "GUIDE")
+          # Guide-first spellings (e.g. "Guide ISO 34:2009") normalize to
+          # publisher-first so the type grammar can match
+          normalized = normalized.gsub(
+              /\bGUIDE\s+(ISO)(?!\/)/,
+              '\1 GUIDE'
+            )
+
           normalized = normalized.gsub("ИСО/МЭК", "ISO/IEC")
           normalized = normalized.gsub("ИСО/ОПМС", "ISO/FDIS")
           normalized = normalized.gsub("ИСО/ПМС", "ISO/DIS")

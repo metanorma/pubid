@@ -15,6 +15,8 @@ require "pubid/lutaml/no_store_registration"
 require "pubid/prefixes_support"
 
 module Pubid
+  autoload :Schema, "pubid/schema"
+  autoload :Conformance, "pubid/conformance"
   # Upper bound on the length of an identifier string accepted by any +parse+
   # entry point. Real-world standards identifiers are well under 200 characters;
   # this limit exists purely to keep pathological, attacker-controlled inputs
@@ -35,13 +37,31 @@ module Pubid
     @flavors = {}
 
     class << self
-      attr_reader :flavors
+      # The registered flavors, always key-sorted and frozen. Sorted so
+      # no behavior can observe registration (= module load) order -
+      # hosts autoload flavor modules in any order, and order-dependent
+      # iteration once routed the same identifier to different flavors
+      # per process. Frozen so the raw table is not public mutable
+      # state; #register is the only mutator.
+      # @return [Hash{String => Module}]
+      def flavors
+        @flavors.sort.to_h.freeze
+      end
 
       # Register a flavor with the registry
       # @param name [String, Symbol] Flavor name (e.g., :iso, :iec)
       # @param flavor_module [Module] The flavor module (e.g., Pubid::Iso)
       def register(name, flavor_module)
         @flavors[name.to_s.downcase] = flavor_module
+      end
+
+      # Remove a flavor registration. Tests that register probe flavors
+      # MUST unregister them: registry-driven specs enumerate every
+      # registered flavor, so a leaked probe fails them for everyone
+      # else in the process.
+      # @param name [String, Symbol] Flavor name
+      def unregister(name)
+        @flavors.delete(name.to_s.downcase)
       end
 
       # Get all registered flavor names
@@ -66,20 +86,13 @@ module Pubid
     end
   end
 
-  # Canonical joint / co-publication leading tokens, injected symmetrically into
-  # every participating flavor's +prefixes+ (see {PrefixesSupport}). Single
-  # source of truth: editing an entry here updates both sides at once
-  # (e.g. +"ISO/IEC"+ appears in +Pubid::Iso.prefixes+ and +Pubid::Iec.prefixes+),
-  # so co-publication symmetry can never drift. Keyed by
+  # Canonical joint / co-publication leading tokens, sourced at boot from
+  # schema/core/joint_prefixes.yaml - the single source of truth. Injected
+  # symmetrically into every participating flavor's +prefixes+ (see
+  # {PrefixesSupport}) so co-publication symmetry can never drift. Keyed by
   # {PrefixesSupport#prefix_flavor_key}.
-  JOINT_PREFIXES = {
-    iso: ["ISO/IEC", "IEC/ISO", "ISO/IEC/IEEE"],
-    iec: ["ISO/IEC", "IEC/ISO", "ISO/IEC/IEEE"],
-    ieee: ["ISO/IEC/IEEE"],
-    ansi: ["ANSI/ASHRAE", "ANSI/AMCA"],
-    ashrae: ["ANSI/ASHRAE"],
-    amca: ["ANSI/AMCA"],
-  }.freeze
+  JOINT_PREFIXES = Schema::Loader.joint_prefixes_map
+    .transform_keys(&:to_sym).freeze
 
   autoload :Parser, "pubid/parser"
   autoload :Components, "pubid/components"
@@ -165,7 +178,10 @@ module Pubid
   # @param format [Symbol] :auto, :human, :mr_string, or :urn
   # @return [Identifier] The parsed identifier
   def self.parse(string, format: :auto)
-    raise ArgumentError, INPUT_TOO_LONG_MESSAGE if string.length > MAX_INPUT_LENGTH
+    if string.length > MAX_INPUT_LENGTH
+      raise ArgumentError, 
+            INPUT_TOO_LONG_MESSAGE
+    end
 
     format = FormatDetector.detect(string) if format == :auto
 

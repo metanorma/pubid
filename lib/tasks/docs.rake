@@ -1,10 +1,10 @@
-# frozen_string_literal
-
-require_relative "../../lib/pubid/core/pattern_doc_generator"
+# frozen_string_literal: true
 
 namespace :docs do
   desc "Generate identifier pattern reference docs"
   task :patterns do
+    require "pubid"
+
     output_dir = File.join(__dir__, "..", "..", "docs", "identifier-patterns")
     FileUtils.mkdir_p(output_dir)
 

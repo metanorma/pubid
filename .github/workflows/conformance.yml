@@ -1,0 +1,25 @@
+name: conformance
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+jobs:
+  conformance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: pubid/pubid-testsuite
+          # The corpus lives on init/reference-data until pubid-testsuite
+          # PR #1 merges it to main; drop the pin at merge time.
+          ref: init/reference-data
+          path: pubid-testsuite
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true
+      - name: Corpus conformance (CLEAN gate, DIRTY ledger)
+        run: bundle exec rake conformance:run
+        env:
+          PUBID_TESTSUITE_PATH: ${{ github.workspace }}/pubid-testsuite

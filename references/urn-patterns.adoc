@@ -1,0 +1,315 @@
+= URN Patterns for All pubid Flavors
+
+Version 1.0 (2026-08-19). Status: normative for implemented classes A/B; design
+for class C.
+
+This document defines the complete set of URN patterns produced by the pubid
+reference implementation (`Identifier#to_urn`). The corpus in pubid-tests
+records `representations.urn` exactly as the reference emits it, so this
+document and the generators must stay in sync.
+
+== Normative sources
+
+1. `references/iso-urn-specification.adoc` — RFC 5141-bis (ISO URN).
+2. `references/iec-urn-specification.adoc` — IEC URI Model.
+3. Reference implementation: `lib/pubid/urn_generator/base.rb` (Base contract)
+   and `lib/pubid/{flavor}/urn_generator.rb` (one subclass per flavor).
+
+== Common rules (UrnGenerator::Base)
+
+`Identifier#to_urn` resolves `Pubid::{Flavor}::UrnGenerator` and falls back to
+`Pubid::UrnGenerator::Base` for flavors without a subclass (currently: doi,
+gb, isbn, un).
+
+Base segment order:
+
+....
+urn:{namespace}:{publisher}:{type}:{number}:{part}:{subpart}:{year}:{edition}:{language}
+....
+
+* Every segment is omitted when its value is absent (skip-if-nil), unless a
+  flavor mandates the segment (e.g. `api` type, `tgpp` release/version).
+* `part` and `subpart` render with a leading `-` (e.g. `-1`, `-2000`).
+* `edition` renders as `ed.N`; languages render as comma-joined codes.
+* Namespace identifiers are lowercase.
+
+== Class A — formal SDO schemes
+
+These flavors have published URN specifications; pubid implements them
+verbatim (no internal variations).
+
+=== ISO — RFC 5141-bis
+
+Full grammar: see `iso-urn-specification.adoc`. Summary:
+
+....
+urn:iso:std:{originator}[:{type}]:{docnumber}[:{partnumber}]
+  [:{status}][:{edition}][:{docversion}][:{language}]
+  [:{suppltype}:{supplnumber}[:{supplversion}]]*
+urn:iso:doc:{originator}:dir[:{edition}][:...]
+....
+
+* `originator` = publisher-copublisher with hyphens (`iso`, `iso-iec`,
+  `iso-iec-ieee`).
+* `type` ∈ data/guide/isp/iwa/pas/r/tr/ts/tta (std); dir/dir-sup (doc).
+* `partnumber` keeps its leading dash (`-1`).
+* **Year never appears** — edition (`ed-2`) replaces it.
+* Supplements chain recursively: `:amd:1:v3:cor:1:v1`.
+
+Examples (verified output):
+
+----
+"ISO 9001"                → urn:iso:std:iso:9001
+"ISO/IEC 9999-1:2022"     → urn:iso:std:iso-iec:9999:-1
+"ISO 9001:2015/Amd 1:2020"→ urn:iso:std:iso:9001:amd:2020:v1   (supplement form)
+----
+
+=== IEC — URI Model
+
+Full grammar: see `iec-urn-specification.adoc`. Summary:
+
+....
+urn:iec:std:{header}:{docnumber}[:{date}][:{type}][:{deliverable}]
+  [:{language}][:[:{adjunct-type}:{adjunct-number}[:{adjunct-date}]]*]
+....
+
+* Part is **inside** `docnumber` (`60601-1-1`), unlike ISO.
+* `date` = year[-month[-day]]; **year appears in the URN**, unlike ISO.
+* Adjunct relation markers: `::` reference, `:plus:` consolidation.
+* Empty positional segments are preserved as `:` (trailing colons are
+  significant positional markers):
+
+----
+"IEC 60601-1-1:2005" → urn:iec:std:iec:60601-1-1:2005:::
+----
+
+=== IALA — MRN (not URN)
+
+....
+urn:mrn:iala:pub:{code}[:ed{edition}][:language]
+urn:mrn:iala:pub:{code}:{annex-segment}[:ed{edition}][:language]
+....
+
+== Class B — per-flavor pubid URN namespaces
+
+Implemented by the 38 flavor `UrnGenerator` subclasses. Segment order below
+follows each generator's `generate` method; segments in brackets are
+skip-if-nil. Decorations not shown are defined by the generator's `urn_*`
+methods.
+
+[cols="1,3,2"]
+|===
+|Flavor |Pattern |Example (verified output)
+
+|adobe
+|`urn:adobe:publication:{slug}[:v{version}]` | `urn:adobe:tech-note:{number}`
+|no corpus fixtures yet (generator: `urn:adobe:publication:{slug}[:v{version}]` / `urn:adobe:tech-note:{number}`)
+
+|amca
+|`urn:amca:{number}[:year][:suffix][:reaffirmed][:copublisher][:type]`
+|`AMCA 204 – AW` → `urn:amca:204:copub.amca:{key: :interpretation, title: "interpretation", short: "interp"}` (see defects)
+
+|ansi
+|`urn:ansi:{number}[:-part][:-subpart][:year][:ed.N][:typed-stage][:lang,lang]`
+|`ANSI 802.3-2012` → `urn:ansi:802.3:-2012` (see defects)
+
+|api
+|`urn:api:{type}:{number}[:-part][:year]` (type mandatory)
+|`API` → `urn:api:std:5100`
+
+|ashrae
+|`urn:ashrae:[:number][:year][:type][:suffix][:amendment][:reaffirmed][:copublisher][:addendum]`
+|`ASHRAE Standard 140-2007: Addenda Supplement` → `urn:ashrae:140` (value-drop)
+
+|asme
+|`urn:asme:[:special-type][:publisher]:{code}[:draft-year|year][:ed.N][:ptc-suffix.X][:csa.N][:pub1.X][:code1.X][:pub2.X][:joint.X]` (branch-dependent)
+|`API 579-2 /ASME PTB-14-2009` → `urn:asme:api/asme:PTB-14:2009:pub1.api:code1.579-2:pub2.asme`
+
+|astm
+|`urn:astm:[:type|std]:{code|number}[:year][:sub-year][:reapp.N][:eN][:wip][:wk.N][:lang,lang]`
+|`ADJF3504-EA` → `urn:astm:std` (value-drop)
+
+|bipm
+|`urn:bipm:{group}:{type-code}:{number}[:year]` (empty segments significant: bare MRA keeps the empty type segment) | `urn:bipm:{group}:meeting:{number}`
+|`Action 10-1 du JCRB (2003)` → `urn:bipm:jcrb:act:10-1:2003`
+
+|bsi
+|`urn:bsi:[:publisher|"bs"][:prefix][:flex-prefix]:{number}[:-part][:-subpart][:/second][:date|year]`
+|`BS 1902-2.3:Addendum No. 1:1976` → `urn:bsi:bs` (value-drop)
+
+|calconnect
+|`urn:calconnect:...` — compact form `urn:calconnect:[:series]:{number}[:date-string]` — nil segments dropped
+|`CC 11001:2024` → `urn:calconnect:11001:2024`
+
+|ccsds
+|`urn:ccsds:{number}[.part][-book-color][-type][-edition][-S][-suffix]` (sub-segments joined inside one NSS part)
+|`CCSDS 100.0-G-1-S` → `urn:ccsds:100.0-G-1-S`
+
+|cen_cenelec
+|`urn:cen:[:publisher|"en"]:[:type]:{number}[:date|year][:stage.N][:lang,lang]`
+|`CR 10313:2000` → `urn:cen:cr:10313:2000`
+
+|cie
+|`urn:cie:[:special-type|"s"][:publisher]:{code}[:year][:lang][:stage][:sep.style]`
+|`CIE 198-SP1.1:2011,...` → `urn:cie:bundle:cie:bundle.CIE 198-SP1.1:2011,...` (see defects)
+
+|csa
+|`urn:csa:[:prefix][:number][:no-number][:series][:series-prefix][:year][:reaffirmation][:package][:year-format][:french]`
+|`CSA C22.2 NO. 0:20` → `urn:csa:csa:C22.2-0:no.0:20`
+
+|easc
+|`urn:easc:{series}[:variant]:{number}[:year]`
+|no corpus fixtures yet (reference-docs/easc empty)
+
+|ecma
+|`urn:ecma:[:tag]:{number}[:part-N]`
+|`ECMA MEM/1962` → `urn:ecma:mem:1962`
+
+|etsi
+|`urn:etsi:{type}:{code}[:version][:date]` (supplement variant splices the base URN's parts)
+|`ETSI ETS 300 011/A1 ed.1 (1994-12)` → `urn:etsi:ets:300 011:ed.1:1994-12` (see defects)
+
+|gost
+|`urn:gost:std:["r":]{number}[:year]`
+|no corpus fixtures yet (reference-docs/gost empty)
+
+|iana
+|`urn:iana:{registry}[:sub-registry]`
+|`IANA _6lowpan-parameters` → `urn:iana:_6lowpan-parameters`
+
+|idf
+|`urn:idf:[:number][:-part][:-subpart][:year][:ed.N][:type][:lang,lang][:supplement...]`
+|`IDF 140-1:2007/AMD 1:2012` → `urn:idf:1:2012:amd:amd:1`
+
+|ieee
+|`urn:ieee:[:publisher][:special-type][:tc][:cc][:year][:dc][:ec][:md][:ds][:redline]`
+|`55 IRE 2.S1 (IEEE Std 147)` → `urn:ieee:ire` (value-drop)
+
+|ietf
+|`urn:ietf:rfc:{number}` | `urn:ietf:id:{name}[:version]` | `urn:ietf:{series}:{number}`
+|`BCP 3` → `urn:ietf:bcp:3`
+
+|iho
+|`urn:iho:{type}:{number}[:ap.N][:part.N][:annex.N][:suppl.N]`
+|`IHO B-1 1.0.0` → `urn:iho:b:1:1.0.0`
+
+|itu
+|`urn:itu:[:sector|"itu"][:report]:{series code, joined by `.` or `-` per series_dash}`
+|`ITU-T I.363 (1993) Add. 1 (11/1993)` → `urn:itu:t:I.363:1993:1:11/1993` (see defects)
+
+|jcgm
+|`urn:jcgm:{number|"gum.N"}[:-part]...` | `urn:jcgm:meeting:{number}[:year]`
+|`JCGM 100:2008/Amd 1` → `urn:jcgm:100:2008:amendment:1`
+
+|jis
+|`urn:jis:[:code][:year][:language][:"all"][:supplement]`
+|`JIS A 0001:1999` → `urn:jis:A 0001:1999` (see defects)
+
+|nist
+|`urn:nist:[:series|sc|sp]:{number}[{edition}][{vol}][{part}][{vol}n{issue}][ver.N][-updN][stage][supp...]` (sub-parts joined inside one segment; nil supplement still emits `supp`)
+|`NBS CIRC 1` → `urn:nist:circ:1.supp` (nil-supplement `supp` quirk)
+
+|oasis
+|`urn:oasis:{slug}` — slug = original title with spaces/brackets percent-encoded
+|`OASIS AkomaNtosoCore-v1.0-Pt2-Specifications` → `urn:oasis:AkomaNtosoCore-v1.0-Pt2-Specifications`
+
+|ogc
+|`urn:ogc:{year}:{number}[:revision]`
+|`01-009a` → `urn:ogc:01:009:a`
+
+|oiml
+|`urn:oiml:{type}:[:number][:year][:stage]` | `urn:oiml:bulletin:[:locator][:language]`
+|`OIML B 18:2018` → `urn:oiml:b:18:2018`
+
+|plateau
+|`urn:plateau:[:type]:[%02d number][:%02d annex]`
+|`PLATEAU Handbook #00 第1.0版` → `urn:plateau:handbook:00`
+
+|sae
+|`urn:sae:{type}:[:number][:year]`
+|no corpus fixtures yet (generator: `urn:sae:{type}:{number}:{year}`)
+
+|tgpp (3GPP)
+|`urn:3gpp:{type-prefix}:{code}:{release}:{version}` (all mandatory)
+|`TR 00.01U:UMTS/3.0.0` → `urn:3gpp:tr:00.01U:UMTS:3.0.0`
+
+|w3c
+|`urn:w3c:[:type-prefix]:{code}[:date]`
+|`W3C CR-exi-20091208` → `urn:w3c:cr:exi:20091208`
+
+|xsf
+|`urn:xsf:xep:{number}`
+|`XEP 0001` → `urn:xsf:xep:0001`
+
+|doi, gb, isbn, un
+|Base fallback: `urn:{flavor}:[:number]...` per Base order
+|`doi:10.1000/182` → `urn:doi` · `GB 1234-2010` → `urn:gb:1234:2010` · `ISBN 0-306-40615-2` → `urn:isbn` · `A/RES/78/1` → `urn:un:1` (value-drop)
+|===
+
+== Class C — `urn:pubid:identifier:` universal namespace (design)
+
+Formal schemes exist only for ISO/IEC (class A) and per-flavor namespaces are
+not registered URN namespaces (class B). The internal universal namespace
+gives every flavor a syntactically valid, round-trippable identifier URN, for
+pubid/pubid-ts interchange.
+
+....
+urn:pubid:identifier:{flavor}:{component}[:{component}...]
+....
+
+* `pubid` — namespace identifier (NID).
+* `identifier` — resource-class discriminator: `identifier` for document
+  identifiers, `publisher` for publisher records, `type` for type schemas.
+* `{flavor}` — lowercase registry key (`iso`, `iec`, `3gpp`, ...). Applies to
+  ALL flavors, including those with formal schemes.
+* `{component}` — the flavor's own canonical component names and values
+  (exactly the keys recorded in the corpus `identifier` mapping), lowercased
+  where the value is a symbolic component (publisher, type, language).
+
+Examples:
+
+----
+urn:pubid:identifier:ansi:ANSI:C37.16:2000
+urn:pubid:identifier:iso:iso-iec:tr:9999:1:2022
+urn:pubid:identifier:oiml:r:52-1:2017:e
+----
+
+Encoding rules: percent-encode space, `/`, `:` inside values; every component
+key is implicit by position (fixed per-flavor order documented in the corpus
+schema). Implementation is tracked in `TODO.restructure/27-ts-urn.md` and
+`TODO.restructure/15-urn-declarative.md`.
+
+== Known defects (recorded as-is in the corpus)
+
+The corpus records `representations.urn` verbatim from the reference
+implementation. Defects are governed by `tests/{flavor}/_status.yaml` (DIRTY
+ledger), never silently corrected here:
+
+* **Illegal characters (RFC 8141 pchar)** — spaces: `urn:etsi:ets:300 011:...`,
+  `urn:jis:A 0001:1999`, `urn:cie:bundle.CIE 198-SP1.1:2011,...`; reserved
+  `/`: `urn:itu:t:I.363:1993:1:11/1993`, `urn:asme:api/asme:...`,
+  `urn:ashrae:...copub.ansi/ashrae`.
+* **Ruby object-inspect leak**: `urn:amca:204:copub.amca:{key:
+  :interpretation, title: "interpretation", short: "interp"}` — a component
+  renders via `to_s` on a raw Ruby structure instead of its URN form.
+* **Value-dropping (bare or truncated namespace)**: `urn:doi`, `urn:isbn`,
+  `urn:omg`, `urn:bsi:bs`, `urn:astm:std`, `urn:ieee:ire`, `urn:un:1`,
+  `urn:ashrae:140` — the generator emits the namespace while dropping the
+  distinguishing components.
+* **Lossy parses**: `ANSI C37.16-2000` mis-segments year into part
+  (`urn:ansi:C37.16:-2000`); `ASTM A36/A36M-14` collapses the designation.
+* **Quirk (retained by design)**: nist renders a nil supplement as `supp`
+  (`urn:nist:circ:1.supp`); IEC preserves empty positional segments
+  (`...:2007:::::amd:1:2009`).
+
+CLEAN means the reference is self-consistent (parse → render/URN
+regeneration matches the recorded corpus), **not** that the URN is
+RFC 8141-valid; validity gaps above are per-flavor ledger items.
+
+== Corpus recording contract
+
+* `representations.urn` is present iff the reference `to_urn` returned a
+  non-nil string for the canonical re-parse of `representations.human`.
+* The exporter's verify gate re-parses and asserts `id.to_urn == urn`
+  (generation determinism), and the conformance runner's `urn` gate repeats
+  the assertion for any implementation claiming conformance.

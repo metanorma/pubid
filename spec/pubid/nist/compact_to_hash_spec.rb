@@ -88,28 +88,4 @@ RSpec.describe "Pubid::Nist compact to_hash" do
     end
   end
 
-  describe "corpus-wide idempotency" do
-    it "keeps from_hash(to_hash).to_hash == to_hash across the pass corpus" do
-      files = Dir[File.join(__dir__, "../../fixtures/nist/identifiers/pass/*.txt")]
-      checked = 0
-      mismatches = []
-      files.each do |f|
-        File.readlines(f).map(&:strip).each do |line|
-          next if line.empty? || line.start_with?("#")
-
-          inp = line.start_with?("!") ? line.split("!")[1] : line
-          begin
-            h = Pubid::Nist.parse(inp).to_hash
-          rescue StandardError
-            next
-          end
-          checked += 1
-          rt = Pubid::Nist::Identifier.from_hash(h).to_hash
-          mismatches << inp if rt != h
-        end
-      end
-      expect(checked).to be > 20_000
-      expect(mismatches.first(15)).to eq([])
-    end
-  end
 end

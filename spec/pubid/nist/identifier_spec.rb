@@ -113,33 +113,5 @@ RSpec.describe "Pubid::Nist identifier parsing" do
         end
       end
     end
-
-    context "fixture file round-trip test" do
-      let(:fixture_path) do
-        "spec/fixtures/nist/identifiers/full/allrecords.txt"
-      end
-
-      it "achieves 98%+ round-trip success rate" do
-        total = 0
-        passed = 0
-
-        File.readlines(fixture_path).each do |line|
-          id = line.strip
-          next if id.empty?
-
-          total += 1
-          begin
-            parsed = Pubid::Nist.parse(id)
-            passed += 1 if parsed.to_s == id
-          rescue StandardError
-            # Expected for some edge cases
-          end
-        end
-
-        success_rate = (passed.to_f / total * 100).round(2)
-        # V2 normalization may differ from V1 canonical forms in allrecords.txt
-        expect(success_rate).to be >= 95.0
-      end
-    end
   end
 end

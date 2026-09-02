@@ -6,7 +6,7 @@ module Pubid
       # Amendment Identifier
       # Contains a base identifier plus amendment parameters
       class Amendment < Base
-        attribute :base, Base, polymorphic: true
+        attribute :base, Pubid::CenCenelec::Identifier, polymorphic: true
         attribute :amendment_number, :string
         attribute :amendment_year, :integer
 

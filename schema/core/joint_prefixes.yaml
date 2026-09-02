@@ -1,0 +1,24 @@
+# Canonical joint / co-publication leading tokens, mirroring
+# Pubid::JOINT_PREFIXES (lib/pubid.rb). Keyed by flavor; merged into each
+# participating flavor's prefixes at load time so co-publication symmetry can
+# never drift (an ISO/IEC token appears in both the iso and iec lists).
+# TODO.restructure/05 makes this file the only home for joint tokens.
+schema_version: 1.0.0
+joint_prefixes:
+  iso:
+    - ISO/IEC
+    - IEC/ISO
+    - ISO/IEC/IEEE
+  iec:
+    - ISO/IEC
+    - IEC/ISO
+    - ISO/IEC/IEEE
+  ieee:
+    - ISO/IEC/IEEE
+  ansi:
+    - ANSI/ASHRAE
+    - ANSI/AMCA
+  ashrae:
+    - ANSI/ASHRAE
+  amca:
+    - ANSI/AMCA

@@ -181,7 +181,6 @@ module Pubid
           result += " #{id.addendum_type}"
         end
         result += " "
-        result += " "
 
         result += id.addendum_number.to_s
         result += ":#{id.addendum_year}" if id.addendum_year

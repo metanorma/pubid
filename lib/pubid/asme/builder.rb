@@ -103,11 +103,11 @@ module Pubid
                            else
                              ssc_sections.to_s
                            end
-            designator_str = "BPVC.SSC.#{sections_str}"
+            designator_str = sections_str.empty? ? "BPVC.SSC" : "BPVC.SSC.#{sections_str}"
           elsif bpvc_data[:subdivision] && bpvc_data[:subdivision][:case_code]
             # BPVC.CC.BPV or BPVC.CC.NC.XI - extract from subdivision hash
             cc = bpvc_data[:subdivision][:case_code].to_s
-            case_sub = bpvc_data[:subdivision][:case_sub]&.to_s
+            case_sub = bpvc_data[:subdivision][:case_sub].to_s.sub(/\A\./, '')
 
             designator_str = case_sub && !case_sub.empty? ? "BPVC.CC.#{cc}.#{case_sub}" : "BPVC.CC.#{cc}"
           elsif bpvc_data[:case_code]
