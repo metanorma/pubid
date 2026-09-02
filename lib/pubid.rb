@@ -55,6 +55,15 @@ module Pubid
         @flavors[name.to_s.downcase] = flavor_module
       end
 
+      # Remove a flavor registration. Tests that register probe flavors
+      # MUST unregister them: registry-driven specs enumerate every
+      # registered flavor, so a leaked probe fails them for everyone
+      # else in the process.
+      # @param name [String, Symbol] Flavor name
+      def unregister(name)
+        @flavors.delete(name.to_s.downcase)
+      end
+
       # Get all registered flavor names
       # @return [Array<String>] Array of flavor names
       def flavor_names

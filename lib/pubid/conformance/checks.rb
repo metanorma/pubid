@@ -14,16 +14,9 @@ module Pubid
         # @param flavor_module [Module] the flavor owning the case
         # @return [Array<String>] mismatch descriptions, empty when passing
         def check_case(test_case, flavor_module)
-          parsed = parse_or_mismatch(test_case, flavor_module)
-          return parsed if parsed.is_a?(Array)
-
-          identifier = parsed
+          identifier = flavor_module.parse(test_case.representations.human)
           mismatchers(identifier, test_case, flavor_module)
             .flat_map(&:call)
-        end
-
-        def parse_or_mismatch(test_case, flavor_module)
-          [flavor_module.parse(test_case.representations.human)]
         rescue StandardError => e
           ["#{test_case.id} raised #{e.class}"]
         end

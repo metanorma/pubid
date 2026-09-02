@@ -28,10 +28,13 @@ RSpec.describe "Pubid::Gost foreign adoption routing" do
   end
 
   describe "Pubid::Registry flavor view" do
+    after { Pubid::Registry.unregister(:zz_probe) }
+
     it "hides registration order behind a sorted frozen view" do
       # A late registration (hosts autoload flavors in any order) must not
       # shift any consumer's iteration: the view stays key-sorted, and the
-      # raw table is not public mutable state.
+      # raw table is not public mutable state. The probe is unregistered
+      # afterwards: registry-driven specs enumerate every flavor.
       Pubid::Registry.register(:zz_probe, Pubid::Astm)
       names = Pubid::Registry.flavors.keys
       expect(names).to eq(names.sort)
