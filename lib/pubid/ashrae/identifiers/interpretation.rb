@@ -15,9 +15,11 @@ module Pubid
         # Renderers::MrString slugs the interpretation FLAT off attributes it
         # does not have, instead of recursing into `base`.
         #
-        # Currently unreachable — an "Interpretations for …" reference never
-        # gets here, because an earlier grammar alternative claims it and the
-        # builder produces a plain Standard (pre-existing; pinned in
+        # Currently unreachable, and NOT because of alternation ordering:
+        # rule(:interpretation_identifier) is reached and does match, but it
+        # never wraps its output in `.as(:interpretation_identifier)`, so
+        # Builder#build's branch for that key is dead code and the tree falls
+        # through to the plain-Standard path (pre-existing; pinned in
         # spec/pubid/ashrae/root_number_spec.rb, hand-off
         # ashrae-interpretation-collapses-onto-base). Added anyway so that
         # fixing the dispatch does not silently ship malformed filenames.
