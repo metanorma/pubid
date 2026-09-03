@@ -78,7 +78,7 @@ module Pubid
         if parsed[:code_with_year]
           code_year_data = parsed[:code_with_year]
           if code_year_data && code_year_data[:code]
-            attributes[:code] =
+            attributes[:number] =
               extract_value(code_year_data[:code])
           end
           if code_year_data && code_year_data[:year]
@@ -86,7 +86,7 @@ module Pubid
               extract_value(code_year_data[:year])
           end
         elsif parsed[:code]
-          attributes[:code] = extract_value(parsed[:code])
+          attributes[:number] = extract_value(parsed[:code])
         end
 
         # Extract year if not already extracted from code_with_year

@@ -19,22 +19,40 @@ module Pubid
       # serialize a String against the Components::Publisher attribute and raise.
       attribute :publisher, :string, default: -> { "AMCA" }
       attribute :copublisher, :string
-      attribute :code, Components::Code
-      attribute :year, Components::Date
+      # The document number used to live in AMCA's own `code` attribute, leaving
+      # the `number` inherited from ::Pubid::Identifier nil — so relaton-index,
+      # which sorts and bsearches on `id.root.number.to_s`, keyed every AMCA row
+      # on "". `code` is gone; each LEAF now declares `attribute :number,
+      # :string` (see standard.rb / publication.rb / interpretation.rb).
+      #
+      # It is declared on the leaves, never here: this class is inherited by all
+      # three of them, and redefining the parent's Components::Code-typed
+      # `number` on an inherited-from class resolves nondeterministically under
+      # multi-flavor load. Do not reintroduce `code`, and do not move `number`
+      # up here.
+      #
+      # A bare 2-digit edition year ("21", "02"). Declared :string, not
+      # Components::Date: the builder assigns a String and lutaml does not cast
+      # it, so a Date declaration left the PARSE path holding a String while
+      # from_hash produced a Components::Date — making
+      # `parse(x) == from_hash(parse(x).to_hash)` false for every AMCA id and
+      # breaking #matches?, which is built on ==. to_hash and to_s agreed, so
+      # the relaton index gate never caught it.
+      attribute :year, :string
       attribute :suffix, :string
       attribute :reaffirmed, :string
 
       # Explicit key_value mapping: only these keys serialize (the inherited
       # Pubid::Identifier attributes — including :type, which subclasses expose
       # as a class-metadata Hash via `self.type` — are intentionally dropped).
-      # code/year are flattened to their scalar value and rebuilt on load, since
-      # the Builder may store them as either a String or a component.
+      # Every mapped attribute is a plain scalar, so no custom converters are
+      # needed; the canonical to_hash already drops empty and default values.
       key_value do
         map "_type", to: :_type
         map "publisher", to: :publisher
         map "copublisher", to: :copublisher
-        map "code", with: { to: :code_to_kv, from: :code_from_kv }
-        map "year", with: { to: :year_to_kv, from: :year_from_kv }
+        map "number", to: :number
+        map "year", to: :year
         map "suffix", to: :suffix
         map "reaffirmed", to: :reaffirmed
       end
@@ -43,28 +61,25 @@ module Pubid
         UrnGenerator.new(self).generate
       end
 
-      def code_to_kv(model, doc)
-        v = model.code.is_a?(::Pubid::Components::Code) ? model.code.value : model.code
-        return if v.nil? || v.to_s.empty?
+      # AMCA models its document type as class metadata (`self.type`), not as a
+      # `typed_stage`, so the base `mr_type` hook found nothing. Without it an
+      # interpretation and the standard it interprets share a slug — and
+      # `to_slug` is an output FILENAME. Before the index columns landed the
+      # whole flavor collapsed onto two slugs ("amca" and "").
+      def mr_type
+        return nil unless self.class.respond_to?(:type)
 
-        doc.add_child(Lutaml::KeyValue::DataModel::Element.new("code", v.to_s))
+        self.class.type[:key]&.to_s
       end
 
-      def code_from_kv(model, value)
-        model.code = ::Pubid::Components::Code.new(value: value.to_s)
-      end
-
-      def year_to_kv(model, doc)
-        y = model.year.is_a?(::Pubid::Components::Date) ? model.year.year : model.year
-        return if y.nil? || y.to_s.empty?
-
-        doc.add_child(Lutaml::KeyValue::DataModel::Element.new("year", y.to_s))
-      end
-
-      def year_from_kv(model, value)
-        model.year = ::Pubid::Components::Date.new(year: value.to_s)
+      # AMCA keeps the edition in its own `year` string, not in the inherited
+      # `date`, so the base `mr_year` hook read nil and two editions of one
+      # standard — "ANSI/AMCA 300-14" and "ANSI/AMCA Standard 300-24" —
+      # produced the same slug. Same shape as the BIPM year recorded in
+      # CLAUDE.md.
+      def mr_year
+        year&.to_s
       end
     end
-
   end
 end

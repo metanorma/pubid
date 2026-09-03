@@ -4,9 +4,9 @@ module Pubid
   module Amca
     class UrnGenerator < Pubid::UrnGenerator::Base
       def urn_number
-        return nil unless identifier.code
+        return nil unless identifier.number
 
-        identifier.code.to_s
+        identifier.number.to_s
       end
 
       def urn_year

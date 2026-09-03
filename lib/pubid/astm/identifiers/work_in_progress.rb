@@ -4,6 +4,8 @@ module Pubid
   module Astm
     module Identifiers
       class WorkInProgress < Base
+        include CodeNumber
+
       end
     end
   end

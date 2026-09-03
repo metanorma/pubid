@@ -12,6 +12,22 @@ module Pubid
       # Distinguishing feature: Starts with digit (typically 5xxxx series)
       # These are ASTM's version of standards jointly developed with ISO
       class IsoDualPublished < Standard
+        # Re-included even though Standard already does. DO NOT "clean this
+        # up" — it compiles fine without it, passes most tests, and silently
+        # reintroduces the multi-flavor `number` determinism landmine for this
+        # class alone, visible only under the full suite.
+        #
+        # Two Ruby facts make the repeat both necessary and safe:
+        #   * `included(base)` fires on EVERY `include` call, so this gives
+        #     IsoDualPublished its own `attribute :number` resolved against its
+        #     own table rather than a snapshot inherited from Standard;
+        #   * `Module#include` does NOT re-insert a module already present via
+        #     a superclass, so CodeNumber keeps the ancestor position Standard
+        #     gave it — still BELOW Standard. That is what lets
+        #     Standard#mr_number_with_part's `super` reach CodeNumber's
+        #     implementation instead of being shadowed here.
+        include CodeNumber
+
         # Inherits all behavior from Standard:
         # - sub_year (a, b, c)
         # - reapproval ((2023))

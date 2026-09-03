@@ -14,7 +14,7 @@ RSpec.describe Pubid::Astm::Identifiers::Adjunct do
 
     it "parses" do
       expect(parsed).to be_a(described_class)
-      expect(parsed.designation).to eq("D2148")
+      expect(parsed.number).to eq("D2148")
       expect(parsed.to_s).to eq("ASTM ADJD2148")
     end
   end
@@ -26,7 +26,7 @@ RSpec.describe Pubid::Astm::Identifiers::Adjunct do
 
     it "parses" do
       expect(parsed).to be_a(described_class)
-      expect(parsed.designation).to eq("F3504")
+      expect(parsed.number).to eq("F3504")
       expect(parsed.ea_suffix).to be(true)
       expect(parsed.to_s).to eq("ADJF3504-EA")
     end
@@ -39,7 +39,7 @@ RSpec.describe Pubid::Astm::Identifiers::Adjunct do
 
     it "parses" do
       expect(parsed).to be_a(described_class)
-      expect(parsed.designation).to eq("G0088")
+      expect(parsed.number).to eq("G0088")
       expect(parsed.dvd_suffix).to be(true)
       expect(parsed.to_s).to eq("ADJG0088DVD")
     end

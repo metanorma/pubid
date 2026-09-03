@@ -17,11 +17,13 @@ module Pubid
           parts << identifier.code.to_s
         end
 
-        number = maybe(:number)
-        if number
-          num = number.to_s
-          parts << num
-        end
+        # `number` is deliberately NOT emitted here. It used to be dead code —
+        # ASTM kept everything in `code` and never set the `number` inherited
+        # from ::Pubid::Identifier, so `maybe(:number)` always returned nil.
+        # Now that `number` is the real index column and `code` is composed
+        # from it, emitting both would double the segment
+        # ("urn:astm:std:D2148:2148:22"). `code` already renders the number
+        # along with the letter and the suffixes.
 
         part = maybe(:part)
         if part

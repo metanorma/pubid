@@ -343,6 +343,19 @@ module Pubid
       segments.compact.join("-").downcase
     end
 
+    # Join MR segments and return nil rather than "" when nothing survives.
+    #
+    # Renderers::MrString does `parts.compact.join(".")`, and `compact` removes
+    # nil but NOT an empty string — so a hook that returns "" contributes a
+    # blank segment and the slug gains a double dot. The base
+    # #mr_number_with_part guards this with its own `return nil unless num`;
+    # flavor overrides that append their own marker to `super` need the same
+    # guard, and this is it.
+    def mr_join(*segments)
+      joined = segments.compact.reject { |s| s.to_s.empty? }.join("-")
+      joined.empty? ? nil : joined
+    end
+
     def mr_number
       number&.to_s&.downcase
     end
