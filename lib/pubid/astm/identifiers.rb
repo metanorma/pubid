@@ -4,6 +4,7 @@ module Pubid
   module Astm
     module Identifiers
       autoload :Base, "#{__dir__}/identifiers/base"
+      autoload :CodeNumber, "#{__dir__}/identifiers/code_number"
       autoload :Standard, "#{__dir__}/identifiers/standard"
       autoload :IsoDualPublished, "#{__dir__}/identifiers/iso_dual_published"
       autoload :Manual, "#{__dir__}/identifiers/manual"

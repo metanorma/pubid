@@ -131,7 +131,7 @@ module Pubid
       def render_adjunct(id)
         result = []
         result << id.publisher if id.publisher && !id.ea_suffix && !id.dvd_suffix
-        result << "ADJ#{id.designation}#{'-EA' if id.ea_suffix}#{'DVD' if id.dvd_suffix}"
+        result << "ADJ#{id.number}#{'-EA' if id.ea_suffix}#{'DVD' if id.dvd_suffix}"
         result.compact.join(" ")
       end
 

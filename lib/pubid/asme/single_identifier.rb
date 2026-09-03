@@ -10,7 +10,14 @@ module Pubid
       # @return [String] URN representation
 
       attribute :publisher, :string
-      attribute :code, Components::Code
+      # The document code lives on the concrete leaf as a single `number`
+      # column holding the WHOLE printed code ("B18.3", "BPVC-CC-BPV") — see
+      # Identifiers::Standard, which explains why it is not split into
+      # designator + number. It cannot be declared here: SingleIdentifier is
+      # inherited by Identifiers::Base and Identifiers::Standard, and
+      # redefining the `number` that ::Pubid::Identifier types as a
+      # Components::Code on an inherited-from class resolves
+      # nondeterministically under multi-flavor load.
       attribute :year, :string
       attribute :reaffirmation, :string     # R2020
       attribute :language, :string          # (SPANISH)

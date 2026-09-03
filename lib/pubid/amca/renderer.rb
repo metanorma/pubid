@@ -35,14 +35,14 @@ module Pubid
         if t.is_a?(Hash) && t[:title]
           parts << t[:title].to_s
         end
-        parts << id.code.to_s
+        parts << id.number.to_s
         parts << "-#{id.year}" if id.year
 
         result = parts.compact.join(" ")
 
         if id.copublisher&.include?("/") && id.year
           type_title = t.is_a?(Hash) ? t[:title].to_s : ""
-          result = "#{id.copublisher} #{type_title} #{id.code}-#{id.year}"
+          result = "#{id.copublisher} #{type_title} #{id.number}-#{id.year}"
         end
 
         result += " (#{id.reaffirmed})" if id.reaffirmed
@@ -54,7 +54,7 @@ module Pubid
         parts = []
         parts << id.copublisher if id.copublisher
         parts << "Publication"
-        parts << id.code.to_s
+        parts << id.number.to_s
         parts << "-#{id.year}" if id.year
         parts << " (Rev. #{id.revision})" if id.revision
         parts << " (#{id.reaffirmed})" if id.reaffirmed && !id.revision
@@ -65,7 +65,7 @@ module Pubid
       def render_interpretation(id)
         parts = []
         parts << id.copublisher if id.copublisher
-        parts << id.code.to_s
+        parts << id.number.to_s
 
         if id.interpretation_code
           parts << "– #{id.interpretation_code}"

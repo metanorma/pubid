@@ -22,15 +22,15 @@ module Pubid
           parts << id.first_publisher
           parts << id.first_code
           parts << "/#{id.second_publisher}" if id.second_publisher
-          parts << id.code.to_s if id.code && id.code.to_s != ""
+          parts << id.number.to_s if id.number && id.number.to_s != ""
         elsif id.joint_publisher
           # ISO/ASME or ASME/ANS format
           parts << id.joint_publisher
-          parts << id.code.to_s if id.code && id.code.to_s != ""
+          parts << id.number.to_s if id.number && id.number.to_s != ""
         else
           # Standard ASME format
           parts << id.publisher if id.publisher
-          parts << id.code.to_s if id.code
+          parts << id.number.to_s if id.number
         end
 
         result = parts.join(" ")

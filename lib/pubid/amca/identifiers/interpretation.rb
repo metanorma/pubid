@@ -9,16 +9,24 @@ module Pubid
       # - AMCA 204 – 1
       # - ANSI/AMCA 204 Interp
       class Interpretation < Identifier
-        attr_reader :interpretation_code
+        attribute :number, :string
 
-        def initialize(code:, year: nil, copublisher: nil, suffix: nil,
-reaffirmed: nil, interpretation_code: nil)
-          @code = Components::Code.new(value: code.to_s)
-          @year = Components::Date.new(year: year.to_s) if year
-          @copublisher = copublisher
-          @suffix = suffix
-          @reaffirmed = reaffirmed
-          @interpretation_code = interpretation_code
+        # See Publication: the hand-written keyword initializer bypassed lutaml,
+        # costing this class its `_type`, its `publisher` default and the
+        # serialization of `interpretation_code`.
+        attribute :interpretation_code, :string
+
+        key_value do
+          map "interpretation_code", to: :interpretation_code
+        end
+
+        # The interpretation letter is what distinguishes one interpretation of
+        # a standard from another ("AMCA 99 JW Interp" vs "AMCA 99 KB Interp" —
+        # different documents, and #== agrees). It is in `==` and in `to_s`, so
+        # it must reach the slug too, or three interpretations of standard 99
+        # share one filename.
+        def mr_number_with_part
+          mr_join(super, interpretation_code&.to_s&.downcase)
         end
 
         def self.type

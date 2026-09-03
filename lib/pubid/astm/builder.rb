@@ -8,9 +8,16 @@ module Pubid
         identifier_class = determine_identifier_class(parsed_hash)
         identifier = identifier_class.new
 
-        # Build code component if present
+        # The code is stored as flat index columns on every concrete class (see
+        # Identifiers::CodeNumber) — `number` is what relaton-index keys on —
+        # so the Code built below is unpacked rather than assigned.
         if parsed_hash[:letter] || parsed_hash[:number]
-          identifier.code = build_code(parsed_hash)
+          code = build_code(parsed_hash)
+          identifier.letter = code.letter
+          identifier.number = code.number
+          identifier.suffix = code.suffix
+          identifier.subseries = code.subseries
+          identifier.dual_m = code.dual_m || false
         end
 
         # Set publisher
@@ -119,7 +126,7 @@ module Pubid
 
         # Adjunct
         if identifier.is_a?(Identifiers::Adjunct)
-          identifier.designation = parsed_hash[:designation].to_s if parsed_hash[:designation]
+          identifier.number = parsed_hash[:designation].to_s if parsed_hash[:designation]
           identifier.ea_suffix = true if parsed_hash[:ea_suffix]
           identifier.dvd_suffix = true if parsed_hash[:dvd_suffix]
         end

@@ -11,8 +11,8 @@ module Pubid
 
         parts << publisher_component
 
-        if identifier.code
-          parts << identifier.code.to_s
+        if identifier.number
+          parts << identifier.number.to_s
         end
 
         part = maybe(:part)

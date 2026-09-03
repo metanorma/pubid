@@ -21,9 +21,18 @@ module Pubid
           identifier.publisher = "ASME"
         end
 
-        # Build code component
+        # The code is stored as flat index columns on the leaf (see
+        # Identifiers::Standard) — `number` is what relaton-index keys on — so
+        # the Code built below is unpacked rather than assigned.
         if parsed_hash[:designator]
-          identifier.code = build_code(parsed_hash)
+          identifier.number = build_code(parsed_hash).to_s
+        elsif parsed_hash[:number]
+          # A joint-published reference ("ISO/ASME 14414-2015") parses to a bare
+          # `number` with no designator. The designator-only guard above dropped
+          # it, so the document number was lost from BOTH the identifier and its
+          # rendering: `to_s` was "ISO/ASME-2015". Pre-existing; recovering it
+          # is what gives these ids an index key.
+          identifier.number = parsed_hash[:number].to_s
         end
 
         # Set PTC suffix
