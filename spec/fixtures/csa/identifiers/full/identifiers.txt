@@ -967,3 +967,10 @@ CSA/ANSI LNG 3.10:22
 CSA/ANSI PRD 1:20
 CSA/ANSI Z83.11:25/CSA 1.8:25
 CSA/ANSI 3.21:19 (R2024)
+
+# Partial references (trailing year omitted) — regression corpus for #134.
+# These were hand-added to pass/standard.txt, which classify_fixtures.rb
+# rebuilds from this file; keep them here or the next run deletes them.
+CSA Z299.1
+CSA B149.1
+CSA B140.4
