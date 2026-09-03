@@ -48,7 +48,7 @@ module Pubid
         parts = ["API", "MPMS"]
 
         # Add chapter
-        parts << "CH #{id.chapter}" if id.chapter
+        parts << "CH #{id.number}" if id.number
 
         # Add section/subsection
         if id.section

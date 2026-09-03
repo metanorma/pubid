@@ -790,8 +790,10 @@ module Pubid
         corrigendum = !amd_data[:corrigendum].nil?
         parenthesized = !data[:parenthesized_amd].nil?
 
+        # NOTE `amd_data[:amendment_number]` above is a PARSE-TREE key and keeps
+        # its name; only the attribute moved to `number`.
         attrs = {
-          amendment_number: Components::Code.new(value: amendment_number),
+          number: Components::Code.new(value: amendment_number),
           corrigendum: corrigendum,
           parenthesized: parenthesized,
         }
@@ -809,8 +811,10 @@ module Pubid
         # Could also use a more sophisticated algorithm for year conversion
         full_year = year_val ? "20#{year_val}" : nil
 
+        # NOTE `data[:document_number]` above is a PARSE-TREE key and keeps its
+        # name; only the attribute moved to `number`.
         attrs = {
-          document_number: document_number,
+          number: Components::Code.new(value: document_number),
         }
         attrs[:date] = Components::Date.new(year: full_year.to_i) if full_year
 

@@ -17,7 +17,8 @@ module Pubid
         cc = code_component
         parts << cc if cc
 
-        parts << identifier.year if identifier.year
+        yc = year_component
+        parts << yc if yc
 
         dc = draft_component
         parts << dc if dc
@@ -126,8 +127,7 @@ module Pubid
       end
 
       def publisher_component
-        pub = identifier.publisher || "IEEE"
-        pub = pub.to_s.downcase
+        pub = normalized_publisher
 
         if identifier.copublisher&.any?
           copubs = identifier.copublisher.map(&:to_s).map(&:downcase)
@@ -135,6 +135,18 @@ module Pubid
         end
 
         pub
+      end
+
+      # A dual-published document has TWO publishers, and
+      # DualPublished#publisher returns them as an Array — which `to_s`
+      # rendered into the URN as a literal Ruby array literal, brackets and
+      # quotes included: `urn:ieee:["ieee", "asme"]`. Join them the same way a
+      # copublisher list is joined above.
+      def normalized_publisher
+        names = Array(identifier.publisher)
+          .map { |p| p.to_s.downcase }.reject(&:empty?)
+
+        names.empty? ? "ieee" : names.join("-")
       end
 
       def type_component
@@ -150,6 +162,23 @@ module Pubid
         return nil unless identifier.code_obj
 
         identifier.code_obj.to_s
+      end
+
+      # A multi-designation wrapper (AdoptedStandard, DualPublished,
+      # MultiNumberedIdentifier) carries no year of its own — the year sits on
+      # the designation it wraps — so the URN dropped it and two editions of
+      # one document produced the SAME urn: "AIEE No 15-1944" and
+      # "AIEE No 15-1959" both gave urn:ieee:aiee:15.
+      #
+      # Fixed here, in the one place that reads the year, rather than by
+      # defining a `#year` method on each wrapper: `year` is a lutaml attribute
+      # on the base and a method of that name would shadow its generated
+      # accessor. `#root` already walks to the wrapped designation.
+      def year_component
+        return identifier.year if identifier.year
+
+        root = identifier.root
+        root.equal?(identifier) ? nil : root.year
       end
 
       def draft_component

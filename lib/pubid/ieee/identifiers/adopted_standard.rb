@@ -30,6 +30,38 @@ module Pubid
           ieee_identifier&.publisher || "IEEE"
         end
 
+        # An adoption names one document by two designations and carries no
+        # number of its own, so `root.number` — the key relaton-index sorts and
+        # bsearches on — was "". Walk to the IEEE designation, which is the one
+        # IEEE files the document under, and which is also the source of truth
+        # for `publisher` above.
+        def root
+          ieee_identifier ? ieee_identifier.root : self
+        end
+
+        # The document number must reach the URN and the MR slug too, not only
+        # `#root` — the project rule that an identity-bearing marker reaches
+        # every identity surface. `UrnGenerator#code_component` and the base
+        # `mr_number_with_part` both read `code_obj`, which a wrapper does not
+        # have, so all 66 adoptions collapsed onto 5 URNs and 5 slugs — and
+        # `to_slug` is an output FILENAME, so that is 66 documents overwriting
+        # each other. Delegate to the IEEE designation, as `#root` does.
+        #
+        # `code_obj` is a plain attr_accessor on the base, not a lutaml
+        # attribute, so overriding it as a method is safe here.
+        def code_obj
+          ieee_identifier&.code_obj
+        end
+
+        # Likewise the year: without it "AIEE No 15-1944" and "AIEE No 15-1959"
+        # — two different documents — produced the same slug "aiee.std.15".
+        # This is the `mr_year` HOOK, not a `#year` method: `year` is a lutaml
+        # attribute on the base, and a method of that name would shadow the
+        # generated accessor (the CLAUDE.md landmine).
+        def mr_year
+          (year || ieee_identifier&.year)&.to_s
+        end
+
         # `publisher` is *derived* from `ieee_identifier` (the serialized source
         # of truth), so it must not be serialized. Emitting it breaks the
         # canonical round-trip: the derived value is default-omitted on the parse

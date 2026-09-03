@@ -11,6 +11,20 @@ module Pubid
         # CSA identifier is stored as-is (not a Lutaml model type)
         attr_accessor :csa_identifier
 
+        # Walk to the IEEE designation for the relaton-index key: this wrapper
+        # names one document by an IEEE and a CSA number and holds neither
+        # itself, so `root.number` was "".
+        def root
+          ieee_identifier ? ieee_identifier.root : self
+        end
+
+        # Carry the number onto the URN and the MR slug as well as #root — see
+        # AdoptedStandard#code_obj. `#code` below delegates already, but the
+        # URN generator and the MR renderer both read `code_obj`.
+        def code_obj
+          ieee_identifier&.code_obj
+        end
+
         # Delegate common attributes to ieee_identifier
         def publisher
           ieee_identifier.publisher
