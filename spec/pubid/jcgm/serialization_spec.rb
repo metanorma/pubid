@@ -45,6 +45,24 @@ RSpec.describe "JCGM serialization" do
           rebuilt = Pubid::Jcgm::Identifier.from_hash(hash)
           expect(rebuilt.to_urn).to eq(identifier.to_urn)
         end
+
+        # The assertion the other four miss. to_s, to_hash and to_urn were all
+        # correct while `typed_stage.original_abbr` diverged between the parse
+        # path (nil) and the attribute default (the canonical abbreviation), so
+        # only `==` ever saw it.
+        it "rebuilds an EQUAL identifier" do
+          rebuilt = Pubid::Jcgm::Identifier.from_hash(hash)
+          expect(rebuilt).to eq(identifier)
+        end
+
+        # `#matches?` is `exclude(*ignore) == other.exclude(*ignore)`, so an
+        # inequality survives the exclusion. This is the shape of a relaton
+        # index lookup: a parsed reference against a from_hash-ed row.
+        it "matches its own rebuilt row" do
+          rebuilt = Pubid::Jcgm::Identifier.from_hash(hash)
+          expect(identifier.matches?(rebuilt, ignore: [])).to be true
+          expect(identifier.matches?(rebuilt, ignore: [:date])).to be true
+        end
       end
     end
   end

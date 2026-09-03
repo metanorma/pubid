@@ -37,15 +37,29 @@ module Pubid
       # The class's published typed_stage (canonical surface form). Each JCGM
       # class registers exactly one, all :published; `_type` fixes the class,
       # so an omitted typed_stage reconstructs deterministically on from_hash.
+      #
+      # `original_abbr` is deliberately LEFT NIL. It records the spelling the
+      # input used and is not serialized, so it cannot survive a round trip —
+      # and this method is one of the two paths that fill `typed_stage`. The
+      # other is the parse path (`Builder#locate_typed_stage` ->
+      # `Jcgm.locate_stage`), which returns the registry entry untouched.
+      # Setting it here made the two disagree, so `from_hash(to_hash) != parse`
+      # for every type the grammar tags (Meeting, Corrigendum, Amendment) —
+      # and because `#matches?` is `exclude(...) == other.exclude(...)`, a
+      # relaton index lookup then silently matched nothing. Nothing in JCGM
+      # reads the field: the renderer hardcodes its surface words, the URN
+      # generator reads only `type_code`, and `TypedStage#abbreviation` chooses
+      # among long_abbr/short_abbr/abbr.first. Recording the *matched* token
+      # instead would not work either — "/Cor 1" would store "Cor" where
+      # from_hash rebuilds "Corrigendum".
       def self.published_typed_stage
         return nil unless const_defined?(:TYPED_STAGES)
 
         ts = self::TYPED_STAGES.find { |t| t.stage_code.to_s == "published" }
-        return nil unless ts
-
-        ts = ts.dup
-        ts.original_abbr = ts.canonical_abbreviation
-        ts
+        # dup: locate_stage hands out the shared object from the frozen
+        # TYPED_STAGES array (the array is frozen, its elements are not), so a
+        # future in-place mutation would otherwise leak globally.
+        ts&.dup
       end
 
       # type and stage are derived from typed_stage, never stored — so the
