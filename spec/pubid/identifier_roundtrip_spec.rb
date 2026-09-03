@@ -78,6 +78,40 @@ RSpec.describe "Identifier to_hash/from_hash round-trip" do
     end
   end
 
+  # Flavors whose rebuilt identifier is not `==` to the parsed one. Each has a
+  # DIFFERENT root cause, so each needs its own fix; the hash, the class and the
+  # rendered string all agree in every case, which is why this went unnoticed.
+  PENDING_EQUALITY = {
+    "Pubid::Iec" => "typed_stage.original_abbr: nil on the parse path, the " \
+                    "canonical abbreviation from the attribute default " \
+                    "(hand-off: iec-typed-stage-original-abbr)",
+    "Pubid::Ieee" => "copublisher: [] on the parse path, nil after from_hash",
+    "Pubid::Idf" => "Type/Stage abbr: \"\" is dropped from to_hash and comes " \
+                    "back nil",
+  }.freeze
+
+  # A SEPARATE example from the round-trip one above, so that its class / to_s /
+  # to_hash coverage stays enforced for the three flavors pending here.
+  #
+  # `==` is the assertion the round-trip example never made, and the one that
+  # matters most to consumers: `#matches?` is
+  # `exclude(*ignore) == other.exclude(*ignore)`, so an inequality here makes a
+  # relaton index lookup (parsed reference vs from_hash-ed row) silently return
+  # nothing. A pending example that starts passing FAILS — that red is the
+  # signal to delete its PENDING_EQUALITY entry.
+  ROUND_TRIP_SAMPLES.each do |flavor_const, sample|
+    it "#{flavor_const} restores an equal identifier from #{sample.inspect}" do
+      if PENDING_EQUALITY.key?(flavor_const)
+        pending(PENDING_EQUALITY[flavor_const])
+      end
+
+      flavor = Object.const_get(flavor_const)
+      id = flavor.parse(sample)
+
+      expect(id.class.from_hash(id.to_hash)).to eq(id)
+    end
+  end
+
   # The CSA container types used to be plain Lutaml::Model::Serializable
   # objects holding their wrapped id in an attr_accessor, invisible to
   # serialization — so this form came back from from_hash with no identifier in

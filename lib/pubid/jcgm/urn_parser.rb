@@ -66,9 +66,9 @@ module Pubid
       #
       # The reconstruction must agree with a parsed identifier attribute for
       # attribute, so `typed_stage` comes from the same registry lookup
-      # `Builder#locate_typed_stage` uses — NOT from the attribute default,
-      # which additionally sets `original_abbr` and would make a
-      # URN-reconstructed meeting unequal to a parsed one.
+      # `Builder#locate_typed_stage` uses. (The attribute default now agrees
+      # too — it no longer sets `original_abbr` — so this mirrors the builder
+      # for clarity rather than out of necessity.)
       def parse_meeting_urn(parts)
         _, number, year = parts
 
