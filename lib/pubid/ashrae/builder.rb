@@ -39,6 +39,18 @@ module Pubid
           return build_addendum_no_type(parsed_hash[:addendum_no_type])
         elsif parsed_hash[:standard_addendum]
           return build_standard_addendum(parsed_hash[:standard_addendum])
+        # These two grammar rules had NO dispatch branch, so they fell through
+        # to the plain-identifier path below. That path looks for
+        # publisher/type/code at the TOP of the hash, finds only the wrapper
+        # key, and builds an empty Standard — 123 corpus ids rendered as the
+        # bare string "ASHRAE Standard ". Both subtrees are flat and carry
+        # exactly the keys #build_addendum_from_identifier already reads.
+        elsif parsed_hash[:addendum]
+          return build_addendum_from_identifier(parsed_hash[:addendum])
+        elsif parsed_hash[:publisher_base_addendum]
+          return build_addendum_from_identifier(
+            parsed_hash[:publisher_base_addendum],
+          )
         end
 
         # Handle base identifier
@@ -89,7 +101,7 @@ module Pubid
           # code_with_year contains both code and year
           code_year_data = parsed[:code_with_year]
           if code_year_data && code_year_data[:code]
-            attributes[:code] =
+            attributes[:number] =
               extract_value(code_year_data[:code])
           end
           if code_year_data && code_year_data[:year]
@@ -97,7 +109,7 @@ module Pubid
               extract_value(code_year_data[:year])
           end
         elsif parsed[:code]
-          attributes[:code] = extract_value(parsed[:code])
+          attributes[:number] = extract_value(parsed[:code])
         end
 
         # Extract year if not already extracted from code_with_year
@@ -205,7 +217,7 @@ module Pubid
       def build_publisher_addendum(parsed)
         base_attrs = {
           type: extract_value(parsed[:type]),
-          code: extract_value(parsed[:code]),
+          number: extract_value(parsed[:code]),
           year: extract_value(parsed[:year]),
         }
         base_class = determine_identifier_class(base_attrs)
@@ -228,7 +240,7 @@ module Pubid
         base_attrs = {
           copublisher: extract_value(parsed[:copublisher]),
           type: extract_value(parsed[:type]) || "Standard",
-          code: extract_value(parsed[:code]),
+          number: extract_value(parsed[:code]),
           year: extract_value(parsed[:year]),
         }
         base_class = determine_identifier_class(base_attrs)
@@ -260,7 +272,7 @@ module Pubid
         if parsed[:code_with_year]
           code_year_data = parsed[:code_with_year]
           if code_year_data && code_year_data[:code]
-            base_attrs[:code] =
+            base_attrs[:number] =
               extract_value(code_year_data[:code])
           end
           if code_year_data && code_year_data[:year]
@@ -298,7 +310,7 @@ module Pubid
         if parsed[:code_with_year]
           code_year_data = parsed[:code_with_year]
           if code_year_data && code_year_data[:code]
-            base_attrs[:code] =
+            base_attrs[:number] =
               extract_value(code_year_data[:code])
           end
           if code_year_data && code_year_data[:year]
@@ -349,7 +361,7 @@ module Pubid
         if parsed[:code_with_year]
           code_year_data = parsed[:code_with_year]
           if code_year_data && code_year_data[:code]
-            base_attrs[:code] =
+            base_attrs[:number] =
               extract_value(code_year_data[:code])
           end
           if code_year_data && code_year_data[:year]
@@ -358,7 +370,7 @@ module Pubid
           end
         else
           base_attrs[:type] = extract_value(parsed[:type]) || "Standard"
-          base_attrs[:code] = extract_value(parsed[:code])
+          base_attrs[:number] = extract_value(parsed[:code])
           base_attrs[:year] = extract_value(parsed[:year])
         end
 
@@ -431,6 +443,15 @@ module Pubid
       # @param parsed [Hash] the parsed data
       # @return [Hash] attributes for base identifier
       def extract_base_attributes(parsed)
+        # Unwrap the `:base` subtree the supplement grammars nest the base
+        # document under. Builder#build does this for the plain-identifier
+        # path, but the five supplement builders that call this method all
+        # passed the WHOLE parse hash — so every lookup below missed and the
+        # base was built with nothing. 318 Errata rendered as the identical
+        # string "ASHRAE Standard  Errata"; doing it here fixes all five call
+        # sites at once, rather than repeating the unwrap in each.
+        parsed = parsed[:base] if parsed.is_a?(Hash) && parsed[:base]
+
         attributes = {}
 
         if parsed[:publisher]
@@ -448,7 +469,7 @@ module Pubid
         if parsed[:code_with_year]
           code_year_data = parsed[:code_with_year]
           if code_year_data && code_year_data[:code]
-            attributes[:code] =
+            attributes[:number] =
               extract_value(code_year_data[:code])
           end
           if code_year_data && code_year_data[:year]
@@ -456,7 +477,7 @@ module Pubid
               extract_value(code_year_data[:year])
           end
         else
-          attributes[:code] = extract_value(parsed[:code]) if parsed[:code]
+          attributes[:number] = extract_value(parsed[:code]) if parsed[:code]
           attributes[:year] = extract_value(parsed[:year]) if parsed[:year]
         end
 

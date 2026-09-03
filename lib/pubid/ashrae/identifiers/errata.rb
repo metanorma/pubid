@@ -13,6 +13,15 @@ module Pubid
       class Errata < SupplementIdentifier
         attribute :errata_date, :string
 
+        # Make Renderers::MrString recurse into `base` instead of slugging the
+        # supplement flat off attributes it does not have. Without it every
+        # erratum of every standard shared one filename, and `to_slug` is what
+        # consumers use as an output filename.
+        def mr_supplement_suffix
+          ["errata", mr_sanitize(errata_date)]
+            .compact.reject(&:empty?).join(".")
+        end
+
         TYPED_STAGES = [
           Components::TypedStage.new(
             abbr: ["Errata"],

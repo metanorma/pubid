@@ -3,10 +3,16 @@
 module Pubid
   module Ashrae
     class UrnGenerator < Pubid::UrnGenerator::Base
+      # A supplement carries no number of its own — only the two
+      # single-document leaves declare one — so reach it through #root, which
+      # walks `base` to the standard the supplement attaches to. Without the
+      # fallback every Errata/Addendum URN lost its number when `code` moved
+      # off the shared base onto the leaves.
       def urn_number
-        return nil unless identifier.code
+        num = identifier.number || identifier.root.number
+        return nil if num.nil? || num.to_s.empty?
 
-        identifier.code.to_s
+        num.to_s
       end
 
       def urn_suffix

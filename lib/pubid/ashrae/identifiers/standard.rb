@@ -8,6 +8,9 @@ module Pubid
       # ASHRAE Standard identifier
       # Example: ASHRAE Standard 15-2024, ASHRAE Standard 90.1-2022
       class Standard < SingleIdentifier
+        # The relaton index key. Declared on the LEAF, not on the shared
+        # Identifier that SupplementIdentifier also inherits — see base.rb.
+        attribute :number, :string
         attribute :type, :string, default: "Standard"
 
         TYPED_STAGES = [

@@ -15,6 +15,14 @@ module Pubid
         attribute :addendum_code, :string  # a, b, c, ..., aa, ab, ..., ba, etc.
         attribute :addendum_date, :string  # Optional date (January 22, 2019)
 
+        # See Errata: the renderer must recurse into `base`. The addendum
+        # letter is what distinguishes addendum a from addendum b of one
+        # standard, so it belongs in the slug as well as in `==`.
+        def mr_supplement_suffix
+          ["add", addendum_code&.to_s&.downcase]
+            .compact.reject(&:empty?).join(".")
+        end
+
         TYPED_STAGES = [
           Components::TypedStage.new(
             abbr: ["Addendum", "Addenda"],

@@ -54,15 +54,25 @@ module Pubid
       end
 
       # Code with year pattern (e.g., 34-2024, 62.1-2022, 90A-2010) - used when type is missing
+      #
+      # The code portion MUST be captured with `.as(:code)`. Without it the
+      # digits were matched and then discarded — only the year was named — so
+      # every identifier reaching this rule lost its document number: 48 corpus
+      # ids rendered as "ANSI/ASHRAE Addendum a to ASHRAE Standard -2024",
+      # number gone and a dangling dash left behind. Builder#extract_base_attributes
+      # already read `code_with_year[:code]`; it was waiting for a value the
+      # grammar never produced.
       rule(:code_with_year) do
         (
-          digits >> # First part (e.g., 34, 62)
-          (dot >> digits).repeat(0, 2) >> # Optional dotted parts (e.g., .1)
-          # Special pattern for codes like "90A,B,C-2010"
           (
-            letter >> # Single letter after digits
-            (comma >> letter).repeat(0, 10) # Optional comma-separated letters
-          ).maybe >>
+            digits >> # First part (e.g., 34, 62)
+            (dot >> digits).repeat(0, 2) >> # Optional dotted parts (e.g., .1)
+            # Special pattern for codes like "90A,B,C-2010"
+            (
+              letter >> # Single letter after digits
+              (comma >> letter).repeat(0, 10) # Optional comma-separated letters
+            ).maybe
+          ).as(:code) >>
           space?.maybe >> dash >>
           year_digits.as(:year)
         ).as(:code_with_year)

@@ -46,7 +46,7 @@ module Pubid
         parts << id.type.to_s if id.type
         result = parts.join(" ")
         result += " " if result.length.positive?
-        result += id.code.to_s
+        result += id.number.to_s
         result += "-#{id.year}" if id.year
         result += " (#{id.amendment})" if id.amendment
         result += id.suffix if id.suffix
@@ -63,7 +63,7 @@ module Pubid
         if id.copublisher
           "#{id.copublisher} Addendum #{id.addendum_code} to #{id.base}"
         else
-          result = "ASHRAE Addendum #{id.addendum_code} to #{base_type} #{id.base.code}"
+          result = "ASHRAE Addendum #{id.addendum_code} to #{base_type} #{id.base.number}"
           result += "-#{id.base.year}" if id.base.year
           result
         end.tap { |r| r << " (#{id.addendum_date})" if id.addendum_date }
@@ -73,7 +73,7 @@ module Pubid
       def render_addenda_package(id)
         return id.base.to_s unless id.base
 
-        result = "ASHRAE #{id.base.type || 'Standard'} #{id.base.code}"
+        result = "ASHRAE #{id.base.type || 'Standard'} #{id.base.number}"
         result += "-#{id.base.year}" if id.base.year
         result += ": Addenda #{id.package_description}" if id.package_description
         result
@@ -85,9 +85,9 @@ module Pubid
 
         base_type = id.base.type || "Standard"
         if id.addendum_codes
-          result = "ASHRAE Addenda #{id.addendum_codes} to #{base_type} #{id.base.code}"
+          result = "ASHRAE Addenda #{id.addendum_codes} to #{base_type} #{id.base.number}"
         else
-          result = "ASHRAE Addenda to #{base_type} #{id.base.code}"
+          result = "ASHRAE Addenda to #{base_type} #{id.base.number}"
         end
         result += "-#{id.base.year}" if id.base.year
         result
@@ -108,7 +108,7 @@ module Pubid
         return id.base.to_s unless id.base
 
         base_type = id.base.type || "Standard"
-        result = "Interpretations for #{base_type} #{id.base.code}"
+        result = "Interpretations for #{base_type} #{id.base.number}"
         result += "-#{id.base.year}" if id.base.year
         result
       end

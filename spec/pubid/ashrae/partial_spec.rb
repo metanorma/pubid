@@ -35,7 +35,7 @@ RSpec.describe "ASHRAE partial reference parsing" do
     subject(:id) { Pubid::Ashrae.parse("ASHRAE 15-2019") }
 
     it "parses the code correctly" do
-      expect(id.code).to eq("15")
+      expect(id.number).to eq("15")
     end
 
     it "parses the year correctly" do
