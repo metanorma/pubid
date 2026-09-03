@@ -1,21 +1,20 @@
 Flavor: CSA
-Classified: 2026-04-01 22:07:59
+Classified: 2026-08-31 13:44:52
 ======================================================================
 
 OVERALL STATISTICS
 ----------------------------------------------------------------------
-Total: 906
-Pass: 819 (90.4%)
-Fail: 87 (9.6%)
+Total: 909
+Pass: 829 (91.2%)
+Fail: 80 (8.8%)
 
 BY CLASS
 ----------------------------------------------------------------------
 bundled                                  Pass: 5/7 (71.43%)
-canadian_adopted                         Pass: 453/453 (100.0%)
-cec                                      Pass: 42/42 (100.0%)
-combined                                 Pass: 8/82 (9.76%)
+canadian_adopted                         Pass: 475/475 (100.0%)
+cec                                      Pass: 43/43 (100.0%)
+combined                                 Pass: 8/81 (9.88%)
 csa_adopted                              Pass: 100/100 (100.0%)
-nil_class                                Pass: 21/21 (100.0%)
 package                                  Pass: 12/12 (100.0%)
 series                                   Pass: 10/11 (90.91%)
-standard                                 Pass: 168/178 (94.38%)
+standard                                 Pass: 176/180 (97.78%)
