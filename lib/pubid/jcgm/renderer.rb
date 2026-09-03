@@ -37,8 +37,15 @@ module Pubid
         id.date ? ":#{id.date}" : ""
       end
 
+      # Two surface forms:
+      #   "JCGM 17th Meeting (2012)"  — date present (published records)
+      #   "JCGM 17th Meeting"         — date absent (partial reference)
+      # The ordinal alone names the meeting, so the dateless form is a valid
+      # identifier and must stay re-parseable (the parser makes the " (YYYY)"
+      # group optional to match).
       def render_meeting(id)
-        "JCGM #{id.ordinal} Meeting (#{id.date.year})"
+        base = "JCGM #{id.ordinal} Meeting"
+        id.date ? "#{base} (#{id.date.year})" : base
       end
 
       def render_single(id)
