@@ -53,10 +53,17 @@ module Pubid
       # wants the ordinal suffix), so ordered choice is unambiguous. Emits the
       # same tokens as a guide plus type_with_stage "Meeting", so the generic
       # builder path resolves it to Identifiers::Meeting (like "Amd").
+      #
+      # The trailing " (YYYY)" group is optional, so the partial reference
+      # "JCGM 11st Meeting" parses with `date` left nil. JCGM numbers its
+      # meetings in one sequence, so the ordinal alone names the event and the
+      # year is redundant detail. The whole group is `.maybe` (not the year
+      # inside it), so a dangling "(" or a truncated year still fails —
+      # the same shape as `date_portion.maybe` in `rule(:base)`.
       rule(:meeting_identifier) do
         publisher >> space >> digits.as(:number) >> ordinal_suffix >>
-          space >> str("Meeting").as(:type_with_stage) >> space >>
-          str("(") >> year_digits.as(:date) >> str(")")
+          space >> str("Meeting").as(:type_with_stage) >>
+          (space >> str("(") >> year_digits.as(:date) >> str(")")).maybe
       end
 
       rule(:ordinal_suffix) do
