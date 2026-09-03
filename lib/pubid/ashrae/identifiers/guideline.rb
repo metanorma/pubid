@@ -8,6 +8,9 @@ module Pubid
       # ASHRAE Guideline identifier
       # Example: ASHRAE Guideline 0-2019, ASHRAE Guideline 1.5
       class Guideline < SingleIdentifier
+        # The relaton index key. Declared on the LEAF, not on the shared
+        # Identifier that SupplementIdentifier also inherits — see base.rb.
+        attribute :number, :string
         attribute :type, :string, default: "Guideline"
 
         TYPED_STAGES = [

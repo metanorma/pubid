@@ -14,6 +14,13 @@ module Pubid
         attribute :addendum_codes, :string # Multiple codes like "c and d"
         attribute :connector, :string # "and" or ","
 
+        # See Errata. The whole letter list is the identity here — "Addenda a,
+        # b" and "Addenda c, d" of one standard are different documents.
+        def mr_supplement_suffix
+          ["adds", mr_sanitize(addendum_codes)]
+            .compact.reject(&:empty?).join(".")
+        end
+
         TYPED_STAGES = [
           Components::TypedStage.new(
             abbr: ["Addenda", "Combined Addenda"],

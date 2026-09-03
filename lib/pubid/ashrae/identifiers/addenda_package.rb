@@ -14,6 +14,12 @@ module Pubid
       class AddendaPackage < SupplementIdentifier
         attribute :package_description, :string # e.g., "Addenda Supplement Package"
 
+        # See Errata.
+        def mr_supplement_suffix
+          ["pkg", mr_sanitize(package_description)]
+            .compact.reject(&:empty?).join(".")
+        end
+
         TYPED_STAGES = [
           Components::TypedStage.new(
             abbr: ["Addenda Supplement Package", "Addenda Package"],
