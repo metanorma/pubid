@@ -8,4 +8,4 @@ API 17J
 API 17U
 API 570
 API 579-2
-!API COS 1-07/RP 75, 4th edition!API
+!API COS 1-07/RP 75, 4th edition!API 75-07

@@ -30,13 +30,13 @@ module Pubid
         # identifier attribute (the concrete class is pinned by `_type`). Drop it
         # so the raw Parslet::Slice never lands in the inherited :type attribute.
         when :type then nil
-        # `:chapter` is a PARSE-TREE key and keeps its name in the grammar; the
-        # ATTRIBUTE it feeds is `number` (see handle_key below), so it casts
-        # like a number rather than like a plain string.
-        when :number, :chapter then Components::Code.new(value: value.to_s)
         when :reaffirmation
           value.is_a?(Hash) ? (value[:year] || value).to_s : value.to_s
-        when :part, :section, :subsection, :year
+        # Every remaining key is a bare scalar. `:chapter` is a PARSE-TREE key
+        # and keeps its name in the grammar; the ATTRIBUTE it feeds is `number`
+        # (see handle_key below), which this branch retyped from
+        # Components::Code to :string — so it now casts like the rest.
+        when :number, :chapter, :part, :section, :subsection, :year
           value.to_s
         else
           super

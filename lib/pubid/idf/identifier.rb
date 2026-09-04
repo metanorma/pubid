@@ -7,6 +7,15 @@ module Pubid
     class Identifier < ::Pubid::Identifier
       attribute :typed_stage, Components::TypedStage
 
+      # `number`/`part`/`subpart` are declared here rather than inherited as a
+      # Components::Code: IDF stores a bare string in every one of them.
+      # Declaring on this class is safe because its body lives in this one file
+      # and is never reopened, so every subclass body opens after it has run
+      # (lutaml deep-dups the parent attribute table at class-definition time).
+      attribute :number, :string
+      attribute :part, :string
+      attribute :subpart, :string
+
       def to_s(**opts)
         render(format: :human, **opts)
       end
@@ -21,11 +30,11 @@ module Pubid
       def number_portion(lang_single: false)
         [
           # Directives may not have a number
-          (number ? " #{number.value}" : ""),
+          (number ? " #{number}" : ""),
 
           # Parts and subparts are optional
-          (part ? "-#{part.value}" : ""),
-          (subpart ? "-#{subpart.value}" : ""),
+          (part ? "-#{part}" : ""),
+          (subpart ? "-#{subpart}" : ""),
 
           # Stage iteration is optional
           (stage_iteration ? ".#{stage_iteration.number}" : ""),

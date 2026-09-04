@@ -12,7 +12,9 @@ module Pubid
 
         attribute :publisher, :string, collection: true # EN, CEN, CLC, etc.
         attribute :type, :string # TR, TS, Guide
-        attribute :number, :string
+        # `number` is inherited as a :string from Pubid::CenCenelec::Identifier;
+        # a same-type redeclaration here is the determinism landmine in
+        # miniature, and it moves the generated accessor onto this class.
         attribute :parts, :string, collection: true
         attribute :year, :integer
         attribute :stage, :string # prEN, FprEN

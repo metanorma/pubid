@@ -164,7 +164,7 @@ module Pubid
 
         # Build attributes hash (conditional arguments must be handled separately)
         attrs = {
-          number: Components::Code.new(value: number_val),
+          number: number_val,
           issue_number: issue_number,
           index_format: format,
         }
@@ -181,7 +181,7 @@ module Pubid
 
         # Build attributes hash
         attrs = {
-          number: Components::Code.new(value: number_val),
+          number: number_val,
         }
         attrs[:date] = Components::Date.new(year: year_val) if year_val
 
@@ -206,9 +206,9 @@ module Pubid
 
         # Build attributes hash
         attrs = {
-          number: Components::Code.new(value: number_val),
+          number: number_val,
         }
-        attrs[:part] = Components::Code.new(value: part_val) if part_val
+        attrs[:part] = part_val if part_val
         attrs[:date] = Components::Date.new(year: year_val) if year_val
 
         Identifiers::ExplanatorySupplement.new(attrs)
@@ -248,13 +248,13 @@ module Pubid
 
         # Build attributes hash
         attrs = {
-          number: Components::Code.new(value: number_val),
+          number: number_val,
           method_code: method_code,
           method_to: method_to,
           method_and: method_and,
           is_plural: is_plural,
         }
-        attrs[:part] = Components::Code.new(value: part_val) if part_val
+        attrs[:part] = part_val if part_val
         attrs[:date] = Components::Date.new(year: year_val) if year_val
 
         Identifiers::Method.new(attrs)
@@ -280,7 +280,7 @@ module Pubid
 
         # Build attributes hash
         attrs = {
-          number: Components::Code.new(value: number_val),
+          number: number_val,
           test_series: test_series,
           test_id: test_id,
         }
@@ -313,7 +313,7 @@ module Pubid
 
         # Build attributes hash (conditional arguments must be handled separately)
         attrs = {
-          number: Components::Code.new(value: number_val),
+          number: number_val,
           section_id: section_id,
           section_format: format,
         }
@@ -343,7 +343,7 @@ module Pubid
 
         # Build attributes hash
         attrs = {
-          number: Components::Code.new(value: number_val),
+          number: number_val,
         }
         attrs[:spec_code] = Components::Code.new(value: spec_code) if spec_code
         if publisher_val
@@ -373,9 +373,9 @@ module Pubid
 
         # Build attributes hash
         attrs = {
-          number: Components::Code.new(value: number_val),
+          number: number_val,
         }
-        attrs[:part] = Components::Code.new(value: part_val) if part_val
+        attrs[:part] = part_val if part_val
         attrs[:publisher] = Components::Publisher.new(body: "DISC")
         attrs[:date] = Components::Date.new(year: year_val) if year_val
 
@@ -432,9 +432,9 @@ module Pubid
         # Build attributes hash
         attrs = {
           prefix: prefix_val,
-          number: Components::Code.new(value: number_val),
+          number: number_val,
         }
-        attrs[:part] = Components::Code.new(value: part_val) if part_val
+        attrs[:part] = part_val if part_val
         attrs[:iteration] = iteration_val if iteration_val
         attrs[:edition] = final_edition if final_edition
         attrs[:publisher] = Components::Publisher.new(body: "BS")
@@ -456,20 +456,20 @@ module Pubid
           # Build base identifier
           base_id = SingleIdentifier.new(
             publisher: Components::Publisher.new(body: "BS"),
-            number: Components::Code.new(value: base_number),
+            number: base_number,
           )
 
           # Build identifiers for each part
           id1 = SingleIdentifier.new(
             publisher: Components::Publisher.new(body: "BS"),
-            number: Components::Code.new(value: base_number),
-            part: Components::Code.new(value: part1),
+            number: base_number,
+            part: part1,
           )
 
           id2 = SingleIdentifier.new(
             publisher: Components::Publisher.new(body: "BS"),
-            number: Components::Code.new(value: base_number),
-            part: Components::Code.new(value: part2),
+            number: base_number,
+            part: part2,
           )
 
           Identifiers::BundledIdentifier.new(
@@ -636,7 +636,7 @@ module Pubid
           publisher: Components::Publisher.new(body: publisher_val),
         )
         id.prefix = prefix_val if prefix_val && !prefix_val.empty?
-        id.number = Components::Code.new(value: number_val) if number_val
+        id.number = number_val if number_val
 
         id.explicit_prefix = has_explicit_publisher || has_explicit_prefix
         id.explicit_publisher = has_explicit_publisher
@@ -646,11 +646,11 @@ module Pubid
           parts_array = parts_val[:parts]
           if parts_array.any?
             part_str = parts_array.first[:part].to_s
-            id.part = Components::Code.new(value: part_str)
+            id.part = part_str
           end
         # Handle space-separated part (direct part attribute)
         elsif space_separated_part_val
-          id.part = Components::Code.new(value: space_separated_part_val.to_s)
+          id.part = space_separated_part_val.to_s
           # Mark this part as space-separated for rendering
           id.space_separated_part = true
         end
@@ -973,7 +973,7 @@ module Pubid
           value&.to_s
 
         when :number
-          Components::Code.new(value: value.to_s)
+          value.to_s
 
         when :parts
           # Extract parts - handle both formats:
@@ -987,26 +987,25 @@ module Pubid
             # Check if subpart is already separated (new format from part_with_subpart rule)
             if first_part.key?(:subpart)
               {
-                part: Components::Code.new(value: part_str),
-                subpart: Components::Code.new(value: first_part[:subpart].to_s),
+                part: part_str,
+                subpart: first_part[:subpart].to_s,
               }
             else
               # Old format - split on dash to get part and subpart
               part_components = part_str.split("-")
-              result = { part: Components::Code.new(value: part_components.first) }
+              result = { part: part_components.first }
               if part_components.length > 1
-                result[:subpart] =
-                  Components::Code.new(value: part_components[1])
+                result[:subpart] = part_components[1]
               end
               result
             end
           end
 
         when :part
-          Components::Code.new(value: value[:part].to_s) if value.is_a?(Hash)
+          value[:part].to_s if value.is_a?(Hash)
 
         when :subpart
-          Components::Code.new(value: value.to_s)
+          value.to_s
 
         when :year, :date
           # Only create date if value is present

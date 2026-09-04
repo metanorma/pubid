@@ -37,8 +37,8 @@ module Pubid
 
       def number_portion(id, context)
         [
-          id.number.render(context:),
-          (id.part ? "-#{id.part.render(context:)}" : ""),
+          id.number,
+          (id.part ? "-#{id.part}" : ""),
           (id.date ? ":#{id.date.render(context:)}" : ""),
         ].join
       end

@@ -24,11 +24,11 @@ RSpec.describe Pubid::Bsi::Identifiers::AdoptedEuropeanNorm do
       end
 
       it "delegates number to adopted identifier" do
-        expect(parsed.number.value).to eq("10077")
+        expect(parsed.number).to eq("10077")
       end
 
       it "delegates part to adopted identifier" do
-        expect(parsed.part.value).to eq("1")
+        expect(parsed.part).to eq("1")
       end
 
       it "round-trips" do
@@ -46,7 +46,7 @@ RSpec.describe Pubid::Bsi::Identifiers::AdoptedEuropeanNorm do
       end
 
       it "delegates number" do
-        expect(parsed.number.value).to eq("1234")
+        expect(parsed.number).to eq("1234")
       end
 
       it "delegates date" do
@@ -88,12 +88,12 @@ RSpec.describe Pubid::Bsi::Identifiers::AdoptedEuropeanNorm do
       end
 
       it "delegates number" do
-        expect(parsed.number.value).to eq("1991")
+        expect(parsed.number).to eq("1991")
       end
 
       it "delegates part (includes subpart as combined value)" do
         # CEN parser captures "1-1" as combined part value
-        expect(parsed.part.value).to eq("1-1")
+        expect(parsed.part).to eq("1-1")
       end
 
       it "round-trips" do
@@ -117,11 +117,11 @@ RSpec.describe Pubid::Bsi::Identifiers::AdoptedEuropeanNorm do
       end
 
       it "delegates number" do
-        expect(parsed.number.value).to eq("50131")
+        expect(parsed.number).to eq("50131")
       end
 
       it "delegates part" do
-        expect(parsed.part.value).to eq("1")
+        expect(parsed.part).to eq("1")
       end
 
       it "includes copublisher in output" do
@@ -141,7 +141,7 @@ RSpec.describe Pubid::Bsi::Identifiers::AdoptedEuropeanNorm do
       end
 
       it "delegates number" do
-        expect(parsed.number.value).to eq("10000")
+        expect(parsed.number).to eq("10000")
       end
 
       it "round-trips" do

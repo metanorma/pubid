@@ -36,10 +36,16 @@ module Pubid
       }
       attribute :prefix, :string # Specialized prefix (A, AU, C, M, 2A, etc.)
       attribute :flex_prefix, :string # Flex type prefix (CECC, E9111, M, etc.)
-      attribute :number, Bsi::Components::Code
+      # `number`/`part`/`subpart` are plain strings, not Bsi::Components::Code:
+      # BSI never populates a field of that component beyond `value`. This class
+      # body is the sole home of Pubid::Bsi::Identifier (bsi/identifier.rb is a
+      # comment-only load stub), so declaring here is safe - every subclass body
+      # opens after it has run. `second_number` keeps the component type: it is
+      # not one of the three attributes the shared base declares.
+      attribute :number, :string
       attribute :iteration, :string # For bracket notation like 1000[9]
-      attribute :part, Bsi::Components::Code
-      attribute :subpart, Bsi::Components::Code
+      attribute :part, :string
+      attribute :subpart, :string
       attribute :second_number, Bsi::Components::Code # For collections like PAS 2035/2030
       attribute :date, Bsi::Components::Date
       attribute :stage, Pubid::Components::Stage
@@ -61,7 +67,7 @@ module Pubid
         return num_cmp unless num_cmp.zero?
 
         # Then by part
-        part_cmp = (part || Components::Code.new(value: "0")).to_s <=> (other.part || Components::Code.new(value: "0")).to_s
+        part_cmp = (part || "0").to_s <=> (other.part || "0").to_s
         return part_cmp unless part_cmp.zero?
 
         # Then by date

@@ -38,7 +38,7 @@ module Pubid
           end
 
           if identifier.number
-            parts << identifier.number.render(context: URN_CONTEXT)
+            parts << identifier.number
           end
         end
 

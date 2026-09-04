@@ -86,7 +86,7 @@ RSpec.describe Pubid::Ieee::Identifier do
         expect(ansi_identifier).to be_a(Pubid::Ansi::Identifiers::Standard)
         expect(ansi_identifier.to_s).to eq("ANSI Y32.21-1976")
         expect(ansi_identifier.publisher.body).to eq("ANSI")
-        expect(ansi_identifier.part.value).to eq("1976")
+        expect(ansi_identifier.part).to eq("1976")
 
         ncta_identifier = adopted_identifiers.last
         expect(ncta_identifier).to be_a(described_class)

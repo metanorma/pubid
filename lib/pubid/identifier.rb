@@ -91,7 +91,22 @@ module Pubid
       def identifier_registry_classes
         (scanned_identifier_classes +
           registered_identifier_classes +
-          additional_identifier_classes).uniq
+          additional_identifier_classes +
+          own_base_class).uniq
+      end
+
+      # The flavor's own Identifier base, when a builder instantiates it
+      # directly (BSI does, for the members of a bundled identifier). Such an
+      # object serializes with `_type: "pubid:<flavor>:identifier"`, and
+      # without an entry here that type resolves to nothing — so a nested
+      # polymorphic attribute typed ::Pubid::Identifier silently deserialized
+      # the member as the abstract root instead of the flavor class. Added
+      # LAST, so a concrete leaf that somehow claimed the same name still wins.
+      def own_base_class
+        return [] if self == ::Pubid::Identifier
+        return [] unless name && polymorphic_name
+
+        [self]
       end
 
       # Concrete identifier classes found directly in the flavor's `Identifiers`

@@ -21,7 +21,7 @@ RSpec.describe Pubid::Idf::SupplementIdentifier do
     end
 
     it "base has the correct number" do
-      expect(parsed.base.number.value).to eq("125")
+      expect(parsed.base.number).to eq("125")
     end
   end
 
@@ -76,7 +76,7 @@ RSpec.describe Pubid::Idf::SupplementIdentifier do
       end
 
       it "parses base part number" do
-        expect(subject.base.part.value).to eq("1")
+        expect(subject.base.part).to eq("1")
       end
     end
   end

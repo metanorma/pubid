@@ -35,7 +35,7 @@ RSpec.describe Pubid::Idf::Identifiers::ReviewedMethod do
     end
 
     it "parses number" do
-      expect(parsed.number.value).to eq("254")
+      expect(parsed.number).to eq("254")
     end
 
     it "parses part" do
@@ -62,11 +62,11 @@ RSpec.describe Pubid::Idf::Identifiers::ReviewedMethod do
     end
 
     it "parses number" do
-      expect(parsed.number.value).to eq("233")
+      expect(parsed.number).to eq("233")
     end
 
     it "parses part" do
-      expect(parsed.part.value).to eq("1")
+      expect(parsed.part).to eq("1")
     end
 
     it "parses date" do

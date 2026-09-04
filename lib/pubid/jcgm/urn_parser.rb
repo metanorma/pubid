@@ -102,7 +102,7 @@ module Pubid
 
         Jcgm.locate_type(typed_stage.type_code).new(
           base: base,
-          number: (number.nil? || number.empty? ? nil : build_code(number)),
+          number: (number.nil? || number.empty? ? nil : number.to_s),
           date: urn_date(year),
           typed_stage: typed_stage,
         )
@@ -121,7 +121,7 @@ module Pubid
         gum = number.start_with?(GUM_PREFIX)
 
         (gum ? Identifiers::GumGuide : Identifiers::Guide).new(
-          number: build_code(gum ? number.delete_prefix(GUM_PREFIX) : number),
+          number: (gum ? number.delete_prefix(GUM_PREFIX) : number).to_s,
           date: urn_date(segment_matching(rest, YEAR_PATTERN)),
           languages: urn_languages(segment_matching(rest, LANGUAGES_PATTERN)),
         )
@@ -143,11 +143,7 @@ module Pubid
       # non-numeric segment as "0" — the behaviour of the previous
       # render-and-re-parse implementation.
       def meeting_number(segment)
-        build_code(segment.to_i.to_s)
-      end
-
-      def build_code(value)
-        Pubid::Components::Code.new(value: value.to_s)
+        segment.to_i.to_s
       end
 
       # nil for an absent year; a Date for a well-formed one. The grammar

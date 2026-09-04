@@ -30,10 +30,11 @@ module Pubid
       def render_default(id)
         parts = ["API"]
 
-        # Add type if available
-        if id.class.attributes.key?(:type_string) && id.type_string
-          parts << id.type_string
-        end
+        # Add the type token (RP, STD, BULL, PUBL, SPEC, TR ...) if the leaf
+        # defines one. `type_string` is a plain METHOD on each leaf, never a
+        # lutaml attribute, so the old `attributes.key?(:type_string)` guard
+        # was always false and the token was dropped from every rendering.
+        parts << id.type_string if id.respond_to?(:type_string) && id.type_string
 
         # Add code/number with part as one token
         parts << code_portion(id) if code_portion(id)
@@ -77,10 +78,18 @@ module Pubid
         parts.join(" ")
       end
 
+      # The document number plus its part, as one token.
+      #
+      # This used to read a `code` attribute that NOTHING ever assigned — the
+      # parser emits no `:code` key and the builder never sets one — so it
+      # always returned nil and 163 of API's 193 corpus identifiers rendered
+      # as the bare publisher "API". That string is both the document number
+      # and the output filename, so they all collapsed onto each other.
+      # `number` is what Builder#cast actually populates.
       def code_portion(id)
-        return nil unless id.code
+        return nil unless id.number
 
-        code_str = id.code.to_s
+        code_str = id.number.to_s
         code_str += "-#{id.part}" if id.part
         code_str
       end

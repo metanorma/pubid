@@ -102,9 +102,13 @@ stage_format_long: nil, with_date: nil)
             parts << supplement.date.year.to_s
           end
 
-          # Add supplement number if present
+          # Add supplement number if present. `supplement` is polymorphic and
+          # `number` is a Components::Code on ::Pubid::Identifier but a plain
+          # :string in a growing number of flavors, so read through either.
           if supplement.number
-            parts << "v#{supplement.number.value}"
+            number = supplement.number
+            value = number.respond_to?(:value) ? number.value : number
+            parts << "v#{value}"
           end
         end
       end

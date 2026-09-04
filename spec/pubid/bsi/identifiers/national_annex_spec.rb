@@ -38,7 +38,7 @@ RSpec.describe Pubid::Bsi::Identifiers::NationalAnnex do
       end
 
       it "delegates number via base_doc" do
-        expect(parsed.base_doc.number.value).to eq("5678")
+        expect(parsed.base_doc.number).to eq("5678")
       end
 
       it "delegates date via base_doc" do

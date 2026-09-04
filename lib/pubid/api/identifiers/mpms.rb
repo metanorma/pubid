@@ -20,13 +20,6 @@ module Pubid
         def type_string
           "MPMS"
         end
-
-        private
-
-        def code_portion
-          # Override - MPMS doesn't use code_portion
-          nil
-        end
       end
     end
   end

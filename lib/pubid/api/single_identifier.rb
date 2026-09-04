@@ -12,20 +12,13 @@ module Pubid
       # serialize a String against the Components::Publisher attribute.
       attribute :publisher, :string, default: -> { "API" }
 
-      attribute :code, Components::Code
-      attribute :part, :string
+      # `number` and `part` are inherited as :string from
+      # Pubid::Api::Identifier. There is deliberately no `code` attribute: one
+      # existed here typed Components::Code, but nothing ever assigned it
+      # (the parser emits no `:code` key), so it only misdirected
+      # Renderer#code_portion away from the `number` the builder populates.
       attribute :year, :string
       attribute :reaffirmation, :string
-
-      private
-
-      def code_portion
-        return nil unless code
-
-        code_str = code.to_s
-        code_str += "-#{part}" if part
-        code_str
-      end
     end
   end
 end

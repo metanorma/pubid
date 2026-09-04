@@ -94,6 +94,16 @@ module Pubid
 
       private
 
+      # Read a value that may be a component or a bare scalar. BSI's own
+      # `number`/`part`/`subpart` are plain strings, but a bundle member or an
+      # adopted identifier can be a foreign one (ISO, IEC, CEN/CENELEC) whose
+      # equivalents are still a Components::Code.
+      def component_str(value)
+        return "" if value.nil?
+
+        (value.respond_to?(:render) ? value.render(context: @context) : value).to_s
+      end
+
       # ------------------------------------------------------------------
       # SingleIdentifier (base BSI identifier)
       # ------------------------------------------------------------------
@@ -109,7 +119,7 @@ module Pubid
         end
 
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
 
           if id.second_number
             second_val = id.second_number.render(context: @context)
@@ -118,13 +128,13 @@ module Pubid
 
           space_separated = id.space_separated_part
           if id.part
-            part_val = id.part.render(context: @context)
+            part_val = id.part
             part_str = part_val.to_s.strip
             separator = space_separated ? " " : "-"
             number_str += "#{separator}#{part_str}"
           end
           if id.subpart
-            subpart_val = id.subpart.render(context: @context)
+            subpart_val = id.subpart
             subpart_str = subpart_val.to_s.strip
             number_str += "-#{subpart_str}"
           end
@@ -249,14 +259,14 @@ module Pubid
         parts << id.prefix if id.prefix
 
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
 
           if id.part
-            part_val = id.part.render(context: @context)
+            part_val = id.part
             number_str += "-#{part_val}"
           end
           if id.subpart
-            subpart_val = id.subpart.render(context: @context)
+            subpart_val = id.subpart
             number_str += "-#{subpart_val}"
           end
 
@@ -321,8 +331,10 @@ module Pubid
           parts_list = id.identifiers[1..].map do |idd|
             part_val = idd.class.attributes.key?(:part) ? idd.part : nil
             if part_val
-              pv = part_val.render(context: @context)
-              pv.to_s
+              # A bundle member may be a foreign identifier (ISO, CEN/CENELEC),
+              # whose `part` is still a Components::Code, so read through
+              # whichever shape it holds.
+              component_str(part_val)
             else
               idd.to_s
             end
@@ -350,23 +362,23 @@ module Pubid
               abbrev_str = prefix.to_s
             end
             if idd.number
-              number_val = idd.number.render(context: @context)
+              number_val = idd.number
               abbrev_str += " " if !abbrev_str.empty?
               abbrev_str += number_val.to_s
             end
             if idd.part
-              part_val = idd.part.render(context: @context)
+              part_val = idd.part
               abbrev_str += "-#{part_val}"
             end
             parts << abbrev_str
           else
             abbrev_str = ""
             if idd.number
-              number_val = idd.number.render(context: @context)
+              number_val = idd.number
               abbrev_str = number_val.to_s
             end
             if idd.part
-              part_val = idd.part.render(context: @context)
+              part_val = idd.part
               abbrev_str += "-#{part_val}"
             end
             parts << abbrev_str
@@ -483,7 +495,7 @@ module Pubid
         parts << "BS"
 
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
           parts << number_str
         end
 
@@ -507,9 +519,9 @@ module Pubid
         parts << "DISC"
 
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
           if id.part
-            part_val = id.part.render(context: @context)
+            part_val = id.part
             number_str += "-#{part_val.to_s.strip}"
           end
           parts << "PD #{number_str}"
@@ -529,14 +541,14 @@ module Pubid
         parts << type_abbr
 
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
 
           if id.part
-            part_val = id.part.render(context: @context)
+            part_val = id.part
             number_str += "-#{part_val.to_s.strip}"
           end
           if id.subpart
-            subpart_val = id.subpart.render(context: @context)
+            subpart_val = id.subpart
             number_str += "-#{subpart_val.to_s.strip}"
           end
 
@@ -562,14 +574,14 @@ module Pubid
         parts << "EP"
 
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
 
           if id.part
-            part_val = id.part.render(context: @context)
+            part_val = id.part
             number_str += "-#{part_val.to_s.strip}"
           end
           if id.subpart
-            subpart_val = id.subpart.render(context: @context)
+            subpart_val = id.subpart
             number_str += "-#{subpart_val.to_s.strip}"
           end
 
@@ -607,14 +619,14 @@ module Pubid
         parts << "BS"
 
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
 
           if id.part
-            part_val = id.part.render(context: @context)
+            part_val = id.part
             number_str += "-#{part_val}"
           end
           if id.subpart
-            subpart_val = id.subpart.render(context: @context)
+            subpart_val = id.subpart
             number_str += "-#{subpart_val}"
           end
 
@@ -637,13 +649,13 @@ module Pubid
         parts << "BSI Flex"
 
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
           if id.part
-            part_val = id.part.render(context: @context)
+            part_val = id.part
             number_str += "-#{part_val}"
           end
           if id.subpart
-            subpart_val = id.subpart.render(context: @context)
+            subpart_val = id.subpart
             number_str += "-#{subpart_val}"
           end
           parts << number_str
@@ -665,9 +677,9 @@ module Pubid
       def render_handbook(id)
         abbr = id.original_abbr || "Handbook"
 
-        number_str = id.number.render(context: @context)
+        number_str = id.number
         if id.part
-          part_val = id.part.render(context: @context)
+          part_val = id.part
           number_str += "-#{part_val.to_s.strip}"
         end
 
@@ -681,7 +693,7 @@ module Pubid
         parts << id.publisher.to_s if id.publisher
 
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
           parts << number_str
         end
 
@@ -708,9 +720,9 @@ module Pubid
         parts << id.publisher.to_s if id.publisher
 
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
           if id.part
-            part_val = id.part.render(context: @context)
+            part_val = id.part
             number_str += "-#{part_val}"
           end
           parts << number_str
@@ -771,7 +783,7 @@ module Pubid
         parts << type_abbr
 
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
 
           if id.second_number
             second_val = id.second_number.render(context: @context)
@@ -779,11 +791,11 @@ module Pubid
           end
 
           if id.part
-            part_val = id.part.render(context: @context)
+            part_val = id.part
             number_str += "-#{part_val.to_s.strip}"
           end
           if id.subpart
-            subpart_val = id.subpart.render(context: @context)
+            subpart_val = id.subpart
             number_str += "-#{subpart_val.to_s.strip}"
           end
 
@@ -811,7 +823,7 @@ module Pubid
         parts << type_abbr
 
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
 
           if id.second_number
             second_val = id.second_number.render(context: @context)
@@ -819,11 +831,11 @@ module Pubid
           end
 
           if id.part
-            part_val = id.part.render(context: @context)
+            part_val = id.part
             number_str += "-#{part_val.to_s.strip}"
           end
           if id.subpart
-            subpart_val = id.subpart.render(context: @context)
+            subpart_val = id.subpart
             number_str += "-#{subpart_val.to_s.strip}"
           end
 
@@ -850,7 +862,7 @@ module Pubid
         parts << id.publisher.to_s if id.publisher
 
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
           parts << number_str
         end
 
@@ -919,14 +931,14 @@ module Pubid
         parts << "BS"
 
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
 
           if id.part
-            part_val = id.part.render(context: @context)
+            part_val = id.part
             number_str += "-#{part_val}"
           end
           if id.subpart
-            subpart_val = id.subpart.render(context: @context)
+            subpart_val = id.subpart
             number_str += "-#{subpart_val}"
           end
 
@@ -949,14 +961,14 @@ module Pubid
         parts << "TS"
 
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
 
           if id.part
-            part_val = id.part.render(context: @context)
+            part_val = id.part
             number_str += "-#{part_val}"
           end
           if id.subpart
-            subpart_val = id.subpart.render(context: @context)
+            subpart_val = id.subpart
             number_str += "-#{subpart_val}"
           end
 
@@ -979,7 +991,7 @@ module Pubid
         parts << "BS"
 
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
           parts << number_str
         end
 

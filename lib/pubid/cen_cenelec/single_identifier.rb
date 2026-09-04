@@ -30,7 +30,7 @@ module Pubid
         return num_cmp unless num_cmp.zero?
 
         # Then by part
-        part_cmp = (part || Components::Code.new(value: "0")).to_s <=> (other.part || Components::Code.new(value: "0")).to_s
+        part_cmp = (part || "0").to_s <=> (other.part || "0").to_s
         return part_cmp unless part_cmp.zero?
 
         # Then by date

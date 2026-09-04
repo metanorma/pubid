@@ -69,7 +69,7 @@ module Pubid
         when :publisher
           Jcgm::Components::Publisher.new(publisher: value.to_s)
         when :number
-          Pubid::Components::Code.new(value: value.to_s)
+          value.to_s
         when :date
           date_str = value.to_s
           if date_str.include?("-")

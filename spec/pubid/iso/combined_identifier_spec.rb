@@ -21,7 +21,7 @@ RSpec.describe Pubid::Iso::CombinedIdentifier do
       end
 
       it "parses joint identifier number" do
-        expect(additional_identifier.number.value).to eq("254")
+        expect(additional_identifier.number).to eq("254")
       end
 
       it "parses joint identifier date" do
@@ -75,7 +75,7 @@ RSpec.describe Pubid::Iso::CombinedIdentifier do
       end
 
       it "parses joint identifier number" do
-        expect(additional_identifier.number.value).to eq("263")
+        expect(additional_identifier.number).to eq("263")
       end
 
       it "parses joint identifier date" do
@@ -133,7 +133,7 @@ RSpec.describe Pubid::Iso::CombinedIdentifier do
       end
 
       it "parses joint identifier number" do
-        expect(additional_identifier.number.value).to eq("171")
+        expect(additional_identifier.number).to eq("171")
       end
 
       it "parses joint identifier date" do
@@ -187,11 +187,11 @@ RSpec.describe Pubid::Iso::CombinedIdentifier do
       end
 
       it "parses joint identifier number" do
-        expect(additional_identifier.number.value).to eq("124")
+        expect(additional_identifier.number).to eq("124")
       end
 
       it "parses joint identifier part" do
-        expect(additional_identifier.part.value).to eq("2")
+        expect(additional_identifier.part).to eq("2")
       end
 
       it "parses joint identifier date" do

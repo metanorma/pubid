@@ -20,7 +20,7 @@ RSpec.describe Pubid::Bsi::Identifiers::PublishedDocument do
       end
 
       it "parses number" do
-        expect(parsed.number.value).to eq("1234")
+        expect(parsed.number).to eq("1234")
       end
 
       it "parses year" do
@@ -42,7 +42,7 @@ RSpec.describe Pubid::Bsi::Identifiers::PublishedDocument do
       end
 
       it "parses number" do
-        expect(parsed.number.value).to eq("5678")
+        expect(parsed.number).to eq("5678")
       end
 
       it "has no date" do
@@ -66,11 +66,11 @@ RSpec.describe Pubid::Bsi::Identifiers::PublishedDocument do
       end
 
       it "parses number" do
-        expect(parsed.number.value).to eq("7654")
+        expect(parsed.number).to eq("7654")
       end
 
       it "parses part" do
-        expect(parsed.part.value).to eq("3")
+        expect(parsed.part).to eq("3")
       end
 
       it "parses year" do
@@ -92,16 +92,16 @@ RSpec.describe Pubid::Bsi::Identifiers::PublishedDocument do
       end
 
       it "parses number" do
-        expect(parsed.number.value).to eq("8888")
+        expect(parsed.number).to eq("8888")
       end
 
       it "parses first part level" do
-        expect(parsed.part.value).to eq("2")
+        expect(parsed.part).to eq("2")
       end
 
       # Multi-level parts are now properly separated by part_with_subpart rule
       it "has subpart from parser" do
-        expect(parsed.subpart.value).to eq("1")
+        expect(parsed.subpart).to eq("1")
       end
 
       # Multi-level parts round-trip properly now
@@ -166,7 +166,7 @@ RSpec.describe Pubid::Bsi::Identifiers::PublishedDocument do
       end
 
       it "parses number" do
-        expect(parsed.number.value).to eq("10000")
+        expect(parsed.number).to eq("10000")
       end
 
       it "round-trips" do

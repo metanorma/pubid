@@ -132,7 +132,7 @@ module Pubid
           end
 
         when :number
-          Components::Code.new(value: value.to_s)
+          value.to_s
 
         when :parts
           # Extract first part, preserve full multi-level part string
@@ -142,11 +142,11 @@ module Pubid
             part_str = parts_array.first[:part].to_s
 
             # Store the full part value for multi-level parts
-            { part: Components::Code.new(value: part_str) }
+            { part: part_str }
           end
 
         when :part
-          Components::Code.new(value: value[:part].to_s) if value.is_a?(Hash)
+          value[:part].to_s if value.is_a?(Hash)
 
         when :year, :date
           # Check if month is present in the data and include it

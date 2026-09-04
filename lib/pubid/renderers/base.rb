@@ -41,6 +41,19 @@ module Pubid
         %(#{lead}<span class="#{css_class}">#{core}</span>#{trail})
       end
 
+      # Render a value that may be a component or a bare scalar.
+      #
+      # `number`, `part` and `subpart` are `Components::Code` on
+      # ::Pubid::Identifier but a plain `:string` in a growing number of
+      # flavors, so a shared renderer cannot assume the format-aware
+      # `#render(context:)` seam is there. This keeps both shapes working while
+      # the flavors convert one tranche at a time.
+      def render_component(value, context)
+        return nil if value.nil?
+
+        value.respond_to?(:render) ? value.render(context: context) : value.to_s
+      end
+
       # Choose between "stage" and a type/supplement class for a typed stage.
       def typed_stage_css(typed_stage)
         code = typed_stage&.type_code.to_s

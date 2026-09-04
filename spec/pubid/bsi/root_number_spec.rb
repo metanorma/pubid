@@ -100,14 +100,16 @@ RSpec.describe "Pubid::Bsi index key (root.number)" do
     end
   end
 
-  # KNOWN GAP, pre-existing and deliberately not closed here.
-  # `Identifiers::Set` mixes flavors: a "BS ISO 20400 + ..." set holds
-  # Pubid::Iso identifiers in an attribute typed to BSI's own Code, so
-  # `to_hash` raises Lutaml::Model::IncorrectModelError. That is the
-  # cross-flavor attribute-type bug already fixed once on
-  # Ieee::Identifiers::AdoptedStandard, and closing it here needs the same
-  # widening plus a from_hash check — a separate defect from the index key.
-  # `#root` is fixed, so the key works; the serialization still raises.
+  # This block used to pin a KNOWN GAP: a "BS ISO 20400 + ..." set holds
+  # Pubid::Iso identifiers, and BSI declared `number`/`part`/`subpart` as its
+  # own Bsi::Components::Code, so `to_hash` raised
+  # Lutaml::Model::IncorrectModelError (hand-off bsi-set-cross-flavor-type).
+  #
+  # Retyping those three attributes to :string removed the offending type
+  # outright, which closes the gap as a side effect — there is no longer a
+  # BSI-specific component for a foreign identifier to mismatch. 74 BSI ids
+  # that previously raised on `to_hash` now serialize. The pin turning red is
+  # what surfaced this, so it is rewritten to assert the repair.
   describe "Identifiers::Set" do
     subject(:id) { Pubid::Bsi.parse("BS ISO 20400 + BS ISO 44001+BS ISO 44002") }
 
@@ -115,8 +117,24 @@ RSpec.describe "Pubid::Bsi index key (root.number)" do
       expect(id.root.number.to_s).to eq("20400")
     end
 
-    it "still raises on to_hash (pre-existing, hand-off bsi-set-cross-flavor-type)" do
-      expect { id.to_hash }.to raise_error(Lutaml::Model::IncorrectModelError)
+    it "serializes instead of raising" do
+      expect { id.to_hash }.not_to raise_error
+    end
+
+    it "round-trips through from_hash" do
+      hash = id.to_hash
+      restored = Pubid::Bsi::Identifier.from_hash(hash)
+
+      expect(restored).to be_a(Pubid::Bsi::Identifiers::Set)
+      expect(restored.to_hash).to eq(hash)
+      expect(restored.to_s).to eq(id.to_s)
+    end
+
+    # Note the set's `root` walks into the nested ISO identifier, whose own
+    # `number` is still an Iso::Components::Code until tranche 3. `.to_s` is
+    # what relaton keys on, so the index contract holds either way.
+    it "still reaches an ISO Code through #root" do
+      expect(id.root.number).to be_a(Pubid::Iso::Components::Code)
     end
   end
 

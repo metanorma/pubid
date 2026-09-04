@@ -35,7 +35,7 @@ RSpec.describe Pubid::Idf::Identifiers::InternationalStandard do
     end
 
     it "parses number" do
-      expect(parsed.number.value).to eq("125A")
+      expect(parsed.number).to eq("125A")
     end
 
     it "parses date" do
@@ -58,11 +58,11 @@ RSpec.describe Pubid::Idf::Identifiers::InternationalStandard do
     end
 
     it "parses number" do
-      expect(parsed.number.value).to eq("124")
+      expect(parsed.number).to eq("124")
     end
 
     it "parses part" do
-      expect(parsed.part.value).to eq("2")
+      expect(parsed.part).to eq("2")
     end
 
     it "parses date" do
@@ -85,7 +85,7 @@ RSpec.describe Pubid::Idf::Identifiers::InternationalStandard do
     end
 
     it "parses number" do
-      expect(parsed.number.value).to eq("259")
+      expect(parsed.number).to eq("259")
     end
 
     it "has no part" do

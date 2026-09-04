@@ -20,7 +20,7 @@ RSpec.describe Pubid::Jcgm do
         end
 
         it "parses number" do
-          expect(parsed.number.value).to eq("100")
+          expect(parsed.number).to eq("100")
         end
 
         it "parses date" do
@@ -80,7 +80,7 @@ RSpec.describe Pubid::Jcgm do
         end
 
         it "parses number" do
-          expect(parsed.number.value).to eq("200")
+          expect(parsed.number).to eq("200")
         end
 
         it "parses date" do
@@ -124,7 +124,7 @@ RSpec.describe Pubid::Jcgm do
         end
 
         it "parses GUM number" do
-          expect(parsed.number.value).to eq("6")
+          expect(parsed.number).to eq("6")
         end
 
         it "parses date" do
@@ -146,7 +146,7 @@ RSpec.describe Pubid::Jcgm do
         end
 
         it "parses GUM number" do
-          expect(parsed.number.value).to eq("1")
+          expect(parsed.number).to eq("1")
         end
 
         it "parses full date" do
@@ -180,7 +180,7 @@ RSpec.describe Pubid::Jcgm do
         end
 
         it "parses the meeting number as a clean integer value" do
-          expect(parsed.number.value).to eq("17")
+          expect(parsed.number).to eq("17")
         end
 
         it "parses the year" do
@@ -210,7 +210,7 @@ RSpec.describe Pubid::Jcgm do
 
           it "parses as Meeting with number #{number} and year #{year}" do
             expect(parsed).to be_a(Pubid::Jcgm::Identifiers::Meeting)
-            expect(parsed.number.value).to eq(number)
+            expect(parsed.number).to eq(number)
             expect(parsed.date.year).to eq(year)
           end
 
@@ -233,12 +233,12 @@ RSpec.describe Pubid::Jcgm do
 
         it "parses base identifier" do
           expect(parsed.base).to be_a(Pubid::Jcgm::Identifiers::Guide)
-          expect(parsed.base.number.value).to eq("100")
+          expect(parsed.base.number).to eq("100")
           expect(parsed.base.date.year).to eq("2008")
         end
 
         it "parses the amendment number" do
-          expect(parsed.number.value).to eq("1")
+          expect(parsed.number).to eq("1")
         end
 
         it "has no amendment date" do
@@ -264,7 +264,7 @@ RSpec.describe Pubid::Jcgm do
         end
 
         it "parses the amendment number" do
-          expect(parsed.number.value).to eq("1")
+          expect(parsed.number).to eq("1")
         end
 
         it "parses amendment full date" do
@@ -292,7 +292,7 @@ RSpec.describe Pubid::Jcgm do
 
           it "parses as a plain Guide with the token as its number" do
             expect(parsed).to be_a(Pubid::Jcgm::Identifiers::Guide)
-            expect(parsed.number.value).to eq(number)
+            expect(parsed.number).to eq(number)
           end
 
           it "has no date" do
@@ -322,7 +322,7 @@ RSpec.describe Pubid::Jcgm do
 
         it "parses the base identifier as a Guide 200:2008" do
           expect(parsed.base).to be_a(Pubid::Jcgm::Identifiers::Guide)
-          expect(parsed.base.number.value).to eq("200")
+          expect(parsed.base.number).to eq("200")
           expect(parsed.base.date.year).to eq("2008")
         end
 
@@ -346,13 +346,13 @@ RSpec.describe Pubid::Jcgm do
 
         it "parses the base identifier as Guide 101:2008" do
           expect(parsed.base).to be_a(Pubid::Jcgm::Identifiers::Guide)
-          expect(parsed.base.number.value).to eq("101")
+          expect(parsed.base.number).to eq("101")
           expect(parsed.base.date.year).to eq("2008")
         end
 
         it "carries the corrigendum number" do
-          expect(parsed.number).to be_a(Pubid::Components::Code)
-          expect(parsed.number.value).to eq("1")
+          expect(parsed.number).to be_a(String)
+          expect(parsed.number).to eq("1")
         end
 
         it "carries the corrigendum date" do
@@ -378,7 +378,7 @@ RSpec.describe Pubid::Jcgm do
         end
 
         it "carries the number but no date" do
-          expect(parsed.number.value).to eq("1")
+          expect(parsed.number).to eq("1")
           expect(parsed.date).to be_nil
         end
 
