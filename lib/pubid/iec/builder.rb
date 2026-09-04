@@ -151,7 +151,15 @@ module Pubid
 
         assign_attributes(identifier, parsed_hash)
 
-        # Detect rendering style from parsed abbreviation
+        # Detect rendering style from parsed abbreviation.
+        #
+        # UNREACHABLE TODAY: no IEC identifier class declares a
+        # `rendering_style` attribute, so this whole block never runs. Its
+        # `original_abbr` reads below are therefore NOT a live consumer of that
+        # field — which is why `original_abbr` can be left nil on both the parse
+        # and the from_hash paths (see Identifier.published_typed_stage). The
+        # long-vs-short stage spelling is already collapsed: "…/Amd 1:2017"
+        # renders back as "…/AMD1:2017". Do not treat this as working code.
         if identifier.class.attributes.key?(:rendering_style) && identifier.typed_stage
           ts = identifier.typed_stage
 

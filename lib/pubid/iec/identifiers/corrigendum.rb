@@ -5,8 +5,8 @@ module Pubid
     module Identifiers
       # Corrigendum Identifier
       class Corrigendum < SupplementIdentifier
-        attribute :type, Pubid::Components::Type, default: -> { self.class.type[:key] }
-
+        # `type` is NOT redeclared here — see the note on Amendment. The
+        # redeclaration assigned the Symbol `:cor` on the from_hash path.
         TYPED_STAGES = [
           Pubid::Components::TypedStage.new(
             code: :pwi_cor,

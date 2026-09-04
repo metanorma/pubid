@@ -45,15 +45,17 @@ module Pubid
 
       # The class's published typed_stage (canonical surface form), or nil for
       # types without a published stage.
+      #
+      # `original_abbr` is deliberately LEFT NIL. It records the spelling the
+      # input used, it is not serialized, and the parse path (Builder#
+      # locate_typed_stage) never writes it — so setting it here alone made
+      # `from_hash(to_hash) != parse` for every IEC identifier. The `dup` stays:
+      # TYPED_STAGES is frozen, its elements are not.
       def self.published_typed_stage
         return nil unless const_defined?(:TYPED_STAGES)
 
         ts = self::TYPED_STAGES.find { |t| t.stage_code.to_s == "published" }
-        return nil unless ts
-
-        ts = ts.dup
-        ts.original_abbr = ts.canonical_abbreviation
-        ts
+        ts&.dup
       end
 
       # type and generic stage are derived from typed_stage, never stored — so
@@ -298,6 +300,8 @@ module Pubid
       end
 
       # Resolve the typed-stage code back within this identifier's class.
+      # `original_abbr` is left nil here for the same reason as in
+      # `published_typed_stage` above.
       def stage_from_kv(model, value)
         return if value.nil? || value.to_s.empty?
 
@@ -306,9 +310,7 @@ module Pubid
              Pubid::Iec.all_typed_stages.find { |t| t.code.to_s == value.to_s }
         return unless ts
 
-        ts = ts.dup
-        ts.original_abbr = ts.canonical_abbreviation
-        model.typed_stage = ts
+        model.typed_stage = ts.dup
       end
 
       def self.parse(string)
