@@ -59,7 +59,7 @@ module Pubid
       def render_amendment(id, context)
         result = id.base.to_s if id.base
         result += "/Amd"
-        result += " #{id.number.render(context:)}" if id.number
+        result += " #{id.number}" if id.number
         result += ":#{id.date}" if id.date
         result
       end
@@ -67,7 +67,7 @@ module Pubid
       def render_gum_guide(id, context)
         parts = []
         parts << id.publisher.publisher if id.publisher
-        parts << "GUM-#{id.number.render(context:)}" if id.number
+        parts << "GUM-#{id.number}" if id.number
 
         result = parts.join(" ")
         result += ":#{id.date}" if id.date

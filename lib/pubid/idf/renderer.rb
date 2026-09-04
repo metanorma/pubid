@@ -43,9 +43,9 @@ module Pubid
         lang_single = opts[:lang_single] || false
 
         [
-          (id.number ? " #{id.number.render(context:)}" : ""),
-          (id.part ? "-#{id.part.render(context:)}" : ""),
-          (id.subpart ? "-#{id.subpart.render(context:)}" : ""),
+          (id.number ? " #{id.number}" : ""),
+          (id.part ? "-#{id.part}" : ""),
+          (id.subpart ? "-#{id.subpart}" : ""),
           (id.stage_iteration ? ".#{id.stage_iteration.render(context:)}" : ""),
           (id.date ? ":#{id.date.render(context:)}" : ""),
           language_portion(id, lang_single: lang_single),
@@ -75,7 +75,7 @@ module Pubid
           "/",
           id.typed_stage.abbreviation,
           " ",
-          id.number.render(context:),
+          id.number,
           (id.date ? ":#{id.date.render(context:)}" : ""),
         ].join
       end

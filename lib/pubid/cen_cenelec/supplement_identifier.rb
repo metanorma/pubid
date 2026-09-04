@@ -6,7 +6,6 @@ module Pubid
   module CenCenelec
     class SupplementIdentifier < Identifiers::Base
       attribute :base, Identifiers::Base, polymorphic: true
-      attribute :number, Components::Code
       attribute :date, Components::Date
       attribute :stage, Components::Stage
       attribute :type, Components::Type
@@ -29,7 +28,7 @@ module Pubid
         return base_cmp unless base_cmp.zero?
 
         # Then compare numbers
-        num_cmp = (number || Components::Code.new(value: "0")).to_s <=> (other.number || Components::Code.new(value: "0")).to_s
+        num_cmp = (number || "0").to_s <=> (other.number || "0").to_s
         return num_cmp unless num_cmp.zero?
 
         # Finally compare dates

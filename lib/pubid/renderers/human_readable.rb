@@ -41,15 +41,15 @@ module Pubid
         ann = context.annotated
         parts = []
         if @id.number
-          parts << annotate(@id.number.render(context:), "docnumber",
+          parts << annotate(render_component(@id.number, context), "docnumber",
                             annotated: ann)
         end
         if @id.part
-          parts << "-#{annotate(@id.part.render(context:), 'part', 
+          parts << "-#{annotate(render_component(@id.part, context), 'part', 
                                 annotated: ann)}"
         end
         if @id.subpart
-          parts << "-#{annotate(@id.subpart.render(context:), 'part', 
+          parts << "-#{annotate(render_component(@id.subpart, context), 'part', 
                                 annotated: ann)}"
         end
         if @id.stage_iteration

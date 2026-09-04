@@ -36,8 +36,8 @@ module Pubid
           main_number = main_and_parts[0]
           part_number = main_and_parts[1]
           {
-            number: Components::Code.new(value: main_number),
-            part: part_number ? Components::Code.new(value: part_number) : nil,
+            number: main_number,
+            part: part_number,
           }.compact
         when :date
           Components::Date.new(year: value.to_s)

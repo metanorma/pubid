@@ -30,7 +30,7 @@ module Pubid
         # identifier attribute (the concrete class is pinned by `_type`). Drop it
         # so the raw Parslet::Slice never lands in the inherited :type attribute.
         when :type then nil
-        when :number then Components::Code.new(value: value.to_s)
+        when :number then value.to_s
         when :reaffirmation
           value.is_a?(Hash) ? (value[:year] || value).to_s : value.to_s
         when :part, :chapter, :section, :subsection, :year

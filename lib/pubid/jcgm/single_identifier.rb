@@ -7,7 +7,6 @@ module Pubid
                 default: -> { self.class.default_publisher }
       attribute :typed_stage, Pubid::Components::TypedStage,
                 default: -> { self.class.published_typed_stage }
-      attribute :number, Pubid::Components::Code
       attribute :date, Pubid::Components::Date
       attribute :languages, Pubid::Components::Language, collection: true
       attribute :stage, Pubid::Components::Stage
@@ -18,7 +17,7 @@ module Pubid
       # (fully determined by the class, i.e. `_type`) are intentionally NOT
       # mapped — they are reconstructed from the class on load via the
       # attribute defaults above. Components collapse to bare scalars:
-      # number -> "100" (not {value: "100"}); date -> year/month/day scalars.
+      # number is already a bare :string; date -> year/month/day scalars.
       # Mirrors ISO (lib/pubid/iso/identifier.rb) and OIML.
       key_value do
         map "_type", to: :_type
@@ -72,13 +71,9 @@ module Pubid
         typed_stage&.to_stage
       end
 
-      # --- number (Code) flattened to a bare string ---
-      def number_to_kv(model, doc) = emit_kv(doc, "number", model.number&.value)
-      def number_from_kv(model, value) = model.number = build_code(value)
-
-      def build_code(value)
-        Pubid::Components::Code.new(value: value.to_s)
-      end
+      # --- number ---
+      def number_to_kv(model, doc) = emit_kv(doc, "number", model.number)
+      def number_from_kv(model, value) = model.number = value.to_s
 
       # --- date flattened to top-level year/month/day scalars ---
       def year_to_kv(model, doc) = emit_kv(doc, "year", model.date&.year)
@@ -104,7 +99,7 @@ module Pubid
 
       def number_portion
         parts = []
-        parts << number.value if number
+        parts << number if number
         parts << ":#{date.year}" if date
         parts.join
       end

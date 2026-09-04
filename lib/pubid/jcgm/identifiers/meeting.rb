@@ -39,7 +39,7 @@ module Pubid
         end
 
         def ordinal
-          self.class.ordinal(number&.value)
+          self.class.ordinal(number)
         end
       end
     end

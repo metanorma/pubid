@@ -18,7 +18,7 @@ RSpec.describe Pubid::CenCenelec::Identifiers::HarmonizationDocument do
       end
 
       it "parses number" do
-        expect(parsed.number.value).to eq("123")
+        expect(parsed.number).to eq("123")
       end
 
       it "parses year" do
@@ -64,11 +64,11 @@ RSpec.describe Pubid::CenCenelec::Identifiers::HarmonizationDocument do
       end
 
       it "parses number" do
-        expect(parsed.number.value).to eq("789")
+        expect(parsed.number).to eq("789")
       end
 
       it "parses part" do
-        expect(parsed.part.value).to eq("1")
+        expect(parsed.part).to eq("1")
       end
 
       it "parses year" do
@@ -86,7 +86,7 @@ RSpec.describe Pubid::CenCenelec::Identifiers::HarmonizationDocument do
       let(:parsed) { Pubid::CenCenelec.parse(subject) }
 
       it "parses part" do
-        expect(parsed.part.value).to eq("5")
+        expect(parsed.part).to eq("5")
       end
 
       it "round-trips" do
@@ -106,7 +106,7 @@ RSpec.describe Pubid::CenCenelec::Identifiers::HarmonizationDocument do
       end
 
       it "parses large number" do
-        expect(parsed.number.value).to eq("12345")
+        expect(parsed.number).to eq("12345")
       end
 
       it "round-trips" do

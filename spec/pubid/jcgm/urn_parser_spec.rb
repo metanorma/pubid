@@ -108,7 +108,7 @@ RSpec.describe Pubid::Jcgm::UrnParser do
     it "restores a numbered corrigendum with its own date" do
       id = Pubid.parse("urn:jcgm:101:2008:corrigendum:1:2009")
 
-      expect(id.number.value).to eq("1")
+      expect(id.number).to eq("1")
       expect(id.date.year).to eq("2009")
       expect(id.to_s).to eq("JCGM 101:2008/Cor 1:2009")
     end
@@ -126,7 +126,7 @@ RSpec.describe Pubid::Jcgm::UrnParser do
       id = Pubid.parse("urn:jcgm:gum.6:2020")
 
       expect(id).to be_a(Pubid::Jcgm::Identifiers::GumGuide)
-      expect(id.number.value).to eq("6")
+      expect(id.number).to eq("6")
       expect(id.to_s).to eq("JCGM GUM-6:2020")
     end
 

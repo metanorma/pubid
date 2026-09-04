@@ -20,7 +20,7 @@ RSpec.describe "JCGM meeting partial reference parsing" do
     end
 
     it "keeps the ordinal" do
-      expect(id.number.value).to eq("11")
+      expect(id.number).to eq("11")
     end
 
     it "round-trips through to_s" do

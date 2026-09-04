@@ -13,8 +13,8 @@ RSpec.describe Pubid::Ansi::Identifiers::Standard do
 
     it "parses" do
       expect(parsed).to be_a(described_class)
-      expect(parsed.number.value).to eq("802.3")
-      expect(parsed.part.value).to eq("2012")
+      expect(parsed.number).to eq("802.3")
+      expect(parsed.part).to eq("2012")
       expect(parsed.to_s).to eq(subject)
     end
   end
@@ -26,8 +26,8 @@ RSpec.describe Pubid::Ansi::Identifiers::Standard do
 
     it "parses" do
       expect(parsed).to be_a(described_class)
-      expect(parsed.number.value).to eq("C135.14")
-      expect(parsed.part.value).to eq("1979")
+      expect(parsed.number).to eq("C135.14")
+      expect(parsed.part).to eq("1979")
       expect(parsed.to_s).to eq(subject)
     end
   end
@@ -39,8 +39,8 @@ RSpec.describe Pubid::Ansi::Identifiers::Standard do
 
     it "parses" do
       expect(parsed).to be_a(described_class)
-      expect(parsed.number.value).to eq("C37.06.1")
-      expect(parsed.part.value).to eq("2000")
+      expect(parsed.number).to eq("C37.06.1")
+      expect(parsed.part).to eq("2000")
       expect(parsed.to_s).to eq(subject)
     end
   end
@@ -52,8 +52,8 @@ RSpec.describe Pubid::Ansi::Identifiers::Standard do
 
     it "parses" do
       expect(parsed).to be_a(described_class)
-      expect(parsed.number.value).to eq("N323D")
-      expect(parsed.part.value).to eq("2002")
+      expect(parsed.number).to eq("N323D")
+      expect(parsed.part).to eq("2002")
       expect(parsed.to_s).to eq(subject)
     end
   end
@@ -65,7 +65,7 @@ RSpec.describe Pubid::Ansi::Identifiers::Standard do
 
     it "parses" do
       expect(parsed).to be_a(described_class)
-      expect(parsed.number.value).to eq("B16.5")
+      expect(parsed.number).to eq("B16.5")
       expect(parsed.part).to be_nil
       expect(parsed.date).to be_nil
       expect(parsed.copublishers.first.body).to eq("ASME")
@@ -79,8 +79,8 @@ RSpec.describe Pubid::Ansi::Identifiers::Standard do
 
     it "parses" do
       expect(parsed).to be_a(described_class)
-      expect(parsed.number.value).to eq("E1527")
-      expect(parsed.part.value).to eq("2013")
+      expect(parsed.number).to eq("E1527")
+      expect(parsed.part).to eq("2013")
       expect(parsed.copublishers.first.body).to eq("ASTM")
     end
   end
@@ -92,8 +92,8 @@ RSpec.describe Pubid::Ansi::Identifiers::Standard do
 
     it "parses" do
       expect(parsed).to be_a(described_class)
-      expect(parsed.number.value).to eq("60601")
-      expect(parsed.part.value).to eq("1")
+      expect(parsed.number).to eq("60601")
+      expect(parsed.part).to eq("1")
       expect(parsed.copublishers.first.body).to eq("IEC")
     end
   end
@@ -105,8 +105,8 @@ RSpec.describe Pubid::Ansi::Identifiers::Standard do
 
     it "parses" do
       expect(parsed).to be_a(described_class)
-      expect(parsed.number.value).to eq("1")
-      expect(parsed.part.value).to eq("1986")
+      expect(parsed.number).to eq("1")
+      expect(parsed.part).to eq("1986")
       expect(parsed.copublishers.first.body).to eq("IEEE")
     end
   end
@@ -118,8 +118,8 @@ RSpec.describe Pubid::Ansi::Identifiers::Standard do
 
     it "parses" do
       expect(parsed).to be_a(described_class)
-      expect(parsed.number.value).to eq("802.3j")
-      expect(parsed.part.value).to eq("1993")
+      expect(parsed.number).to eq("802.3j")
+      expect(parsed.part).to eq("1993")
       expect(parsed.copublishers.first.body).to eq("IEEE")
     end
   end
@@ -131,8 +131,8 @@ RSpec.describe Pubid::Ansi::Identifiers::Standard do
 
     it "parses" do
       expect(parsed).to be_a(described_class)
-      expect(parsed.number.value).to eq("C67.92")
-      expect(parsed.part.value).to eq("1987")
+      expect(parsed.number).to eq("C67.92")
+      expect(parsed.part).to eq("1987")
       expect(parsed.copublishers.first.body).to eq("IEEE")
     end
   end
@@ -144,7 +144,7 @@ RSpec.describe Pubid::Ansi::Identifiers::Standard do
 
     it "parses" do
       expect(parsed).to be_a(described_class)
-      expect(parsed.number.value).to eq("9899")
+      expect(parsed.number).to eq("9899")
       expect(parsed.date.year).to eq("1990")
       expect(parsed.copublishers.first.body).to eq("ISO")
       expect(parsed.to_s).to eq(subject)
@@ -158,7 +158,7 @@ RSpec.describe Pubid::Ansi::Identifiers::Standard do
 
     it "parses" do
       expect(parsed).to be_a(described_class)
-      expect(parsed.number.value).to eq("J1939")
+      expect(parsed.number).to eq("J1939")
       expect(parsed.part).to be_nil
       expect(parsed.date).to be_nil
       expect(parsed.copublishers.first.body).to eq("SAE")

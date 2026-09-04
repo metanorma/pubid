@@ -24,7 +24,7 @@ RSpec.describe Pubid::Bsi::Identifiers::AdoptedInternationalStandard do
       end
 
       it "delegates number to adopted identifier" do
-        expect(parsed.number.value).to eq("8601")
+        expect(parsed.number.to_s).to eq("8601")
       end
 
       it "delegates year to adopted identifier" do
@@ -46,7 +46,7 @@ RSpec.describe Pubid::Bsi::Identifiers::AdoptedInternationalStandard do
       end
 
       it "delegates number" do
-        expect(parsed.number.value).to eq("9001")
+        expect(parsed.number.to_s).to eq("9001")
       end
 
       it "delegates date" do
@@ -96,7 +96,7 @@ RSpec.describe Pubid::Bsi::Identifiers::AdoptedInternationalStandard do
       end
 
       it "delegates number to adopted identifier" do
-        expect(parsed.number.value).to eq("62600")
+        expect(parsed.number.to_s).to eq("62600")
       end
 
       it "delegates year to adopted identifier" do
@@ -118,11 +118,11 @@ RSpec.describe Pubid::Bsi::Identifiers::AdoptedInternationalStandard do
       end
 
       it "delegates number" do
-        expect(parsed.number.value).to eq("60050")
+        expect(parsed.number.to_s).to eq("60050")
       end
 
       it "delegates part" do
-        expect(parsed.part.value).to eq("113")
+        expect(parsed.part.to_s).to eq("113")
       end
 
       it "round-trips" do
@@ -150,7 +150,7 @@ RSpec.describe Pubid::Bsi::Identifiers::AdoptedInternationalStandard do
       end
 
       it "delegates number" do
-        expect(parsed.number.value).to eq("27001")
+        expect(parsed.number.to_s).to eq("27001")
       end
 
       it "delegates year" do
@@ -176,11 +176,11 @@ RSpec.describe Pubid::Bsi::Identifiers::AdoptedInternationalStandard do
       end
 
       it "delegates number" do
-        expect(parsed.number.value).to eq("15693")
+        expect(parsed.number.to_s).to eq("15693")
       end
 
       it "delegates part" do
-        expect(parsed.part.value).to eq("3")
+        expect(parsed.part.to_s).to eq("3")
       end
 
       it "includes copublisher" do
@@ -204,7 +204,7 @@ RSpec.describe Pubid::Bsi::Identifiers::AdoptedInternationalStandard do
       end
 
       it "delegates number" do
-        expect(parsed.number.value).to eq("10000")
+        expect(parsed.number.to_s).to eq("10000")
       end
 
       it "round-trips" do

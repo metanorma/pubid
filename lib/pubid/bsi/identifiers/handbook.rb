@@ -6,8 +6,6 @@ module Pubid
       # BSI Handbook
       # Examples: "Handbook 17:1963", "HB 10146:1998"
       class Handbook < SingleIdentifier
-        attribute :number, Bsi::Components::Code
-        attribute :part, Bsi::Components::Code
         attribute :date, Bsi::Components::Date
         attribute :original_abbr, :string # Preserve "Handbook" or "HB"
 

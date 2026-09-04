@@ -111,9 +111,9 @@ module Pubid
 
         # Number with part (which may be multi-level like "5-1-1")
         if id.number
-          number_str = id.number.render(context: @context)
+          number_str = id.number
           if id.part
-            number_str += "-#{id.part.render(context: @context)}"
+            number_str += "-#{id.part}"
           end
           parts << number_str
         end

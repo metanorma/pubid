@@ -7,15 +7,15 @@ RSpec.describe Pubid::Bsi::Identifiers::Disc do
     it "parses DISC with part number" do
       id = Pubid::Bsi.parse("DISC PD 2000-2:1997")
       expect(id.class).to eq(described_class)
-      expect(id.number.value).to eq("2000")
-      expect(id.part.value).to eq("2")
+      expect(id.number).to eq("2000")
+      expect(id.part).to eq("2")
       expect(id.date.to_s).to eq("1997")
     end
 
     it "parses DISC without part number" do
       id = Pubid::Bsi.parse("DISC PD 3004:1998")
       expect(id.class).to eq(described_class)
-      expect(id.number.value).to eq("3004")
+      expect(id.number).to eq("3004")
       expect(id.part).to be_nil
       expect(id.date.to_s).to eq("1998")
     end
@@ -23,7 +23,7 @@ RSpec.describe Pubid::Bsi::Identifiers::Disc do
     it "parses DISC with zero-padded number" do
       id = Pubid::Bsi.parse("DISC PD 0008:1996")
       expect(id.class).to eq(described_class)
-      expect(id.number.value).to eq("0008")
+      expect(id.number).to eq("0008")
     end
   end
 

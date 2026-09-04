@@ -18,7 +18,7 @@ module Pubid
       # urn:jcgm:meeting:<number>:<year>, e.g. urn:jcgm:meeting:17:2012
       def generate_meeting_urn
         parts = ["urn", "jcgm", "meeting"]
-        parts << identifier.number.value if identifier.number
+        parts << identifier.number if identifier.number
         parts << identifier.date.year if identifier.date
         parts.join(":")
       end

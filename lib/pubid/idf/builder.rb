@@ -41,9 +41,9 @@ module Pubid
           number = parts.shift
           part = parts.shift
           subpart = parts.size.positive? ? parts.join("-") : nil
-          code_hash = { number: Components::Code.new(value: number) }
-          code_hash[:part] = Components::Code.new(value: part) if part
-          code_hash[:subpart] = Components::Code.new(value: subpart) if subpart
+          code_hash = { number: number }
+          code_hash[:part] = part if part
+          code_hash[:subpart] = subpart if subpart
           code_hash
         when :type_with_stage
           iteration = value.to_s.match(/(\d+)$/)

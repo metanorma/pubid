@@ -6,7 +6,6 @@ module Pubid
       # BSI Practice Guide (PP - Published Practice)
       # Examples: "PP 888:1982", "PP 7307:1986", "PP 7722:2006"
       class PracticeGuide < SingleIdentifier
-        attribute :number, Bsi::Components::Code
         attribute :date, Bsi::Components::Date
 
         def self.type
