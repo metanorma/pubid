@@ -7,19 +7,19 @@ RSpec.describe Pubid::Bsi::Identifiers::StandaloneAmendment do
     it "parses AMD with number" do
       id = Pubid::Bsi.parse("AMD 11015")
       expect(id.class).to eq(described_class)
-      expect(id.amendment_number.value).to eq("11015")
+      expect(id.number).to eq("11015")
     end
 
     it "parses parenthesized AMD" do
       id = Pubid::Bsi.parse("(AMD 10971)")
       expect(id.class).to eq(described_class)
-      expect(id.amendment_number.value).to eq("10971")
+      expect(id.number).to eq("10971")
     end
 
     it "parses AMD with corrigendum" do
       id = Pubid::Bsi.parse("AMD Corrigendum 14716")
       expect(id.class).to eq(described_class)
-      expect(id.amendment_number.value).to eq("14716")
+      expect(id.number).to eq("14716")
       expect(id.corrigendum).to be true
     end
   end

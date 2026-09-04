@@ -66,9 +66,10 @@ RSpec.describe "Pubid::Api rendering" do
     end
   end
 
-  describe "MPMS renders from chapter/section, not from the number" do
-    # The one form that always rendered correctly: render_mpms never consulted
-    # code_portion, which is why it escaped the defect.
+  describe "MPMS rendering" do
+    # The one form that always rendered correctly: render_mpms builds its own
+    # string and never consulted code_portion, which is why it escaped the
+    # defect above.
     it "renders its chapter designation" do
       expect(Pubid::Api::Identifier.parse("API MPMS CH 4.1").to_s)
         .to eq("API MPMS CH 4.1")
@@ -97,25 +98,43 @@ RSpec.describe "Pubid::Api rendering" do
     end
   end
 
-  describe "KNOWN GAP: every MPMS id shares one MR slug" do
-    # Pre-existing and NOT addressed by the renderer repair above, which fixed
-    # to_s only. MPMS keeps its locator in chapter/section/subsection and has
-    # no `number`, so the shared Renderers::MrString hooks find nothing and all
-    # 30 corpus MPMS ids slug to the bare "api" — and to_slug is an output
-    # FILENAME, so they collide. Identical on the parent commit. Closing it
-    # needs an Mpms#mr_number_with_part built from chapter/section, the same
-    # shape BIPM and OIML use; that is its own change. These expectations
-    # assert the CURRENT behaviour so a fix trips them.
-    it "collapses distinct MPMS documents onto the same slug" do
+  describe "MPMS MR slugs" do
+    # Two changes met here. #354 moved the MPMS chapter out of its own
+    # `chapter` attribute into the inherited `number` (it IS the document
+    # number), and this branch retyped that `number` to :string. Composed,
+    # they close the collapse this spec originally pinned: all 30 MPMS ids
+    # used to slug to the bare "api", because the shared Renderers::MrString
+    # hooks found no number at all.
+    it "no longer collapses every MPMS document onto the bare publisher" do
       a = Pubid::Api::Identifier.parse("API MPMS CH 4.1")
       b = Pubid::Api::Identifier.parse("API MPMS CH 12.2")
 
-      expect(a.to_s).not_to eq(b.to_s)
-      expect(a.to_mr_string).to eq("api")
-      expect(b.to_mr_string).to eq("api")
+      expect(a.to_mr_string).to eq("api.4")
+      expect(b.to_mr_string).to eq("api.12")
     end
 
-    it "does give a numbered identifier a distinct slug" do
+    it "carries the chapter in `number`, as a String" do
+      id = Pubid::Api::Identifier.parse("API MPMS CH 12.2")
+
+      expect(id.number).to eq("12")
+      expect(id.number).to be_a(String)
+    end
+
+    # KNOWN GAP, narrower than before and NOT this branch's to close: the MR
+    # slug is built from `number` alone, so every section of one chapter still
+    # shares it — 11 colliding slugs across the corpus, and to_slug is an
+    # output FILENAME. Closing it needs an Mpms#mr_number_with_part that
+    # appends section/subsection, the shape BIPM and OIML use. Asserted as
+    # CURRENT behaviour so a fix trips it.
+    it "still shares one slug across the sections of a chapter" do
+      a = Pubid::Api::Identifier.parse("API MPMS CH 14.4")
+      b = Pubid::Api::Identifier.parse("API MPMS CH 14.6")
+
+      expect(a.to_s).not_to eq(b.to_s)
+      expect(a.to_mr_string).to eq(b.to_mr_string)
+    end
+
+    it "gives an ordinary numbered identifier a distinct slug" do
       expect(Pubid::Api::Identifier.parse("API RP 500").to_mr_string)
         .to eq("api.500")
     end
@@ -156,9 +175,9 @@ RSpec.describe "Pubid::Api rendering" do
     end
 
     it "gives every identifier a non-empty root.number" do
-      # MPMS carries its locator in chapter/section, so it has no number.
-      numbered = inputs.reject { |l| l.include?("MPMS") || l.include?("MPMP") }
-      bad = numbered.select do |line|
+      # No exclusions: since #354 moved the MPMS chapter into `number`, every
+      # API identifier has one.
+      bad = inputs.select do |line|
         Pubid::Api::Identifier.parse(line).root.number.to_s.empty?
       end
 

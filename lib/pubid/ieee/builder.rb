@@ -290,6 +290,16 @@ module Pubid
           return build_interpretation_supplement(parsed_hash)
         end
 
+        # The same document with a TRAILING DATE parses FLAT — no :base subtree,
+        # just an :interpretation marker beside the number — so the branch above
+        # skipped it and determine_identifier_class built a base-less
+        # InterpretationIdentifier that dropped the number, the part and the
+        # publisher: "IEEE Std 1003.2-1992/INT, Dec. 1994 Ed." rendered as
+        # " 1003.2-1992/INT". Mirrors build_flat_corrigendum / build_flat_amendment.
+        if parsed_hash[:interpretation] && !parsed_hash[:base]
+          return build_flat_interpretation(parsed_hash)
+        end
+
         # Handle conformance supplements (check for base + conf_number)
         if parsed_hash[:base] && parsed_hash[:conf_number]
           return build_conformance_supplement(parsed_hash)
@@ -429,6 +439,35 @@ module Pubid
           base: base,
           number: cor_number,
           year: cor_year,
+        )
+      end
+
+      # Build an interpretation from a FLAT parse tree — the trailing-date form,
+      # where the :interpretation marker sits beside the base's own keys instead
+      # of over a :base subtree.
+      #
+      # The trailing date is the INTERPRETATION's date (an interpretation of the
+      # 1992 edition of 1003.2, issued in Dec 1994), so it goes on the wrapper;
+      # the base keeps its own `year`. That matches the nested form, whose
+      # `int_year` also lands on the wrapper.
+      # @param parsed_hash [Hash] flat parsed data carrying :interpretation
+      # @return [Identifiers::InterpretationIdentifier]
+      def build_flat_interpretation(parsed_hash)
+        int_year = extract_value(parsed_hash[:trailing_year]) if parsed_hash[:trailing_year]
+
+        base_hash = parsed_hash.reject do |key, _|
+          %i[interpretation trailing_month trailing_year].include?(key)
+        end
+        base = build_single_identifier(base_hash)
+
+        # The trailing MONTH is deliberately dropped, matching the nested form
+        # (whose `int_year` carries no month either). It was not preserved
+        # before this change, so nothing is lost; and setting it fed the URN's
+        # month_day_component, which put "Dec." — a word with a dot — into a
+        # URN segment.
+        Identifiers::InterpretationIdentifier.new(
+          base: base,
+          year: int_year,
         )
       end
 
@@ -770,9 +809,14 @@ module Pubid
           # Pattern: slash >> "C" >> digits >> dot >> digits >> dot >> digits >> dash >> year_digits
           # The parsed crossref is a string - extract the number part
           # Format: C62.22.1-1996 where C is part of the crossref notation
+          # The captured slice keeps the leading slash, which is a SEPARATOR in
+          # the printed reference, not part of the number. Storing it made the
+          # secondary's code "/C62.22.1-1996", which then failed the renderer's
+          # own cross-reference test (`/^C\d+\./`) and fell through to the
+          # " and " join. Strip it.
           secondary_id = Identifiers::Standard.new(
             publisher: "IEEE",
-            number: extract_value(crossref),
+            number: extract_value(crossref).to_s.sub(%r{\A/}, ""),
           )
         elsif parsed[:secondary_joint]
           # Joint standard format: ", Std 1177-1989"

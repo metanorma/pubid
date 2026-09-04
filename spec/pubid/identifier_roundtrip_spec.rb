@@ -82,9 +82,6 @@ RSpec.describe "Identifier to_hash/from_hash round-trip" do
   # DIFFERENT root cause, so each needs its own fix; the hash, the class and the
   # rendered string all agree in every case, which is why this went unnoticed.
   PENDING_EQUALITY = {
-    "Pubid::Iec" => "typed_stage.original_abbr: nil on the parse path, the " \
-                    "canonical abbreviation from the attribute default " \
-                    "(hand-off: iec-typed-stage-original-abbr)",
     "Pubid::Ieee" => "copublisher: [] on the parse path, nil after from_hash",
     "Pubid::Idf" => "Type/Stage abbr: \"\" is dropped from to_hash and comes " \
                     "back nil",

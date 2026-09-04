@@ -23,6 +23,17 @@ module Pubid
           # Compare first identifier
           identifiers.first <=> other.identifiers.first
         end
+
+        # As for BundledIdentifier: a set holds no number of its own, so walk
+        # to the first member for the relaton-index key.
+        #
+        # NOTE the members are frequently a FOREIGN flavor (BS ISO ... holds
+        # Pubid::Iso identifiers), which `to_hash` still rejects — see the
+        # hand-off bsi-set-cross-flavor-type. `#root` is unaffected by that:
+        # it only reads the object, never serializes it.
+        def root
+          identifiers&.first ? identifiers.first.root : self
+        end
       end
     end
   end

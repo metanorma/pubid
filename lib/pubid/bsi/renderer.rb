@@ -406,7 +406,7 @@ module Pubid
                      "00"
                    end
 
-        "#{year_str}/#{id.document_number} DC"
+        "#{year_str}/#{id.number} DC"
       end
 
       def render_consolidated_identifier(id, opts)
@@ -898,9 +898,9 @@ module Pubid
 
       def render_standalone_amendment(id)
         base = if id.corrigendum
-                 "AMD Corrigendum #{id.amendment_number}"
+                 "AMD Corrigendum #{id.number}"
                else
-                 "AMD #{id.amendment_number}"
+                 "AMD #{id.number}"
                end
 
         id.parenthesized ? "(#{base})" : base

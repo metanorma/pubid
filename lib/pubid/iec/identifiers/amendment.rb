@@ -5,8 +5,12 @@ module Pubid
     module Identifiers
       # Amendment Identifier
       class Amendment < SupplementIdentifier
-        attribute :type, Pubid::Components::Type, default: -> { self.class.type[:key] }
-
+        # `type` is NOT redeclared here. It is derived from `typed_stage` by
+        # Pubid::Iec::Identifier#type, like every other IEC type. A redeclared
+        # attribute shadowed that reader and, because `type` is not serialized,
+        # its class-level default assigned the Symbol `:amd` on the from_hash
+        # path where the parse path assigns a Components::Type — so
+        # `from_hash(to_hash) != parse` for every amendment.
         TYPED_STAGES = [
           Pubid::Components::TypedStage.new(
             code: :pwi_amd,
