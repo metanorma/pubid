@@ -9,6 +9,14 @@ module EcmaFixturesSpec
 end
 
 RSpec.describe "ECMA Fixture Round-trip Tests" do
+  # Tripwire: a wrong glob reports zero examples rather than a failure, so this
+  # is the only thing that makes such a defect loud. (See the hand-off
+  # `ten-dead-fixture-specs` — ten flavors still carry the broken
+  # `../../../fixtures/<UPPER>` spelling. ECMA's glob is correct; keep it so.)
+  it "finds the ECMA pass fixtures" do
+    expect(EcmaFixturesSpec::FIXTURE_FILES).not_to be_empty
+  end
+
   describe "all fixture files" do
     EcmaFixturesSpec::FIXTURE_FILES.each do |fixture_file|
       describe File.basename(fixture_file) do

@@ -56,7 +56,10 @@ RSpec.describe "partial reference parsing (cross-flavor)" do
     "xsf" => { ref: "XEP 0001", omits: [] },
     "ietf" => { ref: "STD 3", omits: [] },
     "ccsds" => { ref: "CCSDS 121.0-B-1", omits: [] },
-    "ecma" => { ref: "ECMA TR/18", omits: [] },
+    # ECMA carries the edition and volume as separable trailing suffixes
+    # (" ed3", " vol2"), so a bare reference leaves both nil and wildcards every
+    # edition under `matches?(row, ignore: %i[edition volume])`.
+    "ecma" => { ref: "ECMA TR/18", omits: %i[edition volume] },
     "plateau" => { ref: "PLATEAU Technical Report #00", omits: [] },
     "iala" => { ref: "S1070", omits: [] },
     # OGC: the "<yy>" year is the mandatory leading field of the "<yy>-<nnn>"

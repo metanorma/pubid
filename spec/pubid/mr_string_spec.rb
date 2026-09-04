@@ -337,4 +337,25 @@ RSpec.describe "Lossless MR string (issue #142)" do
       end
     end
   end
+
+  # `Renderers::MrString#render_flat` gained a `mr_volume` slot for ECMA, whose
+  # four ECMA-269 volumes are distinct documents. The base hook returns
+  # literally nil, so the slot must add no segment to any other flavor's slug.
+  describe "the mr_volume slot is inert by default" do
+    it "returns nil on a flavor that does not override it" do
+      expect(Pubid::Iso.parse("ISO 9001:2015").mr_volume).to be_nil
+    end
+
+    it "adds no segment to an existing slug" do
+      expect(Pubid::Iso.parse("ISO 9001:2015").to_mr_string)
+        .to eq("iso.9001.2015")
+    end
+
+    # NIST declares its own `volume` attribute, so a generic `volume&.to_s`
+    # reader on the base would have changed its MR.
+    it "leaves a flavor with its own volume attribute untouched" do
+      id = Pubid::Nist.parse("NIST SP 800-53")
+      expect(id.mr_volume).to be_nil
+    end
+  end
 end

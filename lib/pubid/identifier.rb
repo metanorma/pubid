@@ -293,12 +293,13 @@ module Pubid
         raise ArgumentError, "No renderer registered for format: #{format}"
       end
 
-      # `:trademark` is a render-time flag consumed by the renderer, not the
-      # rendering context — and some flavors override build_rendering_context
-      # with a strict signature, so strip it here.
-      ctx_opts = opts.except(:trademark)
+      # `:trademark` (IEEE) and `:with_volume` (ECMA) are render-time flags
+      # consumed by the renderer, not the rendering context — and some flavors
+      # override build_rendering_context with a strict signature, so strip them
+      # here rather than widening that signature.
+      ctx_opts = opts.except(:trademark, :with_volume)
       context = build_rendering_context(renderer, format:, **ctx_opts)
-      render_opts = opts.slice(:with_edition, :trademark)
+      render_opts = opts.slice(:with_edition, :trademark, :with_volume)
       renderer.new(self).render(context:, **render_opts)
     end
 
@@ -398,6 +399,16 @@ module Pubid
       return nil unless edition&.number
 
       "ed#{edition.number}"
+    end
+
+    # Hook for flavors whose identity includes a volume discriminator — ECMA-269
+    # ed3 vol1..vol4 are four distinct documents sharing one docidentifier.
+    # Literally nil here, NOT `volume&.to_s`: Pubid::Nist::Identifiers::Base
+    # declares its own `volume` attribute with different MR semantics, so a
+    # generic reader would change NIST's slug. A flavor that needs the segment
+    # overrides this (see Pubid::Ecma::Identifier#mr_volume).
+    def mr_volume
+      nil
     end
 
     def mr_languages
