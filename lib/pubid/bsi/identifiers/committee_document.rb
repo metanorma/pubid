@@ -11,7 +11,16 @@ module Pubid
       #   21/30445138 DC
       #   24/30300822 DC
       class CommitteeDocument < SingleIdentifier
-        attribute :document_number, :string # The 8-digit document number
+        # The 8-digit document number lives in the `number` inherited from
+        # SingleIdentifier (a Bsi::Components::Code). It used to be a separate
+        # `document_number` :string, which left `number` nil — so `root.number`,
+        # the key relaton-index sorts and bsearches on, was "".
+        #
+        # The duplicate is DELETED rather than mirrored into `number`: keeping
+        # both would emit the same digits twice in `to_hash`, and a derived
+        # `#number` method is not available here because `number` is a lutaml
+        # attribute, whose generated accessor such a method would collide with.
+        # Nothing is retyped — the inherited attribute is already a Code.
 
         # TYPED_STAGES for committee documents (draft by default)
         TYPED_STAGES = [

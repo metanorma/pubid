@@ -24,6 +24,16 @@ module Pubid
           # Compare first identifier
           identifiers.first <=> other.identifiers.first
         end
+
+        # A bundle carries no number of its own — each member holds one — so
+        # `root.number`, the key relaton-index sorts and bsearches on, was "".
+        # Walk to the first member, the shape ConsolidatedIdentifier already
+        # uses. Members of one bundle are consecutive numbers of a single
+        # series, so the bundle files under the first, and `<=>` above orders
+        # bundles by that same member.
+        def root
+          identifiers&.first ? identifiers.first.root : self
+        end
       end
     end
   end

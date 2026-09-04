@@ -21,8 +21,17 @@ module Pubid
           parts << identifier.flex_prefix.to_s.downcase
         end
 
-        if identifier.number
-          number = identifier.number.to_s
+        # Fall back to the wrapped document's number. A wrapper — an adopted
+        # European norm, a bundle, a set — carries no number of its own, and
+        # `AdoptedEuropeanNorm#number` only delegates ONE level, so a
+        # "DD ENV ISO 11079:1999" (which adopts a CEN prestandard that is
+        # itself a wrapper around the ISO standard) emitted the identity-free
+        # `urn:bsi:dd` — the same URN as every other DD adoption. `#root`
+        # recurses to the origin document, and for a non-wrapper it is `self`,
+        # so this changes nothing for an ordinary identifier.
+        urn_number = identifier.number || identifier.root.number
+        if urn_number
+          number = urn_number.to_s
           if identifier.iteration && !identifier.iteration.empty?
             number += "[#{identifier.iteration}]"
           end

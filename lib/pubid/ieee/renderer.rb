@@ -320,7 +320,11 @@ module Pubid
 
         secondary_code = id.secondary_identifier.code.to_s
         if secondary_code.start_with?("C") && secondary_code.match?(/^C\d+\./)
-          "#{primary}/#{secondary}"
+          # A cross-reference prints the bare second designation after the
+          # slash — "IEEE Std 1299/C62.22.1-1996" — not a second full
+          # reference, so this branch must not reuse `secondary`, which
+          # carries its own "IEEE Std " prefix.
+          "#{primary}/#{secondary_code}"
         else
           "#{primary} and #{secondary}"
         end

@@ -25,6 +25,18 @@ module Pubid
           nil
         end
 
+        # Walk to the adopted document for the relaton-index key.
+        #
+        # The `#number` delegation below is not enough on its own: a
+        # "DD ENV ISO 11079:1999" adopts a CenCenelec EuropeanPrestandard,
+        # which is ITSELF a wrapper around the ISO standard, so the delegation
+        # returned that wrapper's own (nil) number and the chain died one level
+        # short. `#root` recurses, so it reaches the ISO standard however many
+        # adoption layers sit in between.
+        def root
+          adopted_identifier ? adopted_identifier.root : self
+        end
+
         # Delegate common methods to adopted identifier
         def number
           adopted_identifier&.number
