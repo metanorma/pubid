@@ -1,0 +1,15 @@
+# BSI flavor notes
+
+BSI wrappers, adopted norms and cross-flavor sets.
+
+These notes were part of the root `CLAUDE.md`. Read them before you change `lib/pubid/bsi/` or `spec/pubid/bsi/`. The root file keeps the cross-flavor contract that every flavor obeys.
+
+- **One EC representation**: BSI's Expert-commentary suffix is modelled *only* as an outer `Identifiers::ExpertCommentary` wrapper (never a boolean on the inner adopted norm), so `#base_document`/`#base` peel cleanly. The builder's adopted path (`build_adopted_identifier`) is the single place that wraps supplements + EC; `Builder#build` must **not** re-wrap the adopted branch (that caused a double-`ExpertCommentary` that broke `base`).
+
+## From the root note "`number`/`part`/`subpart` retyped to `:string` — tranche 1 of 3 (ansi, api, bsi, cen_cenelec, idf, jcgm)"
+
+**Hand-off `bsi-set-cross-flavor-type` is closed as a side effect, and a pin on `main` is what proved it.** A `BS ISO 20400 + …` set holds *ISO* identifiers, and BSI declared `number`/`part`/`subpart` as its **own** `Bsi::Components::Code`, so `to_hash` raised `IncorrectModelError` — the cross-flavor attribute-type bug already fixed once on `Ieee::Identifiers::AdoptedStandard`. Retyping the three attributes to `:string` **removes the offending type outright**: there is no longer a BSI-specific component for a foreign identifier to mismatch, so no widening was needed. **74 BSI ids that previously raised on `to_hash` now serialize**, and the set round-trips through `from_hash` to the same class, hash and `to_s`. Merging `main` turned its `expect { id.to_hash }.to raise_error` pin red, which is how this surfaced; it now asserts the repair. Note the set's `#root` still reaches an `Iso::Components::Code` until tranche 3 — `root.number.to_s` is what relaton keys on, so the index contract holds either way.
+
+## From the root note "Wrapper index keys (`root.number`) — the number was already there, one level down"
+
+**The second half of the `number` landmine is a plain method shadowing a real attribute reader**, and `Bsi::Identifiers::AdoptedEuropeanNorm` still has it (`#number`, `#date`, `#part`, `#subpart` all delegate to `adopted_identifier`) — pre-existing, deliberately not removed here because `bsi/urn_generator.rb` reads `identifier.number` generically and had no other source. It now has one: that generator falls back to `identifier.root.number`, which recurses where the one-level delegation did not. That alone repaired **80 identity-free BSI URNs** — every `AddendumDocument`, `SupplementDocument`, `BundledIdentifier`, `Set`, `CommitteeDocument`, `StandaloneAmendment` and `AdoptedEuropeanNorm` in the corpus emitted the bare `urn:bsi:bs` or `urn:bsi:dd`, i.e. one URN per publisher for hundreds of documents. **0 URNs got shorter**; a non-wrapper's `root` is `self`, so ordinary identifiers are untouched. Removing the shadowing delegations themselves is now unblocked but is left to a follow-up (hand-off `bsi-set-cross-flavor-type`), which also records that `AdoptedEuropeanNorm` fails the round-trip on *values* rather than keys.
