@@ -109,6 +109,7 @@ from the code.
 - `docs/flavors/ietf.md` — IETF readiness for the unified relaton index.
 - `docs/flavors/itu.md` — ITU grammar, versions, annexes, reports and identity surfaces.
 - `docs/flavors/jcgm.md` — JCGM meetings and URN parsing.
+- `docs/flavors/oasis.md` — OASIS verbatim slugs, index key, MR slug and matching.
 - `docs/flavors/oiml.md` — OIML index key, bulletins and supplement URNs.
 - `docs/flavors/tgpp.md` — 3GPP (`Pubid::Tgpp`) module naming and partial references.
 - `docs/flavors/w3c.md` — W3C slug attribute and index key.
