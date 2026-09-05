@@ -4,15 +4,17 @@ module Pubid
   module Oasis
     # Turns the parse tree into an `Identifiers::Standard`: stores the slug
     # verbatim in `original`, then performs a best-effort, ORDER-INDEPENDENT
-    # decomposition into spec / version / stage / part / label.
+    # decomposition into number / version / stage / part / label.
     #
     # Decomposition splits `original` on "-" and classifies each *whole*
     # fragment (so a stage-like substring inside a spec name — e.g. "CSDL" — is
-    # never mistaken for a stage). `spec` is the run of leading name fragments
-    # before the first recognized fragment; `version`/`stage`/`part` are the
-    # first fragment of each recognized kind; `label` is any name fragment
-    # appearing after the first recognized one. Anything the classifier cannot
-    # place stays only in `original`, so the printed form always round-trips.
+    # never mistaken for a stage). `number` is the specification name: the run
+    # of leading name fragments before the first recognized fragment, and the
+    # key relaton-index sorts and binary-searches on. `version`/`stage`/`part`
+    # are the first fragment of each recognized kind; `label` is any name
+    # fragment appearing after the first recognized one. Anything the
+    # classifier cannot place stays only in `original`, so the printed form
+    # always round-trips.
     class Builder
       # A fragment is a version when it is `v?N(.N)+` (e.g. "3.0", "v1.2.1",
       # "V1.0"). Bare integers are deliberately NOT versions (too ambiguous
@@ -36,16 +38,16 @@ module Pubid
 
       private
 
-      # @return [Hash] best-effort { spec:, version:, stage:, part:, label: }.
-      # Each fragment is classified once into a [fragment, kind] pair. `spec` is
-      # the leading run of name fragments; `label` is any name fragment after
+      # @return [Hash] best-effort { number:, version:, stage:, part:, label: }.
+      # Each fragment is classified once into a [fragment, kind] pair. `number`
+      # is the leading run of name fragments; `label` is any name fragment after
       # the first recognized one; version/stage/part are the first of each kind.
       def decompose(original)
         pairs = original.split("-").map { |f| [f, classify(f)] }
         lead = pairs.take_while { |_, kind| kind.nil? }
         rest = pairs.drop(lead.length)
         {
-          spec: names(lead),
+          number: names(lead),
           version: first_of(rest, :version),
           stage: first_of(rest, :stage),
           part: first_of(rest, :part),

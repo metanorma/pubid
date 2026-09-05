@@ -30,6 +30,14 @@ RSpec.describe "Pubid::Oasis identifier hash round-trip" do
         expect(hash["_type"]).to eq("pubid:oasis:standard")
       end
 
+      # The specification name is serialized as `number`, never `spec`: it is
+      # the key relaton-index sorts and binary-searches on.
+      it "serializes the specification name as `number`" do
+        expect(hash).not_to have_key("spec")
+        expect(hash["number"]).to eq(identifier.number)
+        expect(hash["number"]).not_to be_empty
+      end
+
       it "rebuilds an equal identifier from its hash" do
         rebuilt = Pubid::Oasis::Identifier.from_hash(hash)
         expect(rebuilt.to_s).to eq(identifier.to_s)

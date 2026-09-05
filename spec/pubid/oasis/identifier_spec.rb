@@ -18,10 +18,16 @@ RSpec.describe Pubid::Oasis::Identifier do
       end
 
       it "decomposes the component fields" do
-        expect(parsed.spec).to eq("OSLC-CoreShapes")
+        expect(parsed.number).to eq("OSLC-CoreShapes")
         expect(parsed.version).to eq("3.0")
         expect(parsed.stage).to eq("PS01")
         expect(parsed.part).to eq("Pt8")
+      end
+
+      # The specification name is stored as `number`, the key relaton-index
+      # sorts and binary-searches on; `spec` is a derived reader over it.
+      it "stores the specification name as the index key" do
+        expect(parsed.root.number.to_s).to eq("OSLC-CoreShapes")
       end
 
       it "round-trips through to_s" do
@@ -39,9 +45,9 @@ RSpec.describe Pubid::Oasis::Identifier do
 
       let(:parsed) { described_class.parse(subject) }
 
-      it "keeps everything in spec/original and leaves the rest nil" do
+      it "keeps everything in number/original and leaves the rest nil" do
         expect(parsed.original).to eq("amqp-core")
-        expect(parsed.spec).to eq("amqp-core")
+        expect(parsed.number).to eq("amqp-core")
         expect(parsed.version).to be_nil
         expect(parsed.stage).to be_nil
         expect(parsed.part).to be_nil
@@ -55,7 +61,7 @@ RSpec.describe Pubid::Oasis::Identifier do
       let(:parsed) { described_class.parse(subject) }
 
       it "decomposes order-independently" do
-        expect(parsed.spec).to eq("OSLC-AM")
+        expect(parsed.number).to eq("OSLC-AM")
         expect(parsed.version).to eq("3.0")
         expect(parsed.part).to eq("Part1")
         expect(parsed.stage).to eq("PS01")
@@ -69,7 +75,7 @@ RSpec.describe Pubid::Oasis::Identifier do
       let(:parsed) { described_class.parse(subject) }
 
       it "captures the label after the classified fragments" do
-        expect(parsed.spec).to eq("AkomaNtosoCore")
+        expect(parsed.number).to eq("AkomaNtosoCore")
         expect(parsed.version).to eq("v1.0")
         expect(parsed.part).to eq("Pt2")
         expect(parsed.label).to eq("Specifications")
