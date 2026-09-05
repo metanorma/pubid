@@ -101,6 +101,7 @@ from the code.
 - `docs/flavors/bipm.md` — BIPM update codes, index key, MR slug and loose consumer forms.
 - `docs/flavors/bsi.md` — BSI wrappers, adopted norms and cross-flavor sets.
 - `docs/flavors/csa.md` — CSA convergence onto the cross-flavor identifier contract.
+- `docs/flavors/ecma.md` — ECMA edition and volume in the printed identifier, and the index key.
 - `docs/flavors/etsi.md` — ETSI index key, part exclusion and MR slug.
 - `docs/flavors/iana.md` — IANA registry slugs as the index key.
 - `docs/flavors/iec.md` — IEC typed stages and `from_hash` equality.

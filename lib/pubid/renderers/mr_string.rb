@@ -28,6 +28,20 @@ module Pubid
     class MrString < Base
       SEPARATOR_SUPPLEMENT = "_"
 
+      # The flat MR segments, in order, as the hook each one reads. A hook
+      # returning nil contributes no segment, so a flavor fills only the slots
+      # its identity actually uses — `mr_volume` (ECMA) is nil everywhere else.
+      SEGMENTS = %i[
+        mr_publisher
+        mr_type
+        mr_number_with_part
+        mr_year
+        mr_edition
+        mr_volume
+        mr_languages
+        mr_all_parts
+      ].freeze
+
       def render(context: nil, **)
         suffix = @id.mr_supplement_suffix
 
@@ -43,15 +57,7 @@ module Pubid
       private
 
       def render_flat(id)
-        parts = []
-        parts << id.mr_publisher
-        parts << id.mr_type
-        parts << id.mr_number_with_part
-        parts << id.mr_year
-        parts << id.mr_edition
-        parts << id.mr_languages
-        parts << id.mr_all_parts
-        parts.compact.join(".")
+        SEGMENTS.filter_map { |hook| id.public_send(hook) }.join(".")
       end
     end
   end
