@@ -511,8 +511,15 @@ module Pubid
       # @param parsed_hash [Hash] parsed data with base and supplement info
       # @return [Identifiers::Corrigendum] corrigendum identifier
       def build_corrigendum_supplement(parsed_hash)
+        # The `corrigendum_identifier` rule's :base subtree binds as a
+        # top-level sequence (an Array of capture hashes — the same shape
+        # #build's dispatch merges at line 24) whenever the base carries a
+        # multi-capture narrative tail; fold it before reconstruction or
+        # reconstruct_base_string's Hash indexing crashes with TypeError.
+        base_data = parsed_hash[:base]
+        base_data = merge_parsed_array(base_data) if base_data.is_a?(Array)
         # Recursively parse the base identifier reconstructed from the subtree.
-        base = Identifier.parse(reconstruct_base_string(parsed_hash[:base]))
+        base = Identifier.parse(reconstruct_base_string(base_data))
 
         # Extract corrigendum attributes (parse-tree keys are cor_*; the
         # identifier stores them as the uniform `number`/`year`).
