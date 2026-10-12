@@ -191,13 +191,15 @@ module Pubid
           # year on the code and appends itself dash-joined, whatever the
           # input spelling ("ANSI/IEEE 21-1976-11" and "IEEE P15026.1,
           # 05 2014" both render glued - pubid#517). The comma face is
-          # the LONG format, a month name ("..., May 2014").
-          glued_month = id.month.to_s.match?(/\A\d{1,2}\z/)
+          # the LONG format, a month name ("..., May 2014") - and a
+          # draft row whose draft carries no date of its own keeps the
+          # numeric comma print date ("IEEE P802.15.4Revi/D09, 04 2011").
+          draft_date_free = !id.draft_obj || id.draft_obj&.year
+          glued_month = id.month.to_s.match?(/\A\d{1,2}\z/) && draft_date_free
           year_on_code = id.year && !id.edition &&
-                         (!id.month || glued_month) &&
-                         (!id.draft_obj || id.draft_obj&.year)
+                         (!id.month || glued_month) && draft_date_free
           result += "-#{id.year}" if year_on_code
-          result += "-#{id.month}" if glued_month
+          result += "-#{id.month}" if glued_month && year_on_code
 
           # Append the numbered/lettered revision inline, in IEEE's native
           # position — right after the code number and before the draft
