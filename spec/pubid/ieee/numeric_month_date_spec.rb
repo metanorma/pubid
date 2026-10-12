@@ -5,8 +5,10 @@ require "spec_helper"
 # Trailing numeric-month date "<number>, MM YYYY" (e.g. "IEEE P15026.1, 05
 # 2014"). pubid accepted only the month-name form ("May 2014"); the month-first
 # form failed, skipping 13 relaton-data-ieee index-v2 docids. The numeric month
-# is stored verbatim (matching the existing text-month convention) and rendered
-# back as ", MM YYYY".
+# is stored verbatim (matching the existing text-month convention) and
+# rendered as the SHORT format - the glued "-YYYY-MM" face ("IEEE
+# P15026.1-2014-05"): the comma marks the LONG format (a month name,
+# "IEEE P15026.1, May 2014"), never a numeric month (pubid#517 ruling).
 RSpec.describe "IEEE trailing numeric-month date" do
   # The full corpus of skipped docids from the hand-off.
   corpus = [
@@ -33,10 +35,12 @@ RSpec.describe "IEEE trailing numeric-month date" do
     end
   end
 
-  describe "to_s round-trips the numeric form" do
+  describe "to_s renders the short (glued) format" do
     corpus.each do |ref|
-      it "round-trips #{ref.inspect}" do
-        expect(Pubid::Ieee::Identifier.parse(ref).to_s).to eq(ref)
+      it "renders #{ref.inspect} glued" do
+        m = ref.match(/\A(.+), (\d{2}) (\d{4})\z/)
+        expect(Pubid::Ieee::Identifier.parse(ref).to_s)
+          .to eq("#{m[1]}-#{m[3]}-#{m[2]}")
       end
     end
   end

@@ -187,13 +187,17 @@ module Pubid
           # no draft at all, or a draft that carries its OWN date (the
           # draft+corrigendum family: "PC37.09-1999/D7.2, Nov 2006" -
           # the 1999 is the base's year, the Nov 2006 the draft's).
-          # A glued identity month (pubid#517) keeps the year on the code
-          # and appends itself dash-joined: "ANSI/IEEE 21-1976-11".
+          # A numeric identity month is the SHORT format: it keeps the
+          # year on the code and appends itself dash-joined, whatever the
+          # input spelling ("ANSI/IEEE 21-1976-11" and "IEEE P15026.1,
+          # 05 2014" both render glued - pubid#517). The comma face is
+          # the LONG format, a month name ("..., May 2014").
+          glued_month = id.month.to_s.match?(/\A\d{1,2}\z/)
           year_on_code = id.year && !id.edition &&
-                         (!id.month || id.month_glued) &&
+                         (!id.month || glued_month) &&
                          (!id.draft_obj || id.draft_obj&.year)
           result += "-#{id.year}" if year_on_code
-          result += "-#{id.month}" if id.month_glued
+          result += "-#{id.month}" if glued_month
 
           # Append the numbered/lettered revision inline, in IEEE's native
           # position — right after the code number and before the draft
@@ -267,7 +271,7 @@ module Pubid
         # An exactly-IEC/IEEE co-published reference drops the comma date
         # entirely (same catalogue-metadata rule as the draft date above):
         # "IEC/IEEE P60076-16, May 2016" prints as "IEC/IEEE 60076-16".
-        if id.month && !id.month_glued &&
+        if id.month && !glued_month &&
            !(id.publisher == "IEC" && id.copublisher == ["IEEE"])
           result += ", #{id.month}"
           result += " #{id.day}" if id.day

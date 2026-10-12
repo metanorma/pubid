@@ -27,13 +27,14 @@ RSpec.describe "Glued identity year-month (pubid#517)" do
     expect(round.to_s).to eq("ANSI/IEEE 21-1976-11")
   end
 
-  # The trailing numeric print date keeps its comma form — its own
-  # documented law (the numeric_month_date_spec rows, e.g. "IEEE
-  # P15026.1, 05 2014").
-  it "keeps the trailing comma form for the print-date provenance" do
+  # The comma face is the LONG format only (a month name); a numeric
+  # month renders the short glued face whatever the input spelling
+  # (pubid#517 ruling). The provenance flag still records how the
+  # month arrived.
+  it "renders the numeric print date in the short glued format" do
     id = Pubid::Ieee::Identifier.parse("IEEE P15026.1, 05 2014")
     expect(id.month_glued).to be(false)
-    expect(id.to_s).to eq("IEEE P15026.1, 05 2014")
+    expect(id.to_s).to eq("IEEE P15026.1-2014-05")
   end
 
   it "keeps the year-on-code render for a glued month with draft" do
