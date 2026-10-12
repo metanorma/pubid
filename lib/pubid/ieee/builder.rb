@@ -1600,7 +1600,27 @@ module Pubid
         # Redline
         attributes[:redline] = true if parsed[:redline]
 
+        mark_glued_month(attributes)
         attributes
+      end
+
+      # Glued identity year-month provenance (pubid#517): when the input's
+      # tail is the glued "-YYYY-MM" and the identity carries no draft or
+      # revision suffix, the month belongs to the code's date clause
+      # ("ANSI/IEEE 21-1976-11", "IEEE Std PC2-2016-01") and the renderer
+      # reproduces the glued face. The same month/year attribute shape is
+      # produced by trailing print dates (", 05 2014" — whose numeric form
+      # is its own documented law) and by dash-promoted draft tails
+      # ("/R-x-2011-04"), both of which keep the comma face: the input
+      # shape, checked here at the single choke point every assignment
+      # path converges to, is what distinguishes them (the AIEE
+      # date_separator precedent).
+      def mark_glued_month(attributes)
+        return unless attributes[:month] && attributes[:year] &&
+                      attributes[:draft].nil? && attributes[:revision].nil? &&
+                      original_input.to_s.match?(/-\d{4}-\d{2}\z/)
+
+        attributes[:month_glued] = true
       end
 
       # Determine stage abbreviation for TYPED_STAGE lookup
