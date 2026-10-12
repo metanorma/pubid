@@ -38,6 +38,12 @@ module Pubid
       attribute :revision, :string
       attribute :edition, :string                         # Edition 1.0
       attribute :month, :string
+      # Provenance flag (pubid#517): the month arrived glued to the identity
+      # year on the code ("ANSI/IEEE 21-1976-11", grammar
+      # date_with_month_numeric) rather than as a trailing ", 11 1976"
+      # print date. Serialization round-trips it so to_s reproduces the
+      # glued face.
+      attribute :month_glued, :boolean, default: -> { false }
       attribute :day, :string
       attribute :redline, :boolean, default: -> { false }
       attribute :amendments, Identifier, collection: true # Amendment identifiers
