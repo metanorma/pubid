@@ -57,9 +57,11 @@ RSpec.describe "IEEE serialization compaction (stage + draft)" do
   end
 
   describe "draft slash strip" do
-    it "serializes `draft` slashless (\"D3\", not \"/D3\")" do
+    it "serializes `draft` slashless with its embedded date (\"D3-2017-07\", not \"/D3\")" do
+      # pubid ruling 2026-10-13: a draft's numeric date embeds in the
+      # designator ("D3-2017-07"), whatever spelling arrived.
       h = Pubid::Ieee::Identifier.parse("IEEE P802.16/D-3-2017-07").to_hash
-      expect(h["draft"]).to eq("D3")
+      expect(h["draft"]).to eq("D3-2017-07")
     end
 
     it "round-trips and renders identically from the slashless form" do

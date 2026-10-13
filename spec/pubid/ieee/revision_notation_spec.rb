@@ -82,7 +82,14 @@ RSpec.describe "IEEE revision-notation variants" do
         parsed = klass.parse(variant)
         expect(parsed.revision).not_to be_nil
         expect(parsed.draft.version).to match(/\A\d/)
-        expect(parsed.year).to match(/\A(19|20)\d\d\z/)
+        # pubid ruling 2026-10-13: a MONTH-carrying numeric date embeds in
+        # the draft designator ("D3-2008-02"); a year-only tail keeps the
+        # comma face ("D2, 2007" — the relaton-pinned promotion).
+        if parsed.draft.version.match?(/-\d{4}-\d{2}\z/)
+          expect(parsed.year).to be_nil
+        else
+          expect(parsed.year).to match(/\A(19|20)\d\d\z/)
+        end
       end
 
       it "round-trips through to_hash/from_hash" do
