@@ -33,8 +33,16 @@ module Pubid
         raise Pubid::Errors::InvalidInputError, Pubid::INPUT_TOO_LONG_MESSAGE
       end
 
-      parsed = Pubid::Parg::Backend.parse(:evs, identifier)
-      Builder.new.build(parsed)
+      # The trailing language code (" et" / " en" / " et-en") extracts
+      # before the grammar runs — the CEN adopted_string is greedy over
+      # plain text and would swallow it.
+      language = identifier[/ (et-en|et|en)\z/, 1]
+      body = language ? identifier.sub(/ #{Regexp.escape(language)}\z/, "") : identifier
+
+      parsed = Pubid::Parg::Backend.parse(:evs, body)
+      built = Builder.new.build(parsed)
+      built.language = language
+      built
     end
 
     # Build an EVS identifier from a parse-tree hash.
