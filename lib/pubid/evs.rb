@@ -41,7 +41,10 @@ module Pubid
 
       parsed = Pubid::Parg::Backend.parse(:evs, body)
       built = Builder.new.build(parsed)
-      built.language = language
+      # An "(all parts)" parse wraps the identifier — the language belongs
+      # to the inner EVS identifier, not the flavor-less wrapper.
+      target = built.is_a?(Pubid::AllPartsIdentifier) ? built.identifiers.first : built
+      target.language = language
       built
     end
 
