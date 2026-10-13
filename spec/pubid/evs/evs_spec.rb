@@ -138,9 +138,11 @@ RSpec.describe Pubid::Evs do
     end
 
     it "rejects an unsupported type" do
+      # TS is supported now (the EVS prefix list); a type outside the list
+      # ("xx", "hd" without its CEN adoption spine) still rejects.
       expect do
-        Pubid.parse("urn:evs:ts:18216:2026", format: :urn)
-      end.to raise_error(Pubid::Errors::ParseError, /unsupported type/)
+        Pubid.parse("urn:evs:xx:18216:2026", format: :urn)
+      end.to raise_error(Pubid::Errors::ParseError)
     end
   end
 
