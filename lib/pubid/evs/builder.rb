@@ -66,6 +66,7 @@ module Pubid
         end
         if data[:evs_cor]
           identifier.cor_separator = supplement_separator(data[:evs_cor])
+          identifier.cor_kind = extract(data[:evs_cor][:cor_kind])
           identifier.cor_number = extract(data[:evs_cor][:cor_number])
           identifier.cor_year = extract(data[:evs_cor][:cor_year])
         end
