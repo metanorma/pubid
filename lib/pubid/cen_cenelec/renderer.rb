@@ -110,12 +110,15 @@ module Pubid
           parts << "Guide"
         end
 
-        # Number with part (which may be multi-level like "5-1-1")
+        # Number with part (which may be multi-level like "5-1-1") and the
+        # ETSI-style version suffix ("EN 302 326-2 V2.2.1")
         if id.number
           number_str = id.number
           if id.part
             number_str += "-#{id.part}"
           end
+          # the version capture carries its own leading space
+          number_str += id.version if id.version
           parts << number_str
         end
 

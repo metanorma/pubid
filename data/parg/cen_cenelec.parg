@@ -2,17 +2,20 @@
 # (U+2011/AD dashes, comment stripping, CEN-CLC/GUIDE forms) stays
 # binder-side: the grammar sees normalized input.
 
-grammar PubidCenCenelec version "0.1.0" {
+grammar PubidCenCenelec version "0.2.0" {
   digit = %x30-39
   space = " "
   dash = "-"
   slash = "/"
   plus = "+"
   colon = ":"
-  publisher = (("CWA" / "HD" / "ES" / "CR" / "ENV") as publisher) / (("EN" / "CEN") as publisher [slash "CLC" as copublisher]) / ("CLC" as publisher [slash "CEN" as copublisher])
+  publisher = (("CWA" / "HD" / "ES" / "CR" / "ENV") as publisher) / (("EN" / "CEN") as publisher [copublishers]) / ("CLC" as publisher [copublishers])
+  copublishers = (1*copublisher) as copublishers
+  copublisher = (slash ("CLC" / "ETSI") as copublisher)
   stage_prefix = ("FprEN" / "prEN") as type_with_stage
   type = ("Guide" / "GUIDE" / "TR" / "TS") as type
-  number = (1*digit) as number
+  number = ((1*digit) (*(space (1*digit)))) as number
+  version = (space "V" (1*digit) "." (1*digit) "." (1*digit)) as version
   part = dash (1*(digit / dash)) as part
   parts = (*part) as parts
   month_digits = ("01" / "02" / "03" / "04" / "05" / "06" / "07" / "08" / "09" / "10" / "11" / "12") as month
@@ -28,7 +31,7 @@ grammar PubidCenCenelec version "0.1.0" {
   adopted_string = (adopted_org_prefix *(!supplement !edition any_noln_char)) as adopted_string
   any_noln_char = %x01-09 / %x0B-10FFFF
   fragment_identifier = ((stage_prefix / publisher) space number parts space "AMD" (1*digit) as amendment_number space "FRAG" (1*digit) as fragment_number) / ((stage_prefix / publisher) space number parts [year] (plus / slash) "A" (1*digit) as amendment_number [(colon (4digit) as amendment_year)] space "FRAG" (1*digit) as fragment_number)
-  identifier = fragment_identifier / ((stage_prefix / publisher) [(space adopted_string)] [(space type / slash type)] [(space number parts [year])] supplements [edition])
+  identifier = fragment_identifier / ((stage_prefix / publisher) [(space adopted_string)] [(space type / slash type)] [(space number parts [version] [year])] supplements [edition])
 
   entry identifier: identifier
 
@@ -37,6 +40,11 @@ grammar PubidCenCenelec version "0.1.0" {
     accept "EN ISO 9001:2015"
     accept "CEN/CLC TR 17161:2019"
     accept "EN 196-1:2016+A1"
+    accept "CEN/CLC/ETSI/TR 101551:2026"
+    accept "EN 302 326-2:2026"
+    accept "EN 302 326-2 V2.2.1"
+    accept "EN 302 326 V2.2.1:2026"
+    accept "EN 302:2026"
     reject "nonsense"
   }
 }

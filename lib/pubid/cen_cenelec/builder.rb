@@ -18,6 +18,13 @@ module Pubid
           return build_fragment_identifier(data)
         end
 
+        # "TR" is a CEN or CLC technical report ("CEN/TR", "CLC/TR") — the
+        # EN publisher never carries it (pubid ruling 2026-10-13).
+        if data[:type].to_s == "TR" && %w[EN].include?(data[:publisher].to_s)
+          raise Pubid::Errors::ParseError,
+                "\"EN\" cannot be \"TR\": a technical report is \"CEN/TR\" or \"CLC/TR\""
+        end
+
         # Every base document (an adopted norm, an ENV adoption, a plain
         # identifier) goes through the same supplement wrapping. The adopted
         # branches used to return early, so "CEN ISO/TS 21003-7:2008/A1:2010"
@@ -170,6 +177,9 @@ module Pubid
 
         when :part
           value[:part].to_s if value.is_a?(Hash)
+
+        when :version
+          value.to_s unless value.to_s.empty?
 
         when :year, :date
           # Check if month is present in the data and include it
