@@ -287,6 +287,24 @@ module Pubid
         end
         dash = parsed_hash[:dash_year] ? parsed_hash : nil
         dash ||= drafts.find { |d| d.is_a?(Hash) && d[:dash_year] }
+        if dash.nil? && parsed_hash[:draft]
+          # A numeric month trailing a draft is the draft's own date: it
+          # embeds in the designator ("D09, 04 2011" -> "D09-2011-04")
+          # rather than printing the long-format comma face (a month name
+          # keeps the comma, "D7.2, Nov 2006") — pubid ruling 2026-10-13.
+          m = parsed_hash[:month] || parsed_hash[:trailing_month]
+          y = parsed_hash[:year] || parsed_hash[:trailing_year]
+          if m.to_s.match?(/\A\d{1,2}\z/) && y
+            host = drafts.find { |d| d.is_a?(Hash) && d[:draft_version] }
+            if host
+              host[:draft_version] = [host[:draft_version], y, m].compact.join("-")
+              parsed_hash.delete(:month)
+              parsed_hash.delete(:year)
+              parsed_hash.delete(:trailing_month)
+              parsed_hash.delete(:trailing_year)
+            end
+          end
+        end
         if dash && parsed_hash[:year].nil?
           joined = drafts.filter_map { |d| d.is_a?(Hash) ? d[:draft_version] : nil }
                          .map { |v| v.is_a?(Hash) ? v[:value] : v.to_s }.join
@@ -297,6 +315,15 @@ module Pubid
           dash_led = joined.start_with?("-")
           if bare_joint_draft && dash_led
             parsed_hash[:part] = { value: dash[:dash_year] }
+          elsif dash[:dash_month] &&
+                (host = drafts.find { |d| d.is_a?(Hash) && d[:draft_version] })
+            # The draft's own numeric date embeds in the designator
+            # ("D2-2015-04") — the "D2, 04 2015" comma spelling
+            # normalizes onto it (pubid ruling 2026-10-13).
+            host[:draft_version] =
+              [joined, dash[:dash_year], dash[:dash_month]].compact.join("-")
+            dash.delete(:dash_year)
+            dash.delete(:dash_month)
           elsif dash[:dash_month] || dash_led
             parsed_hash[:year] = dash[:dash_year]
             parsed_hash[:month] = dash[:dash_month]
@@ -307,9 +334,16 @@ module Pubid
             # draft version misses the D-registry), no separate year.
             host = drafts.find { |d| d.is_a?(Hash) && d[:draft_version] }
             if host
-              host[:draft_version] = "#{joined}-#{dash[:dash_year]}"
+              # The draft's own numeric date embeds in the designator
+              # ("D9-2006", and with its month "D2-2015-04") — the
+              # "D2, 04 2015" comma spelling normalizes onto it.
+              host[:draft_version] =
+                [joined, dash[:dash_year], dash[:dash_month]].compact.join("-")
               dash.delete(:dash_year)
               dash.delete(:dash_month)
+              # the hyphenated "/D-2-2007" spelling's year the spine
+              # captured at top level is the draft's own — vacate it
+              parsed_hash.delete(:year) if parsed_hash[:year] == dash[:dash_year]
             else
               parsed_hash[:year] = dash[:dash_year]
               parsed_hash[:month] = dash[:dash_month]
@@ -1663,8 +1697,9 @@ module Pubid
 
             if version
               # relaton's hyphenated "/D-2" spelling captures the dash inside
-              # draft_version; the stage registry keys on "D2".
-              draft_abbr = "D#{version.to_s.sub(/\A-/, "")}"
+              # draft_version; the stage registry keys on "D2". A date-embedded
+              # version ("3-2017-07") keys on its leading ordinal.
+              draft_abbr = "D#{version.to_s.sub(/\A-/, "").sub(/-\d{4}(-\d{2})?\z/, "")}"
               # Check if this specific draft stage is in registry
               stage = Pubid::Ieee.locate_stage(draft_abbr)
               return draft_abbr if stage&.abbr&.include?(draft_abbr)
