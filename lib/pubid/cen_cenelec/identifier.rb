@@ -19,6 +19,8 @@ module Pubid
       attribute :number, :string
       attribute :part, :string
       attribute :subpart, :string
+      # The ETSI-style version suffix ("EN 302 326-2 V2.2.1")
+      attribute :version, :string
 
       # A published European Norm holds no type, stage or typed stage, so a
       # nil one means "published", not "any stage": `EN 1325` is not

@@ -17,8 +17,16 @@ module Pubid
 
         identifier =
           if data[:adopted]
+            adopted_data = data[:adopted]
+            # The adopted TS face carries no TS marker ("EVS-EN
+            # 16798-1:2019"; pubid ruling 2026-10-13) — the TS-ness of an
+            # EN adoption is metadata, not identity, so the type capture
+            # strips before the CEN builder routes on it.
+            if adopted_data[:type].to_s == "TS" && adopted_data[:publisher].to_s == "EN"
+              adopted_data = adopted_data.reject { |k, _| k == :type }
+            end
             Identifiers::NationalAdoption.new(
-              base: Pubid::CenCenelec::Builder.build(data[:adopted]),
+              base: Pubid::CenCenelec::Builder.build(adopted_data),
               **shared(data),
             )
           elsif data[:intl]
