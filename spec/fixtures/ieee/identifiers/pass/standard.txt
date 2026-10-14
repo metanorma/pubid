@@ -28,9 +28,9 @@ ANSI N323AB-2013 (Revision and Redesignation of ANSI N323A-1997 and ANSI N323B-2
 !ANSI/IEEE Std 802.11, 1999 Edition (R2003)!ANSI/IEEE 802.11-1999 (R2003)
 !ANSI/IEEE Std 802.12, 1998 Edition (Incorporating ANSI/IEEE Stds 802.122-1995 and ANSI/IEEE Std 802.12d-1997)!ANSI/IEEE 802.12-1998
 !ANSI/IEEE Std 896.1-1994,!ANSI/IEEE 896.1-1994
-!ANSI/IEEE Std: Outdoor Apparatus Bushings!ANSI/IEEE 21, 11 1976
+!ANSI/IEEE Std: Outdoor Apparatus Bushings!ANSI/IEEE 21-1976-11
 !C2-1997 National Electric Safety Code (NESC)!C2-1997 National Electrical Safety Code
-!Draft National Electrical Safety Code, January 2016!IEEE Std PC2, 01 2016
+!Draft National Electrical Safety Code, January 2016!IEEE Std PC2-2016-01
 !EEE Std 1671.1-2017 (Revision of IEEE Std 1671.1&amp;#8208;2009)!IEEE Std 1671.1-2017
 !IEEE 1647/D8+3, December 2010!IEEE Draft 1647/D8+3, Dec, 2010
 !IEEE 802.1Qch-2017 (Amendment to IEEE Std 802.1Q-2014 as amended by IEEE Std 802.1Qca-2015, IEEE Std 802.1Qcd(TM)-2015, IEEE Std 802.1Q-2014/Cor 1-2015, IEEE Std 802.1Qbv-2015, IEEE Std 802.1Qbu-2016, IEEE Std 802.1Qbz-2016, and IEEE Std 802.1Qci-2017)!IEEE Std 802.1Qch-2017
@@ -38,11 +38,11 @@ ANSI N323AB-2013 (Revision and Redesignation of ANSI N323A-1997 and ANSI N323B-2
 !IEEE Approved Std P1609.3/D23.pdf, Feb 2007!IEEE Draft 1609.3/D23.pdf, Feb, 2007
 !IEEE Approved Std P277D1/Jan 2007!IEEE Draft 277D1/DJan, 2007
 !IEEE C37.04h-1990 (Supplement to lEEE C37.04-1979)!IEEE Std C37.04h-1990
-!IEEE Draft P802.11-REVmb/D3.0, March 2010 (Revision of IEEE Std 802.11-2007, as amended by IEEE Std 802.11k-2008, IEEE Std 802.11r-2008, IEEE Std 802.11y-2008, IEEE Std 802.11w-2009 and IEEE Std 802.11n-2009)!IEEE Draft P802.11/D3.0, Mar, 2010
-!IEEE Draft P802.11-REVmb/D6.0, September 2010 (Revision of IEEE Std 802.11-2007, as amended by IEEE Std 802.11k-2008, IEEE Std 802.11r-2008, IEEE Std 802.11y-2008, IEEE Std 802.11w-2009 and IEEE Std 802.11n-2009)!IEEE Draft P802.11/D6.0, Sept, 2010
-!IEEE Draft P802.11-REVmb/D7.0, February 2011 (Revision of IEEE Std 802.11-2007, as amended by IEEE Std 802.11k-2008, IEEE Std 802.11r-2008, IEEE Std 802.11y-2008, IEEE Std 802.11w-2009 and IEEE Std 802.11n-2009)!IEEE Draft P802.11/D7.0, Feb, 2011
-!IEEE Draft P802.11-REVmb/D8.0, March 2011 (Revision of IEEE Std 802.11-2007, as amended by IEEE Std 802.11k-2008, IEEE Std 802.11r-2008, IEEE Std 802.11y-2008, IEEE Std 802.11w-2009 and IEEE Std 802.11n-2009)!IEEE Draft P802.11/D8.0, Mar, 2011
-!IEEE Draft P802.11-REVmb/D9.0, May 2011 (Revision of IEEE Std 802.11-2007, as amended by IEEE Std 802.11k-2008, IEEE Std 802.11r-2008, IEEE Std 802.11y-2008, IEEE Std 802.11w-2009 and IEEE Std 802.11n-2009)!IEEE Draft P802.11/D9.0, May, 2011
+!IEEE Draft P802.11-REVmb/D3.0, March 2010 (Revision of IEEE Std 802.11-2007, as amended by IEEE Std 802.11k-2008, IEEE Std 802.11r-2008, IEEE Std 802.11y-2008, IEEE Std 802.11w-2009 and IEEE Std 802.11n-2009)!IEEE Draft P802.11-Revmb/D3.0-2010-03
+!IEEE Draft P802.11-REVmb/D6.0, September 2010 (Revision of IEEE Std 802.11-2007, as amended by IEEE Std 802.11k-2008, IEEE Std 802.11r-2008, IEEE Std 802.11y-2008, IEEE Std 802.11w-2009 and IEEE Std 802.11n-2009)!IEEE Draft P802.11-Revmb/D6.0-2010-09
+!IEEE Draft P802.11-REVmb/D7.0, February 2011 (Revision of IEEE Std 802.11-2007, as amended by IEEE Std 802.11k-2008, IEEE Std 802.11r-2008, IEEE Std 802.11y-2008, IEEE Std 802.11w-2009 and IEEE Std 802.11n-2009)!IEEE Draft P802.11-Revmb/D7.0-2011-02
+!IEEE Draft P802.11-REVmb/D8.0, March 2011 (Revision of IEEE Std 802.11-2007, as amended by IEEE Std 802.11k-2008, IEEE Std 802.11r-2008, IEEE Std 802.11y-2008, IEEE Std 802.11w-2009 and IEEE Std 802.11n-2009)!IEEE Draft P802.11-Revmb/D8.0-2011-03
+!IEEE Draft P802.11-REVmb/D9.0, May 2011 (Revision of IEEE Std 802.11-2007, as amended by IEEE Std 802.11k-2008, IEEE Std 802.11r-2008, IEEE Std 802.11y-2008, IEEE Std 802.11w-2009 and IEEE Std 802.11n-2009)!IEEE Draft P802.11-Revmb/D9.0-2011-05
 !IEEE Draft P802.3bf/D2.1, September 2010 (Draft Amendment to IEEE Std 802.3-2008)!IEEE Draft P802.3bf/D2.1, Sept, 2010
 !IEEE Draft P802.3bf/D3.0, November 2010 (Draft Amendment to IEEE Std 802.3-2008)!IEEE Draft P802.3bf/D3.0, Nov, 2010
 !IEEE Draft P802.3bf/D3.1, January 2011 (Draft Amendment to IEEE Std 802.3-2008)!IEEE Draft P802.3bf/D3.1, Jan, 2011
@@ -164,9 +164,9 @@ IEEE Std P1205-Corrigendum1, Dec 2006
 !IEEE Std P1609.3/D18.pdf!IEEE Draft P1609.3/D18
 !IEEE Std P762-2006(R2002)!IEEE Std P762-2006 (R2002)
 !IEEE Std P802.11v/D10.0, Mar2010 (Amendment to IEEE Std 802.11-2007)!IEEE Draft P802.11v/D10.0, Mar, 2010
-!IEEE Std P802.15.1REVa/D5!IEEE P802.15.1/D5
-!IEEE Std P802.16.2-REVa/D8!IEEE P802.16.2/D8
-!IEEE Std P802.16/REVd/D5!IEEE P802.16/D5
+!IEEE Std P802.15.1REVa/D5!IEEE P802.15.1Reva/D5
+!IEEE Std P802.16.2-REVa/D8!IEEE P802.16.2-Reva/D8
+!IEEE Std P802.16/REVd/D5!IEEE P802.16/Revd/D5
 !IEEE Std P802.3ap/D2.3.pdf!IEEE Draft P802.3ap/D2.3
 !IEEE Std P802.3ap/D3.0.pdf!IEEE Draft P802.3ap/D3.0
 !IEEE Std P802.8/D.3.2!IEEE Draft P802.8/D.3.2
@@ -3308,8 +3308,8 @@ IEEE Std 1073.3.1a-2000
 !IEEE Std P802.15.4a/D5!IEEE P802.15.4a/D5
 !IEEE Std P802.15.4a/D6, Dec 2006!IEEE P802.15.4a/D6, Dec, 2006
 !IEEE Std P802.16.2a/D6!IEEE P802.16.2a/D6
-!IEEE Std P802.1QREV/D4.0!IEEE Draft P802.1QREV/D4.0
-!IEEE Std P802.1QREV/D5.0!IEEE Draft P802.1QREV/D5.0
+!IEEE Std P802.1QREV/D4.0!IEEE Draft P802.1QRev/D4.0
+!IEEE Std P802.1QREV/D5.0!IEEE Draft P802.1QRev/D5.0
 !IEEE Std PC37.20.1a/D11!IEEE Draft PC37.20.1a/D11
 !IEEE Std PC37.20.1b/D2!IEEE PC37.20.1b/D2
 !IEEE Std PC37.20.1b/D3!IEEE PC37.20.1b/D3
@@ -3882,7 +3882,7 @@ ANSI/IEEE C37.04g-1986
 !IEEE PC62.69a/D3, January 2017!IEEE PC62.69a/D3, Jan, 2017
 !IEEE PC62.72a/D1, February 2018!IEEE PC62.72a/D1, Feb, 2018
 !IEEE PC62.72a/D2, March 2020!IEEE PC62.72a/D2, Mar, 2020
-!IEEE PC63.4rev/D5.03, December 2013!IEEE Draft PC63.4rev/D5.03, Dec, 2013
+!IEEE PC63.4rev/D5.03, December 2013!IEEE Draft PC63.4Rev/D5.03-2013-12
 IEEE STD 802-11y-2008
 IEEE STD C62.11a-2008
 IEEE Std 1003.1b-1993
@@ -4052,12 +4052,12 @@ IEEE Std C37.48c-1991
 !IEEE Unapproved Draft Std P802.11z/D5.0, Jun 2009!IEEE Unapproved P802.11z/D5.0, Jun 2009
 !IEEE Unapproved Draft Std P802.11z/D6.0, Aug 2009!IEEE Unapproved P802.11z/D6.0, Aug 2009
 !IEEE Unapproved Draft Std P802.11z/D7.0, Feb 2010!IEEE Unapproved P802.11z/D7.0, Feb 2010
-!IEEE Unapproved Draft Std P802.16Rev2/D3 Feb 2008!IEEE Unapproved P802.16Rev2/D3 Feb 2008
-!IEEE Unapproved Draft Std P802.16Rev2/D6 Jul 2008!IEEE Unapproved P802.16Rev2/D6 Jul 2008
-!IEEE Unapproved Draft Std P802.16Rev2/D7 Oct 2008!IEEE Unapproved P802.16Rev2/D7 Oct 2008
-!IEEE Unapproved Draft Std P802.16Rev2/D8 Dec 2008!IEEE Unapproved P802.16Rev2/D8 Dec 2008
-!IEEE Unapproved Draft Std P802.16Rev2/D9a March 2009!IEEE Unapproved P802.16Rev2/D9a Mar 2009
-!IEEE Unapproved Draft Std P802.16Rev2_D4 Apr 2008!IEEE Unapproved P802.16Rev2/D4 Apr 2008
+!IEEE Unapproved Draft Std P802.16Rev2/D3 Feb 2008!IEEE Unapproved P802.16Rev2/D3-2008-02
+!IEEE Unapproved Draft Std P802.16Rev2/D6 Jul 2008!IEEE Unapproved P802.16Rev2/D6-2008-07
+!IEEE Unapproved Draft Std P802.16Rev2/D7 Oct 2008!IEEE Unapproved P802.16Rev2/D7-2008-10
+!IEEE Unapproved Draft Std P802.16Rev2/D8 Dec 2008!IEEE Unapproved P802.16Rev2/D8-2008-12
+!IEEE Unapproved Draft Std P802.16Rev2/D9a March 2009!IEEE Unapproved P802.16Rev2/D9a-2009-03
+!IEEE Unapproved Draft Std P802.16Rev2_D4 Apr 2008!IEEE Unapproved P802.16Rev2/D4-2008-04
 !IEEE Unapproved Draft Std P802.16g/D9, Apr 2007!IEEE Unapproved P802.16g/D9, Apr 2007
 !IEEE Unapproved Draft Std P802.16h/D10, Jul 2009!IEEE Unapproved P802.16h/D10, Jul 2009
 !IEEE Unapproved Draft Std P802.16h/D11, Sept 2009!IEEE Unapproved P802.16h/D11, Sept 2009
@@ -5768,8 +5768,8 @@ IEEE Std P14764, Nov 2004
 !IEEE Std C95.1-2019 (Revision of IEEE Std C95.1-2005/ Incorporates IEEE Std C95.1-2019/Cor 1-2019)!IEEE Std C95.1-2019
 !IEEE Std C95.1-2019 (Revision of IEEE Std C95.1-2005/ Incorporates IEEE Std C95.1-2019/Cor 1-2019) - Redline!IEEE Std C95.1-2019 - Redline
 !IEEE Std 1858-2016 (Incorporating IEEE Std 1858-2016/Cor 1-2017)!IEEE Std 1858-2016
-!P802-REV/D1.6 (Revision of IEEE Std 802-2001, incorporating IEEE Std 802a-2003, and IEEE Std 802b-2004)!IEEE Draft P802-REV/D1.6
-!P802-REV/D2.0 (Revision of IEEE Std 802-2001, incorporating IEEE Std 802a-2003, and IEEE Std 802b-2004)!IEEE Draft P802-REV/D2.0
+!P802-REV/D1.6 (Revision of IEEE Std 802-2001, incorporating IEEE Std 802a-2003, and IEEE Std 802b-2004)!IEEE Draft P802-Rev/D1.6
+!P802-REV/D2.0 (Revision of IEEE Std 802-2001, incorporating IEEE Std 802a-2003, and IEEE Std 802b-2004)!IEEE Draft P802-Rev/D2.0
 !ANSI/IEEE C37.010b-1985 (Supplement to ANSI/IEEE C37.010-1979)!ANSI/IEEE C37.010b-1985
 !ANSI/IEEE C37.010e-1985 (Supplement to ANSI/IEEE C37.010-1979)!ANSI/IEEE C37.010e-1985
 !ANSI/IEEE C37.09e-1985 (Supplement to ANSI/IEEE C37.09-1979)!ANSI/IEEE C37.09e-1985
@@ -5863,12 +5863,12 @@ IEEE PC57.12.01/D8, 2014
 !IEEE Unapproved Std P1076.1/D3.3, Feb2007!IEEE Unapproved P1076.1/D3.3, Feb 2007
 !IEEE Unapproved Std P802.16g/D8, Feb2007!IEEE Unapproved P802.16g/D8, Feb 2007
 !IEEE/IEC P60076-57-129_FDIS, July2017!IEEE/IEC Draft P60076-57-129/D=FDIS-201707
-!IEEE Std P802.11-REVma/D5.0!IEEE Draft P802.11/D5.0
-!IEEE Std P802.11-REVma/D6.0!IEEE Draft P802.11/D6.0
-!IEEE Std P802.11-REVma/D7.0!IEEE Draft P802.11/D7.0
-!IEEE Std P802.11-REVma/D8.0!IEEE Draft P802.11/D8.0
-!IEEE Unapproved Draft Std P802.11-REVma/D9.0!IEEE Unapproved P802.11/D9.0
-!P802.11-REVmd/D2.0, December 2018!IEEE Draft P802.11/D2.0, Dec, 2018
+!IEEE Std P802.11-REVma/D5.0!IEEE Draft P802.11-Revma/D5.0
+!IEEE Std P802.11-REVma/D6.0!IEEE Draft P802.11-Revma/D6.0
+!IEEE Std P802.11-REVma/D7.0!IEEE Draft P802.11-Revma/D7.0
+!IEEE Std P802.11-REVma/D8.0!IEEE Draft P802.11-Revma/D8.0
+!IEEE Unapproved Draft Std P802.11-REVma/D9.0!IEEE Unapproved P802.11-Revma/D9.0
+!P802.11-REVmd/D2.0, December 2018!IEEE Draft P802.11-Revmd/D2.0-2018-12
 !ANSI/IEEE C37.010-1979 (Includes Supplement ANSI/IEEE C37.0I0d-1984)!ANSI/IEEE C37.010-1979
 !IEEE Active Unapproved Draft Std IEEE PC37.06/D8.3, July 2007!IEEE Active Unapproved PC37.06/D8.3, Jul 2007
 !IEEE Std 1003.5b-1996 (Includes IEEE Std 1003.5-1992)!IEEE Std 1003.5b-1996
@@ -5901,8 +5901,8 @@ IEEE PC57.12.01/D8, 2014
 !IEEE Unapproved Draft Std P754_D1.6.0, Jan 2008!IEEE Unapproved P754/D1
 !IEEE Unapproved Draft Std P754_D1.8.0, Apr 2008!IEEE Unapproved P754/D1
 !IEEE Unapproved Draft Std P802.11k_D13.0_Mar 2008!IEEE Unapproved P802.11k/D13.0 Mar 2008
-!IEEE Unapproved Draft Std P802.16_Rev2/D5 Jun 2008!IEEE Unapproved P802.16Rev2/D5 Jun 2008
-!IEEE Unapproved Draft Std P802.16_Rev2_D2, Dec 2007!IEEE Unapproved P802.16Rev2/D2, Dec 2007
+!IEEE Unapproved Draft Std P802.16_Rev2/D5 Jun 2008!IEEE Unapproved P802.16Rev2/D5-2008-06
+!IEEE Unapproved Draft Std P802.16_Rev2_D2, Dec 2007!IEEE Unapproved P802.16Rev2/D2-2007-12
 !IEEE Unapproved Draft Std P802.1AB/REVD2.2, Dec 2007!IEEE Unapproved P802.1AB/D2.2, Dec 2007
 !IEEE Unapproved Draft Std P802.1Q, 2009 Edition/D0.1, Feb 2010!IEEE Unapproved P802.1Q-2009/D0.1, Feb 2010
 !IEEE Unapproved Draft Std P802.1ah/D4., Feb 2008!IEEE Unapproved P802.1ah/D4, Feb 2008
@@ -5953,7 +5953,7 @@ IEEE PC57.12.01/D8, 2014
 !IEEE Unapproved Draft Std P802.11k_D12.0, Jan 2008!IEEE Unapproved P802.11k/D12.0, Jan 2008
 !IEEE Unapproved Draft Std P2600_D33b, Feb 2008!IEEE Unapproved P2600/D33b, Feb 2008
 !IEEE Unapproved Draft Std P1003.1_D4 , Jan 2008!IEEE Unapproved P1003.1/D4, Jan 2008
-!IEEE Unapproved Draft Std P802.16_Rev2_D2, Dec 2007!IEEE Unapproved P802.16Rev2/D2, Dec 2007
+!IEEE Unapproved Draft Std P802.16_Rev2_D2, Dec 2007!IEEE Unapproved P802.16Rev2/D2-2007-12
 !IEEE Unapproved Draft Std PC37.27/D16_Dec 2007!IEEE Unapproved PC37.27/D16 Dec 2007
 !IEEE Unapproved Draft Std P802.11k_D13.0_Mar 2008!IEEE Unapproved P802.11k/D13.0 Mar 2008
 !IEEE Unapproved Draft Std P1028_Draft7.0, Feb 2008!IEEE Unapproved P1028/Draft7.0, Feb 2008
@@ -5961,14 +5961,14 @@ IEEE PC57.12.01/D8, 2014
 !IEEE Unapproved Draft Std P1302_D7.02, Dec 2007!IEEE Unapproved P1302/D7.02, Dec 2007
 !IEEE Unapproved Draft Std P754_D1.7.0, Mar 2008!IEEE Unapproved P754/D1
 !IEEE Unapproved Draft Std P1159_D11, Mar 2008!IEEE Unapproved P1159/D11, Mar 2008
-!IEEE Unapproved Draft Std P802.16Rev2_D4 Apr 2008!IEEE Unapproved P802.16Rev2/D4 Apr 2008
+!IEEE Unapproved Draft Std P802.16Rev2_D4 Apr 2008!IEEE Unapproved P802.16Rev2/D4-2008-04
 !IEEE Unapproved Draft Std 802.1ah-D4.2, Mar 2008!IEEE Unapproved 802.1ah/D4.2, Mar 2008
 !IEEE Unapproved Draft Std P754_D1.8.0, Apr 2008!IEEE Unapproved P754/D1
 !IEEE Unapproved Draft Std P754_D9.0 Apr 2008!IEEE Unapproved P754/D9.0 Apr 2008
 !IEEE Unapproved Draft Std P1675_D7, May 2008!IEEE Unapproved P1675/D7, May 2008
 !IEEE Unapproved Draft Std P1601_D10, Mar 2008!IEEE Unapproved P1601/D10, Mar 2008
 !IEEE Unapproved Draft Std P802.21_D11.0, May 2008!IEEE Unapproved P802.21/D11.0, May 2008
-!IEEE Unapproved Draft Std P802.16_Rev2/D5 Jun 2008!IEEE Unapproved P802.16Rev2/D5 Jun 2008
+!IEEE Unapproved Draft Std P802.16_Rev2/D5 Jun 2008!IEEE Unapproved P802.16Rev2/D5-2008-06
 !IEEE Unapproved Draft Std P802.11y_D10.0, Jun 2008!IEEE Unapproved P802.11y/D10.0, Jun 2008
 !IEEE Unapproved Draft Std P11073-20601_D20 May 2008!IEEE Unapproved P11073-20601/D20 May 2008
 !IEEE Unapproved Draft Std P11073-10471_D05, May 2008!IEEE Unapproved P11073-10471/D05, May 2008
