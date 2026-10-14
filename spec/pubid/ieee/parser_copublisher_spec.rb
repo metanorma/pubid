@@ -24,6 +24,17 @@ RSpec.describe Pubid::Ieee::Parser do
         expect(result).to be_a(Pubid::Ieee::Identifiers::JointDevelopment)
         expect(result.publishers.to_s).to include("IEEE")
       end
+
+      it "glues the joint IEEE/CSA draft date into the designator" do
+        result = Pubid::Ieee.parse("IEEE/CSA Draft P844.1/D2, Sept, 2016")
+        expect(result.to_s).to eq("IEEE/CSA Draft P844.1/D2-2016-09")
+      end
+
+      it "re-parses the glued face onto the draft-embedded date" do
+        result = Pubid::Ieee.parse("IEEE/CSA Draft P844.1/D2-2016-09")
+        expect(result.to_s).to eq("IEEE/CSA Draft P844.1/D2-2016-09")
+        expect(result).to be_a(Pubid::Ieee::Identifiers::ProjectDraftIdentifier)
+      end
     end
 
     context "ASME (American Society of Mechanical Engineers)" do

@@ -986,6 +986,19 @@ module Pubid
               draft_year = extract_value(parsed[:draft_year]).to_s.sub(/\A[, ]+/, "")
               attributes[:draft] = "D#{draft_ver}, #{draft_year}"
               attributes.delete(:year) if parsed[:year].nil?
+            elsif attributes[:publishers] == %w[IEEE CSA] &&
+                  parsed[:iso_stage].nil? &&
+                  extract_value(parsed[:year]).to_s.match?(/\A(19|20)\d\d\z/) &&
+                  extract_value(parsed[:month]).to_s.match?(/\A\d{1,2}\z/)
+              # The glued face re-parses with the date in the identity
+              # slots ("D2-2016-09" -> year/month + a bare D2): it
+              # normalizes back onto the draft-embedded date so the
+              # round trip closes on the CSA canonical.
+              draft = Components::Draft.new(
+                version: "#{draft_ver}-#{extract_value(parsed[:year])}-#{extract_value(parsed[:month])}")
+              attributes[:draft] = draft.to_s.sub(%r{\A/}, "")
+              attributes.delete(:year)
+              attributes.delete(:month)
             else
               attributes[:ieee_draft] = "D#{draft_ver}"
             end
