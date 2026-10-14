@@ -1850,6 +1850,10 @@ module Pubid
           month_slice = draft_data[:month]
           month = extract_value(month_slice) if month_slice
           year = extract_value(draft_data[:year]) if draft_data[:year]
+          # The apostrophe-year catalogue convention ("P1484.20.1/D7,
+          # May 07"): the 2-digit year expands with the <30 pivot so the
+          # hash carries an unambiguous year.
+          year = "#{year.to_i < 30 ? 20 : 19}#{year}" if year.to_s.match?(/\A\d{2}\z/)
           day = extract_value(draft_data[:day]) if draft_data[:day]
 
           # A REV-carrying draft embeds its print date into the designator
