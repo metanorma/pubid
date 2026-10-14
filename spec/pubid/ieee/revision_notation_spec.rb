@@ -40,21 +40,49 @@ RSpec.describe "IEEE revision-notation variants" do
     end
   end
 
-  # LETTERED inline variant => base (revision stripped, collapses onto the base)
+  # LETTERED inline variant => identity (pubid ruling 2026-10-14: the
+  # letter is the IEEE 802-series revision suffix, kept with its printed
+  # separator; the word normalizes to "Rev" — "REVmc" renders "Revmc").
+  # This replaces the former strip doctrine, which silently dropped the
+  # letter.
   {
-    "IEEE Std P802.16.2-REVa/D8" => "IEEE Std P802.16.2/D8",
-    "IEEE Std P802.16/REVd/D5" => "IEEE Std P802.16/D5",
-    "IEEE Std P802.15.1REVa/D5" => "IEEE Std P802.15.1/D5",
-  }.each do |variant, base|
+    "IEEE Std P802.16.2-REVa/D8" => "IEEE P802.16.2-Reva/D8",
+    "IEEE Std P802.16/REVd/D5" => "IEEE P802.16/Revd/D5",
+    "IEEE Std P802.15.1REVa/D5" => "IEEE P802.15.1Reva/D5",
+  }.each do |variant, canonical|
     context variant.inspect do
-      it "strips the lettered inline revision (collapses onto its base)" do
-        expect(klass.parse(variant).to_hash).to eq(klass.parse(base).to_hash)
-        expect(klass.parse(variant).revision).to be_nil
+      it "renders the lettered revision with its separator" do
+        expect(klass.parse(variant).to_s).to eq(canonical)
+        expect(klass.parse(variant).revision).not_to be_nil
       end
 
       it "round-trips through to_hash/from_hash" do
         h = klass.parse(variant).to_hash
         expect(klass.from_hash(h).to_hash).to eq(h)
+      end
+    end
+  end
+
+  # The ruling forms (pubid ruling 2026-10-14): the lettered REV keeps
+  # its printed separator, the bare word with no id stays "Rev", and a
+  # REV-carrying draft embeds its print date with the month canonicalized
+  # numeric. relaton's synthetic "/R-<x>" suffix renders the same face.
+  {
+    "IEEE P802.11-REVmc/D8.0, Aug 2016" => "IEEE P802.11-Revmc/D8.0-2016-08",
+    "IEEE P802.15.3RevA-D00, January 2016" => "IEEE P802.15.3RevA/D00-2016-01",
+    "IEEE P802.15.4REVi/D09, 04 2011" => "IEEE P802.15.4Revi/D09-2011-04",
+    "IEEE Std 802.1AR-Rev/D2.2, September 2017" =>
+      "IEEE Draft 802.1AR-Rev/D2.2-2017-09",
+    "IEEE P802.15.4/D-09/R-i-2011-04" => "IEEE P802.15.4Revi/D09-2011-04",
+  }.each do |variant, canonical|
+    context variant.inspect do
+      it "renders #{canonical}" do
+        expect(klass.parse(variant).to_s).to eq(canonical)
+      end
+
+      it "is idempotent" do
+        rendered = klass.parse(variant).to_s
+        expect(klass.parse(rendered).to_s).to eq(rendered)
       end
     end
   end

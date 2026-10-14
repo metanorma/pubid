@@ -201,8 +201,12 @@ module Pubid
 
           # Append the numbered/lettered revision inline, in IEEE's native
           # position — right after the code number and before the draft
-          # ("P802.16Rev2/D3"). Keeps a revision distinct from its base standard.
-          result += "Rev#{id.revision}" if id.revision
+          # ("P802.16Rev2/D3"). Keeps a revision distinct from its base
+          # standard. The lettered id keeps its printed separator
+          # ("P802.11-REVmc" renders "P802.11-Revmc"); the bare word with
+          # no id still prints "Rev" (pubid ruling 2026-10-14).
+          result += "#{id.rev_sep}Rev#{id.revision}" if id.revision
+          result += "#{id.rev_sep}Rev" if id.rev_bare
 
           # Append draft to code - with or without space based on original
           # format. An exactly-IEC/IEEE co-published reference prints only the

@@ -5,6 +5,17 @@ module Pubid
     # Builder class for constructing IEEE identifier scheme from parsed data
     # Single Responsibility: Transform parsed data into identifier objects
     class Builder
+      # The month_name vocabulary the REV date embed canonicalizes numeric
+      # (the parg rule's exact spellings, dots already stripped).
+      REV_MONTH_NUMBERS = {
+        "January" => "01", "February" => "02", "March" => "03",
+        "April" => "04", "May" => "05", "June" => "06", "July" => "07",
+        "August" => "08", "September" => "09", "Sept" => "09",
+        "October" => "10", "November" => "11", "December" => "12",
+        "Jan" => "01", "Feb" => "02", "Mar" => "03", "Apr" => "04",
+        "Jun" => "06", "Jul" => "07", "Aug" => "08", "Sep" => "09",
+        "Oct" => "10", "Nov" => "11", "Dec" => "12",
+      }.freeze
       attr_accessor :original_input
       attr_reader :identifier_class
 
@@ -1582,6 +1593,8 @@ module Pubid
         # Optional attributes (excluding part/subpart since they're in code)
         extract_optional(parsed, attributes, :edition)
         extract_optional(parsed, attributes, :revision)
+        extract_optional(parsed, attributes, :rev_sep)
+        attributes[:rev_bare] = true if parsed[:rev_bare]
 
         # Month/day - always extract if present (but not if already extracted from year)
         unless attributes[:edition_month]
@@ -1838,6 +1851,18 @@ module Pubid
           month = extract_value(month_slice) if month_slice
           year = extract_value(draft_data[:year]) if draft_data[:year]
           day = extract_value(draft_data[:day]) if draft_data[:day]
+
+          # A REV-carrying draft embeds its print date into the designator
+          # with the month canonicalized numeric (pubid ruling 2026-10-14):
+          # "P802.11-REVmc/D8.0, Aug 2016" renders ".../D8.0-2016-08".
+          # Drafts without a REV keep the comma face.
+          if (attributes[:revision] || attributes[:rev_bare]) && month && year
+            number = REV_MONTH_NUMBERS[month.to_s.delete(".")]
+            if number && version
+              version = "#{version}-#{year}-#{number}"
+              month = year = day = nil
+            end
+          end
 
           # Detect comma before month and space before draft by checking the original input
           if original_input

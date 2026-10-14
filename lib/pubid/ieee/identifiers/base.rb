@@ -36,6 +36,12 @@ module Pubid
       # "Rev<id>". `::Pubid::Identifier` has no `revision` attribute, so this is
       # free of the number/stage multi-flavor collision landmine.
       attribute :revision, :string
+      # The lettered revision's printed separator ("P802.11-REVmc" keeps its
+      # dash; a glued "REVi" stays glued) and the bare-word marker (no id
+      # after "Rev" — "802.1AR-Rev/D2.2" keeps "Rev"). pubid ruling
+      # 2026-10-14.
+      attribute :rev_sep, :string
+      attribute :rev_bare, :boolean
       attribute :edition, :string                         # Edition 1.0
       attribute :month, :string
       # Provenance flag (pubid#517): the month arrived glued to the identity
@@ -216,7 +222,7 @@ module Pubid
       # (renderer.rb's `"Edition #{edition} #{year}-#{edition_month}"`),
       # which survived even though its sibling `year` is already stripped.
       def self.all_parts_edition_keys
-        super + %i[revision reaffirmed edition_month]
+        super + %i[revision rev_sep rev_bare reaffirmed edition_month]
       end
 
       # Inverse of the to_hash compaction: expand a scalar `stage` back into the
