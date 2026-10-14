@@ -16,8 +16,6 @@
 #IEEE Approved Draft Std P1234 / D12, Feb 2007# Pubid::Errors::ParseError: "Failed to match: expected one of ['REV', 'Rev', 'rev', 'R', 'D', [\\x30-\\x39], '.', '-', '&#x2013;', '–', [\\x41-\\x5a], [\\x61-\\x7a], 'Corrigendum', 'Cor', 'Amendment', 'Amd', 'INT', 'Conformance', 'ASHRAE', 'C'] at line 1 char 31."
 #IEEE Approved Draft Std P277/D2 - Mar 2007# Pubid::Errors::ParseError: "Failed to match: expected one of ['19', '20', 'Redline', 'REDLINE', 'redline'] at line 1 char 35."
 #IEEE Approved Draft Std P48/ D5.4, Apr 2009# Pubid::Errors::ParseError: "Failed to match: expected one of ['REV', 'Rev', 'rev', 'R', 'D', [\\x30-\\x39], '.', '-', '&#x2013;', '–', [\\x41-\\x5a], [\\x61-\\x7a], 'Corrigendum', 'Cor', 'Amendment', 'Amd', 'INT', 'Conformance', 'ASHRAE', 'C'] at line 1 char 29."
-#IEEE P1003.1-2008/Cor 1-201x/D5, April 2012# Pubid::Errors::ParseError: "Failed to match: expected one of ['-', '&#x2013;', '–'] at line 1 char 31."
-#IEEE P1003.1-2008/Cor 1-201x/D5, August 2012# Pubid::Errors::ParseError: "Failed to match: expected one of ['-', '&#x2013;', '–'] at line 1 char 31."
 #IEEE P1012 Corrigendum/D1, January 2017# ArgumentError: "unknown attribute for Pubid::Ieee::Identifiers::ProjectDraftIdentifier: corrigendum"
 #IEEE P1013/Draft 1.2, November 2018# Pubid::Errors::ParseError: "Failed to match: expected one of [[\\x30-\\x32]] at line 1 char 19."
 #IEEE P11073-10415/D, February 2019# Pubid::Errors::ParseError: "Failed to match: expected one of ['IS', [\\x30-\\x39], '.', '-', '&#x2013;', '–', [\\x41-\\x5a], [\\x61-\\x7a]] at line 1 char 20."
