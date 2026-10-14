@@ -316,7 +316,11 @@ module Pubid
             end
           end
         end
-        if dash && parsed_hash[:year].nil?
+        # The draft's own dash date embeds onto the draft even when a
+        # base identity year is present ("…-2011/D4-2015-07": the 2011
+        # is the base's year, the 2015-07 the draft's); only the
+        # root-year assignment waits for an unoccupied year slot.
+        if dash
           joined = drafts.filter_map { |d| d.is_a?(Hash) ? d[:draft_version] : nil }
                          .map { |v| v.is_a?(Hash) ? v[:value] : v.to_s }.join
           bare_joint_draft = parsed_hash[:joint_publishers] &&
@@ -335,7 +339,7 @@ module Pubid
               [joined, dash[:dash_year], dash[:dash_month]].compact.join("-")
             dash.delete(:dash_year)
             dash.delete(:dash_month)
-          elsif dash[:dash_month] || dash_led
+          elsif (dash[:dash_month] || dash_led) && parsed_hash[:year].nil?
             parsed_hash[:year] = dash[:dash_year]
             parsed_hash[:month] = dash[:dash_month]
           else
@@ -1860,7 +1864,8 @@ module Pubid
           # with the month canonicalized numeric (pubid ruling 2026-10-14):
           # "P802.11-REVmc/D8.0, Aug 2016" renders ".../D8.0-2016-08".
           # Drafts without a REV keep the comma face.
-          if (attributes[:revision] || attributes[:rev_bare]) && month && year
+          if (attributes[:revision] || attributes[:rev_bare] ||
+              attributes[:cor_number] || attributes[:cor_year]) && month && year
             number = REV_MONTH_NUMBERS[month.to_s.delete(".")]
             if number && version
               version = "#{version}-#{year}-#{number}"

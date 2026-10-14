@@ -1273,6 +1273,37 @@ module Pubid
         cleaned = cleaned.gsub("&amp;amp;", "&")   # Double-encoded ampersand
         cleaned = cleaned.gsub("&amp;", "&")       # Single-encoded ampersand
 
+        # The corrigendum's own draft follows the ordinal after a comma
+        # ("P11073-10418-2011/Cor 1, D4, July 2015"): re-spell the comma as
+        # the draft separator so the cor route's draft slot reaches it.
+        cleaned = cleaned.gsub(%r{/Cor(?:rigendum)? (\d+), (D[A-Z0-9])}, '/Cor \1/\2')
+
+        # The corrigendum's own draft rides before the ordinal in the
+        # house order ("PC37.101-2006/D2, 2007/Cor. 1"): the catalogue
+        # spellings "…/Cor 1, D4, July 2015" and "…/Cor 1-201x/D5,
+        # April 2012" re-order into it, with the draft's date glued
+        # -YYYY-MM (pubid ruling 2026-10-14: no comma dates).
+        cleaned = cleaned.gsub(
+          %r{/Cor(?:rigendum)? (\d+(?:-[0-9xX]{4})?)/(D[A-Z0-9][^,]*), ([A-Za-z]+) (\d{4})}
+        ) do
+          month = ::Pubid::Ieee::Builder::REV_MONTH_NUMBERS[Regexp.last_match(3).capitalize]
+          if month
+            "/#{Regexp.last_match(2)}-#{Regexp.last_match(4)}-#{month}/Cor. #{Regexp.last_match(1)}"
+          else
+            Regexp.last_match(0)
+          end
+        end
+        cleaned = cleaned.gsub(
+          %r{/Cor(?:rigendum)? (\d+), (D[A-Z0-9][^,]*), ([A-Za-z]+) (\d{4})}
+        ) do
+          month = ::Pubid::Ieee::Builder::REV_MONTH_NUMBERS[Regexp.last_match(3).capitalize]
+          if month
+            "/#{Regexp.last_match(2)}-#{Regexp.last_match(4)}-#{month}/Cor. #{Regexp.last_match(1)}"
+          else
+            Regexp.last_match(0)
+          end
+        end
+
         # NEW Phase 1: Fix number spacing issues (e.g., "C57.1 2.25" → "C57.12.25")
         # This handles cases where a space appears in the middle of a number
         cleaned = cleaned.gsub(/(\d+\.\d+)\s+(\d+\.)/, '\1\2')

@@ -195,7 +195,8 @@ module Pubid
           glued_month = id.month.to_s.match?(/\A\d{1,2}\z/)
           year_on_code = id.year && !id.edition &&
                          (!id.month || glued_month) &&
-                         (!id.draft_obj || id.draft_obj&.year)
+                         (!id.draft_obj || id.draft_obj&.year ||
+                          id.draft_obj&.version.to_s.match?(/-\d{4}-\d{2}\z/))
           result += "-#{id.year}" if year_on_code
           result += "-#{id.month}" if glued_month
 
