@@ -1991,8 +1991,17 @@ module Pubid
           end
 
           if param_data[:revision_of]
-            attributes[:revision_of] =
-              extract_value(param_data[:revision_of])
+            target = extract_value(param_data[:revision_of]).to_s.strip
+            begin
+              # The model types revision_of as an Identifier (the printed
+              # target parses as one); feeding the raw string crashes
+              # to_hash with Lutaml::Model::IncorrectModelError.
+              attributes[:revision_of] = Identifier.parse(target)
+            rescue Pubid::Errors::ParseError, StandardError
+              # An unparseable printed target stays on the parenthetical
+              # surface instead of poisoning the hash.
+              attributes[:parenthetical_content] ||= target
+            end
           end
           if param_data[:amendment_to]
             attributes[:amendment_to] =
