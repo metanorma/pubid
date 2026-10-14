@@ -1273,6 +1273,12 @@ module Pubid
         cleaned = cleaned.gsub("&amp;amp;", "&")   # Double-encoded ampersand
         cleaned = cleaned.gsub("&amp;", "&")       # Single-encoded ampersand
 
+        # The joint IEEE/CSA catalogue spells the type word before the
+        # project number ("IEEE/CSA Draft P844.1/D2, Sept, 2016"): the P
+        # already carries the project semantics (docs/IEEE-DRAFT-STAGES.md
+        # §1.1), so the redundant word drops and the joint route parses.
+        cleaned = cleaned.gsub(%r{IEEE/CSA Draft (P[A-Z0-9])}, 'IEEE/CSA \1')
+
         # The corrigendum's own draft follows the ordinal after a comma
         # ("P11073-10418-2011/Cor 1, D4, July 2015"): re-spell the comma as
         # the draft separator so the cor route's draft slot reaches it.

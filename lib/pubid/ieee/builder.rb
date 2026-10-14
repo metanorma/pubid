@@ -959,12 +959,23 @@ module Pubid
             # exempt: their canonical is the ISO face, which prints the
             # date from the identity slots (", March 2017", pubid#216).
             if parsed[:draft_month] && parsed[:iso_stage].nil?
-              draft = Components::Draft.new(
-                version: draft_ver,
-                month: extract_value(parsed[:draft_month]),
-                year: extract_value(parsed[:draft_year]))
-              draft.comma_before_month = true
-              attributes[:draft] = draft.to_s.sub(%r{\A/}, "")
+              dm = extract_value(parsed[:draft_month]).to_s
+              dy = extract_value(parsed[:draft_year]).to_s
+              num = REV_MONTH_NUMBERS[dm.delete(".")]
+              if attributes[:publishers] == %w[IEEE CSA] && num && !dy.empty?
+                # The joint IEEE/CSA drafts glue their date into the
+                # designator with the month numeric (pubid ruling
+                # 2026-10-14: no comma dates on these rows).
+                draft = Components::Draft.new(version: "#{draft_ver}-#{dy}-#{num}")
+                attributes[:draft] = draft.to_s.sub(%r{\A/}, "")
+              else
+                draft = Components::Draft.new(
+                  version: draft_ver,
+                  month: dm,
+                  year: dy)
+                draft.comma_before_month = true
+                attributes[:draft] = draft.to_s.sub(%r{\A/}, "")
+              end
               attributes.delete(:year) if parsed[:year].nil?
               attributes.delete(:month) if parsed[:month].nil?
             elsif parsed[:draft_year] && parsed[:iso_stage].nil?
