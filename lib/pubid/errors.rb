@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
-require "pubid"
+# no `require "pubid"` here: errors.rb loads from pubid.rb itself, and
+# the umbrella self-require is a circular load whose failure order is
+# platform-dependent (windows raises mid-cycle where linux tolerates it)
 require "parslet"
 
 module Pubid
