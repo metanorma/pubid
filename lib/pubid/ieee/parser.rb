@@ -1278,6 +1278,17 @@ module Pubid
         # already carries the project semantics (docs/IEEE-DRAFT-STAGES.md
         # §1.1), so the redundant word drops and the joint route parses.
         cleaned = cleaned.gsub(%r{IEEE/CSA Draft (P[A-Z0-9])}, 'IEEE/CSA \1')
+        # The same redundant word rides the wider joint lists
+        # ("IEEE//ISO/IEC Draft P29119-2/D=DIS-201112"); the crawl also
+        # doubles the publisher slash (the 2026-10-14 ruling: the list
+        # normalizes to single slashes). Drop the word and collapse the
+        # slash before the joint route sees either.
+        # Scoped to the D= stage-draft tail: the doubled-D ("DDIS2") and
+        # stage-month ("DFDIS_March") tails route elsewhere until the
+        # grammar carries them - dropping the word there would route
+        # them to the generic standard face with a slashed copublisher.
+        cleaned = cleaned.gsub(%r{((?:IEEE|ISO|IEC)(?:/(?:IEEE|ISO|IEC|CSA))+)\s+Draft\s+(P[A-Z0-9][A-Z0-9.-]*/D=[A-Z])}, '\1 \2')
+        cleaned = cleaned.gsub(%r{(IEEE|ISO|IEC)//}, '\1/')
 
         # The corrigendum's own draft follows the ordinal after a comma
         # ("P11073-10418-2011/Cor 1, D4, July 2015"): re-spell the comma as
