@@ -8156,7 +8156,7 @@ IEEE Std C57.12.10-2013 (Corrigendum to IEEE Std C57.12.10-2010)
 IEEE Std C57.12.38-2016 (Corrigendum to IEEE Std C57.12.38-2014)
 IEEE Std C57.19.03-2005 (Corrigendum to IEEE Std C57.19.03-1996)
 ANSI C50.14-1977 (Reaffirmed 1989)
-ANSI C50.32-1976 and IEEE Std 117-1974 (Reaffirmed 1984) (Revision of IEEE Std 117-1956)
+#ANSI C50.32-1976 and IEEE Std 117-1974 (Reaffirmed 1984) (Revision of IEEE Std 117-1956)# Pubid::Errors::ParseError: Failed to match: expected one of ['Cor', 'INT', 'Conformance', 'Corrigendum', 'Amendment', 'Amd', '/', 'REV', 'Rev', 'rev', '_', '-', '&#x2013;', '–', ' ', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '0', '1', '[', 'Edition ', '(', 'P&V', 'Redline', 'REDLINE', 'redline', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 18.
 ANSI N42.13-2004 (Reaffirmation of ANSI N42.13-1986)
 ANSI/IEEE Std 286-1975 (Reaffirmed 1981) (Revision of IEEE Std 286-1968)
 ASA C37.1-1937 (Reaffirmed 1945)
@@ -8202,7 +8202,7 @@ IEEE Std C37.20.2b-1994 (Supplement to IEEE Std C37.20.2-1993)
 IEEE Std C37.37a-1992 (Supplement to ANSI/IEEE C37.37-1979)
 !ANSI/IEEE C37.09C-1984 (Supplement to ANSI/IEEE C37.09-1979!ANSI/IEEE C37.09C-1984 (Supplement to ANSI/IEEE C37.09-1979)
 !ANSI/IEEE Std 384-1981 (Revision of ANSI/IEEE Std 384-1977!ANSI/IEEE Std 384-1981 (Revision of ANSI/IEEE Std 384-1977)
-IEEE Std 802.15.3-2016 (Revision of IEEE Std 802.15.3-2003!!IEEE Std 802.15.3-2016 (Revision of IEEE Std 802.15.3-2003)
+#IEEE Std 802.15.3-2016 (Revision of IEEE Std 802.15.3-2003!!IEEE Std 802.15.3-2016 (Revision of IEEE Std 802.15.3-2003)# Pubid::Errors::ParseError: Failed to match: expected one of [' ', ':'] at line 1 char 120.
 !IEEE Std 802.15.4t-2017 (Amendment to IEEE Std 802.15.4-2015 as amended by IEEE Std 802.15.4n-2016, IEEE Std 802.15.4q-2016, and IEEE Std 802.15.4u-2016!IEEE Std 802.15.4t-2017 (Amendment to IEEE Std 802.15.4-2015 as amended by IEEE Std 802.15.4n-2016, IEEE Std 802.15.4q-2016, and IEEE Std 802.15.4u-2016)
 !IEEE Std 802.1CMde-2020 (Amendment to IEEE Std 802.1CM-2018!IEEE Std 802.1CMde-2020 (Amendment to IEEE Std 802.1CM-2018)
 !IEEE Std 802.3bw-2015 (Amendment to IEEE Std 802.3-2015!IEEE Std 802.3bw-2015 (Amendment to IEEE Std 802.3-2015)
@@ -8442,8 +8442,8 @@ IEEE P802.3cd/D3.3, June 2018 (Amendment of IEEE Std 802.3-201x as amended by IE
 IEEE P802.3cd/D3.4, July 2018 (Amendment of IEEE Std 802.3-201x as amended by IEEE Std 802.3cb-201x and IEEE Std 802.3bt-201x)
 IEEE P802.3cd/D3.5, September 2018 (Amendment of IEEE Std 802.3-2018 as amended by IEEE Std 802.3cb-201x and IEEE Std 802.3bt-201x)
 IEC 61671:2012(E) (IEEE Std 1671-2010)
-IEC 62032:2012(E) (IEEE Std C57.135-2011) (Revision of IEC 62032-2005 and IEEE Std C57.135-2001)
-IEC 62032:2012(E) (IEEE Std C57.135-2011) (Revision of IEC 62032-2005 and IEEE Std C57.135-2001) - Redline
+#IEC 62032:2012(E) (IEEE Std C57.135-2011) (Revision of IEC 62032-2005 and IEEE Std C57.135-2001)# Pubid::Errors::ParseError: Failed to match: expected one of [' '] at line 1 char 11.
+#IEC 62032:2012(E) (IEEE Std C57.135-2011) (Revision of IEC 62032-2005 and IEEE Std C57.135-2001) - Redline# Pubid::Errors::ParseError: Failed to match: expected one of [' '] at line 1 char 11.
 IEC 62243:2012(E) (IEEE Std 1232-2010) - Redline
 !IEC 62527:2007 (E)!IEC 62527:2007(E)
 !IEC 62528:2007 (E)!IEC 62528:2007(E)
