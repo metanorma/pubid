@@ -5849,7 +5849,7 @@ IEEE PC57.12.01/D8, 2014
 !IEEE Unapproved Draft Std P12207/FDIS, Nov 2007!IEEE Unapproved P12207/D=FDIS-200711
 !IEEE Unapproved Draft Std P24748_PDTR3, Feb 2008!IEEE Unapproved P24748/DPDTR3, Feb 2008
 !IEEE Unapproved Draft Std P29148_CD2, Feb 2010!IEEE Unapproved P29148/DCD2, Feb 2010
-!ISO/IEC/IEEE P15026-1_D2, December 2018!ISO/IEC/IEEE P15026-1/D, Dec 2018
+#ISO/IEC/IEEE P15026-1/D, Dec 2018# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x30-\\x39], '-', '&#x2013;', '–', '.', 'IS', [\\x41-\\x5a], [\\x61-\\x7a]] at line 1 char 24.
 !IEEE Unapproved Draft Std P15026.2/FCD, Feb 2010!IEEE Unapproved P15026.2/D=FCD-201002
 !IEEE/ISO/IEC P29119-4_FDIS, December 2020!IEEE//ISO/IEC Draft P29119-4/D=FDIS-202012
 !IEEE Std PC37.100.1/D8, Dec2006!IEEE PC37.100.1/D8, Dec, 2006

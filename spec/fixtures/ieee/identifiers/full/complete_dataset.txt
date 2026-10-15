@@ -548,65 +548,65 @@ IEEE/IEC/ISO P80005-1/FDIS_March 2012
 IEEE/ISO/IEC P42010.CD1-V1.0, April 2020
 IEEE/NEMI PR 1533-1998
 IS0/IEC/IEEE 8802-11:2012/Amd.5:2015(E) (Adoption of IEEE Std 802.11af-2014)
-ISO 8802-2 IEEE 802.2, First Edition 1989-12-31 (Revision of IEEE Std 802.2-1985)
+#ISO 8802-2 IEEE 802.2, First Edition 1989-12-31 (Revision of IEEE Std 802.2-1985)# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Corrigendum', 'Amendment', 'Amd', '/', 'REV', 'Rev', 'rev', '_', ' ', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '0', '1', '[', 'Edition ', '(', 'P&V', 'Redline', 'REDLINE', 'redline', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 12.
 ISO/IEC 10038-1993: Information technology-Telecommunications and information exchange between systems - Local area networks - Media access control (MAC) bridges
-ISO/IEC 10861 : 1994 [ANSI/IEEE Std 1296, 1994 Edition]
-ISO/IEC 13213 : 1994 [ANSI/IEEE Std 1212, 1994 Edition]
-ISO/IEC 14515-1:2000/Amd.1:2003 ISO/IEC 14515-1:2000/Amd.1:2003(E)
-ISO/IEC 14536 : 1995 [ANSI/IEEE Std 896.5, 1995 Edition]
-ISO/IEC 14764:2006 (E) IEEE Std 14764-2006 Revision of IEEE Std 1219-1998)
+#ISO/IEC 10861 : 1994 [ANSI/IEEE Std 1296, 1994 Edition]# Pubid::Errors::ParseError: Failed to match: expected one of [' ', '(', 'P&V'] at line 1 char 20.
+#ISO/IEC 13213 : 1994 [ANSI/IEEE Std 1212, 1994 Edition]# Pubid::Errors::ParseError: Failed to match: expected one of [' ', '(', 'P&V'] at line 1 char 20.
+#ISO/IEC 14515-1:2000/Amd.1:2003 ISO/IEC 14515-1:2000/Amd.1:2003(E)# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x61-\\x7a], [\\x30-\\x39], ' ', '(', 'P&V'] at line 1 char 21.
+#ISO/IEC 14536 : 1995 [ANSI/IEEE Std 896.5, 1995 Edition]# Pubid::Errors::ParseError: Failed to match: expected one of [' ', '(', 'P&V'] at line 1 char 20.
+#ISO/IEC 14764:2006 (E) IEEE Std 14764-2006 Revision of IEEE Std 1219-1998)# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x01-\\x27], [\\x2a-\\u{10ffff}]] at line 1 char 22.
 ISO/IEC 15068-2 : 1999 (1387.2-1995)
 ISO/IEC 15802-2:1995 (ANSI/IEEE Std 802.1b-1995 )
 ISO/IEC 23026; IEEE Std 2001-2002, First edition
-ISO/IEC 8802-11 IEEE Std 802.11 Second edition 2005-08-01 ISO/IEC 8802 11:2005(E) IEEE Std 802.11i-2003 Edition
-ISO/IEC 8802-11, Second edition: 2005/Amendment 6 2006: IEEE STD 802.11i-2004 (Amendment to IEEE Std 802.11-1999)
-ISO/IEC 8802-12: 1998 ANSI/IEEE Std 802.12, 1998 Edition (Incorporating ANSI/IEEE Std 802.12-1995 and ANSI/IEEE Std 802.12d-1997)
-ISO/IEC 8802-2:1998 ANSI/IEEE Std 802.2, 1998 edition (Incorporating ANSI/IEEE Stds 802.2c-1997, 802.2f-1997, and 802.2h-1997)
-ISO/IEC 9945-2:19939 ANSI/IEEE Std 1003.2-1993
-ISO/IEC/ IEEE 8802-1AE First edition 2013-12-01 AMENDMENT 1 2015-05-01
-ISO/IEC/ IEEE 8802-1AE First edition 2013-12-01 AMENDMENT 2 2015-05-01
-ISO/IEC/ IEEE 8802-1X First Edition 2013-12-01 AMENDMENT 1 2016-02-15
+#ISO/IEC 8802-11 IEEE Std 802.11 Second edition 2005-08-01 ISO/IEC 8802 11:2005(E) IEEE Std 802.11i-2003 Edition# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x01-\\x27], [\\x2a-\\u{10ffff}], ')', ' ', ':'] at line 1 char 80.
+#ISO/IEC 8802-11, Second edition: 2005/Amendment 6 2006: IEEE STD 802.11i-2004 (Amendment to IEEE Std 802.11-1999)# Pubid::Errors::ParseError: Failed to match: expected one of ['Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '0', '1', '19', '20'] at line 1 char 18.
+#ISO/IEC 8802-12: 1998 ANSI/IEEE Std 802.12, 1998 Edition (Incorporating ANSI/IEEE Std 802.12-1995 and ANSI/IEEE Std 802.12d-1997)# Pubid::Errors::ParseError: Failed to match: expected one of [' ', '(', 'P&V'] at line 1 char 22.
+#ISO/IEC 8802-2:1998 ANSI/IEEE Std 802.2, 1998 edition (Incorporating ANSI/IEEE Stds 802.2c-1997, 802.2f-1997, and 802.2h-1997)# Pubid::Errors::ParseError: Failed to match: expected one of [' ', '(', 'P&V'] at line 1 char 21.
+#ISO/IEC 9945-2:19939 ANSI/IEEE Std 1003.2-1993# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x30-\\x39]] at line 1 char 21.
+#ISO/IEC/ IEEE 8802-1AE First edition 2013-12-01 AMENDMENT 1 2015-05-01# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Corrigendum', 'Amendment', 'Amd', '/', 'REV', 'Rev', 'rev', '_', ' ', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '0', '1', '[', 'Edition ', '(', 'P&V', 'Redline', 'REDLINE', 'redline', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 24.
+#ISO/IEC/ IEEE 8802-1AE First edition 2013-12-01 AMENDMENT 2 2015-05-01# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Corrigendum', 'Amendment', 'Amd', '/', 'REV', 'Rev', 'rev', '_', ' ', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '0', '1', '[', 'Edition ', '(', 'P&V', 'Redline', 'REDLINE', 'redline', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 24.
+#ISO/IEC/ IEEE 8802-1X First Edition 2013-12-01 AMENDMENT 1 2016-02-15# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Corrigendum', 'Amendment', 'Amd', '/', 'REV', 'Rev', 'rev', '_', ' ', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '0', '1', '[', 'Edition ', '(', 'P&V', 'Redline', 'REDLINE', 'redline', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 23.
 ISO/IEC/IEEE 16326 (First edition 2009-12-15)
-ISO/IEC/IEEE 18881 First Edition 2016-04-15
-ISO/IEC/IEEE 18883 First Edition 2016-04-15
-ISO/IEC/IEEE 26511 First edition 2011-12-01; Corrected version 2012-03-15
-ISO/IEC/IEEE 26512 First Edition, 2011-06-01
-ISO/IEC/IEEE 26515 First edition 2011-12-01; Corrected version 2012-03-15
+#ISO/IEC/IEEE 18881 First Edition 2016-04-15# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '(', 'D', 'Corrigendum', 'Edition ', 'REV', 'Rev', 'rev', 'P&V', 'Redline', 'REDLINE', 'redline', 'Amendment', 'Amd', '/', '_', ' ', '0', '1', '[', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 20.
+#ISO/IEC/IEEE 18883 First Edition 2016-04-15# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '(', 'D', 'Corrigendum', 'Edition ', 'REV', 'Rev', 'rev', 'P&V', 'Redline', 'REDLINE', 'redline', 'Amendment', 'Amd', '/', '_', ' ', '0', '1', '[', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 20.
+#ISO/IEC/IEEE 26511 First edition 2011-12-01; Corrected version 2012-03-15# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '(', 'D', 'Corrigendum', 'Edition ', 'REV', 'Rev', 'rev', 'P&V', 'Redline', 'REDLINE', 'redline', 'Amendment', 'Amd', '/', '_', ' ', '0', '1', '[', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 20.
+#ISO/IEC/IEEE 26512 First Edition, 2011-06-01# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '(', 'D', 'Corrigendum', 'Edition ', 'REV', 'Rev', 'rev', 'P&V', 'Redline', 'REDLINE', 'redline', 'Amendment', 'Amd', '/', '_', ' ', '0', '1', '[', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 20.
+#ISO/IEC/IEEE 26515 First edition 2011-12-01; Corrected version 2012-03-15# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '(', 'D', 'Corrigendum', 'Edition ', 'REV', 'Rev', 'rev', 'P&V', 'Redline', 'REDLINE', 'redline', 'Amendment', 'Amd', '/', '_', ' ', '0', '1', '[', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 20.
 ISO/IEC/IEEE 31320-1:2012 (Adoption of IEEE Std 1320.1-1998 )
-ISO/IEC/IEEE 8802-11:2012(E) (Revison of ISO/IEC/IEEE 8802-11-2005 and Amendments)
-ISO/IEC/IEEE 8802-11:2012(E) (Revison of ISO/IEC/IEEE 8802-11-2005 and Amendments) - Redline
+#ISO/IEC/IEEE 8802-11:2012(E) (Revison of ISO/IEC/IEEE 8802-11-2005 and Amendments)# Pubid::Errors::ParseError: Failed to match: expected one of ['-', '&#x2013;', '–', 'Redline', 'REDLINE', 'redline'] at line 1 char 30.
+#ISO/IEC/IEEE 8802-11:2012(E) (Revison of ISO/IEC/IEEE 8802-11-2005 and Amendments) - Redline# Pubid::Errors::ParseError: Failed to match: expected one of ['-', '&#x2013;', '–', 'Redline', 'REDLINE', 'redline'] at line 1 char 30.
 ISO/IEC/IEEE 8802-1AE:2020/Cor.1:2021 (Adoption of IEEE Standard 802.1AE-2018/Cor 1 -2020)
-ISO/IEC/IEEE 8802-21-1:2018(E) (Adoption of IEEE 802.21.1-2017)
+#ISO/IEC/IEEE 8802-21-1:2018(E) (Adoption of IEEE 802.21.1-2017)# Pubid::Errors::ParseError: Failed to match: expected one of ['-', '&#x2013;', '–', 'Redline', 'REDLINE', 'redline'] at line 1 char 32.
 ISO/IEC/IEEE CD.1 P21839, October 2017
 ISO/IEC/IEEE CD2 P12207-2: 201x(E), February 2019
 ISO/IEC/IEEE CD3 P15026-4
 ISO/IEC/IEEE DIS P16326/201x, December 2018
 ISO/IEC/IEEE DIS P42020:201x(E), June 2017
 ISO/IEC/IEEE P15288/ CD, March 2021
-ISO/IEC/IEEE P15289:2016, 3rd Ed FDIS/D2
+#ISO/IEC/IEEE P15289:2016, 3rd Ed FDIS/D2# Pubid::Errors::ParseError: Failed to match: expected one of ['19', '20'] at line 1 char 27.
 ISO/IEC/IEEE P16085/ FDIS, August 2020
 ISO/IEC/IEEE P16326:201x WD.4a, July 2017
 ISO/IEC/IEEE P16326:201x WD5, December 2017
 ISO/IEC/IEEE P21840, DIS-2019
-!ISO/IEC/IEEE P23026_D2, 2013 (Revision of 2006 edition (ISO/IEC 23026:2006)!ISO/IEC/IEEE P23026/D2, 2013 (Revision of 2006 edition (ISO/IEC 23026:2006)
-!ISO/IEC/IEEE P23026_D3, 2014 (Revision of 2006 edition (ISO/IEC 23026:2006)!ISO/IEC/IEEE P23026/D3, 2014 (Revision of 2006 edition (ISO/IEC 23026:2006)
+#ISO/IEC/IEEE P23026/D2, 2013 (Revision of 2006 edition (ISO/IEC 23026:2006)# Pubid::Errors::ParseError: Failed to match: expected one of [' ', ':'] at line 1 char 76.
+#ISO/IEC/IEEE P23026/D3, 2014 (Revision of 2006 edition (ISO/IEC 23026:2006)# Pubid::Errors::ParseError: Failed to match: expected one of [' ', ':'] at line 1 char 76.
 !ISO/IEC/IEEE P24641_D3_CD2,March 2021!ISO/IEC/IEEE P24641/D3_CD2,March 2021
 ISO/IEC/IEEE P24748-3/D3_FDIS, April 2020 (E)
 ISO/IEC/IEEE P24748-4/DIS2-January 2015
-ISO/IEC/IEEE P29119-2/CD Second edition, August 2019
-ISO/IEC/IEEE P29119-2/DIS Second edition, April 2020
-ISO/IEC/IEEE P29119-3/CD Second edition, August 2019
+#ISO/IEC/IEEE P29119-2/CD Second edition, August 2019# Pubid::Errors::ParseError: Failed to match: expected one of ['19', '20', '-', '&#x2013;', '–', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '0', '1', ', ', 'REV', 'Rev', 'rev', '[', 'Corrigendum', 'Cor', 'Edition ', '(', 'P&V', 'Redline', 'REDLINE', 'redline', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 26.
+#ISO/IEC/IEEE P29119-2/DIS Second edition, April 2020# Pubid::Errors::ParseError: Failed to match: expected one of ['19', '20', '-', '&#x2013;', '–', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '0', '1', ', ', 'REV', 'Rev', 'rev', '[', 'Corrigendum', 'Cor', 'Edition ', '(', 'P&V', 'Redline', 'REDLINE', 'redline', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 27.
+#ISO/IEC/IEEE P29119-3/CD Second edition, August 2019# Pubid::Errors::ParseError: Failed to match: expected one of ['19', '20', '-', '&#x2013;', '–', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '0', '1', ', ', 'REV', 'Rev', 'rev', '[', 'Corrigendum', 'Cor', 'Edition ', '(', 'P&V', 'Redline', 'REDLINE', 'redline', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 26.
 ISO/IEC/IEEE P29119-3/D3_January 2021
-ISO/IEC/IEEE P29119-3/DIS Second edition, April 2020
+#ISO/IEC/IEEE P29119-3/DIS Second edition, April 2020# Pubid::Errors::ParseError: Failed to match: expected one of ['19', '20', '-', '&#x2013;', '–', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '0', '1', ', ', 'REV', 'Rev', 'rev', '[', 'Corrigendum', 'Cor', 'Edition ', '(', 'P&V', 'Redline', 'REDLINE', 'redline', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 27.
 ISO/IEC/IEEE P29119-4-DISMay2013
 ISO/IEC/IEEE P29119-4-FDIS April 2015
 ISO/IEC/IEEE P29119-5-CD1 April 2014
-ISO/IEC/IEEE P29148 First Edition, August 2011
+#ISO/IEC/IEEE P29148 First Edition, August 2011# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'FDIS', 'FCD', 'CDV', 'DIS', 'CD', 'WD', 'PWI', 'NP', 'Edition ', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'REV', 'Rev', 'rev', '(', 'P&V', 'D', 'Corrigendum', 'Redline', 'REDLINE', 'redline', 'Amendment', 'Amd', '/', '_', ' ', '0', '1', '[', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 21.
 ISO/IEC/IEEE P29148/FCD-June2010
 ISO/IEC/IEEE P42010.WD4:2019(E)
 ISO/IEC/IEEE P42020 FDIS March 2019
 ISO/IEC/IEEE P42020/V1.9, August 2018
-!ISO/IEC/IEEE/P16085_DIS, March 2020!ISO/IEC/IEEE/P16085/DIS, March 2020
+#ISO/IEC/IEEE/P16085/DIS, March 2020# Pubid::Errors::ParseError: Failed to match: expected one of [' ', 'IEEE', 'AIEE', 'ANSI', 'ASA', 'ANS', 'IEC', 'ISO', 'ASTM', 'CSA', 'ASME', 'NACE', 'NSF', 'ASHRAE', 'NCTA', 'AESC', 'EIA', 'USEMCSC', 'AMPP', 'USAS', 'EAB', 'MPAI', 'FDIS', 'FCD', 'CDV', 'DIS', 'CD', 'WD', 'PWI', 'NP'] at line 1 char 14.
 ISO/IEC/IEEE/P21839, 2019(E)
 ISO/IEC13210: 1994 (E) ANSI/IEEE Std 1003.3-1991
 International Standard ISO/IEC 8802-9: 1996(E) ANSI/IEEE Std 802.9, 1996 Edition
@@ -2999,7 +2999,7 @@ IEEE 488.1 IEC 60488-1 First edition 2004-07
 IEEE 488.2 IEC 60488-2 First edition 2004-05
 IEEE Std 1076.1 IEC 61691-6 Edition 1.0 2009-12
 IEEE Std 1249-2013 IEC 62270 Edition 2.0 2013-09
-!ISO/IEC 15288 First edition 2002-11-01!ISO/IEC 15288:2002-11-01, ED1
+#ISO/IEC 15288:2002-11-01, ED1# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x61-\\x7a], [\\x30-\\x39], ' ', '(', 'P&V'] at line 1 char 19.
 ISO/IEC 26702 IEEE Std 1220-2005 First edition 2007-07-15
 ISO/IEC 42010 IEEE Std 1471-2000 First edition 2007-07-15
 ANSI PC63.10/D14, April 2020
@@ -5617,15 +5617,15 @@ IEEE/IEC P60255-118-1/D8, January 2018
 IEEE/IEC P62271-37-013/D1, Jul 2018
 IEEE/IEC P62271-37-013/D2, April 2019
 IEEE/IEC P63195-2/D9, December 2021
-ISO/IEC 15288 First edition 2002-11-01
-ISO/IEC/ IEEE 23026 First edition 2015-05-15
-ISO/IEC/IEEE 15288 First edition 2015-05-15
-ISO/IEC/IEEE 24748-4 First edition 2016-05-15
-ISO/IEC/IEEE 29119-5 First edition 2016-11-15
-ISO/IEC/IEEE 8802-1AX First edition 2016-01-15
-ISO/IEC/IEEE 8802-1BA First edition 2016-10-15
-ISO/IEC/IEEE 8802-1BR First edition 2016-10-15
-ISO/IEC/IEEE 8802-1Q First edition 2016-03-15
+#ISO/IEC 15288 First edition 2002-11-01# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Edition ', 'Corrigendum', 'Amendment', 'Amd', '/', 'REV', 'Rev', 'rev', '_', ' ', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '0', '1', '[', '(', 'P&V', 'Redline', 'REDLINE', 'redline', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 15.
+#ISO/IEC/ IEEE 23026 First edition 2015-05-15# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Edition ', 'Corrigendum', 'Amendment', 'Amd', '/', 'REV', 'Rev', 'rev', '_', ' ', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '0', '1', '[', '(', 'P&V', 'Redline', 'REDLINE', 'redline', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 21.
+#ISO/IEC/IEEE 15288 First edition 2015-05-15# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '(', 'D', 'Corrigendum', 'Edition ', 'REV', 'Rev', 'rev', 'P&V', 'Redline', 'REDLINE', 'redline', 'Amendment', 'Amd', '/', '_', ' ', '0', '1', '[', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 20.
+#ISO/IEC/IEEE 24748-4 First edition 2016-05-15# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '(', 'D', 'Corrigendum', 'Edition ', 'REV', 'Rev', 'rev', 'P&V', 'Redline', 'REDLINE', 'redline', 'Amendment', 'Amd', '/', '_', ' ', '0', '1', '[', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 22.
+#ISO/IEC/IEEE 29119-5 First edition 2016-11-15# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '(', 'D', 'Corrigendum', 'Edition ', 'REV', 'Rev', 'rev', 'P&V', 'Redline', 'REDLINE', 'redline', 'Amendment', 'Amd', '/', '_', ' ', '0', '1', '[', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 22.
+#ISO/IEC/IEEE 8802-1AX First edition 2016-01-15# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '(', 'D', 'Corrigendum', 'Edition ', 'REV', 'Rev', 'rev', 'P&V', 'Redline', 'REDLINE', 'redline', 'Amendment', 'Amd', '/', '_', ' ', '0', '1', '[', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 23.
+#ISO/IEC/IEEE 8802-1BA First edition 2016-10-15# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '(', 'D', 'Corrigendum', 'Edition ', 'REV', 'Rev', 'rev', 'P&V', 'Redline', 'REDLINE', 'redline', 'Amendment', 'Amd', '/', '_', ' ', '0', '1', '[', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 23.
+#ISO/IEC/IEEE 8802-1BR First edition 2016-10-15# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '(', 'D', 'Corrigendum', 'Edition ', 'REV', 'Rev', 'rev', 'P&V', 'Redline', 'REDLINE', 'redline', 'Amendment', 'Amd', '/', '_', ' ', '0', '1', '[', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 23.
+#ISO/IEC/IEEE 8802-1Q First edition 2016-03-15# Pubid::Errors::ParseError: Failed to match: expected one of ['.', '-', '&#x2013;', '–', 'Cor', 'INT', 'Conformance', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '(', 'D', 'Corrigendum', 'Edition ', 'REV', 'Rev', 'rev', 'P&V', 'Redline', 'REDLINE', 'redline', 'Amendment', 'Amd', '/', '_', ' ', '0', '1', '[', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 22.
 ISO/IEC/IEEE P11073-10417/D2 January 2015
 ISO/IEC/IEEE P24748-2/D2, February 2018
 ISO/IEC/IEEE P26514/D1, March 2020
@@ -8935,7 +8935,7 @@ ISO/IEC/IEEE 21450:2010(E)
 ISO/IEC/IEEE 21451-1:2010(E)
 ISO/IEC/IEEE 21451-2:2010(E)
 ISO/IEC/IEEE 21451-4:2010(E)
-ISO/IEC/IEEE 21451-7:2011(E) (Revision of 1451.7-2010
+#ISO/IEC/IEEE 21451-7:2011(E) (Revision of 1451.7-2010# Pubid::Errors::ParseError: Failed to match: expected one of ['-', '&#x2013;', '–', 'Redline', 'REDLINE', 'redline'] at line 1 char 30.
 ISO/IEC/IEEE 21839:2019(E)
 ISO/IEC/IEEE 21840:2019(E)
 ISO/IEC/IEEE 21841:2019(E)
@@ -9045,7 +9045,7 @@ ISO/IEEE 11073-10101:2020(E)
 ISO/IEEE 11073-10201:2004(E)
 ISO/IEEE 11073-10201:2020(E)
 ISO/IEEE 11073-10207:2019(E)
-ISO/IEEE 11073-10404:2010(E) (Supersedes IEEE Std 11073-10404-2008)
+#ISO/IEEE 11073-10404:2010(E) (Supersedes IEEE Std 11073-10404-2008)# Pubid::Errors::ParseError: Failed to match: expected one of ['-', '&#x2013;', '–', 'Redline', 'REDLINE', 'redline'] at line 1 char 30.
 ISO/IEEE 11073-10407:2010(E)
 ISO/IEEE 11073-10408:2010(E)
 ISO/IEEE 11073-10415:2010(E)
@@ -9067,12 +9067,12 @@ IEC 62843:2013(E) IEEE Std C37.94-2002
 IEC 62860:2013(E) IEEE Std 1620-2008
 ISO/IEC 14515-1:2000 IEEE Std 2003.1-2000
 ISO/IEC 15205:2000 IEEE Std 1496
-ISO/IEC 15288:2008(E) IEEE Std 15288-2008 (Revision of IEEE Std 15288-2004)
-ISO/IEC 15288:2008(E) IEEE Std 15288-2008 (Revision of IEEE Std 15288-2004) - Redline
-ISO/IEC 16085:2004(E) IEEE Std 1540-2001
-ISO/IEC 60559:2020(E) IEEE Std 754-2019
-ISO/IEC 8802-11:2005/Amd.4:2006(E) IEEE Std 802.11g-2003 (Amendment to IEEE Std 802.11-1999)
-ISO/IEC 8802-11:2005/Amd.5:2006(E) IEEE Std 802.11h-2003 (Amendment to IEEE Std 802.11-1999)
+#ISO/IEC 15288:2008(E) IEEE Std 15288-2008 (Revision of IEEE Std 15288-2004)# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x01-\\x27], [\\x2a-\\u{10ffff}]] at line 1 char 21.
+#ISO/IEC 15288:2008(E) IEEE Std 15288-2008 (Revision of IEEE Std 15288-2004) - Redline# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x01-\\x27], [\\x2a-\\u{10ffff}]] at line 1 char 21.
+#ISO/IEC 16085:2004(E) IEEE Std 1540-2001# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x01-\\x27], [\\x2a-\\u{10ffff}]] at line 1 char 21.
+#ISO/IEC 60559:2020(E) IEEE Std 754-2019# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x01-\\x27], [\\x2a-\\u{10ffff}]] at line 1 char 21.
+#ISO/IEC 8802-11:2005/Amd.4:2006(E) IEEE Std 802.11g-2003 (Amendment to IEEE Std 802.11-1999)# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x61-\\x7a], [\\x30-\\x39], ' ', '(', 'P&V'] at line 1 char 21.
+#ISO/IEC 8802-11:2005/Amd.5:2006(E) IEEE Std 802.11h-2003 (Amendment to IEEE Std 802.11-1999)# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x61-\\x7a], [\\x30-\\x39], ' ', '(', 'P&V'] at line 1 char 21.
 ISO/IEC 8802-5:1992 IEEE Std 802.5-1992 First edition 1992-06-12
 !IEEE Std 8802-2-1994/Amd3!IEEE Std 8802-2-1994/Amd 3
 !IEEE/ISO/IEC 8802-1Q-2020/Amd31-2021!IEEE/ISO/IEC 8802-1Q-2020/Amd 31-2021
@@ -9095,15 +9095,15 @@ IEC 62531:2012(E) (IEEE Std 1850-2010) - Redline
 ISO/IEC 14575:2000 (IEEE Std 1355-1995)
 ISO/IEC 16509:1999 (IEEE Std 2000-1998)
 !ISO/IEC/IEEE 26531:2015 (E)!ISO/IEC/IEEE 26531:2015(E)
-!ISO/IEC/IEEE 8802-3-1-2015 (E) First edition 2015-08-01!ISO/IEC/IEEE 8802-3-1-2015(E) ED1, 2015-08-01
+#ISO/IEC/IEEE 8802-3-1-2015(E) ED1, 2015-08-01# Pubid::Errors::ParseError: Failed to match: expected one of ['Cor', 'INT', 'Conformance', '-', '&#x2013;', '–', 'Redline', 'REDLINE', 'redline', 'Corrigendum', 'Amendment', 'Amd', '/', 'REV', 'Rev', 'rev', '_', ' ', 'Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', '0', '1', '[', 'Edition ', '(', 'P&V', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 31.
 !IEC 62659 Ed.1, October 2011!IEC 62659:2011 ED1, October 2011
 !IEC/IEEE 60076-57-1202:2017 Edition 1.0 2017-05!IEC/IEEE 60076-57-1202:2017 ED1.0, 2017-05
 !IEC/IEEE 62582-1:2011 Edition 1.0 2011-08!IEC/IEEE 62582-1:2011 ED1.0, 2011-08
 !IEC/IEEE 62582-2:2011 Edition 1.0 2011-08!IEC/IEEE 62582-2:2011 ED1.0, 2011-08
 !IEC/IEEE 62582-3:2011 Edition 1.0 2012-11!IEC/IEEE 62582-3:2011 ED1.0, 2012-11
 !IEC/IEEE 62582-4:2011 Edition 1.0 2011-08!IEC/IEEE 62582-4:2011 ED1.0, 2011-08
-!ISO/IEC/IEEE 12207:2017(E) First edition 2017-11!ISO/IEC/IEEE 12207:2017(E) ED1, 2017-11
-!ISO/IEC/IEEE 12207:2017(E) First edition 2017-11 - Redline!ISO/IEC/IEEE 12207:2017(E) ED1, 2017-11 - Redline!
+#ISO/IEC/IEEE 12207:2017(E) ED1, 2017-11# Pubid::Errors::ParseError: Failed to match: expected one of ['-', '&#x2013;', '–', 'Redline', 'REDLINE', 'redline'] at line 1 char 28.
+#ISO/IEC/IEEE 12207:2017(E) ED1, 2017-11 - Redline# Pubid::Errors::ParseError: Failed to match: expected one of ['-', '&#x2013;', '–', 'Redline', 'REDLINE', 'redline'] at line 1 char 28.
 !IEC 62529:2012(E) (IEEE Std 1641-2010!IEC 62529:2012(E) (IEEE Std 1641-2010)
 !IEC 62529:2012(E) (IEEE Std 1641-2010 - Redline!IEC 62529:2012(E) (IEEE Std 1641-2010) - Redline
 !IEC 62526:2007(E) IEEE 1450.1-2005(E)!IEC 62526:2007(E) (IEEE 1450.1-2005)
@@ -9111,11 +9111,11 @@ IEEE Std 11073-10101-2019 (Revision of ISO/IEEE 11073-10101:2004)
 IEEE Std 11073-10101-2019 (Revision of ISO/IEEE 11073-10101:2004) - Redline
 IEEE Std 11073-20601-2014 (Revision of ISO/IEEE 11073-20601:2010)
 IEEE Std 11073-20601-2014 (Revision of ISO/IEEE 11073-20601:2010) - Redline
-ISO/IEC/IEEE 42010:2011(E) (Revision of ISO/IEC 42010:2007 and IEEE Std 1471-2000)
+#ISO/IEC/IEEE 42010:2011(E) (Revision of ISO/IEC 42010:2007 and IEEE Std 1471-2000)# Pubid::Errors::ParseError: Failed to match: expected one of ['-', '&#x2013;', '–', 'Redline', 'REDLINE', 'redline'] at line 1 char 28.
 !IEEE STD 525-2007 (Revision of IEEE Std 525-1992/Incorporates IEEE Std 525-2007/Cor1:2008)!IEEE STD 525-2007 (Revision of IEEE Std 525-1992/Incorporates IEEE Std 525-2007/Cor 1:2008)
 !IEEE Std 525-2007 (Revision of IEEE Std 525-1992/Incorporates IEEE Std 525-2007/Cor1:2008) - Redline!IEEE Std 525-2007 (Revision of IEEE Std 525-1992/Incorporates IEEE Std 525-2007/Cor 1:2008) - Redline
 !IEEE Std C37.101-2006 (Revision of IEEE Std C37.101-1993/Incorporates IEEE Std C37.101-2006/Cor1:2007)!IEEE Std C37.101-2006 (Revision of IEEE Std C37.101-1993/Incorporates IEEE Std C37.101-2006/Cor 1:2007)
-ISO/IEC/IEEE 42010:2011(E) (Revision of ISO/IEC 42010:2007 and IEEE Std 1471-2000)
+#ISO/IEC/IEEE 42010:2011(E) (Revision of ISO/IEC 42010:2007 and IEEE Std 1471-2000)# Pubid::Errors::ParseError: Failed to match: expected one of ['-', '&#x2013;', '–', 'Redline', 'REDLINE', 'redline'] at line 1 char 28.
 IEC/IEEE FDIS 62582-5 IEC/IEEE 2015
 IEC/IEEE P60980-344 FDIS, December 2019
 IEC/IEEE P62209-1528 FDIS/D5, 2019
@@ -9196,15 +9196,15 @@ ISO/IEC/IEEE DIS P29119-5, August 2014
 ISO/IEC/IEEE DIS P29148, September 2017
 ISO/IEC/IEEE DIS P42030/D1, December 2017
 ISO/IEC/IEEE FDIS P24765 FDIS, October 2016
-ISO/IEC/IEEE FDIS P24765:2016(E), January 2017
+#ISO/IEC/IEEE FDIS P24765:2016(E), January 2017# Pubid::Errors::ParseError: Failed to match: expected one of [' '] at line 1 char 33.
 ISO/IEC/IEEE FDIS P42030/D2, August 2018
 ISO/IEC/IEEE P24765/D3:2017
 ISO/IEC/IEEE/FDIS P42030, March 2019
 IEC/IEEE P63113/FDIS, December 2020
 !IEEE Std Std 1139-2008!IEEE Std 1139-2008
 IEEE Std 342-1973 (ANSI C37.0731-1973)
-!ISO/IEC/IEEE P90003_FDIS, August 2018!ISO/IEC/IEEE P12207-2/D2 FDIS, December 2019
-!ISO/IEC/IEEE/ P12207-2/D3_FDIS, July 2020!ISO/IEC/IEEE P12207-2/D3 FDIS, July 2020
+#ISO/IEC/IEEE P12207-2/D2 FDIS, December 2019# Pubid::Errors::ParseError: Failed to match: expected one of ['Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Edition ', '-', '&#x2013;', '–', 'REV', 'Rev', 'rev', '(', 'P&V', 'Corrigendum', 'Cor', 'Redline', 'REDLINE', 'redline', '19', '20', '0', '1', ', ', '[', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 26.
+#ISO/IEC/IEEE P12207-2/D3 FDIS, July 2020# Pubid::Errors::ParseError: Failed to match: expected one of ['Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Edition ', '-', '&#x2013;', '–', 'REV', 'Rev', 'rev', '(', 'P&V', 'Corrigendum', 'Cor', 'Redline', 'REDLINE', 'redline', '19', '20', '0', '1', ', ', '[', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 26.
 !ISO/IEC/IEEE/ P21841/FDIS, April 2019!ISO/IEC/IEEE P21841/FDIS, April 2019
 !ISO/IEC/IEEE/ P24748-3/DIS, August 2019!ISO/IEC/IEEE P24748-3/DIS, August 2019
 !ISO/IEC/IEEE&#xA0;P29119-1/FDIS, September 2021!ISO/IEC/IEEE P29119-1/FDIS, September 2021
@@ -9231,7 +9231,7 @@ ISO/IEC/IEEE P15026-4/DIS, February 2020
 ISO/IEC/IEEE P15288-DIS-1403
 !ISO/IEC/IEEE P15288-FDIS-1412!ISO/IEC/IEEE P15288/FDIS-1412
 !ISO/IEC/IEEE P15289 FDIS, February 2019!ISO/IEC/IEEE P15289/FDIS, February 2019
-!ISO/IEC/IEEE P21840/FDIS_D4, July 2019!ISO/IEC/IEEE P21840/FDIS/D4, July 2019
+#ISO/IEC/IEEE P21840/FDIS/D4, July 2019# Pubid::Errors::ParseError: Failed to match: expected one of ['-', '&#x2013;', '–'] at line 1 char 27.
 ISO/IEC/IEEE P23026/CD, January 2022
 ISO/IEC/IEEE P24641/DIS, September 2021
 !ISO/IEC/IEEE P24748-5-FDIS, December 2016!ISO/IEC/IEEE P24748-5/FDIS, December 2016
@@ -9444,13 +9444,13 @@ IEEE Unapproved Draft Std PC62.21-2003-Cor_1/D5, Mar 2008
 !IEEE Unapproved Std P277/D2,Mar 2007!IEEE Unapproved Std P277/D2, Mar 2007
 IEEE/IEC P63195-2 ED4, March 2021
 !ISO/IEC 14515-2_2003 IEEE Std 2003.2-1996!ISO/IEC 14515-2:2003 (IEEE Std 2003.2-1996)
-ISO/IEC/IEEE 8802-11:2012/Amd.4:2015(E) (Adoption of IEEE Std 802.11ac-2013)
+#ISO/IEC/IEEE 8802-11:2012/Amd.4:2015(E) (Adoption of IEEE Std 802.11ac-2013)# Pubid::Errors::ParseError: Failed to match: expected one of ['-', '&#x2013;', '–', 'Redline', 'REDLINE', 'redline'] at line 1 char 41.
 !ISO/IEC/IEEE P15288/CD2-2013-09 (Revision of ISO/IEC/IEEE 15288:2008)!ISO/IEC/IEEE P15288/CD2-1309, September 2013 (Revision of ISO/IEC/IEEE 15288:2008)
-!ISO/IEC/IEEE P24641_D2_CD, June 2020!ISO/IEC/IEEE P24641/D2 CD, June 2020
+#ISO/IEC/IEEE P24641/D2 CD, June 2020# Pubid::Errors::ParseError: Failed to match: expected one of ['Sept.', 'Oct.', 'Nov.', 'Dec.', 'Jan.', 'Feb.', 'Mar.', 'Apr.', 'Jun.', 'Jul.', 'Aug.', 'September', 'November', 'December', 'February', 'August', 'June', 'January', 'March', 'April', 'October', 'July', 'May', 'Sept', 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Edition ', '-', '&#x2013;', '–', 'REV', 'Rev', 'rev', '(', 'P&V', 'Corrigendum', 'Cor', 'Redline', 'REDLINE', 'redline', '19', '20', '0', '1', ', ', '[', '- (Approved Draft)', '(Approved Draft)'] at line 1 char 24.
 !ISO/IEC/IEEE P24748-4-DIS-1404, April 2014!ISO/IEC/IEEE P24748-4/DIS-1404, April 2014
 !ISO/IEC/IEEE P26511.2_FDIS 2018!ISO/IEC/IEEE P26511.2/FDIS, 2018
 !ISO/IEC/IEEE P29119-5-DIS2-1504!ISO/IEC/IEEE P29119-5/DIS2-1504, April 2015
-ISO/IEEE 11073-20601:2010/Amd 1:2015(E) (Adoption of IEEE Std 11073-20601a-2010)
+#ISO/IEEE 11073-20601:2010/Amd 1:2015(E) (Adoption of IEEE Std 11073-20601a-2010)# Pubid::Errors::ParseError: Failed to match: expected one of ['-', '&#x2013;', '–', 'Redline', 'REDLINE', 'redline'] at line 1 char 41.
 !P1073.1.3.4/D3.0!IEEE P1073.1.3.4/D3.0
 !P1901.2/D0.11.00, August, 2013!IEEE P1901.2/D0.11.00, August 2013
 !P7-4.3.2/D4 February 2010!IEEE P7-4.3.2/D4, February 2010
