@@ -10,8 +10,8 @@
 !IEC/IEEE P63195_CDV/V3, February 2020!IEC/IEEE CDV3 P63195, February 2020
 !IEEE/IEC P62582 CD2 proposal, May 2017!IEEE/IEC CD2 P62582-2017-05
 !IEEE/ISO/IEC P42010.CD1-V1.0, April 2020!IEEE/ISO/IEC CD1 P42010-2020-04
-!ISO/IEC 15068-2 : 1999 (1387.2-1995)!ISO/IEC 15068-2:1999
-!ISO/IEC 15802-2:1995 (ANSI/IEEE Std 802.1b-1995 )!ISO/IEC 15802-2:1995
+#ISO/IEC 15068-2:1999# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x61-\\x7a], [\\x30-\\x39], ' ', '(', 'P&V'] at line 1 char 21.
+#ISO/IEC 15802-2:1995# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x61-\\x7a], [\\x30-\\x39], ' ', '(', 'P&V'] at line 1 char 21.
 !ISO/IEC/IEEE 16326 (First edition 2009-12-15)!ISO/IEC/IEEE 16326
 !ISO/IEC/IEEE 31320-1:2012 (Adoption of IEEE Std 1320.1-1998 )!ISO/IEC/IEEE 31320-1:2012
 !ISO/IEC/IEEE CD.1 P21839, October 2017!ISO/IEC/IEEE CD1 P21839-2017-10
@@ -147,11 +147,11 @@ ISO/IEC/IEEE 8802-22:2015
 !ISO/IEEE 11073-20702:2018(E)!ISO/IEEE 11073-20702:2018 (E)
 !ISO/IEEE 11073-30200:2004(E)!ISO/IEEE 11073-30200:2004 (E)
 !ISO/IEEE 11073-30300:2004(E)!ISO/IEEE 11073-30300:2004 (E)
-!ISO/IEC 14515-1:2000 IEEE Std 2003.1-2000!ISO/IEC 14515-1:2000
-!ISO/IEC 15205:2000 IEEE Std 1496!ISO/IEC 15205:2000
-!ISO/IEC 8802-5:1992 IEEE Std 802.5-1992 First edition 1992-06-12!ISO/IEC 8802-5:1992
-!ISO/IEC 14575:2000 (IEEE Std 1355-1995)!ISO/IEC 14575:2000
-!ISO/IEC 16509:1999 (IEEE Std 2000-1998)!ISO/IEC 16509:1999
+#ISO/IEC 14515-1:2000# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x61-\\x7a], [\\x30-\\x39], ' ', '(', 'P&V'] at line 1 char 21.
+#ISO/IEC 15205:2000# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x61-\\x7a], [\\x30-\\x39], ' ', '(', 'P&V'] at line 1 char 19.
+#ISO/IEC 8802-5:1992# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x61-\\x7a], [\\x30-\\x39], ' ', '(', 'P&V'] at line 1 char 20.
+#ISO/IEC 14575:2000# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x61-\\x7a], [\\x30-\\x39], ' ', '(', 'P&V'] at line 1 char 19.
+#ISO/IEC 16509:1999# Pubid::Errors::ParseError: Failed to match: expected one of [[\\x61-\\x7a], [\\x30-\\x39], ' ', '(', 'P&V'] at line 1 char 19.
 ISO/IEC/IEEE 26531:2015 (E)
 !IEC/IEEE P60980-344 FDIS, December 2019!IEC/IEEE FDIS P60980.344, December 2019
 !IEC/IEEE P65700-19-03 CD!IEC/IEEE CD P65700.19.03
