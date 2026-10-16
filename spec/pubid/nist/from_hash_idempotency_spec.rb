@@ -84,3 +84,31 @@ RSpec.describe "NIST from_hash/to_hash idempotency" do
     end
   end
 end
+
+RSpec.describe "NIST from_hash legacy component-era rows" do
+  subject(:identifier) { Pubid::Nist::Identifier.from_hash(row) }
+
+  # The pre-flattening pubid-nist serialized the number as a
+  # {"value" => …} Hash (Components::Code); the attribute is a plain
+  # string now, so from_hash must collapse the legacy shape before the
+  # string assignment dumps it (pubid#540).
+  let(:row) do
+    {"_type" => "pubid:nist:interagency-report",
+     "number" => {"value" => "8200"},
+     "publisher" => "NIST",
+     "series" => {"value" => "IR"}}
+  end
+
+  it "collapses the legacy hash number onto the scalar" do
+    expect(identifier.number).to eq("8200")
+    expect(identifier.to_s).to eq("NIST IR 8200")
+  end
+
+  it "keeps the legacy parted number lossless in the render" do
+    row["number"] = {"value" => "8200-1", "part" => "1"}
+    row["series"] = "IR"
+
+    expect(identifier.number).to eq("8200-1")
+    expect(identifier.to_s).to eq("NIST IR 8200-1")
+  end
+end

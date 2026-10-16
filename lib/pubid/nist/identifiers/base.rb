@@ -51,6 +51,13 @@ module Pubid
         COMPACT_FLAT_VALUES.each do |key|
           out[key] = { "value" => out[key] } if out[key].is_a?(::String)
         end
+        # Legacy index rows (the pre-flattening component era) carry the
+        # number as a {"value" => …} Hash; the attribute is a plain
+        # string now, so the Hash collapses to its scalar before the
+        # assignment dumps it (pubid#540).
+        if out["number"].is_a?(::Hash) && out["number"].key?("value")
+          out["number"] = out["number"]["value"]
+        end
         out
       end
 
