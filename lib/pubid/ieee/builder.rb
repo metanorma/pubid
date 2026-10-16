@@ -910,6 +910,36 @@ module Pubid
         end
         attributes[:month] = extract_value(parsed[:month]) if parsed[:month]
 
+        # The IEEE-led tail word-stage ("IEEE/ISO/IEC P15026-3/CD,
+        # December 2021") composes the D= designator with the glued
+        # 6-digit date - the identity its D= twin spelling parses to
+        # (the corpus canonical: joint-development, lead IEEE, stage P).
+        # The ISO-led tails ("ISO/IEC/IEEE P16085/ FDIS, August 2020",
+        # the issue #216 family) are skipped: the printed-joint route
+        # keeps their published-Std convergence, and the dash-dated
+        # spellings flow untouched.
+        if parsed[:tail_iso_stage] && parsed[:printed_month_year] &&
+           parsed[:part]
+          stage = extract_value(parsed[:tail_iso_stage])
+          year = extract_value(parsed[:year]).to_s
+          month_name = extract_value(parsed[:month]).to_s
+          month = REV_MONTH_NUMBERS[month_name.delete(".")]
+          attributes[:ieee_draft] = "D=#{stage}-#{year}#{month}"
+          parsed[:year] = nil
+          parsed[:month] = nil
+          parsed[:printed_month_year] = nil
+          attributes.delete(:year)
+          attributes.delete(:month)
+          # The ISO-led lists converge to the published-Std identity
+          # (the issue #216 semantics); the IEEE-led lists stay the live
+          # project draft (stage P) - the corpus canonical
+          # (joint-development, lead IEEE).
+          unless attributes[:publisher] == "IEEE"
+            parsed[:iso_published] = { value: "" }
+            attributes[:typed_stage] = Pubid::Ieee.locate_stage("Std")
+          end
+        end
+
         # A text date trailing the DRAFT (pubid#216: "CD P26515/D1, March
         # 2017") reaches the builder under :draft_month/:draft_year — the
         # grammar captures them separately to avoid the :month/:year
@@ -1190,9 +1220,16 @@ module Pubid
           # Mark as project (P prefix)
           attributes[:type] = "P"
 
-          # Create typed_stage for IEEE project
-          attributes[:typed_stage] =
-            Pubid::Ieee.locate_stage("P")
+          if parsed[:draft_iso_stage] && attributes[:publisher] == "ISO"
+            # The ISO-led D= designator (the issue #216 convergence) is
+            # the stage-tracked draft of a published standard - the
+            # typed stage reads Std/published.
+            attributes[:typed_stage] = Pubid::Ieee.locate_stage("Std")
+          else
+            # Create typed_stage for IEEE project
+            attributes[:typed_stage] =
+              Pubid::Ieee.locate_stage("P")
+          end
         end
 
         # A plain IEEE-designator draft on joint publishers ("/D8,
