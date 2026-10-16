@@ -1289,6 +1289,15 @@ module Pubid
         # them to the generic standard face with a slashed copublisher.
         cleaned = cleaned.gsub(%r{((?:IEEE|ISO|IEC)(?:/(?:IEEE|ISO|IEC|CSA))+)\s+Draft\s+(P[A-Z0-9][A-Z0-9.-]*/D=[A-Z])}, '\1 \2')
         cleaned = cleaned.gsub(%r{(IEEE|ISO|IEC)//}, '\1/')
+        # The lettered REV spellings glue to the number ("P1310Rev3",
+        # "P1722Rev1") or carry an after-word separator ("REV.ma",
+        # "REV-ma"); the rev rules read a space or a bare word
+        # respectively, so the boundary normalizes (the render keeps the
+        # glued face - "IEEE P1310 Rev3/D2-2011-02" parses to
+        # "IEEE P1310Rev3/D2-2011-02"). The before-word separator the
+        # Rev doctrine carries ("-REVmc") is untouched.
+        cleaned = cleaned.gsub(%r{(REV|Rev|rev)[.\-](?=[A-Za-z])}, '\1')
+        cleaned = cleaned.gsub(%r{(\d)(REV|Rev|rev)}, '\1 \2')
 
         # The corrigendum's own draft follows the ordinal after a comma
         # ("P11073-10418-2011/Cor 1, D4, July 2015"): re-spell the comma as
