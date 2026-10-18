@@ -172,11 +172,12 @@ module Pubid
           # Join with space and add the date (a decomposed D= date rides
           # here as the year).
           result = parts.join(" ") + iso_date_suffix(year || draft_year)
-          # Only the language/edition marker ("(E)", "(E/F)") prints; a
-          # trailing relationship narrative is metadata, not identity.
-          if parenthetical_content&.match?(%r{\A[A-Z](?:\s*[/&]\s*[A-Z])*\z})
-            result += " (#{parenthetical_content})"
-          end
+          # The face is lossless: parse(to_s) == self (pubid#477; the
+          # 2026-10-19 ruling). The bare language/edition marker ("(E)",
+          # "(E/F)") and the trailing cross-reference narrative alike ride
+          # the parenthetical slot — dropping the narrative emitted a
+          # human the grammar rejects, so the round trip raised.
+          result += " (#{parenthetical_content})" if parenthetical_content
           # The redline marker is identity — the joint ISO print spells it
           # with the space-dash form ("15289:2015(E) - Redline", pubid#215).
           result += " - Redline" if redline
@@ -253,6 +254,9 @@ module Pubid
           result = parts.join(" ")
           result += "-#{year}" if year && !@designator_carries_year &&
                            !ieee_draft.to_s.end_with?("-#{year}")
+          # Lossless on the IEEE face too: the parenthetical rides after
+          # the year, before the redline marker.
+          result += " (#{parenthetical_content})" if parenthetical_content
           result += " - Redline" if redline
 
           result
