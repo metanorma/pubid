@@ -172,6 +172,24 @@ RSpec.describe Pubid::Omg::Identifier do
       expect(numbered.part).to be_nil
     end
 
+    # pubid#548: the glued catalogue label (/spec/ALMAS/1.5/Beta1) is the
+    # version suffix, not a document part. A Beta-prefixed part without
+    # digits ("BetaWave") still lexes as the part — the boundary guard.
+    it "keeps a glued capitalized beta inside the version" do
+      glued = described_class.parse("OMG ALMAS 1.5 Beta1")
+
+      expect(glued.version).to eq("1.5 Beta1")
+      expect(glued.part).to be_nil
+      expect(glued.to_s).to eq("OMG ALMAS 1.5 Beta1")
+    end
+
+    it "reads a Beta-prefixed part without digits as the part" do
+      part = described_class.parse("OMG XYZ 1.5 BetaWave")
+
+      expect(part.version).to eq("1.5")
+      expect(part.part).to eq("BetaWave")
+    end
+
     it "reads a document part after a numbered beta" do
       identifier = described_class.parse("OMG UML 2.5 beta 1 PDF")
 
