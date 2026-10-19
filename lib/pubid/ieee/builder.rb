@@ -1883,9 +1883,13 @@ module Pubid
                       else
                         extract_value(dv)
                       end
-            # Normalize a leading hyphen ("/D-3.0" -> "3.0"); the draft
-            # designator is otherwise held verbatim so no digit is lost.
-            version = version.sub(/\A-/, "") if version
+            # Normalize a leading hyphen ("/D-3.0" -> "3.0") and drop a
+            # zero-padded designator prefix ("/013.0" -> "13.0", the
+            # 2026-10-19 ruling; the strip is scoped to the dotted
+            # designator class — "D043"/"D09"/"D0.16" keep their
+            # conventional widths). The designator is
+            # otherwise held verbatim so no digit is lost.
+            version = version.sub(/\A-/, "").sub(/\A0(?=\d+\.\d)/, "") if version
 
             # FDIS/CDV/… are ISO/IEC stage tokens, not draft ordinals (C1
             # ruling, testsuite#2). "/DDIS" and "/DFCD" are hallucinated
@@ -1896,12 +1900,12 @@ module Pubid
             # month-name date ("-June2010", pubid#548 follow-up 2026-10-19)
             # rides the designator's date slot with the month numeric —
             # "FCD" IS an ISO stage (the 2026-10-19 ruling).
-            if (m = version.match(/\A(FDIS|FCD|CDV|DIS|CD|WD|PWI|NP)(?:-([A-Za-z]+)(\d{4}))?\z/))
-              iso_stage = m[1]
-              if m[2]
-                month = REV_MONTH_NUMBERS[m[2].capitalize] ||
-                        (Date.parse(m[2]).month.to_s rescue nil)
-                year = m[3]
+            if (m = version.match(/\A(FDIS|FCD|CDV|DIS|CD|WD|PWI|NP)(\d+)?(?:-([A-Za-z]+)(\d{4}))?\z/))
+              iso_stage = m[1] + (m[2] || "")
+              if m[3]
+                month = REV_MONTH_NUMBERS[m[3].capitalize] ||
+                        (Date.parse(m[3]).month.to_s rescue nil)
+                year = m[4]
               end
               version = nil
             end
