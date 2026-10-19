@@ -1888,13 +1888,21 @@ module Pubid
             version = version.sub(/\A-/, "") if version
 
             # FDIS/CDV/… are ISO/IEC stage tokens, not draft ordinals (C1
-            # ruling, testsuite#2). "/DDIS" and "/DFDIS" are hallucinated
+            # ruling, testsuite#2). "/DDIS" and "/DFCD" are hallucinated
             # concatenations — the designator D does not merge onto a
             # stage word, and IEEE speak has no such token. The draft of
             # a stage rides the iso_stage slot, which Draft#to_s renders
-            # as the D= designator face ("…/D=DIS-2020").
-            if version.match?(/\A(FDIS|FCD|CDV|DIS|CD|WD|PWI|NP)\z/)
-              iso_stage = version
+            # as the D= designator face ("…/D=DIS-2020"). The glued
+            # month-name date ("-June2010", pubid#548 follow-up 2026-10-19)
+            # rides the designator's date slot with the month numeric —
+            # "FCD" IS an ISO stage (the 2026-10-19 ruling).
+            if (m = version.match(/\A(FDIS|FCD|CDV|DIS|CD|WD|PWI|NP)(?:-([A-Za-z]+)(\d{4}))?\z/))
+              iso_stage = m[1]
+              if m[2]
+                month = REV_MONTH_NUMBERS[m[2].capitalize] ||
+                        (Date.parse(m[2]).month.to_s rescue nil)
+                year = m[3]
+              end
               version = nil
             end
           end
