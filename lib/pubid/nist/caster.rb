@@ -151,6 +151,15 @@ module Pubid
             return { second_number: value }
           end
 
+          # NEW: Handle second_number with revision_simple ("8278.r1" — the
+          # dotted revision spelling): fold to the edition, matching the
+          # glued "8278r1" canonical. The former fall-through stringified
+          # the raw parser hash into the number.
+          if type == :second_number && value.is_a?(Hash) && value[:revision_simple]
+            edition_id = value[:revision_simple][:edition_id].to_s
+            return { edition: Components::Edition.new(type: "r", id: edition_id) }
+          end
+
           # NEW: Handle second_number with revision_letter (hash with :revision_letter containing :number_only and :letter)
           # This handles "27ra" pattern where parser returns {revision_letter: {number_only: "27", letter: "a"}}
           # Should be combined to "27rA" format
