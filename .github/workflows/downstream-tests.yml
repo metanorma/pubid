@@ -16,7 +16,7 @@ jobs:
     outputs:
       gems: ${{ steps.find-gems.outputs.gems }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         submodules: recursive
         fetch-depth: 1
@@ -37,7 +37,7 @@ jobs:
     needs:
     - build-matrix
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         submodules: recursive
         fetch-depth: 1
@@ -98,12 +98,12 @@ jobs:
       matrix: ${{ fromJson(needs.discover-repositories.outputs.combined_matrix) }}
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         submodules: recursive
         fetch-depth: 1
 
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         repository: ${{ matrix.repository.owner }}/${{ matrix.repository.repo }}
         ref: ${{ matrix.repository.ref }}   # empty string -> checkout uses the default branch
