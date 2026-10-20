@@ -664,10 +664,12 @@ module Pubid
                        str("ISO/IEC") | str("IEEE"))
         # ISO stage codes: FDIS, FCD, CDV; DIS/CD with an optional round
         # digit (DIS2, CD1..CD4); WD/PWI/NP.
-        iso_stage = (str("FDIS") | str("FCD") | str("CDV") |
+        iso_stage = ((str("FDIS") >> digit.maybe) | (str("FCD") >> digit.maybe) |
+                     (str("CDV") >> digit.maybe) |
                      (str("DIS") >> digit.maybe) |
                      (str("CD") >> digit.maybe) |
-                     str("WD") | str("PWI") | str("NP")).as(:iso_stage)
+                     (str("WD") >> digit.maybe) | (str("PWI") >> digit.maybe) |
+                     (str("NP") >> digit.maybe)).as(:iso_stage)
         std_noise = (space >> str("Std")).maybe
         # The empty-string marker distinguishes the stage-less PUBLISHED
         # tree in the builder (absence of :iso_stage alone means IEEE format).
@@ -719,10 +721,12 @@ module Pubid
           # D (draft) = the ISO/IEC stage it drafts, with its iteration
           # (docs/IEEE-DRAFT-STAGES.md §1.2).
           ((slash >> str("D") >> str("=") >>
-           (str("FDIS") | str("FCD") | str("CDV") |
+           ((str("FDIS") >> digit.maybe) | (str("FCD") >> digit.maybe) |
+            (str("CDV") >> digit.maybe) |
             (str("DIS") >> digit.maybe) |
             (str("CD") >> digit.maybe) |
-            str("WD") | str("PWI") | str("NP")).as(:draft_iso_stage) >>
+            (str("WD") >> digit.maybe) | (str("PWI") >> digit.maybe) |
+            (str("NP") >> digit.maybe)).as(:draft_iso_stage) >>
            (dot >> (digits >> match("[A-Za-z]").repeat(0, 1)).as(:draft_iso_iteration)).maybe) |
           (slash >> str("D") >> dash.maybe >>
            match('[0-9.]').repeat(1).as(:draft_version) >>
@@ -806,10 +810,12 @@ module Pubid
           # can't match inside a longer token and a glued no-space date
           # (".DISMay2013") is left to fall through.
           dot >>
-          (str("FDIS") | str("FCD") | str("CDV") |
+          ((str("FDIS") >> digit.maybe) | (str("FCD") >> digit.maybe) |
+           (str("CDV") >> digit.maybe) |
            (str("DIS") >> digit.maybe) |
            (str("CD") >> digit.maybe) |
-           str("WD") | str("PWI") | str("NP")).as(:iso_stage) >>
+           (str("WD") >> digit.maybe) | (str("PWI") >> digit.maybe) |
+           (str("NP") >> digit.maybe)).as(:iso_stage) >>
           (digit | match("[A-Za-z]")).absent? >>
           # optional trailing date: :YYYY, -YYYY[-MM], or text "Month YYYY"
           (

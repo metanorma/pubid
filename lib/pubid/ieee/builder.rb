@@ -1137,13 +1137,18 @@ module Pubid
         # P15026.2/D=FDIS-201008") captures the stage and the verbatim
         # date token (":2020", "-201008") with no publisher slot; the
         # designator is the IEEE face, so IEEE is the sole publisher.
-        if parsed[:iso_stage] && parsed[:draft_stage_year]
+        # The no-year form ("IEEE P12207/D=CD1") rides the same D=
+        # designator when the stage carries the glued iteration digit —
+        # the token boundary only the designation route produces.
+        if parsed[:iso_stage] && (parsed[:draft_stage_year] ||
+                                  (original_input.to_s.include?("/D=") &&
+                                   extract_value(parsed[:iso_stage]).to_s.match?(/\A[A-Z]+\d\z/)))
           stage_word = extract_value(parsed[:iso_stage])
           attributes[:publishers] ||= ["IEEE"]
           attributes[:publisher] ||= "IEEE"
           attributes[:copublisher] ||= []
           attributes[:ieee_draft] =
-            "D=#{stage_word}#{extract_value(parsed[:draft_stage_year])}"
+            "D=#{stage_word}#{extract_value(parsed[:draft_stage_year]).to_s}"
           attributes[:typed_stage] = Pubid::Ieee.locate_stage(stage_word)
           attributes[:lead_party] = "IEEE"
           attributes.delete(:year)
