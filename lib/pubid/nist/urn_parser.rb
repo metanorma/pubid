@@ -40,10 +40,10 @@ module Pubid
         parts = split_parts(body)
 
         type_token, payload = parts
-        code, revision = parse_payload(payload)
+        code, suffix = parse_payload(payload)
 
         text = "#{publisher_for(type_token)} #{type_label(type_token)} #{code}"
-        text += revision if revision
+        text += suffix
         flavor_parse(text)
       end
 
@@ -58,14 +58,42 @@ module Pubid
         NBS_SERIES.include?(type_token.downcase) ? "NBS" : "NIST"
       end
 
+      # The generator dot-joins the identity's fields after the number
+      # ("urn:nist:circ:25.e1924.supp", "urn:nist:circ:539.v10.supp",
+      # "urn:nist:circ:24.supp-1"). Reassemble the human spelling the
+      # flavor parser reads: the edition and volume glue onto the number,
+      # a revision glues after them, the bare ".supp" marks
+      # supplementability (non-identity) and a valued ".supp-<v>" is the
+      # supplement's "sup<v>" face.
       def parse_payload(payload)
-        # Strip the trailing ".supp" supplement marker.
-        stripped = payload.sub(/\.supp\z/, "")
-        # Split revision suffix from code (e.g., "800-53.r5" → ["800-53", "r5"]).
-        match = stripped.match(/^(.*)\.(r\d+)$/i)
-        return [stripped, nil] unless match
+        tokens = payload.split(".")
+        code = tokens.shift.to_s
+        suffix = +""
+        part = nil
+        edition = nil
+        volume = nil
+        revision = nil
+        supplement = nil
 
-        [match[1], match[2]]
+        tokens.each do |token|
+          case token
+          when /\Ar\d+\z/i then revision = token
+          when /\Ae[\w]+\z/i then edition = token
+          when /\Av\d+\z/i then volume = token
+          when /\Asupp-(.+)\z/im then supplement = Regexp.last_match(1)
+          when "supp" then next # supplementability marker, not identity
+          when "insert", "errata" then suffix << token # glued in the human
+          when /\A[A-Z]\z/ then part = token # part letter, glued to the code
+          when /\A[A-Z][a-z]+\d{4}\z/ # edition's additional text ("13e2.June1908")
+            edition = "#{edition}.#{token}" if edition
+          else suffix << ".#{token}" # unknown marker: keep verbatim
+          end
+        end
+
+        code << part.to_s
+        suffix << edition.to_s << volume.to_s << revision.to_s
+        suffix << "sup#{supplement}" if supplement
+        [code, suffix]
       end
 
       def type_label(token)
