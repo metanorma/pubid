@@ -64,4 +64,32 @@ RSpec.describe "IEEE catalogue alias spellings" do
       ).to eq("IEEE Draft PC37.30.2Rev8/D03-2013-10")
     end
   end
+
+  describe "the draft-stage ladder on project aliases" do
+    it "takes the fabricated D1 for a date-only Draft Std" do
+      expect(
+        Pubid::Ieee::Identifier.parse(
+          "IEEE Draft Std P754/D1.2.6 Nov 2006",
+        ).to_s,
+      ).to eq("IEEE P754/D1")
+    end
+
+    it "takes the stage token from a doubled-D designator" do
+      expect(
+        Pubid::Ieee::Identifier.parse("IEEE Draft P15288/DCD1").to_s,
+      ).to eq("IEEE P15288/D=CD1")
+    end
+
+    it "takes the stage token from a bare stage-version designator" do
+      expect(
+        Pubid::Ieee::Identifier.parse("IEEE Draft Std P15288/CD1").to_s,
+      ).to eq("IEEE P15288/D=CD1")
+    end
+
+    it "keeps the Draft word when the ordinal is not a stage" do
+      expect(
+        Pubid::Ieee::Identifier.parse("IEEE Draft PC95.7/D11, Mar, 2014").to_s,
+      ).to eq("IEEE Draft PC95.7/D11, Mar, 2014")
+    end
+  end
 end

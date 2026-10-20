@@ -1762,6 +1762,7 @@ module Pubid
         end
 
         # Check for specific draft notation (D1, D2, etc.)
+        draft_version_present = false
         if parsed[:draft]
           draft_data = parsed[:draft]
           if draft_data.is_a?(Array)
@@ -1769,8 +1770,12 @@ module Pubid
               r.merge(e)
             end
           end
+          # A verbatim draft designator ("/D2.1.1") is a version in itself;
+          # only an attribute-less date hash ("{month:, year:}") lacks one.
+          draft_version_present = true unless draft_data.is_a?(Hash)
 
           if draft_data.is_a?(Hash) && draft_data[:draft_version]
+            draft_version_present = true
             dv = draft_data[:draft_version]
             version = if dv.is_a?(Array)
                         dv.map do |v|
@@ -1781,6 +1786,21 @@ module Pubid
                       end
 
             if version
+              # A draft version that IS an ISO stage token ("/DCD1" and
+              # "/CD1" both capture version "CD1") takes that stage on a
+              # PLAIN IEEE document: the stage token outranks the ordinal
+              # ladder (docs/IEEE-DRAFT-STAGES.md §1.3, "DDIS" = DIS), so
+              # the render drops the Draft word. A joint ISO-led
+              # stage-word draft keeps its generic project stage — its
+              # publishers block composes the same face through the
+              # typed-stage project branch.
+              copubs = parsed[:publishers].is_a?(Hash) ? parsed[:publishers][:copublishers] : nil
+              joint = copubs && !(copubs.respond_to?(:empty?) ? copubs.empty? : copubs.nil?)
+              if !joint &&
+                  (m = version.to_s.match(/\A(FDIS|FCD|CDV|DIS|CD|WD|PWI|NP)\d*\z/))
+                return m[1]
+              end
+
               # relaton's hyphenated "/D-2" spelling captures the dash inside
               # draft_version; the stage registry keys on "D2". A date-embedded
               # version ("3-2017-07") keys on its leading ordinal.
@@ -1802,13 +1822,17 @@ module Pubid
             return "P"
           elsif type_value == "Std"
             return "Std"
-          elsif type_value == "Draft Std" && parsed[:draft].nil? && parsed[:digit_draft].nil?
+          elsif type_value == "Draft Std" && !draft_version_present && parsed[:digit_draft].nil?
             # A version-less "Draft Std" fabricates /D1 (issue #205);
             # deriving the stage from that fabricated version renders the
             # same P-prefixed form as an explicit "/D1" spelling, so the
             # render reaches its fixed point in one round (pubid#318).
-            # Gated on no-draft: a dotted version ("D2.0") fails the registry
-            # lookup above and must fall through, keeping "Draft Std".
+            # Gated on no captured VERSION: a dotted version ("D2.0")
+            # fails the registry lookup above and must fall through,
+            # keeping "Draft Std". A draft-version-less tree that carries
+            # only a date ("IEEE Draft Std P754/D1.2.6 Nov 2006") takes
+            # the same fabricated D1, the version the render already
+            # implies.
             return "D1"
           elsif type_value.match?(/^No\.?$/)
             return type_value
