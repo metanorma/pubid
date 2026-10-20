@@ -155,7 +155,9 @@ ISO/IEC/IEEE CD P26513/D1, August 2015: ISO/IEC/IEEE P26513/D1, August 2015
 "ISO/IEC/IEEE DIS P16326/201x, December 2018": "ISO/IEC/IEEE DIS P16326-2018-12"
 "ISO/IEC/IEEE/P21839, 2019(E)": "ISO/IEC/IEEE P21839-2019"
 "ISO/IEC/IEEE CD2 P12207-2: 201x(E), February 2019": "ISO/IEC/IEEE CD2 P12207.2-2019-02"
-"ISO/IEC/IEEE P42010.WD4:2019(E)": "ISO/IEC/IEEE P42010/D-4-2019"
+# The glued WD iteration re-spells to the face that canonicalises in one
+# round ("P42010/D-4-2019" renders "P42010.2019/D4", a second round).
+"ISO/IEC/IEEE P42010.WD4:2019(E)": "ISO/IEC/IEEE P42010.2019/D4"
 # the grammar parses the raw `_CDV/V3, Month YYYY` spelling directly
 # (joint_development_ieee_format slash-stage branch) — no shim needed
 "ISO/IEC/IEEE/P16085_DIS, March 2020": "ISO/IEC/IEEE DIS P16085-2020-03"

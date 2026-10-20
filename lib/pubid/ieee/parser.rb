@@ -1295,6 +1295,39 @@ module Pubid
         # them to the generic standard face with a slashed copublisher.
         cleaned = cleaned.gsub(%r{((?:IEEE|ISO|IEC)(?:/(?:IEEE|ISO|IEC|CSA))+)\s+Draft\s+(P[A-Z0-9][A-Z0-9.-]*/D=[A-Z])}, '\1 \2')
         cleaned = cleaned.gsub(%r{(IEEE|ISO|IEC)//}, '\1/')
+        # The three-way ISO-led list glues the language marker to the
+        # year ("ISO/IEC/IEEE 8802-1AC-2018(E)"): the spaced spelling is
+        # read as the language marker and dropped, the glued one falls
+        # into parenthetical content and prints. Re-spell the boundary.
+        # Scoped to the three-way lists: the two-way IEC/IEEE copublished
+        # form keeps its glued (E) as identity ("…:2012(E)").
+        cleaned = cleaned.gsub(
+          %r{\A((?:ISO/IEC/IEEE|IEEE/ISO/IEC|IEEE/IEC/ISO)\s+[^()]+?[^()\s])\(E\)\z},
+          '\1 (E)',
+        )
+        # The stage-first joint draft's dash part carries a bare comma
+        # year ("IEC/IEEE FDIS P60780-323, 2015"): the joint route takes
+        # no bare year there and the copublished route claims the string,
+        # so drop the non-identity year and let the stage-first route
+        # read the dash part (the rendered face is the dot human).
+        cleaned = cleaned.gsub(
+          %r{\A((?:IEC/IEEE|IEEE/IEC)\s+(?:FDIS|FCD|CDV|DIS|CD|WD|PWI|NP)\s+P\d+(?:-\d+)+),\s+\d{4}\z},
+          '\1',
+        )
+        # A two-digit draft designator spelled without its D
+        # ("IEEE P1052/08, September 2018"): the corpus face is the D
+        # ordinal ("…/D08").
+        cleaned = cleaned.gsub(
+          %r{\AIEEE\s+(P[\d.-]+)/(\d{2}),\s+([A-Za-z]+)\s+(\d{4})\z},
+          'IEEE \1/D\2, \3 \4',
+        )
+        # The revision word rides after the draft ordinal
+        # ("IEEE PC37.30.2/D03 Rev 8, October 2013"): move it onto the
+        # number and mark the document as the draft it spells.
+        cleaned = cleaned.gsub(
+          %r{\AIEEE\s+((?:P)?C?[\d.]+)/D(\d+)\s+Rev\s+(\d+),\s+([A-Za-z]+)\s+(\d{4})\z},
+          'IEEE Draft \1Rev\3/D\2, \4 \5',
+        )
         # The IEEE-led joint list's dash/underscore stage tail carries a
         # month-name date ("IEEE/ISO/IEC P29119-2-DIS, December 2011",
         # "IEEE/ISO/IEC P29119-4_FDIS, December 2020"). The generic route
