@@ -1295,6 +1295,27 @@ module Pubid
         # them to the generic standard face with a slashed copublisher.
         cleaned = cleaned.gsub(%r{((?:IEEE|ISO|IEC)(?:/(?:IEEE|ISO|IEC|CSA))+)\s+Draft\s+(P[A-Z0-9][A-Z0-9.-]*/D=[A-Z])}, '\1 \2')
         cleaned = cleaned.gsub(%r{(IEEE|ISO|IEC)//}, '\1/')
+        # The IEEE-led joint list's dash/underscore stage tail carries a
+        # month-name date ("IEEE/ISO/IEC P29119-2-DIS, December 2011",
+        # "IEEE/ISO/IEC P29119-4_FDIS, December 2020"). The generic route
+        # claims it first and answers with a slashed copublisher
+        # ("IEEE//ISO/IEC Draft …"), so re-spell the stage as the D=
+        # designator the joint route reads. Scoped to the IEEE-led list:
+        # the ISO/IEC- and IEC/IEEE-led forms already render the face.
+        cleaned = cleaned.gsub(
+          %r{\A(IEEE(?:/(?:IEEE|ISO|IEC)){2,})\s+(P[A-Z0-9][A-Z0-9.-]*?)[-_](FDIS|FCD|CDV|DIS|CD|WD|PWI|NP)(\d*),\s+([A-Za-z]+)\s+(\d{4})\z}
+        ) do
+          month = ::Pubid::Ieee::Builder::REV_MONTH_NUMBERS[
+            Regexp.last_match(5).capitalize
+          ]
+          if month
+            "#{Regexp.last_match(1)} #{Regexp.last_match(2)}/" \
+              "D=#{Regexp.last_match(3)}#{Regexp.last_match(4)}-" \
+              "#{Regexp.last_match(6)}#{month}"
+          else
+            Regexp.last_match(0)
+          end
+        end
         # The lettered REV spellings glue to the number ("P1310Rev3",
         # "P1722Rev1") or carry an after-word separator ("REV.ma",
         # "REV-ma"); the rev rules read a space or a bare word
