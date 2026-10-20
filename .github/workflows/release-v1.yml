@@ -50,7 +50,7 @@ jobs:
       id-token: write
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -159,15 +159,15 @@ jobs:
 
     - name: Create GitHub Release
       if: ${{ !inputs.dry_run && inputs.version_type != 'skip' }}
-      uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: "v${{ env.NEW_VERSION }}"
-        release_name: "Release v${{ env.NEW_VERSION }}"
-        body_path: release_body.md
-        draft: false
-        prerelease: false
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # actions/create-release@v1 is archived upstream; gh release create
+        # is the maintained equivalent (the tag already exists — pushed in
+        # the previous step; draft and prerelease default to false).
+        gh release create "v${{ env.NEW_VERSION }}" \
+          --title "Release v${{ env.NEW_VERSION }}" \
+          --notes-file release_body.md
 
     - name: Skip mode summary
       if: ${{ !inputs.dry_run && inputs.version_type == 'skip' }}

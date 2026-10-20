@@ -64,7 +64,7 @@ jobs:
         working-directory: ${{ inputs.monorepo && format('{0}/{1}', inputs.gem_directory, inputs.gem_name) || './' }}
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         submodules: ${{ inputs.submodules }}
 
