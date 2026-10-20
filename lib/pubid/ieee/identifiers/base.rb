@@ -384,10 +384,12 @@ module Pubid
           result = PreParser.preprocess(normalized)
           return build_dual(result.parts) if result.dispatch == :dual_semicolon
         end
-        parsed = Pubid::Parg::Backend.parse(:ieee, Parser.normalize_input(normalized))
+        parser_input = Parser.normalize_input(normalized)
+        parsed = Pubid::Parg::Backend.parse(:ieee, parser_input)
         builder = Builder.new(Identifier)
         # Pass the original input string to builder for context
         builder.original_input = input
+        builder.parser_input = parser_input
         builder.build(parsed)
       end
 

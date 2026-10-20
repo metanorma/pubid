@@ -16,7 +16,7 @@ module Pubid
         "Jun" => "06", "Jul" => "07", "Aug" => "08", "Sep" => "09",
         "Oct" => "10", "Nov" => "11", "Dec" => "12",
       }.freeze
-      attr_accessor :original_input
+      attr_accessor :original_input, :parser_input
       attr_reader :identifier_class
 
       def initialize(identifier_class = Identifier)
@@ -1535,10 +1535,12 @@ module Pubid
         type_value = "Std" if type_value == "Standard"
         draft_status_value = extract_value(parsed[:draft_status])
 
-        # Handle case where parser captured number without "P" prefix
-        # Check original input to see if there was a P before the number
-        # The ieee_p_identifier rule consumes P without capturing it
-        if !type_value && original_input&.match?(/IEEE\s+P/)
+        # Handle case where parser captured number without "P" prefix.
+        # The parser sees the NORMALIZED spelling: a rewrite that moves
+        # the project P behind a re-spelled type word ("IEEE
+        # PC37.30.2/D03 Rev 8" -> "IEEE Draft PC37.30.2Rev8/D03") must
+        # not be re-read as a project marker from the raw input.
+        if !type_value && parser_input&.match?(/IEEE\s+P/)
           type_value = "P"
         end
 
