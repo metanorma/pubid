@@ -294,8 +294,10 @@ module Pubid
              (digits >> (str(".") >> digits).maybe).as(:edition_id)).as(:revision_simple) |
             # Special patterns like "NCNR", "PERMIS", "BFRL"
             str("NCNR") | str("PERMIS") | str("BFRL") |
-            # Just capital letters (e.g., "A", "B", "C") - standalone
-            upper_letter.repeat(1, 3) |
+            # Just capital letters (e.g., "A", "B", "C") - standalone;
+            # a trailing lowercase means a capitalized word ("Suppl"),
+            # not a second number.
+            upper_letter.repeat(1, 3) >> lower_letter.absent? |
             # Regular number with optional suffix - but NOT if part of FIPS date (digit-dash-month-digit-slash)
             (digits_with_suffix >> (dash >> month_abbrev >> digits >> slash).absent?) |
             # Single lowercase letter (e.g., "a", "b") - but NOT "r" followed by digits (edition marker)
@@ -576,11 +578,20 @@ module Pubid
           (space | dash).maybe >> (digits | str("")).as(:addendum_number)).as(:addendum)
       end
 
+      # The capitalized supplement words a letter slot must yield to.
+      rule(:supplement_word) do
+        str("Suppl") | str("Supp") | str("Sup")
+      end
+
       # Supplement - enhanced to support date patterns, year patterns, and combined with revision
       # Examples: suppJan1924, supp3/1926, supp1925, supJun1925-Jun1927 (date ranges), supprev
       rule(:supplement) do
         space.maybe >>
-          (str("supp") | str("sup")) >>
+          dot.maybe >>
+          # The capitalized catalogue spellings ("NIST.SP.955.Suppl") ride
+          # the same slot; longest-first so "Suppl" is not "Sup"+"p".
+          (str("Suppl") | str("Supp") | str("Sup") |
+           str("supp") | str("sup")) >>
           (
             # Supplement followed by revision: supprev
             str("rev").as(:supplement_with_rev) |
@@ -684,14 +695,15 @@ module Pubid
           simple_series >> dot.maybe >> report_number.maybe >>
           # Edition with underscore separator (MR format: 1648_2009)
           (str("_") >> digits.as(:edition_year)).maybe >>
-          # Support letter suffix before update (e.g., 8286C-upd1) - Session 219
-          upper_letter.maybe >>
+          # Support letter suffix before update (e.g., 8286C-upd1) - Session 219;
+          # a capitalized supplement word ("Suppl") is not a letter suffix.
+          supplement_word.absent?.maybe >> upper_letter.maybe >>
           # Support revision component (r1, r5, etc.) before update
           edition.maybe >>
           update.maybe >>
           # Additional dot-separated parts (parts, version, volume, etc.)
           # MUST come before translation to avoid conflicting with language codes
-          (dot >> (digits | upper_letter)).repeat(0, 3) >>
+          (dot >> (digits | (supplement_word.absent? >> upper_letter))).repeat(0, 3) >>
           # Language codes at end (.spa, .por, .ind)
           parts.repeat >> draft.maybe
       end
