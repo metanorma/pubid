@@ -36,6 +36,14 @@ jobs:
         fetch-depth: 0
         ref: ${{ github.ref_name }}
 
+    # The throughput baseline runs over the corpus, so the release job
+    # needs the testsuite beside the gem.
+    - name: Checkout testsuite for the benchmark
+      uses: actions/checkout@v7
+      with:
+        repository: pubid/pubid-testsuite
+        path: pubid-testsuite
+
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -90,6 +98,22 @@ jobs:
     - name: Build gem
       run: gem build pubid.gemspec
 
+    # Track 07: a published throughput baseline, release over release. The
+    # numbers go into the job summary and are appended to the release notes
+    # below; a parse failure is counted, not fatal, so one bad row cannot
+    # block a publish.
+    - name: Benchmark the corpus (throughput baseline)
+      run: |
+        bundle exec rake benchmark:corpus \
+          PUBID_TESTSUITE_PATH="$GITHUB_WORKSPACE/pubid-testsuite/tests" \
+          | tee benchmark.txt
+        {
+          echo "## Corpus throughput"
+          echo '```'
+          cat benchmark.txt
+          echo '```'
+        } >> "$GITHUB_STEP_SUMMARY"
+
     # gem push has no native OIDC support: this step exchanges the job's
     # OIDC token (via id-token: write) for a short-lived RubyGems API key.
     - name: Configure RubyGems credentials (trusted publishing)
@@ -127,6 +151,20 @@ jobs:
           --title "Release v${{ steps.version.outputs.value }}" \
           --generate-notes \
           "${FLAGS[@]}"
+
+    - name: Append the throughput baseline to the release notes
+      if: ${{ !inputs.dry_run && inputs.next_version != 'skip' }}
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        TAG="v${{ steps.version.outputs.value }}"
+        {
+          gh release view "$TAG" --json body -q .body
+          printf '\n\n## Corpus throughput\n\n```\n'
+          cat benchmark.txt
+          printf '```\n'
+        } > release-body.md
+        gh release edit "$TAG" --notes-file release-body.md
 
     - name: Dry-run summary
       if: ${{ inputs.dry_run }}

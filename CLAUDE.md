@@ -35,6 +35,9 @@ bundle exec rake version:bump[patch|minor|major]  # Bump version
 bundle exec rake validation:report             # Summary for all flavors
 bundle exec rake validation:classify[iso]      # Classify one flavor's results
 bundle exec rake validation:classify_all       # Classify all flavors
+
+# Throughput baseline (full-corpus sweep; scoped by FLAVOR=, LIMIT=)
+bundle exec rake benchmark:corpus
 ```
 
 For running specific test files during development, use rspec directly:
