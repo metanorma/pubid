@@ -72,3 +72,11 @@ Read this before you change `lib/pubid/nist/` or `spec/pubid/nist/`. The root
   (`"800-38.A.supp.add."` splits with a trailing `""` in JS but not in
   Ruby; keeping it appends a stray `.`). Locked by
   `spec/pubid/nist/urn_parser_spec.rb`.
+
+- **FIPS MR keeps the parsed publisher.** `FederalInformationProcessingStandards`
+  sets `default_publisher` to `""`, and its `to_mr_style` once started from
+  `series_code` alone, so `NIST.FIPS.197-upd1.ipd` rendered `FIPS.197-upd1.ipd`
+  — not the DOI suffix NIST publishes. It now mirrors its own
+  `to_short_style`: the publisher prefixes only when the input carried one
+  (`NIST.`/`NBS.`), and a bare `FIPS 140-3` still renders `FIPS.140-3`.
+  Locked by `spec/pubid/nist/identifiers/fips_spec.rb`.
