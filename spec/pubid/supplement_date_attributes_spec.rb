@@ -73,9 +73,9 @@ RSpec.describe "Pubid::Identifier#exclude — supplement's own date" do
     end
 
     # Open question, deliberately not resolved here: `dated_version_of?`/
-    # `draft_of?` build on `matches?(other, ignore: [:date, :year, …])`,
-    # which — like every bare :date/:year exclusion — now protects a
-    # supplement's own date unless :supplement_year is also passed. Two
+    # `draft_of?` compare `exclude(:date, :year[, …])` — like every bare
+    # :date/:year exclusion, that now protects a supplement's own date unless
+    # :supplement_year is also passed. Two
     # standalone BSI amendments differing only in their OWN year are no
     # longer `dated_version_of?` each other (they were before this fix,
     # because BSI's old `year`-attribute dodge only protected against a bare

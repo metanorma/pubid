@@ -1177,10 +1177,46 @@ module Pubid
 
     # Self and +other+ refer to the same document but differ only in the
     # trailing date / year — the "dated vs undated" reference pattern.
+    # Compares #exclude, not #matches?: NIST overrides #matches? as an
+    # asymmetric wildcard query (and takes no ignore: keyword).
     def dated_version_of?(other)
       return false unless other.is_a?(::Pubid::Identifier)
 
-      matches?(other, ignore: [:date, :year]) && self != other
+      exclude(:date, :year) == other.exclude(:date, :year) && self != other
+    end
+
+    # The attributes that carry a revision marker. Flavors spell it
+    # differently: OGC and IEEE hold a string (+revision+), NIST folds the
+    # lettered revision and its date into an +update+ component.
+    REVISION_ATTRIBUTES = %i[revision update update_component].freeze
+
+    # The revision marker this identifier carries, or nil. See
+    # REVISION_ATTRIBUTES.
+    # @return [String, Components::Update, nil]
+    def revision_marker
+      REVISION_ATTRIBUTES.each do |name|
+        next unless self.class.attributes.key?(name)
+
+        value = public_send(name)
+        return value unless value.nil? || value == ""
+      end
+      nil
+    end
+
+    # Self is a revision of +other+: the same document, where self carries a
+    # revision marker ("OGC 06-121r9", "NBS LC 800 rJun1992") that +other+
+    # lacks or spells differently. A document whose revision is modelled as
+    # an edition is covered by #edition_of? instead.
+    def revision_of?(other)
+      return false unless other.is_a?(::Pubid::Identifier)
+      return false if self == other
+      return false if revision_marker.nil?
+
+      # #exclude, not #matches?: NIST overrides #matches? as an asymmetric
+      # wildcard query (and takes no ignore: keyword), which would compare a
+      # query against a candidate rather than two concrete documents.
+      exclude(*REVISION_ATTRIBUTES) == other.exclude(*REVISION_ATTRIBUTES) &&
+        revision_marker != other.revision_marker
     end
 
     # The document a wrapper stands in front of: a supplement's base, or
@@ -1289,7 +1325,8 @@ module Pubid
 
       root == other.root &&
         self != other &&
-        matches?(other, ignore: [:date, :year, :stage, :typed_stage])
+        exclude(:date, :year, :stage, :typed_stage) ==
+          other.exclude(:date, :year, :stage, :typed_stage)
     end
 
     # Self and +other+ are editions of the same document: the edition-year
@@ -1315,7 +1352,7 @@ module Pubid
     # Any relational predicate holds.
     def related_to?(other)
       %i[supplement_of? has_supplement? dated_version_of? edition_of?
-         sibling_of? includes? draft_of?].any? do |m|
+         revision_of? sibling_of? includes? draft_of?].any? do |m|
         public_send(m, other)
       end
     end

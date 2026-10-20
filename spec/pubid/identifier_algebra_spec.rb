@@ -117,6 +117,36 @@ RSpec.describe "Pubid::Identifier algebra (pubid/pubid#247)" do
     end
   end
 
+  describe "#revision_of?" do
+    let(:ogc) { Pubid::Ogc.parse("OGC 06-121") }
+    let(:ogc_r9) { Pubid::Ogc.parse("OGC 06-121r9") }
+
+    it "returns true when self carries a revision marker" do
+      expect(ogc_r9).to be_revision_of(ogc)
+    end
+
+    it "returns false when self carries no revision" do
+      expect(ogc).not_to be_revision_of(ogc_r9)
+    end
+
+    it "returns false for an unrelated document" do
+      other = Pubid::Ogc.parse("OGC 06-152r9")
+      expect(ogc_r9).not_to be_revision_of(other)
+    end
+
+    it "relates two different revisions of one document" do
+      r10 = Pubid::Ogc.parse("OGC 06-121r10")
+      expect(ogc_r9).to be_revision_of(r10)
+    end
+
+    it "reads the NIST update component as a revision marker" do
+      base = Pubid::Nist.parse("NBS LC 800")
+      revised = Pubid::Nist.parse("NBS LC 800 rJun1992")
+      expect(revised).to be_revision_of(base)
+      expect(base).not_to be_revision_of(revised)
+    end
+  end
+
   describe "#related_to?" do
     it "returns true for supplement relationship" do
       expect(amd).to be_related_to(base_iso)
@@ -126,6 +156,11 @@ RSpec.describe "Pubid::Identifier algebra (pubid/pubid#247)" do
       dated = Pubid::Iso.parse("ISO 9001:2015")
       undated = Pubid::Iso.parse("ISO 9001")
       expect(dated).to be_related_to(undated)
+    end
+
+    it "returns true for a revision relationship" do
+      expect(Pubid::Ogc.parse("OGC 06-121r9"))
+        .to be_related_to(Pubid::Ogc.parse("OGC 06-121"))
     end
 
     it "returns false for unrelated identifiers" do
