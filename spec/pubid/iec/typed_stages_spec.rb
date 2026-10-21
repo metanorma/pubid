@@ -3,10 +3,11 @@
 require "spec_helper"
 
 # pubid#237: consumers query IEC by stage abbreviation. Every
-# abbreviation in the issue's list must resolve, except the three that
-# appear in NEITHER authoritative stage table
-# (pubid-iec/stages.yaml, pubid-iso/stages.yaml) — those stay nil so a
-# source for them trips this spec instead of being guessed.
+# abbreviation in the issue's list must resolve, except the two that no
+# IEC source we hold defines — the stage tables
+# (pubid-iec/stages.yaml, pubid-iso/stages.yaml) AND IEC's own
+# Data-Feeds-successor documents, extracted in data/iec/stage-codes.md —
+# so a source for them trips this spec instead of a guess.
 RSpec.describe Pubid::Iec do
   ISSUE_ABBREVIATIONS = %w[
     PWI NWIP AWG AMW BPUB PPUB APUB WPUB DELPUB RR NFDIS NDTR NDTS BWG NP
@@ -16,8 +17,9 @@ RSpec.describe Pubid::Iec do
     CDTR CDTS CFDIS DTS DTSM DTR DTRM FDIS PUB
   ].freeze
 
-  # Absent from pubid-iec/stages.yaml and pubid-iso/stages.yaml alike.
-  NOT_IN_TABLES = %w[AWG ADIS CANV].freeze
+  # AWG and CANV appear in neither stage table nor IEC's own successor
+  # documents of the Data Feeds (data/iec/stage-codes.md).
+  NOT_IN_TABLES = %w[AWG CANV].freeze
 
   it "resolves every abbreviation sourced from the stage tables" do
     (ISSUE_ABBREVIATIONS - NOT_IN_TABLES).each do |abbr|
@@ -33,14 +35,17 @@ RSpec.describe Pubid::Iec do
     end
   end
 
-  # The aliases added from the stage tables, mapped by their codes:
-  # AWI is the ISO table's abbreviation for 20.00/10.99 (the ANW stage),
-  # DIS names the 40.00/40.20 stages (both tables' descriptions), and PUB
-  # is the publication stage 60.00/60.60 (the *PUB compounds point there).
-  it "maps the table-sourced aliases to their harmonized stages" do
+  # The aliases added from the sources, mapped by their codes: AWI is the
+  # ISO table's abbreviation for 20.00/10.99 (the ANW stage), DIS names
+  # the 40.00/40.20 stages (both tables' descriptions), PUB is the
+  # publication stage 60.00/60.60 (the *PUB compounds point there), and
+  # ADIS is the legacy Data Feeds spelling of AFDIS at 40.99
+  # (data/iec/stage-codes.md) — cdv is the typed stage claiming 40.99.
+  it "maps the sourced aliases to their harmonized stages" do
     expect(described_class.locate_stage("AWI").code.to_s).to eq("anw")
     expect(described_class.locate_stage("DIS").code.to_s).to eq("cdv")
     expect(described_class.locate_stage("PUB").code.to_s).to eq("is")
+    expect(described_class.locate_stage("ADIS").code.to_s).to eq("cdv")
   end
 
   it "keeps the canonical abbreviation first, so renders are unchanged" do
