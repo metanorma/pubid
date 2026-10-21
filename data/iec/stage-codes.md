@@ -24,6 +24,11 @@ extract because the primary document cannot be fetched programmatically.
     among the *legacy feeders* these Harmonized APIs replace, and maps the
     legacy feed's fields (STAGE_CODE, STAGE_CODE_NAME, ISO_LEVEL) onto the
     modern stageCode/harmonizedStageCode pairs.
+- **Also held: *Stage Codes — International Standard (IS)*, v2.0, 2023-06**
+  (`StageCodes_IS_v2.pdf`, cited by metanorma/pubid-iec#127). The bytes
+  are withheld from retrieval by the same WAF; a human-downloaded copy
+  is preserved outside the repository. It is the IS-lifecycle flow
+  diagram; the abbreviations it defines are transcribed below.
 - **Extraction:** `pdftotext -layout`; table transcribed verbatim below,
   including IEC's own spelling of the section title ("correspondance").
 
@@ -84,10 +89,33 @@ extract because the primary document cannot be fetched programmatically.
 | 60.00 | TPUB | Translation of publication | IS, TR, TS, COR |
 | 95.99 | WPUB | Publication withdrawn | IS, TR, TS, PAS, ISH, COR |
 
-**Absent from the table (full-text searched in both documents):** `AWG`,
-`CANV`, and — as bare codes — `AWI`, `DIS`, `NP`, `WD`, `FDIS`, `PUB`.
-The modern API spells the enquiry/FDIS ladder with the C-prefixed
-circulation codes (CCDV/CFDIS/RFDIS/NFDIS…) rather than DIS/FDIS.
+**Absent from every source in this file** (the correspondence table,
+the IS ladder, and the legacy examples — all full-text searched):
+`AWG`, `CANV`, and — as bare codes — `AWI`, `DIS`, `PUB`. Neither AWG
+nor CANV is part of the issue's list either (pubid#237's STAGE_CODES
+has 55 entries and contains neither); earlier analysis that attributed
+them to the issue was wrong. The modern API spells the enquiry/FDIS
+ladder with the C-prefixed circulation codes (CCDV/CFDIS/RFDIS/NFDIS…)
+rather than DIS/FDIS.
+
+## The IS-lifecycle ladder (StageCodes_IS_v2.pdf, v2.0 2023-06)
+
+The IS diagram chains these abbreviations; the intermediate registered
+states do not all appear in the correspondence table above:
+
+PRELIMINARY: PWI → PROPOSAL: prePNW ("Preparation of NP"), PNW/NP,
+DEL, PRVN, RVN, RR → COMMITTEE: ACD, CD, PCC, CC, CDM →
+ENQUIRY: ACDV, TCDV, CCDV, CDV, PRVC, RVC → APPROVAL: CFDIS, FDIS,
+DECFDIS, RFDIS, CAN → PUBLICATION: BPUB, PPUB, APUB, RPUB, TPUB →
+WPUB, DECPUB, DELPUB.
+
+Notable: the ladder runs through **NP** (not bare "DIS") for the
+proposal, and the enquiry/approval drafts are the C-prefixed
+circulation codes plus **RVC/RFDIS** — bare "DIS" and "FDIS" appear
+only as the delivered drafts, and **ADIS appears nowhere** (it is a
+legacy-Data-Feeds-only code; the diagram uses RFDIS at 50.00).
+"prePNW", "CC" and "RVN/RVC/RVD" are diagram codes with no
+correspondence-table row.
 
 ## Legacy IEC Data Feeds stage codes (use-case examples, v0.0.8 p.24–25; v0.0.7 p.18–19)
 
@@ -116,7 +144,8 @@ stage RFDIS/50.00 — a snapshot of the project's plan, not a code rename.
 - Reconciliation items against this table, deliberately not changed yet:
   `DELPUB` sits at **99.60** here (the registry's `is` ladder starts at
   60.00 and does not claim 99.60); `CAN` carries **two** harmonized codes
-  (30.98 for IS/TR/TS, 50.98 for PAS/ISH/COR); `CDISH`, `CDPAS`,
-  `DECDISH`, `MERGED`, `SPLIT`, `PCC`, `PRVN`, `DEL`, `RPUB`, `TPUB` and
-  the per-deliverable translation/preparation rows are not registered as
-  typed-stage abbreviations.
+  (30.98 for IS/TR/TS, 50.98 for PAS/ISH/COR); `DECDISH`, `MERGED`,
+  `SPLIT`, `PCC`, `PRVN`, `DEL`, `RPUB`, `TPUB` and the per-deliverable
+  translation/preparation rows are not registered as typed-stage
+  abbreviations. `CDISH` and `CDPAS` are registered as aliases on the
+  `dish`/`dpas` stages (the 50.20 rows of their deliverables).
