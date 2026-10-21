@@ -195,7 +195,21 @@ module Pubid
     # @return [Pubid::Components::TypedStage, nil] the matching typed stage
     def self.locate_stage(abbr)
       abbr_str = abbr.to_s.upcase
-      all_typed_stages.find { |s| s.abbr.any? { |a| a.to_s.upcase == abbr_str } }
+      all_typed_stages.find { |s| s.abbr.any? { |a| a.to_s.upcase == abbr_str } } ||
+        # A harmonized stage code ("43.20") names the stage the same way an
+        # abbreviation does; consumers query by it (pubid#251), so an
+        # unmatched abbreviation falls through to the code tables.
+        locate_stage_by_harmonized_code(abbr)
+    end
+
+    # Lookup: harmonized stage code -> typed stage ("43.20" -> the FV EN
+    # entry). The codes are the CEN/CENELEC lifecycle ladder; every code a
+    # consumer can query must resolve (pubid#251).
+    # @param code [String, Symbol] the harmonized stage code to find
+    # @return [Pubid::Components::TypedStage, nil] the matching typed stage
+    def self.locate_stage_by_harmonized_code(code)
+      code_str = code.to_s
+      all_typed_stages.find { |s| s.harmonized_stages.to_a.include?(code_str) }
     end
 
     # Lookup: typed-stage code -> typed stage ("pren" -> the prEN entry).

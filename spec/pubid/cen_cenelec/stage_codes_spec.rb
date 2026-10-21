@@ -37,4 +37,28 @@ RSpec.describe "CEN/CENELEC stage codes — issue #251" do
     pren = all_stages.find { |s| s.code.to_s == "pren" }
     expect(pren.harmonized_stages).to include("30.97")
   end
+
+  it "resolves every issue code through the typed-stage lookup" do
+    ISSUE_CODES.each do |code|
+      stage = Pubid::CenCenelec.locate_stage(code)
+      expect(stage).not_to be_nil, "#{code} does not resolve"
+      expect(stage.harmonized_stages).to include(code)
+      expect(Pubid::CenCenelec.locate_stage_by_harmonized_code(code)).to eq(stage)
+    end
+  end
+
+  it "still resolves abbreviations and rejects an unknown code" do
+    expect(Pubid::CenCenelec.locate_stage("prEN").code.to_s).to eq("pren")
+    expect(Pubid::CenCenelec.locate_stage("FprEN").code.to_s).to eq("fpren")
+    expect(Pubid::CenCenelec.locate_stage("42.42")).to be_nil
+  end
+
+  it "round-trips an identifier built on every typed stage" do
+    all_stages.each do |stage|
+      id = Pubid::CenCenelec::Identifiers::EuropeanNorm.new(
+        number: "1234", typed_stage: stage,
+      )
+      expect(Pubid::CenCenelec::Identifier.from_hash(id.to_hash)).to eq(id)
+    end
+  end
 end
