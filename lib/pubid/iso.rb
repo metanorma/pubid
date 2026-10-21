@@ -223,7 +223,13 @@ module Pubid
     # @return [Pubid::Components::TypedStage, nil]
     def self.locate_stage_by_harmonized_code(harmonized_code)
       harmonized_str = harmonized_code.to_s
-      all_typed_stages.find { |s| s.harmonized_stages&.include?(harmonized_str) }
+      candidates = all_typed_stages.select { |s| s.harmonized_stages&.include?(harmonized_str) }
+      # all_typed_stages walks the loaded identifier constants, so its order
+      # is load-order dependent and a bare "first match" flipped between
+      # processes (an IWA at 10.99 rendered "AWI Add"/"AWI Suppl"/"AWI"
+      # depending on the run). The IS family is the default document type;
+      # prefer it, then keep the registry order.
+      candidates.find { |s| s.type_code.to_s == "is" } || candidates.first
     end
 
     # Default typed stage used when no type_with_stage is present

@@ -382,6 +382,14 @@ RSpec.describe "ISO URN Generation and Parsing" do
         id = Pubid::Iso.parse_urn("urn:iso:std:iso:9001:2019:stage-40.00")
         expect(id.to_s).to eq("ISO/DIS 9001:2019")
       end
+
+      # The harmonized-code fallback used to return the first registry
+      # match, and the registry order is load-order dependent — an IWA at
+      # 10.99 rendered "AWI Add"/"AWI Suppl"/"AWI" depending on the run.
+      it "resolves a shared harmonized code to the IS-family stage" do
+        id = Pubid::Iso.parse_urn("urn:iso:std:iso:iwa:36:stage-10.99")
+        expect(id.to_s).to eq("AWI 36")
+      end
     end
   end
 end
