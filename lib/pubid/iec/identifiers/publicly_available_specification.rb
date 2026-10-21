@@ -53,7 +53,9 @@ module Pubid
             code: :dpas,
             stage_code: :draft,
             type_code: :pas,
-            abbr: ["DPAS"],
+            # CDPAS is the 50.20 row of IEC's stage-code table
+            # ("Draft circulated as DPAS") — see data/iec/stage-codes.md
+            abbr: ["DPAS", "CDPAS"],
             name: "Draft Publicly Available Specification",
             harmonized_stages: %w[50.00 50.20 50.60 50.92 50.98 50.99],
           ),

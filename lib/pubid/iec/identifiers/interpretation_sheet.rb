@@ -54,7 +54,9 @@ module Pubid
             code: :dish,
             stage_code: :draft,
             type_code: :ish,
-            abbr: ["DISH"],
+            # CDISH is the 50.20 row of IEC's stage-code table
+            # ("Draft circulated as DISH") — see data/iec/stage-codes.md
+            abbr: ["DISH", "CDISH"],
             name: "Draft Interpretation Sheet",
             harmonized_stages: %w[50.00 50.20 50.60 50.92 50.98 50.99],
           ),

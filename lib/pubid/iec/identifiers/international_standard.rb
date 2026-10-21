@@ -88,7 +88,7 @@ module Pubid
             stage_code: :published,
             type_code: :is,
             abbr: ["", "BPUB", "PPUB", "APUB", "WPUB", "DELPUB",
-                   "RR", "CAN", "PUB"],
+                   "RR", "CAN"],
             name: "International Standard",
             harmonized_stages: %w[60.00 60.60 90.20 90.60 90.92 90.93 90.99
                                   95.20 95.60 95.92 95.99],
