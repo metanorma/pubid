@@ -278,6 +278,33 @@ RSpec.describe Pubid::Jcgm do
           expect(parsed.to_s).to eq(subject)
         end
       end
+
+      # BIPM's publications page prints the dotted form
+      # (JCGM 100:2008/Amd.1:2026); rendering keeps the ISO-style "Amd 1".
+      describe "dotted supplement spellings (BIPM's printed form)" do
+        {
+          "JCGM 100:2008/Amd.1:2026" => "JCGM 100:2008/Amd 1:2026",
+          "JCGM 101:2008/Cor.1:2009" => "JCGM 101:2008/Cor 1:2009",
+        }.each do |input, rendered|
+          describe input do
+            subject { input }
+
+            let(:parsed) { described_class.parse(subject) }
+
+            it "parses" do
+              expect(parsed).not_to be_nil
+            end
+
+            it "renders normalized without the dot" do
+              expect(parsed.to_s).to eq(rendered)
+            end
+
+            it "re-parses to the same identifier" do
+              expect(described_class.parse(parsed.to_s)).to eq(parsed)
+            end
+          end
+        end
+      end
     end
 
     context "named guides (dateless vocabulary tokens)" do
