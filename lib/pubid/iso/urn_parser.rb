@@ -142,16 +142,31 @@ module Pubid
         elsif TYPED_STAGE_REVERSE_MAP.key?(parts.first&.upcase) ||
             (parts.first&.match?(/^[A-Za-z]+\.\d+$/) &&
              TYPED_STAGE_REVERSE_MAP.key?(parts.first.upcase.split(".").first))
-          stage_abbr = parts.shift.upcase
-          # Check for iteration (WD.2 format)
-          if stage_abbr.include?(".")
-            abbr_part, iteration_part = stage_abbr.split(".")
-            stage_code = TYPED_STAGE_REVERSE_MAP[abbr_part]
-            stage_from_abbr = stage_code
-            stage_iteration = iteration_part.to_i
-          else
-            stage_code = TYPED_STAGE_REVERSE_MAP[stage_abbr]
-            stage_from_abbr = stage_code
+          stage_abbr = parts.first.upcase
+          # The family comes from the abbreviation without its iteration
+          # ("FDAM.3" is still the amd family).
+          family = Pubid::Iso.locate_stage(stage_abbr.split(".").first)&.type_code&.to_s
+          # A supplement-family stage directly before its own supplement
+          # type token ("...:FDAM:amd:1:v1") names the SUPPLEMENT's stage:
+          # consuming it as the base's stage builds the base as a base-less
+          # supplement, which cannot render.
+          supplement_follows =
+            %w[amd cor suppl add].include?(family) &&
+            parts.drop(1).any? do |token|
+              family == SUPPLEMENT_TYPE_MAP[token.to_s.downcase]&.to_s
+            end
+          unless supplement_follows
+            parts.shift
+            # Check for iteration (WD.2 format)
+            if stage_abbr.include?(".")
+              abbr_part, iteration_part = stage_abbr.split(".")
+              stage_code = TYPED_STAGE_REVERSE_MAP[abbr_part]
+              stage_from_abbr = stage_code
+              stage_iteration = iteration_part.to_i
+            else
+              stage_code = TYPED_STAGE_REVERSE_MAP[stage_abbr]
+              stage_from_abbr = stage_code
+            end
           end
         end
 
@@ -397,6 +412,16 @@ module Pubid
         # Build supplements recursively (forward order: first supplement wraps base,
         # second wraps first, etc. -- matching URN left-to-right semantics)
         supplements.each do |supp|
+          # A bare language token with no supplement identity names the BASE
+          # document: wrapping it would build a supplement with no type,
+          # number or base attribute, and a plain standard drops its base —
+          # the whole document was lost, rendering "ISO (FR)".
+          if supp[:type].nil? && supp[:stage].nil? && supp[:number].nil? &&
+              supp[:year].nil? && supp[:languages]
+            base_hash[:languages] = supp[:languages].join("/")
+            next
+          end
+
           supp_hash = {}
 
           if supp[:stage]
