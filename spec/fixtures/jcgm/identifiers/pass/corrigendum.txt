@@ -2,3 +2,4 @@
 # Guide + " Corrigendum" suffix (relaton-data-jcgm static/jcgm/200-2008-corr.yaml)
 
 JCGM 200:2008 Corrigendum
+!JCGM 101:2008/Cor.1:2009!JCGM 101:2008/Cor 1:2009

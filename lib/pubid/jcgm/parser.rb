@@ -33,8 +33,15 @@ module Pubid
       rule(:numbered_corrigendum_identifier) do
         base.as(:base) >>
           str("/") >> str("Cor").as(:type_with_stage) >>
-          space >> digits.as(:number) >>
+          supplement_separator >> digits.as(:number) >>
           corrigendum_date.maybe
+      end
+
+      # "Amd 1" and the dotted "Amd.1:2026" BIPM prints on its
+      # publications page (bipm.org, JCGM 100:2008/Amd.1:2026) are both
+      # accepted on input; rendering stays "Amd 1".
+      rule(:supplement_separator) do
+        space | (str(".") >> space.maybe)
       end
 
       # Dateless "named" guides: "JCGM GUM", "JCGM VIM-3" (and future "VIM-N").
@@ -83,7 +90,7 @@ module Pubid
       rule(:amendment_identifier) do
         base.as(:base) >>
           str("/") >> amendment_type >>
-          space >> digits.as(:number) >>
+          supplement_separator >> digits.as(:number) >>
           amendment_date.maybe
       end
 
