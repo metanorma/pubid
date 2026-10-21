@@ -68,7 +68,10 @@ module Pubid
             code: :cdv,
             stage_code: :cdv,
             type_code: :is,
-            abbr: %w[CDV ACDV CCDV CDVM NCDV DIS],
+            # ADIS is the legacy Data Feeds spelling of AFDIS ("Approved for
+            # FDIS circulation", harmonized 40.99) — see
+            # data/iec/stage-codes.md
+            abbr: %w[CDV ACDV CCDV CDVM NCDV DIS ADIS],
             name: "Committee Draft for Vote",
             harmonized_stages: %w[40.00 40.20 40.60 40.92 40.98 40.99],
           ),
