@@ -37,11 +37,12 @@ module Pubid
           ""
         end
 
-        # Override to_mr_style to not add "NIST" prefix for FIPS
+        # Override to_mr_style so FIPS adds no default "NIST" prefix
         def to_mr_style
-          # "FIPS.46e1977" (machine-readable with dots, no publisher prefix)
+          # "NIST.FIPS.197" keeps a parsed publisher (the DOI suffix NIST
+          # publishes); "FIPS.46e1977" has none and invents none.
           # Note: edition is appended directly to number without dot for FIPS
-          result = series_code
+          result = [publisher, series_code].compact.join(".")
           result += ".#{number}" if number
 
           # FIPS uses dash notation for parts; render here and skip the generic

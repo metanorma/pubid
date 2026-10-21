@@ -327,5 +327,27 @@ RSpec.describe Pubid::Nist::Identifiers::FederalInformationProcessingStandards d
         end
       end
     end
+
+    # The MR form keeps the parsed publisher, as SP/IR/CSWP do: it is the
+    # DOI suffix NIST publishes (10.6028/NIST.FIPS.197-upd1.ipd).
+    context "MR render keeps the publisher" do
+      %w[
+        NIST.FIPS.197 NIST.FIPS.197-upd1 NIST.FIPS.197-upd1.ipd
+      ].each do |input|
+        it "round-trips #{input} in MR format" do
+          expect(Pubid::Nist.parse(input).to_s(:mr)).to eq(input)
+        end
+      end
+
+      {
+        "NIST FIPS 197" => "NIST.FIPS.197",
+        "NBS FIPS 63-1sup" => "NBS.FIPS.63-1sup",
+        "FIPS 140-3" => "FIPS.140-3",
+      }.each do |input, expected|
+        it "renders #{input} as #{expected} in MR format" do
+          expect(Pubid::Nist.parse(input).to_s(:mr)).to eq(expected)
+        end
+      end
+    end
   end
 end
