@@ -349,4 +349,39 @@ RSpec.describe "ISO URN Generation and Parsing" do
       end
     end
   end
+
+  describe ".parse_urn" do
+    context "supplement-family stages and bare languages" do
+      # "FDAM" directly before its own "amd" token names the SUPPLEMENT's
+      # stage: consuming it as the base's stage built the base as a
+      # base-less supplement, which raised on render.
+      it "attaches a supplement-family stage to the following supplement" do
+        id = Pubid::Iso.parse_urn("urn:iso:std:iso:11137:-2:FDAM:amd:1:v1")
+        expect(id.to_s).to eq("ISO 11137-2/FDAM 1")
+      end
+
+      it "keeps a staged supplement-family stage with its type token" do
+        id = Pubid::Iso.parse_urn("urn:iso:std:iso:17301:-1:FDAM.3:amd:2022:v1.3")
+        expect(id.to_s).to eq("ISO 17301-1/AMD 1:2022")
+      end
+
+      # A bare language token with no supplement identity names the base
+      # document: wrapping it built a supplement with no base, and the
+      # whole document was lost ("ISO (FR)").
+      it "attaches a bare trailing language to the base document" do
+        id = Pubid::Iso.parse_urn("urn:iso:std:iso-astm:52920:DIS:fr")
+        expect(id.to_s).to eq("ISO/ASTM DIS 52920(FR)")
+      end
+
+      it "still renders a supplement-carried language" do
+        id = Pubid::Iso.parse_urn("urn:iso:std:iso:10993:-4:amd:2006:v1:en")
+        expect(id.to_s).to eq("ISO 10993-4/AMD 1:2006(EN)")
+      end
+
+      it "still renders a non-supplement stage abbreviation" do
+        id = Pubid::Iso.parse_urn("urn:iso:std:iso:9001:2019:stage-40.00")
+        expect(id.to_s).to eq("ISO/DIS 9001:2019")
+      end
+    end
+  end
 end
