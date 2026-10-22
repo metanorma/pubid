@@ -1,0 +1,33 @@
+name: docs-api
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - "lib/**"
+      - "docs/api-reference.md"
+      - ".github/workflows/docs-api.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4"
+          bundler-cache: true
+      # pubid#577: the committed API reference is generated from YARD —
+      # a docstring or entry-point change without a regen fails here.
+      - name: API reference drift gate
+        run: |
+          bundle exec rake docs:api_reference
+          git diff --exit-code docs/api-reference.md || {
+            echo "::error::docs/api-reference.md is stale — run rake docs:api_reference"
+            exit 1
+          }

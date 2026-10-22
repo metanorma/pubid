@@ -20,6 +20,7 @@ gem "benchmark"
 gem "nokogiri"
 gem "rake"
 gem "rspec"
+gem "yard" # docs:api_reference — the generated API reference (pubid#577)
 gem "json_schemer"
 gem "rubocop"
 gem "rubocop-performance"
