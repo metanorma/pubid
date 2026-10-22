@@ -21,7 +21,9 @@ module Pubid
             code: :np,
             stage_code: :np,
             type_code: :is,
-            abbr: ["NP"],
+            # DEL is 10.98 (IS/TR/TS "Deleted/abandoned") and PRVN 10.60
+            # ("Preparation of RVN") — data/iec/stage-codes.md
+            abbr: ["NP", "DEL", "PRVN"],
             name: "New Proposal",
             harmonized_stages: %w[10.00 10.60 10.92 10.98],
           ),
@@ -50,7 +52,8 @@ module Pubid
             code: :wd,
             stage_code: :wd,
             type_code: :is,
-            abbr: ["WD"],
+            # DEL is 20.98 for the ISH deliverable ("Deleted/abandoned")
+            abbr: ["WD", "DEL"],
             name: "Working Draft",
             harmonized_stages: %w[20.20 20.60 20.98 20.99],
           ),
@@ -60,9 +63,10 @@ module Pubid
             type_code: :is,
             abbr: %w[CD 2CD 3CD 4CD 5CD 6CD 7CD 8CD 9CD
                      ACD A2CD A3CD A4CD A5CD A6CD A7CD A8CD A9CD
-                     CDM],
+                     CDM PCC SPLIT MERGED],
             name: "Committee Draft",
-            harmonized_stages: %w[30.00 30.20 30.60 30.92 30.98 30.99],
+            harmonized_stages: %w[30.00 30.20 30.60 30.92 30.96 30.97 30.98
+                                  30.99],
           ),
           Pubid::Components::TypedStage.new(
             code: :cdv,
@@ -88,10 +92,10 @@ module Pubid
             stage_code: :published,
             type_code: :is,
             abbr: ["", "BPUB", "PPUB", "APUB", "WPUB", "DELPUB",
-                   "RR", "CAN"],
+                   "RR", "CAN", "RPUB", "TPUB", "DECPUB"],
             name: "International Standard",
             harmonized_stages: %w[60.00 60.60 90.20 90.60 90.92 90.93 90.99
-                                  95.20 95.60 95.92 95.99],
+                                  95.20 95.60 95.92 95.99 99.60],
           ),
         ].freeze
 
