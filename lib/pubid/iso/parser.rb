@@ -29,7 +29,8 @@ module Pubid
       # TC documents must come first since they start with "ISO/"
       # and we need to distinguish them from regular ISO/IEC identifiers
       rule(:identifier) do
-        nsb_iso_identifier |
+        bare_tc_document |
+          nsb_iso_identifier |
           tc_document |
           directives_identifiers |
           jcgm_identifier |
@@ -58,6 +59,18 @@ module Pubid
         # (the latter was valid in pubid 1.x via an optional slash).
         prefix_sole_publisher >> (str("/") | space) >> tc_type >> space >> tc_number.as(:tc_number) >>
           tc_subcommittee_part.maybe >>
+          space >> str("N") >> space? >> digits.as(:number) >>
+          (str(":") >> year_digits.as(:year)).maybe
+      end
+
+      # Bare TC document reference (pubid-iso#285): "184/SC 4/WG 12 N10291"
+      # — the ISO/TC route without the ORIGINATOR prefix; the builder
+      # canonicalizes the publisher to ISO. The SC segment is required so
+      # bare numbers cannot leak into the route.
+      rule(:bare_tc_document) do
+        digits.as(:tc_number) >>
+          str("/") >> sc_type >> space >> digits.as(:sc_number) >>
+          (str("/") >> wg_type >> space >> digits.as(:wg_number)).maybe >>
           space >> str("N") >> space? >> digits.as(:number) >>
           (str(":") >> year_digits.as(:year)).maybe
       end

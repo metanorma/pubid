@@ -1,28 +1,26 @@
 Flavor: ISO
-Classified: 2026-01-24 06:54:19
+Classified: 2026-10-22 21:48:04
 ======================================================================
 
 OVERALL STATISTICS
 ----------------------------------------------------------------------
-Total: 7648
-Pass: 7573 (99.02%)
-Fail: 75 (0.98%)
+Total: 7650
+Pass: 7647 (99.96%)
+Fail: 3 (0.04%)
 
 BY CLASS
 ----------------------------------------------------------------------
 amendment                                Pass: 178/178 (100.0%)
 bundled_identifier                       Pass: 3/3 (100.0%)
 corrigendum                              Pass: 109/109 (100.0%)
-cyrillic                                 Pass: 0/44 (0.0%)
 directives                               Pass: 16/16 (100.0%)
-directives_supplement                    Pass: 12/12 (100.0%)
-guide                                    Pass: 14/14 (100.0%)
-international_standard                   Pass: 6566/6571 (99.92%)
+directives_supplement                    Pass: 11/11 (100.0%)
+guide                                    Pass: 23/23 (100.0%)
+international_standard                   Pass: 6629/6631 (99.97%)
 international_standardized_profile       Pass: 13/13 (100.0%)
 international_workshop_agreement         Pass: 20/20 (100.0%)
-nsb_format                               Pass: 0/25 (0.0%)
 pas                                      Pass: 51/51 (100.0%)
 recommendation                           Pass: 44/44 (100.0%)
-technical_report                         Pass: 265/265 (100.0%)
-technical_specification                  Pass: 273/274 (99.64%)
+technical_report                         Pass: 267/267 (100.0%)
+technical_specification                  Pass: 274/275 (99.64%)
 technology_trends_assessments            Pass: 9/9 (100.0%)
