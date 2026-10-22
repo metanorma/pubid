@@ -139,10 +139,6 @@ module Pubid
       # Single letter: any letter not followed by excluded keywords
       rule(:number_suffix) do
         (str("U") >> lower_letter) |
-          # n+UPPERCASE annex suffix (e.g., 1nA, 85nB — the BH/HR/NCSTAR/SP
-          # annex designations, pubid#555). Before the general letter branch,
-          # which would consume the lone "n" and strand the capital letter.
-          (str("n") >> upper_letter) |
           # An "r" directly followed by a digit is the revision marker (pubid#170),
           # not a suffix — leave it for the second_number/edition rules.
           # The guard sits before the letter so it tests the suffix start itself.
