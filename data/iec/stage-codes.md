@@ -136,16 +136,22 @@ stage RFDIS/50.00 — a snapshot of the project's plan, not a code rename.
 ## Relationship to the pubid stage registry
 
 - `ADIS` is registered as an alias on the IEC `cdv` typed stage, whose
-  harmonized list covers 40.99 (project stages are not queryable through
-  `Pubid::Iec.locate_stage`, which reads `TYPED_STAGES` only).
+  harmonized list covers 40.99.
 - `AWG` and `CANV` appear in neither this table nor the legacy examples —
-  IEC's own Data-Feeds successors do not know them. Any registration
-  awaits IEC's confirmation of their harmonized codes.
-- Reconciliation items against this table, deliberately not changed yet:
-  `DELPUB` sits at **99.60** here (the registry's `is` ladder starts at
-  60.00 and does not claim 99.60); `CAN` carries **two** harmonized codes
-  (30.98 for IS/TR/TS, 50.98 for PAS/ISH/COR); `DECDISH`, `MERGED`,
-  `SPLIT`, `PCC`, `PRVN`, `DEL`, `RPUB`, `TPUB` and the per-deliverable
-  translation/preparation rows are not registered as typed-stage
-  abbreviations. `CDISH` and `CDPAS` are registered as aliases on the
-  `dish`/`dpas` stages (the 50.20 rows of their deliverables).
+  IEC's own Data-Feeds successors do not know them, and neither does
+  #237's list; they are fictitious (pubid#572).
+- **Reconciliation (2026-10-22, applied):** `DELPUB`'s code 99.60 is
+  claimed by the `is` ladder; `SPLIT`/`MERGED` are claimed at
+  30.96/30.97 by the `cd` ladder; `PCC`, `RPUB`, `TPUB`, `DECPUB`,
+  `DEL` (10.98 and 20.98) and `PRVN` are registered as typed-stage
+  abbreviations; every per-deliverable row — the translation/preparation
+  families, `DECDISH`, `PRVDISH`/`PRVDPAS`/`PRVDTR`/`PRVDTS`, `CDTR`/
+  `CDTS`/`CDISH`/`CDPAS`, `ADTR`/`ADTS`, `DTRM`/`DTSM`, `NDTR`/`NDTS`,
+  `RDISH`, `TCDV`, `PRVC`, `AFDIS`, … — is queryable through
+  `Pubid::Iec.locate_stage` via the classes' PROJECT_STAGES;
+  `Pubid::Iec.locate_stage_by_harmonized_code` resolves the codes with
+  the IS-family preference (the pubid#570 deterministic rule). The
+  review/withdrawal ladder rows (90.xx/95.xx) stay claimed: the
+  harmonized system is joint ISO/IEC and #237's own list maps RR to
+  9092 — IEC's table simply does not name IEC stage codes for the
+  review sub-states. Locked by `spec/pubid/iec/stage_reconciliation_spec.rb`.
