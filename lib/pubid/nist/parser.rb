@@ -142,7 +142,11 @@ module Pubid
           # An "r" directly followed by a digit is the revision marker (pubid#170),
           # not a suffix — leave it for the second_number/edition rules.
           # The guard sits before the letter so it tests the suffix start itself.
-          ((str("r") >> digit).absent? >> match("[a-zA-Z]") >> (
+          ((str("r") >> digit).absent? >> match("[a-zA-Z]") >>
+          # An uppercase letter following the suffix letter is the part
+          # type "n" + letter form ("1nA", pubid#555) — the suffix must
+          # stop so the parts rule can take the whole token.
+          match("[A-Z]").absent? >> (
           # Match suffixes
           str("ec") |
           str("ndex") |
@@ -669,6 +673,10 @@ module Pubid
         # Put more specific patterns first
         # CRITICAL: new_stage BEFORE language_code to avoid "ipd" being treated as translation
         new_stage |
+          # Part type "n" with a letter value — "NCSTAR 1nA" (pubid#555):
+          # the letter part suffixes the corpus renders as n<A> (Part
+          # type "n"); must precede the generic index/letter rules.
+          (str("n") >> upper_letter).as(:n_letter_part) |
           section | index | insert | appendix | pd_suffix |
           edition | date | legacy_edition | revision |
           version | # MOVED BEFORE volume - try dotted versions (v1.1) before simple volumes (v1)
