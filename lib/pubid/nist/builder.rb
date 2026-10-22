@@ -104,6 +104,16 @@ module Pubid
           identifier.part = letter_suffix_part
         end
 
+        # Part type "n" with a letter value — "NCSTAR 1nA" (pubid#555):
+        # the corpus rows carry part {type: "n", value: <letter>}, which
+        # renders as "n<letter>".
+        if parsed_hash[:n_letter_part]
+          identifier.part = Components::Part.new(
+            type: "n",
+            value: parsed_hash[:n_letter_part].to_s.sub(/\An/, "").upcase,
+          )
+        end
+
         # NEW: If we extracted an Edition from edition_dash_year, assign it now
         if edition_from_dash_year
           identifier.edition = edition_from_dash_year
