@@ -729,6 +729,12 @@ module Pubid
           str_value = value.to_s.strip
           return nil if str_value.empty?
 
+          # The index suffix parses from both spellings ("index", "indx");
+          # the component's value is the long form either way, so
+          # parse(render(x)) == x for the CRPL-F-B corpus rows that print
+          # "indx" (pubid#557).
+          str_value = "index" if type == :index
+
           # For volume, create Volume component from string value
           # This handles patterns like "v1" that come from parser as simple strings
           if type == :volume
