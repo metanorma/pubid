@@ -16,6 +16,16 @@ module Pubid
         # Return a cast hash, or nil to skip assignment.
         # Default: split letter suffix into a Part component.
         def self.cast_letter_number(value, _parsed_hash)
+          # The n+UPPERCASE annex capture (pubid#555, e.g., 800-85nB) arrives
+          # as a nested letter_suffix_extra: it casts to the n-notation Part
+          # (Part.new(type: "n", value: "B") renders "nB").
+          if value[:letter_suffix].is_a?(Hash)
+            letter = value[:letter_suffix][:letter_suffix_extra].to_s
+            return nil if letter.empty?
+
+            return { part: Components::Part.new(type: "n", value: letter.upcase) }
+          end
+
           full = combine_letter_suffix(value)
           return nil if full.nil? || full.empty?
 
@@ -47,8 +57,12 @@ module Pubid
         def self.finalize_identifier(_identifier, _parsed_hash); end
 
         # Combine `:letter_suffix` and `:letter_suffix_extra` (e.g., "U" + "r").
+        # The n+UPPERCASE annex capture nests the extra inside the suffix hash
+        # (pubid#555): unwrap it before stringifying.
         def self.combine_letter_suffix(value)
-          suffix = value[:letter_suffix].to_s.strip
+          suffix = value[:letter_suffix]
+          suffix = suffix[:letter_suffix_extra] if suffix.is_a?(Hash)
+          suffix = suffix.to_s.strip
           extra = value[:letter_suffix_extra].to_s.strip
           extra.empty? ? suffix : "#{suffix}#{extra}"
         end

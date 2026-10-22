@@ -139,6 +139,10 @@ module Pubid
       # Single letter: any letter not followed by excluded keywords
       rule(:number_suffix) do
         (str("U") >> lower_letter) |
+          # n+UPPERCASE annex suffix (e.g., 1nA, 85nB — the BH/HR/NCSTAR/SP
+          # annex designations, pubid#555). Before the general letter branch,
+          # which would consume the lone "n" and strand the capital letter.
+          (str("n") >> upper_letter) |
           # An "r" directly followed by a digit is the revision marker (pubid#170),
           # not a suffix — leave it for the second_number/edition rules.
           # The guard sits before the letter so it tests the suffix start itself.
@@ -438,9 +442,13 @@ module Pubid
             # Dash with letter suffix (e.g., 1-1A, 1-3B for NCSTAR, 73-197Ur for IR)
             # Must come before GCR pattern which expects another dash
             # Supports U+lowercase letter suffix (e.g., Ur, Ua, Ub-Uj for Unclassified variants)
+            # Supports n+UPPERCASE annex suffix (e.g., 1-1nA, 1-1nB — the BH/HR/NCSTAR
+            # annex designations, pubid#555): the n prefix lowercases to the same
+            # letter_suffix face as the plain letter
             # For other uppercase letters, only match single letter (A, B, C) to avoid consuming revision r
             (dash >> digits.as(:letter_base) >> (
               (str("U") >> lower_letter.as(:letter_suffix_extra)) |
+              (str("n") >> upper_letter.as(:letter_suffix_extra)) |
               upper_letter
             ).as(:letter_suffix)).as(:letter_number) |
             # Dash-SEPARATED letter suffix on a numbered part (e.g., 21-4-B,
