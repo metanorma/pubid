@@ -32,6 +32,15 @@ module Pubid
           return Identifiers::TcDocument
         end
 
+        # Bare TC reference (pubid-iso#285): "184/SC 4/WG 12 N10291" — the
+        # ISO/TC route without the ORIGINATOR prefix. tc_type is absent by
+        # construction; sc_type is the route's required segment and cannot
+        # appear on a standard identifier.
+        if parsed_hash[:sc_type] && parsed_hash[:tc_number]
+          parsed_hash[:tc_type] = "TC"
+          return Identifiers::TcDocument
+        end
+
         # An explicit document type (e.g. from a URN's `:tr:`/`:ts:` token) pins
         # the class regardless of the stage. The stage and type are separate URN
         # fields, but the stage is later folded into `:type_with_stage` (e.g.
