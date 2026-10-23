@@ -21,13 +21,13 @@ PubID generates and parses URNs that comply with the ISO URN namespace specifica
 |------------|--------|-------|
 | Publisher identification | Met | Hyphen-separated lowercase copublishers (`iso-iec`, `iso-iec-ieee`) |
 | Document type codes | Met | `tr`, `ts`, `pas`, `guide`, `dir`, `dir-sup`, `iwa-sup` |
-| Typed stage codes | Met | WD, WDS, CD, DIS, FDIS, PDAM, DAM, FDAM, DCOR, FDCOR, CDV, CDTS, DTS, FDTS |
-| Harmonized stage codes | Met | `stage-XX.XX` format for stages without typed abbreviations |
+| Harmonized stage codes | Met | `stage-XX.XX` only, identical to RFC 5141. The typed abbreviations (WD, CD, DIS, DAM, ...) are human-face labels for (deliverable type, stage code) and are never emitted in a URN; legacy abbreviation URNs are accepted on parse as a deprecated ingestion alias and re-canonicalized on render |
 | Supplement chain ordering | Met | Multi-level supplements (Amd/Cor) in correct nesting order (Cor wraps Amd wraps Base) |
 | Edition specification | Met | `ed-N` format for ISO, `ed.N` for IEC |
 | Explicit language codes | Met | Comma-separated language codes (`en`, `en,fr`), always lowercase in URN output |
 | Part/subpart numbering | Met | Colon-dash prefix for ISO (`-1`), single hyphenated field for IEC (`60068-2-2`) |
-| Version numbering | Met | `vN` for supplements, `vN.M` for supplements with iterations |
+| Version numbering | Met | `vN` = the RFC 5141 `<supplversion>` (published supplements are v1), `vN.M` with the draft iteration |
+| Supplement year | Met | `supplyear` slot between the number and the version (`amd:1:2007:v1`); the legacy wire overloaded the number slot with the year and is re-canonicalized on parse |
 | Round-trip parsing | Met | ISO and IEC support URN-to-identifier parsing |
 
 ### Design Principles

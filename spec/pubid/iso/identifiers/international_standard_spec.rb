@@ -1038,7 +1038,7 @@ RSpec.describe Pubid::Iso::Identifiers::InternationalStandard do
           subject { "ISO/IEC WD 23773-1" }
 
           let(:parsed) { Pubid::Iso.parse(subject) }
-          let(:urn) { "urn:iso:std:iso-iec:23773:-1:WD" }
+          let(:urn) { "urn:iso:std:iso-iec:23773:-1:stage-20.20" }
 
           it "parses publisher" do
             expect(parsed.publisher.publisher).to eq("ISO")
@@ -1080,7 +1080,7 @@ RSpec.describe Pubid::Iso::Identifiers::InternationalStandard do
           subject { "ISO/IEC CD 29110-5-1-1" }
 
           let(:parsed) { Pubid::Iso.parse(subject) }
-          let(:urn) { "urn:iso:std:iso-iec:29110:-5-1-1:CD" }
+          let(:urn) { "urn:iso:std:iso-iec:29110:-5-1-1:stage-30.00" }
 
           it "parses publisher" do
             expect(parsed.publisher.publisher).to eq("ISO")
@@ -1126,7 +1126,7 @@ RSpec.describe Pubid::Iso::Identifiers::InternationalStandard do
           subject { "ISO/UNDP DIS 53001" }
 
           let(:parsed) { Pubid::Iso.parse(subject) }
-          let(:urn) { "urn:iso:std:iso-undp:53001:DIS" }
+          let(:urn) { "urn:iso:std:iso-undp:53001:stage-40.00" }
 
           it "parses publisher" do
             expect(parsed.publisher.publisher).to eq("ISO")
@@ -1164,7 +1164,7 @@ RSpec.describe Pubid::Iso::Identifiers::InternationalStandard do
           subject { "ISO/FDIS 22868" }
 
           let(:parsed) { Pubid::Iso.parse(subject) }
-          let(:urn) { "urn:iso:std:iso:22868:FDIS" }
+          let(:urn) { "urn:iso:std:iso:22868:stage-50.00" }
 
           it "parses publisher" do
             expect(parsed.publisher.publisher).to eq("ISO")
@@ -1238,7 +1238,7 @@ RSpec.describe Pubid::Iso::Identifiers::InternationalStandard do
         subject { "ISO/FDIS 21420.2" }
 
         let(:parsed) { Pubid::Iso.parse(subject) }
-        let(:urn) { "urn:iso:std:iso:21420:FDIS.2" }
+        let(:urn) { "urn:iso:std:iso:21420:stage-50.00.v2" }
 
         it "parses stage" do
           expect(parsed.typed_stage.stage_code).to eq("fdis")
@@ -1267,7 +1267,7 @@ RSpec.describe Pubid::Iso::Identifiers::InternationalStandard do
         let(:parsed) { Pubid::Iso.parse(subject) }
         let(:pubid) { "ISO/CD 14065.2:2018" }
         let(:undated) { Pubid::Iso.parse("ISO/CD 14065.2") }
-        let(:urn) { "urn:iso:std:iso:14065:CD.2" }
+        let(:urn) { "urn:iso:std:iso:14065:stage-30.00.v2" }
 
         it "parses stage" do
           expect(parsed.typed_stage.stage_code).to eq("cd")

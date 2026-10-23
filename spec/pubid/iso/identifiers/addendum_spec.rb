@@ -12,7 +12,7 @@ RSpec.describe Pubid::Iso::Identifiers::Addendum do
       subject { "ISO/R 947:1969/Add 1:1969" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:r:947:sup:1969:v1" }
+      let(:urn) { "urn:iso:std:iso:r:947:sup:1:1969:v1" }
 
       it "parses publisher" do
         expect(parsed.publisher.publisher).to eq("ISO")
@@ -114,7 +114,7 @@ RSpec.describe Pubid::Iso::Identifiers::Addendum do
       subject { "ISO 1942:1983/Add 1:1983" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:1942:sup:1983:v1" }
+      let(:urn) { "urn:iso:std:iso:1942:sup:1:1983:v1" }
 
       it "parses publisher" do
         expect(parsed.publisher.publisher).to eq("ISO")
@@ -165,7 +165,7 @@ RSpec.describe Pubid::Iso::Identifiers::Addendum do
       subject { "ISO/TR 8373:1988/Add 1:1990" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:tr:8373:sup:1990:v1" }
+      let(:urn) { "urn:iso:std:iso:tr:8373:sup:1:1990:v1" }
 
       it "parses publisher" do
         expect(parsed.publisher.publisher).to eq("ISO")
@@ -223,7 +223,7 @@ RSpec.describe Pubid::Iso::Identifiers::Addendum do
       let(:normalized) do
         "ISO 4037:1979/Add 1:1983(F)"
       end
-      let(:urn) { "urn:iso:std:iso:4037:sup:1983:v1:fr" }
+      let(:urn) { "urn:iso:std:iso:4037:sup:1:1983:v1:fr" }
 
       it "parses publisher" do
         expect(parsed.publisher.publisher).to eq("ISO")
@@ -330,7 +330,7 @@ RSpec.describe Pubid::Iso::Identifiers::Addendum do
       let(:normalized) do
         "ISO/R 91:1970/ADD 1:1975"
       end
-      let(:urn) { "urn:iso:std:iso:r:91:sup:1975:v1" }
+      let(:urn) { "urn:iso:std:iso:r:91:sup:1:1975:v1" }
 
       it "parses publisher" do
         expect(parsed.publisher.publisher).to eq("ISO")
@@ -427,7 +427,7 @@ RSpec.describe Pubid::Iso::Identifiers::Addendum do
       subject { "ISO 2553/DAD 1:1987" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:2553:stage-40.00:sup:1987:v1" }
+      let(:urn) { "urn:iso:std:iso:2553:stage-40.00:sup:1:1987:v1" }
 
       it "parses publisher" do
         expect(parsed.publisher.publisher).to eq("ISO")

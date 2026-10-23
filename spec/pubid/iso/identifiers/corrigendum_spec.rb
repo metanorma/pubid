@@ -10,7 +10,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       subject { "ISO 10360-1:2000/Cor 1:2002" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:10360:-1:cor:2002:v1" }
+      let(:urn) { "urn:iso:std:iso:10360:-1:cor:1:2002:v1" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -61,7 +61,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       subject { "ISO 10360-1/Cor 1:2002" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:10360:-1:cor:2002:v1" }
+      let(:urn) { "urn:iso:std:iso:10360:-1:cor:1:2002:v1" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -112,7 +112,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       subject { "ISO/IEEE 11073-10418:2014/Cor 1:2016" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso-ieee:11073:-10418:cor:2016:v1" }
+      let(:urn) { "urn:iso:std:iso-ieee:11073:-10418:cor:1:2016:v1" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -221,7 +221,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       let(:normalized) do
         "ISO 105-G01:1993/COR 1:1995"
       end
-      let(:urn) { "urn:iso:std:iso:105:-G01:cor:1995:v1" }
+      let(:urn) { "urn:iso:std:iso:105:-G01:cor:1:1995:v1" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -273,7 +273,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
 
       let(:parsed) { Pubid::Iso.parse(subject) }
       let(:normalized) { "ISO 6709:2008/Cor 1:2009" }
-      let(:urn) { "urn:iso:std:iso:6709:cor:2009:v1" }
+      let(:urn) { "urn:iso:std:iso:6709:cor:1:2009:v1" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -321,7 +321,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
 
       let(:parsed) { Pubid::Iso.parse(subject) }
       let(:normalized) { "ISO 9606-1:2012/Cor 2:2013(fr)" }
-      let(:urn) { "urn:iso:std:iso:9606:-1:cor:2013:v2:fr" }
+      let(:urn) { "urn:iso:std:iso:9606:-1:cor:2:2013:v1:fr" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -377,7 +377,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
 
       let(:parsed) { Pubid::Iso.parse(subject) }
       let(:normalized) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }
-      let(:urn) { "urn:iso:std:iso-iec:17025:cor:2006:v1:fr" }
+      let(:urn) { "urn:iso:std:iso-iec:17025:cor:1:2006:v1:fr" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -622,7 +622,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
         subject { "ISO 3864-2:2004/CD Cor 1" }
 
         let(:parsed) { Pubid::Iso.parse(subject) }
-        let(:urn) { "urn:iso:std:iso:3864:-2:CD:cor:1:v1" }
+        let(:urn) { "urn:iso:std:iso:3864:-2:stage-30.00:cor:1:v1" }
 
         it "parses publisher" do
           expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -669,7 +669,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
         subject { "ISO/IEC ISP 10611-4:1997/CD Cor 2" }
 
         let(:parsed) { Pubid::Iso.parse(subject) }
-        let(:urn) { "urn:iso:std:iso-iec:isp:10611:-4:CD:cor:2:v1" }
+        let(:urn) { "urn:iso:std:iso-iec:isp:10611:-4:stage-30.00:cor:2:v1" }
 
         it "parses publisher" do
           expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -724,7 +724,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
         subject { "ISO/IEC 15408-2:1999/CD Cor 1" }
 
         let(:parsed) { Pubid::Iso.parse(subject) }
-        let(:urn) { "urn:iso:std:iso-iec:15408:-2:CD:cor:1:v1" }
+        let(:urn) { "urn:iso:std:iso-iec:15408:-2:stage-30.00:cor:1:v1" }
 
         it "parses publisher" do
           expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -781,7 +781,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
         let(:normalized) do
           "ISO/IEC 14496-12/DCOR 1"
         end
-        let(:urn) { "urn:iso:std:iso-iec:14496:-12:DCOR:cor:1:v1" }
+        let(:urn) { "urn:iso:std:iso-iec:14496:-12:stage-40.00:cor:1:v1" }
 
         it "parses publisher" do
           expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -834,7 +834,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
         subject { "ISO/TR 23455:2019/FDCor 1" }
 
         let(:parsed) { Pubid::Iso.parse(subject) }
-        let(:urn) { "urn:iso:std:iso:tr:23455:FDCOR:cor:1:v1" }
+        let(:urn) { "urn:iso:std:iso:tr:23455:stage-50.00:cor:1:v1" }
 
         it "parses publisher" do
           expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -886,7 +886,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
 
       let(:parsed) { Pubid::Iso.parse(subject) }
       let(:normalized) { "ISO/IEC 10646-1:1993/CD Cor 2" }
-      let(:urn) { "urn:iso:std:iso-iec:10646:-1:CD:cor:2:v1" }
+      let(:urn) { "urn:iso:std:iso-iec:10646:-1:stage-30.00:cor:2:v1" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -940,7 +940,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       subject { "ISO 17301-1:2016/DCor 1.3:2002" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:17301:-1:DCOR.3:cor:2002:v1.3" }
+      let(:urn) { "urn:iso:std:iso:17301:-1:stage-40.00:cor:1:2002:v1.3" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -991,7 +991,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       subject { "ISO 17301-1:2016/DCor 2.3" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:17301:-1:DCOR.3:cor:2:v1.3" }
+      let(:urn) { "urn:iso:std:iso:17301:-1:stage-40.00:cor:2:v1.3" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -1046,7 +1046,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       let(:normalized) do
         "ISO 17301-1:2016/DCOR 1.3:2002"
       end
-      let(:urn) { "urn:iso:std:iso:17301:-1:DCOR.3:cor:2002:v1.3" }
+      let(:urn) { "urn:iso:std:iso:17301:-1:stage-40.00:cor:1:2002:v1.3" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -1097,7 +1097,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       subject { "ISO 17301-1:2016/FDCor 1.3:2022" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:17301:-1:FDCOR.3:cor:2022:v1.3" }
+      let(:urn) { "urn:iso:std:iso:17301:-1:stage-50.00:cor:1:2022:v1.3" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -1152,7 +1152,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       let(:normalized) do
         "ISO 17301-1:2016/FDCOR 1.3:2022"
       end
-      let(:urn) { "urn:iso:std:iso:17301:-1:FDCOR.3:cor:2022:v1.3" }
+      let(:urn) { "urn:iso:std:iso:17301:-1:stage-50.00:cor:1:2022:v1.3" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -1203,7 +1203,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       subject { "ISO 17301-1:2016/FDCor 2.3" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:17301:-1:FDCOR.3:cor:2:v1.3" }
+      let(:urn) { "urn:iso:std:iso:17301:-1:stage-50.00:cor:2:v1.3" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -1258,7 +1258,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       let(:normalized) do
         "ISO 17301-1:2016/FDCOR 2.3"
       end
-      let(:urn) { "urn:iso:std:iso:17301:-1:FDCOR.3:cor:2:v1.3" }
+      let(:urn) { "urn:iso:std:iso:17301:-1:stage-50.00:cor:2:v1.3" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -1312,7 +1312,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       subject { "ISO/IEC 13818-1:2015/Amd 3:2016/Cor 1:2017" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso-iec:13818:-1:amd:2016:v3:cor:2017:v1" }
+      let(:urn) { "urn:iso:std:iso-iec:13818:-1:amd:3:2016:v1:cor:1:2017:v1" }
 
       it "parses publisher" do
         expect(parsed.base.base.publisher.publisher).to eq("ISO")
@@ -1380,7 +1380,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
 
       let(:parsed) { Pubid::Iso.parse(subject) }
       let(:urn) do
-        "urn:iso:std:iso-iec:15938:-7:amd:2010:v5:CD:cor:1:v1"
+        "urn:iso:std:iso-iec:15938:-7:amd:2010:v5:stage-30.00:cor:1:v1"
       end
 
       it "parses publisher" do
@@ -1447,7 +1447,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       subject { "ISO/IEC Guide 98-3:2008/Suppl 1:2008/Cor 1:2009" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso-iec:guide:98:-3:sup:2008:v1:cor:2009:v1" }
+      let(:urn) { "urn:iso:std:iso-iec:guide:98:-3:sup:1:2008:v1:cor:1:2009:v1" }
 
       it "parses publisher" do
         expect(parsed.base.base.publisher.publisher).to eq("ISO")
@@ -1599,7 +1599,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
 
       let(:parsed) { Pubid::Iso.parse(subject) }
       let(:normalized) { "ISO 11783-2:2012/Cor 1:2012(fr)" }
-      let(:urn) { "urn:iso:std:iso:11783:-2:cor:2012:v1:fr" }
+      let(:urn) { "urn:iso:std:iso:11783:-2:cor:1:2012:v1:fr" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -1655,7 +1655,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
 
       let(:parsed) { Pubid::Iso.parse(subject) }
       let(:normalized) { "ISO 11783-2:2012/Cor 1:2012 ED2(fr)" }
-      let(:urn) { "urn:iso:std:iso:11783:-2:ed-2:cor:2012:v1:fr" }
+      let(:urn) { "urn:iso:std:iso:11783:-2:ed-2:cor:1:2012:v1:fr" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -1714,7 +1714,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       subject { "ISO 11783-2:2012/Cor 1:2012(fr)" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:11783:-2:cor:2012:v1:fr" }
+      let(:urn) { "urn:iso:std:iso:11783:-2:cor:1:2012:v1:fr" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -1769,7 +1769,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       subject { "ISO 11783-2 ED2/Cor 1:2012(fr)" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:11783:-2:ed-2:cor:2012:v1:fr" }
+      let(:urn) { "urn:iso:std:iso:11783:-2:ed-2:cor:1:2012:v1:fr" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -1880,7 +1880,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
 
       let(:parsed) { Pubid::Iso.parse(subject) }
       let(:normalized) { "ISO/IEC 17025:2005/Cor 1:2006(fr)" }
-      let(:urn) { "urn:iso:std:iso-iec:17025:cor:2006:v1:fr" }
+      let(:urn) { "urn:iso:std:iso-iec:17025:cor:1:2006:v1:fr" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -1936,7 +1936,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
 
       let(:parsed) { Pubid::Iso.parse(subject) }
       let(:normalized) { "ISO/IEC 17025:2005/Cor 1:2006 ED1(fr)" }
-      let(:urn) { "urn:iso:std:iso-iec:17025:ed-1:cor:2006:v1:fr" }
+      let(:urn) { "urn:iso:std:iso-iec:17025:ed-1:cor:1:2006:v1:fr" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -1995,7 +1995,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       subject { "ISO/IEC 17025:2005 ED1/Cor 1:2006(fr)" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso-iec:17025:ed-1:cor:2006:v1:fr" }
+      let(:urn) { "urn:iso:std:iso-iec:17025:ed-1:cor:1:2006:v1:fr" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -2057,7 +2057,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       subject { "ISO/IEC 13818-1 ED5/Amd 3:2016/Cor 1:2017" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso-iec:13818:-1:ed-5:amd:2016:v3:cor:2017:v1" }
+      let(:urn) { "urn:iso:std:iso-iec:13818:-1:ed-5:amd:3:2016:v1:cor:1:2017:v1" }
 
       it "parses publisher" do
         expect(parsed.base.base.publisher.publisher).to eq("ISO")
@@ -2128,7 +2128,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
       subject { "ISO/IEC 13818-1:2015/Amd 3:2016/Cor 1:2017 ED5" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso-iec:13818:-1:ed-5:amd:2016:v3:cor:2017:v1" }
+      let(:urn) { "urn:iso:std:iso-iec:13818:-1:ed-5:amd:3:2016:v1:cor:1:2017:v1" }
 
       it "parses publisher" do
         expect(parsed.base.base.publisher.publisher).to eq("ISO")

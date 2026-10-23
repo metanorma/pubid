@@ -216,12 +216,14 @@ module Pubid
   require "pubid/renderers/urn"
   require "pubid/parsers/base"
   require "pubid/parsers/mr_string"
+  require "pubid/parsers/urn"
 
   # Initialize global format registry
   Identifier.format_registry = FormatRegistry.new
   Identifier.format_registry.register(:human, renderer: Renderers::HumanReadable)
   Identifier.format_registry.register(:mr_string, renderer: Renderers::MrString)
-  Identifier.format_registry.register(:urn, renderer: Renderers::Urn)
+  Identifier.format_registry.register(:urn, renderer: Renderers::Urn,
+                                       parser: Parsers::Urn)
 
   # Unified parse entry point with auto-detection
   #
@@ -267,19 +269,30 @@ module Pubid
         parse_by_prefix(string)
       end
     when :urn
-      eager_load_flavors!
-      flavor = detect_flavor_from_urn(string)
-      flavor_module = Registry.get(flavor)
-      unless flavor_module
-        raise ArgumentError,
-              "Unknown flavor in URN: #{flavor}"
-      end
-
-      urn_parser = flavor_module.const_get(:UrnParser)
-      urn_parser.parse(string)
+      parse_urn(string)
     else
       parse_by_prefix(string)
     end
+  end
+
+  # Parse an identifier URN, detecting the flavor from the URN namespace
+  # and delegating to the flavor's UrnParser. This is also the :urn
+  # format's parse side (Parsers::Urn), which the Lutaml FormatRegistry
+  # mirror exposes as Identifier.from_urn.
+  #
+  # @param string [String] the URN
+  # @return [Identifier] the parsed identifier
+  def self.parse_urn(string)
+    eager_load_flavors!
+    flavor = detect_flavor_from_urn(string)
+    flavor_module = Registry.get(flavor)
+    unless flavor_module
+      raise ArgumentError,
+            "Unknown flavor in URN: #{flavor}"
+    end
+
+    urn_parser = flavor_module.const_get(:UrnParser)
+    urn_parser.parse(string)
   end
 
   # Build an identifier from its serialized hash, without naming its flavor —

@@ -63,7 +63,10 @@ module Pubid
       transformer = Class.new do
         define_singleton_method(:name) { "Pubid#{format.to_s.capitalize}Transform" }
 
-        define_method(:data_to_model) do |data, _format, _options = {}|
+        # Lutaml calls the transformer on the class (transformer_for
+        # returns the registered object as-is), so the hook is a
+        # singleton method.
+        define_singleton_method(:data_to_model) do |_model, data, _format, _options = {}|
           data
         end
       end

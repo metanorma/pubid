@@ -25,10 +25,27 @@ following gaps identified in practice:
 * **Extended document types** -- Additional deliverable types beyond
   those in RFC 5141, including Directives (`dir`), Directive Supplements
   (`dir-sup`), and IWA Supplements (`iwa-sup`).
-* **Typed stage abbreviations** -- RFC 5141 uses only harmonized stage
-  codes (`stage-XX.XX`). This specification also supports short stage
-  abbreviations (`WD`, `CD`, `DIS`, `FDIS`, `PDAM`, `DAM`, `FDAM`,
-  `DCOR`, `FDCOR`, `CDTS`, `DTS`, `FDTS`, `WDS`).
+* **Supplement year** -- RFC 5141's `supplement` rule has no slot for
+  the supplement's own publication year (`Amd 1:2007`). This
+  specification adds `supplyear` between the number and the version.
+* **Supplement version** -- RFC 5141 defines `<supplversion>` (the
+  corrected version of a published supplement) but no ISO identifier
+  surface carries it. This specification stores it on the supplement
+  and emits it in the `vN` slot.
+* **Per-supplement stage** -- RFC 5141's single `status` slot sits in
+  `docidentifier` and describes the whole resource, so a draft
+  amendment on a published base cannot state both stages. This
+  specification allows a `stage` element immediately before its
+  supplement's type token.
+* **Legacy stage abbreviations (ingestion only)** -- Datasets carry
+  URNs with typed stage abbreviations (`WD`, `CD`, `DIS`, `FDIS`,
+  `DAM`, ...). These are NOT part of the NSS grammar: they are
+  accepted on parse as a deprecated input alias and re-canonicalized
+  to their harmonized stage codes on render. One abbreviation never
+  maps to one code by itself -- the label is a function of the
+  deliverable type and the stage code (50.00 is FDIS for an IS
+  project, FDAM for an amendment project, FDTS for a TS project), so
+  only the harmonized code round-trips losslessly.
 * **Supplement chains** -- Nested supplements (e.g., a Corrigendum to
   an Amendment) with explicit ordering semantics.
 * **Explicit language specification** -- Language codes are always
@@ -88,13 +105,11 @@ partnumber    = "-" 1*( DIGIT / ALPHA / "-" )
 
 status        = ( "draft" / "cancelled" ) / stage
 
+; Identical to RFC 5141 -- the stage is the harmonized code only. The
+; typed abbreviations (WD, CD, DIS, FDIS, DAM, ...) are human-face
+; labels for (deliverable type, stage code); they are accepted on
+; INGESTION as a deprecated alias and never emitted.
 stage         = "stage-" stagecode ["." iteration]
-              / stage-abbr ["." iteration]
-
-stage-abbr    = "WD" / "WDS" / "CD" / "CDV" / "DIS" / "FDIS"
-              / "PDAM" / "DAM" / "FDAM" / "DCOR" / "FDCOR"
-              / "CDTS" / "DTS" / "FDTS" / "PRF"
-              / "PWI" / "NP" / "AWI" / "NWIP"
 
 stagecode     = DIGIT DIGIT "." DIGIT DIGIT
 
@@ -116,12 +131,17 @@ language      = lang-code *("," lang-code)
 
 lang-code     = 1*2(ALPHA)
 
-supplement    = ":" suppltype ":" supplnumber
-                [":" supplversion] [":" language]
+; Additive extension of the RFC 5141 supplement rule -- the RFC form
+; ":" suppltype ":" supplnumber [":" supplversion] [":" language]
+; remains valid; supplyear and a leading per-supplement stage are new.
+supplement    = [":" stage] ":" suppltype ":" supplnumber
+                [":" supplyear] [":" supplversion] [":" language]
 
 suppltype     = "amd" / "cor" / "sup" / "add"
 
 supplnumber   = DIGITS
+
+supplyear     = 4DIGIT
 
 supplversion  = "v" DIGITS
 
@@ -201,8 +221,17 @@ Omitting `partnumber` designates a multipart document in its entirety.
 Indicates the publication status of the document. When the `status`
 element is not present, the NSS refers to a published document.
 
-RFC 5141-bis extends RFC 5141 by supporting *typed stage abbreviations*
-in addition to harmonized stage codes:
+The stage is carried as the harmonized stage code only -- identical to
+RFC 5141. Earlier drafts of this specification admitted typed stage
+abbreviations (`WD`, `CD`, `DIS`, `FDIS`, `DAM`, ...) as an alternative
+`stage` production; that extension was withdrawn because it redefines a
+rule RFC 5141 already fixes rather than extending it, and because the
+abbreviation is not a function of the code alone: it is a function of
+the deliverable type and the stage code (50.00 is FDIS for an IS
+project, FDAM for an amendment project, FDTS for a TS project, and the
+PRF variants share codes with the F variants). The harmonized code plus
+the identifier's own deliverable type reconstructs the label
+deterministically, so only the code round-trips losslessly.
 
 Harmonized stage code notation::
 
@@ -214,32 +243,18 @@ project iteration.
 stage-00.00:: Preliminary work item
 stage-20.00:: New work item proposal
 stage-30.00:: Committee draft
-stage-40.00:: Draft International Standard
-stage-50.00:: Final Draft International Standard
+stage-40.00:: Draft (enquiry) -- DIS for an IS project, DAM for an
+amendment project, DTS for a TS project, ...
+stage-50.00:: Final draft -- FDIS for an IS project, FDAM for an
+amendment project, FDTS for a TS project, ...
 stage-60.00:: Published (not emitted for published documents)
 
-Typed stage abbreviations (RFC 5141-bis)::
-
-[horizontal]
-PWI:: Preliminary Work Item
-NP:: New Proposal / New Work Item Proposal
-AWI:: Approved Work Item
-NWIP:: New Work Item Proposal
-WD:: Working Draft
-WDS:: Working Draft Study
-CD:: Committee Draft
-CDV:: Committee Draft for Vote
-DIS:: Draft International Standard
-FDIS:: Final Draft International Standard
-PDAM:: Proposed Draft Amendment
-DAM:: Draft Amendment
-FDAM:: Final Draft Amendment
-DCOR:: Draft Corrigendum
-FDCOR:: Final Draft Corrigendum
-CDTS:: Committee Draft Technical Specification
-DTS:: Draft Technical Specification
-FDTS:: Final Draft Technical Specification
-PRF:: Proof
+[NOTE]
+====
+Legacy abbreviation forms are accepted on parse (deprecated ingestion
+alias; see the gap list above) and are re-canonicalized to their
+harmonized stage codes on render. They are never emitted.
+====
 
 ==== edition
 
@@ -278,6 +293,20 @@ amd:: Amendment -- alters and/or adds technical provisions; subject to ballot
 cor:: Technical Corrigendum -- corrects technical error or ambiguity; not balloted
 sup:: Supplement -- generic supplement type
 add:: Addendum -- (document type no longer published)
+
+The slots after the type token, in order:
+
+[horizontal]
+supplnumber:: the supplement's own number (`Amd 1` carries 1)
+supplyear:: the supplement's own publication year (`Amd 1:2007`) --
+added by this specification; RFC 5141 has no slot for it
+supplversion:: the corrected version of the published supplement
+(`v2` = version corrected once); omitted when not stated, where the
+reference is to the highest version per RFC 5141
+stage:: optionally, the supplement's own stage immediately BEFORE the
+type token (`stage-40.00:amd:1`) -- added by this specification; RFC
+5141's single `status` slot cannot separate a draft amendment from its
+published base
 
 ==== addition
 
@@ -372,7 +401,9 @@ documents.
 
 RFC 5141-bis supplements this by requiring that:
 
-* Typed stage abbreviations map unambiguously to harmonized stage codes.
+* Stages are carried as harmonized stage codes only; the typed
+  abbreviations are human-face labels for (deliverable type, stage
+  code) and never appear in the NSS.
 * Supplement chains have a defined ordering (outer supplement last in
   the NSS).
 * Language codes are always explicit, avoiding ambiguity from implicit
@@ -505,10 +536,12 @@ SHOULD resolve to the more general stage (WD) unless the typed abbreviation
 When a harmonized stage code maps to multiple typed stages, the following
 rules apply:
 
-. If the URN contains a typed stage abbreviation (`stage-abbr`), use the
-  stage identified by that abbreviation directly.
-. If the URN contains a harmonized code (`stage-XX.XX`), prefer the stage
-  with the broader scope (more harmonized codes) over a specialized subset.
+. A legacy typed stage abbreviation is accepted on parse only; it
+  selects the stage identified by that abbreviation directly and is
+  re-canonicalized to its harmonized code on render.
+. A harmonized code (`stage-XX.XX`) resolves through the identifier's
+  own deliverable type: prefer the stage of that type with the broader
+  scope (more harmonized codes) over a specialized subset.
 . Published stage codes (`60.00`, `60.60`) resolve to "Proof" (PRF) or
   "Published" depending on context. Non-published stages take precedence
   over the published default for shared codes like `60.00`.
@@ -531,11 +564,25 @@ This specification extends RFC 5141 in the following ways:
 
 | Stage notation
 | Harmonized stage codes only (`stage-XX.XX`)
-| Harmonized codes *and* typed stage abbreviations (`WD`, `CD`, `DIS`, etc.)
+| *Unchanged* -- harmonized codes only. Legacy abbreviation URNs are
+accepted on parse as a deprecated alias and re-canonicalized on render.
 
 | Supplement chains
 | Single level (`amd`/`cor`/`add`)
 | Multi-level nesting (Corrigendum to Amendment)
+
+| Supplement year
+| No slot; the year cannot be carried (`Amd 1:2007` is inexpressible)
+| `supplyear = 4DIGIT` between the number and the version
+
+| Supplement version
+| Defined but unsurfaced (no ISO identifier carries it)
+| Stored on the supplement; emitted in the `vN` slot
+
+| Per-supplement stage
+| One `status` slot for the whole resource; a draft amendment on a
+published base is inexpressible
+| `stage` immediately before the supplement's type token
 
 | Language
 | May be omitted (English assumed)
@@ -577,18 +624,19 @@ and adds `sup` as a generic supplement type.
 
 | 4 | Resolved
 | **Missing ability to state stage of base identifier in supplements.**
-RFC 5141 provides no mechanism to include the base document's stage
-in a supplement URN. RFC 5141-bis supports typed stage abbreviations
-(see <<statusstage>>) and harmonized stage codes on the base document,
-preserving the stage information in supplement URNs.
+RFC 5141's single `status` slot sits in `docidentifier` and describes
+the whole resource, so a draft amendment on a published base cannot
+state both stages. RFC 5141-bis allows a `stage` element immediately
+before the supplement's type token (see <<supplement>>); the base
+stage stays in the RFC slot. The stage is the harmonized code only.
 
 | 5 | Resolved
-| **Missing support for new stage types (WDS, CDTS).** RFC 5141 uses
-only harmonized stage codes. RFC 5141-bis adds typed stage
-abbreviations (see <<statusstage>>) including `WDS` (Working Draft
-Study, introduced 2025-06) and `CDTS` (Committee Draft Technical
-Specification), with dated stage code tracking (see <<Stage Code
-Evolution>>).
+| **Missing support for new stage types (WDS, CDTS).** The harmonized
+stage code system already covers every stage, including `WDS`
+(Working Draft Study, introduced 2025-06) and `CDTS` (Committee Draft
+Technical Specification) -- these are new labels for existing codes,
+resolved through the deliverable type. No NSS change is required;
+the abbreviations live in the human face.
 
 | 6 | Resolved
 | **Missing support for new document types (IWA).** RFC 5141 lists
@@ -599,10 +647,12 @@ RFC 5141-bis extends this with `dir`, `dir-sup`, and `iwa-sup`
 
 [NOTE]
 ====
-All six identified gaps have been resolved in the RFC 5141-bis
-specification and implemented in the PubID software library with full
-test coverage. The implementation is available as open-source software
-to facilitate adoption by ISO Central Secretariat.
+The identified gaps are resolved in the RFC 5141-bis specification and
+implemented in the PubID software library with full test coverage. The
+extensions are strictly additive: every RFC 5141 URN remains valid and
+parses to the same identifier, and no RFC 5141 production is redefined.
+The implementation is available as open-source software to facilitate
+adoption by ISO Central Secretariat.
 ====
 
 == References

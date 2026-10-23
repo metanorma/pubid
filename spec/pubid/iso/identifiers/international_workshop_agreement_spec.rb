@@ -211,7 +211,7 @@ RSpec.describe Pubid::Iso::Identifiers::InternationalWorkshopAgreement do
         subject { "WD IWA 19" }
 
         let(:parsed) { Pubid::Iso.parse(subject) }
-        let(:urn) { "urn:iso:std:iso:iwa:19:WD" }
+        let(:urn) { "urn:iso:std:iso:iwa:19:stage-20.20" }
 
         it "parses publisher" do
           expect(parsed.publisher).to be_nil
@@ -239,7 +239,7 @@ RSpec.describe Pubid::Iso::Identifiers::InternationalWorkshopAgreement do
         subject { "WD IWA 48(en)" }
 
         let(:parsed) { Pubid::Iso.parse(subject) }
-        let(:urn) { "urn:iso:std:iso:iwa:48:WD:en" }
+        let(:urn) { "urn:iso:std:iso:iwa:48:stage-20.20:en" }
 
         it "parses publisher" do
           expect(parsed.publisher).to be_nil
@@ -269,7 +269,7 @@ RSpec.describe Pubid::Iso::Identifiers::InternationalWorkshopAgreement do
         subject { "CD IWA 37" }
 
         let(:parsed) { Pubid::Iso.parse(subject) }
-        let(:urn) { "urn:iso:std:iso:iwa:37:CD" }
+        let(:urn) { "urn:iso:std:iso:iwa:37:stage-30.00" }
 
         it "parses publisher" do
           expect(parsed.publisher).to be_nil
@@ -297,7 +297,7 @@ RSpec.describe Pubid::Iso::Identifiers::InternationalWorkshopAgreement do
         subject { "CD IWA 37-1" }
 
         let(:parsed) { Pubid::Iso.parse(subject) }
-        let(:urn) { "urn:iso:std:iso:iwa:37:-1:CD" }
+        let(:urn) { "urn:iso:std:iso:iwa:37:-1:stage-30.00" }
 
         it "parses publisher" do
           expect(parsed.publisher).to be_nil
@@ -363,7 +363,7 @@ RSpec.describe Pubid::Iso::Identifiers::InternationalWorkshopAgreement do
       subject { "WD IWA 48.2" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:iwa:48:WD.2" }
+      let(:urn) { "urn:iso:std:iso:iwa:48:stage-20.20.v2" }
 
       it "parses publisher" do
         expect(parsed.publisher).to be_nil
@@ -399,7 +399,7 @@ RSpec.describe Pubid::Iso::Identifiers::InternationalWorkshopAgreement do
 
       let(:parsed) { Pubid::Iso.parse(subject) }
       let(:normalized) { "WD IWA 19" }
-      let(:urn) { "urn:iso:std:iso:iwa:19:WD" }
+      let(:urn) { "urn:iso:std:iso:iwa:19:stage-20.20" }
 
       # Publisher is not rendered but still exists
       it "parses publisher" do

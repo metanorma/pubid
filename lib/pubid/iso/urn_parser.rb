@@ -175,6 +175,7 @@ module Pubid
         while parts.any?
           supp_type = nil
           supp_number = nil
+          supp_version = nil
           supp_year = nil
           supp_stage = nil
 
@@ -203,20 +204,38 @@ module Pubid
             end
           end
 
-          # Check for version (v1, v2, etc.) after year or number
+          # Check for version (v1, v2, etc.) after year or number.
+          # Legacy year-overloaded wire ("amd:2007:v2" -- the number rode
+          # the version slot): a v-token with no preceding number carries
+          # the NUMBER. The RFC 5141 additive extension ("amd:1:2007:v2")
+          # keeps the number in its own slot, so a v-token after a number
+          # is the true <supplversion>.
           if parts.first&.start_with?("v")
-            version_str = parts.shift
-            supp_number = version_str.sub("v", "").to_i
-            # Handle version with iteration (v1.2)
-            if supp_number.to_s.include?(".")
-              supp_number, = supp_number.to_s.split(".")
-              supp_number = supp_number.to_i
+            version_str = parts.shift.sub("v", "")
+            value = version_str.split(".").first.to_i
+            if supp_number.nil?
+              supp_number = value
+            else
+              supp_version = value
             end
           end
 
           # Next part might be year if not already set
           if supp_year.nil? && parts.first&.match(/^\d{4}$/)
             supp_year = parts.shift
+          end
+
+          # A v-token after the year ("amd:1:2007:v1") would otherwise be
+          # left for the next loop iteration, wrapping a type-less
+          # supplement around the real one and losing the base.
+          if parts.first&.start_with?("v")
+            version_str = parts.shift.sub("v", "")
+            value = version_str.split(".").first.to_i
+            if supp_number.nil?
+              supp_number = value
+            else
+              supp_version = value
+            end
           end
 
           # Check for language after supplement
@@ -228,6 +247,7 @@ module Pubid
           supplements << {
             type: supp_type,
             number: supp_number,
+            version: supp_version,
             year: supp_year,
             stage: supp_stage,
             languages: supp_languages,
@@ -425,7 +445,11 @@ module Pubid
           supp_hash = {}
 
           if supp[:stage]
-            typed_stage = Pubid::Iso.locate_stage_by_stage_code(supp[:stage])
+            # The supplement-family stages resolve by abbreviation -- the
+            # typed-stage code differs from the abbr ("fdamd" for FDAM),
+            # so the stage-code lookup misses the harmonized rows.
+            typed_stage = Pubid::Iso.locate_stage(supp[:stage].to_s.upcase) ||
+                          Pubid::Iso.locate_stage_by_stage_code(supp[:stage])
             supp_hash[:type_with_stage] = if
 typed_stage
                                             typed_stage.abbr.is_a?(Array) ? typed_stage.abbr.first : typed_stage.abbr
@@ -442,6 +466,10 @@ typed_stage
 
           if supp[:year]
             supp_hash[:year] = supp[:year].to_s
+          end
+
+          if supp[:version]
+            supp_hash[:supplement_version] = supp[:version].to_s
           end
 
           if supp[:languages]
