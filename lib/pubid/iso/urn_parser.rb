@@ -445,16 +445,31 @@ module Pubid
           supp_hash = {}
 
           if supp[:stage]
-            # The supplement-family stages resolve by abbreviation -- the
-            # typed-stage code differs from the abbr ("fdamd" for FDAM),
-            # so the stage-code lookup misses the harmonized rows.
-            typed_stage = Pubid::Iso.locate_stage(supp[:stage].to_s.upcase) ||
-                          Pubid::Iso.locate_stage_by_stage_code(supp[:stage])
+            # A harmonized code resolves through the deliverable type
+            # (like the base stage); a supplement-family abbreviation
+            # resolves by abbr -- the typed-stage code differs from the
+            # abbr ("fdamd" for FDAM), so the stage-code lookup misses.
+            typed_stage =
+              if supp[:stage].to_s.match?(/\A\d\d\.\d\d\z/)
+                # resolve within the supplement's own type family -- the
+                # umbrella lookup prefers the IS family, which would turn
+                # a staged Corrigendum into a plain IS
+                code_str = supp[:stage].to_s
+                type_str = supp[:type]&.to_s
+                candidates = Pubid::Iso.all_typed_stages
+                  .select { |st| st.harmonized_stages&.include?(code_str) }
+                candidates.find { |st| st.type_code.to_s == type_str } ||
+                  candidates.find { |st| st.type_code.to_s == "is" } ||
+                  candidates.first
+              else
+                Pubid::Iso.locate_stage(supp[:stage].to_s.upcase) ||
+                  Pubid::Iso.locate_stage_by_stage_code(supp[:stage])
+              end
             supp_hash[:type_with_stage] = if
 typed_stage
                                             typed_stage.abbr.is_a?(Array) ? typed_stage.abbr.first : typed_stage.abbr
                                           else
-                                            supp[:stage].to_s.upcase
+                                            supp[:type]&.to_s&.upcase
                                           end
           end
 
