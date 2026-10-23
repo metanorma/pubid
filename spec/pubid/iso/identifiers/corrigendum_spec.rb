@@ -1380,7 +1380,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
 
       let(:parsed) { Pubid::Iso.parse(subject) }
       let(:urn) do
-        "urn:iso:std:iso-iec:15938:-7:amd:2010:v5:stage-30.00:cor:1:v1"
+        "urn:iso:std:iso-iec:15938:-7:amd:5:2010:v1:stage-30.00:cor:1:v1"
       end
 
       it "parses publisher" do
@@ -1519,7 +1519,7 @@ RSpec.describe Pubid::Iso::Identifiers::Corrigendum do
 
       let(:parsed) { Pubid::Iso.parse(subject) }
       let(:urn) do
-        "urn:iso:std:iso-iec:guide:98:-3:ed-1:sup:2008:v1:cor:2009:v1"
+        "urn:iso:std:iso-iec:guide:98:-3:ed-1:sup:1:2008:v1:cor:1:2009:v1"
       end
 
       it "parses publisher" do
