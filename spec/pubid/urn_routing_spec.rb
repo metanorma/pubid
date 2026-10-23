@@ -58,5 +58,22 @@ RSpec.describe "URN flavor routing" do
       expect { Pubid::Iso::Identifier.from_urn("urn:mrn:unknown-org:pub:g1") }
         .to raise_error(Lutaml::Model::InvalidFormatError)
     end
+
+    it "builds a guide supplement chain with the generic Supplement" do
+      # the "sup" token used to resolve the Directives Supplement row,
+      # whose render needs the supplement_publisher a guide chain never
+      # has -- the chain crashed on render
+      id = Pubid::Iso::Identifier.from_urn("urn:iso:std:iso-iec:guide:98:-3:ed-1:sup:1:2008:v1:cor:1:2009:v1")
+      expect(id.to_s).to eq("ISO/IEC Guide 98-3/Suppl 1:2008/COR 1:2009")
+      expect(id.base).to be_a(Pubid::Iso::Identifiers::Supplement)
+      expect(id.to_urn).to eq("urn:iso:std:iso-iec:guide:98:-3:ed-1:sup:1:2008:v1:cor:1:2009:v1")
+    end
+
+    it "rejects a URN without a docnumber" do
+      # RFC 5141 requires docnumber; the lenient parse built the
+      # identity-free "ISO "
+      expect { Pubid::Iso::Identifier.from_urn("urn:iso:std:iso") }
+        .to raise_error(Pubid::Errors::UrnParseError, /missing docnumber/)
+    end
   end
 end
