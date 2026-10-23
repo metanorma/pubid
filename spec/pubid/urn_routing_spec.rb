@@ -31,4 +31,32 @@ RSpec.describe "URN flavor routing" do
     expect { Pubid.parse("urn:mrn:unknown-org:pub:g1") }
       .to raise_error(ArgumentError, /Unknown flavor in URN: unknown-org/)
   end
+
+  describe "Identifier.from_urn (the lutaml :urn parse side)" do
+    it "parses a legacy stage-literal supplement URN" do
+      # metanorma-pdfa#108: relaton-data carries DIS-literal URNs; the
+      # format had a renderer but no parser, so every from_urn raised.
+      id = Pubid::Iso::Identifier.from_urn("urn:iso:std:iso:32000:-2:DIS:amd:1:v1")
+      expect(id.to_s).to eq("ISO/DIS 32000-2/AMD 1")
+      # the legacy abbreviation URN re-canonicalizes to the RFC 5141
+      # harmonized stage form (one render path; metanorma-pdfa#108)
+      expect(id.to_urn).to eq("urn:iso:std:iso:32000:-2:stage-40.00:amd:1:v1")
+    end
+
+    it "parses a plain URN and round-trips it" do
+      id = Pubid::Iso::Identifier.from_urn("urn:iso:std:iso:9001")
+      expect(id.to_s).to eq("ISO 9001")
+      expect(id.to_urn).to eq("urn:iso:std:iso:9001")
+    end
+
+    it "routes to the URN's own flavor, not the receiver's" do
+      id = Pubid::Iso::Identifier.from_urn("urn:ieee:std:802.11:2012")
+      expect(id.to_s).to eq("IEEE Std 802.11-2012")
+    end
+
+    it "raises for an unknown URN authority" do
+      expect { Pubid::Iso::Identifier.from_urn("urn:mrn:unknown-org:pub:g1") }
+        .to raise_error(Lutaml::Model::InvalidFormatError)
+    end
+  end
 end

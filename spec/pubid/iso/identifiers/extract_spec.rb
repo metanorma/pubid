@@ -14,7 +14,7 @@ RSpec.describe Pubid::Iso::Identifiers::Extract do
         subject { "ISO 1101:1983/Ext 1:1983" }
 
         let(:parsed) { Pubid::Iso.parse(subject) }
-        let(:urn) { "urn:iso:std:iso:1101:ext:1983:v1" }
+        let(:urn) { "urn:iso:std:iso:1101:ext:1:1983:v1" }
 
         it "parses publisher" do
           expect(parsed.base.publisher.publisher).to eq("ISO")

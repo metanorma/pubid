@@ -59,11 +59,12 @@ Format: `urn:iso:std:{publishers}:{type}:{number}:{part}:{year}:{stage}:{supplem
 | Type | Document type code | `tr`, `ts`, `guide`, `dir`, `dir-sup`
 | Number | Document number | `9001`, `13818`
 | Part | Prefixed with `-` | `-1`, `-90`
-| Stage | Typed stage or harmonized code | `DIS`, `stage-40.00`
+| Stage | Harmonized code only (RFC 5141); legacy
+abbreviation URNs are accepted on parse and re-canonicalized | `stage-40.00`
 | Year | Publication year | `2015`
 | Edition | Prefixed with `ed-` | `ed-2`
 | Language | Comma-separated codes | `en`, `en,fr`
-| Supplement | Type:year:version | `amd:2016:v3`, `cor:2020:v1`
+| Supplement | Type:number:year:version | `amd:1:2016:v3`, `cor:1:2020:v1`
 |===
 
 Examples:
@@ -82,17 +83,22 @@ Pubid::Iso.parse("ISO/IEC 27001:2013").to_urn
 Pubid::Iso.parse("ISO/IEC TR 13818-1:2015").to_urn
 # => "urn:iso:std:iso-iec:tr:13818:-1"
 
-# With supplement
+# With supplement (number, year, then the published version)
 Pubid::Iso.parse("ISO 9001:2015/Amd 1:2020").to_urn
-# => "urn:iso:std:iso:9001:amd:2020:v1"
+# => "urn:iso:std:iso:9001:amd:1:2020:v1"
 
 # Multi-level supplements
 Pubid::Iso.parse("ISO 9001:2015/Amd 1:2020/Cor 1:2021").to_urn
-# => "urn:iso:std:iso:9001:amd:2020:v1:cor:2021:v1"
+# => "urn:iso:std:iso:9001:amd:1:2020:v1:cor:1:2021:v1"
 
-# Draft stage
+# Draft stage -- the URN carries the harmonized code only (RFC 5141);
+# the typed abbreviations are human-face labels for (type, stage code)
 Pubid::Iso.parse("ISO/DIS 9001").to_urn
-# => "urn:iso:std:iso:9001:DIS"
+# => "urn:iso:std:iso:9001:stage-40.00"
+
+# Legacy abbreviation URNs parse and re-canonicalize
+Pubid::Iso::Identifier.from_urn("urn:iso:std:iso:9001:DIS").to_urn
+# => "urn:iso:std:iso:9001:stage-40.00"
 
 # Harmonized stage code
 Pubid::Iso.parse("ISO/NP 9001").to_urn
@@ -185,32 +191,21 @@ id.to_urn  # => "urn:iso:std:iso-iec:13818:-1:amd:2016:v3:cor:2017:v1"
 
 == Stage Codes in URNs
 
-=== Typed Stage Abbreviations
+The URN carries the harmonized stage code only — identical to RFC 5141.
+The typed abbreviations (WD, CD, DIS, FDIS, DAM, FDTS, WDS, CDTS, ...)
+are human-face labels for a (deliverable type, stage code) pair — 50.00
+is FDIS for an IS project, FDAM for an amendment project, FDTS for a TS
+project — so only the harmonized code round-trips losslessly. Legacy
+abbreviation URNs are accepted on parse as a deprecated alias and are
+re-canonicalized on render:
 
-Typed stages use RFC 5141-bis abbreviations in URNs:
-
-|===
-| Stage | URN Code | Description
-
-| WD | `WD` | Working Draft
-| WDS | `WDS` | Working Draft Study (introduced 2025-06)
-| CD | `CD` | Committee Draft
-| CDV | `CDV` | Committee Draft for Vote
-| DIS | `DIS` | Draft International Standard
-| FDIS | `FDIS` | Final Draft International Standard
-| PDAM | `PDAM` | Proposed Draft Amendment
-| DAM | `DAM` | Draft Amendment
-| FDAM | `FDAM` | Final Draft Amendment
-| DCOR | `DCOR` | Draft Corrigendum
-| FDCOR | `FDCOR` | Final Draft Corrigendum
-| CDTS | `CDTS` | Committee Draft Technical Specification
-| DTS | `DTS` | Draft Technical Specification
-| FDTS | `FDTS` | Final Draft Technical Specification
-|===
+[source,ruby]
+----
+Pubid::Iso::Identifier.from_urn("urn:iso:std:iso-iec:13818:-1:amd:2016:v3:cor:2017:v1")
+id.to_urn  # => "urn:iso:std:iso-iec:13818:-1:amd:1:2016:v3:cor:1:2017:v1"
+----
 
 === Harmonized Stage Codes
-
-For stages without typed abbreviations (PWI, NP, AWI, PRF), URNs use harmonized stage codes:
 
 |===
 | Stage | Harmonized Code | URN Example
@@ -220,7 +215,8 @@ For stages without typed abbreviations (PWI, NP, AWI, PRF), URNs use harmonized 
 | AWI | `10.99` | `stage-10.99`
 | WD | `20.xx` | `stage-20.00`
 | CD | `30.xx` | `stage-30.00`
-| CDV | `40.xx` | `stage-40.00`
+| CDV | no harmonized row in the ISO typed-stage table | (stage omitted from the URN)
+| DIS | `40.xx` | `stage-40.00`
 | FDIS | `50.xx` | `stage-50.00`
 | PRF | `60.00` | `stage-60.00` (proof stage)
 | Published | `60.60` | (omitted from URN)

@@ -315,6 +315,10 @@ module Pubid
             value
           end
 
+        when :supplement_version
+          # The RFC 5141 <supplversion> carried on supplement identifiers
+          value.to_s
+
         when :stage
           # Raw stage code from URN parser (e.g., "10.00", "50.00")
           # Convert to type_with_stage format for builder

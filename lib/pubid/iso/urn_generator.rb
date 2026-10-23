@@ -18,23 +18,6 @@ module Pubid
       URN_CONTEXT = Rendering::RenderingContext.urn.freeze
       private_constant :URN_CONTEXT
 
-      # Stage code mapping for RFC 5141-bis typed stages
-      TYPED_STAGE_MAP = {
-        wd: "WD",
-        wds: "WDS",
-        cd: "CD",
-        cdv: "CDV",
-        dis: "DIS",
-        fdis: "FDIS",
-        pdam: "PDAM",
-        dam: "DAM",
-        fdamd: "FDAM",
-        dcor: "DCOR",
-        fdcor: "FDCOR",
-        cdts: "CDTS",
-        dts: "DTS",
-        fdts: "FDTS",
-      }.freeze
 
       TYPE_CODE_MAP = {
         dir: "dir",
@@ -134,22 +117,17 @@ module Pubid
           suppl_type = supp_gen.supplement_type_component
           parts << suppl_type if suppl_type
 
-          if supp.date
-            parts << supp.date.render(context: URN_CONTEXT)
-            if supp.number
-              if supp.stage_iteration && !supp.is_a?(Pubid::Iso::Identifiers::Supplement)
-                parts << "v#{supp.number}.#{supp.stage_iteration.render(context: URN_CONTEXT)}"
-              else
-                parts << "v#{supp.number}"
-              end
-            end
+          # RFC 5141 supplement slots in order: number, year (the bis
+          # additive extension -- the legacy wire overloaded the number
+          # slot with the year), then the published version ("when a
+          # supplement is published, it is version 1").
+          parts << supp.number.to_s if supp.number
+          parts << supp.date.render(context: URN_CONTEXT) if supp.date
+          version = supp.supplement_version || 1
+          if supp.stage_iteration && !supp.is_a?(Pubid::Iso::Identifiers::Supplement)
+            parts << "v#{version}.#{supp.stage_iteration.render(context: URN_CONTEXT)}"
           else
-            parts << supp.number.to_s if supp.number
-            if supp.stage_iteration && !supp.is_a?(Pubid::Iso::Identifiers::Supplement)
-              parts << "v1.#{supp.stage_iteration.render(context: URN_CONTEXT)}"
-            else
-              parts << "v1"
-            end
+            parts << "v#{version}"
           end
 
           if supp.languages&.any?
@@ -208,26 +186,10 @@ module Pubid
         stage_code = identifier.typed_stage.stage_code
         return nil if !stage_code || stage_code == :published
 
-        combined_key = nil
-        dtc = document_type_code&.to_s
-        if dtc && dtc != "is" && dtc != ""
-          combined_key = :"#{stage_code}#{dtc}"
-        end
-
-        stage_abbr = if combined_key && TYPED_STAGE_MAP.key?(combined_key)
-                       TYPED_STAGE_MAP[combined_key]
-                     elsif TYPED_STAGE_MAP.key?(stage_code.to_sym)
-                       TYPED_STAGE_MAP[stage_code.to_sym]
-                     end
-
-        if stage_abbr
-          if identifier.stage_iteration
-            return "#{stage_abbr}.#{identifier.stage_iteration.render(context: URN_CONTEXT)}"
-          end
-
-          return stage_abbr
-        end
-
+        # RFC 5141 carries the stage as the harmonized code only
+        # ("stage-XX.XX[.vN]"); the typed abbreviations (CD, DIS, DAM...)
+        # live in the human face. Legacy abbreviation URNs are accepted
+        # on ingestion and re-canonicalized here.
         harmonized_codes = identifier.typed_stage.harmonized_stages
         return nil unless harmonized_codes&.any?
 

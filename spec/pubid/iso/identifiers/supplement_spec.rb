@@ -12,7 +12,7 @@ RSpec.describe Pubid::Iso::Identifiers::Supplement do
       subject { "ISO/IEC Guide 98-3:2008/Suppl 1:2008" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso-iec:guide:98:-3:sup:2008:v1" }
+      let(:urn) { "urn:iso:std:iso-iec:guide:98:-3:sup:1:2008:v1" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -122,7 +122,7 @@ RSpec.describe Pubid::Iso::Identifiers::Supplement do
 
       let(:parsed) { Pubid::Iso.parse(subject) }
       let(:normalized) { "ISO/IEC Guide 98-3/Suppl 1:2008" }
-      let(:urn) { "urn:iso:std:iso-iec:guide:98:-3:sup:2008:v1" }
+      let(:urn) { "urn:iso:std:iso-iec:guide:98:-3:sup:1:2008:v1" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -178,7 +178,7 @@ RSpec.describe Pubid::Iso::Identifiers::Supplement do
 
       let(:parsed) { Pubid::Iso.parse(subject) }
       let(:normalized) { "ISO/IEC Guide 98-3:2008/Suppl 1:2008(en)" }
-      let(:urn) { "urn:iso:std:iso-iec:guide:98:-3:sup:2008:v1:en" }
+      let(:urn) { "urn:iso:std:iso-iec:guide:98:-3:sup:1:2008:v1:en" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -415,7 +415,7 @@ RSpec.describe Pubid::Iso::Identifiers::Supplement do
       subject { "ISO 3758:1991/Suppl:1993" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:3758:sup:1993" }
+      let(:urn) { "urn:iso:std:iso:3758:sup:1993:v1" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -465,7 +465,7 @@ RSpec.describe Pubid::Iso::Identifiers::Supplement do
       subject { "ISO/TR 10000:2000/Suppl 1:2005" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:tr:10000:sup:2005:v1" }
+      let(:urn) { "urn:iso:std:iso:tr:10000:sup:1:2005:v1" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -516,7 +516,7 @@ RSpec.describe Pubid::Iso::Identifiers::Supplement do
       subject { "ISO 14000:2015/Suppl 1:2020" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:14000:sup:2020:v1" }
+      let(:urn) { "urn:iso:std:iso:14000:sup:1:2020:v1" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -570,7 +570,7 @@ RSpec.describe Pubid::Iso::Identifiers::Supplement do
       subject { "ISO 10000:2020/WD Suppl 1" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:10000:WD:sup:1:v1" }
+      let(:urn) { "urn:iso:std:iso:10000:stage-20.20:sup:1:v1" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")
@@ -613,7 +613,7 @@ RSpec.describe Pubid::Iso::Identifiers::Supplement do
       subject { "ISO 10000:2020/CD Suppl 1" }
 
       let(:parsed) { Pubid::Iso.parse(subject) }
-      let(:urn) { "urn:iso:std:iso:10000:CD:sup:1:v1" }
+      let(:urn) { "urn:iso:std:iso:10000:stage-30.00:sup:1:v1" }
 
       it "parses publisher" do
         expect(parsed.base.publisher.publisher).to eq("ISO")

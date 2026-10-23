@@ -6,6 +6,11 @@ module Pubid
       attribute :base, Identifier,
                 polymorphic: true
 
+      # The RFC 5141 <supplversion> (the corrected version of the
+      # supplement; published supplements are version 1). Distinct from
+      # the amendment/corrigendum <supplnumber>.
+      attribute :supplement_version, :string
+
       key_value do
         # Serialized key is "base" (matches JIS); the attribute/method stays
         # `base`, which relaton-index's get_id_number depends on.
@@ -13,6 +18,24 @@ module Pubid
           attribute: "_type",
           class_map: Identifier::ISO_TYPE_MAP,
         }
+        map "supplement_version",
+            with: { to: :supplement_version_to_kv, from: :supplement_version_from_kv }
+      end
+
+      def supplement_version_to_kv(model, doc)
+        return unless model.supplement_version
+
+        doc.add_child(
+          Lutaml::KeyValue::DataModel::Element.new(
+            "supplement_version", model.supplement_version.to_s,
+          ),
+        )
+      end
+
+      def supplement_version_from_kv(model, value)
+        return if value.nil? || value.to_s.empty?
+
+        model.supplement_version = value.to_i
       end
 
       # A supplement carries the publisher/copublishers of the document it

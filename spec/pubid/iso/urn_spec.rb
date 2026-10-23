@@ -85,17 +85,17 @@ RSpec.describe "ISO URN Generation and Parsing" do
     context "supplements" do
       it "generates URN with amendment" do
         id = Pubid::Iso.parse("ISO 9001:2015/Amd 1:2020")
-        expect(id.to_urn).to eq("urn:iso:std:iso:9001:amd:2020:v1")
+        expect(id.to_urn).to eq("urn:iso:std:iso:9001:amd:1:2020:v1")
       end
 
       it "generates URN with corrigendum" do
         id = Pubid::Iso.parse("ISO 9001:2015/Cor 1:2020")
-        expect(id.to_urn).to eq("urn:iso:std:iso:9001:cor:2020:v1")
+        expect(id.to_urn).to eq("urn:iso:std:iso:9001:cor:1:2020:v1")
       end
 
       it "generates URN with chained supplements (Cor to Amd)" do
         id = Pubid::Iso.parse("ISO/IEC 13818-1:2015/Amd 3:2016/Cor 1:2017")
-        expect(id.to_urn).to eq("urn:iso:std:iso-iec:13818:-1:amd:2016:v3:cor:2017:v1")
+        expect(id.to_urn).to eq("urn:iso:std:iso-iec:13818:-1:amd:3:2016:v1:cor:1:2017:v1")
       end
     end
 
@@ -103,17 +103,17 @@ RSpec.describe "ISO URN Generation and Parsing" do
     context "stages" do
       it "generates URN with DIS typed stage" do
         id = Pubid::Iso.parse("ISO/DIS 9001")
-        expect(id.to_urn).to eq("urn:iso:std:iso:9001:DIS")
+        expect(id.to_urn).to eq("urn:iso:std:iso:9001:stage-40.00")
       end
 
       it "generates URN with CD typed stage" do
         id = Pubid::Iso.parse("ISO/CD 9001")
-        expect(id.to_urn).to eq("urn:iso:std:iso:9001:CD")
+        expect(id.to_urn).to eq("urn:iso:std:iso:9001:stage-30.00")
       end
 
       it "generates URN with FDIS typed stage" do
         id = Pubid::Iso.parse("ISO/FDIS 9001")
-        expect(id.to_urn).to eq("urn:iso:std:iso:9001:FDIS")
+        expect(id.to_urn).to eq("urn:iso:std:iso:9001:stage-50.00")
       end
 
       it "generates URN with NP harmonized stage code" do
@@ -205,17 +205,17 @@ RSpec.describe "ISO URN Generation and Parsing" do
 
       it "round-trips identifier with amendment" do
         id = Pubid::Iso.parse_urn("urn:iso:std:iso:9001:amd:2020:v1")
-        expect(id.to_urn).to eq("urn:iso:std:iso:9001:amd:2020:v1")
+        expect(id.to_urn).to eq("urn:iso:std:iso:9001:amd:1:2020:v1")
       end
 
       it "round-trips identifier with corrigendum" do
         id = Pubid::Iso.parse_urn("urn:iso:std:iso:9001:cor:2020:v1")
-        expect(id.to_urn).to eq("urn:iso:std:iso:9001:cor:2020:v1")
+        expect(id.to_urn).to eq("urn:iso:std:iso:9001:cor:1:2020:v1")
       end
 
       it "round-trips chained supplements (Cor to Amd)" do
         id = Pubid::Iso.parse_urn("urn:iso:std:iso-iec:13818:-1:amd:2016:v3:cor:2017:v1")
-        expect(id.to_urn).to eq("urn:iso:std:iso-iec:13818:-1:amd:2016:v3:cor:2017:v1")
+        expect(id.to_urn).to eq("urn:iso:std:iso-iec:13818:-1:amd:3:2016:v1:cor:1:2017:v1")
       end
     end
 
@@ -363,6 +363,38 @@ RSpec.describe "ISO URN Generation and Parsing" do
       it "keeps a staged supplement-family stage with its type token" do
         id = Pubid::Iso.parse_urn("urn:iso:std:iso:17301:-1:FDAM.3:amd:2022:v1.3")
         expect(id.to_s).to eq("ISO 17301-1/AMD 1:2022")
+      end
+
+      it "round-trips the supplement year in its own slot" do
+        id = Pubid::Iso::Identifier.parse("ISO 4254-1:2005/FDAM 1:2007")
+        expect(id.to_urn).to eq("urn:iso:std:iso:4254:-1:stage-50.00:amd:1:2007:v1")
+        round = Pubid::Iso::UrnParser.parse(id.to_urn)
+        expect(round.to_s).to eq("ISO/FDIS 4254-1/AMD 1:2007")
+      end
+
+      it "re-canonicalizes the legacy year-overloaded supplement wire" do
+        # "amd:2007:v1" put the year in the number slot and the number in
+        # the version slot; the RFC 5141-bis order is number:year:version
+        id = Pubid::Iso::UrnParser.parse("urn:iso:std:iso:4254:-1:stage-50.00:amd:2007:v1")
+        expect(id.to_s).to eq("ISO/FDIS 4254-1/AMD 1:2007")
+        expect(id.to_urn).to eq("urn:iso:std:iso:4254:-1:stage-50.00:amd:1:2007:v1")
+      end
+
+      it "keeps a true supplement version when the number is stated" do
+        id = Pubid::Iso::UrnParser.parse("urn:iso:std:iso:4254:-1:stage-50.00:amd:2:2007:v2")
+        expect(id.number.to_s).to eq("2")
+        expect(id.supplement_version.to_s).to eq("2")
+        expect(id.to_urn).to eq("urn:iso:std:iso:4254:-1:stage-50.00:amd:2:2007:v2")
+      end
+
+      it "shows a harmonized base stage in the human face" do
+        # RFC 5141 carries the stage as the harmonized code; the human
+        # face surfaces it as the typed abbreviation of the base.
+        id = Pubid::Iso.parse_urn("urn:iso:std:iso:17301:-1:stage-50.00:amd:2022:v1.3")
+        expect(id.to_s).to eq("ISO/FDIS 17301-1/AMD 1:2022")
+        # the version tail's .3 iteration rides only the supplement-family
+        # abbreviation stage path today — flagged for the harmonized path
+        expect(id.to_urn).to eq("urn:iso:std:iso:17301:-1:stage-50.00:amd:1:2022:v1")
       end
 
       # A bare language token with no supplement identity names the base
