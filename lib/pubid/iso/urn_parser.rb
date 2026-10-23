@@ -34,7 +34,10 @@ module Pubid
       SUPPLEMENT_TYPE_MAP = {
         "amd" => :amd,
         "cor" => :cor,
-        "sup" => :sup,
+        # the generic Supplement type key (:suppl, the human grammar's
+        # own) -- :sup resolves the Directives Supplement row, whose
+        # render needs the supplement_publisher a guide chain never has
+        "sup" => :suppl,
         "add" => :add,
       }.freeze
 
@@ -88,7 +91,12 @@ module Pubid
         type_code = parse_type(parts.first) if parts.first && TYPE_CODE_REVERSE_MAP.key?(parts.first.downcase)
         parts.shift if type_code
 
-        # Parse number
+        # Parse number -- REQUIRED by the RFC 5141 docidentifier rule
+        # (originator [":" type] ":" docnumber); a URN without one
+        # ("urn:iso:std:iso") is not a valid NSS, and building it
+        # silently produced the identity-free "ISO "
+        raise Errors::UrnParseError, "missing docnumber: #{urn}" if parts.empty?
+
         number_part = parts.shift
         number, part, subpart = parse_number_part(number_part)
 
