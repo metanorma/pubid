@@ -21,6 +21,7 @@ RSpec.describe Pubid::Ieee::Components::Draft do
       /DD7.2
       /DIS
       /DIS2
+      /ED4
     ].each do |rendered|
       it "reproduces #{rendered}" do
         expect(described_class.parse(rendered).to_s).to eq(rendered)
