@@ -13,14 +13,18 @@ module Pubid
           annotated: context.annotated,
         )
 
-        stage_str = annotate(@id.typed_stage.render(context:),
+        # A nil typed_stage means "no stage" (metanorma-iso's draft-biblio
+        # flow assigns nil through the public setter); render the supplement
+        # without the stage segment instead of crashing on nil.render.
+        stage_str = @id.typed_stage &&
+                    annotate(@id.typed_stage.render(context:),
                              typed_stage_css(@id.typed_stage),
                              annotated: context.annotated)
-        parts << "#{base_str}/#{stage_str}"
+        parts << (stage_str ? "#{base_str}/#{stage_str}" : "#{base_str}/")
 
         num_port = render_number_portion(context)
         if num_port && !num_port.empty? && !num_port.start_with?(":")
-          parts << (stage_str.end_with?(".") ? "" : " ")
+          parts << (stage_str&.end_with?(".") ? "" : " ")
         end
         parts << num_port
 
