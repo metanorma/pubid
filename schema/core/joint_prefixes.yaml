@@ -9,12 +9,16 @@ joint_prefixes:
     - ISO/IEC
     - IEC/ISO
     - ISO/IEC/IEEE
+    - ISO/IEEE
   iec:
     - ISO/IEC
     - IEC/ISO
     - ISO/IEC/IEEE
+    - IEC/IEEE
   ieee:
     - ISO/IEC/IEEE
+    - ISO/IEEE
+    - IEC/IEEE
   ansi:
     - ANSI/ASHRAE
     - ANSI/AMCA
