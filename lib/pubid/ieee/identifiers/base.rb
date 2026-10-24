@@ -120,13 +120,13 @@ module Pubid
         # Handle draft as component object
         if args[:draft_obj]
           self.draft_obj = args[:draft_obj]
-          self.draft = args[:draft_obj].to_s
+          self.draft = args[:draft_obj].to_s.sub(%r{\A/}, "")
         elsif args[:draft].is_a?(String)
           self.draft_obj = Components::Draft.parse(args[:draft])
-          self.draft = draft_obj.to_s
+          self.draft = draft_obj.to_s.sub(%r{\A/}, "")
         elsif args[:draft]
           self.draft_obj = args[:draft]
-          self.draft = args[:draft].to_s
+          self.draft = args[:draft].to_s.sub(%r{\A/}, "")
         end
 
         # Set other attributes.
@@ -150,9 +150,11 @@ module Pubid
             public_send(setter, value)
           end
         end
+
       end
 
-      # Override accessors to return component objects.
+            # Override accessors to return component objects.
+
       def code
         code_obj
       end
@@ -231,7 +233,23 @@ module Pubid
       # no expansion (Draft.parse accepts the slashless form).
       def self.from_hash(data, options = {})
         data = Compaction.expand(Compaction.deep_dup(data)) if data.is_a?(::Hash)
-        super
+        identifier = super
+        # == compares the raw ivars: a rebuild whose lazy readers have not
+        # run carries @code_obj/@draft_obj nil while a parse has them set,
+        # so the objects compare unequal although their serialized hashes
+        # agree (pubid#596). Materialize the runtime components eagerly.
+        identifier.materialize_runtime_components
+        identifier
+      end
+
+      # Rebuild the runtime components from the wire strings. Safe on every
+      # construction path: the readers' ||= no-ops when already set, and the
+      # CodeNumber rebuild covers the split-column rows that carry no code
+      # string.
+      def materialize_runtime_components
+        code_obj
+        draft_obj
+        self
       end
 
       # Register the identifier classes the automatic `Identifiers::*` scan
