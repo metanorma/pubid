@@ -243,9 +243,9 @@ project iteration.
 stage-00.00:: Preliminary work item
 stage-20.00:: New work item proposal
 stage-30.00:: Committee draft
-stage-40.00:: Draft (enquiry) -- DIS for an IS project, DAM for an
+stage-40.00:: Draft (enquiry) -- DIS for an IS project, DAM for an +
 amendment project, DTS for a TS project, ...
-stage-50.00:: Final draft -- FDIS for an IS project, FDAM for an
+stage-50.00:: Final draft -- FDIS for an IS project, FDAM for an +
 amendment project, FDTS for a TS project, ...
 stage-60.00:: Published (not emitted for published documents)
 
@@ -298,14 +298,14 @@ The slots after the type token, in order:
 
 [horizontal]
 supplnumber:: the supplement's own number (`Amd 1` carries 1)
-supplyear:: the supplement's own publication year (`Amd 1:2007`) --
+supplyear:: the supplement's own publication year (`Amd 1:2007`) -- +
 added by this specification; RFC 5141 has no slot for it
-supplversion:: the corrected version of the published supplement
-(`v2` = version corrected once); omitted when not stated, where the
+supplversion:: the corrected version of the published supplement +
+(`v2` = version corrected once); omitted when not stated, where the +
 reference is to the highest version per RFC 5141
-stage:: optionally, the supplement's own stage immediately BEFORE the
-type token (`stage-40.00:amd:1`) -- added by this specification; RFC
-5141's single `status` slot cannot separate a draft amendment from its
+stage:: optionally, the supplement's own stage immediately BEFORE the +
+type token (`stage-40.00:amd:1`) -- added by this specification; RFC +
+5141's single `status` slot cannot separate a draft amendment from its +
 published base
 
 ==== addition
@@ -348,8 +348,11 @@ urn:iso:std:iso-iec:9075:-3:stage-95.99:ed-2:en
 urn:iso:std:iso-iec:9075:-3:stage-30.60:ed-4:en
 // Draft 4th edition of ISO/IEC 9075-3
 
-urn:iso:std:iso-iec:9075:-3:DIS:ed-4:en
-// Same as above, using RFC 5141-bis typed stage abbreviation
+The canonical form carries the harmonized code only
+(`stage-30.60:ed-4:en`). Datasets also carry the legacy abbreviation
+spelling (`DIS:ed-4:en`); it parses as a deprecated ingestion alias
+and re-canonicalizes to the harmonized form on render -- see
+<<statusstage>>.
 ....
 
 ==== Language handling
@@ -377,9 +380,12 @@ urn:iso:std:iso:9999:-1:ed-2:en:amd:1:v2
 urn:iso:std:iso:9999:-1:ed-2:en:amd:1:cor:1
 // Corrigendum 1 to Amendment 1
 
-urn:iso:std:iso-iec:13818:-1:amd:2016:v3:cor:2017:v1
+urn:iso:std:iso-iec:13818:-1:amd:3:2016:v1:cor:1:2017:v1
 // Amendment 3 (2016) with Corrigendum 1 (2017) to
-// ISO/IEC 13818-1
+// ISO/IEC 13818-1 -- number, year, then version per the
+// supplement slots; the legacy wire put the year in the
+// number slot ("amd:2016:v3") and is re-canonicalized on
+// ingestion
 ....
 
 ==== Extended types (RFC 5141-bis)
@@ -527,9 +533,12 @@ date to distinguish when a stage was introduced.
 === Overlapping Harmonized Codes
 
 Some stages share harmonized stage codes. For example, both WD and WDS use
-code `20.20`. When parsing a URN that contains `stage-20.20`, implementations
-SHOULD resolve to the more general stage (WD) unless the typed abbreviation
-(`WDS`) is explicitly present in the URN.
+code `20.20`. The harmonized code alone cannot distinguish them -- the
+abbreviation is a function of the deliverable type and the stage code, and
+the distinction is carried by the HUMAN face, never by the NSS. A URN with
+`stage-20.20` resolves to the more general stage (WD); a legacy URN spelling
+the abbreviation (`WDS`) resolves to it during ingestion only, as a
+deprecated alias, and re-canonicalizes to the harmonized code on render.
 
 === Parsing Disambiguation Rules
 

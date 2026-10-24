@@ -142,7 +142,7 @@ edition plus its amendments).
 | Within a field (part numbers, date components, copublishers, languages)
 | `urn:iec:std:iec-iso:60601-1-1`
 
-| `||`
+| `\|\|`
 | Between base edition and adjunct (reference to adjunct itself)
 | `urn:iec:std:iec:60601-1-1:2015-10:::fr\|\|amd:1:2017-01`
 
@@ -528,7 +528,7 @@ Global.
 
 | Supplement model
 | Appended with `:` separator
-| Adjunct model with `||` (adjunct ref) and `_` (consolidation)
+| Adjunct model with `\|\|` (adjunct ref) and `_` (consolidation)
 
 | Relation marker
 | Not applicable
