@@ -89,12 +89,7 @@ extract because the primary document cannot be fetched programmatically.
 | 60.00 | TPUB | Translation of publication | IS, TR, TS, COR |
 | 95.99 | WPUB | Publication withdrawn | IS, TR, TS, PAS, ISH, COR |
 
-**Absent from every source in this file** (the correspondence table,
-the IS ladder, and the legacy examples — all full-text searched):
-`AWG`, `CANV`, and — as bare codes — `AWI`, `DIS`, `PUB`. Neither AWG
-nor CANV is part of the issue's list either (pubid#237's STAGE_CODES
-has 55 entries and contains neither); earlier analysis that attributed
-them to the issue was wrong. The modern API spells the enquiry/FDIS
+The modern API spells the enquiry/FDIS
 ladder with the C-prefixed circulation codes (CCDV/CFDIS/RFDIS/NFDIS…)
 rather than DIS/FDIS.
 
@@ -137,9 +132,6 @@ stage RFDIS/50.00 — a snapshot of the project's plan, not a code rename.
 
 - `ADIS` is registered as an alias on the IEC `cdv` typed stage, whose
   harmonized list covers 40.99.
-- `AWG` and `CANV` appear in neither this table nor the legacy examples —
-  IEC's own Data-Feeds successors do not know them, and neither does
-  #237's list; they are fictitious (pubid#572).
 - **Reconciliation (2026-10-22, applied):** `DELPUB`'s code 99.60 is
   claimed by the `is` ladder; `SPLIT`/`MERGED` are claimed at
   30.96/30.97 by the `cd` ladder; `PCC`, `RPUB`, `TPUB`, `DECPUB`,
