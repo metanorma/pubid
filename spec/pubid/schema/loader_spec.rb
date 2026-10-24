@@ -21,7 +21,7 @@ RSpec.describe Pubid::Schema::Loader do
 
     it "merges joint prefixes from core" do
       expect(described_class.for(:iso).merged_prefixes)
-        .to eq(%w[ISO ISO/IEC IEC/ISO ISO/IEC/IEEE])
+        .to eq(%w[ISO ISO/IEC IEC/ISO ISO/IEC/IEEE ISO/IEEE])
     end
 
     it "memoizes declarations" do
