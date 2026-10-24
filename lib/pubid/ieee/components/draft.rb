@@ -98,18 +98,33 @@ day: nil, iso_stage: nil, iso_iteration: nil)
         COMPOUND_SUFFIX = /=D?(PWI|NP|WD|CDV|FDIS|DIS|CD)(?:[.-]?(\d+))?\z/.freeze
         private_constant :COMPOUND_SUFFIX
 
+        # The D-echo aliases ("DDIS3" = D + DIS + iteration 3) normalize
+        # through the compound split; every other pure stage token
+        # ("CD1", "FCD", "CDV1") restores verbatim -- the compound split
+        # would degrade the glued iterations and drop the stages the
+        # alias list never knew, so from_hash(row) != parse(row).
+        ECHO_SUFFIX = /\AD(=?(PWI|NP|WD|CDV|FDIS|DIS|CD|FCD))(?:[.-]?\d+)?\z/.freeze
+        private_constant :ECHO_SUFFIX
+
         def self.parse(value)
           return value if value.is_a?(Draft)
 
           body = strip_prefix(value.to_s)
           iso_stage = nil
           iso_iteration = nil
-          if (m = body.match(COMPOUND_SUFFIX))
+          if body.start_with?("=") && body[1..].match?(/\A[A-Z][A-Z0-9]*\z/) &&
+             !body[1..].match?(ECHO_SUFFIX)
+            iso_stage = body[1..]
+            body = ""
+          elsif (m = body.match(COMPOUND_SUFFIX))
             iso_stage = m[1]
             iso_iteration = m[2]
             body = body[0...m.begin(0)]
           end
-          version, month, day, year, comma = split_date(body)
+          # a designator that consumed the whole body carries no date;
+          # split_date("") would leave version as "" where the parse
+          # path has nil (and != compares them)
+          version, month, day, year, comma = body.empty? ? [nil, nil, nil, nil, false] : split_date(body)
           draft = new(version: version, month: month, day: day, year: year,
                       iso_stage: iso_stage, iso_iteration: iso_iteration)
           draft.comma_before_month = comma
