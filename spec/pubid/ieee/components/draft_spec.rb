@@ -45,4 +45,43 @@ RSpec.describe Pubid::Ieee::Components::Draft do
       end
     end
   end
+
+  describe "D= designator restoration (pubid#582)" do
+    # The published index rows carry "draft" => "D=<designator>"; the
+    # restore must rebuild the same component the in-context parse
+    # built, so from_hash(parse(x).to_hash) == parse(x).
+    {
+      "D=CD1"  => "CD1",
+      "D=FDIS" => "FDIS",
+      "D=FCD"  => "FCD",
+      "D=CDV1" => "CDV1",
+    }.each do |wire, stage|
+      it "restores #{wire.inspect} verbatim as the stage token" do
+        draft = described_class.parse(wire)
+        expect(draft.iso_stage).to eq(stage)
+        expect(draft.iso_iteration).to be_nil
+        expect(draft.version).to be_nil
+      end
+    end
+
+    it "keeps the D-echo alias normalization" do
+      draft = described_class.parse("D=DDIS3")
+      expect(draft.iso_stage).to eq("DIS")
+      expect(draft.iso_iteration).to eq("3")
+      expect(draft.to_s).to eq("/D=DIS.3")
+    end
+
+    it "round-trips the published rows through from_hash" do
+      {
+        "IEEE Std P12207_CD1" => "IEEE P12207/D=CD1",
+        "IEEE Unapproved Std P15288/D-FDIS-2007" => "IEEE Unapproved P15288/D=FDIS, 2007",
+        "IEEE Unapproved Std P16326/D-FCD-2007" => "IEEE Unapproved P16326/D=FCD, 2007",
+      }.each do |printed, canonical|
+        id = Pubid.parse(printed)
+        restored = Pubid::Ieee::Identifier.from_hash(id.to_hash)
+        expect(restored).to eq(id)
+        expect(restored.to_s).to eq(canonical)
+      end
+    end
+  end
 end
