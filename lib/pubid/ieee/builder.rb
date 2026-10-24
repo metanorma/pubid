@@ -1151,6 +1151,13 @@ module Pubid
           return Identifiers::Standard.new(**printed_attrs.compact)
         end
 
+        # The designation route ("IEEE P24748-4/D=FDIS") has no
+        # publishers group and no parsed publisher slot; IEEE is the
+        # sole publisher of the D= designator face, and the elections
+        # below read the builder-local slots.
+        attributes[:publisher] ||= "IEEE"
+        attributes[:copublisher] ||= []
+
         # The re-parse of the pubid#203 designator render ("IEEE
         # P15026.2/D=FDIS-201008") captures the stage and the verbatim
         # date token (":2020", "-201008") with no publisher slot; the
@@ -1182,9 +1189,12 @@ module Pubid
           if parsed[:iso_stage_iteration]
             stage_abbr += extract_value(parsed[:iso_stage_iteration])
           end
+          # The designation route ("IEEE P24748-4/D=FDIS") carries no
+          # publishers group, so the builder-local copublisher is nil on
+          # it — the empty test must admit nil as none.
           bare_ieee_project = parsed[:project_marker] &&
                               attributes[:publisher] == "IEEE" &&
-                              attributes[:copublisher] == []
+                              (attributes[:copublisher] || []).empty?
           if bare_ieee_project && parsed[:draft_stage_year].nil?
             # pubid#203: a bare-IEEE project row carrying an ISO stage is
             # an IEEE draft of joint ISO/IEC work ("IEEE FDIS P15026.2,
@@ -1517,9 +1527,13 @@ module Pubid
           if pub_data[:copublishers]
             copubs = pub_data[:copublishers]
             copubs = [copubs] unless copubs.is_a?(Array)
+            # A capture may carry its own separators ("/IEC/ISO" — a
+            # joint token glued to the leading slash); the copublisher
+            # collection renders join("/"), so entries hold bare orgs.
             attributes[:copublisher] = copubs.filter_map do |cp|
               extract_value(cp[:copublisher])
-            end
+            end.flat_map { |c| c.to_s.sub(%r{\A/}, "").split("/") }
+                   .reject(&:empty?)
           end
         elsif parsed[:publisher]
           attributes[:publisher] = extract_value(parsed[:publisher])
@@ -2008,7 +2022,14 @@ module Pubid
             end
           end
         else
-          version = extract_value(draft_data)
+          # A degraded wire leaf carries the whole draft clause verbatim
+          # ("/D2.1.1" — the three-segment designator the engine cannot
+          # structure): Draft.parse is the inverse of Draft#to_s, so it
+          # strips the prefix instead of double-appending it.
+          draft = Components::Draft.parse(extract_value(draft_data).to_s)
+          attributes[:draft_obj] = draft
+          attributes[:draft] = draft.to_s
+          return
         end
 
         # A stage-token draft's month rides the D= designator zero-padded

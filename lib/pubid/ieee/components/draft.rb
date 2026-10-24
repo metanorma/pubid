@@ -169,7 +169,12 @@ day: nil, iso_stage: nil, iso_iteration: nil)
         end
 
         def to_s
-          result = "/D#{version}"
+          # A version that already opens with a designator word ("ED4",
+          # the IEC edition-draft ordinal; an ISO/IEC stage token such
+          # as "FDIS_March") renders verbatim — prepending D
+          # concatenates a hallucinated token ("DED4", "DFDIS") that no
+          # face spells. Every other version keeps the D designator.
+          result = version&.match?(/\A(ED\d|(FDIS|FCD|CDV|DIS|CD|WD|PWI|NP))/) ? "/#{version}" : "/D#{version}"
           result += "=#{iso_stage}" if iso_stage
           result += ".#{iso_iteration}" if iso_stage && iso_iteration
           result += if revision.to_s.start_with?(".")
