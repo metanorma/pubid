@@ -1076,7 +1076,16 @@ module Pubid
                         extract_value(parsed[:draft_version]).to_s.match?(/\A\d/)
         # A promoted stage ("29119.FDIS") is printed identity - the joint
         # model carries it, never the printed Standard face.
+        # P + a /D designator (any draft capture) is a DRAFT, never a
+        # printed Std (the owner's 2026-10-24 ruling): the P marker is
+        # project status, so the joint/project-draft family owns the row
+        # whatever date trails the designator. The non-P rows keep the
+        # printed-strip doctrine (the normalization ledger).
+        p_with_draft = parsed[:project_marker] &&
+                       (parsed[:draft_version] || parsed[:draft_iso_stage] ||
+                        parsed[:draft_month] || parsed[:draft_year])
         printed_joint = parsed[:iso_published] && parsed[:iso_stage].nil? &&
+                        !p_with_draft &&
                         (parsed[:printed_dash_year] || parsed[:printed_month_year] ||
                          (numeric_draft && parsed[:draft_month]) ||
                          # A date-less stage-less joint reference carrying only a
@@ -1098,6 +1107,10 @@ module Pubid
                               "#{parsed[:part_dash] ? "-" : "."}#{part_val}"
                             end
           end
+          # the subpart carries its separator too (C1 separator-in-capture);
+          # the two-party rows split "-57-1202"-class parts into both
+          sub_val = parsed[:subpart] && extract_value(parsed[:subpart])
+          printed_code += sub_val if sub_val && !sub_val.empty?
           # P = project: the marker is identity, preserved as spelled.
           printed_code = "P#{printed_code}" if parsed[:project_marker]
           printed_attrs = { publisher: attributes[:publisher],
