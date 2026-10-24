@@ -1118,9 +1118,14 @@ module Pubid
             printed_attrs[:year] = attributes[:year]
             printed_attrs[:month] = attributes[:month]
           elsif parsed[:draft_month]
-            # The date trails the draft itself ("D8, June 2010"); keep it
-            # inside the draft so the code stays date-less.
-            printed_draft = "#{printed_draft}, #{extract_value(parsed[:draft_month])} "                             "#{extract_value(parsed[:draft_year])}"
+            # The date trails the draft itself ("D31, Aug 2010"): the
+            # normalization ledger strips the ordinal draft on the
+            # printed joint face and surfaces the date as the printed
+            # date ("11073-10418 D13, January 2011" ->
+            # "11073.10418, January 2011") -- composing it back into the
+            # draft emitted "/D, Aug 2010" remnants.
+            printed_attrs[:year] = extract_value(parsed[:draft_year])
+            printed_attrs[:month] = extract_value(parsed[:draft_month])
           end
           printed_attrs[:code] = printed_code
           printed_attrs[:draft] = printed_draft if printed_draft
